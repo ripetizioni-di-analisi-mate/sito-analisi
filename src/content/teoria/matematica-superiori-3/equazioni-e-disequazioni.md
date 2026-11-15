@@ -34,6 +34,15 @@ Per ogni coppia di numeri reali $u,v$, il prodotto $uv$ vale zero se almeno uno 
 Perciò $(x+3)(2x-5)=0$ equivale a $x+3=0$ oppure $2x-5=0$. Le soluzioni sono $-3$ e $\dfrac52$. Il primo valore annulla il primo fattore, il secondo annulla il secondo. Un fattore basta a rendere nullo il prodotto.
 :::
 
+:::esempio{titolo="Un'identità su un dominio ristretto"}
+Nell'equazione $\dfrac{x^2-4}{x-2}=x+2$ il dominio è $\mathbb R\setminus\{2\}$. Poiché $x^2-4=(x-2)(x+2)$, possiamo dividere numeratore e denominatore per $x-2$ in quel dominio. L'equazione diventa $x+2=x+2$ ed è vera per ogni valore ammesso. Il punto $x=2$ resta escluso perché a sinistra comparirebbe la divisione per zero. Si chiama **identità** un'uguaglianza valida per ogni valore del dominio in esame.
+
+Se al secondo membro si scrive invece $x+3$, la stessa semplificazione conduce a $x+2=x+3$. Sottraendo $x$ si ottiene $2=3$. L'insieme delle soluzioni è quindi vuoto. Geometricamente si passa da due grafici con la stessa ordinata in ogni ascissa ammessa a due rette parallele, con uno scarto verticale pari a $1$.
+
+::grafico{f="(x^2-4)/(x-2);x+3" xmin=-3 xmax=5 ymin=-2 ymax=9 punti="2,4,vuoto" titolo="La frazione coincide con la retta di ordinata $x+2$ tranne nel punto vuoto"}
+
+:::
+
 ## Le equazioni di secondo grado
 
 ::::teorema{#secondo-grado titolo="Formula risolutiva"}
@@ -82,6 +91,23 @@ $$
 Per esempio $x^2+2x-15$ ha radici $3$ e $-5$, perché la loro somma è $-2$ e il loro prodotto è $-15$. La verifica dà infatti $(x-3)(x+5)=x^2+2x-15$. Quando la ricerca di due numeri con somma e prodotto assegnati richiede troppo tempo, si può tornare alla formula risolutiva.
 :::
 
+::::teorema{#segno-delle-radici titolo="Segno delle radici dalla somma e dal prodotto"}
+Supponiamo che il trinomio abbia due radici reali $r,s$, contate anche quando coincidono. Se il prodotto $rs$ è negativo, le radici hanno segno opposto. Se $rs>0$, le radici hanno lo stesso segno e la somma $r+s$ permette di distinguerle. Quando $rs=0$, almeno una radice è zero e l'altra è uguale alla somma.
+
+:::dimostrazione
+Per $rs<0$ il prodotto è negativo, quindi i fattori sono entrambi diversi da zero e hanno segni opposti. Per $rs>0$ i segni sono invece uguali. La somma di due numeri positivi è positiva e la somma di due numeri negativi è negativa, quindi il segno di $r+s$ è quello comune. Per $rs=0$ si applica la proprietà del prodotto nullo. Se per esempio $r=0$, la somma è $s$.
+:::
+::::
+
+:::esempio{titolo="Due radici negative senza calcolarle"}
+Per $3x^2+13x+4=0$ il discriminante vale $\Delta=13^2-4\cdot3\cdot4=121>0$, quindi ci sono due radici reali distinte. Il loro prodotto è $\dfrac43>0$ e la loro somma è $-\dfrac{13}{3}<0$. Sono dunque entrambe negative. Si vede anche dallo sviluppo $(3x+1)(x+4)=3x^2+13x+4$. Dalla scomposizione si leggono le radici $-\dfrac13$ e $-4$.
+
+Il controllo sul discriminante serve quando le radici reali non sono già note. Per $x^2+2x+5$ la somma formale sarebbe $-2$ e il prodotto $5$. Tuttavia $\Delta=4-20<0$, quindi quei due valori non descrivono una coppia di radici reali. Il grafico di $(x+1)^2+4$ mostra infatti un minimo strettamente positivo.
+
+::grafico{f="(x+1)^2+4" xmin=-4 xmax=2 ymin=-1 ymax=12 punti="-1,4,pieno,V" titolo="Un minimo positivo esclude radici reali, prima di ogni considerazione sul loro segno"}
+
+:::
+
 ## Il segno di un prodotto
 
 :::teorema{#prodotti titolo="Tabella dei segni"}
@@ -112,6 +138,21 @@ Poiché la disequazione è stretta, i due zeri si escludono. La soluzione è $(-
 La **molteplicità** di una radice $r$ è il numero di volte che il fattore $x-r$ compare nella scomposizione. Vicino a $r$, gli altri fattori mantengono il proprio segno. Una molteplicità pari dà quindi lo stesso segno da entrambi i lati, mentre una molteplicità dispari dà segni opposti. In una disequazione non stretta lo zero entra nell'insieme delle soluzioni in entrambi i casi, purché appartenga al dominio.
 :::
 
+::::teorema{#segno-potenza-prodotto titolo="Perché il segno cambia agli zeri dispari"}
+Sia $P(x)=(x-r)^mQ(x)$, con $m$ intero positivo e con $Q(x)$ prodotto di fattori polinomiali reali che non si annullano in $r$. In un intervallo abbastanza piccolo attorno a $r$, il polinomio $P$ cambia segno attraversando $r$ se e solo se $m$ è dispari.
+
+:::dimostrazione
+Ogni fattore di $Q$ ha in $r$ un valore diverso da zero e, per continuità, mantiene quel segno in un intervallo intorno a $r$. Limitandosi alla parte comune di quegli intervalli, il segno di $Q$ è fisso. A destra di $r$, $x-r$ è positivo e così tutte le sue potenze. A sinistra, $x-r$ è negativo, quindi la potenza ha segno $(-1)^m$. Se $m$ è pari quel segno è positivo. Se $m$ è dispari vale $-1$ e inverte il segno del prodotto.
+:::
+::::
+
+:::esempio{titolo="Confronto stretto e punto isolato"}
+Il polinomio $P(x)=-(x+2)^2(x-1)$ è positivo per $x<1$, con l'eccezione di $x=-2$, e negativo per $x>1$. Infatti il quadrato è positivo fuori dal proprio zero, mentre il fattore $-(x-1)$ è positivo a sinistra di $1$. Quindi $P(x)>0$ dà $(-\infty,-2)\cup(-2,1)$. Il confronto $P(x)\leq0$ dà invece $\{-2\}\cup[1,+\infty)$. Lo zero doppio resta isolato in questo secondo insieme, perché i punti appena a sinistra e a destra hanno segno positivo.
+
+::grafico{f="-(x+2)^2*(x-1)" xmin=-4 xmax=3 ymin=-9 ymax=9 punti="-2,0,pieno;1,0,pieno" titolo="Il polinomio tocca l’asse in $-2$ e lo attraversa in $1$"}
+
+:::
+
 ## Le disequazioni di secondo grado
 
 :::teorema{#disequazioni titolo="Segno del trinomio"}
@@ -133,6 +174,22 @@ In $-x^2+x+6\geq0$, il trinomio vale $-(x+2)(x-3)$. Per $-2<x<3$ il primo fattor
 La disequazione $x^2\leq x+2$ chiede dove i punti della parabola $y=x^2$ sono alla stessa altezza della retta $y=x+2$ o più in basso. La differenza è $x^2-x-2=(x+1)(x-2)$. Il prodotto è negativo tra gli zeri $-1$ e $2$. Poiché nei due punti d'intersezione vale l'uguaglianza, la soluzione è $[-1,2]$.
 
 ::grafico{f="x^2;x+2" xmin=-2.5 xmax=3.2 ymin=-1 ymax=8 punti="-1,1,pieno,A;2,4,pieno,B" titolo="Fra le ascisse di $A$ e $B$ la parabola si trova sotto la retta"}
+
+:::
+
+:::esempio{titolo="La soglia coincide con il vertice"}
+La disequazione $-2x^2+8x-5\geq3$ confronta una parabola rivolta verso il basso con una retta orizzontale. Dopo aver sottratto la soglia, si raccoglie $-2$ e si riconosce un quadrato.
+
+$$
+\begin{aligned}
+-2x^2+8x-5-3&=-2(x^2-4x+4)\\[4pt]
+&=-2(x-2)^2.
+\end{aligned}
+$$
+
+Il risultato è sempre minore o uguale a zero, e raggiunge zero soltanto per $x=2$. Pertanto $x=2$ è l'unica soluzione. I tre confronti $\geq3$, $>3$ e $\leq3$ sulla parabola di partenza danno rispettivamente $\{2\}$, $\varnothing$ e $\mathbb R$. La differenza fra questi insiemi dipende dal fatto che la soglia coincide con l'ordinata massima.
+
+::grafico{f="-2*x^2+8*x-5;3" xmin=-0.4 xmax=4.5 ymin=-6 ymax=5 punti="2,3,pieno,V" titolo="La retta di quota $3$ tocca il grafico nel suo punto più alto"}
 
 :::
 
@@ -165,6 +222,21 @@ L'espressione $\dfrac{x^2-9}{x-3}$ è definita per $x\neq3$. Su quel dominio, il
 
 :::
 
+::::teorema{#moltiplicazione-quadrato-denominatore titolo="Moltiplicare per il quadrato del denominatore"}
+Se $N(x)$ e $D(x)$ sono definiti e $D(x)\neq0$, allora $\dfrac{N(x)}{D(x)}$ ha lo stesso segno di $N(x)D(x)$. Si può quindi trasformare il confronto con zero in un confronto su un prodotto, mantenendo esplicitamente la condizione $D(x)\neq0$.
+
+:::dimostrazione
+Nel dominio $D(x)^2$ è strettamente positivo. Moltiplicare per esso conserva l'uguaglianza e il verso di una disuguaglianza. Il membro di sinistra diventa $\dfrac{N(x)}{D(x)}D(x)^2=N(x)D(x)$. Si torna indietro dividendo per la stessa espressione positiva. La trasformazione è perciò equivalente in tutto il dominio.
+:::
+::::
+
+:::esempio{titolo="Numeratore doppio e denominatore semplice"}
+Per $\dfrac{(x-2)^2}{x+1}\leq0$, il dominio esclude $-1$. Nel dominio, il prodotto equivalente è $(x-2)^2(x+1)\leq0$. Il quadrato è positivo per $x\neq2$, quindi il prodotto è negativo quando $x+1<0$, cioè per $x<-1$. È nullo anche in $x=2$. Il prodotto algebrico si annulla in $x=-1$, ma lì il quoziente iniziale è indefinito. Il risultato è $(-\infty,-1)\cup\{2\}$.
+
+::grafico{f="(x-2)^2/(x+1)" xmin=-5 xmax=6 ymin=-16 ymax=10 asintoti="x=-1" punti="2,0,pieno" titolo="Lo zero $2$ è ammesso e l’ascissa $-1$ è fuori dal dominio"}
+
+:::
+
 ## Le condizioni simultanee
 
 :::definizione{#sistemi titolo="Intersezione delle soluzioni"}
@@ -192,6 +264,13 @@ Le coppie $(x,y)$ che soddisfano $y=x^2$ e $y=x+2$ appartengono a entrambi i gra
 Per $x=-1$ la seconda equazione dà $y=1$, e per $x=2$ dà $y=4$. Entrambe le coppie soddisfano anche $y=x^2$. L'insieme delle soluzioni è $\{(-1,1),(2,4)\}$. Le sole ascisse indicano dove si trovano le intersezioni lungo l'asse $x$, mentre il sistema richiede entrambe le coordinate.
 :::
 
+:::esempio{titolo="Due condizioni possono lasciare un singolo punto"}
+Nel sistema formato da $x^2-2x-3\leq0$ e $x\geq3$, il trinomio si scompone come $(x+1)(x-3)$. Il primo insieme soluzione è $[-1,3]$. Il secondo è $[3,+\infty)$. I due insiemi ammettono entrambi $3$, mentre ogni numero minore di $3$ fallisce la seconda condizione e ogni numero maggiore di $3$ fallisce la prima. Il risultato è $\{3\}$. Se la seconda disuguaglianza fosse stretta, l'intersezione sarebbe vuota. Nel grafico la verticale $x=3$ attraversa il punto in cui il trinomio si annulla per la seconda volta.
+
+::grafico{f="x^2-2*x-3" xmin=-3 xmax=6 ymin=-5 ymax=9 punti="-1,0,pieno;3,0,pieno" segmenti="3,-5,3,8" titolo="Il vincolo $x\geq3$ comincia nel punto in cui termina l’intervallo di non positività"}
+
+:::
+
 ## Il ruolo del parametro
 
 :::teorema{#parametri titolo="Distinguere i casi prima di dividere"}
@@ -214,6 +293,15 @@ $$
 $$
 
 Per $k<2$ con $k\neq1$ si hanno due radici reali distinte. Per $k=2$ resta $x^2-2x+1=(x-1)^2=0$, quindi si ha la radice doppia $x=1$. Per $k>2$ il discriminante è negativo e non ci sono radici reali. Entrambi i valori $1$ e $2$ cambiano il numero di soluzioni per motivi diversi. Il primo cambia il grado, il secondo azzera il discriminante.
+:::
+
+:::esempio{titolo="Il parametro sposta una retta orizzontale"}
+Per discutere $x^2-4x+1=k$ si completa il quadrato. La condizione diventa $(x-2)^2=k+3$. Se $k>-3$, le due soluzioni sono $2-\sqrt{k+3}$ e $2+\sqrt{k+3}$. Se $k=-3$, i due valori coincidono in $2$. Se $k<-3$, il secondo membro è negativo e l'equazione è impossibile. Il coefficiente di $x^2$ rimane uguale a $1$ per tutti i parametri, quindi qui nessun valore riduce il grado.
+
+Nel grafico si cerca dove la retta $y=k$ incontra la parabola $y=(x-2)^2-3$. Il vertice è $(2,-3)$ e il parametro ne attraversa la quota quando vale $-3$. Per $k=1$, il quadrato vale $4$ e le intersezioni sono $(0,1)$ e $(4,1)$, simmetriche rispetto all'asse verticale della parabola.
+
+::grafico{f="(x-2)^2-3;1;-3" xmin=-1.5 xmax=5.5 ymin=-5 ymax=8 punti="0,1,pieno;2,-3,pieno,V;4,1,pieno" titolo="La retta di quota $1$ dà due punti. Alla quota del vertice le due ascisse coincidono"}
+
 :::
 
 ## Problemi e controllo del risultato

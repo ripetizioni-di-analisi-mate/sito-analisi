@@ -27,6 +27,19 @@ For $A(-2,3)$ and $B(1,-1)$, the displacements are $1-(-2)=3$ and $-1-3=-4$. The
 
 :::
 
+:::esempio{titolo="Distance from a centre as a condition on coordinates"}
+Find the points $P(x,1)$ at distance $5$ from $A(2,4)$. The second coordinate of $P$ is fixed, so the vertical displacement from $A$ to $P$ is $1-4=-3$. The Pythagorean theorem gives
+$$
+AP^2=(x-2)^2+9.
+$$
+Since $AP$ is a length, the condition $AP=5$ is equivalent to $AP^2=25$. Hence $(x-2)^2=16$. The difference $x-2$ can equal $4$ or $-4$, giving $x=6$ or $x=-2$. Both solutions lie on the same horizontal line, four units to the right and left of the horizontal coordinate of $A$.
+
+If the required distance were $3$, the only point would be $(2,1)$, directly below $A$. A distance less than $3$ would be impossible, since a nonnegative square is always added to the square of the vertical displacement. Geometrically, the line meets the circle of radius $5$ at two points, whereas it touches the circle of radius $3$ at just one point.
+
+::grafico{f="1" curve="2+5*cos(t),4+5*sin(t),0,6.28318530718" legenda="y=1;(x-2)^2+(y-4)^2=25" xmin=-4 xmax=8 ymin=-2 ymax=10 uguale=1 punti="2,4,pieno,A;-2,1,pieno,P_1;6,1,pieno,P_2" segmenti="2,4,-2,1;2,4,6,1" titolo="Both intersections are at distance $5$ from $A$."}
+
+:::
+
 ## Midpoints and point symmetry
 
 ::::teorema{#medio titolo="Half the displacement"}
@@ -49,6 +62,19 @@ The displacements from $A$ to $M$ and from $M$ to $B$ are then equal in both coo
 
 :::esempio{titolo="Recovering an endpoint from the midpoint"}
 For $A(-2,1)$ and $B(4,5)$, averaging the coordinates gives $M(1,3)$. Suppose instead that $A(-2,1)$ and $M(1,3)$ are known. Moving from $A$ to $M$ adds $3$ to the horizontal coordinate and $2$ to the vertical coordinate. Repeating the displacement gives $B(4,5)$. Algebraically, use $x_B=2x_M-x_A$ and $y_B=2y_M-y_A$. The points $A$ and $B$ are reflections of each other through the centre $M$.
+:::
+
+:::esempio{titolo="A segment midpoint and the centre of a rectangle"}
+A rectangle with sides parallel to the axes has opposite vertices $A(-2,-1)$ and $C(4,3)$. The other vertices are $B(4,-1)$ and $D(-2,3)$ because each horizontal side preserves the vertical coordinate, and each vertical side preserves the horizontal coordinate. The diagonal $AC$ has midpoint
+$$
+M\left(\frac{-2+4}{2},\frac{-1+3}{2}\right)=(1,1).
+$$
+The midpoint of $BD$ has the same coordinates because the averages use the same addends in a different order. Thus $M$ lies on both diagonals and is their point of intersection.
+
+The centre determines which pairs of vertices are opposite. For instance, reflecting $A$ through $M$ repeats the displacement $(3,2)$ from $A$ to $M$ and leads to $C$. Reflecting only the horizontal coordinate across $x=1$ would instead lead to $B$, leaving the vertical coordinate unchanged. This shows the difference between point symmetry and reflection across a line.
+
+::grafico{linee="-2,-1 4,-1 4,3 -2,3 -2,-1" segmenti="-2,-1,4,3;4,-1,-2,3" punti="-2,-1,pieno,A;4,-1,pieno,B;4,3,pieno,C;-2,3,pieno,D;1,1,pieno,M" xmin=-4 xmax=6 ymin=-3 ymax=5 uguale=1 titolo="The diagonals share their midpoint $M$."}
+
 :::
 
 ## Equations of lines
@@ -74,6 +100,19 @@ The line passes through $(0,2)$, and every increase of $2$ in the horizontal coo
 
 :::osservazione{titolo="Equivalent equations"}
 Multiplying the entire equation by a nonzero number preserves the set of solutions. For example, $2x+4y-8=0$ and $x+2y-4=0$ describe the same line. The equation $4x-8=0$ describes the vertical line $x=2$. Every value of $y$ satisfies the equation when $x=2$, so this line has infinitely many vertical coordinates for the same horizontal coordinate.
+:::
+
+:::esempio{titolo="Axis intercepts and standard form"}
+The line $3x+2y=6$ meets the horizontal axis at a point with $y=0$. Substitution gives $x=2$, so its horizontal intercept is $(2,0)$. For the vertical axis, set $x=0$ and obtain $(0,3)$. The slope-intercept form
+$$
+y=-\frac32x+3
+$$
+confirms that the vertical intercept is $3$. The slope is negative because moving from $(0,3)$ to $(2,0)$ means going two units right and three units down. In the opposite direction, we go three units up and two left, so the quotient $\dfrac3{-2}$ stays the same.
+
+For vertical and horizontal lines, read the intercepts directly from the equation. The vertical line $x=2$ meets the $x$-axis at $(2,0)$ and stays parallel to the $y$-axis. The horizontal line $y=3$ meets the $y$-axis at $(0,3)$ and stays parallel to the $x$-axis. If the line is itself an axis, its intersection with that axis is the entire line.
+
+::grafico{f="-1.5*x+3;3" curve="2,t,-2,5" legenda="3x+2y=6;y=3;x=2" punti="0,3,pieno,B;2,0,pieno,A" xmin=-2 xmax=5 ymin=-2 ymax=5 uguale=1 titolo="The slanted line meets both axes."}
+
 :::
 
 ## The line through two points
@@ -102,6 +141,19 @@ $$
 At $x=-1$ the output is $4$, and at $x=2$ it is $-2$, which checks the result. The order of the two points can be reversed in the ratio, provided it is reversed in both differences. Both the numerator and denominator then change sign, so the ratio stays the same.
 :::
 
+:::esempio{titolo="Three points on one line"}
+The first two points $A(-2,1)$ and $B(2,3)$ have distinct horizontal coordinates, so they determine the line of slope $\dfrac{3-1}{2-(-2)}=\dfrac12$. The point-slope form through $A$ is
+$$
+y-1=\frac12(x+2).
+$$
+To decide whether $C(6,5)$ is collinear with $A$ and $B$, set $x=6$. This gives $y-1=4$ and hence $y=5$, which agrees with the vertical coordinate of $C$. The point $(6,4)$, by contrast, has the same horizontal coordinate as $C$ but lies one unit below the line.
+
+The same test can be expressed using displacements. From $A$ to $B$ the change is $(4,2)$, and from $B$ to $C$ it is again $(4,2)$. Thus the three points are collinear, and $B$ is the midpoint of $AC$. If the first two points shared a horizontal coordinate, the condition would instead be that the third has the same horizontal coordinate too. The line is vertical in that case, and the displacement ratio is undefined.
+
+::grafico{f="0.5*x+2" legenda="y=\dfrac12x+2" xmin=-4 xmax=8 ymin=-1 ymax=7 punti="-2,1,pieno,A;2,3,pieno,B;6,5,pieno,C;6,4,vuoto" titolo="The point $C(6,5)$ lies on the line, and $(6,4)$ lies below it."}
+
+:::
+
 ## Parallel and coincident lines
 
 :::teorema{#parallele titolo="Lines with the same direction"}
@@ -114,6 +166,20 @@ To construct the line parallel to $2x-y+3=0$ through $P(2,-1)$, keep the part $2
 
 :::osservazione{titolo="Checking directions without solving for y"}
 For the lines $a_1x+b_1y+c_1=0$ and $a_2x+b_2y+c_2=0$, having the same direction is equivalent to $a_1b_2-a_2b_1=0$. If both coefficients of $y$ are nonzero, the equality follows by comparing $-\dfrac{a_1}{b_1}$ and $-\dfrac{a_2}{b_2}$. If one line is vertical, the same criterion requires the other to be vertical as well. To see whether they coincide, take a point on one line and check whether it lies on the other.
+:::
+
+:::esempio{titolo="Vertical separation and distance between lines"}
+The lines $r:y=2x+1$ and $s:y=2x+6$ have the same slope and different intercepts. At a fixed horizontal coordinate, the output difference is always $(2x+6)-(2x+1)=5$. For instance, $(0,1)$ and $(0,6)$ are five units apart along the vertical axis. The segment joining them therefore measures the separation at the same horizontal coordinate.
+
+The distance between the lines, however, is the length of a segment perpendicular to both. To find it, take $(0,1)$ on $r$ and use $2x-y+6=0$ as the equation of $s$. This gives
+$$
+d=\frac{|2\cdot0-1+6|}{\sqrt{2^2+(-1)^2}}
+=\frac5{\sqrt5}=\sqrt5 .
+$$
+This is less than $5$ because the vertical segment does not meet the two slanted lines at a right angle. Vertical separation and perpendicular distance agree when the lines are horizontal.
+
+::grafico{f="2*x+1;2*x+6" xmin=-4 xmax=3 ymin=-3 ymax=8 uguale=1 punti="0,1,pieno,P;0,6,pieno,Q;-2,2,pieno,H" segmenti="0,1,0,6;0,1,-2,2" titolo="Segment $PQ$ is vertical, while $PH$ is perpendicular to the lines."}
+
 :::
 
 ## Perpendicular lines
@@ -141,6 +207,21 @@ $$
 The point $P(2,0)$ belongs to the perpendicular bisector. The distance formula gives $PA=\sqrt{3^2+(-1)^2}=\sqrt{10}$ and $PB=\sqrt{(-1)^2+(-3)^2}=\sqrt{10}$. The midpoint $M$ is also equidistant from $A$ and $B$. For any point on the perpendicular bisector other than $M$, the equality follows from the two right triangles constructed like $PMA$ and $PMB$, with equal lengths $MA$ and $MB$ and shared leg $PM$.
 :::
 
+:::esempio{titolo="Finding a triangle's altitude from one side"}
+Let $A(0,0)$, $B(4,2)$ and $C(2,4)$ be the vertices of a triangle. Side $AB$ lies on the line $y=\dfrac12x$. The altitude to $AB$ starts at $C$ and has slope $-2$, so its equation is $y-4=-2(x-2)$, or $y=-2x+8$. Its foot $H$ lies on both lines, giving
+$$
+\begin{aligned}
+\frac12x&=-2x+8,\\[4pt]
+\frac52x&=8,\\[4pt]
+x_H&=\frac{16}{5},\qquad y_H=\frac85.
+\end{aligned}
+$$
+The horizontal coordinate of the foot is between those of $A$ and $B$, so here the foot lies on the actual side. The base length is $AB=2\sqrt5$. The distance from $C$ to $x-2y=0$ is $\dfrac{|2-8|}{\sqrt5}=\dfrac6{\sqrt5}$. Hence the area is $\dfrac12\cdot2\sqrt5\cdot\dfrac6{\sqrt5}=6$. The same area formula uses distance to the line containing the side even if the foot falls on its extension.
+
+::grafico{f="0.5*x" legenda="y=\dfrac12x" linee="0,0 4,2 2,4 0,0" segmenti="2,4,3.2,1.6" punti="0,0,pieno,A;4,2,pieno,B;2,4,pieno,C;3.2,1.6,pieno,H" xmin=-1 xmax=5 ymin=-1 ymax=5 uguale=1 titolo="The altitude from $C$ meets side $AB$ at its foot $H$."}
+
+:::
+
 ## Intersections as solutions of a system
 
 :::teorema{#intersezioni titolo="Points shared by two lines"}
@@ -164,6 +245,15 @@ The point is $P(1,3)$. It also satisfies the other equation because $-1+4=3$.
 
 :::esempio{titolo="Recognising an inconsistent system"}
 For $2x-y=1$ and $4x-2y=3$, twice the left side of the first equation is the left side of the second. A point satisfying the first equation would therefore give $4x-2y=2$ and could not give $3$. The lines are distinct and parallel. If the right-hand side of the second equation were $2$, the equations would be equivalent and the lines would coincide.
+:::
+
+:::esempio{titolo="Using an intersection to compare two tariffs"}
+Two tariffs give costs in euros $C_1(n)=3n+2$ and $C_2(n)=2n+6$ for a nonnegative integer number $n$ of visits. First compare the lines extending the two graphs by setting $3n+2=2n+6$. This gives $n=4$ and a common cost of $14$ euros. Since $4$ is allowed, the costs do agree at the intersection.
+
+To determine which tariff is lower, consider the difference $C_1(n)-C_2(n)=n-4$. For $0\leq n<4$ the first costs less, while for $n>4$ the second costs less. On the graph the first line starts lower because its fixed charge is $2$, compared with $6$ for the second. Its larger slope takes it above the other line after the intersection. If the equation had given a noninteger result, the lines would still intersect, but no actual number of visits would give the same charge.
+
+::grafico{f="3*x+2;2*x+6" legenda="C_1(n)=3n+2;C_2(n)=2n+6" nomi="n,C" xmin=-1 xmax=8 ymin=-2 ymax=28 punti="0,2;0,6;4,14,pieno,P" segmenti="4,0,4,14;0,14,4,14" titolo="For four visits, the two tariffs give the same charge."}
+
 :::
 
 ## Distance from a point to a line
@@ -204,4 +294,30 @@ d=\frac{|3x_0+4y_0-18|}{\sqrt{3^2+4^2}}
 =\frac{|8-18|}{5}=2.
 $$
 The distance is the same for every point on the first line because $3x_0+4y_0$ is constant on that line. If the coefficients of $x$ and $y$ are proportional in the two equations, first rewrite the equations with the same pair of coefficients.
+:::
+
+:::esempio{titolo="Points at the same distance from the axes"}
+The distance from $P(x,y)$ to the vertical axis $x=0$ is $|x|$, and the distance to the horizontal axis $y=0$ is $|y|$. To describe the equidistant points, solve $|x|=|y|$. Both sides are nonnegative, so squaring gives an equivalent equation.
+$$
+\begin{aligned}
+x^2&=y^2,\\[4pt]
+(x-y)(x+y)&=0.
+\end{aligned}
+$$
+At least one factor must be zero, giving the lines $y=x$ and $y=-x$. For example, $P(-2,2)$ is two units from each axis and lies on the second line. The point $Q(2,2)$ has the same distances and lies on the first. Looking only at $x=y$ would omit all points with opposite nonzero coordinates. The two lines share the origin, which lies at distance zero from both axes.
+
+::grafico{f="x;-x" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="-2,2,pieno,P;2,2,pieno,Q" segmenti="-2,0,-2,2;-2,2,0,2" titolo="The two angle bisectors consist of the points equidistant from the axes."}
+
+:::
+
+:::esempio{titolo="Finding both parallel lines at a given distance"}
+Find every line parallel to $3x+4y=0$ that is at distance $2$ from it. Any parallel line can be written $3x+4y=c$, because the two variable coefficients fix its direction and $c$ changes its position. The origin lies on the original line. Substituting it into the distance formula gives
+$$
+\frac{|c|}{\sqrt{3^2+4^2}}=2
+\qquad\Longleftrightarrow\qquad |c|=10.
+$$
+The two solutions are $c=10$ and $c=-10$. Their opposite signs give two lines on opposite sides of the original. To appreciate the difference between these conditions, look at where the parallel lines meet the $y$-axis. The intercepts are $\dfrac52$ and $-\dfrac52$, exceeding $2$ in magnitude. This is compatible with the required distance because those two segments run along the vertical axis, while distance is measured in the direction perpendicular to the lines.
+
+::grafico{f="-0.75*x;2.5-0.75*x;-2.5-0.75*x" legenda="3x+4y=0;3x+4y=10;3x+4y=-10" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="0,0,pieno,O;1.2,1.6,pieno,H_1;-1.2,-1.6,pieno,H_2" segmenti="-1.2,-1.6,1.2,1.6" titolo="The parallel lines lie on opposite sides, each at distance $2$ from the middle line."}
+
 :::

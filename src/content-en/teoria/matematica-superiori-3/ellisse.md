@@ -33,6 +33,13 @@ The same range holds for $d_2$. For a fixed focus, the smaller value is attained
 For $a=6$ and $c=4$, distances $11$ and $1$ have the required sum $12$. However, each distance must lie between $a-c=2$ and $a+c=10$. Indeed, if a point were $1$ unit from one focus, its distance from the other could be at most $1+8=9$. The pair $9$ and $3$ has sum $12$ and difference $6<8$. A triangle with sides $3$, $8$ and $9$ can be drawn with the segment between the foci as its side of length $8$. Its third vertex is then a point of the ellipse.
 :::
 
+:::esempio{titolo="Three distance sums for the same foci"}
+Fix foci $F_1(-3,0)$ and $F_2(3,0)$. The direct distance between them is $6$. If the required sum is $5$, every two-part path from $F_1$ via $P$ to $F_2$ is longer than $5$, so the locus is empty. If the sum is $6$, the shortest path occurs when $P$ lies on the segment between the foci. For sum $10$, we have $a=5$ and $c=3$. The point $(0,4)$ lies in the locus because it is $\sqrt{3^2+4^2}=5$ units from either focus. The sum $10$ therefore allows positions off the focal axis.
+
+::grafico{curve="5*cos(t),4*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-5 ymax=5 uguale=1 punti="-3,0,pieno,F_1;3,0,pieno,F_2;0,4,pieno,P" linee="-3,0 3,0" segmenti="-3,0,0,4;3,0,0,4" legenda="\dfrac{x^2}{25}+\dfrac{y^2}{16}=1" titolo="Segment $F_1F_2$ gives sum $6$, while the ellipse through $P$ gives sum $10$."}
+
+:::
+
 ## Standard equation and axes
 
 ::::teorema{#assi titolo="From foci to semi-axes"}
@@ -66,6 +73,25 @@ Conversely, the last equation implies $|x|\leq a$. Using it in the formulas for 
 For $\dfrac{x^2}{25}+\dfrac{y^2}{9}=1$, setting $y=0$ gives $x^2=25$, so $x=\pm5$. Setting $x=0$ gives $y=\pm3$. The major axis measures $10$ and the minor axis $6$. Since the coordinates are squared, changing the sign of either one preserves the equation. The curve is therefore symmetric about each axis and, on changing both signs, about the centre.
 :::
 
+::::teorema{#riscalamento titolo="From the unit circle to the ellipse"}
+For positive lengths $p$ and $q$, the transformation $(u,v)\mapsto(pu,qv)$ takes the unit circle to the ellipse with horizontal semi-axis $p$ and vertical semi-axis $q$. It also takes the open unit disk to points satisfying $\dfrac{x^2}{p^2}+\dfrac{y^2}{q^2}<1$. The same transformation thus describes both the curve and its interior.
+
+:::dimostrazione
+The new coordinates are $x=pu$ and $y=qv$. Because $p$ and $q$ are positive, we can recover a unique pair $u=\dfrac{x}{p}$ and $v=\dfrac{y}{q}$. Substitution in $u^2+v^2=1$ gives
+$$
+\frac{x^2}{p^2}+\frac{y^2}{q^2}=1 .
+$$
+The same calculation with $u^2+v^2<1$ gives the interior condition. The extreme values $\pm1$ of $u$ and $v$ become $\pm p$ and $\pm q$, respectively. This correspondence establishes the geometric meaning of the two denominators.
+:::
+::::
+
+:::esempio{titolo="Relative and actual coordinates"}
+Take $u=\dfrac35$ and $v=\dfrac45$. The point $U$ is on the unit circle because $\dfrac9{25}+\dfrac{16}{25}=1$. Scaling horizontally by $5$ and vertically by $3$ maps it to $P\left(3,\dfrac{12}{5}\right)$. Its horizontal coordinate is three-fifths of the half-width and its vertical coordinate is four-fifths of the half-height. These two ratios survive the scaling while Euclidean distances change.
+
+::grafico{curve="cos(t),sin(t),0,6.283185307;5*cos(t),3*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-4 ymax=4 uguale=1 punti="0.6,0.8,pieno,U;3,2.4,pieno,P" segmenti="0.6,0.8,0.6,0;3,2.4,3,0" legenda="u^2+v^2=1;\dfrac{x^2}{25}+\dfrac{y^2}{9}=1" titolo="Point $U$ on the circle maps to $P$ by multiplying its two coordinates by different factors."}
+
+:::
+
 ## Orientation and positions of the foci
 
 :::teorema{#fuochi titolo="The larger denominator locates the foci"}
@@ -78,6 +104,13 @@ In the ellipse $\dfrac{x^2}{9}+\dfrac{y^2}{25}=1$, the major axis is vertical, b
 
 :::attenzione
 Here the letter $a$ denotes the **semi-major axis**. In the equation $\dfrac{x^2}{9}+\dfrac{y^2}{25}=1$, the horizontal semi-axis measures $3$, while $a=5$. To identify the axis containing the foci, compare the two denominators and see which squared term has the larger one.
+:::
+
+:::esempio{titolo="Foci and endpoints of the vertical axis"}
+In $\dfrac{x^2}{9}+\dfrac{y^2}{25}=1$, the side point $P(3,0)$ is horizontally aligned with the centre. The triangle formed by $P$, the centre and $F_2(0,4)$ has legs $3$ and $4$. Its hypotenuse is therefore $5$. The distance $PF_1$ also equals $5$, because $F_1(0,-4)$ is the reflection of $F_2$ across the $x$-axis. Moving from $P$ to the top vertex changes the individual distances from $5$ and $5$ to $9$ and $1$, while the sum remains $10$.
+
+::grafico{curve="3*cos(t),5*sin(t),0,6.283185307" xmin=-5 xmax=5 ymin=-6 ymax=6 uguale=1 punti="0,4,pieno,F_2;0,-4,pieno,F_1;0,5,pieno,V;3,0,pieno,P" segmenti="0,4,3,0;0,-4,3,0" legenda="\dfrac{x^2}{9}+\dfrac{y^2}{25}=1" titolo="The focal distances from $P$ are equal. At vertex $V$ they are $9$ and $1$."}
+
 :::
 
 ## Eccentricity and shape
@@ -94,6 +127,17 @@ For a fixed semi-major axis, increasing $e$ reduces $b$ and makes the curve more
 Two horizontal ellipses with $a=5$ have eccentricities $\dfrac35$ and $\dfrac45$, respectively. In the first case $c=3$, so $b=\sqrt{25-9}=4$. In the second $c=4$, so $b=\sqrt{25-16}=3$. Both have width $10$, but their heights are $8$ and $6$, respectively. The ellipse with the greater eccentricity has foci farther from the centre and is shorter in the vertical direction.
 
 ::grafico{curve="5*cos(t),4*sin(t),0,6.283185307;5*cos(t),3*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-5 ymax=5 uguale=1 punti="-5,0;5,0;0,4;0,3" legenda="e=\dfrac{3}{5};e=\dfrac{4}{5}" titolo="At a fixed width, the ellipse with greater eccentricity has a shorter vertical semi-axis."}
+
+:::
+
+:::esempio{titolo="Equal eccentricity at different scales"}
+One horizontal ellipse has $a=5$ and $b=3$. A second ellipse with the same centre has semi-axes $a=\dfrac52$ and $b=\dfrac32$. The first focus-to-centre distance is $c=\sqrt{25-9}=4$. It is $2$ for the second ellipse, because both squared semi-axes are a quarter of their previous values. The focal ratio is therefore shared:
+$$
+e_1=\frac45,\qquad e_2=\frac{2}{\frac52}=\frac45 .
+$$
+Halving both coordinates takes the larger curve to the smaller one. The height-to-width ratio stays at $\dfrac35$, while both actual lengths are halved.
+
+::grafico{curve="5*cos(t),3*sin(t),0,6.283185307;2.5*cos(t),1.5*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-4 ymax=4 uguale=1 punti="5,0;2.5,0;0,3;0,1.5" legenda="a=5,\ b=3;a=\dfrac52,\ b=\dfrac32" titolo="Uniform scaling changes the semi-axis lengths and preserves eccentricity."}
 
 :::
 
@@ -130,6 +174,17 @@ $$
 The intersections have equal horizontal distance from the centre and opposite $x$-coordinates. The width at the specified height is the difference between the coordinates, $\dfrac{8\sqrt5}{3}\,\mathrm m$. This is less than the span at the base because the cut is at a positive height.
 :::
 
+:::osservazione{titolo="The range of usable widths across an arch"}
+In the arch example the height is $y=3\sqrt{1-\dfrac{x^2}{16}}$. Its radicand is non-negative for $|x|\leq4$. The section width at height $t$ is
+$$
+L(t)=8\sqrt{1-\frac{t^2}{9}}, \qquad 0\leq t\leq3 .
+$$
+At the base, $L(0)=8$, while at the top $L(3)=0$. Between those values, increasing $t$ decreases the radicand. If an object of width $6$ is centred on the base, its horizontal endpoints are at $\pm3$. The arch at those coordinates has height $3\sqrt{1-\dfrac9{16}}=\dfrac{3\sqrt7}{4}$, which is the maximum height of a rectangle of that width.
+
+::grafico{f="3*sqrt(1-x^2/16);2" xmin=-5 xmax=5 ymin=-1 ymax=4 uguale=1 punti="-4,0;4,0;0,3;-2.981423970,2,pieno,A;2.981423970,2,pieno,B" segmenti="-2.981423970,0,-2.981423970,2;2.981423970,0,2.981423970,2" legenda="y=3\sqrt{1-\dfrac{x^2}{16}};y=2" titolo="Section $AB$ is shorter than the base because it is at height $2$."}
+
+:::
+
 ## Translated ellipses
 
 :::teorema{#traslata titolo="Coordinates measured from the centre"}
@@ -144,6 +199,21 @@ The main vertices are $(h\pm a,k)$ and the foci are $(h\pm c,k)$. If the major a
 For $\dfrac{(x-2)^2}{25}+\dfrac{(y+1)^2}{9}=1$ the centre is $(2,-1)$. The major axis is horizontal and $c=\sqrt{25-9}=4$. The foci are therefore $(-2,-1)$ and $(6,-1)$, and the major-axis endpoints are $(-3,-1)$ and $(7,-1)$. The right-hand focus has $x$-coordinate $6$, below $7$, because $c<a$. The endpoints of the minor axis are found by fixing $x=2$ and setting $y=-1\pm3$.
 
 ::grafico{curve="2+5*cos(t),-1+3*sin(t),0,6.283185307" xmin=-4 xmax=8 ymin=-5 ymax=3 uguale=1 punti="2,-1,pieno,C;-2,-1,pieno,F_1;6,-1,pieno,F_2;-3,-1;7,-1;2,2;2,-4" segmenti="-3,-1,7,-1;2,-4,2,2" legenda="\dfrac{(x-2)^2}{25}+\dfrac{(y+1)^2}{9}=1" titolo="The foci and the main vertices all have the same $y$-coordinate as the centre $C$."}
+
+:::
+
+:::esempio{titolo="Completing squares with different coefficients"}
+The equation $9x^2+4y^2+18x-16y-11=0$ has different quadratic coefficients. Factor out the coefficient of each variable before completing its square.
+$$
+\begin{aligned}
+9(x^2+2x)+4(y^2-4y)&=11,\\
+9(x^2+2x+1)+4(y^2-4y+4)&=11+9+16,\\
+9(x+1)^2+4(y-2)^2&=36 .
+\end{aligned}
+$$
+The right-hand additions must be $9$ and $16$ because $1$ and $4$ were added inside expressions multiplied by $9$ and $4$, respectively. Dividing by $36$ gives $\dfrac{(x+1)^2}{4}+\dfrac{(y-2)^2}{9}=1$. The centre is $(-1,2)$ and the major axis is vertical, with vertices $(-1,-1)$ and $(-1,5)$. A zero right-hand side after square completion would have left only the centre. A negative right-hand side would have left no real points because both left-hand terms are non-negative.
+
+::grafico{curve="-1+2*cos(t),2+3*sin(t),0,6.283185307" xmin=-5 xmax=4 ymin=-2 ymax=6 uguale=1 punti="-1,2,pieno,C;-1,-1,pieno,V_1;-1,5,pieno,V_2;-3,2;1,2" segmenti="-1,-1,-1,5;-3,2,1,2" legenda="\dfrac{(x+1)^2}{4}+\dfrac{(y-2)^2}{9}=1" titolo="The centred form gives the centre $C$ and the two vertical endpoints of the major axis."}
 
 :::
 
@@ -217,4 +287,35 @@ Unlike for a circle, the tangent in this case is not perpendicular to the segmen
 
 :::osservazione
 To find how a given line $y=mx+q$ meets the ellipse, substitute the whole expression $mx+q$ for $y$. The coefficient of $x^2$ is $\dfrac1{a^2}+\dfrac{m^2}{b^2}>0$. The discriminant therefore distinguishes the cases of two intersections, one intersection and no intersection. For a vertical line $x=t$, compare $|t|$ with the horizontal semi-axis. Equality gives tangency.
+:::
+
+::::teorema{#tangenti-parallele titolo="Two tangents of a given slope"}
+For the centred ellipse $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ with $a,b>0$, the two tangent lines of slope $m$ have intercepts
+$$
+q=\pm\sqrt{a^2m^2+b^2}.
+$$
+If $|q|$ is below this threshold the line is secant, and if $|q|$ is above it the line misses the ellipse. The threshold depends on both semi-axes when $m\ne0$. At $m=0$ this recovers $y=\pm b$.
+
+:::dimostrazione
+The substitution $x=au$ and $y=bv$ maps the ellipse to the unit circle and the line $y=mx+q$ to $-ma u+bv-q=0$. In the $u,v$ plane, the line's distance from the origin is
+$$
+d=\frac{|q|}{\sqrt{a^2m^2+b^2}} .
+$$
+The radius here is $1$. If $d<1$, the line meets the circle at two points. If $d=1$, it touches the circle at one point. If $d>1$, it misses the circle. The transformation is invertible and preserves the number of intersections, so the three cases hold for the original curve too.
+:::
+::::
+
+:::esempio{titolo="Finding the two contact points from the slope"}
+For $\dfrac{x^2}{9}+\dfrac{y^2}{16}=1$ and $m=1$, the result is $q=\pm\sqrt{9+16}=\pm5$. The two contacts can be found without solving two separate systems. Substituting $y=x+5$ in the ellipse equation gives
+$$
+\begin{aligned}
+16x^2+9(x+5)^2 &=144,\\
+25x^2+90x+81&=0,\\
+(5x+9)^2&=0.
+\end{aligned}
+$$
+The contact with $y=x+5$ is therefore $\left(-\dfrac95,\dfrac{16}{5}\right)$. Reflecting in the origin gives $\left(\dfrac95,-\dfrac{16}{5}\right)$ for $y=x-5$. The two lines are parallel, with their contact points on opposite sides of the centre.
+
+::grafico{f="x+5;x-5" curve="3*cos(t),4*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-6 ymax=6 uguale=1 punti="-1.8,3.2,pieno,P;1.8,-3.2,pieno,Q;0,0,pieno,C" segmenti="-1.8,3.2,1.8,-3.2" legenda="y=x+5;y=x-5;\dfrac{x^2}{9}+\dfrac{y^2}{16}=1" titolo="The contact points $P$ and $Q$ are symmetric about the centre."}
+
 :::

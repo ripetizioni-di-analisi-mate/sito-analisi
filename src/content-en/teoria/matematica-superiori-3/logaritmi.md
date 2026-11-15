@@ -30,6 +30,19 @@ With a base less than $1$, a power with a positive exponent can give an argument
 From $a^0=1$ and $a^1=a$ it follows that $\log_a1=0$ and $\log_a a=1$. For base $e$ we write $\ln$, while for base ten we can write $\log_{10}$. In base ten, $0{,}001=10^{-3}$, so $\log_{10}(0{,}001)=-3$.
 :::
 
+:::esempio{titolo="Locating a value between two integer exponents"}
+To locate $\log_3 20$, find two consecutive powers of $3$ on either side of the argument. We have $3^2=9$ and $3^3=27$, so
+$$
+3^2<20<3^3
+\quad\Longleftrightarrow\quad
+2<\log_3 20<3.
+$$
+The direction is preserved because the base exceeds $1$. With base $\dfrac13$, the result is $-\log_3 20$ and lies between $-3$ and $-2$. Indeed, $\left(\dfrac13\right)^{-3}=27$ and $\left(\dfrac13\right)^{-2}=9$. This comparison locates the result even when neither integer exponent gives the argument exactly.
+
+::grafico{f="3^x;20" xmin=0 xmax=3.3 ymin=-1 ymax=33 punti="2,9;2.72683303,20,pieno,P;3,27" segmenti="2,0,2,9;3,0,3,27" legenda="3^x;20" titolo="The horizontal coordinate of $P$ lies between $2$ and $3$, since $20$ lies between $9$ and $27$"}
+
+:::
+
 ## Laws of logarithms
 
 ::::teorema{#proprieta titolo="Product, quotient and power"}
@@ -77,6 +90,17 @@ $$
 \ln\bigl((x-2)^2\bigr)=\ln\bigl(|x-2|^2\bigr)=2\ln|x-2|.
 $$
 The absolute value makes the base of the power inside the logarithm positive. At $x=1$, the result is $2\ln1=0$. The expression $\ln(x-2)$ on its own would be undefined at that same point.
+:::
+
+:::esempio{titolo="A factor that produces a vertical shift"}
+For $x>0$, replacing argument $x$ by $4x$ adds the same quantity to the base-$2$ logarithm for every $x$. This follows because $4$ is a power of the base:
+$$
+\log_2(4x)=\log_2 4+\log_2 x=2+\log_2 x.
+$$
+The second graph passes through $(1,2)$ because the original graph passes through $(1,0)$. At $x=2$ the heights are $1$ and $3$. The vertical distance is always $2$. With argument $x+4$ instead, the increase is $\log_2\left(1+\dfrac4x\right)$ and depends on the input. A constant multiplier is what makes the increase constant.
+
+::grafico{f="log(x)/log(2);log(4*x)/log(2)" xmin=-0.35 xmax=5 ymin=-3.2 ymax=4.5 punti="1,0;1,2;2,1;2,3" segmenti="1,0,1,2;2,1,2,3" legenda="\log_2x;\log_2(4x)" titolo="The segments at horizontal coordinates $1$ and $2$ both have height $2$"}
+
 :::
 
 ## Change of base
@@ -152,6 +176,23 @@ This gives $(3,4)\cup(4,+\infty)$. The two points are excluded for different rea
 In $\log_2(\log_3 x)$, the argument of the outer logarithm is the value of the inner one. Start with $x>0$, where $\log_3 x$ exists. The outer logarithm also requires $\log_3 x>0$. Since the inner logarithm increases and is zero at $1$, the domain is $(1,+\infty)$. To check it, compare two values. At $x=\dfrac13$ the inner logarithm is $-1$ and the outer logarithm is undefined. At $x=9$ the inner logarithm is $2$, and the composition is $\log_2 2=1$.
 :::
 
+:::esempio{titolo="A variable base crossing one"}
+For $\log_{x-1}(4-x)$, check separately that $x-1$ is positive, that it differs from $1$, and that $4-x$ is positive. The resulting set is $(1,2)\cup(2,4)$. The outer boundaries come from the zeros of the two linear expressions. The interior point $2$ is excluded even though both are positive.
+$$
+\left.
+\begin{aligned}
+x-1=1\\
+4-x=2
+\end{aligned}
+\right\}
+\quad (x=2).
+$$
+The exclusion follows because every power of base $1$ gives $1$, while the argument here is $2$. At $x=3$ the conditions are satisfied and the value is $\log_2 1=0$. The argument must be positive, while the logarithm itself can be zero.
+
+::grafico{f="x-1;4-x;1" xmin=0 xmax=4.5 ymin=-0.6 ymax=4.2 punti="1,0;2,1,vuoto;4,0" segmenti="2,0,2,1" legenda="x-1;4-x;1" titolo="The base $x-1$ reaches the excluded level $1$ at $x=2$"}
+
+:::
+
 ## Graph and inverse function
 
 :::definizione{#funzione titolo="The inverse of an exponential function"}
@@ -190,6 +231,25 @@ $$
 $$
 
 ::grafico{f="log(x-2)/log(2)-1" xmin=0 xmax=8 ymin=-4 ymax=2.5 asintoti="x=2" punti="3,-1;4,0" titolo="The asymptote is $x=2$ and the horizontal intercept is $(4,0)$"}
+
+:::
+
+::::teorema{titolo="Why the logarithm has the same monotonicity as its exponential"}
+Let $0<u<v$ and $a>0$ with $a\ne1$. If $a>1$, then $\log_a u<\log_a v$. If $0<a<1$, then $\log_a u>\log_a v$.
+
+:::dimostrazione
+Write $u=a^p$ and $v=a^q$. When $a>1$, the condition $p\geq q$ would give $a^p\geq a^q$, contradicting $u<v$, so $p<q$. When $0<a<1$, the condition $p\leq q$ would give $a^p\geq a^q$ because the exponential is decreasing. Therefore $p>q$. The numbers $p$ and $q$ are exactly $\log_a u$ and $\log_a v$.
+:::
+::::
+
+:::esempio{titolo="Monotonicity with a decreasing argument"}
+Consider $g(x)=\log_{\frac12}(4-x)$ for $x<4$. Take $x_1<x_2<4$. Subtracting the inputs from $4$ gives $4-x_1>4-x_2>0$. The base-$\dfrac12$ logarithm reverses the comparison again, so
+$$
+\log_{\frac12}(4-x_1)<\log_{\frac12}(4-x_2).
+$$
+The composition is therefore increasing. Its zero is at $x=3$, since $4-3=1$. As $x$ approaches $4$ from the left, the argument approaches zero through positive values and the logarithm increases without bound. The asymptote is thus on the right of the domain, at $x=4$.
+
+::grafico{f="log(4-x)/log(0.5)" xmin=-0.5 xmax=4.8 ymin=-3 ymax=3.8 asintoti="x=4" punti="2,-1;3,0,pieno,P;3.5,1" legenda="\log_{\frac12}(4-x)" titolo="The curve increases on its domain and approaches $x=4$ from the left"}
 
 :::
 
@@ -233,6 +293,23 @@ $$
 \end{aligned}
 $$
 The two original terms are $\log_9 9=1$ and $\log_3 9=2$, so their sum verifies the equation. The product law for logarithms applies only after expressing the terms with the same base.
+:::
+
+:::esempio{titolo="A parameter determines the number of solutions"}
+In $\ln(x^2+1)=k$ the argument is positive for every $x$. The right-hand side gives the height of the horizontal line to compare with the graph. In exponential form,
+$$
+x^2+1=e^k
+\quad\Longleftrightarrow\quad
+x^2=e^k-1 .
+$$
+- If $k<0$, the right-hand side is negative. The line lies below the graph and the equation has no solution.
+- If $k=0$, the right-hand side is zero and the only solution is $x=0$.
+- If $k>0$, the two solutions are $-\sqrt{e^k-1}$ and $\sqrt{e^k-1}$.
+
+For example, with $k=\ln 2$, the right-hand side is $1$ and the required height is attained at $-1$ and $1$. The symmetry follows from $( -x)^2=x^2$.
+
+::grafico{f="log(x^2+1);log(2)" xmin=-3 xmax=3 ymin=-0.45 ymax=2.6 punti="-1,0.69314718;0,0;1,0.69314718" legenda="\ln(x^2+1);\ln 2" titolo="The line at height $\ln 2$ meets the curve at opposite horizontal coordinates $-1$ and $1$"}
+
 :::
 
 ## Inequalities
@@ -282,6 +359,19 @@ In the inequality $\log_{x+1}4\geq2$, the base depends on $x$. To be admissible 
 The solution set is $(0,1]$. At $x=1$ the base is $2$ and $\log_2 4=2$, so the last endpoint is included.
 :::
 
+:::esempio{titolo="Solving an inequality with two height bounds"}
+To find where $-1\leq\log_2(x+2)<2$, write the two levels as $\log_2(\frac12)$ and $\log_2 4$. Since the logarithm increases, the comparisons between arguments preserve the same direction.
+$$
+\frac12\leq x+2<4
+\quad\Longleftrightarrow\quad
+-\frac32\leq x<2.
+$$
+The argument is positive throughout the resulting interval, since it is at least $\dfrac12$. The left endpoint gives equality at the lower bound. The right endpoint has height $2$ and remains excluded. A positive lower bound on the argument can therefore make the domain condition automatic.
+
+::grafico{f="log(x+2)/log(2);-1;2" xmin=-2.5 xmax=4 ymin=-3 ymax=3 punti="-1.5,-1,pieno,A;2,2,vuoto,B" segmenti="-1.5,-1,-1.5,0;2,0,2,2" asintoti="x=-2" legenda="\log_2(x+2);-1;2" titolo="The portion from $A$, included, to $B$, excluded, lies between the required levels"}
+
+:::
+
 ## Thresholds and logarithmic scales
 
 :::esempio{#modelli titolo="Real elapsed time and the first observation"}
@@ -311,3 +401,29 @@ When the intensity is multiplied by $100$, the level rises by $10\log_{10}100=20
 :::osservazione{titolo="A threshold in a decreasing model"}
 For a quantity that halves every hour, the model $Q(t)=80\left(\dfrac12\right)^t$ equals $10$ exactly at $t=3$. The condition $Q(t)<10$ instead requires $t>3$. Since the base is less than $1$, values below the threshold occur at later times. If observations take place at whole hours, hour $3$ still gives $10$ and the first qualifying observation is at hour four.
 :::
+
+:::esempio{titolo="Waiting time with a background level"}
+A display starts at a brightness of $50$ units. The model $L(t)=2+48\left(\dfrac12\right)^{\frac t4}$, with $t$ in hours, describes a variable contribution that halves every four hours and a background brightness of $2$. We seek the first instant when the value is at most $8$. Subtract the background before dividing by the initial variable contribution.
+$$
+\begin{aligned}
+L(t)\leq 8
+ &\quad\Longleftrightarrow\quad
+ \left(\frac12\right)^{\frac t4}\leq \frac{8-2}{48} \\[4pt]
+ &\quad\Longleftrightarrow\quad
+ \left(\frac12\right)^{\frac t4}\leq \left(\frac12\right)^3\\[4pt]
+ &\quad\Longleftrightarrow\quad t\geq 12.
+\end{aligned}
+$$
+The final comparison reverses the direction because the base is less than $1$. At $t=12$ the value is $2+48\cdot\dfrac18=8$, so the first qualifying instant is the twelfth hour. A threshold equal to the background $2$ would require the exponential to be zero. The model approaches that level and stays above it at every finite time.
+
+::grafico{f="2+48*0.5^(x/4);8" xmin=-0.5 xmax=22 ymin=-1 ymax=53 nomi="t,L" asintoti="y=2" punti="0,50;8,14;12,8,pieno,P;16,5" segmenti="12,0,12,8" legenda="2+48\left(\frac12\right)^{\frac{t}{4}};8" titolo="The value reaches threshold $8$ at $P$ and approaches background level $2$"}
+
+:::
+
+::::teorema{titolo="First whole-time observation of a rising threshold"}
+Let $N_0>0$, $a>1$, and $S>N_0$. In the model $N(t)=N_0a^t$ with $t\geq0$, the exact time to reach $S$ is $\tau=\log_a\dfrac{S}{N_0}$. When observations occur only at integer times, the first with $N(t)\geq S$ is $\lceil\tau\rceil$, the smallest integer greater than or equal to $\tau$. The first with $N(t)>S$ is $\lfloor\tau\rfloor+1$, where $\lfloor\tau\rfloor$ is the greatest integer less than or equal to $\tau$.
+
+:::dimostrazione
+Since $a$ exceeds $1$, taking the logarithm of the ratio turns $N_0a^t\geq S$ into $t\geq\tau$. With a strict comparison this becomes $t>\tau$. In either case, choose the first allowed integer. If $\tau$ is an integer, the first inequality allows $\tau$ itself, while the second requires the next integer. If $\tau$ is not an integer, both give the same first observation.
+:::
+::::

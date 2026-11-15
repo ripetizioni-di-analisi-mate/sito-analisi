@@ -37,6 +37,14 @@ Siano $F(0,1)$ e $d:y=-1$. Il vertice è a metà tra $F$ e il punto $D(0,-1)$ in
 ::grafico{f="x^2/4;-1" legenda="y=\dfrac{x^2}{4};y=-1" xmin=-4 xmax=5 ymin=-2 ymax=4.5 uguale=1 punti="0,1,pieno,F;0,0,pieno,V;0,-1,pieno,D;2,1,pieno,P;2,-1,pieno,H" segmenti="0,1,2,1;2,-1,2,1" titolo="Le distanze PF e PH coincidono perché P appartiene alla parabola"}
 :::
 
+:::esempio{titolo="La direttrice sopra il fuoco"}
+Siano $F(1,-2)$ e $d:y=2$. L'asse è la verticale per il fuoco, quindi $x=1$. Il suo punto d'incontro con la direttrice è $D(1,2)$. Poiché il vertice è equidistante da $F$ e da $D$ lungo l'asse, la quota del vertice è la media di $-2$ e $2$. Si ottiene $V(1,0)$. Il parametro $p$ è lo spostamento dal vertice al fuoco, quindi qui vale $-2$ e l'equazione è $(x-1)^2=-8y$.
+
+Per controllare il verso di apertura si può individuare un punto alla quota del fuoco. Ponendo $y=-2$ si ottiene $(x-1)^2=16$, quindi le ascisse possibili sono $-3$ e $5$. Per $P(5,-2)$ il segmento orizzontale verso $F$ misura $5-1=4$. Il segmento verticale da $P$ alla direttrice misura $2-(-2)=4$. La curva passa dunque per $P$ sul lato del fuoco. La stessa equazione esclude quote positive, perché per $y>0$ il secondo membro sarebbe negativo.
+
+::grafico{f="-(x-1)^2/8;2" legenda="y=-\dfrac{(x-1)^2}{8};y=2" xmin=-4 xmax=7 ymin=-4 ymax=3 uguale=1 segmenti="1,-2,5,-2;5,-2,5,2" punti="1,-2,pieno,F;1,0,pieno,V;1,2,pieno,D;5,-2,pieno,P;5,2,pieno,H; -3,-2" titolo="Il fuoco si trova sotto il vertice. Da P i segmenti verso F e verso la direttrice misurano entrambi 4"}
+:::
+
 ## Dal trinomio alla forma con il vertice
 
 ::::teorema{#vertice titolo="Completamento del quadrato"}
@@ -82,6 +90,34 @@ Segue che $V=(2,3)$. A distanza $1$ dall'asse, cioè per $x=1$ e $x=3$, il termi
 Le parabole $y=x^2$ e $y=4x^2$ hanno entrambe vertice nell'origine e sono rivolte verso l'alto. Alla quota $y=1$, la prima incontra la retta orizzontale alle ascisse $-1$ e $1$. Per la seconda vale invece $4x^2=1$, quindi le ascisse sono $-\dfrac12$ e $\dfrac12$. Alla stessa quota la seconda ha una corda larga la metà. Nelle due equazioni il coefficiente di $x^2$ è positivo. La differenza tra le aperture dipende dal suo valore assoluto.
 :::
 
+:::osservazione
+Nella forma $f(x)=a(x-h)^2+k$, la quantità $(x-h)^2$ misura il quadrato della distanza dall'asse. A sinistra dell'asse questa distanza diminuisce quando $x$ aumenta verso $h$. A destra dell'asse aumenta quando $x$ si allontana da $h$. Con $a>0$ le ordinate seguono la stessa variazione, quindi la funzione decresce per $x\le h$ e cresce per $x\ge h$. Con $a<0$, moltiplicare per $a$ inverte il confronto e si ottiene la monotonia opposta.
+
+Per esempio, per $f(x)=-3(x-4)^2+2$ i punti di ascissa $3$ e $5$ distano entrambi $1$ dall'asse. Le loro ordinate valgono $-1$, mentre $f(4)=2$. Tra $3$ e $4$ l'ordinata sale e tra $4$ e $5$ scende. Il fatto che le ordinate agli estremi del tratto $[3,5]$ coincidano indica la simmetria, mentre all'interno l'ordinata varia. Questo aiuta a scegliere quando basta confrontare gli estremi di un intervallo e quando occorre valutare anche il vertice.
+:::
+
+::::teorema{#punti-stessa-ordinata titolo="Asse da due punti alla stessa quota"}
+Sia $f(x)=ax^2+bx+c$ con $a\ne0$. Se $u$ e $v$ sono ascisse distinte e $f(u)=f(v)$, l'asse di simmetria passa per l'ascissa $\dfrac{u+v}{2}$. Questo permette di trovare il vertice quando il grafico o una tabella mostrano due punti alla stessa altezza, anche se entrambi si trovano fuori dall'asse $x$.
+
+:::dimostrazione
+Si sottraggono i valori di $f$ per separare il fattore $v-u$.
+$$
+\begin{aligned}
+0 &= f(v)-f(u)\\
+  &= a(v^2-u^2)+b(v-u)\\
+  &= (v-u)\bigl(a(u+v)+b\bigr).
+\end{aligned}
+$$
+Poiché $v-u\ne0$, il secondo fattore è nullo. Si ottiene $\dfrac{u+v}{2}=-\dfrac{b}{2a}$, cioè l'ascissa dell'asse.
+:::
+::::
+
+:::esempio{titolo="Ricavare il coefficiente quadratico da tre valori"}
+Si sa che $f(0)=f(4)=1$ e $f(2)=-3$. I primi due valori fissano l'asse $x=2$. Il terzo è proprio l'ordinata nel punto dell'asse, quindi la forma più diretta è $f(x)=a(x-2)^2-3$. L'informazione $f(0)=1$ dà $1=4a-3$, perciò $a=1$. Sostituendo l'altra ascissa si trova $f(4)=(4-2)^2-3=1$, coerentemente con il valore dato. I punti di ascisse $0$ e $4$ si trovano a due unità dall'asse. Nella formula, il quadrato di questa distanza è $4$ e coincide con la differenza di quota da $-3$ a $1$.
+
+::grafico{f="(x-2)^2-3;1" xmin=-1 xmax=5 ymin=-4.1 ymax=5.3 asintoti="x=2" punti="0,1,pieno,A;4,1,pieno,B;2,-3,pieno,V" titolo="La corda orizzontale AB individua l'asse che passa per il suo punto medio"}
+:::
+
 ## Zeri, intercetta e segno
 
 :::teorema{#zeri titolo="Intersezioni con gli assi"}
@@ -102,6 +138,18 @@ L'ascissa del vertice è il punto medio delle due radici, cioè $2$. Sostituendo
 
 :::attenzione
 L'equazione $(x-2)^2=0$ ha la sola soluzione $2$ e questa è una radice doppia. Il grafico di $y=(x-2)^2$ tocca l'asse in $(2,0)$. Poiché il quadrato è positivo da entrambi i lati, il segno resta positivo per $x\ne2$.
+:::
+
+:::esempio{titolo="Quante intersezioni al variare di un parametro"}
+Si consideri $f_q(x)=(x-1)^2+q$, con $q$ reale. Il parametro $q$ è l'ordinata minima della parabola. Spostarla in su o in giù cambia quindi il numero degli zeri, mentre l'asse resta $x=1$. Risolvendo $f_q(x)=0$ si ottiene $(x-1)^2=-q$. La distanza dall'asse che risolve l'equazione dipende da $-q$.
+
+- Se $q=-1$, la distanza vale $1$ e si trovano le ascisse $0$ e $2$. Tra queste ascisse il quadrato è minore di $1$, quindi $f_{-1}(x)<0$.
+- Se $q=0$, la distanza è zero. Il solo punto comune è $V(1,0)$ e l'asse $x$ è tangente.
+- Se $q=2$, il quadrato dovrebbe valere $-2$. Il grafico resta sopra l'asse e tutte le ordinate sono almeno $2$.
+
+I tre casi si ritrovano calcolando il discriminante dopo lo sviluppo, perché $b=-2$, $a=1$ e $c=1+q$ danno $\Delta=-4q$. La forma con il vertice identifica direttamente l'effetto della traslazione verticale.
+
+::grafico{f="(x-1)^2-1;(x-1)^2;(x-1)^2+2" xmin=-2 xmax=4 ymin=-2.4 ymax=6.5 punti="0,0;2,0;1,0" titolo="Per lo stesso asse verticale si osservano due zeri, un contatto oppure nessuna intersezione con l'asse x"}
 :::
 
 ## Ricavare l'equazione dai dati
@@ -144,6 +192,20 @@ $$
 Sottraendo la seconda equazione del sistema a destra dalla terza si ottiene $2a=2$, quindi $a=1$ e $b=-2$. Il risultato è $y=x^2-2x+1$. Il coefficiente $a$ è diverso da zero e i valori assunti per $x=0,1,3$ sono rispettivamente $1,0,4$.
 
 In generale tre punti con ascisse distinte determinano al più un polinomio di grado al massimo due. Se due polinomi di quel grado passassero per gli stessi punti, la loro differenza avrebbe tre radici distinte e dovrebbe essere il polinomio nullo. Se i tre punti sono allineati il polinomio ottenuto ha grado al massimo uno, quindi i dati non determinano una parabola.
+:::
+
+:::esempio{titolo="Due zeri e un punto a una quota nota"}
+Si cerchi la parabola con zeri $-1$ e $3$ che passa per $P(1,4)$. Gli zeri fissano i fattori $x+1$ e $x-3$. Rimane da trovare il coefficiente che scala in verticale le ordinate.
+$$
+\begin{aligned}
+y&=a(x+1)(x-3),\\
+4&=a(1+1)(1-3)=-4a,\\
+a&=-1,\qquad y=-(x+1)(x-3).
+\end{aligned}
+$$
+Poiché $1$ è il punto medio degli zeri, $P$ è il vertice. La quota del vertice è positiva, mentre $a<0$, quindi la curva sta sopra l'asse tra le radici e sotto l'asse all'esterno. Se si scegliesse $a=1$, le due ascisse d'intersezione resterebbero corrette, ma in $x=1$ l'ordinata sarebbe $-4$. La condizione sul terzo punto distingue due parabole che hanno gli stessi zeri.
+
+::grafico{f="-(x+1)*(x-3);(x+1)*(x-3)" xmin=-2.3 xmax=4.3 ymin=-6 ymax=6 punti="-1,0;3,0;1,4,pieno,P" titolo="Entrambe le parabole passano per gli zeri assegnati. La curva che passa per P si apre verso il basso"}
 :::
 
 ## Rette secanti, tangenti ed esterne
@@ -220,6 +282,40 @@ Per la prima, la differenza $x^2-(4x-4)$ è $(x-2)^2$. Per la seconda è $(x+2)^
 Per una tangente parallela a una retta data si conosce già la pendenza $m$. Si ricava allora $t$ da $2at+b=m$. Per esempio, per una tangente orizzontale vale $m=0$, perciò $t=-\dfrac{b}{2a}$. Il punto di contatto è il vertice e la retta ha equazione $y=k$.
 :::
 
+::::teorema{#corda-tangente-parallela titolo="Corda e tangente parallela"}
+Sia $f(x)=ax^2+bx+c$ con $a\ne0$. La tangente parallela alla corda fra i punti di ascisse distinte $u$ e $v$ ha ascissa di contatto $t=\dfrac{u+v}{2}$. La retta tangente passa per $(t,f(t))$, mentre il punto medio della corda ha in generale un'altra ordinata.
+
+:::dimostrazione
+La pendenza della corda si ottiene dividendo la differenza delle ordinate per $v-u$.
+$$
+\begin{aligned}
+m_{\mathrm{corda}}&=\frac{f(v)-f(u)}{v-u}\\[4pt]
+&=\frac{(v-u)\bigl(a(v+u)+b\bigr)}{v-u}\\[4pt]
+&=a(v+u)+b.
+\end{aligned}
+$$
+La pendenza della tangente in $t$ vale $2at+b$. Poiché le due rette sono parallele, le pendenze coincidono. Togliendo $b$ e dividendo per $2a$ si ottiene la media delle due ascisse.
+:::
+::::
+
+:::esempio{titolo="La tangente di una corda obliqua"}
+Sulla parabola $f(x)=x^2+1$ i punti di ascisse $0$ e $4$ sono $A(0,1)$ e $B(4,17)$. La corda ha pendenza $\dfrac{17-1}{4-0}=4$ e retta $y=4x+1$. Il punto di tangenza parallela ha ascissa $2$. Si calcola $f(2)=5$, dunque la retta tangente è $y=4(x-2)+5=4x-3$. La corda a $x=2$ ha ordinata $9$. La differenza tra le ordinate delle due rette è $4$ a ogni ascissa perché hanno la stessa pendenza. Come controllo, $x^2+1-(4x-3)=(x-2)^2$, che si annulla soltanto nel punto di contatto.
+
+::grafico{f="x^2+1;4*x+1;4*x-3" xmin=-1 xmax=5 ymin=-4.5 ymax=20 punti="0,1,pieno,A;4,17,pieno,B;2,5,pieno,T;2,9,pieno,M" segmenti="2,5,2,9" titolo="Il contatto T è alla stessa ascissa del punto medio M della corda. Le due rette sono parallele"}
+:::
+
+:::osservazione
+Per contare le tangenti che attraversano $P(u,v)$ si sostituisce il punto nella formula della tangente con contatto a $t$. Indicando ancora con $f$ il trinomio, si può riscrivere la condizione come quadrato.
+$$
+\begin{aligned}
+v&=(2at+b)u+c-at^2\\
+ &=f(u)-a(t-u)^2,\\[3pt]
+(t-u)^2&=\frac{f(u)-v}{a}.
+\end{aligned}
+$$
+Il segno dell'ultimo membro determina il numero di contatti. Se è positivo ci sono due valori di $t$ e quindi due rette di pendenze diverse. Se è nullo, $P$ appartiene alla parabola e il contatto è nel punto stesso. Se è negativo, non ci sono tangenti reali per $P$. Per esempio, per $f(x)=4-x^2$ e $P(0,5)$ si ha $\dfrac{4-5}{-1}=1$, dunque $t=\pm1$. Il coefficiente di secondo grado è negativo, quindi in questo esempio il punto da cui si tracciano due tangenti è sopra la curva alla stessa ascissa. Le due rette risultano $y=5+2x$ e $y=5-2x$.
+:::
+
 ## Parabole con asse orizzontale
 
 :::definizione{#orizzontale titolo="Scambio delle coordinate"}
@@ -238,6 +334,20 @@ Per $x=(y-1)^2-2$, il vertice è $(-2,1)$. Fissando $x=2$ si ricava $(y-1)^2=4$,
 La curva è il grafico di $x$ in funzione di $y$. Alla stessa ascissa possono però corrispondere due ordinate, come mostra la verticale che passa per i due punti. Il grafico di una funzione $y=f(x)$ deve invece assegnare una sola ordinata a ogni ascissa del dominio.
 
 ::grafico{curve="(t-1)^2-2,t,-2,4.3" legenda="x=(y-1)^2-2" xmin=-3.5 xmax=6 ymin=-2.5 ymax=4.5 asintoti="y=1" segmenti="2,-1,2,3" punti="-2,1,pieno,V;2,-1,pieno,A;2,3,pieno,B" titolo="A e B hanno la stessa ascissa e sono simmetrici rispetto alla retta y = 1"}
+:::
+
+:::esempio{titolo="Le due branche di una parabola orizzontale"}
+Si consideri $x=5-2(y-1)^2$. Il vertice è $(5,1)$ e il grafico sta a sinistra della verticale per il vertice. Per descrivere l'ordinata in funzione dell'ascissa bisogna prima isolare il quadrato.
+$$
+\begin{aligned}
+(y-1)^2 &= \frac{5-x}{2},\\[4pt]
+y_+(x) &= 1+\sqrt{\frac{5-x}{2}},\\[4pt]
+y_-(x) &= 1-\sqrt{\frac{5-x}{2}} .
+\end{aligned}
+$$
+Entrambe le radici richiedono $x\le5$. La funzione $y_+$ descrive i punti sopra l'asse orizzontale e $y_-$ quelli sotto. Per $x<5$ si ottengono due quote distinte, mentre per $x=5$ entrambe valgono $1$. A $x=3$ le ordinate sono $2$ e $0$ e la corda verticale misura $2$. Il coefficiente $2$ sotto la radice proviene dalla divisione per quel coefficiente, quindi resta sotto radice quando si assegna $x$.
+
+::grafico{curve="5-2*(t-1)^2,t,1,3.5;5-2*(t-1)^2,t,-1.5,1" legenda="y_+;y_-" xmin=-4 xmax=6 ymin=-1.6 ymax=3.6 segmenti="3,0,3,2;-4,1,5,1" punti="5,1,pieno,V;3,2,pieno,A;3,0,pieno,B" titolo="Le due funzioni hanno in comune il vertice V. La corda verticale AB riunisce un punto per ciascuna branca"}
 :::
 
 ## Estremi e vincoli nei problemi
@@ -265,4 +375,15 @@ y(4)=9-1^2=8,
 y(6)=9-3^2=0 .
 $$
 Sul tratto richiesto il massimo è $8$ e il minimo è $0$. Il massimo del grafico intero sarebbe $9$, ma quel punto non è accessibile sulla passerella.
+:::
+
+:::esempio{titolo="Il prezzo va scelto tra numeri interi"}
+Una scuola propone un laboratorio e può fissare il biglietto a un numero intero di euro compreso fra $4$ e $12$. Il numero di biglietti previsti a prezzo $p$ è $30-2p$. Poiché il ricavo in euro è il prodotto del prezzo per il numero di biglietti, il modello dà
+$$
+\begin{aligned}
+R(p)&=30p-2p^2\\
+    &=\frac{225}{2}-2\left(p-\frac{15}{2}\right)^2 .
+\end{aligned}
+$$
+Per prezzi reali il vertice avrebbe ascissa $\dfrac{15}{2}$, che è tra $7$ e $8$. Il prezzo deve però essere intero. Per massimizzare $R$ si cerca il prezzo ammissibile a distanza minore da $\dfrac{15}{2}$. Sia $7$ sia $8$ distano $\dfrac12$, quindi ottengono lo stesso ricavo. Il conto diretto dà $R(7)=7\cdot16=112$ e $R(8)=8\cdot14=112$. Ogni altro prezzo consentito è più lontano dal vertice e ha ricavo minore. La restrizione ai prezzi interi cambia sia il valore massimo sia il numero di prezzi che lo producono.
 :::
