@@ -31,7 +31,20 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   },
   'tolc-s': { titolo: 'TOLC-S (Science)', breve: 'TOLC-S', descrizione: 'Preparation for the TOLC-S: mathematics, reasoning and reading, biology, chemistry, physics, Earth science and English. An initial collection of theory, worked examples, five-option questions and section-timed simulations. Study materials and simulations are in Italian.', argomenti: {} },
   'tolc-i': { titolo: 'TOLC-I (Engineering)', breve: 'TOLC-I', descrizione: 'Preparation for the TOLC-I: mathematics, logic, physics, chemistry, verbal comprehension and English. An initial collection of theory, worked examples, five-option questions and section-timed simulations. Study materials and simulations are in Italian.', argomenti: {} },
-  'chimica-semestre-filtro': { titolo: 'Chemistry and introductory biochemistry for the filter semester', breve: 'Filter semester chemistry', descrizione: 'Chemistry and introductory biochemistry for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and timed questions. Study materials are in Italian.', argomenti: {} },
+  'chimica-semestre-filtro': {
+    titolo: 'Chemistry and introductory biochemistry for the filter semester',
+    breve: 'Filter semester chemistry',
+    descrizione: 'Chemistry and introductory biochemistry for Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, from atoms to biomolecules. Illustrated theory, worked examples, practice exercises with solutions and 630 explained questions, in Italian and English.',
+    argomenti: {
+      'atomo-legami-termodinamica': { titolo: 'Atoms, bonds, states of matter and thermodynamics', breve: 'Atoms, bonds and thermodynamics' },
+      'soluzioni-proprieta-colligative': { titolo: 'Mixtures, solutions and colligative properties', breve: 'Solutions and colligative properties' },
+      'reazioni-cinetica-equilibrio': { titolo: 'Chemical reactions, kinetics and equilibrium', breve: 'Reactions and equilibrium' },
+      'acidi-basi-redox': { titolo: 'Acids, bases, buffers, redox and electrochemistry', breve: 'Acids, bases and redox' },
+      'carbonio-idrocarburi-stereochimica': { titolo: 'Carbon, hydrocarbons and stereochemistry', breve: 'Carbon and stereochemistry' },
+      'gruppi-funzionali': { titolo: 'Functional groups and reactions of organic compounds', breve: 'Functional groups' },
+      'biomolecole': { titolo: 'Amino acids, proteins, carbohydrates, lipids and nucleic acids', breve: 'Biomolecules' },
+    },
+  },
   'matematica-semestre-filtro': {
     titolo: 'Mathematics foundations for the filter semester',
     breve: 'Mathematics foundations',

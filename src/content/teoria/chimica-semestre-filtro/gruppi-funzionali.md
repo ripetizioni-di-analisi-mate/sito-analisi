@@ -1,158 +1,225 @@
 ---
-titolo: "Gruppi funzionali e reazioni dei composti organici"
-sommario: "Alcoli, ammine, composti carbonilici, acidi carbossilici e derivati, con le trasformazioni chimiche che ricorrono nelle biomolecole."
+titolo: Gruppi funzionali e reazioni dei composti organici
+sommario: Strutture, acidità e meccanismi di alcoli, ammine, carbonili e derivati acilici, dalle trasformazioni di laboratorio ai collegamenti biochimici.
 ---
 
+## Alcoli, fenoli e tioli: leggere l'ambiente del gruppo
 
-## Alcoli, fenoli e tioli
+:::definizione{#alcoli-fenoli titolo="Lo stesso OH in ambienti differenti"}
+Etanolo e fenolo possiedono entrambi un ossidrile, ma non rispondono allo stesso modo a una base. Prima di prevedere una reazione bisogna quindi identificare anche l'atomo al quale il gruppo è legato. In un **alcol** OH è unito a un carbonio saturo; in un **fenolo** è legato direttamente a un carbonio aromatico. L'alcol benzilico, con un gruppo CH2 fra anello e OH, resta un alcol.
 
-:::definizione{#alcoli-fenoli titolo="Gruppi ossidrilici e struttura"}
-Un **alcol** contiene un gruppo OH legato a un carbonio saturo; un fenolo ha il gruppo OH legato direttamente a un anello aromatico. Un alcol è primario, secondario o terziario secondo il numero di carboni legati al carbonio che porta OH. L'etanolo $\mathrm{CH_3CH_2OH}$ è primario, il propan-2-olo $\mathrm{CH_3CH(OH)CH_3}$ è secondario.
+I suffissi aiutano a ricostruire le strutture: etanolo, propan-2-olo e propan-1,2,3-triolo indicano rispettivamente uno, uno e tre ossidrili. L'ultimo composto è il glicerolo. Un alcol è primario, secondario o terziario secondo quanti carboni sono direttamente legati al carbonio che porta OH; non si contano gli ossidrili né tutti i carboni della molecola.
 
-I legami idrogeno fra molecole innalzano l'ebollizione rispetto a idrocarburi di massa simile. La solubilità in acqua risulta dal contributo polare dell'ossidrile e da quello poco polare dello scheletro carbonioso; tende a diminuire all'aumentare della catena. Nei polioli, come il glicerolo, più gruppi OH favoriscono l'interazione con l'acqua.
+![Alcoli primario, secondario e terziario distinti dai carboni direttamente legati al carbonio ossidrilico](/figure/chimica-semestre-filtro/gruppi-funzionali/alcoli-it.svg)
 
-Il fenolo è più acido degli alcoli alifatici semplici perché l'anione fenossido è stabilizzato dalla delocalizzazione elettronica. L'ossidrile fenolico della tirosina e i gruppi fenolici dei tocoferoli hanno quindi proprietà diverse da quelle dell'ossidrile di un alcol saturo.
+L'ossigeno può accettare legami idrogeno e il legame O–H può donarli. Questa associazione intermolecolare innalza in genere l'ebollizione rispetto a composti di massa simile privi di donatori. In acqua, però, compete con la parte idrocarburica: allungare una catena alchilica tende a ridurre la solubilità; aggiungere OH aumenta le possibilità d'interazione con il solvente. Non basta quindi trovare un ossidrile per dichiarare qualsiasi molecola completamente miscibile.
+
+Per confrontare l'acidità si confrontano le basi coniugate. Il fenossido delocalizza la carica anche nell'anello; l'alcossido alifatico non possiede la stessa stabilizzazione. In acqua, a temperatura ambiente, valori indicativi sono $pK_a\approx10$ per il fenolo e $pK_a\approx16$ per l'etanolo. I sostituenti modificano questi valori. La tirosina contiene un ossidrile fenolico, mentre serina e treonina contengono ossidrili alcolici.
 :::
 
-:::osservazione{#reazioni-alcoli titolo="Ossidazione, disidratazione e sostituzione"}
-L'**ossidazione** di un alcol primario può dare un'aldeide e, con condizioni ulteriormente ossidanti, un acido carbossilico. Un alcol secondario dà un chetone. Un alcol terziario è privo dell'idrogeno sul carbonio che porta OH e resiste alle comuni ossidazioni che conservano lo scheletro carbonioso.
+:::osservazione{#reazioni-alcoli titolo="Ossidare, eliminare o sostituire"}
+L'ossidazione ordinaria di un alcol a carbonile richiede un idrogeno sul carbonio ossidrilico. Un alcol primario può dare un'aldeide; un secondario dà un chetone. Un terziario non forma semplicemente un chetone conservando tutti i legami C–C: manca quell'idrogeno. Ossidazioni drastiche con rottura dello scheletro sono un problema diverso.
+
+Il prodotto di un alcol primario dipende dalle condizioni. Un ossidante adatto in ambiente anidro, come PCC nelle condizioni usuali, consente di ottenere l'aldeide; un forte ossidante in ambiente acquoso può proseguire all'acido carbossilico. La scrittura seguente indica una successione di livelli di ossidazione, non un unico protocollo:
+
 $$
-\mathrm{CH_3CH_2OH}\xrightarrow{[O]}\mathrm{CH_3CHO}\xrightarrow{[O]}\mathrm{CH_3COOH}.
+\mathrm{CH_3CH_2OH}\longrightarrow\mathrm{CH_3CHO}\longrightarrow\mathrm{CH_3COOH}.
 $$
-La disidratazione ad alchene, con acido e riscaldamento nelle condizioni adatte, elimina acqua e richiede un idrogeno su un carbonio adiacente a quello che porta OH, detto carbonio beta. Nelle sostituzioni l'ossidrile viene spesso prima protonato, così il gruppo uscente è acqua; un alcol primario può reagire con HBr formando un bromuro alchilico. Nell'organismo l'etanolo è ossidato ad acetaldeide e poi ad acetato mediante enzimi e cofattori; queste trasformazioni sono esempi biochimici delle variazioni del gruppo funzionale.
+
+La disidratazione, con catalisi acida e riscaldamento appropriati, elimina acqua e forma un alchene quando è disponibile un idrogeno su un carbonio adiacente, detto beta. Possono comparire più alcheni; con intermedi carbocationici sono possibili riarrangiamenti. Nella sostituzione di un alcol primario con HBr, la protonazione converte il cattivo gruppo uscente OH in acqua, e bromuro può attaccare il carbonio. Sostituzione ed eliminazione dipendono da substrato, nucleofilo, solvente e temperatura.
+
+Nel metabolismo dell'etanolo, enzimi distinti catalizzano la formazione di acetaldeide e poi acetato, accoppiando le ossidazioni alla riduzione di NAD+. Il collegamento biologico riguarda il bilancio redox; non implica l'impiego cellulare degli ossidanti di laboratorio.
 :::
 
-:::definizione{#tioli-disolfuri titolo="Tioli e legami disolfuro"}
-Un **tiolo** contiene il gruppo SH, come $\mathrm{CH_3CH_2SH}$ nell'etantiolo. I tioli sono in genere più acidi degli alcoli corrispondenti. La forma deprotonata, il tiolato $\mathrm{RS^-}$, è un nucleofilo importante nelle reazioni biologiche.
+:::definizione{#tioli-disolfuri titolo="Zolfo nucleofilo e ponti disolfuro"}
+Un tiolo contiene SH: l'etantiolo è $\mathrm{CH_3CH_2SH}$. I tioli alifatici sono generalmente più acidi degli alcoli corrispondenti; lo zolfo più grande e polarizzabile stabilizza il tiolato. L'ambiente locale modifica l'acidità della cisteina nelle proteine. Il tiolato $\mathrm{RS^-}$ può attaccare un carbonio elettrofilo: nucleofilicità e basicità non sono sinonimi, perché la prima riguarda una velocità di reazione e la seconda un equilibrio con un protone.
 
-L'ossidazione di due gruppi tiolici può formare un disolfuro, mentre la riduzione del disolfuro rigenera i tioli. Il gruppo SH della cisteina e i ponti disolfuro delle proteine costituiscono un esempio di questa coppia di trasformazioni.
+Due tioli possono ossidarsi a un disolfuro. La semireazione rende esplicito il trasferimento di elettroni:
+
 $$
 2\,\mathrm{RSH}\longrightarrow\mathrm{RSSR}+2\,\mathrm{H^+}+2\,e^-.
 $$
+
+La riduzione inversa rigenera due gruppi SH. Un ponte fra due cisteine può stabilizzare una struttura proteica; non è un tioetere, che presenta invece un solo zolfo fra due gruppi carboniosi.
 :::
 
-## Eteri, tioeteri ed epossidi
+## Eteri ed epossidi: l'effetto della tensione d'anello
 
-:::definizione{#eteri-epossidi titolo="Ponti eterei e anelli a tre termini"}
-Un **etere** ha struttura $\mathrm{R{-}O{-}R'}$; un tioetere presenta $\mathrm{R{-}S{-}R'}$. L'etossietano è $\mathrm{CH_3CH_2OCH_2CH_3}$, mentre la metionina contiene un gruppo tioetere. L'ossigeno etereo può accettare legami idrogeno dall'acqua, ma un etere privo di OH non ne dona. A massa comparabile ciò contribuisce a un'ebollizione più bassa rispetto a un alcol.
+:::definizione{#eteri-epossidi titolo="Un ossigeno fra due carboni"}
+Un etere è $\mathrm{R{-}O{-}R'}$; il metossietano è $\mathrm{CH_3OCH_2CH_3}$. Un tioetere sostituisce O con S, come nel gruppo laterale della metionina. Un etere senza altri gruppi OH o NH accetta legami idrogeno dall'acqua ma non li dona. Un etere ordinario resiste alla comune idrolisi basica che scinde un estere: manca un carbonile elettrofilo e l'alcossido sarebbe un cattivo gruppo uscente.
 
-Un **epossido** è un etere ciclico a tre termini. La tensione d'anello favorisce l'apertura nucleofila. In ambiente basico il nucleofilo attacca in genere il carbonio meno ingombrato con meccanismo SN2. In ambiente acido l'ossigeno viene protonato e la distribuzione di carica può favorire, negli epossidi asimmetrici, l'attacco al carbonio più sostituito; la regioselettività dipende dai sostituenti. L'apertura dell'ossirano con acqua produce etan-1,2-diolo.
+Negli **epossidi**, o ossirani, l'ossigeno appartiene a un anello a tre termini. L'apertura allevia la tensione e rende possibile un attacco nucleofilo che non avverrebbe altrettanto facilmente in un etere aciclico. In condizioni basiche, un nucleofilo forte attacca dal lato opposto al legame C–O, generalmente sul carbonio meno ingombrato. L'ossigeno dell'anello rimane legato all'altro carbonio; la protonazione finale dà un OH.
+
+![Apertura del 1,2-epossipropano con metossido sul carbonio meno sostituito e successiva protonazione](/figure/chimica-semestre-filtro/gruppi-funzionali/epossido-it.svg)
+
+In condizioni acide viene prima protonato l'ossigeno. La regioselettività dipende da struttura, nucleofilo e solvente: non è corretto imporre sempre l'attacco al carbonio più sostituito. Quando uno dei carboni è terziario, il maggiore carattere carbocationico può favorire proprio quel sito. Rimane importante l'attacco posteriore, con inversione al carbonio attaccato quando questo è stereogenico; non occorre postulare un carbocatione libero in ogni apertura. Acqua in ambiente acido porta a dioli vicinali, mentre un alcol può introdurre un gruppo etereo.
 :::
 
-## Ammine, basicità e sali
+## Ammine: una coppia elettronica con due ruoli
 
-:::definizione{#ammine titolo="Classificazione e reattività dell'azoto"}
-Le **ammine** derivano formalmente dall'ammoniaca sostituendo uno, due o tre idrogeni con gruppi carboniosi. Sono primarie $\mathrm{RNH_2}$, secondarie $\mathrm{R_2NH}$ e terziarie $\mathrm{R_3N}$. Un sale di ammonio quaternario ha quattro gruppi carboniosi legati all'azoto e carica positiva permanente, $\mathrm{R_4N^+}$.
+:::definizione{#ammine titolo="Struttura, nomi e basicità"}
+Nelle ammine primarie, secondarie e terziarie l'azoto è legato rispettivamente a uno, due e tre gruppi carboniosi: $\mathrm{RNH_2}$, $\mathrm{R_2NH}$ e $\mathrm{R_3N}$. Etanammina e N-metiletanammina mostrano come il prefisso N identifichi un sostituente sull'azoto. La classificazione riguarda l'azoto, non il grado del carbonio vicino.
 
-La coppia elettronica dell'azoto permette alle ammine di accettare protoni e di agire da nucleofili. La basicità si confronta mediante il $pK_a$ degli acidi coniugati; un valore maggiore indica, nelle stesse condizioni, una base più forte. Nell'anilina la coppia è delocalizzata sull'anello e la basicità è minore di quella delle comuni ammine alifatiche. Nell'ammide la delocalizzazione verso il carbonile riduce ulteriormente la disponibilità della coppia.
+Una coppia libera permette all'ammina di legare H+ oppure di attaccare un elettrofilo carbonioso. Un'ammina terziaria neutra può accettare legami idrogeno ma, in assenza di altri donatori, non donarli; un'ammina primaria o secondaria possiede invece legami N–H. La protonazione modifica carica, interazioni con acqua e distribuzione fra ambienti polari e apolari.
+
+Per confrontare basi nelle stesse condizioni si usa il $pK_a$ dell'acido coniugato BH+: maggiore è questo valore, maggiore è la forza di B come base. Nell'anilina la coppia interagisce con l'anello aromatico; nell'ammide interagisce direttamente con C=O. Le coppie su N sono meno disponibili a legare un protone rispetto a una comune ammina alifatica. Nelle ammidi ordinarie, quando avviene protonazione in ambiente sufficientemente acido, è generalmente favorito l'ossigeno carbonilico: non si deve dedurre una normale protonazione amminica su N. La basicità delle ammine in acqua dipende anche dalla solvatazione: il numero di gruppi alchilici, da solo, non dà un ordine universale.
+
+![Coppia libera di un'ammina e delocalizzazione della coppia dell'azoto in un'ammide](/figure/chimica-semestre-filtro/gruppi-funzionali/azoto-it.svg)
 :::
 
-:::osservazione{#reazioni-ammine titolo="Protonazione, alchilazione e composti biologici"}
-Un'ammina reagisce con un acido formando il sale di ammonio corrispondente. La metilammina con HCl dà $\mathrm{CH_3NH_3^+Cl^-}$. La protonazione cambia carica e solubilità e può essere descritta mediante un equilibrio acido-base.
+:::osservazione{#reazioni-ammine titolo="Sali, alchilazione e nitrosazione"}
+Metilammina e HCl formano metilammonio cloruro, $\mathrm{CH_3NH_3^+Cl^-}$. In una soluzione acquosa diluita, approssimando le attività con le concentrazioni,
 
-L'alchilazione con alogenuri adatti forma nuovi legami carbonio-azoto. Le sostituzioni possono proseguire fino al sale di ammonio quaternario, quindi una singola alchilazione selettiva richiede controllo delle condizioni. La **colina**, $\mathrm{HOCH_2CH_2N^+(CH_3)_3}$, possiede un gruppo ammonio quaternario e un ossidrile; è un componente di alcuni fosfolipidi e dell'acetilcolina.
-
-Le ammine secondarie possono formare **N-nitrosammine** per nitrosazione in condizioni adatte, con legame N-N=O. Alcune nitrosammine generano, dopo attivazione metabolica, specie che modificano il DNA. La nitrosazione e la semplice protonazione sono trasformazioni chimiche differenti.
-:::
-
-## Aldeidi e chetoni
-
-:::definizione{#carbonili titolo="Struttura e ossidoriduzioni del carbonile"}
-Il **carbonile** è il gruppo C=O. In un'aldeide il carbonio carbonilico è legato almeno a un idrogeno; in un chetone è legato a due gruppi carboniosi. L'etanale è $\mathrm{CH_3CHO}$, il propanone è $\mathrm{CH_3COCH_3}$.
-
-Il carbonio del carbonile è circa trigonale planare ed elettrofilo per la polarizzazione del legame verso ossigeno. Le aldeidi possono ossidarsi agli acidi carbossilici corrispondenti. La riduzione dà un alcol primario da un'aldeide e un alcol secondario da un chetone. Per esempio il piruvato e il lattato sono collegati da una trasformazione enzimatica fra un gruppo chetonico e un gruppo alcolico, senza cambiare lo scheletro dei carboni.
-:::
-
-:::osservazione{#addizione-carbonile titolo="Addizione nucleofila"}
-Un nucleofilo attacca il carbonio carbonilico e il legame $\pi$ C=O si trasforma temporaneamente in un legame semplice con carica sull'ossigeno. La protonazione o altri passaggi completano la trasformazione. L'ingombro e gli effetti elettronici rendono in genere le aldeidi più reattive dei chetoni verso l'addizione nucleofila, a condizioni confrontabili.
-
-L'addizione di acqua genera un diolo geminale in equilibrio con il carbonile. L'addizione di un idruro, seguita da protonazione, produce l'alcol. Nei sistemi biologici NADH e NADPH trasferiscono equivalenti riducenti in reazioni catalizzate; il solo simbolo $[H]$ riassume un bilancio redox e non ne specifica il meccanismo.
-:::
-
-## Emiacetali, acetali e immine
-
-:::definizione{#acetali-immine titolo="Prodotti con alcoli e ammine"}
-L'addizione di un alcol a un'aldeide forma un **emiacetale**, con un OH e un OR sullo stesso carbonio; da un chetone si forma un emichetale. In ambiente acido, la reazione con un'ulteriore molecola di alcol e la rimozione di acqua possono dare un acetale o un chetale con due gruppi OR sullo stesso carbonio. Gli acetali sono relativamente stabili in ambiente basico e idrolizzabili in ambiente acido.
-
-Un'aldeide o un chetone con un'ammina primaria può dare un'**immina**, o base di Schiff, con gruppo C=N, mediante addizione seguita da perdita di acqua. Le condizioni devono permettere sia la catalisi acida sia la presenza di ammina nucleofila. Le basi di Schiff compaiono, per esempio, nei meccanismi enzimatici che coinvolgono il piridossal fosfato.
-:::
-
-:::esempio{titolo="Ciclizzazione di un monosaccaride"}
-Nel glucosio a catena aperta il carbonio 1 è aldeidico. L'ossidrile sul carbonio 5 può attaccarlo all'interno della stessa molecola e formare un anello emiacetalico a sei termini. Il carbonio che apparteneva al carbonile acquista un nuovo centro stereogenico, da cui derivano gli anomeri $\alpha$ e $\beta$.
-:::
-
-## Idrogeni in alfa, aldoli e tautomeria
-
-:::osservazione{#tautomeria-aldolica titolo="Enoli, enolati e formazione di legami C-C"}
-Gli idrogeni sul carbonio adiacente al carbonile sono detti **idrogeni in alfa**. La loro rimozione mediante una base adatta genera un enolato, stabilizzato dalla delocalizzazione fra carbonio e ossigeno. La forma enolica ha un doppio legame C=C e un OH sul carbonio che nella forma chetonica appartiene al carbonile.
-
-I tautomeri chetonico ed enolico sono isomeri costituzionali in equilibrio, perché cambiano la posizione di un protone e di un doppio legame. Per esempio l'enolo del piruvato si converte nella forma chetonica più stabile. L'idrolisi del fosfoenolpiruvato produce un enolo che può tautomerizzare; questa stabilizzazione contribuisce alla variazione di energia libera complessiva della reazione.
-
-Nella **citosina** la forma cheto-amminica contiene un carbonile in C2 e un gruppo amminico in C4. Nelle forme enol-amminiche il gruppo C2=O diventa C2-OH, con trasferimento di un protone e ridistribuzione dei doppi legami nell'anello. Nelle forme cheto-imminiche il carbonile resta presente, mentre il gruppo C4-NH2 diventa C4=NH e un protone si trasferisce a un azoto dell'anello. Cambiano quindi le posizioni dei donatori e degli accettori di legame idrogeno e la possibilità di appaiamento con altre basi.
-
-Nell'**acido urico** i gruppi carbonilici appartengono a motivi lattamici dell'eterociclo. Il passaggio lattame-lattime si rappresenta localmente con
 $$
-\mathrm{O{=}C{-}NH}\rightleftharpoons\mathrm{HO{-}C{=}N},
+\dfrac{[\mathrm B]}{[\mathrm{BH^+}]}=10^{pH-pK_a}.
 $$
-con trasferimento di un protone dall'azoto all'ossigeno e variazione dei legami. La deprotonazione dell'acido urico a urato è invece un equilibrio acido-base che cambia il numero complessivo dei protoni e la carica della specie. Anche a carica ionica fissata, l'urato può presentare tautomeri con diversa posizione dei protoni e dei doppi legami. Le forme limite di risonanza conservano invece le posizioni di tutti i nuclei e descrivono la stessa specie mediante differenti distribuzioni elettroniche.
+
+Se pH è due unità sotto il $pK_a$ di BH+, il rapporto B/BH+ è 1/100: prevale la specie protonata, meno disponibile come nucleofilo. Il sale può essere riconvertito nella base mediante un opportuno aumento del pH.
+
+Con un alogenuro alchilico adatto, l'ammina può formare un nuovo legame C–N. Il prodotto può reagire ancora, fino a $\mathrm{R_4N^+}$: controllare la monoalchilazione richiede una strategia specifica. L'ammonio quaternario non ha una coppia libera né un protone N–H da rimuovere per ottenere semplicemente un'ammina neutra. La **colina**, $\mathrm{HOCH_2CH_2N^+(CH_3)_3}$, combina ammonio quaternario e alcol ed entra nella struttura di fosfolipidi e acetilcolina.
+
+La nitrosazione di un'ammina secondaria, con specie nitrosanti generate per esempio da nitrito in ambiente acido, può dare una **N-nitrosammina**, $\mathrm{R_2N{-}N{=}O}$. Si forma un nuovo legame N–N: non si tratta della sola protonazione. Alcune nitrosammine, dopo attivazione metabolica, producono intermedi capaci di modificare covalentemente il DNA; struttura e metabolismo determinano il comportamento dei singoli composti.
 :::
 
-:::osservazione{#aldolica titolo="Addizione e condensazione aldolica"}
-Un enolato può attaccare il carbonile di un'altra molecola e formare un nuovo legame C-C. La successiva protonazione dà un composto $\beta$-idrossicarbonilico, prodotto dell'addizione aldolica. La disidratazione, quando avviene, dà un carbonile $\alpha,\beta$-insaturo e completa la condensazione aldolica.
+## Aldeidi e chetoni: attaccare il carbonio carbonilico
 
-Due molecole di etanale possono formare 3-idrossibutanale, $\mathrm{CH_3CH(OH)CH_2CHO}$. Per perdita di acqua si ottiene but-2-enale, $\mathrm{CH_3CH{=}CHCHO}$. Il conteggio dei carboni permette di verificare la costruzione del nuovo scheletro.
+:::definizione{#carbonili titolo="Geometria, proprietà e ossidoriduzione"}
+Il carbonile C=O è presente in classi differenti. In un'aldeide il carbonio carbonilico porta almeno un H; in un chetone porta due gruppi carboniosi. I suffissi -ale e -one distinguono etanale e propanone. Il carbonio carbonilico è circa trigonale planare; l'ossigeno polarizza il legame e lascia il carbonio parzialmente positivo.
+
+Aldeidi e chetoni possono accettare legami idrogeno, ma il solo carbonile non li dona. I membri piccoli interagiscono bene con l'acqua; una parte idrocarburica grande può limitare la solubilità. Le aldeidi si ossidano relativamente facilmente ad acidi carbossilici, mentre i chetoni non danno lo stesso esito senza modificare lo scheletro. La riduzione di un'aldeide dà un alcol primario; quella di un chetone dà un secondario. NaBH4, nelle comuni condizioni blande, riduce aldeidi e chetoni ma non va presentato come riducente universale di ogni derivato carbonilico.
 :::
 
-## Chinoni e idrochinoni
+:::osservazione{#addizione-carbonile titolo="Dalla geometria planare all'intermedio tetraedrico"}
+Il nucleofilo porta una coppia verso il carbonio e gli elettroni del legame pi si spostano sull'ossigeno. Si forma così un centro tetraedrico senza superare l'ottetto del carbonio. Con un nucleofilo anionico si ottiene spesso un alcossido, poi protonato. La figura rappresenta questo schema; il simbolo Nu va sostituito con un nucleofilo compatibile con il substrato e le condizioni.
 
-:::definizione{#chinoni titolo="Trasferimenti di elettroni e protoni"}
-Un **chinone** contiene gruppi carbonilici coniugati in uno scheletro ciclico; la corrispondente forma ridotta è un idrochinone o chinolo. Nel bilancio complessivo, la riduzione del chinone a chinolo comporta l'acquisto di due elettroni e due protoni.
-$$
-\mathrm{Q}+2\,e^-+2\,\mathrm{H^+}\rightleftharpoons\mathrm{QH_2}.
-$$
-L'**ubichinone**, o coenzima Q, possiede un anello chinonico e una catena isoprenoide poco polare. La catena favorisce la permanenza nella membrana e il sistema Q/QH2 trasferisce elettroni nella catena respiratoria. Il trasferimento può comprendere lo stato intermedio semichinonico a un elettrone.
+![Addizione di un nucleofilo a un'aldeide, formazione dell'alcossido tetraedrico e protonazione](/figure/chimica-semestre-filtro/gruppi-funzionali/carbonile-it.svg)
+
+Le aldeidi alifatiche sono generalmente più accessibili e meno arricchite elettronicamente dei chetoni confrontabili. Reattività maggiore non significa però conversione completa: l'addizione di acqua forma un diolo geminale in equilibrio e la posizione dell'equilibrio dipende dai sostituenti. Gruppi elettron-attrattori possono favorire l'idratazione.
+
+Nella riduzione con idruro si forma un legame C–H e, dopo protonazione, O–H. Nelle reazioni enzimatiche NADH o NADPH trasferiscono equivalenti riducenti; il passaggio piruvato/lattato è un esempio di interconversione chetone/alcol. Il trasferimento di un protone da solo non costituisce la stessa riduzione.
 :::
 
-## Acidi carbossilici e acidità
+## Alcoli e ammine che reagiscono con un carbonile
 
-:::definizione{#carbossilici titolo="Carbossile, sali e proprietà"}
-Un **acido carbossilico** contiene il gruppo $\mathrm{COOH}$, formato da carbonile e ossidrile sullo stesso carbonio. L'acido etanoico è $\mathrm{CH_3COOH}$. La dissociazione produce un carbossilato stabilizzato per risonanza, con carica distribuita sui due ossigeni; ciò spiega l'acidità maggiore rispetto a quella di un comune alcol alifatico.
+:::definizione{#acetali-immine titolo="Emiacetale, acetale e immina"}
+L'addizione di un alcol a un'aldeide dà un **emiacetale**: lo stesso carbonio porta OH e OR. Da un chetone si parla di emichetale. In ambiente acido, un altro equivalente di alcol può sostituire l'OH, attraverso protonazione, perdita di acqua e successivo attacco: si ottiene un acetale con due OR sullo stesso carbonio. Per il prodotto di un chetone si usa anche il nome chetale.
 
-Gruppi elettron-attrattori vicini stabilizzano ulteriormente il carbossilato e tendono ad aumentare l'acidità. La reazione con una base dà un sale, come nella neutralizzazione dell'acido etanoico con idrossido di sodio. Gli acidi a catena corta interagiscono bene con l'acqua; l'allungamento della parte idrocarburica riduce il contributo relativo del gruppo polare.
+![Confronto fra carbonio emiacetalico con OH e OR e carbonio acetalico con due OR](/figure/chimica-semestre-filtro/gruppi-funzionali/acetali-it.svg)
+
+L'acido facilita i passaggi ma non cambia la costante di equilibrio. Eccesso di alcol o rimozione di acqua favoriscono l'acetale; acqua in eccesso e catalisi acida favoriscono l'idrolisi. Gli acetali sono relativamente stabili alle basi perché la via richiederebbe l'uscita di un alcossido poco favorevole. Questa differenza permette di proteggere temporaneamente un carbonile.
+
+Nel glucosio aperto, l'OH di C5 può attaccare l'aldeide C1. L'anello risultante contiene cinque carboni e un ossigeno, quindi sei termini. C1 diventa il carbonio anomerico dell'emiacetale: le due configurazioni sono gli anomeri alfa e beta. La parte stereochimica non si ricava dal solo conteggio degli atomi.
+
+Un'ammina primaria reagisce invece attraverso un intermedio con OH e N sullo stesso carbonio, seguito da disidratazione a **immina**, C=N. La catalisi acida moderata facilita l'uscita di acqua; un ambiente troppo acido protona quasi tutta l'ammina e riduce l'attacco nucleofilo. Rimozione di acqua e pH devono quindi essere controllati. Le basi di Schiff compaiono nelle reazioni del piridossal fosfato. Un'ammina secondaria può portare a un'enammina se il carbonile possiede idrogeni alfa: non si deve assegnarle automaticamente la stessa immina neutra di un'ammina primaria.
+:::
+
+## Tautomeria ed aldolica: spostare protoni, costruire legami
+
+:::osservazione{#tautomeria-aldolica titolo="Enoli, enolati e tautomeri biologici"}
+Un idrogeno **alfa** è legato a un carbonio adiacente al carbonile. Una base adatta può rimuoverlo, formando un enolato con carica delocalizzata fra carbonio e ossigeno. Le forme limite dell'enolato non sono molecole che si interconvertono spostando atomi: nella risonanza i nuclei restano fermi.
+
+Un enolo possiede invece un gruppo C=C–OH. Forma carbonilica ed enolica sono **tautomeri**, isomeri costituzionali fra i quali cambiano posizione di un protone e distribuzione dei doppi legami. Catalisi acida o basica può accelerare l'interconversione senza modificare l'equilibrio alla stessa temperatura. Il carbonile prevale spesso, ma coniugazione, aromaticità e legami idrogeno possono stabilizzare particolarmente certi enoli.
+
+Nel fosfoenolpiruvato il fosfato è legato all'ossigeno dell'enolo. Dopo il trasferimento o l'idrolisi del gruppo fosforile, il sistema può raggiungere la più stabile forma chetonica del piruvato. La stabilizzazione dei prodotti contribuisce alla variazione di energia libera complessiva; non è corretto attribuire energia alla sola rottura di un legame.
+
+Nella citosina, forme ammino/immino e cheto/enoliche rare possono modificare donatori e accettori dei legami idrogeno. Per esempio la conversione locale C=O in C–OH richiede un trasferimento di protone e una ridistribuzione dei legami nell'eterociclo, non l'aggiunta di un ossigeno. Nell'acido urico e nell'urato sono possibili equilibri fra tautomeri; il motivo lattame/lattime si rappresenta localmente come
+
+$$
+\mathrm{O{=}C{-}NH}\rightleftharpoons\mathrm{HO{-}C{=}N}.
+$$
+
+La deprotonazione dell'acido urico a urato cambia invece il numero complessivo di protoni e la carica. Acidità, tautomeria e risonanza sono dunque tre descrizioni differenti, da non sovrapporre.
+:::
+
+:::osservazione{#aldolica titolo="Addizione prima, eventuale disidratazione dopo"}
+Nell'addizione aldolica, l'enolato di una molecola attacca il carbonile di un'altra: nasce un legame C–C fra carbonio alfa del donatore e carbonio carbonilico dell'accettore. La protonazione produce un beta-idrossicarbonile. Non viene eliminato necessariamente un gruppo uscente dal carbonile accettore.
+
+Due molecole di etanale, con base diluita e condizioni che consentono di fermarsi all'addizione, danno 3-idrossibutanale. Riscaldamento e condizioni adatte possono favorire la perdita di acqua e il but-2-enale coniugato: addizione più disidratazione costituiscono la condensazione aldolica.
+
+![Due unità di etanale formano una beta-idrossialdeide a quattro carboni e poi un'aldeide insatura per perdita di acqua](/figure/chimica-semestre-filtro/gruppi-funzionali/aldolica-it.svg)
+
+Il donatore deve poter formare un enolo o enolato. Formaldeide e benzaldeide non hanno idrogeni alfa e non sono donatori nella comune aldolica via enolato, pur potendo essere accettori. Mescolare due carbonili entrambi enolizzabili può dare più prodotti: la selettività richiede condizioni ulteriori. Se donatore e accettore appartengono alla stessa molecola, un'aldolica intramolecolare può chiudere un anello: si contano gli atomi lungo il percorso dei legami fra i due centri, includendo il nuovo legame C–C.
+:::
+
+## Chinoni: la trasformazione è una riduzione
+
+:::definizione{#chinoni titolo="Un anello che trasporta elettroni"}
+Un chinone presenta carbonili coniugati in uno scheletro ciclico. Il para-benzochinone può essere ridotto a idrochinone; cambiano legami, stato di ossidazione e contenuto di idrogeno. Non è una semplice tautomeria. Il bilancio di riduzione è
+
+$$
+\mathrm Q+2\,e^-+2\,\mathrm{H^+}\rightleftharpoons\mathrm{QH_2}.
+$$
+
+![Strutture del para-benzochinone e dell'idrochinone con bilancio di due elettroni e due protoni](/figure/chimica-semestre-filtro/gruppi-funzionali/chinoni-it.svg)
+
+L'ubichinone, o coenzima Q, possiede una parte chinonica e una lunga catena isoprenoide lipofila. La catena favorisce la permanenza nella membrana mitocondriale; l'anello partecipa al trasferimento di elettroni e protoni. Sono possibili stati semichinonici a un elettrone, la cui protonazione dipende dall'ambiente. Il bilancio a due elettroni non impone che ogni singolo passaggio trasferisca simultaneamente una coppia.
+:::
+
+## Acidi carbossilici e famiglie di derivati
+
+:::definizione{#carbossilici titolo="Acidità e carica del carbossilato"}
+Nel carbossile, C=O e OH sono uniti allo stesso carbonio. Acido etanoico e acido propanoico illustrano il suffisso; il carbonio carbossilico appartiene alla catena e si conta. Dopo deprotonazione si forma un carbossilato, con carica distribuita sui due ossigeni e legami C–O equivalenti nel modello di risonanza. Questa stabilizzazione spiega perché un acido carbossilico semplice sia più acido di un comune alcol.
+
+Gruppi elettron-attrattori vicini tendono ad aumentare l'acidità per effetto induttivo; allontanandoli, l'effetto si attenua. In acqua diluita, usando le concentrazioni come approssimazione delle attività, a pH uguale al $pK_a$ acido e carbossilato sono equimolari. I sali interagiscono fortemente con l'acqua, ma la solubilità effettiva dipende anche da controione e parte idrocarburica.
+
+La salificazione con idrossido non è un'esterificazione:
+
 $$
 \mathrm{CH_3COOH}+\mathrm{OH^-}\longrightarrow\mathrm{CH_3COO^-}+\mathrm{H_2O}.
 $$
+
+Analogamente, mescolare un acido carbossilico e un'ammina può produrre rapidamente un sale ammonio-carbossilato; per formare efficientemente un'ammide servono attivazione o condizioni di condensazione adeguate.
 :::
 
-## Derivati acilici ed esterificazioni
+:::definizione{#derivati-acilici titolo="Riconoscere ciò che è legato all'acile"}
+Un gruppo acile è $\mathrm{R{-}C(=O){-}}$. Negli esteri è legato a OR', nei tioesteri a SR', nelle ammidi a un azoto. Un'anidride contiene due acili collegati da un ossigeno; un acilfosfato è un'anidride mista fra acido carbossilico e acido fosforico, con collegamento C(=O)–O–P, non C–P.
 
-:::definizione{#derivati-acilici titolo="Classi dei derivati degli acidi"}
-Il gruppo **acile** è $\mathrm{RCO{-}}$. I derivati carbossilici comprendono esteri $\mathrm{RCOOR'}$, tioesteri $\mathrm{RCOSR'}$, ammidi $\mathrm{RCONR'R''}$ e anidridi $\mathrm{RCOOCOR'}$. Gli acilfosfati hanno un legame fra il gruppo acile e un ossigeno del fosfato e sono anidridi miste. Il legame peptidico è ammidico, l'acetil-CoA è un tioestere e l'1,3-bisfosfoglicerato contiene un acilfosfato.
+![Esteri, tioesteri, ammidi e acilfosfati distinti dal gruppo legato al carbonio acilico](/figure/chimica-semestre-filtro/gruppi-funzionali/acili-it.svg)
 
-Nella **sostituzione nucleofila acilica** il nucleofilo attacca il carbonio carbonilico, si forma un intermedio tetraedrico e poi esce un gruppo, ricostituendo C=O. La reattività dipende da gruppo uscente e stabilizzazione per risonanza. Le ammidi sono relativamente poco reattive perché l'azoto dona la propria coppia al sistema carbonilico e il gruppo uscente è poco favorevole.
+Etanoato di etile indica un acile etanoico e un gruppo etile legato all'ossigeno; etanammide indica il derivato con NH2. Acetil-CoA è un tioestere, il legame peptidico è ammidico e l'1,3-bisfosfoglicerato contiene un acilfosfato. La coppia dell'azoto ammidico contribuisce alla delocalizzazione: il legame C–N ha carattere parzialmente doppio, con rotazione ostacolata. Un'ammide non va trattata come una semplice ammina collegata a un carbonio qualsiasi.
 :::
 
-:::osservazione{#esterificazione-idrolisi titolo="Equilibri, idrolisi e transesterificazione"}
-Nell'**esterificazione di Fischer** un acido carbossilico e un alcol formano un estere e acqua con catalisi acida. L'eccesso di un reagente o la rimozione di acqua spostano l'equilibrio verso l'estere.
+## Sostituzione acilica, esterificazione e idrolisi
+
+:::osservazione{#esterificazione-idrolisi titolo="Addizione ed eliminazione nello stesso meccanismo"}
+Nella sostituzione nucleofila acilica il nucleofilo attacca C=O, forma un intermedio tetraedrico e, quando questo collassa, viene espulso un gruppo e si ricostituisce il carbonile. Gruppo uscente, effetti elettronici e condizioni determinano la reattività. La risonanza rende le ammidi relativamente resistenti; i tioesteri sono in genere più reattivi degli esteri ossigenati confrontabili, anche perché lo zolfo dona meno efficacemente al carbonile. Gli enzimi controllano questi trasferimenti senza eliminare la necessità di un bilancio energetico favorevole o accoppiato.
+
+Nell'esterificazione di Fischer, acido carbossilico e alcol reagiscono con catalisi acida:
+
 $$
 \mathrm{CH_3COOH}+\mathrm{CH_3CH_2OH}
 \rightleftharpoons\mathrm{CH_3COOCH_2CH_3}+\mathrm{H_2O}.
 $$
-L'idrolisi acida di un estere è la trasformazione inversa. L'idrolisi basica, detta saponificazione, dà un carbossilato e un alcol; il carbossilato prodotto è poco elettrofilo, perciò la reazione procede favorevolmente nelle condizioni usuali. Nella transesterificazione il gruppo alcolico di un estere viene scambiato con quello di un altro alcol, con catalisi acida o basica opportuna.
 
-L'idrolisi delle ammidi richiede in genere catalisi acida o basica e riscaldamento, oppure enzimi specifici nei sistemi biologici. In ambiente acido i prodotti sono un acido carbossilico e una specie ammonio; in ambiente basico sono un carbossilato e ammoniaca o un'ammina, secondo la sostituzione dell'azoto.
+La protonazione attiva il carbonile, l'alcol si addiziona e trasferimenti protonici consentono l'eliminazione di acqua. L'ossigeno dell'alcol rimane legato al suo gruppo alchilico e diventa l'ossigeno estereo: una marcatura isotopica permette di seguirlo, purché si escludano scambi secondari. Rimozione di acqua o eccesso di alcol spostano l'equilibrio; aumentare il catalizzatore cambia la velocità, non la costante alla stessa temperatura. L'idrolisi acida percorre la trasformazione inversa con acqua disponibile in abbondanza.
+
+Nella **saponificazione**, OH− viene consumato e si ottengono un carbossilato e un alcol. Il trasferimento finale di protone stabilizza il carbossilato e rende sfavorevole il semplice ritorno all'estere nelle condizioni usuali. Un eventuale trattamento acido successivo converte il sale nell'acido: i due momenti non vanno confusi.
+
+La transesterificazione scambia il gruppo OR di un estere mediante un altro alcol, con catalisi acida o un alcossido adatto. L'uso di acqua e idrossido può invece favorire idrolisi: solvente e reagenti non sono dettagli intercambiabili. Nell'idrolisi di un'ammide, generalmente più lenta e bisognosa di condizioni più energiche o catalisi enzimatica, il mezzo decide le forme finali. In acido si ottengono acido carbossilico e ammonio oppure l'ammina protonata corrispondente, secondo la sostituzione di N; in base, carbossilato e ammoniaca o ammina secondo la sostituzione dell'azoto.
 :::
 
-## Condensazioni, lattoni e decarbossilazioni
+## Claisen, lattoni e decarbossilazione
 
-:::osservazione{#claisen titolo="Condensazione di Claisen"}
-Nella **condensazione di Claisen** l'enolato di un estere attacca il carbonile di un altro estere; l'eliminazione di un alcossido forma un $\beta$-chetoestere. Per l'autocondensazione classica, quando lo spostamento dell'equilibrio dipende dalla deprotonazione del prodotto, servono un estere con almeno due idrogeni in alfa e una base adatta; l'alcossido corrispondente al gruppo alcolico dell'estere limita gli scambi di transesterificazione. La deprotonazione del prodotto favorisce la reazione e il trattamento acido finale restituisce il composto neutro.
+:::osservazione{#claisen titolo="Un enolato attacca un estere"}
+Nella condensazione di Claisen un enolato di estere attacca un altro estere. Il collasso dell'intermedio espelle un alcossido e produce un beta-chetoestere: rispetto all'aldolica, cambia il destino dell'intermedio tetraedrico. L'autocondensazione classica dell'etanoato di etile impiega etossido e un trattamento acido finale.
 
-L'etanoato di etile, con etossido e successivo trattamento acido, può dare 3-ossobutanoato di etile, $\mathrm{CH_3COCH_2COOCH_2CH_3}$. Condensazioni di tioesteri analoghe nella costruzione di legami C-C ricorrono nel metabolismo. Per esempio, nella condensazione di due unità acetil-CoA a un composto acetoacetilico, il carbonio nucleofilo di una unità attacca il carbonile dell’altra e si libera un gruppo coenzima A. Gli enzimi stabilizzano gli intermedi e controllano la reazione; il meccanismo concreto dipende dal sistema enzimatico.
+![Due molecole di etanoato di etile danno un beta-chetoestere nella Claisen, con eliminazione complessiva di etanolo](/figure/chimica-semestre-filtro/gruppi-funzionali/claisen-it.svg)
+
+L'alcossido corrispondente al gruppo OR dell'estere limita gli scambi indesiderati di transesterificazione. Nella via classica spinta dalla deprotonazione del prodotto servono almeno due idrogeni alfa sul substrato donatore: uno permette l'enolato iniziale e un altro resta nel beta-dicarbonile e viene rimosso per spostare l'equilibrio. La base non è soltanto catalitica; il trattamento acido finale restituisce il prodotto neutro.
+
+Anche i tioesteri partecipano a condensazioni che costruiscono legami C–C. La condensazione enzimatica di due acetil-CoA a acetoacetil-CoA libera CoA-SH. Il verso netto dipende dalle concentrazioni e dall'accoppiamento con altre reazioni; l'enzima accelera la trasformazione senza modificare la sua costante di equilibrio. Non si deve trasferire automaticamente al metabolismo il protocollo con etossido del laboratorio.
 :::
 
-:::osservazione{#lattoni-decarbossilazione titolo="Esteri ciclici e perdita di anidride carbonica"}
-Un **lattone** è un estere ciclico che può formarsi per esterificazione interna di un idrossiacido. Per esempio l'acido 4-idrossibutanoico può formare un lattone a cinque termini; nell'anello entra anche l'ossigeno del gruppo alcolico, quindi il numero dei termini non coincide sempre con il numero dei carboni.
+:::osservazione{#lattoni-decarbossilazione titolo="Contare l'anello e riconoscere il carbonio perduto"}
+Un lattone è un estere ciclico. L'acido 4-idrossibutanoico può esterificare internamente: il suo OH terminale reagisce con il carbossile e si forma un anello a cinque termini. Nel conteggio entrano tre carboni metilenici, il carbonio carbonilico e l'ossigeno alcolico; l'ossigeno carbonilico resta esterno. La ciclizzazione è un equilibrio influenzato da catalisi, acqua, concentrazione e dimensione dell'anello.
 
-Una decarbossilazione elimina un gruppo carbossilico come $\mathrm{CO_2}$. I $\beta$-chetoacidi possono decarbossilare al riscaldamento perché il percorso stabilizza il trasferimento del protone e produce un enolo che tautomerizza. L'acido acetoacetico $\mathrm{CH_3COCH_2COOH}$ dà propanone e anidride carbonica. La decarbossilazione ossidativa del piruvato, un $\alpha$-chetoacido, richiede invece nel metabolismo uno specifico complesso enzimatico e cofattori; non si deduce applicando le condizioni dei $\beta$-chetoacidi a tutti i chetoacidi.
+![Formazione di un lattone a cinque termini dall'acido 4-idrossibutanoico, con ossigeno carbonilico fuori dall'anello](/figure/chimica-semestre-filtro/gruppi-funzionali/lattone-it.svg)
+
+Un beta-chetoacido può decarbossilare al riscaldamento mediante un percorso che facilita il trasferimento di protone e porta inizialmente a un enolo. L'acido acetoacetico perde il carbonio del carbossile come CO2; l'enolo residuo tautomerizza a propanone:
+
+$$
+\mathrm{CH_3COCH_2COOH}\xrightarrow{\Delta}\mathrm{CH_3COCH_3}+\mathrm{CO_2}.
+$$
+
+Il bilancio conserva quattro carboni complessivi: tre nel chetone e uno in CO2. Il piruvato è invece un alfa-chetoacido. La sua decarbossilazione ossidativa a acetil-CoA richiede nel metabolismo un complesso enzimatico e cofattori, fra cui CoA e NAD+; non si deduce dal solo riscaldamento usato per il beta-chetoacido.
 :::

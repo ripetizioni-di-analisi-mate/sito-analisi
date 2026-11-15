@@ -845,7 +845,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'chimica-semestre-filtro',
     titolo: 'Chimica e propedeutica biochimica per il semestre filtro',
     breve: 'Chimica semestre filtro',
-    descrizione: 'Chimica e propedeutica biochimica per Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.',
+    descrizione: 'Chimica e propedeutica biochimica per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dall’atomo alle biomolecole. Teoria illustrata, schede svolte, esercizi con soluzione e 630 quiz spiegati, in italiano e inglese.',
     colore: '#32746b',
     gruppo: 'Semestre filtro',
     attiva: true,

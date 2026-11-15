@@ -1,0 +1,301 @@
+{
+  "subject": "chimica-semestre-filtro",
+  "baseline_commit": "d516418c61b768d2d6030439421f6e2cc18457a4",
+  "renderer": {
+    "materia": "chimica-semestre-filtro",
+    "fileResi": 1610,
+    "formule": 8518,
+    "capitoli": [
+      {
+        "capitolo": "acidi-basi-redox",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 4161,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 51,
+            "medianaParoleEsercizio": 251
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3976,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 47,
+            "medianaParoleEsercizio": 230
+          }
+        }
+      },
+      {
+        "capitolo": "atomo-legami-termodinamica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 4237,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 50,
+            "medianaParoleEsercizio": 198
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3958,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 45,
+            "medianaParoleEsercizio": 185
+          }
+        }
+      },
+      {
+        "capitolo": "biomolecole",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 4206,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 49,
+            "medianaParoleEsercizio": 247
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 4144,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 47,
+            "medianaParoleEsercizio": 237
+          }
+        }
+      },
+      {
+        "capitolo": "carbonio-idrocarburi-stereochimica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3402,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 48,
+            "medianaParoleEsercizio": 212
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3245,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 44,
+            "medianaParoleEsercizio": 195
+          }
+        }
+      },
+      {
+        "capitolo": "gruppi-funzionali",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3587,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 50,
+            "medianaParoleEsercizio": 229
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3591,
+            "figureTeoria": 11,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 49,
+            "medianaParoleEsercizio": 223
+          }
+        }
+      },
+      {
+        "capitolo": "reazioni-cinetica-equilibrio",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3373,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 61,
+            "medianaParoleEsercizio": 206
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3184,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 54,
+            "medianaParoleEsercizio": 195
+          }
+        }
+      },
+      {
+        "capitolo": "soluzioni-proprieta-colligative",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3739,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 50,
+            "medianaParoleEsercizio": 215
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3378,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 44,
+            "medianaParoleEsercizio": 191
+          }
+        }
+      }
+    ],
+    "avvisi": [],
+    "errori": []
+  },
+  "built_pages": {
+    "subject": "chimica-semestre-filtro",
+    "pages": 566,
+    "localAssets": 149,
+    "theoryAnchorLinks": 792,
+    "quiz": {
+      "it": 630,
+      "en": 630
+    },
+    "unchangedMathematicsFiles": 904,
+    "errors": []
+  },
+  "localized_svg_files": 138,
+  "independent_review": "All seven chapters read in full by a reviewer different from the author; chapter reports record evidence.",
+  "interactive_browser_check": "Not completed: unavailable permitted local preview surface. Figures were rasterized and visually inspected at mobile and desktop widths."
+}

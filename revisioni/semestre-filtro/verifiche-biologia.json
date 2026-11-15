@@ -1,0 +1,303 @@
+{
+  "subject": "biologia-semestre-filtro",
+  "baseline_commit": "d516418c61b768d2d6030439421f6e2cc18457a4",
+  "renderer": {
+    "materia": "biologia-semestre-filtro",
+    "fileResi": 1610,
+    "formule": 1444,
+    "capitoli": [
+      {
+        "capitolo": "ciclo-cellulare",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3210,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 39,
+            "medianaParoleEsercizio": 161
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2893,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 34,
+            "medianaParoleEsercizio": 144
+          }
+        }
+      },
+      {
+        "capitolo": "flusso-informazione",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2983,
+            "figureTeoria": 6,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 51,
+            "medianaParoleEsercizio": 187
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2870,
+            "figureTeoria": 6,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 48,
+            "medianaParoleEsercizio": 181
+          }
+        }
+      },
+      {
+        "capitolo": "genetica-mutazioni",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2675,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 46,
+            "medianaParoleEsercizio": 206
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2608,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 45,
+            "medianaParoleEsercizio": 197
+          }
+        }
+      },
+      {
+        "capitolo": "genoma-cromatina",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2788,
+            "figureTeoria": 6,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 46,
+            "medianaParoleEsercizio": 164
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2658,
+            "figureTeoria": 6,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 42,
+            "medianaParoleEsercizio": 153
+          }
+        }
+      },
+      {
+        "capitolo": "organizzazione-biologica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3131,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 53,
+            "medianaParoleEsercizio": 205
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3080,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 50,
+            "medianaParoleEsercizio": 197
+          }
+        }
+      },
+      {
+        "capitolo": "segnalazione-cellulare",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2656,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 60,
+            "medianaParoleEsercizio": 184
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2535,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 55,
+            "medianaParoleEsercizio": 172
+          }
+        }
+      },
+      {
+        "capitolo": "strutture-cellulari",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2915,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 43,
+            "medianaParoleEsercizio": 210
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2796,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 39,
+            "medianaParoleEsercizio": 201
+          }
+        }
+      }
+    ],
+    "avvisi": [
+      "ciclo-cellulare/en: spiegazioni quiz brevi (mediana 34)"
+    ],
+    "errori": []
+  },
+  "built_pages": {
+    "subject": "biologia-semestre-filtro",
+    "pages": 556,
+    "localAssets": 119,
+    "theoryAnchorLinks": 572,
+    "quiz": {
+      "it": 630,
+      "en": 630
+    },
+    "unchangedMathematicsFiles": 904,
+    "errors": []
+  },
+  "localized_svg_files": 108,
+  "independent_review": "All seven chapters read in full by a reviewer different from the author; chapter reports record evidence.",
+  "interactive_browser_check": "Not completed: unavailable permitted local preview surface. Figures were rasterized and visually inspected at mobile and desktop widths."
+}
