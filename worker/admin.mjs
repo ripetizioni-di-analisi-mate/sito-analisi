@@ -444,6 +444,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     return seriePerGiorni(nome, elencoGiorni(n, fine));
   }
   function seriePerGiorni(nome, g) {
+    // Studio guidato: nome = uno o più eventi separati da «|» (es. 'sg-inizia|sg-inizia-ospite')
+    if (nome.startsWith('sg-')) { const ev = nome.split('|'); const c = {}; (D.studioGuidato || []).forEach((r) => { if (ev.includes(r.evento)) c[r.giorno] = (c[r.giorno] || 0) + r.n; }); return g.map((d) => c[d] || 0); }
     const conta = (lista, campo) => { const c = {}; lista.forEach((x) => { if (x) { const k = x.slice(0, 10); c[k] = (c[k] || 0) + 1; } }); return g.map((d) => c[d] || 0); };
     switch (nome) {
       case 'visite': return g.map((d) => (S.visite[d] || {}).n || 0);
@@ -452,7 +454,6 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       case 'paganti': return conta(Object.values(S.primoAcquisto));
       case 'vendite': return conta(D.acquisti.map((a) => a.creato));
       case 'incasso': { const c = {}; D.acquisti.forEach((a) => { const k = a.creato.slice(0, 10); c[k] = (c[k] || 0) + (Number(a.importo) || 0); }); return g.map((d) => Math.round((c[d] || 0) * 100) / 100); }
-      case 'sg-clic': case 'sg-inizia': case 'sg-fine': { const c = {}; (D.studioGuidato || []).forEach((r) => { if (r.evento === nome || r.evento === nome + '-ospite') c[r.giorno] = (c[r.giorno] || 0) + r.n; }); return g.map((d) => c[d] || 0); }
       case 'ingressi': { const c = {}; D.ingressi.forEach((r) => { c[r.giorno] = (c[r.giorno] || 0) + r.n; }); return g.map((d) => c[d] || 0); }
     }
     return g.map(() => 0);
@@ -578,9 +579,6 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     const is = serie('iscritti', giorni), isp = serie('iscritti', giorni, giorni);
     const pa = serie('paganti', giorni), pap = serie('paganti', giorni, giorni);
     const inc = serie('incasso', giorni), incp = serie('incasso', giorni, giorni);
-    const sgc = serie('sg-clic', giorni), sgcp = serie('sg-clic', giorni, giorni);
-    const sgi = serie('sg-inizia', giorni), sgip = serie('sg-inizia', giorni, giorni);
-    const sgf = serie('sg-fine', giorni), sgfp = serie('sg-fine', giorni, giorni);
     const andamento = andamentoTraffico();
     const [storicoVisitatori, storicoPagine] = andamento.serieG;
     const notaTraffico = andamento.conclusi.length ? 'Giorni conclusi dal ' + breveData(andamento.conclusi[0]) : 'Giorni conclusi';
@@ -598,35 +596,58 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       '<div class="due"><section class="card"><header><h2>Iscrizioni e nuovi clienti</h2><span class="nota">al giorno</span></header>' +
       legenda([{ nome: 'Nuovi iscritti', colore: 'var(--c3)' }, { nome: 'Nuovi clienti', colore: 'var(--c4)' }]) + '<div class="corpo"><div class="grafico" id="g-iscritti"></div></div></section>' +
       '<section class="card"><header><h2>Da dove arrivano</h2><span class="nota">ingressi dall\u2019esterno</span></header><div class="corpo">' + barreFonti(6) + '</div></section></div>' +
-      '<div class="kpi-riga">' +
-      kpi('Clic su Studio guidato', nf.format(somma(sgc)), somma(sgc), somma(sgcp), sgc, 'var(--acc)') +
-      kpi('Test iniziati', nf.format(somma(sgi)), somma(sgi), somma(sgip), sgi, 'var(--c3)') +
-      kpi('Test finiti', nf.format(somma(sgf)), somma(sgf), somma(sgfp), sgf, 'var(--c4)') +
-      '</div>' +
       studioGuidato() +
       '<section class="card"><header><h2>Ultime attività</h2><a class="nota" href="#studenti">tutti gli studenti →</a></header><div class="corpo">' + attivita(10) + '</div></section>';
     graficoTraffico($('#g-andamento'), andamento, { id: 'and', titolo: 'Visitatori unici e pagine viste nei giorni conclusi', altezza: 210 });
     grafico($('#g-iscritti'), g, [{ nome: 'Nuovi iscritti', valori: is, colore: 'var(--c3)', barre: true }, { nome: 'Nuovi clienti', valori: pa, colore: 'var(--c4)', barre: true }], { id: 'isc', titolo: 'Iscrizioni', altezza: 190 });
   }
-  // Studio guidato: clic sui link del test (circa le persone: un clic al giorno per browser e materia), test iniziati e finiti,
-  // risultati sbloccati creando l'account dopo il test da ospite. Conteggi anonimi dal 15/11/2026.
+  // Studio guidato (conteggi anonimi dal 15/11/2026): clic sui link del test (una volta al giorno per browser e materia),
+  // test iniziati e finiti, divisi fra iscritti e ospiti; per gli ospiti, quanti si iscrivono (o accedono) per vedere il risultato.
   function studioGuidato() {
+    const conta = (ev) => somma(serie(ev, giorni)), prima = (ev) => somma(serie(ev, giorni, giorni)), spark = (ev) => serie(ev, giorni);
+    const k = (titolo, ev, colore, sotto) => {
+      const html = kpi(titolo, nf.format(conta(ev)), conta(ev), prima(ev), spark(ev), colore);
+      return sotto ? html.replace('</b>', '</b><span class="delta pari">' + sotto + '</span>') : html;
+    };
+    const iniz = conta('sg-inizia|sg-inizia-ospite'), fin = conta('sg-fine|sg-fine-ospite');
+    const iniO = conta('sg-inizia-ospite'), finO = conta('sg-fine-ospite'), riv = conta('sg-rivendica');
+    const perc = (a, b) => (b ? Math.round((a / b) * 100) + '%' : '—');
     const da = elencoGiorni(giorni)[0];
     const r = {};
-    const voce = (m) => (r[m] ??= { m, clic: 0, inizia: 0, fine: 0, rivendica: 0 });
+    const voce = (m) => (r[m] ??= { m, clic: 0, inizia: 0, fine: 0, iniziaO: 0, fineO: 0, rivendica: 0 });
     (D.studioGuidato || []).forEach((x) => {
       if (x.giorno < da) return;
-      const k = x.evento.replace(/^sg-/, '').replace(/-ospite$/, '');
-      if (k in voce(x.materia)) voce(x.materia)[k] += x.n;
+      const v = voce(x.materia);
+      if (x.evento === 'sg-clic') v.clic += x.n;
+      else if (x.evento === 'sg-inizia') v.inizia += x.n;
+      else if (x.evento === 'sg-fine') v.fine += x.n;
+      else if (x.evento === 'sg-inizia-ospite') v.iniziaO += x.n;
+      else if (x.evento === 'sg-fine-ospite') v.fineO += x.n;
+      else if (x.evento === 'sg-rivendica') v.rivendica += x.n;
     });
-    const righe = Object.values(r).sort((a, b) => b.clic - a.clic || b.inizia - a.inizia);
-    const tot = righe.reduce((t, x) => ({ clic: t.clic + x.clic, inizia: t.inizia + x.inizia, fine: t.fine + x.fine, rivendica: t.rivendica + x.rivendica }), { clic: 0, inizia: 0, fine: 0, rivendica: 0 });
-    const cella = (n) => '<td class="destra num">' + nf.format(n) + '</td>';
-    return '<section class="card" style="margin-bottom:1rem"><header><h2>Studio guidato</h2><span class="nota">' + giorni + ' giorni · conteggi dal 15 novembre</span></header>' +
-      (righe.length ? '<div class="tabella"><table><thead><tr><th>Materia</th><th class="destra" title="Persone che hanno cliccato su «Inizia il test» o su un altro link dello Studio guidato (una volta al giorno per browser e materia)">Clic</th><th class="destra" title="Test cominciati (scelta del capitolo fatta), iscritti e ospiti">Test iniziati</th><th class="destra" title="Test arrivati fino al risultato">Test finiti</th><th class="destra" title="Ospiti che hanno creato l’account o fatto l’accesso per vedere la diagnosi">Diagnosi sbloccate</th></tr></thead><tbody>' +
-        righe.map((x) => '<tr><td><i class="punto" style="background:' + ((M[x.m] || {}).colore || 'var(--ink-3)') + '"></i> ' + esc(nomeMateria(x.m)) + '</td>' + cella(x.clic) + cella(x.inizia) + cella(x.fine) + cella(x.rivendica) + '</tr>').join('') +
-        (righe.length > 1 ? '<tr><td><b>Totale</b></td>' + cella(tot.clic) + cella(tot.inizia) + cella(tot.fine) + cella(tot.rivendica) + '</tr>' : '') +
-        '</tbody></table></div>' : '<div class="vuoto">Nessun clic nel periodo. Il conteggio parte dal 15 novembre.</div>') + '</section>';
+    const righe = Object.values(r).sort((a, b) => b.clic - a.clic || (b.inizia + b.iniziaO) - (a.inizia + a.iniziaO));
+    const tot = righe.reduce((t, x) => { for (const c in t) t[c] += x[c]; return t; }, { clic: 0, inizia: 0, fine: 0, iniziaO: 0, fineO: 0, rivendica: 0 });
+    const cella = (n, t) => '<td class="destra num"' + (t ? ' title="' + t + '"' : '') + '>' + nf.format(Math.max(0, n)) + '</td>';
+    const riga = (nome, x) => '<tr><td>' + nome + '</td>' + cella(x.clic) + cella(x.inizia + x.iniziaO) + cella(x.inizia + x.iniziaO - x.fine - x.fineO) + cella(x.fine) + cella(x.fineO) + cella(x.rivendica) + cella(x.fineO - x.rivendica) + '</tr>';
+    return '<div class="kpi-riga">' +
+      k('Clic su Studio guidato', 'sg-clic', 'var(--acc)') +
+      k('Test iniziati', 'sg-inizia|sg-inizia-ospite', 'var(--c3)', nf.format(iniO) + ' da ospiti') +
+      '<div class="card kpi"><span class="etichetta">Test lasciati a metà</span><b>' + nf.format(Math.max(0, iniz - fin)) + '</b><span class="delta pari">' + perc(Math.max(0, iniz - fin), iniz) + ' dei test iniziati</span></div>' +
+      '<div class="card kpi"><span class="etichetta">Ospiti arrivati al risultato</span><b>' + nf.format(finO) + '</b><span class="delta pari">risultato bloccato, serve l’account</span></div>' +
+      '<div class="card kpi"><span class="etichetta">Si sono iscritti per vederlo</span><b>' + nf.format(riv) + '</b><span class="delta pari">' + (finO ? perc(riv, finO) + ' degli ospiti · ' + nf.format(Math.max(0, finO - riv)) + ' non iscritti' : 'nessun ospite nel periodo') + '</span></div>' +
+      '</div>' +
+      '<section class="card" style="margin-bottom:1rem"><header><h2>Studio guidato per materia</h2><span class="nota">' + giorni + ' giorni · conteggi dal 15 novembre</span></header>' +
+      (righe.length ? '<div class="tabella"><table><thead><tr><th>Materia</th>' +
+        '<th class="destra" title="Persone che hanno cliccato su «Inizia il test» (una volta al giorno per browser e materia)">Clic</th>' +
+        '<th class="destra" title="Test cominciati, iscritti e ospiti">Iniziati</th>' +
+        '<th class="destra" title="Test cominciati e non arrivati al risultato">A metà</th>' +
+        '<th class="destra" title="Iscritti che hanno visto il risultato">Finiti iscritti</th>' +
+        '<th class="destra" title="Ospiti arrivati al risultato bloccato">Finiti ospiti</th>' +
+        '<th class="destra" title="Ospiti che hanno creato l’account o fatto l’accesso per vedere il risultato">Si sono iscritti</th>' +
+        '<th class="destra" title="Ospiti arrivati al risultato che non hanno creato l’account">Non iscritti</th></tr></thead><tbody>' +
+        righe.map((x) => riga('<i class="punto" style="background:' + ((M[x.m] || {}).colore || 'var(--ink-3)') + '"></i> ' + esc(nomeMateria(x.m)), x)).join('') +
+        (righe.length > 1 ? riga('<b>Totale</b>', tot) : '') +
+        '</tbody></table></div>' : '<div class="vuoto">Nessun dato nel periodo. Il conteggio parte dal 15 novembre.</div>') + '</section>';
   }
   function imbuto(vis, isc, pag) {
     const max = Math.max(1, vis, isc, pag);

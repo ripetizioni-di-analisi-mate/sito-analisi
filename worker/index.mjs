@@ -315,6 +315,8 @@ export class Archivio {
       case '/evento':
         this.sql.exec(`INSERT INTO eventi (giorno, evento, materia, n) VALUES (?, ?, ?, 1)
                        ON CONFLICT(giorno, evento, materia) DO UPDATE SET n = n + 1`, c.giorno, c.evento, c.materia);
+        // Studio guidato: il dato deve comparire subito in dashboard, senza aspettare i 3 minuti della copia dei dati
+        if (String(c.evento).startsWith('sg-')) this.copiaDati = null;
         return Response.json({ ok: true });
 
       case '/utente': // dati per il login
