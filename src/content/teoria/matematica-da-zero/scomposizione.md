@@ -32,6 +32,8 @@ Il prodotto coincide con il polinomio di partenza, quindi la scomposizione è co
 Un polinomio che non si può scrivere come prodotto di polinomi di grado più basso si dice **irriducibile**. Ogni polinomio di primo grado, come $x + 3$ o $2x - 5$, è irriducibile. Una scomposizione è **completa** quando tutti i fattori, esclusi i numeri, sono irriducibili.
 
 Ogni polinomio di primo grado vale zero per un numero. Per esempio $x - 2$ vale zero per $x = 2$, e $2x + 1$ vale zero per $x = -\dfrac{1}{2}$, perché $2 \cdot \left(-\dfrac{1}{2}\right) + 1 = 0$. Un prodotto che contiene il fattore $x - 2$ vale quindi zero per $x = 2$. Il polinomio $x^2 + 4$ invece non vale mai zero, perché $x^2$ è maggiore o uguale a $0$ e perciò $x^2 + 4 \geq 4$. Quindi $x^2 + 4$ non ha fattori di primo grado ed è irriducibile.
+
+::grafico{f="x^2-4;x^2+4" xmin=-4 xmax=4 ymin=-5 ymax=12 punti="-2,0,pieno;2,0,pieno" nomi="x,y" titolo="Il grafico di $y = x^2 - 4$ interseca l'asse $x$ in $x = -2$ e $x = 2$, dove si annullano i fattori di $(x + 2)(x - 2)$; il grafico di $y = x^2 + 4$ resta sopra l'asse $x$ e non vale mai zero"}
 :::
 
 ## Raccoglimento totale e parziale
@@ -198,6 +200,8 @@ $$
 x^2 - 8x + 15 = (x - 3)(x - 5) .
 $$
 Nel trinomio $x^2 - x - 6$ il prodotto $-6$ è negativo, quindi i due numeri hanno segni opposti. La coppia $2$ e $-3$ ha prodotto $-6$ e somma $-1$, perciò $x^2 - x - 6 = (x + 2)(x - 3)$.
+
+::grafico{f="x^2-8*x+15" xmin=0 xmax=8 ymin=-2 ymax=16 punti="3,0,pieno;5,0,pieno" nomi="x,y" titolo="Il trinomio $x^2 - 8x + 15 = (x - 3)(x - 5)$ vale zero per $x = 3$ e $x = 5$, i valori che annullano i due fattori"}
 :::
 
 :::osservazione
@@ -232,6 +236,8 @@ x^3 - 8 = (x - 2)(x^2 + 2x + 4) ,
 27x^3 + 1 = (3x + 1)(9x^2 - 3x + 1) ,
 $$
 perché $8 = 2^3$, $27x^3 = (3x)^3$ e $1 = 1^3$. Con i numeri, $3^3 - 1^3 = 27 - 1 = 26$ e $(3 - 1)(9 + 3 + 1) = 2 \cdot 13 = 26$.
+
+::grafico{f="x^3-8" xmin=-3 xmax=4 ymin=-30 ymax=60 punti="2,0,pieno" nomi="x,y" titolo="Il grafico di $y = x^3 - 8 = (x - 2)(x^2 + 2x + 4)$ interseca l'asse $x$ solo in $x = 2$, perché il secondo fattore non vale mai zero"}
 :::
 
 :::osservazione{#falso-quadrato titolo="Falso quadrato"}

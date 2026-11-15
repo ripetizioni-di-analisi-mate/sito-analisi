@@ -256,6 +256,8 @@ Il numero $a$ si chiama **radicando** e il simbolo $\sqrt{\ }$ si chiama segno d
 
 :::attenzione
 Il radicando di una radice quadrata è maggiore o uguale a zero. La scrittura $\sqrt{-4}$ non ha significato, perché il quadrato di un numero qualsiasi è maggiore o uguale a zero; per esempio $2^2 = 4$ e anche $(-2)^2 = 4$. Per lo stesso motivo i numeri che elevati al quadrato danno $49$ sono due, $7$ e $-7$, mentre il simbolo $\sqrt{49}$ indica soltanto il numero positivo $7$. In particolare $\sqrt{(-5)^2} = \sqrt{25} = 5$.
+
+::grafico{f="x^2" xmin=-4 xmax=4 ymin=-1 ymax=9 punti="-2,4,pieno;2,4,pieno" segmenti="-2,4,2,4" nomi="x,y" titolo="Nel grafico di $y = x^2$ i punti con $y = 4$ sono due, quelli con $x = -2$ e $x = 2$; nessun punto ha $y$ negativo, perciò $\sqrt{-4}$ non ha significato"}
 :::
 
 :::richiamo{titolo="Scomposizione in fattori primi"}
@@ -304,6 +306,8 @@ $$
 1 ,\ 8 ,\ 27 ,\ 64 ,\ 125 ,\ 216 ,\ 343 ,\ 512 ,\ 729 ,\ 1000 .
 $$
 Un numero naturale è un **cubo perfetto** se è il cubo di un numero naturale, cioè se nella sua scomposizione in fattori primi ogni esponente è un multiplo di $3$. La radice cubica si ottiene allora dividendo gli esponenti per $3$; per esempio $216 = 2^3 \cdot 3^3$, quindi $\sqrt[3]{216} = 2 \cdot 3 = 6$.
+
+::grafico{f="x^3" xmin=-3 xmax=3 ymin=-28 ymax=28 punti="-3,-27,pieno;3,27,pieno" segmenti="-3,0,-3,-27;3,0,3,27" nomi="x,y" titolo="Nel grafico di $y = x^3$ a ogni valore di $y$, anche negativo, corrisponde un solo punto: $27 = 3^3$ e $-27 = (-3)^3$, perciò $\sqrt[3]{27} = 3$ e $\sqrt[3]{-27} = -3$"}
 :::
 
 ## Proprietà delle radici

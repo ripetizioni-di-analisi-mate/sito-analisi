@@ -33,6 +33,9 @@ $$
 2{,}5\ \text{m}^2 = 250\ \text{dm}^2 = 25\,000\ \text{cm}^2 .
 $$
 Per i terreni si usa l'**ettaro** (ha), che è l'area di un quadrato di lato $100$ m, cioè $1\ \text{ha} = 1\ \text{hm}^2 = 10\,000\ \text{m}^2$. Un campo di $2{,}5$ ettari misura quindi $25\,000\ \text{m}^2$.
+
+::grafico{linee="0,0 10,0 10,10 0,10 0,0;1,0 1,10;2,0 2,10;3,0 3,10;4,0 4,10;5,0 5,10;6,0 6,10;7,0 7,10;8,0 8,10;9,0 9,10;0,1 10,1;0,2 10,2;0,3 10,3;0,4 10,4;0,5 10,5;0,6 10,6;0,7 10,7;0,8 10,8;0,9 10,9" poligoni="0,0 1,0 1,1 0,1" etichette="3.2,10.7,1 m = 10 dm;0.2,-0.9,1 dm" assi=0 uguale=1 xmin=-1 xmax=11 ymin=-1.8 ymax=11.8 titolo="Un quadrato di lato $1$ m è diviso in $10 \cdot 10 = 100$ quadrati di lato $1$ dm: $1\ \text{m}^2 = 100\ \text{dm}^2$"}
+
 :::
 
 :::teorema{#conversioni-volumi titolo="Conversioni di volumi"}
@@ -49,6 +52,8 @@ $$
 1\ \text{m}^3 = 1000\ \text{l} .
 $$
 Queste uguaglianze servono a trovare quanti litri contiene un recipiente di cui si conoscono le dimensioni. Una cisterna a forma di parallelepipedo con spigoli di $2$ m, $1{,}5$ m e $0{,}8$ m ha volume $2 \cdot 1{,}5 \cdot 0{,}8 = 2{,}4\ \text{m}^3$, quindi contiene $2400$ litri. Il calcolo diventa più semplice se si esprimono subito le misure in decimetri, perché allora il volume in $\text{dm}^3$ coincide con la capacità in litri.
+
+::grafico{linee="0,0 10,0 10,4 0,4 0,0;0,4 4,7 14,7 10,4;14,7 14,3 10,0" segmenti="0,0,4,3;4,3,14,3;4,3,4,7" etichette="3.5,-1,20 dm;14.3,1.2,15 dm;-3.6,1.8,8 dm;5,2,V = 2400 dm³" assi=0 uguale=1 xmin=-4.5 xmax=15.5 ymin=-2 ymax=8 titolo="Cisterna con spigoli di $20$ dm, $15$ dm e $8$ dm: il volume è $20 \cdot 15 \cdot 8 = 2400\ \text{dm}^3 = 2400$ litri"}
 
 :::dimostrazione
 Il litro è definito come la capacità di un cubo di spigolo $1$ dm, quindi $1\ \text{l} = 1\ \text{dm}^3$. Un millilitro è un millesimo di litro e un centimetro cubo è un millesimo di decimetro cubo, perciò $1\ \text{ml} = 1\ \text{cm}^3$. Infine $1\ \text{m}^3 = 1000\ \text{dm}^3 = 1000\ \text{l}$.
@@ -78,6 +83,9 @@ Per una differenza, se i minuti da sottrarre sono più di quelli disponibili, si
 $$
 13\ \text{h}\ 70\ \text{min} - 8\ \text{h}\ 35\ \text{min} = 5\ \text{h}\ 35\ \text{min} .
 $$
+
+::grafico{linee="8.583,0 14.167,0" punti="8.583,0,pieno;14,0,pieno;14.167,0,pieno" segmenti="8.583,0.6,14,0.6;14,0.6,14.167,0.6;8.583,0.3,8.583,0.9;14,0.3,14,0.9;14.167,0.3,14.167,0.9" etichette="8.3,-0.8,8:35;13.6,-0.8,14:00;14.1,-1.5,14:10;10.5,1.2,5 h 25 min;14.2,1.2,10 min" assi=0 xmin=7.8 xmax=14.8 ymin=-2 ymax=2 titolo="Il viaggio da $8{:}35$ a $14{:}10$ si scompone in $5\ \text{h}\ 25\ \text{min}$ fino alle $14{:}00$ e $10$ minuti: in tutto $5\ \text{h}\ 35\ \text{min}$"}
+
 :::
 
 :::attenzione{#ore-decimali}
@@ -167,6 +175,9 @@ $$
 \frac{1}{T} = \frac{1}{T_1} - \frac{1}{T_2} .
 $$
 Il rendimento dello scarico si sottrae, perché ogni ora toglie la frazione $\dfrac{1}{T_2}$ della vasca. Con $T_1 = 4$ ore e $T_2 = 12$ ore la vasca si riempie ogni ora di $\dfrac{1}{4} - \dfrac{1}{12} = \dfrac{1}{6}$, quindi è piena dopo $6$ ore.
+
+::grafico{f="150*x+0*sqrt(x)+0*sqrt(4-x);100*x+0*sqrt(x)+0*sqrt(6-x)" punti="4,600,pieno;6,600,pieno" segmenti="0,600,6,600;4,0,4,600;6,0,6,600" xmin=-0.5 xmax=6.8 ymin=-75 ymax=675 nomi="t,V" legenda="V = 150\,t;V = 100\,t" titolo="Litri $V$ nella vasca in funzione delle ore $t$: il rubinetto da solo versa $150$ litri all'ora e la riempie in $4$ ore; con lo scarico, che toglie $50$ litri all'ora, ne restano $100$ all'ora e servono $6$ ore"}
+
 :::
 
 :::attenzione
@@ -208,6 +219,9 @@ $$
 c_1 \cdot V_1 = c_2 \cdot V_2 .
 $$
 Cinque litri di una soluzione al $12\%$ contengono $0{,}12 \cdot 5 = 0{,}6$ litri di sostanza. Per portare la concentrazione all'$8\%$ la soluzione deve diventare di $\dfrac{0{,}6}{0{,}08} = 7{,}5$ litri, perciò si aggiungono $2{,}5$ litri di acqua. Concentrazione e volume sono inversamente proporzionali, e l'acqua *aggiunta* è la differenza tra i due volumi.
+
+::grafico{f="60/x" punti="5,12,pieno,prima;7.5,8,pieno,dopo" segmenti="5,0,5,12;7.5,0,7.5,8;0,12,5,12;0,8,7.5,8" xmin=0 xmax=10 ymin=0 ymax=20 nomi="V,c" legenda="c \cdot V = 60" titolo="Concentrazione $c$ in percentuale in funzione del volume $V$ in litri: la quantità di sostanza è $c \cdot V = 60$ (cioè $0{,}6$ litri di sostanza) prima e dopo la diluizione"}
+
 :::
 
 ## Densità e cambi di valuta

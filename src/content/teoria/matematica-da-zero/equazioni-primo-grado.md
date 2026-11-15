@@ -159,6 +159,9 @@ x &= \frac{-2}{-3} = \frac{2}{3} .
 \end{aligned}
 $$
 Il quoziente di due numeri negativi è positivo, per la regola dei segni. La verifica dà $2 \cdot \dfrac{2}{3} + 9 = \dfrac{4}{3} + \dfrac{27}{3} = \dfrac{31}{3}$ e $5 \cdot \dfrac{2}{3} + 7 = \dfrac{10}{3} + \dfrac{21}{3} = \dfrac{31}{3}$.
+
+::grafico{f="2*x+9;5*x+7" punti="0.6667,10.3333,pieno" segmenti="0.6667,0,0.6667,10.3333" xmin=-2 xmax=4 ymin=-4 ymax=28 legenda="y = 2x + 9;y = 5x + 7" titolo="Le rette $y = 2x + 9$ e $y = 5x + 7$ si incontrano nel punto di ascissa $\dfrac{2}{3}$, che è la soluzione dell'equazione"}
+
 :::
 
 :::attenzione

@@ -169,7 +169,9 @@ Standardizzando ciascuna variabile con la propria deviazione standard campionari
 :::
 
 :::attenzione
-I tre punti $(-1,1)$, $(0,0)$ e $(1,1)$ hanno $S_{xy}=0$ per simmetria, quindi $r=0$. Le ordinate sono comunque determinate dalle ascisse attraverso $y=x^2$. Un coefficiente nullo indica assenza di associazione lineare nel senso di Pearson. La forma del diagramma resta necessaria per riconoscere relazioni curve.
+I tre punti $(-1,1)$, $(0,0)$ e $(1,1)$ hanno $S_{xy}=0$ per simmetria, quindi $r=0$. Le ordinate sono comunque determinate dalle ascisse attraverso $y=x^2$. Un coefficiente nullo indica assenza di associazione lineare nel senso di Pearson. La forma del diagramma resta necessaria per riconoscere relazioni curve. Poiché $b=0$, la retta dei minimi quadrati è la retta orizzontale $\hat y=\bar y=\dfrac23$.
+
+::grafico{f="x^2;2/3" xmin=-1.8 xmax=1.8 ymin=-0.4 ymax=2.2 punti="-1,1;0,0;1,1" legenda="y=x^2;\hat y=\frac{2}{3}" titolo="I tre punti stanno sulla parabola $y=x^2$, ma la retta dei minimi quadrati è orizzontale e $r=0$."}
 :::
 
 ## Modello lineare e inferenza sulla pendenza
@@ -212,6 +214,8 @@ $$
 T=\frac{1{,}8-1{,}2}{0{,}3}=2.
 $$
 Poiché $|T|=2<2{,}262=t_{9,0{,}975}$, il test non rifiuta $H_0$. L'intervallo al $95\%$ è $[1{,}1214;\,2{,}4786]$ usando il quantile fornito. Il valore $1{,}2$ appartiene all'intervallo, in accordo con il test bilaterale dello stesso livello.
+
+::grafico{f="0.388035*(1+x^2/9)^(-5)" area="0.388035*(1+x^2/9)^(-5);0;-4.6;-2.262|0.388035*(1+x^2/9)^(-5);0;2.262;4.6" punti="2,0.0617,pieno,T" segmenti="2,0,2,0.0617" xmin=-4.6 xmax=4.8 ymin=-0.035 ymax=0.45 nomi="t,f" legenda="t_9" titolo="Densità di Student con $9$ gradi di libertà. Le code colorate oltre $\pm 2{,}262$ formano la regione di rifiuto al $5\%$; il valore osservato $T=2$ cade fra le due soglie."}
 :::
 
 :::osservazione
@@ -237,7 +241,21 @@ Il centro è lo stesso perché il nuovo errore ha media zero. La previsione indi
 :::
 
 :::osservazione
-La stima della risposta media si riscrive come $\bar y+b(x_0-\bar x)$. Nel modello la media campionaria e la pendenza sono incorrelate, perché il loro prodotto di coefficienti sugli errori ha somma proporzionale a $\sum_i(x_i-\bar x)=0$. Le due varianze si sommano e danno $\sigma^2h_0$. Per la nuova risposta, l'errore aggiuntivo ha varianza $\sigma^2$ ed è indipendente dal campione. Questo produce il termine $1+h_0$. Il margine per la media è minimo a $x_0=\bar x$, dove il contributo della pendenza si annulla.
+La stima della risposta media si riscrive come $\bar y+b(x_0-\bar x)$. Nel modello la media campionaria e la pendenza sono incorrelate. Gli errori compaiono nella prima con coefficienti $\dfrac1n$ e nella seconda con coefficienti $\dfrac{x_i-\bar x}{S_{xx}}$, e la covarianza è $\sigma^2$ per la somma dei prodotti dei coefficienti, che è proporzionale a $\sum_i(x_i-\bar x)=0$. Le due varianze si sommano e danno $\sigma^2h_0$. Per la nuova risposta, l'errore aggiuntivo ha varianza $\sigma^2$ ed è indipendente dal campione. Questo produce il termine $1+h_0$. Il margine per la media è minimo a $x_0=\bar x$, dove il contributo della pendenza si annulla.
+:::
+
+:::esempio{titolo="Fascia per la risposta media nei cinque dati"}
+Per i cinque dati con $\hat y(x)=1{,}3+0{,}9x$ si ha $SSE=1{,}9$, quindi
+$$
+s_e^2=\frac{1{,}9}{5-2}=\frac{19}{30},\qquad s_e\approx0{,}796.
+$$
+Con $t_{3,0{,}975}\approx3{,}182$, il margine al $95\%$ per la risposta media all'ascissa $x_0$ è
+$$
+3{,}182\cdot0{,}796\sqrt{\frac15+\frac{(x_0-3)^2}{10}}.
+$$
+A $x_0=3$ il termine sotto radice vale $\dfrac15$ e il margine è circa $1{,}13$. A $x_0=0$ e a $x_0=6$ il termine vale $\dfrac{11}{10}$, perciò il margine sale a circa $2{,}66$. Al variare di $x_0$ gli estremi degli intervalli disegnano due rami di iperbole, più vicini fra loro al centro dei dati.
+
+::grafico{f="1.3+0.9*x" area="1.3+0.9*x+2.5323*sqrt(0.2+(x-3)^2/10);1.3+0.9*x-2.5323*sqrt(0.2+(x-3)^2/10);0;6" punti="1,2;2,3;3,5;4,4;5,6" segmenti="3,0,3,4" xmin=-0.4 xmax=6.4 ymin=-1.8 ymax=10 legenda="\hat y=1{,}3+0{,}9x" titolo="Fascia di confidenza al $95\%$ per la risposta media. L'ampiezza è minima all'ascissa media $\bar x=3$."}
 :::
 
 :::esempio{titolo="Due margini allo stesso valore di x"}
@@ -271,6 +289,23 @@ Alle ascisse $1,2,3,4,5$ si osservano i residui $2,-1,-2,-1,2$. La somma è zero
 
 :::definizione{#leva titolo="Leva e influenza"}
 Nel modello con intercetta la **leva** dell'osservazione $i$ è $h_i=\dfrac1n+\dfrac{(x_i-\bar x)^2}{S_{xx}}$. Dipende dalla distanza orizzontale dell'ascissa dal centro dei dati. Un'osservazione è influente se la sua rimozione modifica in modo apprezzabile il modello adattato. Una leva elevata permette una forte influenza, soprattutto quando la posizione del punto è in disaccordo con la tendenza degli altri dati. Se il punto estremo giace esattamente sulla retta determinata dagli altri punti, aggiungerlo lascia invariato l'adattamento.
+:::
+
+:::esempio{titolo="Un punto con leva alta e ordinata in disaccordo"}
+Le coppie $(1,2)$, $(2,3)$, $(3,4)$ e $(4,5)$ stanno sulla retta $y=1+x$, di pendenza $1$. Si aggiunge il punto $(10,4)$, mentre la retta iniziale prevede $11$ a quell'ascissa. Con le cinque coppie si ha $\bar x=4$ e $\bar y=\dfrac{18}{5}$. Le somme centrate valgono
+$$
+\begin{aligned}
+S_{xx}&=130-5\cdot4^2=50,\\[6pt]
+S_{xy}&=80-5\cdot4\cdot\frac{18}{5}=8,
+\end{aligned}
+$$
+quindi la nuova pendenza è $b=\dfrac{8}{50}=0{,}16$. La leva del punto aggiunto è
+$$
+h=\frac15+\frac{(10-4)^2}{50}=\frac{23}{25}=0{,}92.
+$$
+Una variazione $\Delta$ dell'ordinata del punto aggiunto sposta perciò il suo valore adattato di $0{,}92\,\Delta$. La sola presenza di questo punto riduce la pendenza da $1$ a $0{,}16$.
+
+::grafico{f="1+x;2.96+0.16*x" xmin=-0.5 xmax=11 ymin=-0.5 ymax=12.5 punti="1,2;2,3;3,4;4,5;10,4" segmenti="10,4,10,11" legenda="y=1+x;\hat y=2{,}96+0{,}16x" titolo="Il punto $(10,4)$ ha leva $0{,}92$. La retta iniziale dista $7$ dal punto, quella ricalcolata, tratteggiata, solo $0{,}56$."}
 :::
 
 :::osservazione

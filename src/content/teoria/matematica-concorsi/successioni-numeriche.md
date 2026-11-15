@@ -56,6 +56,9 @@ $$
 \end{array}
 $$
 La differenza successiva è quindi $9 + 2 = 11$, e il termine successivo è $26 + 11 = 37$. Il metodo è corretto perché ogni termine è il precedente più la sua differenza, e ogni differenza è la precedente più $2$. Come controllo, i termini sono i numeri $n^2 + 1$, e infatti $6^2 + 1 = 37$.
+
+::grafico{f="x^2+1" punti="1,2,pieno;2,5,pieno;3,10,pieno;4,17,pieno;5,26,pieno;6,37,vuoto" xmin=-1 xmax=7 ymin=-5 ymax=40 nomi="n,aₙ" titolo="I termini $2, 5, 10, 17, 26$ e il successivo $37$ (punto vuoto) stanno sulla curva $y = x^2 + 1$"}
+
 :::
 
 :::esempio{titolo="Differenze che seguono un'altra regola"}
@@ -64,6 +67,9 @@ Le differenze possono formare una successione di un altro tipo. Nella succession
 
 :::definizione{#rapporti titolo="Rapporti tra termini consecutivi"}
 Il **rapporto** tra due termini consecutivi è $\dfrac{a_{n+1}}{a_n}$, cioè il numero per cui si moltiplica un termine per ottenere il successivo. Se i rapporti sono tutti uguali, ogni termine è il precedente moltiplicato per lo stesso numero. Nella successione $3, 6, 12, 24, \dots$ ogni termine è il doppio del precedente, quindi il termine successivo è $48$. Nella successione $400, 200, 100, 50, \dots$ il rapporto vale $\dfrac{1}{2}$, quindi il termine successivo è $25$. In queste successioni le differenze non sono costanti, perché ognuna è il doppio, oppure la metà, della precedente; la regola si trova quindi con i rapporti.
+
+::grafico{f="400*(1/2)^(x-1)" punti="1,400,pieno;2,200,pieno;3,100,pieno;4,50,pieno;5,25,vuoto" xmin=-1 xmax=6 ymin=-50 ymax=450 nomi="n,aₙ" titolo="Con rapporto $\dfrac{1}{2}$ ogni termine è la metà del precedente: $400, 200, 100, 50$ e il successivo $25$ (punto vuoto)"}
+
 :::
 
 ## Operazioni miste e successioni intrecciate
@@ -83,6 +89,9 @@ $$
 3,\ 20,\ 6,\ 17,\ 9,\ 14,\ 12,\ \dots
 $$
 i termini di posto dispari sono $3, 6, 9, 12$, che crescono di $3$, e quelli di posto pari sono $20, 17, 14$, che diminuiscono di $3$. Il termine successivo occupa l'ottavo posto, che è pari, quindi continua la seconda successione e vale $14 - 3 = 11$.
+
+::grafico{punti="1,3,pieno;3,6,pieno;5,9,pieno;7,12,pieno;2,20,pieno;4,17,pieno;6,14,pieno;8,11,vuoto" linee="1,3 3,6 5,9 7,12;2,20 4,17 6,14 8,11" xmin=-1 xmax=9 ymin=-2 ymax=22 nomi="n,aₙ" titolo="La successione $3, 20, 6, 17, 9, 14, 12$: i posti dispari crescono di $3$, i posti pari diminuiscono di $3$; l'ottavo termine, $14 - 3 = 11$, è il punto vuoto"}
+
 :::
 
 :::osservazione{#segni-alterni titolo="Successioni a segni alterni"}
@@ -117,6 +126,9 @@ a_1 = a_2 = 1,
 a_{n+2} = a_{n+1} + a_n .
 $$
 I primi termini sono $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \dots$, infatti $2 = 1 + 1$, $3 = 1 + 2$ e $5 = 2 + 3$. Nei quiz la stessa regola si applica partendo da due numeri qualsiasi. Nella successione $2, 5, 7, 12, 19, 31, \dots$ ogni termine è la somma dei due precedenti, quindi il termine successivo è $19 + 31 = 50$. Una successione di questo tipo si riconosce dalle differenze, perché dalla seconda in poi coincidono con i termini della successione stessa. Per $2, 5, 7, 12, 19, 31$ le differenze sono infatti $3, 2, 5, 7, 12$.
+
+::grafico{punti="1,1,pieno;2,1,pieno;3,2,pieno;4,3,pieno;5,5,pieno;6,8,pieno;7,13,pieno;8,21,pieno" segmenti="1,0,1,1;2,0,2,1;3,0,3,2;4,0,4,3;5,0,5,5;6,0,6,8;7,0,7,13;8,0,8,21" xmin=-1 xmax=10 ymin=-3 ymax=24 nomi="n,aₙ" titolo="I primi otto termini della successione di Fibonacci: ogni altezza è la somma delle due precedenti, per esempio $8 = 3 + 5$ e $13 = 5 + 8$"}
+
 :::
 
 ## Progressioni aritmetiche

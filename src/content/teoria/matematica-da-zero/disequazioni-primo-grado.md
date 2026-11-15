@@ -244,6 +244,8 @@ Un'espressione come $2x - 6$ cambia segno in un solo punto, quello in cui vale z
 - uguale a zero per $x = 3$;
 - negativa per $x < 3$, per esempio con $x = 0$ vale $-6$.
 
+::grafico{assi=0 uguale=1 linee="-2.6,0 6.6,0;6.3,0.15 6.6,0 6.3,-0.15;-2,-0.1 -2,0.1;-1,-0.1 -1,0.1;0,-0.1 0,0.1;1,-0.1 1,0.1;2,-0.1 2,0.1;3,-0.1 3,0.1;4,-0.1 4,0.1;5,-0.1 5,0.1;6,-0.1 6,0.1" punti="3,0,pieno" etichette="-1.3,0.35,−   −   −   −;4.1,0.35,+   +   +;-2.16,-0.5,−2;-1.16,-0.5,−1;-0.08,-0.5,0;0.92,-0.5,1;1.92,-0.5,2;2.92,-0.5,3;3.92,-0.5,4;4.92,-0.5,5;5.92,-0.5,6" xmin=-3 xmax=7 ymin=-0.8 ymax=0.7 titolo="Segno di $2x - 6$: negativo a sinistra di $3$, positivo a destra; in $3$ l'espressione vale zero"}
+
 Allo stesso modo $4 - 2x > 0$ dà $-2x > -4$, cioè $x < 2$, quindi $4 - 2x$ è positiva per $x < 2$ e negativa per $x > 2$. Quando il coefficiente di $x$ è negativo, l'espressione è positiva a sinistra del numero in cui vale zero.
 :::
 
@@ -328,6 +330,11 @@ $$
 x > \frac{20}{3} .
 $$
 Il numero $\dfrac{20}{3}$ è compreso tra $6$ e $7$, perché $6 \cdot 3 = 18$ e $7 \cdot 3 = 21$. Il numero di lavaggi è intero, quindi la tessera **costa meno** a partire da $7$ lavaggi. Per controllo, con $7$ lavaggi si spendono $31{,}50$ euro senza tessera e $31$ euro con la tessera; con $6$ lavaggi si spendono $27$ euro senza tessera e $28$ euro con la tessera.
+
+Nel grafico la spesa in euro è in funzione del numero $x$ di lavaggi. Le due rette si incontrano per $x = \dfrac{20}{3}$, dove entrambe le spese valgono $10 + 3 \cdot \dfrac{20}{3} = 30$ euro; a destra di questo punto la retta della tessera sta sotto l'altra.
+
+::grafico{f="4.5*x;10+3*x" xmin=0 xmax=10 ymin=0 ymax=45 nomi="x,euro" punti="6.667,30,pieno" segmenti="6.667,0,6.667,30" legenda="\text{senza tessera: } 4{,}5\,x;\text{con tessera: } 10 + 3x" titolo="La spesa con la tessera è minore per $x > \dfrac{20}{3}$, cioè da $7$ lavaggi in poi"}
+
 :::
 
 :::esempio{titolo="Un problema con due condizioni"}
@@ -339,4 +346,7 @@ $$
 \end{cases}
 $$
 La prima disequazione dà $3x > 15$, cioè $x > 5$. La seconda dà $x \leq 8$. Le soluzioni sono $5 < x \leq 8$, cioè l'intervallo $(5, 8]$. Se si cercano solo numeri interi, le soluzioni sono $6$, $7$ e $8$.
+
+::grafico{assi=0 uguale=1 linee="2.4,0 10.6,0;10.3,0.15 10.6,0 10.3,-0.15;3,-0.1 3,0.1;4,-0.1 4,0.1;5,-0.1 5,0.1;6,-0.1 6,0.1;7,-0.1 7,0.1;8,-0.1 8,0.1;9,-0.1 9,0.1;10,-0.1 10,0.1" area="0.18;0;5;8" punti="5,0,vuoto;6,0,pieno;7,0,pieno;8,0,pieno" etichette="2.92,-0.5,3;3.92,-0.5,4;4.92,-0.5,5;5.92,-0.5,6;6.92,-0.5,7;7.92,-0.5,8;8.92,-0.5,9;9.82,-0.5,10" xmin=2 xmax=11 ymin=-0.8 ymax=0.6 titolo="Le soluzioni del sistema formano l'intervallo $(5, 8]$; i numeri interi che vi appartengono sono $6$, $7$ e $8$"}
+
 :::

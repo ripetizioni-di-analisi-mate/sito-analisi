@@ -33,6 +33,9 @@ $$
 6, \qquad 6 + 5 = 11, \qquad 11 + 4 = 15, \qquad 15 + 3 = 18, \qquad 18 + 2 = 20 .
 $$
 Quindi $15$ famiglie su $20$, cioè il $75\%$, hanno al più tre componenti. Le famiglie con *almeno* quattro componenti sono le rimanenti, $20 - 15 = 5$.
+
+::grafico{linee="0,0 1,0 1,6 2,6 2,11 3,11 3,15 4,15 4,18 5,18 5,20 6,20" punti="1,6,pieno;2,11,pieno;3,15,pieno;4,18,pieno;5,20,pieno" etichette="1.25,7.6,6;2.25,12.6,11;3.25,16.6,15;4.25,19.6,18;5.25,21.6,20" xmin=0 xmax=7 ymin=0 ymax=23 nomi="x,F" legenda=0 titolo="Frequenza cumulata $F$ delle $20$ famiglie in funzione del numero $x$ di componenti: a ogni dato il valore sale della frequenza del dato"}
+
 :::
 
 ## Media aritmetica e media ponderata
@@ -43,6 +46,9 @@ $$
 \bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} .
 $$
 La media è il valore che ogni dato dovrebbe avere perché la somma resti la stessa. I voti $6$, $7$, $7$, $8$, $9$, $5$ hanno somma $42$, quindi la loro media è $\dfrac{42}{6} = 7$, e sei voti tutti uguali a $7$ hanno la stessa somma $42$. La media è sempre compresa tra il dato minimo e il dato massimo, e questo fornisce un primo controllo sul risultato.
+
+::grafico{poligoni="0.7,0 0.7,6 1.3,6 1.3,0;1.7,0 1.7,7 2.3,7 2.3,0;2.7,0 2.7,7 3.3,7 3.3,0;3.7,0 3.7,8 4.3,8 4.3,0;4.7,0 4.7,9 5.3,9 5.3,0;5.7,0 5.7,5 6.3,5 6.3,0" segmenti="0.4,7,6.6,7" etichette="6.9,7.5,media 7" xmin=0 xmax=7.6 ymin=0 ymax=10 nomi="i,voto" legenda=0 titolo="I sei voti $6$, $7$, $7$, $8$, $9$, $5$ e la loro media $\bar{x} = 7$: le parti delle barre sopra la linea tratteggiata compensano i tratti mancanti"}
+
 :::
 
 :::definizione{#media-ponderata titolo="Media ponderata"}
@@ -94,6 +100,9 @@ $$
 \frac{1500 + 1600 + 1700 + 1800 + 9400}{5} = \frac{16\,000}{5} = 3200 \text{ euro},
 $$
 mentre la mediana è $1700$ euro. Quattro stipendi su cinque sono minori della media, quindi in questo caso la mediana descrive meglio lo stipendio tipico. Nei quesiti che chiedono di confrontare media e mediana, un dato molto grande fa la media maggiore della mediana, e un dato molto piccolo la fa minore.
+
+::grafico{poligoni="0.7,0 0.7,1500 1.3,1500 1.3,0;1.7,0 1.7,1600 2.3,1600 2.3,0;2.7,0 2.7,1700 3.3,1700 3.3,0;3.7,0 3.7,1800 4.3,1800 4.3,0;4.7,0 4.7,9400 5.3,9400 5.3,0" segmenti="0.4,3200,5.6,3200;0.4,1700,5.6,1700" etichette="3,3700,media 3200;3,2200,mediana 1700" xmin=0 xmax=6.2 ymin=0 ymax=9600 nomi="i,€" legenda=0 titolo="I cinque stipendi in euro: il dato $9400$ porta la media a $3200$, mentre la mediana resta $1700$"}
+
 :::
 
 ## Come cambia la media
@@ -142,6 +151,9 @@ $$
 \sigma^2 = \frac{20}{5} = 4, \qquad \sigma = 2 .
 $$
 Uno scarto quadratico medio piccolo indica dati raccolti vicino alla media.
+
+::grafico{punti="1,5,pieno;2,7,pieno;3,8,pieno;4,9,pieno;5,11,pieno" segmenti="0.5,8,5.5,8;1,5,1,8;2,7,2,8;4,9,4,8;5,11,5,8" etichette="5.6,8.6,media 8;1.2,6.5,-3;2.2,7.5,-1;4.2,8.5,1;5.2,9.5,3" xmin=0 xmax=6.8 ymin=0 ymax=12 nomi="i,x" legenda=0 titolo="I dati $5$, $7$, $8$, $9$, $11$ e i loro scarti dalla media $8$: i segmenti verticali misurano $-3$, $-1$, $0$, $1$, $3$"}
+
 :::
 
 :::osservazione{#variabilita-e-trasformazioni titolo="Variabilità di dati trasformati"}
@@ -160,6 +172,9 @@ Una **tabella a doppia entrata** raccoglie le frequenze di due caratteri osserva
 | totale | $60$ | $60$ | $120$ |
 
 Ogni totale di riga è la somma delle caselle della riga, e lo stesso vale per le colonne. Perciò, se di una riga si conoscono il totale e tutte le caselle tranne una, la casella mancante è la differenza tra il totale e la somma delle altre caselle.
+
+::grafico{poligoni="0.6,0 0.6,42 1,42 1,0;1,0 1,48 1.4,48 1.4,0;2,0 2,18 2.4,18 2.4,0;2.4,0 2.4,12 2.8,12 2.8,0" etichette="0.8,45,U;1.2,51,D;2.2,21,U;2.6,15,D;1,-6,tempo pieno;2.4,-6,part-time" xmin=0 xmax=3.4 ymin=0 ymax=56 nomi="c,n" legenda=0 titolo="Dipendenti per tipo di contratto e sesso (U uomini, D donne): $42$ e $48$ a tempo pieno, $18$ e $12$ part-time"}
+
 :::
 
 :::osservazione{#percentuali-di-riga-e-colonna titolo="Percentuali su totali diversi"}

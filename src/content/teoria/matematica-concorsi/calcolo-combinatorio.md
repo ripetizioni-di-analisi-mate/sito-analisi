@@ -56,6 +56,9 @@ $$
 ABC, \quad ACB, \quad BAC, \quad BCA, \quad CAB, \quad CBA .
 $$
 Le prime due iniziano con $A$, le due successive con $B$, le ultime due con $C$. Fissata la prima lettera, le altre due si ordinano in $2! = 2$ modi, quindi le permutazioni sono $3 \cdot 2 = 6$.
+
+::grafico{assi=0 uguale=1 xmin=-1 xmax=10 ymin=0 ymax=7 linee="0,3.5 3,5.5;3,5.5 6,6;3,5.5 6,5;0,3.5 3,3.5;3,3.5 6,4;3,3.5 6,3;0,3.5 3,1.5;3,1.5 6,2;3,1.5 6,1" punti="0,3.5,pieno;3,5.5,pieno;6,6,pieno;6,5,pieno;3,3.5,pieno;6,4,pieno;6,3,pieno;3,1.5,pieno;6,2,pieno;6,1,pieno" etichette="6.4,5.85,ABC;6.4,4.85,ACB;1.9,5.75,A;6.4,3.85,BAC;6.4,2.85,BCA;1.9,3.8,B;6.4,1.85,CAB;6.4,0.85,CBA;1.9,0.6,C" titolo="Le permutazioni di $A$, $B$, $C$: $3$ rami per la prima lettera, $2$ per la seconda e $1$ per la terza, quindi $3 \cdot 2 \cdot 1 = 6$ percorsi"}
+
 :::
 
 :::osservazione{#vincoli-di-posizione titolo="Permutazioni con vincoli"}
@@ -176,6 +179,9 @@ Per ogni numero naturale $n \geq 1$ e per ogni $k$ con $0 \leq k \leq n$ valgono
 - $\dbinom{n}{k} = \dbinom{n}{n - k}$, perché scegliere i $k$ oggetti da prendere equivale a scegliere gli $n - k$ oggetti da lasciare.
 
 La terza proprietà si chiama **simmetria** e permette di sostituire $k$ con $n - k$ quando $n - k$ è più piccolo. Per esempio $\dbinom{20}{18} = \dbinom{20}{2} = \dfrac{20 \cdot 19}{2} = 190$.
+
+::grafico{assi=0 uguale=1 xmin=-0.5 xmax=10.5 ymin=-1.6 ymax=5 poligoni="0,0 1.1,0 1.1,0.2 0,0.2;1.5,0 2.6,0 2.6,1.2 1.5,1.2;3,0 4.1,0 4.1,3 3,3;4.5,0 5.6,0 5.6,4 4.5,4;6,0 7.1,0 7.1,3 6,3;7.5,0 8.6,0 8.6,1.2 7.5,1.2;9,0 10.1,0 10.1,0.2 9,0.2" etichette="0.3,0.55,1;0.45,-0.5,0;1.8,1.55,6;1.95,-0.5,1;3.3,3.35,15;3.45,-0.5,2;4.8,4.35,20;4.95,-0.5,3;6.3,3.35,15;6.45,-0.5,4;7.8,1.55,6;7.95,-0.5,5;9.3,0.55,1;9.45,-0.5,6;9.4,-1.2,k" titolo="I coefficienti $\dbinom{6}{k}$ per $k = 0, 1, \dots, 6$: i valori $1$, $6$, $15$, $20$, $15$, $6$, $1$ si leggono uguali da sinistra e da destra, perché $\dbinom{6}{k} = \dbinom{6}{6 - k}$"}
+
 :::
 
 :::esempio{#strette-di-mano titolo="Strette di mano e partite di un girone"}
@@ -245,6 +251,9 @@ Da un gruppo di $4$ uomini e $3$ donne si sceglie un comitato di $3$ persone. I 
 $$
 \binom{3}{1} \binom{4}{2} + \binom{3}{2} \binom{4}{1} + \binom{3}{3} \binom{4}{0} = 18 + 12 + 1 = 31 .
 $$
+
+::venn{tipo="incluso" zone="a" nomi="comitati,soli uomini" elementi="a:31;ab:4" titolo="I $\dbinom{7}{3} = 35$ comitati possibili: $4$ sono formati da soli uomini e $35 - 4 = 31$ hanno almeno una donna"}
+
 :::
 
 :::attenzione
@@ -263,4 +272,6 @@ Nelle prove a tempo i conteggi si controllano con alcune osservazioni.
 - **Verificare le opzioni**. Nei quesiti inversi, come "un poligono ha $20$ diagonali: quanti lati ha?", si sostituiscono le opzioni nella formula, e con $n = 8$ si ottiene $\dfrac{8 \cdot 5}{2} = 20$.
 
 Il verso del risultato offre un ulteriore controllo, perché aggiungere un vincolo (due persone vicine, una cifra vietata) riduce il numero dei casi, mentre ammettere le ripetizioni lo aumenta.
+
+::grafico{assi=0 uguale=1 xmin=-0.5 xmax=11 ymin=-1 ymax=6.2 poligoni="0,0 2.6,0 2.6,0.56 0,0.56;3.6,0 6.2,0 6.2,3.36 3.6,3.36;7.2,0 9.8,0 9.8,5.12 7.2,5.12" etichette="0.1,0.96,C₈,₃ = 56;0.1,-0.5,combinazioni;3.7,3.76,D₈,₃ = 336;3.7,-0.5,disposizioni;7.3,5.52,8³ = 512;7.3,-0.5,con ripetizione" titolo="Con $n = 8$ e $k = 3$ i tre conteggi rispettano $C_{8,3} \leq D_{8,3} \leq 8^3$: $56 \leq 336 \leq 512$"}
 :::
