@@ -91,6 +91,14 @@ const nome = m.breve || m.titolo;
     .sg-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
     .sg-nav .sg-link{color:var(--inchiostro-2);align-self:center}
     .sg-sintesi{margin:0;padding-left:1rem;border-left:3px solid var(--azione);font:1.12rem/1.5 var(--testo)}
+    .sg-commento{display:flex;flex-direction:column;gap:.4rem}
+    .sg-commento .sg-sintesi.scrive::after{content:'';display:inline-block;width:.45em;height:1em;margin-left:.15em;vertical-align:-.12em;background:var(--azione);opacity:.5;animation:sg-cursore 1s steps(2) infinite}
+    @keyframes sg-cursore{50%{opacity:0}}
+    .sg-firma{display:flex;align-items:center;gap:.45rem;margin:0 0 0 1.2rem;font-size:.78rem;color:var(--inchiostro-2)}
+    .sg-firma[hidden]{display:none}
+    .sg-firma i{font:italic 700 .85rem var(--titoli);width:1.25rem;height:1.25rem;border-radius:50%;display:grid;place-items:center;background:#e6efec;color:#1f5a4f}
+    .sg-err{margin:0;font-size:.88rem;line-height:1.45;color:#7a3b1d}
+    .sg-err b{font-weight:600}
     .sg-tappe{display:flex;flex-direction:column;margin:.3rem 0 0;padding:0;list-style:none}
     .sg-tappe li{display:grid;grid-template-columns:2.5rem minmax(0,1fr);gap:1rem}
     .sg-filo{display:flex;flex-direction:column;align-items:center}
@@ -194,6 +202,8 @@ const nome = m.breve || m.titolo;
     $('[data-sg-nonso]').addEventListener('click', () => avanza('/api/studio-guidato/rispondi', { token, scelta: null }));
 
     const minuscola = (x: string) => esc(x[0].toLowerCase() + x.slice(1));
+    // HTML già protetto (formule rese dal sito): minuscola solo se comincia con una lettera.
+    const iniziale = (h: string) => /^[A-ZÀ-Ý]/.test(h) ? h[0].toLowerCase() + h.slice(1) : h;
     function mostraEsito(e: any, prog: any) {
       test.hidden = true; intro.hidden = true; ris.hidden = false;
       const lacune = e.lacune || [];
@@ -212,6 +222,7 @@ const nome = m.breve || m.titolo;
           ${k === 0 ? '<span class="sg-qui">PARTI DA QUI</span>' : ''}
           <div class="sg-tit"><h2>${esc(l.nome)}</h2><span${l.stato === 'lacuna' ? '' : ' class="cons"'}>${l.stato === 'lacuna' ? 'Da riprendere' : 'Da consolidare'}</span></div>
           <p class="sg-perche">${perche}</p>
+          ${(l.errori || []).map((x: any) => `<p class="sg-err"><b>Errore${x.volte > 1 ? ` ripetuto ${x.volte} volte` : ''}:</b> ${iniziale(x.nomeHtml || esc(x.nome))}. ${x.fattoHtml || esc(x.fatto)}</p>`).join('')}
           <div class="sg-vai">${vai}</div></div></li>`;
       }).join('');
       const spunta = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
@@ -219,7 +230,8 @@ const nome = m.breve || m.titolo;
       const sai = nomi('ok', spunta), nonVerificate = nomi('nv');
       const capitolo = e.modo === 'ricontrollo' ? 'Ricontrollo' : e.titoloCapitolo ? esc(e.titoloCapitolo) : 'Tutti i capitoli';
       ris.innerHTML = `<header class="sg-testa"><h1>Da dove ripartire</h1><p>${capitolo} · ${e.domande} domande</p></header>
-        <p class="sg-sintesi">${esc(e.sintesi)}</p>
+        <div class="sg-commento"><p class="sg-sintesi" data-sg-commento>${esc(e.racconto || e.sintesi)}</p>
+          <p class="sg-firma" data-sg-firma${e.racconto ? '' : ' hidden'}><i>π</i>Commento di Pi, l’assistente IA del sito</p></div>
         ${lacune.length ? `<ol class="sg-tappe">${percorso}</ol>` : ''}
         ${sai ? `<p class="sg-etich">Senza errori</p><p class="sg-chip">${sai}</p>` : ''}
         ${nonVerificate ? `<p class="sg-etich">Non verificate in questo test</p><p class="sg-chip nv">${nonVerificate}</p>` : ''}
@@ -230,6 +242,33 @@ const nome = m.breve || m.titolo;
       ris.querySelector('[data-sg-ricontrolla]')?.addEventListener('click', () => avanza('/api/studio-guidato/inizia', { materia, ricontrollo: true }));
       ris.focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (!e.racconto && e.domande) racconta();
+    }
+
+    // Commento di Pi sull'esito (Claude dal Worker, testo a pezzi). Se non arriva resta la frase di sintesi.
+    async function racconta() {
+      const p = ris.querySelector<HTMLElement>('[data-sg-commento]');
+      const firma = ris.querySelector<HTMLElement>('[data-sg-firma]');
+      if (!p || !firma) return;
+      const sintesi = p.textContent || '';
+      try {
+        const r = await fetch('/api/studio-guidato/racconto', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia }) });
+        if (!r.ok || r.status === 204 || !r.body) return;
+        const lettore = r.body.getReader();
+        const dec = new TextDecoder();
+        let testo = '';
+        for (;;) {
+          const { value, done } = await lettore.read();
+          if (done) break;
+          testo += dec.decode(value, { stream: true });
+          if (testo.trim()) {
+            if (!p.classList.contains('scrive')) { p.classList.add('scrive'); firma.hidden = false; }
+            p.textContent = testo;
+          }
+        }
+        if (!testo.trim()) { p.textContent = sintesi; firma.hidden = true; }
+      } catch { p.textContent = sintesi; firma.hidden = true; }
+      finally { p.classList.remove('scrive'); }
     }
 
     // All'apertura: se c'è un test precedente si mostra il risultato (?esito) oppure la riga di ripresa.

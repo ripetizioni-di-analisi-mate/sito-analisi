@@ -29,6 +29,7 @@ import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
+import { raccontaInStreaming, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
 import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
@@ -213,6 +214,7 @@ export class Archivio {
     creaTabelleLivelli(this.sql);
     creaTabelleOrientamento(this.sql);
     creaTabelleStudioGuidato(this.sql);
+    creaTabelleIA(this.sql);
     creaTabelleEmail(this.sql);
     creaTabellePromozioni(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
@@ -266,7 +268,7 @@ export class Archivio {
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
     if (pathname.startsWith('/sg-')) {
-      const r = archivioStudioGuidato(this, pathname, c);
+      const r = archivioStudioGuidato(this, pathname, c) || archivioIA(this, pathname, c);
       if (r) return Response.json(r);
     }
     if (pathname.startsWith('/ori-')) {
@@ -1187,7 +1189,7 @@ export default {
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
     }
     // ===== Studio guidato (test adattivo sulle lacune, anteprima riservata ai GM: worker/studio-guidato.mjs) =====
-    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi') {
+    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi' || p === '/api/studio-guidato/racconto') {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'Accedi con il tuo account per usare lo Studio guidato.' }, 401, { 'cache-control': 'no-store' });
       if (!io.gm) return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, { 'cache-control': 'no-store' });
@@ -1203,6 +1205,19 @@ export default {
       }
       if (!POST) return json({ errore: 'Metodo non consentito.' }, 405);
       const corpo = await req.json().catch(() => ({}));
+      if (p === '/api/studio-guidato/racconto') {
+        // Commento dell'IA sull'ultimo esito salvato (worker/studio-guidato-ia.mjs). Una volta per esito: poi si rilegge.
+        const materia = corpo.materia;
+        if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
+        const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia });
+        const ultimo = storico[0];
+        if (!ultimo?.domande) return new Response(null, { status: 204, headers: nessunaCache });
+        if (ultimo.racconto) return new Response(ultimo.racconto, { headers: { 'content-type': 'text/plain; charset=utf-8', ...nessunaCache } });
+        return raccontaInStreaming(env, ultimo, {
+          salva: (testo) => aDO(env, '/sg-racconto', { email: io.email, materia, quando: ultimo.quando, testo }),
+          conta: (modello, tin, tout) => aDO(env, '/sg-ia-conta', { modello, tin, tout }),
+        });
+      }
       let stato;
       if (p === '/api/studio-guidato/inizia') {
         const materia = corpo.materia;
@@ -1220,7 +1235,7 @@ export default {
         const dati = await domandeDi(env, q.m, 'it');
         const d = dati?.argomenti?.[q.id.split('/')[0]]?.find((x) => x.id === q.id);
         const scelta = Number.isInteger(corpo.scelta) ? corpo.scelta : null;
-        registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta));
+        registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta), d ? scelta : null);
       }
       const q = prossima(stato);
       if (!q) {

@@ -16,6 +16,9 @@
 import { STUDIO_GUIDATO, MATERIA_BASI, REGOLE_SG, RIMANDI } from '../src/data/studio-guidato.mjs';
 import CLASSI from '../src/data/studio-guidato-livelli.json' with { type: 'json' };
 import TITOLI_RIMANDI from '../src/data/studio-guidato-rimandi.json' with { type: 'json' };
+// Errori tipici delle risposte sbagliate (P3, 15/11/2026): catalogo per capitolo e diagnosi di ogni risposta.
+// Scritto da agenti con istruzioni-agenti/brief-studio-guidato-errori.md, unito da strumenti/sg-errori-unisci.py.
+import ERRORI from '../src/data/studio-guidato-errori.json' with { type: 'json' };
 
 export const VERSIONE_SG = 2;
 export const materieGuidate = () => Object.keys(STUDIO_GUIDATO);
@@ -111,8 +114,23 @@ export function prossima(stato) {
   return null;
 }
 
+// Errore tipico della risposta `scelta` (indice 0-3) alla domanda q, oppure null.
+function erroreDi(m, id, scelta) {
+  if (!Number.isInteger(scelta)) return null;
+  const k = ERRORI.domande?.[m]?.[id]?.[String(scelta + 1)];
+  if (!k) return null;
+  const [a] = id.split('/');
+  const e = ERRORI.errori?.[`${m}/${a}`]?.find((x) => x.id === k);
+  return e ? `${m}/${a}:${k}` : null;
+}
+const datiErrore = (chiaveErrore) => {
+  const [ma, k] = chiaveErrore.split(':');
+  return ERRORI.errori?.[ma]?.find((x) => x.id === k) || null;
+};
+
 // Registra la risposta alla domanda corrente (ok = true/false; «Non lo so» vale false).
-export function registra(stato, ok) {
+// scelta = indice della risposta scelta (null per «Non lo so»): serve alla diagnosi dell'errore.
+export function registra(stato, ok, scelta = null) {
   const q = stato.q;
   if (!q) return;
   stato.usate.push(`${q.m}:${q.id}`);
@@ -128,7 +146,7 @@ export function registra(stato, ok) {
     stato.u = unitaDelCapitolo(stato.m, a);
     const j = stato.u.findIndex((u) => u.k === q.k);
     const [u] = stato.u.splice(j, 1);
-    u.r.push([q.id, q.liv, 0]);
+    u.r.push([q.id, q.liv, 0, erroreDi(q.m, q.id, scelta)]);
     stato.u.unshift(u);
     stato.i = 0;
     if (scorta(stato) <= 0) u.st = 'incerta';
@@ -136,7 +154,7 @@ export function registra(stato, ok) {
   }
   const u = stato.u[stato.i];
   if (!u) return;
-  u.r.push([q.id, q.liv, ok ? 1 : 0]);
+  u.r.push([q.id, q.liv, ok ? 1 : 0, ok ? null : erroreDi(q.m, q.id, scelta)]);
   if (u.tipo !== 'ab') { u.st = ok ? 'ok' : 'lacuna'; return; }
   if (u.r.length === 1) {
     if (ok) u.st = 'ok';
@@ -152,6 +170,14 @@ export function registra(stato, ok) {
     nuove.push(unita(b, 'base', u.k));
   }
   stato.u.splice(stato.i + 1, 0, ...nuove);
+}
+
+// Errori tipici diagnosticati nelle risposte sbagliate di un gruppo di unità, con quante volte compaiono.
+function erroriDi(unita) {
+  const conta = new Map();
+  for (const u of unita) for (const r of u.r) if (!r[2] && r[3]) conta.set(r[3], (conta.get(r[3]) || 0) + 1);
+  return [...conta].map(([k, volte]) => { const e = datiErrore(k); return e ? { k, nome: e.nome, fatto: e.fatto, nomeHtml: e.nomeHtml, fattoHtml: e.fattoHtml, volte } : null; })
+    .filter(Boolean).sort((a, b) => b.volte - a.volte);
 }
 
 // Rimandi di un'abilità: paragrafo della teoria, scheda svolta, domande a tempo del capitolo.
@@ -181,7 +207,7 @@ export function esito(stato, titoli) {
     if (lacune.some((l) => l.k === u.k)) return;
     // «per»: le abilità del capitolo che dipendono da questa e sono risultate lacune.
     const per = stato.u.filter((x) => x.st === 'lacuna' && x.k !== u.k && basiDi(x.k).includes(u.k)).map((x) => nomeAbilita(x.k));
-    lacune.push({ ...voce(u, statoDi(u)), tipo, per, sbagliate: u.r.filter((r) => !r[2]).length, chieste: u.r.length, ...rimandi(u.k) });
+    lacune.push({ ...voce(u, statoDi(u)), tipo, per, sbagliate: u.r.filter((r) => !r[2]).length, chieste: u.r.length, errori: erroriDi([u]), ...rimandi(u.k) });
   };
   // 1. Basi sbagliate (fuori dal capitolo). 2. Abilità del capitolo che sono base di altre lacune.
   // 3. Le altre lacune nell'ordine del programma. 4. Le abilità incerte.
@@ -193,6 +219,9 @@ export function esito(stato, titoli) {
 
   const cap = stato.a ? tit(stato.m, stato.a) : null;
   const min = (t) => `«${t}»`;
+  // Errore ricorrente: lo stesso errore tipico in almeno due risposte sbagliate del test.
+  const tutti = erroriDi(chiuse);
+  const ricorrente = tutti.find((x) => x.volte >= 2) || null;
   const gravi = lacune.filter((l) => l.stato === 'lacuna');
   let sintesi;
   if (!stato.n) sintesi = 'Il test non contiene risposte.';
@@ -209,9 +238,10 @@ export function esito(stato, titoli) {
     const altri = lacune.length - 1;
     if (altri) sintesi += ` ${altri === 1 ? 'C’è un altro punto' : `Ci sono altri ${altri} punti`} da riprendere${gravi.length ? '' : ', tutti da consolidare'}.`;
   }
+  if (ricorrente && !ricorrente.nome.includes('$')) sintesi += ` L’errore che ricorre nelle risposte è «${ricorrente.nome[0].toLowerCase()}${ricorrente.nome.slice(1)}».`;
   return {
     v: VERSIONE_SG, materia: stato.m, modo: stato.modo, capitolo: stato.a, titoloCapitolo: cap, quando: Date.now(), domande: stato.n,
-    sintesi, abilita, lacune, cerca: stato.cerca,
+    sintesi, abilita, lacune, cerca: stato.cerca, errori: tutti, ricorrente,
     viste: stato.usate,
     risposte: chiuse.map((u) => ({ k: u.k, r: u.r })),
   };

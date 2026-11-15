@@ -261,3 +261,33 @@ test('Idraulica: la base in un capitolo precedente resta in Idraulica', () => {
   assert.equal(e.lacune[0].materia, 'Idraulica');
   assert.ok(e.lacune[0].teoria[0].href.startsWith('/idraulica/idrostatica/teoria#'));
 });
+
+// Diagnosi dell'errore (15/11/2026): la risposta scelta porta all'errore tipico del catalogo.
+const ERRORI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-errori.json', import.meta.url), 'utf8'));
+test('errori tipici: ogni diagnosi punta a un errore del catalogo e mai alla risposta corretta', () => {
+  for (const [m, domande] of Object.entries(ERRORI.domande)) for (const [id, voce] of Object.entries(domande)) {
+    const [a, n] = id.split('/');
+    const corretta = Number(/corretta:\s*(\d)/.exec(readFileSync(new URL(`../src/content/domande/${m}/${a}/${n}.md`, import.meta.url), 'utf8'))[1]);
+    for (const [k, err] of Object.entries(voce)) {
+      assert.notEqual(Number(k), corretta, `${m}/${id}`);
+      assert.ok(ERRORI.errori[`${m}/${a}`].some((e) => e.id === err && e.nomeHtml && e.fattoHtml), `${m}/${id} → ${err}`);
+    }
+  }
+});
+test('errori tipici: le risposte sbagliate diagnosticate compaiono nell\'esito e l\'errore ripetuto è ricorrente', () => {
+  const diagnosi = ERRORI.domande['analisi-1'] || {};
+  const s = creaStato({ materia: 'analisi-1', argomento: 'limiti' });
+  let q, viste = 0;
+  while ((q = prossima(s))) {
+    const voce = diagnosi[q.id];
+    const k = voce ? Object.keys(voce)[0] : null;
+    // Sbaglia sempre scegliendo una risposta con diagnosi, se esiste.
+    registra(s, false, k ? Number(k) - 1 : null);
+    viste++;
+  }
+  const e = esito(s, titoli);
+  const conte = e.errori.reduce((t, x) => t + x.volte, 0);
+  assert.ok(viste > 0 && conte > 0, 'nessun errore diagnosticato');
+  assert.ok(e.lacune.some((l) => l.errori.length), 'errori assenti dalle lacune');
+  if (e.errori[0].volte >= 2) assert.equal(e.ricorrente.k, e.errori[0].k);
+});

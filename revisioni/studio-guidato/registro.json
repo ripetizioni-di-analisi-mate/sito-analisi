@@ -1,0 +1,11 @@
+{ "giorni": [ {
+  "giorno": "2026-11-15",
+  "proposte": [
+    { "n": "P1", "titolo": "Pi racconta l'esito (Claude Sonnet)", "stato": "fatta" },
+    { "n": "P2", "titolo": "«Cosa ti blocca?» a parole", "stato": "in attesa" },
+    { "n": "P3", "titolo": "Diagnosi dell'errore per Analisi 1 e Precorso", "stato": "fatta" },
+    { "n": "P4", "titolo": "«Quanto sei sicuro?» dopo ogni risposta", "stato": "in attesa" },
+    { "n": "P5", "titolo": "Informativa sulla privacy (Anthropic)", "stato": "fatta" }
+  ],
+  "prossimo": "Proporre P2 e P4 e la diagnosi dell'errore per le altre materie dello Studio guidato"
+} ] }
