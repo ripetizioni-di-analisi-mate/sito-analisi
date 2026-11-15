@@ -5,8 +5,8 @@
 // Parte alta «B con lucchetto» (14/11 notte, scelta fra quattro varianti leggere): Studio guidato in una striscia
 // sottile velata (mirino senza cerchio, tasto a contorno), tre passi sotto con le icone al posto dei numeri,
 // icone a tratto fine, «Sblocca tutto · prezzo» come link con il lucchetto al posto della pillola oro.
-// Vale per ogni materia in italiano. Anteprima riservata ai GM: il contenitore ha data-orientamento-gm e si mostra
-// solo dopo la verifica in Base.astro, che aggiunge html.gm-anteprima per nascondere la vista classica.
+// Vale per ogni materia in italiano ed è visibile a tutti dal 15/11/2026 (prima solo ai GM): la vista classica
+// (classe vista-classica in Materia.astro) resta nel codice della pagina ma è sempre nascosta.
 // Lo Studio guidato funziona solo dove ci sono le domande classificate (STUDIO_GUIDATO); altrove «In preparazione».
 interface Argomento { slug: string; titolo: string; riassunto?: string; pronto: boolean; svolti: number; dafare: number; verificabili: number; domande: number }
 interface Props {
@@ -44,7 +44,7 @@ const I = {
 };
 const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`;
 ---
-<div class="pm" data-orientamento-gm hidden data-programma-materia={materia}>
+<div class="pm" data-programma-materia={materia}>
   <section class="pm-sg">
     <span class="pm-sg-ic" set:html={I.mirino} />
     <h2>Studio guidato</h2>
@@ -128,10 +128,10 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
 </div>
 
 <style is:global>
-  html.gm-anteprima .vista-classica { display: none !important; }
+  .vista-classica { display: none !important; }
   /* Sopra il titolo restano solo la freccia e «Materie»: l'etichetta della materia e l'ultima voce del percorso ripetevano il titolo. */
-  html.gm-anteprima .pagina:has([data-programma-materia]) > .contesto-materia,
-  html.gm-anteprima .pagina:has([data-programma-materia]) > .percorso li[aria-current] { display: none; }
+  .pagina:has([data-programma-materia]) > .contesto-materia,
+  .pagina:has([data-programma-materia]) > .percorso li[aria-current] { display: none; }
   .pm { font-family: var(--ui); margin-top: 1.2rem; --pm-oro: #d6c28e; --pm-oro-testo: #2b2210; --pm-sabbia: #f4efe1; --pm-sabbia-bordo: #e7dec8; }
   .pm svg { width: 1em; height: 1em; flex: none; }
   .pm-corto { display: none; }

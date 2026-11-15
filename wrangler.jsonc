@@ -15,7 +15,7 @@
     // "0" = sito tutto aperto; qualsiasi altro valore = oscuramento attivo
     "VENDITA": "1",
     // Studio guidato: "1" = aperto a tutti gli iscritti (anche gratuiti); altrimenti solo agli account GM
-    "STUDIO_GUIDATO_TUTTI": "0",
+    "STUDIO_GUIDATO_TUTTI": "1",
     // Prezzi storici Paddle per verificare le notifiche sugli acquisti precedenti.
     "PADDLE_PREZZO_TOLC_S": "pri_01m6s97tkf9pkj9tnqg3mcjgpm",
     "PADDLE_PREZZO_TOLC_I": "pri_01m6s94tn7fz7xzj64ntrg4rzb",
