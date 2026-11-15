@@ -3,7 +3,7 @@
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -23,7 +23,9 @@ const dati = (m) => {
   for (let k = 2; k <= (d.parti ?? 1); k++) Object.assign(d.argomenti, JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}--${k}.json`), 'utf8')).argomenti);
   return d;
 };
-const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi', 'meccanica-razionale', 'idraulica'].map((m) => [m, dati(m)]));
+// Si caricano solo le materie presenti nella build: ogni test usa le sue.
+const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi', 'meccanica-razionale', 'idraulica', 'algebra-lineare', 'matematica-generale', 'fisica-2', 'statica', 'scienza-delle-costruzioni']
+  .filter((m) => existsSync(join(root, 'dist/dati-domande', `${m}.json`))).map((m) => [m, dati(m)]));
 const corretta = (id, m) => DATI[m].argomenti[id.split('/')[0]].find((q) => q.id === id).corretta;
 
 function banco(t) {
@@ -190,4 +192,27 @@ test('Meccanica razionale e Idraulica: test completo con basi in Fisica 1 e in u
   assert.ok(id.esito.lacune.every((l) => l.teoria.every((x) => x.titolo)));
   const tutto = await giro(b, tok, { materia: 'idraulica' }, []);
   assert.equal(tutto.esito.lacune.length, 0);
+});
+
+// Algebra lineare, Matematica generale, Fisica 2, Statica, Scienza delle costruzioni (15/11/2026).
+// Build: SOLO_MATERIE="algebra-lineare,matematica-generale,fisica-2,statica,scienza-delle-costruzioni,analisi-1,fisica-zero,precorso"
+test('cinque materie nuove: ogni capitolo senza errori, e con tutti gli errori quando le basi sono nella build', async (t) => {
+  const { STUDIO_GUIDATO } = await import(pathToFileURL(join(root, 'src/data/studio-guidato.mjs')));
+  const CL = JSON.parse(readFileSync(join(root, 'src/data/studio-guidato-livelli.json'), 'utf8'));
+  const RIM = JSON.parse(readFileSync(join(root, 'src/data/studio-guidato-rimandi.json'), 'utf8'));
+  const b = banco(t);
+  const tok = await b.utente('gm-cinque@test.invalid', true);
+  for (const m of ['algebra-lineare', 'matematica-generale', 'fisica-2', 'statica', 'scienza-delle-costruzioni']) {
+    if (!DATI[m]) continue;
+    for (const a of Object.keys(STUDIO_GUIDATO[m].dipendenze)) {
+      const ok = await giro(b, tok, { materia: m, argomento: a }, []);
+      assert.equal(ok.esito.lacune.length, 0, `${m}/${a}`);
+      const tutte = CL.abilita[`${m}/${a}`].map((_, i) => `${m}/${a}#${i}`);
+      const basi = RIM[`${m}/${a}`].flatMap((r) => r.b);
+      if (!basi.every((k) => DATI[k.split('/')[0]])) continue;
+      const male = await giro(b, tok, { materia: m, argomento: a }, [...tutte, ...basi]);
+      assert.ok(male.esito.lacune.length > 0, `${m}/${a}: nessuna lacuna`);
+      assert.ok(male.esito.lacune.every((l) => l.teoria.length && l.teoria.every((x) => x.titolo && x.href)), `${m}/${a}: rimandi`);
+    }
+  }
 });
