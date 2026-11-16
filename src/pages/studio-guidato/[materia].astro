@@ -98,10 +98,10 @@ const nome = m.breve || m.titolo;
     .sg-arg b{font-weight:400}
     .sg-dom{display:flex;flex-direction:column;gap:1.25rem}
     .sg-dom fieldset{border:0;margin:0;padding:0;min-width:0}
-    .sg-dom .q{font:600 1.2rem/1.45 var(--titoli);padding:.9rem 0 .2rem;margin:0 0 1rem;overflow-x:auto;max-width:100%}
+    .sg-dom .q{font:600 1.2rem/1.45 var(--titoli);padding:.9rem 0 .2rem;margin:0 0 1rem;overflow-x:auto;overflow-y:hidden;max-width:100%}
     .sg-dom .q p{margin:0 0 .5rem}
     .sg-scelte{display:flex;flex-direction:column;border-bottom:1px solid var(--riga);counter-reset:sc}
-    .sg-scelta{counter-increment:sc;position:relative;display:flex;align-items:center;gap:1rem;min-height:3.1rem;padding:.35rem .75rem;border-top:1px solid var(--riga);font:1.02rem var(--testo);cursor:pointer;overflow-x:auto}
+    .sg-scelta{counter-increment:sc;position:relative;display:flex;align-items:center;gap:1rem;min-height:3.1rem;padding:.35rem .75rem;border-top:1px solid var(--riga);font:1.02rem var(--testo);cursor:pointer;overflow-x:auto;overflow-y:hidden}
     .sg-scelta::before{content:counter(sc,upper-alpha);font:700 .95rem var(--titoli);color:var(--azione);width:1rem;flex:none}
     .sg-scelta input{position:absolute;opacity:0;pointer-events:none}
     .sg-scelta:hover{background:#fbf9f3}
