@@ -452,7 +452,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
   }
   function seriePerGiorni(nome, g) {
     // Studio guidato: nome = uno o più eventi separati da «|» (es. 'sg-inizia|sg-inizia-ospite')
-    if (nome.startsWith('sg-')) { const ev = nome.split('|'); const c = {}; (D.studioGuidato || []).forEach((r) => { if (ev.includes(r.evento)) c[r.giorno] = (c[r.giorno] || 0) + r.n; }); return g.map((d) => c[d] || 0); }
+    if (nome.startsWith('sg-') || nome === 'ap-clic') { const ev = nome.split('|'); const c = {}; (D.studioGuidato || []).forEach((r) => { if (ev.includes(r.evento)) c[r.giorno] = (c[r.giorno] || 0) + r.n; }); return g.map((d) => c[d] || 0); }
     const conta = (lista, campo) => { const c = {}; lista.forEach((x) => { if (x) { const k = x.slice(0, 10); c[k] = (c[k] || 0) + 1; } }); return g.map((d) => c[d] || 0); };
     switch (nome) {
       case 'visite': return g.map((d) => (S.visite[d] || {}).n || 0);
@@ -623,7 +623,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     const r = {};
     const voce = (m) => (r[m] ??= { m, clic: 0, inizia: 0, fine: 0, iniziaO: 0, fineO: 0, rivendica: 0 });
     (D.studioGuidato || []).forEach((x) => {
-      if (x.giorno < da) return;
+      if (x.giorno < da || !x.evento.startsWith('sg-')) return;
       const v = voce(x.materia);
       if (x.evento === 'sg-clic') v.clic += x.n;
       else if (x.evento === 'sg-inizia') v.inizia += x.n;
@@ -637,6 +637,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     const cella = (n, t) => '<td class="destra num"' + (t ? ' title="' + t + '"' : '') + '>' + nf.format(Math.max(0, n)) + '</td>';
     const riga = (nome, x) => '<tr><td>' + nome + '</td>' + cella(x.clic) + cella(x.inizia + x.iniziaO) + cella(x.inizia + x.iniziaO - x.fine - x.fineO) + cella(x.fine) + cella(x.fineO) + cella(x.rivendica) + cella(x.fineO - x.rivendica) + '</tr>';
     return '<div class="kpi-riga">' +
+      k('Clic su Anteprima gratuita', 'ap-clic', 'var(--c2)') +
       k('Clic su Studio guidato', 'sg-clic', 'var(--acc)') +
       k('Test iniziati', 'sg-inizia|sg-inizia-ospite', 'var(--c3)', nf.format(iniO) + ' da ospiti') +
       '<div class="card kpi"><span class="etichetta">Test lasciati a metà</span><b>' + nf.format(Math.max(0, iniz - fin)) + '</b><span class="delta pari">' + perc(Math.max(0, iniz - fin), iniz) + ' dei test iniziati</span></div>' +
@@ -965,9 +966,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     const righe = ((D.percorsoAcquisto && D.percorsoAcquisto[giorni]) || []).slice().sort((a, b) => (b.pagine + b.sblocca) - (a.pagine + a.sblocca));
     const camp = (D.campagne && D.campagne[giorni]) || [];
     const quota = (x, base) => (base ? ' <span class="nota">' + Math.round((x / base) * 100) + '%</span>' : '');
-    return '<section class="card" style="margin-top:1rem"><header><h2>Percorso d’acquisto</h2><span class="nota">' + giorni + ' giorni · dal 2 novembre</span></header><div class="tabella"><table><thead><tr><th>Materia</th><th class="destra" title="Pagine della materia viste (teoria, schede, esercizi)">Pagine</th><th class="destra" title="Volte in cui il riquadro di fine anteprima è arrivato sullo schermo">Fine anteprima</th><th class="destra" title="Pagina Sblocca della materia vista">Sblocca</th><th class="destra" title="Tasti «Crea l’account e paga», «Sblocca ora», «Acquista il videocorso» premuti">Tasto</th><th class="destra">Pagati</th></tr></thead><tbody>' +
-      (righe.length ? righe.map((r) => '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' + ((M[r.materia] || {}).colore || '#7a8a87') + '"></i>' + esc(breveMateria(r.materia)) + '</span></td><td class="destra">' + nf.format(r.pagine) + '</td><td class="destra">' + nf.format(r.fine) + '</td><td class="destra">' + nf.format(r.sblocca) + '</td><td class="destra">' + nf.format(r.tasto) + quota(r.tasto, r.sblocca) + '</td><td class="destra"><b>' + nf.format(r.pagati) + '</b>' + quota(r.pagati, r.tasto) + '</td></tr>').join('') :
-        '<tr><td colspan="6"><div class="vuoto">Ancora nessun dato: i conteggi partono dal 2 novembre</div></td></tr>') +
+    return '<section class="card" style="margin-top:1rem"><header><h2>Percorso d’acquisto</h2><span class="nota">' + giorni + ' giorni · dal 2 novembre</span></header><div class="tabella"><table><thead><tr><th>Materia</th><th class="destra" title="Pagine della materia viste (teoria, schede, esercizi)">Pagine</th><th class="destra" title="Persone che hanno cliccato su «Inizia con l’anteprima» (una volta al giorno per browser e materia)">Clic anteprima</th><th class="destra" title="Volte in cui il riquadro di fine anteprima è arrivato sullo schermo">Fine anteprima</th><th class="destra" title="Pagina Sblocca della materia vista">Sblocca</th><th class="destra" title="Tasti «Crea l’account e paga», «Sblocca ora», «Acquista il videocorso» premuti">Tasto</th><th class="destra">Pagati</th></tr></thead><tbody>' +
+      (righe.length ? righe.map((r) => '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' + ((M[r.materia] || {}).colore || '#7a8a87') + '"></i>' + esc(breveMateria(r.materia)) + '</span></td><td class="destra">' + nf.format(r.pagine) + '</td><td class="destra">' + nf.format(r.anteprima || 0) + '</td><td class="destra">' + nf.format(r.fine) + '</td><td class="destra">' + nf.format(r.sblocca) + '</td><td class="destra">' + nf.format(r.tasto) + quota(r.tasto, r.sblocca) + '</td><td class="destra"><b>' + nf.format(r.pagati) + '</b>' + quota(r.pagati, r.tasto) + '</td></tr>').join('') :
+        '<tr><td colspan="7"><div class="vuoto">Ancora nessun dato: i conteggi partono dal 2 novembre</div></td></tr>') +
       '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">Si contano solo i numeri, senza sapere chi. La percentuale accanto a «Tasto» è sul numero di pagine Sblocca viste; quella accanto a «Pagati» sul numero di tasti premuti. Per i videocorsi «Pagine» è la pagina del videocorso.</p></section>' +
       '<section class="card" style="margin-top:1rem"><header><h2>Campagne dei link</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
       barre(camp.map((r) => ({ nome: r.campagna, valore: r.n, colore: 'var(--c6)' })), { quota: false, vuoto: 'Nessun ingresso con utm_campaign nel periodo' }) +
