@@ -70,6 +70,43 @@ A cube in a uniform field can have **zero net flux with a nonzero field**. Suppo
 
 :::
 
+:::richiamo{titolo="Field of a point charge"}
+**Hypothesis:** a point charge $Q$ is at rest in vacuum and $r$ is the distance from the point considered.
+
+**Conclusion:** the field is radial and its signed radial component is $E_r=\dfrac{Q}{4\pi\varepsilon_0r^2}$.
+:::
+
+::::teorema{#gauss-puntiforme titolo="Flux of a point charge through a sphere"}
+A point charge $Q$ sits at the center of a sphere of radius $r$. The flux of the electric field through the sphere, with outward normals, is
+$$
+\Phi_E=\frac{Q}{\varepsilon_0}
+$$
+for every value of $r$. This is the special case of Gauss's law that follows directly from Coulomb's law. The flux is independent of the radius, since the field decreases as $\dfrac{1}{r^2}$ while the area of the sphere grows as $r^2$.
+
+:::dimostrazione
+At every point of the sphere the field is radial and the outward normal is $\hat r$, so $\vec E\cdot\hat n=E_r$. By Coulomb's law $E_r$ depends only on $r$, so it has the same value at all points of the sphere. The flux is the product of $E_r$ and the area $4\pi r^2$,
+$$
+\begin{aligned}
+\Phi_E&=E_r\cdot4\pi r^2\\[6pt]
+&=\frac{Q}{4\pi\varepsilon_0r^2}\cdot4\pi r^2\\[6pt]
+&=\frac{Q}{\varepsilon_0}.
+\end{aligned}
+$$
+The radius cancels, so the result holds for every sphere centered on the charge. If $Q<0$ the field points inward, $E_r<0$, and the flux is negative.
+:::
+::::
+
+:::esempio{titolo="Same flux on different spheres"}
+A charge $Q=+2\,\mathrm{nC}$ is at the center of two spheres, of radii $0.10\,\mathrm{m}$ and $0.50\,\mathrm{m}$. On the first the field is $1.80\cdot10^{3}\,\mathrm{N/C}$ and the area is $0.126\,\mathrm{m^2}$. On the second the field is $71.9\,\mathrm{N/C}$ and the area is $3.14\,\mathrm{m^2}$. In both cases the product is $226\,\mathrm{N\,m^2/C}$, that is, $\dfrac{Q}{\varepsilon_0}$.
+
+::grafico{assi=0 uguale=1 unicolore=1 curve="1.6*cos(t),1.6*sin(t),0,6.28318530718" punti="0,0,pieno,Q" vettori="1.60,0.00,2.50,0.00;1.13,1.13,1.77,1.77;0.00,1.60,0.00,2.50;-1.13,1.13,-1.77,1.77;-1.60,0.00,-2.50,0.00;-1.13,-1.13,-1.77,-1.77;-0.00,-1.60,-0.00,-2.50;1.13,-1.13,1.77,-1.77" xmin=-3 xmax=3 ymin=-3 ymax=3 titolo="Charge $+Q$ at the center of a Gaussian sphere. At every point of the surface the field is parallel to the outward normal."}
+
+:::
+
+:::attenzione
+The value $\dfrac{Q}{\varepsilon_0}$ refers to the flux through a *closed* surface and does not hold for an open surface. If the charge $+2\,\mathrm{nC}$ is at the center of a sphere, a hemispherical cap occupies half the area. The field has the same magnitude and the same angle with the normal at every point, so the cap receives half the flux, that is, $113\,\mathrm{N\,m^2/C}$ and not $226\,\mathrm{N\,m^2/C}$.
+:::
+
 ## Spherical symmetry
 
 ::::teorema{#sfera titolo="Field of a spherically symmetric distribution"}
@@ -106,6 +143,43 @@ Substitution into Gauss's law gives $E_r=\dfrac{Qr}{4\pi\varepsilon_0R^3}$. At t
 
 :::
 
+:::attenzione
+Inside a charged insulating sphere, the formula for the exterior field with the total charge does not apply. For $R=0.10\,\mathrm{m}$ and $Q=1.5\,\mathrm{nC}$, at $r=0.040\,\mathrm{m}$ the formula $\dfrac{Q}{4\pi\varepsilon_0r^2}$ would give $8.43\cdot10^{3}\,\mathrm{N/C}$. The Gaussian sphere of that radius encloses only the fraction $\left(\dfrac{r}{R}\right)^3=0.064$ of the charge, so the field is $540\,\mathrm{N/C}$, about $16$ times smaller.
+:::
+
+:::richiamo{titolo="Field of a spherically symmetric distribution"}
+**Hypothesis:** the charge distribution is spherically symmetric and $Q_{\mathrm{int}}(r)$ is the charge enclosed in the sphere of radius $r$.
+
+**Conclusion:** $E_r=\dfrac{Q_{\mathrm{int}}(r)}{4\pi\varepsilon_0r^2}$.
+:::
+
+::::teorema{#guscio titolo="Field of a spherical shell"}
+A thin spherical shell of radius $R$ carries the charge $Q$ with uniform surface density $\sigma_q=\dfrac{Q}{4\pi R^2}$. The field is zero inside and, outside, coincides with that of a point charge $Q$ at the center,
+$$
+E_r=
+\begin{cases}
+0 & \text{if } r<R,\\[6pt]
+\dfrac{Q}{4\pi\varepsilon_0r^2} & \text{if } r>R.
+\end{cases}
+$$
+It is used for hollow bodies charged on the surface and for conducting spheres.
+
+:::dimostrazione
+The distribution has spherical symmetry, so $E_r=\dfrac{Q_{\mathrm{int}}(r)}{4\pi\varepsilon_0r^2}$ holds. All the charge lies on the shell. A Gaussian sphere with $r<R$ lies inside the shell and encloses no charge, so $Q_{\mathrm{int}}=0$ and $E_r=0$. A Gaussian sphere with $r>R$ contains the whole shell, so $Q_{\mathrm{int}}=Q$ and the formula for the field of a point charge is obtained.
+:::
+::::
+
+:::esempio{titolo="Charged shell"}
+A shell of radius $R=0.10\,\mathrm{m}$ carries $Q=+4\,\mathrm{nC}$. The surface density is $\sigma_q=\dfrac{Q}{4\pi R^2}=3.18\cdot10^{-8}\,\mathrm{C/m^2}$. Inside the shell the field is zero. Just outside it is $3.60\cdot10^{3}\,\mathrm{N/C}$ and at $r=0.20\,\mathrm{m}$ it is $899\,\mathrm{N/C}$, one fourth of the previous value.
+
+::grafico{f="x<1?0:1/(x^2)" xmin=0 xmax=3 ymin=0 ymax=1.25 punti="1,1,pieno;1,0,vuoto;2,0.25,pieno" nomi="r/R,E/Eₛ" legenda="\dfrac{E}{E_s}" titolo="Normalized magnitude of the field of a shell, with $E_s$ the value just outside. Inside the shell $E=0$."}
+
+:::
+
+:::osservazione
+At the shell the field magnitude jumps from zero to $\dfrac{Q}{4\pi\varepsilon_0R^2}=\dfrac{\sigma_q}{\varepsilon_0}$, which in the example is $3.60\cdot10^{3}\,\mathrm{N/C}$. The jump equals the ratio of the surface density to $\varepsilon_0$, the same value as the field just outside a conductor.
+:::
+
 ## Cylindrical symmetry and an infinite wire
 
 ::::teorema{#filo titolo="Field of an infinite straight wire"}
@@ -132,6 +206,21 @@ The length $L$ cancels. The field depends on radial distance, while the cylinder
 For a wire with $\lambda_q=1\,\mathrm{nC/m}$ at $r=0.10\,\mathrm{m}$ the magnitude is $E\simeq180\,\mathrm{N/C}$. Doubling $r$ at the same $L$ leaves the same enclosed charge and doubles the curved side's area. The field falls by half to about $90\,\mathrm{N/C}$.
 
 ::grafico{assi=0 uguale=1 linee="-2.4,-1.12 2.4,-1.12 2.4,1.12 -2.4,1.12 -2.4,-1.12" segmenti="-3.12,0,3.12,0;0,-1.12,0,0;-2.4,-1.46,2.4,-1.46" vettori="-1.5,1.13,-1.5,1.71,E;1.2,-1.13,1.2,-1.72,E;0.85,0.24,0.85,0.84,E" etichette="-0.32,-0.59,r;-0.04,-1.6,L;2.58,-0.13,wire" xmin=-3.5 xmax=3.75 ymin=-1.95 ymax=1.95 titolo="Cross-section along the axis of the Gaussian cylinder. The field crosses the curved side and stays tangent to the end caps on the left and right."}
+
+:::
+
+:::esempio{titolo="Constant flux as the radius varies"}
+A wire with $\lambda_q=2.0\,\mathrm{nC/m}$ passes through two coaxial cylinders $0.50\,\mathrm{m}$ long, of radii $0.20\,\mathrm{m}$ and $0.40\,\mathrm{m}$. Each encloses $1.0\,\mathrm{nC}$, so the flux is the same,
+$$
+\Phi_E=\frac{10^{-9}}{8.85\cdot10^{-12}}\,\mathrm{N\,m^2/C}\simeq113\,\mathrm{N\,m^2/C}.
+$$
+The areas of the curved sides are $0.628\,\mathrm{m^2}$ and $1.26\,\mathrm{m^2}$, so the field is $180\,\mathrm{N/C}$ on the first and $90\,\mathrm{N/C}$ on the second.
+:::
+
+:::osservazione
+The field of the wire decreases as $\dfrac{1}{r}$. That of a point charge or of a spherical distribution decreases as $\dfrac{1}{r^2}$. If the two magnitudes coincide at $r=r_0$, at $r=2r_0$ the wire gives half the initial value and the sphere one fourth.
+
+::grafico{f="1/x;1/(x^2)" xmin=0.2 xmax=3 ymin=0 ymax=3 punti="1,1,pieno;2,0.5,pieno;2,0.25,pieno" nomi="r/r₀,E/E₀" legenda="\dfrac{1}{r};\dfrac{1}{r^2}" titolo="Magnitudes normalized to the value $E_0$ they have at $r=r_0$. The curve that decreases more slowly is that of the wire, $\dfrac{1}{r}$."}
 
 :::
 
@@ -164,6 +253,17 @@ $$
 In the regions outside, the two magnitudes are equal and their directions are opposite. For finite plates the result is a good approximation in the central region when their separation is much smaller than their transverse dimensions.
 :::
 
+:::esempio{titolo="Field along the perpendicular to the plates"}
+Two plates with densities $+8.85\cdot10^{-9}\,\mathrm{C/m^2}$ and $-8.85\cdot10^{-9}\,\mathrm{C/m^2}$ are $2\,\mathrm{cm}$ apart. Between the plates each plane contributes $500\,\mathrm{N/C}$ in the same direction, so $E_{\mathrm{int}}=\dfrac{\sigma_q}{\varepsilon_0}=1000\,\mathrm{N/C}$. Outside, the two contributions of $500\,\mathrm{N/C}$ have opposite directions and the field is zero.
+
+::grafico{f="abs(x)<=1?1000:0" xmin=-3 xmax=3 ymin=0 ymax=1500 punti="0,1000,pieno" segmenti="-1,0,-1,1400;1,0,1,1400" etichette="-1.0,1450,+σ;1.0,1450,−σ" nomi="x,E" legenda="E" titolo="Field magnitude in $\mathrm{N/C}$ along the $x$ axis (in $\mathrm{cm}$) perpendicular to the plates, located at $x=-1\,\mathrm{cm}$ ($+\sigma_q$) and at $x=1\,\mathrm{cm}$ ($-\sigma_q$)."}
+
+:::
+
+:::attenzione
+If the two plates have the same density $+\sigma_q$, superposition gives the opposite result: between the planes the two fields have opposite directions and cancel, outside they have the same direction and add. With $\sigma_q=8.85\cdot10^{-9}\,\mathrm{C/m^2}$ the field between the planes is zero and outside it is $1000\,\mathrm{N/C}$ on both sides.
+:::
+
 ## Conductors in electrostatic equilibrium
 
 :::teorema{#conduttore titolo="Field in the metal and just outside it"}
@@ -184,10 +284,34 @@ A closed cavity inside a conductor contains a point charge $+3\,\mathrm{nC}$. A 
 With no charge in the cavity, the entire inner wall is at the same potential. The electrostatic solution with this boundary has constant potential throughout the cavity, so its electric field is zero.
 :::
 
+:::esempio{titolo="Field just outside a conductor"}
+A conductor has surface density $\sigma_q=8.85\cdot10^{-9}\,\mathrm{C/m^2}$ at a point of its surface. Just outside, the field is perpendicular to the surface and equals $\dfrac{\sigma_q}{\varepsilon_0}=1000\,\mathrm{N/C}$. An infinite insulating plane with the same density produces $\dfrac{\sigma_q}{2\varepsilon_0}=500\,\mathrm{N/C}$ on each side.
+:::
+
+:::osservazione
+The double value compared with the insulating plane is explained by superposition. The charge near the point produces $\dfrac{\sigma_q}{2\varepsilon_0}$ outward outside the metal and $\dfrac{\sigma_q}{2\varepsilon_0}$ inward inside. All the other charges produce $\dfrac{\sigma_q}{2\varepsilon_0}$ outward both inside and outside. Inside the two contributions cancel, outside they add.
+:::
+
+:::esempio{titolo="Conducting shell with a charge in the cavity"}
+A neutral conducting shell, with inner radius $0.10\,\mathrm{m}$ and outer radius $0.15\,\mathrm{m}$, has a charge $+3\,\mathrm{nC}$ at the center of the cavity. The inner wall carries $-3\,\mathrm{nC}$ and the outer surface $+3\,\mathrm{nC}$. Outside the shell the distribution has spherical symmetry and a Gaussian sphere of radius $0.30\,\mathrm{m}$ encloses the net charge $(+3-3+3)\,\mathrm{nC}=+3\,\mathrm{nC}$. The field is
+$$
+E=\frac{3\cdot10^{-9}}{4\pi\cdot8.85\cdot10^{-12}\cdot(0.30)^2}\,\mathrm{N/C}\simeq300\,\mathrm{N/C}.
+$$
+In the metal, between $0.10\,\mathrm{m}$ and $0.15\,\mathrm{m}$, the field is zero.
+:::
+
 ## When flux determines the field
 
 :::osservazione{#uso-simmetria titolo="Choosing a Gaussian surface"}
 Gauss's law holds for every closed surface. To isolate the field in the equation, the symmetry of the charge distribution must determine the normal component on parts of the surface. On a concentric sphere $E_r$ is constant. On a cylinder around the wire it is constant on the curved side and zero on the caps. For a pillbox crossing a charged plane, the normal component is constant on the caps and zero on the curved side.
 
 Moving a point charge from the center of a Gaussian sphere to another point inside leaves the enclosed charge unchanged. The field closer to the charge gets stronger, and the directions are no longer all radial relative to the sphere's center. Dividing the total flux by the area gives the average normal component, while finding the field at an individual point requires Coulomb's law.
+:::
+
+:::esempio{titolo="Zero flux and nonzero field"}
+Two charges $+2\,\mathrm{nC}$ and $-2\,\mathrm{nC}$ are $0.10\,\mathrm{m}$ apart and both are enclosed by a sphere. The net charge is zero, so the total flux is zero. At the midpoint between the charges the field is not zero. Each charge is $0.050\,\mathrm{m}$ away and the two contributions have the same direction, from the positive charge toward the negative one, so
+$$
+E=2\cdot\frac{2\cdot10^{-9}}{4\pi\cdot8.85\cdot10^{-12}\cdot(0.050)^2}\,\mathrm{N/C}\simeq1.4\cdot10^{4}\,\mathrm{N/C}.
+$$
+Gauss's law does not allow us to find this field, because the distribution has no symmetry that makes the normal component constant on a surface.
 :::

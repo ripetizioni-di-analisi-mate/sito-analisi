@@ -70,6 +70,43 @@ Un cubo in un campo uniforme può avere **flusso netto nullo con campo non nullo
 
 :::
 
+:::richiamo{titolo="Campo di una carica puntiforme"}
+**Ipotesi:** una carica puntiforme $Q$ è ferma nel vuoto e $r$ è la distanza dal punto considerato.
+
+**Tesi:** il campo è radiale e la sua componente radiale con segno vale $E_r=\dfrac{Q}{4\pi\varepsilon_0r^2}$.
+:::
+
+::::teorema{#gauss-puntiforme titolo="Flusso di una carica puntiforme su una sfera"}
+Una carica puntiforme $Q$ occupa il centro di una sfera di raggio $r$. Il flusso del campo elettrico attraverso la sfera, con le normali uscenti, vale
+$$
+\Phi_E=\frac{Q}{\varepsilon_0}
+$$
+per ogni valore di $r$. È il caso particolare del teorema di Gauss che si ricava direttamente dalla legge di Coulomb. Il flusso è indipendente dal raggio, poiché il campo diminuisce come $\dfrac{1}{r^2}$ mentre l'area della sfera cresce come $r^2$.
+
+:::dimostrazione
+In ogni punto della sfera il campo è radiale e la normale uscente è $\hat r$, quindi $\vec E\cdot\hat n=E_r$. Per la legge di Coulomb $E_r$ dipende soltanto da $r$, perciò ha lo stesso valore in tutti i punti della sfera. Il flusso è il prodotto di $E_r$ per l'area $4\pi r^2$,
+$$
+\begin{aligned}
+\Phi_E&=E_r\cdot4\pi r^2\\[6pt]
+&=\frac{Q}{4\pi\varepsilon_0r^2}\cdot4\pi r^2\\[6pt]
+&=\frac{Q}{\varepsilon_0}.
+\end{aligned}
+$$
+Il raggio si semplifica, quindi il risultato vale per ogni sfera con centro nella carica. Se $Q<0$ il campo è entrante, $E_r<0$, e il flusso è negativo.
+:::
+::::
+
+:::esempio{titolo="Stesso flusso su sfere diverse"}
+Una carica $Q=+2\,\mathrm{nC}$ è al centro di due sfere, di raggi $0{,}10\,\mathrm{m}$ e $0{,}50\,\mathrm{m}$. Sulla prima il campo vale $1{,}80\cdot10^{3}\,\mathrm{N/C}$ e l'area è $0{,}126\,\mathrm{m^2}$. Sulla seconda il campo vale $71{,}9\,\mathrm{N/C}$ e l'area è $3{,}14\,\mathrm{m^2}$. In entrambi i casi il prodotto è $226\,\mathrm{N\,m^2/C}$, cioè $\dfrac{Q}{\varepsilon_0}$.
+
+::grafico{assi=0 uguale=1 unicolore=1 curve="1.6*cos(t),1.6*sin(t),0,6.28318530718" punti="0,0,pieno,Q" vettori="1.60,0.00,2.50,0.00;1.13,1.13,1.77,1.77;0.00,1.60,0.00,2.50;-1.13,1.13,-1.77,1.77;-1.60,0.00,-2.50,0.00;-1.13,-1.13,-1.77,-1.77;-0.00,-1.60,-0.00,-2.50;1.13,-1.13,1.77,-1.77" xmin=-3 xmax=3 ymin=-3 ymax=3 titolo="Carica $+Q$ al centro di una sfera gaussiana. In ogni punto della superficie il campo è parallelo alla normale uscente."}
+
+:::
+
+:::attenzione
+Il valore $\dfrac{Q}{\varepsilon_0}$ si riferisce al flusso attraverso una superficie *chiusa* e per una superficie aperta non vale. Se la carica $+2\,\mathrm{nC}$ è al centro di una sfera, una calotta emisferica occupa metà dell'area. Il campo ha lo stesso modulo e lo stesso angolo con la normale in ogni punto, quindi la calotta riceve metà del flusso, cioè $113\,\mathrm{N\,m^2/C}$ e non $226\,\mathrm{N\,m^2/C}$.
+:::
+
 ## Simmetria sferica
 
 ::::teorema{#sfera titolo="Campo di una distribuzione sfericamente simmetrica"}
@@ -106,6 +143,43 @@ Inserendola nella formula di Gauss si trova $E_r=\dfrac{Qr}{4\pi\varepsilon_0R^3
 
 :::
 
+:::attenzione
+Dentro una sfera isolante carica la formula del campo esterno con la carica totale non si applica. Per $R=0{,}10\,\mathrm{m}$ e $Q=1{,}5\,\mathrm{nC}$, a $r=0{,}040\,\mathrm{m}$ la formula $\dfrac{Q}{4\pi\varepsilon_0r^2}$ darebbe $8{,}43\cdot10^{3}\,\mathrm{N/C}$. La sfera gaussiana di quel raggio racchiude soltanto la frazione $\left(\dfrac{r}{R}\right)^3=0{,}064$ della carica, quindi il campo vale $540\,\mathrm{N/C}$, circa $16$ volte meno.
+:::
+
+:::richiamo{titolo="Campo di una distribuzione sfericamente simmetrica"}
+**Ipotesi:** la distribuzione di carica è sfericamente simmetrica e $Q_{\mathrm{int}}(r)$ è la carica racchiusa nella sfera di raggio $r$.
+
+**Tesi:** $E_r=\dfrac{Q_{\mathrm{int}}(r)}{4\pi\varepsilon_0r^2}$.
+:::
+
+::::teorema{#guscio titolo="Campo di un guscio sferico"}
+Un guscio sferico sottile di raggio $R$ porta la carica $Q$ con densità superficiale uniforme $\sigma_q=\dfrac{Q}{4\pi R^2}$. Il campo è nullo all'interno e, all'esterno, coincide con quello di una carica puntiforme $Q$ al centro,
+$$
+E_r=
+\begin{cases}
+0 & \text{se } r<R,\\[6pt]
+\dfrac{Q}{4\pi\varepsilon_0r^2} & \text{se } r>R.
+\end{cases}
+$$
+Serve per i corpi cavi carichi in superficie e per le sfere conduttrici.
+
+:::dimostrazione
+La distribuzione ha simmetria sferica, quindi vale $E_r=\dfrac{Q_{\mathrm{int}}(r)}{4\pi\varepsilon_0r^2}$. La carica si trova tutta sul guscio. Una sfera gaussiana con $r<R$ sta dentro il guscio e non racchiude carica, quindi $Q_{\mathrm{int}}=0$ e $E_r=0$. Una sfera gaussiana con $r>R$ contiene l'intero guscio, quindi $Q_{\mathrm{int}}=Q$ e si ottiene la formula del campo di una carica puntiforme.
+:::
+::::
+
+:::esempio{titolo="Guscio carico"}
+Un guscio di raggio $R=0{,}10\,\mathrm{m}$ porta $Q=+4\,\mathrm{nC}$. La densità superficiale è $\sigma_q=\dfrac{Q}{4\pi R^2}=3{,}18\cdot10^{-8}\,\mathrm{C/m^2}$. Dentro il guscio il campo è nullo. Appena fuori vale $3{,}60\cdot10^{3}\,\mathrm{N/C}$ e a $r=0{,}20\,\mathrm{m}$ vale $899\,\mathrm{N/C}$, un quarto del valore precedente.
+
+::grafico{f="x<1?0:1/(x^2)" xmin=0 xmax=3 ymin=0 ymax=1.25 punti="1,1,pieno;1,0,vuoto;2,0.25,pieno" nomi="r/R,E/Eₛ" legenda="\dfrac{E}{E_s}" titolo="Modulo normalizzato del campo di un guscio, con $E_s$ valore appena fuori. Dentro il guscio $E=0$."}
+
+:::
+
+:::osservazione
+Sul guscio il modulo del campo passa da zero a $\dfrac{Q}{4\pi\varepsilon_0R^2}=\dfrac{\sigma_q}{\varepsilon_0}$, che nell'esempio vale $3{,}60\cdot10^{3}\,\mathrm{N/C}$. Il salto è pari al rapporto fra la densità superficiale e $\varepsilon_0$, lo stesso valore del campo appena fuori da un conduttore.
+:::
+
 ## Simmetria cilindrica e filo indefinito
 
 ::::teorema{#filo titolo="Campo di un filo rettilineo indefinito"}
@@ -132,6 +206,21 @@ Il fattore $L$ si semplifica. Il campo dipende dalla distanza radiale, mentre la
 Per un filo con $\lambda_q=1\,\mathrm{nC/m}$ e $r=0{,}10\,\mathrm{m}$ si ottiene $E\simeq180\,\mathrm{N/C}$. Raddoppiando $r$, a parità di $L$, la carica racchiusa resta la stessa e il mantello raddoppia la propria area. Il campo si dimezza a circa $90\,\mathrm{N/C}$.
 
 ::grafico{assi=0 uguale=1 linee="-2.4,-1.12 2.4,-1.12 2.4,1.12 -2.4,1.12 -2.4,-1.12" segmenti="-3.12,0,3.12,0;0,-1.12,0,0;-2.4,-1.46,2.4,-1.46" vettori="-1.5,1.13,-1.5,1.71,E;1.2,-1.13,1.2,-1.72,E;0.85,0.24,0.85,0.84,E" etichette="-0.32,-0.59,r;-0.04,-1.6,L;2.58,-0.13,filo" xmin=-3.5 xmax=3.75 ymin=-1.95 ymax=1.95 titolo="Sezione lungo l'asse del cilindro gaussiano. Il campo attraversa il mantello e rimane tangente alle basi a sinistra e destra."}
+
+:::
+
+:::esempio{titolo="Flusso costante al variare del raggio"}
+Un filo con $\lambda_q=2{,}0\,\mathrm{nC/m}$ attraversa due cilindri coassiali lunghi $0{,}50\,\mathrm{m}$, di raggi $0{,}20\,\mathrm{m}$ e $0{,}40\,\mathrm{m}$. Ciascuno racchiude $1{,}0\,\mathrm{nC}$, quindi il flusso è lo stesso,
+$$
+\Phi_E=\frac{10^{-9}}{8{,}85\cdot10^{-12}}\,\mathrm{N\,m^2/C}\simeq113\,\mathrm{N\,m^2/C}.
+$$
+Le aree dei mantelli sono $0{,}628\,\mathrm{m^2}$ e $1{,}26\,\mathrm{m^2}$, perciò il campo vale $180\,\mathrm{N/C}$ sul primo e $90\,\mathrm{N/C}$ sul secondo.
+:::
+
+:::osservazione
+Il campo del filo decresce come $\dfrac{1}{r}$. Quello di una carica puntiforme o di una distribuzione sferica decresce come $\dfrac{1}{r^2}$. Se i due moduli coincidono a $r=r_0$, a $r=2r_0$ il filo dà la metà del valore iniziale e la sfera un quarto.
+
+::grafico{f="1/x;1/(x^2)" xmin=0.2 xmax=3 ymin=0 ymax=3 punti="1,1,pieno;2,0.5,pieno;2,0.25,pieno" nomi="r/r₀,E/E₀" legenda="\dfrac{1}{r};\dfrac{1}{r^2}" titolo="Moduli normalizzati al valore $E_0$ che hanno a $r=r_0$. La curva che decresce più lentamente è quella del filo, $\dfrac{1}{r}$."}
 
 :::
 
@@ -164,6 +253,17 @@ $$
 Nelle regioni esterne i due moduli sono uguali e i versi opposti. Per lastre finite il risultato vale in buona approssimazione nella regione centrale quando la distanza fra le lastre è molto minore delle dimensioni trasversali.
 :::
 
+:::esempio{titolo="Campo lungo la perpendicolare alle armature"}
+Due armature con densità $+8{,}85\cdot10^{-9}\,\mathrm{C/m^2}$ e $-8{,}85\cdot10^{-9}\,\mathrm{C/m^2}$ distano $2\,\mathrm{cm}$. Fra le armature ciascun piano contribuisce con $500\,\mathrm{N/C}$ nello stesso verso, quindi $E_{\mathrm{int}}=\dfrac{\sigma_q}{\varepsilon_0}=1000\,\mathrm{N/C}$. Fuori i due contributi di $500\,\mathrm{N/C}$ hanno versi opposti e il campo è nullo.
+
+::grafico{f="abs(x)<=1?1000:0" xmin=-3 xmax=3 ymin=0 ymax=1500 punti="0,1000,pieno" segmenti="-1,0,-1,1400;1,0,1,1400" etichette="-1.0,1450,+σ;1.0,1450,−σ" nomi="x,E" legenda="E" titolo="Modulo del campo in $\mathrm{N/C}$ lungo l'asse $x$ (in $\mathrm{cm}$) perpendicolare alle armature, poste in $x=-1\,\mathrm{cm}$ ($+\sigma_q$) e in $x=1\,\mathrm{cm}$ ($-\sigma_q$)."}
+
+:::
+
+:::attenzione
+Se le due armature hanno la stessa densità $+\sigma_q$, la sovrapposizione dà il risultato opposto: fra i piani i due campi hanno versi opposti e si annullano, fuori hanno lo stesso verso e si sommano. Con $\sigma_q=8{,}85\cdot10^{-9}\,\mathrm{C/m^2}$ il campo fra i piani è nullo e fuori vale $1000\,\mathrm{N/C}$ da entrambi i lati.
+:::
+
 ## Conduttori in equilibrio elettrostatico
 
 :::teorema{#conduttore titolo="Campo nel metallo e appena fuori"}
@@ -184,10 +284,34 @@ Una cavità chiusa dentro un conduttore contiene una carica puntiforme $+3\,\mat
 In assenza di cariche nella cavità, tutta la parete interna è allo stesso potenziale. Per la soluzione elettrostatica con questo contorno il potenziale è costante anche nella cavità, quindi il campo vi è nullo.
 :::
 
+:::esempio{titolo="Campo appena fuori da un conduttore"}
+Un conduttore ha in un punto della superficie la densità $\sigma_q=8{,}85\cdot10^{-9}\,\mathrm{C/m^2}$. Appena fuori il campo è perpendicolare alla superficie e vale $\dfrac{\sigma_q}{\varepsilon_0}=1000\,\mathrm{N/C}$. Un piano isolante indefinito con la stessa densità produce $\dfrac{\sigma_q}{2\varepsilon_0}=500\,\mathrm{N/C}$ su ciascun lato.
+:::
+
+:::osservazione
+Il valore doppio rispetto al piano isolante si spiega con la sovrapposizione. La carica vicina al punto produce $\dfrac{\sigma_q}{2\varepsilon_0}$ verso l'esterno fuori dal metallo e $\dfrac{\sigma_q}{2\varepsilon_0}$ verso l'interno dentro. Tutte le altre cariche producono $\dfrac{\sigma_q}{2\varepsilon_0}$ verso l'esterno sia dentro sia fuori. Dentro i due contributi si compensano, fuori si sommano.
+:::
+
+:::esempio{titolo="Guscio conduttore con una carica nella cavità"}
+Un guscio conduttore neutro, con raggio interno $0{,}10\,\mathrm{m}$ e raggio esterno $0{,}15\,\mathrm{m}$, ha al centro della cavità una carica $+3\,\mathrm{nC}$. La parete interna porta $-3\,\mathrm{nC}$ e la superficie esterna $+3\,\mathrm{nC}$. Fuori dal guscio la distribuzione ha simmetria sferica e una sfera gaussiana di raggio $0{,}30\,\mathrm{m}$ racchiude la carica netta $(+3-3+3)\,\mathrm{nC}=+3\,\mathrm{nC}$. Il campo vale
+$$
+E=\frac{3\cdot10^{-9}}{4\pi\cdot8{,}85\cdot10^{-12}\cdot(0{,}30)^2}\,\mathrm{N/C}\simeq300\,\mathrm{N/C}.
+$$
+Nel metallo, fra $0{,}10\,\mathrm{m}$ e $0{,}15\,\mathrm{m}$, il campo è nullo.
+:::
+
 ## Quando il flusso permette di ricavare il campo
 
 :::osservazione{#uso-simmetria titolo="Scelta della superficie gaussiana"}
 Il teorema di Gauss vale per tutte le superfici chiuse. Per isolare il campo nell'equazione, la simmetria della distribuzione deve permettere di determinare la componente normale su parti della superficie. Su una sfera concentrica $E_r$ è costante. Su un cilindro attorno al filo è costante sul mantello e nulla sulle basi. Sul cilindro corto che attraversa un piano risulta costante sulle basi e nulla sul mantello.
 
 Se si sposta una carica puntiforme dal centro di una sfera gaussiana a un altro punto interno, la carica racchiusa resta la stessa. Il campo vicino alla carica diventa più intenso e le direzioni non sono tutte radiali rispetto al centro della sfera. Dividere il flusso totale per l'area dà la media della componente normale, mentre per conoscere i valori puntuali occorre il campo di Coulomb.
+:::
+
+:::esempio{titolo="Flusso nullo e campo non nullo"}
+Due cariche $+2\,\mathrm{nC}$ e $-2\,\mathrm{nC}$ distano $0{,}10\,\mathrm{m}$ e sono entrambe racchiuse da una sfera. La carica netta è nulla, quindi il flusso totale è nullo. Nel punto medio fra le cariche il campo non è nullo. Ciascuna carica dista $0{,}050\,\mathrm{m}$ e i due contributi hanno lo stesso verso, dalla carica positiva verso quella negativa, perciò
+$$
+E=2\cdot\frac{2\cdot10^{-9}}{4\pi\cdot8{,}85\cdot10^{-12}\cdot(0{,}050)^2}\,\mathrm{N/C}\simeq1{,}4\cdot10^{4}\,\mathrm{N/C}.
+$$
+Il teorema di Gauss non permette di ricavare questo campo, perché la distribuzione non ha una simmetria che renda costante la componente normale su una superficie.
 :::
