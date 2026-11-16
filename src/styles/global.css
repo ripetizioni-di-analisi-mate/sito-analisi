@@ -1675,3 +1675,15 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 @media (max-width: 720px) and (prefers-reduced-motion: reduce) {
   .bottoni-fissi > .pi-lancio, .bottoni-fissi > .bottone-whatsapp, .bottoni-fissi > .torna-su { transition: none; }
 }
+
+/* Pagina Sblocca: tabella «Gratis / Accesso completo» (versione B, 16/11/2026) */
+.confronto-accesso .solo-lettori { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.confronto-accesso { width: 100%; border-collapse: collapse; font-family: var(--ui); font-size: 0.93rem; margin: 1rem 0 1.3rem; }
+.confronto-accesso th, .confronto-accesso td { text-align: left; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--riga); vertical-align: top; line-height: 1.45; }
+.confronto-accesso thead th { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); font-weight: 600; border-bottom-color: transparent; }
+.confronto-accesso thead th:last-child { color: var(--azione, var(--accento)); }
+.confronto-accesso tbody th { font-weight: 600; width: 28%; }
+.confronto-accesso td { color: var(--inchiostro-2); }
+.confronto-accesso td:last-child { color: var(--inchiostro); background: color-mix(in srgb, var(--azione, var(--accento)) 9%, #fff); }
+.confronto-accesso td.uguale { color: var(--azione, var(--accento)); font-weight: 600; }
+@media (max-width: 640px) { .confronto-accesso { font-size: 0.85rem; } .confronto-accesso th, .confronto-accesso td { padding: 0.5rem 0.4rem; } .confronto-accesso tbody th { width: 30%; } }

@@ -13,6 +13,7 @@ import { materiaUsa } from '../data/stem-usa/catalog-view';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
 import { usContentCounts } from '../lib/stem-usa-banks';
 import { url } from '../lib/url';
+import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 interface Props { lingua: Lingua; materia: string; usa?: boolean }
 const { lingua, materia, usa = false } = Astro.props;
 const t = T(lingua);
@@ -26,6 +27,66 @@ const en = lingua === 'en';
 const domande = scienza || bocconi
   ? (await getCollection(bocconi && en ? 'domande_en' : 'domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
 const hrefDiagnostico = bocconi ? link(lingua, `/${materia}/simulazione#diagnostico`) : '';
+
+// Tabella «Gratis / Accesso completo» (versione B scelta da Carmine il 16/11/2026), per le materie ordinarie.
+// I numeri si contano dai contenuti, così la tabella segue da sola ogni materia.
+const tabella = !usa && !scienza && !bocconi;
+const confronto: { voce: string; gratis: string; completo: string; uguale?: boolean }[] = [];
+if (tabella) {
+  const svoltiM = (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`));
+  const svoltiGratis = svoltiM.filter((v) => v.data.gratis).length;
+  const teoria = (await getCollection(en ? 'teoria_en' : 'teoria')).filter((v) => v.id.startsWith(`${materia}/`));
+  const conta = (re: RegExp) => teoria.reduce((n, v) => n + ((v.body ?? '').match(re)?.length ?? 0), 0);
+  const nDef = conta(/^\s*:{3,4}definizione\b/gm);
+  const nTeo = conta(/^\s*:{3,4}(teorema|proposizione)\b/gm);
+  const nDim = conta(/^\s*:{3,4}dimostrazione\b/gm);
+  const nDomande = (await getCollection(en ? 'domande_en' : 'domande')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+  const nCap = m.argomenti.length;
+  const conSimulazione = nDomande > 0 && dafare > 0 && m.gruppo !== 'Concorsi' && !['tiec', 'tolc-i', 'tolc-s'].includes(materia);
+  const guidato = Boolean((STUDIO_GUIDATO as Record<string, unknown>)[materia]);
+  const capitoli = en ? `All ${nCap} chapters` : `Tutti ${/^(8|11|18|8\d)$/.test(String(nCap)) ? 'gli' : 'i'} ${nCap} capitoli`;
+  const parti = [
+    nDef && (en ? `${nDef} definitions` : `${nDef} definizioni`),
+    nTeo && (en ? `${nTeo} theorems` : `${nTeo} teoremi`),
+    nDim && (en ? `${nDim} proofs` : `${nDim} dimostrazioni`),
+  ].filter(Boolean) as string[];
+  const elenco = parti.length > 1 ? `${parti.slice(0, -1).join(', ')} ${en ? 'and' : 'e'} ${parti.at(-1)}` : parti[0];
+  confronto.push({
+    voce: en ? 'Theory' : 'Teoria',
+    gratis: en ? 'The beginning of each chapter' : "L'inizio di ogni capitolo",
+    completo: elenco ? `${capitoli}: ${elenco}` : capitoli,
+  });
+  if (svolti > 0) confronto.push({
+    voce: en ? 'Worked examples' : 'Esercizi svolti',
+    gratis: en ? `${svoltiGratis} of ${svolti} sheets, the first of each chapter` : `${svoltiGratis} schede su ${svolti}, le prime di ogni capitolo`,
+    completo: en ? `All ${svolti} sheets` : `Tutte le ${svolti} schede`,
+  });
+  if (dafare > 0) confronto.push({
+    voce: en ? 'Practice exercises' : 'Esercizi da fare',
+    gratis: en ? 'Text and answer check' : 'Testo e verifica della risposta',
+    completo: en ? `Also the solutions of all ${dafare}` : `Anche le soluzioni dei ${dafare} esercizi`,
+  });
+  if (conSimulazione) confronto.push({
+    voce: en ? 'Mock exam' : "Simulazione d'esame",
+    gratis: en ? 'The exam papers' : 'Le tracce',
+    completo: en ? 'Also the solutions' : 'Anche le soluzioni',
+  });
+  confronto.push({
+    voce: en ? 'Pi on the exercises' : 'Pi sugli esercizi',
+    gratis: en ? 'Hints on the method' : 'Indicazioni sul metodo',
+    completo: en ? 'Full explanation' : 'Spiegazione completa',
+  });
+  if (nDomande > 0) confronto.push({
+    voce: en ? 'Timed questions' : 'Domande a tempo',
+    gratis: en ? `All ${nDomande}` : `Tutte le ${nDomande}`,
+    completo: en ? `All ${nDomande}` : `Tutte le ${nDomande}`, uguale: true,
+  });
+  if (guidato) confronto.push({
+    voce: en ? 'Guided study' : 'Studio guidato',
+    gratis: en ? 'With a free account (in Italian)' : 'Con un account gratuito',
+    completo: en ? 'Yes' : 'Sì', uguale: true,
+  });
+}
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 const hrefMateria = usa ? url(courseUrl(materia)) : link(lingua, '/' + materia);
@@ -51,6 +112,14 @@ const invito = lingua === 'en' ? {
   <p class="sopratitolo">{m.titolo}</p>
   <h1>{t.sbloccaTitolo(m.titolo)}</h1>
   <p class="sommario">{t.sbloccaSommario}</p>
+  {tabella ? (
+    <table class="confronto-accesso">
+      <thead><tr><th><span class="solo-lettori">{en ? 'Feature' : 'Parte del sito'}</span></th><th scope="col">{en ? 'Free' : 'Gratis'}</th><th scope="col">{en ? 'Full access' : 'Accesso completo'}</th></tr></thead>
+      <tbody>
+        {confronto.map((r) => <tr><th scope="row">{r.voce}</th><td>{r.gratis}</td><td class:list={{ uguale: r.uguale }}>{r.completo}</td></tr>)}
+      </tbody>
+    </table>
+  ) : <>
   <ul class="cosa-include">
     {usa ? <li><strong>Lessons for all {m.argomenti.length} topics</strong></li> : <li set:html={t.includeTeoria(m.argomenti.length)} />}
     {usa ? <li><strong>{svolti} worked examples</strong> with solutions</li> : <li set:html={t.includeSvolti(svolti)} />}
@@ -71,6 +140,7 @@ const invito = lingua === 'en' ? {
     ? 'Read the beginning of each topic, open its first three worked exercise sheets and try one timed question without an account.'
     : 'Senza account puoi leggere l’inizio di ogni capitolo, aprire le prime tre schede di esercizi svolti e provare una domanda a tempo.') : t.gratisOra}</p>}
   {bocconi && <p class="gratis-ora"><a href={hrefDiagnostico}>{en ? 'Take the free diagnostic' : 'Svolgi il diagnostico gratuito'}</a></p>}
+  </>}
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
@@ -106,7 +176,8 @@ const invito = lingua === 'en' ? {
       const qui = location.pathname;
       const [rIo, rConf] = await Promise.all([fetch('/api/io').catch(() => null), fetch('/api/config').catch(() => null)]);
       let io = rIo && rIo.ok ? await rIo.json() : null;
-      const attivo = Boolean(rConf?.ok && (await rConf.json()).stripe);
+      const confOk = Boolean(rConf?.ok);
+      const attivo = Boolean(confOk && (await rConf.json().catch(() => ({}))).stripe);
       const paga = () => { location.assign(pref + '/acquisto?' + new URLSearchParams({ tipo: 'materia', slug: materia })); };
       // «Invita un amico»: riga sullo sconto (cookie dell'invito per gli ospiti, stato dell'account per gli iscritti).
       const notaInvito = document.getElementById('nota-invito');
@@ -162,6 +233,12 @@ const invito = lingua === 'en' ? {
       if (!attivo) {
         modulo.hidden = true;
         azione.hidden = false;
+        // Se il controllo del pagamento non risponde, non è vero che la materia non si può comprare.
+        if (!confOk) {
+          azione.innerHTML = `<p>${lingua === 'en' ? 'Payment is not responding right now.' : 'Il pagamento non risponde in questo momento.'}</p><button type="button" class="bottone-primario" id="riprova-pagamento">${lingua === 'en' ? 'Try again' : 'Riprova'}</button>`;
+          document.getElementById('riprova-pagamento').addEventListener('click', () => location.reload());
+          return;
+        }
         if (bocconi) {
           azione.textContent = lingua === 'en' ? 'Payment is temporarily unavailable. Please try again shortly.' : 'Il pagamento è temporaneamente indisponibile. Riprova tra poco.';
           return;
