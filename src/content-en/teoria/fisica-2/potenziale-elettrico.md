@@ -1,6 +1,6 @@
 ---
-titolo: Potenziale elettrico ed energia elettrostatica
-sommario: Perché il campo elettrostatico è conservativo, come si definiscono l'energia potenziale e il potenziale, come si calcola il potenziale di cariche puntiformi e di distribuzioni continue, come si ricava il campo dal potenziale e come la conservazione dell'energia descrive il moto delle cariche.
+titolo: Electric potential and electrostatic energy
+sommario: Why the electrostatic field is conservative, how potential energy and potential are defined, how the potential of point charges and continuous distributions is computed, how the field is obtained from the potential and how conservation of energy describes the motion of charges.
 ---
 
 ## Work done by the electric force

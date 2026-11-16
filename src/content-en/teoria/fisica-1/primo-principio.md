@@ -1,6 +1,6 @@
 ---
-titolo: Temperatura, calore e primo principio della termodinamica
-sommario: Come si misura la temperatura, come il calore cambia temperatura e stato dei corpi, come si descrive un gas perfetto e come il primo principio collega calore, lavoro ed energia interna nelle trasformazioni e nei cicli.
+titolo: Temperature, heat and the first law of thermodynamics
+sommario: How temperature is measured, how heat changes the temperature and state of bodies, how an ideal gas is described and how the first law links heat, work and internal energy in processes and cycles.
 ---
 
 ## Temperature and thermal equilibrium

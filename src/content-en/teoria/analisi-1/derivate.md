@@ -1,6 +1,6 @@
 ---
-titolo: Calcolo differenziale e Taylor
-sommario: La derivata come limite del rapporto incrementale, le regole di calcolo, i teoremi di Fermat, Rolle e Lagrange con le loro conseguenze, il teorema di de l'Hôpital e la formula di Taylor.
+titolo: Differential calculus and Taylor
+sommario: The derivative as the limit of the difference quotient, the rules of differentiation, the theorems of Fermat, Rolle and Lagrange with their consequences, de l'Hôpital's theorem and Taylor's formula.
 ---
 
 ## The derivative

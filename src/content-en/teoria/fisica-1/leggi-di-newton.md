@@ -1,6 +1,6 @@
 ---
-titolo: Leggi di Newton e forze
-sommario: I tre principi della dinamica, le forze che compaiono nei problemi di meccanica (peso, reazione vincolare, tensione, attrito, forza elastica) e il metodo per scrivere e risolvere l'equazione del moto di un corpo o di un sistema di corpi, anche nei moti circolari e nei sistemi di riferimento non inerziali.
+titolo: Newton's laws and forces
+sommario: The three laws of dynamics, the forces that appear in mechanics problems (weight, normal force, tension, friction, elastic force) and the method for writing and solving the equation of motion of a body or a system of bodies, including circular motion and non-inertial reference frames.
 ---
 
 ## Forces and Newton's first law

@@ -1,6 +1,6 @@
 ---
-titolo: Fattorizzazione, Ruffini e divisione tra polinomi
-sommario: Che cos'è un polinomio, come si sviluppano e si riconoscono i prodotti notevoli, come si esegue la divisione tra polinomi e come si scompone un polinomio in fattori con la regola di Ruffini.
+titolo: Factorisation, Ruffini's rule and polynomial division
+sommario: What a polynomial is, how to expand and recognise special products, how to divide polynomials and how to factor a polynomial with Ruffini's rule.
 ---
 
 ## Polynomials and degree

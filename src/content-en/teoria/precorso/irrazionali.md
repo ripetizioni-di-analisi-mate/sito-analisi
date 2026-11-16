@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni e disequazioni irrazionali
-sommario: Le condizioni di esistenza delle radici e i sistemi che risolvono equazioni e disequazioni con radici di indice pari e dispari.
+titolo: Irrational equations and inequalities
+sommario: The conditions of existence of roots and the systems that solve equations and inequalities with roots of even and odd index.
 ---
 
 ## Domain restrictions

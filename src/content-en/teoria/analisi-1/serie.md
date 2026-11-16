@@ -1,6 +1,6 @@
 ---
-titolo: Serie numeriche
-sommario: Che cosa significa sommare infiniti termini, con quali criteri si stabilisce il carattere di una serie, e come si studia una serie di potenze.
+titolo: Numerical series
+sommario: What it means to add infinitely many terms, which tests determine the behaviour of a series, and how a power series is studied.
 ---
 
 ## Review of sequences

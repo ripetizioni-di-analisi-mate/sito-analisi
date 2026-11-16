@@ -1,6 +1,6 @@
 ---
-titolo: Cinematica in una dimensione
-sommario: Come si descrive il moto di un punto lungo una retta con la legge oraria, la velocità e l'accelerazione, come si risolvono il moto uniforme, il moto uniformemente accelerato e la caduta dei gravi, e come si ricava la posizione dai grafici e dall'accelerazione.
+titolo: Kinematics in one dimension
+sommario: How the motion of a point along a line is described by the position function, the velocity and the acceleration, how uniform motion, uniformly accelerated motion and free fall are solved, and how the position is obtained from graphs and from the acceleration.
 ---
 
 ## Reference frame and position as a function of time

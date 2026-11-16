@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni e disequazioni con il valore assoluto
-sommario: La definizione per casi del valore assoluto, le sue proprietà, e i sistemi che risolvono equazioni e disequazioni con uno o più moduli.
+titolo: Equations and inequalities with absolute value
+sommario: The piecewise definition of absolute value, its properties, and the systems that solve equations and inequalities with one or more absolute values.
 ---
 
 ## Definition and geometric meaning

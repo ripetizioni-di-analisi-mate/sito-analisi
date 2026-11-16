@@ -1,6 +1,6 @@
 ---
-titolo: Gravitazione
-sommario: La legge di gravitazione universale, il campo e l'energia potenziale gravitazionale, la variazione di g con la quota, le orbite circolari dei satelliti, la velocità di fuga e le leggi di Keplero ricavate dalla dinamica.
+titolo: Gravitation
+sommario: The law of universal gravitation, the gravitational field and potential energy, the variation of g with altitude, the circular orbits of satellites, the escape velocity and Kepler's laws derived from dynamics.
 ---
 
 ## Law of universal gravitation

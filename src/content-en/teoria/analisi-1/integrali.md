@@ -1,6 +1,6 @@
 ---
-titolo: Calcolo integrale
-sommario: Le primitive e le tecniche di integrazione, l'integrale definito secondo Riemann con il teorema fondamentale del calcolo, e il calcolo delle aree.
+titolo: Integral calculus
+sommario: Antiderivatives and integration techniques, the Riemann definite integral with the fundamental theorem of calculus, and the computation of areas.
 ---
 
 ## Antiderivatives and indefinite integral

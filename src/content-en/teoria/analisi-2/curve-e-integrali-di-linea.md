@@ -1,6 +1,6 @@
 ---
-titolo: Curve e integrali di linea
-sommario: Curve parametriche nel piano e nello spazio, regolarità e vettore tangente, lunghezza e ascissa curvilinea, integrali di linea di prima e di seconda specie con le applicazioni a massa, baricentro e lavoro.
+titolo: Curves and line integrals
+sommario: Parametric curves in the plane and in space, regularity and tangent vector, length and arc length parameter, line integrals of the first and second kind with applications to mass, centroid and work.
 ---
 
 ## Parametric curves

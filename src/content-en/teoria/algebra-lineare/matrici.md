@@ -1,6 +1,6 @@
 ---
-titolo: Matrici e operazioni tra matrici
-sommario: Le matrici e i loro tipi, somma, prodotto righe per colonne, trasposta e potenze, la matrice inversa, la riduzione a scala per righe e il calcolo dell'inversa con il metodo di Gauss-Jordan.
+titolo: Matrices and matrix operations
+sommario: Matrices and their types, sum, row-by-column product, transpose and powers, the inverse matrix, row reduction to echelon form and the computation of the inverse with the Gauss-Jordan method.
 ---
 
 ## Matrices and notation

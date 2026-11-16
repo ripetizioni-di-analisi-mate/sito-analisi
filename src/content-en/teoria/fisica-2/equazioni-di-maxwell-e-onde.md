@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni di Maxwell e onde elettromagnetiche
-sommario: Come la corrente di spostamento completa la legge di Ampère, quali sono le quattro equazioni di Maxwell, perché da esse seguono onde che si propagano alla velocità della luce, e quanta energia e quantità di moto queste onde trasportano.
+titolo: Maxwell's equations and electromagnetic waves
+sommario: How the displacement current completes Ampère's law, what the four Maxwell equations are, why they imply waves travelling at the speed of light, and how much energy and momentum these waves carry.
 ---
 
 ## Displacement current

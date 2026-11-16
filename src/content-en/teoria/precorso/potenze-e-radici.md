@@ -1,6 +1,6 @@
 ---
-titolo: Potenze e radici
-sommario: Le potenze a esponente intero, razionale e reale con le loro proprietà, le radici n-esime con le condizioni di esistenza, la razionalizzazione e il confronto tra potenze e tra radici.
+titolo: Powers and roots
+sommario: Powers with integer, rational and real exponents and their properties, n-th roots with their conditions of existence, rationalisation and the comparison of powers and of roots.
 ---
 
 ## Powers with natural number and integer exponents

@@ -1,6 +1,6 @@
 ---
-titolo: Successioni e serie di funzioni
-sommario: La convergenza puntuale e la convergenza uniforme di una successione di funzioni, i teoremi di passaggio per continuità, integrale e derivata, e la convergenza totale per le serie di funzioni.
+titolo: Sequences and series of functions
+sommario: Pointwise and uniform convergence of a sequence of functions, the theorems on passing to the limit for continuity, integral and derivative, and total convergence for series of functions.
 ---
 
 ## Sequences of functions and pointwise convergence

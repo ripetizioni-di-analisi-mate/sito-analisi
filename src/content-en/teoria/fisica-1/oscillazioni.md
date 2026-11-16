@@ -1,6 +1,6 @@
 ---
-titolo: Oscillazioni e moto armonico
-sommario: Che cos'è il moto armonico semplice, come lo si riconosce dall'equazione $\ddot{x} = -\omega^2 x$, come si calcolano periodo ed energia della molla e dei pendoli, e come smorzamento e forzante portano alla risonanza.
+titolo: Oscillations and harmonic motion
+sommario: What simple harmonic motion is, how to recognise it from the equation $\ddot{x} = -\omega^2 x$, how to compute the period and energy of the spring and of pendulums, and how damping and a driving force lead to resonance.
 ---
 
 ## Periodic motion and simple harmonic motion

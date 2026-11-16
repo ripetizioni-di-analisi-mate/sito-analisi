@@ -1,6 +1,6 @@
 ---
-titolo: Sorgenti del campo magnetico
-sommario: Come le correnti producono il campo magnetico, dalla legge di Biot-Savart ai campi di fili, spire e archi, alla forza tra fili paralleli e alla definizione dell'ampere, fino alla legge di Ampère con le sue applicazioni a filo, cavo coassiale, solenoide e toroide, al flusso del campo magnetico e a un cenno ai materiali magnetici.
+titolo: Sources of the magnetic field
+sommario: How currents produce the magnetic field, from the Biot-Savart law to the fields of wires, loops and arcs, the force between parallel wires and the definition of the ampere, up to Ampère's law and its applications to the wire, the coaxial cable, the solenoid and the toroid, the flux of the magnetic field and a brief look at magnetic materials.
 ---
 
 ## Biot-Savart law

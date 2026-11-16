@@ -1,6 +1,6 @@
 ---
-titolo: Vettori nel piano e nello spazio
-sommario: Che cos'è un vettore geometrico, come si opera con le componenti, come prodotto scalare, prodotto vettoriale e prodotto misto misurano angoli, aree e volumi e riconoscono ortogonalità, parallelismo e complanarità.
+titolo: Vectors in the plane and in space
+sommario: What a geometric vector is, how to work with components, how the dot product, the cross product and the scalar triple product measure angles, areas and volumes and detect orthogonality, parallelism and coplanarity.
 ---
 
 ## Geometric vectors and operations

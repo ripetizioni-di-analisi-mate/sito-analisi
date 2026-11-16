@@ -1,6 +1,6 @@
 ---
-titolo: Studio di funzione
-sommario: Lo schema completo dello studio, i criteri per massimi, minimi e flessi, la convessità e la costruzione del grafico qualitativo.
+titolo: Curve sketching
+sommario: The complete scheme of curve sketching, the tests for maxima, minima and inflection points, convexity and the construction of the qualitative graph.
 ---
 
 ## The steps in curve sketching

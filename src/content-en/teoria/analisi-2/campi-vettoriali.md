@@ -1,6 +1,6 @@
 ---
-titolo: Campi vettoriali e teorema di Green
-sommario: Campi vettoriali nel piano e nello spazio, lavoro lungo una curva, campi conservativi e potenziale, campi irrotazionali e domini semplicemente connessi, teorema di Green e calcolo di aree.
+titolo: Vector fields and Green's theorem
+sommario: Vector fields in the plane and in space, work along a curve, conservative fields and potential, irrotational fields and simply connected domains, Green's theorem and the computation of areas.
 ---
 
 ## Vector fields

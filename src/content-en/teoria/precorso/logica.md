@@ -1,6 +1,6 @@
 ---
-titolo: Logica elementare
-sommario: Che cosa è una proposizione, come si combinano le proposizioni con i connettivi, come si negano le frasi con i quantificatori e come sono costruite le dimostrazioni.
+titolo: Elementary logic
+sommario: What a proposition is, how propositions are combined with connectives, how sentences with quantifiers are negated and how proofs are built.
 ---
 
 ## Propositions

@@ -1,6 +1,6 @@
 ---
-titolo: Conduttori, condensatori e dielettrici
-sommario: Perché in un conduttore in equilibrio il campo interno è nullo e la carica sta in superficie, come si calcola la capacità dei condensatori piano, sferico e cilindrico e dei loro collegamenti, quanta energia immagazzina il campo elettrico e come un dielettrico modifica capacità, campo ed energia.
+titolo: Conductors, capacitors and dielectrics
+sommario: Why in a conductor in equilibrium the internal field is zero and the charge lies on the surface, how to compute the capacitance of parallel-plate, spherical and cylindrical capacitors and of their combinations, how much energy the electric field stores and how a dielectric changes capacitance, field and energy.
 ---
 
 ## Conductors in electrostatic equilibrium

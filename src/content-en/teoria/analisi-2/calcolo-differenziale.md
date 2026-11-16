@@ -1,6 +1,6 @@
 ---
-titolo: Calcolo differenziale in più variabili
-sommario: Derivate parziali e gradiente, differenziabilità e piano tangente, derivate direzionali e formula del gradiente, regola della catena, derivate seconde e formula di Taylor al secondo ordine.
+titolo: Differential calculus in several variables
+sommario: Partial derivatives and gradient, differentiability and tangent plane, directional derivatives and the gradient formula, chain rule, second derivatives and second-order Taylor formula.
 ---
 
 ## Partial derivatives and gradient

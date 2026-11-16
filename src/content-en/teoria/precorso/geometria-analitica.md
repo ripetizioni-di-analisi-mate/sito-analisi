@@ -1,6 +1,6 @@
 ---
-titolo: Geometria analitica e coniche
-sommario: Punti e rette nel piano cartesiano, poi parabola, circonferenza, ellisse e iperbole, con il metodo per riconoscere una conica dalla sua equazione e disegnarla.
+titolo: Analytic geometry and conics
+sommario: Points and lines in the Cartesian plane, then parabola, circle, ellipse and hyperbola, with the method for recognising a conic from its equation and drawing it.
 ---
 
 ## The Cartesian plane

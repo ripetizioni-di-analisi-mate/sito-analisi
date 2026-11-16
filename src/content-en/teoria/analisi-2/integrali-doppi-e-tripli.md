@@ -1,6 +1,6 @@
 ---
-titolo: Integrali doppi e tripli
-sommario: Come si integra una funzione di due o tre variabili, come un integrale multiplo si riduce a integrali semplici, come i cambiamenti di variabile semplificano il dominio, e come si calcolano aree, volumi, masse e baricentri.
+titolo: Double and triple integrals
+sommario: How to integrate a function of two or three variables, how a multiple integral is reduced to single integrals, how changes of variables simplify the domain, and how areas, volumes, masses and centroids are computed.
 ---
 
 ## The double integral over rectangles
