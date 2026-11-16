@@ -1,6 +1,6 @@
 ---
-titolo: Grandezze fisiche, unità di misura e vettori
-sommario: Come si misura una grandezza fisica nel Sistema Internazionale, come si controllano formule e risultati con l'analisi dimensionale e le cifre significative, e come si opera con i vettori che descrivono spostamenti, forze, lavoro e momenti.
+titolo: Physical quantities, units and vectors
+sommario: How a physical quantity is measured in the International System, how formulas and results are checked with dimensional analysis and significant figures, and how to work with the vectors that describe displacements, forces, work and torques.
 ---
 
 ## Physical quantities and measurement

@@ -1,6 +1,6 @@
 ---
-titolo: Applicazioni lineari
-sommario: Le funzioni tra spazi vettoriali che conservano somme e prodotti per scalare, la matrice che le rappresenta, nucleo e immagine, il teorema della dimensione, gli isomorfismi, la composizione e il cambiamento di base.
+titolo: Linear maps
+sommario: Functions between vector spaces that preserve sums and scalar multiples, the matrix that represents them, kernel and image, the rank-nullity theorem, isomorphisms, composition and change of basis.
 ---
 
 ## Definition and examples

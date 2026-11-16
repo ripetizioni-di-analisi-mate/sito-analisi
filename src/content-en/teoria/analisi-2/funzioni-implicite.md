@@ -1,6 +1,6 @@
 ---
-titolo: Funzioni implicite
-sommario: Quando un'equazione F(x, y) = 0 definisce una funzione y = φ(x), come si calcolano le derivate di φ senza conoscerla, e come il risultato si estende alle superfici e ai sistemi.
+titolo: Implicit functions
+sommario: When an equation F(x, y) = 0 defines a function y = φ(x), how the derivatives of φ are computed without knowing it, and how the result extends to surfaces and systems.
 ---
 
 ## The problem

@@ -1,6 +1,6 @@
 ---
-titolo: Serie di potenze e serie di Taylor
-sommario: Dove converge una serie di potenze, come si calcolano il raggio e l'insieme di convergenza, come si deriva e si integra termine a termine, e come gli sviluppi di Taylor rappresentano le funzioni elementari.
+titolo: Power series and Taylor series
+sommario: Where a power series converges, how the radius and the set of convergence are computed, how to differentiate and integrate term by term, and how Taylor expansions represent the elementary functions.
 ---
 
 ## Power series and radius of convergence

@@ -1,6 +1,6 @@
 ---
-titolo: Ottica geometrica e ondulatoria
-sommario: Come la luce si riflette e si rifrange secondo le leggi di Snell, come specchi e lenti sottili formano le immagini, e come interferenza, diffrazione e polarizzazione rivelano la natura ondulatoria della luce.
+titolo: Geometrical and wave optics
+sommario: How light is reflected and refracted according to Snell's laws, how mirrors and thin lenses form images, and how interference, diffraction and polarisation reveal the wave nature of light.
 ---
 
 ## Light, rays and index of refraction

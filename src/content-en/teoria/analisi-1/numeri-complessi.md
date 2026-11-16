@@ -1,6 +1,6 @@
 ---
-titolo: Numeri complessi
-sommario: Che cosa sono i numeri complessi, come si rappresentano in forma algebrica, trigonometrica ed esponenziale, come si calcolano potenze e radici, e come si risolvono le equazioni in campo complesso.
+titolo: Complex numbers
+sommario: What complex numbers are, how they are represented in algebraic, trigonometric and exponential form, how powers and roots are computed, and how equations are solved over the complex numbers.
 ---
 
 ## Definition and algebraic form

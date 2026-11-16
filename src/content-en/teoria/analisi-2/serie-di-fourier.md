@@ -1,6 +1,6 @@
 ---
-titolo: Serie di Fourier
-sommario: Come una funzione periodica si sviluppa in serie di seni e coseni, come si calcolano i coefficienti, in quali punti e in che senso la serie converge, e come l'uguaglianza di Parseval lega la funzione ai suoi coefficienti.
+titolo: Fourier series
+sommario: How a periodic function is expanded in a series of sines and cosines, how the coefficients are computed, at which points and in what sense the series converges, and how Parseval's identity relates the function to its coefficients.
 ---
 
 ## Periodic functions and trigonometric polynomials

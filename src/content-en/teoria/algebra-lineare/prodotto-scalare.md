@@ -1,6 +1,6 @@
 ---
-titolo: Prodotto scalare, ortogonalità e teorema spettrale
-sommario: Il prodotto scalare standard, la norma e gli angoli, le basi ortonormali, le proiezioni ortogonali con il procedimento di Gram-Schmidt, le matrici ortogonali e la diagonalizzazione ortogonale delle matrici simmetriche.
+titolo: Inner product, orthogonality and the spectral theorem
+sommario: The standard inner product, norm and angles, orthonormal bases, orthogonal projections with the Gram-Schmidt process, orthogonal matrices and the orthogonal diagonalisation of symmetric matrices.
 ---
 
 ## Standard inner product and norm

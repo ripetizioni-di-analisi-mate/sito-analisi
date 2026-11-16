@@ -1,6 +1,6 @@
 ---
-titolo: Secondo principio, macchine termiche ed entropia
-sommario: Come il secondo principio limita la trasformazione di calore in lavoro, perché il ciclo di Carnot fissa il rendimento massimo tra due temperature e come l'entropia misura l'irreversibilità delle trasformazioni.
+titolo: Second law, heat engines and entropy
+sommario: How the second law limits the conversion of heat into work, why the Carnot cycle sets the maximum efficiency between two temperatures and how entropy measures the irreversibility of processes.
 ---
 
 ## Reversible and irreversible processes

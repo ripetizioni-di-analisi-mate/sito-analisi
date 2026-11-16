@@ -1,6 +1,6 @@
 ---
-titolo: Lavoro ed energia
-sommario: Come si calcola il lavoro di una forza costante o variabile, che cosa misura la potenza, come il teorema dell'energia cinetica e la conservazione dell'energia meccanica danno le velocità senza risolvere le equazioni del moto, e come una curva di energia potenziale descrive moto ed equilibrio.
+titolo: Work and energy
+sommario: How to compute the work of a constant or variable force, what power measures, how the work-energy theorem and the conservation of mechanical energy give speeds without solving the equations of motion, and how a potential energy curve describes motion and equilibrium.
 ---
 
 ## Work of a constant force

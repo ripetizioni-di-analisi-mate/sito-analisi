@@ -1,6 +1,6 @@
 ---
-titolo: Spazi vettoriali, basi e dimensione
-sommario: La struttura comune a vettori, matrici e polinomi, i sottospazi descritti con generatori o con equazioni, le basi, la dimensione e la formula di Grassmann per somma e intersezione.
+titolo: Vector spaces, bases and dimension
+sommario: The structure shared by vectors, matrices and polynomials, subspaces described by generators or by equations, bases, dimension and Grassmann's formula for sum and intersection.
 ---
 
 ## Vector spaces

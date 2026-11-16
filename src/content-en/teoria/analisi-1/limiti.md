@@ -1,6 +1,6 @@
 ---
-titolo: Limiti e continuità
-sommario: Che cosa significa che una funzione tende a un valore, come si calcolano i limiti, quali teoremi li governano, e che cosa aggiunge la continuità.
+titolo: Limits and continuity
+sommario: What it means for a function to tend to a value, how limits are computed, which theorems govern them, and what continuity adds.
 ---
 
 ## Neighborhoods and accumulation points

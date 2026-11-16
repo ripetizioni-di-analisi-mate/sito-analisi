@@ -1,6 +1,6 @@
 ---
-titolo: Flusso del campo elettrico e legge di Gauss
-sommario: Che cosa misura il flusso del campo elettrico attraverso una superficie, perché il flusso uscente da una superficie chiusa dipende solo dalla carica racchiusa, come la legge di Gauss dà il campo delle distribuzioni con simmetria sferica, cilindrica e piana, e qual è la sua forma locale.
+titolo: Flux of the electric field and Gauss's law
+sommario: What the flux of the electric field through a surface measures, why the outward flux through a closed surface depends only on the enclosed charge, how Gauss's law gives the field of distributions with spherical, cylindrical and planar symmetry, and what its local form is.
 ---
 
 ## Electric flux

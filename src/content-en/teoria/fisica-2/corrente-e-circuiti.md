@@ -1,6 +1,6 @@
 ---
-titolo: Corrente elettrica e circuiti in corrente continua
-sommario: Che cosa sono l'intensità e la densità di corrente, come la legge di Ohm e la resistività legano corrente e tensione, quanta potenza dissipa un resistore, come si risolve un circuito con generatori reali, resistori in serie e in parallelo e leggi di Kirchhoff, e come si caricano e si scaricano i condensatori in un circuito RC.
+titolo: Electric current and direct-current circuits
+sommario: What current and current density are, how Ohm's law and resistivity relate current and voltage, how much power a resistor dissipates, how to solve a circuit with real sources, resistors in series and in parallel and Kirchhoff's laws, and how capacitors charge and discharge in an RC circuit.
 ---
 
 ## Electric current and current density

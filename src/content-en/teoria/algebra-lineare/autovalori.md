@@ -1,6 +1,6 @@
 ---
-titolo: Autovalori, autovettori e diagonalizzazione
-sommario: Come si calcolano autovalori e autospazi di una matrice o di un endomorfismo, quando una matrice è diagonalizzabile e come si costruisce la matrice diagonalizzante, con le applicazioni alle potenze e alle matrici con parametro.
+titolo: Eigenvalues, eigenvectors and diagonalisation
+sommario: How to compute the eigenvalues and eigenspaces of a matrix or of an endomorphism, when a matrix is diagonalisable and how the diagonalising matrix is built, with applications to powers and to matrices with a parameter.
 ---
 
 ## Eigenvalues and eigenvectors

@@ -1,6 +1,6 @@
 ---
-titolo: Funzioni di più variabili
-sommario: Lo spazio ℝⁿ con norma, distanza e intorni, gli insiemi del piano, le funzioni di due o più variabili con dominio e insiemi di livello, i limiti in due variabili, la continuità e il teorema di Weierstrass.
+titolo: Functions of several variables
+sommario: The space ℝⁿ with norm, distance and neighbourhoods, sets in the plane, functions of two or more variables with domain and level sets, limits in two variables, continuity and the Weierstrass theorem.
 ---
 
 ## The space ℝⁿ

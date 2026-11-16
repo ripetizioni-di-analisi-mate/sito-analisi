@@ -1,6 +1,6 @@
 ---
-titolo: Meccanica dei fluidi
-sommario: Come densità e pressione descrivono un fluido, come la legge di Stevino, il principio di Pascal e il principio di Archimede spiegano i liquidi in quiete e il galleggiamento, e come l'equazione di continuità e il teorema di Bernoulli descrivono i fluidi in moto.
+titolo: Fluid mechanics
+sommario: How density and pressure describe a fluid, how Stevin's law, Pascal's principle and Archimedes' principle explain liquids at rest and floating, and how the continuity equation and Bernoulli's theorem describe fluids in motion.
 ---
 
 ## Density and pressure

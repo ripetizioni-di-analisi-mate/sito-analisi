@@ -1,6 +1,6 @@
 ---
-titolo: Insiemi, induzione e funzioni elementari
-sommario: Il linguaggio degli insiemi e gli insiemi numerici da N a R, il principio di induzione e il binomio di Newton, poi le funzioni elementari con i loro grafici, il bagaglio di partenza per tutta l'analisi.
+titolo: Sets, induction and elementary functions
+sommario: The language of sets and the number sets from N to R, the principle of induction and the binomial theorem, then the elementary functions with their graphs, the starting toolkit for all of analysis.
 ---
 
 ## The language of sets

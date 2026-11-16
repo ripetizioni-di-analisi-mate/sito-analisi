@@ -1,6 +1,6 @@
 ---
-titolo: Sistemi di punti, quantità di moto e urti
-sommario: Come quantità di moto, impulso e centro di massa descrivono i sistemi di più corpi, perché in assenza di forze esterne la quantità di moto totale si conserva e come questa legge, insieme all'energia, risolve urti, esplosioni e il moto di un razzo.
+titolo: Systems of particles, momentum and collisions
+sommario: How momentum, impulse and the centre of mass describe systems of several bodies, why the total momentum is conserved when there are no external forces and how this law, together with energy, solves collisions, explosions and the motion of a rocket.
 ---
 
 ## Momentum of a particle

@@ -1,6 +1,6 @@
 ---
-titolo: "Moto nel piano: proiettile e moto circolare"
-sommario: Come posizione, velocità e accelerazione diventano vettori nel piano, come si descrivono il moto del proiettile e il moto circolare uniforme e non uniforme, e come cambiano velocità e traiettorie passando da un sistema di riferimento a un altro in moto traslatorio.
+titolo: "Motion in the plane: projectile and circular motion"
+sommario: How position, velocity and acceleration become vectors in the plane, how projectile motion and uniform and non-uniform circular motion are described, and how velocities and trajectories change from one reference frame to another in translational motion.
 ---
 
 ## Position, velocity and acceleration vectors

@@ -1,6 +1,6 @@
 ---
-titolo: Superfici, flussi e teoremi di Gauss e Stokes
-sommario: Superfici parametriche regolari, vettore normale e area, integrali di superficie e flusso di un campo, divergenza e rotore, teorema della divergenza e teorema di Stokes.
+titolo: Surfaces, fluxes and the theorems of Gauss and Stokes
+sommario: Regular parametric surfaces, normal vector and area, surface integrals and flux of a field, divergence and curl, divergence theorem and Stokes' theorem.
 ---
 
 ## Parametric surfaces

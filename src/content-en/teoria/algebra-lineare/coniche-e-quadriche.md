@@ -1,6 +1,6 @@
 ---
-titolo: Coniche e quadriche
-sommario: Come si scrive la matrice di una conica o di una quadrica, come si classifica con gli invarianti e come si riduce a forma canonica con una rotazione e una traslazione, usando autovalori e autovettori.
+titolo: Conics and quadrics
+sommario: How to write the matrix of a conic or of a quadric, how to classify it with the invariants and how to reduce it to canonical form with a rotation and a translation, using eigenvalues and eigenvectors.
 ---
 
 ## Ellipse, hyperbola and parabola

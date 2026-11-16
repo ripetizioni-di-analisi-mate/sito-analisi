@@ -1,6 +1,6 @@
 ---
-titolo: Rette e piani nello spazio
-sommario: Equazioni di piani e rette nello spazio, posizioni reciproche, angoli, distanze, proiezioni ortogonali, fasci di piani e retta di minima distanza tra due rette sghembe.
+titolo: Lines and planes in space
+sommario: Equations of planes and lines in space, relative positions, angles, distances, orthogonal projections, pencils of planes and the line of minimum distance between two skew lines.
 ---
 
 ## The plane: Cartesian equation and normal vector

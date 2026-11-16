@@ -1,6 +1,6 @@
 ---
-titolo: Determinante e matrice inversa
-sommario: Come si calcola il determinante di una matrice quadrata, quali proprietà permettono di semplificarne il calcolo e come il determinante decide l'invertibilità e fornisce la formula dell'inversa.
+titolo: Determinant and inverse matrix
+sommario: How to compute the determinant of a square matrix, which properties simplify the computation and how the determinant decides invertibility and gives the formula for the inverse.
 ---
 
 ## Determinants of orders 2 and 3

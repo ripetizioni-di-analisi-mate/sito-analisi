@@ -1,6 +1,6 @@
 ---
-titolo: Oscillazioni elettriche e circuiti in corrente alternata
-sommario: Come oscilla la carica in un circuito LC e come le oscillazioni si smorzano in un circuito RLC, come resistori, condensatori e induttori rispondono a una tensione sinusoidale, come fasori e impedenza danno corrente e sfasamento, che cosa sono la risonanza e il fattore di potenza, e come un trasformatore cambia la tensione alternata.
+titolo: Electrical oscillations and alternating-current circuits
+sommario: How the charge oscillates in an LC circuit and how the oscillations are damped in an RLC circuit, how resistors, capacitors and inductors respond to a sinusoidal voltage, how phasors and impedance give current and phase shift, what resonance and the power factor are, and how a transformer changes an alternating voltage.
 ---
 
 ## LC circuit and electrical oscillations

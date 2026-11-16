@@ -1,6 +1,6 @@
 ---
-titolo: Sistemi lineari e rango
-sommario: Come si scrive un sistema lineare in forma matriciale, come si calcola il rango, quando un sistema ha soluzioni e quante, come si risolve con Gauss o con Cramer e come si discute al variare di un parametro.
+titolo: Linear systems and rank
+sommario: How to write a linear system in matrix form, how to compute the rank, when a system has solutions and how many, how to solve it with Gauss or Cramer and how to discuss it as a parameter varies.
 ---
 
 ## Linear systems and matrix form

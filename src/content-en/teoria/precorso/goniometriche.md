@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni e disequazioni goniometriche
-sommario: Seno, coseno e tangente sulla circonferenza goniometrica, le identità che li legano e i metodi risolutivi per ogni tipo di equazione e disequazione goniometrica.
+titolo: Trigonometric equations and inequalities
+sommario: Sine, cosine and tangent on the unit circle, the identities that relate them and the solution methods for every type of trigonometric equation and inequality.
 ---
 
 ## The unit circle

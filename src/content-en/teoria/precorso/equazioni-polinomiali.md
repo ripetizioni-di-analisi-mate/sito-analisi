@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni e disequazioni polinomiali e fratte
-sommario: Come si risolvono le equazioni di primo e secondo grado, come si abbassa il grado con la fattorizzazione, come si trattano equazioni e disequazioni fratte a partire dalle condizioni di esistenza, e come si studiano le disequazioni con il segno della parabola, la tabella dei segni e i sistemi.
+titolo: Polynomial and rational equations and inequalities
+sommario: How to solve equations of the first and second degree, how to lower the degree by factoring, how to handle rational equations and inequalities starting from the conditions of existence, and how to study inequalities with the sign of the parabola, the sign table and systems.
 ---
 
 ## Linear equations

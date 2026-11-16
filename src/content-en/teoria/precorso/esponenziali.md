@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni e disequazioni esponenziali
-sommario: La funzione a^x con le sue proprietà, e i metodi per risolvere equazioni e disequazioni in cui l'incognita compare all'esponente.
+titolo: Exponential equations and inequalities
+sommario: The function a^x with its properties, and the methods for solving equations and inequalities in which the unknown appears in the exponent.
 ---
 
 ## The exponential function

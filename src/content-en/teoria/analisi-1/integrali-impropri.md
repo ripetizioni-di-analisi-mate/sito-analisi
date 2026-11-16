@@ -1,6 +1,6 @@
 ---
-titolo: Integrali impropri
-sommario: Come si estende l'integrale a intervalli illimitati e a funzioni illimitate, quali integrali campione fanno da riferimento e come i criteri del confronto stabiliscono la convergenza senza calcolare una primitiva.
+titolo: Improper integrals
+sommario: How the integral is extended to unbounded intervals and unbounded functions, which model integrals serve as references and how the comparison tests establish convergence without computing an antiderivative.
 ---
 
 ## Integral over an unbounded interval

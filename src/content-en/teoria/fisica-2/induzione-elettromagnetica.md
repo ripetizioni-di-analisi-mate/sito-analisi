@@ -1,6 +1,6 @@
 ---
-titolo: Induzione elettromagnetica
-sommario: Come la variazione del flusso magnetico concatenato con un circuito genera una forza elettromotrice, come si calcolano la f.e.m. di una sbarretta in moto e di una spira rotante, che cosa sono l'induttanza e il circuito RL, e dove si trova l'energia del campo magnetico.
+titolo: Electromagnetic induction
+sommario: How a change in the magnetic flux linked with a circuit produces an electromotive force, how to compute the emf of a moving rod and of a rotating loop, what inductance and the RL circuit are, and where the energy of the magnetic field is stored.
 ---
 
 ## Flux linkage and the Faraday-Neumann-Lenz law

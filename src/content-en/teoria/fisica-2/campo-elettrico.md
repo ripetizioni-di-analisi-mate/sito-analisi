@@ -1,6 +1,6 @@
 ---
-titolo: Campo elettrico
-sommario: Come si definisce il campo elettrico, come si calcola per cariche puntiformi, per il dipolo e per distribuzioni continue come il filo, l'anello, il disco e il piano, come lo descrivono le linee di campo e come si muove una carica in un campo uniforme.
+titolo: Electric field
+sommario: How the electric field is defined, how it is computed for point charges, for the dipole and for continuous distributions such as the wire, the ring, the disc and the plane, how field lines describe it and how a charge moves in a uniform field.
 ---
 
 ## Definition of the electric field

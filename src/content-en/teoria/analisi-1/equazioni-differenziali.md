@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni differenziali
-sommario: Che cosa sono le equazioni differenziali e il problema di Cauchy, i metodi risolutivi per il primo ordine e per il secondo ordine a coefficienti costanti.
+titolo: Differential equations
+sommario: What differential equations and the Cauchy problem are, and the solution methods for first-order equations and for second-order equations with constant coefficients.
 ---
 
 ## Differential equations and the initial value problem

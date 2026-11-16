@@ -1,6 +1,6 @@
 ---
-titolo: Massimi e minimi liberi e vincolati
-sommario: Dove cercare gli estremi di una funzione di più variabili, come classificarli con la matrice Hessiana, come trattare i compatti e i vincoli con i moltiplicatori di Lagrange.
+titolo: Free and constrained maxima and minima
+sommario: Where to look for the extrema of a function of several variables, how to classify them with the Hessian matrix, how to handle compact sets and constraints with Lagrange multipliers.
 ---
 
 ## Unconstrained maxima and minima

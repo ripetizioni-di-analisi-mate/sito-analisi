@@ -1,6 +1,6 @@
 ---
-titolo: Equazioni e disequazioni logaritmiche
-sommario: Il logaritmo come esponente, le sue proprietà e la sua funzione, e i metodi per risolvere equazioni e disequazioni logaritmiche a partire dalle condizioni di esistenza.
+titolo: Logarithmic equations and inequalities
+sommario: The logarithm as an exponent, its properties and its function, and the methods for solving logarithmic equations and inequalities starting from the conditions of existence.
 ---
 
 ## The logarithm

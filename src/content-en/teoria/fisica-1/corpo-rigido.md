@@ -1,6 +1,6 @@
 ---
-titolo: Dinamica del corpo rigido
-sommario: Come si descrive la rotazione di un corpo rigido, come momento delle forze, momento d'inerzia e momento angolare ne determinano il moto, e quando il corpo rotola senza strisciare o resta in equilibrio.
+titolo: Rigid body dynamics
+sommario: How the rotation of a rigid body is described, how torque, moment of inertia and angular momentum determine its motion, and when the body rolls without slipping or stays in equilibrium.
 ---
 
 ## Rigid body and angular quantities

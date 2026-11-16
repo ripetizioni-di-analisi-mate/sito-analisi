@@ -1,6 +1,6 @@
 ---
-titolo: Campo magnetico e forza di Lorentz
-sommario: Come un campo magnetico agisce su cariche in moto e su correnti, dalla forza di Lorentz al moto circolare ed elicoidale delle particelle, al selettore di velocità, allo spettrometro di massa e all'effetto Hall, fino alla forza su un filo e al momento delle forze su una spira, descritto dal momento magnetico.
+titolo: Magnetic field and Lorentz force
+sommario: How a magnetic field acts on moving charges and on currents, from the Lorentz force to the circular and helical motion of particles, the velocity selector, the mass spectrometer and the Hall effect, up to the force on a wire and the torque on a loop, described by the magnetic moment.
 ---
 
 ## Magnetic field and field lines

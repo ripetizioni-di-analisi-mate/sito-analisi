@@ -1,6 +1,6 @@
 ---
-titolo: Carica elettrica e legge di Coulomb
-sommario: Che cos'è la carica elettrica e quali proprietà ha, come si elettrizzano conduttori e isolanti, come la legge di Coulomb e il principio di sovrapposizione danno la forza tra cariche puntiformi in una e due dimensioni, e quando un sistema di cariche è in equilibrio.
+titolo: Electric charge and Coulomb's law
+sommario: What electric charge is and what properties it has, how conductors and insulators are charged, how Coulomb's law and the superposition principle give the force between point charges in one and two dimensions, and when a system of charges is in equilibrium.
 ---
 
 ## Electric charge
