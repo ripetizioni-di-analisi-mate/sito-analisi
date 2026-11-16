@@ -51,7 +51,7 @@ const nome = m.breve || m.titolo;
       <form class="sg-dom" data-sg-form>
         <fieldset><legend class="q" data-sg-testo tabindex="-1"></legend><div class="sg-scelte" data-sg-scelte></div></fieldset>
         <div class="sg-nav"><button type="button" class="sg-link" data-sg-nonso>Non lo so</button>
-          <div class="sg-conf"><button type="submit" class="sg-btn sec" data-sg-sicuro="0" disabled>Sto tirando a indovinare</button><button type="submit" class="sg-btn" data-sg-sicuro="1" disabled>Sono sicuro</button></div></div>
+          <div class="sg-conf"><button type="submit" class="sg-btn" data-sg-conferma disabled>Conferma</button></div></div>
       </form>
     </section>
 
@@ -246,11 +246,11 @@ const nome = m.breve || m.titolo;
       $('[data-sg-testo]').innerHTML = d.testo;
       $('[data-sg-scelte]').innerHTML = d.scelte.map((s: string, i: number) =>
         `<label class="sg-scelta"><input type="radio" name="scelta" value="${i}" /><span>${s}</span></label>`).join('');
-      radice.querySelectorAll<HTMLButtonElement>('[data-sg-sicuro]').forEach((b) => { b.disabled = true; });
+      radice.querySelectorAll<HTMLButtonElement>('[data-sg-conferma]').forEach((b) => { b.disabled = true; });
       $('[data-sg-testo]').focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    $('[data-sg-scelte]').addEventListener('change', () => { radice.querySelectorAll<HTMLButtonElement>('[data-sg-sicuro]').forEach((b) => { b.disabled = false; }); });
+    $('[data-sg-scelte]').addEventListener('change', () => { radice.querySelectorAll<HTMLButtonElement>('[data-sg-conferma]').forEach((b) => { b.disabled = false; }); });
 
     async function avanza(percorso: string, corpo: unknown) {
       if (occupato) return;
@@ -318,8 +318,7 @@ const nome = m.breve || m.titolo;
     $('[data-sg-form]').addEventListener('submit', (e) => {
       e.preventDefault();
       const s = radice.querySelector<HTMLInputElement>('input[name="scelta"]:checked');
-      const b = (e as SubmitEvent).submitter as HTMLButtonElement | null;
-      if (s) avanza('/api/studio-guidato/rispondi', { token, scelta: Number(s.value), sicuro: b?.dataset.sgSicuro === '1' });
+      if (s) avanza('/api/studio-guidato/rispondi', { token, scelta: Number(s.value) });
     });
     $('[data-sg-nonso]').addEventListener('click', () => avanza('/api/studio-guidato/rispondi', { token, scelta: null }));
 
