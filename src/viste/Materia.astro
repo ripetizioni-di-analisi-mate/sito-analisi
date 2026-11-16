@@ -17,6 +17,8 @@ import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { TOLC } from '../data/tolc.mjs';
 import NotaTolcI from '../components/NotaTolcI.astro';
+import NotaBocconi from '../components/NotaBocconi.astro';
+import { BOCCONI } from '../data/bocconi.mjs';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
@@ -31,9 +33,10 @@ const SEZIONI = sezioniL(lingua).filter((s) => !quizPerEsercitarsi || s.slug !==
 // Sopratitolo per tipo di materia: l'esame per l'università, il programma per le superiori, il concorso per i concorsi.
 const gruppo = materiaIt(materia).gruppo;
 const confTolc = TOLC[materia];
-const sopra = confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
+const bocconi = materia === BOCCONI.slug;
+const sopra = bocconi ? (lingua === 'en' ? 'University admissions' : 'Test di ingresso') : confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
 const guida = lingua === 'it' ? GUIDE_DISCIPLINE[materia] : undefined;
-const titoloPagina = guida?.titolo ?? (confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
+const titoloPagina = guida?.titolo ?? (bocconi ? (lingua === 'en' ? 'Bocconi Test preparation course and mock tests' : 'Test Bocconi: corso di preparazione e simulazioni') : confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
   : SEO(lingua).materia(m.titolo));
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
@@ -58,7 +61,8 @@ const anteprimaTesto = anteprimaScienza
   ? (en ? 'Read the beginning of each topic, open its first three worked exercise sheets and try one timed question without an account.'
     : 'Senza account puoi leggere l’inizio di ogni capitolo, aprire le prime tre schede di esercizi svolti e provare una domanda a tempo.')
   : t.anteprimaTesto;
-const { ripasso: nomeRipasso, simulazione: nomeCompito } = nomiAllenamento(m, lingua);
+const { ripasso: nomeRipasso, simulazione: nomeSimulazione } = nomiAllenamento(m, lingua);
+const nomeCompito = bocconi ? (en ? 'Four mock tests' : 'Quattro simulazioni') : nomeSimulazione;
 const notaQuiz = en
   ? 'A timed quiz across all topics, with an explanation after each answer. Questions are in Italian.'
   : 'Quiz a tempo su tutti gli argomenti, con la spiegazione dopo ogni risposta. Con un account puoi ripassare le domande che hai sbagliato.';
@@ -106,6 +110,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <p class="sommario">{m.descrizione}</p>
   {materia === 'analisi-3' && lingua === 'it' && <NotaAnalisi3 />}
   {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
+  {bocconi && (lingua === 'it' || lingua === 'en') && <NotaBocconi lingua={lingua} />}
   {gruppo === 'Superiori' && <div class:list={{ 'vista-classica': nuova }}><NotaSuperiori lingua={lingua} /></div>}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}

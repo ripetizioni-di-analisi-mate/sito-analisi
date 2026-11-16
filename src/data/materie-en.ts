@@ -1,5 +1,17 @@
 // Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
 export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  'test-bocconi': {
+    titolo: 'Bocconi Test', breve: 'Bocconi Test',
+    descrizione: 'Prepare for the standard Bocconi Online Test. Study mathematics, reading comprehension, numerical reasoning and critical thinking. Each chapter includes lessons, worked examples, practice exercises and explained quiz answers. Available in English and Italian.',
+    argomenti: {
+      'numeri-e-algebra': { titolo: 'Numbers, sets and algebra', breve: 'Numbers and algebra' },
+      'funzioni-e-geometria': { titolo: 'Functions, geometry and trigonometry', breve: 'Functions and geometry' },
+      'probabilita-e-statistica': { titolo: 'Counting, probability and statistics', breve: 'Probability and statistics' },
+      'comprensione-del-testo': { titolo: 'Reading comprehension', breve: 'Reading comprehension' },
+      'ragionamento-numerico': { titolo: 'Numerical reasoning', breve: 'Numerical reasoning' },
+      'pensiero-critico': { titolo: 'Critical thinking', breve: 'Critical thinking' },
+    },
+  },
   'matematica-finanziaria': {
     titolo: 'Financial mathematics', breve: 'Financial mathematics',
     descrizione: 'A dedicated university course in cash-flow valuation, annuities, amortization, NPV and IRR, bonds, term structures, duration, convexity and immunization. Study materials are in Italian.',
