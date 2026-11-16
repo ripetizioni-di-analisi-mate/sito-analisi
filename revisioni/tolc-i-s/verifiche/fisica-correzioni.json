@@ -1,0 +1,186 @@
+[
+  {
+    "file": "src/content/domande/tolc-i/fisica/44.md",
+    "correzione": "Riparati due distrattori troncati da |; cinque alternative fisicamente complete, corretta invariata"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/30.md",
+    "correzione": "Esplicitati orientamento della leva e verso del carico, così le distanze sono i bracci"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/35.md",
+    "correzione": "Esplicitate incomprimibilità e assenza di perdite per applicare la continuità"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/49.md",
+    "correzione": "Esplicitato calore specifico costante per la media esatta delle temperature"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/60.md",
+    "correzione": "Distinta direzione dell’accelerazione da quella della velocità, che il testo non assegna"
+  },
+  {
+    "file": "src/content/teoria/tolc-i/fisica.md",
+    "correzione": "Precisate ipotesi di Stevino e direzione della velocità; etichette SVG a e Δp leggibili"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/44.md",
+    "correzione": "Riparati due distrattori troncati da |; cinque alternative fisicamente complete, corretta invariata"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/30.md",
+    "correzione": "Esplicitati orientamento della leva e verso del carico, così le distanze sono i bracci"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/35.md",
+    "correzione": "Esplicitate incomprimibilità e assenza di perdite per applicare la continuità"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/49.md",
+    "correzione": "Esplicitato calore specifico costante per la media esatta delle temperature"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/60.md",
+    "correzione": "Distinta direzione dell’accelerazione da quella della velocità, che il testo non assegna"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-i/fisica.md",
+    "correzione": "Precisate ipotesi di Stevino e direzione della velocità; etichette SVG a e Δp leggibili"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/67.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/67.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/44.md",
+    "correzione": "Riparati due distrattori troncati da |; cinque alternative fisicamente complete, corretta invariata"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/30.md",
+    "correzione": "Esplicitati orientamento della leva e verso del carico, così le distanze sono i bracci"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/35.md",
+    "correzione": "Esplicitate incomprimibilità e assenza di perdite per applicare la continuità"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/49.md",
+    "correzione": "Esplicitato calore specifico costante per la media esatta delle temperature"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/60.md",
+    "correzione": "Distinta direzione dell’accelerazione da quella della velocità, che il testo non assegna"
+  },
+  {
+    "file": "src/content/teoria/tolc-s/fisica.md",
+    "correzione": "Precisate ipotesi di Stevino e direzione della velocità; etichette SVG a e Δp leggibili"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/44.md",
+    "correzione": "Riparati due distrattori troncati da |; cinque alternative fisicamente complete, corretta invariata"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/30.md",
+    "correzione": "Esplicitati orientamento della leva e verso del carico, così le distanze sono i bracci"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/35.md",
+    "correzione": "Esplicitate incomprimibilità e assenza di perdite per applicare la continuità"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/49.md",
+    "correzione": "Esplicitato calore specifico costante per la media esatta delle temperature"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/60.md",
+    "correzione": "Distinta direzione dell’accelerazione da quella della velocità, che il testo non assegna"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-s/fisica.md",
+    "correzione": "Precisate ipotesi di Stevino e direzione della velocità; etichette SVG a e Δp leggibili"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/67.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/67.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/86.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/86.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content/domande/tolc-i/fisica/88.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content-en/domande/tolc-i/fisica/88.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/89.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/89.md",
+    "correzione": "Sostituzione di un procedimento ripetuto con una decisione fisica distinta"
+  },
+  {
+    "file": "src/content/teoria/tolc-i/fisica.md",
+    "correzione": "Esplicitata conservazione della carica e sua ripartizione fra conduttori identici"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-i/fisica.md",
+    "correzione": "Esplicitata conservazione della carica e sua ripartizione fra conduttori identici"
+  },
+  {
+    "file": "src/content/teoria/tolc-s/fisica.md",
+    "correzione": "Esplicitata conservazione della carica e sua ripartizione fra conduttori identici"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-s/fisica.md",
+    "correzione": "Esplicitata conservazione della carica e sua ripartizione fra conduttori identici"
+  },
+  {
+    "file": "src/content/domande/tolc-s/fisica/87.md",
+    "correzione": "Copertura corpo nero: confronto qualitativo di massimo spettrale e potenza integrata; corretta 2 invariata"
+  },
+  {
+    "file": "src/content/teoria/tolc-s/fisica.md",
+    "correzione": "Aggiunto blocco corpo nero: Wien, Stefan-Boltzmann e motivazione della quantizzazione"
+  },
+  {
+    "file": "src/content/teoria/tolc-i/fisica.md",
+    "correzione": "Completati conduttori/isolanti, elettrizzazione, ferromagnetismo e ordine dello spettro elettromagnetico"
+  },
+  {
+    "file": "src/content/teoria/tolc-s/fisica.md",
+    "correzione": "Completati conduttori/isolanti, elettrizzazione, ferromagnetismo e ordine dello spettro elettromagnetico"
+  },
+  {
+    "file": "src/content-en/domande/tolc-s/fisica/87.md",
+    "correzione": "Copertura corpo nero: confronto qualitativo di massimo spettrale e potenza integrata; corretta 2 invariata"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-s/fisica.md",
+    "correzione": "Aggiunto blocco corpo nero: Wien, Stefan-Boltzmann e motivazione della quantizzazione"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-i/fisica.md",
+    "correzione": "Completati conduttori/isolanti, elettrizzazione, ferromagnetismo e ordine dello spettro elettromagnetico"
+  },
+  {
+    "file": "src/content-en/teoria/tolc-s/fisica.md",
+    "correzione": "Completati conduttori/isolanti, elettrizzazione, ferromagnetismo e ordine dello spettro elettromagnetico"
+  }
+]

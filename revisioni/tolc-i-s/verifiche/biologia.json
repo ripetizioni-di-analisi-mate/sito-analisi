@@ -1,0 +1,150 @@
+{
+  "argomento": "biologia",
+  "corso": "tolc-s",
+  "ruolo": "verificatore indipendente, diverso dall’autore",
+  "data": "2026-11-16",
+  "copertura": {
+    "file": 230,
+    "abbinamenti_it_en": 115,
+    "teorie": 2,
+    "quiz": 180,
+    "quiz_distinti": 90,
+    "alternative_esaminate": 900,
+    "tracce": 40,
+    "schede": 8,
+    "esercizi_svolti": 32,
+    "esercizi_distinti": 16,
+    "lettura_integrale_it_en": true,
+    "formule_katex": 626,
+    "errori_katex": 0,
+    "controlli_esatti_calcoli_enumerazioni": 52
+  },
+  "metodo": [
+    "Lettura di tutti gli enunciati e alternative IT/EN e soluzione indipendente prima delle spiegazioni dei quiz.",
+    "Rilettura integrale delle spiegazioni, delle teorie e dei 16 esercizi svolti, confronto frase per frase IT/EN.",
+    "Verifica di identità delle tracce con i primi 20 quiz e lettura dei metadati e delle soluzioni di tutte le tracce.",
+    "Ricalcolo con frazioni esatte, enumerazione degli incroci, simulazione dei filamenti semiconservativi e della non disgiunzione; controllo dei valori delle alternative.",
+    "Confronto delle decisioni richieste per rimuovere due ripetizioni residue; controllo locale YAML/ancore/posizioni/KaTeX."
+  ],
+  "correzioni": [
+    {
+      "file": "svolti/3",
+      "descrizione": "Specificata G2 a t=3,5: il solo plateau DNA prima della citodieresi non escludeva anafase e non determinava 6 cromosomi."
+    },
+    {
+      "file": "domande/66",
+      "descrizione": "Esplicitata conversione non catalizzata trascurabile nel modello di inibizione completa dell’enzima."
+    },
+    {
+      "file": "domande/78",
+      "descrizione": "Limitato l’effetto termico a cambiamento conformazionale senza alterazioni covalenti per rendere certa la conservazione della sequenza primaria."
+    },
+    {
+      "file": "domande/22",
+      "descrizione": "Villi precisati come proiezioni della mucosa rivestite da epitelio."
+    },
+    {
+      "file": "domande/21",
+      "descrizione": "Chiarito il confronto fra composizione del filtrato iniziale e dell’urina."
+    },
+    {
+      "file": "domande/56",
+      "descrizione": "Precisata segregazione normale delle eventuali altre coppie cromosomiche."
+    },
+    {
+      "file": "domande/70",
+      "descrizione": "Caso ripetitivo sulla superficie radicale sostituito con proliferazione del meristema apicale; teoria integrata."
+    },
+    {
+      "file": "domande/90",
+      "descrizione": "Richiamo ripetitivo alla struttura primaria sostituito con splicing del trascritto RNA."
+    },
+    {
+      "file": "teoria",
+      "descrizione": "Precisate organizzazione eucariotica tipica ed eccezione degli eritrociti maturi; aggiunti meristemi; rispaziati schemi 2/3, con seconda freccia trofica da x=8,8."
+    },
+    {
+      "file": "svolti/4",
+      "descrizione": "Rimosso riferimento a tabella inesistente, sostituito con dati."
+    },
+    {
+      "file": "dafare/1-20",
+      "descrizione": "Soluzioni ridotte al solo risultato; spiegazioni complete restano nei quiz. Traduzione keyword della traccia 5 completata."
+    }
+  ],
+  "correzioni_bilingui": true,
+  "file_modificati": [
+    "src/content/teoria/tolc-s/biologia.md",
+    "src/content/svolti/tolc-s/biologia/3.md",
+    "src/content/svolti/tolc-s/biologia/4.md",
+    "src/content/dafare/tolc-s/biologia/1.md",
+    "src/content/dafare/tolc-s/biologia/2.md",
+    "src/content/dafare/tolc-s/biologia/3.md",
+    "src/content/dafare/tolc-s/biologia/4.md",
+    "src/content/dafare/tolc-s/biologia/5.md",
+    "src/content/dafare/tolc-s/biologia/6.md",
+    "src/content/dafare/tolc-s/biologia/7.md",
+    "src/content/dafare/tolc-s/biologia/8.md",
+    "src/content/dafare/tolc-s/biologia/9.md",
+    "src/content/dafare/tolc-s/biologia/10.md",
+    "src/content/dafare/tolc-s/biologia/11.md",
+    "src/content/dafare/tolc-s/biologia/12.md",
+    "src/content/dafare/tolc-s/biologia/13.md",
+    "src/content/dafare/tolc-s/biologia/14.md",
+    "src/content/dafare/tolc-s/biologia/15.md",
+    "src/content/dafare/tolc-s/biologia/16.md",
+    "src/content/dafare/tolc-s/biologia/17.md",
+    "src/content/dafare/tolc-s/biologia/18.md",
+    "src/content/dafare/tolc-s/biologia/19.md",
+    "src/content/dafare/tolc-s/biologia/20.md",
+    "src/content/domande/tolc-s/biologia/21.md",
+    "src/content/domande/tolc-s/biologia/22.md",
+    "src/content/domande/tolc-s/biologia/56.md",
+    "src/content/domande/tolc-s/biologia/66.md",
+    "src/content/domande/tolc-s/biologia/70.md",
+    "src/content/domande/tolc-s/biologia/78.md",
+    "src/content/domande/tolc-s/biologia/90.md",
+    "src/content-en/teoria/tolc-s/biologia.md",
+    "src/content-en/svolti/tolc-s/biologia/3.md",
+    "src/content-en/svolti/tolc-s/biologia/4.md",
+    "src/content-en/dafare/tolc-s/biologia/1.md",
+    "src/content-en/dafare/tolc-s/biologia/2.md",
+    "src/content-en/dafare/tolc-s/biologia/3.md",
+    "src/content-en/dafare/tolc-s/biologia/4.md",
+    "src/content-en/dafare/tolc-s/biologia/5.md",
+    "src/content-en/dafare/tolc-s/biologia/6.md",
+    "src/content-en/dafare/tolc-s/biologia/7.md",
+    "src/content-en/dafare/tolc-s/biologia/8.md",
+    "src/content-en/dafare/tolc-s/biologia/9.md",
+    "src/content-en/dafare/tolc-s/biologia/10.md",
+    "src/content-en/dafare/tolc-s/biologia/11.md",
+    "src/content-en/dafare/tolc-s/biologia/12.md",
+    "src/content-en/dafare/tolc-s/biologia/13.md",
+    "src/content-en/dafare/tolc-s/biologia/14.md",
+    "src/content-en/dafare/tolc-s/biologia/15.md",
+    "src/content-en/dafare/tolc-s/biologia/16.md",
+    "src/content-en/dafare/tolc-s/biologia/17.md",
+    "src/content-en/dafare/tolc-s/biologia/18.md",
+    "src/content-en/dafare/tolc-s/biologia/19.md",
+    "src/content-en/dafare/tolc-s/biologia/20.md",
+    "src/content-en/domande/tolc-s/biologia/21.md",
+    "src/content-en/domande/tolc-s/biologia/22.md",
+    "src/content-en/domande/tolc-s/biologia/56.md",
+    "src/content-en/domande/tolc-s/biologia/66.md",
+    "src/content-en/domande/tolc-s/biologia/70.md",
+    "src/content-en/domande/tolc-s/biologia/78.md",
+    "src/content-en/domande/tolc-s/biologia/90.md"
+  ],
+  "esiti": {
+    "risposte_numeriche_autore_confermate": true,
+    "quiz_per_lingua": 90,
+    "alternative_per_quiz": 5,
+    "corrette_per_posizione": 18,
+    "ancore_per_teoria": 21,
+    "dubbi_aperti": []
+  },
+  "limiti": [
+    "Nessun git, build o test globale eseguito.",
+    "Rendering grafico globale svolto dal coordinatore; correzioni delle spaziature eseguite sulle sue segnalazioni, senza dichiarare una seconda ispezione autonoma in browser."
+  ]
+}

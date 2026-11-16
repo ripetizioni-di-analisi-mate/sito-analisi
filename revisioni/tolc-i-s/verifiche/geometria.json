@@ -1,0 +1,3201 @@
+{
+  "reviewer": "fisica",
+  "files": 420,
+  "counts": {
+    "content/tolc-i": {
+      "theory": 1,
+      "theory_words": 2629,
+      "worked_exercises": 12,
+      "svolti": 4,
+      "dafare": 10,
+      "domande": 90,
+      "correct_distribution": {
+        "1": 18,
+        "2": 18,
+        "3": 18,
+        "4": 18,
+        "5": 18
+      }
+    },
+    "content/tolc-s": {
+      "theory": 1,
+      "theory_words": 2696,
+      "worked_exercises": 12,
+      "svolti": 4,
+      "dafare": 10,
+      "domande": 90,
+      "correct_distribution": {
+        "1": 18,
+        "2": 18,
+        "3": 18,
+        "4": 18,
+        "5": 18
+      }
+    },
+    "content-en/tolc-i": {
+      "theory": 1,
+      "theory_words": 2633,
+      "worked_exercises": 12,
+      "svolti": 4,
+      "dafare": 10,
+      "domande": 90,
+      "correct_distribution": {
+        "1": 18,
+        "2": 18,
+        "3": 18,
+        "4": 18,
+        "5": 18
+      }
+    },
+    "content-en/tolc-s": {
+      "theory": 1,
+      "theory_words": 2687,
+      "worked_exercises": 12,
+      "svolti": 4,
+      "dafare": 10,
+      "domande": 90,
+      "correct_distribution": {
+        "1": 18,
+        "2": 18,
+        "3": 18,
+        "4": 18,
+        "5": 18
+      }
+    }
+  },
+  "quiz_checks": [
+    {
+      "course": "tolc-i",
+      "id": 1,
+      "method": "numeric",
+      "expression": "sqrt(6**2+8**2)",
+      "result": "10",
+      "correct": 1,
+      "alternatives": [
+        "10",
+        "14",
+        "sqrt(14)",
+        "48",
+        "7"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 2,
+      "method": "numeric",
+      "expression": "pi*3**2",
+      "result": "9*pi",
+      "correct": 2,
+      "alternatives": [
+        "6*pi",
+        "9*pi",
+        "3*pi",
+        "18*pi",
+        "27*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 3,
+      "method": "numeric",
+      "expression": "pi*2**2*9/3",
+      "result": "12*pi",
+      "correct": 3,
+      "alternatives": [
+        "36*pi",
+        "6*pi",
+        "12*pi",
+        "18*pi",
+        "4*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 4,
+      "method": "numeric",
+      "expression": "sqrt((4-1)**2+(6-2)**2)",
+      "result": "5",
+      "correct": 4,
+      "alternatives": [
+        "7",
+        "25",
+        "sqrt(7)",
+        "5",
+        "3"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 5,
+      "method": "point incidence",
+      "expression": null,
+      "result": "2*x+2",
+      "correct": 5,
+      "alternatives": [
+        "3*x + 2",
+        "2*x - 2",
+        "x + 2",
+        "4*x + 2",
+        "2*x + 2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 6,
+      "method": "numeric",
+      "expression": "-1/2",
+      "result": "-1/2",
+      "correct": 1,
+      "alternatives": [
+        "-1/2",
+        "2",
+        "-2",
+        "1/2",
+        "0"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 7,
+      "method": "center and radius",
+      "expression": null,
+      "result": "((2, -1), 3)",
+      "correct": 2,
+      "alternatives": [
+        "((-2, 1), 3)",
+        "((2, -1), 3)",
+        "((2, 1), 9)",
+        "((2, -1), 9)",
+        "((-2, -1), 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 8,
+      "method": "numeric",
+      "expression": "(4/2,(4/2)**2-4*(4/2)+3)",
+      "result": "(2, -1)",
+      "correct": 3,
+      "alternatives": [
+        "(-2, -1)",
+        "(2, 3)",
+        "(2, -1)",
+        "(4, 3)",
+        "(1, 0)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 9,
+      "method": "numeric",
+      "expression": "3**2",
+      "result": "9",
+      "correct": 4,
+      "alternatives": [
+        "3",
+        "6",
+        "27",
+        "9",
+        "sqrt(3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 10,
+      "method": "numeric",
+      "expression": "sqrt(25)",
+      "result": "5",
+      "correct": 5,
+      "alternatives": [
+        "25",
+        "10",
+        "3",
+        "4",
+        "5"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 11,
+      "method": "triangle inequalities",
+      "expression": null,
+      "result": "Interval.open(3, 11)",
+      "correct": 1,
+      "alternatives": [
+        "Interval.open(3, 11)",
+        "Interval.open(0, 11)",
+        "Interval(3, 11)",
+        "Interval.open(4, 7)",
+        "Interval.open(3, oo)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 12,
+      "method": "numeric",
+      "expression": "180*4/(2+3+4)",
+      "result": "80",
+      "correct": 2,
+      "alternatives": [
+        "40",
+        "80",
+        "60",
+        "90",
+        "100"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 13,
+      "method": "numeric",
+      "expression": "128-53",
+      "result": "75",
+      "correct": 3,
+      "alternatives": [
+        "52",
+        "105",
+        "75",
+        "127",
+        "181"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 14,
+      "method": "numeric",
+      "expression": "(180-38)/2",
+      "result": "71",
+      "correct": 4,
+      "alternatives": [
+        "76",
+        "142",
+        "38",
+        "71",
+        "52"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 15,
+      "method": "geometric property",
+      "expression": null,
+      "result": "Ottusangolo",
+      "correct": 5,
+      "alternatives": [
+        "Rettangolo",
+        "Acutangolo",
+        "Equilatero",
+        "Degenere",
+        "Ottusangolo"
+      ],
+      "reason": "4+5>7; 7²>4²+5². Altri tipi esclusi."
+    },
+    {
+      "course": "tolc-i",
+      "id": 16,
+      "method": "numeric",
+      "expression": "10*sqrt(13**2-(10/2)**2)/2",
+      "result": "60",
+      "correct": 1,
+      "alternatives": [
+        "60",
+        "65",
+        "120",
+        "30",
+        "50"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 17,
+      "method": "numeric",
+      "expression": "sqrt(8**2-(8/2)**2)",
+      "result": "4*sqrt(3)",
+      "correct": 2,
+      "alternatives": [
+        "8*sqrt(3)",
+        "4*sqrt(3)",
+        "4",
+        "8",
+        "2*sqrt(3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 18,
+      "method": "numeric",
+      "expression": "14/2",
+      "result": "7",
+      "correct": 3,
+      "alternatives": [
+        "14",
+        "28",
+        "7",
+        "14/3",
+        "7/2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 19,
+      "method": "numeric",
+      "expression": "21*2/3",
+      "result": "14",
+      "correct": 4,
+      "alternatives": [
+        "7",
+        "21/2",
+        "18",
+        "14",
+        "21"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 20,
+      "method": "numeric",
+      "expression": "10/2",
+      "result": "5",
+      "correct": 5,
+      "alternatives": [
+        "10",
+        "5*sqrt(2)",
+        "20",
+        "5/2",
+        "5"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 21,
+      "method": "geometric property",
+      "expression": null,
+      "result": "L’incentro",
+      "correct": 1,
+      "alternatives": [
+        "L’incentro",
+        "Il baricentro",
+        "Il circocentro",
+        "L’ortocentro",
+        "Il punto medio del lato maggiore"
+      ],
+      "reason": "Intersezione delle bisettrici interne; proprietà per ogni triangolo. Gli altri centri non sono generalmente equidistanti dai lati."
+    },
+    {
+      "course": "tolc-i",
+      "id": 22,
+      "method": "geometric property",
+      "expression": null,
+      "result": "P appartiene alla bisettrice interna",
+      "correct": 2,
+      "alternatives": [
+        "P è il vertice dell’angolo",
+        "P appartiene alla bisettrice interna",
+        "L’angolo misura necessariamente 60 gradi",
+        "P dista 3 cm dal vertice",
+        "L’angolo è necessariamente retto"
+      ],
+      "reason": "Distanze perpendicolari uguali in angolo convesso, triangoli rettangoli congruenti. Il dato non fissa apertura o distanza dal vertice."
+    },
+    {
+      "course": "tolc-i",
+      "id": 23,
+      "method": "locus",
+      "expression": null,
+      "result": "x=3",
+      "correct": 3,
+      "alternatives": [
+        "x - 3",
+        "y - 2"
+      ],
+      "reason": "8*x - 24 = 0"
+    },
+    {
+      "course": "tolc-i",
+      "id": 24,
+      "method": "numeric",
+      "expression": "(4-(-2))*(5-1)/2",
+      "result": "12",
+      "correct": 4,
+      "alternatives": [
+        "24",
+        "15",
+        "6",
+        "12",
+        "18"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 25,
+      "method": "numeric",
+      "expression": "9*(9-3)/2",
+      "result": "27",
+      "correct": 5,
+      "alternatives": [
+        "54",
+        "36",
+        "18",
+        "9",
+        "27"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 26,
+      "method": "numeric",
+      "expression": "360/24",
+      "result": "15",
+      "correct": 1,
+      "alternatives": [
+        "15",
+        "12",
+        "24",
+        "8",
+        "30"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 27,
+      "method": "numeric",
+      "expression": "1260/180+2",
+      "result": "9",
+      "correct": 2,
+      "alternatives": [
+        "7",
+        "9",
+        "8",
+        "10",
+        "12"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 28,
+      "method": "numeric",
+      "expression": "8+14+8+sqrt((14-8)**2+8**2)",
+      "result": "40",
+      "correct": 3,
+      "alternatives": [
+        "38",
+        "44",
+        "40",
+        "36",
+        "48"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 29,
+      "method": "numeric",
+      "expression": "4*sqrt((10/2)**2+(24/2)**2)",
+      "result": "52",
+      "correct": 4,
+      "alternatives": [
+        "68",
+        "26",
+        "120",
+        "52",
+        "48"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 30,
+      "method": "numeric",
+      "expression": "10*6/2",
+      "result": "30",
+      "correct": 5,
+      "alternatives": [
+        "60",
+        "15",
+        "30*sqrt(3)",
+        "60*sqrt(3)",
+        "30"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 31,
+      "method": "numeric",
+      "expression": "2*(10+6)-4-2+4+2",
+      "result": "32",
+      "correct": 1,
+      "alternatives": [
+        "32",
+        "20",
+        "24",
+        "40",
+        "44"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 32,
+      "method": "numeric",
+      "expression": "(20/4)**2",
+      "result": "25",
+      "correct": 2,
+      "alternatives": [
+        "20",
+        "25",
+        "24",
+        "50",
+        "100"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 33,
+      "method": "numeric",
+      "expression": "36/2",
+      "result": "18",
+      "correct": 3,
+      "alternatives": [
+        "12",
+        "24",
+        "18",
+        "9",
+        "36"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 34,
+      "method": "numeric",
+      "expression": "20*3/2",
+      "result": "30",
+      "correct": 4,
+      "alternatives": [
+        "45",
+        "50",
+        "40/3",
+        "30",
+        "12"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 35,
+      "method": "numeric",
+      "expression": "(10-2*2)**2*2",
+      "result": "72",
+      "correct": 5,
+      "alternatives": [
+        "128",
+        "200",
+        "36",
+        "144",
+        "72"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 36,
+      "method": "numeric",
+      "expression": "pi*(7**2-5**2)",
+      "result": "24*pi",
+      "correct": 1,
+      "alternatives": [
+        "24*pi",
+        "4*pi",
+        "12*pi",
+        "74*pi",
+        "49*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 37,
+      "method": "numeric",
+      "expression": "2*4+2*pi*4*(90/360)",
+      "result": "2*pi + 8",
+      "correct": 2,
+      "alternatives": [
+        "2*pi",
+        "2*pi + 8",
+        "4 + 2*pi",
+        "8 + 4*pi",
+        "4*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 38,
+      "method": "numeric",
+      "expression": "pi*70*10/100",
+      "result": "7*pi",
+      "correct": 3,
+      "alternatives": [
+        "14*pi",
+        "70*pi",
+        "7*pi",
+        "7*pi/10",
+        "7*pi/2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 39,
+      "method": "numeric",
+      "expression": "114/2",
+      "result": "57",
+      "correct": 4,
+      "alternatives": [
+        "114",
+        "228",
+        "66",
+        "57",
+        "33"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 40,
+      "method": "numeric",
+      "expression": "2*sqrt(13**2-5**2)",
+      "result": "24",
+      "correct": 5,
+      "alternatives": [
+        "12",
+        "26",
+        "16",
+        "2*sqrt(194)",
+        "24"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 41,
+      "method": "numeric",
+      "expression": "sqrt(10**2-6**2)",
+      "result": "8",
+      "correct": 1,
+      "alternatives": [
+        "8",
+        "4",
+        "16",
+        "2*sqrt(34)",
+        "6"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 42,
+      "method": "numeric",
+      "expression": "sqrt(6**2+8**2)/2",
+      "result": "5",
+      "correct": 2,
+      "alternatives": [
+        "10",
+        "5",
+        "7",
+        "4",
+        "3"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 43,
+      "method": "numeric",
+      "expression": "1",
+      "result": "1",
+      "correct": 3,
+      "alternatives": [
+        "0",
+        "2",
+        "1",
+        "4",
+        "oo"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 44,
+      "method": "numeric",
+      "expression": "pi*4**2/4",
+      "result": "4*pi",
+      "correct": 4,
+      "alternatives": [
+        "16*pi",
+        "8*pi",
+        "2*pi",
+        "4*pi",
+        "4"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 45,
+      "method": "geometric property",
+      "expression": null,
+      "result": "Tangenti esternamente",
+      "correct": 5,
+      "alternatives": [
+        "Secanti in due punti",
+        "Tangenti internamente",
+        "Concentriche",
+        "Esterne senza punti comuni",
+        "Tangenti esternamente"
+      ],
+      "reason": "d=6=r1+r2, d diverso da |r1-r2|=2 e da 0."
+    },
+    {
+      "course": "tolc-i",
+      "id": 46,
+      "method": "numeric",
+      "expression": "pi*4**2/4-4*4/2",
+      "result": "-8 + 4*pi",
+      "correct": 1,
+      "alternatives": [
+        "-8 + 4*pi",
+        "-4 + 4*pi",
+        "-8 + 8*pi",
+        "4*pi",
+        "-8 + 16*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 47,
+      "method": "numeric",
+      "expression": "2*pi*3*8+pi*3**2",
+      "result": "57*pi",
+      "correct": 2,
+      "alternatives": [
+        "66*pi",
+        "57*pi",
+        "48*pi",
+        "24*pi",
+        "81*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 48,
+      "method": "numeric",
+      "expression": "pi*5*sqrt(5**2+12**2)",
+      "result": "65*pi",
+      "correct": 3,
+      "alternatives": [
+        "60*pi",
+        "25*pi",
+        "65*pi",
+        "90*pi",
+        "130*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 49,
+      "method": "numeric",
+      "expression": "4*pi*3**3/3",
+      "result": "36*pi",
+      "correct": 4,
+      "alternatives": [
+        "18*pi",
+        "12*pi",
+        "72*pi",
+        "36*pi",
+        "27*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 50,
+      "method": "numeric",
+      "expression": "sqrt(3**2+4**2+12**2)",
+      "result": "13",
+      "correct": 5,
+      "alternatives": [
+        "5",
+        "19",
+        "3*sqrt(17)",
+        "12",
+        "13"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 51,
+      "method": "numeric",
+      "expression": "80/40",
+      "result": "2",
+      "correct": 1,
+      "alternatives": [
+        "2",
+        "1/2",
+        "40",
+        "120",
+        "4"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 52,
+      "method": "numeric",
+      "expression": "120*(1-(1/2)**3)",
+      "result": "105",
+      "correct": 2,
+      "alternatives": [
+        "60",
+        "105",
+        "90",
+        "15",
+        "30"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 53,
+      "method": "numeric",
+      "expression": "sqrt(9/25)**3",
+      "result": "27/125",
+      "correct": 3,
+      "alternatives": [
+        "9/25",
+        "3/5",
+        "27/125",
+        "81/625",
+        "81/125"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 54,
+      "method": "numeric",
+      "expression": "(2*3)**3-4*pi*3**3/3",
+      "result": "216 - 36*pi",
+      "correct": 4,
+      "alternatives": [
+        "27 - 36*pi",
+        "216 - 108*pi",
+        "216 - 18*pi",
+        "216 - 36*pi",
+        "180*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 55,
+      "method": "numeric",
+      "expression": "(3+4+sqrt(3**2+4**2))*7",
+      "result": "84",
+      "correct": 5,
+      "alternatives": [
+        "42",
+        "49",
+        "96",
+        "21",
+        "84"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 56,
+      "method": "numeric",
+      "expression": "40*30*25/1000",
+      "result": "30",
+      "correct": 1,
+      "alternatives": [
+        "30",
+        "3",
+        "300",
+        "30000",
+        "12"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 57,
+      "method": "numeric",
+      "expression": "2500/10000",
+      "result": "1/4",
+      "correct": 2,
+      "alternatives": [
+        "25",
+        "1/4",
+        "5/2",
+        "1/40",
+        "1/400"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 58,
+      "method": "numeric",
+      "expression": "600*450/(30*30)",
+      "result": "300",
+      "correct": 3,
+      "alternatives": [
+        "30",
+        "90",
+        "300",
+        "150",
+        "900"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 59,
+      "method": "geometric property",
+      "expression": null,
+      "result": "Sono parallele",
+      "correct": 4,
+      "alternatives": [
+        "Sono incidenti",
+        "Sono sghembe",
+        "Sono perpendicolari fra loro",
+        "Sono parallele",
+        "Appartengono al piano"
+      ],
+      "reason": "Entrambe hanno direzione normale al piano; sono distinte."
+    },
+    {
+      "course": "tolc-i",
+      "id": 60,
+      "method": "numeric",
+      "expression": "sqrt((2+2)**2+2**2)",
+      "result": "2*sqrt(5)",
+      "correct": 5,
+      "alternatives": [
+        "2*sqrt(3)",
+        "6",
+        "4",
+        "2*sqrt(2)",
+        "2*sqrt(5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 61,
+      "method": "numeric",
+      "expression": "abs(10-(-5))/sqrt(3**2+4**2)",
+      "result": "3",
+      "correct": 1,
+      "alternatives": [
+        "3",
+        "15",
+        "5",
+        "3/5",
+        "15/7"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 62,
+      "method": "numeric",
+      "expression": "(8/2)*8/2",
+      "result": "16",
+      "correct": 2,
+      "alternatives": [
+        "32",
+        "16",
+        "8",
+        "12",
+        "64"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 63,
+      "method": "numeric",
+      "expression": "2*3",
+      "result": "6",
+      "correct": 3,
+      "alternatives": [
+        "3",
+        "0",
+        "6",
+        "-6",
+        "3/2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 64,
+      "method": "numeric",
+      "expression": "1+(5-1)/(2-0)*3",
+      "result": "7",
+      "correct": 4,
+      "alternatives": [
+        "6",
+        "8",
+        "5",
+        "7",
+        "3"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 65,
+      "method": "numeric",
+      "expression": "sqrt(12+(-4/2)**2+(6/2)**2)",
+      "result": "5",
+      "correct": 5,
+      "alternatives": [
+        "25",
+        "2*sqrt(3)",
+        "sqrt(13)",
+        "3",
+        "5"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 66,
+      "method": "geometric property",
+      "expression": null,
+      "result": "L’insieme vuoto",
+      "correct": 1,
+      "alternatives": [
+        "L’insieme vuoto",
+        "Una circonferenza di raggio 2",
+        "Il solo punto (1, -2)",
+        "Una retta",
+        "Tutto il piano"
+      ],
+      "reason": "Somma di due quadrati reali non negativa, incompatibile con -4."
+    },
+    {
+      "course": "tolc-i",
+      "id": 67,
+      "method": "tangent normal and incidence",
+      "expression": null,
+      "result": "3*x+4*y-25",
+      "correct": 2,
+      "alternatives": [
+        "4*x - 3*y",
+        "3*x + 4*y - 25",
+        "3*x + 4*y - 5",
+        "4*x + 3*y - 25",
+        "y - 4"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 68,
+      "method": "circle substitution",
+      "expression": null,
+      "result": "(-2, 6)",
+      "correct": 3,
+      "alternatives": [
+        "(-4, 4)",
+        "(-3, 7)",
+        "(-2, 6)",
+        "(0, 4)",
+        "(-6, 2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 69,
+      "method": "all tangent parameters",
+      "expression": null,
+      "result": "{-3, 3}",
+      "correct": 4,
+      "alternatives": [
+        "{1}",
+        "{-9, 9}",
+        "{0}",
+        "{-3, 3}",
+        "Interval.open(-3, 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 70,
+      "method": "numeric",
+      "expression": "180-112",
+      "result": "68",
+      "correct": 5,
+      "alternatives": [
+        "112",
+        "56",
+        "248",
+        "78",
+        "68"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 71,
+      "method": "numeric",
+      "expression": "(2+4,-(-3))",
+      "result": "(6, 3)",
+      "correct": 1,
+      "alternatives": [
+        "(6, 3)",
+        "(6, -3)",
+        "(-6, 3)",
+        "(2, 7)",
+        "(-2, 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 72,
+      "method": "numeric",
+      "expression": "(5,-2)",
+      "result": "(5, -2)",
+      "correct": 2,
+      "alternatives": [
+        "(2, 5)",
+        "(5, -2)",
+        "(-2, -5)",
+        "(-5, 2)",
+        "(2, -5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 73,
+      "method": "numeric",
+      "expression": "(2*1-4,2*(-1)-(-3))",
+      "result": "(-2, 1)",
+      "correct": 3,
+      "alternatives": [
+        "(-4, 3)",
+        "(2, -1)",
+        "(-2, 1)",
+        "(-3, 2)",
+        "(6, -5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 74,
+      "method": "numeric",
+      "expression": "(1,-1+4)",
+      "result": "(1, 3)",
+      "correct": 4,
+      "alternatives": [
+        "(1, 1)",
+        "(2, 0)",
+        "(5/3, 1/3)",
+        "(1, 3)",
+        "(2, -1)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 75,
+      "method": "numeric",
+      "expression": "(1+2*(3-1),2+2*(1-2))",
+      "result": "(5, 0)",
+      "correct": 5,
+      "alternatives": [
+        "(6, 2)",
+        "(4, -2)",
+        "(3, 4)",
+        "(4, 0)",
+        "(5, 0)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 76,
+      "method": "numeric",
+      "expression": "(2+(3-(-1)),-3+(2-4))",
+      "result": "(6, -5)",
+      "correct": 1,
+      "alternatives": [
+        "(6, -5)",
+        "(4, -1)",
+        "(-2, -1)",
+        "(6, -1)",
+        "(3, 2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 77,
+      "method": "numeric",
+      "expression": "360/((6-2)*180/6)",
+      "result": "3",
+      "correct": 2,
+      "alternatives": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 78,
+      "method": "numeric",
+      "expression": "6*4*sqrt(4**2-2**2)/2",
+      "result": "24*sqrt(3)",
+      "correct": 3,
+      "alternatives": [
+        "12*sqrt(3)",
+        "48*sqrt(3)",
+        "24*sqrt(3)",
+        "24",
+        "16*sqrt(3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 79,
+      "method": "numeric",
+      "expression": "4+9+12",
+      "result": "25",
+      "correct": 4,
+      "alternatives": [
+        "26",
+        "24",
+        "22",
+        "25",
+        "18"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 80,
+      "method": "numeric",
+      "expression": "sqrt((5-2)**2+3**2)",
+      "result": "3*sqrt(2)",
+      "correct": 5,
+      "alternatives": [
+        "3",
+        "sqrt(34)",
+        "sqrt(10)",
+        "6",
+        "3*sqrt(2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 81,
+      "method": "numeric",
+      "expression": "pi*(2**2+3**2)",
+      "result": "13*pi",
+      "correct": 1,
+      "alternatives": [
+        "13*pi",
+        "25*pi",
+        "5*pi",
+        "6*pi",
+        "10*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 82,
+      "method": "numeric",
+      "expression": "((0+6+0)/3,(0+0+3)/3)",
+      "result": "(2, 1)",
+      "correct": 2,
+      "alternatives": [
+        "(3, 3/2)",
+        "(2, 1)",
+        "(2, 3/2)",
+        "(3, 1)",
+        "(1, 2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 83,
+      "method": "numeric",
+      "expression": "2*sqrt(25-16)",
+      "result": "6",
+      "correct": 3,
+      "alternatives": [
+        "3",
+        "9",
+        "6",
+        "10",
+        "2*sqrt(41)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 84,
+      "method": "asymptote slopes",
+      "expression": null,
+      "result": "2/3",
+      "correct": 4,
+      "alternatives": [
+        "3/2",
+        "2",
+        "3",
+        "2/3",
+        "None"
+      ],
+      "reason": "Set homogeneous quadratic x²/9-y²/4 to zero; vertical alternatives have wrong direction."
+    },
+    {
+      "course": "tolc-i",
+      "id": 85,
+      "method": "numeric",
+      "expression": "1",
+      "result": "1",
+      "correct": 5,
+      "alternatives": [
+        "0",
+        "2",
+        "3",
+        "oo",
+        "1"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 86,
+      "method": "numeric",
+      "expression": "sqrt(4/(1-9/18))",
+      "result": "2*sqrt(2)",
+      "correct": 1,
+      "alternatives": [
+        "2*sqrt(2)",
+        "8",
+        "2",
+        "4",
+        "sqrt(2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 87,
+      "method": "numeric",
+      "expression": "(2,-1)",
+      "result": "(2, -1)",
+      "correct": 2,
+      "alternatives": [
+        "(-2, 1)",
+        "(2, -1)",
+        "(3, 2)",
+        "(2, 1)",
+        "(0, 0)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 88,
+      "method": "focus/directrix locus",
+      "expression": null,
+      "result": "x**2 - 4*y",
+      "correct": 3,
+      "alternatives": [
+        "-x**2 + y",
+        "x**2 + y**2 - 1",
+        "-x**2/4 + y",
+        "-x**2/2 + y",
+        "x"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 89,
+      "method": "numeric",
+      "expression": "2*sqrt(25)-3",
+      "result": "7",
+      "correct": 4,
+      "alternatives": [
+        "2",
+        "5",
+        "8",
+        "7",
+        "10"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-i",
+      "id": 90,
+      "method": "polynomial constraints",
+      "expression": null,
+      "result": "2*(x+2)*(x-4)",
+      "correct": 5,
+      "alternatives": [
+        "(x - 4)*(x + 2)",
+        "(x + 4)*(2*x - 4)",
+        "(-2*x - 4)*(x - 4)",
+        "(x + 4)*(2*x + 4)",
+        "(x - 4)*(2*x + 4)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 1,
+      "method": "numeric",
+      "expression": "sqrt(6**2+8**2)",
+      "result": "10",
+      "correct": 1,
+      "alternatives": [
+        "10",
+        "14",
+        "sqrt(14)",
+        "48",
+        "7"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 2,
+      "method": "numeric",
+      "expression": "pi*3**2",
+      "result": "9*pi",
+      "correct": 2,
+      "alternatives": [
+        "6*pi",
+        "9*pi",
+        "3*pi",
+        "18*pi",
+        "27*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 3,
+      "method": "numeric",
+      "expression": "pi*2**2*9/3",
+      "result": "12*pi",
+      "correct": 3,
+      "alternatives": [
+        "36*pi",
+        "6*pi",
+        "12*pi",
+        "18*pi",
+        "4*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 4,
+      "method": "numeric",
+      "expression": "sqrt((4-1)**2+(6-2)**2)",
+      "result": "5",
+      "correct": 4,
+      "alternatives": [
+        "7",
+        "25",
+        "sqrt(7)",
+        "5",
+        "3"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 5,
+      "method": "point incidence",
+      "expression": null,
+      "result": "2*x+2",
+      "correct": 5,
+      "alternatives": [
+        "3*x + 2",
+        "2*x - 2",
+        "x + 2",
+        "4*x + 2",
+        "2*x + 2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 6,
+      "method": "numeric",
+      "expression": "-1/2",
+      "result": "-1/2",
+      "correct": 1,
+      "alternatives": [
+        "-1/2",
+        "2",
+        "-2",
+        "1/2",
+        "0"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 7,
+      "method": "center and radius",
+      "expression": null,
+      "result": "((2, -1), 3)",
+      "correct": 2,
+      "alternatives": [
+        "((-2, 1), 3)",
+        "((2, -1), 3)",
+        "((2, 1), 9)",
+        "((2, -1), 9)",
+        "((-2, -1), 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 8,
+      "method": "numeric",
+      "expression": "(-5,-2)",
+      "result": "(-5, -2)",
+      "correct": 3,
+      "alternatives": [
+        "(5, 2)",
+        "(2, -5)",
+        "(-5, -2)",
+        "(5, -2)",
+        "(-2, -5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 9,
+      "method": "numeric",
+      "expression": "3**2",
+      "result": "9",
+      "correct": 4,
+      "alternatives": [
+        "3",
+        "6",
+        "27",
+        "9",
+        "sqrt(3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 10,
+      "method": "coordinate predicate",
+      "expression": null,
+      "result": "all three constraints",
+      "correct": 5,
+      "alternatives": [
+        "(-3, 4)",
+        "(0, 4)",
+        "(2, 1)",
+        "(-2, 4)",
+        "(-2, 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 11,
+      "method": "triangle inequalities",
+      "expression": null,
+      "result": "Interval.open(3, 11)",
+      "correct": 1,
+      "alternatives": [
+        "Interval.open(3, 11)",
+        "Interval.open(0, 11)",
+        "Interval(3, 11)",
+        "Interval.open(4, 7)",
+        "Interval.open(3, oo)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 12,
+      "method": "numeric",
+      "expression": "180*4/(2+3+4)",
+      "result": "80",
+      "correct": 2,
+      "alternatives": [
+        "40",
+        "80",
+        "60",
+        "90",
+        "100"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 13,
+      "method": "numeric",
+      "expression": "128-53",
+      "result": "75",
+      "correct": 3,
+      "alternatives": [
+        "52",
+        "105",
+        "75",
+        "127",
+        "181"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 14,
+      "method": "numeric",
+      "expression": "(180-38)/2",
+      "result": "71",
+      "correct": 4,
+      "alternatives": [
+        "76",
+        "142",
+        "38",
+        "71",
+        "52"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 15,
+      "method": "geometric property",
+      "expression": null,
+      "result": "Ottusangolo",
+      "correct": 5,
+      "alternatives": [
+        "Rettangolo",
+        "Acutangolo",
+        "Equilatero",
+        "Degenere",
+        "Ottusangolo"
+      ],
+      "reason": "4+5>7; 7²>4²+5². Altri tipi esclusi."
+    },
+    {
+      "course": "tolc-s",
+      "id": 16,
+      "method": "numeric",
+      "expression": "10*sqrt(13**2-(10/2)**2)/2",
+      "result": "60",
+      "correct": 1,
+      "alternatives": [
+        "60",
+        "65",
+        "120",
+        "30",
+        "50"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 17,
+      "method": "numeric",
+      "expression": "sqrt(8**2-(8/2)**2)",
+      "result": "4*sqrt(3)",
+      "correct": 2,
+      "alternatives": [
+        "8*sqrt(3)",
+        "4*sqrt(3)",
+        "4",
+        "8",
+        "2*sqrt(3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 18,
+      "method": "numeric",
+      "expression": "14/2",
+      "result": "7",
+      "correct": 3,
+      "alternatives": [
+        "14",
+        "28",
+        "7",
+        "14/3",
+        "7/2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 19,
+      "method": "numeric",
+      "expression": "21*2/3",
+      "result": "14",
+      "correct": 4,
+      "alternatives": [
+        "7",
+        "21/2",
+        "18",
+        "14",
+        "21"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 20,
+      "method": "numeric",
+      "expression": "10/2",
+      "result": "5",
+      "correct": 5,
+      "alternatives": [
+        "10",
+        "5*sqrt(2)",
+        "20",
+        "5/2",
+        "5"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 21,
+      "method": "geometric property",
+      "expression": null,
+      "result": "L’incentro",
+      "correct": 1,
+      "alternatives": [
+        "L’incentro",
+        "Il baricentro",
+        "Il circocentro",
+        "L’ortocentro",
+        "Il punto medio del lato maggiore"
+      ],
+      "reason": "Intersezione delle bisettrici interne; proprietà per ogni triangolo. Gli altri centri non sono generalmente equidistanti dai lati."
+    },
+    {
+      "course": "tolc-s",
+      "id": 22,
+      "method": "geometric property",
+      "expression": null,
+      "result": "P appartiene alla bisettrice interna",
+      "correct": 2,
+      "alternatives": [
+        "P è il vertice dell’angolo",
+        "P appartiene alla bisettrice interna",
+        "L’angolo misura necessariamente 60 gradi",
+        "P dista 3 cm dal vertice",
+        "L’angolo è necessariamente retto"
+      ],
+      "reason": "Distanze perpendicolari uguali in angolo convesso, triangoli rettangoli congruenti. Il dato non fissa apertura o distanza dal vertice."
+    },
+    {
+      "course": "tolc-s",
+      "id": 23,
+      "method": "locus",
+      "expression": null,
+      "result": "x=3",
+      "correct": 3,
+      "alternatives": [
+        "x - 3",
+        "y - 2"
+      ],
+      "reason": "8*x - 24 = 0"
+    },
+    {
+      "course": "tolc-s",
+      "id": 24,
+      "method": "numeric",
+      "expression": "(4-(-2))*(5-1)/2",
+      "result": "12",
+      "correct": 4,
+      "alternatives": [
+        "24",
+        "15",
+        "6",
+        "12",
+        "18"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 25,
+      "method": "numeric",
+      "expression": "9*(9-3)/2",
+      "result": "27",
+      "correct": 5,
+      "alternatives": [
+        "54",
+        "36",
+        "18",
+        "9",
+        "27"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 26,
+      "method": "numeric",
+      "expression": "360/24",
+      "result": "15",
+      "correct": 1,
+      "alternatives": [
+        "15",
+        "12",
+        "24",
+        "8",
+        "30"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 27,
+      "method": "numeric",
+      "expression": "1260/180+2",
+      "result": "9",
+      "correct": 2,
+      "alternatives": [
+        "7",
+        "9",
+        "8",
+        "10",
+        "12"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 28,
+      "method": "numeric",
+      "expression": "8+14+8+sqrt((14-8)**2+8**2)",
+      "result": "40",
+      "correct": 3,
+      "alternatives": [
+        "38",
+        "44",
+        "40",
+        "36",
+        "48"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 29,
+      "method": "numeric",
+      "expression": "4*sqrt((10/2)**2+(24/2)**2)",
+      "result": "52",
+      "correct": 4,
+      "alternatives": [
+        "68",
+        "26",
+        "120",
+        "52",
+        "48"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 30,
+      "method": "numeric",
+      "expression": "10*6/2",
+      "result": "30",
+      "correct": 5,
+      "alternatives": [
+        "60",
+        "15",
+        "30*sqrt(3)",
+        "60*sqrt(3)",
+        "30"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 31,
+      "method": "numeric",
+      "expression": "2*(10+6)-4-2+4+2",
+      "result": "32",
+      "correct": 1,
+      "alternatives": [
+        "32",
+        "20",
+        "24",
+        "40",
+        "44"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 32,
+      "method": "numeric",
+      "expression": "(20/4)**2",
+      "result": "25",
+      "correct": 2,
+      "alternatives": [
+        "20",
+        "25",
+        "24",
+        "50",
+        "100"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 33,
+      "method": "numeric",
+      "expression": "36/2",
+      "result": "18",
+      "correct": 3,
+      "alternatives": [
+        "12",
+        "24",
+        "18",
+        "9",
+        "36"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 34,
+      "method": "numeric",
+      "expression": "20*3/2",
+      "result": "30",
+      "correct": 4,
+      "alternatives": [
+        "45",
+        "50",
+        "40/3",
+        "30",
+        "12"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 35,
+      "method": "numeric",
+      "expression": "(10-2*2)**2*2",
+      "result": "72",
+      "correct": 5,
+      "alternatives": [
+        "128",
+        "200",
+        "36",
+        "144",
+        "72"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 36,
+      "method": "numeric",
+      "expression": "pi*(7**2-5**2)",
+      "result": "24*pi",
+      "correct": 1,
+      "alternatives": [
+        "24*pi",
+        "4*pi",
+        "12*pi",
+        "74*pi",
+        "49*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 37,
+      "method": "numeric",
+      "expression": "2*4+2*pi*4*(90/360)",
+      "result": "2*pi + 8",
+      "correct": 2,
+      "alternatives": [
+        "2*pi",
+        "2*pi + 8",
+        "4 + 2*pi",
+        "8 + 4*pi",
+        "4*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 38,
+      "method": "numeric",
+      "expression": "pi*70*10/100",
+      "result": "7*pi",
+      "correct": 3,
+      "alternatives": [
+        "14*pi",
+        "70*pi",
+        "7*pi",
+        "7*pi/10",
+        "7*pi/2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 39,
+      "method": "numeric",
+      "expression": "114/2",
+      "result": "57",
+      "correct": 4,
+      "alternatives": [
+        "114",
+        "228",
+        "66",
+        "57",
+        "33"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 40,
+      "method": "numeric",
+      "expression": "2*sqrt(13**2-5**2)",
+      "result": "24",
+      "correct": 5,
+      "alternatives": [
+        "12",
+        "26",
+        "16",
+        "2*sqrt(194)",
+        "24"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 41,
+      "method": "numeric",
+      "expression": "sqrt(10**2-6**2)",
+      "result": "8",
+      "correct": 1,
+      "alternatives": [
+        "8",
+        "4",
+        "16",
+        "2*sqrt(34)",
+        "6"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 42,
+      "method": "numeric",
+      "expression": "sqrt(6**2+8**2)/2",
+      "result": "5",
+      "correct": 2,
+      "alternatives": [
+        "10",
+        "5",
+        "7",
+        "4",
+        "3"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 43,
+      "method": "numeric",
+      "expression": "1",
+      "result": "1",
+      "correct": 3,
+      "alternatives": [
+        "0",
+        "2",
+        "1",
+        "4",
+        "oo"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 44,
+      "method": "numeric",
+      "expression": "pi*4**2/4",
+      "result": "4*pi",
+      "correct": 4,
+      "alternatives": [
+        "16*pi",
+        "8*pi",
+        "2*pi",
+        "4*pi",
+        "4"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 45,
+      "method": "geometric property",
+      "expression": null,
+      "result": "Tangenti esternamente",
+      "correct": 5,
+      "alternatives": [
+        "Secanti in due punti",
+        "Tangenti internamente",
+        "Concentriche",
+        "Esterne senza punti comuni",
+        "Tangenti esternamente"
+      ],
+      "reason": "d=6=r1+r2, d diverso da |r1-r2|=2 e da 0."
+    },
+    {
+      "course": "tolc-s",
+      "id": 46,
+      "method": "numeric",
+      "expression": "pi*4**2/4-4*4/2",
+      "result": "-8 + 4*pi",
+      "correct": 1,
+      "alternatives": [
+        "-8 + 4*pi",
+        "-4 + 4*pi",
+        "-8 + 8*pi",
+        "4*pi",
+        "-8 + 16*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 47,
+      "method": "numeric",
+      "expression": "2*pi*3*8+pi*3**2",
+      "result": "57*pi",
+      "correct": 2,
+      "alternatives": [
+        "66*pi",
+        "57*pi",
+        "48*pi",
+        "24*pi",
+        "81*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 48,
+      "method": "numeric",
+      "expression": "pi*5*sqrt(5**2+12**2)",
+      "result": "65*pi",
+      "correct": 3,
+      "alternatives": [
+        "60*pi",
+        "25*pi",
+        "65*pi",
+        "90*pi",
+        "130*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 49,
+      "method": "numeric",
+      "expression": "4*pi*3**3/3",
+      "result": "36*pi",
+      "correct": 4,
+      "alternatives": [
+        "18*pi",
+        "12*pi",
+        "72*pi",
+        "36*pi",
+        "27*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 50,
+      "method": "numeric",
+      "expression": "sqrt(3**2+4**2+12**2)",
+      "result": "13",
+      "correct": 5,
+      "alternatives": [
+        "5",
+        "19",
+        "3*sqrt(17)",
+        "12",
+        "13"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 51,
+      "method": "numeric",
+      "expression": "80/40",
+      "result": "2",
+      "correct": 1,
+      "alternatives": [
+        "2",
+        "1/2",
+        "40",
+        "120",
+        "4"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 52,
+      "method": "numeric",
+      "expression": "120*(1-(1/2)**3)",
+      "result": "105",
+      "correct": 2,
+      "alternatives": [
+        "60",
+        "105",
+        "90",
+        "15",
+        "30"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 53,
+      "method": "numeric",
+      "expression": "sqrt(9/25)**3",
+      "result": "27/125",
+      "correct": 3,
+      "alternatives": [
+        "9/25",
+        "3/5",
+        "27/125",
+        "81/625",
+        "81/125"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 54,
+      "method": "numeric",
+      "expression": "(2*3)**3-4*pi*3**3/3",
+      "result": "216 - 36*pi",
+      "correct": 4,
+      "alternatives": [
+        "27 - 36*pi",
+        "216 - 108*pi",
+        "216 - 18*pi",
+        "216 - 36*pi",
+        "180*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 55,
+      "method": "numeric",
+      "expression": "(3+4+sqrt(3**2+4**2))*7",
+      "result": "84",
+      "correct": 5,
+      "alternatives": [
+        "42",
+        "49",
+        "96",
+        "21",
+        "84"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 56,
+      "method": "numeric",
+      "expression": "40*30*25/1000",
+      "result": "30",
+      "correct": 1,
+      "alternatives": [
+        "30",
+        "3",
+        "300",
+        "30000",
+        "12"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 57,
+      "method": "numeric",
+      "expression": "2500/10000",
+      "result": "1/4",
+      "correct": 2,
+      "alternatives": [
+        "25",
+        "1/4",
+        "5/2",
+        "1/40",
+        "1/400"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 58,
+      "method": "numeric",
+      "expression": "600*450/(30*30)",
+      "result": "300",
+      "correct": 3,
+      "alternatives": [
+        "30",
+        "90",
+        "300",
+        "150",
+        "900"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 59,
+      "method": "geometric property",
+      "expression": null,
+      "result": "Sono parallele",
+      "correct": 4,
+      "alternatives": [
+        "Sono incidenti",
+        "Sono sghembe",
+        "Sono perpendicolari fra loro",
+        "Sono parallele",
+        "Appartengono al piano"
+      ],
+      "reason": "Entrambe hanno direzione normale al piano; sono distinte."
+    },
+    {
+      "course": "tolc-s",
+      "id": 60,
+      "method": "numeric",
+      "expression": "sqrt((2+2)**2+2**2)",
+      "result": "2*sqrt(5)",
+      "correct": 5,
+      "alternatives": [
+        "2*sqrt(3)",
+        "6",
+        "4",
+        "2*sqrt(2)",
+        "2*sqrt(5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 61,
+      "method": "numeric",
+      "expression": "abs(10-(-5))/sqrt(3**2+4**2)",
+      "result": "3",
+      "correct": 1,
+      "alternatives": [
+        "3",
+        "15",
+        "5",
+        "3/5",
+        "15/7"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 62,
+      "method": "numeric",
+      "expression": "(8/2)*8/2",
+      "result": "16",
+      "correct": 2,
+      "alternatives": [
+        "32",
+        "16",
+        "8",
+        "12",
+        "64"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 63,
+      "method": "numeric",
+      "expression": "2*3",
+      "result": "6",
+      "correct": 3,
+      "alternatives": [
+        "3",
+        "0",
+        "6",
+        "-6",
+        "3/2"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 64,
+      "method": "numeric",
+      "expression": "1+(5-1)/(2-0)*3",
+      "result": "7",
+      "correct": 4,
+      "alternatives": [
+        "6",
+        "8",
+        "5",
+        "7",
+        "3"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 65,
+      "method": "numeric",
+      "expression": "sqrt(12+(-4/2)**2+(6/2)**2)",
+      "result": "5",
+      "correct": 5,
+      "alternatives": [
+        "25",
+        "2*sqrt(3)",
+        "sqrt(13)",
+        "3",
+        "5"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 66,
+      "method": "geometric property",
+      "expression": null,
+      "result": "L’insieme vuoto",
+      "correct": 1,
+      "alternatives": [
+        "L’insieme vuoto",
+        "Una circonferenza di raggio 2",
+        "Il solo punto (1, -2)",
+        "Una retta",
+        "Tutto il piano"
+      ],
+      "reason": "Somma di due quadrati reali non negativa, incompatibile con -4."
+    },
+    {
+      "course": "tolc-s",
+      "id": 67,
+      "method": "tangent normal and incidence",
+      "expression": null,
+      "result": "3*x+4*y-25",
+      "correct": 2,
+      "alternatives": [
+        "4*x - 3*y",
+        "3*x + 4*y - 25",
+        "3*x + 4*y - 5",
+        "4*x + 3*y - 25",
+        "y - 4"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 68,
+      "method": "circle substitution",
+      "expression": null,
+      "result": "(-2, 6)",
+      "correct": 3,
+      "alternatives": [
+        "(-4, 4)",
+        "(-3, 7)",
+        "(-2, 6)",
+        "(0, 4)",
+        "(-6, 2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 69,
+      "method": "all tangent parameters",
+      "expression": null,
+      "result": "{-3, 3}",
+      "correct": 4,
+      "alternatives": [
+        "{1}",
+        "{-9, 9}",
+        "{0}",
+        "{-3, 3}",
+        "Interval.open(-3, 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 70,
+      "method": "numeric",
+      "expression": "180-112",
+      "result": "68",
+      "correct": 5,
+      "alternatives": [
+        "112",
+        "56",
+        "248",
+        "78",
+        "68"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 71,
+      "method": "numeric",
+      "expression": "(2+4,-(-3))",
+      "result": "(6, 3)",
+      "correct": 1,
+      "alternatives": [
+        "(6, 3)",
+        "(6, -3)",
+        "(-6, 3)",
+        "(2, 7)",
+        "(-2, 3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 72,
+      "method": "numeric",
+      "expression": "(5,-2)",
+      "result": "(5, -2)",
+      "correct": 2,
+      "alternatives": [
+        "(2, 5)",
+        "(5, -2)",
+        "(-2, -5)",
+        "(-5, 2)",
+        "(2, -5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 73,
+      "method": "numeric",
+      "expression": "(2*1-4,2*(-1)-(-3))",
+      "result": "(-2, 1)",
+      "correct": 3,
+      "alternatives": [
+        "(-4, 3)",
+        "(2, -1)",
+        "(-2, 1)",
+        "(-3, 2)",
+        "(6, -5)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 74,
+      "method": "numeric",
+      "expression": "(1,-1+4)",
+      "result": "(1, 3)",
+      "correct": 4,
+      "alternatives": [
+        "(1, 1)",
+        "(2, 0)",
+        "(5/3, 1/3)",
+        "(1, 3)",
+        "(2, -1)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 75,
+      "method": "numeric",
+      "expression": "(1+2*(3-1),2+2*(1-2))",
+      "result": "(5, 0)",
+      "correct": 5,
+      "alternatives": [
+        "(6, 2)",
+        "(4, -2)",
+        "(3, 4)",
+        "(4, 0)",
+        "(5, 0)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 76,
+      "method": "numeric",
+      "expression": "(2+(3-(-1)),-3+(2-4))",
+      "result": "(6, -5)",
+      "correct": 1,
+      "alternatives": [
+        "(6, -5)",
+        "(4, -1)",
+        "(-2, -1)",
+        "(6, -1)",
+        "(3, 2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 77,
+      "method": "numeric",
+      "expression": "360/((6-2)*180/6)",
+      "result": "3",
+      "correct": 2,
+      "alternatives": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 78,
+      "method": "numeric",
+      "expression": "6*4*sqrt(4**2-2**2)/2",
+      "result": "24*sqrt(3)",
+      "correct": 3,
+      "alternatives": [
+        "12*sqrt(3)",
+        "48*sqrt(3)",
+        "24*sqrt(3)",
+        "24",
+        "16*sqrt(3)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 79,
+      "method": "numeric",
+      "expression": "4+9+12",
+      "result": "25",
+      "correct": 4,
+      "alternatives": [
+        "26",
+        "24",
+        "22",
+        "25",
+        "18"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 80,
+      "method": "numeric",
+      "expression": "sqrt((5-2)**2+3**2)",
+      "result": "3*sqrt(2)",
+      "correct": 5,
+      "alternatives": [
+        "3",
+        "sqrt(34)",
+        "sqrt(10)",
+        "6",
+        "3*sqrt(2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 81,
+      "method": "numeric",
+      "expression": "pi*(2**2+3**2)",
+      "result": "13*pi",
+      "correct": 1,
+      "alternatives": [
+        "13*pi",
+        "25*pi",
+        "5*pi",
+        "6*pi",
+        "10*pi"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 82,
+      "method": "numeric",
+      "expression": "((0+6+0)/3,(0+0+3)/3)",
+      "result": "(2, 1)",
+      "correct": 2,
+      "alternatives": [
+        "(3, 3/2)",
+        "(2, 1)",
+        "(2, 3/2)",
+        "(3, 1)",
+        "(1, 2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 83,
+      "method": "numeric",
+      "expression": "(3-(-1))*(5-2)",
+      "result": "12",
+      "correct": 3,
+      "alternatives": [
+        "15",
+        "8",
+        "12",
+        "7",
+        "20"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 84,
+      "method": "geometric property",
+      "expression": null,
+      "result": "area and side lengths",
+      "correct": 4,
+      "alternatives": [
+        "Ogni vertice resta fermo",
+        "L’orientamento dei vertici resta uguale",
+        "Il triangolo immagine è sempre disgiunto dall’originale",
+        "L’area e le lunghezze dei lati restano uguali",
+        "La sua area raddoppia"
+      ],
+      "reason": "Reflection matrix transpose times itself is identity; determinant -1 reverses orientation; points on axis only are fixed."
+    },
+    {
+      "course": "tolc-s",
+      "id": 85,
+      "method": "symbolic composition",
+      "expression": null,
+      "result": "x + 6",
+      "correct": 5,
+      "alternatives": [
+        "Traslazione di 3 unità a destra",
+        "Traslazione di 6 unità a sinistra",
+        "Rotazione di 180 gradi attorno all’origine",
+        "Simmetria rispetto a x = 3",
+        "Traslazione di 6 unità a destra"
+      ],
+      "reason": "Two reflections give (x+6,y); alternative displacements/mappings differ."
+    },
+    {
+      "course": "tolc-s",
+      "id": 86,
+      "method": "numeric",
+      "expression": "360/5",
+      "result": "72",
+      "correct": 1,
+      "alternatives": [
+        "72",
+        "36",
+        "60",
+        "108",
+        "180"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 87,
+      "method": "numeric",
+      "expression": "6+6+sqrt(6**2+6**2)",
+      "result": "6*sqrt(2) + 12",
+      "correct": 2,
+      "alternatives": [
+        "18",
+        "6*sqrt(2) + 12",
+        "6 + 6*sqrt(2)",
+        "12",
+        "18*sqrt(2)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 88,
+      "method": "coordinate predicate",
+      "expression": null,
+      "result": "squared distance < 4",
+      "correct": 3,
+      "alternatives": [
+        "(3, -2)",
+        "(1, 0)",
+        "(2, -2)",
+        "(-2, -2)",
+        "(1, 1)"
+      ],
+      "reason": ""
+    },
+    {
+      "course": "tolc-s",
+      "id": 89,
+      "method": "centroid change",
+      "expression": null,
+      "result": "2",
+      "correct": 4,
+      "alternatives": [
+        "Si sposta di 6 unità verso destra",
+        "Resta fermo",
+        "Si sposta di 3 unità verso destra",
+        "Si sposta di 2 unità verso destra",
+        "Si sposta di 2 unità verso l’alto"
+      ],
+      "reason": "Only one of three x coordinates increases 6; average shifts 2 right, y unchanged."
+    },
+    {
+      "course": "tolc-s",
+      "id": 90,
+      "method": "symbolic locus",
+      "expression": null,
+      "result": "[1]",
+      "correct": 5,
+      "alternatives": [
+        "$y=2$",
+        "$x=1$",
+        "$y=0$",
+        "$y=6$",
+        "$y=1$"
+      ],
+      "reason": "Squared distances equality gives y=1 for every x."
+    }
+  ],
+  "worked_and_theory_calculations": [
+    {
+      "name": "s1e1_height",
+      "expression": "sqrt(13**2-(10/2)**2)",
+      "result": "12"
+    },
+    {
+      "name": "s1e1_area",
+      "expression": "10*sqrt(13**2-5**2)/2",
+      "result": "60"
+    },
+    {
+      "name": "s1e2_slant",
+      "expression": "sqrt((14-8)**2+8**2)",
+      "result": "10"
+    },
+    {
+      "name": "s1e2_area",
+      "expression": "(14+8)*8/2",
+      "result": "88"
+    },
+    {
+      "name": "s1e2_perimeter",
+      "expression": "14+8+8+sqrt(6**2+8**2)",
+      "result": "40"
+    },
+    {
+      "name": "s1e3_endpoint",
+      "expression": "(7-4,4)",
+      "result": "(3, 4)"
+    },
+    {
+      "name": "s1e3_distance",
+      "expression": "sqrt((7-4)**2+4**2)",
+      "result": "5"
+    },
+    {
+      "name": "s1e3_difference",
+      "expression": "7+4+4-sqrt(3**2+4**2)",
+      "result": "10"
+    },
+    {
+      "name": "s2e1_area",
+      "expression": "6**2+pi*(6/2)**2/2",
+      "result": "9*pi/2 + 36"
+    },
+    {
+      "name": "s2e1_perimeter",
+      "expression": "3*6+pi*(6/2)",
+      "result": "3*pi + 18"
+    },
+    {
+      "name": "s2e2_capacity",
+      "expression": "pi*3**2*8",
+      "result": "72*pi"
+    },
+    {
+      "name": "s2e2_wall_bottom",
+      "expression": "2*pi*3*8+pi*3**2",
+      "result": "57*pi"
+    },
+    {
+      "name": "s2e3_box",
+      "expression": "(10-2*2)**2*2",
+      "result": "72"
+    },
+    {
+      "name": "s2e3_sheet",
+      "expression": "10**2-4*2**2",
+      "result": "84"
+    },
+    {
+      "name": "s3e1_slope",
+      "expression": "-1/(-1/2)",
+      "result": "2"
+    },
+    {
+      "name": "s3e1_intersection",
+      "expression": "(18/5,11/5)",
+      "result": "(18/5, 11/5)"
+    },
+    {
+      "name": "s3e2_center",
+      "expression": "(2,-3)",
+      "result": "(2, -3)"
+    },
+    {
+      "name": "s3e2_radius",
+      "expression": "sqrt(12+4+9)",
+      "result": "5"
+    },
+    {
+      "name": "s3e2_y1",
+      "expression": "-3+sqrt(25-(5-2)**2)",
+      "result": "1"
+    },
+    {
+      "name": "s3e2_y2",
+      "expression": "-3-sqrt(25-(5-2)**2)",
+      "result": "-7"
+    },
+    {
+      "name": "s3e3_x_intercept",
+      "expression": "5/2",
+      "result": "5/2"
+    },
+    {
+      "name": "I_s4e1_a",
+      "expression": "-16/((0+2)*(0-4))",
+      "result": "2"
+    },
+    {
+      "name": "I_s4e1_vertex",
+      "expression": "(1,2*(1+2)*(1-4))",
+      "result": "(1, -18)"
+    },
+    {
+      "name": "I_s4e2_focus",
+      "expression": "sqrt(25-9)",
+      "result": "4"
+    },
+    {
+      "name": "I_s4e2_axes",
+      "expression": "(2*sqrt(25),2*sqrt(9))",
+      "result": "(10, 6)"
+    },
+    {
+      "name": "I_s4e2_other_focus",
+      "expression": "2*sqrt(25)-3",
+      "result": "7"
+    },
+    {
+      "name": "I_s4e3_vertices",
+      "expression": "(-1,5)",
+      "result": "(-1, 5)"
+    },
+    {
+      "name": "I_s4e3_slopes",
+      "expression": "(-2/3,2/3)",
+      "result": "(-2/3, 2/3)"
+    },
+    {
+      "name": "S_s4e1_rotation",
+      "expression": "(1-(-1),2+3)",
+      "result": "(2, 5)"
+    },
+    {
+      "name": "S_s4e1_distance",
+      "expression": "sqrt((4-1)**2+(1-2)**2)",
+      "result": "sqrt(10)"
+    },
+    {
+      "name": "S_s4e2_order",
+      "expression": "(-(2+3),1)",
+      "result": "(-5, 1)"
+    },
+    {
+      "name": "S_s4e2_reverse",
+      "expression": "(-2+3,1)",
+      "result": "(1, 1)"
+    },
+    {
+      "name": "S_s4e3_area",
+      "expression": "6*6/2",
+      "result": "18"
+    },
+    {
+      "name": "S_s4e3_perimeter",
+      "expression": "6+6+sqrt(6**2+6**2)",
+      "result": "6*sqrt(2) + 12"
+    },
+    {
+      "name": "theory_angle",
+      "expression": "180-38",
+      "result": "142"
+    },
+    {
+      "name": "theory_area_scale",
+      "expression": "sqrt(18/50)",
+      "result": "3/5"
+    },
+    {
+      "name": "theory_map_scale",
+      "expression": "3*200/100",
+      "result": "6"
+    },
+    {
+      "name": "theory_shadow",
+      "expression": "12*2/3",
+      "result": "8"
+    },
+    {
+      "name": "theory_cutout_area",
+      "expression": "10*6-4*2",
+      "result": "52"
+    },
+    {
+      "name": "theory_hex_diagonals",
+      "expression": "6*(6-3)/2",
+      "result": "9"
+    },
+    {
+      "name": "theory_hex_angles",
+      "expression": "(6-2)*180",
+      "result": "720"
+    },
+    {
+      "name": "theory_chord",
+      "expression": "2*sqrt(5**2-3**2)",
+      "result": "8"
+    },
+    {
+      "name": "theory_box_diagonal",
+      "expression": "sqrt(3**2+4**2+12**2)",
+      "result": "13"
+    },
+    {
+      "name": "theory_water_height",
+      "expression": "6000/(40*30)",
+      "result": "5"
+    },
+    {
+      "name": "theory_midpoint",
+      "expression": "((-2+6)/2,(5-1)/2)",
+      "result": "(2, 2)"
+    },
+    {
+      "name": "theory_dilation",
+      "expression": "(1+2*(3-1),2+2*(1-2))",
+      "result": "(5, 0)"
+    }
+  ],
+  "figure_geometry_checks": {
+    "isosceles": {
+      "area": "60",
+      "perimeter": "36"
+    },
+    "cutout": {
+      "area": "52",
+      "perimeter": "32"
+    },
+    "trapezoid": {
+      "area": "88",
+      "perimeter": "40"
+    },
+    "region_S": {
+      "area": "18",
+      "perimeter": "6*sqrt(2) + 12"
+    },
+    "chord": "O(0,0), A(3,4), B(3,-4): radius5, distance3, chord8",
+    "semicircle": "center(3,6), radius3, t 0..pi: endpoints(6,6),(0,6), top(3,9)",
+    "circle_tangent": "radius4; y=4; contact(0,4)",
+    "line_intersection": "(2,5) on both lines",
+    "parabola_theory": "(1,1) on both curves; double root",
+    "parabola_sheet": "vertex(1,-18), y=-16 intersects x0,2",
+    "S_transform": "P(2,1) -> Q(5,1) -> R(-5,1); reverse S(1,1)"
+  },
+  "symbolic_equation_checks": 5,
+  "translation_formula_mismatches": []
+}

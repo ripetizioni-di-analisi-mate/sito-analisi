@@ -1,0 +1,1741 @@
+{
+  "revisore": "root, distinto dall’autore aritmetica",
+  "lettura_integrale": {
+    "quiz_unici": 90,
+    "quiz_percorso": 180,
+    "svolti_unici": 12,
+    "tracce_uniche": 10,
+    "teorie": 2,
+    "lingue": [
+      "IT",
+      "EN"
+    ]
+  },
+  "metodo": "Risoluzione manuale di tutti i 90 enunciati e alternative e di tutti i 12 svolti; lettura integrale IT/EN; 10 tracce identiche ai primi quiz. Controllo simbolico supplementare dei 30 casi elencati, non presentato come verifica automatica universale.",
+  "ricalcoli_simbolici": {
+    "quiz_1": "19/12",
+    "quiz_6": "{3}",
+    "quiz_18": "10 - 5*sqrt(2)",
+    "quiz_23_added": "{2}",
+    "quiz_26": "2",
+    "quiz_28": "Union(Interval.open(-oo, -2), Interval.open(1, oo))",
+    "quiz_31": "[23/5]",
+    "quiz_35": "6",
+    "quiz_37": "32",
+    "quiz_43": "9",
+    "quiz_49": "{-2, -1, 1, 2}",
+    "quiz_53": "Union(Interval.open(-1, 2), Interval.open(2, oo))",
+    "quiz_57": "3",
+    "quiz_64": "(1 + sqrt(3))/2",
+    "quiz_70": "5",
+    "quiz_73": "{39}",
+    "quiz_74": "42",
+    "quiz_79": "4/11",
+    "quiz_82": "4",
+    "quiz_90": "Interval.Lopen(2, 3)",
+    "svolti_1_1": "2/3",
+    "svolti_1_3": "99",
+    "svolti_2_1": "x**3",
+    "svolti_2_3": "1 + sqrt(5)",
+    "svolti_3_1": "[1]",
+    "svolti_3_2": "{1/2, 3}",
+    "svolti_4_1": "Interval.Ropen(-1, 4)",
+    "svolti_4_3": "{3}",
+    "teoria_coniugato": "2 + sqrt(5)",
+    "teoria_resto": "8"
+  },
+  "rilievi_corretti": [
+    "Q23: contains non identificava un unico insieme; ora sole soluzioni aggiunte in entrambe le lingue",
+    "Q38 EN: eliminato doppio punto interrogativo",
+    "Q76: decimale in formula in entrambe le lingue",
+    "Q74 EN: esplicitato che i pacchi hanno contenuto identico fra loro",
+    "Teoria integrata su decimali periodici/finiti, razionalizzazione, cubi e teorema del resto per sostenere tutti i quiz",
+    "Precisati dominio nelle trasformazioni equivalenti, esponente razionale e caso degenere dei parametri",
+    "Rimando teoria della scheda 2 completato; virgola italiana nella legenda della scheda 3"
+  ],
+  "figure": "Cinque grafici unici renderizzati e ispezionati: confronto valore assoluto, segno parabola, intersezione radicale/retta, punto escluso, confronto tariffe; dati e punti corretti. Non è una prova browser/mobile della pagina completa.",
+  "ripetitivita": "Copertura riletta per decisione: operazioni, confronto, modelli, dominio, segni, casi impossibili/indeterminati, parametri, divisibilità e resti. Esistono richiami della stessa abilità con obiettivo differente; assenti serie di soli coefficienti cambiati.",
+  "errori_aperti": [],
+  "files": [
+    {
+      "path": "src/content/teoria/tolc-i/aritmetica-e-algebra.md",
+      "sha256": "af19dd77596348b6abcd2107d2fb59db9e38a1e7b506f9e70e019b7377032717"
+    },
+    {
+      "path": "src/content/teoria/tolc-s/aritmetica-e-algebra.md",
+      "sha256": "22caf9614675af18d85905634a2158cf8babf3cc293efb05752a0081224b933e"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/aritmetica-e-algebra/1.md",
+      "sha256": "7269946eff912c9ded0ec5615b600a74165ca543471f62dfbb0214c7627b32b4"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/aritmetica-e-algebra/2.md",
+      "sha256": "75bbb9b39bbb71fbe90957251e8a1d3008f7c661a920fd7f837e8c0f6f1e00ef"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/aritmetica-e-algebra/3.md",
+      "sha256": "bf1e3bfc823815af5953820621e899572f521f99b03ae0cbbabf8d3056b8d8dd"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/aritmetica-e-algebra/4.md",
+      "sha256": "6f91b7552f79a1d584950a3f439bdd9ea8a556d897780e02e4200ae8fc6b1809"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/aritmetica-e-algebra/1.md",
+      "sha256": "7269946eff912c9ded0ec5615b600a74165ca543471f62dfbb0214c7627b32b4"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/aritmetica-e-algebra/2.md",
+      "sha256": "75bbb9b39bbb71fbe90957251e8a1d3008f7c661a920fd7f837e8c0f6f1e00ef"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/aritmetica-e-algebra/3.md",
+      "sha256": "bf1e3bfc823815af5953820621e899572f521f99b03ae0cbbabf8d3056b8d8dd"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/aritmetica-e-algebra/4.md",
+      "sha256": "6f91b7552f79a1d584950a3f439bdd9ea8a556d897780e02e4200ae8fc6b1809"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/1.md",
+      "sha256": "d377f7d98b17a35deb28ff1c6ff15121f0607cb3ca0a76c2e495786355568a00"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/10.md",
+      "sha256": "88596e67634edf2c5d02cacc8ae56b7ecb578ea817392d2bf7fe21d638654a38"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/2.md",
+      "sha256": "f9f431bf664df8983ea31953350520bb193f49c04f936f77d52a69854234a7c7"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/3.md",
+      "sha256": "b5ec82cc33a270a3313a2e2d970bb4cd503006975c46d02a486ce24a73220e97"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/4.md",
+      "sha256": "9afe33be83d7151617bfa77f0114f8705ba9a5bfd6429b52da11e90a0b118f3a"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/5.md",
+      "sha256": "acd7f7c8de5c4a0da6da5154bc835b1141699d6cfa82009c6167b0b65efb5e4e"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/6.md",
+      "sha256": "265e275ac9fe4466ba30c5a7a779b40ed4b743f3a38344b90fd4cbd9a7c7e2b6"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/7.md",
+      "sha256": "b8a5ad8db2dba6b66d14e1dc820e3fe43677bd0cae017acde79a597aa5378284"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/8.md",
+      "sha256": "97d3fa774ff78b7612020eb2cedb8c2efd78bf8b55d45d02ff3cc8c3f22735f0"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/aritmetica-e-algebra/9.md",
+      "sha256": "8e9cc83c96be934b409c2d208b580c843fdf58138cd513256c641edf016a1606"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/1.md",
+      "sha256": "d377f7d98b17a35deb28ff1c6ff15121f0607cb3ca0a76c2e495786355568a00"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/10.md",
+      "sha256": "88596e67634edf2c5d02cacc8ae56b7ecb578ea817392d2bf7fe21d638654a38"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/2.md",
+      "sha256": "f9f431bf664df8983ea31953350520bb193f49c04f936f77d52a69854234a7c7"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/3.md",
+      "sha256": "b5ec82cc33a270a3313a2e2d970bb4cd503006975c46d02a486ce24a73220e97"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/4.md",
+      "sha256": "9afe33be83d7151617bfa77f0114f8705ba9a5bfd6429b52da11e90a0b118f3a"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/5.md",
+      "sha256": "acd7f7c8de5c4a0da6da5154bc835b1141699d6cfa82009c6167b0b65efb5e4e"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/6.md",
+      "sha256": "265e275ac9fe4466ba30c5a7a779b40ed4b743f3a38344b90fd4cbd9a7c7e2b6"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/7.md",
+      "sha256": "b8a5ad8db2dba6b66d14e1dc820e3fe43677bd0cae017acde79a597aa5378284"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/8.md",
+      "sha256": "97d3fa774ff78b7612020eb2cedb8c2efd78bf8b55d45d02ff3cc8c3f22735f0"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/aritmetica-e-algebra/9.md",
+      "sha256": "8e9cc83c96be934b409c2d208b580c843fdf58138cd513256c641edf016a1606"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/1.md",
+      "sha256": "93364c579cfae5947d42dfc8f9835b2c29b4f7013d5f085e6bb436f06e3b2af2"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/10.md",
+      "sha256": "58b5de3f1c91768a5e92ffbdc44d95348d271699157d4980973d119b01a15ce3"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/11.md",
+      "sha256": "2ad9d604157d2be91cbc7ac5548e79da6405bff3fdb7a3258a67ff2e274eca59"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/12.md",
+      "sha256": "5b6d6bbe591bc36037998b9ae4b4b9adb06661f02d753527665080b3774c05dd"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/13.md",
+      "sha256": "f9e874115a7d254cdfb24c6750e5002f3ae427a62230aef9813ddbb42798f1fd"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/14.md",
+      "sha256": "f6060ccf8dbfaea9984da4e16f93e676ea399c9c67afd6a8fa99ca3adbeb7c4a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/15.md",
+      "sha256": "18a4d7c0ca4386d6ff45dc2f9b315dda8755e96879da8e188396d542a94a8df3"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/16.md",
+      "sha256": "24e80857db96e9fa8537cfd66fdd73e4995f8c047c2a554609e543502da68621"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/17.md",
+      "sha256": "48cbc34f24464b55c129e2f8df2e52c12d3d623ec4fe05f8effcce89b84dcff5"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/18.md",
+      "sha256": "6f08461dbd85577e969cb6e7271d1786c93113b696f9e4c7102c696437d884f1"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/19.md",
+      "sha256": "b3a98c57bcd56e57708e3fc8ed33c7fd82815640a2710777461b8d99509e4d7f"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/2.md",
+      "sha256": "38967aecb6f607834c0c34d713b439dd0859a092d3efc5b8fb9bd07664beb83d"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/20.md",
+      "sha256": "bd9c2d68e0cfa9089a09d423122ed93e2a75e5371f786e1e5b22ee9d4838de76"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/21.md",
+      "sha256": "2355b418fe372c157b3a95bdadab730b1674e4a5068a2def884a46eeea86dc4c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/22.md",
+      "sha256": "549f324812e1d604845027141538ee08fa28b3b79db3dfccba7657d94ead1b48"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/23.md",
+      "sha256": "f32a921d5456f366898316ca54a9a733ef23dfe213c215f7088df68b2f8bc273"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/24.md",
+      "sha256": "471392a7685e65fd548e201d090620fef760e41cde4867871083b50d85cdb0e0"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/25.md",
+      "sha256": "407915c32c2f39d4490aece19144093e74bd1b77af43d4f828541d5989032f41"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/26.md",
+      "sha256": "106ac90b514340c3278021a1f48abd84417a76e226f897d550fe2a92551b80d8"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/27.md",
+      "sha256": "486e42f0291e1b2a126e6d1a45d4c14f82e3ad38d3f11658256501b01bc05547"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/28.md",
+      "sha256": "f78df081bd50f6b1528ff48066516ba884d18be521bb1776729b962902babd2a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/29.md",
+      "sha256": "204d49bcd2c6ab4de2d9ba3aa1a15a447da43079b3d61ee6fab1f65d292c078c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/3.md",
+      "sha256": "78a428357d9ee7edd71e73cfaf67d5d3c46d7da940e06ed457ff254cf8bbc66e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/30.md",
+      "sha256": "982636da7237673022424f3cf5efe39f7712cd3ca410b58eea53b08c63aad3ae"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/31.md",
+      "sha256": "837f9f55adc80d517e7571ed7621ddb40e2ca82736e9622751eec2b27226f39d"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/32.md",
+      "sha256": "2f7d287cefeca0db4e6d914910f5622fb4dcd6798d0d69b89fb1a8dbbec01eb4"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/33.md",
+      "sha256": "49117dca705c693e1f7142850dc836eed108e06cbc6c7cd97cb1151dc994c34e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/34.md",
+      "sha256": "b182234039f29f9fc5c4564f12ada5c90b5cbdff1cc26cae15091bfdfbdff559"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/35.md",
+      "sha256": "9f077f3673a63525d001df138b3941e016d23fffb8483248e660d3a17cf11e9e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/36.md",
+      "sha256": "d8fa8928b2c7f704d691b4ae06b27cff2205da282c0c9709e63bdf221c600e13"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/37.md",
+      "sha256": "8e8ed1f528a0e416f57d9bbc80f0d9469053364411cb44b609d94fad8fab0e29"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/38.md",
+      "sha256": "06b7ab52d7b558d71987a1049e302f1aac38b3059c700ea25c919c7fb2a31bea"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/39.md",
+      "sha256": "98a1e8c17432a54c66c8f132198cc976c95c40a0b4ee7af5a9f6869fcd959462"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/4.md",
+      "sha256": "2dafbb1e6584e6e900821cb33706032a9b29b3285b5fbf1618ee6ea8fd4320c7"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/40.md",
+      "sha256": "197564c8de52c070077c18bdb3161789ca8014b9886405b4a5a9c9047e18df81"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/41.md",
+      "sha256": "f8ca8c2e04bc7bff4d80752d5ef2581675f275abcd4dd5b5e16de4d721f2422a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/42.md",
+      "sha256": "41dc97042ec6b688de55c2c13ff87b360810a75d0c0b3b28a027ac78cb56512e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/43.md",
+      "sha256": "b0739931d9f02e37eb50b4e6d0ec8699a195c3e6e10f2f2122ed011351546d5f"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/44.md",
+      "sha256": "8e24268a0a045d8c1c14c31f8e2b6e7613c3b4edc38c7895e77a68fdaef42755"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/45.md",
+      "sha256": "e1782be33ee7d6ee59e71600f9cf4be6081fefe1d3f5a00fdd582b32aa08ebaa"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/46.md",
+      "sha256": "c490a4add31c2ca495d1cec37aff5c200709c0d7f75d100181f810da3682abf6"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/47.md",
+      "sha256": "4fe9edc6ef9fee2d6bf5a08b24fe40fc8e638a33c2454acae540d8dab7772d7b"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/48.md",
+      "sha256": "eb2246c73edec53d17b2477b9d41fe5ea747353381447c55e592941d05292fd8"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/49.md",
+      "sha256": "854df9a1bafebf8a89da18b24802b139d4d94347a76c272000a824173d23440b"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/5.md",
+      "sha256": "2d59714364d953f6241a5b7dc82201fbf45d58e586385fb86c827cd12ef64bb0"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/50.md",
+      "sha256": "dd40b57d6b6d7ec32a4bdb510f201fde895a41f7c005caaf825f52fa8a55b45a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/51.md",
+      "sha256": "62003253853fe4eaa35e73f11dbfe084ab453e1ac29c665a25ee7e1644a48c07"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/52.md",
+      "sha256": "8f3f69624cae437b91d907af71e2e3b68cf4fa3f553303acfa2b90448c57cb74"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/53.md",
+      "sha256": "f0ee6b6c1fb9bc3456c3f89b6e23be1e7adbb6ad1e29243bdae2fd119231dcbc"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/54.md",
+      "sha256": "d31b839450a56324295271ff56226042464afd270d788d0031cb0dfb178eea9c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/55.md",
+      "sha256": "07ec0c92ca9b048e6e78fa43b52cbcef621d960e3489687f1c250f220a830703"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/56.md",
+      "sha256": "118fc0090d5b8071b61f43c06dfbb50ff28f13542e23a58043aaf1c9f0d64e88"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/57.md",
+      "sha256": "3d6b99da73ee5e0cac6099a5718bc3011fa01944ca37ce74accb6e902d8f5c90"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/58.md",
+      "sha256": "09c0ba52784d4901d4195a7bb86449bf5afd649cb39a8f2552a5748e13c18c29"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/59.md",
+      "sha256": "78c3e0ddc8430e95323b8e287847186204b271a2490fa82f724ebd9abbe9cbe4"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/6.md",
+      "sha256": "4e10034654241ca4cc003704ab909fe9bd90a546f49e2fd2a5d9bf3a00aa72e8"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/60.md",
+      "sha256": "1c3c369bdbdb72fa6a27de610eeabe4b9ff1f19e0b4490c2d36597a65a48c654"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/61.md",
+      "sha256": "b70f9b1f6f213e1c5448671a4bd68ea905180283296319f13dcc3a49771059d6"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/62.md",
+      "sha256": "8b86e2e06e74855e7ed31a4698ac46f8eab3f8d3e84075764e5a4db02e2f9557"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/63.md",
+      "sha256": "497a8b154e0fa6c0abeb00cd445b83203dc9ebb2ac9cf593b1c16f5bfb183c31"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/64.md",
+      "sha256": "e052d166a7db2d872d2c433d991f81c92e47a14df5a0b09eb0cfbb60b9af7bdf"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/65.md",
+      "sha256": "88dabd6a13539b13ed3288b9bbeb8ba06e20e226c68d9d42ee9344071e6a1a35"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/66.md",
+      "sha256": "409906453342e13e8cdc79af485f88a54931fdaf8ad3834d0b8bcfbcb37f50fb"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/67.md",
+      "sha256": "c66afdee5cc0f2216cf0e4acd7bfb42713ea66fa18c51f4e4aaa4202e1da08a2"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/68.md",
+      "sha256": "2d127f5f067966f2072e49dd288560785a311d51dfaebd2d69d115002f68293c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/69.md",
+      "sha256": "f055edf58696bf437c1e91143ebd4005ffa81a5bf90154f2596cafc95bc58f86"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/7.md",
+      "sha256": "6cc7d3b73716610e182452ada20b96b2c42fc5851a4df0137b10013c6a2c81b4"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/70.md",
+      "sha256": "439d00b31e9c85399a8a613e9a9778fc19795e423315b10f1e10f74ac7a5fb2b"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/71.md",
+      "sha256": "9b37b832c8804eb9c97f7065fcd2bb1c6650dcaccc6573589ad4f7745679b492"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/72.md",
+      "sha256": "0c87bd9d5d421cf0c20395c9cb1934fb7295d07e6e91312ee983d55328fac357"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/73.md",
+      "sha256": "edc6336a482b16cf68cba3dfdf2dc8ca4d784d757694424b2321fc8e60b64152"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/74.md",
+      "sha256": "85a67c6832395a6625e81b13975926c022bf6f9a8578c750acd3b35085c6c146"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/75.md",
+      "sha256": "62513d9c027229fd66e25c68b77888d93330446442259bc56d5bdbbb42440850"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/76.md",
+      "sha256": "2dc51a5deda24412229642a9a440319878086c47f979c4ee891d6036f21d55b4"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/77.md",
+      "sha256": "a4091344674f467adc10c470bad83789be858b766c4eb1694ca80f7d5429ee64"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/78.md",
+      "sha256": "b07626f71a7cf129cd778116c3d77b570db97562b844eb09e5c16e1819aa9451"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/79.md",
+      "sha256": "97f2d46bb2f50c312e28a8533751274db7a9a796da2c29e2e5e73a8ade1ddf6e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/8.md",
+      "sha256": "bdc9a7d7bc4be46c7eee494d2b8052a4600c7c236381224f5db9e95f0aa572bc"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/80.md",
+      "sha256": "a1b4fa797266284cc996c466e16eecdfa6d429c84e2f184de8224c5a77476fae"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/81.md",
+      "sha256": "06cd346f00d0b6449237862d6db4cc37bb509825aa28858d66a6f68c45569c38"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/82.md",
+      "sha256": "58fe002338b58660e80e2bb84acc12a5af53916786f55a7eb48cc428ef355f58"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/83.md",
+      "sha256": "33e585bb50008735a3f5f8d44eaaab51766051a57c0eff2af5619f3a2cf5a44c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/84.md",
+      "sha256": "01b5ae694291180f1104ab676264fb1167c1f2ec07b4484c689df6b470c91555"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/85.md",
+      "sha256": "dde3f9d96c4d34faacd12efdf21bcd9239dcbdebb80edc42b8caca000b5de535"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/86.md",
+      "sha256": "30db8b503a030a07a25eeb73f0e6ec5d37baf31d17abb1ccdddad6454fff63b2"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/87.md",
+      "sha256": "97dfb9442c0c345c2565963a891699fa0a317d45ba5cefa9319805d7aa7c2773"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/88.md",
+      "sha256": "67127390153394ab0832f508a56d2cb8367a0bfc6972fa664944764dbd61ab5c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/89.md",
+      "sha256": "5cf4b655174f9b73c9ff7b031e9802aee90ab18f2329f308c2fdaa43305473b5"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/9.md",
+      "sha256": "7536d6fbbfef2ecbb95f0fbc0ed309b3fb2c80b24f8af1d7144ec78a061e7165"
+    },
+    {
+      "path": "src/content/domande/tolc-i/aritmetica-e-algebra/90.md",
+      "sha256": "99ff8971e77e57bd2d09e3fd1033e11b60fe7f683bc37512a46b9d9839345d35"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/1.md",
+      "sha256": "93364c579cfae5947d42dfc8f9835b2c29b4f7013d5f085e6bb436f06e3b2af2"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/10.md",
+      "sha256": "58b5de3f1c91768a5e92ffbdc44d95348d271699157d4980973d119b01a15ce3"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/11.md",
+      "sha256": "2ad9d604157d2be91cbc7ac5548e79da6405bff3fdb7a3258a67ff2e274eca59"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/12.md",
+      "sha256": "5b6d6bbe591bc36037998b9ae4b4b9adb06661f02d753527665080b3774c05dd"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/13.md",
+      "sha256": "f9e874115a7d254cdfb24c6750e5002f3ae427a62230aef9813ddbb42798f1fd"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/14.md",
+      "sha256": "f6060ccf8dbfaea9984da4e16f93e676ea399c9c67afd6a8fa99ca3adbeb7c4a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/15.md",
+      "sha256": "18a4d7c0ca4386d6ff45dc2f9b315dda8755e96879da8e188396d542a94a8df3"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/16.md",
+      "sha256": "24e80857db96e9fa8537cfd66fdd73e4995f8c047c2a554609e543502da68621"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/17.md",
+      "sha256": "48cbc34f24464b55c129e2f8df2e52c12d3d623ec4fe05f8effcce89b84dcff5"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/18.md",
+      "sha256": "6f08461dbd85577e969cb6e7271d1786c93113b696f9e4c7102c696437d884f1"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/19.md",
+      "sha256": "b3a98c57bcd56e57708e3fc8ed33c7fd82815640a2710777461b8d99509e4d7f"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/2.md",
+      "sha256": "38967aecb6f607834c0c34d713b439dd0859a092d3efc5b8fb9bd07664beb83d"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/20.md",
+      "sha256": "bd9c2d68e0cfa9089a09d423122ed93e2a75e5371f786e1e5b22ee9d4838de76"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/21.md",
+      "sha256": "2355b418fe372c157b3a95bdadab730b1674e4a5068a2def884a46eeea86dc4c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/22.md",
+      "sha256": "549f324812e1d604845027141538ee08fa28b3b79db3dfccba7657d94ead1b48"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/23.md",
+      "sha256": "f32a921d5456f366898316ca54a9a733ef23dfe213c215f7088df68b2f8bc273"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/24.md",
+      "sha256": "471392a7685e65fd548e201d090620fef760e41cde4867871083b50d85cdb0e0"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/25.md",
+      "sha256": "407915c32c2f39d4490aece19144093e74bd1b77af43d4f828541d5989032f41"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/26.md",
+      "sha256": "106ac90b514340c3278021a1f48abd84417a76e226f897d550fe2a92551b80d8"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/27.md",
+      "sha256": "486e42f0291e1b2a126e6d1a45d4c14f82e3ad38d3f11658256501b01bc05547"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/28.md",
+      "sha256": "f78df081bd50f6b1528ff48066516ba884d18be521bb1776729b962902babd2a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/29.md",
+      "sha256": "204d49bcd2c6ab4de2d9ba3aa1a15a447da43079b3d61ee6fab1f65d292c078c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/3.md",
+      "sha256": "78a428357d9ee7edd71e73cfaf67d5d3c46d7da940e06ed457ff254cf8bbc66e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/30.md",
+      "sha256": "982636da7237673022424f3cf5efe39f7712cd3ca410b58eea53b08c63aad3ae"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/31.md",
+      "sha256": "837f9f55adc80d517e7571ed7621ddb40e2ca82736e9622751eec2b27226f39d"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/32.md",
+      "sha256": "2f7d287cefeca0db4e6d914910f5622fb4dcd6798d0d69b89fb1a8dbbec01eb4"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/33.md",
+      "sha256": "49117dca705c693e1f7142850dc836eed108e06cbc6c7cd97cb1151dc994c34e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/34.md",
+      "sha256": "b182234039f29f9fc5c4564f12ada5c90b5cbdff1cc26cae15091bfdfbdff559"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/35.md",
+      "sha256": "9f077f3673a63525d001df138b3941e016d23fffb8483248e660d3a17cf11e9e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/36.md",
+      "sha256": "d8fa8928b2c7f704d691b4ae06b27cff2205da282c0c9709e63bdf221c600e13"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/37.md",
+      "sha256": "8e8ed1f528a0e416f57d9bbc80f0d9469053364411cb44b609d94fad8fab0e29"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/38.md",
+      "sha256": "06b7ab52d7b558d71987a1049e302f1aac38b3059c700ea25c919c7fb2a31bea"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/39.md",
+      "sha256": "98a1e8c17432a54c66c8f132198cc976c95c40a0b4ee7af5a9f6869fcd959462"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/4.md",
+      "sha256": "2dafbb1e6584e6e900821cb33706032a9b29b3285b5fbf1618ee6ea8fd4320c7"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/40.md",
+      "sha256": "197564c8de52c070077c18bdb3161789ca8014b9886405b4a5a9c9047e18df81"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/41.md",
+      "sha256": "f8ca8c2e04bc7bff4d80752d5ef2581675f275abcd4dd5b5e16de4d721f2422a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/42.md",
+      "sha256": "41dc97042ec6b688de55c2c13ff87b360810a75d0c0b3b28a027ac78cb56512e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/43.md",
+      "sha256": "b0739931d9f02e37eb50b4e6d0ec8699a195c3e6e10f2f2122ed011351546d5f"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/44.md",
+      "sha256": "8e24268a0a045d8c1c14c31f8e2b6e7613c3b4edc38c7895e77a68fdaef42755"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/45.md",
+      "sha256": "e1782be33ee7d6ee59e71600f9cf4be6081fefe1d3f5a00fdd582b32aa08ebaa"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/46.md",
+      "sha256": "c490a4add31c2ca495d1cec37aff5c200709c0d7f75d100181f810da3682abf6"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/47.md",
+      "sha256": "4fe9edc6ef9fee2d6bf5a08b24fe40fc8e638a33c2454acae540d8dab7772d7b"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/48.md",
+      "sha256": "eb2246c73edec53d17b2477b9d41fe5ea747353381447c55e592941d05292fd8"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/49.md",
+      "sha256": "854df9a1bafebf8a89da18b24802b139d4d94347a76c272000a824173d23440b"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/5.md",
+      "sha256": "2d59714364d953f6241a5b7dc82201fbf45d58e586385fb86c827cd12ef64bb0"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/50.md",
+      "sha256": "dd40b57d6b6d7ec32a4bdb510f201fde895a41f7c005caaf825f52fa8a55b45a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/51.md",
+      "sha256": "62003253853fe4eaa35e73f11dbfe084ab453e1ac29c665a25ee7e1644a48c07"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/52.md",
+      "sha256": "8f3f69624cae437b91d907af71e2e3b68cf4fa3f553303acfa2b90448c57cb74"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/53.md",
+      "sha256": "f0ee6b6c1fb9bc3456c3f89b6e23be1e7adbb6ad1e29243bdae2fd119231dcbc"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/54.md",
+      "sha256": "d31b839450a56324295271ff56226042464afd270d788d0031cb0dfb178eea9c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/55.md",
+      "sha256": "07ec0c92ca9b048e6e78fa43b52cbcef621d960e3489687f1c250f220a830703"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/56.md",
+      "sha256": "118fc0090d5b8071b61f43c06dfbb50ff28f13542e23a58043aaf1c9f0d64e88"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/57.md",
+      "sha256": "3d6b99da73ee5e0cac6099a5718bc3011fa01944ca37ce74accb6e902d8f5c90"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/58.md",
+      "sha256": "09c0ba52784d4901d4195a7bb86449bf5afd649cb39a8f2552a5748e13c18c29"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/59.md",
+      "sha256": "78c3e0ddc8430e95323b8e287847186204b271a2490fa82f724ebd9abbe9cbe4"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/6.md",
+      "sha256": "4e10034654241ca4cc003704ab909fe9bd90a546f49e2fd2a5d9bf3a00aa72e8"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/60.md",
+      "sha256": "1c3c369bdbdb72fa6a27de610eeabe4b9ff1f19e0b4490c2d36597a65a48c654"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/61.md",
+      "sha256": "b70f9b1f6f213e1c5448671a4bd68ea905180283296319f13dcc3a49771059d6"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/62.md",
+      "sha256": "8b86e2e06e74855e7ed31a4698ac46f8eab3f8d3e84075764e5a4db02e2f9557"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/63.md",
+      "sha256": "497a8b154e0fa6c0abeb00cd445b83203dc9ebb2ac9cf593b1c16f5bfb183c31"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/64.md",
+      "sha256": "e052d166a7db2d872d2c433d991f81c92e47a14df5a0b09eb0cfbb60b9af7bdf"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/65.md",
+      "sha256": "88dabd6a13539b13ed3288b9bbeb8ba06e20e226c68d9d42ee9344071e6a1a35"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/66.md",
+      "sha256": "409906453342e13e8cdc79af485f88a54931fdaf8ad3834d0b8bcfbcb37f50fb"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/67.md",
+      "sha256": "c66afdee5cc0f2216cf0e4acd7bfb42713ea66fa18c51f4e4aaa4202e1da08a2"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/68.md",
+      "sha256": "2d127f5f067966f2072e49dd288560785a311d51dfaebd2d69d115002f68293c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/69.md",
+      "sha256": "f055edf58696bf437c1e91143ebd4005ffa81a5bf90154f2596cafc95bc58f86"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/7.md",
+      "sha256": "6cc7d3b73716610e182452ada20b96b2c42fc5851a4df0137b10013c6a2c81b4"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/70.md",
+      "sha256": "439d00b31e9c85399a8a613e9a9778fc19795e423315b10f1e10f74ac7a5fb2b"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/71.md",
+      "sha256": "9b37b832c8804eb9c97f7065fcd2bb1c6650dcaccc6573589ad4f7745679b492"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/72.md",
+      "sha256": "0c87bd9d5d421cf0c20395c9cb1934fb7295d07e6e91312ee983d55328fac357"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/73.md",
+      "sha256": "edc6336a482b16cf68cba3dfdf2dc8ca4d784d757694424b2321fc8e60b64152"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/74.md",
+      "sha256": "85a67c6832395a6625e81b13975926c022bf6f9a8578c750acd3b35085c6c146"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/75.md",
+      "sha256": "62513d9c027229fd66e25c68b77888d93330446442259bc56d5bdbbb42440850"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/76.md",
+      "sha256": "2dc51a5deda24412229642a9a440319878086c47f979c4ee891d6036f21d55b4"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/77.md",
+      "sha256": "a4091344674f467adc10c470bad83789be858b766c4eb1694ca80f7d5429ee64"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/78.md",
+      "sha256": "b07626f71a7cf129cd778116c3d77b570db97562b844eb09e5c16e1819aa9451"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/79.md",
+      "sha256": "97f2d46bb2f50c312e28a8533751274db7a9a796da2c29e2e5e73a8ade1ddf6e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/8.md",
+      "sha256": "bdc9a7d7bc4be46c7eee494d2b8052a4600c7c236381224f5db9e95f0aa572bc"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/80.md",
+      "sha256": "a1b4fa797266284cc996c466e16eecdfa6d429c84e2f184de8224c5a77476fae"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/81.md",
+      "sha256": "06cd346f00d0b6449237862d6db4cc37bb509825aa28858d66a6f68c45569c38"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/82.md",
+      "sha256": "58fe002338b58660e80e2bb84acc12a5af53916786f55a7eb48cc428ef355f58"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/83.md",
+      "sha256": "33e585bb50008735a3f5f8d44eaaab51766051a57c0eff2af5619f3a2cf5a44c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/84.md",
+      "sha256": "01b5ae694291180f1104ab676264fb1167c1f2ec07b4484c689df6b470c91555"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/85.md",
+      "sha256": "dde3f9d96c4d34faacd12efdf21bcd9239dcbdebb80edc42b8caca000b5de535"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/86.md",
+      "sha256": "30db8b503a030a07a25eeb73f0e6ec5d37baf31d17abb1ccdddad6454fff63b2"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/87.md",
+      "sha256": "97dfb9442c0c345c2565963a891699fa0a317d45ba5cefa9319805d7aa7c2773"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/88.md",
+      "sha256": "67127390153394ab0832f508a56d2cb8367a0bfc6972fa664944764dbd61ab5c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/89.md",
+      "sha256": "5cf4b655174f9b73c9ff7b031e9802aee90ab18f2329f308c2fdaa43305473b5"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/9.md",
+      "sha256": "7536d6fbbfef2ecbb95f0fbc0ed309b3fb2c80b24f8af1d7144ec78a061e7165"
+    },
+    {
+      "path": "src/content/domande/tolc-s/aritmetica-e-algebra/90.md",
+      "sha256": "99ff8971e77e57bd2d09e3fd1033e11b60fe7f683bc37512a46b9d9839345d35"
+    },
+    {
+      "path": "src/content-en/teoria/tolc-i/aritmetica-e-algebra.md",
+      "sha256": "3ddf9e5f9ac5e3a1c6033b82d32254b599f756f1ca72faf527a1227dfe45f673"
+    },
+    {
+      "path": "src/content-en/teoria/tolc-s/aritmetica-e-algebra.md",
+      "sha256": "e07b75123b400ef7fe2add3f27f5ab114edb3ea62d0a5d256cbb2b51af33bc9b"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/aritmetica-e-algebra/1.md",
+      "sha256": "a0cff4e7244fd5fb392252d2f95ff334b84fa2260d0789dff127f04c72022c77"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/aritmetica-e-algebra/2.md",
+      "sha256": "998eadb152b1d23804fad242c8689a977228ae63da8345ff28007e9c91eb41e8"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/aritmetica-e-algebra/3.md",
+      "sha256": "090d5d3ef7ee31b2597c13345fa83fc4279dfce337fe0ff0d2b6688aa4170269"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/aritmetica-e-algebra/4.md",
+      "sha256": "632f4dfa061ea32a9ff54a89f01977da66f5ff4510473517c4608373bb4aed76"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/aritmetica-e-algebra/1.md",
+      "sha256": "a0cff4e7244fd5fb392252d2f95ff334b84fa2260d0789dff127f04c72022c77"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/aritmetica-e-algebra/2.md",
+      "sha256": "998eadb152b1d23804fad242c8689a977228ae63da8345ff28007e9c91eb41e8"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/aritmetica-e-algebra/3.md",
+      "sha256": "090d5d3ef7ee31b2597c13345fa83fc4279dfce337fe0ff0d2b6688aa4170269"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/aritmetica-e-algebra/4.md",
+      "sha256": "632f4dfa061ea32a9ff54a89f01977da66f5ff4510473517c4608373bb4aed76"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/1.md",
+      "sha256": "3c8203f3856d366f58c19dcb7f60016d33db07685ca8c6b13367a90691108bf5"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/10.md",
+      "sha256": "740c517c4191d713026e2f7f36d57f30f54afe3491cffb509e9f4d1f888ed548"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/2.md",
+      "sha256": "08a6f60a054cf2e288444478bad3ed133f9e1a08e1f4367e03e8f85ce618a837"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/3.md",
+      "sha256": "5400f2b1e26531977f611ca413b0852888f832b69ac56ee25f937aa6a0580348"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/4.md",
+      "sha256": "8ab5823f12d4974382f817e1d8d3aff8bc05c31eaa4680678e7e79cf9df1612d"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/5.md",
+      "sha256": "44f9ed83353e6b9b4314d16c06e7f65115d88d35000821300d385ec17c6d3285"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/6.md",
+      "sha256": "9fae1c3d8c7f080806d9cf010d93fdb01ae05d0c444b0b90edf784d4bc5f11d4"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/7.md",
+      "sha256": "b3e5f6029357f77f0e842ebfd7004c871b2370ec7cee9182cec97ffe82ddec9d"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/8.md",
+      "sha256": "57eec7dca5a0035c091e2d4897223cddfe50da57c112239909e85c4255b30367"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/aritmetica-e-algebra/9.md",
+      "sha256": "74403ce7995dde1671cf66842d108dc7ef4c571f1a0ddd718f31fdb1de0033c0"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/1.md",
+      "sha256": "3c8203f3856d366f58c19dcb7f60016d33db07685ca8c6b13367a90691108bf5"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/10.md",
+      "sha256": "740c517c4191d713026e2f7f36d57f30f54afe3491cffb509e9f4d1f888ed548"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/2.md",
+      "sha256": "08a6f60a054cf2e288444478bad3ed133f9e1a08e1f4367e03e8f85ce618a837"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/3.md",
+      "sha256": "5400f2b1e26531977f611ca413b0852888f832b69ac56ee25f937aa6a0580348"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/4.md",
+      "sha256": "8ab5823f12d4974382f817e1d8d3aff8bc05c31eaa4680678e7e79cf9df1612d"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/5.md",
+      "sha256": "44f9ed83353e6b9b4314d16c06e7f65115d88d35000821300d385ec17c6d3285"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/6.md",
+      "sha256": "9fae1c3d8c7f080806d9cf010d93fdb01ae05d0c444b0b90edf784d4bc5f11d4"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/7.md",
+      "sha256": "b3e5f6029357f77f0e842ebfd7004c871b2370ec7cee9182cec97ffe82ddec9d"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/8.md",
+      "sha256": "57eec7dca5a0035c091e2d4897223cddfe50da57c112239909e85c4255b30367"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/aritmetica-e-algebra/9.md",
+      "sha256": "74403ce7995dde1671cf66842d108dc7ef4c571f1a0ddd718f31fdb1de0033c0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/1.md",
+      "sha256": "9ea41f0ba01a2598e2469ad2e5a9fee9312fb8524549ba32eda6f256114e84d9"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/10.md",
+      "sha256": "f0c2621c796b305827d6eb68c8695010d82b97bc8111012bbac44c75fb84d817"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/11.md",
+      "sha256": "51161274c6dfe454249f4a9f1a2f26672e88524f460230752d59b036bc9e37de"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/12.md",
+      "sha256": "c6fe933796316c0e2aaca2f0f19865c706dbb954f3e3c6d36068711c3e1740e6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/13.md",
+      "sha256": "1a58e247042efce288eca070d2150d74294878cb847a9b051467ac4ff25dbfdb"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/14.md",
+      "sha256": "f0b7d8c90c62ac588ac1e7b88a0dd14680dd5a1eb4ed419fb930666e15663984"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/15.md",
+      "sha256": "996b38394f65aee50571f33f0e5e62751855b0e72cf5334ebaa10130fa5ec900"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/16.md",
+      "sha256": "71e181e64e90ed224f4cca204375b70ea052072d10379760b3a332e0d7616d98"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/17.md",
+      "sha256": "c3bc5a53142f19f87b497dce5e55306289c7d369b85d547e64c9ebb76d214457"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/18.md",
+      "sha256": "1ea598182deb3e68f9b20ae191e6d99dc6aca5564c7e3ac33f173c91d049a790"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/19.md",
+      "sha256": "0552611765b2e74327a91ab684a9b04c6d7cadd4a06cee15bd23d93e5e6f4230"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/2.md",
+      "sha256": "96636b91814891e7087df02665f51321604550b8489a2e49d9aee30dc89952f0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/20.md",
+      "sha256": "e967f072b4095d8bf0fa7152834775f46bb30b81e545dacefd0b3522e28d1e47"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/21.md",
+      "sha256": "d7385d2e29301d1b82b14f0b6febecd3cadbd805393f10b85b34e7881d1d6334"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/22.md",
+      "sha256": "e278ed27e34b1f398976433757c386d244a53b182b5b4df74750d729a0981587"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/23.md",
+      "sha256": "193e0d8a9504775f71bb6269f411dab8411647739baedb48eb26922538488f0b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/24.md",
+      "sha256": "a8c66c0fa1d233cfd10c29707da1d1c746908cc6fbd6dfc82a8917bb1c00b1ef"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/25.md",
+      "sha256": "82e7e64213fe15e913079827a3175f504ef499e2e63e69fd29e58c77fe101a10"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/26.md",
+      "sha256": "f80ba6cb1ec042591b9d90c3dbabb8e2cc00e7c7a53370a978516ded4f87d915"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/27.md",
+      "sha256": "4da24d72643d79c18b5de1fb9f8a3abcd524c9e54fe0c396d189a94344cade71"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/28.md",
+      "sha256": "f7025e8f9c5dc66d85d9b55f1bd6493ea6582ea7136a6a6d9455c91bd371cee7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/29.md",
+      "sha256": "a96fe1d77977d47234b26c9f01c7593c61f8de346e8b3529edba792f3ca15c70"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/3.md",
+      "sha256": "0ac92779755159352ebf49f3e82d6914a6515bf5263132472dd1013a72100e41"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/30.md",
+      "sha256": "25165faedc28b7a7c02e5cbf491e8b7ae9aabeeae9fa7ba5879b4fe5aa2eec16"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/31.md",
+      "sha256": "a7d476b8cc2185aabdbce65239a1003baaeb58043348d981608fd11c4c90544a"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/32.md",
+      "sha256": "fd2f8d60190bf6026c7af89c801494feb5cc70f5eeb5832c88a75e8378b65560"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/33.md",
+      "sha256": "22f7186a2597dde56d8c9e724f1f51d84a809244a31728ee8a38b29b1e830535"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/34.md",
+      "sha256": "ca8b07423caaefe7c3abea8953bc4a4db304d6a634e0e1c85100305d59ae250c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/35.md",
+      "sha256": "1972c3257364d1b4d84aea093e3cf0f1d42ef88a16877d36352c97273d8acfad"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/36.md",
+      "sha256": "b852d404079ef4583479e87468dc73d861fcdfa6e728b7d93f1734d1c4ac5b83"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/37.md",
+      "sha256": "4facc0f8a32afe078ce70a55c7e79ce4f952c931509c78cc32fce5d8ee99a64f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/38.md",
+      "sha256": "fdc0f81015001662caef0de8738a9e4db728765c43dc80b5e1a282f0c1b22425"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/39.md",
+      "sha256": "b7738003474ad7ead58967cb2268ce2f7562e4e2e093b0113aca5b33751c9ae8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/4.md",
+      "sha256": "7e84011f940929d4782d78639c12564106b2b39096225e6c9a1a29ea1bb86474"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/40.md",
+      "sha256": "319e773bc84a0caec848ab8a3bc59ccfc4311c5dce7eb528a62c4822c950bed1"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/41.md",
+      "sha256": "7fd3177842a6ccf5151cf481297a15e0078dc756262023b3b527a253040dc7e7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/42.md",
+      "sha256": "fd8d471c153cb15f4c9955dc71be9c2d1c6dc8156788bb29301a6f906e267538"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/43.md",
+      "sha256": "31943b9a576fcf729c1ad54783f67dfb286f6f893db17f5e5648edd369fce2f4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/44.md",
+      "sha256": "da81633a65a211f8d1e42f98743e0e794e080bcbe84108e00593607693948e68"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/45.md",
+      "sha256": "5666ad0bc92f8d64b76f5df168561ff5caf8bfe1eb6db899a1c4c36a7ea1723d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/46.md",
+      "sha256": "84f8f71c5e6f1b683cdb11629f1e7391d7fbd31ece2b3815384ba6cb846451ff"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/47.md",
+      "sha256": "998046439964f7ede8d3bb67c8f0f52f38453fa73c2ff62fb65d465b2f1edd6a"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/48.md",
+      "sha256": "8ca6f36692a769285c6839a61a74927722a478605b621562a8439046f07a7de8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/49.md",
+      "sha256": "66ef09804e6d4f45407a786951d14048ad1ce807e096c483fa3542d1558aba4f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/5.md",
+      "sha256": "bd1ee3e9288acce682ada0893e72e7c62970cd4d9f8af3067cd4270dc1b10e89"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/50.md",
+      "sha256": "cc9cefc6e7f30911718ae85b3b9ce6b9eb58ccb8fc5a907780863bb0a0332bee"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/51.md",
+      "sha256": "76f72041809d4d2fbf54cba229d269cd017f3f0aaff2cf8abd8442952d6a80b3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/52.md",
+      "sha256": "6d77e460c8eb336e9bf43f71e6e7e49aafd4aea51bcc17be8d6eb9b51cf67638"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/53.md",
+      "sha256": "cb7ef2780419391980fe248babc9c1ab5c55c27de1de3cd4859959af183f91f0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/54.md",
+      "sha256": "e9929b3f89ec91cc5ec8d6acc7e92fe2fb7a98f580aad63dd7c04bb48b138e50"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/55.md",
+      "sha256": "181c3c33966a26fc5106449b4c58fa0c7ccb4776143f5b8c9db735394a3cfc41"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/56.md",
+      "sha256": "9815dfd3a33aa0e87a669b65da64c23a4c2810d4631640e264c5143bcbd631dd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/57.md",
+      "sha256": "934e41fc0b6d06b44afe4c5943afc4fb5e7ad2e8afaa018aefe84f870672847c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/58.md",
+      "sha256": "92a6362df5d515c775d01488121f5bbf0338a2b3d0ae616b8bbf75c0a73495c8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/59.md",
+      "sha256": "8e4a1d92d52657d28c9b4a0cfe8a91527206f89aa9d11ec3f15635826debed53"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/6.md",
+      "sha256": "ef7b961746dc7a2e3486f2c76ed0e3bd9c32278552141f410c3f9d165af070a3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/60.md",
+      "sha256": "500909d841c34547011b3a9680a559ab8c5f06d1dc3f554afc2575ddc1d75c52"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/61.md",
+      "sha256": "554ccad642b675d867867078e911dd28b1a0c922408a24791041c44ba39fcb55"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/62.md",
+      "sha256": "2e760260458239ed19a372dbd8b4be706016e89805991a2058e2cf03bc6e3a02"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/63.md",
+      "sha256": "a06c4b9e1dbdc314f00631ff7c3087ba0038bd3fe8ea3bdeec625cb42716e3b9"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/64.md",
+      "sha256": "4e3cef6db05cf60aef7c3c2045ca15eb3736eafa84df292975feb65f3fd9de32"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/65.md",
+      "sha256": "ab97ebc5275d564eccb021e0ee3d9cea2aada0a3ebd54d0463ade542a5dd909b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/66.md",
+      "sha256": "21e03dec5665b4ea4a6b8a569772e936447769a79d0a825c883595b1a2f075e4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/67.md",
+      "sha256": "ebb23610f022f80f1926d7b4bb5f1fcc44211019be6e6c6243b59425d38850ef"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/68.md",
+      "sha256": "3823d8355369442da6997a844b9fccf1bba66841b8ea7277927259731712bced"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/69.md",
+      "sha256": "95538424020612e212183b7ba87c077e9b643f2d62b26f2d19cb6151818d3df5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/7.md",
+      "sha256": "fa88689f52f32ad87fccb591e6b3ecbf43480e8e2f68575a5660c7bdc01674e6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/70.md",
+      "sha256": "371975a7a9228d4cfdc5f3f7a3f4a5194f5c46d6185ac4feb3c40b027d6c5b01"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/71.md",
+      "sha256": "2bafecc7d8d94f27c7ba9ef63035abd4116c5583b1f099a44241762136fe0af6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/72.md",
+      "sha256": "881514c9d59a7fc0ef9ef52bca1818c8e58dc6337dcc03f4cef29dd5f320def1"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/73.md",
+      "sha256": "85bad781e639efee8b42433b778d97704a425d27912b842f992d5172e5015d6c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/74.md",
+      "sha256": "ee8c874ed2da4f8045c37ddf785c00f641252bb0855633126450aad49fe2b6eb"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/75.md",
+      "sha256": "4cc52b16f8ce1170d7895ab8a42104cf8c2d54935a74fb68de74e4b132c0d341"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/76.md",
+      "sha256": "92323f8225780c9ca7b128ab6e8c8c5fc0f14470042e9c9dccb031792740c7dc"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/77.md",
+      "sha256": "97040387a7d861969ff6c01581a05e6fceda9d857d3c6a08f4a43769d1aa7987"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/78.md",
+      "sha256": "1b4a646be6cc48bf8e948b10525eca27a8adb7d67d80bf155dbbb16a0d07c613"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/79.md",
+      "sha256": "562f3e088cbbda40d87c88d878b107febe08d434b8ee7e7b28103114a7c85561"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/8.md",
+      "sha256": "d44dd9973032ecbcae89ad111f1ab30f82c0e3c60a028d7034ee5ec685d51247"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/80.md",
+      "sha256": "4d29ea40e9b5989c23ef167fa3a8d4fef40b5da60c1cfdf2f660df1af4cff80d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/81.md",
+      "sha256": "36195f5a01358d8a03c4a3c2c43f870dffc7b8a1d13bc07c52bd474762761160"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/82.md",
+      "sha256": "e0ca3d1bc1c8380f599b6b62c119490dc234cd57eda3bb7d66dd3bc262c9c70b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/83.md",
+      "sha256": "d0613b713a1bcb3d5c226bc4b972eb8249ad44b9c2f56b912c8732bddbe5c9e5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/84.md",
+      "sha256": "7d06d9fc413c7f6197a48300ea6b85f97a6c422581f7489bb234d1e9f6c92694"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/85.md",
+      "sha256": "8cb60b245e5891e548ce91c3f40eb218c0bcd1a8edfcff8f9892b77d0e9ecbc4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/86.md",
+      "sha256": "3d715ce1984ddc53c96cd263bb3615f475840446a9d8412f6f81069fa862a601"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/87.md",
+      "sha256": "790e5c2040044480c38de4bd753202c0db10a3f321da021ffb035e7744c7eec3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/88.md",
+      "sha256": "382faeb7243240f8b66cb87bb2354c8b3e22b4e16d7903336ad7e57d6f4e5d8d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/89.md",
+      "sha256": "316fe9ec230e4307b8bfc7243b80411d847da943dd4fca5bd8104cc9bd1182a5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/9.md",
+      "sha256": "997aada4fc5fce1ca79364cb9e7bb87f1432aa6a51936f709f72b2864c194bb7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/aritmetica-e-algebra/90.md",
+      "sha256": "4dc19575bea4b80237f1161d88f0a0e2e1140e97e79d09158064e56bbebc99da"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/1.md",
+      "sha256": "9ea41f0ba01a2598e2469ad2e5a9fee9312fb8524549ba32eda6f256114e84d9"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/10.md",
+      "sha256": "f0c2621c796b305827d6eb68c8695010d82b97bc8111012bbac44c75fb84d817"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/11.md",
+      "sha256": "51161274c6dfe454249f4a9f1a2f26672e88524f460230752d59b036bc9e37de"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/12.md",
+      "sha256": "c6fe933796316c0e2aaca2f0f19865c706dbb954f3e3c6d36068711c3e1740e6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/13.md",
+      "sha256": "1a58e247042efce288eca070d2150d74294878cb847a9b051467ac4ff25dbfdb"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/14.md",
+      "sha256": "f0b7d8c90c62ac588ac1e7b88a0dd14680dd5a1eb4ed419fb930666e15663984"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/15.md",
+      "sha256": "996b38394f65aee50571f33f0e5e62751855b0e72cf5334ebaa10130fa5ec900"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/16.md",
+      "sha256": "71e181e64e90ed224f4cca204375b70ea052072d10379760b3a332e0d7616d98"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/17.md",
+      "sha256": "c3bc5a53142f19f87b497dce5e55306289c7d369b85d547e64c9ebb76d214457"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/18.md",
+      "sha256": "1ea598182deb3e68f9b20ae191e6d99dc6aca5564c7e3ac33f173c91d049a790"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/19.md",
+      "sha256": "0552611765b2e74327a91ab684a9b04c6d7cadd4a06cee15bd23d93e5e6f4230"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/2.md",
+      "sha256": "96636b91814891e7087df02665f51321604550b8489a2e49d9aee30dc89952f0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/20.md",
+      "sha256": "e967f072b4095d8bf0fa7152834775f46bb30b81e545dacefd0b3522e28d1e47"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/21.md",
+      "sha256": "d7385d2e29301d1b82b14f0b6febecd3cadbd805393f10b85b34e7881d1d6334"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/22.md",
+      "sha256": "e278ed27e34b1f398976433757c386d244a53b182b5b4df74750d729a0981587"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/23.md",
+      "sha256": "193e0d8a9504775f71bb6269f411dab8411647739baedb48eb26922538488f0b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/24.md",
+      "sha256": "a8c66c0fa1d233cfd10c29707da1d1c746908cc6fbd6dfc82a8917bb1c00b1ef"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/25.md",
+      "sha256": "82e7e64213fe15e913079827a3175f504ef499e2e63e69fd29e58c77fe101a10"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/26.md",
+      "sha256": "f80ba6cb1ec042591b9d90c3dbabb8e2cc00e7c7a53370a978516ded4f87d915"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/27.md",
+      "sha256": "4da24d72643d79c18b5de1fb9f8a3abcd524c9e54fe0c396d189a94344cade71"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/28.md",
+      "sha256": "f7025e8f9c5dc66d85d9b55f1bd6493ea6582ea7136a6a6d9455c91bd371cee7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/29.md",
+      "sha256": "a96fe1d77977d47234b26c9f01c7593c61f8de346e8b3529edba792f3ca15c70"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/3.md",
+      "sha256": "0ac92779755159352ebf49f3e82d6914a6515bf5263132472dd1013a72100e41"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/30.md",
+      "sha256": "25165faedc28b7a7c02e5cbf491e8b7ae9aabeeae9fa7ba5879b4fe5aa2eec16"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/31.md",
+      "sha256": "a7d476b8cc2185aabdbce65239a1003baaeb58043348d981608fd11c4c90544a"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/32.md",
+      "sha256": "fd2f8d60190bf6026c7af89c801494feb5cc70f5eeb5832c88a75e8378b65560"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/33.md",
+      "sha256": "22f7186a2597dde56d8c9e724f1f51d84a809244a31728ee8a38b29b1e830535"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/34.md",
+      "sha256": "ca8b07423caaefe7c3abea8953bc4a4db304d6a634e0e1c85100305d59ae250c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/35.md",
+      "sha256": "1972c3257364d1b4d84aea093e3cf0f1d42ef88a16877d36352c97273d8acfad"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/36.md",
+      "sha256": "b852d404079ef4583479e87468dc73d861fcdfa6e728b7d93f1734d1c4ac5b83"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/37.md",
+      "sha256": "4facc0f8a32afe078ce70a55c7e79ce4f952c931509c78cc32fce5d8ee99a64f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/38.md",
+      "sha256": "fdc0f81015001662caef0de8738a9e4db728765c43dc80b5e1a282f0c1b22425"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/39.md",
+      "sha256": "b7738003474ad7ead58967cb2268ce2f7562e4e2e093b0113aca5b33751c9ae8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/4.md",
+      "sha256": "7e84011f940929d4782d78639c12564106b2b39096225e6c9a1a29ea1bb86474"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/40.md",
+      "sha256": "319e773bc84a0caec848ab8a3bc59ccfc4311c5dce7eb528a62c4822c950bed1"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/41.md",
+      "sha256": "7fd3177842a6ccf5151cf481297a15e0078dc756262023b3b527a253040dc7e7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/42.md",
+      "sha256": "fd8d471c153cb15f4c9955dc71be9c2d1c6dc8156788bb29301a6f906e267538"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/43.md",
+      "sha256": "31943b9a576fcf729c1ad54783f67dfb286f6f893db17f5e5648edd369fce2f4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/44.md",
+      "sha256": "da81633a65a211f8d1e42f98743e0e794e080bcbe84108e00593607693948e68"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/45.md",
+      "sha256": "5666ad0bc92f8d64b76f5df168561ff5caf8bfe1eb6db899a1c4c36a7ea1723d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/46.md",
+      "sha256": "84f8f71c5e6f1b683cdb11629f1e7391d7fbd31ece2b3815384ba6cb846451ff"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/47.md",
+      "sha256": "998046439964f7ede8d3bb67c8f0f52f38453fa73c2ff62fb65d465b2f1edd6a"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/48.md",
+      "sha256": "8ca6f36692a769285c6839a61a74927722a478605b621562a8439046f07a7de8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/49.md",
+      "sha256": "66ef09804e6d4f45407a786951d14048ad1ce807e096c483fa3542d1558aba4f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/5.md",
+      "sha256": "bd1ee3e9288acce682ada0893e72e7c62970cd4d9f8af3067cd4270dc1b10e89"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/50.md",
+      "sha256": "cc9cefc6e7f30911718ae85b3b9ce6b9eb58ccb8fc5a907780863bb0a0332bee"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/51.md",
+      "sha256": "76f72041809d4d2fbf54cba229d269cd017f3f0aaff2cf8abd8442952d6a80b3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/52.md",
+      "sha256": "6d77e460c8eb336e9bf43f71e6e7e49aafd4aea51bcc17be8d6eb9b51cf67638"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/53.md",
+      "sha256": "cb7ef2780419391980fe248babc9c1ab5c55c27de1de3cd4859959af183f91f0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/54.md",
+      "sha256": "e9929b3f89ec91cc5ec8d6acc7e92fe2fb7a98f580aad63dd7c04bb48b138e50"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/55.md",
+      "sha256": "181c3c33966a26fc5106449b4c58fa0c7ccb4776143f5b8c9db735394a3cfc41"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/56.md",
+      "sha256": "9815dfd3a33aa0e87a669b65da64c23a4c2810d4631640e264c5143bcbd631dd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/57.md",
+      "sha256": "934e41fc0b6d06b44afe4c5943afc4fb5e7ad2e8afaa018aefe84f870672847c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/58.md",
+      "sha256": "92a6362df5d515c775d01488121f5bbf0338a2b3d0ae616b8bbf75c0a73495c8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/59.md",
+      "sha256": "8e4a1d92d52657d28c9b4a0cfe8a91527206f89aa9d11ec3f15635826debed53"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/6.md",
+      "sha256": "ef7b961746dc7a2e3486f2c76ed0e3bd9c32278552141f410c3f9d165af070a3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/60.md",
+      "sha256": "500909d841c34547011b3a9680a559ab8c5f06d1dc3f554afc2575ddc1d75c52"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/61.md",
+      "sha256": "554ccad642b675d867867078e911dd28b1a0c922408a24791041c44ba39fcb55"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/62.md",
+      "sha256": "2e760260458239ed19a372dbd8b4be706016e89805991a2058e2cf03bc6e3a02"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/63.md",
+      "sha256": "a06c4b9e1dbdc314f00631ff7c3087ba0038bd3fe8ea3bdeec625cb42716e3b9"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/64.md",
+      "sha256": "4e3cef6db05cf60aef7c3c2045ca15eb3736eafa84df292975feb65f3fd9de32"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/65.md",
+      "sha256": "ab97ebc5275d564eccb021e0ee3d9cea2aada0a3ebd54d0463ade542a5dd909b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/66.md",
+      "sha256": "21e03dec5665b4ea4a6b8a569772e936447769a79d0a825c883595b1a2f075e4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/67.md",
+      "sha256": "ebb23610f022f80f1926d7b4bb5f1fcc44211019be6e6c6243b59425d38850ef"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/68.md",
+      "sha256": "3823d8355369442da6997a844b9fccf1bba66841b8ea7277927259731712bced"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/69.md",
+      "sha256": "95538424020612e212183b7ba87c077e9b643f2d62b26f2d19cb6151818d3df5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/7.md",
+      "sha256": "fa88689f52f32ad87fccb591e6b3ecbf43480e8e2f68575a5660c7bdc01674e6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/70.md",
+      "sha256": "371975a7a9228d4cfdc5f3f7a3f4a5194f5c46d6185ac4feb3c40b027d6c5b01"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/71.md",
+      "sha256": "2bafecc7d8d94f27c7ba9ef63035abd4116c5583b1f099a44241762136fe0af6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/72.md",
+      "sha256": "881514c9d59a7fc0ef9ef52bca1818c8e58dc6337dcc03f4cef29dd5f320def1"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/73.md",
+      "sha256": "85bad781e639efee8b42433b778d97704a425d27912b842f992d5172e5015d6c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/74.md",
+      "sha256": "ee8c874ed2da4f8045c37ddf785c00f641252bb0855633126450aad49fe2b6eb"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/75.md",
+      "sha256": "4cc52b16f8ce1170d7895ab8a42104cf8c2d54935a74fb68de74e4b132c0d341"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/76.md",
+      "sha256": "92323f8225780c9ca7b128ab6e8c8c5fc0f14470042e9c9dccb031792740c7dc"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/77.md",
+      "sha256": "97040387a7d861969ff6c01581a05e6fceda9d857d3c6a08f4a43769d1aa7987"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/78.md",
+      "sha256": "1b4a646be6cc48bf8e948b10525eca27a8adb7d67d80bf155dbbb16a0d07c613"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/79.md",
+      "sha256": "562f3e088cbbda40d87c88d878b107febe08d434b8ee7e7b28103114a7c85561"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/8.md",
+      "sha256": "d44dd9973032ecbcae89ad111f1ab30f82c0e3c60a028d7034ee5ec685d51247"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/80.md",
+      "sha256": "4d29ea40e9b5989c23ef167fa3a8d4fef40b5da60c1cfdf2f660df1af4cff80d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/81.md",
+      "sha256": "36195f5a01358d8a03c4a3c2c43f870dffc7b8a1d13bc07c52bd474762761160"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/82.md",
+      "sha256": "e0ca3d1bc1c8380f599b6b62c119490dc234cd57eda3bb7d66dd3bc262c9c70b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/83.md",
+      "sha256": "d0613b713a1bcb3d5c226bc4b972eb8249ad44b9c2f56b912c8732bddbe5c9e5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/84.md",
+      "sha256": "7d06d9fc413c7f6197a48300ea6b85f97a6c422581f7489bb234d1e9f6c92694"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/85.md",
+      "sha256": "8cb60b245e5891e548ce91c3f40eb218c0bcd1a8edfcff8f9892b77d0e9ecbc4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/86.md",
+      "sha256": "3d715ce1984ddc53c96cd263bb3615f475840446a9d8412f6f81069fa862a601"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/87.md",
+      "sha256": "790e5c2040044480c38de4bd753202c0db10a3f321da021ffb035e7744c7eec3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/88.md",
+      "sha256": "382faeb7243240f8b66cb87bb2354c8b3e22b4e16d7903336ad7e57d6f4e5d8d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/89.md",
+      "sha256": "316fe9ec230e4307b8bfc7243b80411d847da943dd4fca5bd8104cc9bd1182a5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/9.md",
+      "sha256": "997aada4fc5fce1ca79364cb9e7bb87f1432aa6a51936f709f72b2864c194bb7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/aritmetica-e-algebra/90.md",
+      "sha256": "4dc19575bea4b80237f1161d88f0a0e2e1140e97e79d09158064e56bbebc99da"
+    }
+  ]
+}

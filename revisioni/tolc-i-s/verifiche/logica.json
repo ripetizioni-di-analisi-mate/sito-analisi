@@ -1,0 +1,954 @@
+{
+  "status": "ok",
+  "files": 420,
+  "quiz_decisions": [
+    {
+      "id": 1,
+      "correct": 1,
+      "reason": "Negare ogni badge richiede almeno un testimone senza badge; nessun badge sarebbe troppo forte."
+    },
+    {
+      "id": 2,
+      "correct": 2,
+      "reason": "P implica B e non B escludono P; coperture e cause non sono deducibili."
+    },
+    {
+      "id": 3,
+      "correct": 3,
+      "reason": "A incluso B e B disgiunto C rendono A disgiunto C, anche con A vuoto."
+    },
+    {
+      "id": 4,
+      "correct": 4,
+      "reason": "Entrare implica badge; il solo controcaso entrare senza badge viola la necessità."
+    },
+    {
+      "id": 5,
+      "correct": 5,
+      "reason": "Unione 22+18-7=33; esterno 40-33=7."
+    },
+    {
+      "id": 6,
+      "correct": 1,
+      "reason": "Le due precedenze concatenano Anna-Bruno-Carla."
+    },
+    {
+      "id": 7,
+      "correct": 2,
+      "reason": "La negazione della congiunzione ammette almeno una componente falsa, incluse entrambe."
+    },
+    {
+      "id": 8,
+      "correct": 3,
+      "reason": "Il modello con Python presente e ingegneri vuoti e quello con un ingegnere soddisfano entrambi le premesse."
+    },
+    {
+      "id": 9,
+      "correct": 4,
+      "reason": "I cinque termini sono 3,5,9,15,23: quattro incrementi dopo il valore iniziale."
+    },
+    {
+      "id": 10,
+      "correct": 5,
+      "reason": "Due colori permettono ancora rosso-blu; tre estrazioni impongono la ripetizione."
+    },
+    {
+      "id": 11,
+      "correct": 1,
+      "reason": "Le due universali false forniscono un grande numerato e un grande non numerato, necessariamente distinti."
+    },
+    {
+      "id": 12,
+      "correct": 2,
+      "reason": "Negazione di forall studente exists testo: exists studente forall testo non letto."
+    },
+    {
+      "id": 13,
+      "correct": 3,
+      "reason": "Il complemento del conteggio esattamente uno è zero oppure almeno due."
+    },
+    {
+      "id": 14,
+      "correct": 4,
+      "reason": "Per interi non negativi, non(n<=2) equivale a n>=3; almeno due include ancora il caso vero n=2."
+    },
+    {
+      "id": 15,
+      "correct": 5,
+      "reason": "Assenza di urgente con mappa equivale a intersezione vuota, senza negare ogni urgente."
+    },
+    {
+      "id": 16,
+      "correct": 1,
+      "reason": "La disgiunzione inclusiva esclude soltanto nessuna scelta fra A e B; C è irrilevante."
+    },
+    {
+      "id": 17,
+      "correct": 2,
+      "reason": "Esattamente una firma è disgiunzione accompagnata dalla negazione della congiunzione."
+    },
+    {
+      "id": 18,
+      "correct": 3,
+      "reason": "Il bicondizionale è falso esattamente con valori discordi."
+    },
+    {
+      "id": 19,
+      "correct": 4,
+      "reason": "Il controcaso dell’implicazione è apertura vera e spegnimento falso."
+    },
+    {
+      "id": 20,
+      "correct": 5,
+      "reason": "A chiusa e B aperta rispetta A implica B e viola B implica A."
+    },
+    {
+      "id": 21,
+      "correct": 1,
+      "reason": "Pass valido e ingresso vietato obbligano sala non libera per la regola congiunta."
+    },
+    {
+      "id": 22,
+      "correct": 2,
+      "reason": "La prima regola del sensore è superflua; rimuovere ciascuna delle altre ammette un modello attivo."
+    },
+    {
+      "id": 23,
+      "correct": 3,
+      "reason": "La garanzia è apertura implica visita; apertura con annullamento la viola. Annullamento senza stato del museo non basta."
+    },
+    {
+      "id": 24,
+      "correct": 4,
+      "reason": "Da A oppure B e non A segue B, anche con disgiunzione inclusiva."
+    },
+    {
+      "id": 25,
+      "correct": 5,
+      "reason": "Non sorvegliato esclude scala aperta e poi manutenzione; non implica ascensore funzionante."
+    },
+    {
+      "id": 26,
+      "correct": 1,
+      "reason": "Se martedì è aperto impone lunedì; se martedì è chiuso l’alternativa impone lunedì."
+    },
+    {
+      "id": 27,
+      "correct": 2,
+      "reason": "La negazione di P implica (Q oppure R) richiede P e non Q e non R."
+    },
+    {
+      "id": 28,
+      "correct": 3,
+      "reason": "Il testimone firmato senza relazione diventa idoneo soltanto se ogni firmata è idonea fra le aggiunte proposte."
+    },
+    {
+      "id": 29,
+      "correct": 4,
+      "reason": "Un portatile non calibrato non può stare nel vano composto solo da calibrati."
+    },
+    {
+      "id": 30,
+      "correct": 5,
+      "reason": "Due testimoni distinti rendono vere le esistenze iniziali e vuota l’intersezione montagna-stampate."
+    },
+    {
+      "id": 31,
+      "correct": 1,
+      "reason": "Membership esattamente due per 1,3,6; 4 appartiene a tutti e tre."
+    },
+    {
+      "id": 32,
+      "correct": 2,
+      "reason": "Inclusione-esclusione tripla: 27-9+1=19."
+    },
+    {
+      "id": 33,
+      "correct": 3,
+      "reason": "Le intersezioni doppie esclusive sono 4,3,5 e sommano 12."
+    },
+    {
+      "id": 34,
+      "correct": 4,
+      "reason": "Minimo intersezione 19+16-30=5, realizzato da regioni 14,11,5."
+    },
+    {
+      "id": 35,
+      "correct": 5,
+      "reason": "Minimo unione 21 con allegati inclusi nelle note; massimo esterno 19."
+    },
+    {
+      "id": 36,
+      "correct": 1,
+      "reason": "Unione 14+12-3=23 superiore al totale 20: dati incompatibili."
+    },
+    {
+      "id": 37,
+      "correct": 2,
+      "reason": "Al massimo uno include anche nessuno: complemento dei quattro in entrambi, quindi 24."
+    },
+    {
+      "id": 38,
+      "correct": 3,
+      "reason": "A incluso B implica B meno A con cardinalità 19-8=11."
+    },
+    {
+      "id": 39,
+      "correct": 4,
+      "reason": "Le due regioni esclusive rappresentano XOR, non unione inclusiva."
+    },
+    {
+      "id": 40,
+      "correct": 5,
+      "reason": "Fotografati non restaurati possono esserci o mancare; le altre opzioni impongono un restaurato non fotografato."
+    },
+    {
+      "id": 41,
+      "correct": 1,
+      "reason": "Enumerazione delle file: unica Lia-Marco-Gino-Omar-Nora, estremi Lia-Nora."
+    },
+    {
+      "id": 42,
+      "correct": 2,
+      "reason": "Permutazioni ammesse ABC,ACB,BAC: tre."
+    },
+    {
+      "id": 43,
+      "correct": 3,
+      "reason": "Il blocco AB deve lasciare C prima e D ultima: unico CABD."
+    },
+    {
+      "id": 44,
+      "correct": 4,
+      "reason": "Le derangements su tre lettere sono BCA,CAB: due."
+    },
+    {
+      "id": 45,
+      "correct": 5,
+      "reason": "Con D e due posti, C è vietata; A richiederebbe tre scelte; unica coppia BD."
+    },
+    {
+      "id": 46,
+      "correct": 1,
+      "reason": "Durata critica A-C-D: 2+5+1=8; B termina prima di C."
+    },
+    {
+      "id": 47,
+      "correct": 2,
+      "reason": "Ogni cammino parte passando B e arriva attraverso D; C può essere evitato."
+    },
+    {
+      "id": 48,
+      "correct": 3,
+      "reason": "Cammini diretti ABD,ACD,ABCD: tre."
+    },
+    {
+      "id": 49,
+      "correct": 4,
+      "reason": "Dopo tre passi da 2 la parità è dispari; 1,3,5 raggiungibili, 4 impossibile."
+    },
+    {
+      "id": 50,
+      "correct": 5,
+      "reason": "Otto partecipanti generano 8*7/2=28 coppie non ordinate."
+    },
+    {
+      "id": 51,
+      "correct": 1,
+      "reason": "Ada e Bea hanno verità complementari; per due vere Ciro deve essere vero, chiave C."
+    },
+    {
+      "id": 52,
+      "correct": 2,
+      "reason": "Le equazioni sui valori delle frasi ammettono soltanto Ada vera e Bea falsa."
+    },
+    {
+      "id": 53,
+      "correct": 3,
+      "reason": "Etichetta misto con mela è mele; etichetta pere non può essere pere e quindi è misto."
+    },
+    {
+      "id": 54,
+      "correct": 4,
+      "reason": "Equilibrio A-B esclude la moneta più pesante su entrambi i piatti, rimane C."
+    },
+    {
+      "id": 55,
+      "correct": 5,
+      "reason": "Venticinque inversioni da spento producono acceso."
+    },
+    {
+      "id": 56,
+      "correct": 1,
+      "reason": "Somma invariata nove; (5,5) ha somma dieci e tutte le altre sono raggiungibili."
+    },
+    {
+      "id": 57,
+      "correct": 2,
+      "reason": "Ricorrenza: 2,3,5,8,13,21,34."
+    },
+    {
+      "id": 58,
+      "correct": 3,
+      "reason": "Due blocchi sommano quattordici e i due termini residui uno+uno danno sedici."
+    },
+    {
+      "id": 59,
+      "correct": 4,
+      "reason": "Cinque aggiornamenti: 9,12,6,3,6,3."
+    },
+    {
+      "id": 60,
+      "correct": 5,
+      "reason": "Multipli comuni positivi entro50:24,48; zero non si conta."
+    },
+    {
+      "id": 61,
+      "correct": 1,
+      "reason": "Posizioni da due estremi:13+9-1=21."
+    },
+    {
+      "id": 62,
+      "correct": 2,
+      "reason": "Ceiling28/12=3, ottenibile con quattro mesi da tre e otto da due."
+    },
+    {
+      "id": 63,
+      "correct": 3,
+      "reason": "Caso peggiore sei blu prima; otto estrazioni garantiscono due rossi e sette no."
+    },
+    {
+      "id": 64,
+      "correct": 4,
+      "reason": "Venti fogli minimi più tre eccedenze: tre cartelle con cinque."
+    },
+    {
+      "id": 65,
+      "correct": 5,
+      "reason": "2c-(5-c)=4 impone c=3."
+    },
+    {
+      "id": 66,
+      "correct": 1,
+      "reason": "Anna intera maggiore di nove: valori10..18; non un unico numero."
+    },
+    {
+      "id": 67,
+      "correct": 2,
+      "reason": "B ha più promossi assoluti24>18, A più percentuale90%>80%."
+    },
+    {
+      "id": 68,
+      "correct": 3,
+      "reason": "Campione limitato ai rinnovi seleziona un comportamento potenzialmente legato alla soddisfazione."
+    },
+    {
+      "id": 69,
+      "correct": 4,
+      "reason": "Obbligo di frequenza concomitante è una causa alternativa pertinente all’aumento."
+    },
+    {
+      "id": 70,
+      "correct": 5,
+      "reason": "Condizioni iniziali e tempo comparabili riducono spiegazioni alternative, senza provare causalità assoluta."
+    },
+    {
+      "id": 71,
+      "correct": 1,
+      "reason": "Occorre copertura di ogni iscritto e recapito effettivo, non semplice presenza di qualche indirizzo."
+    },
+    {
+      "id": 72,
+      "correct": 2,
+      "reason": "Un fallimento appartenente al lotto falsifica la universale; non provato significa ignoto."
+    },
+    {
+      "id": 73,
+      "correct": 3,
+      "reason": "2*3 è pari ma i due fattori non sono entrambi pari; gli altri non sono controesempi."
+    },
+    {
+      "id": 74,
+      "correct": 4,
+      "reason": "Distributività: P e (Q o non Q) equivale a P."
+    },
+    {
+      "id": 75,
+      "correct": 5,
+      "reason": "(P e Q) implica P è tautologia; ogni altra formula ha una riga falsa."
+    },
+    {
+      "id": 76,
+      "correct": 1,
+      "reason": "P implica Q con P vero e Q falso è l’unica combinazione incoerente."
+    },
+    {
+      "id": 77,
+      "correct": 2,
+      "reason": "Assegnazioni000,001,011,111: quattro."
+    },
+    {
+      "id": 78,
+      "correct": 3,
+      "reason": "La precedenza ciclica è impossibile in qualunque permutazione lineare."
+    },
+    {
+      "id": 79,
+      "correct": 4,
+      "reason": "Unico controcaso vocale-dispari: vanno controllate A e7, non consonanteD o pari4."
+    },
+    {
+      "id": 80,
+      "correct": 5,
+      "reason": "Due studenti con tutor diversi verificano forall exists ma negano un tutor comune."
+    },
+    {
+      "id": 81,
+      "correct": 1,
+      "reason": "A e B aperti farebbero tre con C; quindi chiusi e D aperto."
+    },
+    {
+      "id": 82,
+      "correct": 2,
+      "reason": "Con A prima B, C subito dopo B forzaABC; le altre aggiunte lasciano rispettivamente2,2,2,3 ordini."
+    },
+    {
+      "id": 83,
+      "correct": 3,
+      "reason": "Tre domande binarie distinguono otto esiti e sono realizzabili con tre dimezzamenti."
+    },
+    {
+      "id": 84,
+      "correct": 4,
+      "reason": "Due riunioni sovrapposte impongono due sale, sufficienti riutilizzando alle11 quella della prima."
+    },
+    {
+      "id": 85,
+      "correct": 5,
+      "reason": "Uguaglianza di colori è transitiva; non impone identità degli oggetti o nome del colore."
+    },
+    {
+      "id": 86,
+      "correct": 1,
+      "reason": "Adiacenze distinte a B occupano i suoi due lati; A e C separati da B."
+    },
+    {
+      "id": 87,
+      "correct": 2,
+      "reason": "Protocollata iff firmata e firmata implica non provvisoria escludono provvisorie protocollate."
+    },
+    {
+      "id": 88,
+      "correct": 3,
+      "reason": "5+7n>80: minimo n11, valore82; precedente75."
+    },
+    {
+      "id": 89,
+      "correct": 4,
+      "reason": "Fra12,15,19,16,20 solo16 è pari e congruo1 modulo3."
+    },
+    {
+      "id": 90,
+      "correct": 5,
+      "reason": "Codice garantisce ritiro; documento senza codice dà un ritiro possibile senza la condizione, quindi non necessaria."
+    }
+  ],
+  "automated_cases": [
+    {
+      "quiz": 1,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 2,
+      "computed": "[(False, False)]",
+      "expected": "[(False, False)]"
+    },
+    {
+      "quiz": 3,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 4,
+      "computed": "[(True, False)]",
+      "expected": "[(True, False)]"
+    },
+    {
+      "quiz": 5,
+      "computed": "7",
+      "expected": "7"
+    },
+    {
+      "quiz": 6,
+      "computed": "['ABC']",
+      "expected": "['ABC']"
+    },
+    {
+      "quiz": 7,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 8,
+      "computed": "[(set(), {0}), ({0}, {0})]",
+      "expected": "[(set(), {0}), ({0}, {0})]"
+    },
+    {
+      "quiz": 9,
+      "computed": "23",
+      "expected": "23"
+    },
+    {
+      "quiz": 10,
+      "computed": "3",
+      "expected": "3"
+    },
+    {
+      "quiz": 11,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 12,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 13,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 14,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 15,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 16,
+      "computed": "[(False, False)]",
+      "expected": "[(False, False)]"
+    },
+    {
+      "quiz": 17,
+      "computed": "[(False, True), (True, False)]",
+      "expected": "[(False, True), (True, False)]"
+    },
+    {
+      "quiz": 18,
+      "computed": "[(False, True), (True, False)]",
+      "expected": "[(False, True), (True, False)]"
+    },
+    {
+      "quiz": 19,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 20,
+      "computed": "[(False, True)]",
+      "expected": "[(False, True)]"
+    },
+    {
+      "quiz": 21,
+      "computed": "[(True, False, False)]",
+      "expected": "[(True, False, False)]"
+    },
+    {
+      "quiz": 22,
+      "computed": "[1]",
+      "expected": "[1]"
+    },
+    {
+      "quiz": 23,
+      "computed": "[(True, False)]",
+      "expected": "[(True, False)]"
+    },
+    {
+      "quiz": 24,
+      "computed": "[(False, True)]",
+      "expected": "[(False, True)]"
+    },
+    {
+      "quiz": 25,
+      "computed": "[(False, False, False)]",
+      "expected": "[(False, False, False)]"
+    },
+    {
+      "quiz": 26,
+      "computed": "[(True, False), (True, True)]",
+      "expected": "[(True, False), (True, True)]"
+    },
+    {
+      "quiz": 27,
+      "computed": "[(True, False, False)]",
+      "expected": "[(True, False, False)]"
+    },
+    {
+      "quiz": 28,
+      "computed": "[3]",
+      "expected": "[3]"
+    },
+    {
+      "quiz": 29,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 30,
+      "computed": "(True, True, False)",
+      "expected": "(True, True, False)"
+    },
+    {
+      "quiz": 31,
+      "computed": "{1, 3, 6}",
+      "expected": "{1, 3, 6}"
+    },
+    {
+      "quiz": 32,
+      "computed": "19",
+      "expected": "19"
+    },
+    {
+      "quiz": 33,
+      "computed": "12",
+      "expected": "12"
+    },
+    {
+      "quiz": 34,
+      "computed": "5",
+      "expected": "5"
+    },
+    {
+      "quiz": 35,
+      "computed": "19",
+      "expected": "19"
+    },
+    {
+      "quiz": 36,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 37,
+      "computed": "24",
+      "expected": "24"
+    },
+    {
+      "quiz": 38,
+      "computed": "11",
+      "expected": "11"
+    },
+    {
+      "quiz": 39,
+      "computed": "[(False, True), (True, False)]",
+      "expected": "[(False, True), (True, False)]"
+    },
+    {
+      "quiz": 40,
+      "computed": "[5]",
+      "expected": "[5]"
+    },
+    {
+      "quiz": 41,
+      "computed": "['LMGON']",
+      "expected": "['LMGON']"
+    },
+    {
+      "quiz": 42,
+      "computed": "3",
+      "expected": "3"
+    },
+    {
+      "quiz": 43,
+      "computed": "['CABD']",
+      "expected": "['CABD']"
+    },
+    {
+      "quiz": 44,
+      "computed": "2",
+      "expected": "2"
+    },
+    {
+      "quiz": 45,
+      "computed": "[('B', 'D')]",
+      "expected": "[('B', 'D')]"
+    },
+    {
+      "quiz": 46,
+      "computed": "8",
+      "expected": "8"
+    },
+    {
+      "quiz": 47,
+      "computed": "{'B', 'D'}",
+      "expected": "{'B', 'D'}"
+    },
+    {
+      "quiz": 48,
+      "computed": "3",
+      "expected": "3"
+    },
+    {
+      "quiz": 49,
+      "computed": "{1, 3, 5}",
+      "expected": "{1, 3, 5}"
+    },
+    {
+      "quiz": 50,
+      "computed": "28",
+      "expected": "28"
+    },
+    {
+      "quiz": 51,
+      "computed": "['C']",
+      "expected": "['C']"
+    },
+    {
+      "quiz": 52,
+      "computed": "[(True, False)]",
+      "expected": "[(True, False)]"
+    },
+    {
+      "quiz": 53,
+      "computed": "[2]",
+      "expected": "[2]"
+    },
+    {
+      "quiz": 54,
+      "computed": "[2]",
+      "expected": "[2]"
+    },
+    {
+      "quiz": 55,
+      "computed": "1",
+      "expected": "1"
+    },
+    {
+      "quiz": 56,
+      "computed": "[(5, 5)]",
+      "expected": "[(5, 5)]"
+    },
+    {
+      "quiz": 57,
+      "computed": "34",
+      "expected": "34"
+    },
+    {
+      "quiz": 58,
+      "computed": "16",
+      "expected": "16"
+    },
+    {
+      "quiz": 59,
+      "computed": "3",
+      "expected": "3"
+    },
+    {
+      "quiz": 60,
+      "computed": "[24, 48]",
+      "expected": "[24, 48]"
+    },
+    {
+      "quiz": 61,
+      "computed": "21",
+      "expected": "21"
+    },
+    {
+      "quiz": 62,
+      "computed": "3",
+      "expected": "3"
+    },
+    {
+      "quiz": 63,
+      "computed": "8",
+      "expected": "8"
+    },
+    {
+      "quiz": 64,
+      "computed": "{3}",
+      "expected": "{3}"
+    },
+    {
+      "quiz": 65,
+      "computed": "[3]",
+      "expected": "[3]"
+    },
+    {
+      "quiz": 66,
+      "computed": "[10, 11, 12, 13, 14, 15, 16, 17, 18]",
+      "expected": "[10, 11, 12, 13, 14, 15, 16, 17, 18]"
+    },
+    {
+      "quiz": 67,
+      "computed": "(True, True)",
+      "expected": "(True, True)"
+    },
+    {
+      "quiz": 73,
+      "computed": "[3]",
+      "expected": "[3]"
+    },
+    {
+      "quiz": 74,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 75,
+      "computed": "[5]",
+      "expected": "[5]"
+    },
+    {
+      "quiz": 76,
+      "computed": "[False, True, True, True, True]",
+      "expected": "[False, True, True, True, True]"
+    },
+    {
+      "quiz": 77,
+      "computed": "4",
+      "expected": "4"
+    },
+    {
+      "quiz": 78,
+      "computed": "[]",
+      "expected": "[]"
+    },
+    {
+      "quiz": 79,
+      "computed": "['A', '7']",
+      "expected": "['A', '7']"
+    },
+    {
+      "quiz": 80,
+      "computed": "(True, False)",
+      "expected": "(True, False)"
+    },
+    {
+      "quiz": 81,
+      "computed": "[(False, False, True, True)]",
+      "expected": "[(False, False, True, True)]"
+    },
+    {
+      "quiz": 82,
+      "computed": "[2, 1, 2, 2, 3]",
+      "expected": "[2, 1, 2, 2, 3]"
+    },
+    {
+      "quiz": 83,
+      "computed": "3",
+      "expected": "3"
+    },
+    {
+      "quiz": 84,
+      "computed": "2",
+      "expected": "2"
+    },
+    {
+      "quiz": 85,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 86,
+      "computed": "['ABC', 'CBA']",
+      "expected": "['ABC', 'CBA']"
+    },
+    {
+      "quiz": 87,
+      "computed": "True",
+      "expected": "True"
+    },
+    {
+      "quiz": 88,
+      "computed": "82",
+      "expected": "82"
+    },
+    {
+      "quiz": 89,
+      "computed": "[16]",
+      "expected": "[16]"
+    },
+    {
+      "quiz": 90,
+      "computed": "(True, True)",
+      "expected": "(True, True)"
+    }
+  ],
+  "automated_count": 85,
+  "worked_map": {
+    "1.1": 12,
+    "1.2": 19,
+    "1.3": 21,
+    "2.1": 3,
+    "2.2": 29,
+    "2.3": 30,
+    "3.1": 5,
+    "3.2": 33,
+    "3.3": 34,
+    "4.1": 41,
+    "4.2": 45,
+    "4.3": 51
+  },
+  "redundant_premise_models": {
+    "1": [
+      [
+        true,
+        false,
+        false
+      ]
+    ],
+    "2": [
+      [
+        true,
+        false,
+        false
+      ],
+      [
+        true,
+        true,
+        false
+      ]
+    ],
+    "3": [
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        false
+      ],
+      [
+        true,
+        false,
+        false
+      ]
+    ],
+    "4": [
+      [
+        true,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true
+      ],
+      [
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "all_practice_aligned": true
+}

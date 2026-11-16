@@ -1,0 +1,512 @@
+{
+  "revisore": "root, diverso dall’autore logica",
+  "metodo": "Lettura integrale e soluzione manuale di 90 quiz, con tutte le alternative e spiegazioni, 12 casi svolti, 10 tracce e teoria in IT/EN. I due corsi sono identici byte per byte. Dodici gruppi di ricalcoli Python aggiuntivi; non si presenta il controllo numerico come verifica automatica delle inferenze linguistiche.",
+  "copertura": {
+    "quiz_unici": 90,
+    "quiz_percorso": 180,
+    "casi_svolti_unici": 12,
+    "tracce_uniche": 10,
+    "tracce_confrontate_materiali": 40,
+    "file": 420,
+    "lingue": [
+      "IT",
+      "EN"
+    ]
+  },
+  "quiz": [
+    {
+      "n": 1,
+      "risposta_verificata": "Sono aumentati gli ingressi serali",
+      "motivo_indipendente": "Aumento serale esplicito; mattino stabile; nessuna misura di lettura o utenti distinti."
+    },
+    {
+      "n": 2,
+      "risposta_verificata": "È aumentato il tempo medio di lettura individuale",
+      "motivo_indipendente": "Durata media della lettura non rilevata; gli altri fatti sono attestati."
+    },
+    {
+      "n": 3,
+      "risposta_verificata": "Agli ingressi",
+      "motivo_indipendente": "Quelli riprende ingressi, nel confronto fra fasce orarie."
+    },
+    {
+      "n": 4,
+      "risposta_verificata": "Più accessi serali, altri dati prima della scelta definitiva",
+      "motivo_indipendente": "Il titolo conserva insieme aumento osservato e scelta ancora aperta."
+    },
+    {
+      "n": 5,
+      "risposta_verificata": "Il tempo dedicato alla lettura da ciascun visitatore",
+      "motivo_indipendente": "La variabile richiesta è il tempo individuale di lettura, non accessi o costi."
+    },
+    {
+      "n": 6,
+      "risposta_verificata": "L’associazione osservata richiede cautela nell’interpretazione causale",
+      "motivo_indipendente": "Associazione riconosciuta con causalità ancora indeterminata."
+    },
+    {
+      "n": 7,
+      "risposta_verificata": "Perché caratteristiche preesistenti potrebbero distinguere i gruppi",
+      "motivo_indipendente": "Scelta autonoma compatibile con differenze iniziali fra gruppi."
+    },
+    {
+      "n": 8,
+      "risposta_verificata": "I ricercatori hanno assegnato a caso il mezzo di trasporto",
+      "motivo_indipendente": "Assegnazione casuale contraddice la scelta autonoma dichiarata."
+    },
+    {
+      "n": 9,
+      "risposta_verificata": "Il risultato non basta per stabilire la causa",
+      "motivo_indipendente": "Non sufficienza del dato, non negazione dell’effetto."
+    },
+    {
+      "n": 10,
+      "risposta_verificata": "Fra i pendolari adulti rispondenti, chi pedala dichiara maggiore benessere medio",
+      "motivo_indipendente": "Restano rispondenti adulti, media e benessere dichiarato."
+    },
+    {
+      "n": 11,
+      "risposta_verificata": "La scelta dei dettagli dipende dall’uso della mappa",
+      "motivo_indipendente": "La selezione di dettagli dipende dallo scopo delle due mappe."
+    },
+    {
+      "n": 12,
+      "risposta_verificata": "Introduce un’obiezione che permette di precisare il criterio di selezione",
+      "motivo_indipendente": "L’obiezione permette la distinzione fra omissione pertinente e irrilevante."
+    },
+    {
+      "n": 13,
+      "risposta_verificata": "Non devono essere nascosti ostacoli rilevanti per chi cammina",
+      "motivo_indipendente": "Purché conserva il requisito di rappresentare ostacoli rilevanti."
+    },
+    {
+      "n": 14,
+      "risposta_verificata": "Accuratezza delle informazioni e quantità di informazioni",
+      "motivo_indipendente": "Precisione delle informazioni e loro quantità sono distinte."
+    },
+    {
+      "n": 15,
+      "risposta_verificata": "Evidenziare un attraversamento utile che prima si distingueva poco",
+      "motivo_indipendente": "Evidenziare l’attraversamento aumenta la leggibilità di un dato pertinente."
+    },
+    {
+      "n": 16,
+      "risposta_verificata": "Distinguere ciò che attestano e cercare controlli pertinenti",
+      "motivo_indipendente": "Si confrontano oggetto attestato e controlli, senza gerarchia automatica delle fonti."
+    },
+    {
+      "n": 17,
+      "risposta_verificata": "La decisione del 1978 è stata eseguita dopo l’estate del 1980",
+      "motivo_indipendente": "Decisione nel 1978 e attuazione dopo estate 1980 rendono compatibili le date."
+    },
+    {
+      "n": 18,
+      "risposta_verificata": "Il momento dell’intervento materiale sulla fontana",
+      "motivo_indipendente": "Ordini di lavoro riguardano l’intervento materiale ancora da datare."
+    },
+    {
+      "n": 19,
+      "risposta_verificata": "L’abitante ha certamente mentito",
+      "motivo_indipendente": "La menzogna certa è esclusa dalla cautela della guida."
+    },
+    {
+      "n": 20,
+      "risposta_verificata": "Fornire una testimonianza o documentazione su un fatto",
+      "motivo_indipendente": "Attestare riguarda testimonianza o documentazione, non infallibilità."
+    },
+    {
+      "n": 21,
+      "risposta_verificata": "Per rendere riconoscibile l’intervento recente",
+      "motivo_indipendente": "La diversa tonalità rende riconoscibile l’aggiunta recente."
+    },
+    {
+      "n": 22,
+      "risposta_verificata": "Quando manca sufficiente sicurezza sul disegno originale",
+      "motivo_indipendente": "La superficie neutra corrisponde a conoscenza insufficiente del motivo."
+    },
+    {
+      "n": 23,
+      "risposta_verificata": "Una conseguenza del criterio di ricostruzione prudente",
+      "motivo_indipendente": "Dunque esplicita conseguenza del criterio prudente."
+    },
+    {
+      "n": 24,
+      "risposta_verificata": "Leggibilità del motivo e riconoscibilità delle aggiunte",
+      "motivo_indipendente": "Leggibilità complessiva e riconoscibilità delle aggiunte coesistono."
+    },
+    {
+      "n": 25,
+      "risposta_verificata": "Un restauro può lasciare visibile un limite della conoscenza",
+      "motivo_indipendente": "La lacuna neutra rende visibile un limite della conoscenza."
+    },
+    {
+      "n": 26,
+      "risposta_verificata": "Una racconta contemporaneamente agli eventi, l’altra ricorda anni dopo",
+      "motivo_indipendente": "Racconto contemporaneo e ricordo successivo sono esplicitamente distinti."
+    },
+    {
+      "n": 27,
+      "risposta_verificata": "Il commentatore del romanzo",
+      "motivo_indipendente": "Il giudizio è attribuito al commentatore, non ai narratori."
+    },
+    {
+      "n": 28,
+      "risposta_verificata": "Rendono concreti i diversi limiti di osservazione",
+      "motivo_indipendente": "Porta e riparazioni mostrano diversi accessi alle informazioni."
+    },
+    {
+      "n": 29,
+      "risposta_verificata": "Confrontare prospettive e limiti delle due testimonianze",
+      "motivo_indipendente": "Il confronto resta al lettore senza voce risolutiva."
+    },
+    {
+      "n": 30,
+      "risposta_verificata": "La discordanza da sola non basta a concludere l’inattendibilità",
+      "motivo_indipendente": "Discordanza da sola non implica inattendibilità e non prova infallibilità."
+    },
+    {
+      "n": 31,
+      "risposta_verificata": "Il caricamento della nuova versione",
+      "motivo_indipendente": "Il nuovo caricamento, non la richiesta di correzioni, riavvia il termine."
+    },
+    {
+      "n": 32,
+      "risposta_verificata": "Il file è arrivato, ma il messaggio non attesta l’approvazione",
+      "motivo_indipendente": "La ricevuta attesta ricezione soltanto; approvazione non deducibile."
+    },
+    {
+      "n": 33,
+      "risposta_verificata": "Può approvare esplicitamente prima dei due giorni",
+      "motivo_indipendente": "Limite massimo compatibile con approvazione anticipata."
+    },
+    {
+      "n": 34,
+      "risposta_verificata": "Possono essere richiesti più invii di versioni corrette",
+      "motivo_indipendente": "Numero di invii non limitato, quindi durata complessiva non fissata."
+    },
+    {
+      "n": 35,
+      "risposta_verificata": "Ricostruire da quando decorre ciascun termine",
+      "motivo_indipendente": "Date delle versioni identificano decorrenza di ogni termine."
+    },
+    {
+      "n": 36,
+      "risposta_verificata": "Prenotazione e autorizzazione del responsabile",
+      "motivo_indipendente": "Esterni ammessi; documento fragile richiede prenotazione più autorizzazione."
+    },
+    {
+      "n": 37,
+      "risposta_verificata": "Visitare la mostra al piano terra",
+      "motivo_indipendente": "Solo la mostra mantiene libero accesso ordinario."
+    },
+    {
+      "n": 38,
+      "risposta_verificata": "No: la richiesta di fotografie viene valutata separatamente",
+      "motivo_indipendente": "Fotografie valutate separatamente: né implicazione né divieto assoluto."
+    },
+    {
+      "n": 39,
+      "risposta_verificata": "I posti sono limitati e i materiali richiedono preparazione",
+      "motivo_indipendente": "Posti limitati e preparazione sono le due ragioni dichiarate."
+    },
+    {
+      "n": 40,
+      "risposta_verificata": "Accessibilità pubblica della sala e immediata consultabilità di ogni documento",
+      "motivo_indipendente": "Apertura pubblica non implica disponibilità immediata di ogni documento."
+    },
+    {
+      "n": 41,
+      "risposta_verificata": "Il resoconto non è arrivato",
+      "motivo_indipendente": "Trattino significa resoconto mancante, diverso da zero."
+    },
+    {
+      "n": 42,
+      "risposta_verificata": "12",
+      "motivo_indipendente": "Somma disponibile 12+0=12; non totale completo della rete."
+    },
+    {
+      "n": 43,
+      "risposta_verificata": "È almeno 12",
+      "motivo_indipendente": "Conteggio ignoto non negativo, nessun doppione: totale almeno 12."
+    },
+    {
+      "n": 44,
+      "risposta_verificata": "Manca il dato corrente di uno sportello presente nel totale precedente",
+      "motivo_indipendente": "Diverse coperture impediscono di concludere diminuzione complessiva."
+    },
+    {
+      "n": 45,
+      "risposta_verificata": "Il numero di segnalazioni ricevute da Sud nella settimana corrente",
+      "motivo_indipendente": "Serve proprio Sud nella stessa settimana, non stima o dato storico."
+    },
+    {
+      "n": 46,
+      "risposta_verificata": "75%",
+      "motivo_indipendente": "Quota breve 30/40=75%; 25% è il complemento."
+    },
+    {
+      "n": 47,
+      "risposta_verificata": "Esteso ha più completamenti; breve ha una quota di completamento maggiore",
+      "motivo_indipendente": "60>30 ma 60/100<30/40: assoluti e quote hanno ordinamenti diversi."
+    },
+    {
+      "n": 48,
+      "risposta_verificata": "$\\dfrac{90}{140}$",
+      "motivo_indipendente": "Totali senza duplicati: 90/140=9/14, non media non pesata."
+    },
+    {
+      "n": 49,
+      "risposta_verificata": "Il corso breve farebbe completare più spesso gli stessi studenti del corso esteso",
+      "motivo_indipendente": "Confronto osservazionale non prova effetto sugli stessi studenti."
+    },
+    {
+      "n": 50,
+      "risposta_verificata": "Segnalare una possibile differenza iniziale tra i gruppi",
+      "motivo_indipendente": "Scelta autonoma ammette caratteristiche iniziali diverse."
+    },
+    {
+      "n": 51,
+      "risposta_verificata": "La durata giornaliera della luce",
+      "motivo_indipendente": "Luce è l’unico fattore dichiaratamente variato; germogli sono l’esito."
+    },
+    {
+      "n": 52,
+      "risposta_verificata": "Nelle condizioni della prova, la maggiore durata della luce è associata a più germogli",
+      "motivo_indipendente": "Conclusione circoscritta alle condizioni e all’associazione osservata."
+    },
+    {
+      "n": 53,
+      "risposta_verificata": "Verificare la stabilità della differenza con nuovi semi",
+      "motivo_indipendente": "Replica verifica stabilità su nuovi semi, senza garantire esito."
+    },
+    {
+      "n": 54,
+      "risposta_verificata": "Un eventuale effetto non sarebbe facilmente attribuibile a uno solo dei due fattori",
+      "motivo_indipendente": "Due fattori variati impediscono attribuzione univoca a uno solo."
+    },
+    {
+      "n": 55,
+      "risposta_verificata": "Un risultato che sostiene un’interpretazione senza renderla universale",
+      "motivo_indipendente": "Indizio sostiene interpretazione circoscritta, non legge universale."
+    },
+    {
+      "n": 56,
+      "risposta_verificata": "Alle cento persone intervistate quel pomeriggio",
+      "motivo_indipendente": "70% dei cento intervistati, non della popolazione."
+    },
+    {
+      "n": 57,
+      "risposta_verificata": "Dal campione ai residenti e da quel giorno a ogni giorno",
+      "motivo_indipendente": "Estensioni indebite sia di popolazione sia di frequenza temporale."
+    },
+    {
+      "n": 58,
+      "risposta_verificata": "Potrebbe aver influito sulle scelte, ma l’entità dell’effetto non è misurata",
+      "motivo_indipendente": "Influenza della pioggia possibile, entità non misurata."
+    },
+    {
+      "n": 59,
+      "risposta_verificata": "Definire prima un piano che distribuisca le interviste fra luoghi e orari diversi",
+      "motivo_indipendente": "Piano preventivo con luoghi e tempi diversi risponde alla proposta."
+    },
+    {
+      "n": 60,
+      "risposta_verificata": "Mezzi pubblici usati quel giorno da 70 dei 100 intervistati all’uscita della stazione",
+      "motivo_indipendente": "Titolo conserva gruppo, dato e giorno osservato."
+    },
+    {
+      "n": 61,
+      "risposta_verificata": "30 euro",
+      "motivo_indipendente": "20 euro fissi più 10 viaggi da 1 euro danno 30 euro."
+    },
+    {
+      "n": 62,
+      "risposta_verificata": "Libera costa zero e Piano venti euro",
+      "motivo_indipendente": "Zero viaggi: assenza di variabili non elimina quota fissa Piano."
+    },
+    {
+      "n": 63,
+      "risposta_verificata": "Una persona con cinque viaggi: Libera costa 10 euro e Piano 25",
+      "motivo_indipendente": "Cinque viaggi danno 10 contro 25; unico controesempio fra le opzioni."
+    },
+    {
+      "n": 64,
+      "risposta_verificata": "Libera costa meno sotto 20 viaggi, Piano sopra 20, con parità a 20",
+      "motivo_indipendente": "Differenza n-20 cambia segno a 20; uguaglianza distinta da convenienza."
+    },
+    {
+      "n": 65,
+      "risposta_verificata": "Il numero futuro di viaggi non è certo e può cambiare la convenienza",
+      "motivo_indipendente": "Incertezza di n può cambiare quale tariffa conviene, non i prezzi."
+    },
+    {
+      "n": 66,
+      "risposta_verificata": "Controllare il collegamento, provare la presa controllata, richiedere assistenza se il problema persiste",
+      "motivo_indipendente": "Sequenza cavo, presa, eventuale assistenza; involucro vietato."
+    },
+    {
+      "n": 67,
+      "risposta_verificata": "Segnalare la presa originaria",
+      "motivo_indipendente": "Accensione nella presa verificata porta a segnalare quella originaria."
+    },
+    {
+      "n": 68,
+      "risposta_verificata": "È certamente danneggiato il pulsante di accensione",
+      "motivo_indipendente": "La prova non identifica il pulsante di accensione come guasto."
+    },
+    {
+      "n": 69,
+      "risposta_verificata": "Fornire al tecnico informazioni utili per le verifiche successive",
+      "motivo_indipendente": "I controlli forniscono informazioni al tecnico, non diagnosi completa."
+    },
+    {
+      "n": 70,
+      "risposta_verificata": "Una procedura con condizioni di passaggio e limiti delle conclusioni",
+      "motivo_indipendente": "Testo procedurale condizionato con limiti espliciti delle inferenze."
+    },
+    {
+      "n": 71,
+      "risposta_verificata": "Il percorso separa alcuni visitatori dai compagni e rende l’accesso meno riconoscibile",
+      "motivo_indipendente": "Problema di percorso condiviso e riconoscibilità, non mancato superamento dei gradini."
+    },
+    {
+      "n": 72,
+      "risposta_verificata": "La rampa è necessaria, ma la sua presenza da sola non esaurisce la qualità dell’accesso",
+      "motivo_indipendente": "Necessità della rampa non equivale alla sufficienza della sola presenza."
+    },
+    {
+      "n": 73,
+      "risposta_verificata": "Ogni differenza di percorso è sempre inaccettabile",
+      "motivo_indipendente": "Evitata generalizzazione a ogni edificio e ogni differenza di percorso."
+    },
+    {
+      "n": 74,
+      "risposta_verificata": "Ha fatto emergere un problema non individuato dalla sola verifica delle pendenze",
+      "motivo_indipendente": "Utenti rivelano problema non coperto dalla sola misura delle pendenze."
+    },
+    {
+      "n": 75,
+      "risposta_verificata": "Soddisfare un requisito misurabile può non bastare a risolvere bene un problema",
+      "motivo_indipendente": "Un requisito misurabile necessario non esaurisce la qualità della soluzione."
+    },
+    {
+      "n": 76,
+      "risposta_verificata": "È una proposta ancora da votare",
+      "motivo_indipendente": "Proposta presentata ma voto rinviato; nessuna approvazione o bocciatura."
+    },
+    {
+      "n": 77,
+      "risposta_verificata": "Anticipa a lunedì una misura discussa per l’anno successivo",
+      "motivo_indipendente": "Titolo sposta all’immediato una proposta per l’anno successivo."
+    },
+    {
+      "n": 78,
+      "risposta_verificata": "La proposta potrà essere approvata o respinta in una votazione futura",
+      "motivo_indipendente": "Esito del voto resta aperto; rettifica non equivale a rigetto."
+    },
+    {
+      "n": 79,
+      "risposta_verificata": "L’acquisizione del parere del gestore degli autobus",
+      "motivo_indipendente": "Parere del gestore deve precedere il voto."
+    },
+    {
+      "n": 80,
+      "risposta_verificata": "Per rendere riconoscibili l’errore e la successiva correzione",
+      "motivo_indipendente": "Archivio con rettifica documenta errore e correzione, non conferma errore."
+    },
+    {
+      "n": 81,
+      "risposta_verificata": "Riciclato riguarda l’origine della materia; riciclabile una possibilità di trattamento",
+      "motivo_indipendente": "Riciclato è provenienza; riciclabile è possibilità di trattamento."
+    },
+    {
+      "n": 82,
+      "risposta_verificata": "Sì, le due proprietà riguardano aspetti diversi",
+      "motivo_indipendente": "Proprietà riferite ad aspetti diversi possono coesistere."
+    },
+    {
+      "n": 83,
+      "risposta_verificata": "Occorrono anche servizi disponibili e corretto conferimento",
+      "motivo_indipendente": "Servizi e conferimento collegano capacità tecnica e riciclo effettivo."
+    },
+    {
+      "n": 84,
+      "risposta_verificata": "Quale contenitore abbia il minore impatto ambientale complessivo",
+      "motivo_indipendente": "Impatto totale richiede dati su più fasi non forniti dalla scheda."
+    },
+    {
+      "n": 85,
+      "risposta_verificata": "Una qualifica precisa non va estesa a proprietà complessive che non certifica",
+      "motivo_indipendente": "Qualifica specifica non certifica proprietà complessive."
+    },
+    {
+      "n": 86,
+      "risposta_verificata": "C",
+      "motivo_indipendente": "Ampiezze A20, B50, C6: C è minima."
+    },
+    {
+      "n": 87,
+      "risposta_verificata": "B ha stima centrale maggiore, ma il suo consumo effettivo non è per questo certamente maggiore",
+      "motivo_indipendente": "105>100 nelle stime, ma consumi effettivi non ordinati con certezza."
+    },
+    {
+      "n": 88,
+      "risposta_verificata": "Come fascia di valori plausibili nelle condizioni considerate",
+      "motivo_indipendente": "Intervallo plausibile non è limite assoluto, somma o durata."
+    },
+    {
+      "n": 89,
+      "risposta_verificata": "Una forte variazione degli orari d’uso degli edifici",
+      "motivo_indipendente": "Orari d’uso sono condizione del modello esplicitamente soggetta a revisione."
+    },
+    {
+      "n": 90,
+      "risposta_verificata": "Usarlo nel confronto con i dati senza dichiarare per questo inutili tutte le previsioni",
+      "motivo_indipendente": "Errore utile alla valutazione senza giudizio universale di inutilità."
+    }
+  ],
+  "ricalcoli": {
+    "totale_disponibile": 12,
+    "quote_corsi": [
+      "3/4",
+      "3/5"
+    ],
+    "quota_complessiva": "9/14",
+    "non_completamenti": 50,
+    "piano_10_viaggi": 30,
+    "zero_viaggi": [
+      0,
+      20
+    ],
+    "controesempio_5_viaggi": [
+      10,
+      25
+    ],
+    "pareggio_20_viaggi": [
+      40,
+      40
+    ],
+    "ampiezze": [
+      20,
+      50,
+      6
+    ],
+    "esito_compatibile_ordine_inverso": true,
+    "confronto_tariffe_201_casi": true,
+    "soglie_teoria": [
+      "Iris"
+    ]
+  },
+  "correzioni": [
+    "Riscritti dall’autore 25 gruppi di distrattori troppo estranei; tutte le modifiche rilette dal revisore",
+    "Q49: rimosso riferimento errato alla prima alternativa",
+    "Q4,10,22,28,45,74,83: spiegazioni riallineate alle alternative effettive",
+    "Q64: differenza di costo espressa in euro con variabile definita",
+    "Ingresso in biblioteca: due entrate, evitando ambiguità sui ritorni",
+    "Scheda1: eliminati età adulta e ruolo operativo del marinaio non stabiliti dal brano",
+    "Teoria: riciclato non limitato alle fibre; discussione di una tesi non equivale ad adesione",
+    "EN: indizio reso indication; stesso while nei due esempi contestuali"
+  ],
+  "parita_formule": "Quattro segnalazioni per le due materie: scheda3 usa euros invece di euro nelle unità e overall proportion invece di quota complessiva; Q64 usa euros invece di euro. Equivalenza verificata, nessuna differenza nei valori.",
+  "errori_aperti": []
+}

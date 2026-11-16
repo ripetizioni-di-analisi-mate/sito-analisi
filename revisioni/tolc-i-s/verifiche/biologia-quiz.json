@@ -1,0 +1,2342 @@
+[
+  {
+    "language": "content",
+    "id": 1,
+    "selected": 1,
+    "answer": "Ribosoma",
+    "other_options": [
+      "Lisosoma",
+      "Parete cellulare",
+      "Vacuolo centrale",
+      "Centriolo"
+    ],
+    "reason": "Il ribosoma catalizza legami peptidici; gli altri organelli elencati non traducono mRNA."
+  },
+  {
+    "language": "content",
+    "id": 2,
+    "selected": 2,
+    "answer": "La cellula ha organizzazione eucariotica",
+    "other_options": [
+      "La cellula è necessariamente animale",
+      "La cellula è necessariamente fotosintetica",
+      "La cellula è priva di ribosomi",
+      "La cellula è un batterio tipico"
+    ],
+    "reason": "L'involucro nucleare con pori identifica organizzazione eucariotica, senza imporre animale o fotosintetica."
+  },
+  {
+    "language": "content",
+    "id": 3,
+    "selected": 3,
+    "answer": "$50$",
+    "other_options": [
+      "$51$",
+      "$52$",
+      "$25$",
+      "$102$"
+    ],
+    "reason": "Una catena lineare con 51 vertici ha 50 collegamenti; estremità non unite esclude 51."
+  },
+  {
+    "language": "content",
+    "id": 4,
+    "selected": 4,
+    "answer": "RNA",
+    "other_options": [
+      "DNA nucleare ordinario",
+      "Un trigliceride",
+      "Cellulosa",
+      "Una catena polipeptidica"
+    ],
+    "reason": "Ribosio e uracile individuano RNA, non DNA ordinario né lipide/proteina/polisaccaride."
+  },
+  {
+    "language": "content",
+    "id": 5,
+    "selected": 5,
+    "answer": "Trascrizione",
+    "other_options": [
+      "Traduzione",
+      "Replicazione del DNA",
+      "Idrolisi delle proteine",
+      "Duplicazione del centrosoma"
+    ],
+    "reason": "DNA stampo e RNA prodotto definiscono trascrizione; traduzione produce proteina e replicazione DNA."
+  },
+  {
+    "language": "content",
+    "id": 6,
+    "selected": 1,
+    "answer": "$\\dfrac14$",
+    "other_options": [
+      "$\\dfrac12$",
+      "$\\dfrac34$",
+      "$1$",
+      "$0$"
+    ],
+    "reason": "Gameti a indipendenti da Aa hanno probabilità 1/2 ciascuno; prodotto 1/4."
+  },
+  {
+    "language": "content",
+    "id": 7,
+    "selected": 2,
+    "answer": "Fase S",
+    "other_options": [
+      "Anafase mitotica",
+      "Citodieresi",
+      "Telofase",
+      "Meiosi II"
+    ],
+    "reason": "Raddoppio del DNA in interfase senza divisione è fase S; altre fasi distribuiscono materiale già replicato."
+  },
+  {
+    "language": "content",
+    "id": 8,
+    "selected": 3,
+    "answer": "Meiosi I",
+    "other_options": [
+      "Fase S",
+      "Mitosi di una cellula diploide",
+      "Meiosi II",
+      "Fecondazione"
+    ],
+    "reason": "Omologhi separati ma cromatidi uniti identificano fine meiosi I, con aploidia e cromosomi duplicati."
+  },
+  {
+    "language": "content",
+    "id": 9,
+    "selected": 4,
+    "answer": "Crossing-over tra cromatidi non fratelli di omologhi",
+    "other_options": [
+      "Scambio obbligatorio tra cromosomi non omologhi",
+      "Replicazione di tutto il genoma",
+      "Traduzione di due mRNA",
+      "Separazione dei cromatidi fratelli"
+    ],
+    "reason": "Scambio corrispondente tra omologhi materno/paterno in profase I è crossing-over non fratello."
+  },
+  {
+    "language": "content",
+    "id": 10,
+    "selected": 5,
+    "answer": "Diffusione dei gas tra alveoli e capillari",
+    "other_options": [
+      "Digestione dell’amido nello stomaco",
+      "Formazione di urina nella vescica",
+      "Produzione dei gameti negli alveoli",
+      "Trascrizione del DNA nei globuli rossi maturi"
+    ],
+    "reason": "Lo spessore maggiore rallenta direttamente diffusione alveolo-capillare; le altre attività non sono lo scambio indicato."
+  },
+  {
+    "language": "content",
+    "id": 11,
+    "selected": 1,
+    "answer": "Muscolare",
+    "other_options": [
+      "Epiteliale di rivestimento",
+      "Connettivo cartilagineo",
+      "Nervoso",
+      "Connettivo osseo"
+    ],
+    "reason": "Contrazione e sviluppo di forza da proteine organizzate identificano tessuto muscolare."
+  },
+  {
+    "language": "content",
+    "id": 12,
+    "selected": 2,
+    "answer": "Xilema",
+    "other_options": [
+      "Floema",
+      "Epidermide fogliare",
+      "Meristema apicale",
+      "Tessuto nervoso"
+    ],
+    "reason": "Acqua radici-foglie segue soprattutto xilema; floema principalmente sorgente-destinatario per composti organici."
+  },
+  {
+    "language": "content",
+    "id": 13,
+    "selected": 3,
+    "answer": "Può essere una normale cellula vegetale non fotosintetica",
+    "other_options": [
+      "Deve essere procariotica",
+      "Non può produrre ATP",
+      "Deve essere una cellula animale",
+      "La parete sostituisce il nucleo"
+    ],
+    "reason": "Una radice può avere eucarioti vegetali privi di cloroplasti e dotati di mitocondri."
+  },
+  {
+    "language": "content",
+    "id": 14,
+    "selected": 4,
+    "answer": "Nell’ossigeno molecolare liberato",
+    "other_options": [
+      "Nell’azoto atmosferico fissato",
+      "Nel metano prodotto dal cloroplasto",
+      "Nell’idrogeno di ogni zucchero",
+      "Nell’anidride carbonica assorbita prima della prova"
+    ],
+    "reason": "L'ossidazione dell'acqua nelle reazioni luminose libera O2 contenente gli atomi marcati."
+  },
+  {
+    "language": "content",
+    "id": 15,
+    "selected": 5,
+    "answer": "Una popolazione",
+    "other_options": [
+      "L’intera comunità",
+      "L’intero ecosistema",
+      "Un solo organismo",
+      "Tutti i fattori abiotici"
+    ],
+    "reason": "Una specie, stessa area e tempo costituiscono popolazione; comunità ed ecosistema includono altro."
+  },
+  {
+    "language": "content",
+    "id": 16,
+    "selected": 1,
+    "answer": "Produttore autotrofo",
+    "other_options": [
+      "Consumatore primario obbligato",
+      "Predatore secondario",
+      "Parassita animale obbligato",
+      "Consumatore di materia organica come unica fonte di carbonio"
+    ],
+    "reason": "Carbonio inorganico e luce individuano fotoautotrofo produttore, non consumatore obbligato."
+  },
+  {
+    "language": "content",
+    "id": 17,
+    "selected": 2,
+    "answer": "Mutualismo",
+    "other_options": [
+      "Parassitismo",
+      "Competizione",
+      "Predazione",
+      "Commensalismo con effetto nullo sulla pianta"
+    ],
+    "reason": "Nettare e impollinazione vantaggiosi per entrambi definiscono mutualismo; effetto nullo/dannoso contraddice i dati."
+  },
+  {
+    "language": "content",
+    "id": 18,
+    "selected": 3,
+    "answer": "Selezione di varianti resistenti già presenti",
+    "other_options": [
+      "Trasformazione volontaria di ogni batterio sensibile",
+      "Comparsa necessaria della stessa mutazione in tutte le cellule",
+      "Assenza di qualsiasi variazione ereditaria",
+      "Produzione di resistenza da parte dei ribosomi senza geni"
+    ],
+    "reason": "Resistenza preesistente e riproduzione differenziale implicano selezione, senza mutazione intenzionale."
+  },
+  {
+    "language": "content",
+    "id": 19,
+    "selected": 4,
+    "answer": "Ha organizzazione procariotica e appartiene a un dominio distinto da Bacteria",
+    "other_options": [
+      "È necessariamente un animale",
+      "È un virus incluso in Eukarya",
+      "Possiede necessariamente cloroplasti",
+      "Archaea e Bacteria sono nomi della stessa specie"
+    ],
+    "reason": "Nel modello esplicitamente assegnato, Archaea è dominio procariotico distinto da Bacteria."
+  },
+  {
+    "language": "content",
+    "id": 20,
+    "selected": 5,
+    "answer": "Teste polari verso l’acqua e code apolari verso l’interno",
+    "other_options": [
+      "Code apolari completamente esposte all’acqua su entrambi i lati",
+      "Tutte le teste soltanto sul lato esterno",
+      "Tutte le code soltanto sul lato citoplasmatico",
+      "Fosfolipidi trasformati in nucleotidi"
+    ],
+    "reason": "Teste idrofile a entrambe le superfici acquose e code apolari interne minimizzano esposizione idrofoba."
+  },
+  {
+    "language": "content",
+    "id": 21,
+    "selected": 1,
+    "answer": "Riassorbimento del glucosio dai tubuli verso il sangue",
+    "other_options": [
+      "Produzione di glucosio nella vescica",
+      "Distruzione di tutto il filtrato nel glomerulo",
+      "Passaggio del glucosio dal sangue all’urina nell’uretere",
+      "Trasformazione del glucosio in eritrociti"
+    ],
+    "reason": "Il recupero tubulare del glucosio spiega filtrato positivo e urina quasi priva di glucosio; vescica non recupera nutrienti."
+  },
+  {
+    "language": "content",
+    "id": 22,
+    "selected": 2,
+    "answer": "Diminuisce la superficie di contatto disponibile",
+    "other_options": [
+      "Aumenta necessariamente il numero di alveoli",
+      "Scompare ogni enzima pancreatico",
+      "Il sangue smette di contenere acqua",
+      "L’intestino diventa un tessuto nervoso"
+    ],
+    "reason": "Perdere villi riduce area assorbente a lunghezza invariata; precisata mucosa rivestita da epitelio."
+  },
+  {
+    "language": "content",
+    "id": 23,
+    "selected": 3,
+    "answer": "Distribuzione regolare dei cromosomi ai nuclei figli",
+    "other_options": [
+      "Appaiamento delle basi durante una digestione proteica",
+      "Produzione di glucosio da parte della parete cellulare",
+      "Trasformazione dei fosfolipidi in cromosomi",
+      "Formazione obbligatoria di nuovi alleli in ogni gene"
+    ],
+    "reason": "Il fuso a microtubuli organizza e separa cromosomi; bloccarlo danneggia segregazione, non produce alleli obbligati."
+  },
+  {
+    "language": "content",
+    "id": 24,
+    "selected": 4,
+    "answer": "Il genere",
+    "other_options": [
+      "La specie",
+      "La sottospecie",
+      "La popolazione locale",
+      "Lo stesso individuo"
+    ],
+    "reason": "Quercus è il genere condiviso; robur e ilex designano specie distinte, non una popolazione unica."
+  },
+  {
+    "language": "content",
+    "id": 25,
+    "selected": 5,
+    "answer": "$260$",
+    "other_options": [
+      "$250$",
+      "$280$",
+      "$270$",
+      "$255$"
+    ],
+    "reason": "Entrate 40+10, uscite 25+5: 240+50-30=260."
+  },
+  {
+    "language": "content",
+    "id": 26,
+    "selected": 1,
+    "answer": "Desossiribosio, fosfato e base azotata",
+    "other_options": [
+      "Ribosio, glicerolo e amminoacido",
+      "Glucosio, fosfato e acido grasso",
+      "Glicerolo e tre acidi grassi",
+      "Desossiribosio e due amminoacidi"
+    ],
+    "reason": "Nucleotide DNA: desossiribosio, fosfato e base; glicerolo con acidi grassi è trigliceride."
+  },
+  {
+    "language": "content",
+    "id": 27,
+    "selected": 2,
+    "answer": "I legami tra le unità hanno configurazione diversa e gli enzimi sono specifici",
+    "other_options": [
+      "La cellulosa contiene soltanto amminoacidi",
+      "Il glucosio dell’amido è un nucleotide",
+      "Gli enzimi riconoscono soltanto il colore della sostanza",
+      "La cellulosa non contiene legami chimici"
+    ],
+    "reason": "Specificità enzimatica distingue legami glicosidici di amido e cellulosa, pur con stessi monomeri."
+  },
+  {
+    "language": "content",
+    "id": 28,
+    "selected": 3,
+    "answer": "Parete cellulare",
+    "other_options": [
+      "Ribosoma",
+      "Nucleolo",
+      "Apparato di Golgi",
+      "Cromatina"
+    ],
+    "reason": "La parete resiste meccanicamente all'espansione osmotica; gli organelli interni non sono la barriera rigida."
+  },
+  {
+    "language": "content",
+    "id": 29,
+    "selected": 4,
+    "answer": "È un lipide ad anelli presente nelle membrane animali e precursore di ormoni steroidei",
+    "other_options": [
+      "È un polisaccaride della parete vegetale",
+      "È il monomero di tutte le proteine",
+      "È una base azotata esclusiva dell’RNA",
+      "È composto da glicerolo e tre acidi grassi"
+    ],
+    "reason": "Colesterolo sterolo ad anelli, non trigliceride né base/nucleotide/proteina."
+  },
+  {
+    "language": "content",
+    "id": 30,
+    "selected": 5,
+    "answer": "Deriva genetica per collo di bottiglia",
+    "other_options": [
+      "Selezione certa a favore di quell’allele",
+      "Traduzione del DNA",
+      "Aumento obbligato della variabilità",
+      "Mutazione identica in ogni sopravvissuto"
+    ],
+    "reason": "Sopravvivenza casuale rispetto al genotipo e campione piccolo identificano deriva da collo di bottiglia."
+  },
+  {
+    "language": "content",
+    "id": 31,
+    "selected": 1,
+    "answer": "$Aa$",
+    "other_options": [
+      "$AA$",
+      "$aa$",
+      "Non possiede alleli per il locus",
+      "È necessariamente aploide"
+    ],
+    "reason": "Un figlio aa obbliga entrambi i genitori a fornire a; fenotipo dominante dell'ignoto richiede anche A, quindi Aa."
+  },
+  {
+    "language": "content",
+    "id": 32,
+    "selected": 2,
+    "answer": "Glicogeno",
+    "other_options": [
+      "Cellulosa",
+      "Colesterolo",
+      "DNA",
+      "Cheratina"
+    ],
+    "reason": "Riserva animale ramificata di glucosio è glicogeno; cheratina proteina e cellulosa strutturale."
+  },
+  {
+    "language": "content",
+    "id": 33,
+    "selected": 3,
+    "answer": "Riconoscimento del neurotrasmettitore da parte della cellula bersaglio",
+    "other_options": [
+      "Duplicazione dei cromosomi presinaptici",
+      "Ingresso di globuli rossi nella sinapsi",
+      "Passaggio di un nucleo tra le cellule",
+      "Formazione di una parete di cellulosa"
+    ],
+    "reason": "Rilascio intatto e recettori bloccati separano emissione da riconoscimento postsinaptico."
+  },
+  {
+    "language": "content",
+    "id": 34,
+    "selected": 4,
+    "answer": "$20\\%$",
+    "other_options": [
+      "$30\\%$",
+      "$40\\%$",
+      "$15\\%$",
+      "$70\\%$"
+    ],
+    "reason": "A=T=30%, residuo G+C=40%; C=20% nel duplex complessivo."
+  },
+  {
+    "language": "content",
+    "id": 35,
+    "selected": 5,
+    "answer": "Il batterio non possiede un nucleo delimitato da membrana e si divide per scissione binaria",
+    "other_options": [
+      "Il batterio non contiene materiale genetico",
+      "La divisione batterica non richiede mai replicazione",
+      "Le due cellule figlie sono necessariamente gameti",
+      "Ogni divisione batterica include due meiosi"
+    ],
+    "reason": "Scissione binaria procariotica replica e segrega DNA senza mitosi di un nucleo membranoso."
+  },
+  {
+    "language": "content",
+    "id": 36,
+    "selected": 1,
+    "answer": "Lisosoma",
+    "other_options": [
+      "Ribosoma",
+      "Centriolo",
+      "Nucleolo",
+      "Cloroplasto"
+    ],
+    "reason": "Vescicola acida con idrolasi è lisosoma; ribosomi, centrioli e nucleolo non sono vescicole digestive."
+  },
+  {
+    "language": "content",
+    "id": 37,
+    "selected": 2,
+    "answer": "Parassitismo",
+    "other_options": [
+      "Mutualismo",
+      "Commensalismo",
+      "Competizione intraspecifica",
+      "Produzione primaria"
+    ],
+    "reason": "Beneficio alla zecca e costo al mammifero descrivono parassitismo, con ospite vivo durante alimentazione."
+  },
+  {
+    "language": "content",
+    "id": 38,
+    "selected": 3,
+    "answer": "Metafase",
+    "other_options": [
+      "Anafase",
+      "Telofase",
+      "Fase G1",
+      "Citodieresi conclusa"
+    ],
+    "reason": "Allineamento equatoriale con cromatidi uniti è metafase, non anafase o G1."
+  },
+  {
+    "language": "content",
+    "id": 39,
+    "selected": 4,
+    "answer": "5′–GACT–3′",
+    "other_options": [
+      "5′–TCAG–3′",
+      "5′–GACU–3′",
+      "5′–CTGA–3′",
+      "5′–AGTC–3′"
+    ],
+    "reason": "Complemento antiparallelo TCAG va invertito per scriverlo 5′→3′: GACT; U escluso nel DNA."
+  },
+  {
+    "language": "content",
+    "id": 40,
+    "selected": 5,
+    "answer": "La polarità permette interazioni stabilizzanti con gli ioni",
+    "other_options": [
+      "Le molecole d’acqua sono tutte prive di cariche parziali",
+      "L’acqua converte ogni ione in un atomo neutro",
+      "L’acqua distrugge i nuclei degli ioni",
+      "Ogni sale viene convertito interamente in glucosio"
+    ],
+    "reason": "Cariche parziali dell'acqua stabilizzano ioni separati; non si neutralizzano o trasmutano gli atomi."
+  },
+  {
+    "language": "content",
+    "id": 41,
+    "selected": 1,
+    "answer": "$\\dfrac14$",
+    "other_options": [
+      "$\\dfrac12$",
+      "$\\dfrac18$",
+      "$\\dfrac1{16}$",
+      "$\\dfrac34$"
+    ],
+    "reason": "Assortimento indipendente AaBb genera AB,Ab,aB,ab equiprobabili; Ab=1/4."
+  },
+  {
+    "language": "content",
+    "id": 42,
+    "selected": 2,
+    "answer": "$\\dfrac13$",
+    "other_options": [
+      "$\\dfrac14$",
+      "$\\dfrac12$",
+      "$\\dfrac23$",
+      "$\\dfrac34$"
+    ],
+    "reason": "Tra AA,Aa,Aa dominanti equiprobabili, AA occupa un caso su tre; denominatore condizionato."
+  },
+  {
+    "language": "content",
+    "id": 43,
+    "selected": 3,
+    "answer": "Sinonima",
+    "other_options": [
+      "Non senso",
+      "Inserzione con slittamento della cornice",
+      "Delezione dell’intero gene",
+      "Duplicazione cromosomica"
+    ],
+    "reason": "GAA→GAG cambia nucleotide ma non amminoacido assegnato: sinonima; nessuna inserzione o stop."
+  },
+  {
+    "language": "content",
+    "id": 44,
+    "selected": 4,
+    "answer": "Omologia",
+    "other_options": [
+      "Commensalismo",
+      "Identità di specie",
+      "Assenza di evoluzione",
+      "Origine indipendente senza antenato comune"
+    ],
+    "reason": "Schema ereditato da antenato comune definisce omologia anche con funzioni differenti."
+  },
+  {
+    "language": "content",
+    "id": 45,
+    "selected": 5,
+    "answer": "Respirazione cellulare delle sostanze organiche",
+    "other_options": [
+      "Osmosi dell’acqua",
+      "Diffusione dell’azoto atmosferico",
+      "Duplicazione del DNA senza degradazione",
+      "Assorbimento intestinale di sali"
+    ],
+    "reason": "Respirazione ossida carbonio organico a CO2; osmosi e assorbimento sali non lo fanno."
+  },
+  {
+    "language": "content",
+    "id": 46,
+    "selected": 1,
+    "answer": "Competizione interspecifica",
+    "other_options": [
+      "Competizione soltanto intraspecifica",
+      "Mutualismo obbligato",
+      "Predazione di una specie sull’altra",
+      "Commensalismo privo di effetti sulla seconda specie"
+    ],
+    "reason": "Specie diverse competono per semi limitati; non è predazione degli individui fra le specie."
+  },
+  {
+    "language": "content",
+    "id": 47,
+    "selected": 2,
+    "answer": "Una cellula con due nuclei figli",
+    "other_options": [
+      "Quattro cellule aploidi",
+      "Una cellula senza DNA",
+      "Due cellule prive di citoplasma",
+      "Un solo nucleo che non ha separato i cromosomi"
+    ],
+    "reason": "Mitosi completata divide nuclei; citodieresi assente li lascia nella stessa cellula."
+  },
+  {
+    "language": "content",
+    "id": 48,
+    "selected": 3,
+    "answer": "$8$ cromosomi e $16$ cromatidi",
+    "other_options": [
+      "$16$ cromosomi e $16$ cromatidi",
+      "$4$ cromosomi e $8$ cromatidi",
+      "$8$ cromosomi e $8$ cromatidi",
+      "$16$ cromosomi e $32$ cromatidi"
+    ],
+    "reason": "Dopo S restano 8 cromosomi con due cromatidi ciascuno, quindi 16 cromatidi."
+  },
+  {
+    "language": "content",
+    "id": 49,
+    "selected": 4,
+    "answer": "Feedback negativo",
+    "other_options": [
+      "Amplificazione obbligatoria della perturbazione",
+      "Assenza di controllo omeostatico",
+      "Produzione di ossigeno dal glucosio",
+      "Trasmissione di alleli ai gameti"
+    ],
+    "reason": "La risposta riduce la perturbazione iniziale: feedback negativo, non amplificazione."
+  },
+  {
+    "language": "content",
+    "id": 50,
+    "selected": 5,
+    "answer": "Flusso genico",
+    "other_options": [
+      "Deriva dovuta esclusivamente a mortalità casuale",
+      "Formazione di un nuovo allele senza migrazione",
+      "Estinzione globale",
+      "Replicazione del DNA come unica causa"
+    ],
+    "reason": "Migranti riproduttivi trasferiscono un allele tra popolazioni: flusso genico, non nuova mutazione obbligata."
+  },
+  {
+    "language": "content",
+    "id": 51,
+    "selected": 1,
+    "answer": "Epiteliale",
+    "other_options": [
+      "Osseo",
+      "Cartilagineo",
+      "Muscolare scheletrico",
+      "Nervoso"
+    ],
+    "reason": "Strato continuo che riveste il lume è epitelio; l'organo può contenere anche altri tessuti."
+  },
+  {
+    "language": "content",
+    "id": 52,
+    "selected": 2,
+    "answer": "Elevata richiesta di ATP sostenuta dalla respirazione aerobica",
+    "other_options": [
+      "Sostituzione dei filamenti contrattili con DNA mitocondriale",
+      "Produzione fotosintetica di glucosio nel cuore",
+      "Assenza di consumo energetico",
+      "Eliminazione della necessità di ossigeno"
+    ],
+    "reason": "Molti mitocondri sostengono domanda ATP per lavoro cardiaco, non fotosintesi o autonomia dall'ossigeno."
+  },
+  {
+    "language": "content",
+    "id": 53,
+    "selected": 3,
+    "answer": "La capacità portante dipende dalle condizioni ambientali",
+    "other_options": [
+      "La capacità portante è sempre uguale al numero di cromosomi",
+      "Il primo equilibrio dimostrava assenza di morti e nascite",
+      "Ogni specie ha una capacità portante universale immutabile",
+      "L’aumento dimostra necessariamente una nuova specie"
+    ],
+    "reason": "Nuovo equilibrio con nuove risorse mostra dipendenza ambientale della capacità portante."
+  },
+  {
+    "language": "content",
+    "id": 54,
+    "selected": 4,
+    "answer": "Consumo di ossigeno e rilascio di anidride carbonica",
+    "other_options": [
+      "Produzione di ossigeno alimentata da luce assente",
+      "Assorbimento di fotoni al buio completo",
+      "Produzione di glucosio senza alcuna fonte di energia",
+      "Trasformazione dei mitocondri in cloroplasti"
+    ],
+    "reason": "Al buio breve e con riserve si mantiene respirazione aerobica: O2 consumato e CO2 emessa."
+  },
+  {
+    "language": "content",
+    "id": 55,
+    "selected": 5,
+    "answer": "$200$",
+    "other_options": [
+      "$1000$",
+      "$2000$",
+      "$3000$",
+      "$20$"
+    ],
+    "reason": "10000×0,20×0,10=200; trasferimenti successivi non si sommano."
+  },
+  {
+    "language": "content",
+    "id": 56,
+    "selected": 1,
+    "answer": "Due con un cromosoma in più e due con uno in meno",
+    "other_options": [
+      "Tutti con il numero normale",
+      "Uno normale e tre con numero alterato",
+      "Quattro cellule diploidi identiche",
+      "Tutti senza alcun cromosoma"
+    ],
+    "reason": "Non disgiunzione I seguita da II normale: due n+1 e due n−1; altre coppie eventualmente presenti restano normali."
+  },
+  {
+    "language": "content",
+    "id": 57,
+    "selected": 2,
+    "answer": "Appaiarsi con un codone dell’mRNA durante la traduzione",
+    "other_options": [
+      "Duplicare da solo tutto il DNA",
+      "Formare una membrana nucleare",
+      "Eliminare i fosfati dai cromosomi",
+      "Convertire ogni amminoacido in glucosio"
+    ],
+    "reason": "Anticodone tRNA si appaia al codone mRNA; non diventa proteina e non replica il genoma."
+  },
+  {
+    "language": "content",
+    "id": 58,
+    "selected": 3,
+    "answer": "Diffusione semplice",
+    "other_options": [
+      "Diffusione facilitata da canali",
+      "Trasporto attivo primario",
+      "Osmosi",
+      "Endocitosi"
+    ],
+    "reason": "Gas lungo gradiente direttamente nei lipidi senza carrier: diffusione semplice, non facilitata/attiva."
+  },
+  {
+    "language": "content",
+    "id": 59,
+    "selected": 4,
+    "answer": "Polmoni, atrio sinistro, ventricolo sinistro",
+    "other_options": [
+      "Fegato, ventricolo destro, polmoni",
+      "Atrio destro, aorta, polmoni",
+      "Ventricolo sinistro, intestino, atrio destro",
+      "Reni, atrio destro, aorta"
+    ],
+    "reason": "Dal ventricolo destro: polmoni, atrio sinistro, ventricolo sinistro, poi aorta; alternative invertono distretti."
+  },
+  {
+    "language": "content",
+    "id": 60,
+    "selected": 5,
+    "answer": "Capacità di trasportare ossigeno",
+    "other_options": [
+      "Capacità di duplicare tutti i cromosomi plasmatici",
+      "Produzione di bile",
+      "Sintesi di amido",
+      "Formazione dei cloroplasti"
+    ],
+    "reason": "Emoglobina lega gran parte dell'ossigeno ematico; diminuirla riduce capacità di trasporto."
+  },
+  {
+    "language": "content",
+    "id": 61,
+    "selected": 1,
+    "answer": "Il floema trasporta zuccheri dalla sorgente al destinatario",
+    "other_options": [
+      "Lo xilema trasporta esclusivamente saccarosio in ogni pianta",
+      "La radice deve compiere fotosintesi per ricevere zuccheri",
+      "Il saccarosio passa soltanto come vapore dagli stomi",
+      "Il trasporto avviene mediante neuroni vegetali"
+    ],
+    "reason": "Saccarosio da foglia sorgente a radice sink segue floema, senza obbligo di direzione verticale universale."
+  },
+  {
+    "language": "content",
+    "id": 62,
+    "selected": 2,
+    "answer": "Più cervi e maggiore pressione sulle giovani piante",
+    "other_options": [
+      "Meno cervi per aumento della predazione",
+      "Scomparsa immediata di ogni produttore per definizione",
+      "Trasformazione dei cervi in produttori",
+      "Aumento certo delle piante perché i lupi non le mangiano"
+    ],
+    "reason": "Meno predatori può aumentare cervi e consumo giovani piante: effetto indiretto plausibile nel modello."
+  },
+  {
+    "language": "content",
+    "id": 63,
+    "selected": 3,
+    "answer": "A e B sono più strettamente imparentati tra loro",
+    "other_options": [
+      "A deriva necessariamente dalla specie B attuale",
+      "C è necessariamente l’antenato vivente di A",
+      "A e B devono avere aspetto identico",
+      "C è una specie meno evoluta"
+    ],
+    "reason": "Antenato comune più recente implica maggiore parentela, non identità o progresso evolutivo."
+  },
+  {
+    "language": "content",
+    "id": 64,
+    "selected": 4,
+    "answer": "Perdita d’acqua e riduzione del volume",
+    "other_options": [
+      "Ingresso d’acqua e aumento del volume",
+      "Perdita d’acqua e aumento del volume",
+      "Entrata obbligatoria del soluto in uguale quantità",
+      "Raddoppio immediato del numero di cromosomi"
+    ],
+    "reason": "Soluto esterno impermeante ipertonico ed eguale pressione iniziale: acqua esce, volume diminuisce."
+  },
+  {
+    "language": "content",
+    "id": 65,
+    "selected": 5,
+    "answer": "$\\dfrac12$",
+    "other_options": [
+      "$\\dfrac14$",
+      "$1$",
+      "$0$",
+      "$\\dfrac34$"
+    ],
+    "reason": "Due filamenti originari persistono in due duplex distinti sui quattro finali: 1/2."
+  },
+  {
+    "language": "content",
+    "id": 66,
+    "selected": 1,
+    "answer": "A si accumula e la nuova produzione di B si arresta",
+    "other_options": [
+      "A diminuisce perché viene convertito più rapidamente",
+      "B viene prodotto senza usare A",
+      "A viene trasformato automaticamente in DNA",
+      "Le quantità restano necessariamente identiche"
+    ],
+    "reason": "Conversione non catalizzata ora esplicitamente trascurabile: ingresso A senza conversione porta accumulo e nessun nuovo B nella via."
+  },
+  {
+    "language": "content",
+    "id": 67,
+    "selected": 2,
+    "answer": "Dominanza incompleta",
+    "other_options": [
+      "Dominanza completa di R",
+      "Dominanza completa di B",
+      "Assenza di segregazione degli alleli",
+      "Ereditarietà esclusivamente ambientale"
+    ],
+    "reason": "RB uniformemente intermedio tra RR e BB è dominanza incompleta, senza eliminare segregazione."
+  },
+  {
+    "language": "content",
+    "id": 68,
+    "selected": 3,
+    "answer": "Il pH può influenzare l’attività enzimatica nelle condizioni provate",
+    "other_options": [
+      "La temperatura deve essere cambiata",
+      "La quantità di enzima deve essere diversa",
+      "Il pH trasforma gli elementi chimici del substrato",
+      "Ogni enzima ha lo stesso pH ottimale"
+    ],
+    "reason": "Solo pH cambiato a variabili controllate: effetto pH compatibile; due misure non fissano ottimo universale."
+  },
+  {
+    "language": "content",
+    "id": 69,
+    "selected": 4,
+    "answer": "Decompositori che contribuiscono al riciclo della materia",
+    "other_options": [
+      "Produttori che creano energia dal nulla",
+      "Consumatori che impediscono ogni riciclo",
+      "Organismi che trasformano tutti gli atomi in luce",
+      "Predatori dei minerali"
+    ],
+    "reason": "Degradazione foglie e mineralizzazione definiscono decompositori e riciclo materia, non creazione energia."
+  },
+  {
+    "language": "content",
+    "id": 70,
+    "selected": 5,
+    "answer": "Proliferazione nel meristema apicale",
+    "other_options": [
+      "Solo assorbimento di acqua senza divisioni",
+      "Fotosintesi nelle cellule prive di cloroplasti",
+      "Formazione di gameti mediante meiosi",
+      "Trasformazione dello xilema in tessuto nervoso"
+    ],
+    "reason": "Nuovo quesito: mitosi frequenti nell'apice producono nuove cellule nel meristema; non semplice distensione o gametogenesi."
+  },
+  {
+    "language": "content",
+    "id": 71,
+    "selected": 1,
+    "answer": "L’ambiente può contribuire alla differenza di fenotipo",
+    "other_options": [
+      "Le piante devono appartenere a specie diverse",
+      "La differenza prova una nuova mutazione ereditaria",
+      "I geni non hanno alcun ruolo nello sviluppo",
+      "Le foglie sono necessariamente gameti"
+    ],
+    "reason": "Genotipo identico e luce diversa ammettono plasticità fenotipica senza mutazione necessaria."
+  },
+  {
+    "language": "content",
+    "id": 72,
+    "selected": 2,
+    "answer": "DNA proprio e ribosomi con caratteristiche di origine batterica",
+    "other_options": [
+      "Assenza completa di membrane e DNA",
+      "Produzione esclusiva da ribosomi liberi isolati",
+      "Presenza soltanto fuori dalle cellule eucariotiche",
+      "Identità con il nucleo cellulare"
+    ],
+    "reason": "DNA e apparato ribosomale di ascendenza batterica sostengono endosimbiosi, senza autonomia attuale."
+  },
+  {
+    "language": "content",
+    "id": 73,
+    "selected": 3,
+    "answer": "La disponibilità di carbonio può essere il fattore limitante",
+    "other_options": [
+      "La luce è diventata un nutriente minerale",
+      "La fotosintesi non usa mai anidride carbonica",
+      "Il DNA è scomparso da tutte le cellule",
+      "La pianta non può più respirare per definizione"
+    ],
+    "reason": "CO2 insufficiente può limitare fissazione del carbonio anche con luce abbondante."
+  },
+  {
+    "language": "content",
+    "id": 74,
+    "selected": 4,
+    "answer": "Isolamento riproduttivo temporale",
+    "other_options": [
+      "Isolamento geografico dovuto a continenti diversi",
+      "Sterilità degli ibridi già nati",
+      "Morte degli zigoti dopo fecondazione",
+      "Assenza di qualsiasi barriera agli incroci"
+    ],
+    "reason": "Fioriture non sovrapposte nella stessa area configurano isolamento temporale prezigotico."
+  },
+  {
+    "language": "content",
+    "id": 75,
+    "selected": 5,
+    "answer": "Un apporto di energia diretto o accoppiato a un altro processo",
+    "other_options": [
+      "Nessuna fonte energetica perché ogni trasporto è passivo",
+      "La scomparsa della membrana plasmatica",
+      "La trasformazione dello ione in acqua",
+      "Il passaggio obbligatorio attraverso una vescicola"
+    ],
+    "reason": "Moto contro gradiente elettrochimico richiede energia, diretta o accoppiata; non sempre ATP diretto del carrier."
+  },
+  {
+    "language": "content",
+    "id": 76,
+    "selected": 1,
+    "answer": "$29$",
+    "other_options": [
+      "$30$",
+      "$90$",
+      "$27$",
+      "$31$"
+    ],
+    "reason": "90 nucleotidi/3=30 codoni; start dà residuo e stop no: 29 amminoacidi prima di modifiche."
+  },
+  {
+    "language": "content",
+    "id": 77,
+    "selected": 2,
+    "answer": "I due tipi cellulari esprimono in modo diverso i geni",
+    "other_options": [
+      "Ogni cellula muscolare ha perso necessariamente tutti i geni nervosi",
+      "Il neurone non contiene DNA",
+      "Le proteine sono prodotte indipendentemente dall’informazione genetica",
+      "Il DNA muscolare usa uracile invece di timina"
+    ],
+    "reason": "Stesso genoma nucleare con proteine diverse deriva da espressione differenziale, non perdita generalizzata dei geni."
+  },
+  {
+    "language": "content",
+    "id": 78,
+    "selected": 3,
+    "answer": "La sequenza primaria degli amminoacidi",
+    "other_options": [
+      "La stessa struttura terziaria",
+      "Ogni interazione tra catene",
+      "La funzione originaria",
+      "La forma tridimensionale completa"
+    ],
+    "reason": "Enunciato ora limita il cambiamento alla conformazione senza alterazioni covalenti: sequenza primaria conservata."
+  },
+  {
+    "language": "content",
+    "id": 79,
+    "selected": 4,
+    "answer": "Si è verificata un’estinzione locale della popolazione",
+    "other_options": [
+      "La specie si è estinta globalmente",
+      "Tutti i suoi individui sono diventati un’altra specie",
+      "Non può essere cambiata alcuna comunità",
+      "La scomparsa locale dimostra che non esisteva variabilità"
+    ],
+    "reason": "Persistenza in altri laghi esclude estinzione globale; scomparsa locale della popolazione."
+  },
+  {
+    "language": "content",
+    "id": 80,
+    "selected": 5,
+    "answer": "Minore perdita di vapore acqueo e minore ingresso di CO₂",
+    "other_options": [
+      "Maggiore ingresso di CO₂ e perdita d’acqua sempre nulla",
+      "Eliminazione dei mitocondri e aumento dei cromosomi",
+      "Arresto obbligato di ogni reazione cellulare",
+      "Trasformazione dello xilema in floema"
+    ],
+    "reason": "Chiudere stomi riduce scambio di vapore e CO2, senza arrestare ogni metabolismo."
+  },
+  {
+    "language": "content",
+    "id": 81,
+    "selected": 1,
+    "answer": "Apparato di Golgi, vescicole secretorie, membrana plasmatica",
+    "other_options": [
+      "Nucleolo, cromosoma, parete di cellulosa",
+      "Matrice mitocondriale, cloroplasto, nucleo",
+      "DNA, tRNA, amminoacidi liberi",
+      "Centriolo, fuso, cromatidi"
+    ],
+    "reason": "Via classica RER→Golgi→vescicole→membrana; non ogni proteina segue tale via, ma quella assegnata sì."
+  },
+  {
+    "language": "content",
+    "id": 82,
+    "selected": 2,
+    "answer": "Una grande cellula uovo e piccoli globuli polari possono derivare dalla stessa meiosi",
+    "other_options": [
+      "Ogni prodotto deve restare diploide",
+      "La replicazione del DNA avviene dopo ogni divisione",
+      "Non si separano mai i cromosomi omologhi",
+      "Si producono quattro uova identiche per dimensione"
+    ],
+    "reason": "Citodieresi asimmetrica nell'oogenesi dà uovo grande e globuli polari pur con riduzione meiotica normale."
+  },
+  {
+    "language": "content",
+    "id": 83,
+    "selected": 3,
+    "answer": "Temperatura dell’acqua",
+    "other_options": [
+      "Intensità luminosa che costituisce il trattamento",
+      "Quantità di ossigeno prodotto, imposta prima della misura",
+      "Risultato finale, reso identico per definizione",
+      "Numero di bolle, bloccato sperimentalmente allo stesso valore"
+    ],
+    "reason": "Luce è trattamento, temperatura controllo; ossigeno/bolle sono risposta da misurare e non imporre uguale."
+  },
+  {
+    "language": "content",
+    "id": 84,
+    "selected": 4,
+    "answer": "Glicerolo e tre acidi grassi",
+    "other_options": [
+      "Glucosio e tre nucleotidi",
+      "Ribosio e tre amminoacidi",
+      "Una base azotata e tre fosfati",
+      "Colesterolo e tre glucosi"
+    ],
+    "reason": "Idrolisi dei tre esteri del trigliceride fornisce scheletro glicerolo e tre acidi grassi."
+  },
+  {
+    "language": "content",
+    "id": 85,
+    "selected": 5,
+    "answer": "Arteria",
+    "other_options": [
+      "Vena perché il sangue è povero di ossigeno",
+      "Capillare perché parte dal cuore",
+      "Vena perché raggiunge i polmoni",
+      "Vaso linfatico per definizione"
+    ],
+    "reason": "La direzione dal cuore definisce arteria anche se sangue deossigenato, come nell'arteria polmonare."
+  },
+  {
+    "language": "content",
+    "id": 86,
+    "selected": 1,
+    "answer": "È compatibile con un virus",
+    "other_options": [
+      "È necessariamente una cellula batterica autonoma",
+      "È un quarto dominio cellulare",
+      "È un mitocondrio libero capace di completa autonomia",
+      "È un animale unicellulare con tutti gli organelli"
+    ],
+    "reason": "Acido nucleico, capside e dipendenza dall'ospite senza ribosomi sono compatibili con virus acellulare."
+  },
+  {
+    "language": "content",
+    "id": 87,
+    "selected": 2,
+    "answer": "Ovulo → seme; ovario → frutto",
+    "other_options": [
+      "Ovulo → radice adulta; ovario → polline",
+      "Ovulo → stoma; ovario → mitocondrio",
+      "Petalo → cromosoma; radice → seme",
+      "Xilema → embrione; floema → polline"
+    ],
+    "reason": "Ovulo→seme e ovario→frutto nella sviluppo tipico, con possibile contributo di altri tessuti."
+  },
+  {
+    "language": "content",
+    "id": 88,
+    "selected": 3,
+    "answer": "$750$",
+    "other_options": [
+      "$1650$",
+      "$1200$",
+      "$450$",
+      "$270$"
+    ],
+    "reason": "Produzione netta=1200−450=750, sottraendo respirazione dei produttori."
+  },
+  {
+    "language": "content",
+    "id": 89,
+    "selected": 4,
+    "answer": "Uguale ricchezza di specie e diversa distribuzione delle abbondanze",
+    "other_options": [
+      "X ha più specie perché è più uniforme",
+      "Y ha una sola specie perché una è dominante",
+      "X contiene più individui totali",
+      "La ricchezza si misura contando soltanto la specie più abbondante"
+    ],
+    "reason": "Entrambe ricchezza 3 e totale 30; le abbondanze 10/10/10 e 28/1/1 hanno uniformità diversa."
+  },
+  {
+    "language": "content",
+    "id": 90,
+    "selected": 5,
+    "answer": "Splicing del trascritto di RNA",
+    "other_options": [
+      "Replicazione semiconservativa del DNA",
+      "Traduzione degli introni in un nuovo cromosoma",
+      "Eliminazione degli introni dal DNA di tutte le cellule",
+      "Crossing-over fra cromosomi omologhi"
+    ],
+    "reason": "Nuovo quesito: rimozione introni e giunzione esoni nel trascritto è splicing RNA, senza eliminazione dal DNA."
+  },
+  {
+    "language": "content-en",
+    "id": 1,
+    "selected": 1,
+    "answer": "Ribosome",
+    "other_options": [
+      "Lysosome",
+      "Cell wall",
+      "Central vacuole",
+      "Centriole"
+    ],
+    "reason": "Il ribosoma catalizza legami peptidici; gli altri organelli elencati non traducono mRNA."
+  },
+  {
+    "language": "content-en",
+    "id": 2,
+    "selected": 2,
+    "answer": "The cell has eukaryotic organization",
+    "other_options": [
+      "The cell must be animal",
+      "The cell must be photosynthetic",
+      "The cell lacks ribosomes",
+      "The cell is a typical bacterium"
+    ],
+    "reason": "L'involucro nucleare con pori identifica organizzazione eucariotica, senza imporre animale o fotosintetica."
+  },
+  {
+    "language": "content-en",
+    "id": 3,
+    "selected": 3,
+    "answer": "$50$",
+    "other_options": [
+      "$51$",
+      "$52$",
+      "$25$",
+      "$102$"
+    ],
+    "reason": "Una catena lineare con 51 vertici ha 50 collegamenti; estremità non unite esclude 51."
+  },
+  {
+    "language": "content-en",
+    "id": 4,
+    "selected": 4,
+    "answer": "RNA",
+    "other_options": [
+      "Ordinary nuclear DNA",
+      "A triglyceride",
+      "Cellulose",
+      "A polypeptide chain"
+    ],
+    "reason": "Ribosio e uracile individuano RNA, non DNA ordinario né lipide/proteina/polisaccaride."
+  },
+  {
+    "language": "content-en",
+    "id": 5,
+    "selected": 5,
+    "answer": "Transcription",
+    "other_options": [
+      "Translation",
+      "DNA replication",
+      "Protein hydrolysis",
+      "Centrosome duplication"
+    ],
+    "reason": "DNA stampo e RNA prodotto definiscono trascrizione; traduzione produce proteina e replicazione DNA."
+  },
+  {
+    "language": "content-en",
+    "id": 6,
+    "selected": 1,
+    "answer": "$\\dfrac14$",
+    "other_options": [
+      "$\\dfrac12$",
+      "$\\dfrac34$",
+      "$1$",
+      "$0$"
+    ],
+    "reason": "Gameti a indipendenti da Aa hanno probabilità 1/2 ciascuno; prodotto 1/4."
+  },
+  {
+    "language": "content-en",
+    "id": 7,
+    "selected": 2,
+    "answer": "S phase",
+    "other_options": [
+      "Mitotic anaphase",
+      "Cytokinesis",
+      "Telophase",
+      "Meiosis II"
+    ],
+    "reason": "Raddoppio del DNA in interfase senza divisione è fase S; altre fasi distribuiscono materiale già replicato."
+  },
+  {
+    "language": "content-en",
+    "id": 8,
+    "selected": 3,
+    "answer": "Meiosis I",
+    "other_options": [
+      "S phase",
+      "Mitosis of a diploid cell",
+      "Meiosis II",
+      "Fertilization"
+    ],
+    "reason": "Omologhi separati ma cromatidi uniti identificano fine meiosi I, con aploidia e cromosomi duplicati."
+  },
+  {
+    "language": "content-en",
+    "id": 9,
+    "selected": 4,
+    "answer": "Crossing-over between nonsister chromatids of homologs",
+    "other_options": [
+      "An obligatory exchange between nonhomologous chromosomes",
+      "Replication of the whole genome",
+      "Translation of two mRNAs",
+      "Separation of sister chromatids"
+    ],
+    "reason": "Scambio corrispondente tra omologhi materno/paterno in profase I è crossing-over non fratello."
+  },
+  {
+    "language": "content-en",
+    "id": 10,
+    "selected": 5,
+    "answer": "Gas diffusion between alveoli and capillaries",
+    "other_options": [
+      "Starch digestion in the stomach",
+      "Urine formation in the bladder",
+      "Gamete production in alveoli",
+      "DNA transcription in mature red blood cells"
+    ],
+    "reason": "Lo spessore maggiore rallenta direttamente diffusione alveolo-capillare; le altre attività non sono lo scambio indicato."
+  },
+  {
+    "language": "content-en",
+    "id": 11,
+    "selected": 1,
+    "answer": "Muscle",
+    "other_options": [
+      "Lining epithelium",
+      "Cartilaginous connective tissue",
+      "Nervous",
+      "Bone connective tissue"
+    ],
+    "reason": "Contrazione e sviluppo di forza da proteine organizzate identificano tessuto muscolare."
+  },
+  {
+    "language": "content-en",
+    "id": 12,
+    "selected": 2,
+    "answer": "Xylem",
+    "other_options": [
+      "Phloem",
+      "Leaf epidermis",
+      "Apical meristem",
+      "Nervous tissue"
+    ],
+    "reason": "Acqua radici-foglie segue soprattutto xilema; floema principalmente sorgente-destinatario per composti organici."
+  },
+  {
+    "language": "content-en",
+    "id": 13,
+    "selected": 3,
+    "answer": "It can be a normal nonphotosynthetic plant cell",
+    "other_options": [
+      "It must be prokaryotic",
+      "It cannot produce ATP",
+      "It must be an animal cell",
+      "The wall replaces the nucleus"
+    ],
+    "reason": "Una radice può avere eucarioti vegetali privi di cloroplasti e dotati di mitocondri."
+  },
+  {
+    "language": "content-en",
+    "id": 14,
+    "selected": 4,
+    "answer": "In the molecular oxygen released",
+    "other_options": [
+      "In atmospheric nitrogen fixed",
+      "In methane produced by the chloroplast",
+      "In the hydrogen of every sugar",
+      "In carbon dioxide absorbed before the experiment"
+    ],
+    "reason": "L'ossidazione dell'acqua nelle reazioni luminose libera O2 contenente gli atomi marcati."
+  },
+  {
+    "language": "content-en",
+    "id": 15,
+    "selected": 5,
+    "answer": "A population",
+    "other_options": [
+      "The entire community",
+      "The entire ecosystem",
+      "A single organism",
+      "All abiotic factors"
+    ],
+    "reason": "Una specie, stessa area e tempo costituiscono popolazione; comunità ed ecosistema includono altro."
+  },
+  {
+    "language": "content-en",
+    "id": 16,
+    "selected": 1,
+    "answer": "Autotrophic producer",
+    "other_options": [
+      "Obligate primary consumer",
+      "Secondary predator",
+      "Obligate animal parasite",
+      "Consumer using organic matter as its only carbon source"
+    ],
+    "reason": "Carbonio inorganico e luce individuano fotoautotrofo produttore, non consumatore obbligato."
+  },
+  {
+    "language": "content-en",
+    "id": 17,
+    "selected": 2,
+    "answer": "Mutualism",
+    "other_options": [
+      "Parasitism",
+      "Competition",
+      "Predation",
+      "Commensalism with no effect on the plant"
+    ],
+    "reason": "Nettare e impollinazione vantaggiosi per entrambi definiscono mutualismo; effetto nullo/dannoso contraddice i dati."
+  },
+  {
+    "language": "content-en",
+    "id": 18,
+    "selected": 3,
+    "answer": "Selection of resistant variants already present",
+    "other_options": [
+      "Voluntary transformation of every susceptible bacterium",
+      "Necessary appearance of the same mutation in all cells",
+      "Absence of any inherited variation",
+      "Production of resistance by ribosomes without genes"
+    ],
+    "reason": "Resistenza preesistente e riproduzione differenziale implicano selezione, senza mutazione intenzionale."
+  },
+  {
+    "language": "content-en",
+    "id": 19,
+    "selected": 4,
+    "answer": "It has prokaryotic organization and belongs to a domain distinct from Bacteria",
+    "other_options": [
+      "It must be an animal",
+      "It is a virus included in Eukarya",
+      "It must have chloroplasts",
+      "Archaea and Bacteria are names for the same species"
+    ],
+    "reason": "Nel modello esplicitamente assegnato, Archaea è dominio procariotico distinto da Bacteria."
+  },
+  {
+    "language": "content-en",
+    "id": 20,
+    "selected": 5,
+    "answer": "Polar heads face water and nonpolar tails face inward",
+    "other_options": [
+      "Nonpolar tails are fully exposed to water on both sides",
+      "All heads are only on the outer side",
+      "All tails are only on the cytoplasmic side",
+      "Phospholipids are converted into nucleotides"
+    ],
+    "reason": "Teste idrofile a entrambe le superfici acquose e code apolari interne minimizzano esposizione idrofoba."
+  },
+  {
+    "language": "content-en",
+    "id": 21,
+    "selected": 1,
+    "answer": "Glucose reabsorption from tubules into blood",
+    "other_options": [
+      "Glucose production in the bladder",
+      "Destruction of all filtrate in the glomerulus",
+      "Glucose passage from blood to urine in the ureter",
+      "Conversion of glucose into red blood cells"
+    ],
+    "reason": "Il recupero tubulare del glucosio spiega filtrato positivo e urina quasi priva di glucosio; vescica non recupera nutrienti."
+  },
+  {
+    "language": "content-en",
+    "id": 22,
+    "selected": 2,
+    "answer": "The available contact surface decreases",
+    "other_options": [
+      "The number of alveoli necessarily increases",
+      "Every pancreatic enzyme disappears",
+      "Blood stops containing water",
+      "The intestine becomes nervous tissue"
+    ],
+    "reason": "Perdere villi riduce area assorbente a lunghezza invariata; precisata mucosa rivestita da epitelio."
+  },
+  {
+    "language": "content-en",
+    "id": 23,
+    "selected": 3,
+    "answer": "Regular chromosome distribution to daughter nuclei",
+    "other_options": [
+      "Base pairing during protein digestion",
+      "Glucose production by the cell wall",
+      "Conversion of phospholipids into chromosomes",
+      "Obligatory formation of new alleles in every gene"
+    ],
+    "reason": "Il fuso a microtubuli organizza e separa cromosomi; bloccarlo danneggia segregazione, non produce alleli obbligati."
+  },
+  {
+    "language": "content-en",
+    "id": 24,
+    "selected": 4,
+    "answer": "Genus",
+    "other_options": [
+      "Species",
+      "Subspecies",
+      "Local population",
+      "The same individual"
+    ],
+    "reason": "Quercus è il genere condiviso; robur e ilex designano specie distinte, non una popolazione unica."
+  },
+  {
+    "language": "content-en",
+    "id": 25,
+    "selected": 5,
+    "answer": "$260$",
+    "other_options": [
+      "$250$",
+      "$280$",
+      "$270$",
+      "$255$"
+    ],
+    "reason": "Entrate 40+10, uscite 25+5: 240+50-30=260."
+  },
+  {
+    "language": "content-en",
+    "id": 26,
+    "selected": 1,
+    "answer": "Deoxyribose, phosphate and a nitrogenous base",
+    "other_options": [
+      "Ribose, glycerol and an amino acid",
+      "Glucose, phosphate and a fatty acid",
+      "Glycerol and three fatty acids",
+      "Deoxyribose and two amino acids"
+    ],
+    "reason": "Nucleotide DNA: desossiribosio, fosfato e base; glicerolo con acidi grassi è trigliceride."
+  },
+  {
+    "language": "content-en",
+    "id": 27,
+    "selected": 2,
+    "answer": "Bonds between units have different configurations and enzymes are specific",
+    "other_options": [
+      "Cellulose contains only amino acids",
+      "The glucose in starch is a nucleotide",
+      "Enzymes recognize only the substance’s color",
+      "Cellulose contains no chemical bonds"
+    ],
+    "reason": "Specificità enzimatica distingue legami glicosidici di amido e cellulosa, pur con stessi monomeri."
+  },
+  {
+    "language": "content-en",
+    "id": 28,
+    "selected": 3,
+    "answer": "Cell wall",
+    "other_options": [
+      "Ribosome",
+      "Nucleolus",
+      "Golgi apparatus",
+      "Chromatin"
+    ],
+    "reason": "La parete resiste meccanicamente all'espansione osmotica; gli organelli interni non sono la barriera rigida."
+  },
+  {
+    "language": "content-en",
+    "id": 29,
+    "selected": 4,
+    "answer": "It is a ring-shaped lipid found in animal membranes and a precursor of steroid hormones",
+    "other_options": [
+      "It is a polysaccharide in plant cell walls",
+      "It is the monomer of all proteins",
+      "It is a nitrogenous base exclusive to RNA",
+      "It consists of glycerol and three fatty acids"
+    ],
+    "reason": "Colesterolo sterolo ad anelli, non trigliceride né base/nucleotide/proteina."
+  },
+  {
+    "language": "content-en",
+    "id": 30,
+    "selected": 5,
+    "answer": "Genetic drift through a bottleneck",
+    "other_options": [
+      "Certain selection in favor of that allele",
+      "Translation of DNA",
+      "An obligatory increase in variation",
+      "The same mutation in every survivor"
+    ],
+    "reason": "Sopravvivenza casuale rispetto al genotipo e campione piccolo identificano deriva da collo di bottiglia."
+  },
+  {
+    "language": "content-en",
+    "id": 31,
+    "selected": 1,
+    "answer": "$Aa$",
+    "other_options": [
+      "$AA$",
+      "$aa$",
+      "It has no alleles at the locus",
+      "It must be haploid"
+    ],
+    "reason": "Un figlio aa obbliga entrambi i genitori a fornire a; fenotipo dominante dell'ignoto richiede anche A, quindi Aa."
+  },
+  {
+    "language": "content-en",
+    "id": 32,
+    "selected": 2,
+    "answer": "Glycogen",
+    "other_options": [
+      "Cellulose",
+      "Cholesterol",
+      "DNA",
+      "Keratin"
+    ],
+    "reason": "Riserva animale ramificata di glucosio è glicogeno; cheratina proteina e cellulosa strutturale."
+  },
+  {
+    "language": "content-en",
+    "id": 33,
+    "selected": 3,
+    "answer": "Recognition of neurotransmitter by the target cell",
+    "other_options": [
+      "Replication of presynaptic chromosomes",
+      "Entry of red blood cells into the synapse",
+      "Passage of a nucleus between cells",
+      "Formation of a cellulose wall"
+    ],
+    "reason": "Rilascio intatto e recettori bloccati separano emissione da riconoscimento postsinaptico."
+  },
+  {
+    "language": "content-en",
+    "id": 34,
+    "selected": 4,
+    "answer": "$20\\%$",
+    "other_options": [
+      "$30\\%$",
+      "$40\\%$",
+      "$15\\%$",
+      "$70\\%$"
+    ],
+    "reason": "A=T=30%, residuo G+C=40%; C=20% nel duplex complessivo."
+  },
+  {
+    "language": "content-en",
+    "id": 35,
+    "selected": 5,
+    "answer": "The bacterium has no membrane-bounded nucleus and divides by binary fission",
+    "other_options": [
+      "The bacterium contains no genetic material",
+      "Bacterial division never requires replication",
+      "Both daughter cells must be gametes",
+      "Every bacterial division includes two meioses"
+    ],
+    "reason": "Scissione binaria procariotica replica e segrega DNA senza mitosi di un nucleo membranoso."
+  },
+  {
+    "language": "content-en",
+    "id": 36,
+    "selected": 1,
+    "answer": "Lysosome",
+    "other_options": [
+      "Ribosome",
+      "Centriole",
+      "Nucleolus",
+      "Chloroplast"
+    ],
+    "reason": "Vescicola acida con idrolasi è lisosoma; ribosomi, centrioli e nucleolo non sono vescicole digestive."
+  },
+  {
+    "language": "content-en",
+    "id": 37,
+    "selected": 2,
+    "answer": "Parasitism",
+    "other_options": [
+      "Mutualism",
+      "Commensalism",
+      "Intraspecific competition",
+      "Primary production"
+    ],
+    "reason": "Beneficio alla zecca e costo al mammifero descrivono parassitismo, con ospite vivo durante alimentazione."
+  },
+  {
+    "language": "content-en",
+    "id": 38,
+    "selected": 3,
+    "answer": "Metaphase",
+    "other_options": [
+      "Anaphase",
+      "Telophase",
+      "G1 phase",
+      "Completed cytokinesis"
+    ],
+    "reason": "Allineamento equatoriale con cromatidi uniti è metafase, non anafase o G1."
+  },
+  {
+    "language": "content-en",
+    "id": 39,
+    "selected": 4,
+    "answer": "5′–GACT–3′",
+    "other_options": [
+      "5′–TCAG–3′",
+      "5′–GACU–3′",
+      "5′–CTGA–3′",
+      "5′–AGTC–3′"
+    ],
+    "reason": "Complemento antiparallelo TCAG va invertito per scriverlo 5′→3′: GACT; U escluso nel DNA."
+  },
+  {
+    "language": "content-en",
+    "id": 40,
+    "selected": 5,
+    "answer": "Polarity allows stabilizing interactions with ions",
+    "other_options": [
+      "All water molecules lack partial charges",
+      "Water converts every ion into a neutral atom",
+      "Water destroys ion nuclei",
+      "Every salt is entirely converted into glucose"
+    ],
+    "reason": "Cariche parziali dell'acqua stabilizzano ioni separati; non si neutralizzano o trasmutano gli atomi."
+  },
+  {
+    "language": "content-en",
+    "id": 41,
+    "selected": 1,
+    "answer": "$\\dfrac14$",
+    "other_options": [
+      "$\\dfrac12$",
+      "$\\dfrac18$",
+      "$\\dfrac1{16}$",
+      "$\\dfrac34$"
+    ],
+    "reason": "Assortimento indipendente AaBb genera AB,Ab,aB,ab equiprobabili; Ab=1/4."
+  },
+  {
+    "language": "content-en",
+    "id": 42,
+    "selected": 2,
+    "answer": "$\\dfrac13$",
+    "other_options": [
+      "$\\dfrac14$",
+      "$\\dfrac12$",
+      "$\\dfrac23$",
+      "$\\dfrac34$"
+    ],
+    "reason": "Tra AA,Aa,Aa dominanti equiprobabili, AA occupa un caso su tre; denominatore condizionato."
+  },
+  {
+    "language": "content-en",
+    "id": 43,
+    "selected": 3,
+    "answer": "Synonymous",
+    "other_options": [
+      "Nonsense",
+      "Frameshifting insertion",
+      "Deletion of the entire gene",
+      "Chromosome duplication"
+    ],
+    "reason": "GAA→GAG cambia nucleotide ma non amminoacido assegnato: sinonima; nessuna inserzione o stop."
+  },
+  {
+    "language": "content-en",
+    "id": 44,
+    "selected": 4,
+    "answer": "Homology",
+    "other_options": [
+      "Commensalism",
+      "Identity of species",
+      "Absence of evolution",
+      "Independent origin without a common ancestor"
+    ],
+    "reason": "Schema ereditato da antenato comune definisce omologia anche con funzioni differenti."
+  },
+  {
+    "language": "content-en",
+    "id": 45,
+    "selected": 5,
+    "answer": "Cellular respiration of organic substances",
+    "other_options": [
+      "Water osmosis",
+      "Diffusion of atmospheric nitrogen",
+      "DNA replication without breakdown",
+      "Intestinal mineral absorption"
+    ],
+    "reason": "Respirazione ossida carbonio organico a CO2; osmosi e assorbimento sali non lo fanno."
+  },
+  {
+    "language": "content-en",
+    "id": 46,
+    "selected": 1,
+    "answer": "Interspecific competition",
+    "other_options": [
+      "Only intraspecific competition",
+      "Obligate mutualism",
+      "Predation by one species on the other",
+      "Commensalism without an effect on the second species"
+    ],
+    "reason": "Specie diverse competono per semi limitati; non è predazione degli individui fra le specie."
+  },
+  {
+    "language": "content-en",
+    "id": 47,
+    "selected": 2,
+    "answer": "One cell with two daughter nuclei",
+    "other_options": [
+      "Four haploid cells",
+      "One cell without DNA",
+      "Two cells without cytoplasm",
+      "One nucleus that has not separated chromosomes"
+    ],
+    "reason": "Mitosi completata divide nuclei; citodieresi assente li lascia nella stessa cellula."
+  },
+  {
+    "language": "content-en",
+    "id": 48,
+    "selected": 3,
+    "answer": "$8$ chromosomes and $16$ chromatids",
+    "other_options": [
+      "$16$ chromosomes and $16$ chromatids",
+      "$4$ chromosomes and $8$ chromatids",
+      "$8$ chromosomes and $8$ chromatids",
+      "$16$ chromosomes and $32$ chromatids"
+    ],
+    "reason": "Dopo S restano 8 cromosomi con due cromatidi ciascuno, quindi 16 cromatidi."
+  },
+  {
+    "language": "content-en",
+    "id": 49,
+    "selected": 4,
+    "answer": "Negative feedback",
+    "other_options": [
+      "Obligatory amplification of the disturbance",
+      "Absence of homeostatic control",
+      "Production of oxygen from glucose",
+      "Transmission of alleles to gametes"
+    ],
+    "reason": "La risposta riduce la perturbazione iniziale: feedback negativo, non amplificazione."
+  },
+  {
+    "language": "content-en",
+    "id": 50,
+    "selected": 5,
+    "answer": "Gene flow",
+    "other_options": [
+      "Drift due exclusively to random mortality",
+      "Formation of a new allele without migration",
+      "Global extinction",
+      "DNA replication as the only cause"
+    ],
+    "reason": "Migranti riproduttivi trasferiscono un allele tra popolazioni: flusso genico, non nuova mutazione obbligata."
+  },
+  {
+    "language": "content-en",
+    "id": 51,
+    "selected": 1,
+    "answer": "Epithelial",
+    "other_options": [
+      "Bone",
+      "Cartilage",
+      "Skeletal muscle",
+      "Nervous"
+    ],
+    "reason": "Strato continuo che riveste il lume è epitelio; l'organo può contenere anche altri tessuti."
+  },
+  {
+    "language": "content-en",
+    "id": 52,
+    "selected": 2,
+    "answer": "High ATP demand supported by aerobic respiration",
+    "other_options": [
+      "Replacement of contractile filaments with mitochondrial DNA",
+      "Photosynthetic glucose production in the heart",
+      "Absence of energy consumption",
+      "Elimination of the need for oxygen"
+    ],
+    "reason": "Molti mitocondri sostengono domanda ATP per lavoro cardiaco, non fotosintesi o autonomia dall'ossigeno."
+  },
+  {
+    "language": "content-en",
+    "id": 53,
+    "selected": 3,
+    "answer": "Carrying capacity depends on environmental conditions",
+    "other_options": [
+      "Carrying capacity always equals chromosome number",
+      "The first equilibrium proved that births and deaths were absent",
+      "Each species has a universal unchanging carrying capacity",
+      "The increase necessarily proves a new species"
+    ],
+    "reason": "Nuovo equilibrio con nuove risorse mostra dipendenza ambientale della capacità portante."
+  },
+  {
+    "language": "content-en",
+    "id": 54,
+    "selected": 4,
+    "answer": "Oxygen consumption and carbon dioxide release",
+    "other_options": [
+      "Oxygen production powered by absent light",
+      "Photon absorption in complete darkness",
+      "Glucose production without any energy source",
+      "Conversion of mitochondria into chloroplasts"
+    ],
+    "reason": "Al buio breve e con riserve si mantiene respirazione aerobica: O2 consumato e CO2 emessa."
+  },
+  {
+    "language": "content-en",
+    "id": 55,
+    "selected": 5,
+    "answer": "$200$",
+    "other_options": [
+      "$1000$",
+      "$2000$",
+      "$3000$",
+      "$20$"
+    ],
+    "reason": "10000×0,20×0,10=200; trasferimenti successivi non si sommano."
+  },
+  {
+    "language": "content-en",
+    "id": 56,
+    "selected": 1,
+    "answer": "Two with one extra chromosome and two with one missing",
+    "other_options": [
+      "All with the normal number",
+      "One normal and three with altered numbers",
+      "Four identical diploid cells",
+      "All without any chromosomes"
+    ],
+    "reason": "Non disgiunzione I seguita da II normale: due n+1 e due n−1; altre coppie eventualmente presenti restano normali."
+  },
+  {
+    "language": "content-en",
+    "id": 57,
+    "selected": 2,
+    "answer": "Pairing with an mRNA codon during translation",
+    "other_options": [
+      "Duplicating all DNA by itself",
+      "Forming a nuclear membrane",
+      "Removing phosphates from chromosomes",
+      "Converting every amino acid into glucose"
+    ],
+    "reason": "Anticodone tRNA si appaia al codone mRNA; non diventa proteina e non replica il genoma."
+  },
+  {
+    "language": "content-en",
+    "id": 58,
+    "selected": 3,
+    "answer": "Simple diffusion",
+    "other_options": [
+      "Channel-mediated facilitated diffusion",
+      "Primary active transport",
+      "Osmosis",
+      "Endocytosis"
+    ],
+    "reason": "Gas lungo gradiente direttamente nei lipidi senza carrier: diffusione semplice, non facilitata/attiva."
+  },
+  {
+    "language": "content-en",
+    "id": 59,
+    "selected": 4,
+    "answer": "Lungs, left atrium, left ventricle",
+    "other_options": [
+      "Liver, right ventricle, lungs",
+      "Right atrium, aorta, lungs",
+      "Left ventricle, intestine, right atrium",
+      "Kidneys, right atrium, aorta"
+    ],
+    "reason": "Dal ventricolo destro: polmoni, atrio sinistro, ventricolo sinistro, poi aorta; alternative invertono distretti."
+  },
+  {
+    "language": "content-en",
+    "id": 60,
+    "selected": 5,
+    "answer": "Oxygen-carrying capacity",
+    "other_options": [
+      "Ability to replicate all plasma chromosomes",
+      "Bile production",
+      "Starch synthesis",
+      "Chloroplast formation"
+    ],
+    "reason": "Emoglobina lega gran parte dell'ossigeno ematico; diminuirla riduce capacità di trasporto."
+  },
+  {
+    "language": "content-en",
+    "id": 61,
+    "selected": 1,
+    "answer": "Phloem carries sugars from source to sink",
+    "other_options": [
+      "Xylem carries only sucrose in every plant",
+      "The root must photosynthesize to receive sugars",
+      "Sucrose moves only as vapor through stomata",
+      "Transport uses plant neurons"
+    ],
+    "reason": "Saccarosio da foglia sorgente a radice sink segue floema, senza obbligo di direzione verticale universale."
+  },
+  {
+    "language": "content-en",
+    "id": 62,
+    "selected": 2,
+    "answer": "More deer and greater pressure on young plants",
+    "other_options": [
+      "Fewer deer because of increased predation",
+      "Immediate disappearance of every producer by definition",
+      "Conversion of deer into producers",
+      "Certain plant increase because wolves do not eat plants"
+    ],
+    "reason": "Meno predatori può aumentare cervi e consumo giovani piante: effetto indiretto plausibile nel modello."
+  },
+  {
+    "language": "content-en",
+    "id": 63,
+    "selected": 3,
+    "answer": "A and B are more closely related to each other",
+    "other_options": [
+      "A necessarily descends from the current species B",
+      "C must be A’s living ancestor",
+      "A and B must look identical",
+      "C is a less evolved species"
+    ],
+    "reason": "Antenato comune più recente implica maggiore parentela, non identità o progresso evolutivo."
+  },
+  {
+    "language": "content-en",
+    "id": 64,
+    "selected": 4,
+    "answer": "Water loss and reduced volume",
+    "other_options": [
+      "Water entry and increased volume",
+      "Water loss and increased volume",
+      "Obligatory solute entry in an equal amount",
+      "Immediate doubling of chromosome number"
+    ],
+    "reason": "Soluto esterno impermeante ipertonico ed eguale pressione iniziale: acqua esce, volume diminuisce."
+  },
+  {
+    "language": "content-en",
+    "id": 65,
+    "selected": 5,
+    "answer": "$\\dfrac12$",
+    "other_options": [
+      "$\\dfrac14$",
+      "$1$",
+      "$0$",
+      "$\\dfrac34$"
+    ],
+    "reason": "Due filamenti originari persistono in due duplex distinti sui quattro finali: 1/2."
+  },
+  {
+    "language": "content-en",
+    "id": 66,
+    "selected": 1,
+    "answer": "A accumulates and new B production stops",
+    "other_options": [
+      "A decreases because it is converted faster",
+      "B is produced without using A",
+      "A automatically becomes DNA",
+      "Amounts necessarily remain identical"
+    ],
+    "reason": "Conversione non catalizzata ora esplicitamente trascurabile: ingresso A senza conversione porta accumulo e nessun nuovo B nella via."
+  },
+  {
+    "language": "content-en",
+    "id": 67,
+    "selected": 2,
+    "answer": "Incomplete dominance",
+    "other_options": [
+      "Complete dominance of R",
+      "Complete dominance of B",
+      "Absence of allele segregation",
+      "Exclusively environmental inheritance"
+    ],
+    "reason": "RB uniformemente intermedio tra RR e BB è dominanza incompleta, senza eliminare segregazione."
+  },
+  {
+    "language": "content-en",
+    "id": 68,
+    "selected": 3,
+    "answer": "pH can influence enzyme activity under the tested conditions",
+    "other_options": [
+      "Temperature must have changed",
+      "Enzyme amount must differ",
+      "pH transforms the substrate’s chemical elements",
+      "Every enzyme has the same optimal pH"
+    ],
+    "reason": "Solo pH cambiato a variabili controllate: effetto pH compatibile; due misure non fissano ottimo universale."
+  },
+  {
+    "language": "content-en",
+    "id": 69,
+    "selected": 4,
+    "answer": "Decomposers contributing to matter recycling",
+    "other_options": [
+      "Producers creating energy from nothing",
+      "Consumers preventing all recycling",
+      "Organisms turning every atom into light",
+      "Predators of minerals"
+    ],
+    "reason": "Degradazione foglie e mineralizzazione definiscono decompositori e riciclo materia, non creazione energia."
+  },
+  {
+    "language": "content-en",
+    "id": 70,
+    "selected": 5,
+    "answer": "Proliferation in the apical meristem",
+    "other_options": [
+      "Only water uptake without divisions",
+      "Photosynthesis in cells lacking chloroplasts",
+      "Gamete formation through meiosis",
+      "Conversion of xylem into nervous tissue"
+    ],
+    "reason": "Nuovo quesito: mitosi frequenti nell'apice producono nuove cellule nel meristema; non semplice distensione o gametogenesi."
+  },
+  {
+    "language": "content-en",
+    "id": 71,
+    "selected": 1,
+    "answer": "The environment can contribute to the phenotype difference",
+    "other_options": [
+      "The plants must belong to different species",
+      "The difference proves a new inherited mutation",
+      "Genes have no role in development",
+      "Leaves must be gametes"
+    ],
+    "reason": "Genotipo identico e luce diversa ammettono plasticità fenotipica senza mutazione necessaria."
+  },
+  {
+    "language": "content-en",
+    "id": 72,
+    "selected": 2,
+    "answer": "Their own DNA and ribosomes with features of bacterial origin",
+    "other_options": [
+      "Complete absence of membranes and DNA",
+      "Production exclusively from isolated free ribosomes",
+      "Occurrence only outside eukaryotic cells",
+      "Identity with the cell nucleus"
+    ],
+    "reason": "DNA e apparato ribosomale di ascendenza batterica sostengono endosimbiosi, senza autonomia attuale."
+  },
+  {
+    "language": "content-en",
+    "id": 73,
+    "selected": 3,
+    "answer": "Carbon availability may be the limiting factor",
+    "other_options": [
+      "Light has become a mineral nutrient",
+      "Photosynthesis never uses carbon dioxide",
+      "DNA has disappeared from all cells",
+      "The plant can no longer respire by definition"
+    ],
+    "reason": "CO2 insufficiente può limitare fissazione del carbonio anche con luce abbondante."
+  },
+  {
+    "language": "content-en",
+    "id": 74,
+    "selected": 4,
+    "answer": "Temporal reproductive isolation",
+    "other_options": [
+      "Geographic isolation on different continents",
+      "Sterility of hybrids already born",
+      "Zygote death after fertilization",
+      "Absence of any barrier to crossing"
+    ],
+    "reason": "Fioriture non sovrapposte nella stessa area configurano isolamento temporale prezigotico."
+  },
+  {
+    "language": "content-en",
+    "id": 75,
+    "selected": 5,
+    "answer": "An energy input, direct or coupled to another process",
+    "other_options": [
+      "No energy source because all transport is passive",
+      "Disappearance of the plasma membrane",
+      "Conversion of the ion into water",
+      "Obligatory passage through a vesicle"
+    ],
+    "reason": "Moto contro gradiente elettrochimico richiede energia, diretta o accoppiata; non sempre ATP diretto del carrier."
+  },
+  {
+    "language": "content-en",
+    "id": 76,
+    "selected": 1,
+    "answer": "$29$",
+    "other_options": [
+      "$30$",
+      "$90$",
+      "$27$",
+      "$31$"
+    ],
+    "reason": "90 nucleotidi/3=30 codoni; start dà residuo e stop no: 29 amminoacidi prima di modifiche."
+  },
+  {
+    "language": "content-en",
+    "id": 77,
+    "selected": 2,
+    "answer": "The two cell types express genes differently",
+    "other_options": [
+      "Every muscle cell must have lost all neural genes",
+      "The neuron contains no DNA",
+      "Proteins are produced independently of genetic information",
+      "Muscle DNA uses uracil instead of thymine"
+    ],
+    "reason": "Stesso genoma nucleare con proteine diverse deriva da espressione differenziale, non perdita generalizzata dei geni."
+  },
+  {
+    "language": "content-en",
+    "id": 78,
+    "selected": 3,
+    "answer": "The primary amino acid sequence",
+    "other_options": [
+      "The same tertiary structure",
+      "Every interaction between chains",
+      "The original function",
+      "The complete three-dimensional shape"
+    ],
+    "reason": "Enunciato ora limita il cambiamento alla conformazione senza alterazioni covalenti: sequenza primaria conservata."
+  },
+  {
+    "language": "content-en",
+    "id": 79,
+    "selected": 4,
+    "answer": "A local population extinction occurred",
+    "other_options": [
+      "The species became globally extinct",
+      "All its individuals became another species",
+      "No community can have changed",
+      "Local disappearance proves that variation was absent"
+    ],
+    "reason": "Persistenza in altri laghi esclude estinzione globale; scomparsa locale della popolazione."
+  },
+  {
+    "language": "content-en",
+    "id": 80,
+    "selected": 5,
+    "answer": "Less water vapor loss and less CO₂ entry",
+    "other_options": [
+      "Greater CO₂ entry and always zero water loss",
+      "Elimination of mitochondria and increased chromosomes",
+      "Obligatory arrest of every cellular reaction",
+      "Conversion of xylem into phloem"
+    ],
+    "reason": "Chiudere stomi riduce scambio di vapore e CO2, senza arrestare ogni metabolismo."
+  },
+  {
+    "language": "content-en",
+    "id": 81,
+    "selected": 1,
+    "answer": "Golgi apparatus, secretory vesicles, plasma membrane",
+    "other_options": [
+      "Nucleolus, chromosome, cellulose wall",
+      "Mitochondrial matrix, chloroplast, nucleus",
+      "DNA, tRNA, free amino acids",
+      "Centriole, spindle, chromatids"
+    ],
+    "reason": "Via classica RER→Golgi→vescicole→membrana; non ogni proteina segue tale via, ma quella assegnata sì."
+  },
+  {
+    "language": "content-en",
+    "id": 82,
+    "selected": 2,
+    "answer": "One large egg cell and small polar bodies can arise from the same meiosis",
+    "other_options": [
+      "Every product must remain diploid",
+      "DNA replication occurs after each division",
+      "Homologous chromosomes never separate",
+      "Four eggs identical in size are produced"
+    ],
+    "reason": "Citodieresi asimmetrica nell'oogenesi dà uovo grande e globuli polari pur con riduzione meiotica normale."
+  },
+  {
+    "language": "content-en",
+    "id": 83,
+    "selected": 3,
+    "answer": "Water temperature",
+    "other_options": [
+      "The light intensity constituting the treatment",
+      "Oxygen produced, imposed before measurement",
+      "The final result, made identical by definition",
+      "Bubble count, experimentally fixed at the same value"
+    ],
+    "reason": "Luce è trattamento, temperatura controllo; ossigeno/bolle sono risposta da misurare e non imporre uguale."
+  },
+  {
+    "language": "content-en",
+    "id": 84,
+    "selected": 4,
+    "answer": "Glycerol and three fatty acids",
+    "other_options": [
+      "Glucose and three nucleotides",
+      "Ribose and three amino acids",
+      "One nitrogenous base and three phosphates",
+      "Cholesterol and three glucose molecules"
+    ],
+    "reason": "Idrolisi dei tre esteri del trigliceride fornisce scheletro glicerolo e tre acidi grassi."
+  },
+  {
+    "language": "content-en",
+    "id": 85,
+    "selected": 5,
+    "answer": "Artery",
+    "other_options": [
+      "Vein because the blood is oxygen-poor",
+      "Capillary because it starts at the heart",
+      "Vein because it reaches the lungs",
+      "Lymphatic vessel by definition"
+    ],
+    "reason": "La direzione dal cuore definisce arteria anche se sangue deossigenato, come nell'arteria polmonare."
+  },
+  {
+    "language": "content-en",
+    "id": 86,
+    "selected": 1,
+    "answer": "It is compatible with a virus",
+    "other_options": [
+      "It must be an autonomous bacterial cell",
+      "It is a fourth cellular domain",
+      "It is a free mitochondrion with complete autonomy",
+      "It is a unicellular animal with every organelle"
+    ],
+    "reason": "Acido nucleico, capside e dipendenza dall'ospite senza ribosomi sono compatibili con virus acellulare."
+  },
+  {
+    "language": "content-en",
+    "id": 87,
+    "selected": 2,
+    "answer": "Ovule → seed; ovary → fruit",
+    "other_options": [
+      "Ovule → adult root; ovary → pollen",
+      "Ovule → stoma; ovary → mitochondrion",
+      "Petal → chromosome; root → seed",
+      "Xylem → embryo; phloem → pollen"
+    ],
+    "reason": "Ovulo→seme e ovario→frutto nella sviluppo tipico, con possibile contributo di altri tessuti."
+  },
+  {
+    "language": "content-en",
+    "id": 88,
+    "selected": 3,
+    "answer": "$750$",
+    "other_options": [
+      "$1650$",
+      "$1200$",
+      "$450$",
+      "$270$"
+    ],
+    "reason": "Produzione netta=1200−450=750, sottraendo respirazione dei produttori."
+  },
+  {
+    "language": "content-en",
+    "id": 89,
+    "selected": 4,
+    "answer": "Equal species richness and different abundance distributions",
+    "other_options": [
+      "X has more species because it is more even",
+      "Y has only one species because one dominates",
+      "X has more individuals in total",
+      "Richness counts only the most abundant species"
+    ],
+    "reason": "Entrambe ricchezza 3 e totale 30; le abbondanze 10/10/10 e 28/1/1 hanno uniformità diversa."
+  },
+  {
+    "language": "content-en",
+    "id": 90,
+    "selected": 5,
+    "answer": "Splicing of the RNA transcript",
+    "other_options": [
+      "Semiconservative DNA replication",
+      "Translation of introns into a new chromosome",
+      "Removal of introns from the DNA of every cell",
+      "Crossing-over between homologous chromosomes"
+    ],
+    "reason": "Nuovo quesito: rimozione introni e giunzione esoni nel trascritto è splicing RNA, senza eliminazione dal DNA."
+  }
+]
