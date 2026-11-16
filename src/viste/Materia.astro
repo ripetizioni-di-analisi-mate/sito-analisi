@@ -75,17 +75,18 @@ const nDefinizioni = indice.reduce((n, a) => n + a.voci.filter((v) => v.tipo ===
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 // Pagina nuova «A2» (ProgrammaMateria.astro): per i GM sostituisce la vista classica in ogni materia in italiano.
 // Lo Studio guidato funziona solo nelle materie di STUDIO_GUIDATO; nelle altre il riquadro dice «In preparazione».
-const nuova = lingua === 'it';
+const nuova = lingua === 'it' || lingua === 'en';
 const guidata = nuova && Boolean(STUDIO_GUIDATO[materia]);
+const linguaPm = en ? 'en' : 'it';
 const verificabiliMateria = dafare.filter((v) => v.id.startsWith(`${materia}/`) && risultatoDi(v)).length;
 // Voci del riquadro «Accesso completo»: solo ciò che la materia contiene davvero.
 const incluso = [
-  'Teoria di tutti i capitoli',
-  svolti.some((v) => v.id.startsWith(`${materia}/`)) && 'Esercizi svolti, un passaggio alla volta',
-  !quizPerEsercitarsi && dafare.some((v) => v.id.startsWith(`${materia}/`)) && (verificabiliMateria > 0 ? 'Esercizi da fare, con verifica della risposta' : 'Esercizi da fare'),
-  domandeMateria > 0 && 'Domande a tempo',
+  en ? 'Theory of every topic' : 'Teoria di tutti i capitoli',
+  svolti.some((v) => v.id.startsWith(`${materia}/`)) && (en ? 'Worked examples, one step at a time' : 'Esercizi svolti, un passaggio alla volta'),
+  !quizPerEsercitarsi && dafare.some((v) => v.id.startsWith(`${materia}/`)) && (verificabiliMateria > 0 ? (en ? 'Exercises, with answer checking' : 'Esercizi da fare, con verifica della risposta') : (en ? 'Exercises' : 'Esercizi da fare')),
+  domandeMateria > 0 && (en ? 'Timed questions' : 'Domande a tempo'),
   domandeMateria > 0 && !quizPerEsercitarsi && nomeCompito,
-  guidata && 'Studio guidato',
+  guidata && (en ? 'Guided study (in Italian)' : 'Studio guidato'),
 ].filter((v): v is string => Boolean(v));
 const video = lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === materia) : undefined;
 const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(video.slug)).map((p) => p.slug)]
@@ -108,12 +109,12 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   {gruppo === 'Superiori' && <div class:list={{ 'vista-classica': nuova }}><NotaSuperiori lingua={lingua} /></div>}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
-  {nuova && <ProgrammaMateria materia={materia} titolo={m.titolo} prezzo={m.prezzo} studioGuidato={guidata} incluso={incluso}
+  {nuova && <ProgrammaMateria materia={materia} titolo={m.titolo} prezzo={m.prezzo} studioGuidato={guidata} incluso={incluso} lingua={linguaPm} linguaDomande={linguaDomande === 'en' ? 'en' : 'it'}
     anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}
-    compatibilita={MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}
+    compatibilita={lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}
     argomenti={m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo, riassunto: riassunti[materia + '/' + a.slug], pronto: teorie.has(`${materia}/${a.slug}`), svolti: conta(svolti, a.slug), dafare: quizPerEsercitarsi ? 0 : conta(dafare, a.slug), verificabili: quizPerEsercitarsi ? 0 : verificabili(a.slug), domande: conta(domande, a.slug) }))}
-    ripasso={domandeMateria > 0 ? { titolo: nomeRipasso, domande: domandeMateria, href: `/${materia}/${RIPASSO}/domande`, simulazione: quizPerEsercitarsi ? undefined : { href: `/${materia}/simulazione`, titolo: nomeCompito }, oggi: `/${materia}/${RIPASSO_OGGI}/domande` } : undefined}
-    teoremi={indice.length > 0 ? { href: `/${materia}/teoremi`, teoremi: nTeoremi, definizioni: nDefinizioni } : undefined} />}
+    ripasso={domandeMateria > 0 ? { titolo: nomeRipasso, domande: domandeMateria, href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), simulazione: quizPerEsercitarsi ? undefined : { href: link(scienza ? 'it' : lingua, `/${materia}/simulazione`), titolo: nomeCompito }, oggi: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`) } : undefined}
+    teoremi={indice.length > 0 ? { href: link(lingua, `/${materia}/teoremi`), teoremi: nTeoremi, definizioni: nDefinizioni } : undefined} />}
   {m.prezzo && (<div class:list={{ 'vista-classica': nuova }}>
     <AccessoMateria materia={m.slug} titolo={m.titolo} prezzo={m.prezzo} lingua={lingua} testo={anteprimaTesto}
       anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}>
