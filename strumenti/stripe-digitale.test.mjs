@@ -73,9 +73,10 @@ function banco(t) {
   };
   creaTabelleStripeDigitale(o.sql);
   const io = { email: 'studente@example.test', materie: [] },
-    env = { STRIPE_SECRET_KEY: 'segreto-test', STRIPE_WEBHOOK_SECRET: 'firma-test', RESEND_API_KEY: 'resend-test' };
+    env = { STRIPE_SECRET_KEY: 'segreto-test', STRIPE_WEBHOOK_SECRET: 'firma-test', RESEND_API_KEY: 'resend-test', EMAIL_AVVISI: 'avvisi@example.test' };
   let sconto = null,
     messaggi = 0,
+    avvisi = [],
     aperte = 0,
     statoErrore = 0;
   const sessioni = new Map(), statiPagamento = new Map();
@@ -109,6 +110,10 @@ function banco(t) {
   t.mock.method(globalThis, 'fetch', async (u, opts) => {
     if (u === 'https://api.resend.com/emails') {
       assert.doesNotMatch(opts.body, /RSSMRA|Via Esempio/);
+      if (JSON.parse(opts.body).to[0] === 'avvisi@example.test') {
+        avvisi.push({ chiave: opts.headers['Idempotency-Key'], oggetto: JSON.parse(opts.body).subject });
+        return Response.json({ id: 'em_avviso' });
+      }
       const ricevuta = JSON.parse(opts.body);
       assert.ok(ricevuta.attachments[0].content.length > 100);
       assert.ok(ricevuta.text.includes(VERSIONE_CONDIZIONI));
@@ -180,6 +185,7 @@ function banco(t) {
       sconto = v;
     },
     messaggi: () => messaggi,
+    avvisi: () => avvisi,
     aperte: () => aperte,
     simulaErrore: (v) => {
       statoErrore = v;
@@ -296,6 +302,10 @@ test('pagamento differito: attende senza riaprire Stripe, abilita e invia la con
   assert.deepEqual(b.o.materieDi(b.io.email), ['analisi-1']);
   assert.equal(b.o.riga('SELECT COUNT(*) n FROM acquisti').n, 1);
   assert.equal(b.messaggi(), 1);
+  // avviso a Carmine: uno solo, con il prodotto e l'importo; i webhook ripetuti usano la stessa chiave
+  assert.equal(b.avvisi().length, 1);
+  assert.match(b.avvisi()[0].oggetto, /^Nuovo acquisto: .+ · 49,00\s?€$/);
+  assert.match(b.avvisi()[0].chiave, /^avviso-carmine-digitale-/);
 });
 
 test('fallimento differito: webhook o recupero periodico sbloccano un nuovo acquisto della stessa selezione', async (t) => {

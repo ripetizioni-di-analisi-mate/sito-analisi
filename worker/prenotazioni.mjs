@@ -1,4 +1,5 @@
 import { componiEmail, inviaEmailResend } from './email.mjs';
+import { avvisaCarmine, linkDashboard } from './avvisi-carmine.mjs';
 // Prenotazione delle lezioni individuali (pagina /prenota).
 //  - fasce e limiti giornalieri in src/data/lezioni.ts;
 //  - il calendario Google di Carmine (collegato dalla pagina /admin/lezioni) esclude gli orari già occupati
@@ -545,6 +546,21 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
           await aDO(env, '/pren-evento', { id, ...e });
           l.meet = e.meet;
         } catch (e) { console.log('prenota evento google', String(e?.message || e)); }
+        await avvisaCarmine(env, {
+          chiave: 'lezione-' + id,
+          oggetto: `Nuova lezione prenotata: ${titoloMateria(l.materia)} · ${quando(l.inizio, l.fine)}`,
+          titolo: 'Nuova lezione prenotata',
+          righe: [
+            `Studente: ${l.nome} (${l.email})`,
+            `Telefono: ${l.telefono}`,
+            `Quando: ${quando(l.inizio, l.fine)}`,
+            ...(l.universita ? [`Università: ${l.universita}`] : []),
+            ...(l.note ? [`Argomenti: ${l.note}`] : []),
+          ],
+          prodotto: 'Lezione individuale · ' + titoloMateria(l.materia),
+          importo: l.importo || LEZIONI.prezzo,
+          link: linkDashboard('/admin/lezioni'),
+        });
         await inviaEmail(env, 'lezione-confermata', l.email, `Lezione confermata: ${quando(l.inizio, l.fine)}`, [
           `Ciao ${l.nome.split(' ')[0]},`,
           `ho ricevuto il pagamento di ${LEZIONI.prezzo} € per la tua lezione di ${titoloMateria(l.materia)}.`,

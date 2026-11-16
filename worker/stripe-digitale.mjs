@@ -6,6 +6,7 @@ import { allegatoContrattoDigitale } from './contratto-digitale.mjs';
 import { leggiFatturazione } from './fatturazione.mjs';
 import { stripe } from './prenotazioni.mjs';
 import { componiEmail, inviaEmailResend, SITO_EMAIL } from './email.mjs';
+import { avvisaCarmine, dataItaliana, euro as euroAvviso, linkDashboard } from './avvisi-carmine.mjs';
 import { usaProduct } from '../src/data/stem-usa/pricing.ts';
 import { courseUrl } from '../src/data/stem-usa/catalog.mjs';
 
@@ -300,6 +301,7 @@ async function confermaOrdine(env, h, r) {
     pref = en ? '/en' : '';
   if (q.tipo === 'materia' || q.tipo === 'materie')
     await h.dopoAcquistoMateria(env, h.aDO, SITO_EMAIL, { email: r.email, transazione: r.pagamento, sconto: q.sconto?.id });
+  await avvisoAcquisto(env, r);
   const messaggio = componiEmail({
     lingua: q.lingua,
     subject: (en ? 'Purchase confirmation · ' : 'Conferma di acquisto · ') + q.titolo,
@@ -332,6 +334,32 @@ async function confermaOrdine(env, h, r) {
   const esito = await inviaEmailResend(env, r.email, messaggio, 'conferma-digitale-' + r.id, 'acquisto-digitale');
   if (esito.ok) await h.aDO(env, '/dig-conferma', { id: r.id });
   return esito.ok;
+}
+
+// Email a Carmine con chi ha comprato, che cosa e quanto ha pagato (solo nome ed email, niente dati di fatturazione)
+async function avvisoAcquisto(env, r) {
+  const q = r.ordine;
+  let nome = '';
+  try {
+    const f = JSON.parse(r.fatturazione || 'null');
+    nome = [f?.nome, f?.cognome].filter(Boolean).join(' ');
+  } catch { /* dati assenti */ }
+  const importo = r.in_centesimi / 100;
+  await avvisaCarmine(env, {
+    chiave: 'digitale-' + r.id,
+    oggetto: `Nuovo acquisto: ${q.titolo} · ${euroAvviso(importo)}`,
+    titolo: 'Nuovo acquisto sul sito',
+    righe: [
+      `Studente: ${nome ? nome + ' (' + r.email + ')' : r.email}`,
+      `Prodotti: ${q.prodotti.join(', ')}`,
+      `Data: ${dataItaliana(r.pagato || Date.now())}`,
+      ...(q.sconto?.id ? ['Prezzo con sconto applicato.'] : []),
+      `Numero d’ordine: ${r.id}`,
+    ],
+    prodotto: q.titolo,
+    importo,
+    link: linkDashboard(),
+  });
 }
 
 export async function eventoDigitale(env, h, ev) {
