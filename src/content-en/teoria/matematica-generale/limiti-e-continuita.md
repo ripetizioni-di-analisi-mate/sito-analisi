@@ -160,19 +160,51 @@ The function equal to $5$ for $0 < x \leq 2$ and to $8$ for $x > 2$ has a jump d
 
 ## Theorems on continuous functions
 
-:::teorema{#teorema-degli-zeri titolo="Bolzano's theorem"}
+::::teorema{#teorema-degli-zeri titolo="Bolzano's theorem"}
 Let $f$ be continuous on the closed interval $[a, b]$, with $f(a)$ and $f(b)$ of opposite sign. Then there exists at least one point $c \in (a, b)$ such that $f(c) = 0$.
 
-The graph joins a point on one side of the $x$-axis to a point on the other without any breaks, so it meets the axis. The theorem guarantees a solution even when we have no method for solving the equation. The **bisection method** uses this result to approximate the solution. Evaluate $f$ at the midpoint of the interval, keep the half on which $f$ has opposite signs at the endpoints, and repeat. For $f(x) = x^3 + x - 1$, we have $f(0) = -1$ and $f(1) = 1$, so there is a zero in $(0, 1)$. Since $f\left( \dfrac{1}{2} \right) = -\dfrac{3}{8}$ and $f\left( \dfrac{3}{4} \right) = \dfrac{11}{64}$, the zero lies in $\left( \dfrac{1}{2}, \dfrac{3}{4} \right)$ and is approximately $0{,}682$. The proof uses the completeness of the real numbers, which is covered in the chapter on sets in Mathematical Analysis 1.
+The graph joins a point on one side of the $x$-axis to a point on the other without any breaks, so it meets the axis. The theorem guarantees a solution even when we have no method for solving the equation. The **bisection method** uses this result to approximate the solution. Evaluate $f$ at the midpoint of the interval, keep the half on which $f$ has opposite signs at the endpoints, and repeat. For $f(x) = x^3 + x - 1$, we have $f(0) = -1$ and $f(1) = 1$, so there is a zero in $(0, 1)$. Since $f\left( \dfrac{1}{2} \right) = -\dfrac{3}{8}$ and $f\left( \dfrac{3}{4} \right) = \dfrac{11}{64}$, the zero lies in $\left( \dfrac{1}{2}, \dfrac{3}{4} \right)$ and is approximately $0{,}682$.
 
 ::grafico{f="x^3+x-1" punti="0,-1,pieno;1,1,pieno;0.5,-0.375,pieno;0.75,0.1719,pieno;0.6823,0,vuoto" segmenti="0.5,0,0.5,-0.375;0.75,0,0.75,0.1719" xmin=-0.5 xmax=1.5 ymin=-1.5 ymax=2 titolo="$f(x) = x^3 + x - 1$ changes sign between $0$ and $1$, and then between $\dfrac{1}{2}$ and $\dfrac{3}{4}$; the zero is approximately $0{,}682$"}
 
+:::dimostrazione
+Assume $f(a) < 0 < f(b)$; the opposite case is analogous. Let
+$$
+E = \{ x \in [a, b] : f(x) < 0 \} .
+$$
+The set $E$ contains $a$ and is bounded above by $b$, so by the **completeness of the real numbers** there exists $c = \sup E$, and $c \in [a, b]$.
+
+- Suppose $f(c) < 0$. By the **sign-preserving property** $f$ is negative in a neighbourhood of $c$. Since $f(b) > 0$, we have $c < b$, so the neighbourhood contains points of $E$ greater than $c$. This is impossible, because $c$ is an upper bound of $E$.
+- Suppose $f(c) > 0$. By the **sign-preserving property** $f$ is positive on an interval $(c - \delta, c + \delta)$. Since $f(a) < 0$, we have $c > a$. No point of $(c - \delta, c]$ belongs to $E$, and no point greater than $c$ belongs to $E$ because $c = \sup E$. Hence $c - \delta$ is an upper bound of $E$ smaller than $c$, which contradicts the fact that $c$ is the least upper bound.
+
+Therefore $f(c) = 0$. Finally $c \neq a$ and $c \neq b$, because $f(a) \neq 0$ and $f(b) \neq 0$, so $c \in (a, b)$.
+:::
+::::
+
+:::richiamo{titolo="Completeness of the real numbers"}
+Every non-empty set of real numbers that is bounded above has a supremum, that is, an upper bound less than or equal to every other upper bound.
 :::
 
-:::teorema{#valori-intermedi titolo="Intermediate value theorem"}
+:::richiamo{titolo="Sign-preserving property"}
+If $f$ is continuous at $x_0$ and $f(x_0) \neq 0$, then $f$ has the sign of $f(x_0)$ at every point of a neighbourhood of $x_0$.
+:::
+
+::::teorema{#valori-intermedi titolo="Intermediate value theorem"}
 Let $f$ be continuous on the interval $[a, b]$. Then $f$ takes every value between $f(a)$ and $f(b)$.
 
-It follows from Bolzano's theorem. If $y_0$ lies between $f(a)$ and $f(b)$, the continuous function $f(x) - y_0$ has opposite signs at the endpoints. It therefore vanishes at a point $c$, where $f(c) = y_0$. For example, $f(x) = x^2$ is continuous on $[1, 3]$, with $f(1) = 1$ and $f(3) = 9$. It therefore takes the value $5$ at a point of $(1, 3)$, namely $\sqrt{5}$.
+The theorem shows that an equation $f(x) = k$ has a solution and determines the range of a continuous function. For example, $f(x) = x^2$ is continuous on $[1, 3]$, with $f(1) = 1$ and $f(3) = 9$. It therefore takes the value $5$ at a point of $(1, 3)$, namely $\sqrt{5}$.
+
+:::dimostrazione
+Let $y_0$ be a value between $f(a)$ and $f(b)$. If $y_0 = f(a)$ or $y_0 = f(b)$, the value is taken at an endpoint. Otherwise $y_0$ lies strictly between $f(a)$ and $f(b)$; define
+$$
+g(x) = f(x) - y_0 .
+$$
+The function $g$ is continuous on $[a, b]$, because it is the difference between $f$ and a constant. The numbers $g(a) = f(a) - y_0$ and $g(b) = f(b) - y_0$ have opposite signs, so by **Bolzano's theorem** there is $c \in (a, b)$ with $g(c) = 0$, that is, $f(c) = y_0$.
+:::
+::::
+
+:::richiamo{titolo="Bolzano's theorem"}
+If $f$ is continuous on $[a, b]$ and $f(a)$ and $f(b)$ have opposite signs, there is $c \in (a, b)$ with $f(c) = 0$.
 :::
 
 :::teorema{#weierstrass titolo="Extreme value theorem"}

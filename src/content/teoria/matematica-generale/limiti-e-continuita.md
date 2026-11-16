@@ -160,19 +160,51 @@ La funzione che vale $5$ per $0 < x \leq 2$ e $8$ per $x > 2$ ha in $x = 2$ una 
 
 ## Teoremi sulle funzioni continue
 
-:::teorema{#teorema-degli-zeri titolo="Teorema degli zeri"}
+::::teorema{#teorema-degli-zeri titolo="Teorema degli zeri"}
 Sia $f$ continua sull'intervallo chiuso $[a, b]$, con $f(a)$ e $f(b)$ di segno opposto. Allora esiste almeno un punto $c \in (a, b)$ tale che $f(c) = 0$.
 
-Il grafico è una curva senza interruzioni che unisce un punto da una parte dell'asse $x$ a un punto dall'altra parte, quindi incontra l'asse. Il teorema garantisce che un'equazione ha una soluzione anche quando non si sa risolverla, e su di esso si basa il **metodo di bisezione** per approssimarla. Si calcola $f$ nel punto medio dell'intervallo, si tiene la metà ai cui estremi $f$ ha segno opposto, e si ripete. Per $f(x) = x^3 + x - 1$ si ha $f(0) = -1$ e $f(1) = 1$, quindi c'è uno zero in $(0, 1)$; poiché $f\left( \dfrac{1}{2} \right) = -\dfrac{3}{8}$ e $f\left( \dfrac{3}{4} \right) = \dfrac{11}{64}$, lo zero sta in $\left( \dfrac{1}{2}, \dfrac{3}{4} \right)$, e vale circa $0{,}682$. Il teorema si dimostra con la completezza dei numeri reali, per la quale si rimanda all'argomento sugli insiemi di Analisi 1.
+Il grafico è una curva senza interruzioni che unisce un punto da una parte dell'asse $x$ a un punto dall'altra parte, quindi incontra l'asse. Il teorema garantisce che un'equazione ha una soluzione anche quando non si sa risolverla, e su di esso si basa il **metodo di bisezione** per approssimarla. Si calcola $f$ nel punto medio dell'intervallo, si tiene la metà ai cui estremi $f$ ha segno opposto, e si ripete. Per $f(x) = x^3 + x - 1$ si ha $f(0) = -1$ e $f(1) = 1$, quindi c'è uno zero in $(0, 1)$; poiché $f\left( \dfrac{1}{2} \right) = -\dfrac{3}{8}$ e $f\left( \dfrac{3}{4} \right) = \dfrac{11}{64}$, lo zero sta in $\left( \dfrac{1}{2}, \dfrac{3}{4} \right)$, e vale circa $0{,}682$.
 
 ::grafico{f="x^3+x-1" punti="0,-1,pieno;1,1,pieno;0.5,-0.375,pieno;0.75,0.1719,pieno;0.6823,0,vuoto" segmenti="0.5,0,0.5,-0.375;0.75,0,0.75,0.1719" xmin=-0.5 xmax=1.5 ymin=-1.5 ymax=2 titolo="$f(x) = x^3 + x - 1$ cambia segno tra $0$ e $1$, e poi tra $\dfrac{1}{2}$ e $\dfrac{3}{4}$; lo zero è circa $0{,}682$"}
 
+:::dimostrazione
+Si suppone $f(a) < 0 < f(b)$; il caso opposto è analogo. Sia
+$$
+E = \{ x \in [a, b] : f(x) < 0 \} .
+$$
+L'insieme $E$ contiene $a$ ed è limitato superiormente da $b$, quindi per la **completezza dei numeri reali** esiste $c = \sup E$, e $c \in [a, b]$.
+
+- Si suppone $f(c) < 0$. Per la **permanenza del segno** $f$ è negativa in un intorno di $c$. Poiché $f(b) > 0$, si ha $c < b$, perciò l'intorno contiene punti di $E$ maggiori di $c$. Questo è impossibile, perché $c$ è un maggiorante di $E$.
+- Si suppone $f(c) > 0$. Per la **permanenza del segno** $f$ è positiva in un intervallo $(c - \delta, c + \delta)$. Poiché $f(a) < 0$, si ha $c > a$. Nessun punto di $(c - \delta, c]$ appartiene a $E$, e nessun punto maggiore di $c$ appartiene a $E$ perché $c = \sup E$. Quindi $c - \delta$ è un maggiorante di $E$ minore di $c$, e questo contraddice il fatto che $c$ è il più piccolo dei maggioranti.
+
+Perciò $f(c) = 0$. Infine $c \neq a$ e $c \neq b$, perché $f(a) \neq 0$ e $f(b) \neq 0$, quindi $c \in (a, b)$.
+:::
+::::
+
+:::richiamo{titolo="Completezza dei numeri reali"}
+Ogni insieme non vuoto di numeri reali limitato superiormente ha estremo superiore, cioè un maggiorante minore o uguale a ogni altro maggiorante.
 :::
 
-:::teorema{#valori-intermedi titolo="Teorema dei valori intermedi"}
+:::richiamo{titolo="Permanenza del segno"}
+Se $f$ è continua in $x_0$ e $f(x_0) \neq 0$, allora $f$ ha il segno di $f(x_0)$ in tutti i punti di un intorno di $x_0$.
+:::
+
+::::teorema{#valori-intermedi titolo="Teorema dei valori intermedi"}
 Sia $f$ continua sull'intervallo $[a, b]$. Allora $f$ assume tutti i valori compresi tra $f(a)$ e $f(b)$.
 
-Segue dal teorema degli zeri, perché se $y_0$ sta tra $f(a)$ e $f(b)$, la funzione $f(x) - y_0$ è continua e ha segni opposti agli estremi, quindi si annulla in un punto $c$, dove $f(c) = y_0$. Per esempio $f(x) = x^2$ è continua su $[1, 3]$, con $f(1) = 1$ e $f(3) = 9$, quindi assume il valore $5$ in un punto di $(1, 3)$, che è $\sqrt{5}$.
+Il teorema serve a stabilire che un'equazione $f(x) = k$ ha soluzione e a determinare l'immagine di una funzione continua. Per esempio $f(x) = x^2$ è continua su $[1, 3]$, con $f(1) = 1$ e $f(3) = 9$, quindi assume il valore $5$ in un punto di $(1, 3)$, che è $\sqrt{5}$.
+
+:::dimostrazione
+Sia $y_0$ un valore compreso tra $f(a)$ e $f(b)$. Se $y_0 = f(a)$ oppure $y_0 = f(b)$, il valore è assunto in un estremo dell'intervallo. Altrimenti $y_0$ è strettamente compreso tra $f(a)$ e $f(b)$, e si pone
+$$
+g(x) = f(x) - y_0 .
+$$
+La funzione $g$ è continua su $[a, b]$, perché è la differenza tra $f$ e una costante. I numeri $g(a) = f(a) - y_0$ e $g(b) = f(b) - y_0$ hanno segno opposto, quindi per il **teorema degli zeri** esiste $c \in (a, b)$ con $g(c) = 0$, cioè $f(c) = y_0$.
+:::
+::::
+
+:::richiamo{titolo="Teorema degli zeri"}
+Se $f$ è continua in $[a, b]$ e $f(a)$ e $f(b)$ hanno segno opposto, esiste $c \in (a, b)$ con $f(c) = 0$.
 :::
 
 :::teorema{#weierstrass titolo="Teorema di Weierstrass"}

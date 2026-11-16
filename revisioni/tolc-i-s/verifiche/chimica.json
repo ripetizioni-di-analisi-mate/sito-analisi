@@ -1,0 +1,1687 @@
+{
+  "file_count": 440,
+  "numerical_checks": {
+    "I1": "10",
+    "I3": "2",
+    "I4": "6",
+    "I5": "1/4",
+    "I6": "3",
+    "I10": "1/5",
+    "I13": "-1",
+    "I14": "1/8",
+    "I15": "(3, 2)",
+    "I17": "18",
+    "I18": "1",
+    "I19": "4",
+    "I22": "1",
+    "I27": "6",
+    "I28": "44",
+    "I29": "1/2",
+    "I31": "24",
+    "I32": "1/2",
+    "I36": "(Fraction(1, 1), Fraction(4, 1))",
+    "I37": "3",
+    "I38": "75",
+    "I39": "100",
+    "I40": "4",
+    "I41": "0",
+    "I42": "41/2",
+    "I45": "1/100",
+    "I46": "8",
+    "I47": "(2, 3)",
+    "I50": "8/9",
+    "I68": "3",
+    "I69": "3",
+    "I71": "(17, 18, 18)",
+    "I72": "[False, True, False, False, False]",
+    "I73": "2",
+    "I77": "25",
+    "I80": "(2, 6)",
+    "I81": "0",
+    "I87": "11",
+    "I88": "3",
+    "I89": "2/5",
+    "I90": "5",
+    "S19": "3",
+    "S71": "[1]",
+    "S76": "3/2",
+    "S77": "2",
+    "S78": "50",
+    "S79": "True",
+    "S80": "True",
+    "S81": "f*k",
+    "S87": "11/10",
+    "S88": "6",
+    "S90": "2",
+    "theory_hydrate": "40",
+    "worked_atom_count": "6",
+    "I16_balance": "[True, False, False, False, False]",
+    "I75_balance": "[False, False, False, False, True]"
+  },
+  "quiz_ledger": [
+    {
+      "course": "tolc-i",
+      "id": 1,
+      "chosen": 1,
+      "answer": "$10$",
+      "independent_rationale": "18 nucleoni meno 8 protoni dà 10 neutroni; gli elettroni non entrano in A.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 2,
+      "chosen": 2,
+      "answer": "$(6,6)$ e $(6,8)$",
+      "independent_rationale": "Soltanto la coppia (6,6)/(6,8) conserva i protoni e cambia neutroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 3,
+      "chosen": 3,
+      "answer": "$2\\,\\mathrm{mol}$",
+      "independent_rationale": "36/18=2 mol di molecole, distinte dalle 6 mol di atomi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 4,
+      "chosen": 4,
+      "answer": "$6\\,\\mathrm{mol}$",
+      "independent_rationale": "Il coefficiente acqua/ossigeno è 2:1 e l’idrogeno è in eccesso; 3 mol danno 6 mol.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 5,
+      "chosen": 5,
+      "answer": "$0{,}25\\,\\mathrm{mol/L}$",
+      "independent_rationale": "0,50/2,0=0,25 mol/L con volume finale della soluzione.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 6,
+      "chosen": 1,
+      "answer": "$3$",
+      "independent_rationale": "Il logaritmo decimale di 10^-3 è -3; il pH è 3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 7,
+      "chosen": 2,
+      "answer": "Si ossida cedendo un elettrone",
+      "independent_rationale": "L’elettrone compare nei prodotti: perdita elettronica e numero Fe da +2 a +3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 8,
+      "chosen": 3,
+      "answer": "$\\mathrm{CH_4}$",
+      "independent_rationale": "Un carbonio in un alcano aciclico saturo richiede quattro idrogeni: CH4.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 9,
+      "chosen": 4,
+      "answer": "Un reticolo di ioni sodio e cloruro",
+      "independent_rationale": "NaCl solido è un reticolo di ioni con rapporto 1:1, non molecole o elementi separati.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 10,
+      "chosen": 5,
+      "answer": "$0{,}20\\,\\mathrm{mol/L}$",
+      "independent_rationale": "0,100 mol conservate divise per 0,500 L danno 0,20 mol/L.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 11,
+      "chosen": 1,
+      "answer": "$\\mathrm{C_3H_8}$",
+      "independent_rationale": "Solo C3H8 contiene esclusivamente C e H; tutte le altre formule hanno O o Cl.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 12,
+      "chosen": 2,
+      "answer": "$0$",
+      "independent_rationale": "O2 è una sostanza elementare e il numero di ossidazione è zero.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 13,
+      "chosen": 3,
+      "answer": "$-1$",
+      "independent_rationale": "La neutralità dà 2(+1)+2x=0, quindi x=-1 per il perossido.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 14,
+      "chosen": 4,
+      "answer": "$0{,}125\\,\\mathrm{mol}$",
+      "independent_rationale": "10/40=0,25 mol MgO richiedono 0,125 mol O2.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 15,
+      "chosen": 5,
+      "answer": "$3$ e $2$",
+      "independent_rationale": "2a=3b ha soluzione minima positiva a=3, b=2, con 6 elettroni scambiati.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 16,
+      "chosen": 1,
+      "answer": "$\\mathrm{CH_4+2O_2\\to CO_2+2H_2O}$",
+      "independent_rationale": "Soltanto CH4+2O2→CO2+2H2O conserva C1 H4 O4 e produce combustione completa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 17,
+      "chosen": 2,
+      "answer": "$18$",
+      "independent_rationale": "3 unità per 2 nitrati per 3 ossigeni dà 18 atomi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 18,
+      "chosen": 3,
+      "answer": "$1\\,\\mathrm{mol}$",
+      "independent_rationale": "Gli atomi dati diventano metà molecole: 1,2·10^24/(2·6·10^23)=1 mol.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 19,
+      "chosen": 4,
+      "answer": "$4\\%$",
+      "independent_rationale": "La base è 4+96=100 g di soluzione: 4% in massa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 20,
+      "chosen": 5,
+      "answer": "Accetta un protone dall'acqua",
+      "independent_rationale": "NH3 diventa NH4+ accettando un protone dall’acqua.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 21,
+      "chosen": 1,
+      "answer": "$\\mathrm{CaCl_2\\to Ca^{2+}+2Cl^-}$",
+      "independent_rationale": "Un Ca2+ e due Cl− conservano Ca1 Cl2 e carica zero.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 22,
+      "chosen": 2,
+      "answer": "L'idrogeno, perché il rapporto tra moli iniziali e coefficiente è minore",
+      "independent_rationale": "Rapporti quantità/coefficienti 2 e 1; H2 è il minore, resta 1 mol N2 e si formano 2 mol NH3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 23,
+      "chosen": 3,
+      "answer": "$\\mathrm{CO_3^{2-}}$",
+      "independent_rationale": "Sottrarre H+ a HCO3− lascia CO3²−; le altre formule cambiano più di un protone o la carica.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 24,
+      "chosen": 4,
+      "answer": "Una coppia di elettroni è condivisa tra due nuclei",
+      "independent_rationale": "H2 ha una coppia elettronica condivisa fra nuclei identici.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 25,
+      "chosen": 5,
+      "answer": "Azoto molecolare",
+      "independent_rationale": "L’aria secca ordinaria è prevalentemente N2, circa 78%, davanti a O2 circa 21%.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 26,
+      "chosen": 1,
+      "answer": "Resta quella di saturazione mentre altro soluto cristallizza",
+      "independent_rationale": "Solido in equilibrio e temperatura fissa impongono saturazione; il soluto aggiuntivo cristallizza.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 27,
+      "chosen": 2,
+      "answer": "$+6$",
+      "independent_rationale": "x−8=−2 impone x=+6 nello ione solfato.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 28,
+      "chosen": 3,
+      "answer": "$44\\,\\mathrm{g/mol}$",
+      "independent_rationale": "CO2 richiede 12+2·16=44 g/mol.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 29,
+      "chosen": 4,
+      "answer": "Contengono lo stesso numero di molecole",
+      "independent_rationale": "16/32=14/28=0,5 mol: stesso numero di molecole malgrado masse diverse.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 30,
+      "chosen": 5,
+      "answer": "Il numero atomico",
+      "independent_rationale": "Il nucleo è invariato, quindi Z è invariato; perdita elettronica modifica carica ed elettroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 31,
+      "chosen": 1,
+      "answer": "$24\\,\\mathrm g$",
+      "independent_rationale": "Stesso composto: rapporto massico fisso; triplicando C si triplica O da 8 a 24 g.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 32,
+      "chosen": 2,
+      "answer": "$0{,}50\\,\\mathrm{mol/L}$",
+      "independent_rationale": "Moli 0,02+0,18=0,20 in 0,40 L: 0,50 mol/L.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 33,
+      "chosen": 3,
+      "answer": "Ossigeno $\\mathrm{O_2}$",
+      "independent_rationale": "O2 contiene un solo simbolo di elemento ed è molecolare; gli altri contengono elementi diversi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 34,
+      "chosen": 4,
+      "answer": "Monossido di carbonio",
+      "independent_rationale": "Ossigeno insufficiente permette CO; gli altri prodotti proposti sono estranei agli elementi o al processo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 35,
+      "chosen": 5,
+      "answer": "Possiede elettroni delocalizzati mobili",
+      "independent_rationale": "Nel metallo solido trasportano carica gli elettroni delocalizzati, non nuclei o ioni disciolti.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 36,
+      "chosen": 1,
+      "answer": "$\\mathrm{CH_4}$",
+      "independent_rationale": "Moli C=1 e H=4; rapporto atomico minimo CH4.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 37,
+      "chosen": 2,
+      "answer": "$3$",
+      "independent_rationale": "Diluizione dieci volte: idronio 10^-2→10^-3; pH 2→3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 38,
+      "chosen": 3,
+      "answer": "$75\\%$",
+      "independent_rationale": "15/20·100=75%; 25% è la frazione non recuperata.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 39,
+      "chosen": 4,
+      "answer": "$100$",
+      "independent_rationale": "10^-3/10^-5=100; la scala è logaritmica.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 40,
+      "chosen": 5,
+      "answer": "$4$",
+      "independent_rationale": "Carbonio centrale: doppio legame più semplice C–C più C–H, ordine totale 4.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 41,
+      "chosen": 1,
+      "answer": "$\\mathrm{Cu^{2+}+2e^-\\to Cu}$",
+      "independent_rationale": "Cu2+ deve acquistare due elettroni a sinistra per dare carica zero.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 42,
+      "chosen": 2,
+      "answer": "$20{,}5\\,\\mathrm u$",
+      "independent_rationale": "Media pesata 20·3/4+22·1/4=20,5 u; media semplice errata per abbondanze diverse.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 43,
+      "chosen": 3,
+      "answer": "Una sostanza e due fasi",
+      "independent_rationale": "Entrambe le fasi sono H2O: una sostanza e due fasi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 44,
+      "chosen": 4,
+      "answer": "L'acido forte dà più idronio e pH minore",
+      "independent_rationale": "Con proticità e concentrazione uguali, nel modello indicato il forte produce più idronio e pH inferiore.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 45,
+      "chosen": 5,
+      "answer": "$0{,}010\\,\\mathrm{mol}$ di idronio",
+      "independent_rationale": "Reazione 1:1: 0,030−0,020=0,010 mol di idronio residuo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 46,
+      "chosen": 1,
+      "answer": "$8\\,\\mathrm g$",
+      "independent_rationale": "Su 28 g aggiunti solo 20 si sciolgono nei 100 g d’acqua: 8 g solidi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 47,
+      "chosen": 2,
+      "answer": "$\\mathrm{Al_2O_3}$",
+      "independent_rationale": "3a=2b, minimo a=2 b=3: Al2O3 neutro.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 48,
+      "chosen": 3,
+      "answer": "Può essere un alchene aciclico o un cicloalcano",
+      "independent_rationale": "C4H8 può avere un doppio legame aciclico oppure un anello saturo; formula non decide connettività.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 49,
+      "chosen": 4,
+      "answer": "Gli ioni diventano mobili nel liquido",
+      "independent_rationale": "La fusione rende mobili gli ioni già presenti; non crea protoni o metallo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 50,
+      "chosen": 5,
+      "answer": "$\\dfrac89$",
+      "independent_rationale": "O contribuisce 16 su 18 alla massa di H2O: frazione 8/9, non frazione atomica 1/3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 51,
+      "chosen": 1,
+      "answer": "Tende a diminuire",
+      "independent_rationale": "Da Na a Cl cresce la carica efficace nello stesso livello: andamento generale decrescente del raggio.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 52,
+      "chosen": 2,
+      "answer": "La quantità di sostanza",
+      "independent_rationale": "pV=nRT con p,V,T uguali impone n uguale; He monoatomico e N2 biatomico distinguono atomi e massa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 53,
+      "chosen": 3,
+      "answer": "Evaporazione dell'acqua",
+      "independent_rationale": "Evaporare conserva H2O; le altre opzioni producono o consumano acqua chimicamente.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 54,
+      "chosen": 4,
+      "answer": "Sono isomeri di struttura",
+      "independent_rationale": "Stessa formula C2H6O con legami O–H/O–C diversi: isomeri di struttura.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 55,
+      "chosen": 5,
+      "answer": "Contribuisce alla trasformazione della fase solida in liquida",
+      "independent_rationale": "Il calore di fusione alimenta il cambiamento di fase anche a temperatura costante.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 56,
+      "chosen": 1,
+      "answer": "$1$",
+      "independent_rationale": "Nel modello dei gruppi principali l’ultimo livello della distribuzione 2,8,1 ha un elettrone.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 57,
+      "chosen": 2,
+      "answer": "$\\mathrm{CH_3CH_2OH}$",
+      "independent_rationale": "Solo CH3CH2OH contiene OH su carbonio saturo; COOH è funzione acida diversa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 58,
+      "chosen": 3,
+      "answer": "Neutrone",
+      "independent_rationale": "Solo il neutrone combina carica zero e massa dell’ordine del protone.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 59,
+      "chosen": 4,
+      "answer": "$\\mathrm{Zn}$",
+      "independent_rationale": "Zn perde due elettroni e riduce Cu2+; riducente è lo Zn iniziale.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 60,
+      "chosen": 5,
+      "answer": "Il volume finale dell'intera soluzione",
+      "independent_rationale": "La molarità è riferita al volume finale della soluzione, non al solvente iniziale.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 61,
+      "chosen": 1,
+      "answer": "Una parte della materia esce sotto forma di gas",
+      "independent_rationale": "Il becher è un sistema aperto: l’uscita di gas spiega perdita misurata senza distruzione di materia.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 62,
+      "chosen": 2,
+      "answer": "Fra le molecole d'acqua si formano intensi legami a idrogeno",
+      "independent_rationale": "Legami a idrogeno intermolecolari più intensi spiegano la maggiore ebollizione di H2O rispetto a H2S.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 63,
+      "chosen": 3,
+      "answer": "$[\\mathrm{H_3O^+}]=[\\mathrm{OH^-}]$",
+      "independent_rationale": "Neutralità significa concentrazioni uguali di H3O+ e OH−; pH neutro varia con temperatura.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 64,
+      "chosen": 4,
+      "answer": "Formazione di un solido poco solubile da ioni disciolti",
+      "independent_rationale": "AgCl(s) è precipitato poco solubile; Ag resta +1 e Cl −1, senza riduzione a metallo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 65,
+      "chosen": 5,
+      "answer": "Cambia l'identità del prodotto invece dei soli coefficienti",
+      "independent_rationale": "H2O2 è un’altra sostanza: bilanciare richiede coefficienti e non modifica degli indici.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 66,
+      "chosen": 1,
+      "answer": "$12\\,\\mathrm{mL}$ di etanolo per $100\\,\\mathrm{mL}$ di soluzione, alle condizioni di riferimento",
+      "independent_rationale": "12% v/v è 12 mL di componente per 100 mL finali alle condizioni di riferimento, non solvente o massa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 67,
+      "chosen": 2,
+      "answer": "La sostanza iniziale è un composto",
+      "independent_rationale": "Una sostanza pura decomponibile chimicamente in elementi diversi è un composto.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 68,
+      "chosen": 3,
+      "answer": "$\\mathrm{C_3H_6O_3}$",
+      "independent_rationale": "90/30=3 moltiplica tutti gli indici della formula minima: C3H6O3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 69,
+      "chosen": 4,
+      "answer": "$3\\,\\mathrm L$",
+      "independent_rationale": "Gas ideali stesso p,T: O2/CO=1/2 in moli e volume; 6 L richiedono 3 L.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 70,
+      "chosen": 5,
+      "answer": "Gli atomi sono collegati e disposti in strutture diverse",
+      "independent_rationale": "Diamante/grafite sono allotropi: diversa rete di legami, stesso numero atomico.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 71,
+      "chosen": 1,
+      "answer": "$17,18,18$",
+      "independent_rationale": "Cl35−: Z=17 protoni, 35−17=18 neutroni, 17+1=18 elettroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 72,
+      "chosen": 2,
+      "answer": "$\\mathrm{Na^+}$ e $\\mathrm{F^-}$",
+      "independent_rationale": "Solo Na+ e F− hanno entrambi 10 elettroni; enumerati gli altri conteggi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 73,
+      "chosen": 3,
+      "answer": "$2$",
+      "independent_rationale": "Acqua 1,8/18=0,1 mol e MX 3,6/72=0,05 mol: x=2.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 74,
+      "chosen": 4,
+      "answer": "Un elettrone nel livello più esterno",
+      "independent_rationale": "Na e K hanno entrambi un elettrone di valenza, pur avendo diversi livelli e conteggi totali.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 75,
+      "chosen": 5,
+      "answer": "$\\mathrm{Zn+2H^+\\to Zn^{2+}+H_2}$",
+      "independent_rationale": "Zn+2H+→Zn2++H2 conserva Zn1 H2 e carica +2.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 76,
+      "chosen": 1,
+      "answer": "Rimuovere un elettrone da un atomo neutro isolato allo stato gassoso",
+      "independent_rationale": "Prima ionizzazione: rimozione di un elettrone da atomo neutro gassoso isolato.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 77,
+      "chosen": 2,
+      "answer": "$25\\,\\mathrm g$",
+      "independent_rationale": "Solubilità da 40 a 15 g sulla stessa acqua: cristallizzano 25 g.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 78,
+      "chosen": 3,
+      "answer": "La diversa volatilità dei componenti",
+      "independent_rationale": "La distillazione usa diversa volatilità; miscibilità impedisce semplice separazione in strati o filtro.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 79,
+      "chosen": 4,
+      "answer": "$\\mathrm{CH_3COOH}$",
+      "independent_rationale": "Solo CH3COOH ha carbonile e OH sullo stesso carbonio, gruppo carbossilico.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 80,
+      "chosen": 5,
+      "answer": "$\\mathrm{C_2H_6}$",
+      "independent_rationale": "Addizione H2 a C2H4 conserva C2 e porta H4→H6: C2H6.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 81,
+      "chosen": 1,
+      "answer": "I due contributi uguali hanno direzioni opposte",
+      "independent_rationale": "Due vettori dipolari uguali e opposti in CO2 lineare hanno somma zero.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 82,
+      "chosen": 2,
+      "answer": "La molecola ha geometria angolare",
+      "independent_rationale": "La geometria angolare non annulla i due dipoli O–H; neutralità non equivale a dipolo nullo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 83,
+      "chosen": 3,
+      "answer": "NaCl libera ioni mobili, mentre il glucosio resta principalmente molecolare",
+      "independent_rationale": "NaCl genera ioni mobili; glucosio resta prevalentemente molecolare, dunque conducibilità differente.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 84,
+      "chosen": 4,
+      "answer": "Un anello carbonioso con elettroni delocalizzati",
+      "independent_rationale": "Il benzene è un anello aromatico delocalizzato; non alcano, sale o miscela.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 85,
+      "chosen": 5,
+      "answer": "È un numero formale di ossidazione, non la prova di uno ione libero C4+ nella molecola",
+      "independent_rationale": "+4 del C è numero di ossidazione formale, non nucleo modificato né ione libero nella CO2.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 86,
+      "chosen": 1,
+      "answer": "Il gruppo OH dell'etanolo può formare interazioni favorevoli e legami a idrogeno con l'acqua",
+      "independent_rationale": "OH dell’etanolo permette legami a idrogeno con acqua; un idrocarburo apolare non offre interazioni analoghe.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 87,
+      "chosen": 2,
+      "answer": "$11$",
+      "independent_rationale": "OH−=10^-3 e Kw=10^-14 danno H3O+=10^-11 e pH=11.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 88,
+      "chosen": 3,
+      "answer": "Cloruro di ferro(III)",
+      "independent_rationale": "Tre Cl− richiedono Fe+3, quindi cloruro di ferro(III).",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 89,
+      "chosen": 4,
+      "answer": "$0{,}40\\,\\mathrm{mol}$",
+      "independent_rationale": "50·0,8=40 g attivi; 40/100=0,4 mol, impurità escluse.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 90,
+      "chosen": 5,
+      "answer": "Le entità specificate sono uguali in numero, ma il metano contiene cinque volte tanti atomi",
+      "independent_rationale": "Una mole dà stesso numero di entità; ogni CH4 ha 5 atomi contro un atomo per He.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 1,
+      "chosen": 1,
+      "answer": "$10$",
+      "independent_rationale": "18 nucleoni meno 8 protoni dà 10 neutroni; gli elettroni non entrano in A.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 2,
+      "chosen": 2,
+      "answer": "$(6,6)$ e $(6,8)$",
+      "independent_rationale": "Soltanto la coppia (6,6)/(6,8) conserva i protoni e cambia neutroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 3,
+      "chosen": 3,
+      "answer": "$2\\,\\mathrm{mol}$",
+      "independent_rationale": "36/18=2 mol di molecole, distinte dalle 6 mol di atomi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 4,
+      "chosen": 4,
+      "answer": "$6\\,\\mathrm{mol}$",
+      "independent_rationale": "Il coefficiente acqua/ossigeno è 2:1 e l’idrogeno è in eccesso; 3 mol danno 6 mol.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 5,
+      "chosen": 5,
+      "answer": "$0{,}25\\,\\mathrm{mol/L}$",
+      "independent_rationale": "0,50/2,0=0,25 mol/L con volume finale della soluzione.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 6,
+      "chosen": 1,
+      "answer": "$3$",
+      "independent_rationale": "Il logaritmo decimale di 10^-3 è -3; il pH è 3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 7,
+      "chosen": 2,
+      "answer": "Si ossida cedendo un elettrone",
+      "independent_rationale": "L’elettrone compare nei prodotti: perdita elettronica e numero Fe da +2 a +3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 8,
+      "chosen": 3,
+      "answer": "$\\mathrm{CH_4}$",
+      "independent_rationale": "Un carbonio in un alcano aciclico saturo richiede quattro idrogeni: CH4.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 9,
+      "chosen": 4,
+      "answer": "Un reticolo di ioni sodio e cloruro",
+      "independent_rationale": "NaCl solido è un reticolo di ioni con rapporto 1:1, non molecole o elementi separati.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 10,
+      "chosen": 5,
+      "answer": "$0{,}20\\,\\mathrm{mol/L}$",
+      "independent_rationale": "0,100 mol conservate divise per 0,500 L danno 0,20 mol/L.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 11,
+      "chosen": 1,
+      "answer": "Fusione del ghiaccio",
+      "independent_rationale": "La fusione conserva molecole H2O; gli altri eventi sono reazioni chimiche.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 12,
+      "chosen": 2,
+      "answer": "Filtrazione con pori adatti",
+      "independent_rationale": "Il filtro con pori adatti trattiene granelli insolubili lasciando passare l’acqua.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 13,
+      "chosen": 3,
+      "answer": "$\\mathrm{Cu^{2+}}$",
+      "independent_rationale": "Cu2+ acquista due elettroni, si riduce ed è l’ossidante iniziale.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 14,
+      "chosen": 4,
+      "answer": "Fornisce un percorso con minore barriera di attivazione in entrambi i versi",
+      "independent_rationale": "Catalizzatore riduce barriera in entrambi i versi senza modificare K alla stessa temperatura.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 15,
+      "chosen": 5,
+      "answer": "Le velocità diretta e inversa sono uguali",
+      "independent_rationale": "Equilibrio dinamico: uguaglianza delle velocità, non delle concentrazioni e non arresto microscopico.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 16,
+      "chosen": 1,
+      "answer": "Negativo, perché il sistema cede calore",
+      "independent_rationale": "A p costante con solo lavoro pV, esotermico significa q_p=ΔH<0.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 17,
+      "chosen": 2,
+      "answer": "Limita le variazioni di pH per piccole aggiunte di acido o base, entro una capacità finita",
+      "independent_rationale": "Una coppia debole/coniugata in quantità finite resiste a piccole aggiunte, non quantità illimitate né pH sempre7.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 18,
+      "chosen": 3,
+      "answer": "$\\mathrm{CH_3CH_2OH}$",
+      "independent_rationale": "Ethanol OH su carbonio saturo identifica alcol; acido, chetone, aldeide ed etere hanno altri gruppi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 19,
+      "chosen": 4,
+      "answer": "$\\mathrm{CaCl_2}$",
+      "independent_rationale": "A c,T uguali conta i: CaCl2→3 ioni supera NaCl→2 e soluti molecolari→1.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 20,
+      "chosen": 5,
+      "answer": "Contiene ioni mobili di carica positiva e negativa",
+      "independent_rationale": "Cationi/anioni mobili portano carica in direzioni opposte senza perdere neutralità globale.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 21,
+      "chosen": 1,
+      "answer": "$\\mathrm{CaCl_2\\to Ca^{2+}+2Cl^-}$",
+      "independent_rationale": "Un Ca2+ e due Cl− conservano Ca1 Cl2 e carica zero.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 22,
+      "chosen": 2,
+      "answer": "L'idrogeno, perché il rapporto tra moli iniziali e coefficiente è minore",
+      "independent_rationale": "Rapporti quantità/coefficienti 2 e 1; H2 è il minore, resta 1 mol N2 e si formano 2 mol NH3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 23,
+      "chosen": 3,
+      "answer": "$\\mathrm{CO_3^{2-}}$",
+      "independent_rationale": "Sottrarre H+ a HCO3− lascia CO3²−; le altre formule cambiano più di un protone o la carica.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 24,
+      "chosen": 4,
+      "answer": "Una coppia di elettroni è condivisa tra due nuclei",
+      "independent_rationale": "H2 ha una coppia elettronica condivisa fra nuclei identici.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 25,
+      "chosen": 5,
+      "answer": "Azoto molecolare",
+      "independent_rationale": "L’aria secca ordinaria è prevalentemente N2, circa 78%, davanti a O2 circa 21%.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 26,
+      "chosen": 1,
+      "answer": "Resta quella di saturazione mentre altro soluto cristallizza",
+      "independent_rationale": "Solido in equilibrio e temperatura fissa impongono saturazione; il soluto aggiuntivo cristallizza.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 27,
+      "chosen": 2,
+      "answer": "$+6$",
+      "independent_rationale": "x−8=−2 impone x=+6 nello ione solfato.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 28,
+      "chosen": 3,
+      "answer": "$44\\,\\mathrm{g/mol}$",
+      "independent_rationale": "CO2 richiede 12+2·16=44 g/mol.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 29,
+      "chosen": 4,
+      "answer": "Contengono lo stesso numero di molecole",
+      "independent_rationale": "16/32=14/28=0,5 mol: stesso numero di molecole malgrado masse diverse.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 30,
+      "chosen": 5,
+      "answer": "Il numero atomico",
+      "independent_rationale": "Il nucleo è invariato, quindi Z è invariato; perdita elettronica modifica carica ed elettroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 31,
+      "chosen": 1,
+      "answer": "$24\\,\\mathrm g$",
+      "independent_rationale": "Stesso composto: rapporto massico fisso; triplicando C si triplica O da 8 a 24 g.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 32,
+      "chosen": 2,
+      "answer": "$0{,}50\\,\\mathrm{mol/L}$",
+      "independent_rationale": "Moli 0,02+0,18=0,20 in 0,40 L: 0,50 mol/L.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 33,
+      "chosen": 3,
+      "answer": "Ossigeno $\\mathrm{O_2}$",
+      "independent_rationale": "O2 contiene un solo simbolo di elemento ed è molecolare; gli altri contengono elementi diversi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 34,
+      "chosen": 4,
+      "answer": "Monossido di carbonio",
+      "independent_rationale": "Ossigeno insufficiente permette CO; gli altri prodotti proposti sono estranei agli elementi o al processo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 35,
+      "chosen": 5,
+      "answer": "Possiede elettroni delocalizzati mobili",
+      "independent_rationale": "Nel metallo solido trasportano carica gli elettroni delocalizzati, non nuclei o ioni disciolti.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 36,
+      "chosen": 1,
+      "answer": "$\\mathrm{CH_4}$",
+      "independent_rationale": "Moli C=1 e H=4; rapporto atomico minimo CH4.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 37,
+      "chosen": 2,
+      "answer": "$3$",
+      "independent_rationale": "Diluizione dieci volte: idronio 10^-2→10^-3; pH 2→3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 38,
+      "chosen": 3,
+      "answer": "$75\\%$",
+      "independent_rationale": "15/20·100=75%; 25% è la frazione non recuperata.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 39,
+      "chosen": 4,
+      "answer": "$100$",
+      "independent_rationale": "10^-3/10^-5=100; la scala è logaritmica.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 40,
+      "chosen": 5,
+      "answer": "$4$",
+      "independent_rationale": "Carbonio centrale: doppio legame più semplice C–C più C–H, ordine totale 4.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 41,
+      "chosen": 1,
+      "answer": "$\\mathrm{Cu^{2+}+2e^-\\to Cu}$",
+      "independent_rationale": "Cu2+ deve acquistare due elettroni a sinistra per dare carica zero.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 42,
+      "chosen": 2,
+      "answer": "$20{,}5\\,\\mathrm u$",
+      "independent_rationale": "Media pesata 20·3/4+22·1/4=20,5 u; media semplice errata per abbondanze diverse.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 43,
+      "chosen": 3,
+      "answer": "Una sostanza e due fasi",
+      "independent_rationale": "Entrambe le fasi sono H2O: una sostanza e due fasi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 44,
+      "chosen": 4,
+      "answer": "L'acido forte dà più idronio e pH minore",
+      "independent_rationale": "Con proticità e concentrazione uguali, nel modello indicato il forte produce più idronio e pH inferiore.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 45,
+      "chosen": 5,
+      "answer": "$0{,}010\\,\\mathrm{mol}$ di idronio",
+      "independent_rationale": "Reazione 1:1: 0,030−0,020=0,010 mol di idronio residuo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 46,
+      "chosen": 1,
+      "answer": "$8\\,\\mathrm g$",
+      "independent_rationale": "Su 28 g aggiunti solo 20 si sciolgono nei 100 g d’acqua: 8 g solidi.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 47,
+      "chosen": 2,
+      "answer": "$\\mathrm{Al_2O_3}$",
+      "independent_rationale": "3a=2b, minimo a=2 b=3: Al2O3 neutro.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 48,
+      "chosen": 3,
+      "answer": "Può essere un alchene aciclico o un cicloalcano",
+      "independent_rationale": "C4H8 può avere un doppio legame aciclico oppure un anello saturo; formula non decide connettività.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 49,
+      "chosen": 4,
+      "answer": "Gli ioni diventano mobili nel liquido",
+      "independent_rationale": "La fusione rende mobili gli ioni già presenti; non crea protoni o metallo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 50,
+      "chosen": 5,
+      "answer": "$\\dfrac89$",
+      "independent_rationale": "O contribuisce 16 su 18 alla massa di H2O: frazione 8/9, non frazione atomica 1/3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 51,
+      "chosen": 1,
+      "answer": "Tende a diminuire",
+      "independent_rationale": "Da Na a Cl cresce la carica efficace nello stesso livello: andamento generale decrescente del raggio.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 52,
+      "chosen": 2,
+      "answer": "La quantità di sostanza",
+      "independent_rationale": "pV=nRT con p,V,T uguali impone n uguale; He monoatomico e N2 biatomico distinguono atomi e massa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 53,
+      "chosen": 3,
+      "answer": "Aumentano le configurazioni microscopiche accessibili alle particelle",
+      "independent_rationale": "Vaporizzazione generalmente amplia configurazioni microscopiche accessibili a pari sostanza.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 54,
+      "chosen": 4,
+      "answer": "Sono isomeri di struttura",
+      "independent_rationale": "Stessa formula C2H6O con legami O–H/O–C diversi: isomeri di struttura.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 55,
+      "chosen": 5,
+      "answer": "Contribuisce alla trasformazione della fase solida in liquida",
+      "independent_rationale": "Il calore di fusione alimenta il cambiamento di fase anche a temperatura costante.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 56,
+      "chosen": 1,
+      "answer": "$1$",
+      "independent_rationale": "Nel modello dei gruppi principali l’ultimo livello della distribuzione 2,8,1 ha un elettrone.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 57,
+      "chosen": 2,
+      "answer": "Chetoni",
+      "independent_rationale": "Carbonile legato a due carboni definisce chetone (propanone).",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 58,
+      "chosen": 3,
+      "answer": "Neutrone",
+      "independent_rationale": "Solo il neutrone combina carica zero e massa dell’ordine del protone.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 59,
+      "chosen": 4,
+      "answer": "Una parte del cloro si riduce e un'altra si ossida",
+      "independent_rationale": "Cl0 dà Cl−1 e Cl+1: disproporzione, contemporaneamente riduzione e ossidazione di particelle diverse.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 60,
+      "chosen": 5,
+      "answer": "Il volume finale dell'intera soluzione",
+      "independent_rationale": "La molarità è riferita al volume finale della soluzione, non al solvente iniziale.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 61,
+      "chosen": 1,
+      "answer": "Una parte della materia esce sotto forma di gas",
+      "independent_rationale": "Il becher è un sistema aperto: l’uscita di gas spiega perdita misurata senza distruzione di materia.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 62,
+      "chosen": 2,
+      "answer": "Fra le molecole d'acqua si formano intensi legami a idrogeno",
+      "independent_rationale": "Legami a idrogeno intermolecolari più intensi spiegano la maggiore ebollizione di H2O rispetto a H2S.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 63,
+      "chosen": 3,
+      "answer": "$[\\mathrm{H_3O^+}]=[\\mathrm{OH^-}]$",
+      "independent_rationale": "Neutralità significa concentrazioni uguali di H3O+ e OH−; pH neutro varia con temperatura.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 64,
+      "chosen": 4,
+      "answer": "Formazione di un solido poco solubile da ioni disciolti",
+      "independent_rationale": "AgCl(s) è precipitato poco solubile; Ag resta +1 e Cl −1, senza riduzione a metallo.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 65,
+      "chosen": 5,
+      "answer": "Cambia l'identità del prodotto invece dei soli coefficienti",
+      "independent_rationale": "H2O2 è un’altra sostanza: bilanciare richiede coefficienti e non modifica degli indici.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 66,
+      "chosen": 1,
+      "answer": "$12\\,\\mathrm{mL}$ di etanolo per $100\\,\\mathrm{mL}$ di soluzione, alle condizioni di riferimento",
+      "independent_rationale": "12% v/v è 12 mL di componente per 100 mL finali alle condizioni di riferimento, non solvente o massa.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 67,
+      "chosen": 2,
+      "answer": "La sostanza iniziale è un composto",
+      "independent_rationale": "Una sostanza pura decomponibile chimicamente in elementi diversi è un composto.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 68,
+      "chosen": 3,
+      "answer": "$\\mathrm{C_3H_6O_3}$",
+      "independent_rationale": "90/30=3 moltiplica tutti gli indici della formula minima: C3H6O3.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 69,
+      "chosen": 4,
+      "answer": "$3\\,\\mathrm L$",
+      "independent_rationale": "Gas ideali stesso p,T: O2/CO=1/2 in moli e volume; 6 L richiedono 3 L.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 70,
+      "chosen": 5,
+      "answer": "Gli atomi sono collegati e disposti in strutture diverse",
+      "independent_rationale": "Diamante/grafite sono allotropi: diversa rete di legami, stesso numero atomico.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 71,
+      "chosen": 1,
+      "answer": "$1$",
+      "independent_rationale": "n=2 ammette l intero0 o1; fra le opzioni compare solo1.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 72,
+      "chosen": 2,
+      "answer": "Spin opposti",
+      "independent_rationale": "Stesso orbitale impone spin opposti per Pauli; massimo due elettroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 73,
+      "chosen": 3,
+      "answer": "Due orbitali diversi, con spin paralleli",
+      "independent_rationale": "Hund: due elettroni in due orbitali p distinti con spin paralleli, terzo vuoto.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 74,
+      "chosen": 4,
+      "answer": "Piramidale trigonale",
+      "independent_rationale": "Tre legami e una coppia solitaria: geometria elettronica tetraedrica, nuclei piramidali trigonali.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 75,
+      "chosen": 5,
+      "answer": "$sp$",
+      "independent_rationale": "Due direzioni lineari corrispondono a sp; il triplo legame conta una regione.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 76,
+      "chosen": 1,
+      "answer": "$\\dfrac32$",
+      "independent_rationale": "n,V fissi: p2/p1=T2/T1=450/300=3/2.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 77,
+      "chosen": 2,
+      "answer": "$2\\,\\mathrm{bar}$",
+      "independent_rationale": "Frazione molare A=1/4; pA=8/4=2 bar.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 78,
+      "chosen": 3,
+      "answer": "$+50\\,\\mathrm J$",
+      "independent_rationale": "q=+80 J, lavoro sul sistema=-30 J, ΔU=+50 J.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 79,
+      "chosen": 4,
+      "answer": "Negativo",
+      "independent_rationale": "ΔH negativo e -TΔS negativo implicano somma negativa per T>0.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 80,
+      "chosen": 5,
+      "answer": "Verso B, perché $Q_c=1<K_c$",
+      "independent_rationale": "Q=B²/A=1<4: avanzamento verso B, non uguaglianza automatica delle velocità.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 81,
+      "chosen": 1,
+      "answer": "Verso $\\mathrm{N_2O_4}$",
+      "independent_rationale": "Compressione isoterma moltiplica Q per fattore>1: Q>K, favorito N2O4 con meno moli gas.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 82,
+      "chosen": 2,
+      "answer": "È favorito il verso inverso endotermico",
+      "independent_rationale": "Aumentare T favorisce verso endotermico, qui inverso.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 83,
+      "chosen": 3,
+      "answer": "Sono informazioni complementari e il pittogramma da solo non indica una dose sicura",
+      "independent_rationale": "Composizione, pericolo e istruzioni sono informazioni complementari; pictogramma non definisce dose sicura.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 84,
+      "chosen": 4,
+      "answer": "Tendenza ad acidificare la soluzione",
+      "independent_rationale": "NH4+ dona H+ ad acqua e produce H3O+, contributo acidificante senza redox.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 85,
+      "chosen": 5,
+      "answer": "Acido acetico e acetato di sodio",
+      "independent_rationale": "Acido acetico/acetato è coppia acido debole/base coniugata; altre coppie non sono tamponi indicati.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 86,
+      "chosen": 1,
+      "answer": "Il pH è maggiore di $6$, senza determinarne un valore esatto",
+      "independent_rationale": "Dopo precisazione blu soltanto per pH>6, blu implica regione>6 ma non valore esatto né basicità.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 87,
+      "chosen": 2,
+      "answer": "$+1{,}10\\,\\mathrm V$",
+      "independent_rationale": "CatodoCu meno anodoZn: 0,34−(−0,76)=1,10 V, nessun fattore elettroni.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 88,
+      "chosen": 3,
+      "answer": "$\\mathrm{C_4H_6}$",
+      "independent_rationale": "Catena aperta con un triplo e nessuna altra insaturazione: H=2·4−2=6.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 89,
+      "chosen": 4,
+      "answer": "Diossido di zolfo",
+      "independent_rationale": "SO2 può formare specie acide atmosferiche; alternative inerti o acqua pura non spiegano emissione acidificante.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 90,
+      "chosen": 5,
+      "answer": "$2\\%$",
+      "independent_rationale": "Incertezza relativa: 0,2/10·100=2%.",
+      "all_options_reviewed": true,
+      "IT_EN_full_comparison": true
+    }
+  ],
+  "unique_question_pairs": 123,
+  "worked_exercises": 24,
+  "practice_problems": 30,
+  "translation": "Lettura integrale IT/EN di teorie, svolti e 123 coppie di quiz uniche; 57 duplicati I/S verificati identici byte per byte. Tracce identiche ai quiz controllate integralmente per metadati e soluzioni."
+}

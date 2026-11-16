@@ -1,0 +1,345 @@
+[
+  {
+    "label": "Rotazione oraria",
+    "computed": "15",
+    "expected": "15",
+    "source": "svolti1.1",
+    "pass": true
+  },
+  {
+    "label": "Rotazione 6 ore",
+    "computed": "90",
+    "expected": "90",
+    "source": "svolti1.1",
+    "pass": true
+  },
+  {
+    "label": "Tempo luce a distanza 4 anni-luce",
+    "computed": "4",
+    "expected": "4",
+    "source": "svolti1.3",
+    "pass": true
+  },
+  {
+    "label": "Velocità relativa dorsale",
+    "computed": "4",
+    "expected": "4",
+    "source": "quiz5 / dafare5 / svolti2.2",
+    "pass": true
+  },
+  {
+    "label": "Separazione km",
+    "computed": "40",
+    "expected": "40",
+    "source": "quiz5 / dafare5 / svolti2.2",
+    "pass": true
+  },
+  {
+    "label": "Distanza singolo punto dall’asse km",
+    "computed": "20",
+    "expected": "20",
+    "source": "svolti2.2",
+    "pass": true
+  },
+  {
+    "label": "Epicentro",
+    "computed": "(18, 0)",
+    "expected": "(18, 0)",
+    "source": "quiz11 / dafare11 / svolti2.4",
+    "pass": true
+  },
+  {
+    "label": "Distanza epicentrale",
+    "computed": "16",
+    "expected": "16",
+    "source": "svolti2.4",
+    "pass": true
+  },
+  {
+    "label": "Profondità ipocentro",
+    "computed": "12",
+    "expected": "12",
+    "source": "svolti2.4",
+    "pass": true
+  },
+  {
+    "label": "Distanza ipocentrale km",
+    "computed": "20.0",
+    "expected": "20",
+    "source": "svolti2.4",
+    "pass": true
+  },
+  {
+    "label": "Numero dimezzamenti",
+    "computed": "2",
+    "expected": "2",
+    "source": "quiz13 / dafare13 / svolti4.2",
+    "pass": true
+  },
+  {
+    "label": "Padre al primo dimezzamento",
+    "computed": "40",
+    "expected": "40",
+    "source": "quiz13 / svolti4.2",
+    "pass": true
+  },
+  {
+    "label": "Padre residuo",
+    "computed": "20",
+    "expected": "20",
+    "source": "quiz13 / dafare13 / svolti4.2",
+    "pass": true
+  },
+  {
+    "label": "Figlio stabile prodotto",
+    "computed": "60",
+    "expected": "60",
+    "source": "svolti4.2",
+    "pass": true
+  },
+  {
+    "label": "Frazione trasformata",
+    "computed": "3/4",
+    "expected": "3/4",
+    "source": "svolti4.2",
+    "pass": true
+  },
+  {
+    "label": "Frazione residua",
+    "computed": "1/4",
+    "expected": "1/4",
+    "source": "svolti4.2",
+    "pass": true
+  },
+  {
+    "label": "Perdita attesa euro",
+    "computed": "6000",
+    "expected": "6000",
+    "source": "quiz14 / dafare14 / svolti3.4",
+    "pass": true
+  },
+  {
+    "label": "Perdita attesa dopo rinforzo",
+    "computed": "3000",
+    "expected": "3000",
+    "source": "svolti3.4",
+    "pass": true
+  },
+  {
+    "label": "Metallo contenuto t",
+    "computed": "6",
+    "expected": "6",
+    "source": "quiz21 / svolti4.4",
+    "pass": true
+  },
+  {
+    "label": "Metallo recuperato t",
+    "computed": "3",
+    "expected": "3",
+    "source": "quiz21 / svolti4.4",
+    "pass": true
+  },
+  {
+    "label": "Metallo non recuperato t",
+    "computed": "3",
+    "expected": "3",
+    "source": "svolti4.4",
+    "pass": true
+  },
+  {
+    "label": "Esempio teoria contenuto t",
+    "computed": "2",
+    "expected": "2",
+    "source": "teoria risorse",
+    "pass": true
+  },
+  {
+    "label": "Esempio teoria recuperato t",
+    "computed": "8/5",
+    "expected": "8/5",
+    "source": "teoria risorse",
+    "pass": true
+  },
+  {
+    "label": "Acqua condensata g",
+    "computed": "3",
+    "expected": "3",
+    "source": "quiz28",
+    "pass": true
+  },
+  {
+    "label": "Bilancio annuo milioni m3",
+    "computed": "-2",
+    "expected": "-2",
+    "source": "quiz33 / svolti3.1 / teoria bilanci",
+    "pass": true
+  },
+  {
+    "label": "Stock 3 anni milioni m3",
+    "computed": "24",
+    "expected": "24",
+    "source": "quiz33 / svolti3.1",
+    "pass": true
+  },
+  {
+    "label": "Ora arrivo minuti dalla mezzanotte",
+    "computed": "728",
+    "expected": "728",
+    "source": "quiz34",
+    "pass": true
+  },
+  {
+    "label": "Assorbimento neve",
+    "computed": "20",
+    "expected": "20",
+    "source": "quiz35 / svolti3.3",
+    "pass": true
+  },
+  {
+    "label": "Assorbimento terreno",
+    "computed": "80",
+    "expected": "80",
+    "source": "quiz35 / svolti3.3",
+    "pass": true
+  },
+  {
+    "label": "Differenza assorbimenti",
+    "computed": "60",
+    "expected": "60",
+    "source": "quiz35 / svolti3.3",
+    "pass": true
+  },
+  {
+    "label": "Rapporto assorbimenti",
+    "computed": "4",
+    "expected": "4",
+    "source": "svolti3.3",
+    "pass": true
+  },
+  {
+    "label": "Altri gas percentuale",
+    "computed": "1",
+    "expected": "1",
+    "source": "quiz56",
+    "pass": true
+  },
+  {
+    "label": "Distanza da ritardo S-P",
+    "computed": "60",
+    "expected": "60",
+    "source": "quiz68",
+    "pass": true
+  },
+  {
+    "label": "Tempo P",
+    "computed": "10",
+    "expected": "10",
+    "source": "quiz68",
+    "pass": true
+  },
+  {
+    "label": "Tempo S",
+    "computed": "20",
+    "expected": "20",
+    "source": "quiz68",
+    "pass": true
+  },
+  {
+    "label": "Ritardo ricalcolato",
+    "computed": "10",
+    "expected": "10",
+    "source": "quiz68",
+    "pass": true
+  },
+  {
+    "label": "Curva decadimento t=0",
+    "computed": "100",
+    "expected": "100",
+    "source": "figura teoria datazioni",
+    "pass": true
+  },
+  {
+    "label": "Curva decadimento t=20",
+    "computed": "50",
+    "expected": "50",
+    "source": "figura teoria datazioni",
+    "pass": true
+  },
+  {
+    "label": "Curva decadimento t=40",
+    "computed": "25",
+    "expected": "25",
+    "source": "figura teoria datazioni",
+    "pass": true
+  },
+  {
+    "label": "Curva decadimento t=60",
+    "computed": "25/2",
+    "expected": "25/2",
+    "source": "figura teoria datazioni",
+    "pass": true
+  },
+  {
+    "label": "Curva acquifero t=0",
+    "computed": "30",
+    "expected": "30",
+    "source": "figura svolti3.1",
+    "pass": true
+  },
+  {
+    "label": "Curva acquifero t=1",
+    "computed": "28",
+    "expected": "28",
+    "source": "figura svolti3.1",
+    "pass": true
+  },
+  {
+    "label": "Curva acquifero t=2",
+    "computed": "26",
+    "expected": "26",
+    "source": "figura svolti3.1",
+    "pass": true
+  },
+  {
+    "label": "Curva acquifero t=3",
+    "computed": "24",
+    "expected": "24",
+    "source": "figura svolti3.1",
+    "pass": true
+  },
+  {
+    "label": "Età unica fra ceneri",
+    "computed": "[110]",
+    "expected": "[110]",
+    "source": "quiz19",
+    "pass": true
+  },
+  {
+    "label": "Intervalli: primo più giovane",
+    "computed": "True",
+    "expected": "True",
+    "source": "quiz74",
+    "pass": true
+  },
+  {
+    "label": "Intervalli: primo più antico",
+    "computed": "True",
+    "expected": "True",
+    "source": "quiz74",
+    "pass": true
+  },
+  {
+    "label": "Intervalli: età uguali ammesse",
+    "computed": "True",
+    "expected": "True",
+    "source": "quiz74",
+    "pass": true
+  },
+  {
+    "label": "Perdita padre sovrastima età",
+    "computed": "True",
+    "expected": "True",
+    "source": "quiz40; perdita fisica 25% come controprova",
+    "pass": true
+  }
+]

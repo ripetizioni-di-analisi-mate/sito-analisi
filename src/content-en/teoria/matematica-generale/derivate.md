@@ -174,29 +174,70 @@ Suppose the function has a local maximum at $x_0$. The proof for a local minimum
 :::
 ::::
 
-:::teorema{#teorema-di-lagrange titolo="Rolle's theorem and the mean value theorem"}
+::::teorema{#teorema-di-lagrange titolo="Rolle's theorem and the mean value theorem"}
 Let $f$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
 
 - **Mean value theorem**: there is a point $c \in (a, b)$ such that $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
 - **Rolle's theorem**: if $f(a) = f(b)$ also holds, there is a point $c \in (a, b)$ such that $f'(c) = 0$.
 
-The mean value theorem states that at least one tangent has the same slope as the secant through the endpoints. Rolle's theorem is the case where the secant is horizontal. It follows from the extreme value theorem and Fermat's theorem. By the extreme value theorem, the function attains a maximum and a minimum on $[a, b]$. If the two extrema do not both occur at the endpoints, one occurs at an interior point where the derivative is zero. If they both occur at the endpoints, then $f(a) = f(b)$ implies that the maximum and minimum values are equal. The function is therefore constant and its derivative is zero at each interior point. Applying Rolle's theorem to the difference between $f$ and the secant line through the endpoints gives the mean value theorem. For $f(x) = x^3$ on $[0, 2]$, the average slope is $\dfrac{8 - 0}{2} = 4$. Solving $3c^2 = 4$ gives $c = \dfrac{2}{\sqrt{3}} \approx 1{,}15$.
+The mean value theorem states that at least one tangent has the same slope as the secant through the endpoints. Rolle's theorem is the case where the secant is horizontal. The link between the sign of the derivative and monotonicity, stated next, follows from the mean value theorem. For $f(x) = x^3$ on $[0, 2]$, the average slope is $\dfrac{8 - 0}{2} = 4$. Solving $3c^2 = 4$ gives $c = \dfrac{2}{\sqrt{3}} \approx 1{,}15$.
 
 ::grafico{f="x^3;4*x-3.0792" segmenti="0,0,2,8" punti="0,0,pieno;2,8,pieno;1.1547,1.5396,pieno" xmin=-1 xmax=3 ymin=-2 ymax=10 legenda="y = x^3;y = 4x - \dfrac{16}{3\sqrt{3}}" titolo="For $x^3$ on $[0, 2]$, the dashed secant through $(0, 0)$ and $(2, 8)$ has slope $4$. The tangent at $c = \dfrac{2}{\sqrt{3}}$ has the same slope and is parallel to the secant"}
 
 ::grafico{f="x*(x-3)^2" segmenti="-0.5,4,2.5,4" punti="0,0,pieno;3,0,pieno;1,4,pieno" xmin=-1 xmax=4 ymin=-1 ymax=6 titolo="The function $x\,(x - 3)^2$ equals $0$ at $0$ and at $3$. By Rolle's theorem, it has a horizontal tangent at the interior point $c = 1$, where its value is $4$"}
+
+:::dimostrazione
+Rolle's theorem is proved first. Since $f$ is continuous on $[a, b]$, by the **extreme value theorem** $f$ attains a maximum value $M$ and a minimum value $m$ on $[a, b]$.
+
+- If $M = m$, the function is constant on $[a, b]$, so $f'(c) = 0$ for every $c \in (a, b)$.
+- If $M > m$, at least one of the two values differs from $f(a) = f(b)$, so it is attained at a point $c$ inside the interval. The point $c$ is an interior local extremum and $f$ is differentiable at $c$, so by **Fermat's theorem** $f'(c) = 0$.
+
+For the mean value theorem, define
+$$
+g(x) = f(x) - f(a) - \frac{f(b) - f(a)}{b - a}\,(x - a) ,
+$$
+the difference between $f$ and the secant line through $(a, f(a))$ and $(b, f(b))$. The function $g$ is continuous on $[a, b]$ and differentiable on $(a, b)$, because it is the sum of $f$ and a polynomial of degree one. Moreover $g(a) = 0$ and $g(b) = f(b) - f(a) - \bigl( f(b) - f(a) \bigr) = 0$. The hypotheses of **Rolle's theorem** are therefore satisfied, and there is $c \in (a, b)$ with $g'(c) = 0$. Since
+$$
+g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a} ,
+$$
+the condition $g'(c) = 0$ gives $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
+:::
+::::
+
+:::richiamo{titolo="Extreme value theorem"}
+If $f$ is continuous on the closed and bounded interval $[a, b]$, then $f$ attains a maximum and a minimum on $[a, b]$.
 :::
 
-:::teorema{#monotonia-e-derivata titolo="Sign of the derivative and monotonicity"}
+:::richiamo{titolo="Fermat's theorem"}
+If $x_0$ is an interior point of local maximum or minimum for $f$ and $f$ is differentiable at $x_0$, then $f'(x_0) = 0$.
+:::
+
+::::teorema{#monotonia-e-derivata titolo="Sign of the derivative and monotonicity"}
 Let $f$ be differentiable on an interval $I$.
 
 - If $f'(x) > 0$ for every $x \in I$, then $f$ is increasing on $I$.
 - If $f'(x) < 0$ for every $x \in I$, then $f$ is decreasing on $I$.
 - If $f'(x) = 0$ for every $x \in I$, then $f$ is constant on $I$.
 
-For two points $x_1 < x_2$ in $I$, applying the mean value theorem to $[x_1, x_2]$ gives a point $c$ with $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1)$. The difference therefore has the sign of $f'(c)$. This criterion identifies the intervals of increase and decrease when sketching a graph. The hypothesis that $I$ is an interval is necessary. For example, $\dfrac{1}{x}$ has a negative derivative on its domain, but it is not decreasing on the entire domain because $\dfrac{1}{-1} < \dfrac{1}{1}$.
+This criterion identifies the intervals of increase and decrease when sketching a graph. The hypothesis that $I$ is an interval is necessary. For example, $\dfrac{1}{x}$ has a negative derivative on its domain, but it is not decreasing on the entire domain because $\dfrac{1}{-1} < \dfrac{1}{1}$.
 
 ::grafico{f="x^3-3*x;3*x^2-3" punti="-1,2,pieno;1,-2,pieno" segmenti="-1,0,-1,2;1,0,1,-2" xmin=-3 xmax=3 ymin=-4 ymax=6 legenda="y = x^3 - 3x;y = 3x^2 - 3" titolo="The derivative $3x^2 - 3$ is positive for $x < -1$ and for $x > 1$, where $x^3 - 3x$ increases, and is negative on $(-1, 1)$, where $x^3 - 3x$ decreases"}
+
+:::dimostrazione
+Let $x_1 < x_2$ be two points of $I$. Since $I$ is an interval, $[x_1, x_2] \subseteq I$, so $f$ is continuous on $[x_1, x_2]$ and differentiable on $(x_1, x_2)$. By the **mean value theorem** there is $c \in (x_1, x_2)$ such that
+$$
+f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1) .
+$$
+The factor $x_2 - x_1$ is positive, so $f(x_2) - f(x_1)$ has the sign of $f'(c)$.
+
+- If $f' > 0$ on $I$, then $f(x_2) > f(x_1)$, so $f$ is increasing on $I$.
+- If $f' < 0$ on $I$, then $f(x_2) < f(x_1)$, so $f$ is decreasing on $I$.
+- If $f' = 0$ on $I$, then $f(x_2) = f(x_1)$; since $x_1$ and $x_2$ are any two points of $I$, $f$ is constant on $I$.
+:::
+::::
+
+:::richiamo{titolo="Mean value theorem"}
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, there is $c \in (a, b)$ with $f(b) - f(a) = f'(c)\,(b - a)$.
 :::
 
 ## L'Hôpital's rule<span id="de-lhôpitals-rule"></span>

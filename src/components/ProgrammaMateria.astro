@@ -8,6 +8,9 @@
 // Vale per ogni materia in italiano ed è visibile a tutti dal 15/11/2026 (prima solo ai GM): la vista classica
 // (classe vista-classica in Materia.astro) resta nel codice della pagina ma è sempre nascosta.
 // Lo Studio guidato funziona solo dove ci sono le domande classificate (STUDIO_GUIDATO); altrove «In preparazione».
+// Versione E (16/11/2026, scelta di Carmine fra sei varianti): riquadro dell'anteprima gratuita in cima (azione principale,
+// con «Sblocca tutto» e «Copre il tuo esame?»), Studio guidato sotto; nei capitoli la Teoria è la prima delle quattro voci.
+// Vale anche per le pagine inglesi (prop lingua); lo Studio guidato e la compatibilità restano in italiano.
 interface Argomento { slug: string; titolo: string; riassunto?: string; pronto: boolean; svolti: number; dafare: number; verificabili: number; domande: number }
 interface Props {
   materia: string;
@@ -21,8 +24,34 @@ interface Props {
   incluso: string[];
   ripasso?: { titolo: string; domande: number; href: string; simulazione?: { href: string; titolo: string }; oggi: string };
   teoremi?: { href: string; teoremi: number; definizioni: number };
+  lingua?: 'it' | 'en';
+  /** Lingua delle pagine delle domande a tempo (alcune materie inglesi le hanno solo in italiano). */
+  linguaDomande?: 'it' | 'en';
 }
-const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, studioGuidato, incluso, ripasso, teoremi } = Astro.props;
+const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, studioGuidato, incluso, ripasso, teoremi, lingua = 'it', linguaDomande = lingua } = Astro.props;
+const en = lingua === 'en';
+// Testi della pagina nelle due lingue (16/11/2026: la versione E vale anche in inglese).
+const L = en ? {
+  sg: 'Guided study', sgInfo: 'How Guided study works', sgInfoBreve: 'How it works', sgFrase: 'The level of the questions adapts to your answers. The test is in Italian.',
+  sgInizia: 'Start the test', sgPrep: 'Coming soon', passi: [['Answer the questions', 'Questions'], ['Find your gaps and their cause', 'Gaps'], ['Follow the path', 'Path']],
+  apTitolo: 'Free preview', apTesto: 'For each topic, read the beginning of the theory and the first 3 sheets of worked examples for free, no account needed.',
+  apInizia: 'Start with the preview', sblocca: 'Unlock everything', copre: 'Does it cover your exam?', attivo: 'Full access active',
+  programma: 'Syllabus', teoria: 'Theory', svolti: ['Worked examples', 'Worked'], dafare: ['Exercises', 'Exercises'], domande: ['Timed questions', 'Questions'],
+  prep: 'Coming soon', ripassoN: (n: number) => `${n} review questions on the whole syllabus.`, ripassoV: 'Review questions', oggi: 'Today’s review',
+  indice: 'Index of theorems and definitions', indiceN: (t: number, d: number) => `${t} theorems and ${d} definitions`,
+  accesso: 'Full access', chiudi: 'Close', totale: 'Total', paga: 'Go to checkout', compatDlg: 'Want to check the compatibility before buying?', provaDlg: 'Try the free preview first',
+  dataEsame: 'Exam date',
+} : {
+  sg: 'Studio guidato', sgInfo: 'Come funziona lo Studio guidato', sgInfoBreve: 'Come funziona', sgFrase: 'Il livello delle domande si adatta alle tue risposte.',
+  sgInizia: 'Inizia il test', sgPrep: 'In preparazione', passi: [['Rispondi alle domande', 'Domande'], ['Trovi le tue lacune e la loro causa', 'Lacune'], ['Segui il percorso', 'Percorso']],
+  apTitolo: 'Anteprima gratuita', apTesto: 'Di ogni capitolo leggi gratis l’inizio della teoria e le prime 3 schede di esercizi svolti, senza creare l’account.',
+  apInizia: 'Inizia con l’anteprima', sblocca: 'Sblocca tutto', copre: 'Copre il tuo esame?', attivo: 'Accesso completo attivo',
+  programma: 'Programma', teoria: 'Teoria', svolti: ['Esercizi svolti', 'Svolti'], dafare: ['Esercizi da fare', 'Da fare'], domande: ['Domande a tempo', 'Domande'],
+  prep: 'In preparazione', ripassoN: (n: number) => `${n} domande di ripasso su tutto il programma.`, ripassoV: 'Domande di ripasso', oggi: 'Il tuo ripasso di oggi',
+  indice: 'Indice di teoremi e definizioni', indiceN: (t: number, d: number) => `${t} teoremi e ${d} definizioni`,
+  accesso: 'Accesso completo', chiudi: 'Chiudi', totale: 'Totale', paga: 'Vai al pagamento', compatDlg: 'Vuoi controllare la compatibilità prima dell’acquisto?', provaDlg: 'Prova prima l’anteprima gratuita',
+  dataEsame: 'Data d’esame',
+};
 const ic = (corpo: string, tratto = 1.7) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${tratto}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${corpo}</svg>`;
 const I = {
   bersaglio: ic('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>'),
@@ -39,40 +68,53 @@ const I = {
   dafare: ic('<path d="M4 20l1-4L16 5l3 3L8 19z"/>'),
   domande: ic('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'),
   avanti: ic('<path d="m9 6 6 6-6 6"/>'),
+  libro: ic('<path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v14H7.5A2.5 2.5 0 0 0 5 19.5z"/><path d="M5 19.5A2.5 2.5 0 0 0 7.5 22H19v-5"/>'),
   spunta: ic('<path d="m5 12.5 4.5 4.5L19 7.5"/>', 2.2),
   chiudi: ic('<path d="M6 6l12 12M18 6 6 18"/>'),
 };
-const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`;
+const pre = en ? '/en' : '';
+const href = (slug: string, sezione: string) => `${sezione === 'domande' && linguaDomande === 'it' ? '' : pre}/${materia}/${slug}/${sezione}`;
 ---
-<div class="pm" data-programma-materia={materia}>
+<div class:list={['pm', { 'pm-en': en }]} data-programma-materia={materia} data-lingua={lingua}>
+  {/* Versione E (16/11/2026, scelta di Carmine): l'anteprima gratuita è l'azione principale e raccoglie anche
+      «Sblocca tutto» e «Copre il tuo esame?». Chi ha la materia vede al suo posto «Accesso completo attivo». */}
+  {prezzo && (
+    <div class="pm-acc" data-materia={materia}>
+      <section class="pm-ap stato-bloccata">
+        <span class="pm-ap-ic" set:html={I.occhio} />
+        <h2>{L.apTitolo}</h2>
+        <p>{L.apTesto}</p>
+        <div class="pm-ap-az">
+          <a class="pm-ap-btn" href={anteprima}>{L.apInizia}<span set:html={I.freccia} /></a>
+          <span class="pm-ap-sec">
+            <a class="pm-sblocca" href={sblocca} data-pm-apri><span set:html={I.lucchetto} /><span class="pm-sblocca-t">{L.sblocca} · {prezzo} €</span></a>
+            {compatibilita && <a class="pm-ap-compat" href={compatibilita}><span set:html={I.foglio} /><span class="pm-lungo">{L.copre}</span><span class="pm-corto">{en ? 'Covers your exam?' : 'Copre l’esame?'}</span></a>}
+          </span>
+        </div>
+      </section>
+      <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{L.attivo}</span>
+    </div>
+  )}
+
   <section class="pm-sg">
     <span class="pm-sg-ic" set:html={I.mirino} />
-    <h2>Studio guidato</h2>
-    <button type="button" class="pm-info" aria-expanded="false" aria-controls="pm-sg-info" aria-label="Come funziona lo Studio guidato" title="Come funziona" data-pm-info set:html={I.info}></button>
-    <p>Il livello delle domande si adatta alle tue risposte.</p>
+    <h2>{L.sg}</h2>
+    <button type="button" class="pm-info" aria-expanded="false" aria-controls="pm-sg-info" aria-label={L.sgInfo} title={L.sgInfoBreve} data-pm-info set:html={I.info}></button>
+    <p>{L.sgFrase}</p>
     {studioGuidato
-      ? <a class="pm-btn" href={`/studio-guidato/${materia}`}>Inizia il test<span set:html={I.freccia} /></a>
-      : <span class="pm-btn pm-btn-off">In preparazione</span>}
+      ? <a class="pm-btn" href={`/studio-guidato/${materia}`}>{L.sgInizia}<span set:html={I.freccia} /></a>
+      : <span class="pm-btn pm-btn-off">{L.sgPrep}</span>}
     <ol class="pm-sg2" id="pm-sg-info" hidden>
-      <li><span set:html={I.matita} /><span class="pm-lungo">Rispondi alle domande</span><span class="pm-corto">Domande</span></li>
+      <li><span set:html={I.matita} /><span class="pm-lungo">{L.passi[0][0]}</span><span class="pm-corto">{L.passi[0][1]}</span></li>
       <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
-      <li><span set:html={I.lente} /><span class="pm-lungo">Trovi le tue lacune e la loro causa</span><span class="pm-corto">Lacune</span></li>
+      <li><span set:html={I.lente} /><span class="pm-lungo">{L.passi[1][0]}</span><span class="pm-corto">{L.passi[1][1]}</span></li>
       <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
-      <li><span set:html={I.percorso} /><span class="pm-lungo">Segui il percorso</span><span class="pm-corto">Percorso</span></li>
+      <li><span set:html={I.percorso} /><span class="pm-lungo">{L.passi[2][0]}</span><span class="pm-corto">{L.passi[2][1]}</span></li>
     </ol>
   </section>
 
-  <div class="pm-az" data-materia={prezzo ? materia : undefined}>
-    <div class="pm-link">
-      {prezzo && <a class="stato-bloccata" href={anteprima}><span set:html={I.occhio} />Prova gratis</a>}
-      {prezzo && compatibilita && <a class="stato-bloccata" href={compatibilita}><span set:html={I.foglio} /><span class="pm-lungo">Copre il tuo esame?</span><span class="pm-corto">Copre l’esame?</span></a>}
-      {prezzo && <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accesso completo attivo</span>}
-    </div>
-    {prezzo && <a class="pm-sblocca stato-bloccata" href={sblocca} data-pm-apri><span set:html={I.lucchetto} /><span class="pm-sblocca-t">Sblocca tutto · {prezzo} €</span></a>}
-  </div>
-
   <div class="pm-ph-riga">
-    <h2 class="pm-ph">Programma</h2>
+    <h2 class="pm-ph">{L.programma}</h2>
     <span class="pm-esame" data-pm-esame></span>
   </div>
   <ol class="pm-perc">
@@ -86,11 +128,12 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
         {a.pronto ? (
           <div class="pm-voci">
             <em class="pm-stato" hidden></em>
-            {a.svolti > 0 && <a class="pm-v" href={href(a.slug, 'esercizi-svolti')} data-voce="schede"><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn"><span class="pm-lungo">Esercizi svolti</span><span class="pm-corto">Svolti</span></span><span class="pm-vc">{a.svolti}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
-            {a.dafare > 0 && <a class="pm-v" href={href(a.slug, 'esercizi')} data-voce="esercizi"><span class="pm-vr"><span set:html={I.dafare} /><span class="pm-vn"><span class="pm-lungo">Esercizi da fare</span><span class="pm-corto">Da fare</span></span><span class="pm-vc">{a.dafare}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
-            {a.domande > 0 && <a class="pm-v" href={href(a.slug, 'domande')} data-voce="domande"><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn"><span class="pm-lungo">Domande a tempo</span><span class="pm-corto">Domande</span></span><span class="pm-vc">{a.domande}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            <a class="pm-v" href={href(a.slug, 'teoria')} data-voce="teoria"><span class="pm-vr"><span set:html={I.libro} /><span class="pm-vn">{L.teoria}</span><span class="pm-vc"></span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>
+            {a.svolti > 0 && <a class="pm-v" href={href(a.slug, 'esercizi-svolti')} data-voce="schede"><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn"><span class="pm-lungo">{L.svolti[0]}</span><span class="pm-corto">{L.svolti[1]}</span></span><span class="pm-vc">{a.svolti}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.dafare > 0 && <a class="pm-v" href={href(a.slug, 'esercizi')} data-voce="esercizi"><span class="pm-vr"><span set:html={I.dafare} /><span class="pm-vn"><span class="pm-lungo">{L.dafare[0]}</span><span class="pm-corto">{L.dafare[1]}</span></span><span class="pm-vc">{a.dafare}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.domande > 0 && <a class="pm-v" href={href(a.slug, 'domande')} data-voce="domande"><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn"><span class="pm-lungo">{L.domande[0]}</span><span class="pm-corto">{L.domande[1]}</span></span><span class="pm-vc">{a.domande}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
           </div>
-        ) : <em class="pm-stato pm-stato-prep">In preparazione</em>}
+        ) : <em class="pm-stato pm-stato-prep">{L.prep}</em>}
       </li>
     ))}
     {ripasso && (
@@ -98,30 +141,30 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
         <span class="pm-num pm-num-ic" set:html={I.bersaglio} />
         <div class="pm-cp">
           <h3><a href={ripasso.href}>{ripasso.titolo}<span set:html={I.avanti} /></a></h3>
-          <p>{ripasso.domande} domande di ripasso su tutto il programma.</p>
+          <p>{L.ripassoN(ripasso.domande)}</p>
         </div>
         <div class="pm-voci">
-          <a class="pm-v" href={ripasso.href}><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn">Domande di ripasso</span><span class="pm-vc">{ripasso.domande}</span><span set:html={I.avanti} /></span></a>
+          <a class="pm-v" href={ripasso.href}><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn">{L.ripassoV}</span><span class="pm-vc">{ripasso.domande}</span><span set:html={I.avanti} /></span></a>
           {ripasso.simulazione && <a class="pm-v" href={ripasso.simulazione.href}><span class="pm-vr"><span set:html={I.foglio} /><span class="pm-vn">{ripasso.simulazione.titolo}</span><span set:html={I.avanti} /></span></a>}
-          <a class="pm-v solo-collegati" href={ripasso.oggi} hidden><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn">Il tuo ripasso di oggi</span><span set:html={I.avanti} /></span></a>
+          <a class="pm-v solo-collegati" href={ripasso.oggi} hidden><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn">{L.oggi}</span><span set:html={I.avanti} /></span></a>
         </div>
       </li>
     )}
   </ol>
-  {teoremi && <p class="pm-dopo"><a href={teoremi.href}>Indice di teoremi e definizioni</a><span>{teoremi.teoremi} teoremi e {teoremi.definizioni} definizioni</span></p>}
+  {teoremi && <p class="pm-dopo"><a href={teoremi.href}>{L.indice}</a><span>{L.indiceN(teoremi.teoremi, teoremi.definizioni)}</span></p>}
 
   {prezzo && (
     <dialog class="pm-dlg" aria-labelledby={`pm-dlg-${materia}`}>
       <div class="pm-dlg-testa">
-        <div><span>Accesso completo</span><h2 id={`pm-dlg-${materia}`}>{titolo}</h2></div>
-        <button type="button" class="pm-dlg-x" aria-label="Chiudi" data-pm-chiudi set:html={I.chiudi} />
+        <div><span>{L.accesso}</span><h2 id={`pm-dlg-${materia}`}>{titolo}</h2></div>
+        <button type="button" class="pm-dlg-x" aria-label={L.chiudi} data-pm-chiudi set:html={I.chiudi} />
       </div>
       <ul>{incluso.map((v) => <li><span set:html={I.spunta} />{v}</li>)}</ul>
-      <p class="pm-dlg-tot"><span>Totale</span><b>{prezzo} €</b></p>
-      <a class="pm-oro pm-oro-largo" href={sblocca}><span set:html={I.lucchetto} />Vai al pagamento</a>
+      <p class="pm-dlg-tot"><span>{L.totale}</span><b>{prezzo} €</b></p>
+      <a class="pm-oro pm-oro-largo" href={sblocca}><span set:html={I.lucchetto} />{L.paga}</a>
       <div class="pm-dlg-link">
-        {compatibilita && <a href={compatibilita}><span set:html={I.foglio} /><span>Vuoi controllare la compatibilità prima dell'acquisto?</span><span set:html={I.avanti} /></a>}
-        <a href={anteprima}><span set:html={I.occhio} /><span>Prova prima l'anteprima gratuita</span><span set:html={I.avanti} /></a>
+        {compatibilita && <a href={compatibilita}><span set:html={I.foglio} /><span>{L.compatDlg}</span><span set:html={I.avanti} /></a>}
+        <a href={anteprima}><span set:html={I.occhio} /><span>{L.provaDlg}</span><span set:html={I.avanti} /></a>
       </div>
     </dialog>
   )}
@@ -155,6 +198,26 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   .pm-sg2 li { display: inline-flex; align-items: center; gap: .4rem; }
   .pm-sg2 li svg { color: var(--pm-icona); font-size: .95rem; }
   .pm-sg2 .pm-fr svg { color: #a9b7b4; font-size: .8rem; }
+
+  /* Versione E (16/11/2026): riquadro dell'anteprima gratuita in cima, con «Sblocca tutto» e «Copre il tuo esame?» come link secondari. */
+  .pm-acc { margin: 0 0 .6rem; }
+  .pm-ap { grid-template-columns: auto minmax(0, 1fr); gap: .2rem .85rem; padding: 1.1rem 1.25rem 1.15rem; background: var(--pm-velo); border: 1px solid var(--pm-filo); border-radius: 14px; }
+  .pm-acc .pm-ap.stato-bloccata { display: grid; }
+  .pm-ap-ic { display: inline-flex; grid-row: 1 / span 2; padding-top: .1rem; color: #41706b; font-size: 1.6rem; }
+  .pm-ap-ic svg { stroke-width: 1.4; }
+  .pm-ap h2 { font: 700 1.3rem/1.25 var(--titoli); margin: 0; }
+  .pm-ap p { margin: .15rem 0 0; font-size: .95rem; line-height: 1.4; color: var(--inchiostro-2); }
+  .pm-ap-az { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.2rem; margin-top: .75rem; }
+  .pm-ap-btn { display: inline-flex; align-items: center; gap: .45rem; height: 2.9rem; padding: 0 1.3rem; border-radius: 999px; background: var(--azione); color: #fff; font-size: .98rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .pm-ap-btn:hover { color: #fff; filter: brightness(1.1); }
+  .pm-ap-btn svg { font-size: .9rem; stroke-width: 1.8; }
+  .pm-ap-sec { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.1rem; font-size: .9rem; }
+  .pm-ap-sec .pm-sblocca { display: inline-flex; }
+  .pm-ap-compat { display: inline-flex; align-items: center; gap: .4rem; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; white-space: nowrap; }
+  .pm-ap-compat svg { color: var(--pm-icona); font-size: 1.05rem; stroke-width: 1.4; }
+  .pm-ap-compat:hover { color: var(--azione); text-decoration: underline; text-underline-offset: 3px; }
+  .pm-acc .stato-sbloccata { display: none; align-items: center; gap: .4rem; padding: .25rem .75rem .25rem .3rem; border-radius: 999px; background: color-mix(in srgb, var(--verde) 12%, transparent); color: var(--verde); font-size: .88rem; font-weight: 600; }
+  .pm-acc .stato-sbloccata svg { width: 1.1rem; height: 1.1rem; }
 
   .pm-az { display: flex; align-items: center; justify-content: space-between; gap: .3rem .9rem; margin: .5rem 0 0; font-size: .9rem; }
   .pm-link { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.1rem; flex: 1 1 0; min-width: 0; }
@@ -283,6 +346,13 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
     .pm-fine .pm-voci { grid-template-columns: 1fr; gap: .5rem; }
     .pm-fine .pm-vr { font-size: .84rem; }
     .pm-dlg { padding: 1.3rem 1.2rem 1rem; }
+    .pm-ap { padding: .9rem .9rem 1rem; }
+    .pm-ap h2 { font-size: 1.15rem; }
+    .pm-ap p { font-size: .88rem; }
+    .pm-ap-az { grid-column: 1 / -1; gap: .2rem 1rem; }
+    .pm-ap-btn { width: 100%; justify-content: center; }
+    .pm-ap-sec { font-size: .84rem; }
+    .pm-en .pm-esame .esame-apri::after { content: 'Exam date'; }
   }
   @media (prefers-reduced-motion: reduce) { .pm-oro { animation: none; } .pm-barra i { transition: none; } }
 </style>
@@ -290,6 +360,7 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
 <script>
   for (const box of document.querySelectorAll<HTMLElement>('[data-programma-materia]')) {
     const materia = box.dataset.programmaMateria!;
+    const en = box.dataset.lingua === 'en';
     // «Sblocca tutto» apre il riquadro dell'accesso completo; senza <dialog> il link porta alla pagina Sblocca.
     const dlg = box.querySelector<HTMLDialogElement>('.pm-dlg');
     if (dlg && typeof dlg.showModal === 'function') {
@@ -302,7 +373,7 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
     const passi = box.querySelector<HTMLElement>('.pm-sg2');
     info?.addEventListener('click', () => { if (!passi) return; passi.hidden = !passi.hidden; info.setAttribute('aria-expanded', String(!passi.hidden)); });
     // La riga della data d'esame (Materia.astro) sta dopo la vista classica: nella pagina nuova va
-    // nella riga dell'anteprima, accanto ai link.
+    // accanto al titolo «Programma».
     const spostaEsame = () => {
       const esame = document.querySelector<HTMLElement>('.esame-materia');
       if (!box.hidden && esame && !box.contains(esame)) box.querySelector('[data-pm-esame]')!.append(esame);
@@ -319,6 +390,12 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
           const p = d.argomenti[li.dataset.arg!] || { teoria: false, schede: 0, esercizi: 0, domande: 0 };
           const tot = { schede: Number(li.dataset.schede), esercizi: Number(li.dataset.verificabili), domande: Number(li.dataset.domande) };
           const quote = [p.teoria ? 1 : 0];
+          // Teoria: la barra è piena quando il capitolo è stato aperto per intero.
+          const teoria = li.querySelector<HTMLElement>('[data-voce="teoria"]');
+          if (teoria) {
+            teoria.querySelector<HTMLElement>('.pm-barra i')!.style.width = p.teoria ? '100%' : '0%';
+            teoria.querySelector<HTMLElement>('.pm-vc')!.textContent = p.teoria ? (en ? 'Read' : 'Letta') : (en ? 'Not read yet' : 'Da leggere');
+          }
           for (const voce of ['schede', 'esercizi', 'domande'] as const) {
             if (!tot[voce]) continue;
             const fatti = Math.min(p[voce] || 0, tot[voce]);
@@ -328,12 +405,12 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
             if (!el) continue;
             el.querySelector<HTMLElement>('.pm-barra i')!.style.width = `${Math.round(quota * 100)}%`;
             // Negli esercizi da fare conta la verifica automatica, presente solo in una parte delle tracce: il numero resta il totale.
-            if (voce === 'esercizi') el.title = `${fatti} verificati su ${tot[voce]} con la verifica della risposta`;
-            else el.querySelector<HTMLElement>('.pm-vc')!.textContent = `${fatti} su ${tot[voce]}`;
+            if (voce === 'esercizi') el.title = en ? `${fatti} of ${tot[voce]} checked with answer verification` : `${fatti} verificati su ${tot[voce]} con la verifica della risposta`;
+            else el.querySelector<HTMLElement>('.pm-vc')!.textContent = en ? `${fatti} of ${tot[voce]}` : `${fatti} su ${tot[voce]}`;
           }
           const media = Math.round((quote.reduce((a, b) => a + b, 0) / quote.length) * 100);
           const stato = li.querySelector<HTMLElement>('.pm-stato')!;
-          stato.textContent = media >= 100 ? 'Completato' : media > 0 ? `${media}%` : 'Da iniziare';
+          stato.textContent = media >= 100 ? (en ? 'Completed' : 'Completato') : media > 0 ? `${media}%` : (en ? 'Not started' : 'Da iniziare');
           stato.classList.toggle('pm-zero', media === 0);
           stato.hidden = false;
         });
