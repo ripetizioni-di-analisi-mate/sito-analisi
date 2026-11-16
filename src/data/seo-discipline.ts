@@ -258,6 +258,14 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
     esempi: ['aritmetica-e-algebra', 'geometria', 'logica'],
     collegate: ['precorso', 'logica-concorsi', 'tolc-s'],
   },
+  tiec: {
+    titolo: 'TIEC Cattolica Economia | Teoria, quiz svolti e simulazione',
+    descrizione: 'Preparazione al TIEC dell’Università Cattolica: matematica, logica, comprensione del testo e inglese. Quiz a 4 risposte e simulazione da 48 quesiti.',
+    preparazione: 'Il percorso segue il programma di matematica pubblicato dalla Cattolica per il TIEC: insiemi e percentuali, potenze, esponenziali e logaritmi, calcolo letterale, equazioni e disequazioni, geometria analitica e cenni di trigonometria. Seguono logica, comprensione del testo e inglese, le altre tre aree del test.',
+    metodo: 'Ogni capitolo alterna teoria essenziale, quiz svolti con le opzioni sbagliate commentate e quiz da fare. La simulazione riproduce la prova completa, 48 quesiti in 60 minuti, e confronta le risposte esatte di ogni area con la soglia minima, compresa la VPI di matematica.',
+    esempi: ['equazioni-disequazioni-e-sistemi', 'logica', 'comprensione-del-testo'],
+    collegate: ['precorso', 'logica-concorsi', 'matematica-generale'],
+  },
   'tolc-s': {
     titolo: 'TOLC-S Scienze | Teoria, quiz svolti e simulazioni',
     descrizione: 'Preparazione al TOLC-S con matematica, ragionamento, comprensione del testo e scienze. Teoria, quiz svolti e simulazioni con correzione.',

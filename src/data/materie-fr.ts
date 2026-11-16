@@ -46,6 +46,7 @@ export const MATERIE_FR: Record<string, [string, string]> = {
   'matematica-semestre-filtro': ['Mathématiques pour le semestre de sélection', 'Proportions, unités, formules, graphiques, logarithmes, trigonométrie et vecteurs pour préparer la physique et la chimie.'],
   'tolc-i': ['TOLC-I pour les études d’ingénieur', 'Mathématiques, logique, sciences, compréhension de texte et anglais pour le test d’admission italien TOLC-I.'],
   'tolc-e': ['TOLC-E pour les études d’économie', 'Mathématiques, logique et compréhension de texte pour le test italien TOLC-E du CISIA.'],
+  'tiec': ['TIEC de l’Università Cattolica (économie)', 'Mathématiques, logique, compréhension de texte et anglais pour le test d’admission TIEC de l’Università Cattolica.'],
   'tolc-s': ['TOLC-S pour les études scientifiques', 'Mathématiques, raisonnement logique, compréhension de texte, sciences et anglais pour le test italien TOLC-S.'],
   'tol-politecnico': ['TOL du Politecnico di Milano', 'Mathématiques, logique et physique pour le test d’admission du Politecnico di Milano.'],
   'ofa-matematica': ['Mathématiques pour les OFA', 'Remise à niveau pour satisfaire aux obligations de formation complémentaires (OFA) que les universités italiennes peuvent imposer après un test d’admission.'],
@@ -55,6 +56,14 @@ export const MATERIE_FR: Record<string, [string, string]> = {
 };
 
 export const ARGOMENTI_FR: Record<string, string> = {
+  'tiec/insiemi-numeri-e-percentuali': 'Ensembles, nombres et pourcentages',
+  'tiec/potenze-esponenziali-e-logaritmi': 'Puissances, exponentielles et logarithmes',
+  'tiec/calcolo-letterale-e-frazioni-algebriche': 'Calcul littéral et fractions rationnelles',
+  'tiec/equazioni-disequazioni-e-sistemi': 'Équations, inéquations et systèmes',
+  'tiec/geometria-analitica-e-trigonometria': 'Géométrie analytique et notions de trigonométrie',
+  'tiec/logica': 'Logique',
+  'tiec/comprensione-del-testo': 'Compréhension de texte',
+  'tiec/inglese': 'Anglais',
   'numeri-e-operazioni': 'Nombres naturels, entiers relatifs et rationnels',
   'potenze-proporzioni-percentuali': 'Puissances, proportions et pourcentages',
   'insiemi-e-logica': 'Ensembles et logique élémentaire',

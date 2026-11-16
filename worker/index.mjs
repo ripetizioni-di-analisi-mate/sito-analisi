@@ -1386,7 +1386,7 @@ export default {
       });
       return json({ ...base, ...r });
     }
-    if (p.startsWith('/api/tolc-i/') || p.startsWith('/api/tolc-s/')) return gestisciTolcI(req, env, p, { json, utenteCollegato, domandeDi, firmaToken, leggiToken });
+    if (p.startsWith('/api/tolc-i/') || p.startsWith('/api/tolc-s/') || p.startsWith('/api/tiec/')) return gestisciTolcI(req, env, p, { json, utenteCollegato, domandeDi, firmaToken, leggiToken });
     if (p === '/api/simulazione-quiz' && POST) {
       // Simulazione della prova preselettiva (materie dei concorsi): domande di più materie e argomenti,
       // pescate a turno. Il browser riceve testi e risposte; la posizione delle corrette arriva solo alla consegna.

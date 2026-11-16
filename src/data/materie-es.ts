@@ -46,6 +46,7 @@ export const MATERIE_ES: Record<string, [string, string]> = {
   'matematica-semestre-filtro': ['Matemáticas para el semestre de selección', 'Proporciones, unidades, fórmulas, gráficos, logaritmos, trigonometría y vectores para preparar Física y Química.'],
   'tolc-i': ['TOLC-I para Ingeniería', 'Matemáticas, lógica, ciencias, comprensión lectora e inglés para la prueba italiana TOLC-I.'],
   'tolc-e': ['TOLC-E para Economía', 'Matemáticas, lógica y comprensión lectora para la prueba italiana TOLC-E del CISIA.'],
+  'tiec': ['TIEC de la Università Cattolica (Economía)', 'Matemáticas, lógica, comprensión lectora e inglés para la prueba de admisión TIEC de la Università Cattolica.'],
   'tolc-s': ['TOLC-S para titulaciones científicas', 'Matemáticas, razonamiento lógico, comprensión lectora, ciencias e inglés para la prueba italiana TOLC-S.'],
   'tol-politecnico': ['TOL del Politecnico di Milano', 'Matemáticas, lógica y física para la prueba de admisión del Politecnico di Milano.'],
   'ofa-matematica': ['Matemáticas para los requisitos OFA', 'Fundamentos de matemáticas para cumplir los requisitos formativos adicionales (OFA) que pueden establecer las universidades italianas tras la prueba de acceso.'],
@@ -55,6 +56,14 @@ export const MATERIE_ES: Record<string, [string, string]> = {
 };
 
 export const ARGOMENTI_ES: Record<string, string> = {
+  'tiec/insiemi-numeri-e-percentuali': 'Conjuntos, números y porcentajes',
+  'tiec/potenze-esponenziali-e-logaritmi': 'Potencias, exponenciales y logaritmos',
+  'tiec/calcolo-letterale-e-frazioni-algebriche': 'Cálculo literal y fracciones algebraicas',
+  'tiec/equazioni-disequazioni-e-sistemi': 'Ecuaciones, inecuaciones y sistemas',
+  'tiec/geometria-analitica-e-trigonometria': 'Geometría analítica y nociones de trigonometría',
+  'tiec/logica': 'Lógica',
+  'tiec/comprensione-del-testo': 'Comprensión lectora',
+  'tiec/inglese': 'Inglés',
   'numeri-e-operazioni': 'Números naturales, enteros y racionales',
   'potenze-proporzioni-percentuali': 'Potencias, proporciones y porcentajes',
   'insiemi-e-logica': 'Conjuntos y lógica elemental',
