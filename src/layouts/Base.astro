@@ -715,6 +715,17 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           try { navigator.sendBeacon('/api/evento', new Blob([JSON.stringify({ e: 'sg-clic', m })], { type: 'application/json' })); } catch (_) {}
         }, true);
       }
+      // Anteprima gratuita: clic su «Inizia con l'anteprima» / «Prova prima l'anteprima gratuita» (stesso criterio dello Studio guidato).
+      if (navigator.sendBeacon) {
+        document.addEventListener('click', (ev) => {
+          const a = ev.target.closest && ev.target.closest('a[data-ap]');
+          const m = a && a.getAttribute('data-ap');
+          if (!m) return;
+          const chiave = 'ap-clic-' + new Date().toISOString().slice(0, 10) + '-' + m;
+          try { if (localStorage.getItem(chiave)) return; localStorage.setItem(chiave, '1'); } catch (_) {}
+          try { navigator.sendBeacon('/api/evento', new Blob([JSON.stringify({ e: 'ap-clic', m })], { type: 'application/json' })); } catch (_) {}
+        }, true);
+      }
       const pezzi = location.pathname.replace(/^\/en(?=\/)/, '').split('/');
       const materia = pezzi[1] === 'videocorsi' ? (pezzi[2] ? 'video-' + pezzi[2].replace(/\.html$/, '') : '') : pezzi[1];
       if (!materia || !navigator.sendBeacon) return;

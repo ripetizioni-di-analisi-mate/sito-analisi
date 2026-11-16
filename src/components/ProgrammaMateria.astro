@@ -85,7 +85,7 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
         <h2>{L.apTitolo}</h2>
         <p>{L.apTesto}</p>
         <div class="pm-ap-az">
-          <a class="pm-ap-btn" href={anteprima}>{L.apInizia}<span set:html={I.freccia} /></a>
+          <a class="pm-ap-btn" href={anteprima} data-ap={materia}>{L.apInizia}<span set:html={I.freccia} /></a>
           <span class="pm-ap-sec">
             <a class="pm-sblocca" href={sblocca} data-pm-apri><span set:html={I.lucchetto} /><span class="pm-sblocca-t">{L.sblocca} · {prezzo} €</span></a>
             {compatibilita && <a class="pm-ap-compat" href={compatibilita}><span set:html={I.foglio} /><span class="pm-lungo">{L.copre}</span><span class="pm-corto">{en ? 'Covers your exam?' : 'Copre l’esame?'}</span></a>}
@@ -164,7 +164,7 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
       <a class="pm-oro pm-oro-largo" href={sblocca}><span set:html={I.lucchetto} />{L.paga}</a>
       <div class="pm-dlg-link">
         {compatibilita && <a href={compatibilita}><span set:html={I.foglio} /><span>{L.compatDlg}</span><span set:html={I.avanti} /></a>}
-        <a href={anteprima}><span set:html={I.occhio} /><span>{L.provaDlg}</span><span set:html={I.avanti} /></a>
+        <a href={anteprima} data-ap={materia}><span set:html={I.occhio} /><span>{L.provaDlg}</span><span set:html={I.avanti} /></a>
       </div>
     </dialog>
   )}

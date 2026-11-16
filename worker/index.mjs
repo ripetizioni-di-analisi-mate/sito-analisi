@@ -291,7 +291,7 @@ export class Archivio {
         this.sql.exec(`INSERT INTO eventi (giorno, evento, materia, n) VALUES (?, ?, ?, 1)
                        ON CONFLICT(giorno, evento, materia) DO UPDATE SET n = n + 1`, c.giorno, c.evento, c.materia);
         // Studio guidato: il dato deve comparire subito in dashboard, senza aspettare i 3 minuti della copia dei dati
-        if (String(c.evento).startsWith('sg-')) this.copiaDati = null;
+        if (String(c.evento).startsWith('sg-') || c.evento === 'ap-clic') this.copiaDati = null;
         return Response.json({ ok: true });
 
       case '/utente': // dati per il login
@@ -530,19 +530,19 @@ export class Archivio {
         const percorsoAcquisto = (giorni) => {
           const da = `date('now', '-${giorni - 1} days')`;
           const pagine = this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= ${da} GROUP BY sezione`);
-          const ev = this.righe(`SELECT evento, materia, SUM(n) AS n FROM eventi WHERE giorno >= ${da} AND evento IN ('fine-anteprima', 'tasto') GROUP BY evento, materia`);
+          const ev = this.righe(`SELECT evento, materia, SUM(n) AS n FROM eventi WHERE giorno >= ${da} AND evento IN ('fine-anteprima', 'tasto', 'ap-clic') GROUP BY evento, materia`);
           const pag = this.righe(`SELECT materia, COUNT(*) AS n FROM acquisti WHERE substr(creato, 1, 10) >= ${da} GROUP BY materia`);
           const r = {};
-          const voce = (m) => (r[m] ??= { materia: m, pagine: 0, fine: 0, sblocca: 0, tasto: 0, pagati: 0 });
+          const voce = (m) => (r[m] ??= { materia: m, pagine: 0, anteprima: 0, fine: 0, sblocca: 0, tasto: 0, pagati: 0 });
           for (const x of pagine) {
             const [m, a] = x.sezione.split('/');
             if (a === 'sblocca') voce(m).sblocca += x.n;
             else if (m === 'videocorsi' && a) voce('video-' + a).pagine += x.n;
             else voce(m).pagine += x.n;
           }
-          for (const x of ev) { const v = voce(x.materia); if (x.evento === 'fine-anteprima') v.fine += x.n; if (x.evento === 'tasto') v.tasto += x.n; }
+          for (const x of ev) { const v = voce(x.materia); if (x.evento === 'fine-anteprima') v.fine += x.n; if (x.evento === 'tasto') v.tasto += x.n; if (x.evento === 'ap-clic') v.anteprima += x.n; }
           for (const x of pag) voce(x.materia).pagati += x.n;
-          return Object.values(r).filter((v) => v.fine || v.sblocca || v.tasto || v.pagati);
+          return Object.values(r).filter((v) => v.anteprima || v.fine || v.sblocca || v.tasto || v.pagati);
         };
         const campagne = (giorni) => this.righe(`SELECT materia AS campagna, SUM(n) AS n FROM eventi WHERE evento = 'campagna'
                                                  AND giorno >= date('now', '-${giorni - 1} days') GROUP BY materia ORDER BY n DESC LIMIT 30`);
@@ -554,7 +554,7 @@ export class Archivio {
           sezioni: { 7: sezioni(7), 30: sezioni(30), 90: sezioni(90) },
           percorsoAcquisto: { 7: percorsoAcquisto(7), 30: percorsoAcquisto(30), 90: percorsoAcquisto(90) },
           campagne: { 7: campagne(7), 30: campagne(30), 90: campagne(90) },
-          studioGuidato: this.righe(`SELECT giorno, evento, materia, n FROM eventi WHERE evento LIKE 'sg-%' AND giorno >= date('now', '-179 days') ORDER BY giorno`),
+          studioGuidato: this.righe(`SELECT giorno, evento, materia, n FROM eventi WHERE (evento LIKE 'sg-%' OR evento = 'ap-clic') AND giorno >= date('now', '-179 days') ORDER BY giorno`),
           ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`)
             .map((r) => ({ ...r, fonte: fonteStorica(r.fonte, r.giorno) })),
           provenienze: { 7: riepilogoFonti(this, 7), 30: riepilogoFonti(this, 30), 90: riepilogoFonti(this, 90) },
@@ -1112,7 +1112,7 @@ export default {
       const ua = req.headers.get('user-agent') || '';
       const { e, m } = await req.json().catch(() => ({}));
       const materiaValida = typeof m === 'string' && (e === 'sg-clic' ? materieGuidate().includes(m) : (Object.hasOwn(PREZZI, m) || VIDEOCORSI.some((v) => 'video-' + v.slug === m)));
-      if (ua && !ROBOT.test(ua) && (e === 'fine-anteprima' || e === 'tasto' || e === 'sg-clic') && materiaValida) {
+      if (ua && !ROBOT.test(ua) && (e === 'fine-anteprima' || e === 'tasto' || e === 'sg-clic' || e === 'ap-clic') && materiaValida) {
         ctx.waitUntil(aDO(env, '/evento', { giorno: new Date().toISOString().slice(0, 10), evento: e, materia: m }).catch(() => {}));
       }
       return new Response(null, { status: 204 });
