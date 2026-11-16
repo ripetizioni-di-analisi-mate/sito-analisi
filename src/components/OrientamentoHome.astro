@@ -31,10 +31,6 @@ const t = en ? {
   metodoTitolo: 'From an answer to an activity',
   metodoDomande: 'The test starts with three questions for each of the six skills shown before you begin. If answers within a skill give mixed indications, it adds a follow-up question. You can check each correction against the solutions.',
   metodoPiano: 'Your answers distinguish new topics, steps to revisit and questions you have solved. The plan gives priority to foundations to revisit or learn, follows the subject’s prerequisites and links explanations, examples and exercises. A positive result applies only to the questions you answered.',
-  fontiTitolo: 'Services consulted for the approach',
-  fontiPrima: 'The principle of linking corrections to revision was informed by ',
-  fontiLink: 'CISIA’s placement tests (PPS)', fontiDopo: '.',
-  originalita: 'Our questions, text and rules are original. These links let you consult separate services and do not imply affiliation or endorsement. Our test does not reproduce their tests.',
   termini: 'Terms of service', informativa: 'Answer privacy information',
 } : {
   pagina: 'Orientamento', etichetta: 'Orientamento allo studio', anteprima: 'Anteprima GM',
@@ -58,10 +54,6 @@ const t = en ? {
   metodoTitolo: 'Da una risposta a un’attività',
   metodoDomande: 'Il test propone inizialmente tre quesiti per ciascuna delle sei competenze indicate prima di cominciare. Se le risposte sulla stessa competenza danno indicazioni diverse, aggiunge un quesito di conferma. Le soluzioni permettono di controllare ogni correzione.',
   metodoPiano: 'Le risposte distinguono argomenti nuovi, passaggi da riprendere e quesiti risolti. Il piano dà precedenza alle basi da riprendere o studiare, segue l’ordine dei prerequisiti della disciplina e collega teoria, esempi ed esercizi. Un risultato positivo riguarda soltanto i quesiti svolti.',
-  fontiTitolo: 'Servizi consultati per l’impostazione',
-  fontiPrima: 'Dalle ', fontiLink: 'PPS di CISIA',
-  fontiDopo: ' abbiamo ripreso il principio di collegare correzione e ripasso.',
-  originalita: 'Domande, testi e regole di questo sito sono nostri. I collegamenti permettono di consultare servizi distinti: non implicano affiliazioni o approvazioni. Il nostro test non riproduce le loro prove.',
   termini: 'Condizioni del servizio', informativa: 'Informativa sulle risposte',
 };
 const legale = (path: string) => `${en ? '/en' : ''}${path}#orientamento`;
@@ -122,9 +114,6 @@ const legale = (path: string) => `${en ? '/en' : ''}${path}#orientamento`;
         <h2>{t.metodoTitolo}</h2>
         <p>{t.metodoDomande}</p>
         <p>{t.metodoPiano}</p>
-        <h2>{t.fontiTitolo}</h2>
-        <p>{t.fontiPrima}<a href="https://www.orientazione.it/per-chi-studia/pps-prove-di-posizionamento" target="_blank" rel="noopener noreferrer">{t.fontiLink}</a>{t.fontiDopo}</p>
-        <p>{t.originalita}</p>
         <p><a href={legale('/termini')}>{t.termini}</a> · <a href={legale('/privacy')}>{t.informativa}</a>.</p>
       </div>
     </details>
