@@ -46,6 +46,7 @@ export const MATERIE_DE: Record<string, [string, string]> = {
   'matematica-semestre-filtro': ['Mathematische Grundlagen für das Auswahlsemester', 'Vorbereitung auf Physik und Chemie mit Proportionen, Einheiten, Formeln, Diagrammen, Logarithmen, Trigonometrie und Vektoren.'],
   'tolc-i': ['TOLC-I für Ingenieurwissenschaften', 'Vorbereitung auf den italienischen TOLC-I mit Mathematik, Logik, Naturwissenschaften, Textverständnis und Englisch.'],
   'tolc-e': ['TOLC-E für Wirtschaftswissenschaften', 'Mathematik, Logik und Textverständnis für den italienischen TOLC-E des CISIA.'],
+  'tiec': ['TIEC der Università Cattolica (Wirtschaft)', 'Mathematik, Logik, Textverständnis und Englisch für den Zulassungstest TIEC der Università Cattolica.'],
   'tolc-s': ['TOLC-S für naturwissenschaftliche Studiengänge', 'Vorbereitung auf den italienischen TOLC-S mit Mathematik, logischem Denken, Textverständnis, Naturwissenschaften und Englisch.'],
   'tol-politecnico': ['TOL des Politecnico di Milano', 'Mathematik, Logik und Physik für den Aufnahmetest des Politecnico di Milano.'],
   'ofa-matematica': ['Mathematik für die OFA-Auflagen', 'Mathematische Grundlagen zum Erfüllen der zusätzlichen Studienauflagen (OFA), die italienische Hochschulen nach dem Eingangstest festlegen können.'],
@@ -55,6 +56,14 @@ export const MATERIE_DE: Record<string, [string, string]> = {
 };
 
 export const ARGOMENTI_DE: Record<string, string> = {
+  'tiec/insiemi-numeri-e-percentuali': 'Mengen, Zahlen und Prozente',
+  'tiec/potenze-esponenziali-e-logaritmi': 'Potenzen, Exponentialfunktionen und Logarithmen',
+  'tiec/calcolo-letterale-e-frazioni-algebriche': 'Termumformungen und Bruchterme',
+  'tiec/equazioni-disequazioni-e-sistemi': 'Gleichungen, Ungleichungen und Systeme',
+  'tiec/geometria-analitica-e-trigonometria': 'Analytische Geometrie und Grundlagen der Trigonometrie',
+  'tiec/logica': 'Logik',
+  'tiec/comprensione-del-testo': 'Textverständnis',
+  'tiec/inglese': 'Englisch',
   'numeri-e-operazioni': 'Natürliche, ganze und rationale Zahlen',
   'potenze-proporzioni-percentuali': 'Potenzen, Verhältnisse und Prozentrechnung',
   'insiemi-e-logica': 'Mengen und Grundlagen der Logik',

@@ -1,0 +1,181 @@
+---
+import Base from '../layouts/Base.astro';
+import { TOLC } from '../data/tolc.mjs';
+import { materia as materiaIt } from '../data/materie';
+// Simulazione del TIEC (Università Cattolica, Economia): 48 quesiti in 60 minuti con un solo tempo per tutta la prova.
+// Si passa liberamente da un'area all'altra; alla fine le risposte esatte di ogni area si confrontano con le soglie della Cattolica.
+const materia = 'tiec';
+const conf = TOLC[materia];
+const prezzo = materiaIt(materia).prezzo;
+---
+<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Simulazione del TIEC dell'Università Cattolica: ${conf.quesiti} quesiti a quattro risposte in ${conf.minuti} minuti, 12 per area, con le soglie minime di ogni area e le spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
+  <div class="tiec-simulazione" data-materia={materia} data-minuti={conf.minuti}>
+    <p class="sopratitolo">Preparati a {conf.area}</p>
+    <h1>Simulazione TIEC</h1>
+    <p class="sommario">Una prova completa come il test della Cattolica. Alla fine trovi le risposte esatte di ogni area, il confronto con le soglie minime e le spiegazioni.</p>
+    <section id="tiec-inizio">
+      <div class="tiec-specifiche"><strong>{conf.quesiti} quesiti · {conf.minuti} minuti · 4 risposte per quesito</strong><span>Un solo tempo per tutta la prova: puoi passare da un'area all'altra e tornare indietro fino alla consegna.</span></div>
+      <table><thead><tr><th>Area</th><th>Quesiti</th><th>Soglia minima</th></tr></thead><tbody>{conf.sezioni.map((s) => <tr><td>{s.titolo}</td><td>{s.numero}</td><td>{s.soglia} esatte{s.vpi ? ` · VPI ${s.vpi}` : ''}</td></tr>)}</tbody></table>
+      <p class="tiec-dettaglio">La Matematica vale anche come VPI (verifica della preparazione iniziale): con meno di {conf.sezioni.find((s) => s.vpi)?.vpi} risposte esatte la Cattolica assegna un OFA. Il punteggio di ammissione comprende anche i voti scolastici e le certificazioni: la simulazione misura soltanto la parte del test.</p>
+      <form id="tiec-form"><button class="bottone-primario" type="submit">Inizia la simulazione</button></form>
+      <p class="tiec-dettaglio">La simulazione completa è inclusa nell’<a href={`/${materia}/sblocca`}>accesso TIEC · {prezzo} €</a>. Puoi iniziare gratuitamente dai <a href={`/${materia}/prove-d-esame/domande`}>dieci quiz dimostrativi</a>.</p>
+      <p class="tiec-dettaglio">Quesiti originali di allenamento, non quesiti ufficiali della Cattolica. <a href={conf.fonte} target="_blank" rel="noopener noreferrer">Struttura e soglie pubblicate dalla Cattolica ↗</a></p>
+    </section>
+    <p id="tiec-messaggio" role="status" hidden></p>
+    <section id="tiec-prova" hidden aria-label="Prova in corso">
+      <div class="tiec-barra"><nav id="tiec-aree" aria-label="Aree della prova"></nav><div class="tiec-tempo"><small>Tempo rimasto</small><strong id="tiec-clock" role="timer">—</strong></div></div>
+      <p id="tiec-conta"></p>
+      <nav id="tiec-numeri" aria-label="Quesiti dell'area"></nav>
+      <div id="tiec-domanda"></div>
+      <div class="tiec-muovi"><button id="tiec-prev" type="button" class="bottone-secondario">← Precedente</button><button id="tiec-clear" type="button" class="bottone-secondario">Togli risposta</button><button id="tiec-next" type="button" class="bottone-secondario">Successiva →</button></div>
+      <button id="tiec-chiudi" type="button" class="bottone-primario">Consegna la prova</button>
+      <div id="tiec-conferma" role="alert" hidden><p id="tiec-conferma-testo"></p><button id="tiec-si" class="bottone-primario" type="button">Consegna</button> <button id="tiec-no" class="bottone-secondario" type="button">Continua la prova</button></div>
+      <p class="tiec-dettaglio">La sessione si conserva in questo browser. Se chiudi la pagina, il tempo continua a scorrere.</p>
+    </section>
+    <section id="tiec-risultato" hidden aria-label="Risultati della simulazione"><h2>Il tuo risultato</h2><p id="tiec-voto"></p><div class="tiec-tabella"><table><thead><tr><th>Area</th><th>Esatte</th><th>Errate</th><th>Omesse</th><th>Soglia</th></tr></thead><tbody id="tiec-conto"></tbody></table></div><p id="tiec-vpi"></p><p class="tiec-dettaglio">Il risultato serve a scegliere che cosa ripassare. L’ammissione dipende anche da voti scolastici, certificazioni e posti disponibili.</p><div id="tiec-revisione"></div></section>
+    <button id="tiec-riprova" type="button" class="bottone-primario" hidden>Riprova la correzione</button>
+    <p id="tiec-riparti" hidden><button type="button" class="bottone-secondario">Nuova simulazione</button> <a href={`/${materia}`}>Torna al percorso</a></p>
+    <noscript><p>Per avviare la simulazione occorre attivare JavaScript. Puoi leggere <a href={`/${materia}`}>teoria ed esercizi del percorso</a>.</p></noscript>
+  </div>
+</Base>
+<script>
+  type Q = { id: string; testo: string; scelte: string[] };
+  type S = { slug: string; titolo: string; domande: Q[] };
+  type Stato = { token: string; sezioni: S[]; risposte: (number | null)[][]; sezione: number; domanda: number; fine: number; creata: number; conclusa: boolean; esito?: Esito };
+  type Riga = { slug: string; titolo: string; corrette: number; errate: number; omesse: number; massimo: number; esiti: { id: string; corretta: number; spiegazione: string }[] };
+  type Area = { slug: string; corrette: number; soglia: number; superata: boolean; vpi?: number; vpiSuperata?: boolean };
+  type Esito = { sezioni: Riga[]; tiec: { aree: Area[]; idoneo: boolean; corrette: number; massimo: number } };
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(`tiec-${id}`) as T;
+  const radice = document.querySelector<HTMLElement>('.tiec-simulazione')!;
+  const materia = radice.dataset.materia!;
+  const MINUTI = Number(radice.dataset.minuti);
+  const KEY = `${materia}-sessione-v1`;
+  const LETTERE = 'ABCD';
+  let stato: Stato | null = null, timer = 0, invio = false;
+  const salva = () => { try { localStorage.setItem(KEY, JSON.stringify(stato)); } catch { /* La prova funziona anche senza salvataggio locale. */ } };
+  const avvisa = (t: string) => { $('messaggio').textContent = t; $('messaggio').hidden = !t; };
+  const date = (k: number) => stato!.risposte[k].filter((r) => r !== null).length;
+  function mostraDomanda() {
+    if (!stato || stato.conclusa) return;
+    const s = stato.sezioni[stato.sezione], i = stato.domanda, q = s.domande[i];
+    $('conferma').hidden = true;
+    $('aree').replaceChildren(...stato.sezioni.map((sez, k) => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.innerHTML = `${sez.titolo} <small>${date(k)}/${sez.domande.length}</small>`;
+      if (k === stato!.sezione) b.setAttribute('aria-current', 'true');
+      b.addEventListener('click', () => { if (!controllaTempo()) return; stato!.sezione = k; stato!.domanda = 0; salva(); mostraDomanda(); });
+      return b;
+    }));
+    $('conta').textContent = `${s.titolo} · quesito ${i + 1} di ${s.domande.length}`;
+    $('numeri').replaceChildren(...s.domande.map((_, n) => {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = String(n + 1);
+      const data = stato!.risposte[stato!.sezione][n] !== null;
+      b.setAttribute('aria-label', `Quesito ${n + 1}${data ? ', risposta data' : ', senza risposta'}`);
+      if (n === i) b.setAttribute('aria-current', 'true');
+      b.classList.toggle('risposta-data', data);
+      b.addEventListener('click', () => { if (!controllaTempo()) return; stato!.domanda = n; salva(); mostraDomanda(); });
+      return b;
+    }));
+    const box = $('domanda'); box.innerHTML = `<div class="testo-domanda">${q.testo}</div>`;
+    const fs = document.createElement('fieldset'); const legend = document.createElement('legend'); legend.textContent = 'Scegli una risposta'; fs.append(legend);
+    q.scelte.forEach((scelta, n) => {
+      const l = document.createElement('label'); l.className = 'tiec-scelta';
+      const input = document.createElement('input'); input.type = 'radio'; input.name = 'risposta'; input.value = String(n); input.checked = stato!.risposte[stato!.sezione][i] === n;
+      const span = document.createElement('span'); span.innerHTML = `<b>${LETTERE[n]}.</b> ${scelta}`; l.append(input, span);
+      input.addEventListener('change', () => { if (!controllaTempo() || !stato || stato.conclusa) return; stato.risposte[stato.sezione][i] = n; salva(); mostraDomanda(); });
+      fs.append(l);
+    });
+    box.append(fs);
+    const ultima = stato.sezione === stato.sezioni.length - 1 && i === s.domande.length - 1;
+    $('prev').toggleAttribute('disabled', stato.sezione === 0 && i === 0);
+    $('next').toggleAttribute('disabled', ultima);
+    $('clear').toggleAttribute('disabled', stato.risposte[stato.sezione][i] === null);
+    aggiornaClock();
+  }
+  function aggiornaClock() { if (!stato) return; const t = Math.max(0, Math.ceil((stato.fine - Date.now()) / 1000)); $('clock').textContent = `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; $('clock').classList.toggle('in-scadenza', t < 300); }
+  function controllaTempo() {
+    if (!stato || stato.conclusa) return false;
+    if (Date.now() >= stato.fine) { stato.conclusa = true; salva(); avvisa('Tempo scaduto: la prova è stata consegnata con le risposte date.'); void correggi(); return false; }
+    aggiornaClock(); return true;
+  }
+  function attiva() {
+    $('inizio').hidden = true; $('prova').hidden = false; $('riparti').hidden = false; mostraDomanda();
+    clearInterval(timer); controllaTempo(); if (stato && !stato.conclusa) timer = window.setInterval(controllaTempo, 1000);
+  }
+  $('form').addEventListener('submit', async (e) => {
+    e.preventDefault(); const b = $('form').querySelector('button')!; b.disabled = true; b.textContent = 'Preparazione dei quesiti…'; avvisa('');
+    try {
+      const r = await fetch(`/api/${materia}/inizia`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' });
+      const d = await r.json(); if (!r.ok) throw new Error(d.errore || 'Impossibile iniziare la simulazione.');
+      stato = { token: d.token, sezioni: d.sezioni, risposte: d.sezioni.map((s: S) => s.domande.map(() => null)), sezione: 0, domanda: 0, fine: Date.now() + MINUTI * 60000, creata: Date.now(), conclusa: false }; salva(); attiva();
+    } catch (e) { avvisa(e instanceof Error ? e.message : 'Le domande non si sono caricate. Riprova.'); }
+    finally { b.disabled = false; b.textContent = 'Inizia la simulazione'; }
+  });
+  $('prev').addEventListener('click', () => {
+    if (!controllaTempo() || !stato) return;
+    if (stato.domanda > 0) stato.domanda--; else if (stato.sezione > 0) { stato.sezione--; stato.domanda = stato.sezioni[stato.sezione].domande.length - 1; }
+    salva(); mostraDomanda();
+  });
+  $('next').addEventListener('click', () => {
+    if (!controllaTempo() || !stato) return;
+    if (stato.domanda < stato.sezioni[stato.sezione].domande.length - 1) stato.domanda++; else if (stato.sezione < stato.sezioni.length - 1) { stato.sezione++; stato.domanda = 0; }
+    salva(); mostraDomanda();
+  });
+  $('clear').addEventListener('click', () => { if (!controllaTempo() || !stato) return; stato.risposte[stato.sezione][stato.domanda] = null; salva(); mostraDomanda(); });
+  $('chiudi').addEventListener('click', () => {
+    if (!controllaTempo() || !stato) return;
+    const vuote = stato.risposte.flat().filter((r) => r === null).length;
+    $('conferma-testo').textContent = vuote ? `Hai ${vuote} quesiti senza risposta. Dopo la consegna non potrai modificare le risposte.` : 'Dopo la consegna non potrai modificare le risposte.';
+    $('conferma').hidden = false; $('si').focus();
+  });
+  $('no').addEventListener('click', () => { $('conferma').hidden = true; $('chiudi').focus(); });
+  $('si').addEventListener('click', () => { if (!controllaTempo() || !stato) return; $('conferma').hidden = true; stato.conclusa = true; salva(); void correggi(); });
+  async function correggi() {
+    if (!stato || invio) return; invio = true; clearInterval(timer); $('prova').hidden = true; $('riprova').hidden = true; avvisa('Correzione della simulazione…');
+    try {
+      const r = await fetch(`/api/${materia}/correggi`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token: stato.token, risposte: stato.risposte }) }); const d = await r.json();
+      if (!r.ok) throw new Error(d.errore || 'La correzione non è arrivata.'); stato.esito = d; salva(); risultato(d);
+    } catch (e) { avvisa((e instanceof Error ? e.message : 'Connessione non disponibile.') + ' Le risposte sono conservate in questo browser.'); $('riprova').hidden = false; }
+    finally { invio = false; }
+  }
+  function risultato(d: Esito) {
+    if (!stato) return; $('inizio').hidden = true; $('prova').hidden = true; $('risultato').hidden = false; $('riparti').hidden = false; avvisa('');
+    const t = d.tiec;
+    $('voto').textContent = `${t.corrette} / ${t.massimo} risposte esatte · ${t.idoneo ? 'soglie superate in tutte le aree' : 'soglia non raggiunta in ' + t.aree.filter((a) => !a.superata).length + (t.aree.filter((a) => !a.superata).length === 1 ? ' area' : ' aree')}`;
+    $('conto').innerHTML = d.sezioni.map((s) => { const a = t.aree.find((x) => x.slug === s.slug)!; return `<tr><th scope="row">${s.titolo}</th><td><strong>${s.corrette}</strong> / ${s.massimo}</td><td>${s.errate}</td><td>${s.omesse}</td><td class="${a.superata ? 'tiec-ok' : 'tiec-no'}">${a.superata ? '✓' : '✗'} almeno ${a.soglia}</td></tr>`; }).join('');
+    const m = t.aree.find((a) => a.vpi);
+    $('vpi').textContent = m ? (m.vpiSuperata ? `VPI di matematica superata: ${m.corrette} risposte esatte su almeno ${m.vpi}.` : `VPI di matematica non superata: servono almeno ${m.vpi} risposte esatte, ne hai date ${m.corrette}. Con questo risultato la Cattolica assegnerebbe un OFA.`) : '';
+    const rev = $('revisione'); rev.replaceChildren();
+    d.sezioni.forEach((s, i) => {
+      const group = document.createElement('details'); const summary = document.createElement('summary'); summary.textContent = `${s.titolo} · Rivedi le risposte`; group.append(summary);
+      s.esiti.forEach((es, j) => {
+        const q = stato!.sezioni[i].domande[j], r = stato!.risposte[i][j]; const article = document.createElement('article');
+        const esito = r === null ? 'Omessa' : r === es.corretta - 1 ? 'Esatta' : 'Errata';
+        article.innerHTML = `<h3>Quesito ${j + 1} · ${esito}</h3><div class="testo-domanda">${q.testo}</div><p>La tua risposta: ${r === null ? 'non data' : `${LETTERE[r]}. ${q.scelte[r]}`}</p><p><strong>Risposta corretta: ${LETTERE[es.corretta - 1]}.</strong> ${q.scelte[es.corretta - 1]}</p><div>${es.spiegazione}</div><p><a href="/${materia}/${q.id.split('/')[0]}/teoria">Ripassa questo argomento →</a></p>`; group.append(article);
+      }); rev.append(group);
+    });
+  }
+  $('riprova').addEventListener('click', () => void correggi());
+  $('riparti').querySelector('button')!.addEventListener('click', () => {
+    if (stato && !stato.conclusa) { avvisa('Consegna la prova in corso prima di avviare una nuova simulazione.'); return; }
+    clearInterval(timer); stato = null; try { localStorage.removeItem(KEY); } catch {} location.reload();
+  });
+  try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && typeof d.token === 'string' && Array.isArray(d.sezioni) && Array.isArray(d.risposte) && Number.isFinite(d.fine) && Date.now() - d.creata < 6 * 3600000) { stato = d; if (stato!.conclusa) { if (stato!.esito) risultato(stato!.esito); else void correggi(); } else { avvisa('Sessione ripresa: il tempo continua dalla precedente apertura.'); attiva(); } } } catch { /* Nessuna sessione da riprendere. */ }
+</script>
+<style>
+  .tiec-simulazione{font-family:var(--ui)}.tiec-simulazione h1,.tiec-simulazione h2,.tiec-simulazione h3{font-family:var(--titoli)}
+  .tiec-specifiche{display:flex;flex-direction:column;gap:.4rem;padding:1rem 1.2rem;background:color-mix(in srgb,var(--accento) 7%,var(--carta));border-left:3px solid var(--accento)}
+  .tiec-specifiche span,.tiec-dettaglio{font-size:.83rem;color:var(--inchiostro-2)}.tiec-dettaglio{line-height:1.65}
+  table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.88rem}th,td{text-align:left;padding:.7rem .45rem;border-bottom:1px solid var(--riga)}
+  #tiec-messaggio{padding:1rem;background:var(--carta-2);border:1px solid var(--riga);border-radius:var(--raggio)}
+  .tiec-barra{display:flex;justify-content:space-between;gap:1rem;align-items:center;border-block:1px solid var(--riga);padding:.8rem 0;margin-top:1rem}
+  #tiec-aree{display:flex;flex-wrap:wrap;gap:.4rem}#tiec-aree :global(button){border:1px solid var(--riga);border-radius:999px;background:var(--carta);color:var(--inchiostro);padding:.35rem .8rem;font-size:.82rem;cursor:pointer}#tiec-aree :global(button small){color:var(--inchiostro-2);margin-left:.2rem}#tiec-aree :global([aria-current]){border-color:var(--accento);background:color-mix(in srgb,var(--accento) 10%,var(--carta));font-weight:600}
+  .tiec-tempo{text-align:right}.tiec-tempo small{font-size:.75rem;color:var(--inchiostro-2)}.tiec-tempo strong{display:block;font-size:1.7rem;font-variant-numeric:tabular-nums}.in-scadenza{color:#a43831}
+  #tiec-conta{font-size:.83rem;color:var(--inchiostro-2)}#tiec-numeri{display:flex;flex-wrap:wrap;gap:.35rem;margin:1rem 0 1.5rem}#tiec-numeri :global(button){min-width:2.2rem;min-height:2.2rem;border:1px solid var(--riga);border-radius:var(--raggio);background:var(--carta);color:var(--inchiostro);cursor:pointer}#tiec-numeri :global(.risposta-data){background:color-mix(in srgb,var(--accento) 12%,var(--carta))}#tiec-numeri :global([aria-current]){outline:2px solid var(--accento);outline-offset:1px}
+  #tiec-domanda :global(fieldset){border:0;padding:0;margin:1.2rem 0}#tiec-domanda :global(legend){font-size:.82rem;margin-bottom:.6rem}#tiec-domanda :global(.tiec-scelta){display:flex;align-items:flex-start;gap:.65rem;padding:.8rem;margin:.5rem 0;border:1px solid var(--riga);border-radius:var(--raggio);cursor:pointer}#tiec-domanda :global(.tiec-scelta:has(input:checked)){background:color-mix(in srgb,var(--accento) 8%,var(--carta));border-color:var(--accento)}#tiec-domanda :global(input){margin-top:.3rem;accent-color:var(--accento)}
+  .tiec-muovi{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;margin:1rem 0 1.5rem}.tiec-simulazione button:disabled{opacity:.45;cursor:default}#tiec-conferma{padding:1rem;border:1px solid var(--accento);margin:1rem 0;border-radius:var(--raggio)}#tiec-voto{font-size:1.4rem;font-weight:700;color:var(--accento)}.tiec-tabella{overflow-x:auto}
+  #tiec-conto :global(th),#tiec-conto :global(td){text-align:left;padding:.7rem .45rem;border-bottom:1px solid var(--riga);font-weight:400}#tiec-conto :global(th){font-weight:600}#tiec-conto :global(.tiec-ok){color:var(--accento);font-weight:600}#tiec-conto :global(.tiec-no){color:#a43831;font-weight:600}
+  .tiec-ok{color:var(--accento);font-weight:600}.tiec-no{color:#a43831;font-weight:600}
+  #tiec-revisione :global(details){border-block-start:1px solid var(--riga);padding:1rem 0}#tiec-revisione :global(summary){cursor:pointer;font-weight:600}#tiec-revisione :global(article){margin:1.5rem 0;padding-top:1rem;border-top:1px solid var(--riga)}#tiec-riparti{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  [hidden]{display:none!important}@media(max-width:40rem){.tiec-muovi{justify-content:flex-start}.tiec-barra{flex-direction:column;align-items:stretch}.tiec-tempo{text-align:left}th,td{padding:.6rem .3rem;font-size:.8rem}}
+</style>

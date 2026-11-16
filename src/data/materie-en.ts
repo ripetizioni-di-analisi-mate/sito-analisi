@@ -568,6 +568,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   },
   'tolc-i': { titolo: 'TOLC-I (Engineering)', breve: 'TOLC-I', descrizione: 'The mathematics, logic and science of the TOLC-I, the CISIA test for Engineering degree programmes.', argomenti: {} },
   'tolc-e': { titolo: 'TOLC-E (Economics)', breve: 'TOLC-E', descrizione: 'The mathematics, logic and reading comprehension of the TOLC-E, the CISIA test for Economics degree programmes.', argomenti: {} },
+  'tiec': { titolo: 'TIEC Cattolica (Economics)', breve: 'TIEC Cattolica', descrizione: 'The mathematics, logic, reading comprehension and English of the TIEC, the admission test of Università Cattolica for its Economics degree programmes. Materials are in Italian.', argomenti: {} },
   'tolc-s': { titolo: 'TOLC-S (Sciences)', breve: 'TOLC-S', descrizione: 'The basic mathematics, reasoning and science of the TOLC-S, the CISIA test for science degree programmes.', argomenti: {} },
   'tol-politecnico': { titolo: 'TOL of Politecnico di Milano', breve: 'TOL Politecnico', descrizione: 'The mathematics, logic and physics of the TOL, the admission test for Engineering at Politecnico di Milano.', argomenti: {} },
   'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },

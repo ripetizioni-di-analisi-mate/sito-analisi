@@ -1,4 +1,4 @@
-import { TOLC, provaTolc } from '../src/data/tolc.mjs';
+import { TOLC, provaTolc, esitoTiec } from '../src/data/tolc.mjs';
 import { correggiSezioneTolc } from '../src/data/tolc-i.mjs';
 
 export async function gestisciTolcI(req, env, path, h) {
@@ -38,6 +38,8 @@ export async function gestisciTolcI(req, env, path, h) {
       }
       sezioni.push({ slug: s.slug, titolo: s.titolo, ...correggiSezioneTolc(domande, rs, s.slug === 'inglese'), esiti: domande.map((q) => ({ id: q.id, corretta: q.corretta, spiegazione: q.spiegazione })) });
     }
+    // TIEC: nessun punteggio ufficiale per risposta; conta il numero di risposte esatte per area.
+    if (conf.tempoUnico) return risposta({ sezioni, tiec: esitoTiec(sezioni.map(({ slug, titolo, corrette, errate, omesse, massimo }) => ({ slug, titolo, corrette, errate, omesse, massimo }))) });
     return risposta({ sezioni, punti: sezioni.filter((s) => s.slug !== 'inglese').reduce((n, s) => n + s.punti, 0), massimo: conf.quesiti, inglese: sezioni.find((s) => s.slug === 'inglese')?.punti ?? null });
   }
   return risposta({ errore: 'Percorso non trovato.' }, 404);
