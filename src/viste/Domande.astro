@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { BOCCONI } from '../data/bocconi.mjs';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import { catalogoDomande, conteggiDomande } from '../lib/domande';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
@@ -14,6 +15,7 @@ interface Props { lingua: Lingua; materia: string; argomento: string; totale: nu
 const { lingua, materia, argomento, totale, usa = false } = Astro.props;
 const en = lingua === 'en';
 const es = lingua === 'es';
+const bocconi = materia === BOCCONI.slug;
 const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
 const quizStatistica = materia === 'statistica'
   ? Object.values((await conteggiDomande('it')).statistica ?? {}).reduce((somma, numero) => somma + numero, 0).toLocaleString(en ? 'en-US' : 'it-IT', { useGrouping: 'always' })
@@ -117,7 +119,7 @@ const JS = es ? {
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua} usa={usa}
   seo={{ noindex: true, senzaInglese, soloQuestaLingua: (materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && senzaInglese }}
 >
-  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
+  <div class="domande" data-materia={materia} data-bocconi-quiz={bocconi || undefined} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
       <div>
         <p class="sopratitolo">{T.titolo}</p>
@@ -154,9 +156,15 @@ const JS = es ? {
       </div>
       <p class="numero-domanda"></p>
       <div class="velo-blocco velo-scheda blocco-domande" hidden>
-        <p class="sopratitolo">{T.anteprima}</p>
-        <h2>{T.bloccata}</h2>
-        <a class="bottone-sblocca" href={hrefSblocca}>{T.sblocca}</a>
+        {bocconi ? <>
+          <h2>{en ? 'Timed questions are included in the full Bocconi course' : 'I quiz a tempo sono inclusi nel corso completo Bocconi'}</h2>
+          <p><a class="bottone-sblocca" href={hrefSblocca}>{T.sblocca}</a></p>
+          <a href={link(lingua, `/${materia}/simulazione#diagnostico`)}>{nomiProve.diagnostico}</a>
+        </> : <>
+          <p class="sopratitolo">{T.anteprima}</p>
+          <h2>{T.bloccata}</h2>
+          <a class="bottone-sblocca" href={hrefSblocca}>{T.sblocca}</a>
+        </>}
       </div>
       <div class="tempo" hidden>
         <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="12" r="8" /><path d="M11 8v4l2.5 2M9 2h4" /></svg>
@@ -190,6 +198,7 @@ const JS = es ? {
 <script>
   const radice = document.querySelector<HTMLElement>('.domande')!;
   const { materia, argomento, titolo, lingua, pref } = radice.dataset as { materia: string; argomento: string; titolo: string; lingua: string; pref: string };
+  const bocconi = radice.hasAttribute('data-bocconi-quiz');
   const L = JSON.parse(radice.dataset.testi || '{}') as Record<string, string>;
   const f = (k: string, x: string | number) => L[k].replace('§', String(x));
   const $ = <T extends HTMLElement>(s: string) => radice.querySelector<T>(s)!;
@@ -332,6 +341,12 @@ const JS = es ? {
     // Con una rete lenta e più tocchi di fila conta solo l'ultima domanda chiesta.
     if (richiesta !== ultimaRichiesta) return;
     if (!d) {
+      if (bocconi && r?.status === 403) {
+        blocco.hidden = false;
+        testo.hidden = true;
+        nav.hidden = true;
+        return;
+      }
       // Il Worker spiega il motivo (per esempio: ripasso di oggi senza account, oppure nessuna domanda da ripassare).
       const p = document.createElement('p');
       p.textContent = d0?.errore || L.errore;
@@ -372,7 +387,11 @@ const JS = es ? {
     const r = await post('/api/domande/rispondi', { token: d0.token, scelta }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
     if (!d) {
-      if (corrente?.id === d0.id) { esito.hidden = false; esito.textContent = L.nonArrivata; }
+      if (corrente?.id !== d0.id) return;
+      if (bocconi && r?.status === 403) {
+        blocco.hidden = false; testo.hidden = true; tempo.hidden = true; nav.hidden = true;
+        scelte.replaceChildren();
+      } else { esito.hidden = false; esito.textContent = L.nonArrivata; }
       return;
     }
     const e: Esito = { ...d, scelta, scaduto };

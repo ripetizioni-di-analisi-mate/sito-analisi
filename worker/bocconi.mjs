@@ -1,5 +1,9 @@
 import { AREE_BOCCONI, BOCCONI, PROVE_BOCCONI } from '../src/data/bocconi.mjs';
 
+export function accessoBocconi(env, utente) {
+  return env.VENDITA === '0' || Boolean(utente?.materie?.includes(BOCCONI.slug));
+}
+
 export function correggiBocconi(domande, risposte, simulazione) {
   const aree = Object.fromEntries(Object.keys(AREE_BOCCONI).map((area) => [
     area, { corrette: 0, errate: 0, omesse: 0, massimo: 0, centesimi: 0 },
@@ -38,7 +42,7 @@ export async function gestisciBocconi(req, env, path, h) {
     return risposta({ errore: messaggio('Prova non disponibile.', 'Test unavailable.') }, 404);
   }
   const io = simulazione ? await h.utenteCollegato(env, req).catch(() => null) : null;
-  if (simulazione && env.VENDITA !== '0' && !io?.materie?.includes(BOCCONI.slug)) {
+  if (simulazione && !accessoBocconi(env, io)) {
     return risposta({
       errore: messaggio('Le simulazioni complete sono incluse nel corso Test Bocconi.', 'The full mock tests are included in the Bocconi Test course.'),
       sblocca: `${lingua === 'en' ? '/en' : ''}/${BOCCONI.slug}/sblocca`,

@@ -1,7 +1,14 @@
+import { BOCCONI } from '../data/bocconi.mjs';
+
 // Nomi comuni a indice, pagine, ricerca e anteprime dei link.
 // Il gruppo italiano e quello tradotto identificano lo stesso percorso scolastico.
 export function nomiAllenamento(materia, lingua = 'it') {
   const en = lingua === 'en';
+  if (materia?.slug === BOCCONI.slug) {
+    return en
+      ? { ripasso: 'Bocconi practice', simulazione: 'Full mock tests', diagnostico: 'Free diagnostic' }
+      : { ripasso: 'Allenamento Bocconi', simulazione: 'Simulazioni complete', diagnostico: 'Diagnostico gratuito' };
+  }
   if (['tolc-i', 'tolc-s', 'tiec'].includes(materia?.slug)) { const nome = materia.slug.toUpperCase(); return { ripasso: en ? `${nome} practice` : `Allenamento ${nome}`, simulazione: en ? `${nome} simulation` : `Simulazione ${nome}` }; }
   if (materia?.gruppo === 'Superiori' || materia?.gruppo === 'High school') {
     return {

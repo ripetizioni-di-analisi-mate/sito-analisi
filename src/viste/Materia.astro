@@ -17,7 +17,6 @@ import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { TOLC } from '../data/tolc.mjs';
 import NotaTolcI from '../components/NotaTolcI.astro';
-import NotaBocconi from '../components/NotaBocconi.astro';
 import { BOCCONI } from '../data/bocconi.mjs';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
@@ -62,8 +61,8 @@ const anteprimaTesto = anteprimaScienza
   ? (en ? 'Read the beginning of each topic, open its first three worked exercise sheets and try one timed question without an account.'
     : 'Senza account puoi leggere l’inizio di ogni capitolo, aprire le prime tre schede di esercizi svolti e provare una domanda a tempo.')
   : t.anteprimaTesto;
-const { ripasso: nomeRipasso, simulazione: nomeSimulazione } = nomiAllenamento(m, lingua);
-const nomeCompito = bocconi ? (en ? 'Four mock tests' : 'Quattro simulazioni') : nomeSimulazione;
+const { ripasso: nomeRipasso, simulazione: nomeCompito } = nomiAllenamento(m, lingua);
+const indirizzoSimulazione = `/${materia}/simulazione${bocconi ? '#simulazioni' : ''}`;
 const notaQuiz = en
   ? 'A timed quiz across all topics, with an explanation after each answer. Questions are in Italian.'
   : 'Quiz a tempo su tutti gli argomenti, con la spiegazione dopo ogni risposta. Con un account puoi ripassare le domande che hai sbagliato.';
@@ -111,7 +110,6 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <p class="sommario">{m.descrizione}</p>
   {materia === 'analisi-3' && lingua === 'it' && <NotaAnalisi3 />}
   {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
-  {bocconi && (lingua === 'it' || lingua === 'en') && <NotaBocconi lingua={lingua} />}
   {gruppo === 'Superiori' && <div class:list={{ 'vista-classica': nuova }}><NotaSuperiori lingua={lingua} /></div>}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
@@ -119,7 +117,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}
     compatibilita={lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}
     argomenti={m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo, riassunto: riassunti[materia + '/' + a.slug], pronto: teorie.has(`${materia}/${a.slug}`), svolti: conta(svolti, a.slug), dafare: quizPerEsercitarsi ? 0 : conta(dafare, a.slug), verificabili: quizPerEsercitarsi ? 0 : verificabili(a.slug), domande: conta(domande, a.slug) }))}
-    ripasso={domandeMateria > 0 ? { titolo: nomeRipasso, domande: domandeMateria, href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), simulazione: quizPerEsercitarsi ? undefined : { href: link(scienza ? 'it' : lingua, `/${materia}/simulazione`), titolo: nomeCompito }, oggi: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`) } : undefined}
+    ripasso={domandeMateria > 0 ? { titolo: nomeRipasso, domande: domandeMateria, href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), simulazione: quizPerEsercitarsi ? undefined : { href: link(scienza ? 'it' : lingua, indirizzoSimulazione), titolo: nomeCompito }, oggi: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`) } : undefined}
     teoremi={indice.length > 0 ? { href: link(lingua, `/${materia}/teoremi`), teoremi: nTeoremi, definizioni: nDefinizioni } : undefined} />}
   {m.prezzo && (<div class:list={{ 'vista-classica': nuova }}>
     <AccessoMateria materia={m.slug} titolo={m.titolo} prezzo={m.prezzo} lingua={lingua} testo={anteprimaTesto}

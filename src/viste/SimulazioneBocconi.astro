@@ -1,45 +1,63 @@
 ---
 import Base from '../layouts/Base.astro';
 import { AREE_BOCCONI, BOCCONI, PROVE_BOCCONI } from '../data/bocconi.mjs';
-import { materiaL } from '../i18n';
+import { link, materiaL } from '../i18n';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { lingua: 'it' | 'en' }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
-const corso = (en ? '/en' : '') + '/' + BOCCONI.slug;
-const capitoli = Object.fromEntries(materiaL(lingua, BOCCONI.slug).argomenti.map(({ slug, titolo }) => [slug, titolo]));
-const titolo = en ? 'Bocconi Test practice' : 'Prove di allenamento Bocconi';
+const base = '/' + BOCCONI.slug;
+const m = materiaL(lingua, BOCCONI.slug);
+const capitoli = Object.fromEntries(m.argomenti.map(({ slug, titolo }) => [slug, titolo]));
+const { ripasso: titolo, diagnostico, simulazione } = nomiAllenamento(m, lingua);
+const hrefSimulazioni = link(lingua, base + '/simulazione#simulazioni');
 const descrizione = en
   ? 'Free diagnostic and four timed Bocconi Test mocks, with worked solutions and links to the course.'
   : 'Diagnostico gratuito e quattro simulazioni a tempo del Test Bocconi, con correzione ragionata e rimandi alle lezioni.';
 ---
-<Base titolo={titolo} descrizione={descrizione} materia={BOCCONI.slug} sezione="simulazione" lingua={lingua} seo={{ noindex: true }}>
+<Base titolo={titolo} descrizione={descrizione} percorso={[{ titolo }]} materia={BOCCONI.slug} sezione="simulazione" lingua={lingua} seo={{ noindex: true }}>
   <div class="bocconi" data-bocconi data-lingua={lingua} data-capitoli={JSON.stringify(capitoli)}>
     <h1>{titolo}</h1>
     <section id="boc-inizio" class="boc-inizio">
       <div class="boc-pannello" id="diagnostico">
-        <h2>{en ? 'Free diagnostic' : 'Diagnostico gratuito'}</h2>
-        <p>{en ? 'Answer 18 questions and see which course topics to revisit. Work at your own pace.' : 'Rispondi a 18 quesiti e scopri quali lezioni riprendere. Puoi svolgere la prova con i tuoi tempi.'}</p>
-        <button id="boc-diagnostico" type="button" class="bottone-primario">{en ? 'Start the diagnostic' : 'Inizia il diagnostico'}</button>
+        <h2>{diagnostico}</h2>
+        <p>{en ? `Answer ${BOCCONI.diagnostico} questions at your own pace to see which lessons to revisit.` : `Rispondi a ${BOCCONI.diagnostico} quesiti senza limiti di tempo per capire quali lezioni riprendere.`}</p>
+        <div class="boc-azioni">
+          <button id="boc-diagnostico" type="button" class="bottone-primario">{en ? 'Start the diagnostic' : 'Inizia il diagnostico'}</button>
+          <button id="boc-riprendi-diagnostico" type="button" class="bottone-secondario" hidden></button>
+        </div>
       </div>
       <div class="boc-pannello" id="simulazioni">
-        <h2>{en ? 'Full mock tests' : 'Simulazioni complete'}</h2>
-        <p>{en ? 'Each mock contains 50 original questions, with 75 minutes in total. You can review the three questions on the current page before moving forward.' : 'Ogni simulazione contiene 50 quesiti originali da svolgere in 75 minuti. Puoi rivedere i tre quesiti della pagina aperta prima di avanzare.'}</p>
+        <h2>{simulazione}</h2>
+        <p>{en
+          ? `${BOCCONI.simulazioni} mock tests, with ${BOCCONI.quesiti} questions and ${BOCCONI.minuti} minutes each. Once you move forward, the previous page is closed.`
+          : `${BOCCONI.simulazioni} simulazioni da ${BOCCONI.quesiti} quesiti in ${BOCCONI.minuti} minuti ciascuna. Quando avanzi, la pagina precedente si chiude.`}</p>
         <form id="boc-form">
           <label for="boc-numero">{en ? 'Choose a mock test' : 'Scegli una simulazione'}</label>
           <select id="boc-numero" name="prova">{PROVE_BOCCONI.slice(1).map((n) => <option value={n}>{en ? 'Mock test' : 'Simulazione'} {n}</option>)}</select>
-          <button type="submit" class="bottone-primario">{en ? 'Start the mock test' : 'Inizia la simulazione'}</button>
+          <div class="boc-azioni">
+            <button type="submit" class="bottone-primario">{en ? 'Start the mock test' : 'Inizia la simulazione'}</button>
+            <button id="boc-riprendi-simulazioni" type="button" class="bottone-secondario" hidden></button>
+          </div>
         </form>
-        <p class="boc-piccolo"><a href={corso + '/sblocca'}>{en ? 'Get full course access' : 'Sblocca il corso completo'}</a></p>
+        <div class="boc-acquisto">
+          <p>{en ? 'The mock tests are included with full course access.' : 'Le simulazioni sono incluse nell’accesso completo al corso.'}</p>
+          <div class="boc-azioni">
+            <a class="bottone-primario" href={link(lingua, base + '/sblocca')}>{en ? 'Unlock the course' : 'Sblocca il corso'}</a>
+            <a class="solo-ospiti" href={link(lingua, '/accedi') + '?dopo=' + encodeURIComponent(hrefSimulazioni)}>{en ? 'Already have access? Log in' : 'Hai già accesso? Accedi'}</a>
+          </div>
+        </div>
       </div>
       <details class="boc-pannello boc-regole">
         <summary>{en ? 'Test format and scoring' : 'Formato e punteggio della simulazione'}</summary>
         <ul>{Object.values(AREE_BOCCONI).map((area) => <li><strong>{area[lingua]}</strong> · {area.quesiti}</li>)}</ul>
         <p>{en ? 'Correct answers earn 1 point. Omissions earn 0. Wrong answers deduct 0.20 points, or 0.33 on the critical thinking questions with three options.' : 'Una risposta corretta vale 1 punto. Una risposta omessa vale 0. Una risposta errata sottrae 0,20 punti, oppure 0,33 nei quesiti di pensiero critico con tre opzioni.'}</p>
-        <p>{en ? 'Moving forward closes the current page. If you reload this tab, you can resume from the open page and the clock continues to run.' : 'Quando avanzi, la pagina si chiude. Se ricarichi la scheda del browser, riprendi dalla pagina aperta e il tempo continua a scorrere.'}</p>
+        <p>{en ? 'You can resume a test from this browser tab. The mock test timer keeps running while you are away.' : 'Puoi riprendere la prova da questa scheda del browser. Il timer della simulazione continua a scorrere anche se lasci la pagina.'}</p>
         <p>{en ? 'Independent preparation for the standard Bocconi Online Test.' : 'Preparazione indipendente al Test online Bocconi standard.'} <a href={BOCCONI.fonti[lingua]}>{en ? 'Official format and syllabus' : 'Formato e programma ufficiali'}</a></p>
       </details>
     </section>
     <p class="boc-avviso" id="boc-avviso" role="status" hidden></p>
+    <p id="boc-accesso" hidden><a href={link(lingua, base + '/sblocca')}>{en ? 'View course access options' : 'Vai all’accesso al corso'}</a></p>
     <section id="boc-prova" aria-labelledby="boc-pagina" hidden>
       <div class="boc-barra">
         <div><h2 id="boc-pagina" tabindex="-1"></h2><p id="boc-conto"></p></div>
@@ -47,6 +65,7 @@ const descrizione = en
       </div>
       <div id="boc-domande" class="boc-domande"></div>
       <div class="boc-azioni">
+        <button type="button" class="bottone-secondario" id="boc-indietro" hidden>{en ? 'Previous page' : 'Pagina precedente'}</button>
         <button type="button" class="bottone-primario" id="boc-avanti">{en ? 'Next page' : 'Pagina successiva'}</button>
         <button type="button" class="bottone-secondario" id="boc-consegna">{en ? 'Submit test' : 'Consegna la prova'}</button>
       </div>
@@ -77,22 +96,22 @@ const descrizione = en
       <div id="boc-correzione"></div>
     </section>
     <div class="boc-azioni boc-fondo">
-      <button type="button" id="boc-nuova" class="bottone-secondario" hidden>{en ? 'Choose another test' : 'Scegli un’altra prova'}</button>
-      <a href={corso}>{en ? 'Back to the course' : 'Torna al corso'}</a>
+      <button type="button" id="boc-menu" class="bottone-secondario" hidden>{en ? 'Back to the tests' : 'Torna alle prove'}</button>
+      <a href={link(lingua, base + '#programma')}>{en ? 'Go to the course syllabus' : 'Vai al programma del corso'}</a>
     </div>
     <noscript><p>{en ? 'Activate JavaScript to take a test.' : 'Attiva JavaScript per svolgere una prova.'}</p></noscript>
   </div>
 </Base>
 
 <script>
-  if (document.querySelector('[data-bocconi]')) void import('../scripts/simulazione-bocconi');
+  import '../scripts/simulazione-bocconi';
 </script>
 <style>
   .bocconi { max-width: 53rem; }
   .bocconi [hidden] { display: none !important; }
   .boc-inizio { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .boc-pannello, :global(.boc-quesito), :global(.boc-revisione-gruppo) {
-    border: 1px solid var(--bordo); border-radius: .7rem; padding: 1rem 1.2rem; background: var(--pannello, var(--carta));
+    border: 1px solid var(--riga); border-radius: .7rem; padding: 1rem 1.2rem; background: var(--carta);
   }
   .boc-pannello h2 { margin: 0 0 .5rem; font-size: 1.23rem; }
   .boc-pannello p, .boc-regole ul { margin: .6rem 0 .9rem; }
@@ -100,8 +119,11 @@ const descrizione = en
   .boc-regole summary, :global(.boc-revisione-gruppo summary) { cursor: pointer; font-weight: 600; }
   .boc-regole li { margin-bottom: .25rem; }
   #boc-form { display: grid; justify-items: start; gap: .5rem; }
-  #boc-numero { padding: .5rem; background: var(--carta); color: var(--inchiostro); border: 1px solid var(--bordo); border-radius: .35rem; font: inherit; }
-  .boc-piccolo { font-size: .88rem; }
+  #boc-numero { padding: .5rem; background: var(--carta); color: var(--inchiostro); border: 1px solid var(--riga); border-radius: .35rem; font: inherit; }
+  .bocconi:not([data-accesso-completo]) #boc-form,
+  .bocconi[data-accesso-completo] .boc-acquisto { display: none; }
+  .bocconi :is(#diagnostico, #simulazioni) { scroll-margin-top: 5.5rem; }
+  #boc-form .boc-azioni { margin-top: .2rem; }
   .boc-barra { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1rem 0; }
   .boc-barra h2, .boc-barra p { margin: .2rem 0; }
   #boc-tempo { text-align: right; font-size: .86rem; }
@@ -110,23 +132,25 @@ const descrizione = en
   .boc-domande { display: grid; gap: .9rem; }
   :global(.boc-quesito fieldset) { border: 0; margin: .6rem 0; padding: 0; min-width: 0; }
   :global(.boc-quesito legend) { font-weight: 600; margin: 0 0 .5rem; }
+  .boc-domande > :global(.boc-quesito) { min-width: 0; }
   :global(.boc-domanda-testo), :global(.boc-risposta-testo) { overflow-x: auto; overflow-y: hidden; min-width: 0; }
-  :global(.boc-scelta) { display: flex; align-items: start; gap: .6rem; border: 1px solid var(--bordo); padding: .7rem; margin: .4rem 0; border-radius: .4rem; cursor: pointer; }
+  :global(.boc-scelta) { display: flex; align-items: start; gap: .6rem; border: 1px solid var(--riga); padding: .7rem; margin: .4rem 0; border-radius: .4rem; cursor: pointer; }
   :global(.boc-scelta:has(input:checked)) { border-color: var(--accento, #356d67); background: var(--evidenza, #eaf3f0); color: #163f39; }
   :global(.boc-scelta input) { accent-color: var(--accento, #356d67); margin-top: .3em; }
   :global(.boc-scelta p) { margin: 0; }
   .boc-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1rem; }
   .boc-fondo { margin: 1.5rem 0; }
-  .boc-avviso { padding: .75rem; background: var(--pannello, var(--carta)); border: 1px solid var(--bordo); border-radius: .4rem; }
+  .boc-avviso { padding: .75rem; background: var(--carta-2); border: 1px solid var(--riga); border-radius: .4rem; }
   .boc-tabella { overflow-x: auto; }
   .boc-tabella table { border-collapse: collapse; width: 100%; margin: .5rem 0; }
-  .boc-tabella :is(td, th) { padding: .55rem; border-bottom: 1px solid var(--bordo); text-align: start; }
+  .boc-tabella :is(td, th) { padding: .55rem; border-bottom: 1px solid var(--riga); text-align: start; }
   :global(.boc-revisione-gruppo) { margin: .7rem 0; }
-  :global(.boc-revisione-gruppo article) { border-top: 1px solid var(--bordo); padding: .8rem 0; margin: .6rem 0; }
-  #boc-conferma { max-width: min(33rem, calc(100% - 2rem)); border: 1px solid var(--bordo); border-radius: .7rem; background: var(--carta); color: var(--inchiostro); padding: 1.1rem; }
+  :global(.boc-revisione-gruppo article) { border-top: 1px solid var(--riga); padding: .8rem 0; margin: .6rem 0; }
+  #boc-conferma { max-width: min(33rem, calc(100% - 2rem)); border: 1px solid var(--riga); border-radius: .7rem; background: var(--carta); color: var(--inchiostro); padding: 1.1rem; }
   #boc-conferma::backdrop { background: rgb(10 25 23 / .48); }
   @media (max-width: 41rem) {
     .boc-inizio { grid-template-columns: 1fr; }
     .boc-pannello, :global(.boc-quesito) { padding: .85rem; }
+    .boc-tabella :is(td, th) { padding: .4rem .3rem; font-size: .84rem; }
   }
 </style>

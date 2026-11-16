@@ -1,36 +1,50 @@
 ---
 import { BOCCONI } from '../data/bocconi.mjs';
+import { link } from '../i18n';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { lingua: 'it' | 'en' }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
-const simulazione = `${en ? '/en' : ''}/${BOCCONI.slug}/simulazione`;
+const prove = `/${BOCCONI.slug}/simulazione`;
+const { diagnostico, simulazione } = nomiAllenamento(BOCCONI, lingua);
 ---
 <section class="bocconi-prove" aria-labelledby="bocconi-prove-titolo">
   <div>
-    <h2 id="bocconi-prove-titolo">{en ? 'Practise in the test format' : 'Allenati con il formato della prova'}</h2>
-    <p>{en ? 'Use the free diagnostic to identify topics to revisit. After the lessons, take four distinct mock tests with full solutions and links back to the course.' : 'Il diagnostico gratuito indica quali argomenti ripassare. Dopo le lezioni puoi svolgere quattro simulazioni distinte, con soluzioni e rimandi alla teoria.'}</p>
+    <h2 id="bocconi-prove-titolo">{en ? 'Bocconi practice tests' : 'Prove del Test Bocconi'}</h2>
+    <p>{en
+      ? `The ${BOCCONI.diagnostico}-question diagnostic shows which lessons to review. Full course access includes ${BOCCONI.simulazioni} mock tests with ${BOCCONI.quesiti} questions each.`
+      : `Il diagnostico da ${BOCCONI.diagnostico} quesiti indica quali lezioni ripassare. Il corso completo include ${BOCCONI.simulazioni} simulazioni da ${BOCCONI.quesiti} quesiti ciascuna.`}</p>
   </div>
   <div class="bocconi-prove-link">
-    <a class="bottone-primario" href={simulazione + '#diagnostico'}>{en ? 'Free diagnostic' : 'Diagnostico gratuito'}</a>
-    <a class="bottone-secondario" href={simulazione + '#simulazioni'}>{en ? 'Mock tests' : 'Simulazioni'}</a>
-    <a href={BOCCONI.fonti[lingua]}>{en ? 'Bocconi’s syllabus and test format' : 'Programma e formato sul sito Bocconi'}</a>
+    <a class="bottone-primario" href={link(lingua, prove + '#diagnostico')}>{diagnostico}</a>
+    <a class="bottone-secondario" href={link(lingua, prove + '#simulazioni')}>{simulazione}</a>
   </div>
 </section>
 <style>
   .bocconi-prove {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
-    gap: 1.25rem;
-    padding: 1.2rem 1.35rem;
-    margin: 1.5rem 0;
-    border: 1px solid var(--bordo);
-    border-radius: .75rem;
-    background: var(--pannello, var(--carta));
+    grid-template-columns: minmax(0, 1fr);
+    gap: .8rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--pm-filo);
+    border-radius: 14px;
+    background: var(--pm-velo);
   }
-  h2 { margin: 0 0 .45rem; font-size: 1.2rem; }
-  p { margin: 0; }
-  .bocconi-prove-link { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
-  .bocconi-prove-link > a:last-child { flex-basis: 100%; font-size: .88rem; }
-  @media (max-width: 47rem) { .bocconi-prove { grid-template-columns: 1fr; } }
+  h2 { margin: 0 0 .35rem; font: 700 1.15rem/1.25 var(--titoli); }
+  p { margin: 0; color: var(--inchiostro-2); font-size: .93rem; line-height: 1.4; }
+  .bocconi-prove-link { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; }
+  .bocconi-prove-link a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 2.75rem;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 34rem) {
+    .bocconi-prove { padding: .9rem; }
+    .bocconi-prove-link a { flex: 1 1 100%; }
+  }
 </style>

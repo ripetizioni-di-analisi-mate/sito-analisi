@@ -20,7 +20,7 @@ import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import { gestisciTolcI } from './tolc-i.mjs';
 import { TOLC, demoTolc } from '../src/data/tolc.mjs';
-import { gestisciBocconi } from './bocconi.mjs';
+import { accessoBocconi, gestisciBocconi } from './bocconi.mjs';
 import { BOCCONI } from '../src/data/bocconi.mjs';
 import { anteprimaAnalisi3 } from '../src/data/analisi3.mjs';
 import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
@@ -1892,6 +1892,11 @@ export default {
       if (io?.gm !== true) {
         risposta = new HTMLRewriter().on('[data-orientamento-gm]', {
           element(element) { element.remove(); },
+        }).transform(risposta);
+      }
+      if (primo === BOCCONI.slug && percorsoNormalizzato.endsWith('/simulazione') && accessoBocconi(env, io)) {
+        risposta = new HTMLRewriter().on('[data-bocconi]', {
+          element(element) { element.setAttribute('data-accesso-completo', ''); },
         }).transform(risposta);
       }
       if (corsoUsa) {

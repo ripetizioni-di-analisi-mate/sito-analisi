@@ -31,6 +31,7 @@ const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, 
 const hrefArgomento = (slug: string, arg: string, sez: string) => usa ? linkArgomentoUsa(slug, arg, sez) : link(lingua, '/' + slug + '/' + arg + '/' + sez);
 const SEZIONI = sezioniL(lingua).filter((s) => m?.eserciziDaFare !== false || s.slug !== 'esercizi');
 const nomiProve = nomiAllenamento(m, lingua);
+const hrefBocconi = m && nomiProve.diagnostico ? `/${m.slug}/simulazione` : undefined;
 const simulazioneUsa = usa && Boolean(m && hasUsStudyPages(m.slug));
 const ripassoCorrente = argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione';
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
@@ -138,7 +139,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             <button type="button" class="argomento" aria-expanded={ripassoCorrente ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
             <ol class:list={{ aperta: ripassoCorrente }}>
               <li><a href={hrefArgomento(m.slug, RIPASSO, 'domande')} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
-              {m.eserciziDaFare !== false && <li><a href={usa ? url(courseUrl(m.slug) + '/simulazione') : link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{nomiProve.simulazione}</a></li>}
+              {hrefBocconi && <li><a href={link(lingua, hrefBocconi + '#diagnostico')}>{nomiProve.diagnostico}</a></li>}
+              {m.eserciziDaFare !== false && <li><a href={hrefBocconi ? link(lingua, hrefBocconi + '#simulazioni') : usa ? url(courseUrl(m.slug) + '/simulazione') : link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' && !hrefBocconi }}>{nomiProve.simulazione}</a></li>}
               <li class="solo-collegati" data-usa-content={simulazioneUsa || undefined}><a href={hrefArgomento(m.slug, RIPASSO_OGGI, 'domande')} class:list={{ attiva: argomento === RIPASSO_OGGI }}>{lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi'}</a></li>
             </ol>
           </li>
