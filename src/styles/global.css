@@ -311,6 +311,10 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .katex { font-size: 1.08em; }
 /* formule nel testo: non vanno a capo a metà se stanno nella riga (classe messa da Base.astro) */
 .katex.intera { white-space: nowrap; }
+/* Formule nel testo: un po' di aria sopra e sotto, così frazioni, esponenti e radici di due righe
+   vicine (o di due voci di un elenco) non si sovrappongono. Le righe con formule basse non cambiano. */
+.katex:not(.katex-display > .katex) > .katex-html > .base { margin-block: 0.12em; }
+.katex:not(.katex-display > .katex) > .katex-html > .base:has(.mfrac, .sqrt, .delimsizing, .op-limits, .mtable) { margin-block: 0.3em; }
 .katex-display { margin: 1rem 0; overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
 .katex-display .katex-html { text-align: center; }
 
