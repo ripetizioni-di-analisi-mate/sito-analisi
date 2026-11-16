@@ -1,0 +1,3 @@
+# Verifica del rifacimento delle domande a tempo del Precorso (un capitolo)
+
+**Segui per intero `istruzioni-agenti/brief-verifica-domande-rifacimento-analisi1-fisica1.md`**, con MATERIA = `precorso`; l'autore ha lavorato con `istruzioni-agenti/brief-domande-rifacimento-precorso.md`. Tutto ciò che vale «per Analisi 1» (diagnosi degli errori tipici in `esito.json`, verificate con sympy) vale anche per il Precorso. Le domande a testo vuoto del capitolo sono elencate in `domande_a_testo_vuoto` di `/home/claude/lavoro-af/precorso__<CAPITOLO>-sg.json`: solo quelle non si toccano. In Irrazionali controlla che nessuna domanda sia rimasta sul solo valore assoluto.

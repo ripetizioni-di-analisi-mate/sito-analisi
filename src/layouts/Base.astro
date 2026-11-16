@@ -625,6 +625,24 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
       su.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
+    // Al telefono Pi, WhatsApp e «Torna su» escono dallo schermo mentre si scorre verso il basso (si sta leggendo)
+    // e tornano quando si risale, in cima o in fondo alla pagina. Con la finestra di Pi aperta restano dove sono.
+    const telefono = matchMedia('(max-width: 720px)');
+    let ultimoY = scrollY;
+    const aggiornaFissi = () => {
+      const y = scrollY;
+      const inFondo = y + innerHeight >= document.documentElement.scrollHeight - 120;
+      const piAperto = !document.querySelector('.assistente')?.hasAttribute('hidden');
+      let nascondi = document.documentElement.classList.contains('bf-nascosti');
+      if (!telefono.matches || piAperto || y < 200 || inFondo) nascondi = false;
+      else if (y > ultimoY + 8) nascondi = true;
+      else if (y < ultimoY - 8) nascondi = false;
+      if (Math.abs(y - ultimoY) > 8 || !nascondi) ultimoY = y;
+      document.documentElement.classList.toggle('bf-nascosti', nascondi);
+    };
+    addEventListener('scroll', aggiornaFissi, { passive: true });
+    telefono.addEventListener?.('change', aggiornaFissi);
+
     // Il blocco della copia vale per chi non ha sbloccato la materia. Le protezioni
     // di stampa e cattura si applicano anche alle pagine sbloccate.
     const radice = document.documentElement;

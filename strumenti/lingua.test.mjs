@@ -10,9 +10,10 @@ const env = { ASSETS: { fetch: () => Response.json({
   en: ['/', '/analisi-1', '/analisi-1/limiti/teoria'],
 }) } };
 
-async function destinazione(path, { lingua = 'de-DE,de;q=0.9,en;q=0.8', cookie = '', agente = 'Mozilla/5.0', method = 'GET' } = {}) {
+async function destinazione(path, { lingua = 'de-DE,de;q=0.9,en;q=0.8', cookie = '', agente = 'Mozilla/5.0', method = 'GET', paese = 'DE' } = {}) {
   const url = new URL(path, 'https://ripetizionidianalisi.com');
   const req = new Request(url, { method, headers: { 'accept-language': lingua, cookie, 'user-agent': agente } });
+  Object.defineProperty(req, 'cf', { value: paese ? { country: paese } : undefined });
   const r = await versoLaLinguaGiusta(req, env, url);
   return r?.headers.get('location') ?? null;
 }
@@ -64,6 +65,21 @@ test('i link diretti e le scelte esplicite funzionano in tutte le lingue', async
   assert.equal(await destinazione('/analisi-1', { lingua: 'nl-NL' }), '/en/analisi-1');
   assert.equal(await destinazione('/analisi-1/limiti/teoria?lingua=it'), null);
   assert.equal(await destinazione('/', { cookie: 'lingua=%e' }), '/de');
+});
+
+test('gli studenti in Italia o con l\'italiano fra le lingue restano in italiano', async () => {
+  // Telefono in inglese, studente in Italia (link della bio di Instagram): niente inglese automatico.
+  assert.equal(await destinazione('/', { lingua: 'en-US,en;q=0.9', paese: 'IT' }), null);
+  assert.equal(await destinazione('/analisi-1/limiti/teoria', { lingua: 'en-GB', paese: 'IT' }), null);
+  assert.equal(await destinazione('/analisi-1', { lingua: 'ro-RO,ro;q=0.9', paese: 'IT' }), null);
+  // L'italiano come seconda lingua del browser basta, anche all'estero.
+  assert.equal(await destinazione('/analisi-1', { lingua: 'en-GB,en;q=0.9,it;q=0.8', paese: 'GB' }), null);
+  // All'estero, senza italiano, resta il comportamento di prima.
+  assert.equal(await destinazione('/analisi-1', { lingua: 'en-US,en;q=0.9', paese: 'US' }), '/en/analisi-1');
+  // La scelta esplicita (cookie) vince anche in Italia.
+  assert.equal(await destinazione('/analisi-1', { lingua: 'it-IT', paese: 'IT', cookie: 'lingua=en' }), '/en/analisi-1');
+  // Chi è in Italia e apre un link inglese con il telefono in inglese torna all'italiano solo se la pagina esiste.
+  assert.equal(await destinazione('/en/analisi-1', { lingua: 'en-US', paese: 'IT' }), '/analisi-1');
 });
 
 test('i robot, gli asset e le API non vengono reindirizzati', async () => {

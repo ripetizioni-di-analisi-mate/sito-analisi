@@ -36,6 +36,22 @@ export function linguaBrowser(intestazione) {
   return voci[0]?.tag.split('-')[0] || null;
 }
 
+// Tutte le lingue accettate dal browser (q > 0), per esempio ['en', 'it'] da «en-GB,en;q=0.9,it;q=0.8».
+export function lingueBrowser(intestazione) {
+  return (intestazione || '').split(',').map((pezzo) => {
+    const [tag, ...param] = pezzo.trim().split(';');
+    const q = Number((param.find((x) => x.trim().startsWith('q=')) || 'q=1').trim().slice(2));
+    return Number.isFinite(q) && q > 0 ? tag.trim().toLowerCase().split('-')[0] : '';
+  }).filter((t) => t && t !== '*');
+}
+
+// Paesi in cui il sito resta in italiano anche con il telefono in un'altra lingua (16/11/2026: molti studenti
+// italiani con il telefono in inglese finivano sulla versione inglese). Il paese lo dà Cloudflare (req.cf.country).
+const PAESI_ITALIANI = new Set(['IT', 'SM', 'VA']);
+export function visitatoreItaliano(req) {
+  return PAESI_ITALIANI.has(String(req.cf?.country || '').toUpperCase()) || lingueBrowser(req.headers.get('accept-language')).includes('it');
+}
+
 export function navigazioneVisitatore(req) {
   const ua = req.headers.get('user-agent') || '';
   return req.method === 'GET' && Boolean(ua) && !NON_PERSONE.test(ua);
@@ -50,7 +66,8 @@ export async function versoLaLinguaGiusta(req, env, url) {
   const scelta = leggiCookie(req, 'lingua');
   const browser = linguaBrowser(req.headers.get('accept-language'));
   const sceltaEsplicita = CODICI_LINGUA.includes(scelta);
-  const voluta = sceltaEsplicita ? scelta : CODICI_LINGUA.includes(browser) ? browser : browser ? 'en' : null;
+  // Senza una scelta esplicita: in Italia, o con l'italiano fra le lingue del browser, resta l'italiano.
+  const voluta = sceltaEsplicita ? scelta : visitatoreItaliano(req) ? 'it' : CODICI_LINGUA.includes(browser) ? browser : browser ? 'en' : null;
   if (!voluta) return null;
 
   const prefisso = prefissoLingua(percorso);

@@ -58,6 +58,7 @@ const T = es ? {
   ospite: 'Puedes responder sin cuenta. Si creas una cuenta gratuita, se guardarán tus puntos y tus avances.', accedi: 'Crear una cuenta o iniciar sesión',
   caricamento: 'Cargando la pregunta…', risposte: 'Respuestas', conferma: 'Confirmar respuesta', prossima: 'Siguiente pregunta', svolti: 'Ejercicios resueltos de este tema', nuovaSerie: 'Nueva serie de preguntas',
   navigazione: 'Preguntas', precedente: '← Anterior', successiva: 'Siguiente →',
+  inizia: 'Empezar', avvio: 'El tiempo empieza cuando pulsas «Empezar».',
   anteprima: 'Vista previa gratuita', bloccata: 'Esta pregunta requiere acceso completo al curso.', sblocca: 'Desbloquear el curso',
 } : en ? {
   titolo: personale ? 'Spaced review' : ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
@@ -65,6 +66,7 @@ const T = es ? {
   ospite: (anteprimaScienza || anteprimaUsa) ? 'Experience points and progress are saved with a free account.' : 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
   caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic', nuovaSerie: 'New set of questions',
   navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
+  inizia: 'Start', avvio: 'The timer starts when you press Start.',
   anteprima: 'Free preview', bloccata: 'This question requires full access to the course.', sblocca: 'Unlock the course',
 } : {
   titolo: personale ? 'Ripasso dilazionato' : ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
@@ -72,6 +74,7 @@ const T = es ? {
   ospite: (anteprimaScienza || anteprimaUsa) ? 'I punti esperienza e i progressi si salvano con un account gratuito.' : 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
   caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento', nuovaSerie: 'Nuova serie di domande',
   navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
+  inizia: 'Inizia', avvio: 'Il tempo parte quando premi «Inizia».',
   anteprima: 'Anteprima gratuita', bloccata: 'Questa domanda è riservata a chi ha acquistato l’accesso completo alla materia.', sblocca: 'Sblocca la materia',
 };
 // Testi usati dallo script nel browser.
@@ -145,6 +148,10 @@ const JS = es ? {
     </nav>
 
     <section class="scheda-domanda" aria-live="polite">
+      <div class="avvio-domande" hidden>
+        <button type="button" class="bottone-primario avvia">{T.inizia}</button>
+        <p>{T.avvio}</p>
+      </div>
       <p class="numero-domanda"></p>
       <div class="velo-blocco velo-scheda blocco-domande" hidden>
         <p class="sopratitolo">{T.anteprima}</p>
@@ -175,6 +182,9 @@ const JS = es ? {
 
 <style>
   :global(html.sbloccato) .nota-anteprima-scienza { display: none; }
+  .avvio-domande { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; padding: .4rem 0 .2rem; }
+  .avvio-domande[hidden] { display: none; }
+  .avvio-domande p { margin: 0; color: var(--inchiostro); opacity: .75; font-family: var(--ui); font-size: .92rem; }
 </style>
 
 <script>
@@ -379,7 +389,11 @@ const JS = es ? {
   conferma.addEventListener('click', () => invia());
   const sposta = (i: number) => { vai(i); scheda.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
   prossima.addEventListener('click', () => sposta(pos + 1));
-  nuovaSerie.addEventListener('click', () => location.reload());
+  nuovaSerie.addEventListener('click', () => {
+    // Chi chiede una nuova serie ha già premuto «Inizia»: la serie nuova parte subito.
+    try { sessionStorage.setItem('domande-avvio-subito', '1'); } catch { /* niente memoria */ }
+    location.reload();
+  });
   succ.addEventListener('click', () => sposta(pos + 1));
   prec.addEventListener('click', () => sposta(pos - 1));
 
@@ -412,5 +426,19 @@ const JS = es ? {
     riepilogo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  vai(0);
+  // Il tempo della prima domanda parte solo quando lo studente preme «Inizia» (richiesta di Carmine del 16/11/2026:
+  // prima il cronometro partiva all'apertura della pagina, mentre si leggevano le istruzioni).
+  const avvio = $('.avvio-domande');
+  let subito = false;
+  try { subito = sessionStorage.getItem('domande-avvio-subito') === '1'; sessionStorage.removeItem('domande-avvio-subito'); } catch { /* niente memoria */ }
+  if (subito) vai(0);
+  else {
+    testo.hidden = true;
+    avvio.hidden = false;
+    $<HTMLButtonElement>('.avvia').addEventListener('click', () => {
+      avvio.hidden = true;
+      testo.hidden = false;
+      vai(0);
+    }, { once: true });
+  }
 </script>

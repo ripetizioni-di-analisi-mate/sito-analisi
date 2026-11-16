@@ -1647,3 +1647,21 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 }
 :is(.testo-studio, .testo-domanda) blockquote > p { margin: 0 0 0.7rem; }
 :is(.testo-studio, .testo-domanda) blockquote > p:last-child { margin-bottom: 0; }
+
+/* ---------- tasti fissi al telefono (16/11/2026, richiesta di Carmine: Pi e WhatsApp coprivano testo e tasti) ----------
+   Più piccoli e più vicini al bordo; mentre si scorre verso il basso per leggere si spostano fuori dallo schermo
+   e tornano appena si risale, in cima alla pagina o in fondo (classe html.bf-nascosti, script in Base.astro). */
+@media (max-width: 720px) {
+  .bottoni-fissi { right: 0.7rem; bottom: 0.7rem; gap: 0.45rem; }
+  .bottone-assistente { height: 2.9rem; max-width: 2.9rem; }
+  .pi-avatar { width: calc(2.9rem - 4px); height: calc(2.9rem - 4px); font-size: 1.45rem; }
+  .pi-online { width: 0.75rem; height: 0.75rem; }
+  .bottone-whatsapp { width: 2.6rem; height: 2.6rem; }
+  .bottone-whatsapp svg { width: 1.45rem; height: 1.45rem; }
+  .torna-su { width: 2.4rem; height: 2.4rem; }
+  .bottoni-fissi > .pi-lancio, .bottoni-fissi > .bottone-whatsapp, .bottoni-fissi > .torna-su { transition: transform 0.25s ease, opacity 0.25s ease; }
+  html.bf-nascosti .bottoni-fissi > .pi-lancio, html.bf-nascosti .bottoni-fissi > .bottone-whatsapp, html.bf-nascosti .bottoni-fissi > .torna-su { transform: translateX(calc(100% + 1rem)); opacity: 0; pointer-events: none; }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .bottoni-fissi > .pi-lancio, .bottoni-fissi > .bottone-whatsapp, .bottoni-fissi > .torna-su { transition: none; }
+}
