@@ -11,6 +11,9 @@
 // Versione E (16/11/2026, scelta di Carmine fra sei varianti): riquadro dell'anteprima gratuita in cima (azione principale,
 // con «Sblocca tutto» e «Copre il tuo esame?»), Studio guidato sotto; nei capitoli la Teoria è la prima delle quattro voci.
 // Vale anche per le pagine inglesi (prop lingua); lo Studio guidato e la compatibilità restano in italiano.
+import NotaBocconi from './NotaBocconi.astro';
+import { BOCCONI } from '../data/bocconi.mjs';
+
 interface Argomento { slug: string; titolo: string; riassunto?: string; pronto: boolean; svolti: number; dafare: number; verificabili: number; domande: number }
 interface Props {
   materia: string;
@@ -96,7 +99,7 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
     </div>
   )}
 
-  <section class="pm-sg">
+  {materia === BOCCONI.slug ? <NotaBocconi lingua={lingua} /> : <section class="pm-sg">
     <span class="pm-sg-ic" set:html={I.mirino} />
     <h2>{L.sg}</h2>
     <button type="button" class="pm-info" aria-expanded="false" aria-controls="pm-sg-info" aria-label={L.sgInfo} title={L.sgInfoBreve} data-pm-info set:html={I.info}></button>
@@ -111,10 +114,10 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
       <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
       <li><span set:html={I.percorso} /><span class="pm-lungo">{L.passi[2][0]}</span><span class="pm-corto">{L.passi[2][1]}</span></li>
     </ol>
-  </section>
+  </section>}
 
   <div class="pm-ph-riga">
-    <h2 class="pm-ph">{L.programma}</h2>
+    <h2 class="pm-ph" id="programma">{L.programma}</h2>
     <span class="pm-esame" data-pm-esame></span>
   </div>
   <ol class="pm-perc">

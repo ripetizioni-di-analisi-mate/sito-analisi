@@ -11,39 +11,66 @@ type Stato = Avvio & { prova: string; pagina: number; risposte: (number | null)[
 const radice = document.querySelector<HTMLElement>('[data-bocconi]')!;
 const lingua: Lingua = radice.dataset.lingua === 'en' ? 'en' : 'it';
 const corso = (lingua === 'en' ? '/en/' : '/') + BOCCONI.slug;
-const chiave = 'bocconi-prova-v1-' + lingua;
+const chiave = 'bocconi-prove-v2-' + lingua;
+const accessoCompleto = radice.hasAttribute('data-accesso-completo');
 const traduci = (it: string, en: string) => lingua === 'en' ? en : it;
 const elemento = <T extends HTMLElement = HTMLElement>(nome: string) => document.getElementById('boc-' + nome) as T;
 const introduzione = elemento('inizio');
 const provaInCorso = elemento('prova');
 const risultato = elemento('risultato');
 const avanti = elemento<HTMLButtonElement>('avanti');
+const indietro = elemento<HTMLButtonElement>('indietro');
 const consegna = elemento<HTMLButtonElement>('consegna');
 const conferma = elemento<HTMLDialogElement>('conferma');
 const messaggi = elemento('avviso');
-const nuova = elemento<HTMLButtonElement>('nuova');
+const menu = elemento<HTMLButtonElement>('menu');
+const accesso = elemento('accesso');
 const riprova = elemento<HTMLButtonElement>('riprova');
 const diagnostico = elemento<HTMLButtonElement>('diagnostico');
+const riprendiDiagnostico = elemento<HTMLButtonElement>('riprendi-diagnostico');
+const riprendiSimulazione = elemento<HTMLButtonElement>('riprendi-simulazioni');
 const form = elemento<HTMLFormElement>('form');
+const numero = elemento<HTMLSelectElement>('numero');
 const avviaSimulazione = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 const formato = new Intl.NumberFormat(lingua === 'en' ? 'en-GB' : 'it-IT', { maximumFractionDigits: 2 });
 const nomiCapitoli = JSON.parse(radice.dataset.capitoli ?? '{}') as Record<string, string>;
 
+const tentativi: Partial<Record<string, Stato>> = {};
 let stato: Stato | null = null;
 let intervallo = 0;
 let richiestaInCorso = false;
 
-function avvisa(testo: string) {
+function avvisa(testo: string, linkAccesso = false) {
   messaggi.textContent = testo;
   messaggi.hidden = !testo;
+  accesso.hidden = !linkAccesso;
+}
+
+function salvaTentativi() {
+  try {
+    sessionStorage.setItem(chiave, JSON.stringify(tentativi));
+  } catch {
+    // La prova funziona anche quando il browser disattiva il salvataggio di sessione.
+  }
 }
 
 function salva() {
-  try {
-    if (stato) sessionStorage.setItem(chiave, JSON.stringify(stato));
-    else sessionStorage.removeItem(chiave);
-  } catch {
-    // La prova funziona anche quando il browser disattiva il salvataggio di sessione.
+  if (!stato) return;
+  tentativi[stato.prova] = stato;
+  salvaTentativi();
+}
+
+function indirizzo(prova?: string, sezione?: string) {
+  const url = new URL(location.href);
+  if (prova) url.searchParams.set('prova', prova);
+  else url.searchParams.delete('prova');
+  url.hash = sezione ?? '';
+  history.replaceState(history.state, '', url);
+}
+
+class ErroreProva extends Error {
+  constructor(messaggio: string, readonly stato: number) {
+    super(messaggio);
   }
 }
 
@@ -55,7 +82,7 @@ async function richiedi<T>(azione: string, dati: Record<string, unknown>): Promi
   }).catch(() => { throw new Error(traduci('Connessione interrotta. Riprova.', 'Connection interrupted. Please try again.')); });
   const esito = await risposta.json().catch(() => null);
   if (!risposta.ok || !esito) {
-    throw new Error(esito?.errore || traduci('La prova non si è caricata. Riprova.', 'The test did not load. Please try again.'));
+    throw new ErroreProva(esito?.errore || traduci('La prova non si è caricata. Riprova.', 'The test did not load. Please try again.'), risposta.status);
   }
   return esito;
 }
@@ -119,7 +146,6 @@ function mostraQuesito(q: Domanda, indice: number, scelta: number | null) {
       aggiornaConto();
     });
     const lettera = nodo('span', String.fromCharCode(65 + i) + '. ');
-    lettera.setAttribute('aria-hidden', 'true');
     etichetta.append(input, lettera, testoReso(risposta, 'boc-risposta-testo'));
     opzioni.append(etichetta);
   }
@@ -141,7 +167,7 @@ function mostraPagina() {
   introduzione.hidden = true;
   provaInCorso.hidden = false;
   risultato.hidden = true;
-  nuova.hidden = true;
+  menu.hidden = false;
   elemento('tempo').hidden = stato.scadenza === null;
   const partenza = stato.pagina * BOCCONI.perPagina;
   const limite = Math.min(partenza + BOCCONI.perPagina, stato.domande.length);
@@ -150,6 +176,7 @@ function mostraPagina() {
   elemento('domande').replaceChildren(...stato.domande.slice(partenza, limite).map((q, i) =>
     mostraQuesito(q, partenza + i, stato!.risposte[partenza + i])));
   avanti.hidden = ultimaPagina;
+  indietro.hidden = stato.prova !== 'diagnostico' || stato.pagina === 0;
   consegna.className = ultimaPagina ? 'bottone-primario' : 'bottone-secondario';
   aggiornaConto();
   elemento('pagina').focus();
@@ -157,30 +184,24 @@ function mostraPagina() {
 
 async function inizia(codice: string) {
   if (richiestaInCorso) return;
-  richiestaInCorso = true;
-  diagnostico.disabled = true;
-  avviaSimulazione.disabled = true;
+  inAttesa(true);
   avvisa(traduci('Caricamento dei quesiti…', 'Loading questions…'));
+  let dati: Avvio;
   try {
-    const dati = await richiedi<Avvio>('inizia', { prova: codice });
-    stato = { ...dati, prova: codice, pagina: 0, risposte: dati.domande.map(() => null), consegnata: false };
-    salva();
-    avvisa('');
-    mostraPagina();
-    if (dati.scadenza !== null && !stato.consegnata) intervallo = window.setInterval(controllaTempo, 1000);
+    dati = await richiedi<Avvio>('inizia', { prova: codice });
   } catch (errore) {
-    avvisa(errore instanceof Error ? errore.message : traduci('Connessione da riprovare.', 'Please check your connection and retry.'));
+    avvisa(errore instanceof Error ? errore.message : traduci('Connessione da riprovare.', 'Please check your connection and retry.'),
+      errore instanceof ErroreProva && errore.stato === 403);
+    return;
   } finally {
-    diagnostico.disabled = false;
-    avviaSimulazione.disabled = false;
-    richiestaInCorso = false;
-    if (stato?.consegnata && !stato.esito) void correggi();
+    inAttesa(false);
   }
+  apri({ ...dati, prova: codice, pagina: 0, risposte: dati.domande.map(() => null), consegnata: false });
 }
 
-function linkTeoria(q: Domanda, titolo?: string) {
-  const a = nodo('a', titolo ?? traduci('Ripassa la lezione', 'Review the lesson'));
-  a.href = corso + '/' + q.capitolo + '/teoria/' + q.ancora;
+function linkTeoria(q: Domanda, capitolo = false) {
+  const a = nodo('a', capitolo ? nomiCapitoli[q.capitolo] : traduci('Ripassa la lezione', 'Review the lesson'));
+  a.href = corso + '/' + q.capitolo + '/teoria' + (capitolo ? '' : '/' + q.ancora);
   return a;
 }
 
@@ -190,7 +211,7 @@ function mostraRisultato(esito: Esito) {
   provaInCorso.hidden = true;
   risultato.hidden = false;
   riprova.hidden = true;
-  nuova.hidden = false;
+  menu.hidden = false;
   avvisa('');
   elemento('punti').textContent = (stato.prova === 'diagnostico' ? traduci('Risposte corrette ', 'Correct answers ') : traduci('Punteggio ', 'Score ')) +
     formato.format(esito.punti) + ' / ' + esito.massimo;
@@ -227,9 +248,9 @@ function mostraRisultato(esito: Esito) {
     gruppo.append(articolo);
   }
   elemento('focus').hidden = capitoli.size === 0;
-  elemento('focus-lista').replaceChildren(...[...capitoli.entries()].sort((a, b) => b[1].daRiprendere - a[1].daRiprendere).map(([id, voce]) => {
+  elemento('focus-lista').replaceChildren(...[...capitoli.values()].sort((a, b) => b.daRiprendere - a.daRiprendere).map((voce) => {
     const li = nodo('li', '');
-    li.append(linkTeoria(voce.domanda, nomiCapitoli[id]), ' · ' + voce.daRiprendere + traduci(' da rivedere', ' to review'));
+    li.append(linkTeoria(voce.domanda, true), ' · ' + voce.daRiprendere + traduci(' da rivedere', ' to review'));
     return li;
   }));
   elemento('correzione').replaceChildren(...Object.keys(AREE_BOCCONI).map((area) => gruppi.get(area as Area)!));
@@ -237,35 +258,110 @@ function mostraRisultato(esito: Esito) {
 }
 
 async function correggi() {
-  if (!stato) return;
+  if (!stato || richiestaInCorso) return;
   stato.consegnata = true;
   salva();
-  if (richiestaInCorso) return;
-  richiestaInCorso = true;
+  inAttesa(true);
   if (conferma.open) conferma.close();
   clearInterval(intervallo);
   introduzione.hidden = true;
   provaInCorso.hidden = true;
   riprova.hidden = true;
-  nuova.hidden = true;
+  menu.hidden = true;
   avvisa(traduci('Correzione in corso…', 'Marking your answers…'));
   try {
     stato.esito = await richiedi<Esito>('correggi', { prova: stato.prova, token: stato.token, risposte: stato.risposte });
     salva();
     mostraRisultato(stato.esito);
   } catch (errore) {
-    avvisa(errore instanceof Error ? errore.message : traduci('Correzione da riprovare.', 'Please retry marking.'));
-    riprova.hidden = false;
-    nuova.hidden = false;
+    const messaggio = errore instanceof Error ? errore.message : traduci('Correzione da riprovare.', 'Please retry marking.');
+    const codice = errore instanceof ErroreProva ? errore.stato : 0;
+    if ([400, 409].includes(codice)) {
+      const prova = stato.prova;
+      delete tentativi[prova];
+      salvaTentativi();
+      tornaAlleProve(prova);
+    } else {
+      riprova.hidden = false;
+      menu.hidden = false;
+    }
+    avvisa(messaggio, codice === 403);
   } finally {
-    richiestaInCorso = false;
+    inAttesa(false);
+  }
+}
+
+function inAttesa(attesa: boolean) {
+  richiestaInCorso = attesa;
+  for (const bottone of [diagnostico, avviaSimulazione, riprendiDiagnostico, riprendiSimulazione, riprova]) {
+    bottone.disabled = attesa;
+  }
+  numero.disabled = attesa;
+}
+
+function aggiornaRiprese() {
+  const libero = tentativi.diagnostico;
+  riprendiDiagnostico.hidden = !libero;
+  riprendiDiagnostico.textContent = libero?.esito
+    ? traduci('Rivedi il risultato', 'View your result') : traduci('Riprendi il diagnostico', 'Resume diagnostic');
+  diagnostico.textContent = libero
+    ? traduci('Ricomincia il diagnostico', 'Restart diagnostic') : traduci('Inizia il diagnostico', 'Start the diagnostic');
+  const simulazione = accessoCompleto ? tentativi[numero.value] : undefined;
+  riprendiSimulazione.hidden = !simulazione;
+  riprendiSimulazione.textContent = simulazione?.esito
+    ? traduci('Rivedi il risultato', 'View your result') : traduci('Riprendi la simulazione', 'Resume mock test');
+  avviaSimulazione.textContent = simulazione
+    ? traduci('Ricomincia la simulazione', 'Restart mock test') : traduci('Inizia la simulazione', 'Start the mock test');
+}
+
+function tornaAlleProve(prova: string) {
+  clearInterval(intervallo);
+  stato = null;
+  const demo = prova === 'diagnostico';
+  indirizzo(undefined, demo ? 'diagnostico' : 'simulazioni');
+  if (!demo) numero.value = prova;
+  avvisa('');
+  risultato.hidden = true;
+  provaInCorso.hidden = true;
+  menu.hidden = true;
+  riprova.hidden = true;
+  introduzione.hidden = false;
+  aggiornaRiprese();
+  (demo ? diagnostico : numero).focus();
+}
+
+function apri(tentativo: Stato) {
+  clearInterval(intervallo);
+  stato = tentativo;
+  salva();
+  indirizzo(stato.prova);
+  avvisa('');
+  if (stato.esito) mostraRisultato(stato.esito);
+  else if (stato.consegnata) void correggi();
+  else {
+    mostraPagina();
+    if (stato.scadenza !== null && !stato.consegnata) intervallo = window.setInterval(controllaTempo, 1000);
   }
 }
 
 diagnostico.addEventListener('click', () => void inizia('diagnostico'));
 form.addEventListener('submit', (evento) => {
   evento.preventDefault();
-  void inizia(elemento<HTMLSelectElement>('numero').value);
+  if (accessoCompleto) void inizia(numero.value);
+});
+numero.addEventListener('change', aggiornaRiprese);
+riprendiDiagnostico.addEventListener('click', () => {
+  if (tentativi.diagnostico) apri(tentativi.diagnostico);
+});
+riprendiSimulazione.addEventListener('click', () => {
+  const tentativo = tentativi[numero.value];
+  if (accessoCompleto && tentativo) apri(tentativo);
+});
+indietro.addEventListener('click', () => {
+  if (stato?.prova !== 'diagnostico' || stato.pagina === 0) return;
+  stato.pagina--;
+  salva();
+  mostraPagina();
 });
 avanti.addEventListener('click', () => {
   if (!stato || !controllaTempo() || (stato.pagina + 1) * BOCCONI.perPagina >= stato.domande.length) return;
@@ -286,29 +382,34 @@ conferma.addEventListener('close', () => {
   if (conferma.returnValue === 'consegna') void correggi();
 });
 riprova.addEventListener('click', () => void correggi());
-nuova.addEventListener('click', () => {
-  stato = null;
-  salva();
-  avvisa('');
-  risultato.hidden = true;
-  nuova.hidden = true;
-  riprova.hidden = true;
-  introduzione.hidden = false;
-  diagnostico.focus();
+menu.addEventListener('click', () => {
+  if (stato) tornaAlleProve(stato.prova);
 });
 
+function valido(ripresa: Partial<Stato> | null | undefined): ripresa is Stato {
+  return Boolean(ripresa && PROVE_BOCCONI.includes(ripresa.prova ?? '') && typeof ripresa.token === 'string' &&
+    Array.isArray(ripresa.domande) && ripresa.domande.length === (ripresa.prova === 'diagnostico' ? BOCCONI.diagnostico : BOCCONI.quesiti) &&
+    Array.isArray(ripresa.risposte) && ripresa.risposte.length === ripresa.domande.length && typeof ripresa.pagina === 'number' &&
+    Number.isInteger(ripresa.pagina) && ripresa.pagina >= 0 && ripresa.pagina * BOCCONI.perPagina < ripresa.domande.length);
+}
+
 try {
-  const ripresa = JSON.parse(sessionStorage.getItem(chiave) ?? 'null') as Stato | null;
-  if (ripresa && PROVE_BOCCONI.includes(ripresa.prova) && typeof ripresa.token === 'string' &&
-      ripresa.domande.length === (ripresa.prova === 'diagnostico' ? BOCCONI.diagnostico : BOCCONI.quesiti) &&
-      ripresa.risposte.length === ripresa.domande.length && Number.isInteger(ripresa.pagina) &&
-      ripresa.pagina >= 0 && ripresa.pagina * BOCCONI.perPagina < ripresa.domande.length) stato = ripresa;
+  const salvati = JSON.parse(sessionStorage.getItem(chiave) ?? '{}');
+  for (const prova of PROVE_BOCCONI) {
+    const tentativo = salvati?.[prova];
+    if (valido(tentativo) && tentativo.prova === prova) tentativi[prova] = tentativo;
+  }
+  const chiavePrecedente = 'bocconi-prova-v1-' + lingua;
+  const precedente = JSON.parse(sessionStorage.getItem(chiavePrecedente) ?? 'null');
+  if (valido(precedente)) {
+    tentativi[precedente.prova] ??= precedente;
+    sessionStorage.setItem(chiave, JSON.stringify(tentativi));
+    sessionStorage.removeItem(chiavePrecedente);
+  }
 } catch {
-  stato = null;
+  // Il salvataggio può essere disattivato o provenire da un tentativo interrotto.
 }
-if (stato?.esito) mostraRisultato(stato.esito);
-else if (stato?.consegnata) void correggi();
-else if (stato) {
-  mostraPagina();
-  if (stato.scadenza !== null && !stato.consegnata) intervallo = window.setInterval(controllaTempo, 1000);
-}
+aggiornaRiprese();
+const codiceUrl = new URLSearchParams(location.search).get('prova');
+const daRiprendere = PROVE_BOCCONI.includes(codiceUrl ?? '') ? tentativi[codiceUrl!] : undefined;
+if (daRiprendere && !location.hash && (daRiprendere.prova === 'diagnostico' || accessoCompleto)) apri(daRiprendere);

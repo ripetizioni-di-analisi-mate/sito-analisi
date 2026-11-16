@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import ConsensoEmail from '../components/ConsensoEmail.astro';
 import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
+import { BOCCONI } from '../data/bocconi.mjs';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { SCONTO_INVITO } from '../data/inviti';
 import { SCONTO_BENVENUTO } from '../data/benvenuto';
@@ -20,8 +21,11 @@ const usCounts = usa ? usContentCounts(materia, m.argomenti.length) : undefined;
 const svolti = usCounts?.worked ?? (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
 const dafare = usCounts?.exercises ?? (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
 const scienza = materia === 'scienza-delle-costruzioni';
-const domande = scienza ? (await getCollection('domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
+const bocconi = materia === BOCCONI.slug;
 const en = lingua === 'en';
+const domande = scienza || bocconi
+  ? (await getCollection(bocconi && en ? 'domande_en' : 'domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
+const hrefDiagnostico = bocconi ? link(lingua, `/${materia}/simulazione#diagnostico`) : '';
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 const hrefMateria = usa ? url(courseUrl(materia)) : link(lingua, '/' + materia);
@@ -57,11 +61,16 @@ const invito = lingua === 'en' ? {
     </> : <>
       <li set:html={t.includeSoluzioni(dafare)} />
       {scienza && <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li>}
+      {bocconi && <>
+        <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'with explanations' : 'con spiegazione'}</li>
+        <li><strong>{BOCCONI.simulazioni} {en ? 'full mock tests' : 'simulazioni complete'}</strong> {en ? 'with worked solutions in Italian and English' : 'con correzione ragionata in italiano e in inglese'}</li>
+      </>}
     </>}
   </ul>
   {!usa && <p class="gratis-ora">{scienza ? (en
     ? 'Read the beginning of each topic, open its first three worked exercise sheets and try one timed question without an account.'
     : 'Senza account puoi leggere l’inizio di ogni capitolo, aprire le prime tre schede di esercizi svolti e provare una domanda a tempo.') : t.gratisOra}</p>}
+  {bocconi && <p class="gratis-ora"><a href={hrefDiagnostico}>{en ? 'Take the free diagnostic' : 'Svolgi il diagnostico gratuito'}</a></p>}
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
@@ -89,7 +98,7 @@ const invito = lingua === 'en' ? {
     <p class="nota-termini-breve">{lingua === 'it' ? <>Acquistando accetti i <a href="/termini">termini d’uso</a>.</> : <>By purchasing you accept the <a href="/en/termini">terms of use</a>.</>}</p>
   </div>
 
-  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, lingua, invito, compat, usa, hrefMateria }}>
+  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, lingua, invito, compat, usa, hrefMateria, bocconi }}>
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
@@ -153,6 +162,10 @@ const invito = lingua === 'en' ? {
       if (!attivo) {
         modulo.hidden = true;
         azione.hidden = false;
+        if (bocconi) {
+          azione.textContent = lingua === 'en' ? 'Payment is temporarily unavailable. Please try again shortly.' : 'Il pagamento è temporaneamente indisponibile. Riprova tra poco.';
+          return;
+        }
         azione.innerHTML = `<p>${usa ? 'Purchasing this subject is temporarily unavailable.' : lingua === 'en'
           ? 'Purchasing this subject is not available yet. You can explore the free preview and practise with the timed questions.'
           : 'L’acquisto di questa materia non è ancora disponibile. Puoi consultare l’anteprima gratuita e allenarti con le domande a tempo.'}</p><a class="bottone-primario" href="${hrefMateria}">${usa ? 'View course topics' : lingua === 'en' ? 'Explore the free preview' : 'Esplora l’anteprima gratuita'}</a>`;

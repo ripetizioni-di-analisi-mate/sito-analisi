@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { AREE_BOCCONI, BOCCONI, PROVE_BOCCONI } from '../src/data/bocconi.mjs';
-import { correggiBocconi, gestisciBocconi } from '../worker/bocconi.mjs';
+import { accessoBocconi, correggiBocconi, gestisciBocconi } from '../worker/bocconi.mjs';
 
 const banca = JSON.parse(readFileSync(new URL('../src/data/bocconi-prove.json', import.meta.url), 'utf8'));
 
@@ -47,6 +47,30 @@ test('Bocconi: penalità da 0,20 e da 0,33, omissioni e diagnostico', () => {
   assert.equal(valuta.sezioni.find((a) => a.area === 'critico').punti, -0.33);
   assert.equal(valuta.sezioni.find((a) => a.area === 'matematica').omesse, 1);
   assert.equal(correggiBocconi(domande, risposte, false).punti, 1);
+});
+
+test('Bocconi: ogni rimando della correzione punta allo stesso argomento in italiano e in inglese', () => {
+  const capitoli = new Map();
+  for (const { capitolo, topic } of Object.values(banca).flat()) {
+    const chiavi = capitoli.get(capitolo) ?? new Set();
+    chiavi.add(topic);
+    capitoli.set(capitolo, chiavi);
+  }
+  for (const cartella of ['content', 'content-en']) {
+    for (const [capitolo, riferimenti] of capitoli) {
+      const testo = readFileSync(new URL(`../src/${cartella}/teoria/${BOCCONI.slug}/${capitolo}.md`, import.meta.url), 'utf8');
+      const ancore = new Set(Array.from(testo.matchAll(/\{#([a-z0-9-]+)(?=[\s}])/g), ([, id]) => id));
+      for (const id of riferimenti) assert.ok(ancore.has(id), `${cartella}/${capitolo}#${id}`);
+    }
+  }
+});
+
+test('Bocconi: interfaccia delle simulazioni e API usano l’accesso del corso', () => {
+  const vendita = { VENDITA: '1' };
+  assert.equal(accessoBocconi(vendita, null), false);
+  assert.equal(accessoBocconi(vendita, { materie: ['analisi-1'] }), false);
+  assert.equal(accessoBocconi(vendita, { materie: [BOCCONI.slug] }), true);
+  assert.equal(accessoBocconi({ VENDITA: '0' }, null), true);
 });
 
 test('Bocconi: diagnostico aperto, esercitazione protetta, correzione separata', async () => {
