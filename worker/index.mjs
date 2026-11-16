@@ -20,6 +20,8 @@ import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import { gestisciTolcI } from './tolc-i.mjs';
 import { TOLC, demoTolc } from '../src/data/tolc.mjs';
+import { gestisciBocconi } from './bocconi.mjs';
+import { BOCCONI } from '../src/data/bocconi.mjs';
 import { anteprimaAnalisi3 } from '../src/data/analisi3.mjs';
 import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
@@ -1032,7 +1034,7 @@ export default {
     if (p === '/api/lega' || p === '/api/lega/gm' || p === '/api/lega/nome' || p === '/api/lega/avvisi' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
       const r = await gestisciSfide(req, env, ctx, p, {
         json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi,
-        materiaQuizRiservata: scienzaAPagamento ? SCIENZA_DELLE_COSTRUZIONI : null,
+        materieQuizRiservate: [scienzaAPagamento && SCIENZA_DELLE_COSTRUZIONI, vendita && BOCCONI.slug].filter(Boolean),
       });
       if (r) return r;
     }
@@ -1293,6 +1295,13 @@ export default {
       const anteprimaUsa = usaBloccato && l === 'en' && usStudyPreviewPage(materia, argomento + '/domande');
       if (usaBloccato && !anteprimaUsa) return rispostaCorsoUsaRiservato(materia);
       const personale = argomento === RIPASSO_OGGI;
+      if (materia === BOCCONI.slug && vendita && !io?.materie?.includes(materia)) {
+        return json({
+          errore: l === 'en' ? 'Topic quizzes are included in the full course. You can start with the free diagnostic test.'
+            : 'I quiz per capitolo sono inclusi nel corso completo. Per iniziare puoi svolgere il diagnostico gratuito.',
+          sblocca: `${l === 'en' ? '/en' : ''}/${materia}/sblocca`,
+        }, 403, { 'cache-control': 'no-store' });
+      }
       const anteprimaScienza = scienzaAPagamento && materia === SCIENZA_DELLE_COSTRUZIONI && !io?.materie?.includes(materia);
       if (anteprimaScienza && personale) return json(quizScienzaRiservato(l, true), 403, { 'cache-control': 'no-store' });
       let dati = await domandeDi(env, materia, l);
@@ -1376,6 +1385,9 @@ export default {
           && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
         return json(quizScienzaRiservato(linguaDi(tok.l)), 403, { 'cache-control': 'no-store' });
       }
+      if (tok.m === BOCCONI.slug && vendita && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
+        return json({ errore: tok.l === 'en' ? 'Full course access is required.' : 'Serve l’accesso al corso completo.' }, 403, { 'cache-control': 'no-store' });
+      }
       const giusta = Number(scelta) === q.corretta;
       const secondi = Math.round((Date.now() - tok.t) / 1000);
       const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
@@ -1387,6 +1399,7 @@ export default {
       return json({ ...base, ...r });
     }
     if (p.startsWith('/api/tolc-i/') || p.startsWith('/api/tolc-s/') || p.startsWith('/api/tiec/')) return gestisciTolcI(req, env, p, { json, utenteCollegato, domandeDi, firmaToken, leggiToken });
+    if (p.startsWith('/api/bocconi/')) return gestisciBocconi(req, env, p, { json, utenteCollegato, firmaToken, leggiToken });
     if (p === '/api/simulazione-quiz' && POST) {
       // Simulazione della prova preselettiva (materie dei concorsi): domande di più materie e argomenti,
       // pescate a turno. Il browser riceve testi e risposte; la posizione delle corrette arriva solo alla consegna.

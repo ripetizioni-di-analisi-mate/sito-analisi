@@ -1,5 +1,7 @@
 ---
 import Simulazione from '../../../viste/Simulazione.astro';
+import SimulazioneBocconi from '../../../viste/SimulazioneBocconi.astro';
+import { BOCCONI } from '../../../data/bocconi.mjs';
 import { catalogoDomande } from '../../../lib/domande';
 import { MATERIE } from '../../../data/materie';
 export async function getStaticPaths() {
@@ -7,5 +9,6 @@ export async function getStaticPaths() {
   return MATERIE.filter((m) => domande[m.slug] && m.eserciziDaFare !== false)
     .map((m) => ({ params: { materia: m.slug } }));
 }
+const materia = Astro.params.materia!;
 ---
-<Simulazione lingua="en" materia={Astro.params.materia!} />
+{materia === BOCCONI.slug ? <SimulazioneBocconi lingua="en" /> : <Simulazione lingua="en" materia={materia} />}

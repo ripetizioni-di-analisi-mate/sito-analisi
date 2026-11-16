@@ -1,0 +1,36 @@
+---
+import { BOCCONI } from '../data/bocconi.mjs';
+interface Props { lingua: 'it' | 'en' }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const simulazione = `${en ? '/en' : ''}/${BOCCONI.slug}/simulazione`;
+---
+<section class="bocconi-prove" aria-labelledby="bocconi-prove-titolo">
+  <div>
+    <h2 id="bocconi-prove-titolo">{en ? 'Practise in the test format' : 'Allenati con il formato della prova'}</h2>
+    <p>{en ? 'Use the free diagnostic to identify topics to revisit. After the lessons, take four distinct mock tests with full solutions and links back to the course.' : 'Il diagnostico gratuito indica quali argomenti ripassare. Dopo le lezioni puoi svolgere quattro simulazioni distinte, con soluzioni e rimandi alla teoria.'}</p>
+  </div>
+  <div class="bocconi-prove-link">
+    <a class="bottone-primario" href={simulazione + '#diagnostico'}>{en ? 'Free diagnostic' : 'Diagnostico gratuito'}</a>
+    <a class="bottone-secondario" href={simulazione + '#simulazioni'}>{en ? 'Mock tests' : 'Simulazioni'}</a>
+    <a href={BOCCONI.fonti[lingua]}>{en ? 'Bocconi’s syllabus and test format' : 'Programma e formato sul sito Bocconi'}</a>
+  </div>
+</section>
+<style>
+  .bocconi-prove {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 1.25rem;
+    padding: 1.2rem 1.35rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--bordo);
+    border-radius: .75rem;
+    background: var(--pannello, var(--carta));
+  }
+  h2 { margin: 0 0 .45rem; font-size: 1.2rem; }
+  p { margin: 0; }
+  .bocconi-prove-link { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+  .bocconi-prove-link > a:last-child { flex-basis: 100%; font-size: .88rem; }
+  @media (max-width: 47rem) { .bocconi-prove { grid-template-columns: 1fr; } }
+</style>

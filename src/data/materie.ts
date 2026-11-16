@@ -751,6 +751,23 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   // Test di ingresso all’università: percorsi dedicati.
   {
+    slug: 'test-bocconi',
+    titolo: 'Test Bocconi',
+    breve: 'Test Bocconi',
+    descrizione: 'Preparazione al Test online Bocconi standard. Studia matematica, comprensione del testo, ragionamento numerico e pensiero critico. Ogni capitolo comprende lezioni, esempi svolti, esercizi e quiz commentati. In italiano e in inglese.',
+    colore: '#356d67',
+    gruppo: 'TOLC, OFA e test di ingresso',
+    attiva: true,
+    argomenti: [
+      { slug: 'numeri-e-algebra', titolo: 'Numeri, insiemi e algebra', breve: 'Numeri e algebra' },
+      { slug: 'funzioni-e-geometria', titolo: 'Funzioni, geometria e trigonometria', breve: 'Funzioni e geometria' },
+      { slug: 'probabilita-e-statistica', titolo: 'Combinatoria, probabilità e statistica', breve: 'Probabilità e statistica' },
+      { slug: 'comprensione-del-testo', titolo: 'Comprensione del testo', breve: 'Comprensione del testo' },
+      { slug: 'ragionamento-numerico', titolo: 'Ragionamento numerico', breve: 'Ragionamento numerico' },
+      { slug: 'pensiero-critico', titolo: 'Pensiero critico', breve: 'Pensiero critico' },
+    ],
+  },
+  {
     slug: 'tolc-i',
     titolo: 'TOLC-I (Ingegneria)',
     breve: 'TOLC-I',

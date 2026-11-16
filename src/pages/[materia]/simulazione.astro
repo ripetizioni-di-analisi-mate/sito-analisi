@@ -3,6 +3,8 @@ import Simulazione from '../../viste/Simulazione.astro';
 import SimulazioneTolcI from '../../viste/SimulazioneTolcI.astro';
 import SimulazioneTiec from '../../viste/SimulazioneTiec.astro';
 import SimulazioneConcorsi from '../../viste/SimulazioneConcorsi.astro';
+import SimulazioneBocconi from '../../viste/SimulazioneBocconi.astro';
+import { BOCCONI } from '../../data/bocconi.mjs';
 import { catalogoDomande } from '../../lib/domande';
 import { MATERIE } from '../../data/materie';
 // La simulazione d'esame ordinaria pesca tra le tracce degli esercizi da fare.
@@ -15,4 +17,4 @@ export async function getStaticPaths() {
 const materia = Astro.params.materia!;
 const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';
 ---
-{materia === 'tiec' ? <SimulazioneTiec /> : ['tolc-i', 'tolc-s'].includes(materia) ? <SimulazioneTolcI materia={materia} /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}
+{materia === BOCCONI.slug ? <SimulazioneBocconi lingua="it" /> : materia === 'tiec' ? <SimulazioneTiec /> : ['tolc-i', 'tolc-s'].includes(materia) ? <SimulazioneTolcI materia={materia} /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}
