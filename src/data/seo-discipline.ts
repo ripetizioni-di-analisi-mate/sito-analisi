@@ -9,6 +9,11 @@ export interface GuidaDisciplina {
   collegate: string[];
 }
 
+export const BOCCONI_SEO_EN = {
+  titolo: 'Bocconi Test Preparation | Lessons, Practice and Mock Tests',
+  descrizione: 'Prepare for the Bocconi Test with lessons in maths, reading, numerical and critical reasoning, a free diagnostic and four full-length mock tests.',
+};
+
 export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
   'precorso': {
     titolo: 'Precorso di matematica | Teoria ed esercizi svolti',
@@ -249,6 +254,14 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
     metodo: 'Gli esercizi allenano il passaggio fra formula e calcolo. Le schede mostrano come isolare un’incognita, convertire le unità e leggere la relazione fra due grandezze. I collegamenti con Fisica e Chimica consentono di applicare subito questi strumenti.',
     esempi: ['unita-di-misura', 'equazioni-e-formule', 'vettori-e-componenti'],
     collegate: ['fisica-semestre-filtro', 'chimica-semestre-filtro', 'biologia-semestre-filtro'],
+  },
+  'test-bocconi': {
+    titolo: 'Test Bocconi | Corso di preparazione e simulazioni',
+    descrizione: 'Preparati al Test Bocconi con lezioni di matematica, comprensione del testo, ragionamento numerico e pensiero critico, un test gratuito e quattro simulazioni.',
+    preparazione: 'Il corso tratta le quattro aree del test online standard. La matematica è divisa in tre capitoli, da numeri e algebra fino a combinatoria, probabilità e statistica. Seguono comprensione del testo, ragionamento numerico e pensiero critico.',
+    metodo: 'Usa il test diagnostico gratuito per scegliere da quali capitoli partire. Dopo la teoria, confronta il tuo procedimento con gli esempi svolti e allenati con le domande a tempo. Le quattro simulazioni da 50 quesiti consentono di esercitarti sul formato della prova completa.',
+    esempi: ['numeri-e-algebra', 'ragionamento-numerico', 'pensiero-critico'],
+    collegate: ['precorso', 'logica-concorsi', 'tiec'],
   },
   'tolc-i': {
     titolo: 'TOLC-I Ingegneria | Teoria, esercizi svolti e simulazioni',
