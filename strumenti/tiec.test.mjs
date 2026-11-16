@@ -4,6 +4,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import katex from 'katex';
 import { TOLC, provaTolc, demoTolc, esitoTiec, TIEC_SEZIONI } from '../src/data/tolc.mjs';
 import { gestisciTolcI } from '../worker/tolc-i.mjs';
+import { TIEC_IMPEGNATIVE, impegnativaTiec } from '../src/data/tiec-impegnative.mjs';
 
 // Banca dei quesiti del TIEC (Cattolica, Economia): 8 capitoli da 90 domande a quattro risposte.
 const capitoli = TIEC_SEZIONI.flatMap((s) => s.argomenti);
@@ -81,4 +82,20 @@ test('API TIEC: correzione per area, accesso riservato a chi ha il TIEC', async 
   assert.equal(v.tiec.idoneo, false); assert.equal(v.tiec.corrette, 0);
   utente.materie = ['tolc-i']; assert.equal((await gestisciTolcI(req(inizio), {}, inizio, h)).status, 403); utente.materie = ['tiec'];
   firmato.tipo = 'tolc-i'; assert.equal((await gestisciTolcI(req(fine, { token: 'firmato', risposte: giuste }), {}, fine, h)).status, 400);
+});
+
+test('TIEC: nella simulazione al massimo due domande impegnative per area di logica e matematica', () => {
+  for (const [a, ns] of Object.entries(TIEC_IMPEGNATIVE)) {
+    assert(capitoli.includes(a), a);
+    for (const n of ns) assert(n >= 1 && n <= 90, `${a}/${n}`);
+  }
+  let viste = 0;
+  for (let i = 0; i < 200; i++) {
+    const p = provaTolc('tiec', args, false);
+    for (const s of p.slice(0, 2)) {
+      const k = s.domande.filter((q) => impegnativaTiec(q.id)).length;
+      assert(k <= 2, `${s.slug}: ${k} impegnative`); viste += k;
+    }
+  }
+  assert(viste > 0, 'le domande impegnative compaiono ancora');
 });

@@ -1,4 +1,5 @@
-import { TOLC_I_SEZIONI, TOLC_I_FONTE, creaProvaTolc, anteprimaTolc } from './tolc-i.mjs';
+import { TOLC_I_SEZIONI, TOLC_I_FONTE, creaProvaTolc, anteprimaTolc, mescolaTolc } from './tolc-i.mjs';
+import { impegnativaTiec } from './tiec-impegnative.mjs';
 
 export const TOLC_S_SEZIONI = [
   { slug: 'matematica', titolo: 'Matematica di base', numero: 20, minuti: 50, argomenti: ['aritmetica-e-algebra', 'geometria', 'funzioni-e-grafici', 'trigonometria-e-statistica', 'probabilita-e-dati'] },
@@ -15,8 +16,8 @@ export const TOLC_S_SEZIONI = [
 // Il tempo è unico per tutta la prova; la Cattolica non pubblica i punti per risposta.
 export const TIEC_FONTE = 'https://www.unicatt.it/en/programmes/undergraduate-and-integrated-degree-programmes/economics-and-management-of-services-rome/admissions-and-enrolment.html';
 export const TIEC_SEZIONI = [
-  { slug: 'logica', titolo: 'Logica', numero: 12, minuti: 15, soglia: 6, argomenti: ['logica'] },
-  { slug: 'matematica', titolo: 'Matematica', numero: 12, minuti: 15, soglia: 4, vpi: 7, argomenti: ['insiemi-numeri-e-percentuali', 'potenze-esponenziali-e-logaritmi', 'calcolo-letterale-e-frazioni-algebriche', 'equazioni-disequazioni-e-sistemi', 'geometria-analitica-e-trigonometria'] },
+  { slug: 'logica', titolo: 'Logica', numero: 12, minuti: 15, soglia: 6, impegnativeMax: 2, argomenti: ['logica'] },
+  { slug: 'matematica', titolo: 'Matematica', numero: 12, minuti: 15, soglia: 4, vpi: 7, impegnativeMax: 2, argomenti: ['insiemi-numeri-e-percentuali', 'potenze-esponenziali-e-logaritmi', 'calcolo-letterale-e-frazioni-algebriche', 'equazioni-disequazioni-e-sistemi', 'geometria-analitica-e-trigonometria'] },
   { slug: 'comprensione', titolo: 'Comprensione del testo', numero: 12, minuti: 15, soglia: 6, argomenti: ['comprensione-del-testo'] },
   { slug: 'inglese', titolo: 'Inglese', numero: 12, minuti: 15, soglia: 6, argomenti: ['inglese'] },
 ];
@@ -30,7 +31,21 @@ export const TOLC = {
 export function provaTolc(materia, argomenti, inglese = true, casuale = Math.random) {
   if (!Object.hasOwn(TOLC, materia)) throw new Error('Percorso TOLC non valido');
   // Nel TIEC l'inglese è una delle quattro aree: c'è sempre.
+  if (materia === 'tiec') argomenti = limitaImpegnative(argomenti, TIEC_SEZIONI, casuale);
   return creaProvaTolc(argomenti, TOLC[materia].tempoUnico ? true : inglese, casuale, TOLC[materia].sezioni);
+}
+
+// Nelle aree con `impegnativeMax` restano in gioco solo quelle domande impegnative (scelte a caso),
+// quindi la prova ne contiene al massimo tante; le altre domande dell'area hanno il livello della demo ufficiale.
+export function limitaImpegnative(argomenti, sezioni, casuale = Math.random) {
+  const out = { ...argomenti };
+  for (const s of sezioni) {
+    if (!s.impegnativeMax) continue;
+    const tutte = s.argomenti.flatMap((a) => (argomenti[a] || []).filter((q) => impegnativaTiec(q.id)).map((q) => q.id));
+    const ammesse = new Set(mescolaTolc(tutte, casuale).slice(0, s.impegnativeMax));
+    for (const a of s.argomenti) out[a] = (argomenti[a] || []).filter((q) => !impegnativaTiec(q.id) || ammesse.has(q.id));
+  }
+  return out;
 }
 
 // Esito del TIEC per area: risposte esatte confrontate con le soglie minime della Cattolica.
