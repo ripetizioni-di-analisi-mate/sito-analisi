@@ -23,7 +23,7 @@ import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import GuidaMateria from '../components/GuidaMateria.astro';
-import { GUIDE_DISCIPLINE } from '../data/seo-discipline';
+import { BOCCONI_SEO_EN, GUIDE_DISCIPLINE } from '../data/seo-discipline';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const t = T(lingua);
@@ -36,7 +36,8 @@ const confTolc = TOLC[materia];
 const bocconi = materia === BOCCONI.slug;
 const sopra = bocconi ? (lingua === 'en' ? 'University admissions' : 'Test di ingresso') : confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
 const guida = lingua === 'it' ? GUIDE_DISCIPLINE[materia] : undefined;
-const titoloPagina = guida?.titolo ?? (bocconi ? (lingua === 'en' ? 'Bocconi Test preparation course and mock tests' : 'Test Bocconi: corso di preparazione e simulazioni') : confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
+const seoMateria = bocconi && lingua === 'en' ? BOCCONI_SEO_EN : guida;
+const titoloPagina = seoMateria?.titolo ?? (confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
   : SEO(lingua).materia(m.titolo));
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
@@ -66,7 +67,7 @@ const nomeCompito = bocconi ? (en ? 'Four mock tests' : 'Quattro simulazioni') :
 const notaQuiz = en
   ? 'A timed quiz across all topics, with an explanation after each answer. Questions are in Italian.'
   : 'Quiz a tempo su tutti gli argomenti, con la spiegazione dopo ogni risposta. Con un account puoi ripassare le domande che hai sbagliato.';
-const descrizione = guida?.descrizione ?? (quizPerEsercitarsi
+const descrizione = seoMateria?.descrizione ?? (quizPerEsercitarsi
   ? en ? `${m.titolo}. Theory, worked examples and ${domandeMateria} timed questions in Italian.` : `${m.titolo} per Ingegneria. Teoria, esercizi svolti e ${domandeMateria} domande a tempo.`
   : SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length));
 // Indice analitico (teoremi e definizioni) della materia.
