@@ -1,0 +1,1087 @@
+{
+  "status": "ok",
+  "files": 210,
+  "quiz_decisions": [
+    {
+      "id": 1,
+      "correct": 1,
+      "reason": "Tre facce pari fra sei equiprobabili danno probabilità 1/2."
+    },
+    {
+      "id": 2,
+      "correct": 2,
+      "reason": "Il complemento di nessuna testa ha probabilità 1 − 1/4 = 3/4."
+    },
+    {
+      "id": 3,
+      "correct": 3,
+      "reason": "Senza reinserimento, due rosse hanno probabilità (3/5)(2/4) = 3/10."
+    },
+    {
+      "id": 4,
+      "correct": 4,
+      "reason": "Con reinserimento, due rosse hanno probabilità (3/5)² = 9/25."
+    },
+    {
+      "id": 5,
+      "correct": 5,
+      "reason": "Il condizionamento ai pari lascia 2, 4, 6: una faccia favorevole su tre."
+    },
+    {
+      "id": 6,
+      "correct": 1,
+      "reason": "Nei cinque dati ordinati il terzo valore è 3; la media 22 non è la mediana."
+    },
+    {
+      "id": 7,
+      "correct": 2,
+      "reason": "L’inclusione impone 7/10 ≤ P(B) ≤ 1: fra le alternative soltanto 4/5 soddisfa il vincolo."
+    },
+    {
+      "id": 8,
+      "correct": 3,
+      "reason": "Gli esiti singoli 1 e 2 sono disgiunti: 2/6 = 1/3."
+    },
+    {
+      "id": 9,
+      "correct": 4,
+      "reason": "Il complemento ha probabilità 1 − 15/100 = 85/100."
+    },
+    {
+      "id": 10,
+      "correct": 5,
+      "reason": "Le 36 coppie ordinate dei dadi sono equiprobabili; somme, prodotti, minimi e conteggi di pari raggruppano numeri diversi di coppie."
+    },
+    {
+      "id": 11,
+      "correct": 1,
+      "reason": "La seconda pallina è rossa in 27 delle 90 coppie ordinate: probabilità marginale 3/10."
+    },
+    {
+      "id": 12,
+      "correct": 2,
+      "reason": "La pallina speciale compare in 9 delle 45 coppie: 1/5."
+    },
+    {
+      "id": 13,
+      "correct": 3,
+      "reason": "In uno spazio finito equiprobabile, P(A|B) = 1 impone B interamente contenuto in A."
+    },
+    {
+      "id": 14,
+      "correct": 4,
+      "reason": "L’ordine delle categorie permette la mediana «medio»; le frequenze danno due mode, «basso» e «alto». La media delle etichette non è quantitativa."
+    },
+    {
+      "id": 15,
+      "correct": 5,
+      "reason": "Due rossi fra tre e un blu fra tre si scelgono in 3 × 3 = 9 modi."
+    },
+    {
+      "id": 16,
+      "correct": 1,
+      "reason": "Una sequenza con h teste pesa 2^h/27; HHH è l’unica massima, con probabilità 8/27."
+    },
+    {
+      "id": 17,
+      "correct": 2,
+      "reason": "La prima testa ha probabilità 3/4, due teste 5/8: il rapporto è 5/6. L’osservazione aggiorna la scelta nascosta della moneta."
+    },
+    {
+      "id": 18,
+      "correct": 3,
+      "reason": "Condizionando alla seconda blu, tre delle altre sei palline sono blu: 1/2."
+    },
+    {
+      "id": 19,
+      "correct": 4,
+      "reason": "I codici numerici delle specie sono etichette arbitrarie: la loro media non misura una quantità delle specie."
+    },
+    {
+      "id": 20,
+      "correct": 5,
+      "reason": "La somma delle distanze è 20 km per dieci persone: media 2 km."
+    },
+    {
+      "id": 21,
+      "correct": 1,
+      "reason": "Eventi disgiunti con probabilità positive hanno intersezione nulla e prodotto positivo: non sono indipendenti."
+    },
+    {
+      "id": 22,
+      "correct": 2,
+      "reason": "L’intersezione vale 1/2 + 2/5 − 7/10 = 1/5."
+    },
+    {
+      "id": 23,
+      "correct": 3,
+      "reason": "Il limite inferiore dell’intersezione è 3/5 + 7/10 − 1 = 3/10, realizzabile assegnando probabilità 3/10, 4/10, 3/10 alle tre regioni dell’unione."
+    },
+    {
+      "id": 24,
+      "correct": 4,
+      "reason": "Il primo rosso al terzo tentativo richiede non rosso, non rosso, rosso: probabilità 4/27."
+    },
+    {
+      "id": 25,
+      "correct": 5,
+      "reason": "Soltanto 10/30 arrotonda al 33%; 9/30 dà 30% e 11/30 dà 37%."
+    },
+    {
+      "id": 26,
+      "correct": 1,
+      "reason": "Le mediane dei due gruppi, 2 e 8, non determinano la mediana aggregata: due coppie di gruppi compatibili danno 5 e 7,5."
+    },
+    {
+      "id": 27,
+      "correct": 2,
+      "reason": "Fissato il primo dado a 2, il secondo deve dare 5: un esito su sei."
+    },
+    {
+      "id": 28,
+      "correct": 3,
+      "reason": "La quota pomeridiana fra i rispondenti è 4/7, maggiore della quota scolastica 2/5: sovrarappresentazione."
+    },
+    {
+      "id": 29,
+      "correct": 4,
+      "reason": "Almeno metà delle osservazioni non supera la mediana; se tutti i valori coincidono con essa, le affermazioni con disuguaglianza stretta falliscono."
+    },
+    {
+      "id": 30,
+      "correct": 5,
+      "reason": "I non urgenti sono 30 e i chiusi fra essi 9: probabilità condizionata 3/10."
+    },
+    {
+      "id": 31,
+      "correct": 1,
+      "reason": "P(treno) = 3/5 e P(ritardo|treno) = 1/6: probabilità congiunta 1/10."
+    },
+    {
+      "id": 32,
+      "correct": 2,
+      "reason": "Il prodotto (1/2)(1/3) coincide con l’intersezione 1/6, che è positiva: indipendenti e non disgiunti."
+    },
+    {
+      "id": 33,
+      "correct": 3,
+      "reason": "A conta 30 osservazioni e B ne conta 18 su 80; restano 32 osservazioni per C."
+    },
+    {
+      "id": 34,
+      "correct": 4,
+      "reason": "Dopo aver selezionato almeno una testa, le marginali sono 2/3 e l’intersezione 1/3: questa non coincide con il prodotto 4/9."
+    },
+    {
+      "id": 35,
+      "correct": 5,
+      "reason": "L’unione conta 17 + 14 − 6 = 25 persone; fuori dall’unione ne restano 5."
+    },
+    {
+      "id": 36,
+      "correct": 1,
+      "reason": "Con reinserimento, stesso colore significa due rossi oppure due blu: 4/25 + 9/25 = 13/25."
+    },
+    {
+      "id": 37,
+      "correct": 2,
+      "reason": "Fra i 21 presenti, nove sono del gruppo B: probabilità condizionata 3/7."
+    },
+    {
+      "id": 38,
+      "correct": 3,
+      "reason": "Un campione volontario può selezionare le persone interessate al tema; aumentarne la numerosità non elimina automaticamente questa distorsione."
+    },
+    {
+      "id": 39,
+      "correct": 4,
+      "reason": "I multipli di 4 o 6 fra 1 e 30 sono 7 + 5 − 2 = 10: probabilità 1/3."
+    },
+    {
+      "id": 40,
+      "correct": 5,
+      "reason": "La media 6 di tre dati determina soltanto la somma 18; esempi come 0, 8, 10 e −2, 9, 11 confutano gli altri vincoli."
+    },
+    {
+      "id": 41,
+      "correct": 1,
+      "reason": "Centotrenta preferenze su cento persone impongono almeno una risposta multipla: con al massimo una risposta a testa il totale non supererebbe cento."
+    },
+    {
+      "id": 42,
+      "correct": 2,
+      "reason": "Le aree delle due barre sono entrambe 12, rispettivamente 2 × 6 e 3 × 4: rapporto 1."
+    },
+    {
+      "id": 43,
+      "correct": 3,
+      "reason": "Le assegnazioni alle stanze sono 64; le assegnazioni tutte distinte sono 24. Almeno una coincidenza ha probabilità 40/64 = 5/8."
+    },
+    {
+      "id": 44,
+      "correct": 4,
+      "reason": "La media dei quadrati di 1 e 3 è 5; il quadrato della media è invece 4."
+    },
+    {
+      "id": 45,
+      "correct": 5,
+      "reason": "I dadi diversi corrispondono a 30 coppie ordinate su 36: probabilità 5/6."
+    },
+    {
+      "id": 46,
+      "correct": 1,
+      "reason": "Le due probabilità marginali 1/2 non determinano l’intersezione: sono compatibili sia con 1/4 sia con 1/2."
+    },
+    {
+      "id": 47,
+      "correct": 2,
+      "reason": "Con A incluso in B, P(A∩B) = P(A); se P(A)>0 e P(B)<1, questo supera P(A)P(B), escludendo l’indipendenza."
+    },
+    {
+      "id": 48,
+      "correct": 3,
+      "reason": "La soglia di almeno 95% equivale a 2^n ≥ 20: quattro prove non bastano e cinque sono sufficienti."
+    },
+    {
+      "id": 49,
+      "correct": 4,
+      "reason": "La probabilità totale di difetto è 0,6 × 0,05 + 0,4 × 0,1 = 0,07."
+    },
+    {
+      "id": 50,
+      "correct": 5,
+      "reason": "Scegliere prima uniformemente il colore attribuisce al blu probabilità 1/2, non 1/4."
+    },
+    {
+      "id": 51,
+      "correct": 1,
+      "reason": "Gli eventi {1,2} e {5,6} sono disgiunti ma lasciano fuori 3 e 4: non sono complementari."
+    },
+    {
+      "id": 52,
+      "correct": 2,
+      "reason": "Le sole regioni a e b descrivono (A∩Bᶜ) ∪ (Aᶜ∩B), ossia uno solo dei due eventi."
+    },
+    {
+      "id": 53,
+      "correct": 3,
+      "reason": "Aggiungere un valore inferiore a tutti e uno superiore a tutti sposta il vecchio quarto valore alla nuova quinta posizione: la mediana resta 10."
+    },
+    {
+      "id": 54,
+      "correct": 4,
+      "reason": "Con urne scelte a pari probabilità, Bayes dà (3/8)/(3/8 + 1/8) = 3/4."
+    },
+    {
+      "id": 55,
+      "correct": 5,
+      "reason": "La massa è continua nel modello fisico; i conteggi sono discreti e specie o colore sono qualitativi."
+    },
+    {
+      "id": 56,
+      "correct": 1,
+      "reason": "I sei piatti singoli e le otto coppie formano casi disgiunti: 2 + 4 + 2 × 4 = 14 menu."
+    },
+    {
+      "id": 57,
+      "correct": 2,
+      "reason": "Passare dal 20% al 25% aumenta di cinque punti percentuali; il 25% è invece l’incremento relativo."
+    },
+    {
+      "id": 58,
+      "correct": 3,
+      "reason": "Almeno due libri comprende le frequenze 8 e 4 su 20: probabilità 3/5."
+    },
+    {
+      "id": 59,
+      "correct": 4,
+      "reason": "Raddoppiare tutti i valori raddoppia il campo di variazione: 18 − 6 = 12."
+    },
+    {
+      "id": 60,
+      "correct": 5,
+      "reason": "La barra di una assenza ha frequenza 8 su un totale di 20: probabilità 2/5."
+    },
+    {
+      "id": 61,
+      "correct": 1,
+      "reason": "P(B|B) = P(B)/P(B) = 1, poiché P(B) è positiva."
+    },
+    {
+      "id": 62,
+      "correct": 2,
+      "reason": "Le condizionate inverse uguali e positive hanno lo stesso numeratore positivo; cancellandolo si ottiene P(A) = P(B)."
+    },
+    {
+      "id": 63,
+      "correct": 3,
+      "reason": "Le stringhe binarie ammesse sono 000, 001, 010, 100 e 101: cinque in totale."
+    },
+    {
+      "id": 64,
+      "correct": 4,
+      "reason": "L’equazione della mediana (7 + x)/2 = 9 dà x = 11, compatibile con l’ordine richiesto."
+    },
+    {
+      "id": 65,
+      "correct": 5,
+      "reason": "Esattamente tre teste in quattro lanci corrispondono a quattro sequenze su sedici: probabilità 1/4."
+    },
+    {
+      "id": 66,
+      "correct": 1,
+      "reason": "L’evento certo è indipendente da A perché P(A∩Ω) = P(A) = P(A)P(Ω)."
+    },
+    {
+      "id": 67,
+      "correct": 2,
+      "reason": "Il segnale positivo dato il fenomeno presente usa 12/(12 + 3), non 12/(12 + 8): probabilità 4/5."
+    },
+    {
+      "id": 68,
+      "correct": 3,
+      "reason": "Appartenere esattamente a uno dei due insiemi seleziona 1, 2, 3, 7, 8: cinque esiti su venti, ossia 1/4."
+    },
+    {
+      "id": 69,
+      "correct": 4,
+      "reason": "La somma 4 ha tre coppie ordinate, (1,3), (2,2), (3,1), su 36: probabilità 1/12."
+    },
+    {
+      "id": 70,
+      "correct": 5,
+      "reason": "Due mancate rilevazioni indipendenti hanno probabilità (1/5)(1/4) = 1/20."
+    },
+    {
+      "id": 71,
+      "correct": 1,
+      "reason": "A supera B sia nei casi facili, 90% contro 80%, sia nei difficili, 10% contro 0%; nel totale 1/2 è minore di 72/91 per il diverso peso delle categorie."
+    },
+    {
+      "id": 72,
+      "correct": 2,
+      "reason": "Il codice 33 pesa 1/100 nel modello uniforme su cento codici e 1/10 quando la seconda cifra copia la prima: marginali uguali non determinano la distribuzione congiunta."
+    },
+    {
+      "id": 73,
+      "correct": 3,
+      "reason": "Senza reinserimento, colori diversi possono presentarsi nei due ordini: 4/15 + 4/15 = 8/15."
+    },
+    {
+      "id": 74,
+      "correct": 4,
+      "reason": "Il condizionamento all’evento impossibile «esce 7» avrebbe denominatore zero: non è definito, anziché valere zero."
+    },
+    {
+      "id": 75,
+      "correct": 5,
+      "reason": "La probabilità iniziale di rosso meno quella dopo un rosso vale b/[N(N−1)] > 0 per r,b ≥ 1: diminuisce."
+    },
+    {
+      "id": 76,
+      "correct": 1,
+      "reason": "La cella «pomeriggio e difettoso» contiene 12 esemplari su 80: probabilità congiunta 3/20."
+    },
+    {
+      "id": 77,
+      "correct": 2,
+      "reason": "La sensibilità 90% non determina il valore predittivo: con prevalenza 1/2, falsi positivi nulli danno posteriori 1, mentre falsi positivi al 90% danno 1/2."
+    },
+    {
+      "id": 78,
+      "correct": 3,
+      "reason": "Una base grafica a 80 produce altezze 10 e 20, in rapporto 1:2; i dati 90 e 100 sono invece in rapporto 9:10."
+    },
+    {
+      "id": 79,
+      "correct": 4,
+      "reason": "L’unione dei due eventi disgiunti pesa 5/8; nessuno dei due pesa 3/8. Non è lecito moltiplicare qui i complementi."
+    },
+    {
+      "id": 80,
+      "correct": 5,
+      "reason": "I 45 favorevoli certi possono aggiungersi a un numero da zero a quaranta di non rispondenti: i limiti esatti sono 45% e 85%."
+    },
+    {
+      "id": 81,
+      "correct": 1,
+      "reason": "Nel modello di lanci equi indipendenti il prossimo lancio resta testa con probabilità 1/2; la frequenza precedente 7/10 non modifica il modello."
+    },
+    {
+      "id": 82,
+      "correct": 2,
+      "reason": "Le frequenze di categorie disgiunte ed esaustive sommano 3 + 6 + 4 + 2 = 15."
+    },
+    {
+      "id": 83,
+      "correct": 3,
+      "reason": "Il sistema funziona se funziona C oppure, con C guasto, funzionano A e B: probabilità 1/2 + 1/8 = 5/8."
+    },
+    {
+      "id": 84,
+      "correct": 4,
+      "reason": "La media di dati compresi fra 10 e 20 non può essere 22; ciascuno degli altri valori proposti si realizza con una lista costante."
+    },
+    {
+      "id": 85,
+      "correct": 5,
+      "reason": "Dopo la sostituzione, 2 compare tre volte mentre 5 e 8 compaiono due volte: la moda unica è 2."
+    },
+    {
+      "id": 86,
+      "correct": 1,
+      "reason": "Condizionando a esattamente due teste, restano HHT, HTH, THH; soltanto THH inizia con croce: probabilità 1/3."
+    },
+    {
+      "id": 87,
+      "correct": 2,
+      "reason": "Lo stesso tasso 2/5 nei due strati B e Bᶜ impone P(A) = 2/5 e quindi l’indipendenza da B."
+    },
+    {
+      "id": 88,
+      "correct": 3,
+      "reason": "Le probabilità proposte per la partizione sommano 4/10 + 5/10 + 3/10 = 6/5, non 1: dati incompatibili."
+    },
+    {
+      "id": 89,
+      "correct": 4,
+      "reason": "In tre lanci il numero dispari di teste è uno oppure tre: quattro sequenze su otto, con probabilità 1/2."
+    },
+    {
+      "id": 90,
+      "correct": 5,
+      "reason": "Le cinque facce diverse da 6 pesano ciascuna 2/15; le tre facce dispari pesano quindi 2/5."
+    }
+  ],
+  "checks": [
+    {
+      "id": 1,
+      "computed": "1/2",
+      "expected": "1/2",
+      "note": ""
+    },
+    {
+      "id": 2,
+      "computed": "3/4",
+      "expected": "3/4",
+      "note": ""
+    },
+    {
+      "id": 3,
+      "computed": "3/10",
+      "expected": "3/10",
+      "note": ""
+    },
+    {
+      "id": 4,
+      "computed": "9/25",
+      "expected": "9/25",
+      "note": ""
+    },
+    {
+      "id": 5,
+      "computed": "1/3",
+      "expected": "1/3",
+      "note": ""
+    },
+    {
+      "id": 6,
+      "computed": "3",
+      "expected": "3",
+      "note": ""
+    },
+    {
+      "id": 7,
+      "computed": "[Fraction(4, 5)]",
+      "expected": "[Fraction(4, 5)]",
+      "note": ""
+    },
+    {
+      "id": 8,
+      "computed": "1/3",
+      "expected": "1/3",
+      "note": ""
+    },
+    {
+      "id": 9,
+      "computed": "17/20",
+      "expected": "17/20",
+      "note": ""
+    },
+    {
+      "id": 10,
+      "computed": "[0]",
+      "expected": "[0]",
+      "note": ""
+    },
+    {
+      "id": 11,
+      "computed": "3/10",
+      "expected": "3/10",
+      "note": ""
+    },
+    {
+      "id": 12,
+      "computed": "1/5",
+      "expected": "1/5",
+      "note": ""
+    },
+    {
+      "id": 13,
+      "computed": "[True, False, False, False, False]",
+      "expected": "[True, False, False, False, False]",
+      "note": ""
+    },
+    {
+      "id": 14,
+      "computed": "(1, ['basso', 'alto'])",
+      "expected": "(1, ['basso', 'alto'])",
+      "note": "Median uses only order; mean of arbitrary labels is not a quantitative statistic"
+    },
+    {
+      "id": 15,
+      "computed": "9",
+      "expected": "9",
+      "note": ""
+    },
+    {
+      "id": 16,
+      "computed": "HHH",
+      "expected": "HHH",
+      "note": ""
+    },
+    {
+      "id": 17,
+      "computed": "5/6",
+      "expected": "5/6",
+      "note": ""
+    },
+    {
+      "id": 18,
+      "computed": "1/2",
+      "expected": "1/2",
+      "note": ""
+    },
+    {
+      "id": 19,
+      "computed": "True",
+      "expected": "True",
+      "note": "Same species observations under exchanged codes can yield a different numerical mean"
+    },
+    {
+      "id": 20,
+      "computed": "2",
+      "expected": "2",
+      "note": ""
+    },
+    {
+      "id": 21,
+      "computed": "(Fraction(0, 1), Fraction(1, 18))",
+      "expected": "(Fraction(0, 1), Fraction(1, 18))",
+      "note": ""
+    },
+    {
+      "id": 22,
+      "computed": "1/5",
+      "expected": "1/5",
+      "note": ""
+    },
+    {
+      "id": 23,
+      "computed": "3/10",
+      "expected": "3/10",
+      "note": ""
+    },
+    {
+      "id": 24,
+      "computed": "4/27",
+      "expected": "4/27",
+      "note": ""
+    },
+    {
+      "id": 25,
+      "computed": "[10]",
+      "expected": "[10]",
+      "note": ""
+    },
+    {
+      "id": 26,
+      "computed": "(5.0, 7.5)",
+      "expected": "(5, 7.5)",
+      "note": ""
+    },
+    {
+      "id": 27,
+      "computed": "1/6",
+      "expected": "1/6",
+      "note": ""
+    },
+    {
+      "id": 28,
+      "computed": "True",
+      "expected": "True",
+      "note": ""
+    },
+    {
+      "id": 29,
+      "computed": "True",
+      "expected": "True",
+      "note": "General proof: the median definition places at least half the sorted positions at or below it"
+    },
+    {
+      "id": 30,
+      "computed": "3/10",
+      "expected": "3/10",
+      "note": ""
+    },
+    {
+      "id": 31,
+      "computed": "1/10",
+      "expected": "1/10",
+      "note": ""
+    },
+    {
+      "id": 32,
+      "computed": "1/6",
+      "expected": "1/6",
+      "note": ""
+    },
+    {
+      "id": 33,
+      "computed": "32",
+      "expected": "32",
+      "note": ""
+    },
+    {
+      "id": 34,
+      "computed": "(Fraction(2, 3), Fraction(2, 3), Fraction(1, 3))",
+      "expected": "(Fraction(2, 3), Fraction(2, 3), Fraction(1, 3))",
+      "note": ""
+    },
+    {
+      "id": 35,
+      "computed": "5",
+      "expected": "5",
+      "note": ""
+    },
+    {
+      "id": 36,
+      "computed": "13/25",
+      "expected": "13/25",
+      "note": ""
+    },
+    {
+      "id": 37,
+      "computed": "3/7",
+      "expected": "3/7",
+      "note": ""
+    },
+    {
+      "id": 39,
+      "computed": "1/3",
+      "expected": "1/3",
+      "note": ""
+    },
+    {
+      "id": 40,
+      "computed": "18",
+      "expected": "18",
+      "note": ""
+    },
+    {
+      "id": 41,
+      "computed": "True",
+      "expected": "True",
+      "note": "At most one response per person would bound preferences by100; exceeding forces a multiple response"
+    },
+    {
+      "id": 42,
+      "computed": "1",
+      "expected": "1",
+      "note": ""
+    },
+    {
+      "id": 43,
+      "computed": "5/8",
+      "expected": "5/8",
+      "note": ""
+    },
+    {
+      "id": 44,
+      "computed": "5",
+      "expected": "5",
+      "note": ""
+    },
+    {
+      "id": 45,
+      "computed": "5/6",
+      "expected": "5/6",
+      "note": ""
+    },
+    {
+      "id": 46,
+      "computed": "(True, False)",
+      "expected": "(True, False)",
+      "note": "Same marginals admit independent or identical events"
+    },
+    {
+      "id": 47,
+      "computed": "-a*(b - 1)",
+      "expected": "a*(1 - b)",
+      "note": "For 0<a and b<1 this is strictly positive, excluding independence"
+    },
+    {
+      "id": 48,
+      "computed": "5",
+      "expected": "5",
+      "note": ""
+    },
+    {
+      "id": 49,
+      "computed": "7/100",
+      "expected": "7/100",
+      "note": ""
+    },
+    {
+      "id": 50,
+      "computed": "1/2",
+      "expected": "1/2",
+      "note": ""
+    },
+    {
+      "id": 51,
+      "computed": "(set(), False)",
+      "expected": "(set(), False)",
+      "note": ""
+    },
+    {
+      "id": 52,
+      "computed": "{(False, True), (True, False)}",
+      "expected": "{(True, False), (False, True)}",
+      "note": ""
+    },
+    {
+      "id": 53,
+      "computed": "10",
+      "expected": "10",
+      "note": ""
+    },
+    {
+      "id": 54,
+      "computed": "3/4",
+      "expected": "3/4",
+      "note": ""
+    },
+    {
+      "id": 56,
+      "computed": "14",
+      "expected": "14",
+      "note": ""
+    },
+    {
+      "id": 57,
+      "computed": "5",
+      "expected": "5",
+      "note": ""
+    },
+    {
+      "id": 58,
+      "computed": "3/5",
+      "expected": "3/5",
+      "note": ""
+    },
+    {
+      "id": 59,
+      "computed": "12",
+      "expected": "12",
+      "note": ""
+    },
+    {
+      "id": 60,
+      "computed": "2/5",
+      "expected": "2/5",
+      "note": ""
+    },
+    {
+      "id": 61,
+      "computed": "1",
+      "expected": "1",
+      "note": ""
+    },
+    {
+      "id": 62,
+      "computed": "True",
+      "expected": "True",
+      "note": "Positive shared numerator cancels in equality of conditional ratios; no equality of sets or independence follows"
+    },
+    {
+      "id": 63,
+      "computed": "5",
+      "expected": "5",
+      "note": ""
+    },
+    {
+      "id": 64,
+      "computed": "11",
+      "expected": "11",
+      "note": ""
+    },
+    {
+      "id": 65,
+      "computed": "1/4",
+      "expected": "1/4",
+      "note": ""
+    },
+    {
+      "id": 66,
+      "computed": "a",
+      "expected": "a",
+      "note": ""
+    },
+    {
+      "id": 67,
+      "computed": "4/5",
+      "expected": "4/5",
+      "note": ""
+    },
+    {
+      "id": 68,
+      "computed": "1/4",
+      "expected": "1/4",
+      "note": ""
+    },
+    {
+      "id": 69,
+      "computed": "1/12",
+      "expected": "1/12",
+      "note": ""
+    },
+    {
+      "id": 70,
+      "computed": "1/20",
+      "expected": "1/20",
+      "note": ""
+    },
+    {
+      "id": 71,
+      "computed": "(True, True, True)",
+      "expected": "(True, True, True)",
+      "note": ""
+    },
+    {
+      "id": 72,
+      "computed": "(Fraction(1, 100), Fraction(1, 10))",
+      "expected": "(Fraction(1, 100), Fraction(1, 10))",
+      "note": "The second model has only ten diagonal codes; the first has all100"
+    },
+    {
+      "id": 73,
+      "computed": "8/15",
+      "expected": "8/15",
+      "note": ""
+    },
+    {
+      "id": 74,
+      "computed": "0",
+      "expected": "0",
+      "note": "Conditioning denominator is zero, so formula is undefined rather than zero"
+    },
+    {
+      "id": 75,
+      "computed": "bb/((bb + r)*(bb + r - 1))",
+      "expected": "bb/((bb + r)*(bb + r - 1))",
+      "note": "For integer r,b>=1 both denominator factors are positive"
+    },
+    {
+      "id": 76,
+      "computed": "3/20",
+      "expected": "3/20",
+      "note": ""
+    },
+    {
+      "id": 77,
+      "computed": "(Fraction(1, 1), Fraction(1, 2))",
+      "expected": "(Fraction(1, 1), Fraction(1, 2))",
+      "note": ""
+    },
+    {
+      "id": 78,
+      "computed": "(Fraction(1, 2), Fraction(9, 10))",
+      "expected": "(Fraction(1, 2), Fraction(9, 10))",
+      "note": ""
+    },
+    {
+      "id": 79,
+      "computed": "3/8",
+      "expected": "3/8",
+      "note": ""
+    },
+    {
+      "id": 80,
+      "computed": "(45, 85)",
+      "expected": "(45, 85)",
+      "note": ""
+    },
+    {
+      "id": 81,
+      "computed": "1/2",
+      "expected": "1/2",
+      "note": "Fair independent next toss remains a half under any specified past sequence"
+    },
+    {
+      "id": 82,
+      "computed": "15",
+      "expected": "15",
+      "note": ""
+    },
+    {
+      "id": 83,
+      "computed": "5/8",
+      "expected": "5/8",
+      "note": ""
+    },
+    {
+      "id": 84,
+      "computed": "[22]",
+      "expected": "[22]",
+      "note": ""
+    },
+    {
+      "id": 85,
+      "computed": "2",
+      "expected": "2",
+      "note": ""
+    },
+    {
+      "id": 86,
+      "computed": "1/3",
+      "expected": "1/3",
+      "note": ""
+    },
+    {
+      "id": 87,
+      "computed": "2/5",
+      "expected": "2/5",
+      "note": ""
+    },
+    {
+      "id": 88,
+      "computed": "6/5",
+      "expected": "6/5",
+      "note": ""
+    },
+    {
+      "id": 89,
+      "computed": "1/2",
+      "expected": "1/2",
+      "note": ""
+    },
+    {
+      "id": 90,
+      "computed": "2/5",
+      "expected": "2/5",
+      "note": ""
+    },
+    {
+      "id": "1.1",
+      "computed": "({2, 4, 5, 6}, {6}, Fraction(2, 3))",
+      "expected": "({2, 4, 5, 6}, {6}, Fraction(2, 3))",
+      "note": ""
+    },
+    {
+      "id": "1.2",
+      "computed": "(60, 10)",
+      "expected": "(60, 10)",
+      "note": ""
+    },
+    {
+      "id": "1.3",
+      "computed": "18/35",
+      "expected": "18/35",
+      "note": ""
+    },
+    {
+      "id": "2.1",
+      "computed": "(Fraction(1, 3), Fraction(1, 4))",
+      "expected": "(Fraction(1, 3), Fraction(1, 4))",
+      "note": ""
+    },
+    {
+      "id": "2.2",
+      "computed": "(True, Fraction(1, 2))",
+      "expected": "(True, Fraction(1, 2))",
+      "note": ""
+    },
+    {
+      "id": "2.3",
+      "computed": "(Fraction(4, 9), Fraction(8, 9))",
+      "expected": "(Fraction(4, 9), Fraction(8, 9))",
+      "note": ""
+    },
+    {
+      "id": "3.1",
+      "computed": "(Fraction(2, 5), Fraction(4, 9), Fraction(2, 45))",
+      "expected": "(Fraction(2, 5), Fraction(4, 9), Fraction(2, 45))",
+      "note": ""
+    },
+    {
+      "id": "3.2",
+      "computed": "(Fraction(2, 5), Fraction(2, 3))",
+      "expected": "(Fraction(2, 5), Fraction(2, 3))",
+      "note": ""
+    },
+    {
+      "id": "3.3",
+      "computed": "9/64",
+      "expected": "9/64",
+      "note": ""
+    },
+    {
+      "id": "4.1",
+      "computed": "(Fraction(5, 12), Fraction(1, 2), 1)",
+      "expected": "(Fraction(5, 12), Fraction(1, 2), 1)",
+      "note": ""
+    },
+    {
+      "id": "4.2",
+      "computed": "(Fraction(3, 4), Fraction(9, 20), Fraction(17, 20))",
+      "expected": "(Fraction(3, 4), Fraction(9, 20), Fraction(17, 20))",
+      "note": ""
+    },
+    {
+      "id": "4.3",
+      "computed": "(True, True, Fraction(1, 2), Fraction(72, 91))",
+      "expected": "(True, True, Fraction(1, 2), Fraction(72, 91))",
+      "note": ""
+    }
+  ],
+  "count": 100,
+  "purely_verbal_ids": [
+    38,
+    55
+  ],
+  "replaced_ids": [
+    7,
+    10,
+    11,
+    13,
+    14,
+    16,
+    17,
+    19,
+    26,
+    29,
+    34,
+    43,
+    44,
+    48,
+    62,
+    66,
+    77,
+    80,
+    83,
+    87
+  ],
+  "worked_count": 12,
+  "practice_aligned": true
+}

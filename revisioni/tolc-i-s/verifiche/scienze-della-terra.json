@@ -1,0 +1,78 @@
+{
+  "files_read_entirely": 220,
+  "quizzes_independently_solved": 90,
+  "worked_exercises_independently_solved": 15,
+  "practice_exercises_each_language": 15,
+  "counts": {
+    "content/domande": 90,
+    "content/dafare": 15,
+    "content/svolti": 4,
+    "content-en/domande": 90,
+    "content-en/dafare": 15,
+    "content-en/svolti": 4
+  },
+  "numeric_checks": 49,
+  "numeric_checks_passed": 49,
+  "formulas": 402,
+  "answer_positions": {
+    "1": 18,
+    "2": 18,
+    "3": 18,
+    "4": 18,
+    "5": 18
+  },
+  "theory_words": {
+    "content": {
+      "gross": 2857,
+      "without_directive_lines_math_html": 2660,
+      "sections": 9
+    },
+    "content-en": {
+      "gross": 2695,
+      "without_directive_lines_math_html": 2507,
+      "sections": 9
+    }
+  },
+  "bilingual_math_differences_after_label_unit_decimal_normalization": [],
+  "figure_geometry_and_directives_unchanged": true,
+  "errors": [],
+  "status": "passed; content frozen",
+  "changes": 56,
+  "katex": {
+    "checked": 402,
+    "errors": []
+  },
+  "distractor_questions_improved": [
+    22,
+    24,
+    29,
+    31,
+    32,
+    36,
+    39,
+    41,
+    46,
+    49,
+    51,
+    52,
+    55,
+    59,
+    69,
+    72,
+    74,
+    81,
+    89
+  ],
+  "content_assumption_precisions": [
+    "day/night complete cycle Q1 and practice1",
+    "eclipse bodies and orbital nodes worked1",
+    "reciprocal Mohs tests Q43",
+    "atmospheric CO2 Q51",
+    "temperate latitude Q66",
+    "simultaneous P/S emission Q68",
+    "porosity fraction Q71",
+    "magnetic polarity epochs Q76"
+  ],
+  "figures_changed": [],
+  "open_issues": []
+}

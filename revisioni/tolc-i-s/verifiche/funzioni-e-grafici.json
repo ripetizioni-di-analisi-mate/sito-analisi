@@ -1,0 +1,1753 @@
+{
+  "revisore": "root, diverso dall’autore funzioni",
+  "lettura_integrale": {
+    "quiz_unici": 90,
+    "quiz_percorso": 180,
+    "esercizi_svolti_unici": 12,
+    "tracce_uniche": 10,
+    "file": 420,
+    "lingue": [
+      "IT",
+      "EN"
+    ]
+  },
+  "metodo": "Risoluzione manuale di tutti i quiz, confronto di tutte le alternative e lettura integrale delle versioni IT/EN, teoria e schede. Ricalcoli simbolici aggiuntivi dei casi elencati, non presentati come verifica automatica di ogni frase.",
+  "ricalcoli": {
+    "q2": "[3]",
+    "q3": "5",
+    "q4": "10",
+    "q6": "(3, 2)",
+    "q7": "9",
+    "q11": "14",
+    "q13": "[3]",
+    "q15": "3",
+    "q19": "Interval.open(-3/2, 4/3)",
+    "q23": "{-4}",
+    "q26": "(1, 4)",
+    "q29": "1",
+    "q30": "[(1, 2), (3, 10)]",
+    "q31": "[1]",
+    "q35": "[(0, 4)]",
+    "q37": "[0]",
+    "q43": "[3, 6, 12, 24]",
+    "q45": "[True, True, True, True, False]",
+    "q47": "log(2)/log(4) + 1",
+    "q49": "{4}",
+    "q52": "6",
+    "q56": "EmptySet",
+    "q58": "{-3, 3}",
+    "q63": "4",
+    "q66": "-1",
+    "q68": "20",
+    "q73": "(1, 7)",
+    "q75": "2",
+    "q78": "(-1, 5)",
+    "q81": "4",
+    "q82": "Interval.open(3/4, oo)",
+    "q83": "Interval(-1, 3)",
+    "q86": "[2]",
+    "q89": "4",
+    "svolti_1_3_zero": "EmptySet",
+    "svolti_2_2_domain": "Interval(-4, 1)",
+    "svolti_2_3_range": "Interval(2, 10)",
+    "svolti_4_2_zero": "{-sqrt(3), sqrt(3)}",
+    "svolti_4_3_composition": "x"
+  },
+  "rilievi_corretti": [
+    "Q25,55,77: punto certamente appartenente, per distinguere ciò che è garantito da ciò che è solo possibile",
+    "Q46: esplicitato il dominio reale per rendere definito f(3)",
+    "Q68 e teoria: esplicitata l’ipotesi di decadimento esponenziale",
+    "Scheda1: denominatore nullo rende non definita la frazione, non nulla la formula",
+    "Scheda2: grafico limitato al dominio [3,5], senza rappresentare valori esclusi",
+    "Scheda4: precisato il caso y=2 nella selezione del ramo inverso",
+    "Teoria: aggiunto esempio svolto di funzione a tratti e raccordo",
+    "Teoria: condizione di radicando strettamente positivo limitata al caso in cui il denominatore è la radice",
+    "Teoria: assi di uguale scala nel grafico di funzione e inversa"
+  ],
+  "parita_formule": "Le cinque differenze segnalate dal confronto sequenziale sono riordino o ripetizione di simboli nelle frasi EN (59,64,76,77,79), senza variazione matematica; lette integralmente.",
+  "copertura_aggiunta": "Verificato sillabo CISIA TOLC-S: aggiunta distinzione tra estremi relativi e assoluti, con nuovo Q35 di lettura di una spezzata; sostituisce un calcolo di percentuali successive già esercitato in aritmetica.",
+  "figure": "Render finale delle 17 occorrenze per percorso/lingua: 16 immagini geometricamente distinte esaminate anche in tavole larghe 350 px, con assi/punti corretti, dominio della scheda 2 limitato a [3,5], Q35 coerente e scala uguale per il confronto inversa. Nessuna prova browser della pagina completa dichiarata.",
+  "errori_aperti": [],
+  "files": [
+    {
+      "path": "src/content/teoria/tolc-i/funzioni-e-grafici.md",
+      "sha256": "3f6d63ea8209b454df5c96a7101e899759c41952fab19bef77fbb229a8d24464"
+    },
+    {
+      "path": "src/content/teoria/tolc-s/funzioni-e-grafici.md",
+      "sha256": "3f6d63ea8209b454df5c96a7101e899759c41952fab19bef77fbb229a8d24464"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/funzioni-e-grafici/1.md",
+      "sha256": "f7031b6618e835c9a402443cc01734e6fc00844be8d3530314c84d5eb2780402"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/funzioni-e-grafici/1.md",
+      "sha256": "f7031b6618e835c9a402443cc01734e6fc00844be8d3530314c84d5eb2780402"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/funzioni-e-grafici/2.md",
+      "sha256": "0ea134cefdea96161818bb76c29bba9cbbb259f21b41b902ee0feedf3f9ebd22"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/funzioni-e-grafici/2.md",
+      "sha256": "0ea134cefdea96161818bb76c29bba9cbbb259f21b41b902ee0feedf3f9ebd22"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/funzioni-e-grafici/3.md",
+      "sha256": "642d31027e7cf76a0e6282c1dca39e11dce0f2fe0af66a61a42e2ca61bdd6ab0"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/funzioni-e-grafici/3.md",
+      "sha256": "642d31027e7cf76a0e6282c1dca39e11dce0f2fe0af66a61a42e2ca61bdd6ab0"
+    },
+    {
+      "path": "src/content/svolti/tolc-i/funzioni-e-grafici/4.md",
+      "sha256": "8c8392fb77d4020886ea5471b9915adc2477272f4269d7681dcbccc064ec3be7"
+    },
+    {
+      "path": "src/content/svolti/tolc-s/funzioni-e-grafici/4.md",
+      "sha256": "8c8392fb77d4020886ea5471b9915adc2477272f4269d7681dcbccc064ec3be7"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/1.md",
+      "sha256": "dfa38e1f9de70aa065b92a70d0470dd4e30cab4e23ef1080bd3217678fca1875"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/1.md",
+      "sha256": "dfa38e1f9de70aa065b92a70d0470dd4e30cab4e23ef1080bd3217678fca1875"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/10.md",
+      "sha256": "42f42cd5292752d7910a8b2a126ec2d31753d8804cb284e5142b170ee6e0a147"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/10.md",
+      "sha256": "42f42cd5292752d7910a8b2a126ec2d31753d8804cb284e5142b170ee6e0a147"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/2.md",
+      "sha256": "9578030a4757b44afb3a25f72643f9106d7926d377c8e7d4e8b1784746d63625"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/2.md",
+      "sha256": "9578030a4757b44afb3a25f72643f9106d7926d377c8e7d4e8b1784746d63625"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/3.md",
+      "sha256": "4bd6cf955405709c0fd68a10cba2b398f12c0cd65438d4f5f656311f436badc1"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/3.md",
+      "sha256": "4bd6cf955405709c0fd68a10cba2b398f12c0cd65438d4f5f656311f436badc1"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/4.md",
+      "sha256": "c4e603419c0b07e1742f30743be14b13149d5dceced36cc451e402f03214e0ce"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/4.md",
+      "sha256": "c4e603419c0b07e1742f30743be14b13149d5dceced36cc451e402f03214e0ce"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/5.md",
+      "sha256": "2aec07a04f17cc5a4d685ce77496689323597eb570582262cd1ae958019beaa6"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/5.md",
+      "sha256": "2aec07a04f17cc5a4d685ce77496689323597eb570582262cd1ae958019beaa6"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/6.md",
+      "sha256": "9fb94d4811934b2767caf8fc630346982deae267d53c8031941e88c08f224ee9"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/6.md",
+      "sha256": "9fb94d4811934b2767caf8fc630346982deae267d53c8031941e88c08f224ee9"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/7.md",
+      "sha256": "ae8cbb490e0c7b58724e516ca44f2951d59b109b65cb1adfe89132003ab5fd2b"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/7.md",
+      "sha256": "ae8cbb490e0c7b58724e516ca44f2951d59b109b65cb1adfe89132003ab5fd2b"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/8.md",
+      "sha256": "aa2fa7999417978889abd57af10052144b8ecf32f8ebcb812872eea86a05961a"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/8.md",
+      "sha256": "aa2fa7999417978889abd57af10052144b8ecf32f8ebcb812872eea86a05961a"
+    },
+    {
+      "path": "src/content/dafare/tolc-i/funzioni-e-grafici/9.md",
+      "sha256": "a3643247239b1c1fe18253b12bb63ee4ce5efa355af18da5f7aaad3b5df64e93"
+    },
+    {
+      "path": "src/content/dafare/tolc-s/funzioni-e-grafici/9.md",
+      "sha256": "a3643247239b1c1fe18253b12bb63ee4ce5efa355af18da5f7aaad3b5df64e93"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/1.md",
+      "sha256": "6b8ecd0a676422ee236d54415f60997563f65d52458781a02ca3b4998c61030a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/1.md",
+      "sha256": "6b8ecd0a676422ee236d54415f60997563f65d52458781a02ca3b4998c61030a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/10.md",
+      "sha256": "4f008095af337d18c187e35a1baf1830cb48ee327bf50f314ecdaca9caf01b01"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/10.md",
+      "sha256": "4f008095af337d18c187e35a1baf1830cb48ee327bf50f314ecdaca9caf01b01"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/11.md",
+      "sha256": "5eb307fa9db8c6299c8310c315cadd694c6d93494f339e032289a0872d41466e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/11.md",
+      "sha256": "5eb307fa9db8c6299c8310c315cadd694c6d93494f339e032289a0872d41466e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/12.md",
+      "sha256": "9e11b85fd613db77ce7f38b47825533f8ec0020383c813eb6cdeccd7963901c5"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/12.md",
+      "sha256": "9e11b85fd613db77ce7f38b47825533f8ec0020383c813eb6cdeccd7963901c5"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/13.md",
+      "sha256": "23cacf57dd57ef65dc0e7fa6f41bff9a1e9e4720b90c8c8593cd064dd4f78e5e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/13.md",
+      "sha256": "23cacf57dd57ef65dc0e7fa6f41bff9a1e9e4720b90c8c8593cd064dd4f78e5e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/14.md",
+      "sha256": "42b2285487f6ba4027d08d3e96659e3ad642ba343a504adc6b6d08c740703f39"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/14.md",
+      "sha256": "42b2285487f6ba4027d08d3e96659e3ad642ba343a504adc6b6d08c740703f39"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/15.md",
+      "sha256": "bc99c077779485f7123e9c421156e92c966f94a8567e9341890e7fb2cda6db09"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/15.md",
+      "sha256": "bc99c077779485f7123e9c421156e92c966f94a8567e9341890e7fb2cda6db09"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/16.md",
+      "sha256": "203af0f1188f22c597c045f0a8eeb9f3e03571c9263247b72cb03dab505ed60a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/16.md",
+      "sha256": "203af0f1188f22c597c045f0a8eeb9f3e03571c9263247b72cb03dab505ed60a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/17.md",
+      "sha256": "0e168d63574650088d0ff6d18d507def048ae93f5edc299860e4c047a13e73c0"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/17.md",
+      "sha256": "0e168d63574650088d0ff6d18d507def048ae93f5edc299860e4c047a13e73c0"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/18.md",
+      "sha256": "2812ce4a220973d1458f7803410fa743473dff2cf337af759e3449c5cc93f844"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/18.md",
+      "sha256": "2812ce4a220973d1458f7803410fa743473dff2cf337af759e3449c5cc93f844"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/19.md",
+      "sha256": "189c345402ccd79bc9b80adfd5f5d473088a1bad4430c3dcd6ab566b6b611473"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/19.md",
+      "sha256": "189c345402ccd79bc9b80adfd5f5d473088a1bad4430c3dcd6ab566b6b611473"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/2.md",
+      "sha256": "6f4a8f2c90ff39c47aa12f587b87c4e4a082e9e5094adee6a84a1d6300167710"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/2.md",
+      "sha256": "6f4a8f2c90ff39c47aa12f587b87c4e4a082e9e5094adee6a84a1d6300167710"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/20.md",
+      "sha256": "600c8aee8e0e9d0a9f30883bf9950b4e63ebbd48547e61b6d578d4fefa004fb1"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/20.md",
+      "sha256": "600c8aee8e0e9d0a9f30883bf9950b4e63ebbd48547e61b6d578d4fefa004fb1"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/21.md",
+      "sha256": "f42af6831f59b1cc31c1722a6c4b84e35d60fa5b6b9451b2485db4bbeb69de29"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/21.md",
+      "sha256": "f42af6831f59b1cc31c1722a6c4b84e35d60fa5b6b9451b2485db4bbeb69de29"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/22.md",
+      "sha256": "91da687efe50b493f7e6b32df58ef259b7b55b5c1af8a80e258f896bdc366d2b"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/22.md",
+      "sha256": "91da687efe50b493f7e6b32df58ef259b7b55b5c1af8a80e258f896bdc366d2b"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/23.md",
+      "sha256": "1cd02b7bd2dadf144cdf932dc7b19409bcba86edc6a56b99b941418d206f7985"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/23.md",
+      "sha256": "1cd02b7bd2dadf144cdf932dc7b19409bcba86edc6a56b99b941418d206f7985"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/24.md",
+      "sha256": "01d71931a8ed08facb5223187e294e1b1332878bd551a031f6af03df24e30521"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/24.md",
+      "sha256": "01d71931a8ed08facb5223187e294e1b1332878bd551a031f6af03df24e30521"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/25.md",
+      "sha256": "bfca9d527b6f97e1f0177fa41bd5b131a1c9250a36df6953ac9d333bdcc30676"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/25.md",
+      "sha256": "bfca9d527b6f97e1f0177fa41bd5b131a1c9250a36df6953ac9d333bdcc30676"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/26.md",
+      "sha256": "67fd9e50e97bf6ceee350edc112ace6e326b55c061bb0a7d414d37c4742c04fe"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/26.md",
+      "sha256": "67fd9e50e97bf6ceee350edc112ace6e326b55c061bb0a7d414d37c4742c04fe"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/27.md",
+      "sha256": "0d77396e473549a4a9cad07980a83be4a01055d58ffcece167dab7188ffa73d8"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/27.md",
+      "sha256": "0d77396e473549a4a9cad07980a83be4a01055d58ffcece167dab7188ffa73d8"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/28.md",
+      "sha256": "4cb297deb6e3f3f54136415af6fdd4f4beec7e15be6896e7457c1a2724803db0"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/28.md",
+      "sha256": "4cb297deb6e3f3f54136415af6fdd4f4beec7e15be6896e7457c1a2724803db0"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/29.md",
+      "sha256": "f5da0761b06f9c79ff6ed4075cf27add201da02bc79400989dc825217b877a3d"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/29.md",
+      "sha256": "f5da0761b06f9c79ff6ed4075cf27add201da02bc79400989dc825217b877a3d"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/3.md",
+      "sha256": "6737c3a5ac43dfabdc5848635c1266cd98f20e2572296cc116edd102be74bd7c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/3.md",
+      "sha256": "6737c3a5ac43dfabdc5848635c1266cd98f20e2572296cc116edd102be74bd7c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/30.md",
+      "sha256": "399b7046e15b442a694fc7d7f9b2681731c1657b3993b3493ccebdd7b81207dd"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/30.md",
+      "sha256": "399b7046e15b442a694fc7d7f9b2681731c1657b3993b3493ccebdd7b81207dd"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/31.md",
+      "sha256": "912acc72884fa9302f42b0cea016cf3b6fa83cb86a4643baae2f86e1758d5cb2"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/31.md",
+      "sha256": "912acc72884fa9302f42b0cea016cf3b6fa83cb86a4643baae2f86e1758d5cb2"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/32.md",
+      "sha256": "aa113b2bace24f2b70fda32730a2dc3b2aa8d70aa921f1a85c5d509689cf9883"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/32.md",
+      "sha256": "aa113b2bace24f2b70fda32730a2dc3b2aa8d70aa921f1a85c5d509689cf9883"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/33.md",
+      "sha256": "0f62b35083c84809ac8d9d359c62dda2c1703bc54bf086ed460079122c1f68fe"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/33.md",
+      "sha256": "0f62b35083c84809ac8d9d359c62dda2c1703bc54bf086ed460079122c1f68fe"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/34.md",
+      "sha256": "c0a8705d150d12055272301e8898c6d1b61f384f42ed1743c2a19d68584badc7"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/34.md",
+      "sha256": "c0a8705d150d12055272301e8898c6d1b61f384f42ed1743c2a19d68584badc7"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/35.md",
+      "sha256": "982b48b8305ba19b647c57893dac33b4fe29a21ff6c90006a80cf18be08238f9"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/35.md",
+      "sha256": "982b48b8305ba19b647c57893dac33b4fe29a21ff6c90006a80cf18be08238f9"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/36.md",
+      "sha256": "ad49ad58532c1b117c0c45159d2eea30b919754631badc523f245e4a3623c085"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/36.md",
+      "sha256": "ad49ad58532c1b117c0c45159d2eea30b919754631badc523f245e4a3623c085"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/37.md",
+      "sha256": "ee6ca58948b1ff1dc82f21fa2bfb9640b5e1daa91cb4877ef7a739f11abdcbc3"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/37.md",
+      "sha256": "ee6ca58948b1ff1dc82f21fa2bfb9640b5e1daa91cb4877ef7a739f11abdcbc3"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/38.md",
+      "sha256": "9fc825ab791bf4ef1505c75b982742a4687f64d1f011595aa9a27eb8a84fb652"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/38.md",
+      "sha256": "9fc825ab791bf4ef1505c75b982742a4687f64d1f011595aa9a27eb8a84fb652"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/39.md",
+      "sha256": "f263ad826091740cfa11a25b4d894cc3582cc80685b9222c1fea57d9f7641726"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/39.md",
+      "sha256": "f263ad826091740cfa11a25b4d894cc3582cc80685b9222c1fea57d9f7641726"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/4.md",
+      "sha256": "2604f64ac459f28ac2bfbdc58d663c8a129ed91f427e0ef2973c7a6ff996d9ec"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/4.md",
+      "sha256": "2604f64ac459f28ac2bfbdc58d663c8a129ed91f427e0ef2973c7a6ff996d9ec"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/40.md",
+      "sha256": "0695c7cee1494738b6c27d732cf4b42ca299bed8c28ba3a717c1c035b51993c8"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/40.md",
+      "sha256": "0695c7cee1494738b6c27d732cf4b42ca299bed8c28ba3a717c1c035b51993c8"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/41.md",
+      "sha256": "eeb282c4f5f077b0b940e4a5077c9f7aa08cf4aa9d9afa26b9cb850ad911d316"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/41.md",
+      "sha256": "eeb282c4f5f077b0b940e4a5077c9f7aa08cf4aa9d9afa26b9cb850ad911d316"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/42.md",
+      "sha256": "2cd74ebc3f526917b14f4516280cec42b4fc9ebd928afc021c25306414c5f17c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/42.md",
+      "sha256": "2cd74ebc3f526917b14f4516280cec42b4fc9ebd928afc021c25306414c5f17c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/43.md",
+      "sha256": "7ea373cc6bef432b7e6c2c2b3a4201aa0e7c6df965e95585a9a65f7d6716966c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/43.md",
+      "sha256": "7ea373cc6bef432b7e6c2c2b3a4201aa0e7c6df965e95585a9a65f7d6716966c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/44.md",
+      "sha256": "965ccf28dfef14d10896967eec199d509e08e4a8c406808f9cc39ae2c09a43a3"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/44.md",
+      "sha256": "965ccf28dfef14d10896967eec199d509e08e4a8c406808f9cc39ae2c09a43a3"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/45.md",
+      "sha256": "d47f62d6e692590873aed76fa6da5967e1a2dde494a42fe0d8cf1fba3f66e4c9"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/45.md",
+      "sha256": "d47f62d6e692590873aed76fa6da5967e1a2dde494a42fe0d8cf1fba3f66e4c9"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/46.md",
+      "sha256": "1b7f0119d3a9a21b53f555166ed960ed85776039aad4953b14c29b61dbdabe57"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/46.md",
+      "sha256": "1b7f0119d3a9a21b53f555166ed960ed85776039aad4953b14c29b61dbdabe57"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/47.md",
+      "sha256": "d28af73e43fcaa72d8e263b73e33afaffb4200bdcca925bfa5b86e8e88e987ec"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/47.md",
+      "sha256": "d28af73e43fcaa72d8e263b73e33afaffb4200bdcca925bfa5b86e8e88e987ec"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/48.md",
+      "sha256": "8e99a7532bf0f09e0dc68a58e09ffcf7257cdbc381e93aeeba35c180128acd13"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/48.md",
+      "sha256": "8e99a7532bf0f09e0dc68a58e09ffcf7257cdbc381e93aeeba35c180128acd13"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/49.md",
+      "sha256": "1b8bda7413bb5693455c67417925a795c1b51a0f82f7f39fb55e5ac1f8a3ddcb"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/49.md",
+      "sha256": "1b8bda7413bb5693455c67417925a795c1b51a0f82f7f39fb55e5ac1f8a3ddcb"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/5.md",
+      "sha256": "80d63c2e4ca61b1cf5b85520fe222dd0de20369529bd65df28bbafc1463adc74"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/5.md",
+      "sha256": "80d63c2e4ca61b1cf5b85520fe222dd0de20369529bd65df28bbafc1463adc74"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/50.md",
+      "sha256": "4008c409c98f43d7d91f5fd2ac9a6e40507e63c8f82218994006a7f91a17c437"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/50.md",
+      "sha256": "4008c409c98f43d7d91f5fd2ac9a6e40507e63c8f82218994006a7f91a17c437"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/51.md",
+      "sha256": "e5f913172334b8766a80dbdc588c123d1fa6588c03e7c5c386e2b1c74e4d82b1"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/51.md",
+      "sha256": "e5f913172334b8766a80dbdc588c123d1fa6588c03e7c5c386e2b1c74e4d82b1"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/52.md",
+      "sha256": "396ec3b5ec93137b9203a0879513fc8e4ed8cf07f2414120aef71269fa307e03"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/52.md",
+      "sha256": "396ec3b5ec93137b9203a0879513fc8e4ed8cf07f2414120aef71269fa307e03"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/53.md",
+      "sha256": "3cbfaea038955349a896e4be85a1e70d4aff65dbd27cbeefc31d1272f6e51ee0"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/53.md",
+      "sha256": "3cbfaea038955349a896e4be85a1e70d4aff65dbd27cbeefc31d1272f6e51ee0"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/54.md",
+      "sha256": "933a39e12647de7d1fbe75dae24d7af2df9d55dae620438145b5e11ea6ca988a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/54.md",
+      "sha256": "933a39e12647de7d1fbe75dae24d7af2df9d55dae620438145b5e11ea6ca988a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/55.md",
+      "sha256": "9ee3a22e7a784529bcc4ea1cc31a7943af8133541886c252b57ccd0f45636571"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/55.md",
+      "sha256": "9ee3a22e7a784529bcc4ea1cc31a7943af8133541886c252b57ccd0f45636571"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/56.md",
+      "sha256": "3742eeb6d48a0ae8dc5cd84b98d27bf4d28fda9f49b8888f43b7fb4645af8097"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/56.md",
+      "sha256": "3742eeb6d48a0ae8dc5cd84b98d27bf4d28fda9f49b8888f43b7fb4645af8097"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/57.md",
+      "sha256": "dd666e766693a32a7e1a63f7ecc1100fd664b376584e2e04f06c71592b580f40"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/57.md",
+      "sha256": "dd666e766693a32a7e1a63f7ecc1100fd664b376584e2e04f06c71592b580f40"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/58.md",
+      "sha256": "94a0b1367f1f3a10c771f734661d5201d857c43f18f52225e709945e33ec1889"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/58.md",
+      "sha256": "94a0b1367f1f3a10c771f734661d5201d857c43f18f52225e709945e33ec1889"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/59.md",
+      "sha256": "88e8a2d621a88b071a3cb3d08161d84ca893a9724fe4382c5d2c51904ab297a7"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/59.md",
+      "sha256": "88e8a2d621a88b071a3cb3d08161d84ca893a9724fe4382c5d2c51904ab297a7"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/6.md",
+      "sha256": "49fde4c17074371f85c46120736e4f6f7382a83d4080e980583d9664674397c2"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/6.md",
+      "sha256": "49fde4c17074371f85c46120736e4f6f7382a83d4080e980583d9664674397c2"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/60.md",
+      "sha256": "8d1248f5069259bb79407ef5d7058d27d09eaf1e75b47e608dbdd4ac09be18c9"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/60.md",
+      "sha256": "8d1248f5069259bb79407ef5d7058d27d09eaf1e75b47e608dbdd4ac09be18c9"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/61.md",
+      "sha256": "7ad528069d4b83e1afe50cded9e7e1339836c37fb334a0eea392d6ca2c6c7a74"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/61.md",
+      "sha256": "7ad528069d4b83e1afe50cded9e7e1339836c37fb334a0eea392d6ca2c6c7a74"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/62.md",
+      "sha256": "d383816042ad75e4641c55339809d7f9b894e6d5ee7fab061a791862750cb56e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/62.md",
+      "sha256": "d383816042ad75e4641c55339809d7f9b894e6d5ee7fab061a791862750cb56e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/63.md",
+      "sha256": "42380134c999cd78b0017142811258249c0a66cff69568c1c79499627242c31e"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/63.md",
+      "sha256": "42380134c999cd78b0017142811258249c0a66cff69568c1c79499627242c31e"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/64.md",
+      "sha256": "49e31de953e3f7f8bc4921397f86554d0b8f30736f95e0c5ee5f9685f25ea59a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/64.md",
+      "sha256": "49e31de953e3f7f8bc4921397f86554d0b8f30736f95e0c5ee5f9685f25ea59a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/65.md",
+      "sha256": "cf216e2cc5c22b5a804e5066a212dc041f2ad9e4f40e03cf3020548a759a3cf7"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/65.md",
+      "sha256": "cf216e2cc5c22b5a804e5066a212dc041f2ad9e4f40e03cf3020548a759a3cf7"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/66.md",
+      "sha256": "86b2e730877402af531a7521f486e723ddce5608a01f60fe3e1a2f6ad7727418"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/66.md",
+      "sha256": "86b2e730877402af531a7521f486e723ddce5608a01f60fe3e1a2f6ad7727418"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/67.md",
+      "sha256": "127842e86810f7d5d653dd3d0ba6f66bb4cdbace8334b7c35a22f47e0ffdfa9d"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/67.md",
+      "sha256": "127842e86810f7d5d653dd3d0ba6f66bb4cdbace8334b7c35a22f47e0ffdfa9d"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/68.md",
+      "sha256": "0c644f06180a70aa7f53d9d34e0279bb76a8721b2ec4393c60080b2e6c2b478b"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/68.md",
+      "sha256": "0c644f06180a70aa7f53d9d34e0279bb76a8721b2ec4393c60080b2e6c2b478b"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/69.md",
+      "sha256": "e9a3ed52a9621f8ae448460513d46449e6e38db1b7fd5dbb87ae510b5e8b2a2a"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/69.md",
+      "sha256": "e9a3ed52a9621f8ae448460513d46449e6e38db1b7fd5dbb87ae510b5e8b2a2a"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/7.md",
+      "sha256": "c37fe7312995a86750ca40c57d66c6357a5ce7309863893e6c3ee9d4280779bd"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/7.md",
+      "sha256": "c37fe7312995a86750ca40c57d66c6357a5ce7309863893e6c3ee9d4280779bd"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/70.md",
+      "sha256": "27ca55e5e13a8369e77627614de76e419c92a26e4f79f68ae02a333717458447"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/70.md",
+      "sha256": "27ca55e5e13a8369e77627614de76e419c92a26e4f79f68ae02a333717458447"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/71.md",
+      "sha256": "d703f92d665624394dceab817c80f026c077c8902b758316576dd3d6d0958d8f"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/71.md",
+      "sha256": "d703f92d665624394dceab817c80f026c077c8902b758316576dd3d6d0958d8f"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/72.md",
+      "sha256": "800eec5da3ad9ff82208f57b6acf5e5301435c1420f0de327d6b3cae4975382c"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/72.md",
+      "sha256": "800eec5da3ad9ff82208f57b6acf5e5301435c1420f0de327d6b3cae4975382c"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/73.md",
+      "sha256": "5579d987acf26435f19935d5a2218f2d756522fbff15f169ce60418fdb2a8547"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/73.md",
+      "sha256": "5579d987acf26435f19935d5a2218f2d756522fbff15f169ce60418fdb2a8547"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/74.md",
+      "sha256": "8b4a7fe98c8f6835a26f69f581e792680904174873724a3fe2daa34a216424b3"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/74.md",
+      "sha256": "8b4a7fe98c8f6835a26f69f581e792680904174873724a3fe2daa34a216424b3"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/75.md",
+      "sha256": "7278fe7c8920a9a9d2b19dea6fee91066bad8180f29e0507d2c8e3f1b110ed86"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/75.md",
+      "sha256": "7278fe7c8920a9a9d2b19dea6fee91066bad8180f29e0507d2c8e3f1b110ed86"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/76.md",
+      "sha256": "9800ba79dadd8371364a04451cfb6eace4ac6820b018dc14c84d92e99bfd53d8"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/76.md",
+      "sha256": "9800ba79dadd8371364a04451cfb6eace4ac6820b018dc14c84d92e99bfd53d8"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/77.md",
+      "sha256": "fc6a4cfad4154910425d86987b0761f68a2bdf61e48062f31f48a255517468e3"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/77.md",
+      "sha256": "fc6a4cfad4154910425d86987b0761f68a2bdf61e48062f31f48a255517468e3"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/78.md",
+      "sha256": "cfd753056bd5294d5f68d3f7cadaed60089e59975fada815a1c0158e7fb2f671"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/78.md",
+      "sha256": "cfd753056bd5294d5f68d3f7cadaed60089e59975fada815a1c0158e7fb2f671"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/79.md",
+      "sha256": "313ffe2b08bec1e10ae6caf75dc184a2cb1310f6e13e0a007c6826d3c9ee1fa5"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/79.md",
+      "sha256": "313ffe2b08bec1e10ae6caf75dc184a2cb1310f6e13e0a007c6826d3c9ee1fa5"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/8.md",
+      "sha256": "019ec76ef668c8848c0dbfa8be13c9eb3ec87463c216d8fbe0a545aa690475a1"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/8.md",
+      "sha256": "019ec76ef668c8848c0dbfa8be13c9eb3ec87463c216d8fbe0a545aa690475a1"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/80.md",
+      "sha256": "1bfc2e38c7fd5b4b5ef6ab15d2e9a708adfa69d5660ce4dad4a995f4ca94d853"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/80.md",
+      "sha256": "1bfc2e38c7fd5b4b5ef6ab15d2e9a708adfa69d5660ce4dad4a995f4ca94d853"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/81.md",
+      "sha256": "fcb25955ae422b689260df5bf912cd702e0eb003d4cc926673821b78d8f4f63d"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/81.md",
+      "sha256": "fcb25955ae422b689260df5bf912cd702e0eb003d4cc926673821b78d8f4f63d"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/82.md",
+      "sha256": "d698a9d5eabbdc3a48e2c37fb230b9c1fbbf912a08c72e4e4259d54e4d9275be"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/82.md",
+      "sha256": "d698a9d5eabbdc3a48e2c37fb230b9c1fbbf912a08c72e4e4259d54e4d9275be"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/83.md",
+      "sha256": "a8e5dc0f5e89bea5bca8ae2633cf4b6d555ec9fc858bf7ca98126e548fc7c07d"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/83.md",
+      "sha256": "a8e5dc0f5e89bea5bca8ae2633cf4b6d555ec9fc858bf7ca98126e548fc7c07d"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/84.md",
+      "sha256": "605e3b41c3c5e5aa98cc0a17e960a041c8e4c7950b07f76d7af5087586ba1899"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/84.md",
+      "sha256": "605e3b41c3c5e5aa98cc0a17e960a041c8e4c7950b07f76d7af5087586ba1899"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/85.md",
+      "sha256": "aa1b3914a4ea105f0c0e187b182f7ebfc11a82c327ed7267116898cb999dfb52"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/85.md",
+      "sha256": "aa1b3914a4ea105f0c0e187b182f7ebfc11a82c327ed7267116898cb999dfb52"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/86.md",
+      "sha256": "fc31e96fc9e90222652fe0414f3d5fb1eb95bb4e96c47395d01d84e363482d92"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/86.md",
+      "sha256": "fc31e96fc9e90222652fe0414f3d5fb1eb95bb4e96c47395d01d84e363482d92"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/87.md",
+      "sha256": "74933a4bb8f42deb1cf08c7cced0020069de2a6c95eafe83c6db6562aa1ac4ad"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/87.md",
+      "sha256": "74933a4bb8f42deb1cf08c7cced0020069de2a6c95eafe83c6db6562aa1ac4ad"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/88.md",
+      "sha256": "1fb7f56b7323abc8d25a0d9a2db5e32bb09dfa7ce9e1b4bd166003d1e0069646"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/88.md",
+      "sha256": "1fb7f56b7323abc8d25a0d9a2db5e32bb09dfa7ce9e1b4bd166003d1e0069646"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/89.md",
+      "sha256": "812a65573bd3bcd10cf19887792bb90ddabd70b0899b409c31f52a82059234e7"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/89.md",
+      "sha256": "812a65573bd3bcd10cf19887792bb90ddabd70b0899b409c31f52a82059234e7"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/9.md",
+      "sha256": "bc7a00b7c1116e70fc81ffa41e1b47031c6659614851fe96fa2efe02f127b69b"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/9.md",
+      "sha256": "bc7a00b7c1116e70fc81ffa41e1b47031c6659614851fe96fa2efe02f127b69b"
+    },
+    {
+      "path": "src/content/domande/tolc-i/funzioni-e-grafici/90.md",
+      "sha256": "278d06b737b92eb1e72f47e2ad467e3ed657ed522cf7bc9e7763b0abd3f7a3ae"
+    },
+    {
+      "path": "src/content/domande/tolc-s/funzioni-e-grafici/90.md",
+      "sha256": "278d06b737b92eb1e72f47e2ad467e3ed657ed522cf7bc9e7763b0abd3f7a3ae"
+    },
+    {
+      "path": "src/content-en/teoria/tolc-i/funzioni-e-grafici.md",
+      "sha256": "3fd7c6c64eb83f4012f551bf087156c12962a2b6525f4044dc8f932b144e28d8"
+    },
+    {
+      "path": "src/content-en/teoria/tolc-s/funzioni-e-grafici.md",
+      "sha256": "3fd7c6c64eb83f4012f551bf087156c12962a2b6525f4044dc8f932b144e28d8"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/funzioni-e-grafici/1.md",
+      "sha256": "9e06f2ca748269fbc2d4394dfc231ed75149f207e3bdfa37ea0409088390a5ac"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/funzioni-e-grafici/1.md",
+      "sha256": "9e06f2ca748269fbc2d4394dfc231ed75149f207e3bdfa37ea0409088390a5ac"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/funzioni-e-grafici/2.md",
+      "sha256": "4ec7a8abeb171ea4cc65e7958b2887e16e05e9e31c8868ede06d75ad271fc380"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/funzioni-e-grafici/2.md",
+      "sha256": "4ec7a8abeb171ea4cc65e7958b2887e16e05e9e31c8868ede06d75ad271fc380"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/funzioni-e-grafici/3.md",
+      "sha256": "64bec609e5eedea86d3471a43ee2c76a2ab91f8e040d8778494c8e13aa5ef78d"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/funzioni-e-grafici/3.md",
+      "sha256": "64bec609e5eedea86d3471a43ee2c76a2ab91f8e040d8778494c8e13aa5ef78d"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-i/funzioni-e-grafici/4.md",
+      "sha256": "98f96ec0273bcc516688e88b92f523d90b8bc8ad639e264275a10f7b5a73fae7"
+    },
+    {
+      "path": "src/content-en/svolti/tolc-s/funzioni-e-grafici/4.md",
+      "sha256": "98f96ec0273bcc516688e88b92f523d90b8bc8ad639e264275a10f7b5a73fae7"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/1.md",
+      "sha256": "d0b712ac654301dc09fef4d69365955574a3d3e403755e1a33efa5445bc0f94b"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/1.md",
+      "sha256": "d0b712ac654301dc09fef4d69365955574a3d3e403755e1a33efa5445bc0f94b"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/10.md",
+      "sha256": "b4e4ed421155199e7d8ad979acaab2e53837d0b87cf85f7adfeef85d90a060b3"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/10.md",
+      "sha256": "b4e4ed421155199e7d8ad979acaab2e53837d0b87cf85f7adfeef85d90a060b3"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/2.md",
+      "sha256": "2c17dc014eb427266e1c30cc08d9a6284655e62c898bfa801290d0e5110e9b69"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/2.md",
+      "sha256": "2c17dc014eb427266e1c30cc08d9a6284655e62c898bfa801290d0e5110e9b69"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/3.md",
+      "sha256": "bde4f46280a9e88dd57083136ca5cfddf8c4b4c95d7701e4157a5d2b05ab2349"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/3.md",
+      "sha256": "bde4f46280a9e88dd57083136ca5cfddf8c4b4c95d7701e4157a5d2b05ab2349"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/4.md",
+      "sha256": "274766801d25564c3747710387b7956d114b98a64c875cd14b4dbd6ddc634bd9"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/4.md",
+      "sha256": "274766801d25564c3747710387b7956d114b98a64c875cd14b4dbd6ddc634bd9"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/5.md",
+      "sha256": "e645951dd31ea09b2412c18694b85ee78af594ef7d1ca934c0899c205e455575"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/5.md",
+      "sha256": "e645951dd31ea09b2412c18694b85ee78af594ef7d1ca934c0899c205e455575"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/6.md",
+      "sha256": "aee17fc5de3a38f144921afccc778fe16c58c3468a625a9798d407e08247876b"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/6.md",
+      "sha256": "aee17fc5de3a38f144921afccc778fe16c58c3468a625a9798d407e08247876b"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/7.md",
+      "sha256": "bcbf58f00a238335c046780984ee6aada239768ff951e2e23963a0563eee63ad"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/7.md",
+      "sha256": "bcbf58f00a238335c046780984ee6aada239768ff951e2e23963a0563eee63ad"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/8.md",
+      "sha256": "e8573ee46c0670ae91033644a92b5733a0a0a121a0241804e78942b08bfc3f86"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/8.md",
+      "sha256": "e8573ee46c0670ae91033644a92b5733a0a0a121a0241804e78942b08bfc3f86"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-i/funzioni-e-grafici/9.md",
+      "sha256": "ca89c5e6f13ed1bfcd0bd699f3f83ad4bca8cc7b3ed3596b6e5acfde487d37d5"
+    },
+    {
+      "path": "src/content-en/dafare/tolc-s/funzioni-e-grafici/9.md",
+      "sha256": "ca89c5e6f13ed1bfcd0bd699f3f83ad4bca8cc7b3ed3596b6e5acfde487d37d5"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/1.md",
+      "sha256": "92412a9ab17ed74827568e1e29feaa452b4409befdb5a65c023c6bdeaa34ebff"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/1.md",
+      "sha256": "92412a9ab17ed74827568e1e29feaa452b4409befdb5a65c023c6bdeaa34ebff"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/10.md",
+      "sha256": "7d74be047f03b703014978c4fb7c0524d3377d8f30362ec0a41dc3d2fa9ff88b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/10.md",
+      "sha256": "7d74be047f03b703014978c4fb7c0524d3377d8f30362ec0a41dc3d2fa9ff88b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/11.md",
+      "sha256": "c145789eaf07bdc14633a87ab518f845bf22601ff3c936ab286a72cb1da88c1b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/11.md",
+      "sha256": "c145789eaf07bdc14633a87ab518f845bf22601ff3c936ab286a72cb1da88c1b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/12.md",
+      "sha256": "e1ad787480d67c55a8817224be05acc71aa0796509f516265c18e01e4bad1bce"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/12.md",
+      "sha256": "e1ad787480d67c55a8817224be05acc71aa0796509f516265c18e01e4bad1bce"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/13.md",
+      "sha256": "69578385ed7da481cbf1602259149015187d81d777f67e17dfbc1500a3d5ca48"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/13.md",
+      "sha256": "69578385ed7da481cbf1602259149015187d81d777f67e17dfbc1500a3d5ca48"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/14.md",
+      "sha256": "b4b11c08d1ef5364490833c1453c5e6d4abc407978779a385f65a95075bb3b78"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/14.md",
+      "sha256": "b4b11c08d1ef5364490833c1453c5e6d4abc407978779a385f65a95075bb3b78"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/15.md",
+      "sha256": "66df177a231c8a94b91d9e9cd42290a25557c6f90883da6fe0922dd19bd4c12b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/15.md",
+      "sha256": "66df177a231c8a94b91d9e9cd42290a25557c6f90883da6fe0922dd19bd4c12b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/16.md",
+      "sha256": "2a5964683c05f72ca7846dd1b70a4556e31368aa601b4b9d3ee05a93bb6e2322"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/16.md",
+      "sha256": "2a5964683c05f72ca7846dd1b70a4556e31368aa601b4b9d3ee05a93bb6e2322"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/17.md",
+      "sha256": "19b75af36fb36b75c61b99e9727939f7467dd4b5ec4217121d2a3ad5013b903e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/17.md",
+      "sha256": "19b75af36fb36b75c61b99e9727939f7467dd4b5ec4217121d2a3ad5013b903e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/18.md",
+      "sha256": "ecb70f968cdfd474109bf37832b30a62b1357321635cc0e58454577c0a388d70"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/18.md",
+      "sha256": "ecb70f968cdfd474109bf37832b30a62b1357321635cc0e58454577c0a388d70"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/19.md",
+      "sha256": "a773991a474dbdae19cd859d7aec5dfec59a205a512f4643e2e94ff3338b8d9d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/19.md",
+      "sha256": "a773991a474dbdae19cd859d7aec5dfec59a205a512f4643e2e94ff3338b8d9d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/2.md",
+      "sha256": "ef203efdae39c666bdb7fc245e8b81de8cfc92699c71dbb522ce63bbad85a305"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/2.md",
+      "sha256": "ef203efdae39c666bdb7fc245e8b81de8cfc92699c71dbb522ce63bbad85a305"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/20.md",
+      "sha256": "115a7ce030b2ff95ab794691d6c31bf5628211fff94986c7318a73f790e847c6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/20.md",
+      "sha256": "115a7ce030b2ff95ab794691d6c31bf5628211fff94986c7318a73f790e847c6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/21.md",
+      "sha256": "6dfe78c0bc76447d59d7ceb111767018b944a8e50b210d0431a054e1c018fe82"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/21.md",
+      "sha256": "6dfe78c0bc76447d59d7ceb111767018b944a8e50b210d0431a054e1c018fe82"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/22.md",
+      "sha256": "c54cde92a3841c713b01b518fd3c56feae6b213e0ea5dc1a059516f8e04c524b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/22.md",
+      "sha256": "c54cde92a3841c713b01b518fd3c56feae6b213e0ea5dc1a059516f8e04c524b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/23.md",
+      "sha256": "fe476f79f6637e0c905be6e79b486c8864077edd5125f3ebf3c1558040495ac6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/23.md",
+      "sha256": "fe476f79f6637e0c905be6e79b486c8864077edd5125f3ebf3c1558040495ac6"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/24.md",
+      "sha256": "decfc4b1a0c3987f5dcdaf52846339d858ea3fdc04ace8bfa32cae635bcae29e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/24.md",
+      "sha256": "decfc4b1a0c3987f5dcdaf52846339d858ea3fdc04ace8bfa32cae635bcae29e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/25.md",
+      "sha256": "61822f0e3efc0d517a34d02a7959ac101276d1747e6f05a399544cb5456decb4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/25.md",
+      "sha256": "61822f0e3efc0d517a34d02a7959ac101276d1747e6f05a399544cb5456decb4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/26.md",
+      "sha256": "029ba7489020f2223d03e17814d12374060013d4b7bfb32f665b322e52df066c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/26.md",
+      "sha256": "029ba7489020f2223d03e17814d12374060013d4b7bfb32f665b322e52df066c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/27.md",
+      "sha256": "16bb369ba64f4ad1a04627cabb2b26bf0a4c3718fdfae4f4b872cb515c178ff7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/27.md",
+      "sha256": "16bb369ba64f4ad1a04627cabb2b26bf0a4c3718fdfae4f4b872cb515c178ff7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/28.md",
+      "sha256": "6322d83f8454d978646a40415142f2ddc79d1d4bb64cff271ec625c882436aca"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/28.md",
+      "sha256": "6322d83f8454d978646a40415142f2ddc79d1d4bb64cff271ec625c882436aca"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/29.md",
+      "sha256": "878f054de95109d2ec1a7a56beb4b61bb790524e9d1e28ed27d9d855935ab340"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/29.md",
+      "sha256": "878f054de95109d2ec1a7a56beb4b61bb790524e9d1e28ed27d9d855935ab340"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/3.md",
+      "sha256": "7941bd14de96df3f909c20e28dc1d7abd0e8f5b5dbf0b20d688dc3837d30df5c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/3.md",
+      "sha256": "7941bd14de96df3f909c20e28dc1d7abd0e8f5b5dbf0b20d688dc3837d30df5c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/30.md",
+      "sha256": "9a8a9f2f891ae5c9b90f2e90e584036c1ec8176282b580548652f036417527a4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/30.md",
+      "sha256": "9a8a9f2f891ae5c9b90f2e90e584036c1ec8176282b580548652f036417527a4"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/31.md",
+      "sha256": "c8229c2a2559d8c60e8bb2846fc937ae52d39ef187227e30168bd033a2c7242f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/31.md",
+      "sha256": "c8229c2a2559d8c60e8bb2846fc937ae52d39ef187227e30168bd033a2c7242f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/32.md",
+      "sha256": "49d224e45bbc8e34e9dce1bc6f7a9ed0765772435108a2d09594bcf9a59d6bca"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/32.md",
+      "sha256": "49d224e45bbc8e34e9dce1bc6f7a9ed0765772435108a2d09594bcf9a59d6bca"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/33.md",
+      "sha256": "4e51d59593f19816d4d2dff1242a8043e1ed98f3bdeffefbab4691c04ac0a754"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/33.md",
+      "sha256": "4e51d59593f19816d4d2dff1242a8043e1ed98f3bdeffefbab4691c04ac0a754"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/34.md",
+      "sha256": "a4f54d602b60db81f4250b0a9b12a4e56442698322536ff92267af8f5dc9874c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/34.md",
+      "sha256": "a4f54d602b60db81f4250b0a9b12a4e56442698322536ff92267af8f5dc9874c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/35.md",
+      "sha256": "61b6edded22eb27802df72603c3274d1a34ffd1694f41bc9cf85ab5145173397"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/35.md",
+      "sha256": "61b6edded22eb27802df72603c3274d1a34ffd1694f41bc9cf85ab5145173397"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/36.md",
+      "sha256": "52204f63f0b93477a00c2a826da6c69389414feb9e8712ce3e26a248af9114c0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/36.md",
+      "sha256": "52204f63f0b93477a00c2a826da6c69389414feb9e8712ce3e26a248af9114c0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/37.md",
+      "sha256": "2f881bb6ddb100e2176a6815d68f214778d117dc2c6f28ec8841baabead9786d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/37.md",
+      "sha256": "2f881bb6ddb100e2176a6815d68f214778d117dc2c6f28ec8841baabead9786d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/38.md",
+      "sha256": "e21b02d66383395902d87ed7358c9d80e515930f996844a9eda2725344d4913c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/38.md",
+      "sha256": "e21b02d66383395902d87ed7358c9d80e515930f996844a9eda2725344d4913c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/39.md",
+      "sha256": "9c60da61c1e4a11fa20e63dc6a4fd2b0f58fb8d8841affc2f039846ebe434541"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/39.md",
+      "sha256": "9c60da61c1e4a11fa20e63dc6a4fd2b0f58fb8d8841affc2f039846ebe434541"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/4.md",
+      "sha256": "e7622be394b28d11dedd0ef8c00fde00ef507c9dfa2acbc879357b1beea098b2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/4.md",
+      "sha256": "e7622be394b28d11dedd0ef8c00fde00ef507c9dfa2acbc879357b1beea098b2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/40.md",
+      "sha256": "c72481ab88330f2c1070e79a13caf358dc3aea94791e64750eb9f186881267c8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/40.md",
+      "sha256": "c72481ab88330f2c1070e79a13caf358dc3aea94791e64750eb9f186881267c8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/41.md",
+      "sha256": "c6c04b55238ef2b211ce9b090806a682b6f8f6231266c46007ad68a72bd7ce45"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/41.md",
+      "sha256": "c6c04b55238ef2b211ce9b090806a682b6f8f6231266c46007ad68a72bd7ce45"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/42.md",
+      "sha256": "7f670f688d8ed670d5c43941febc88e9e7c59bd9dbc3f8733acbe07f4e7c148e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/42.md",
+      "sha256": "7f670f688d8ed670d5c43941febc88e9e7c59bd9dbc3f8733acbe07f4e7c148e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/43.md",
+      "sha256": "8948d7115797b0b2c7f1ce9dca326b330605515b8fa58a698821559044f3258e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/43.md",
+      "sha256": "8948d7115797b0b2c7f1ce9dca326b330605515b8fa58a698821559044f3258e"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/44.md",
+      "sha256": "e754f416d4537de808560945260d7a478ac0b90ac19f19a2395b5b00f0646c66"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/44.md",
+      "sha256": "e754f416d4537de808560945260d7a478ac0b90ac19f19a2395b5b00f0646c66"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/45.md",
+      "sha256": "c3a3b534b86099e2e3b2cf6fa4a54b11c5b36bcaf74556527c945caef1d00437"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/45.md",
+      "sha256": "c3a3b534b86099e2e3b2cf6fa4a54b11c5b36bcaf74556527c945caef1d00437"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/46.md",
+      "sha256": "46b61a594b5fe11a016ebdcb47a1ee0142fd2f8544e039df1a9c7272a800fd9d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/46.md",
+      "sha256": "46b61a594b5fe11a016ebdcb47a1ee0142fd2f8544e039df1a9c7272a800fd9d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/47.md",
+      "sha256": "b305ca65c2a247df55f210d5d7276a7182c563858d6b19577abb7f0aa703c5b0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/47.md",
+      "sha256": "b305ca65c2a247df55f210d5d7276a7182c563858d6b19577abb7f0aa703c5b0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/48.md",
+      "sha256": "b364111bdd8efe1633e08c0b1e92289b46a3fbe3498f6e6cd6df52eaac03e034"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/48.md",
+      "sha256": "b364111bdd8efe1633e08c0b1e92289b46a3fbe3498f6e6cd6df52eaac03e034"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/49.md",
+      "sha256": "a995e881ca96b58685f69d7a4c6fb715d9f6541d91c31933f6f60e7b82495456"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/49.md",
+      "sha256": "a995e881ca96b58685f69d7a4c6fb715d9f6541d91c31933f6f60e7b82495456"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/5.md",
+      "sha256": "8db74c03abe20d3704d5b838d325f277702d76361c8281ebb3d393d56c462df1"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/5.md",
+      "sha256": "8db74c03abe20d3704d5b838d325f277702d76361c8281ebb3d393d56c462df1"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/50.md",
+      "sha256": "b1947560925b9a05ce2c590210fb3f44b355e78289178fa47d055f594c578c73"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/50.md",
+      "sha256": "b1947560925b9a05ce2c590210fb3f44b355e78289178fa47d055f594c578c73"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/51.md",
+      "sha256": "d5820ef5765a2ce20bfdb821f31994fa558f6f3c05ae20e5ced404dcbf6b4900"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/51.md",
+      "sha256": "d5820ef5765a2ce20bfdb821f31994fa558f6f3c05ae20e5ced404dcbf6b4900"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/52.md",
+      "sha256": "a834ed333bea96a60493dbf6e10ad273776822dd3c84afa59a2f7ee4c3b63246"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/52.md",
+      "sha256": "a834ed333bea96a60493dbf6e10ad273776822dd3c84afa59a2f7ee4c3b63246"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/53.md",
+      "sha256": "e50355d49865ca1f3efc6f59ac0bfeb709154985e5f3cb59b5d9fe2cc9d29e08"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/53.md",
+      "sha256": "e50355d49865ca1f3efc6f59ac0bfeb709154985e5f3cb59b5d9fe2cc9d29e08"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/54.md",
+      "sha256": "e45c4be890ba06e2a28e112561d0cb5e75a6ceb04d32e20dcb9c2b2f4b768eaa"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/54.md",
+      "sha256": "e45c4be890ba06e2a28e112561d0cb5e75a6ceb04d32e20dcb9c2b2f4b768eaa"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/55.md",
+      "sha256": "6df5c2af7e90099fca99859f735b5090c59b07b469584b0773f9b79e40d5d8e2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/55.md",
+      "sha256": "6df5c2af7e90099fca99859f735b5090c59b07b469584b0773f9b79e40d5d8e2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/56.md",
+      "sha256": "5660956c0f10cd4df68851e7b4b101f25a83cff98678074619efe87fbb888c73"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/56.md",
+      "sha256": "5660956c0f10cd4df68851e7b4b101f25a83cff98678074619efe87fbb888c73"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/57.md",
+      "sha256": "19bd8f30613b4ef14998f21bd24c4db17c538184d5523737622f71b1dc545e41"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/57.md",
+      "sha256": "19bd8f30613b4ef14998f21bd24c4db17c538184d5523737622f71b1dc545e41"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/58.md",
+      "sha256": "46ae9cd8a46ed6fc7fed18b9298783e0bcc525689d7e2c6b47ac7075bea558df"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/58.md",
+      "sha256": "46ae9cd8a46ed6fc7fed18b9298783e0bcc525689d7e2c6b47ac7075bea558df"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/59.md",
+      "sha256": "d8f00cb128a4af4734cf44a17fd2193a0847b726043edce55c8123ea719da9b0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/59.md",
+      "sha256": "d8f00cb128a4af4734cf44a17fd2193a0847b726043edce55c8123ea719da9b0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/6.md",
+      "sha256": "8903214038b4c070945f80f476d6208a9c2f26862d08651d853c2baa9e8bbe63"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/6.md",
+      "sha256": "8903214038b4c070945f80f476d6208a9c2f26862d08651d853c2baa9e8bbe63"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/60.md",
+      "sha256": "e335cc5b791581a83a80a04198ddfe2baa169c51bd35a400d3f0c353a57766d2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/60.md",
+      "sha256": "e335cc5b791581a83a80a04198ddfe2baa169c51bd35a400d3f0c353a57766d2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/61.md",
+      "sha256": "05f9b926a85f27418abd0cab9f0e7733f7a0ae35c339a15518a6b894fdf73765"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/61.md",
+      "sha256": "05f9b926a85f27418abd0cab9f0e7733f7a0ae35c339a15518a6b894fdf73765"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/62.md",
+      "sha256": "28e3712fbbab41e82b31c0b58c1b8e1d54ab29686e422f9fd3699aaad7988cb3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/62.md",
+      "sha256": "28e3712fbbab41e82b31c0b58c1b8e1d54ab29686e422f9fd3699aaad7988cb3"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/63.md",
+      "sha256": "172b6ff815e599002fab6ffd8c44f00cf1c80f6c55c16a630c8699a6236b0932"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/63.md",
+      "sha256": "172b6ff815e599002fab6ffd8c44f00cf1c80f6c55c16a630c8699a6236b0932"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/64.md",
+      "sha256": "ab7bc59bac0bc55aacf3f9f27428f558ed25132a25052e1b47425005372431a2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/64.md",
+      "sha256": "ab7bc59bac0bc55aacf3f9f27428f558ed25132a25052e1b47425005372431a2"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/65.md",
+      "sha256": "c93e8bdd34a1e9391d7f58156806ba5e3a1055aafd1d6c280d1c1ee8351661bd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/65.md",
+      "sha256": "c93e8bdd34a1e9391d7f58156806ba5e3a1055aafd1d6c280d1c1ee8351661bd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/66.md",
+      "sha256": "ee96e3b6625b371b6c356438c669898bec15e1ffd37fb22c3d2768f089bc4338"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/66.md",
+      "sha256": "ee96e3b6625b371b6c356438c669898bec15e1ffd37fb22c3d2768f089bc4338"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/67.md",
+      "sha256": "eacbd72939b13886b0be479e308f32b0c8c6cff3aaadafaddd206f0ed2b1cd4b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/67.md",
+      "sha256": "eacbd72939b13886b0be479e308f32b0c8c6cff3aaadafaddd206f0ed2b1cd4b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/68.md",
+      "sha256": "cb35db2318841aa14d26c169ee183e0f652100c2d24374f848b6f29332396efb"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/68.md",
+      "sha256": "cb35db2318841aa14d26c169ee183e0f652100c2d24374f848b6f29332396efb"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/69.md",
+      "sha256": "33572b1393c65f9ef04affcd5967d1e5eb06fa195424734dae0bd14c18df1719"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/69.md",
+      "sha256": "33572b1393c65f9ef04affcd5967d1e5eb06fa195424734dae0bd14c18df1719"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/7.md",
+      "sha256": "ae42ab05220e52cc582262682727307de16ed413159d35a2b0b845ed349f908b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/7.md",
+      "sha256": "ae42ab05220e52cc582262682727307de16ed413159d35a2b0b845ed349f908b"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/70.md",
+      "sha256": "9ed2d488918f89565de6f00dc1a14fd9092332495a946b0376ff6d0aa22b86cd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/70.md",
+      "sha256": "9ed2d488918f89565de6f00dc1a14fd9092332495a946b0376ff6d0aa22b86cd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/71.md",
+      "sha256": "a8c6a84351eb6d3897d3a44410ce4f7a86f410baee46a4c3386a2d549b718b4f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/71.md",
+      "sha256": "a8c6a84351eb6d3897d3a44410ce4f7a86f410baee46a4c3386a2d549b718b4f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/72.md",
+      "sha256": "67884a9f5e4dd640e14cdef4031ee1e6babe1816fee718fb3f2c7583712b6a37"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/72.md",
+      "sha256": "67884a9f5e4dd640e14cdef4031ee1e6babe1816fee718fb3f2c7583712b6a37"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/73.md",
+      "sha256": "c82ab85aba7e241004fb7a45e79d58d090cabd56edae98016a380a3ea4097389"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/73.md",
+      "sha256": "c82ab85aba7e241004fb7a45e79d58d090cabd56edae98016a380a3ea4097389"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/74.md",
+      "sha256": "a6a26a341691226cc3950a80a60e65576807608520332c55423fad8a2ec83d23"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/74.md",
+      "sha256": "a6a26a341691226cc3950a80a60e65576807608520332c55423fad8a2ec83d23"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/75.md",
+      "sha256": "d347a8dd75688220a241e7a68d1e66982895ced8e743b07ada360b4336d7bdca"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/75.md",
+      "sha256": "d347a8dd75688220a241e7a68d1e66982895ced8e743b07ada360b4336d7bdca"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/76.md",
+      "sha256": "43b11c520f50b8e5b30ebcef22ee40e87f6e73e0b273cecf51d89bf0bcbd3a00"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/76.md",
+      "sha256": "43b11c520f50b8e5b30ebcef22ee40e87f6e73e0b273cecf51d89bf0bcbd3a00"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/77.md",
+      "sha256": "2178e7bb515eb3d5d4ac800af13a7fd35ace5e614e3d2e486d5f7e1f655e4d4f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/77.md",
+      "sha256": "2178e7bb515eb3d5d4ac800af13a7fd35ace5e614e3d2e486d5f7e1f655e4d4f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/78.md",
+      "sha256": "7a302779f13277bf47268927e228ab17075a0c75d56a04188365f5b4e71aea2f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/78.md",
+      "sha256": "7a302779f13277bf47268927e228ab17075a0c75d56a04188365f5b4e71aea2f"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/79.md",
+      "sha256": "584798824c739e17ef934f2a8e84bb29a1fe2c49c35c6f036f3311ca91918dfd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/79.md",
+      "sha256": "584798824c739e17ef934f2a8e84bb29a1fe2c49c35c6f036f3311ca91918dfd"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/8.md",
+      "sha256": "cf3c99c02b75f5fdb0dae6dcef9c531a9fdeca7fcd6e2631003d3eedbf0db972"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/8.md",
+      "sha256": "cf3c99c02b75f5fdb0dae6dcef9c531a9fdeca7fcd6e2631003d3eedbf0db972"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/80.md",
+      "sha256": "b2d28f7782463fb432f9104443424dcfef0408d307532a6480fd3fbcede6e2d0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/80.md",
+      "sha256": "b2d28f7782463fb432f9104443424dcfef0408d307532a6480fd3fbcede6e2d0"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/81.md",
+      "sha256": "941b73fe68f494bd37a058b005b5abcc8b377895c9e6d7e13f9d6a78a49e86a8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/81.md",
+      "sha256": "941b73fe68f494bd37a058b005b5abcc8b377895c9e6d7e13f9d6a78a49e86a8"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/82.md",
+      "sha256": "002bf9b1b07c0be52790cda515374f5ba57c6145957c1e8a6eaffd36e5b0bd9d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/82.md",
+      "sha256": "002bf9b1b07c0be52790cda515374f5ba57c6145957c1e8a6eaffd36e5b0bd9d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/83.md",
+      "sha256": "c2f107efe3e2ef623d26e02c15b4c2e976b5ae6712dfa6a100d2490127d72f3c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/83.md",
+      "sha256": "c2f107efe3e2ef623d26e02c15b4c2e976b5ae6712dfa6a100d2490127d72f3c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/84.md",
+      "sha256": "4cf504732fa11ab74da9bf8c001e744fb1ff258dfe7601fbbc2439ccb059a29d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/84.md",
+      "sha256": "4cf504732fa11ab74da9bf8c001e744fb1ff258dfe7601fbbc2439ccb059a29d"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/85.md",
+      "sha256": "e47d966d8ce40f6540bb356ef667108e0331faf184aa4c787bbd27ddbfef0409"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/85.md",
+      "sha256": "e47d966d8ce40f6540bb356ef667108e0331faf184aa4c787bbd27ddbfef0409"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/86.md",
+      "sha256": "d0626c096e97c7dd80f6652d667d68b797a2bcbd449629eb361ad1651e983485"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/86.md",
+      "sha256": "d0626c096e97c7dd80f6652d667d68b797a2bcbd449629eb361ad1651e983485"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/87.md",
+      "sha256": "9def63de25dd199a0e707336f261ea1b7983eff1c5b79f5fa1f5d01c86c144c7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/87.md",
+      "sha256": "9def63de25dd199a0e707336f261ea1b7983eff1c5b79f5fa1f5d01c86c144c7"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/88.md",
+      "sha256": "cf18d723c89c3b00e99d01b087d4e2d023942e0bf0b554b38b5a0dc05ec8ceed"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/88.md",
+      "sha256": "cf18d723c89c3b00e99d01b087d4e2d023942e0bf0b554b38b5a0dc05ec8ceed"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/89.md",
+      "sha256": "0f26f8d820a8388da0a51f3cf14d7738361ca1183342e2d22d6a1c16bbc6b333"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/89.md",
+      "sha256": "0f26f8d820a8388da0a51f3cf14d7738361ca1183342e2d22d6a1c16bbc6b333"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/9.md",
+      "sha256": "4bfeaedf66075126c44186fdec9590bcf73d12cca331f9a7e0d5202f2c2b097c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/9.md",
+      "sha256": "4bfeaedf66075126c44186fdec9590bcf73d12cca331f9a7e0d5202f2c2b097c"
+    },
+    {
+      "path": "src/content-en/domande/tolc-i/funzioni-e-grafici/90.md",
+      "sha256": "bc859d39f3da856b43e6ec03a6fcded765907d1005f6bf571c1e258304cb3009"
+    },
+    {
+      "path": "src/content-en/domande/tolc-s/funzioni-e-grafici/90.md",
+      "sha256": "bc859d39f3da856b43e6ec03a6fcded765907d1005f6bf571c1e258304cb3009"
+    }
+  ]
+}

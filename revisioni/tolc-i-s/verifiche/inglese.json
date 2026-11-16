@@ -1,0 +1,3456 @@
+{
+  "files_checked": 508,
+  "questions_course_ids": 180,
+  "unique_question_pairs": 90,
+  "bilingual_question_files": 360,
+  "theory": [
+    {
+      "course": "tolc-i",
+      "language": "content",
+      "sections": 9,
+      "anchors": 23,
+      "prose_words": 2625
+    },
+    {
+      "course": "tolc-i",
+      "language": "content-en",
+      "sections": 9,
+      "anchors": 23,
+      "prose_words": 2663
+    },
+    {
+      "course": "tolc-s",
+      "language": "content",
+      "sections": 9,
+      "anchors": 23,
+      "prose_words": 2625
+    },
+    {
+      "course": "tolc-s",
+      "language": "content-en",
+      "sections": 9,
+      "anchors": 23,
+      "prose_words": 2663
+    }
+  ],
+  "independent_questions": [
+    {
+      "course": "tolc-i",
+      "id": 1,
+      "selected": 1,
+      "answer": "goes",
+      "independent_reason": "Con she e abitudine attuale serve goes: go non concorda, going/gone non sono verbi finiti e are non concorda."
+    },
+    {
+      "course": "tolc-i",
+      "id": 2,
+      "selected": 2,
+      "answer": "are attending",
+      "independent_reason": "Children è plurale e la lezione è in corso right now: are attending soddisfa insieme accordo e aspetto; le altre forme no."
+    },
+    {
+      "course": "tolc-i",
+      "id": 3,
+      "selected": 3,
+      "answer": "watched",
+      "independent_reason": "Yesterday evening è un riferimento passato concluso: watched; il present perfect e i presenti non conservano il riferimento."
+    },
+    {
+      "course": "tolc-i",
+      "id": 4,
+      "selected": 4,
+      "answer": "since / for",
+      "independent_reason": "April è il punto iniziale e three months è una durata: since/for; le altre coppie invertono o duplicano i due ruoli."
+    },
+    {
+      "course": "tolc-i",
+      "id": 5,
+      "selected": 5,
+      "answer": "The key is missing and this prevents entry now.",
+      "independent_reason": "La chiave persa impedisce ora di aprire: solo la risposta mantiene perdita e conseguenza presente; ritrovamento, abitudine e ritorno futuro non sono dati."
+    },
+    {
+      "course": "tolc-i",
+      "id": 6,
+      "selected": 1,
+      "answer": "Do",
+      "independent_reason": "La consegna chiede una preferenza, dunque like è verbo e la domanda con you richiede Do; Are darebbe una diversa costruzione con like preposizione."
+    },
+    {
+      "course": "tolc-i",
+      "id": 7,
+      "selected": 2,
+      "answer": "eat",
+      "independent_reason": "Doesn't porta già negazione e accordo: segue eat base; eats/ate/eating/eaten non sono la forma richiesta dopo do."
+    },
+    {
+      "course": "tolc-i",
+      "id": 8,
+      "selected": 3,
+      "answer": "any",
+      "independent_reason": "Milk indica qui quantità non numerabile in una negativa: any; i quantificatori numerabili e an non completano questo uso."
+    },
+    {
+      "course": "tolc-i",
+      "id": 9,
+      "selected": 4,
+      "answer": "many",
+      "independent_reason": "Students è plurale numerabile e la domanda ne chiede il numero: How many; much e i determinanti proposti non formano la domanda."
+    },
+    {
+      "course": "tolc-i",
+      "id": 10,
+      "selected": 5,
+      "answer": "easier",
+      "independent_reason": "Than introduce il confronto: easier; easiest è superlativo, easy manca del comparativo e more easier raddoppia la marca."
+    },
+    {
+      "course": "tolc-i",
+      "id": 11,
+      "selected": 1,
+      "answer": "best",
+      "independent_reason": "La consegna richiede il superlativo di good: best; better è comparativo, good grado positivo, well non dà quel superlativo e more good è errato."
+    },
+    {
+      "course": "tolc-i",
+      "id": 12,
+      "selected": 2,
+      "answer": "at / on / in",
+      "independent_reason": "L'ora prende at, il giorno on e il mese in: solo at/on/in rispetta tutte e tre le espressioni."
+    },
+    {
+      "course": "tolc-i",
+      "id": 13,
+      "selected": 3,
+      "answer": "by / until",
+      "independent_reason": "Inviare il modulo ha una scadenza by Friday; conservare il posto continua until Monday; le altre coppie non mantengono i due rapporti."
+    },
+    {
+      "course": "tolc-i",
+      "id": 14,
+      "selected": 4,
+      "answer": "in",
+      "independent_reason": "L'aggettivo interested regge in nel significato di interesse per engineering; le altre preposizioni non formano questa costruzione."
+    },
+    {
+      "course": "tolc-i",
+      "id": 15,
+      "selected": 5,
+      "answer": "must",
+      "independent_reason": "Compulsory rende l'obbligo esplicito: must lo esprime; might/may/could esprimono possibilità o permesso e would non questo obbligo."
+    },
+    {
+      "course": "tolc-i",
+      "id": 16,
+      "selected": 1,
+      "answer": "will stay",
+      "independent_reason": "Con if it rains tomorrow e previsione futura serve will stay; le altre quattro sequenze sono malformate nel contesto."
+    },
+    {
+      "course": "tolc-i",
+      "id": 17,
+      "selected": 2,
+      "answer": "would read",
+      "independent_reason": "Il tempo libero non basta ora e si immagina di averne di più: would read; gli altri gruppi non costruiscono l'ipotesi."
+    },
+    {
+      "course": "tolc-i",
+      "id": 18,
+      "selected": 3,
+      "answer": "who",
+      "independent_reason": "Teacher è persona e il relativo è soggetto di helped: who; which/where/when/whose non svolgono questo ruolo nella frase."
+    },
+    {
+      "course": "tolc-i",
+      "id": 19,
+      "selected": 4,
+      "answer": "an / a",
+      "independent_reason": "Hour inizia con suono vocalico e university con consonante /j/: an/a; nessun'altra coppia rispetta entrambi i suoni."
+    },
+    {
+      "course": "tolc-i",
+      "id": 20,
+      "selected": 5,
+      "answer": "The",
+      "independent_reason": "Si richiede l'articolo che riprende il libro già identificato: The; A/Some cambiano riferimento, An non concorda col suono e Many col numero."
+    },
+    {
+      "course": "tolc-i",
+      "id": 21,
+      "selected": 1,
+      "answer": "me",
+      "independent_reason": "La persona aiutata è complemento di help: me; I è soggetto, my richiede un nome, mine è possessivo e myself's non è pronome personale."
+    },
+    {
+      "course": "tolc-i",
+      "id": 22,
+      "selected": 2,
+      "answer": "hers",
+      "independent_reason": "La borsa appartiene ad Anna: hers sostituisce her bag; her richiederebbe il nome, she è soggetto e herself riflessivo, she's è contrazione."
+    },
+    {
+      "course": "tolc-i",
+      "id": 23,
+      "selected": 3,
+      "answer": "take",
+      "independent_reason": "Should richiede il verbo base senza to: take; le altre alternative sono infinitivo con to, forma -ing, terza persona o passato."
+    },
+    {
+      "course": "tolc-i",
+      "id": 24,
+      "selected": 4,
+      "answer": "Why",
+      "independent_reason": "La risposta con Because fornisce una ragione: Why; gli altri interrogativi chiedono luogo, possessore, numero o scelta."
+    },
+    {
+      "course": "tolc-i",
+      "id": 25,
+      "selected": 5,
+      "answer": "but",
+      "independent_reason": "La consegna richiede contrasto fra stanchezza e completamento: but; because/so/until/if esprimono relazioni diverse."
+    },
+    {
+      "course": "tolc-i",
+      "id": 26,
+      "selected": 1,
+      "answer": "A place where people can read and borrow books.",
+      "independent_reason": "Borrow books seleziona il prestito in biblioteca: la prima alternativa; vendita, raccolta chiusa, sola riparazione e stampa commerciale non descrivono l'attività."
+    },
+    {
+      "course": "tolc-i",
+      "id": 27,
+      "selected": 2,
+      "answer": "At 8:05.",
+      "independent_reason": "Dieci minuti prima di 8:15 sono 8:05; 8:15 non anticipa, 8:25 ritarda, 8:10 anticipa cinque minuti e 7:15 un'ora."
+    },
+    {
+      "course": "tolc-i",
+      "id": 28,
+      "selected": 3,
+      "answer": "been",
+      "independent_reason": "Has richiede un participio: been; le altre forme non lo sono. Il ritorno e twice sono compatibili con due visite concluse."
+    },
+    {
+      "course": "tolc-i",
+      "id": 29,
+      "selected": 4,
+      "answer": "are",
+      "independent_reason": "Look presenta ora due libri: there are; is/was non concordano, has non costruisce l'esistenziale e be non è finito."
+    },
+    {
+      "course": "tolc-i",
+      "id": 30,
+      "selected": 5,
+      "answer": "during / while",
+      "independent_reason": "The lecture è gruppo nominale e the teacher was speaking è proposizione: during/while; nessun'altra coppia rispetta entrambe le strutture."
+    },
+    {
+      "course": "tolc-i",
+      "id": 31,
+      "selected": 1,
+      "answer": "from",
+      "independent_reason": "L'articolo precedente è il termine del confronto: different from; in indicherebbe un aspetto soltanto con diverso complemento, le altre reggenze proposte non sono pertinenti."
+    },
+    {
+      "course": "tolc-i",
+      "id": 32,
+      "selected": 2,
+      "answer": "was waiting",
+      "independent_reason": "L'attesa era in corso al momento dell'incidente ieri: was waiting; i presenti/futuri non mantengono il tempo e have been waited non è la costruzione intransitiva."
+    },
+    {
+      "course": "tolc-i",
+      "id": 33,
+      "selected": 3,
+      "answer": "You don't have to print the form.",
+      "independent_reason": "Facoltativo nega l'obbligo: don't have to; must/have to impongono, mustn't/forbidden vietano. Nessuna delle altre parafrasi conserva la scelta."
+    },
+    {
+      "course": "tolc-i",
+      "id": 34,
+      "selected": 4,
+      "answer": "himself",
+      "independent_reason": "Leo si ferisce la propria mano: soggetto e oggetto coincidono, quindi himself; his/he hanno altre funzioni e gli altri riflessivi non concordano."
+    },
+    {
+      "course": "tolc-i",
+      "id": 35,
+      "selected": 5,
+      "answer": "Paying by card.",
+      "independent_reason": "Dopo le sei cash non è accettato ma cards sì fino a chiusura: la carta resta ammessa; non è data un'eccezione per monete o piccoli importi."
+    },
+    {
+      "course": "tolc-i",
+      "id": 36,
+      "selected": 1,
+      "answer": "The train's departure.",
+      "independent_reason": "Fra partenza e arrivo, had already left pone prima la partenza; biglietti e apertura non sono menzionati, simultaneità contraddice already."
+    },
+    {
+      "course": "tolc-i",
+      "id": 37,
+      "selected": 2,
+      "answer": "The meeting has been postponed to Friday.",
+      "independent_reason": "Put off until Friday significa rinviare a venerdì; non cancellare definitivamente, anticipare, rendere ricorrente o dichiarare concluso l'incontro."
+    },
+    {
+      "course": "tolc-i",
+      "id": 38,
+      "selected": 3,
+      "answer": "was",
+      "independent_reason": "La consegna richiede backshift: am diventa was con she; is senza backshift non soddisfa la consegna e le altre forme non concordano o non riportano il tempo."
+    },
+    {
+      "course": "tolc-i",
+      "id": 39,
+      "selected": 4,
+      "answer": "were cleaned",
+      "independent_reason": "Windows plurale riceve ieri l'azione: were cleaned; was non concorda e le altre sequenze non formano il passivo passato."
+    },
+    {
+      "course": "tolc-i",
+      "id": 40,
+      "selected": 5,
+      "answer": "Adding the powder.",
+      "independent_reason": "L'ordine dato è pesare vuoto, aggiungere polvere, pesare di nuovo: immediatamente prima della seconda pesata si aggiunge; le altre azioni non sono date."
+    },
+    {
+      "course": "tolc-i",
+      "id": 41,
+      "selected": 1,
+      "answer": "Mia is usually on time.",
+      "independent_reason": "L'avverbio di frequenza segue be: Mia is usually on time; le altre posizioni spezzano la struttura o il gruppo on time."
+    },
+    {
+      "course": "tolc-i",
+      "id": 42,
+      "selected": 2,
+      "answer": "carefully",
+      "independent_reason": "Il vuoto modifica il leggere e richiede l'avverbio carefully; careful/more careful sono aggettivi, care/carefulness non sono avverbi di modo."
+    },
+    {
+      "course": "tolc-i",
+      "id": 43,
+      "selected": 3,
+      "answer": "know",
+      "independent_reason": "Know descrive uno stato di conoscenza con I: know semplice; am knowing non è l'uso standard richiesto e le altre forme sono errate per accordo o completezza."
+    },
+    {
+      "course": "tolc-i",
+      "id": 44,
+      "selected": 4,
+      "answer": "There are not many chairs, and they are insufficient for everyone.",
+      "independent_reason": "Few chairs più persone costrette a stare in piedi implica poche sedie insufficienti; non implica assenza totale, guasti o conteggi opposti."
+    },
+    {
+      "course": "tolc-i",
+      "id": 45,
+      "selected": 5,
+      "answer": "submit",
+      "independent_reason": "Hand in an assignment significa submit; before noon è la scadenza, non richiede riscrittura, discussione o altre attività."
+    },
+    {
+      "course": "tolc-i",
+      "id": 46,
+      "selected": 1,
+      "answer": "yet",
+      "independent_reason": "Il film atteso non è ancora iniziato: yet finale. Ago manca della durata, for/during del complemento e yesterday non si combina normalmente col present perfect."
+    },
+    {
+      "course": "tolc-i",
+      "id": 47,
+      "selected": 2,
+      "answer": "some",
+      "independent_reason": "Tea è esplicitamente non numerabile e la frase è un'offerta: some; many/a few richiedono plurali, each un'unità numerabile e an non completa tea."
+    },
+    {
+      "course": "tolc-i",
+      "id": 48,
+      "selected": 3,
+      "answer": "used to",
+      "independent_reason": "Used to live descrive la residenza passata cessata; am used to richiederebbe nome o living e significherebbe abitudine acquisita."
+    },
+    {
+      "course": "tolc-i",
+      "id": 49,
+      "selected": 4,
+      "answer": "Ask the driver when boarding.",
+      "independent_reason": "Sabato è weekend; la fermata è su richiesta e il testo ordina di avvertire il conducente salendo: le altre azioni ignorano destinatario, momento o condizione."
+    },
+    {
+      "course": "tolc-i",
+      "id": 50,
+      "selected": 5,
+      "answer": "Visitors should enter through the main entrance.",
+      "independent_reason": "Staff only riserva il retro al personale e i visitatori sono diretti all'ingresso principale; le altre alternative estendono o negano permessi non dati."
+    },
+    {
+      "course": "tolc-i",
+      "id": 51,
+      "selected": 1,
+      "answer": "the station is",
+      "independent_reason": "La subordinata interrogativa usa ordine dichiarativo the station is; is the station è domanda diretta e le altre sequenze non costruiscono la subordinata."
+    },
+    {
+      "course": "tolc-i",
+      "id": 52,
+      "selected": 2,
+      "answer": "Able to be trusted.",
+      "independent_reason": "Reliable significa attendibile: able to be trusted; mezzo, età o grandezza dei numeri non sono il significato dell'aggettivo."
+    },
+    {
+      "course": "tolc-i",
+      "id": 53,
+      "selected": 3,
+      "answer": "bottles",
+      "independent_reason": "Ones riprende bottles plurale e larger seleziona le più grandi; shelf è singolare e labels/rooms non sono antecedenti introdotti."
+    },
+    {
+      "course": "tolc-i",
+      "id": 54,
+      "selected": 4,
+      "answer": "another",
+      "independent_reason": "Si chiede un ulteriore esercizio singolare: another one; other/others/each of/all non completano il sintagma dato."
+    },
+    {
+      "course": "tolc-i",
+      "id": 55,
+      "selected": 5,
+      "answer": "in the end",
+      "independent_reason": "La porta si apre dopo tentativi: eventually significa in the end; non possibilità, caso o una relazione temporale diversa."
+    },
+    {
+      "course": "tolc-i",
+      "id": 56,
+      "selected": 1,
+      "answer": "boring / bored",
+      "independent_reason": "La consegna distingue causa della noia ed esperienza: talk boring, narratore bored; boring/boring cambierebbe il secondo significato e boredom è nome."
+    },
+    {
+      "course": "tolc-i",
+      "id": 57,
+      "selected": 2,
+      "answer": "can't",
+      "independent_reason": "L'incapacità attuale di vedere implica can't read; can la contraddice, should/must non esprimono incapacità e may neppure."
+    },
+    {
+      "course": "tolc-i",
+      "id": 58,
+      "selected": 3,
+      "answer": "fewer",
+      "independent_reason": "Dodici è meno di venti e seats è numerabile plurale: fewer; more inverte i dati, fewest/most sono superlativi e much non concorda."
+    },
+    {
+      "course": "tolc-i",
+      "id": 59,
+      "selected": 4,
+      "answer": "His coat is here, so he must be nearby.",
+      "independent_reason": "Il cappotto presente è indizio per dedurre must be nearby; negli altri enunciati must impone azioni tramite regola, scadenza o requisito."
+    },
+    {
+      "course": "tolc-i",
+      "id": 60,
+      "selected": 5,
+      "answer": "We paused our walk in order to drink.",
+      "independent_reason": "Stopped walking to drink interrompe la camminata per bere; non implica fine definitiva, mancanza d'acqua o inversione fra azione e scopo."
+    },
+    {
+      "course": "tolc-i",
+      "id": 61,
+      "selected": 1,
+      "answer": "ago",
+      "independent_reason": "Ago segue two months e colloca moved nel passato; for precederebbe la durata, during manca del complemento, yet/already non completano two months ___."
+    },
+    {
+      "course": "tolc-i",
+      "id": 62,
+      "selected": 2,
+      "answer": "will help",
+      "independent_reason": "La consegna richiede l'offerta spontanea quando emerge il problema: will help; le forme passate hanno altro riferimento e have help/am help sono malformate."
+    },
+    {
+      "course": "tolc-i",
+      "id": 63,
+      "selected": 3,
+      "answer": "little",
+      "independent_reason": "Information è non numerabile: very little; few/a few/many/several non possono quantificare il nome in questo uso."
+    },
+    {
+      "course": "tolc-i",
+      "id": 64,
+      "selected": 4,
+      "answer": "Who called Nora yesterday?",
+      "independent_reason": "Si chiede chi ha chiamato Nora, dunque Who called Nora? senza did; Who did Nora call? inverte chiamante e destinatario, le altre sequenze non rispondono."
+    },
+    {
+      "course": "tolc-i",
+      "id": 65,
+      "selected": 5,
+      "answer": "enough / enough",
+      "independent_reason": "Enough precede il nome time e segue warm: enough/enough; enough of richiederebbe un gruppo determinato e le altre posizioni sono errate."
+    },
+    {
+      "course": "tolc-i",
+      "id": 66,
+      "selected": 1,
+      "answer": "The first appointment.",
+      "independent_reason": "La prima visita si sposta da martedì a mercoledì mentre follow-up still Friday resta venerdì; nessuna altra data o modifica è comunicata."
+    },
+    {
+      "course": "tolc-i",
+      "id": 67,
+      "selected": 2,
+      "answer": "Could you explain that again, please?",
+      "independent_reason": "Lo studente chiede una nuova spiegazione: Could you explain that again, please?; le altre richieste riguardano informazioni o azioni diverse."
+    },
+    {
+      "course": "tolc-i",
+      "id": 68,
+      "selected": 3,
+      "answer": "to wait",
+      "independent_reason": "Asked us riporta una richiesta con persona più to-infinitive: to wait; nessuna altra forma conserva questa reggenza."
+    },
+    {
+      "course": "tolc-i",
+      "id": 69,
+      "selected": 4,
+      "answer": "provided that",
+      "independent_reason": "La consegna richiede on condition that: provided that; because causa, even though concessione e before/after ordine temporale."
+    },
+    {
+      "course": "tolc-i",
+      "id": 70,
+      "selected": 5,
+      "answer": "I cannot reach the shelf because of its height.",
+      "independent_reason": "Too high for me to reach afferma che il parlante non raggiunge lo scaffale per altezza eccessiva; non confronta tutti gli scaffali né impone spostamenti."
+    },
+    {
+      "course": "tolc-i",
+      "id": 71,
+      "selected": 1,
+      "answer": "ever",
+      "independent_reason": "Ever domanda un'esperienza almeno una volta e twice risponde con due occasioni; every/ago mancano di complementi, yesterday contrasta col tempo e for non regge tried."
+    },
+    {
+      "course": "tolc-i",
+      "id": 72,
+      "selected": 2,
+      "answer": "How students attend the class.",
+      "independent_reason": "Going ahead conferma la lezione e online cambia la partecipazione; non sono annunciati nuovo insegnante, argomento, data o cancellazione."
+    },
+    {
+      "course": "tolc-i",
+      "id": 73,
+      "selected": 3,
+      "answer": "whose",
+      "independent_reason": "Il quaderno appartiene allo studente: whose introduce il nome posseduto; who/whom non esprimono questa relazione e gli altri relativi non si adattano."
+    },
+    {
+      "course": "tolc-i",
+      "id": 74,
+      "selected": 4,
+      "answer": "reading",
+      "independent_reason": "Suggest qui regge l'attività in -ing: reading; to read e le altre sequenze non sono il modello richiesto e non compare una proposizione alternativa."
+    },
+    {
+      "course": "tolc-i",
+      "id": 75,
+      "selected": 5,
+      "answer": "Despite",
+      "independent_reason": "The heavy rain è un nome: Despite esprime concessione davanti al gruppo; Although/Even though/So that/Because it richiedono strutture diverse."
+    },
+    {
+      "course": "tolc-i",
+      "id": 76,
+      "selected": 1,
+      "answer": "where",
+      "independent_reason": "Village è il luogo in cui vivevano: where equivale a in which; chi/possesso non descrivono la funzione del vuoto."
+    },
+    {
+      "course": "tolc-i",
+      "id": 77,
+      "selected": 2,
+      "answer": "mustn't",
+      "independent_reason": "La consegna richiede il divieto No photography: mustn't; don't have to nega obbligo, should consiglia e le altre opzioni non vietano."
+    },
+    {
+      "course": "tolc-i",
+      "id": 78,
+      "selected": 3,
+      "answer": "have been waiting",
+      "independent_reason": "La consegna richiede present perfect continuous con I: have been waiting; has non concorda, being non sostituisce been e waited non è forma progressiva."
+    },
+    {
+      "course": "tolc-i",
+      "id": 79,
+      "selected": 4,
+      "answer": "in order to",
+      "independent_reason": "Per esprimere lo scopo davanti a catch base serve in order to; so that richiede proposizione e le altre locuzioni non reggono quel verbo base."
+    },
+    {
+      "course": "tolc-i",
+      "id": 80,
+      "selected": 5,
+      "answer": "as",
+      "independent_reason": "I due oggetti pesano 5 kg: as heavy as; than richiederebbe comparativo e le altre parole non completano la costruzione di uguaglianza."
+    },
+    {
+      "course": "tolc-i",
+      "id": 81,
+      "selected": 1,
+      "answer": "These instructions do not require a printed copy in this case.",
+      "independent_reason": "Richiesta copia implica fallimento; caricamento riuscito esclude quel requisito per contrapposizione. Non si inferiscono divieti, copia sempre obbligatoria o altra sequenza."
+    },
+    {
+      "course": "tolc-i",
+      "id": 82,
+      "selected": 2,
+      "answer": "whether",
+      "independent_reason": "La domanda indiretta presenta open or closed: whether; le altre parole non collegano le due alternative nella struttura proposta."
+    },
+    {
+      "course": "tolc-i",
+      "id": 83,
+      "selected": 3,
+      "answer": "neither",
+      "independent_reason": "Entrambe le lampade non funzionano senza batterie: neither lamp; each/every danno significato opposto, both richiede plurale ed è opposto."
+    },
+    {
+      "course": "tolc-i",
+      "id": 84,
+      "selected": 4,
+      "answer": "If you do not have a valid pass, you cannot enter.",
+      "independent_reason": "Unless si legge if not: senza pass non si entra. Il pass è necessario, non sufficiente né un obbligo di entrare."
+    },
+    {
+      "course": "tolc-i",
+      "id": 85,
+      "selected": 5,
+      "answer": "lend",
+      "independent_reason": "You è chi presta il righello a me: lend; borrow cambierebbe i ruoli e gli altri verbi non costruiscono il prestito richiesto."
+    },
+    {
+      "course": "tolc-i",
+      "id": 86,
+      "selected": 1,
+      "answer": "take",
+      "independent_reason": "Si chiede al passante di usare la macchina e creare uno scatto: take a photograph; mostrare, conservare o restituire riguarderebbe una foto già esistente."
+    },
+    {
+      "course": "tolc-i",
+      "id": 87,
+      "selected": 2,
+      "answer": "is going to",
+      "independent_reason": "Le nuvole sono indizio presente per una previsione: is going to rain; le altre forme non esprimono questa previsione e riferimento temporale."
+    },
+    {
+      "course": "tolc-i",
+      "id": 88,
+      "selected": 3,
+      "answer": "Books can be expensive.",
+      "independent_reason": "Books can be expensive usa plurale nudo generico; le altre alternative identificano gruppi con luogo, dimostrativo, numero o possessivo."
+    },
+    {
+      "course": "tolc-i",
+      "id": 89,
+      "selected": 4,
+      "answer": "success",
+      "independent_reason": "A great richiede nome singolare: success; successful aggettivo, successfully avverbio, succeed verbo e l'altra forma non completano il nome."
+    },
+    {
+      "course": "tolc-i",
+      "id": 90,
+      "selected": 5,
+      "answer": "managed",
+      "independent_reason": "Riuscire malgrado difficoltà: managed to finish. Enjoy/avoid/suggest/prevent non reggono quella sequenza con lo stesso significato."
+    },
+    {
+      "course": "tolc-s",
+      "id": 1,
+      "selected": 1,
+      "answer": "goes",
+      "independent_reason": "Con she e abitudine attuale serve goes: go non concorda, going/gone non sono verbi finiti e are non concorda."
+    },
+    {
+      "course": "tolc-s",
+      "id": 2,
+      "selected": 2,
+      "answer": "are attending",
+      "independent_reason": "Children è plurale e la lezione è in corso right now: are attending soddisfa insieme accordo e aspetto; le altre forme no."
+    },
+    {
+      "course": "tolc-s",
+      "id": 3,
+      "selected": 3,
+      "answer": "watched",
+      "independent_reason": "Yesterday evening è un riferimento passato concluso: watched; il present perfect e i presenti non conservano il riferimento."
+    },
+    {
+      "course": "tolc-s",
+      "id": 4,
+      "selected": 4,
+      "answer": "since / for",
+      "independent_reason": "April è il punto iniziale e three months è una durata: since/for; le altre coppie invertono o duplicano i due ruoli."
+    },
+    {
+      "course": "tolc-s",
+      "id": 5,
+      "selected": 5,
+      "answer": "The key is missing and this prevents entry now.",
+      "independent_reason": "La chiave persa impedisce ora di aprire: solo la risposta mantiene perdita e conseguenza presente; ritrovamento, abitudine e ritorno futuro non sono dati."
+    },
+    {
+      "course": "tolc-s",
+      "id": 6,
+      "selected": 1,
+      "answer": "Do",
+      "independent_reason": "La consegna chiede una preferenza, dunque like è verbo e la domanda con you richiede Do; Are darebbe una diversa costruzione con like preposizione."
+    },
+    {
+      "course": "tolc-s",
+      "id": 7,
+      "selected": 2,
+      "answer": "eat",
+      "independent_reason": "Doesn't porta già negazione e accordo: segue eat base; eats/ate/eating/eaten non sono la forma richiesta dopo do."
+    },
+    {
+      "course": "tolc-s",
+      "id": 8,
+      "selected": 3,
+      "answer": "any",
+      "independent_reason": "Milk indica qui quantità non numerabile in una negativa: any; i quantificatori numerabili e an non completano questo uso."
+    },
+    {
+      "course": "tolc-s",
+      "id": 9,
+      "selected": 4,
+      "answer": "many",
+      "independent_reason": "Students è plurale numerabile e la domanda ne chiede il numero: How many; much e i determinanti proposti non formano la domanda."
+    },
+    {
+      "course": "tolc-s",
+      "id": 10,
+      "selected": 5,
+      "answer": "easier",
+      "independent_reason": "Than introduce il confronto: easier; easiest è superlativo, easy manca del comparativo e more easier raddoppia la marca."
+    },
+    {
+      "course": "tolc-s",
+      "id": 11,
+      "selected": 1,
+      "answer": "best",
+      "independent_reason": "La consegna richiede il superlativo di good: best; better è comparativo, good grado positivo, well non dà quel superlativo e more good è errato."
+    },
+    {
+      "course": "tolc-s",
+      "id": 12,
+      "selected": 2,
+      "answer": "at / on / in",
+      "independent_reason": "L'ora prende at, il giorno on e il mese in: solo at/on/in rispetta tutte e tre le espressioni."
+    },
+    {
+      "course": "tolc-s",
+      "id": 13,
+      "selected": 3,
+      "answer": "by / until",
+      "independent_reason": "Inviare il modulo ha una scadenza by Friday; conservare il posto continua until Monday; le altre coppie non mantengono i due rapporti."
+    },
+    {
+      "course": "tolc-s",
+      "id": 14,
+      "selected": 4,
+      "answer": "in",
+      "independent_reason": "L'aggettivo interested regge in nel significato di interesse per engineering; le altre preposizioni non formano questa costruzione."
+    },
+    {
+      "course": "tolc-s",
+      "id": 15,
+      "selected": 5,
+      "answer": "must",
+      "independent_reason": "Compulsory rende l'obbligo esplicito: must lo esprime; might/may/could esprimono possibilità o permesso e would non questo obbligo."
+    },
+    {
+      "course": "tolc-s",
+      "id": 16,
+      "selected": 1,
+      "answer": "will stay",
+      "independent_reason": "Con if it rains tomorrow e previsione futura serve will stay; le altre quattro sequenze sono malformate nel contesto."
+    },
+    {
+      "course": "tolc-s",
+      "id": 17,
+      "selected": 2,
+      "answer": "would read",
+      "independent_reason": "Il tempo libero non basta ora e si immagina di averne di più: would read; gli altri gruppi non costruiscono l'ipotesi."
+    },
+    {
+      "course": "tolc-s",
+      "id": 18,
+      "selected": 3,
+      "answer": "who",
+      "independent_reason": "Teacher è persona e il relativo è soggetto di helped: who; which/where/when/whose non svolgono questo ruolo nella frase."
+    },
+    {
+      "course": "tolc-s",
+      "id": 19,
+      "selected": 4,
+      "answer": "an / a",
+      "independent_reason": "Hour inizia con suono vocalico e university con consonante /j/: an/a; nessun'altra coppia rispetta entrambi i suoni."
+    },
+    {
+      "course": "tolc-s",
+      "id": 20,
+      "selected": 5,
+      "answer": "The",
+      "independent_reason": "Si richiede l'articolo che riprende il libro già identificato: The; A/Some cambiano riferimento, An non concorda col suono e Many col numero."
+    },
+    {
+      "course": "tolc-s",
+      "id": 21,
+      "selected": 1,
+      "answer": "me",
+      "independent_reason": "La persona aiutata è complemento di help: me; I è soggetto, my richiede un nome, mine è possessivo e myself's non è pronome personale."
+    },
+    {
+      "course": "tolc-s",
+      "id": 22,
+      "selected": 2,
+      "answer": "hers",
+      "independent_reason": "La borsa appartiene ad Anna: hers sostituisce her bag; her richiederebbe il nome, she è soggetto e herself riflessivo, she's è contrazione."
+    },
+    {
+      "course": "tolc-s",
+      "id": 23,
+      "selected": 3,
+      "answer": "take",
+      "independent_reason": "Should richiede il verbo base senza to: take; le altre alternative sono infinitivo con to, forma -ing, terza persona o passato."
+    },
+    {
+      "course": "tolc-s",
+      "id": 24,
+      "selected": 4,
+      "answer": "Why",
+      "independent_reason": "La risposta con Because fornisce una ragione: Why; gli altri interrogativi chiedono luogo, possessore, numero o scelta."
+    },
+    {
+      "course": "tolc-s",
+      "id": 25,
+      "selected": 5,
+      "answer": "but",
+      "independent_reason": "La consegna richiede contrasto fra stanchezza e completamento: but; because/so/until/if esprimono relazioni diverse."
+    },
+    {
+      "course": "tolc-s",
+      "id": 26,
+      "selected": 1,
+      "answer": "A place where people can read and borrow books.",
+      "independent_reason": "Borrow books seleziona il prestito in biblioteca: la prima alternativa; vendita, raccolta chiusa, sola riparazione e stampa commerciale non descrivono l'attività."
+    },
+    {
+      "course": "tolc-s",
+      "id": 27,
+      "selected": 2,
+      "answer": "At 8:05.",
+      "independent_reason": "Dieci minuti prima di 8:15 sono 8:05; 8:15 non anticipa, 8:25 ritarda, 8:10 anticipa cinque minuti e 7:15 un'ora."
+    },
+    {
+      "course": "tolc-s",
+      "id": 28,
+      "selected": 3,
+      "answer": "been",
+      "independent_reason": "Has richiede un participio: been; le altre forme non lo sono. Il ritorno e twice sono compatibili con due visite concluse."
+    },
+    {
+      "course": "tolc-s",
+      "id": 29,
+      "selected": 4,
+      "answer": "are",
+      "independent_reason": "Look presenta ora due libri: there are; is/was non concordano, has non costruisce l'esistenziale e be non è finito."
+    },
+    {
+      "course": "tolc-s",
+      "id": 30,
+      "selected": 5,
+      "answer": "during / while",
+      "independent_reason": "The lecture è gruppo nominale e the teacher was speaking è proposizione: during/while; nessun'altra coppia rispetta entrambe le strutture."
+    },
+    {
+      "course": "tolc-s",
+      "id": 31,
+      "selected": 1,
+      "answer": "from",
+      "independent_reason": "L'articolo precedente è il termine del confronto: different from; in indicherebbe un aspetto soltanto con diverso complemento, le altre reggenze proposte non sono pertinenti."
+    },
+    {
+      "course": "tolc-s",
+      "id": 32,
+      "selected": 2,
+      "answer": "was waiting",
+      "independent_reason": "L'attesa era in corso al momento dell'incidente ieri: was waiting; i presenti/futuri non mantengono il tempo e have been waited non è la costruzione intransitiva."
+    },
+    {
+      "course": "tolc-s",
+      "id": 33,
+      "selected": 3,
+      "answer": "You don't have to print the form.",
+      "independent_reason": "Facoltativo nega l'obbligo: don't have to; must/have to impongono, mustn't/forbidden vietano. Nessuna delle altre parafrasi conserva la scelta."
+    },
+    {
+      "course": "tolc-s",
+      "id": 34,
+      "selected": 4,
+      "answer": "himself",
+      "independent_reason": "Leo si ferisce la propria mano: soggetto e oggetto coincidono, quindi himself; his/he hanno altre funzioni e gli altri riflessivi non concordano."
+    },
+    {
+      "course": "tolc-s",
+      "id": 35,
+      "selected": 5,
+      "answer": "Paying by card.",
+      "independent_reason": "Dopo le sei cash non è accettato ma cards sì fino a chiusura: la carta resta ammessa; non è data un'eccezione per monete o piccoli importi."
+    },
+    {
+      "course": "tolc-s",
+      "id": 36,
+      "selected": 1,
+      "answer": "The train's departure.",
+      "independent_reason": "Fra partenza e arrivo, had already left pone prima la partenza; biglietti e apertura non sono menzionati, simultaneità contraddice already."
+    },
+    {
+      "course": "tolc-s",
+      "id": 37,
+      "selected": 2,
+      "answer": "The meeting has been postponed to Friday.",
+      "independent_reason": "Put off until Friday significa rinviare a venerdì; non cancellare definitivamente, anticipare, rendere ricorrente o dichiarare concluso l'incontro."
+    },
+    {
+      "course": "tolc-s",
+      "id": 38,
+      "selected": 3,
+      "answer": "was",
+      "independent_reason": "La consegna richiede backshift: am diventa was con she; is senza backshift non soddisfa la consegna e le altre forme non concordano o non riportano il tempo."
+    },
+    {
+      "course": "tolc-s",
+      "id": 39,
+      "selected": 4,
+      "answer": "were cleaned",
+      "independent_reason": "Windows plurale riceve ieri l'azione: were cleaned; was non concorda e le altre sequenze non formano il passivo passato."
+    },
+    {
+      "course": "tolc-s",
+      "id": 40,
+      "selected": 5,
+      "answer": "Adding the powder.",
+      "independent_reason": "L'ordine dato è pesare vuoto, aggiungere polvere, pesare di nuovo: immediatamente prima della seconda pesata si aggiunge; le altre azioni non sono date."
+    },
+    {
+      "course": "tolc-s",
+      "id": 41,
+      "selected": 1,
+      "answer": "Mia is usually on time.",
+      "independent_reason": "L'avverbio di frequenza segue be: Mia is usually on time; le altre posizioni spezzano la struttura o il gruppo on time."
+    },
+    {
+      "course": "tolc-s",
+      "id": 42,
+      "selected": 2,
+      "answer": "carefully",
+      "independent_reason": "Il vuoto modifica il leggere e richiede l'avverbio carefully; careful/more careful sono aggettivi, care/carefulness non sono avverbi di modo."
+    },
+    {
+      "course": "tolc-s",
+      "id": 43,
+      "selected": 3,
+      "answer": "know",
+      "independent_reason": "Know descrive uno stato di conoscenza con I: know semplice; am knowing non è l'uso standard richiesto e le altre forme sono errate per accordo o completezza."
+    },
+    {
+      "course": "tolc-s",
+      "id": 44,
+      "selected": 4,
+      "answer": "There are not many chairs, and they are insufficient for everyone.",
+      "independent_reason": "Few chairs più persone costrette a stare in piedi implica poche sedie insufficienti; non implica assenza totale, guasti o conteggi opposti."
+    },
+    {
+      "course": "tolc-s",
+      "id": 45,
+      "selected": 5,
+      "answer": "submit",
+      "independent_reason": "Hand in an assignment significa submit; before noon è la scadenza, non richiede riscrittura, discussione o altre attività."
+    },
+    {
+      "course": "tolc-s",
+      "id": 46,
+      "selected": 1,
+      "answer": "yet",
+      "independent_reason": "Il film atteso non è ancora iniziato: yet finale. Ago manca della durata, for/during del complemento e yesterday non si combina normalmente col present perfect."
+    },
+    {
+      "course": "tolc-s",
+      "id": 47,
+      "selected": 2,
+      "answer": "some",
+      "independent_reason": "Tea è esplicitamente non numerabile e la frase è un'offerta: some; many/a few richiedono plurali, each un'unità numerabile e an non completa tea."
+    },
+    {
+      "course": "tolc-s",
+      "id": 48,
+      "selected": 3,
+      "answer": "used to",
+      "independent_reason": "Used to live descrive la residenza passata cessata; am used to richiederebbe nome o living e significherebbe abitudine acquisita."
+    },
+    {
+      "course": "tolc-s",
+      "id": 49,
+      "selected": 4,
+      "answer": "Ask the driver when boarding.",
+      "independent_reason": "Sabato è weekend; la fermata è su richiesta e il testo ordina di avvertire il conducente salendo: le altre azioni ignorano destinatario, momento o condizione."
+    },
+    {
+      "course": "tolc-s",
+      "id": 50,
+      "selected": 5,
+      "answer": "Visitors should enter through the main entrance.",
+      "independent_reason": "Staff only riserva il retro al personale e i visitatori sono diretti all'ingresso principale; le altre alternative estendono o negano permessi non dati."
+    },
+    {
+      "course": "tolc-s",
+      "id": 51,
+      "selected": 1,
+      "answer": "the station is",
+      "independent_reason": "La subordinata interrogativa usa ordine dichiarativo the station is; is the station è domanda diretta e le altre sequenze non costruiscono la subordinata."
+    },
+    {
+      "course": "tolc-s",
+      "id": 52,
+      "selected": 2,
+      "answer": "Able to be trusted.",
+      "independent_reason": "Reliable significa attendibile: able to be trusted; mezzo, età o grandezza dei numeri non sono il significato dell'aggettivo."
+    },
+    {
+      "course": "tolc-s",
+      "id": 53,
+      "selected": 3,
+      "answer": "bottles",
+      "independent_reason": "Ones riprende bottles plurale e larger seleziona le più grandi; shelf è singolare e labels/rooms non sono antecedenti introdotti."
+    },
+    {
+      "course": "tolc-s",
+      "id": 54,
+      "selected": 4,
+      "answer": "another",
+      "independent_reason": "Si chiede un ulteriore esercizio singolare: another one; other/others/each of/all non completano il sintagma dato."
+    },
+    {
+      "course": "tolc-s",
+      "id": 55,
+      "selected": 5,
+      "answer": "in the end",
+      "independent_reason": "La porta si apre dopo tentativi: eventually significa in the end; non possibilità, caso o una relazione temporale diversa."
+    },
+    {
+      "course": "tolc-s",
+      "id": 56,
+      "selected": 1,
+      "answer": "boring / bored",
+      "independent_reason": "La consegna distingue causa della noia ed esperienza: talk boring, narratore bored; boring/boring cambierebbe il secondo significato e boredom è nome."
+    },
+    {
+      "course": "tolc-s",
+      "id": 57,
+      "selected": 2,
+      "answer": "can't",
+      "independent_reason": "L'incapacità attuale di vedere implica can't read; can la contraddice, should/must non esprimono incapacità e may neppure."
+    },
+    {
+      "course": "tolc-s",
+      "id": 58,
+      "selected": 3,
+      "answer": "fewer",
+      "independent_reason": "Dodici è meno di venti e seats è numerabile plurale: fewer; more inverte i dati, fewest/most sono superlativi e much non concorda."
+    },
+    {
+      "course": "tolc-s",
+      "id": 59,
+      "selected": 4,
+      "answer": "His coat is here, so he must be nearby.",
+      "independent_reason": "Il cappotto presente è indizio per dedurre must be nearby; negli altri enunciati must impone azioni tramite regola, scadenza o requisito."
+    },
+    {
+      "course": "tolc-s",
+      "id": 60,
+      "selected": 5,
+      "answer": "We paused our walk in order to drink.",
+      "independent_reason": "Stopped walking to drink interrompe la camminata per bere; non implica fine definitiva, mancanza d'acqua o inversione fra azione e scopo."
+    },
+    {
+      "course": "tolc-s",
+      "id": 61,
+      "selected": 1,
+      "answer": "ago",
+      "independent_reason": "Ago segue two months e colloca moved nel passato; for precederebbe la durata, during manca del complemento, yet/already non completano two months ___."
+    },
+    {
+      "course": "tolc-s",
+      "id": 62,
+      "selected": 2,
+      "answer": "will help",
+      "independent_reason": "La consegna richiede l'offerta spontanea quando emerge il problema: will help; le forme passate hanno altro riferimento e have help/am help sono malformate."
+    },
+    {
+      "course": "tolc-s",
+      "id": 63,
+      "selected": 3,
+      "answer": "little",
+      "independent_reason": "Information è non numerabile: very little; few/a few/many/several non possono quantificare il nome in questo uso."
+    },
+    {
+      "course": "tolc-s",
+      "id": 64,
+      "selected": 4,
+      "answer": "Who called Nora yesterday?",
+      "independent_reason": "Si chiede chi ha chiamato Nora, dunque Who called Nora? senza did; Who did Nora call? inverte chiamante e destinatario, le altre sequenze non rispondono."
+    },
+    {
+      "course": "tolc-s",
+      "id": 65,
+      "selected": 5,
+      "answer": "enough / enough",
+      "independent_reason": "Enough precede il nome time e segue warm: enough/enough; enough of richiederebbe un gruppo determinato e le altre posizioni sono errate."
+    },
+    {
+      "course": "tolc-s",
+      "id": 66,
+      "selected": 1,
+      "answer": "The first appointment.",
+      "independent_reason": "La prima visita si sposta da martedì a mercoledì mentre follow-up still Friday resta venerdì; nessuna altra data o modifica è comunicata."
+    },
+    {
+      "course": "tolc-s",
+      "id": 67,
+      "selected": 2,
+      "answer": "Could you explain that again, please?",
+      "independent_reason": "Lo studente chiede una nuova spiegazione: Could you explain that again, please?; le altre richieste riguardano informazioni o azioni diverse."
+    },
+    {
+      "course": "tolc-s",
+      "id": 68,
+      "selected": 3,
+      "answer": "to wait",
+      "independent_reason": "Asked us riporta una richiesta con persona più to-infinitive: to wait; nessuna altra forma conserva questa reggenza."
+    },
+    {
+      "course": "tolc-s",
+      "id": 69,
+      "selected": 4,
+      "answer": "provided that",
+      "independent_reason": "La consegna richiede on condition that: provided that; because causa, even though concessione e before/after ordine temporale."
+    },
+    {
+      "course": "tolc-s",
+      "id": 70,
+      "selected": 5,
+      "answer": "I cannot reach the shelf because of its height.",
+      "independent_reason": "Too high for me to reach afferma che il parlante non raggiunge lo scaffale per altezza eccessiva; non confronta tutti gli scaffali né impone spostamenti."
+    },
+    {
+      "course": "tolc-s",
+      "id": 71,
+      "selected": 1,
+      "answer": "ever",
+      "independent_reason": "Ever domanda un'esperienza almeno una volta e twice risponde con due occasioni; every/ago mancano di complementi, yesterday contrasta col tempo e for non regge tried."
+    },
+    {
+      "course": "tolc-s",
+      "id": 72,
+      "selected": 2,
+      "answer": "How students attend the class.",
+      "independent_reason": "Going ahead conferma la lezione e online cambia la partecipazione; non sono annunciati nuovo insegnante, argomento, data o cancellazione."
+    },
+    {
+      "course": "tolc-s",
+      "id": 73,
+      "selected": 3,
+      "answer": "whose",
+      "independent_reason": "Il quaderno appartiene allo studente: whose introduce il nome posseduto; who/whom non esprimono questa relazione e gli altri relativi non si adattano."
+    },
+    {
+      "course": "tolc-s",
+      "id": 74,
+      "selected": 4,
+      "answer": "reading",
+      "independent_reason": "Suggest qui regge l'attività in -ing: reading; to read e le altre sequenze non sono il modello richiesto e non compare una proposizione alternativa."
+    },
+    {
+      "course": "tolc-s",
+      "id": 75,
+      "selected": 5,
+      "answer": "Despite",
+      "independent_reason": "The heavy rain è un nome: Despite esprime concessione davanti al gruppo; Although/Even though/So that/Because it richiedono strutture diverse."
+    },
+    {
+      "course": "tolc-s",
+      "id": 76,
+      "selected": 1,
+      "answer": "where",
+      "independent_reason": "Village è il luogo in cui vivevano: where equivale a in which; chi/possesso non descrivono la funzione del vuoto."
+    },
+    {
+      "course": "tolc-s",
+      "id": 77,
+      "selected": 2,
+      "answer": "mustn't",
+      "independent_reason": "La consegna richiede il divieto No photography: mustn't; don't have to nega obbligo, should consiglia e le altre opzioni non vietano."
+    },
+    {
+      "course": "tolc-s",
+      "id": 78,
+      "selected": 3,
+      "answer": "have been waiting",
+      "independent_reason": "La consegna richiede present perfect continuous con I: have been waiting; has non concorda, being non sostituisce been e waited non è forma progressiva."
+    },
+    {
+      "course": "tolc-s",
+      "id": 79,
+      "selected": 4,
+      "answer": "in order to",
+      "independent_reason": "Per esprimere lo scopo davanti a catch base serve in order to; so that richiede proposizione e le altre locuzioni non reggono quel verbo base."
+    },
+    {
+      "course": "tolc-s",
+      "id": 80,
+      "selected": 5,
+      "answer": "as",
+      "independent_reason": "I due oggetti pesano 5 kg: as heavy as; than richiederebbe comparativo e le altre parole non completano la costruzione di uguaglianza."
+    },
+    {
+      "course": "tolc-s",
+      "id": 81,
+      "selected": 1,
+      "answer": "These instructions do not require a printed copy in this case.",
+      "independent_reason": "Richiesta copia implica fallimento; caricamento riuscito esclude quel requisito per contrapposizione. Non si inferiscono divieti, copia sempre obbligatoria o altra sequenza."
+    },
+    {
+      "course": "tolc-s",
+      "id": 82,
+      "selected": 2,
+      "answer": "whether",
+      "independent_reason": "La domanda indiretta presenta open or closed: whether; le altre parole non collegano le due alternative nella struttura proposta."
+    },
+    {
+      "course": "tolc-s",
+      "id": 83,
+      "selected": 3,
+      "answer": "neither",
+      "independent_reason": "Entrambe le lampade non funzionano senza batterie: neither lamp; each/every danno significato opposto, both richiede plurale ed è opposto."
+    },
+    {
+      "course": "tolc-s",
+      "id": 84,
+      "selected": 4,
+      "answer": "If you do not have a valid pass, you cannot enter.",
+      "independent_reason": "Unless si legge if not: senza pass non si entra. Il pass è necessario, non sufficiente né un obbligo di entrare."
+    },
+    {
+      "course": "tolc-s",
+      "id": 85,
+      "selected": 5,
+      "answer": "lend",
+      "independent_reason": "You è chi presta il righello a me: lend; borrow cambierebbe i ruoli e gli altri verbi non costruiscono il prestito richiesto."
+    },
+    {
+      "course": "tolc-s",
+      "id": 86,
+      "selected": 1,
+      "answer": "take",
+      "independent_reason": "Si chiede al passante di usare la macchina e creare uno scatto: take a photograph; mostrare, conservare o restituire riguarderebbe una foto già esistente."
+    },
+    {
+      "course": "tolc-s",
+      "id": 87,
+      "selected": 2,
+      "answer": "is going to",
+      "independent_reason": "Le nuvole sono indizio presente per una previsione: is going to rain; le altre forme non esprimono questa previsione e riferimento temporale."
+    },
+    {
+      "course": "tolc-s",
+      "id": 88,
+      "selected": 3,
+      "answer": "Books can be expensive.",
+      "independent_reason": "Books can be expensive usa plurale nudo generico; le altre alternative identificano gruppi con luogo, dimostrativo, numero o possessivo."
+    },
+    {
+      "course": "tolc-s",
+      "id": 89,
+      "selected": 4,
+      "answer": "success",
+      "independent_reason": "A great richiede nome singolare: success; successful aggettivo, successfully avverbio, succeed verbo e l'altra forma non completano il nome."
+    },
+    {
+      "course": "tolc-s",
+      "id": 90,
+      "selected": 5,
+      "answer": "managed",
+      "independent_reason": "Riuscire malgrado difficoltà: managed to finish. Enjoy/avoid/suggest/prevent non reggono quella sequenza con lo stesso significato."
+    }
+  ],
+  "paired_checks": [
+    {
+      "course": "tolc-i",
+      "id": 1,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 2,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 3,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 4,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 5,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 6,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 7,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 8,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 9,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 10,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 11,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 12,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 13,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 14,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 15,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 16,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 17,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 18,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 19,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 20,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 21,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 22,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 23,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 24,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 25,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 26,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 27,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 28,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 29,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 30,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 31,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 32,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 33,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 34,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 35,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 36,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 37,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 38,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 39,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 40,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 41,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 42,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 43,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 44,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 45,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 46,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 47,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 48,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 49,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 50,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 51,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 52,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 53,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 54,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 55,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 56,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 57,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 58,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 59,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 60,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 61,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 62,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 63,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 64,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 65,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 66,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 67,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 68,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 69,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 70,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 71,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 72,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 73,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 74,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 75,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 76,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 77,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 78,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 79,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 80,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 81,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 82,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 83,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 84,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 85,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 86,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 87,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 88,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 89,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-i",
+      "id": 90,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 1,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 2,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 3,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 4,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 5,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 6,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 7,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 8,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 9,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 10,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 11,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 12,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 13,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 14,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 15,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 16,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 17,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 18,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 19,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 20,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 21,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 22,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 23,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 24,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 25,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 26,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 27,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 28,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 29,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 30,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 31,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 32,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 33,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 34,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 35,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 36,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 37,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 38,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 39,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 40,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 41,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 42,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 43,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 44,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 45,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 46,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 47,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 48,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 49,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 50,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 51,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 52,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 53,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 54,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 55,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 56,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 57,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 58,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 59,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 60,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 61,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 62,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 63,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 64,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 65,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 66,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 67,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 68,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 69,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 70,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 71,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 72,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 73,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 74,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 75,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 76,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 77,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 78,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 79,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 80,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 81,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 82,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 83,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 84,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 85,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 86,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 87,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 88,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 89,
+      "options_identical": true,
+      "correct_identical": true
+    },
+    {
+      "course": "tolc-s",
+      "id": 90,
+      "options_identical": true,
+      "correct_identical": true
+    }
+  ],
+  "practice_files": [
+    {
+      "file": "src/content/dafare/tolc-i/inglese/1.md",
+      "question_id": 1,
+      "answer": "goes"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/2.md",
+      "question_id": 2,
+      "answer": "are attending"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/3.md",
+      "question_id": 3,
+      "answer": "watched"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/4.md",
+      "question_id": 4,
+      "answer": "since / for"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/5.md",
+      "question_id": 5,
+      "answer": "The key is missing and this prevents entry now."
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/6.md",
+      "question_id": 6,
+      "answer": "Do"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/7.md",
+      "question_id": 7,
+      "answer": "eat"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/8.md",
+      "question_id": 8,
+      "answer": "any"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/9.md",
+      "question_id": 9,
+      "answer": "many"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/10.md",
+      "question_id": 10,
+      "answer": "easier"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/11.md",
+      "question_id": 11,
+      "answer": "best"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/12.md",
+      "question_id": 12,
+      "answer": "at / on / in"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/13.md",
+      "question_id": 13,
+      "answer": "by / until"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/14.md",
+      "question_id": 14,
+      "answer": "in"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/15.md",
+      "question_id": 15,
+      "answer": "must"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/16.md",
+      "question_id": 16,
+      "answer": "will stay"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/17.md",
+      "question_id": 17,
+      "answer": "would read"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/18.md",
+      "question_id": 18,
+      "answer": "who"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/19.md",
+      "question_id": 19,
+      "answer": "an / a"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/20.md",
+      "question_id": 20,
+      "answer": "The"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/21.md",
+      "question_id": 21,
+      "answer": "me"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/22.md",
+      "question_id": 22,
+      "answer": "hers"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/23.md",
+      "question_id": 23,
+      "answer": "take"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/24.md",
+      "question_id": 24,
+      "answer": "Why"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/25.md",
+      "question_id": 25,
+      "answer": "but"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/26.md",
+      "question_id": 26,
+      "answer": "A place where people can read and borrow books."
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/27.md",
+      "question_id": 27,
+      "answer": "At 8:05."
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/28.md",
+      "question_id": 28,
+      "answer": "been"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/29.md",
+      "question_id": 29,
+      "answer": "are"
+    },
+    {
+      "file": "src/content/dafare/tolc-i/inglese/30.md",
+      "question_id": 30,
+      "answer": "during / while"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/1.md",
+      "question_id": 1,
+      "answer": "goes"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/2.md",
+      "question_id": 2,
+      "answer": "are attending"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/3.md",
+      "question_id": 3,
+      "answer": "watched"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/4.md",
+      "question_id": 4,
+      "answer": "since / for"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/5.md",
+      "question_id": 5,
+      "answer": "The key is missing and this prevents entry now."
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/6.md",
+      "question_id": 6,
+      "answer": "Do"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/7.md",
+      "question_id": 7,
+      "answer": "eat"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/8.md",
+      "question_id": 8,
+      "answer": "any"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/9.md",
+      "question_id": 9,
+      "answer": "many"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/10.md",
+      "question_id": 10,
+      "answer": "easier"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/11.md",
+      "question_id": 11,
+      "answer": "best"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/12.md",
+      "question_id": 12,
+      "answer": "at / on / in"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/13.md",
+      "question_id": 13,
+      "answer": "by / until"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/14.md",
+      "question_id": 14,
+      "answer": "in"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/15.md",
+      "question_id": 15,
+      "answer": "must"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/16.md",
+      "question_id": 16,
+      "answer": "will stay"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/17.md",
+      "question_id": 17,
+      "answer": "would read"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/18.md",
+      "question_id": 18,
+      "answer": "who"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/19.md",
+      "question_id": 19,
+      "answer": "an / a"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/20.md",
+      "question_id": 20,
+      "answer": "The"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/21.md",
+      "question_id": 21,
+      "answer": "me"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/22.md",
+      "question_id": 22,
+      "answer": "hers"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/23.md",
+      "question_id": 23,
+      "answer": "take"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/24.md",
+      "question_id": 24,
+      "answer": "Why"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/25.md",
+      "question_id": 25,
+      "answer": "but"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/26.md",
+      "question_id": 26,
+      "answer": "A place where people can read and borrow books."
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/27.md",
+      "question_id": 27,
+      "answer": "At 8:05."
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/28.md",
+      "question_id": 28,
+      "answer": "been"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/29.md",
+      "question_id": 29,
+      "answer": "are"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-i/inglese/30.md",
+      "question_id": 30,
+      "answer": "during / while"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/1.md",
+      "question_id": 1,
+      "answer": "goes"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/2.md",
+      "question_id": 2,
+      "answer": "are attending"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/3.md",
+      "question_id": 3,
+      "answer": "watched"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/4.md",
+      "question_id": 4,
+      "answer": "since / for"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/5.md",
+      "question_id": 5,
+      "answer": "The key is missing and this prevents entry now."
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/6.md",
+      "question_id": 6,
+      "answer": "Do"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/7.md",
+      "question_id": 7,
+      "answer": "eat"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/8.md",
+      "question_id": 8,
+      "answer": "any"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/9.md",
+      "question_id": 9,
+      "answer": "many"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/10.md",
+      "question_id": 10,
+      "answer": "easier"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/11.md",
+      "question_id": 11,
+      "answer": "best"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/12.md",
+      "question_id": 12,
+      "answer": "at / on / in"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/13.md",
+      "question_id": 13,
+      "answer": "by / until"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/14.md",
+      "question_id": 14,
+      "answer": "in"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/15.md",
+      "question_id": 15,
+      "answer": "must"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/16.md",
+      "question_id": 16,
+      "answer": "will stay"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/17.md",
+      "question_id": 17,
+      "answer": "would read"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/18.md",
+      "question_id": 18,
+      "answer": "who"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/19.md",
+      "question_id": 19,
+      "answer": "an / a"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/20.md",
+      "question_id": 20,
+      "answer": "The"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/21.md",
+      "question_id": 21,
+      "answer": "me"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/22.md",
+      "question_id": 22,
+      "answer": "hers"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/23.md",
+      "question_id": 23,
+      "answer": "take"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/24.md",
+      "question_id": 24,
+      "answer": "Why"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/25.md",
+      "question_id": 25,
+      "answer": "but"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/26.md",
+      "question_id": 26,
+      "answer": "A place where people can read and borrow books."
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/27.md",
+      "question_id": 27,
+      "answer": "At 8:05."
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/28.md",
+      "question_id": 28,
+      "answer": "been"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/29.md",
+      "question_id": 29,
+      "answer": "are"
+    },
+    {
+      "file": "src/content/dafare/tolc-s/inglese/30.md",
+      "question_id": 30,
+      "answer": "during / while"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/1.md",
+      "question_id": 1,
+      "answer": "goes"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/2.md",
+      "question_id": 2,
+      "answer": "are attending"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/3.md",
+      "question_id": 3,
+      "answer": "watched"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/4.md",
+      "question_id": 4,
+      "answer": "since / for"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/5.md",
+      "question_id": 5,
+      "answer": "The key is missing and this prevents entry now."
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/6.md",
+      "question_id": 6,
+      "answer": "Do"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/7.md",
+      "question_id": 7,
+      "answer": "eat"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/8.md",
+      "question_id": 8,
+      "answer": "any"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/9.md",
+      "question_id": 9,
+      "answer": "many"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/10.md",
+      "question_id": 10,
+      "answer": "easier"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/11.md",
+      "question_id": 11,
+      "answer": "best"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/12.md",
+      "question_id": 12,
+      "answer": "at / on / in"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/13.md",
+      "question_id": 13,
+      "answer": "by / until"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/14.md",
+      "question_id": 14,
+      "answer": "in"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/15.md",
+      "question_id": 15,
+      "answer": "must"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/16.md",
+      "question_id": 16,
+      "answer": "will stay"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/17.md",
+      "question_id": 17,
+      "answer": "would read"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/18.md",
+      "question_id": 18,
+      "answer": "who"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/19.md",
+      "question_id": 19,
+      "answer": "an / a"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/20.md",
+      "question_id": 20,
+      "answer": "The"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/21.md",
+      "question_id": 21,
+      "answer": "me"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/22.md",
+      "question_id": 22,
+      "answer": "hers"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/23.md",
+      "question_id": 23,
+      "answer": "take"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/24.md",
+      "question_id": 24,
+      "answer": "Why"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/25.md",
+      "question_id": 25,
+      "answer": "but"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/26.md",
+      "question_id": 26,
+      "answer": "A place where people can read and borrow books."
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/27.md",
+      "question_id": 27,
+      "answer": "At 8:05."
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/28.md",
+      "question_id": 28,
+      "answer": "been"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/29.md",
+      "question_id": 29,
+      "answer": "are"
+    },
+    {
+      "file": "src/content-en/dafare/tolc-s/inglese/30.md",
+      "question_id": 30,
+      "answer": "during / while"
+    }
+  ],
+  "worked_cases_language_copies": [
+    {
+      "file": "src/content/svolti/tolc-i/inglese/1.md",
+      "exercise": 1,
+      "equivalent_question": 1,
+      "independent_answer": "goes"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/1.md",
+      "exercise": 2,
+      "equivalent_question": 2,
+      "independent_answer": "are attending"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/1.md",
+      "exercise": 3,
+      "equivalent_question": 43,
+      "independent_answer": "know"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/2.md",
+      "exercise": 1,
+      "equivalent_question": 3,
+      "independent_answer": "watched"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/2.md",
+      "exercise": 2,
+      "equivalent_question": 32,
+      "independent_answer": "was waiting"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/2.md",
+      "exercise": 3,
+      "equivalent_question": 36,
+      "independent_answer": "The train's departure."
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/3.md",
+      "exercise": 1,
+      "equivalent_question": 19,
+      "independent_answer": "an / a"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/3.md",
+      "exercise": 2,
+      "equivalent_question": 22,
+      "independent_answer": "hers"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/3.md",
+      "exercise": 3,
+      "equivalent_question": 44,
+      "independent_answer": "There are not many chairs, and they are insufficient for everyone."
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/4.md",
+      "exercise": 1,
+      "equivalent_question": 15,
+      "independent_answer": "must"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/4.md",
+      "exercise": 2,
+      "equivalent_question": 33,
+      "independent_answer": "You don't have to print the form."
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/4.md",
+      "exercise": 3,
+      "equivalent_question": 77,
+      "independent_answer": "mustn't"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/5.md",
+      "exercise": 1,
+      "equivalent_question": 51,
+      "independent_answer": "the station is"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/5.md",
+      "exercise": 2,
+      "equivalent_question": 74,
+      "independent_answer": "reading"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/5.md",
+      "exercise": 3,
+      "equivalent_question": 75,
+      "independent_answer": "Despite"
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/6.md",
+      "exercise": 1,
+      "equivalent_question": 27,
+      "independent_answer": "At 8:05."
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/6.md",
+      "exercise": 2,
+      "equivalent_question": 40,
+      "independent_answer": "Adding the powder."
+    },
+    {
+      "file": "src/content/svolti/tolc-i/inglese/6.md",
+      "exercise": 3,
+      "equivalent_question": 81,
+      "independent_answer": "These instructions do not require a printed copy in this case."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/1.md",
+      "exercise": 1,
+      "equivalent_question": 1,
+      "independent_answer": "goes"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/1.md",
+      "exercise": 2,
+      "equivalent_question": 2,
+      "independent_answer": "are attending"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/1.md",
+      "exercise": 3,
+      "equivalent_question": 43,
+      "independent_answer": "know"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/2.md",
+      "exercise": 1,
+      "equivalent_question": 3,
+      "independent_answer": "watched"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/2.md",
+      "exercise": 2,
+      "equivalent_question": 32,
+      "independent_answer": "was waiting"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/2.md",
+      "exercise": 3,
+      "equivalent_question": 36,
+      "independent_answer": "The train's departure."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/3.md",
+      "exercise": 1,
+      "equivalent_question": 19,
+      "independent_answer": "an / a"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/3.md",
+      "exercise": 2,
+      "equivalent_question": 22,
+      "independent_answer": "hers"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/3.md",
+      "exercise": 3,
+      "equivalent_question": 44,
+      "independent_answer": "There are not many chairs, and they are insufficient for everyone."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/4.md",
+      "exercise": 1,
+      "equivalent_question": 15,
+      "independent_answer": "must"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/4.md",
+      "exercise": 2,
+      "equivalent_question": 33,
+      "independent_answer": "You don't have to print the form."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/4.md",
+      "exercise": 3,
+      "equivalent_question": 77,
+      "independent_answer": "mustn't"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/5.md",
+      "exercise": 1,
+      "equivalent_question": 51,
+      "independent_answer": "the station is"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/5.md",
+      "exercise": 2,
+      "equivalent_question": 74,
+      "independent_answer": "reading"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/5.md",
+      "exercise": 3,
+      "equivalent_question": 75,
+      "independent_answer": "Despite"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/6.md",
+      "exercise": 1,
+      "equivalent_question": 27,
+      "independent_answer": "At 8:05."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/6.md",
+      "exercise": 2,
+      "equivalent_question": 40,
+      "independent_answer": "Adding the powder."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-i/inglese/6.md",
+      "exercise": 3,
+      "equivalent_question": 81,
+      "independent_answer": "These instructions do not require a printed copy in this case."
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/1.md",
+      "exercise": 1,
+      "equivalent_question": 1,
+      "independent_answer": "goes"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/1.md",
+      "exercise": 2,
+      "equivalent_question": 2,
+      "independent_answer": "are attending"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/1.md",
+      "exercise": 3,
+      "equivalent_question": 43,
+      "independent_answer": "know"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/2.md",
+      "exercise": 1,
+      "equivalent_question": 3,
+      "independent_answer": "watched"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/2.md",
+      "exercise": 2,
+      "equivalent_question": 32,
+      "independent_answer": "was waiting"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/2.md",
+      "exercise": 3,
+      "equivalent_question": 36,
+      "independent_answer": "The train's departure."
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/3.md",
+      "exercise": 1,
+      "equivalent_question": 19,
+      "independent_answer": "an / a"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/3.md",
+      "exercise": 2,
+      "equivalent_question": 22,
+      "independent_answer": "hers"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/3.md",
+      "exercise": 3,
+      "equivalent_question": 44,
+      "independent_answer": "There are not many chairs, and they are insufficient for everyone."
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/4.md",
+      "exercise": 1,
+      "equivalent_question": 15,
+      "independent_answer": "must"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/4.md",
+      "exercise": 2,
+      "equivalent_question": 33,
+      "independent_answer": "You don't have to print the form."
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/4.md",
+      "exercise": 3,
+      "equivalent_question": 77,
+      "independent_answer": "mustn't"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/5.md",
+      "exercise": 1,
+      "equivalent_question": 51,
+      "independent_answer": "the station is"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/5.md",
+      "exercise": 2,
+      "equivalent_question": 74,
+      "independent_answer": "reading"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/5.md",
+      "exercise": 3,
+      "equivalent_question": 75,
+      "independent_answer": "Despite"
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/6.md",
+      "exercise": 1,
+      "equivalent_question": 27,
+      "independent_answer": "At 8:05."
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/6.md",
+      "exercise": 2,
+      "equivalent_question": 40,
+      "independent_answer": "Adding the powder."
+    },
+    {
+      "file": "src/content/svolti/tolc-s/inglese/6.md",
+      "exercise": 3,
+      "equivalent_question": 81,
+      "independent_answer": "These instructions do not require a printed copy in this case."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/1.md",
+      "exercise": 1,
+      "equivalent_question": 1,
+      "independent_answer": "goes"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/1.md",
+      "exercise": 2,
+      "equivalent_question": 2,
+      "independent_answer": "are attending"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/1.md",
+      "exercise": 3,
+      "equivalent_question": 43,
+      "independent_answer": "know"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/2.md",
+      "exercise": 1,
+      "equivalent_question": 3,
+      "independent_answer": "watched"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/2.md",
+      "exercise": 2,
+      "equivalent_question": 32,
+      "independent_answer": "was waiting"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/2.md",
+      "exercise": 3,
+      "equivalent_question": 36,
+      "independent_answer": "The train's departure."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/3.md",
+      "exercise": 1,
+      "equivalent_question": 19,
+      "independent_answer": "an / a"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/3.md",
+      "exercise": 2,
+      "equivalent_question": 22,
+      "independent_answer": "hers"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/3.md",
+      "exercise": 3,
+      "equivalent_question": 44,
+      "independent_answer": "There are not many chairs, and they are insufficient for everyone."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/4.md",
+      "exercise": 1,
+      "equivalent_question": 15,
+      "independent_answer": "must"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/4.md",
+      "exercise": 2,
+      "equivalent_question": 33,
+      "independent_answer": "You don't have to print the form."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/4.md",
+      "exercise": 3,
+      "equivalent_question": 77,
+      "independent_answer": "mustn't"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/5.md",
+      "exercise": 1,
+      "equivalent_question": 51,
+      "independent_answer": "the station is"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/5.md",
+      "exercise": 2,
+      "equivalent_question": 74,
+      "independent_answer": "reading"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/5.md",
+      "exercise": 3,
+      "equivalent_question": 75,
+      "independent_answer": "Despite"
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/6.md",
+      "exercise": 1,
+      "equivalent_question": 27,
+      "independent_answer": "At 8:05."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/6.md",
+      "exercise": 2,
+      "equivalent_question": 40,
+      "independent_answer": "Adding the powder."
+    },
+    {
+      "file": "src/content-en/svolti/tolc-s/inglese/6.md",
+      "exercise": 3,
+      "equivalent_question": 81,
+      "independent_answer": "These instructions do not require a printed copy in this case."
+    }
+  ],
+  "independent_numeric_logic_checks": {
+    "q27_time_minutes": true,
+    "q58_countable_comparison": true,
+    "q80_equal_weights": true,
+    "theory_half_past_two": true,
+    "theory_quarter_to_three": true,
+    "timeline_strict_order": true,
+    "q81_only_if_contrapositive": true,
+    "q81_failure_not_sufficient": true,
+    "q84_pass_necessary": true,
+    "q84_pass_not_sufficient": true
+  },
+  "exact_shared_files_between_courses": 252,
+  "evaluated_english_quote_differences": [
+    {
+      "course": "tolc-i",
+      "id": 69,
+      "it": [
+        "a condizione che",
+        "You can borrow the book ___ you return it by Friday"
+      ],
+      "en": [
+        "on condition that",
+        "You can borrow the book ___ you return it by Friday"
+      ]
+    },
+    {
+      "course": "tolc-s",
+      "id": 69,
+      "it": [
+        "a condizione che",
+        "You can borrow the book ___ you return it by Friday"
+      ],
+      "en": [
+        "on condition that",
+        "You can borrow the book ___ you return it by Friday"
+      ]
+    }
+  ],
+  "modified_files": 80
+}

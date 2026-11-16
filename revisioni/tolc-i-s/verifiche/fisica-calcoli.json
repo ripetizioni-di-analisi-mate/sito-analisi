@@ -1,0 +1,4113 @@
+{
+  "quiz": [
+    {
+      "course": "tolc-i",
+      "n": 1,
+      "type": "quantitativo",
+      "metodo": "km/h to m/s",
+      "ricalcolo": "20",
+      "alternative_normalizzate": [
+        "20",
+        "72",
+        "648/25",
+        "2",
+        "200"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$20\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 2,
+      "type": "quantitativo",
+      "metodo": "distance from rest with constant acceleration",
+      "ricalcolo": "9",
+      "alternative_normalizzate": [
+        "6",
+        "9",
+        "18",
+        "3",
+        "12"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$9\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 3,
+      "type": "quantitativo",
+      "metodo": "net force divided by mass",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "36",
+        "9",
+        "4",
+        "15",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$4\\,\\mathrm{m/s^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 4,
+      "type": "quantitativo",
+      "metodo": "kinetic energy",
+      "ricalcolo": "9",
+      "alternative_normalizzate": [
+        "18",
+        "3",
+        "12",
+        "9",
+        "6"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$9\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 5,
+      "type": "quantitativo",
+      "metodo": "hydrostatic pressure increment",
+      "ricalcolo": "20000",
+      "alternative_normalizzate": [
+        "2000",
+        "200",
+        "100000",
+        "5000",
+        "20000"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$20000\\,\\mathrm{Pa}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 6,
+      "type": "quantitativo",
+      "metodo": "constant amount and temperature: pressure ratio",
+      "ricalcolo": "1/2",
+      "alternative_normalizzate": [
+        "1/2",
+        "2",
+        "1",
+        "4",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "Si dimezza",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 7,
+      "type": "quantitativo",
+      "metodo": "heat in minus work out",
+      "ricalcolo": "300",
+      "alternative_normalizzate": [
+        "700",
+        "300",
+        "-300",
+        "-700",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$+300\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 8,
+      "type": "quantitativo",
+      "metodo": "Ohm law",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "6",
+        "18",
+        "2",
+        "72",
+        "1/2"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$2\\,\\mathrm{A}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 9,
+      "type": "quantitativo",
+      "metodo": "Coulomb inverse square",
+      "ricalcolo": "1/4",
+      "alternative_normalizzate": [
+        "1/2",
+        "2",
+        "4",
+        "1/4",
+        "1"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "Diventa un quarto",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 10,
+      "type": "quantitativo",
+      "metodo": "phase speed from refractive index",
+      "ricalcolo": "200000000",
+      "alternative_normalizzate": [
+        "450000000",
+        "300000000",
+        "150000000",
+        "50000000",
+        "200000000"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$2\\cdot10^8\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 11,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Kinetic energy is scalar; velocity, acceleration, displacement and momentum require vector direction.",
+      "corretta_indipendente": 1,
+      "risposta": "Energia cinetica",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 12,
+      "type": "quantitativo",
+      "metodo": "constant power integrated in kWh",
+      "ricalcolo": "1/10",
+      "alternative_normalizzate": [
+        "100",
+        "1/10",
+        "6",
+        "2/5",
+        "1/5"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$0{,}10\\,\\mathrm{kWh}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 13,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Snell law with n2>n1 and oblique incidence gives a smaller nonzero angle; the other changes fail the stated indices.",
+      "corretta_indipendente": 3,
+      "risposta": "Diminuisce",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 14,
+      "type": "quantitativo",
+      "metodo": "thin lens reciprocal distances",
+      "ricalcolo": "15",
+      "alternative_normalizzate": [
+        "40",
+        "20",
+        "15/2",
+        "15",
+        "5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$15\\,\\mathrm{cm}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 15,
+      "type": "quantitativo",
+      "metodo": "norm of perpendicular displacement components",
+      "ricalcolo": "10",
+      "alternative_normalizzate": [
+        "14",
+        "2",
+        "48",
+        "7",
+        "10"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$10\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 16,
+      "type": "quantitativo",
+      "metodo": "critical angle from Snell law",
+      "ricalcolo": "30",
+      "alternative_normalizzate": [
+        "30",
+        "15",
+        "45",
+        "60",
+        "90"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$30^\\circ$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 17,
+      "type": "quantitativo",
+      "metodo": "series divider voltage",
+      "ricalcolo": "8",
+      "alternative_normalizzate": [
+        "12",
+        "8",
+        "2",
+        "4",
+        "6"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$8\\,\\mathrm{V}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 18,
+      "type": "quantitativo",
+      "metodo": "displacement/time versus distance/time",
+      "ricalcolo": "(0, 4)",
+      "alternative_normalizzate": [
+        "(4, 4)",
+        "(2, 2)",
+        "(0, 4)",
+        "(0, 2)",
+        "(4, 0)"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$0\\,\\mathrm{m/s}$ e $4\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 19,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Constant speed removes tangential acceleration, not radial change of velocity; acceleration is inward, not outward or zero.",
+      "corretta_indipendente": 4,
+      "risposta": "È diretta verso il centro",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 20,
+      "type": "quantitativo",
+      "metodo": "density with mass and volume conversions",
+      "ricalcolo": "800",
+      "alternative_normalizzate": [
+        "1250",
+        "400",
+        "80",
+        "200",
+        "800"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$800\\,\\mathrm{kg/m^3}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 21,
+      "type": "quantitativo",
+      "metodo": "junction current conservation",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "4",
+        "10",
+        "3",
+        "7",
+        "1"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$4\\,\\mathrm{A}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 22,
+      "type": "quantitativo",
+      "metodo": "wavelength from vacuum frequency",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "200",
+        "2",
+        "20",
+        "1/2",
+        "45"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$2\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 23,
+      "type": "quantitativo",
+      "metodo": "lifting work divided by duration",
+      "ricalcolo": "150",
+      "alternative_normalizzate": [
+        "600",
+        "50",
+        "150",
+        "60",
+        "200"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$150\\,\\mathrm{W}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 24,
+      "type": "quantitativo",
+      "metodo": "percentage relative uncertainty",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "1",
+        "50",
+        "1/50",
+        "2",
+        "5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$2\\%$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 25,
+      "type": "quantitativo",
+      "metodo": "work-energy signed balance",
+      "ricalcolo": "30",
+      "alternative_normalizzate": [
+        "110",
+        "0",
+        "40",
+        "70",
+        "30"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$30\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 26,
+      "type": "quantitativo",
+      "metodo": "signed momentum sum, right positive",
+      "ricalcolo": "-2",
+      "alternative_normalizzate": [
+        "-2",
+        "2",
+        "-14",
+        "14",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$2\\,\\mathrm{kg\\,m/s}$ verso sinistra",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 27,
+      "type": "quantitativo",
+      "metodo": "work as dot product",
+      "ricalcolo": "20",
+      "alternative_normalizzate": [
+        "40",
+        "20",
+        "80",
+        "0",
+        "-20"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$20\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 28,
+      "type": "quantitativo",
+      "metodo": "static balance: required 8 N below 15 N threshold",
+      "ricalcolo": "8",
+      "alternative_normalizzate": [
+        "15",
+        "7",
+        "8",
+        "23",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$8\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 29,
+      "type": "quantitativo",
+      "metodo": "mirror object-image separation",
+      "ricalcolo": "3",
+      "alternative_normalizzate": [
+        "3/2",
+        "3/4",
+        "9/2",
+        "3",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$3\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 30,
+      "type": "quantitativo",
+      "metodo": "opposite lever moments with perpendicular forces",
+      "ricalcolo": "20",
+      "alternative_normalizzate": [
+        "180",
+        "60",
+        "12",
+        "40",
+        "20"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$20\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 31,
+      "type": "quantitativo",
+      "metodo": "weight of displaced water",
+      "ricalcolo": "40",
+      "alternative_normalizzate": [
+        "40",
+        "4",
+        "400",
+        "4000",
+        "1/25"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$40\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 32,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Dispersion is n depending on wavelength; vacuum speed and reflection law are shared, boundary frequency is conserved and no new colours need be emitted.",
+      "corretta_indipendente": 2,
+      "risposta": "L’indice dipende dalla lunghezza d’onda",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 33,
+      "type": "quantitativo",
+      "metodo": "one capacitor plate charge in microcoulombs",
+      "ricalcolo": "60",
+      "alternative_normalizzate": [
+        "30",
+        "120",
+        "60",
+        "17",
+        "3/50"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$60\\,\\mu\\mathrm{C}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 34,
+      "type": "quantitativo",
+      "metodo": "inelastic collision momentum",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "4",
+        "6",
+        "3",
+        "2",
+        "1"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$2\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 35,
+      "type": "quantitativo",
+      "metodo": "incompressible steady continuity",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "6",
+        "12",
+        "2",
+        "1",
+        "4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$4\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 36,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "An ideal source keeps voltage across the surviving branch; fixed resistance implies unchanged power, while total source current falls.",
+      "corretta_indipendente": 1,
+      "risposta": "Resta uguale",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 37,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Common still connected lake and depth give equal p0,rho,g,h; shore distance cannot enter the hydrostatic expression.",
+      "corretta_indipendente": 2,
+      "risposta": "Sono uguali",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 38,
+      "type": "quantitativo",
+      "metodo": "force signed east positive",
+      "ricalcolo": "-3/500",
+      "alternative_normalizzate": [
+        "3/500",
+        "-6",
+        "-3/500",
+        "1500",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$6\\cdot10^{-3}\\,\\mathrm{N}$ verso ovest",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 39,
+      "type": "quantitativo",
+      "metodo": "echo round-trip distance",
+      "ricalcolo": "102",
+      "alternative_normalizzate": [
+        "204",
+        "51",
+        "340",
+        "102",
+        "170"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$102\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 40,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A diverging lens produces rays whose backward extensions pass through the incoming-side focus; no real outgoing convergence.",
+      "corretta_indipendente": 5,
+      "risposta": "Divergono come se provenissero dal fuoco sul lato di ingresso",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 41,
+      "type": "quantitativo",
+      "metodo": "adiabatic compression sign convention",
+      "ricalcolo": "75",
+      "alternative_normalizzate": [
+        "75",
+        "-75",
+        "150",
+        "-150",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$+75\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 42,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Both phases at fixed pressure keep melting temperature; supplied heat reduces ice rather than raising T or freezing all water.",
+      "corretta_indipendente": 2,
+      "risposta": "Il ghiaccio diminuisce e la temperatura resta circa zero gradi Celsius",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 43,
+      "type": "quantitativo",
+      "metodo": "signed areas under velocity graph",
+      "ricalcolo": "8",
+      "alternative_normalizzate": [
+        "16",
+        "10",
+        "8",
+        "20",
+        "-8"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$8\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 44,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Nonzero q,v,B with v parallel B has sin(theta)=0. All four other alternatives assert a nonzero magnitude or a decelerating direction.",
+      "corretta_indipendente": 4,
+      "risposta": "È nulla",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 45,
+      "type": "quantitativo",
+      "metodo": "area unit conversion squared",
+      "ricalcolo": "9/100",
+      "alternative_normalizzate": [
+        "9",
+        "9/10",
+        "900",
+        "9/10000",
+        "9/100"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$0{,}09\\,\\mathrm{m^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 46,
+      "type": "quantitativo",
+      "metodo": "Hooke force after cm conversion",
+      "ricalcolo": "6",
+      "alternative_normalizzate": [
+        "6",
+        "600",
+        "60",
+        "3/5",
+        "203"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$6\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 47,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Mass remains 12kg; weight scales with g to one sixth. The other answers change mass or invert/ignore g scaling.",
+      "corretta_indipendente": 2,
+      "risposta": "La massa resta 12 kg e il peso diventa un sesto",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 48,
+      "type": "quantitativo",
+      "metodo": "thermal expansion in mm",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "2000",
+        "20",
+        "2",
+        "1/5",
+        "1"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$2\\,\\mathrm{mm}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 49,
+      "type": "quantitativo",
+      "metodo": "equal heat capacities, isolated mixing",
+      "ricalcolo": "40",
+      "alternative_normalizzate": [
+        "80",
+        "20",
+        "60",
+        "40",
+        "30"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$40\\,{}^\\circ\\mathrm{C}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 50,
+      "type": "quantitativo",
+      "metodo": "sensible heat",
+      "ricalcolo": "6000",
+      "alternative_normalizzate": [
+        "2000",
+        "24000",
+        "12000",
+        "1500",
+        "6000"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$6000\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 51,
+      "type": "quantitativo",
+      "metodo": "absolute temperature with nearest-K rounding",
+      "ricalcolo": "300",
+      "alternative_normalizzate": [
+        "300",
+        "27",
+        "246",
+        "273",
+        "310"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$300\\,\\mathrm{K}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 52,
+      "type": "quantitativo",
+      "metodo": "parallel branch current sum",
+      "ricalcolo": "3",
+      "alternative_normalizzate": [
+        "1",
+        "3",
+        "2",
+        "2/3",
+        "9"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$3\\,\\mathrm{A}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 53,
+      "type": "quantitativo",
+      "metodo": "elastic energy, not endpoint force times extension",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "20",
+        "4",
+        "2",
+        "10",
+        "1/5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$2\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 54,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Two parallel interface normals and the same external medium return the original angle; lateral displacement does not change direction.",
+      "corretta_indipendente": 4,
+      "risposta": "Sono parallele",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 55,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Magnetic force is perpendicular to velocity and does zero work; no energy increase, decrease, zeroing or oscillation follows.",
+      "corretta_indipendente": 5,
+      "risposta": "Resta costante",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 56,
+      "type": "quantitativo",
+      "metodo": "apparent-weight difference",
+      "ricalcolo": "5",
+      "alternative_normalizzate": [
+        "5",
+        "31",
+        "18",
+        "13",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$5\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 57,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Equal-distance positive-charge fields have equal magnitudes and opposite directions at the midpoint; vector sum vanishes.",
+      "corretta_indipendente": 2,
+      "risposta": "È nullo",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 58,
+      "type": "quantitativo",
+      "metodo": "potential to kinetic energy",
+      "ricalcolo": "10",
+      "alternative_normalizzate": [
+        "5",
+        "50",
+        "10",
+        "100",
+        "20"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$10\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 59,
+      "type": "quantitativo",
+      "metodo": "Pascal pressure matching",
+      "ricalcolo": "300",
+      "alternative_normalizzate": [
+        "3",
+        "30",
+        "60",
+        "300",
+        "600"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$300\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 60,
+      "type": "quantitativo",
+      "metodo": "gravity component down the plane",
+      "ricalcolo": "5",
+      "alternative_normalizzate": [
+        "10",
+        "20",
+        "0",
+        "5/2",
+        "5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$5\\,\\mathrm{m/s^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 61,
+      "type": "quantitativo",
+      "metodo": "velocity-time slope",
+      "ricalcolo": "-3",
+      "alternative_normalizzate": [
+        "-3",
+        "3",
+        "6",
+        "-6",
+        "12"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$-3\\,\\mathrm{m/s^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 62,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Both have initial vertical velocity zero and the same vertical acceleration; horizontal velocity does not change fall time over level ground.",
+      "corretta_indipendente": 2,
+      "risposta": "Arrivano insieme",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 63,
+      "type": "quantitativo",
+      "metodo": "radial resultant",
+      "ricalcolo": "18",
+      "alternative_normalizzate": [
+        "3",
+        "9",
+        "18",
+        "48",
+        "72"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$18\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 64,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A stationary interface preserves source frequency; lower propagation speed therefore decreases wavelength.",
+      "corretta_indipendente": 4,
+      "risposta": "Frequenza uguale e lunghezza d’onda minore",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 65,
+      "type": "quantitativo",
+      "metodo": "pendulum square-root scaling",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "4",
+        "1/2",
+        "1/4",
+        "1",
+        "2"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$2T$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 66,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Driving near natural frequency supplies energy coherently; mass, gravity and natural period do not vanish.",
+      "corretta_indipendente": 1,
+      "risposta": "Il trasferimento di energia è favorito dalla risonanza",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 67,
+      "type": "quantitativo",
+      "metodo": "opposite-phase amplitudes normalised by A>0",
+      "ricalcolo": "0",
+      "alternative_normalizzate": [
+        "2",
+        "0",
+        "1",
+        "1/2",
+        "4"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$0$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 68,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Faraday induction depends on flux change; constant flux gives zero emf regardless of merely present field.",
+      "corretta_indipendente": 3,
+      "risposta": "È nulla",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 69,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Cylindrical symmetry and the right-hand rule give circles in transverse planes, not radial, axial or terminating lines.",
+      "corretta_indipendente": 4,
+      "risposta": "Circonferenze attorno al filo in piani perpendicolari",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 70,
+      "type": "quantitativo",
+      "metodo": "cyclic efficiency as percentage",
+      "ricalcolo": "30",
+      "alternative_normalizzate": [
+        "70",
+        "43",
+        "150",
+        "85",
+        "30"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$30\\%$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 71,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A sustained nonzero field would move free charges and violate electrostatic equilibrium inside the material.",
+      "corretta_indipendente": 1,
+      "risposta": "È nullo",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 72,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Equal endpoint potentials imply W=-q deltaV=0; electrostatic path length is irrelevant.",
+      "corretta_indipendente": 2,
+      "risposta": "Zero",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 73,
+      "type": "quantitativo",
+      "metodo": "potential-energy increase in microjoules",
+      "ricalcolo": "36",
+      "alternative_normalizzate": [
+        "4",
+        "15",
+        "36",
+        "-36",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$36\\,\\mu\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 74,
+      "type": "quantitativo",
+      "metodo": "wire resistance at fixed resistivity and length",
+      "ricalcolo": "1/2",
+      "alternative_normalizzate": [
+        "2",
+        "1",
+        "4",
+        "1/2",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "La seconda è metà della prima",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 75,
+      "type": "quantitativo",
+      "metodo": "terminal voltage with internal drop",
+      "ricalcolo": "10",
+      "alternative_normalizzate": [
+        "12",
+        "2",
+        "14",
+        "6",
+        "10"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$10\\,\\mathrm{V}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 76,
+      "type": "quantitativo",
+      "metodo": "integrated linear force pulse",
+      "ricalcolo": "12",
+      "alternative_normalizzate": [
+        "12",
+        "24",
+        "8",
+        "3",
+        "6"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$12\\,\\mathrm{N\\,s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 77,
+      "type": "quantitativo",
+      "metodo": "stopping distance from resisting work",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "900",
+        "4",
+        "45",
+        "1/4",
+        "2"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$4\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 78,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Third-law pair reverses the interacting bodies: wall on person, 70N opposite; other choices concern different interactions or wrong magnitude.",
+      "corretta_indipendente": 3,
+      "risposta": "La forza della parete sulla persona, opposta e di 70 N",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 79,
+      "type": "quantitativo",
+      "metodo": "latent heat at melting temperature",
+      "ricalcolo": "66000",
+      "alternative_normalizzate": [
+        "1650000",
+        "330000",
+        "660",
+        "66000",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$6{,}6\\cdot10^4\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 80,
+      "type": "quantitativo",
+      "metodo": "isochoric absolute-temperature pressure ratio",
+      "ricalcolo": "3/2",
+      "alternative_normalizzate": [
+        "1/2",
+        "1",
+        "3",
+        "67/100",
+        "3/2"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "Si moltiplica per 1,5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 81,
+      "type": "quantitativo",
+      "metodo": "constant-pressure expansion work",
+      "ricalcolo": "200",
+      "alternative_normalizzate": [
+        "200",
+        "200000",
+        "2",
+        "-200",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$200\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 82,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Electromagnetic radiation crosses vacuum; conduction/convection require matter.",
+      "corretta_indipendente": 2,
+      "risposta": "Irraggiamento",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 83,
+      "type": "quantitativo",
+      "metodo": "floating density ratio",
+      "ricalcolo": "3/5",
+      "alternative_normalizzate": [
+        "167/100",
+        "2/5",
+        "3/5",
+        "1",
+        "3/50"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$0{,}60$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 84,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "0<p<f gives q<0 and M=f/(f-p)>1, hence virtual, upright and enlarged.",
+      "corretta_indipendente": 4,
+      "risposta": "Virtuale, diritta e ingrandita",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 85,
+      "type": "quantitativo",
+      "metodo": "complement to surface and reflection law",
+      "ricalcolo": "70",
+      "alternative_normalizzate": [
+        "20",
+        "40",
+        "90",
+        "140",
+        "70"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$70^\\circ$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 86,
+      "type": "quantitativo",
+      "metodo": "vertical components of symmetric tensions",
+      "ricalcolo": "100",
+      "alternative_normalizzate": [
+        "100",
+        "50",
+        "200",
+        "25",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$100\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 87,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Voltmeter samples the same two nodes and must draw no current: parallel with infinite resistance.",
+      "corretta_indipendente": 2,
+      "risposta": "In parallelo, con resistenza infinita",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 88,
+      "type": "quantitativo",
+      "metodo": "signed charge conservation and equal sharing",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "4",
+        "8",
+        "2",
+        "-2",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$+2\\,\\mu\\mathrm{C}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 89,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A directly screen-projectable image requires actual ray convergence; magnification and upright orientation are not guaranteed.",
+      "corretta_indipendente": 4,
+      "risposta": "I raggi luminosi convergono realmente nei punti dell’immagine",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "n": 90,
+      "type": "quantitativo",
+      "metodo": "Joule power integrated over duration",
+      "ricalcolo": "200",
+      "alternative_normalizzate": [
+        "20",
+        "100",
+        "50",
+        "400",
+        "200"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$200\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 1,
+      "type": "quantitativo",
+      "metodo": "km/h to m/s",
+      "ricalcolo": "20",
+      "alternative_normalizzate": [
+        "20",
+        "72",
+        "648/25",
+        "2",
+        "200"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$20\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 2,
+      "type": "quantitativo",
+      "metodo": "distance from rest with constant acceleration",
+      "ricalcolo": "9",
+      "alternative_normalizzate": [
+        "6",
+        "9",
+        "18",
+        "3",
+        "12"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$9\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 3,
+      "type": "quantitativo",
+      "metodo": "net force divided by mass",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "36",
+        "9",
+        "4",
+        "15",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$4\\,\\mathrm{m/s^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 4,
+      "type": "quantitativo",
+      "metodo": "kinetic energy",
+      "ricalcolo": "9",
+      "alternative_normalizzate": [
+        "18",
+        "3",
+        "12",
+        "9",
+        "6"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$9\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 5,
+      "type": "quantitativo",
+      "metodo": "hydrostatic pressure increment",
+      "ricalcolo": "20000",
+      "alternative_normalizzate": [
+        "2000",
+        "200",
+        "100000",
+        "5000",
+        "20000"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$20000\\,\\mathrm{Pa}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 6,
+      "type": "quantitativo",
+      "metodo": "constant amount and temperature: pressure ratio",
+      "ricalcolo": "1/2",
+      "alternative_normalizzate": [
+        "1/2",
+        "2",
+        "1",
+        "4",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "Si dimezza",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 7,
+      "type": "quantitativo",
+      "metodo": "heat in minus work out",
+      "ricalcolo": "300",
+      "alternative_normalizzate": [
+        "700",
+        "300",
+        "-300",
+        "-700",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$+300\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 8,
+      "type": "quantitativo",
+      "metodo": "Ohm law",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "6",
+        "18",
+        "2",
+        "72",
+        "1/2"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$2\\,\\mathrm{A}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 9,
+      "type": "quantitativo",
+      "metodo": "Coulomb inverse square",
+      "ricalcolo": "1/4",
+      "alternative_normalizzate": [
+        "1/2",
+        "2",
+        "4",
+        "1/4",
+        "1"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "Diventa un quarto",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 10,
+      "type": "quantitativo",
+      "metodo": "phase speed from refractive index",
+      "ricalcolo": "200000000",
+      "alternative_normalizzate": [
+        "450000000",
+        "300000000",
+        "150000000",
+        "50000000",
+        "200000000"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$2\\cdot10^8\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 11,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Kinetic energy is scalar; velocity, acceleration, displacement and momentum require vector direction.",
+      "corretta_indipendente": 1,
+      "risposta": "Energia cinetica",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 12,
+      "type": "quantitativo",
+      "metodo": "constant power integrated in kWh",
+      "ricalcolo": "1/10",
+      "alternative_normalizzate": [
+        "100",
+        "1/10",
+        "6",
+        "2/5",
+        "1/5"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$0{,}10\\,\\mathrm{kWh}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 13,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Snell law with n2>n1 and oblique incidence gives a smaller nonzero angle; the other changes fail the stated indices.",
+      "corretta_indipendente": 3,
+      "risposta": "Diminuisce",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 14,
+      "type": "quantitativo",
+      "metodo": "thin lens reciprocal distances",
+      "ricalcolo": "15",
+      "alternative_normalizzate": [
+        "40",
+        "20",
+        "15/2",
+        "15",
+        "5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$15\\,\\mathrm{cm}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 15,
+      "type": "quantitativo",
+      "metodo": "norm of perpendicular displacement components",
+      "ricalcolo": "10",
+      "alternative_normalizzate": [
+        "14",
+        "2",
+        "48",
+        "7",
+        "10"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$10\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 16,
+      "type": "quantitativo",
+      "metodo": "critical angle from Snell law",
+      "ricalcolo": "30",
+      "alternative_normalizzate": [
+        "30",
+        "15",
+        "45",
+        "60",
+        "90"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$30^\\circ$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 17,
+      "type": "quantitativo",
+      "metodo": "series divider voltage",
+      "ricalcolo": "8",
+      "alternative_normalizzate": [
+        "12",
+        "8",
+        "2",
+        "4",
+        "6"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$8\\,\\mathrm{V}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 18,
+      "type": "quantitativo",
+      "metodo": "displacement/time versus distance/time",
+      "ricalcolo": "(0, 4)",
+      "alternative_normalizzate": [
+        "(4, 4)",
+        "(2, 2)",
+        "(0, 4)",
+        "(0, 2)",
+        "(4, 0)"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$0\\,\\mathrm{m/s}$ e $4\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 19,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Constant speed removes tangential acceleration, not radial change of velocity; acceleration is inward, not outward or zero.",
+      "corretta_indipendente": 4,
+      "risposta": "È diretta verso il centro",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 20,
+      "type": "quantitativo",
+      "metodo": "density with mass and volume conversions",
+      "ricalcolo": "800",
+      "alternative_normalizzate": [
+        "1250",
+        "400",
+        "80",
+        "200",
+        "800"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$800\\,\\mathrm{kg/m^3}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 21,
+      "type": "quantitativo",
+      "metodo": "junction current conservation",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "4",
+        "10",
+        "3",
+        "7",
+        "1"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$4\\,\\mathrm{A}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 22,
+      "type": "quantitativo",
+      "metodo": "wavelength from vacuum frequency",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "200",
+        "2",
+        "20",
+        "1/2",
+        "45"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$2\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 23,
+      "type": "quantitativo",
+      "metodo": "lifting work divided by duration",
+      "ricalcolo": "150",
+      "alternative_normalizzate": [
+        "600",
+        "50",
+        "150",
+        "60",
+        "200"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$150\\,\\mathrm{W}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 24,
+      "type": "quantitativo",
+      "metodo": "percentage relative uncertainty",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "1",
+        "50",
+        "1/50",
+        "2",
+        "5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$2\\%$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 25,
+      "type": "quantitativo",
+      "metodo": "work-energy signed balance",
+      "ricalcolo": "30",
+      "alternative_normalizzate": [
+        "110",
+        "0",
+        "40",
+        "70",
+        "30"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$30\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 26,
+      "type": "quantitativo",
+      "metodo": "signed momentum sum, right positive",
+      "ricalcolo": "-2",
+      "alternative_normalizzate": [
+        "-2",
+        "2",
+        "-14",
+        "14",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$2\\,\\mathrm{kg\\,m/s}$ verso sinistra",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 27,
+      "type": "quantitativo",
+      "metodo": "work as dot product",
+      "ricalcolo": "20",
+      "alternative_normalizzate": [
+        "40",
+        "20",
+        "80",
+        "0",
+        "-20"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$20\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 28,
+      "type": "quantitativo",
+      "metodo": "static balance: required 8 N below 15 N threshold",
+      "ricalcolo": "8",
+      "alternative_normalizzate": [
+        "15",
+        "7",
+        "8",
+        "23",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$8\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 29,
+      "type": "quantitativo",
+      "metodo": "mirror object-image separation",
+      "ricalcolo": "3",
+      "alternative_normalizzate": [
+        "3/2",
+        "3/4",
+        "9/2",
+        "3",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$3\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 30,
+      "type": "quantitativo",
+      "metodo": "opposite lever moments with perpendicular forces",
+      "ricalcolo": "20",
+      "alternative_normalizzate": [
+        "180",
+        "60",
+        "12",
+        "40",
+        "20"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$20\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 31,
+      "type": "quantitativo",
+      "metodo": "weight of displaced water",
+      "ricalcolo": "40",
+      "alternative_normalizzate": [
+        "40",
+        "4",
+        "400",
+        "4000",
+        "1/25"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$40\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 32,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Dispersion is n depending on wavelength; vacuum speed and reflection law are shared, boundary frequency is conserved and no new colours need be emitted.",
+      "corretta_indipendente": 2,
+      "risposta": "L’indice dipende dalla lunghezza d’onda",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 33,
+      "type": "quantitativo",
+      "metodo": "one capacitor plate charge in microcoulombs",
+      "ricalcolo": "60",
+      "alternative_normalizzate": [
+        "30",
+        "120",
+        "60",
+        "17",
+        "3/50"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$60\\,\\mu\\mathrm{C}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 34,
+      "type": "quantitativo",
+      "metodo": "inelastic collision momentum",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "4",
+        "6",
+        "3",
+        "2",
+        "1"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$2\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 35,
+      "type": "quantitativo",
+      "metodo": "incompressible steady continuity",
+      "ricalcolo": "4",
+      "alternative_normalizzate": [
+        "6",
+        "12",
+        "2",
+        "1",
+        "4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$4\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 36,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "An ideal source keeps voltage across the surviving branch; fixed resistance implies unchanged power, while total source current falls.",
+      "corretta_indipendente": 1,
+      "risposta": "Resta uguale",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 37,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Common still connected lake and depth give equal p0,rho,g,h; shore distance cannot enter the hydrostatic expression.",
+      "corretta_indipendente": 2,
+      "risposta": "Sono uguali",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 38,
+      "type": "quantitativo",
+      "metodo": "force signed east positive",
+      "ricalcolo": "-3/500",
+      "alternative_normalizzate": [
+        "3/500",
+        "-6",
+        "-3/500",
+        "1500",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$6\\cdot10^{-3}\\,\\mathrm{N}$ verso ovest",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 39,
+      "type": "quantitativo",
+      "metodo": "echo round-trip distance",
+      "ricalcolo": "102",
+      "alternative_normalizzate": [
+        "204",
+        "51",
+        "340",
+        "102",
+        "170"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$102\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 40,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A diverging lens produces rays whose backward extensions pass through the incoming-side focus; no real outgoing convergence.",
+      "corretta_indipendente": 5,
+      "risposta": "Divergono come se provenissero dal fuoco sul lato di ingresso",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 41,
+      "type": "quantitativo",
+      "metodo": "adiabatic compression sign convention",
+      "ricalcolo": "75",
+      "alternative_normalizzate": [
+        "75",
+        "-75",
+        "150",
+        "-150",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$+75\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 42,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Both phases at fixed pressure keep melting temperature; supplied heat reduces ice rather than raising T or freezing all water.",
+      "corretta_indipendente": 2,
+      "risposta": "Il ghiaccio diminuisce e la temperatura resta circa zero gradi Celsius",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 43,
+      "type": "quantitativo",
+      "metodo": "signed areas under velocity graph",
+      "ricalcolo": "8",
+      "alternative_normalizzate": [
+        "16",
+        "10",
+        "8",
+        "20",
+        "-8"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$8\\,\\mathrm{m}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 44,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Nonzero q,v,B with v parallel B has sin(theta)=0. All four other alternatives assert a nonzero magnitude or a decelerating direction.",
+      "corretta_indipendente": 4,
+      "risposta": "È nulla",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 45,
+      "type": "quantitativo",
+      "metodo": "area unit conversion squared",
+      "ricalcolo": "9/100",
+      "alternative_normalizzate": [
+        "9",
+        "9/10",
+        "900",
+        "9/10000",
+        "9/100"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$0{,}09\\,\\mathrm{m^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 46,
+      "type": "quantitativo",
+      "metodo": "Hooke force after cm conversion",
+      "ricalcolo": "6",
+      "alternative_normalizzate": [
+        "6",
+        "600",
+        "60",
+        "3/5",
+        "203"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$6\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 47,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Mass remains 12kg; weight scales with g to one sixth. The other answers change mass or invert/ignore g scaling.",
+      "corretta_indipendente": 2,
+      "risposta": "La massa resta 12 kg e il peso diventa un sesto",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 48,
+      "type": "quantitativo",
+      "metodo": "thermal expansion in mm",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "2000",
+        "20",
+        "2",
+        "1/5",
+        "1"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$2\\,\\mathrm{mm}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 49,
+      "type": "quantitativo",
+      "metodo": "equal heat capacities, isolated mixing",
+      "ricalcolo": "40",
+      "alternative_normalizzate": [
+        "80",
+        "20",
+        "60",
+        "40",
+        "30"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$40\\,{}^\\circ\\mathrm{C}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 50,
+      "type": "quantitativo",
+      "metodo": "sensible heat",
+      "ricalcolo": "6000",
+      "alternative_normalizzate": [
+        "2000",
+        "24000",
+        "12000",
+        "1500",
+        "6000"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$6000\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 51,
+      "type": "quantitativo",
+      "metodo": "absolute temperature with nearest-K rounding",
+      "ricalcolo": "300",
+      "alternative_normalizzate": [
+        "300",
+        "27",
+        "246",
+        "273",
+        "310"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$300\\,\\mathrm{K}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 52,
+      "type": "quantitativo",
+      "metodo": "parallel branch current sum",
+      "ricalcolo": "3",
+      "alternative_normalizzate": [
+        "1",
+        "3",
+        "2",
+        "2/3",
+        "9"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$3\\,\\mathrm{A}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 53,
+      "type": "quantitativo",
+      "metodo": "elastic energy, not endpoint force times extension",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "20",
+        "4",
+        "2",
+        "10",
+        "1/5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$2\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 54,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Two parallel interface normals and the same external medium return the original angle; lateral displacement does not change direction.",
+      "corretta_indipendente": 4,
+      "risposta": "Sono parallele",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 55,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Magnetic force is perpendicular to velocity and does zero work; no energy increase, decrease, zeroing or oscillation follows.",
+      "corretta_indipendente": 5,
+      "risposta": "Resta costante",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 56,
+      "type": "quantitativo",
+      "metodo": "apparent-weight difference",
+      "ricalcolo": "5",
+      "alternative_normalizzate": [
+        "5",
+        "31",
+        "18",
+        "13",
+        "0"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$5\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 57,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Equal-distance positive-charge fields have equal magnitudes and opposite directions at the midpoint; vector sum vanishes.",
+      "corretta_indipendente": 2,
+      "risposta": "È nullo",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 58,
+      "type": "quantitativo",
+      "metodo": "potential to kinetic energy",
+      "ricalcolo": "10",
+      "alternative_normalizzate": [
+        "5",
+        "50",
+        "10",
+        "100",
+        "20"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$10\\,\\mathrm{m/s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 59,
+      "type": "quantitativo",
+      "metodo": "Pascal pressure matching",
+      "ricalcolo": "300",
+      "alternative_normalizzate": [
+        "3",
+        "30",
+        "60",
+        "300",
+        "600"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$300\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 60,
+      "type": "quantitativo",
+      "metodo": "gravity component down the plane",
+      "ricalcolo": "5",
+      "alternative_normalizzate": [
+        "10",
+        "20",
+        "0",
+        "5/2",
+        "5"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$5\\,\\mathrm{m/s^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 61,
+      "type": "quantitativo",
+      "metodo": "velocity-time slope",
+      "ricalcolo": "-3",
+      "alternative_normalizzate": [
+        "-3",
+        "3",
+        "6",
+        "-6",
+        "12"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$-3\\,\\mathrm{m/s^2}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 62,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Both have initial vertical velocity zero and the same vertical acceleration; horizontal velocity does not change fall time over level ground.",
+      "corretta_indipendente": 2,
+      "risposta": "Arrivano insieme",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 63,
+      "type": "quantitativo",
+      "metodo": "radial resultant",
+      "ricalcolo": "18",
+      "alternative_normalizzate": [
+        "3",
+        "9",
+        "18",
+        "48",
+        "72"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$18\\,\\mathrm{N}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 64,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A stationary interface preserves source frequency; lower propagation speed therefore decreases wavelength.",
+      "corretta_indipendente": 4,
+      "risposta": "Frequenza uguale e lunghezza d’onda minore",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 65,
+      "type": "quantitativo",
+      "metodo": "pendulum square-root scaling",
+      "ricalcolo": "2",
+      "alternative_normalizzate": [
+        "4",
+        "1/2",
+        "1/4",
+        "1",
+        "2"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$2T$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 66,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Driving near natural frequency supplies energy coherently; mass, gravity and natural period do not vanish.",
+      "corretta_indipendente": 1,
+      "risposta": "Il trasferimento di energia è favorito dalla risonanza",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 67,
+      "type": "quantitativo",
+      "metodo": "opposite-phase amplitudes normalised by A>0",
+      "ricalcolo": "0",
+      "alternative_normalizzate": [
+        "2",
+        "0",
+        "1",
+        "1/2",
+        "4"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "$0$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 68,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Faraday induction depends on flux change; constant flux gives zero emf regardless of merely present field.",
+      "corretta_indipendente": 3,
+      "risposta": "È nulla",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 69,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Cylindrical symmetry and the right-hand rule give circles in transverse planes, not radial, axial or terminating lines.",
+      "corretta_indipendente": 4,
+      "risposta": "Circonferenze attorno al filo in piani perpendicolari",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 70,
+      "type": "quantitativo",
+      "metodo": "cyclic efficiency as percentage",
+      "ricalcolo": "30",
+      "alternative_normalizzate": [
+        "70",
+        "43",
+        "150",
+        "85",
+        "30"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$30\\%$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 71,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "A sustained nonzero field would move free charges and violate electrostatic equilibrium inside the material.",
+      "corretta_indipendente": 1,
+      "risposta": "È nullo",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 72,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Equal endpoint potentials imply W=-q deltaV=0; electrostatic path length is irrelevant.",
+      "corretta_indipendente": 2,
+      "risposta": "Zero",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 73,
+      "type": "quantitativo",
+      "metodo": "potential-energy increase in microjoules",
+      "ricalcolo": "36",
+      "alternative_normalizzate": [
+        "4",
+        "15",
+        "36",
+        "-36",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$36\\,\\mu\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 74,
+      "type": "quantitativo",
+      "metodo": "wire resistance at fixed resistivity and length",
+      "ricalcolo": "1/2",
+      "alternative_normalizzate": [
+        "2",
+        "1",
+        "4",
+        "1/2",
+        "1/4"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "La seconda è metà della prima",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 75,
+      "type": "quantitativo",
+      "metodo": "terminal voltage with internal drop",
+      "ricalcolo": "10",
+      "alternative_normalizzate": [
+        "12",
+        "2",
+        "14",
+        "6",
+        "10"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$10\\,\\mathrm{V}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 76,
+      "type": "quantitativo",
+      "metodo": "photon energy inverse wavelength",
+      "ricalcolo": "3",
+      "alternative_normalizzate": [
+        "3",
+        "1/3",
+        "9",
+        "1/9",
+        "1"
+      ],
+      "esiti_alternative": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 1,
+      "risposta": "$3$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 77,
+      "type": "quantitativo",
+      "metodo": "photon energy emitted; absorption encoded negative",
+      "ricalcolo": "3",
+      "alternative_normalizzate": [
+        "-3",
+        "3",
+        "7",
+        "-7",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "corretta_indipendente": 2,
+      "risposta": "Emette un fotone di 3 eV",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 78,
+      "type": "quantitativo",
+      "metodo": "expected remaining parent nuclei",
+      "ricalcolo": "100",
+      "alternative_normalizzate": [
+        "400",
+        "200",
+        "100",
+        "267",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$100$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 79,
+      "type": "quantitativo",
+      "metodo": "alpha daughter Z and A conservation",
+      "ricalcolo": "(82, 206)",
+      "alternative_normalizzate": [
+        "(83, 210)",
+        "(86, 214)",
+        "(84, 206)",
+        "(82, 206)",
+        "(82, 208)"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$Z=82$, $A=206$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 80,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Beta-minus changes one neutron into a proton; Z rises one and total nucleon count stays fixed.",
+      "corretta_indipendente": 5,
+      "risposta": "$Z$ aumenta di uno, $A$ resta uguale",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 81,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Gamma removes excitation energy without removing or changing nucleons; Z and A stay fixed.",
+      "corretta_indipendente": 1,
+      "risposta": "Restano entrambi invariati",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 82,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "In the stated one-photon model hf below work function prevents emission; intensity changes photon number, not hf.",
+      "corretta_indipendente": 2,
+      "risposta": "Non si emettono fotoelettroni nel modello considerato",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 83,
+      "type": "quantitativo",
+      "metodo": "floating density ratio",
+      "ricalcolo": "3/5",
+      "alternative_normalizzate": [
+        "167/100",
+        "2/5",
+        "3/5",
+        "1",
+        "3/50"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$0{,}60$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 84,
+      "type": "quantitativo",
+      "metodo": "normal force over area",
+      "ricalcolo": "10000",
+      "alternative_normalizzate": [
+        "4",
+        "1000",
+        "400",
+        "10000",
+        "200"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$10000\\,\\mathrm{Pa}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 85,
+      "type": "quantitativo",
+      "metodo": "harmonic amplitude and period",
+      "ricalcolo": "(4, 1)",
+      "alternative_normalizzate": [
+        "(4, 2*pi)",
+        "(8, 1)",
+        "(2*pi, 4)",
+        "(4, 1/2)",
+        "(4, 1)"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "corretta_indipendente": 5,
+      "risposta": "$4\\,\\mathrm{cm}$ e $1\\,\\mathrm{s}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 86,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Approach compresses wavefront spacing at a stationary observer, increasing received frequency, not merely loudness.",
+      "corretta_indipendente": 1,
+      "risposta": "È maggiore",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 87,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "For T increasing, Wien gives peak wavelength decreasing and Stefan-Boltzmann gives total emission per area increasing; every other pairing violates at least one law.",
+      "corretta_indipendente": 2,
+      "risposta": "La lunghezza d’onda del massimo diminuisce e la potenza emessa aumenta",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 88,
+      "type": "quantitativo",
+      "metodo": "ideal-gas isothermal first law",
+      "ricalcolo": "100",
+      "alternative_normalizzate": [
+        "0",
+        "-100",
+        "100",
+        "200",
+        "50"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "corretta_indipendente": 3,
+      "risposta": "$100\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 89,
+      "type": "quantitativo",
+      "metodo": "counterclockwise p-V cycle; kPa L = J",
+      "ricalcolo": "-200",
+      "alternative_normalizzate": [
+        "200",
+        "600",
+        "-600",
+        "-200",
+        "0"
+      ],
+      "esiti_alternative": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "corretta_indipendente": 4,
+      "risposta": "$-200\\,\\mathrm{J}$",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "n": 90,
+      "type": "qualitativo",
+      "criterio_e_esclusioni": "Laminar layers are orderly with limited transverse mixing; zero velocity or growing density/flow is not required.",
+      "corretta_indipendente": 5,
+      "risposta": "Strati ordinati con limitato mescolamento trasversale",
+      "esito": "pass"
+    }
+  ],
+  "svolti": [
+    {
+      "course": "tolc-i",
+      "esercizio": "1.1",
+      "passaggio": 1,
+      "ricalcolo": "14",
+      "atteso": "14",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.1",
+      "passaggio": 2,
+      "ricalcolo": "6",
+      "atteso": "6",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.2",
+      "passaggio": 1,
+      "ricalcolo": "6",
+      "atteso": "6",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.2",
+      "passaggio": 2,
+      "ricalcolo": "54",
+      "atteso": "54",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.3",
+      "passaggio": 1,
+      "ricalcolo": "8",
+      "atteso": "8",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.3",
+      "passaggio": 2,
+      "ricalcolo": "16",
+      "atteso": "16",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.3",
+      "passaggio": 3,
+      "ricalcolo": "8/5",
+      "atteso": "8/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "1.3",
+      "passaggio": 4,
+      "ricalcolo": "16/5",
+      "atteso": "16/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.1",
+      "passaggio": 1,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.1",
+      "passaggio": 2,
+      "ricalcolo": "9",
+      "atteso": "9",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.2",
+      "passaggio": 1,
+      "ricalcolo": "100",
+      "atteso": "100",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.2",
+      "passaggio": 2,
+      "ricalcolo": "10",
+      "atteso": "10",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.3",
+      "passaggio": 1,
+      "ricalcolo": "2",
+      "atteso": "2",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.3",
+      "passaggio": 2,
+      "ricalcolo": "36",
+      "atteso": "36",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.3",
+      "passaggio": 3,
+      "ricalcolo": "12",
+      "atteso": "12",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "2.3",
+      "passaggio": 4,
+      "ricalcolo": "24",
+      "atteso": "24",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.1",
+      "passaggio": 1,
+      "ricalcolo": "30000",
+      "atteso": "30000",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.1",
+      "passaggio": 2,
+      "ricalcolo": "130000",
+      "atteso": "130000",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.2",
+      "passaggio": 1,
+      "ricalcolo": "300",
+      "atteso": "300",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.2",
+      "passaggio": 2,
+      "ricalcolo": "3/10",
+      "atteso": "3/10",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.2",
+      "passaggio": 3,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.3",
+      "passaggio": 1,
+      "ricalcolo": "200",
+      "atteso": "200",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "3.3",
+      "passaggio": 2,
+      "ricalcolo": "300",
+      "atteso": "300",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.1",
+      "passaggio": 1,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.1",
+      "passaggio": 2,
+      "ricalcolo": "5",
+      "atteso": "5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.1",
+      "passaggio": 3,
+      "ricalcolo": "12/5",
+      "atteso": "12/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.1",
+      "passaggio": 4,
+      "ricalcolo": "36/5",
+      "atteso": "36/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.1",
+      "passaggio": 5,
+      "ricalcolo": "6/5",
+      "atteso": "6/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.2",
+      "passaggio": 1,
+      "ricalcolo": "15",
+      "atteso": "15",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.2",
+      "passaggio": 2,
+      "ricalcolo": "-1/2",
+      "atteso": "-1/2",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.2",
+      "passaggio": 3,
+      "ricalcolo": "-2",
+      "atteso": "-2",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.3",
+      "passaggio": 1,
+      "ricalcolo": "60",
+      "atteso": "60",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-i",
+      "esercizio": "4.3",
+      "passaggio": 2,
+      "ricalcolo": "24",
+      "atteso": "24",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.1",
+      "passaggio": 1,
+      "ricalcolo": "14",
+      "atteso": "14",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.1",
+      "passaggio": 2,
+      "ricalcolo": "6",
+      "atteso": "6",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.2",
+      "passaggio": 1,
+      "ricalcolo": "6",
+      "atteso": "6",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.2",
+      "passaggio": 2,
+      "ricalcolo": "54",
+      "atteso": "54",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.3",
+      "passaggio": 1,
+      "ricalcolo": "8",
+      "atteso": "8",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.3",
+      "passaggio": 2,
+      "ricalcolo": "16",
+      "atteso": "16",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.3",
+      "passaggio": 3,
+      "ricalcolo": "8/5",
+      "atteso": "8/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "1.3",
+      "passaggio": 4,
+      "ricalcolo": "16/5",
+      "atteso": "16/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.1",
+      "passaggio": 1,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.1",
+      "passaggio": 2,
+      "ricalcolo": "9",
+      "atteso": "9",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.2",
+      "passaggio": 1,
+      "ricalcolo": "100",
+      "atteso": "100",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.2",
+      "passaggio": 2,
+      "ricalcolo": "10",
+      "atteso": "10",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.3",
+      "passaggio": 1,
+      "ricalcolo": "2",
+      "atteso": "2",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.3",
+      "passaggio": 2,
+      "ricalcolo": "36",
+      "atteso": "36",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.3",
+      "passaggio": 3,
+      "ricalcolo": "12",
+      "atteso": "12",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "2.3",
+      "passaggio": 4,
+      "ricalcolo": "24",
+      "atteso": "24",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.1",
+      "passaggio": 1,
+      "ricalcolo": "30000",
+      "atteso": "30000",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.1",
+      "passaggio": 2,
+      "ricalcolo": "130000",
+      "atteso": "130000",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.2",
+      "passaggio": 1,
+      "ricalcolo": "300",
+      "atteso": "300",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.2",
+      "passaggio": 2,
+      "ricalcolo": "3/10",
+      "atteso": "3/10",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.2",
+      "passaggio": 3,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.3",
+      "passaggio": 1,
+      "ricalcolo": "200",
+      "atteso": "200",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "3.3",
+      "passaggio": 2,
+      "ricalcolo": "300",
+      "atteso": "300",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.1",
+      "passaggio": 1,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.1",
+      "passaggio": 2,
+      "ricalcolo": "5",
+      "atteso": "5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.1",
+      "passaggio": 3,
+      "ricalcolo": "12/5",
+      "atteso": "12/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.1",
+      "passaggio": 4,
+      "ricalcolo": "36/5",
+      "atteso": "36/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.1",
+      "passaggio": 5,
+      "ricalcolo": "6/5",
+      "atteso": "6/5",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.2",
+      "passaggio": 1,
+      "ricalcolo": "15",
+      "atteso": "15",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.2",
+      "passaggio": 2,
+      "ricalcolo": "-1/2",
+      "atteso": "-1/2",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.2",
+      "passaggio": 3,
+      "ricalcolo": "-2",
+      "atteso": "-2",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.3",
+      "passaggio": 1,
+      "ricalcolo": "60",
+      "atteso": "60",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.3",
+      "passaggio": 2,
+      "ricalcolo": "24",
+      "atteso": "24",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.4",
+      "passaggio": 1,
+      "ricalcolo": "3",
+      "atteso": "3",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.4",
+      "passaggio": 2,
+      "ricalcolo": "200",
+      "atteso": "200",
+      "esito": "pass"
+    },
+    {
+      "course": "tolc-s",
+      "esercizio": "4.4",
+      "passaggio": 3,
+      "ricalcolo": "7/8",
+      "atteso": "7/8",
+      "esito": "pass"
+    }
+  ]
+}

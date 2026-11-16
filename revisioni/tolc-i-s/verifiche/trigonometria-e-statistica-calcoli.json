@@ -1,0 +1,837 @@
+{
+  "passed": true,
+  "quiz_count": 90,
+  "worked_exercises": 12,
+  "additional_theory_checks": 6,
+  "practice_files_checked": 40,
+  "results": [
+    {
+      "id": "Q1",
+      "computed": "1/2",
+      "choice": 1,
+      "actual_option": "$\\dfrac12$",
+      "method": "Valore da triangolo equilatero diviso a metà",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q2",
+      "computed": "5*pi/6",
+      "choice": 2,
+      "actual_option": "$\\dfrac{5\\pi}{6}$",
+      "method": "Conversione esatta dei gradi",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q3",
+      "computed": "{pi/6, 5*pi/6}",
+      "choice": 3,
+      "actual_option": "$\\left\\{\\dfrac\\pi6,\\dfrac{5\\pi}{6}\\right\\}$",
+      "method": "Solveset sull’intervallo assegnato, verifica insiemi completi",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q4",
+      "computed": "True",
+      "choice": 4,
+      "actual_option": "$2\\sin x\\cos x$",
+      "method": "Identità trigonometriche: una sola differenza identicamente nulla",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q5",
+      "computed": "5",
+      "choice": 5,
+      "actual_option": "$5\\,\\mathrm{cm}$",
+      "method": "Cateto opposto rispetto all’ipotenusa",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q6",
+      "computed": "5",
+      "choice": 1,
+      "actual_option": "$5$",
+      "method": "Somma e numerosità",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q7",
+      "computed": "25",
+      "choice": 2,
+      "actual_option": "$25$",
+      "method": "Somme dei gruppi prima dell’aggregazione",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q8",
+      "computed": "1",
+      "choice": 3,
+      "actual_option": "$1$",
+      "method": "Scarti quadratici con divisore due",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q9",
+      "computed": "10",
+      "choice": 4,
+      "actual_option": "$10$",
+      "method": "Enumerazione coppie non ordinate",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q10",
+      "computed": "15",
+      "choice": 5,
+      "actual_option": "$15\\%$",
+      "method": "Frequenza relativa in percentuale",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q11",
+      "computed": "20",
+      "choice": 1,
+      "actual_option": "$20$",
+      "method": "Enumerazione multinsieme e rimozione duplicati",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q12",
+      "computed": "{pi/4, 5*pi/4}",
+      "choice": 2,
+      "actual_option": "$\\left\\{\\dfrac\\pi4,\\dfrac{5\\pi}{4}\\right\\}$",
+      "method": "Solveset e dominio tangente",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q13",
+      "computed": "-4/5",
+      "choice": 3,
+      "actual_option": "$-\\dfrac45$",
+      "method": "Identità pitagorica e segno nel secondo quadrante",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q14",
+      "computed": "21",
+      "choice": 4,
+      "actual_option": "$21$",
+      "method": "Unione delle prime tre classi semiaperte",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q15",
+      "computed": "Interval(0, pi/3)",
+      "choice": 5,
+      "actual_option": "$\\left[0,\\dfrac\\pi3\\right]$",
+      "method": "Monotonia coseno su 0..pi, soglia e inclusione estremi; richiesta completa esplicitata",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q16",
+      "computed": "sqrt(3)/2",
+      "choice": 1,
+      "actual_option": "$\\dfrac{\\sqrt3}{2}$",
+      "method": "Duplicazione del coseno, radice positiva perché angolo acuto",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q17",
+      "computed": "{2*pi/3, 4*pi/3}",
+      "choice": 2,
+      "actual_option": "$\\left\\{\\dfrac{2\\pi}{3},\\dfrac{4\\pi}{3}\\right\\}$",
+      "method": "Solveset con coseno negativo in due quadranti",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q18",
+      "computed": "(-1/2, -sqrt(3)/2)",
+      "choice": 3,
+      "actual_option": "$\\left(-\\dfrac12,-\\dfrac{\\sqrt3}{2}\\right)$",
+      "method": "Coordinate ordinate coseno/seno",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q19",
+      "computed": "-sqrt(2)/2",
+      "choice": 4,
+      "actual_option": "$-\\dfrac{\\sqrt2}{2}$",
+      "method": "Riferimento pi/4 e segno quarto quadrante",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q20",
+      "computed": "81",
+      "choice": 5,
+      "actual_option": "$81$",
+      "method": "Enumerazione codici ripetibili",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q21",
+      "computed": "6",
+      "choice": 1,
+      "actual_option": "$6$",
+      "method": "Enumerazione sedici sequenze binarie",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q22",
+      "computed": "9*sqrt(2)",
+      "choice": 2,
+      "actual_option": "$9\\sqrt2\\,\\mathrm{cm}$",
+      "method": "Teorema dei seni con coppie lato-angolo opposte",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q23",
+      "computed": "True",
+      "choice": 3,
+      "actual_option": "$\\sin20^\\circ=\\cos70^\\circ$",
+      "method": "Complementarietà 20+70=90 gradi e verifica cinque uguaglianze",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q24",
+      "computed": "4",
+      "choice": 4,
+      "actual_option": "$[2,7)$",
+      "method": "Aree 16,20,12: classe seconda nella quarta alternativa",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q25",
+      "computed": "sqrt(2)/4 + sqrt(6)/4",
+      "choice": 5,
+      "actual_option": "$\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+      "method": "Formula della differenza, valori radicali distinti",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q26",
+      "computed": "18",
+      "choice": 1,
+      "actual_option": "$18$",
+      "method": "Tre scelte seguite da sei alternative disgiunte",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q27",
+      "computed": "210",
+      "choice": 2,
+      "actual_option": "$210$",
+      "method": "Enumerazione podi con ruoli",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q28",
+      "computed": "30",
+      "choice": 3,
+      "actual_option": "$30$",
+      "method": "Enumerazione gruppi escludendo coppia fissata",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q29",
+      "computed": "48",
+      "choice": 4,
+      "actual_option": "$48$",
+      "method": "Enumerazione cifre senza ripetizione e prima non zero",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q30",
+      "computed": "pi/2",
+      "choice": 5,
+      "actual_option": "$\\dfrac\\pi2$",
+      "method": "Periodo fondamentale simbolico",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q31",
+      "computed": "26",
+      "choice": 1,
+      "actual_option": "$26$",
+      "method": "Differenza delle somme prima e dopo aggiunta",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q32",
+      "computed": "40",
+      "choice": 2,
+      "actual_option": "$40$",
+      "method": "Quota angolare del totale",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q33",
+      "computed": "7",
+      "choice": 3,
+      "actual_option": "$7$",
+      "method": "Enumerazione coppie contenenti una persona prefissata",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q34",
+      "computed": "True",
+      "choice": 4,
+      "actual_option": "$\\dfrac{3\\pi}{2}$",
+      "method": "Zeri del denominatore della tangente fra gli angoli proposti",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q35",
+      "computed": "2.0",
+      "choice": 5,
+      "actual_option": "$2$",
+      "method": "Espansione tabella, posizioni quinta e sesta",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q36",
+      "computed": "15",
+      "choice": 1,
+      "actual_option": "$15$",
+      "method": "Estremi con minimo negativo",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q37",
+      "computed": "True",
+      "choice": 2,
+      "actual_option": "$h(x)=\\sin x$ soltanto sul dominio $\\cos x\\ne0$",
+      "method": "Identità sin x soltanto sul dominio originario; altri candidati non identici, controesempi pi/4 e pi/6",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q38",
+      "computed": "48",
+      "choice": 3,
+      "actual_option": "$48$",
+      "method": "Enumerazione tutte le file e vincolo di adiacenza",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q39",
+      "computed": "4",
+      "choice": 4,
+      "actual_option": "$4$",
+      "method": "Nuovo quesito: enumerazione dieci percorsi, esclusione sei passanti per (1,1)",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q40",
+      "computed": "Interval.open(0, pi)",
+      "choice": 5,
+      "actual_option": "$x\\in(0,\\pi)$",
+      "method": "Segno del seno e insieme completo degli angoli ammessi",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q41",
+      "computed": "-1",
+      "choice": 1,
+      "actual_option": "Ottuso",
+      "method": "Segno del coseno dell’angolo opposto al lato massimo; triangolo valido",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q42",
+      "computed": "True",
+      "choice": 2,
+      "actual_option": "$\\sin^2x$",
+      "method": "Identità fondamentali contro tutti i distrattori",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q43",
+      "computed": "3",
+      "choice": 3,
+      "actual_option": "Il numero di dati minori di 10",
+      "method": "Nuovo quesito: solo conteggio sotto 10 determinato; controesempi conservano classi ma cambiano indicatori",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q44",
+      "computed": "15",
+      "choice": 4,
+      "actual_option": "$15$",
+      "method": "Conteggio sottoinsiemi per cardinalità non nulla",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q45",
+      "computed": "18",
+      "choice": 5,
+      "actual_option": "$18$",
+      "method": "Enumerazione coppie di caselle senza riga/colonna condivisa",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q46",
+      "computed": "6.5",
+      "choice": 1,
+      "actual_option": "$6{,}5$",
+      "method": "Ordinamento e mediana di sei valori",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q47",
+      "computed": "3*pi/4",
+      "choice": 2,
+      "actual_option": "$\\dfrac{3\\pi}{4}$",
+      "method": "Riduzione modulo due pi",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q48",
+      "computed": "3/5",
+      "choice": 3,
+      "actual_option": "$\\dfrac35$",
+      "method": "Triangolo simile con cateti 3 e 4",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q49",
+      "computed": "1",
+      "choice": 4,
+      "actual_option": "$1$",
+      "method": "Valore associato alla frequenza massima",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q50",
+      "computed": "{0, pi/2}",
+      "choice": 5,
+      "actual_option": "$\\left\\{0,\\dfrac\\pi2\\right\\}$",
+      "method": "Solveset con argomento doppio e estremo escluso",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q51",
+      "computed": "0",
+      "choice": 1,
+      "actual_option": "$0$",
+      "method": "Identità della somma degli scarti, non loro quadrati",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q52",
+      "computed": "3",
+      "choice": 2,
+      "actual_option": "$3$",
+      "method": "Varianza dal campione espanso e radice positiva",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q53",
+      "computed": "Interval(pi/4, 3*pi/4)",
+      "choice": 3,
+      "actual_option": "$\\left[\\dfrac\\pi4,\\dfrac{3\\pi}{4}\\right]$",
+      "method": "Ordinata almeno soglia; estremi inclusi e insieme completo",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q54",
+      "computed": "2",
+      "choice": 4,
+      "actual_option": "Nel secondo",
+      "method": "Coordinate (cos,sin) con segni (-,+), nessun asse",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q55",
+      "computed": "20",
+      "choice": 5,
+      "actual_option": "$20\\,\\mathrm{cm}^2$",
+      "method": "Area triangolo da lati e angolo compreso",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q56",
+      "computed": "True",
+      "choice": 1,
+      "actual_option": "Entrambe restano invariate",
+      "method": "Prova generale: somme e numerosità duplicate; verifica aggiuntiva su dati non costanti",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q57",
+      "computed": "5",
+      "choice": 2,
+      "actual_option": "$5$",
+      "method": "Differenza di frequenze cumulate",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q58",
+      "computed": "5",
+      "choice": 3,
+      "actual_option": "$5$",
+      "method": "Massimo simbolico e controllo raggiungibilità in pi",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q59",
+      "computed": "60",
+      "choice": 4,
+      "actual_option": "$60$",
+      "method": "Prodotto di due scelte non ordinate disgiunte per ruolo di categoria",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q60",
+      "computed": "True",
+      "choice": 5,
+      "actual_option": "La media aumenta di $4$ e la varianza resta invariata",
+      "method": "Traslazione: media aumenta di quattro, scarti invariati; dimostrazione algebrica in testo",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q61",
+      "computed": "45",
+      "choice": 1,
+      "actual_option": "$45$",
+      "method": "Fattore quadratico nella varianza",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q62",
+      "computed": "120/169",
+      "choice": 2,
+      "actual_option": "$\\dfrac{120}{169}$",
+      "method": "Radice positiva per coseno e duplicazione",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q63",
+      "computed": "pi/3",
+      "choice": 3,
+      "actual_option": "$\\dfrac\\pi3$",
+      "method": "Periodo fondamentale tangente con dominio conservato",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q64",
+      "computed": "27/2",
+      "choice": 4,
+      "actual_option": "$13{,}5\\,\\mathrm m$",
+      "method": "Dislivello dagli occhi più quota di riferimento",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q65",
+      "computed": "7",
+      "choice": 5,
+      "actual_option": "$7$",
+      "method": "Teorema del coseno e radice positiva",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q66",
+      "computed": "discrete",
+      "choice": 1,
+      "actual_option": "Quantitativa discreta",
+      "method": "Conteggio librerie: interi non negativi, non codici arbitrari",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q67",
+      "computed": "True",
+      "choice": 2,
+      "actual_option": "Tutti i dati sono uguali alla media",
+      "method": "Somma di quadrati zero implica ciascuno zero; controesempio costante 5 per gli altri enunciati",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q68",
+      "computed": "True",
+      "choice": 3,
+      "actual_option": "$\\cos(\\pi-x)=-\\cos x$",
+      "method": "Cinque identità candidate simbolicamente controllate",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q69",
+      "computed": "(4, 0)",
+      "choice": 4,
+      "actual_option": "La media aumenta di $4$ e la mediana non cambia",
+      "method": "Differenza della somma e ordinamento preservato",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q70",
+      "computed": "3/8",
+      "choice": 5,
+      "actual_option": "$\\dfrac38$",
+      "method": "Frequenza residua su totale esaustivo",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q71",
+      "computed": "(2, 1)",
+      "choice": 1,
+      "actual_option": "$\\mathrm{cm}^2$ e $\\mathrm{cm}$",
+      "method": "Esponenti dimensionali di varianza e deviazione standard",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q72",
+      "computed": "True",
+      "choice": 2,
+      "actual_option": "$2,7,10$",
+      "method": "Verifica necessaria e sufficiente delle cumulate proposte",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q73",
+      "computed": "3",
+      "choice": 3,
+      "actual_option": "Appartiene a $[10,20)$",
+      "method": "Posizioni quinta e sesta entrambe nella seconda classe; media nello stesso intervallo, valore preciso non noto",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q74",
+      "computed": "6*pi",
+      "choice": 4,
+      "actual_option": "$6\\pi\\,\\mathrm{cm}^2$",
+      "method": "Area settore con angolo entro un giro",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q75",
+      "computed": "True",
+      "choice": 5,
+      "actual_option": "A ha una percentuale di difettosi maggiore di B",
+      "method": "Confronto quote esatte distinto dai conteggi assoluti",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q76",
+      "computed": "pi",
+      "choice": 1,
+      "actual_option": "$\\pi$",
+      "method": "Massimi quando x−pi/2=pi/2+2kpi; minimo nonnegativo pi",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q77",
+      "computed": "4",
+      "choice": 2,
+      "actual_option": "$4$",
+      "method": "Solveset con unione zeri di seno/coseno",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q78",
+      "computed": "True",
+      "choice": 3,
+      "actual_option": "Nessuna",
+      "method": "Impossibilità per immagine del coseno, verificata simbolicamente",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q79",
+      "computed": "1/2 - sqrt(3)/2",
+      "choice": 4,
+      "actual_option": "$\\dfrac{1-\\sqrt3}{2}$",
+      "method": "Valori notevoli senza falsa distributività",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q80",
+      "computed": "2",
+      "choice": 5,
+      "actual_option": "$2$",
+      "method": "Due angoli supplementari validi; controllo SSA con altezza 4 < lato5 < lato8",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q81",
+      "computed": "4*pi",
+      "choice": 1,
+      "actual_option": "$4\\pi\\,\\mathrm{cm}$",
+      "method": "Lunghezza arco r theta",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q82",
+      "computed": "10*sqrt(3)",
+      "choice": 2,
+      "actual_option": "$10\\sqrt3\\,\\mathrm m$",
+      "method": "Risolto sistema dei due triangoli con distanze differite",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q83",
+      "computed": "9",
+      "choice": 3,
+      "actual_option": "$9$",
+      "method": "Varianza della popolazione riunita ricalcolata dalla lista",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q84",
+      "computed": "2",
+      "choice": 4,
+      "actual_option": "$2$",
+      "method": "Media quadrati meno quadrato della media",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q85",
+      "computed": "(True, 4)",
+      "choice": 5,
+      "actual_option": "Hanno la stessa media e B ha varianza quadrupla di A",
+      "method": "Due varianze calcolate separatamente e loro rapporto",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q86",
+      "computed": "9",
+      "choice": 1,
+      "actual_option": "$9$",
+      "method": "Enumerazione gruppi con almeno una ragazza",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q87",
+      "computed": "4",
+      "choice": 2,
+      "actual_option": "$4$",
+      "method": "Enumerazione insiemi con inclusione/esclusione fissate",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q88",
+      "computed": "12",
+      "choice": 3,
+      "actual_option": "$12$",
+      "method": "Enumerazione multipli e conteggio una sola volta",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q89",
+      "computed": "10",
+      "choice": 4,
+      "actual_option": "$10$",
+      "method": "Enumerazione coppie di sedie non adiacenti, fila non circolare",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "Q90",
+      "computed": "6",
+      "choice": 5,
+      "actual_option": "$6$",
+      "method": "Enumerazione multinsiemi di due gusti",
+      "all_five_options_checked": true
+    },
+    {
+      "id": "S1.1",
+      "computed": "(5*pi/4, -sqrt(2)/2, -sqrt(2)/2, 1)",
+      "expected": "(5*pi/4, -sqrt(2)/2, -sqrt(2)/2, 1)",
+      "method": "Conversione, coordinate, tangente indipendenti"
+    },
+    {
+      "id": "S1.2",
+      "computed": "(-4/5, -3/4, -24/25)",
+      "expected": "(-4/5, -3/4, -24/25)",
+      "method": "Segno QII, rapporto, duplicazione"
+    },
+    {
+      "id": "S1.3",
+      "computed": "sqrt(2)/4 + sqrt(6)/4",
+      "expected": "sqrt(2)/4 + sqrt(6)/4",
+      "method": "Formula esatta; valore positivo e quadrato (2+sqrt3)/4<1"
+    },
+    {
+      "id": "S2.1",
+      "computed": "{0, pi/6, 5*pi/6, pi}",
+      "expected": "{0, pi/6, 5*pi/6, pi}",
+      "method": "Solveset conserva anche il fattore seno nullo"
+    },
+    {
+      "id": "S2.2",
+      "computed": "(7, 10*sqrt(3))",
+      "expected": "(7, 10*sqrt(3))",
+      "method": "Teorema coseno e area con angolo compreso"
+    },
+    {
+      "id": "S2.3",
+      "computed": "10*sqrt(3)",
+      "expected": "10*sqrt(3)",
+      "method": "Sistema due misure da terra"
+    },
+    {
+      "id": "S3.1",
+      "computed": "(3, 2.0, {2, 5}, 14/5)",
+      "expected": "(3, 2, {2, 5}, 14/5)",
+      "method": "Espansione frequenze; entrambe le mode; varianza"
+    },
+    {
+      "id": "S3.2",
+      "computed": "(20, 20)",
+      "expected": "(20, 20)",
+      "method": "Somma del secondo gruppo e traslazione di tutti i venti dati"
+    },
+    {
+      "id": "S3.3",
+      "computed": "(48, 3/4, 107/24)",
+      "expected": "(48, 3/4, 107/24)",
+      "method": "Aree delle classi, quota esatta e media stimata dai punti medi"
+    },
+    {
+      "id": "S4.1",
+      "computed": "(48, 4)",
+      "expected": "(48, 4)",
+      "method": "Enumerazione numeri con prima non zero e sottocaso crescente"
+    },
+    {
+      "id": "S4.2",
+      "computed": "(20, 6)",
+      "expected": "(20, 6)",
+      "method": "Enumerazione anagrammi totali e con estremi fissati"
+    },
+    {
+      "id": "S4.3",
+      "computed": "(30, 25)",
+      "expected": "(30, 25)",
+      "method": "Enumerazione gruppi misti e coppia designata esclusa"
+    },
+    {
+      "id": "T_rampa",
+      "computed": "(4, 4*sqrt(3))",
+      "expected": "(4, 4*sqrt(3))",
+      "method": "Dislivello e proiezione della rampa; coordinate della figura coerenti"
+    },
+    {
+      "id": "T_area",
+      "computed": "12",
+      "expected": "12",
+      "method": "Area da lati 6,8 e angolo30"
+    },
+    {
+      "id": "T_dato_rimosso",
+      "computed": "16",
+      "expected": "16",
+      "method": "Media dopo eliminazione dato26"
+    },
+    {
+      "id": "T_varianza",
+      "computed": "(8/3, 4)",
+      "expected": "(8/3, 4)",
+      "method": "Varianza e campo di variazione distinti"
+    },
+    {
+      "id": "T_menu",
+      "computed": "(30, 7)",
+      "expected": "(30, 7)",
+      "method": "Prodotto e somma nei due modelli"
+    },
+    {
+      "id": "T_mamma",
+      "computed": "10",
+      "expected": "10",
+      "method": "Multinsieme M3A2"
+    }
+  ]
+}

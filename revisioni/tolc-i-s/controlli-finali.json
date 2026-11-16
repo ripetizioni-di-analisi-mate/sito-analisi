@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-16",
+  "content_files": 4558,
+  "content_sha256": "67558aceddeae033d04652de89f758cd36f5445228703cafbf24ac47986f8958",
+  "inventory": [
+    {
+      "course": "tolc-i",
+      "theory": 9,
+      "worked_sheets": 38,
+      "worked_exercises": 114,
+      "practice": 110,
+      "quiz": 810,
+      "files_per_language": 967
+    },
+    {
+      "course": "tolc-s",
+      "theory": 12,
+      "worked_sheets": 50,
+      "worked_exercises": 158,
+      "practice": 170,
+      "quiz": 1080,
+      "files_per_language": 1312
+    }
+  ],
+  "structural_errors": [],
+  "formula_comparison_warnings": [
+    "src/content-en/teoria/tolc-i/chimica.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-i/chimica/2.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-i/chimica/3.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-i/comprensione-verbale/3.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/comprensione-verbale/64.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/funzioni-e-grafici/59.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/funzioni-e-grafici/64.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/funzioni-e-grafici/76.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/funzioni-e-grafici/77.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/funzioni-e-grafici/79.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/logica/60.md: confronto formule da esaminare",
+    "src/content-en/teoria/tolc-i/trigonometria-e-statistica.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-i/trigonometria-e-statistica/3.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-i/trigonometria-e-statistica/4.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/trigonometria-e-statistica/1.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/trigonometria-e-statistica/42.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/trigonometria-e-statistica/86.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-i/trigonometria-e-statistica/88.md: confronto formule da esaminare",
+    "src/content-en/teoria/tolc-s/chimica.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/chimica/1.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/chimica/2.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/chimica/3.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/chimica/87.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/comprensione-verbale/3.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/comprensione-verbale/64.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/funzioni-e-grafici/59.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/funzioni-e-grafici/64.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/funzioni-e-grafici/76.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/funzioni-e-grafici/77.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/funzioni-e-grafici/79.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/logica/60.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/probabilita-e-dati/1.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/probabilita-e-dati/3.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/probabilita-e-dati/4.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/probabilita-e-dati/80.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/scienze-della-terra/1.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/scienze-della-terra/2.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/scienze-della-terra/3.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/scienze-della-terra/4.md: confronto formule da esaminare",
+    "src/content-en/dafare/tolc-s/scienze-della-terra/5.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/scienze-della-terra/5.md: confronto formule da esaminare",
+    "src/content-en/teoria/tolc-s/trigonometria-e-statistica.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/trigonometria-e-statistica/3.md: confronto formule da esaminare",
+    "src/content-en/svolti/tolc-s/trigonometria-e-statistica/4.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/trigonometria-e-statistica/1.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/trigonometria-e-statistica/42.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/trigonometria-e-statistica/86.md: confronto formule da esaminare",
+    "src/content-en/domande/tolc-s/trigonometria-e-statistica/88.md: confronto formule da esaminare"
+  ],
+  "warning_resolution": "Avvisi riletti nei controlli indipendenti IT/EN: ordine sintattico, etichette/pedici/unità tradotti o numero ripetuto in frase. Nessuna divergenza matematica irrisolta.",
+  "render_counts": {
+    "tolc-i/content": 967,
+    "tolc-s/content": 1312,
+    "tolc-i/content-en": 967,
+    "tolc-s/content-en": 1312
+  },
+  "render_errors": [],
+  "svg_occurrences": 312,
+  "svg_occurrences_by_topic": {
+    "aritmetica-e-algebra": 20,
+    "chimica": 20,
+    "comprensione-verbale": 8,
+    "fisica": 34,
+    "funzioni-e-grafici": 68,
+    "geometria": 46,
+    "inglese": 8,
+    "logica": 24,
+    "trigonometria-e-statistica": 48,
+    "biologia": 14,
+    "probabilita-e-dati": 12,
+    "scienze-della-terra": 10
+  },
+  "graph_expression_checks": 262,
+  "graph_sample_points_per_expression": 81,
+  "graph_value_failures": [],
+  "compiled_content": {
+    "scope": "Compiled static HTML and question JSON; no browser/mobile layout assertion",
+    "pages": 1632,
+    "question_counts": {
+      "tolc-i/it": 810,
+      "tolc-i/en": 810,
+      "tolc-s/it": 1080,
+      "tolc-s/en": 1080
+    },
+    "bank_parts": {
+      "tolc-i/it": 1,
+      "tolc-i/en": 1,
+      "tolc-s/it": 2,
+      "tolc-s/en": 1
+    },
+    "errors": []
+  },
+  "existing_tolc_tests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "clock_notation_fix": {
+    "reason": "remark-directive parses numeric colons as unknown directives; Markdown escapes preserve clock values",
+    "changes": [
+      {
+        "file": "sito-analisi/src/content/teoria/tolc-i/inglese.md",
+        "escaped_colons": 4
+      },
+      {
+        "file": "sito-analisi/src/content/teoria/tolc-s/inglese.md",
+        "escaped_colons": 4
+      },
+      {
+        "file": "sito-analisi/src/content/svolti/tolc-i/inglese/6.md",
+        "escaped_colons": 13
+      },
+      {
+        "file": "sito-analisi/src/content/svolti/tolc-s/inglese/6.md",
+        "escaped_colons": 13
+      },
+      {
+        "file": "sito-analisi/src/content/dafare/tolc-i/inglese/27.md",
+        "escaped_colons": 7
+      },
+      {
+        "file": "sito-analisi/src/content/dafare/tolc-s/inglese/27.md",
+        "escaped_colons": 7
+      },
+      {
+        "file": "sito-analisi/src/content/domande/tolc-i/inglese/27.md",
+        "escaped_colons": 10
+      },
+      {
+        "file": "sito-analisi/src/content/domande/tolc-s/scienze-della-terra/34.md",
+        "escaped_colons": 7
+      },
+      {
+        "file": "sito-analisi/src/content/domande/tolc-s/inglese/27.md",
+        "escaped_colons": 10
+      },
+      {
+        "file": "sito-analisi/src/content-en/teoria/tolc-i/inglese.md",
+        "escaped_colons": 4
+      },
+      {
+        "file": "sito-analisi/src/content-en/teoria/tolc-s/inglese.md",
+        "escaped_colons": 4
+      },
+      {
+        "file": "sito-analisi/src/content-en/svolti/tolc-i/inglese/6.md",
+        "escaped_colons": 13
+      },
+      {
+        "file": "sito-analisi/src/content-en/svolti/tolc-s/inglese/6.md",
+        "escaped_colons": 13
+      },
+      {
+        "file": "sito-analisi/src/content-en/dafare/tolc-i/inglese/27.md",
+        "escaped_colons": 7
+      },
+      {
+        "file": "sito-analisi/src/content-en/dafare/tolc-s/inglese/27.md",
+        "escaped_colons": 7
+      },
+      {
+        "file": "sito-analisi/src/content-en/domande/tolc-i/inglese/27.md",
+        "escaped_colons": 10
+      },
+      {
+        "file": "sito-analisi/src/content-en/domande/tolc-s/scienze-della-terra/34.md",
+        "escaped_colons": 7
+      },
+      {
+        "file": "sito-analisi/src/content-en/domande/tolc-s/inglese/27.md",
+        "escaped_colons": 10
+      }
+    ]
+  },
+  "visual_scope": "Ispezione dei diagrammi resi con i plugin reali, comprese versioni ristrette a 350–490 px. Nessuna prova browser completa o sessione autenticata: entrambi i browser disponibili non raggiungevano il server locale."
+}

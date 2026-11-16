@@ -1,0 +1,186 @@
+{
+  "role": "independent_reviewer_not_author",
+  "topic": "trigonometria-e-statistica",
+  "courses": [
+    "tolc-i",
+    "tolc-s"
+  ],
+  "languages": [
+    "it",
+    "en"
+  ],
+  "status": "complete",
+  "scope": {
+    "total_files": 420,
+    "unique_bilingual_materials": 210,
+    "theory_per_course_language": 1,
+    "worked_sheets_per_course_language": 4,
+    "worked_exercises_per_course_language": 12,
+    "practice_per_course_language": 10,
+    "quiz_per_course_language": 90,
+    "I_S_relation": "Tutti i corrispondenti file I/S verificati identici byte per byte, prima e dopo le correzioni."
+  },
+  "independent_method": "Lette prima tutte le tracce IT dei 90 quiz e dei 12 esercizi senza assumere spiegazioni o corrette dell’autore. Ricavati risultati e insiemi; successivamente lette integralmente spiegazioni IT, domande/opzioni/spiegazioni EN, teoria, schede e 10 dafare. Script indipendente usa Sympy, frazioni esatte, enumerazioni di codici/gruppi/percorsi e controesempi. Tutte le cinque alternative confrontate con il risultato o con la proprietà logica richiesta.",
+  "math": {
+    "quiz_checked": 90,
+    "worked_checked": 12,
+    "extra_theory_checks": 6,
+    "practice_files_checked": 40,
+    "passed": true,
+    "initial_numeric_errors": 0,
+    "after_revisions_passed": true
+  },
+  "changes": [
+    {
+      "files": "domande 15,40,53 IT/EN I/S",
+      "reason": "Le vecchie formulazioni potevano essere lette come richiesta di un sottoinsieme valido. Esplicitati insieme completo oppure tutti e soli i valori; le alternative e gli indici corretti restano identici."
+    },
+    {
+      "files": "domande 39 IT/EN I/S",
+      "reason": "Il vecchio percorso libero equivaleva al semplice conteggio delle posizioni già valutato dal quiz21. Sostituito con percorso che evita (1,1): dieci totali meno sei vietati, risultato quattro; enumerazione indipendente dei dieci percorsi conferma."
+    },
+    {
+      "files": "domande 43 IT/EN I/S",
+      "reason": "La vecchia altezza di istogramma invertiva il calcolo di area/frequenza del quiz24. Sostituita con distinzione fra conteggio esatto e indicatori non determinabili da classi. Forniti controesempi separati per media, mediana, minimo e varianza."
+    },
+    {
+      "files": "svolti1, domande22/74 IT/EN I/S",
+      "reason": "Quattro frazioni annidate con slash convertite integralmente in LaTeX a colonna; valori invariati."
+    },
+    {
+      "files": "teoria IT/EN I/S",
+      "reason": "Precisato 0≤theta≤2pi per il settore circolare e N>1 per divisore N−1. Definiti fattoriale, 0! e dominio intero delle combinazioni. Quantitativa definita attraverso conteggio o misura, evitando di confonderla con mere etichette numeriche."
+    },
+    {
+      "files": "domande28/60/61/86 EN I/S",
+      "reason": "Numeri tradotti correttamente in parole riportati nella stessa notazione matematica dell’italiano; nessuna variazione di dato o significato."
+    }
+  ],
+  "changed_files": 44,
+  "translation_review": {
+    "complete": true,
+    "omissions_found": 0,
+    "mathematical_multiset_parity": true,
+    "same_correct_option_order": true,
+    "same_anchors_metadata": true,
+    "remaining_order_notes": [
+      {
+        "file": "teoria/tolc-i/trigonometria-e-statistica.md",
+        "reason": "Sequenza diversa per ordine sintattico IT/EN; stesso multinsieme di formule e stessa associazione verificata nella lettura integrale."
+      },
+      {
+        "file": "domande/tolc-i/trigonometria-e-statistica/1.md",
+        "reason": "Sequenza diversa per ordine sintattico IT/EN; stesso multinsieme di formule e stessa associazione verificata nella lettura integrale."
+      },
+      {
+        "file": "domande/tolc-i/trigonometria-e-statistica/42.md",
+        "reason": "Sequenza diversa per ordine sintattico IT/EN; stesso multinsieme di formule e stessa associazione verificata nella lettura integrale."
+      },
+      {
+        "file": "domande/tolc-i/trigonometria-e-statistica/86.md",
+        "reason": "Sequenza diversa per ordine sintattico IT/EN; stesso multinsieme di formule e stessa associazione verificata nella lettura integrale."
+      },
+      {
+        "file": "domande/tolc-i/trigonometria-e-statistica/88.md",
+        "reason": "Sequenza diversa per ordine sintattico IT/EN; stesso multinsieme di formule e stessa associazione verificata nella lettura integrale."
+      }
+    ],
+    "resolved_warning_details": {
+      "theory": "Soltanto ordine sintattico delle formule nelle frasi: sostituzione b con −b, cumulati e posizioni dei dati. Valori e associazioni verificati identici.",
+      "worked_3_4": "Testo matematico e pedici tradotti (mediana/median, mode/modes, stimata/estimated, crescente/increasing, vietati/forbidden, ammessi/allowed). Formule algebriche equivalenti.",
+      "q1_q42_q88": "Ordine delle formule invertito nella frase inglese, stesso contenuto matematico e nessuna omissione.",
+      "q28_q60_q61_q86": "Dati prima espressi in parole inglesi, ora uniformati alla notazione numerica; Q86 conserva un innocuo riordinamento dei numeri nel testo."
+    }
+  },
+  "structural": {
+    "issues": [],
+    "rows": [
+      {
+        "course": "tolc-i",
+        "language": "it",
+        "files": 105,
+        "theory_words": 2751,
+        "sections": 9,
+        "counts": {
+          "svolti": 4,
+          "dafare": 10,
+          "domande": 90
+        },
+        "figures": 12,
+        "positions": {
+          "3": 18,
+          "5": 18,
+          "2": 18,
+          "4": 18,
+          "1": 18
+        }
+      },
+      {
+        "course": "tolc-i",
+        "language": "en",
+        "files": 105,
+        "theory_words": 2808,
+        "sections": 9,
+        "counts": {
+          "svolti": 4,
+          "dafare": 10,
+          "domande": 90
+        },
+        "figures": 12,
+        "positions": {
+          "3": 18,
+          "5": 18,
+          "2": 18,
+          "4": 18,
+          "1": 18
+        }
+      },
+      {
+        "course": "tolc-s",
+        "language": "it",
+        "files": 105,
+        "theory_words": 2751,
+        "sections": 9,
+        "counts": {
+          "svolti": 4,
+          "dafare": 10,
+          "domande": 90
+        },
+        "figures": 12,
+        "positions": {
+          "3": 18,
+          "5": 18,
+          "2": 18,
+          "4": 18,
+          "1": 18
+        }
+      },
+      {
+        "course": "tolc-s",
+        "language": "en",
+        "files": 105,
+        "theory_words": 2808,
+        "sections": 9,
+        "counts": {
+          "svolti": 4,
+          "dafare": 10,
+          "domande": 90
+        },
+        "figures": 12,
+        "positions": {
+          "3": 18,
+          "5": 18,
+          "2": 18,
+          "4": 18,
+          "1": 18
+        }
+      }
+    ],
+    "correct_positions": "18 each of 1–5 per course/language",
+    "katex_formulas": 5416,
+    "katex_errors": [],
+    "figures": "12 per lingua e corso. Controllate coordinate/dati: circonferenze, rampa, triangoli, torre, sinusoidi, istogrammi. Nessuna figura decorativa nuova; rendering visuale globale resta al coordinatore."
+  },
+  "open_issues": [],
+  "scope_limits": "Nessun git, build o test globale. Verifica visuale dei render a cura del coordinatore come da brief."
+}
