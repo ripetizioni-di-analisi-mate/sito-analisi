@@ -13,15 +13,28 @@ $$
 Per esempio $F(x) = x^3$ è una primitiva di $f(x) = 3x^2$ su $\mathbb{R}$, perché $\left( x^3 \right)' = 3x^2$. Anche $x^3 + 5$ e $x^3 - 2$ sono primitive di $3x^2$, perché la derivata di una costante è zero; una funzione che ha una primitiva ne ha quindi infinite.
 :::
 
-:::teorema{#primitive-di-una-funzione titolo="Primitive di una stessa funzione"}
+::::teorema{#primitive-di-una-funzione titolo="Primitive di una stessa funzione"}
 Sia $F$ una primitiva di $f$ sull'intervallo $I$. Allora le primitive di $f$ su $I$ sono *tutte e sole* le funzioni
 $$
 F(x) + c, \qquad c \in \mathbb{R} .
 $$
-Ogni $F + c$ è una primitiva, perché $(F + c)' = F' = f$. Viceversa, se $G$ è un'altra primitiva, la differenza $G - F$ ha derivata $f - f = 0$ su tutto l'intervallo, e per il teorema sul **segno della derivata e monotonia** è costante. I grafici delle primitive sono traslazioni verticali l'uno dell'altro, e la costante si fissa assegnando il valore in un punto. La primitiva di $2x$ che vale $3$ in $x = 1$ è $x^2 + c$ con $1 + c = 3$, cioè $x^2 + 2$.
+I grafici delle primitive sono traslazioni verticali l'uno dell'altro, e la costante si fissa assegnando il valore in un punto. La primitiva di $2x$ che vale $3$ in $x = 1$ è $x^2 + c$ con $1 + c = 3$, cioè $x^2 + 2$.
 
 ::grafico{f="x^2;x^2+2" segmenti="1,1,1,3;-1.5,2.25,-1.5,4.25" punti="1,3,pieno" xmin=-3 xmax=3 ymin=-1 ymax=9 legenda="y = x^2;y = x^2 + 2" titolo="Due primitive di $2x$; i grafici di $x^2$ e di $x^2 + 2$ distano $2$ in verticale per ogni $x$, e in ogni ascissa hanno la stessa pendenza; il punto $(1, 3)$ individua $x^2 + 2$"}
 
+:::dimostrazione
+Ogni funzione $F + c$ è una primitiva di $f$, perché $(F + c)' = F' + 0 = f$.
+
+Viceversa, sia $G$ un'altra primitiva di $f$ su $I$ e sia $H = G - F$. La funzione $H$ è derivabile su $I$ e
+$$
+H'(x) = G'(x) - F'(x) = f(x) - f(x) = 0 \qquad \text{per ogni } x \in I .
+$$
+Poiché $I$ è un intervallo, per il teorema sul **segno della derivata e monotonia** la funzione $H$ è costante su $I$. Quindi esiste $c \in \mathbb{R}$ con $H(x) = c$ per ogni $x \in I$, cioè $G(x) = F(x) + c$.
+:::
+::::
+
+:::richiamo{titolo="Segno della derivata e monotonia"}
+Se $f$ è derivabile nell'intervallo $I$ e $f'(x) = 0$ per ogni $x \in I$, allora $f$ è costante su $I$.
 :::
 
 :::definizione{#integrale-indefinito titolo="Integrale indefinito"}

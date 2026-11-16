@@ -174,29 +174,70 @@ Si suppone che $x_0$ sia un punto di massimo locale; il caso del minimo è analo
 :::
 ::::
 
-:::teorema{#teorema-di-lagrange titolo="Teoremi di Rolle e di Lagrange"}
+::::teorema{#teorema-di-lagrange titolo="Teoremi di Rolle e di Lagrange"}
 Sia $f$ continua su $[a, b]$ e derivabile in $(a, b)$.
 
 - **Teorema di Lagrange**: esiste $c \in (a, b)$ tale che $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
 - **Teorema di Rolle**: se inoltre $f(a) = f(b)$, esiste $c \in (a, b)$ tale che $f'(c) = 0$.
 
-Il teorema di Lagrange dice che in almeno un punto la pendenza della tangente è uguale alla pendenza media sull'intervallo, cioè a quella della secante per gli estremi; il teorema di Rolle è il caso in cui la secante è orizzontale. Rolle segue da Weierstrass e Fermat. Per il teorema di Weierstrass la funzione ha massimo e minimo su $[a, b]$, e se non sono entrambi agli estremi uno dei due è in un punto interno, dove la derivata si annulla; se sono entrambi agli estremi, poiché $f(a) = f(b)$ il massimo e il minimo coincidono, quindi la funzione è costante e la sua derivata è nulla in ogni punto interno. Il teorema di Lagrange si ottiene applicando quello di Rolle alla differenza tra $f$ e la retta secante per gli estremi. Per $f(x) = x^3$ su $[0, 2]$ la pendenza media è $\dfrac{8 - 0}{2} = 4$, e $3c^2 = 4$ dà $c = \dfrac{2}{\sqrt{3}} \approx 1{,}15$.
+Il teorema di Lagrange dice che in almeno un punto la pendenza della tangente è uguale alla pendenza media sull'intervallo, cioè a quella della secante per gli estremi; il teorema di Rolle è il caso in cui la secante è orizzontale. Dal teorema di Lagrange segue il legame tra il segno della derivata e la monotonia, enunciato subito dopo. Per $f(x) = x^3$ su $[0, 2]$ la pendenza media è $\dfrac{8 - 0}{2} = 4$, e $3c^2 = 4$ dà $c = \dfrac{2}{\sqrt{3}} \approx 1{,}15$.
 
 ::grafico{f="x^3;4*x-3.0792" segmenti="0,0,2,8" punti="0,0,pieno;2,8,pieno;1.1547,1.5396,pieno" xmin=-1 xmax=3 ymin=-2 ymax=10 legenda="y = x^3;y = 4x - \dfrac{16}{3\sqrt{3}}" titolo="Per $x^3$ su $[0, 2]$ la secante tratteggiata per $(0, 0)$ e $(2, 8)$ ha pendenza $4$; la tangente in $c = \dfrac{2}{\sqrt{3}}$ ha la stessa pendenza ed è parallela alla secante"}
 
 ::grafico{f="x*(x-3)^2" segmenti="-0.5,4,2.5,4" punti="0,0,pieno;3,0,pieno;1,4,pieno" xmin=-1 xmax=4 ymin=-1 ymax=6 titolo="La funzione $x\,(x - 3)^2$ vale $0$ in $0$ e in $3$; per il teorema di Rolle ha un punto interno con tangente orizzontale, $c = 1$, dove vale $4$"}
+
+:::dimostrazione
+Si dimostra prima il teorema di Rolle. Poiché $f$ è continua in $[a, b]$, per il **teorema di Weierstrass** $f$ assume su $[a, b]$ un valore massimo $M$ e un valore minimo $m$.
+
+- Se $M = m$, la funzione è costante su $[a, b]$, quindi $f'(c) = 0$ per ogni $c \in (a, b)$.
+- Se $M > m$, almeno uno dei due valori è diverso da $f(a) = f(b)$, perciò è assunto in un punto $c$ interno all'intervallo. Il punto $c$ è un estremo locale interno e $f$ è derivabile in $c$, quindi per il **teorema di Fermat** $f'(c) = 0$.
+
+Per il teorema di Lagrange si definisce la funzione
+$$
+g(x) = f(x) - f(a) - \frac{f(b) - f(a)}{b - a}\,(x - a) ,
+$$
+cioè la differenza tra $f$ e la retta secante per i punti $(a, f(a))$ e $(b, f(b))$. La funzione $g$ è continua in $[a, b]$ e derivabile in $(a, b)$, perché è la somma di $f$ e di un polinomio di primo grado. Inoltre $g(a) = 0$ e $g(b) = f(b) - f(a) - \bigl( f(b) - f(a) \bigr) = 0$. Le ipotesi del **teorema di Rolle** sono quindi soddisfatte, ed esiste $c \in (a, b)$ con $g'(c) = 0$. Poiché
+$$
+g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a} ,
+$$
+da $g'(c) = 0$ segue $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
+:::
+::::
+
+:::richiamo{titolo="Teorema di Weierstrass"}
+Se $f$ è continua sull'intervallo chiuso e limitato $[a, b]$, allora $f$ ha massimo e minimo su $[a, b]$.
 :::
 
-:::teorema{#monotonia-e-derivata titolo="Segno della derivata e monotonia"}
+:::richiamo{titolo="Teorema di Fermat"}
+Se $x_0$ è un punto interno di massimo o di minimo locale per $f$ e $f$ è derivabile in $x_0$, allora $f'(x_0) = 0$.
+:::
+
+::::teorema{#monotonia-e-derivata titolo="Segno della derivata e monotonia"}
 Sia $f$ derivabile in un intervallo $I$.
 
 - Se $f'(x) > 0$ per ogni $x \in I$, allora $f$ è crescente su $I$.
 - Se $f'(x) < 0$ per ogni $x \in I$, allora $f$ è decrescente su $I$.
 - Se $f'(x) = 0$ per ogni $x \in I$, allora $f$ è costante su $I$.
 
-Per due punti $x_1 < x_2$ di $I$, il teorema di Lagrange applicato a $[x_1, x_2]$ dà un punto $c$ con $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1)$; il segno della differenza è quindi il segno di $f'(c)$. È il criterio con cui nello studio di funzione si trovano gli intervalli di crescita e decrescita. L'ipotesi che $I$ sia un intervallo non si può omettere. Per esempio $\dfrac{1}{x}$ ha derivata negativa sul suo dominio, ma non è decrescente su tutto il dominio, perché $\dfrac{1}{-1} < \dfrac{1}{1}$.
+È il criterio con cui nello studio di funzione si trovano gli intervalli di crescita e decrescita. L'ipotesi che $I$ sia un intervallo non si può omettere. Per esempio $\dfrac{1}{x}$ ha derivata negativa sul suo dominio, ma non è decrescente su tutto il dominio, perché $\dfrac{1}{-1} < \dfrac{1}{1}$.
 
 ::grafico{f="x^3-3*x;3*x^2-3" punti="-1,2,pieno;1,-2,pieno" segmenti="-1,0,-1,2;1,0,1,-2" xmin=-3 xmax=3 ymin=-4 ymax=6 legenda="y = x^3 - 3x;y = 3x^2 - 3" titolo="La derivata $3x^2 - 3$ è positiva per $x < -1$ e per $x > 1$, dove $x^3 - 3x$ cresce, ed è negativa in $(-1, 1)$, dove $x^3 - 3x$ decresce"}
+
+:::dimostrazione
+Siano $x_1 < x_2$ due punti di $I$. Poiché $I$ è un intervallo, $[x_1, x_2] \subseteq I$, quindi $f$ è continua su $[x_1, x_2]$ e derivabile in $(x_1, x_2)$. Per il **teorema di Lagrange** esiste $c \in (x_1, x_2)$ tale che
+$$
+f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1) .
+$$
+Il fattore $x_2 - x_1$ è positivo, perciò $f(x_2) - f(x_1)$ ha il segno di $f'(c)$.
+
+- Se $f' > 0$ su $I$, allora $f(x_2) > f(x_1)$, quindi $f$ è crescente su $I$.
+- Se $f' < 0$ su $I$, allora $f(x_2) < f(x_1)$, quindi $f$ è decrescente su $I$.
+- Se $f' = 0$ su $I$, allora $f(x_2) = f(x_1)$; poiché $x_1$ e $x_2$ sono due punti qualsiasi di $I$, $f$ è costante su $I$.
+:::
+::::
+
+:::richiamo{titolo="Teorema di Lagrange"}
+Se $f$ è continua in $[a, b]$ e derivabile in $(a, b)$, esiste $c \in (a, b)$ con $f(b) - f(a) = f'(c)\,(b - a)$.
 :::
 
 ## Regola di de l'Hôpital

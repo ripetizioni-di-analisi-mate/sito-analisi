@@ -13,15 +13,28 @@ $$
 For example, $F(x) = x^3$ is an antiderivative of $f(x) = 3x^2$ on $\mathbb{R}$ because $\left( x^3 \right)' = 3x^2$. The functions $x^3 + 5$ and $x^3 - 2$ are also antiderivatives of $3x^2$ because the derivative of a constant is zero. A function with an antiderivative therefore has infinitely many.
 :::
 
-:::teorema{#primitive-di-una-funzione titolo="Antiderivatives of the same function"}
+::::teorema{#primitive-di-una-funzione titolo="Antiderivatives of the same function"}
 Let $F$ be an antiderivative of $f$ on the interval $I$. Then the antiderivatives of $f$ on $I$ are *precisely* the functions
 $$
 F(x) + c, \qquad c \in \mathbb{R} .
 $$
-Every $F + c$ is an antiderivative, because $(F + c)' = F' = f$. Conversely, if $G$ is another antiderivative, the difference $G - F$ has derivative $f - f = 0$ on the whole interval, and by the theorem on the **sign of the derivative and monotonicity** it is constant. The graphs of the antiderivatives are vertical translations of one another, and the constant is fixed by assigning the value at one point. The antiderivative of $2x$ that equals $3$ at $x = 1$ is $x^2 + c$ with $1 + c = 3$, that is, $x^2 + 2$.
+The graphs of the antiderivatives are vertical translations of one another, and the constant is fixed by assigning the value at one point. The antiderivative of $2x$ that equals $3$ at $x = 1$ is $x^2 + c$ with $1 + c = 3$, that is, $x^2 + 2$.
 
 ::grafico{f="x^2;x^2+2" segmenti="1,1,1,3;-1.5,2.25,-1.5,4.25" punti="1,3,pieno" xmin=-3 xmax=3 ymin=-1 ymax=9 legenda="y = x^2;y = x^2 + 2" titolo="Two antiderivatives of $2x$. The graphs of $x^2$ and $x^2 + 2$ are $2$ units apart vertically for every $x$, with the same slope at each x-coordinate. The point $(1, 3)$ identifies the graph of $x^2 + 2$"}
 
+:::dimostrazione
+Every function $F + c$ is an antiderivative of $f$, because $(F + c)' = F' + 0 = f$.
+
+Conversely, let $G$ be another antiderivative of $f$ on $I$ and let $H = G - F$. The function $H$ is differentiable on $I$ and
+$$
+H'(x) = G'(x) - F'(x) = f(x) - f(x) = 0 \qquad \text{for every } x \in I .
+$$
+Since $I$ is an interval, by the theorem on the **sign of the derivative and monotonicity** the function $H$ is constant on $I$. Hence there is $c \in \mathbb{R}$ with $H(x) = c$ for every $x \in I$, that is, $G(x) = F(x) + c$.
+:::
+::::
+
+:::richiamo{titolo="Sign of the derivative and monotonicity"}
+If $f$ is differentiable on the interval $I$ and $f'(x) = 0$ for every $x \in I$, then $f$ is constant on $I$.
 :::
 
 :::definizione{#integrale-indefinito titolo="Indefinite integral"}
