@@ -105,12 +105,12 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
       <p class="indice-materia indice-materia-corrente">
         <a href={hrefMateria(m.slug)}>{m.titolo}</a>
       </p>
-      <ol data-usa-course-nav={usa || undefined}>
-        {m.argomenti.map((a) => {
+      <ol class="indice-percorso-capitoli" data-usa-course-nav={usa || undefined}>
+        {m.argomenti.map((a, i) => {
           const corrente = a.slug === argomento;
           return (
-            <li class:list={{ corrente }}>
-              <button type="button" class="argomento" aria-expanded={corrente ? 'true' : 'false'} data-apri-argomento>{a.titolo}</button>
+            <li class:list={['tappa', { corrente }]}>
+              <button type="button" class="argomento" aria-expanded={corrente ? 'true' : 'false'} data-apri-argomento><span class="tappa-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><span class="tappa-nome">{a.titolo}</span></button>
               <ol class:list={{ aperta: corrente }}>
                 {SEZIONI.map((s) => (
                   <li><a href={hrefArgomento(m.slug, a.slug, s.slug)} class:list={{ attiva: corrente && s.slug === sezione }} aria-current={corrente && s.slug === sezione ? 'page' : undefined}>{s.titolo}</a></li>
@@ -135,8 +135,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           </li>
         )}
         {(!usa || simulazioneUsa) && conDomande.size > 0 && (
-          <li class:list={{ corrente: ripassoCorrente }}>
-            <button type="button" class="argomento" aria-expanded={ripassoCorrente ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
+          <li class:list={['indice-prove', { corrente: ripassoCorrente }]}>
+            <button type="button" class="argomento" aria-expanded={ripassoCorrente ? 'true' : 'false'} data-apri-argomento><span class="tappa-nome">{nomiProve.ripasso}</span></button>
             <ol class:list={{ aperta: ripassoCorrente }}>
               <li><a href={hrefArgomento(m.slug, RIPASSO, 'domande')} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
               {hrefBocconi && <li><a href={link(lingua, hrefBocconi + '#diagnostico')}>{nomiProve.diagnostico}</a></li>}

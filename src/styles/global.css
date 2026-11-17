@@ -1687,3 +1687,18 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 .confronto-accesso td:last-child { color: var(--inchiostro); background: color-mix(in srgb, var(--azione, var(--accento)) 9%, #fff); }
 .confronto-accesso td.uguale { color: var(--azione, var(--accento)); font-weight: 600; }
 @media (max-width: 640px) { .confronto-accesso { font-size: 0.85rem; } .confronto-accesso th, .confronto-accesso td { padding: 0.5rem 0.4rem; } .confronto-accesso tbody th { width: 30%; } }
+
+/* Indice di una materia, «percorso numerato» (17/11/2026, variante B scelta da Carmine):
+   freccia di apertura a inizio riga, numeri 01, 02… senza cerchio, titoli neri, sezioni più chiare,
+   «Prove d'esame» staccato in fondo. */
+.indice-blocco-materia > ol.indice-percorso-capitoli > li > button.argomento { justify-content: flex-start; gap: 0.6rem; color: #111816; font-weight: 500; }
+.indice-blocco-materia > ol.indice-percorso-capitoli > li > button.argomento::after { order: -1; margin: 0 0.1rem 0 0.15rem; border-right-width: 1.5px; border-bottom-width: 1.5px; border-color: #1c2624; opacity: 1; }
+.indice-blocco-materia .tappa-nome { flex: 1; }
+.indice-blocco-materia .tappa-num { flex: none; min-width: 1.15rem; color: var(--verde); font: 600 0.78rem/1 var(--ui); font-variant-numeric: tabular-nums; }
+.indice-blocco-materia .tappa > ol { padding-left: 3.05rem; }
+.indice-blocco-materia ol ol a { color: #7a837f; }
+.indice-blocco-materia ol ol a:hover { color: var(--inchiostro); }
+.indice-blocco-materia ol ol a.attiva { color: var(--accento); }
+.indice-blocco-materia .indice-prove { margin-top: 0.9rem; padding-top: 0.75rem; border-top: 1px solid var(--riga); }
+.indice .indice-blocco-materia > ol > li.indice-prove > button.argomento { color: var(--verde); font-weight: 600; background: color-mix(in srgb, var(--verde) 6%, var(--carta)); }
+.indice .indice-blocco-materia > ol > li.indice-prove > button.argomento:hover { background: color-mix(in srgb, var(--verde) 11%, var(--carta)); }
