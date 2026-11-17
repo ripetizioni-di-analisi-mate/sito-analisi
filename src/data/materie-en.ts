@@ -342,7 +342,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-superiori-1': {
     titolo: 'Mathematics, 1st year',
     breve: 'Maths 1st year',
-    descrizione: 'First-year Italian high school mathematics: numbers, algebra, linear equations, geometry and statistics, with worked examples and 90 questions per topic. Study materials are in Italian. The placement of rational expressions and inequalities within the first two years varies by school.',
+    descrizione: 'First-year Italian high school mathematics covers numbers, algebra, linear equations, geometry and statistics. The course includes theory, step-by-step worked examples, practice problems and 90 timed questions per topic. Schools may teach rational expressions and inequalities at different points in the first two years.',
     argomenti: {
       'numeri-e-operazioni': { titolo: 'Natural numbers, integers and rational numbers', breve: 'Numbers and operations' },
       'potenze-proporzioni-percentuali': { titolo: 'Powers, ratios and percentages', breve: 'Powers and ratios' },
@@ -361,7 +361,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-superiori-2': {
     titolo: 'Mathematics, 2nd year',
     breve: 'Maths 2nd year',
-    descrizione: 'The mathematics syllabus of the 2nd year of Italian high school, with theory and worked exercises.',
+    descrizione: 'Second-year Italian high school mathematics covers linear systems, radicals, straight lines, quadratic equations and inequalities, Euclidean geometry, probability and statistics. The course includes theory, step-by-step worked examples, practice problems and 90 timed questions per topic. The order and depth of topics may vary by class.',
     argomenti: {
       'sistemi-lineari': { titolo: 'Linear systems', breve: 'Linear systems' },
       'radicali': { titolo: 'Real numbers and radicals', breve: 'Real numbers and radicals' },
@@ -370,8 +370,8 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'equazioni-e-sistemi-non-lineari': { titolo: 'Nonlinear equations and systems', breve: 'Nonlinear equations and systems' },
       'disequazioni-secondo-grado': { titolo: 'Quadratic and rational inequalities', breve: 'Quadratic and rational inequalities' },
       'circonferenza-e-poligoni': { titolo: 'Circles and polygons', breve: 'Circles and polygons' },
-      'equivalenza-e-aree': { titolo: 'Equivalent figures and areas', breve: 'Equivalent figures and areas' },
-      'pitagora-e-teoremi-di-euclide': { titolo: 'Pythagoras and Euclidean theorems', breve: 'Pythagoras and Euclidean theorems' },
+      'equivalenza-e-aree': { titolo: 'Equal-area figures and area formulas', breve: 'Equal areas and area formulas' },
+      'pitagora-e-teoremi-di-euclide': { titolo: 'The Pythagorean theorem and right-triangle relations', breve: 'Right-triangle theorems' },
       'similitudine-e-talete': { titolo: 'Similarity and the intercept theorem', breve: 'Similarity and the intercept theorem' },
       'probabilita': { titolo: 'Elementary probability', breve: 'Elementary probability' },
       'statistica': { titolo: 'Descriptive statistics', breve: 'Descriptive statistics' },

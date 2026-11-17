@@ -47,6 +47,20 @@ In un triangolo ottusangolo il piede di un'altezza può cadere sul prolungamento
 ::grafico{assi=0 uguale=1 poligoni="0,0 6,0 2,4" linee="2,0 2,4" punti="0,0,pieno,A;6,0,pieno,B;2,4,pieno,C;2,0,pieno,H" xmin=-1 xmax=7 ymin=-1 ymax=5 titolo="Base $6$ e altezza $4$ danno area $12$"}
 :::
 
+:::esempio{titolo="Altezza esterna in un triangolo ottusangolo"}
+
+Il triangolo $ABC$ ha base $AB=6\,\mathrm{cm}$. Il piede $H$ dell’altezza è sul prolungamento di $AB$ oltre $A$, con $HA=2\,\mathrm{cm}$ e $CH=3\,\mathrm{cm}$. Il triangolo $HBC$ ha base $8$ e quello più piccolo $HAC$ ha base $2$. Entrambi hanno altezza $3$. La differenza delle loro aree è l’area di $ABC$.
+
+$$
+\begin{aligned}
+\mathcal A_{ABC}&=\frac{8\cdot3}{2}-\frac{2\cdot3}{2} \\[5pt]
+&=\frac{6\cdot3}{2}=9\,\mathrm{cm}^2
+\end{aligned}
+$$
+
+::grafico{assi=0 uguale=1 poligoni="0,0 6,0 -2,3" linee="-2,3 -2,0 0,0;-2,0.3 -1.7,0.3 -1.7,0" punti="0,0,pieno,A;6,0,pieno,B;-2,3,pieno,C;-2,0" etichette="-1,-0.27,2;3,-0.27,6;-2.35,1.35,3;-2.15,-0.37,H" xmin=-3 xmax=7 ymin=-1 ymax=4 titolo="L’altezza $CH$ cade sul prolungamento della base"}
+:::
+
 ## Trapezi
 
 :::teorema{#trapezio titolo="Somma delle basi"}
@@ -82,9 +96,23 @@ Un poligono regolare si divide congiungendo il centro ai vertici in triangoli tu
 $$
 A=\frac{Pa}{2}.
 $$
-Un pentagono regolare con perimetro $30$ e apotema $4$ ha area $60$. Nel quadrato di lato $l$ l'apotema è $\dfrac l2$; la formula restituisce $l^2$.
+Un esagono regolare di lato $6$ ha perimetro $36$ e apotema $3\sqrt3$, cioè l’altezza di un triangolo equilatero di lato $6$. La sua area è $54\sqrt3$. Nel quadrato di lato $l$ l'apotema è $\dfrac l2$; la formula restituisce $l^2$.
 
 La stessa espressione vale per un poligono convesso circoscritto a una circonferenza, perché la distanza del centro da tutti i lati è il raggio della circonferenza inscritta.
+:::
+
+:::esempio{titolo="Calcolo dell’apotema da una costruzione"}
+
+Congiungendo il centro $O$ ai vertici di un esagono regolare di lato $4$ si ottengono sei triangoli equilateri. L’apotema è l’altezza di uno di questi triangoli. In quello di vertici $O$, $A$, $B$, il piede $H$ dell’altezza divide $AB$ a metà. Nel triangolo rettangolo $OHA$ il cateto $AH$ vale $2$ e l’ipotenusa $OA$ vale $4$.
+
+$$
+\begin{aligned}
+a&=\sqrt{4^2-2^2}=2\sqrt3 \\[5pt]
+\mathcal A&=\frac{(6\cdot4)\,2\sqrt3}{2}=24\sqrt3
+\end{aligned}
+$$
+
+::grafico{assi=0 uguale=1 poligoni="4,0 2,3.464102 -2,3.464102 -4,0 -2,-3.464102 2,-3.464102" linee="-4,0 4,0;2,3.464102 -2,-3.464102;-2,3.464102 2,-3.464102;0,0 3,1.732051" punti="0,0;4,0,pieno,A;2,3.464102,pieno,B;3,1.732051,pieno,H" etichette="-0.55,0.3,O" xmin=-5 xmax=5 ymin=-4.3 ymax=4.3 titolo="L’apotema $OH$ è l’altezza del triangolo equilatero $OAB$"}
 :::
 
 ## Problemi inversi e figure composte

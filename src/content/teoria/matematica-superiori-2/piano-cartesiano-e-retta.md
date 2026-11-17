@@ -1,6 +1,7 @@
 ---
-titolo: "Piano cartesiano e retta"
-sommario: "Distanze, punto medio, equazioni della retta, coefficiente angolare, parallelismo, perpendicolarità e intersezioni."
+titolo: Piano cartesiano e retta
+sommario: Distanze, punto medio, equazioni della retta, coefficiente angolare, parallelismo,
+  perpendicolarità e intersezioni.
 ---
 
 ## Coordinate e segmenti
@@ -13,15 +14,15 @@ M\left(\frac{x_A+x_B}2;\frac{y_A+y_B}2\right).
 $$
 La formula della distanza deriva dal teorema di Pitagora applicato alle proiezioni del segmento sugli assi. La formula del punto medio dimezza separatamente gli spostamenti orizzontale e verticale.
 
-Per $A(1;2)$ e $B(4;6)$ si ottengono $AB=5$ e $M(\dfrac52;4)$. Per un segmento orizzontale la distanza è il valore assoluto della differenza delle ascisse; per uno verticale si usa la differenza delle ordinate.
+Per $A(1;2)$ e $B(4;6)$ si ottengono $AB=5$ e $M(\dfrac52;4)$. Per un segmento orizzontale si prende il valore assoluto della differenza delle ascisse. Per un segmento verticale si prende il valore assoluto della differenza delle ordinate.
 
-::grafico{linee="1,2 4,6;1,2 4,2 4,6" punti="1,2,pieno,A;4,6,pieno,B;2.5,4,pieno,M" xmin=0 xmax=6 ymin=0 ymax=8 uguale=1 titolo="Le differenze di coordinate formano i cateti; $M$ è il punto medio"}
+::grafico{linee="1,2 4,6;1,2 4,2 4,6" punti="1,2,pieno,A;4,6,pieno,B;2.5,4,pieno,M" xmin=0 xmax=6 ymin=0 ymax=8 uguale=1 titolo="Le differenze di coordinate danno i cateti e $M$ è il punto medio"}
 :::
 
 ## Equazione esplicita
 
 :::definizione{#pendenza titolo="Coefficiente angolare e intercetta"}
-Una retta non verticale ha equazione $y=mx+q$. Il **coefficiente angolare** $m$ è il rapporto fra variazione di ordinata e variazione di ascissa; l'**intercetta** $q$ è l'ordinata del punto sull'asse verticale.
+Una retta non verticale ha equazione $y=mx+q$. Il **coefficiente angolare** $m$ è il rapporto fra variazione di ordinata e variazione di ascissa. L’**intercetta** $q$ è l’ordinata del punto sull’asse verticale.
 
 Per due punti con ascisse diverse,
 $$
@@ -32,6 +33,18 @@ Per $A(0;1)$ e $B(2;5)$ risulta $m=2$, quindi la retta è $y=2x+1$. Quando $x$ a
 Per $m>0$ la retta è crescente, per $m<0$ è decrescente e per $m=0$ è orizzontale. Una retta verticale ha equazione $x=k$ e non ha coefficiente angolare.
 
 ::grafico{f="2*x+1;-x+1" xmin=-3 xmax=4 ymin=-4 ymax=7 titolo="Rette crescente e decrescente con la stessa intercetta"}
+:::
+
+:::esempio{titolo="La pendenza con una variazione negativa"}
+Sulla retta per $A(-2;4)$ e $B(2;2)$, procedere da $A$ a $B$ aumenta l’ascissa di $4$ e riduce l’ordinata di $2$. Il rapporto è
+
+$$
+m=\frac{2-4}{2-(-2)}=-\frac12.
+$$
+
+La retta scende di una unità ogni due unità verso destra. Per esempio a $x=0$, a metà tra le due ascisse, corrisponde $y=3$. Se si parte da $B$, entrambe le differenze cambiano segno e il rapporto resta uguale.
+
+::grafico{f="-0.5*x+3" punti="-2,4,pieno,A;2,2,pieno,B;0,3,pieno,M" linee="-2,4 2,4 2,2" xmin=-4 xmax=4 ymin=0 ymax=6 uguale=1 titolo="Da A a B la retta avanza di 4 e scende di 2"}
 :::
 
 ## Forma generale
@@ -53,7 +66,7 @@ y-y_0=m(x-x_0).
 $$
 Per $P(2;3)$ e $m=-1$ segue $y-3=-(x-2)$, quindi $y=-x+5$.
 
-Per due punti con ascisse diverse si calcola prima $m$ e poi si usa uno dei punti. Se le ascisse coincidono, la retta è verticale e ha quell'ascissa costante.
+Per due punti con ascisse diverse si calcola prima $m$ e poi si usa uno dei punti. Se due punti distinti hanno la stessa ascissa, la retta è verticale e ha quell’ascissa costante.
 
 Due punti distinti determinano una sola retta. Se i due punti coincidono, il dato non determina una direzione e occorre un'altra informazione.
 
@@ -63,12 +76,28 @@ Due punti distinti determinano una sola retta. Se i due punti coincidono, il dat
 ## Parallele e perpendicolari
 
 :::teorema{#posizioni titolo="Confronto delle direzioni"}
-Due rette non verticali sono parallele se hanno uguale coefficiente angolare. Sono coincidenti se hanno anche lo stesso termine noto.
+Due rette non verticali con lo stesso coefficiente angolare e intercette diverse sono parallele distinte. Quando coincidono sia il coefficiente angolare sia l’intercetta, le equazioni descrivono la stessa retta.
 
 Due rette non verticali sono perpendicolari se $m_1m_2=-1$. Per esempio una perpendicolare a $y=2x+1$ ha coefficiente $-\dfrac12$. La retta orizzontale e quella verticale sono perpendicolari e vanno trattate separatamente.
 
 Per trovare la parallela a $y=3x-2$ passante per $(1;5)$ si scrive $y-5=3(x-1)$, quindi $y=3x+2$. La condizione di parallelismo fissa la direzione e il punto fissa la posizione.
 :::
+
+::::teorema{#prodotto-pendenze titolo="Perché il prodotto vale meno uno"}
+Per due rette non verticali e perpendicolari i coefficienti angolari soddisfano $m_1m_2=-1$. La relazione consente di scegliere la pendenza della perpendicolare prima di imporre il passaggio per un punto.
+
+:::dimostrazione
+L’idea è confrontare uno spostamento lungo la prima retta con lo stesso spostamento ruotato di un quarto di giro. Lungo la prima retta si può avanzare di $1$ e variare l’ordinata di $m_1$. La coppia $(1;m_1)$ diventa $(-m_1;1)$ dopo una rotazione antioraria di $90^\circ$.
+
+Poiché la seconda retta è non verticale, si ha $m_1\ne0$. Il rapporto fra variazione verticale e orizzontale dopo la rotazione è
+
+$$
+m_2=\frac{1}{-m_1}.
+$$
+
+Moltiplicando per $m_1$ si ottiene il risultato. Viceversa, una retta con questa pendenza ha la direzione dello spostamento ruotato ed è quindi perpendicolare alla prima.
+:::
+::::
 
 ## Intersezioni
 
@@ -104,4 +133,19 @@ Per un triangolo con base orizzontale si usa la lunghezza della base e la distan
 Una tariffa con costo iniziale $q$ e costo unitario $m$ può essere descritta da $C(x)=mx+q$. Il dominio deriva dal significato di $x$, per esempio $x\ge0$ se è una distanza percorsa.
 
 L'intersezione di due rette di costo indica la quantità per cui le tariffe coincidono. La differenza dei costi consente poi di confrontarle sui due lati dell'intersezione.
+:::
+
+:::esempio{titolo="Due tariffe e una soglia intera"}
+Due tariffe per il noleggio di una bici costano $C_A(n)=5+3n$ e $C_B(n)=11+n$ euro dopo $n$ ore intere, con $n\ge 1$. La differenza di costo vale
+
+$$
+\begin{aligned}
+C_A(n)-C_B(n)&=(5+3n)-(11+n)\\
+&=2n-6.
+\end{aligned}
+$$
+
+Per $n=3$ entrambe le tariffe costano $14$ euro. Per $n<3$ la differenza è negativa, quindi A costa meno per una o due ore. Da quattro ore in poi la differenza è positiva e B costa meno. Il grafico mostra anche valori intermedi, mentre il problema ammette ore intere.
+
+::grafico{f="5+3*x;11+x" punti="3,14,pieno,P" nomi="n,C" legenda="C_A(n)=5+3n;C_B(n)=11+n" xmin=0 xmax=6 ymin=0 ymax=24 titolo="Le tariffe coincidono dopo 3 ore"}
 :::

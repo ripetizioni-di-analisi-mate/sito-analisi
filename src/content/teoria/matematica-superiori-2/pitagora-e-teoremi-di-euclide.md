@@ -6,103 +6,124 @@ sommario: "Triangoli rettangoli, teorema di Pitagora e inverso, triangoli notevo
 ## Il triangolo rettangolo
 
 :::definizione{#triangolo titolo="Cateti e ipotenusa"}
-Un triangolo **rettangolo** ha un angolo di $90^\circ$. I lati che formano quell'angolo sono i **cateti**; il lato opposto è l'**ipotenusa** ed è il più lungo.
+Un triangolo **rettangolo** ha un angolo di $90^\circ$. I lati che formano quell’angolo sono i **cateti** $a$ e $b$. Il lato opposto è l’**ipotenusa** $c$. Poiché all’angolo maggiore si oppone il lato più lungo, $c$ è maggiore di ciascun cateto. Questa relazione permette di riconoscere quale lunghezza isolare nel teorema di Pitagora.
+:::
 
-Si indicano con $a,b$ i cateti e con $c$ l'ipotenusa. Riconoscere il ruolo dei lati precede la scelta della formula. Se si conosce l'ipotenusa e un cateto, il secondo cateto è minore dell'ipotenusa.
+:::esempio{titolo="Il triangolo di lati $3$, $4$ e $5$"}
+Se l’angolo retto è in $A$, i cateti sono $AB$ e $AC$. L’ipotenusa è quindi il lato $BC$, che dalla figura misura $5$.
 
-Un triangolo con lati $3,4,5$ è rettangolo e ha ipotenusa $5$. Un triangolo generico non soddisfa automaticamente le formule dei triangoli rettangoli.
+::grafico{assi=0 uguale=1 poligoni="0,0 4,0 0,3" linee="0.35,0 0.35,0.35 0,0.35" punti="0,0;4,0;0,3" etichette="-0.25,-0.27,A;4.25,-0.19,B;-0.22,3.17,C;2,-0.28,4;-0.35,1.4,3;2.2,1.9,5" xmin=-1 xmax=5 ymin=-1 ymax=4 titolo="L’ipotenusa $BC$ è opposta all’angolo retto in $A$"}
+
 :::
 
 ## Il teorema di Pitagora
 
-:::teorema{#pitagora titolo="Somma dei quadrati dei cateti"}
-In un triangolo rettangolo,
+::::teorema{#pitagora titolo="Teorema di Pitagora"}
+In un triangolo rettangolo con cateti $a$, $b$ e ipotenusa $c$ vale
 $$
 c^2=a^2+b^2.
 $$
-Quindi $c=\sqrt{a^2+b^2}$, $a=\sqrt{c^2-b^2}$ e $b=\sqrt{c^2-a^2}$.
+La relazione determina un lato quando sono noti gli altri due. Per esempio, se i cateti misurano $6$ e $8$, si ottiene $c=\sqrt{36+64}=10$. Se invece sono noti $c$ e $a$, si isola $b^2=c^2-a^2$ e se ne estrae la radice quadrata.
 
-Una dimostrazione per aree dispone quattro triangoli rettangoli congruenti in un quadrato di lato $a+b$, lasciando al centro un quadrato di lato $c$. L'area esterna è $(a+b)^2$ e quella dei quattro triangoli è $2ab$. Sottraendo segue $c^2=(a+b)^2-2ab=a^2+b^2$.
+:::dimostrazione
+Si dispongono quattro copie del triangolo lungo i lati di un quadrato di lato $a+b$. Ogni copia occupa un angolo del quadrato esterno e lascia la sua ipotenusa sul bordo del quadrilatero centrale. Quel quadrilatero ha quattro lati uguali a $c$. In ogni suo vertice i due angoli acuti dei triangoli adiacenti sommano $90^\circ$, quindi l’angolo rimanente vale $90^\circ$. La regione centrale è perciò un quadrato.
 
-Con cateti $6$ e $8$ si ottiene $c=\sqrt{36+64}=10$. Il risultato è positivo e maggiore di ciascun cateto.
+::grafico{assi=0 uguale=1 poligoni="0,0 4,0 0,3;4,0 7,0 7,4;7,4 7,7 3,7;3,7 0,7 0,3" linee="4,0 7,4 3,7 0,3 4,0" xmin=-0.5 xmax=7.5 ymin=-0.5 ymax=7.5 titolo="Quattro triangoli identici e il quadrato centrale"}
 
-::grafico{assi=0 uguale=1 poligoni="0,0 4,0 0,3" linee="0.35,0 0.35,0.35 0,0.35" punti="0,0,pieno,A;4,0,pieno,B;0,3,pieno,C" xmin=-1 xmax=5 ymin=-1 ymax=4 titolo="Il lato $BC$ è l’ipotenusa; $AB$ e $AC$ sono i cateti"}
+Sottraendo dall’area del quadrato esterno le aree dei quattro triangoli si ottiene
+$$
+\begin{aligned}
+c^2&=(a+b)^2-4\cdot\frac{ab}{2}\\[5pt]
+   &=a^2+2ab+b^2-2ab\\[5pt]
+   &=a^2+b^2.
+\end{aligned}
+$$
 :::
+::::
 
 ## Il teorema inverso
 
-:::teorema{#inverso titolo="Riconoscere un angolo retto"}
-Se tre lunghezze positive formano un triangolo e il quadrato del lato maggiore è la somma dei quadrati degli altri due, il triangolo è rettangolo.
+:::teorema{#inverso titolo="Teorema inverso di Pitagora"}
+Se tre lunghezze positive formano un triangolo e il quadrato del lato maggiore è la somma dei quadrati degli altri due, il triangolo è rettangolo. L’angolo retto è opposto al lato maggiore. Per $5$, $12$ e $13$ vale $5+12>13$, quindi le tre lunghezze formano un triangolo. Inoltre $25+144=169$, perciò l’angolo opposto a $13$ è retto.
+:::
 
-Per $5,12,13$ si ha $25+144=169$, quindi il triangolo è rettangolo. Per $4,5,6$, invece, $16+25\ne36$ e non è rettangolo.
+:::attenzione
+Le lunghezze $4$, $5$ e $6$ formano un triangolo, poiché $4+5>6$. Tuttavia $4^2+5^2=41$ è diverso da $6^2=36$, quindi quel triangolo non è rettangolo.
+:::
 
-La condizione che i lati formino un triangolo richiede che ciascuno sia minore della somma degli altri due. Il teorema inverso identifica poi l'angolo opposto al lato maggiore come angolo retto.
-
-Moltiplicare tutti i lati di una terna pitagorica per lo stesso numero positivo conserva la relazione. Da $3,4,5$ si ottengono così $9,12,15$.
+:::osservazione
+Una **terna pitagorica** è una terna di interi positivi che soddisfa il teorema. Moltiplicando tutti i lati per uno stesso intero positivo i quadrati si moltiplicano per lo stesso fattore. Per esempio, da $(3,4,5)$ si ottiene $(9,12,15)$.
 :::
 
 ## Triangoli notevoli
 
 :::teorema{#notevoli titolo="Quadrato ed equilatero"}
-Nel triangolo rettangolo isoscele i cateti sono uguali. Se ciascuno misura $l$, l'ipotenusa misura $l\sqrt2$. Di conseguenza un quadrato di lato $l$ ha diagonale $l\sqrt2$.
+La diagonale di un quadrato di lato $l$ è l’ipotenusa del triangolo rettangolo i cui cateti misurano entrambi $l$. Per Pitagora misura $l\sqrt{2}$.
 
-L'altezza di un triangolo equilatero di lato $l$ divide la base in due parti uguali. Pitagora dà
+L’altezza di un triangolo equilatero di lato $l$ divide la base in due segmenti uguali. Il triangolo rettangolo ottenuto ha ipotenusa $l$ e un cateto lungo $\dfrac l2$, quindi
 $$
-h=\sqrt{l^2-\left(\frac l2\right)^2}=\frac{\sqrt3}{2}l.
+\begin{aligned}
+h&=\sqrt{l^2-\left(\frac l2\right)^2}\\[5pt]
+ &=\frac{\sqrt3}{2}l.
+\end{aligned}
 $$
-L'area è quindi $\dfrac{\sqrt3}{4}l^2$. Con lato $6$ si hanno altezza $3\sqrt3$ e area $9\sqrt3$.
+L’area è $\dfrac{lh}{2}=\dfrac{\sqrt3}{4}l^2$. Con $l=6$ si trovano $h=3\sqrt3$ e area $9\sqrt3$.
 
-I due triangoli ottenuti hanno angoli $30^\circ$, $60^\circ$ e $90^\circ$. Il cateto opposto a $30^\circ$ misura metà dell'ipotenusa.
+L’altezza divide in due anche l’angolo al vertice, quindi il triangolo rettangolo ha angoli di $30^\circ$ e $60^\circ$. Il cateto opposto all’angolo di $30^\circ$ è metà dell’ipotenusa.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 6,0 3,5.196152" linee="3,0 3,5.196152" xmin=-1 xmax=7 ymin=-1 ymax=6 titolo="L’altezza di un equilatero di lato $6$ misura $3\sqrt3$"}
+::grafico{assi=0 uguale=1 poligoni="0,0 6,0 3,5.196152" linee="3,0 3,5.196152;3,0.25 3.25,0.25 3.25,0" etichette="1.5,-0.25,3;4.5,-0.25,3;3.65,2.4,h" xmin=-0.6 xmax=6.6 ymin=-0.8 ymax=6 titolo="L’altezza divide la base in due segmenti di misura $3$"}
+
 :::
 
 ## Proiezioni sull’ipotenusa
 
-:::definizione{#proiezioni titolo="L’altezza e i segmenti"}
-Sia $ABC$ rettangolo in $A$ e sia $H$ il piede dell'altezza su $BC$. Poniamo $BC=c$, $BH=p$, $HC=q$ e $AH=h$. Le due proiezioni sono positive e soddisfano $p+q=c$.
+:::definizione{#proiezioni titolo="Altezza e proiezioni dei cateti"}
+Sia $ABC$ rettangolo in $A$ e sia $H$ il piede dell’altezza su $BC$. Si indica con $c$ la lunghezza dell’ipotenusa $BC$, con $p$ la lunghezza di $BH$, con $q$ quella di $HC$ e con $h$ quella di $AH$. Il punto $H$ è interno a $BC$, quindi $p,q>0$ e $p+q=c$.
 
-Il segmento $BH$ è la proiezione del cateto $AB$; $HC$ è quella di $AC$. Le corrispondenze vanno conservate nelle formule.
+Per individuare la proiezione del cateto $AB$ si osserva che $B$ appartiene già all’ipotenusa e che $A$ si proietta in $H$. La proiezione è dunque $BH$. Per il cateto $AC$ la proiezione è invece $HC$.
 
-::grafico{assi=0 uguale=1 linee="0,0 5,0 1.8,2.4 0,0;1.8,2.4 1.8,0" punti="0,0,pieno,B;5,0,pieno,C;1.8,2.4,pieno,A;1.8,0,pieno,H" xmin=-1 xmax=6 ymin=-1 ymax=4 titolo="$BH$ e $HC$ sono le proiezioni; $AH$ è l’altezza"}
+::grafico{assi=0 uguale=1 linee="0,0 5,0 1.8,2.4 0,0;1.8,2.4 1.8,0;1.8,0.25 2.05,0.25 2.05,0" punti="0,0,pieno,B;5,0,pieno,C;1.8,2.4,pieno,A;1.8,0" etichette="0.9,-0.28,p;3.4,-0.28,q;2.09,1.12,h;1.8,-0.34,H" xmin=-0.6 xmax=5.7 ymin=-0.8 ymax=3.25 titolo="Le proiezioni $BH$ e $HC$ ricompongono l’ipotenusa $BC$"}
 
-L'altezza divide il triangolo in due triangoli rettangoli simili a quello iniziale. Le proporzioni fra i loro lati giustificano i teoremi di Euclide.
+L’altezza divide il triangolo in due triangoli rettangoli. Ognuno ha un angolo acuto in comune con $ABC$, quindi entrambi sono simili al triangolo iniziale. Le proporzioni fra i lati corrispondenti giustificano i teoremi di Euclide.
 :::
 
 ## Il primo teorema di Euclide
 
 :::teorema{#euclide-primo titolo="Cateto, ipotenusa e proiezione"}
-In un triangolo rettangolo il quadrato di un cateto è uguale al prodotto dell'ipotenusa per la proiezione di quel cateto sull'ipotenusa:
-$$
-AB^2=cp,\qquad AC^2=cq.
-$$
-Dalla similitudine fra $ABC$ e $HBA$ si ha $BC:AB=AB:BH$. Moltiplicando i medi e gli estremi si ottiene $AB^2=BC\cdot BH$. L'altra relazione si dimostra nello stesso modo.
+In un triangolo rettangolo il quadrato di un cateto è uguale al prodotto dell’ipotenusa per la proiezione di quel cateto sull’ipotenusa. Con le notazioni della figura si ha $AB^2=cp$ e $AC^2=cq$.
 
-Se $c=25$ e $p=9$, il cateto corrispondente è $AB=\sqrt{225}=15$. L'altra proiezione è $16$ e l'altro cateto misura $20$.
+I triangoli $ABC$ e $HBA$ sono simili. Il rapporto fra le due ipotenuse, $BC$ e $AB$, è quindi uguale al rapporto fra i due cateti adiacenti all’angolo in $B$, cioè $AB$ e $BH$. Dalla proporzione $\dfrac{BC}{AB}=\dfrac{AB}{BH}$ si ricava $AB^2=BC\cdot BH$. Applicando lo stesso ragionamento all’angolo in $C$ si ottiene $AC^2=BC\cdot HC$.
+:::
+
+:::esempio{titolo="Calcolo dei cateti dalle proiezioni"}
+Se $c=25$ e $p=9$, segue $q=25-9=16$. Il primo teorema di Euclide dà
+$$
+AB=\sqrt{25\cdot9}=15,
+\qquad AC=\sqrt{25\cdot16}=20.
+$$
+La somma $15^2+20^2=625$ coincide con $25^2$, come prevede il teorema di Pitagora.
 :::
 
 ## Il secondo teorema di Euclide
 
 :::teorema{#euclide-secondo titolo="Altezza e proiezioni"}
-Il quadrato dell'altezza relativa all'ipotenusa è il prodotto delle due proiezioni:
-$$
-h^2=pq.
-$$
-La similitudine fra i due triangoli piccoli dà $BH:AH=AH:HC$. Il prodotto dei medi è uguale a quello degli estremi, quindi $AH^2=BH\cdot HC$.
+In un triangolo rettangolo il quadrato dell’altezza relativa all’ipotenusa è il prodotto delle proiezioni dei cateti, quindi $h^2=pq$.
 
-Con $p=4$ e $q=9$, l'altezza è $6$ e l'ipotenusa è $13$. I cateti sono $\sqrt{52}$ e $\sqrt{117}$. Questi valori non vanno sostituiti con $4$ e $9$, che sono le loro proiezioni.
+Nella similitudine fra $HBA$ e $HAC$, il cateto $BH$ del primo triangolo corrisponde ad $AH$ del secondo, mentre $AH$ del primo corrisponde a $HC$ del secondo. Perciò $\dfrac{BH}{AH}=\dfrac{AH}{HC}$. Il prodotto dei medi è uguale a quello degli estremi, da cui $AH^2=BH\cdot HC$.
+
+Con $p=4$ e $q=9$ si ottiene $h=\sqrt{36}=6$. Il primo teorema di Euclide, applicato con $c=13$, dà invece $AB=\sqrt{52}$ e $AC=\sqrt{117}$.
 :::
 
 ## Problemi con più passaggi
 
 :::osservazione{#problemi titolo="Scelta della base per l’area"}
-L'area del triangolo rettangolo può essere calcolata in due modi:
+L’area $\mathcal{A}$ del triangolo rettangolo si può calcolare scegliendo come base un cateto oppure l’ipotenusa. Nel primo caso l’altro cateto è l’altezza. Nel secondo caso l’altezza è $h$, relativa all’ipotenusa.
 $$
-A=\frac{AB\cdot AC}{2}=\frac{ch}{2}.
+\mathcal A=\frac{AB\cdot AC}{2}=\frac{ch}{2}.
 $$
-Segue anche $h=\dfrac{AB\cdot AC}{c}$. Con cateti $3$ e $4$ e ipotenusa $5$, l'altezza relativa all'ipotenusa è $\dfrac{12}{5}$.
+Segue $h=\dfrac{AB\cdot AC}{c}$. Per cateti $3$ e $4$ e ipotenusa $5$ si ottiene $h=\dfrac{12}{5}$.
+:::
 
-Per un triangolo isoscele si traccia l'altezza alla base, che la divide a metà. Se i lati obliqui misurano $5$ e la base $6$, l'altezza misura $4$ e l'area $12$.
-
-Prima di applicare Euclide si individua l'ipotenusa. In un triangolo non rettangolo le stesse formule non sono giustificate.
+:::esempio{titolo="L’altezza di un isoscele"}
+I lati uguali misurano $5$ e la base misura $6$. L’altezza relativa alla base la divide in due segmenti da $3$, perciò si applica Pitagora a uno dei due triangoli rettangoli ottenuti. Si ricavano l’altezza $\sqrt{5^2-3^2}=4$ e l’area $\dfrac{6\cdot4}{2}=12$.
 :::

@@ -3,10 +3,6 @@ titolo: "Potenze, proporzioni e percentuali"
 sommario: "Proprietà delle potenze, rapporti, variazioni percentuali, proporzionalità e scale."
 ---
 
-:::percorso
-Le operazioni con interi e frazioni permettono di descrivere prodotti ripetuti e confronti fra quantità. Qui si lavora con potenze, rapporti e percentuali. La proporzionalità prepara la lettura delle formule e delle tabelle usate anche in fisica.
-:::
-
 ## Potenze e loro proprietà
 
 :::teorema{#potenze titolo="Base, esponente e proprietà"}
@@ -19,6 +15,20 @@ $$
 Se $a\ne0$, valgono anche $\dfrac{a^m}{a^n}=a^{m-n}$, $a^0=1$ e $a^{-n}=\dfrac1{a^n}$. La scrittura $0^0$ resta esclusa in questo corso.
 
 Il segno della base va letto con precisione: $(-3)^2=9$, mentre $-3^2=-9$. Nel primo caso il segno meno è dentro la base, nel secondo si prende l’opposto del quadrato. Le proprietà delle potenze riguardano prodotti e quozienti; $2^3+2^2$ vale $12$ e non $2^5$.
+:::
+
+:::esempio{titolo="Quoziente di potenze con esponente più piccolo al numeratore"}
+Il quoziente $\dfrac{5^2}{5^4}$ ha due fattori $5$ al numeratore e quattro al denominatore. Dopo aver semplificato i due fattori comuni, rimangono due fattori al denominatore.
+
+$$
+\begin{aligned}
+\frac{5^2}{5^4}&=5^{2-4}\\[6pt]
+&=5^{-2}\\[6pt]
+&=\frac1{25}.
+\end{aligned}
+$$
+
+L’esponente negativo indica il reciproco di $5^2$. Poiché la potenza $5^2$ è maggiore di $1$, il reciproco è positivo e minore di $1$.
 :::
 
 ## Potenze di dieci e notazione scientifica
@@ -49,6 +59,16 @@ Un aumento del $p\%$ moltiplica la quantità iniziale per $1+\dfrac p{100}$; uno
 Due variazioni successive si applicano al valore aggiornato. Un aumento del $10\%$ seguito da una riduzione del $10\%$ produce il fattore $1{,}1\cdot0{,}9=0{,}99$. Partendo da $100$, si arriva a $99$.
 :::
 
+:::esempio{titolo="Variazione percentuale e punti percentuali"}
+In un sondaggio, la quota di risposte favorevoli sale dal $40\%$ al $50\%$. La differenza tra le quote è di $10$ **punti percentuali**. Per la variazione relativa si divide questa differenza per il valore di partenza.
+
+$$
+\frac{50-40}{40}\cdot100=25.
+$$
+
+La quota è dunque aumentata del $25\%$ rispetto al dato iniziale. Infatti $40\%\cdot1{,}25=50\%$.
+:::
+
 ## Proporzionalità diretta e inversa
 
 :::definizione{#proporzionalita titolo="Rapporto costante oppure prodotto costante"}
@@ -57,6 +77,14 @@ Due grandezze sono **direttamente proporzionali** quando $y=kx$ e il rapporto $\
 Sono **inversamente proporzionali** quando $xy=k$, quindi $y=\dfrac kx$ per $x\ne0$. Per uno stesso lavoro eseguito da macchine identiche allo stesso ritmo, raddoppiare il numero di macchine dimezza il tempo. Il modello presuppone che le macchine possano lavorare contemporaneamente senza ostacolarsi.
 
 Una formula come $y=3x+5$ descrive invece un costo unitario con quota fissa. Il rapporto fra costo e quantità varia, quindi non è proporzionalità diretta.
+:::
+
+:::esempio{titolo="Costo al pezzo e costo con quota fissa"}
+Si confrontano due tariffe. In una il costo è $y=3x$, con $x$ numero di pezzi e $y$ costo in euro. Nell’altra il costo è $y=3x+5$. I costi aumentano entrambi di $3$ euro per ogni pezzo aggiunto. Tuttavia, a quantità zero la prima tariffa costa $0$ euro e la seconda costa già $5$ euro.
+
+::grafico{f="3*x;3*x+5" xmin=-0.5 xmax=5.5 ymin=-1 ymax=22 punti="0,0,pieno;0,5,pieno;4,12,pieno;4,17,pieno" titolo="La retta del costo proporzionale passa per l’origine. La quota fissa sposta la seconda retta di 5 euro verso l’alto"}
+
+Per la prima tariffa il rapporto fra costo e numero di pezzi vale sempre $3$ quando $x>0$. Per la seconda il rapporto vale $8$ euro a pezzo per $x=1$ e $\dfrac{17}{4}$ euro a pezzo per $x=4$, quindi varia con la quantità. Le rette rappresentano le due formule, mentre i quantitativi acquistabili sono interi.
 :::
 
 ## Scale e problemi inversi

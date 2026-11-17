@@ -8,7 +8,7 @@ sommario: "Esiti ed eventi, probabilità classica, complementare, unione, prove 
 :::definizione{#eventi titolo="Spazio degli esiti"}
 Un **esperimento aleatorio** ha un risultato che non si conosce prima della prova. Lo **spazio degli esiti** $\Omega$ raccoglie tutti i risultati elementari possibili. Un **evento** è un insieme di tali esiti.
 
-Nel lancio di un dado regolare, $\Omega=\{1,2,3,4,5,6\}$. L'evento «numero pari» è $\{2,4,6\}$. L'evento certo è tutto $\Omega$; quello impossibile è l'insieme vuoto.
+Nel lancio di un dado regolare, $\Omega=\{1,2,3,4,5,6\}$. L'evento «numero pari» è $\{2,4,6\}$. L’evento certo è tutto $\Omega$. Quello impossibile è l’insieme vuoto.
 
 Una probabilità è compresa fra zero e uno. Zero corrisponde all'evento impossibile e uno all'evento certo nel modello finito equiprobabile usato qui.
 :::
@@ -56,17 +56,17 @@ Nel dado, «pari» e «maggiore di quattro» hanno intersezione $\{6\}$. L'union
 ## Esperimenti composti
 
 :::teorema{#composti titolo="Coppie ordinate e alberi"}
-In due lanci di un dado distinguibile, un esito è una coppia ordinata. Le coppie possibili sono $6\cdot6=36$ e sono equiprobabili se i dadi sono regolari e indipendenti.
+In due lanci successivi di un dado, un esito è una coppia ordinata. La prima coordinata registra il primo punteggio e la seconda registra il secondo. Le coppie possibili sono $6\cdot6=36$ e sono equiprobabili se i dadi sono regolari e indipendenti.
 
 La somma sette si ottiene con sei coppie, da $(1;6)$ a $(6;1)$, e ha probabilità $\dfrac16$. La somma due ha una sola coppia e probabilità $\dfrac1{36}$. Le undici somme possibili non sono quindi equiprobabili.
 
-Un diagramma ad albero rappresenta ogni prova con un livello. Il prodotto delle probabilità lungo un percorso dà la probabilità di quel percorso; per eventi formati da percorsi distinti si sommano i risultati.
+Un diagramma ad albero rappresenta ogni prova con un livello. Il prodotto delle probabilità lungo un percorso dà la probabilità di quel percorso. Per un evento formato da percorsi distinti si sommano le probabilità dei percorsi, poiché essi sono incompatibili.
 :::
 
 ## Indipendenza e reimmissione
 
 :::definizione{#indipendenza titolo="Probabilità che restano uguali"}
-Due eventi sono **indipendenti** quando conoscere l'esito di uno non modifica la probabilità dell'altro. In questo caso
+Due eventi $A$ e $B$ sono **indipendenti** se vale
 $$
 P(A\cap B)=P(A)P(B).
 $$
@@ -89,6 +89,30 @@ $$
 \frac25\frac34+\frac35\frac24=\frac35.
 $$
 I due percorsi sono incompatibili e ciascuno usa la composizione corretta dopo la prima estrazione.
+:::
+
+:::esempio{titolo="Il ramo cambia dopo la prima estrazione"}
+Un’urna ha tre palline rosse e due blu. Si fanno due estrazioni uniformi senza reimmissione. Scriviamo $R$ per rossa e $B$ per blu. Nel diagramma il primo livello indica il colore della prima pallina e il secondo il colore della seconda. Dopo una prima $R$, rimangono due rosse e due blu. Dopo una prima $B$, rimangono tre rosse e una blu.
+
+::grafico{assi=0 xmin=-0.7 xmax=7.6 ymin=-4 ymax=4 linee="0,0 3,2 6,3;3,2 6,1;0,0 3,-2 6,-1;3,-2 6,-3" etichette="1.5,1.85,3/5;1.5,-1.85,2/5;4.5,3.1,2/4;4.5,0.9,2/4;4.5,-0.9,3/4;4.5,-3.1,1/4;6.6,3,RR;6.6,1,RB;6.6,-1,BR;6.6,-3,BB" titolo="Probabilità sui rami per due estrazioni senza reimmissione"}
+
+Per un colore diverso alla seconda estrazione si considerano $RB$ e $BR$. I percorsi hanno la stessa probabilità, perché $\dfrac35\cdot\dfrac24=\dfrac25\cdot\dfrac34=\dfrac3{10}$. I percorsi sono incompatibili e quindi la probabilità complessiva è $\dfrac35$.
+:::
+
+## Probabilità condizionata
+
+:::definizione{#condizionata titolo="Restringere gli esiti con un dato"}
+Se si sa che $B$ si verifica, si considerano soltanto gli esiti di $B$. Fra questi, i favorevoli ad $A$ sono quelli di $A\cap B$. La **probabilità condizionata** di $A$ dato $B$, con $P(B)>0$, è
+
+$$
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
+$$
+
+Per esempio, si sceglie uniformemente un intero da $1$ a $8$. Siano $A$ l’evento «multiplo di $4$» e $B$ l’evento «numero pari». Se si sa che il numero è pari, si considerano $2$, $4$, $6$ e $8$. Due numeri pari sono multipli di $4$, quindi la probabilità condizionata è $\dfrac24=\dfrac12$.
+
+::venn{tipo="incluso" zone="a,ab" elementi="a:2,6;ab:4,8;u:1,3,5,7" nomi="B,A" universo=1 titolo="Il dato restringe lo spazio ai quattro numeri pari"}
+
+Dalla formula segue $P(A\cap B)=P(B)P(A\mid B)$. Per esempio, nelle estrazioni senza reimmissione la probabilità della seconda rossa viene calcolata sapendo che la prima pallina è stata rossa. Se gli eventi sono indipendenti e $P(B)>0$, vale $P(A\mid B)=P(A)$.
 :::
 
 ## Frequenza e probabilità

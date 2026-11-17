@@ -3,82 +3,82 @@ titolo: "Equazioni di primo grado"
 sommario: "Principi di equivalenza, soluzioni, equazioni con frazioni e traduzione dei problemi."
 ---
 
-:::percorso
-Il calcolo con polinomi permette di trasformare espressioni mantenendo il loro valore. Nelle equazioni si cerca invece quali valori rendono vera un’uguaglianza. Il metodo richiede di conservare le soluzioni a ogni passaggio e di controllare il risultato nel testo iniziale.
-:::
-
 ## Equazioni e principi di equivalenza
 
 :::teorema{#equivalenza titolo="Trasformazioni che conservano le soluzioni"}
-Un’**equazione** è un’uguaglianza contenente una o più incognite. Una **soluzione** è un valore che rende l’uguaglianza vera e per cui tutte le espressioni sono definite. Due equazioni sono equivalenti se hanno lo stesso insieme di soluzioni.
+Un’**equazione** è un’uguaglianza che contiene una o più incognite. Una **soluzione** è un valore ammesso che rende uguali i due membri. Due equazioni sono equivalenti se hanno lo stesso insieme di soluzioni.
 
-Aggiungere o sottrarre la stessa quantità a entrambi i membri conserva l’uguaglianza. Moltiplicare o dividere entrambi i membri per lo stesso numero non nullo conserva le soluzioni. Per esempio $3x+2=11$ equivale a $3x=9$ e quindi a $x=3$.
+Aggiungere la stessa espressione a entrambi i membri conserva le soluzioni nel dominio in cui l’espressione è definita. Moltiplicare o dividere entrambi i membri per lo stesso numero non nullo conserva le soluzioni. Per esempio, da $3x+2=11$ si ottiene $3x=9$ sottraendo $2$ a entrambi i membri, quindi si trova $x=3$ dividendo per $3$. Ogni passaggio si può invertire.
+:::
 
-Dividere per un’espressione contenente l’incognita richiede di verificare che sia non nulla. Senza tale controllo si possono perdere soluzioni.
+:::attenzione{titolo="Divisione per un’espressione che può annullarsi"}
+Da $x(x-2)=0$, dividendo per $x$ si trova $x=2$ nel caso $x\ne 0$. Il prodotto iniziale vale zero anche per $x=0$. Per conservare entrambe le soluzioni si usa la legge di annullamento del prodotto, oppure si esamina a parte il caso $x=0$.
 :::
 
 ## Forma normale e soluzione
 
-:::teorema{#lineari titolo="L’equazione ax uguale a b"}
-Dopo la riduzione, un’equazione di primo grado si presenta come $ax=b$, con $a\ne0$. La soluzione è
+:::teorema{#lineari titolo="Equazione ax uguale a b"}
+Dopo la riduzione, un’equazione di primo grado assume la forma $ax=b$, con $a\ne 0$. Poiché la divisione per $a$ è reversibile, la soluzione unica è $x=\dfrac ba$.
 
-$$
-x=\frac ba.
-$$
-
-Per esempio $5x-4=2x+8$ diventa $3x=12$, quindi $x=4$.
-
-Il trasporto di un termine è una forma abbreviata dell’aggiunta del suo opposto a entrambi i membri. Il segno cambia perché si esegue quella stessa operazione sui due membri. La verifica sostituisce la soluzione nell’equazione iniziale: per $x=4$, entrambi i membri dell’esempio valgono $16$.
+Per esempio, per risolvere $5x-4=2x+8$ si sottrae $2x$ da entrambi i membri e si aggiunge $4$ a entrambi. Si ottiene $3x=12$, quindi $x=4$. Il cambio di segno di un termine trasferito da un membro all’altro deriva dall’aggiunta del suo opposto a entrambi.
 :::
+
+:::esempio{titolo="Verifica nell’equazione iniziale"}
+Per verificare $x=4$ nell’equazione $5x-4=2x+8$, si calcolano separatamente $5\cdot 4-4=16$ e $2\cdot 4+8=16$. I due risultati coincidono. Nei grafici di $y=5x-4$ e $y=2x+8$, questa uguaglianza corrisponde al punto $(4,16)$.
+:::
+
+::grafico{f="5*x-4;2*x+8" xmin=-1 xmax=6 ymin=-6 ymax=24 punti="4,16,pieno,P" titolo="Intersezione in (4, 16)"}
 
 ## Equazioni con raggruppamenti
 
-:::esempio{#parentesi titolo="Sviluppare e raccogliere i termini simili"}
-Nell’equazione $2(x-3)+4=3x-5$ si applica prima la distributiva:
+:::esempio{#parentesi titolo="Distribuire un fattore negativo"}
+Nell’equazione seguente il fattore $-2$ moltiplica entrambi i termini del binomio $x-3$. Il termine costante dello sviluppo è quindi $(-2)(-3)=6$.
 
 $$
 \begin{aligned}
-2x-6+4&=3x-5\\
-2x-2&=3x-5\\
-3&=x.
+-2(x-3)+4 &= x+1 \\[6pt]
+-2x+6+4 &= x+1 \\[6pt]
+9 &= 3x \\[6pt]
+x &= 3
 \end{aligned}
 $$
 
-Nell’ultimo passaggio si è sottratto $2x$ e aggiunto $5$ a entrambi i membri. La verifica dà $2(3-3)+4=4$ e $3\cdot3-5=4$.
-
-Un segno meno davanti a un raggruppamento cambia il segno di tutti i suoi termini. Per questo motivo è utile completare lo sviluppo prima di riunire i termini numerici.
+La terza riga si ottiene aggiungendo $2x$ e sottraendo $1$ da entrambi i membri. Sostituendo $3$ nell’equazione iniziale si ottiene $4$ in entrambi i membri.
 :::
 
-## Denominatori numerici e denominatori letterali
+## Denominatori numerici e letterali
 
 :::teorema{#frazioni titolo="Eliminare i denominatori nel dominio ammesso"}
-Con soli denominatori numerici non nulli, si può moltiplicare ogni termine dei due membri per il loro minimo comune multiplo. Da $\dfrac x2-\dfrac x3=4$ si ottiene $3x-2x=24$, quindi $x=24$.
+Con soli denominatori numerici non nulli, si può moltiplicare ogni termine dei due membri per il minimo comune multiplo dei denominatori. Da $\dfrac x2-\dfrac x3=4$, moltiplicando per $6$ anche il secondo membro, si ottiene $3x-2x=24$, quindi $x=24$.
 
-Con denominatori letterali si scrivono prima le condizioni di esistenza. Per
+Con denominatori che contengono l’incognita si determina prima il dominio. Nell’equazione $\dfrac{x-3}{x+1}=\dfrac13$ si esclude $x=-1$. Nel dominio ammesso si può moltiplicare per $3(x+1)$ e ottenere $3x-9=x+1$. Il candidato $x=5$ appartiene al dominio, quindi è la soluzione.
+:::
 
-$$
-\frac{x-3}{x+1}=\frac13,\qquad x\ne-1,
-$$
-
-moltiplicando per $3(x+1)$ si ottiene $3x-9=x+1$. La soluzione è $x=5$, che rispetta la condizione iniziale. Un candidato che annullasse un denominatore andrebbe escluso, anche se ottenuto da un’equazione trasformata.
+:::esempio{titolo="Candidato fuori dal dominio"}
+Per $\dfrac{2x-4}{x-2}=0$ il dominio richiede $x\ne 2$. Una frazione è nulla quando il numeratore è zero e il denominatore è diverso da zero. L’unico zero del numeratore è $2$, che il dominio esclude. L’insieme delle soluzioni è $\varnothing$.
 :::
 
 ## Equazioni impossibili e identità
 
 :::osservazione{#classificazione titolo="Quando l’incognita scompare"}
-Dopo la riduzione può comparire $0x=b$. Se $b\ne0$, l’equazione è **impossibile**, perché nessun numero moltiplicato per zero restituisce un numero non nullo. Per esempio $2(x+1)=2x+3$ porta a $2=3$.
+Se la riduzione dà $0x=b$ con $b\ne 0$, l’equazione è **impossibile**. Per esempio, $2(x+1)=2x+3$ si riduce a $2=3$.
 
-Se si ottiene $0x=0$, l’uguaglianza è un’**identità** nel dominio iniziale. Per esempio $3(x-2)=3x-6$ vale per ogni reale. In un’equazione con frazioni algebriche, un’identità vale soltanto per i valori che non erano esclusi dai denominatori.
+Se la riduzione dà $0x=0$, l’uguaglianza è un’**identità** nel dominio iniziale. Per esempio, $3(x-2)=3x-6$ vale per ogni reale. In un’equazione con frazioni algebriche rimangono esclusi i valori che annullano i denominatori.
+:::
 
-Un’equazione determinata ha invece una soluzione unica; per la forma $ax=b$ questo accade quando $a\ne0$.
+:::esempio{titolo="Il ruolo di un parametro"}
+Nell’equazione $mx+5=4x+5$, $m$ è un parametro e $x$ è l’incognita. Sottraendo $4x+5$ da entrambi i membri si ottiene $(m-4)x=0$.
+
+- Se $m=4$, l’uguaglianza vale per ogni $x\in\mathbb R$.
+- Se $m\ne 4$, si può dividere per $m-4$ e l’unica soluzione è $x=0$.
 :::
 
 ## Problemi e formule inverse
 
-:::esempio{#problemi titolo="Scegliere l’incognita e controllare il contesto"}
-Un servizio costa $5$ euro fissi più $3$ euro per attività. Un totale di $26$ euro è descritto da $5+3x=26$, dove x è il numero di attività. Si ottiene $x=7$. Il risultato è un intero non negativo, come richiede il problema.
+:::esempio{#problemi titolo="Scegliere l’incognita e interpretare il risultato"}
+Un servizio costa $5$ euro fissi più $3$ euro per attività. Se $x$ indica il numero di attività, il totale di $26$ euro si traduce in $5+3x=26$. Rimangono $21$ euro dopo aver sottratto il costo fisso. Dividendo per il costo unitario si trova $x=7$, che è un intero non negativo.
 
-Se la somma di due interi consecutivi è $19$, indicando il minore con x, il successivo è $x+1$. L’equazione $x+(x+1)=19$ dà $x=9$, quindi i numeri sono $9$ e $10$.
+Per due interi consecutivi di somma $19$, si indica il minore con $x$ e il maggiore con $x+1$. L’equazione $x+(x+1)=19$ dà $2x=18$. I due interi sono quindi $9$ e $10$.
 
-Isolare una lettera in una formula segue lo stesso metodo. Da $s=3t+2$ si ricava $t=\dfrac{s-2}{3}$ sottraendo due e dividendo per tre.
+Per ricavare $t$ da $s=3t+2$, si sottrae $2$ a entrambi i membri e si divide per $3$. Si ottiene $t=\dfrac{s-2}{3}$. Se $s=14$, la formula inversa dà $t=4$, che nella formula iniziale restituisce $s=14$.
 :::

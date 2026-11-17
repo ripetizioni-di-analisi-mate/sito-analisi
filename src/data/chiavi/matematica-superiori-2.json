@@ -76,7 +76,7 @@
    {
     "e": "Insieme delle soluzioni",
     "t": "intervallo",
-    "v": "[2, 4]"
+    "v": "[-1,\\frac{3}{2}]"
    }
   ]
  },
@@ -85,7 +85,7 @@
    {
     "e": "Insieme delle soluzioni",
     "t": "intervallo",
-    "v": "(-\\infty, 2) \\cup (4, +\\infty)"
+    "v": "\\mathbb R\\setminus\\{-3\\}"
    }
   ]
  },
@@ -94,7 +94,7 @@
    {
     "e": "Insieme delle soluzioni",
     "t": "intervallo",
-    "v": "[2, 4]"
+    "v": "[-\\sqrt2,\\sqrt2]"
    }
   ]
  },
@@ -103,7 +103,7 @@
    {
     "e": "Insieme delle soluzioni",
     "t": "intervallo",
-    "v": "x \\neq 2"
+    "v": "\\varnothing"
    }
   ]
  },
@@ -112,7 +112,7 @@
    {
     "e": "Insieme delle soluzioni",
     "t": "intervallo",
-    "v": "(-\\infty, 2] \\cup (4, +\\infty)"
+    "v": "[-1,2)\\cup(2,+\\infty)"
    }
   ]
  },
@@ -121,7 +121,7 @@
    {
     "e": "Insieme delle soluzioni",
     "t": "intervallo",
-    "v": "(3, 4]"
+    "v": "(-3,-2]\\cup\\{2\\}"
    }
   ]
  },
@@ -457,10 +457,49 @@
     "e": "Punto medio $M$",
     "t": "valori",
     "v": [
-     "1",
-     "3"
+     "4",
+     "1"
     ],
     "ordine": true
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/12": {
+  "campi": [
+   {
+    "e": "Equazione della retta",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "y=-2x-1"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/13": {
+  "campi": [
+   {
+    "e": "Equazione della retta",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "-4x+6y-12=0"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/14": {
+  "campi": [
+   {
+    "e": "Equazione della retta",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "x=-3"
    }
   ]
  },
@@ -669,16 +708,6 @@
     "e": "Frequenza percentuale",
     "t": "numero",
     "v": "30",
-    "u": "%"
-   }
-  ]
- },
- "statistica/14": {
-  "campi": [
-   {
-    "e": "Frequenza percentuale",
-    "t": "numero",
-    "v": "\\frac{100}{3}",
     "u": "%"
    }
   ]

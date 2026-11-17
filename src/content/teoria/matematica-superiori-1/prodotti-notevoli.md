@@ -3,17 +3,15 @@ titolo: "Prodotti notevoli"
 sommario: "Quadrati e cubi di binomi, somma per differenza, riconoscimento dei termini e applicazioni."
 ---
 
-:::percorso
-La proprietà distributiva permette di moltiplicare qualsiasi coppia di polinomi. Alcuni prodotti hanno una struttura che si ripete e può essere descritta con una formula. Riconoscerli rende più leggibili i calcoli e prepara la scomposizione dei polinomi.
-:::
-
 ## Quadrato di un binomio
 
 ::::teorema{#quadrati titolo="Quadrato di una somma e di una differenza"}
 Per ogni numero reale $a,b$ valgono
 
 $$
-(a+b)^2=a^2+2ab+b^2,\qquad(a-b)^2=a^2-2ab+b^2.
+\begin{aligned}
+(a+b)^2&=a^2+2ab+b^2, \\[6pt](a-b)^2&=a^2-2ab+b^2.
+\end{aligned}
 $$
 
 I termini estremi sono i quadrati dei due termini del binomio. Il termine centrale è il loro **doppio prodotto**.
@@ -88,13 +86,23 @@ Ogni coppia di termini produce un doppio prodotto. Se uno dei termini è negativ
 :::osservazione{#riconoscimento titolo="Controllo del termine centrale"}
 Per verificare se $x^2+6x+9$ è un quadrato, si riconoscono $x^2$ e $3^2$ e si controlla che il termine centrale sia $2\cdot x\cdot3=6x$. Si ottiene quindi $(x+3)^2$.
 
-Il controllo del doppio prodotto distingue un vero quadrato da un’espressione simile. Il polinomio $x^2+3x+9$ non è il quadrato di $x+3$. Per completare $x^2-10x+\square$ in un quadrato, il secondo termine del binomio deve essere $-5$ e il termine mancante è $25$.
+Il controllo del doppio prodotto distingue un vero quadrato da un’espressione simile. Per completare $x^2-10x+\square$, il secondo termine del binomio deve essere $-5$ perché $2\cdot(-5)=-10$. Il termine mancante è quindi $(-5)^2=25$.
+:::
+
+:::attenzione{titolo="Quadrati agli estremi e termine centrale"}
+Il polinomio $x^2+3x+9$ ha gli stessi termini estremi di $(x+3)^2$. Il suo termine centrale è $3x$, mentre nel quadrato vale $6x$. Per esempio, in $x=1$ i due valori sono $13$ e $16$.
+:::
+
+:::esempio{titolo="Completare un quadrato con un coefficiente"}
+In $4x^2-12x+\square$ il primo termine del binomio è $2x$. Per avere il doppio prodotto $-12x$ il secondo termine deve essere $-3$, poiché $2\cdot 2x\cdot(-3)=-12x$. Si aggiunge quindi $9$.
 :::
 
 ## Differenze di aree e semplificazioni
 
 :::esempio{#applicazioni titolo="Interpretare il doppio prodotto"}
-Un quadrato di lato $x>0$ viene ingrandito portando il lato a $x+3$. L’aumento dell’area vale
+Un quadrato di lato $x>0$ viene ingrandito portando il lato a $x+3$. L’aumento dell’area è la somma delle tre regioni che si aggiungono al quadrato iniziale.
+
+::struttura{linee="0,0 5,0 5,5 0,5 0,0" poligoni="5,0 8,0 8,5 5,5;0,5 5,5 5,8 0,8;5,5 8,5 8,8 5,8" riferimento=0 etichette="2.5,-0.4,x;6.5,-0.4,3;-0.45,2.5,x;-0.45,6.5,3" titolo="Le tre regioni aggiunte al quadrato iniziale"}
 
 $$
 (x+3)^2-x^2=6x+9.
@@ -102,5 +110,18 @@ $$
 
 Il termine $6x$ rappresenta due strisce rettangolari di area $3x$ ciascuna; il termine $9$ rappresenta il piccolo quadrato di lato tre.
 
-Le formule si possono combinare. Nella differenza $(x+3)^2-(x-3)^2$ i quadrati dei termini si eliminano e resta $12x$. Nella somma degli stessi due quadrati si eliminano invece i doppi prodotti e resta $2x^2+18$.
+:::
+
+:::esempio{titolo="Cambiare formula dopo aver riconosciuto i quadrati"}
+Si può trattare $(x+3)^2-(x-3)^2$ come una differenza di quadrati, con $A=x+3$ e $B=x-3$. Nella somma $A+B$ i termini costanti si annullano. Nella differenza $A-B$ si annullano invece i termini in $x$.
+
+$$
+\begin{aligned}
+A+B&=(x+3)+(x-3)=2x,\\[6pt]
+A-B&=(x+3)-(x-3)=6,\\[6pt]
+A^2-B^2&=(2x)\cdot6=12x.
+\end{aligned}
+$$
+
+Per la somma degli stessi quadrati si possono sviluppare i due binomi. I doppi prodotti sono opposti, quindi resta $2x^2+18$.
 :::
