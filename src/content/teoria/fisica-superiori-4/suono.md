@@ -26,6 +26,20 @@ Nel grafico sono riportate le variazioni di pressione lungo una direzione in un 
 A un'interfaccia ferma le oscillazioni dei due mezzi hanno la stessa frequenza imposta dalla sorgente. Dalla relazione $\lambda=\dfrac{u}{f}$ segue che la lunghezza d'onda cambia nello stesso rapporto di $u$. Se $u_2=3u_1$ allora $\lambda_2=3\lambda_1$. La frequenza comune garantisce che, al confine, il ciclo di compressione del secondo mezzo sia ripetuto con il periodo del primo.
 :::
 
+:::esempio{titolo="Intervallo delle frequenze udibili"}
+L'orecchio umano percepisce suoni da circa $20\,\mathrm{Hz}$ a circa $20\,000\,\mathrm{Hz}$. In aria, con $u=340\,\mathrm{m/s}$, le lunghezze d'onda corrispondenti sono
+$$
+\lambda_{\max}=\frac{340}{20}\,\mathrm m=17\,\mathrm m,\qquad
+\lambda_{\min}=\frac{340}{20\,000}\,\mathrm m=0{,}017\,\mathrm m.
+$$
+Le lunghezze d'onda udibili vanno quindi da $1{,}7\,\mathrm{cm}$ a $17\,\mathrm m$, perché a velocità fissata $\lambda$ è inversamente proporzionale a $f$.
+:::
+
+:::attenzione
+Un grafico di $\Delta p$ in funzione di $x$ fornisce lunghezze, non durate. Se due massimi distano $0{,}50\,\mathrm m$, quel numero è una lunghezza d'onda e va letto in metri. Il periodo si ricava con $T=\dfrac{\lambda}{u}=\dfrac{0{,}50}{340}\,\mathrm s\simeq1{,}47\,\mathrm{ms}$.
+:::
+
+
 ## Altezza, timbro e ampiezza
 
 :::definizione{#caratteri-suono titolo="Caratteri di un suono"}
@@ -37,6 +51,13 @@ Un tono puro contiene una sola frequenza. Un suono periodico complesso può cont
 :::esempio{titolo="Stessa nota, spettri diversi"}
 Due strumenti hanno fondamentale $200\,\mathrm{Hz}$. Nel primo prevale la fondamentale, nel secondo la componente a $400\,\mathrm{Hz}$ ha un'ampiezza confrontabile con essa. I due suoni hanno la stessa fondamentale e un diverso contenuto delle armoniche, quindi possono essere riconosciuti dal timbro. Per alzare la nota di un'ottava si raddoppia la fondamentale a $400\,\mathrm{Hz}$ e si spostano nello stesso rapporto le frequenze delle armoniche.
 :::
+
+:::esempio{titolo="Forma d'onda con una seconda armonica"}
+Si sommano un tono a $200\,\mathrm{Hz}$ e un tono a $400\,\mathrm{Hz}$ con ampiezza pari alla metà. Il periodo della somma è $5\,\mathrm{ms}$, come quello della fondamentale. Dopo $5\,\mathrm{ms}$ la prima componente ha compiuto un ciclo e la seconda ne ha compiuti due, quindi il segnale si ripete. L'altezza resta quella di $200\,\mathrm{Hz}$ e cambia il profilo del segnale, cioè il timbro.
+
+::grafico{f="sin(2*pi*x/5);sin(2*pi*x/5)+0.5*sin(4*pi*x/5)" xmin=0 xmax=10 ymin=-1.9 ymax=1.9 nomi="t,Δp" legenda="f_1;f_1+f_2" titolo="Pressione in funzione di $t$ (in ms). Fondamentale a $200\,\mathrm{Hz}$ da sola e con la seconda armonica a $400\,\mathrm{Hz}$: il periodo è $5\,\mathrm{ms}$ in entrambi i casi."}
+:::
+
 
 :::osservazione
 L'ampiezza di pressione è una grandezza fisica misurabile in pascal. La sensazione di volume dipende anche dalla frequenza e dalla risposta dell'orecchio. Il livello in decibel quantifica un rapporto di intensità rispetto a un riferimento fissato.
@@ -68,6 +89,21 @@ A $4{,}0\,\mathrm m$ l'intensità è $\dfrac{I_2}{4}\simeq 4{,}97\cdot10^{-3}\,\
 Per un'onda armonica progressiva nello stesso mezzo, $I$ è proporzionale al quadrato dell'ampiezza di pressione. Raddoppiare l'ampiezza quadruplica quindi l'intensità. Questa relazione confronta due ampiezze. La legge $\dfrac{P}{4\pi r^2}$ descrive invece come cambia l'intensità quando si cambia distanza a potenza fissata.
 :::
 
+:::osservazione{titolo="Stessa potenza su sfere diverse"}
+Fra due sfere concentriche l'energia non viene assorbita, quindi la potenza $P$ che attraversa la sfera di raggio $r$ attraversa anche quella di raggio $2r$. Le aree sono $4\pi r^2$ e $16\pi r^2$, perciò $I_1=\dfrac{P}{4\pi r^2}$ e $I_2=\dfrac{P}{16\pi r^2}=\dfrac{I_1}{4}$.
+
+::grafico{curve="cos(t),sin(t),0,6.2832;2*cos(t),2*sin(t),0,6.2832" assi=0 uguale=1 xmin=-2.6 xmax=2.6 ymin=-2.4 ymax=2.4 punti="0,0,pieno,S" vettori="0,0,0.71,0.71,r;0,0,-1.41,1.41,2r" unicolore=1 titolo="Le sfere di raggio $r$ e $2r$ sono attraversate dalla stessa potenza $P$. Le loro aree sono $4\pi r^2$ e $16\pi r^2$."}
+:::
+
+:::esempio{titolo="Potenza di una sorgente da una misura"}
+A $10\,\mathrm m$ da una sorgente isotropa, in campo libero, un microfono misura $I=2{,}0\cdot10^{-6}\,\mathrm{W/m^2}$. La sfera di raggio $10\,\mathrm m$ ha area $4\pi\cdot10^2\,\mathrm{m^2}$, quindi
+$$
+P=I\cdot4\pi r^2=2{,}0\cdot10^{-6}\cdot4\pi\cdot10^2\,\mathrm W\simeq2{,}5\cdot10^{-3}\,\mathrm W.
+$$
+La sorgente emette circa $2{,}5\,\mathrm{mW}$.
+:::
+
+
 ## Livello sonoro in decibel
 
 :::definizione{#decibel titolo="Scala logaritmica delle intensità"}
@@ -89,9 +125,13 @@ $$
 Un fattore $10$ in intensità aggiunge $10\,\mathrm{dB}$. Un fattore $2$ aggiunge circa $3{,}01\,\mathrm{dB}$. Per una sorgente puntiforme ideale, a distanza doppia $\dfrac{I_2}{I_1}=\dfrac14$, quindi il livello diminuisce di circa $6{,}02\,\mathrm{dB}$.
 
 :::dimostrazione
-La differenza dei due logaritmi è il logaritmo del quoziente. Poiché $\dfrac{I_2/I_0}{I_1/I_0}=\dfrac{I_2}{I_1}$, il risultato dipende solo dal rapporto delle intensità.
+La differenza dei due logaritmi è il logaritmo del quoziente. Poiché $\dfrac{\frac{I_2}{I_0}}{\frac{I_1}{I_0}}=\dfrac{I_2}{I_1}$, il risultato dipende solo dal rapporto delle intensità.
 :::
 ::::
+
+:::esempio{titolo="Livelli estremi della scala"}
+Se $I=I_0$ il rapporto vale $1$ e $\beta=10\log_{10}1=0\,\mathrm{dB}$, quindi il livello nullo corrisponde all'intensità di riferimento. Se $I=1\,\mathrm{W/m^2}$ il rapporto vale $\dfrac{1}{10^{-12}}=10^{12}$ e $\beta=10\cdot12\,\mathrm{dB}=120\,\mathrm{dB}$. Un intervallo di dodici ordini di grandezza in intensità occupa quindi $120$ unità sulla scala dei decibel.
+:::
 
 :::esempio{titolo="Due sorgenti indipendenti"}
 Un microfono misura $50\,\mathrm{dB}$ con la prima sorgente accesa e $60\,\mathrm{dB}$ con la seconda. Per sorgenti indipendenti, le intensità medie si sommano. La differenza di $10\,\mathrm{dB}$ dà $I_1=\dfrac{I_2}{10}$, quindi $I_{\mathrm{tot}}=1{,}1I_2$. Il livello totale si ricava dal più alto aggiungendo il contributo del fattore $1{,}1$.
@@ -105,6 +145,52 @@ Il contributo della sorgente più debole è piccolo perché al microfono la sua 
 Due sorgenti coerenti con fase fissata richiedono di sommare le perturbazioni prima di calcolare l'intensità. Due onde di uguale ampiezza che arrivano in opposizione di fase possono dare intensità nulla nel punto. Il raddoppio dell'intensità vale per due contributi indipendenti di uguale intensità media.
 :::
 
+:::attenzione
+I livelli in decibel non si sommano. Due sorgenti indipendenti che producono ciascuna $60\,\mathrm{dB}$ hanno intensità totale $2I$, quindi il livello è $60\,\mathrm{dB}+10\log_{10}2\,\mathrm{dB}\simeq63{,}0\,\mathrm{dB}$ e non $120\,\mathrm{dB}$.
+:::
+
+:::richiamo{titolo="Logaritmo di un prodotto"}
+Per $a>0$ e $b>0$ vale $\log_{10}(ab)=\log_{10}a+\log_{10}b$.
+:::
+
+::::teorema{#sorgenti-uguali titolo="Livello di N sorgenti uguali"}
+Siano $N$ sorgenti indipendenti, ciascuna delle quali produce da sola nel punto considerato il livello $\beta_1$. Il livello complessivo è
+$$
+\beta_N=\beta_1+10\log_{10}N\,\mathrm{dB}.
+$$
+Con $N=10$ il livello aumenta di $10\,\mathrm{dB}$, con $N=100$ di $20\,\mathrm{dB}$. Dieci persone che parlano ciascuna a $60\,\mathrm{dB}$ producono quindi $70\,\mathrm{dB}$.
+
+:::dimostrazione
+Le sorgenti sono indipendenti, quindi le intensità medie si sommano e $I_N=N I_1$. Il livello complessivo è allora $\beta_N=10\log_{10}\dfrac{N I_1}{I_0}$. Si applica il logaritmo di un prodotto con $a=N$ e $b=\dfrac{I_1}{I_0}$, entrambi positivi, e si ottiene
+$$
+\beta_N=10\log_{10}N+10\log_{10}\frac{I_1}{I_0}=\beta_1+10\log_{10}N.
+$$
+:::
+::::
+
+::::teorema{#livello-distanza titolo="Livello a distanza diversa dalla sorgente"}
+Per una sorgente puntiforme isotropa in campo libero, se alla distanza $r_1$ il livello è $\beta_1$, alla distanza $r_2$ il livello è
+$$
+\beta_2=\beta_1-20\log_{10}\frac{r_2}{r_1}\,\mathrm{dB}.
+$$
+Ogni raddoppio della distanza riduce il livello di $20\log_{10}2\simeq6{,}02\,\mathrm{dB}$. La formula permette di prevedere il livello a una distanza qualsiasi quando se ne conosce uno a una distanza data.
+
+:::dimostrazione
+Dalla formula dell'intensità si ha $\dfrac{I_2}{I_1}=\dfrac{\frac{P}{4\pi r_2^2}}{\frac{P}{4\pi r_1^2}}=\left(\dfrac{r_1}{r_2}\right)^2$. La differenza fra i livelli è quindi $\beta_2-\beta_1=10\log_{10}\left(\dfrac{r_1}{r_2}\right)^2\,\mathrm{dB}$. Il logaritmo di una potenza è l'esponente per il logaritmo della base, perciò $\beta_2-\beta_1=20\log_{10}\dfrac{r_1}{r_2}\,\mathrm{dB}$. Poiché $\log_{10}\dfrac{r_1}{r_2}=-\log_{10}\dfrac{r_2}{r_1}$, si ottiene la formula.
+:::
+::::
+
+:::esempio{titolo="Livello a distanze crescenti"}
+Un microfono a $1\,\mathrm m$ da una sorgente puntiforme misura $90\,\mathrm{dB}$. A $8\,\mathrm m$ il livello è
+$$
+\beta_8=90\,\mathrm{dB}-20\log_{10}8\,\mathrm{dB}\simeq(90-18{,}06)\,\mathrm{dB}\simeq71{,}9\,\mathrm{dB}.
+$$
+Lo stesso calcolo dà $83{,}98\,\mathrm{dB}$ a $2\,\mathrm m$ e $77{,}96\,\mathrm{dB}$ a $4\,\mathrm m$.
+
+::grafico{f="90-20*log(x)/log(10)" xmin=0.8 xmax=9 ymin=65 ymax=95 nomi="r,β" punti="1,90,pieno;2,83.98,pieno;4,77.96,pieno;8,71.94,pieno" legenda="\beta(r)" titolo="Livello $\beta$ (in dB) a distanza $r$ (in m) da una sorgente puntiforme che dà $90\,\mathrm{dB}$ a $1\,\mathrm m$. Ogni raddoppio della distanza toglie circa $6\,\mathrm{dB}$."}
+:::
+
+
 ## Eco e battimenti
 
 :::teorema{#eco titolo="Tempo di andata e ritorno"}
@@ -114,6 +200,17 @@ $$
 $$
 Con $\Delta t=0{,}40\,\mathrm s$ e $u=340\,\mathrm{m/s}$ l'intero percorso misura $136\,\mathrm m$, quindi la parete dista $68\,\mathrm m$. Se due microfoni registrano lo stesso fronte diretto lungo una semiretta dalla sorgente, la differenza dei tempi corrisponde invece a un cammino di sola andata.
 :::
+
+:::osservazione{titolo="Quando l'eco è distinto"}
+L'orecchio umano percepisce come separati due suoni brevi che arrivano a distanza di almeno circa $0{,}1\,\mathrm s$. Con $u=340\,\mathrm{m/s}$ l'eco è quindi distinto dal suono diretto se $\Delta t=\dfrac{2d}{u}\ge0{,}1\,\mathrm s$, cioè se $d\ge\dfrac{340\cdot0{,}1}{2}\,\mathrm m=17\,\mathrm m$. Per una parete più vicina il suono riflesso si somma al diretto e si percepisce come un prolungamento.
+:::
+
+:::esempio{titolo="Posizione dell'impulso nel tempo"}
+Una parete dista $68\,\mathrm m$ e l'impulso parte da $x=0$ al tempo $t=0$. Fino alla parete la posizione cresce con velocità $340\,\mathrm{m/s}$, quindi la raggiunge dopo $\dfrac{68}{340}\,\mathrm s=0{,}20\,\mathrm s$. Dopo la riflessione la posizione diminuisce con la stessa rapidità e torna a $x=0$ dopo altri $0{,}20\,\mathrm s$, cioè a $\Delta t=0{,}40\,\mathrm s$.
+
+::grafico{f="68-abs(68-340*x)" xmin=0 xmax=0.4 ymin=-10 ymax=90 nomi="t,x" asintoti="y=68" punti="0.2,68,pieno,P;0.4,0,pieno" segmenti="0.2,0,0.2,68" legenda="x(t)" titolo="Posizione $x$ (in m) dell'impulso al tempo $t$ (in s). La parete $P$ è a $68\,\mathrm m$ e l'impulso ritorna in $x=0$ a $t=0{,}40\,\mathrm s$."}
+:::
+
 
 :::definizione{#battimenti titolo="Frequenze vicine"}
 I **battimenti** sono massimi e minimi periodici d'ampiezza prodotti da due toni di frequenze vicine e ampiezze confrontabili. Se le frequenze sono $f_1$ e $f_2$, la frequenza dei massimi d'intensità è
@@ -130,6 +227,23 @@ Nel grafico si sommano due oscillazioni di $9\,\mathrm{Hz}$ e $10\,\mathrm{Hz}$.
 
 ::grafico{f="cos(18*pi*x)+cos(20*pi*x);2*abs(cos(pi*x));-2*abs(cos(pi*x))" xmin=0 xmax=2 ymin=-2.3 ymax=2.5 nomi="t,Δp (Pa)" legenda="\Delta p(t);+2\lvert\cos(\pi t)\rvert;-2\lvert\cos(\pi t)\rvert" titolo="I massimi successivi dell'inviluppo sono separati da $1\,\mathrm s$."}
 :::
+
+:::richiamo{titolo="Formula di prostaferesi del coseno"}
+Per ogni coppia di angoli $\alpha$ e $\beta$ vale $\cos\alpha+\cos\beta=2\cos\dfrac{\alpha-\beta}{2}\cos\dfrac{\alpha+\beta}{2}$.
+:::
+
+::::teorema{#inviluppo-battimenti titolo="Inviluppo di due toni vicini"}
+Due toni di uguale ampiezza $A$ e frequenze $f_1$ e $f_2$ danno in un punto fisso la pressione
+$$
+\Delta p(t)=A\cos(2\pi f_1t)+A\cos(2\pi f_2t)=2A\cos\bigl(\pi(f_1-f_2)t\bigr)\cos\bigl(\pi(f_1+f_2)t\bigr).
+$$
+Il secondo coseno oscilla alla frequenza media $\dfrac{f_1+f_2}{2}$ e il fattore $2A\left|\cos\bigl(\pi(f_1-f_2)t\bigr)\right|$ ne è l'ampiezza, che ha $|f_1-f_2|$ massimi al secondo. Con $f_1=440\,\mathrm{Hz}$ e $f_2=444\,\mathrm{Hz}$ l'ampiezza è $2A|\cos(4\pi t)|$, nulla per $t=\dfrac18\,\mathrm s$ e massima ogni $\dfrac14\,\mathrm s$.
+
+:::dimostrazione
+Si applica la formula di prostaferesi con $\alpha=2\pi f_1t$ e $\beta=2\pi f_2t$, e si ottiene l'uguaglianza scritta. Poiché $|f_1-f_2|$ è piccola rispetto a $\dfrac{f_1+f_2}{2}$, il primo fattore varia lentamente rispetto al secondo e ne determina l'ampiezza. L'argomento $\pi|f_1-f_2|t$ aumenta di $\pi$ quando $t$ aumenta di $\dfrac{1}{|f_1-f_2|}$, e il valore assoluto del coseno ha periodo $\pi$ nell'argomento. L'ampiezza si ripete quindi con periodo $\dfrac{1}{|f_1-f_2|}$, cioè la frequenza dei massimi è $|f_1-f_2|$.
+:::
+::::
+
 
 ## Risonanza nei tubi sonori
 
@@ -158,6 +272,15 @@ Con $L=0{,}85\,\mathrm m$ e $u=340\,\mathrm{m/s}$ il tubo aperto ai due estremi 
 ::grafico{curve="t,cos(pi*t/0.85),0,0.85;t,sin(pi*t/1.7),0,0.85;t,sin(3*pi*t/1.7),0,0.85" xmin=-0.03 xmax=0.92 ymin=-1.35 ymax=1.35 nomi="x,s/sₘₐₓ" segmenti="0.85,-1.13,0.85,1.13" legenda="\text{Aperto, modo 1};\text{Chiuso, modo 1};\text{Chiuso, modo 2}" titolo="Profili di spostamento tra $x=0$ e $x=0{,}85\,\mathrm m$. Il tubo chiuso ha un nodo in $x=0$ e un ventre al bordo aperto."}
 :::
 
+:::esempio{titolo="Lunghezza di un tubo per una nota data"}
+Un tubo aperto ai due estremi deve avere fondamentale $440\,\mathrm{Hz}$. Dalla formula con $n=1$ si ricava $L=\dfrac{u}{2f_1}=\dfrac{340}{2\cdot440}\,\mathrm m\simeq0{,}386\,\mathrm m$. Con un'estremità chiusa vale invece $L=\dfrac{u}{4f_1}=\dfrac{340}{4\cdot440}\,\mathrm m\simeq0{,}193\,\mathrm m$, cioè la metà.
+:::
+
+:::attenzione
+In un tubo chiuso la frequenza $2f_1$ non è una frequenza propria. Con $f_1=100\,\mathrm{Hz}$ le risonanze sono $100\,\mathrm{Hz}$, $300\,\mathrm{Hz}$, $500\,\mathrm{Hz}$, e un tono a $200\,\mathrm{Hz}$ cade fra le prime due senza soddisfare la condizione $L=\dfrac{(2n-1)\lambda}{4}$.
+:::
+
+
 ## Effetto Doppler
 
 ::::teorema{#doppler titolo="Sorgente e osservatore in moto rispetto al mezzo"}
@@ -171,6 +294,12 @@ Si prende $v_o>0$ se l'osservatore si muove verso la sorgente, e $v_s>0$ se la s
 In un periodo di emissione $T=\dfrac1f$, il primo fronte avanza di $uT$ e la sorgente avanza verso l'osservatore di $v_sT$. Il fronte successivo parte da una posizione più avanzata, quindi la distanza fra i due fronti è $\lambda'=(u-v_s)T$. Se l'osservatore va incontro ai fronti, la velocità di incontro è $u+v_o$. Il numero di fronti ricevuti al secondo è $\dfrac{u+v_o}{\lambda'}$, che dà la formula.
 :::
 ::::
+
+:::osservazione{titolo="Fronti davanti e dietro la sorgente"}
+In un periodo $T$ ogni fronte avanza di $uT$ e la sorgente di $v_sT$. Con $v_s=\dfrac{u}{4}$ la distanza fra fronti consecutivi è $\left(u-\dfrac{u}{4}\right)T=\dfrac{3}{4}uT$ davanti alla sorgente e $\left(u+\dfrac{u}{4}\right)T=\dfrac{5}{4}uT$ dietro. Un osservatore fermo davanti riceve i fronti più ravvicinati, quindi con frequenza maggiore di $f$. Dietro la sorgente li riceve più distanziati, quindi con frequenza minore.
+
+::grafico{curve="3.6*cos(t),3.6*sin(t),0,3.1416;0.3+2.4*cos(t),2.4*sin(t),0,3.1416;0.6+1.2*cos(t),1.2*sin(t),0,3.1416" assi=0 uguale=1 xmin=-3.8 xmax=3.8 ymin=-0.8 ymax=3.8 punti="0.9,0,pieno" vettori="0.9,0,1.7,0" etichette="0.72,-0.5,S;0.2,0.4,v = u/4" unicolore=1 titolo="Fronti emessi a intervalli $T$ da una sorgente $S$ che si muove verso destra con $v_s=\dfrac{u}{4}$ (semipiano superiore). Davanti i fronti distano $\dfrac{3}{4}uT$, dietro $\dfrac{5}{4}uT$."}
+:::
 
 :::esempio{titolo="Uguale velocità di avvicinamento"}
 Con $f=600\,\mathrm{Hz}$ e $u=340\,\mathrm{m/s}$, una sorgente che avanza a $20\,\mathrm{m/s}$ verso un osservatore fermo produce
@@ -193,6 +322,18 @@ v_s=u\left(1-\frac{f}{f'}\right)
 $$
 Il segno negativo indica che la sorgente si allontana. Una verifica si ottiene osservando che $u-v_s>u$, quindi la formula deve dare $f'<f$.
 :::
+
+:::esempio{titolo="Osservatore che si allontana"}
+Una sorgente ferma emette $1000\,\mathrm{Hz}$ e un osservatore si allontana a $15\,\mathrm{m/s}$, quindi $v_o=-15\,\mathrm{m/s}$ e $v_s=0$. La lunghezza d'onda è $\lambda=\dfrac{340}{1000}\,\mathrm m=0{,}34\,\mathrm m$ e i fronti lo raggiungono con velocità relativa $340-15=325\,\mathrm{m/s}$. Ne riceve $\dfrac{325}{0{,}34}\simeq956$ al secondo, valore che coincide con
+$$
+f'=1000\,\frac{340-15}{340}\,\mathrm{Hz}\simeq955{,}9\,\mathrm{Hz}.
+$$
+:::
+
+:::attenzione
+Il moto della sorgente cambia la lunghezza d'onda ricevuta, mentre la velocità dei fronti nell'aria resta $u$. Con $f=600\,\mathrm{Hz}$ e $v_s=\dfrac{u}{4}$ si ha $\lambda=0{,}567\,\mathrm m$ e $\lambda'=\dfrac{3}{4}\lambda=0{,}425\,\mathrm m$, quindi $f'=\dfrac{u}{\lambda'}=800\,\mathrm{Hz}$. Il prodotto $f'\lambda'=340\,\mathrm{m/s}$ è ancora $u$.
+:::
+
 
 ## Confronti e lettura di un esperimento
 
