@@ -55,7 +55,6 @@ for course, topics in COURSES.items():
         anchors = re.findall(r'\{#([a-z0-9-]+)\b', body)
         check(len(anchors) == len(set(anchors)), theory, 'ancore duplicate')
         check(len(re.findall(r'^## ', body, re.M)) >= 6, theory, 'meno di sei sezioni di teoria')
-        check(':::percorso' in body, theory, 'percorso di apertura mancante')
         for collection, expected in [('svolti', 8), ('dafare', 14), ('domande', 90)]:
             folder = ROOT / 'src/content' / collection / course / topic
             files = list(folder.glob('*.md'))

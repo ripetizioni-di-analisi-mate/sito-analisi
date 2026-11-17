@@ -3,84 +3,90 @@ titolo: "Equilibrio del corpo rigido"
 sommario: "Momenti, leve, coppie di forze, reazioni delle travi, baricentri e stabilità."
 ---
 
-:::percorso
-L'annullamento della risultante controlla l'equilibrio traslatorio.
-Per un corpo esteso occorre anche controllare la tendenza a ruotare.
-Momenti, bracci e baricentro permettono di risolvere leve, travi appoggiate e problemi di stabilità.
-:::
-
 ## Momento di una forza
 
 :::definizione{#momento titolo="Forza e distanza perpendicolare"}
-Il **momento** di una forza rispetto a un punto descrive la sua tendenza a produrre rotazione. Nel piano il suo modulo è
-$$
-M=Fb,
-$$
-dove b è il **braccio**, cioè la distanza perpendicolare dal punto alla linea d'azione della forza. L'unità è N m.
-Una forza di 20 N con braccio 0,3 m produce 6 N m. Se la linea d'azione attraversa il punto scelto, il braccio e il momento sono nulli. La distanza dal punto di applicazione al perno coincide con il braccio soltanto quando la forza è perpendicolare a quel segmento.
+Un **corpo rigido** è un modello in cui le distanze fra i punti del corpo restano costanti. Per descriverne l'equilibrio bisogna considerare anche la possibilità di rotazione. La stessa forza apre una porta più efficacemente quando agisce lontano dai cardini. Conta inoltre la direzione della spinta. Una forza diretta lungo la porta verso i cardini ha effetto rotatorio nullo rispetto a essi.
+
+Il **braccio** $b$ è la distanza perpendicolare dal punto di riferimento $O$ alla retta d'azione della forza. Il modulo del momento nel piano vale $\lvert M_O\rvert=Fb$, in newton metri. Se $r$ è la distanza da $O$ al punto di applicazione e $\theta$ è l'angolo fra il segmento $r$ e la forza, allora $b=r\lvert\sin\theta\rvert$. Il modulo si può anche ottenere moltiplicando $r$ per la componente della forza perpendicolare al segmento.
 :::
+
+:::esempio{titolo="Una chiave inclinata rispetto alla spinta"}
+Su una chiave lunga $0{,}30\,\mathrm m$ si esercita una forza di $40\,\mathrm N$ con angolo $30^\circ$ rispetto alla chiave. La componente utile è $40\sin30^\circ\,\mathrm N=20\,\mathrm N$. Moltiplicandola per $0{,}30\,\mathrm m$ si ottiene $6\,\mathrm{N\,m}$. Il braccio è $0{,}15\,\mathrm m$. Usando la lunghezza intera come braccio si raddoppierebbe il risultato effettivo.
+:::
+
+::grafico{assi=0 uguale=1 linee="0,0 3,0;0,0 0.75,-1.3;0.75,-1.3 4.73,1" vettori="3,0,4.73,1,F" punti="0,0,pieno,O;3,0,pieno,A" etichette="1.6,0.35,r;0.2,-0.8,b" xmin=-1 xmax=5.4 ymin=-2 ymax=1.8 titolo="Il braccio b è perpendicolare alla retta d'azione. Il segmento OA dà invece la distanza dal bullone al punto di applicazione"}
 
 ## Segni dei momenti
 
 :::osservazione{#segni titolo="Orario e antiorario"}
-Si sceglie un verso di rotazione positivo, per esempio quello antiorario. Una forza che tende a ruotare il corpo in quel verso ha momento positivo; quella che tende al verso opposto ha momento negativo.
-Un momento di 8 N m antiorario e uno di 3 N m orario danno un totale di 5 N m antiorario. Il segno dipende dalla tendenza di rotazione rispetto al punto scelto, non dal solo verso verticale della forza.
+Guardando il piano da uno stesso lato, si può prendere come positivo il senso antiorario. Per assegnare il segno si immagina quale verso di rotazione tenderebbe a produrre la singola forza attorno al punto scelto. Una spinta verso il basso sul lato destro di un perno tende a ruotare in senso orario e ha momento negativo. Sul lato sinistro la stessa spinta ha momento positivo.
+
+Per una trave sull'asse $x$ con perno nell'origine e forze solo verticali, si può scrivere $M_O=xF_y$, usando componenti con segno. Se una forza di $12\,\mathrm N$ verso il basso agisce a $x=-0{,}4\,\mathrm m$, il prodotto $(-0{,}4)(-12)$ vale $+4{,}8\,\mathrm{N\,m}$. Con un'altra forza verso il basso di $8\,\mathrm N$ a $x=+0{,}3\,\mathrm m$ si aggiunge $-2{,}4\,\mathrm{N\,m}$. Il momento totale è $+2{,}4\,\mathrm{N\,m}$.
 :::
 
 ## Equilibrio del corpo rigido
 
-:::teorema{#equilibrio-rigido titolo="Forze e momenti devono annullarsi"}
-Per un corpo rigido fermo nel piano, in un riferimento inerziale, occorre
+::::teorema{#equilibrio-rigido titolo="Forze e momenti devono annullarsi"}
+Un corpo rigido fermo, soggetto a forze nel piano, resta in equilibrio se sono nulle la risultante delle forze e la somma dei momenti rispetto a un medesimo punto $O$. Le condizioni sono
 $$
-\begin{cases}
-\sum F_x=0,\\
-\sum F_y=0,\\
-\sum M_O=0.
-\end{cases}
+\sum F_x=0,\qquad \sum F_y=0,\qquad \sum M_O=0.
 $$
-O è il punto rispetto al quale si calcolano i momenti. Quando la risultante è nulla, il momento totale non dipende dalla scelta di O. Conviene scegliere un punto su cui passa una forza incognita: quella forza ha momento nullo e non compare nella relativa equazione.
+La scelta di $O$ è libera. Per semplificare i calcoli si sceglie spesso un punto sulla retta d'azione di una reazione incognita.
+
+:::dimostrazione
+Spostando il riferimento da $O$ a un altro punto $O'$ si sottrae a ciascun momento il contributo dato dal vettore $\overrightarrow{OO'}$ e dalla singola forza. I contributi sottratti si sommano al momento della risultante calcolato con lo stesso vettore di spostamento. Quando la risultante è zero, questa variazione è zero. Una somma dei momenti nulla rispetto a $O$ è dunque nulla anche rispetto a $O'$.
+:::
+::::
+
+:::attenzione
+Un sistema di due forze opposte con rette d'azione distinte ha risultante nulla e momento non nullo. Una singola forza la cui linea passa per il perno ha momento nullo rispetto al perno e risultante non nulla. Ciascuno dei due bilanci rileva un aspetto distinto dell'equilibrio.
 :::
 
 ## Leve
 
 :::teorema{#leve titolo="Uguaglianza dei momenti opposti"}
-Una leva ideale con due forze ai lati del fulcro, e peso proprio trascurabile oppure già equilibrato, soddisfa
-$$
-F_1b_1=F_2b_2.
-$$
-Per equilibrare 40 N con braccio 0,2 m usando un braccio di 0,8 m occorrono 10 N. Il rapporto fra forza resistente e motrice è il rapporto fra braccio motore e resistente.
-I bracci sono distanze perpendicolari. Se la forza è obliqua alla leva, si può usare la componente perpendicolare moltiplicata per la distanza fra fulcro e punto di applicazione.
-
-::grafico{assi=0 uguale=1 xmin=-2.5 xmax=5.5 ymin=-3 ymax=3.2 linee="-1.5,0 4.5,0;-0.35,-0.6 0,0 0.35,-0.6 -0.35,-0.6;-0.6,-0.7 0.6,-0.7" vettori="-1,0,-1,-2,F₁ = 40 N;4,0,4,-0.5,F₂ = 10 N;0,0,0,2.5,R = 50 N" punti="0,0" etichette="-0.65,0.55,0,2 m;2.2,0.55,0,8 m;0,-1.1,O" titolo="Leva di peso trascurabile: $40\cdot0{,}2=10\cdot0{,}8$. La reazione del fulcro, $R=50\,\mathrm N$, equilibra le due forze verso il basso"}
+In una leva ideale con perno senza attrito, due forze che tendono a far ruotare in versi opposti si equilibrano rispetto al fulcro se $F_1b_1=F_2b_2$, a condizione che gli altri momenti siano nulli o già compensati. Il rapporto fra forza resistente e forza motrice è il rapporto inverso dei loro bracci. La reazione del fulcro va calcolata separatamente dall'equilibrio delle forze.
 :::
+
+:::esempio{titolo="Equilibrio con un fulcro che sostiene entrambe le forze"}
+Una forza di $45\,\mathrm N$ agisce verso il basso a $0{,}2\,\mathrm m$ a sinistra del fulcro. A $0{,}6\,\mathrm m$ a destra si applicano $15\,\mathrm N$ verso il basso. I loro momenti sono $+9$ e $-9\,\mathrm{N\,m}$. Il fulcro fornisce $60\,\mathrm N$ verso l'alto per annullare la somma verticale. La sua retta d'azione passa per il fulcro, quindi la reazione non altera l'equazione appena usata.
+:::
+
+::grafico{assi=0 uguale=1 linee="-1.8,0 3.8,0;-0.32,-0.55 0,0 0.32,-0.55 -0.32,-0.55" vettori="-1,0,-1,-1.8,45 N;3,0,3,-0.6,15 N;0,0,0,2.4,60 N" etichette="-0.5,0.45,0.2 m;1.65,0.45,0.6 m" xmin=-2.5 xmax=4.4 ymin=-2.3 ymax=3 titolo="Leva con momenti opposti e reazione del fulcro verso l'alto"}
 
 ## Coppie di forze
 
-:::definizione{#coppie titolo="Risultante nulla e momento non nullo"}
-Una **coppia** è formata da due forze parallele, uguali e opposte, con linee d'azione diverse. La risultante è nulla; il modulo del momento è $M_c=Fd$, dove d è la distanza fra le linee.
-Due forze di 10 N distanti 0,2 m producono una coppia di 2 N m. Il momento della coppia non dipende dal punto rispetto al quale si calcola. Il corpo non è in equilibrio sotto l'effetto della sola coppia, anche se la somma delle forze è zero.
+::::teorema{#coppie titolo="Risultante nulla e momento non nullo"}
+Una **coppia di forze** è formata da due forze parallele con modulo comune $F$, versi opposti e rette d'azione distinte. La risultante è nulla, mentre il modulo del momento è $F d$, dove $d$ è la distanza perpendicolare fra le rette.
+
+:::dimostrazione
+Per calcolare il momento si sceglie un punto sulla retta d'azione di una delle forze. Quella forza ha braccio zero, mentre l'altra ha braccio $d$. La risultante nulla della coppia rende il risultato indipendente dalla scelta del punto.
 :::
+::::
+
+::grafico{assi=0 uguale=1 linee="-2,-2 -2,2;2,-2 2,2" vettori="-2,0,-2,1.6,F;2,0,2,-1.6,F" etichette="0,0.2,d" xmin=-3 xmax=3 ymin=-2.4 ymax=2.4 titolo="Forze verticali opposte a distanza d. Entrambe tendono a ruotare il corpo in senso orario rispetto al punto centrale"}
 
 ## Travi con due appoggi
 
 :::osservazione{#travi titolo="Ricavare le reazioni"}
-Una trave orizzontale appoggiata agli estremi A e B riceve reazioni verticali $R_A$ e $R_B$. Prima si impone $R_A+R_B=P_{\mathrm{tot}}$; poi si annullano i momenti, per esempio rispetto ad A.
-Una trave senza peso lunga 3 m porta un carico di 60 N a 1 m da A. Da $3R_B=60\cdot1$ si trova $R_B=20\,\mathrm N$; quindi $R_A=40\,\mathrm N$. Il peso proprio di una trave omogenea va applicato al centro e aggiunto ai carichi.
+Per una trave orizzontale di lunghezza $L$ fra due appoggi, un singolo peso $P$ applicato a distanza $a$ dall'appoggio A dà reazione $R_B=Pa/L$ nell'altro appoggio se il peso della trave è trascurabile. Il momento rispetto ad A elimina $R_A$. Il bilancio verticale fornisce poi $R_A=P-R_B$. Se la trave ha peso proprio, lo si aggiunge come forza verticale applicata al suo baricentro.
+
+Per $L=4\,\mathrm m$, $a=1\,\mathrm m$ e $P=100\,\mathrm N$ si trovano $R_B=25\,\mathrm N$ e $R_A=75\,\mathrm N$. Con un peso della trave omogenea di $40\,\mathrm N$ si aggiungono $20\,\mathrm N$ a ciascuna reazione, perché il peso proprio agisce al centro. Lo stesso risultato si può verificare calcolando i momenti rispetto a B.
 :::
 
 ## Baricentro
 
 :::definizione{#baricentro titolo="Posizione della risultante dei pesi"}
-In un campo gravitazionale uniforme il peso totale si può applicare al **baricentro**. Per due masse puntiformi lungo un asse,
-$$
-x_G=\frac{m_1x_1+m_2x_2}{m_1+m_2}.
-$$
-Due masse 1 kg e 2 kg poste a 0 e 3 m hanno baricentro a 2 m. Per un'asta omogenea il baricentro è il punto medio; per un corpo con distribuzione di massa non uniforme non basta osservare il centro geometrico.
+In un campo uniforme il **baricentro** ha la stessa posizione del centro di massa. Per masse $m_i$ fissate lungo una retta nelle posizioni $x_i$, la sua coordinata è $x_G=\dfrac{\sum m_i x_i}{\sum m_i}$. Si ottiene imponendo che il peso totale applicato in $x_G$ abbia lo stesso momento della somma dei pesi individuali. Il campo $g$ si semplifica.
+
+Il punto medio è il baricentro di un'asta omogenea di sezione costante, per simmetria. Se si aggiunge una massa a destra del baricentro iniziale, la media pesata si sposta verso destra. La nuova coordinata resta compresa fra la vecchia coordinata e quella della massa aggiunta.
 :::
 
 ## Stabilità e ribaltamento
 
 :::teorema{#stabilita titolo="La verticale del baricentro"}
-Un corpo appoggiato, soggetto soltanto al peso e alle reazioni di sostegno, può mantenere l'equilibrio se la verticale del baricentro attraversa la base di appoggio. Quando raggiunge un bordo si raggiunge una configurazione limite; oltre il bordo il peso tende a ribaltare il corpo.
-Con una spinta orizzontale applicata a quota h, si confrontano i momenti rispetto allo spigolo di ribaltamento. Per base larga w e baricentro centrale, alla soglia $Fh=P\,w/2$. Questa conclusione presuppone attrito sufficiente a evitare uno scorrimento precedente.
+Con il solo peso e le reazioni di un appoggio piano, l'equilibrio richiede che la verticale del baricentro incontri la base d'appoggio. Se arriva al bordo, il sistema è alla soglia. Quando la verticale cade oltre il bordo, il peso ha momento attorno allo spigolo che tende a ribaltare il corpo.
+
+Una spinta orizzontale $F$ applicata ad altezza $h$ ha momento $Fh$ rispetto allo spigolo verso cui il corpo tende a ruotare. Se il peso è $P$ e la sua retta d'azione dista $b$ dallo spigolo, alla soglia vale $Fh=Pb$. Occorre anche che l'attrito disponibile sia sufficiente a evitare lo scorrimento prima di quella soglia.
 :::

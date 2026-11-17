@@ -1,74 +1,78 @@
 ---
-titolo: "Moto nel piano, proiettili e moto circolare"
-sommario: "Componenti del moto, lanci orizzontali e obliqui, traiettorie, radianti e accelerazione centripeta."
+titolo: "Moti nel piano"
+sommario: "Componenti e velocità, lanci nel vuoto, traiettorie e accelerazione nel moto circolare."
 ---
 
 ## Descrivere il moto in due dimensioni
 
 :::definizione{#componenti-moto titolo="Posizione, velocità e accelerazione nel piano"}
-La posizione di un punto nel piano è individuata dalle coordinate $x,y$. Il vettore spostamento ha componenti $\Delta x,\Delta y$. La velocità media vettoriale è $\vec v_m=\dfrac{\Delta\vec r}{\Delta t}$; la velocità istantanea è tangente alla traiettoria e ha verso concorde al moto.
+La posizione ha due coordinate che dipendono dallo stesso tempo. Nel piano, $(x(t),y(t))$ determina il punto materiale. Eliminando $t$ si può ricavare la **traiettoria**, ossia la curva dei punti attraversati. La traiettoria da sola non dice quando il corpo passa per ciascun punto o in quale verso lo percorre.
 
-Le componenti permettono di risolvere separatamente le equazioni lungo i due assi. Il tempo è lo stesso per entrambe. Con $v_x=3\,\mathrm{m/s}$ e $v_y=4\,\mathrm{m/s}$, il modulo della velocità è $v=\sqrt{v_x^2+v_y^2}=5\,\mathrm{m/s}$. Nel moto curvilineo la direzione di $\vec v$ cambia, quindi può esserci accelerazione anche con modulo della velocità costante.
+La **velocità** ha componenti $v_x$ e $v_y$, stimate con le pendenze delle due leggi orarie in intervalli sempre più brevi. È tangente alla traiettoria nei punti regolari con velocità non nulla e punta nel verso del moto. Da $v_x=6\,\mathrm{m/s}$ e $v_y=-8\,\mathrm{m/s}$ si trova un modulo di $10\,\mathrm{m/s}$ e un verso verso destra e in basso. Sommare $6$ e $-8$ mescolerebbe contributi lungo assi perpendicolari.
+
+L'accelerazione è la variazione vettoriale della velocità nel tempo. Una velocità può cambiare sia di modulo sia di direzione. Perciò un moto a rapidità costante può avere accelerazione diversa da zero, come accade quando un punto descrive una circonferenza. In un lancio senza resistenza dell'aria, invece, l'accelerazione è verticale e costante in prossimità del suolo.
 :::
 
 ## Il lancio orizzontale
 
 :::teorema{#lancio-orizzontale titolo="Moti indipendenti lungo gli assi"}
-Un corpo viene lanciato orizzontalmente da quota $h$ con velocità $v_0$. Scegliendo $x_0=0$ e l'asse $y$ verso l'alto, trascurando l'aria e assumendo $g$ costante,
+Supponiamo che la resistenza dell'aria sia trascurabile, che il suolo sia orizzontale e che $g$ sia uniforme. Si prende $x$ orizzontale e $y$ verso l'alto. Se il corpo parte da $(0,h)$ con velocità orizzontale $v_0>0$, le leggi sono
 $$
-x=v_0t,\qquad y=h-\frac12gt^2,\qquad v_x=v_0,\qquad v_y=-gt.
+x(t)=v_0t,\qquad y(t)=h-\tfrac12gt^2.
 $$
-La componente orizzontale è uniforme perché l'accelerazione orizzontale è nulla. Lungo la verticale il corpo cade da fermo. Il tempo di volo fino al suolo è $t_f=\sqrt{\dfrac{2h}{g}}$; la distanza orizzontale è $R=v_0t_f$. Con $h=19{,}62\,\mathrm m$ e $v_0=6{,}0\,\mathrm{m/s}$ si ottengono $t_f=2{,}0\,\mathrm s$ e $R=12\,\mathrm m$. Eliminando $t$ risulta $y=h-\dfrac{g}{2v_0^2}x^2$, una parabola.
+Il moto verticale parte da fermo e determina il tempo di arrivo $t_f=\sqrt{2h/g}$. Il moto orizzontale procede senza accelerazione durante lo stesso tempo. La distanza di arrivo è $R=v_0t_f$, quindi dipende linearmente da $v_0$ e come radice quadrata da $h$. Quadruplicare $h$ raddoppia il tempo e, a $v_0$ fissata, anche la distanza.
+
+Con $h=5\,\mathrm m$, $v_0=6\,\mathrm{m/s}$ e $g=10\,\mathrm{m/s^2}$ si ha $t_f=1\,\mathrm s$ e $R=6\,\mathrm m$. La velocità poco prima dell'impatto ha componenti $(6,-10)\,\mathrm{m/s}$. La sua direzione è obliqua perché la componente orizzontale rimane quella iniziale e quella verticale aumenta in modulo. Scrivendo $t=x/v_0$ nella legge verticale si ricava $y=h-\dfrac{g}{2v_0^2}x^2$. Si usa il tratto da $x=0$ a $x=R$, fino al contatto.
 :::
+
+::grafico{curve="6*t,5-5*t^2,0,1" punti="0,5,pieno;6,0,pieno" vettori="0,5,2,5,v_0" xmin=-0.6 xmax=7 ymin=-0.5 ymax=6.5 titolo="Il lancio orizzontale produce una parabola fino al suolo"}
 
 ## Il lancio obliquo
 
 :::teorema{#lancio-obliquo titolo="Tempo di volo, quota massima e gittata"}
-Per un lancio dall'origine con velocità iniziale $v_0$ inclinata di $\theta$ rispetto all'orizzontale,
-$$
-x=v_0\cos\theta\,t,\qquad y=v_0\sin\theta\,t-\frac12gt^2.
-$$
-La componente verticale della velocità è $v_y=v_0\sin\theta-gt$. Al culmine essa si annulla, quindi $t_H=\dfrac{v_0\sin\theta}{g}$ e $H=\dfrac{v_0^2\sin^2\theta}{2g}$. Al culmine la componente orizzontale resta $v_0\cos\theta$.
+Sia $\theta$ l'angolo del lancio dal semiasse positivo $x$. Con partenza da $(0,h)$ e assenza di resistenza, le componenti iniziali sono $v_{0x}=v_0\cos\theta$ e $v_{0y}=v_0\sin\theta$. Pertanto $x=v_{0x}t$ e $y=h+v_{0y}t-\frac12gt^2$. Se $v_{0y}>0$, all'apice si ha $v_y=v_{0y}-gt=0$. L'aumento di quota è $H=v_{0y}^2/(2g)$. A quell'istante la velocità è ancora orizzontale se $v_{0x}$ non è nullo.
 
-Se arrivo e partenza sono alla stessa quota, si ottengono $t_f=2t_H$ e $R=\dfrac{v_0^2\sin2\theta}{g}$. Il fattore $\sin2\theta$ ha valore massimo $1$, quindi la gittata massima si ha a $45^\circ$ nelle ipotesi del modello. Con quote diverse si risolve invece la legge verticale all'altezza di arrivo. Un lancio con $v_0=20\,\mathrm{m/s}$ e $\theta=30^\circ$ ha $H\simeq5{,}10\,\mathrm m$ e $R\simeq35{,}3\,\mathrm m$.
+Se partenza e arrivo sono alla stessa quota, la prima soluzione di $y(t)=h$ è il lancio, $t=0$. La seconda dà $t_f=2v_{0y}/g$. Si ricava la gittata
+$$
+R=\frac{2v_{0x}v_{0y}}g=\frac{v_0^2\sin(2\theta)}g .
+$$
+Per $0<\theta<90^\circ$ e $v_0$ fissata, il seno raggiunge il massimo a $2\theta=90^\circ$. Angoli complementari hanno la stessa gittata in queste condizioni, perché $\sin\alpha=\sin(180^\circ-\alpha)$. I tempi di volo e le altezze massime sono invece diversi, perché dipendono dalla componente verticale.
+
+Se la quota di arrivo è diversa, si deve risolvere la legge verticale con la nuova quota. Nel caso $x=8t$, $y=15+5t-5t^2$ si raggiunge il suolo a $t=(1+\sqrt{13})/2\,\mathrm s\simeq2{,}30\,\mathrm s$. Usare la formula della stessa quota darebbe $1\,\mathrm s$, che corrisponde invece al ritorno all'altezza iniziale di quindici metri.
 :::
 
-::grafico{f="0.5*x-0.025*x^2" xmin=0 xmax=22 ymin=-2 ymax=4 nomi="x,y" titolo="Traiettoria parabolica: al culmine la tangente è orizzontale"}
+::grafico{curve="8*t,15+5*t-5*t^2,0,2.30277564" punti="0,15,pieno;4,16.25,pieno;8,15,pieno" segmenti="0,15,8,15" xmin=-0.5 xmax=20 ymin=-1 ymax=18.5 titolo="Il ritorno alla quota iniziale precede l'impatto al suolo"}
 
 ## Angoli e velocità angolare
 
 :::definizione{#radianti titolo="Il radiante"}
-Un angolo in radianti è il rapporto fra lunghezza dell'arco $s$ e raggio $r$, quindi $\theta=\dfrac sr$. Un giro corrisponde a $2\pi$ radianti e a $360^\circ$. La velocità angolare media è $\omega_m=\dfrac{\Delta\theta}{\Delta t}$. Nel moto circolare uniforme è costante.
+Un angolo in radianti è il rapporto tra l'arco orientato $s$ e il raggio $r$: $\theta=s/r$. Un giro è $2\pi$ radianti, quindi $180^\circ=\pi\,\mathrm{rad}$. La velocità angolare misura la variazione di angolo per unità di tempo. In moto circolare uniforme $\omega=2\pi/T=2\pi f$, dove $T$ è il periodo e $f$ la frequenza. Se un rotore compie trenta giri al minuto, la frequenza è mezzo giro al secondo, quindi $\omega=\pi\,\mathrm{rad/s}$.
 
-Il periodo $T$ è il tempo necessario a completare un giro; la frequenza è $f=\dfrac1T$. Valgono
-$$
-\omega=\frac{2\pi}{T}=2\pi f,\qquad v=\omega r.
-$$
-Un punto a $r=0{,}50\,\mathrm m$ che compie un giro ogni $2{,}0\,\mathrm s$ ha $\omega=\pi\,\mathrm{rad/s}$ e $v\simeq1{,}57\,\mathrm{m/s}$. Sullo stesso disco rigido tutti i punti hanno uguale velocità angolare; la velocità tangenziale cresce con la distanza dall'asse.
+Da $s=r\theta$ segue $v_t=r\omega$ quando $\theta$ si misura in radianti. A raggio doppio, con la stessa velocità angolare, il punto percorre un arco doppio nello stesso tempo. Tutti i punti di un disco rigido compiono un giro in uno stesso periodo, ma quelli più lontani dall'asse hanno velocità tangenziale maggiore. L'angolo esprime quanto il corpo ruota e il raggio trasforma quella rotazione in una distanza.
 :::
 
 ## Accelerazione centripeta
 
 :::teorema{#centripeta titolo="Variazione della direzione della velocità"}
-Nel moto circolare uniforme l'accelerazione è diretta verso il centro e ha modulo
+Su una circonferenza, la velocità è tangente e perpendicolare al raggio. Nel moto circolare uniforme le frecce velocità hanno tutte la stessa lunghezza, ma a istanti diversi hanno orientamenti diversi. La differenza fra due velocità vicine ha modulo circa $v\,\Delta\theta$ per un angolo molto piccolo $\Delta\theta$, misurato in radianti. Dividendo per il tempo e usando $\omega=v/r$ si ottiene
 $$
-a_c=\frac{v^2}{r}=\omega^2r.
+a_c=v\omega=\frac{v^2}r=\omega^2r .
 $$
-La relazione si ricava confrontando, in un intervallo breve, il triangolo formato dai raggi con quello formato dai vettori velocità; i due triangoli hanno lo stesso piccolo angolo. Risulta $\dfrac{|\Delta\vec v|}{v}\simeq\dfrac{\Delta s}{r}$. Dividendo per $\Delta t$ e usando $\dfrac{\Delta s}{\Delta t}=v$, si ottiene $a_c=\dfrac{v^2}{r}$.
+Nel limite la direzione della variazione punta verso il centro. Per effetto dell'accelerazione, la velocità segue il passaggio alla nuova tangente e la traiettoria si piega.
 
-Un corpo a $v=4{,}0\,\mathrm{m/s}$ su una circonferenza di raggio $2{,}0\,\mathrm m$ ha $a_c=8{,}0\,\mathrm{m/s^2}$. Raddoppiare la velocità a raggio fisso quadruplica l'accelerazione. L'aggettivo centripeta indica la direzione dell'accelerazione.
+La forma più conveniente dipende dai dati. A velocità lineare fissata, una curva di raggio dimezzato richiede accelerazione doppia. A velocità angolare fissata, invece, il punto su un disco a raggio doppio ha accelerazione doppia. L'apparente differenza è dovuta al fatto che nel secondo confronto anche il modulo della velocità raddoppia.
 :::
 
-::grafico{curve="3*cos(t),3*sin(t),0,6.283185" vettori="3,0,3,2,v;3,0,1,0,a" xmin=-4 xmax=5 ymin=-4 ymax=4 uguale=1 titolo="Velocità tangente e accelerazione verso il centro nel moto circolare uniforme"}
+::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="2,0,2,1.4,v;2,0,0.9,0,a_c" xmin=-2.5 xmax=2.8 ymin=-2.5 ymax=2.5 uguale=1 titolo="Nel punto a destra l'accelerazione è rivolta verso il centro"}
 
 ## Moto circolare non uniforme
 
-:::osservazione{#tangenziale titolo="Due componenti dell’accelerazione"}
-Se cambia anche il modulo della velocità, l'accelerazione ha una componente tangenziale $a_t$ e una normale $a_c=\dfrac{v^2}{r}$. La prima cambia il modulo della velocità, la seconda ne cambia la direzione. Poiché sono perpendicolari,
-$$
-a=\sqrt{a_t^2+a_c^2}.
-$$
-Con $a_t=3{,}0\,\mathrm{m/s^2}$ e $a_c=4{,}0\,\mathrm{m/s^2}$ il modulo totale è $5{,}0\,\mathrm{m/s^2}$. La traiettoria circolare e il grafico di una componente della posizione sono rappresentazioni diverse: la traiettoria usa due coordinate spaziali; la legge oraria mette in relazione una coordinata con il tempo. Le oscillazioni e la proiezione del moto circolare saranno riprese in Fisica del 4° anno.
+:::osservazione{#tangenziale titolo="Due componenti dell'accelerazione"}
+Nel moto circolare non uniforme cambia anche il modulo della velocità. La componente tangenziale vale $a_t=\Delta v/\Delta t$ come media della variazione di rapidità lungo il tratto. Istante per istante si considera il limite su intervalli piccoli. Un segno negativo, prendendo positiva la tangente lungo il moto, indica che il corpo rallenta. La componente radiale resta $a_c=v^2/r$ verso il centro.
+
+Le due direzioni sono perpendicolari, dunque $a=\sqrt{a_c^2+a_t^2}$. Con $v=4\,\mathrm{m/s}$, $r=4\,\mathrm m$ e $a_t=3\,\mathrm{m/s^2}$, l'accelerazione radiale vale $4\,\mathrm{m/s^2}$ e il modulo totale è $5\,\mathrm{m/s^2}$. Se il corpo rallenta con $a_t=-3\,\mathrm{m/s^2}$, il modulo rimane cinque ma si inclina all'indietro rispetto al moto. Il segno conta quando si disegna la direzione.
+
+Se la curva è sempre la stessa circonferenza, nel momento in cui il corpo passa da velocità nulla la componente radiale è nulla. Può comunque esserci accelerazione tangenziale, come per una ruota che parte aumentando la velocità angolare. A velocità non nulla, annullare l'accelerazione tangenziale lascia una componente centripeta positiva in modulo.
 :::
 
-::grafico{f="x^2/2" xmin=0 xmax=5 ymin=0 ymax=14 nomi="v,a" titolo="A raggio $2\,\mathrm m$, l’accelerazione centripeta cresce con il quadrato della velocità"}
+::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="2,0,0.4,0,a_c;2,0,2,1.2,a_t;2,0,0.4,1.2,a" segmenti="0.4,0,0.4,1.2;0.4,1.2,2,1.2" xmin=-2.5 xmax=2.8 ymin=-2.5 ymax=2.5 uguale=1 titolo="La risultante è la diagonale del parallelogramma delle componenti"}
