@@ -1,3 +1,4 @@
+import { PERIODI_DASHBOARD } from './periodi.mjs';
 const GIORNO = 86_400_000;
 const FUSO = 'Europe/Rome';
 const dataRoma = new Intl.DateTimeFormat('sv-SE', { timeZone: FUSO, year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -90,7 +91,7 @@ function mezzanotteRoma(utc) {
 }
 
 export function storicoEmail(ar, c, ora) {
-  const giorni = [7, 30, 90].includes(Number(c.giorni)) ? Number(c.giorni) : 30;
+  const giorni = PERIODI_DASHBOARD.includes(Number(c.giorni)) ? Number(c.giorni) : 30;
   const oggi = Date.parse(dataRoma.format(ora));
   const calendario = Array.from({ length: giorni }, (_, i) => {
     const utc = oggi - i * GIORNO;

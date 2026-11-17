@@ -2,7 +2,7 @@
 // Servono META_ADS_ACCOUNT (numero dell'account pubblicitario, in wrangler.jsonc) e il segreto META_ADS_TOKEN
 // (chiave di sola lettura, permesso ads_read). Senza chiave la dashboard mostra solo il ricavo.
 const VALIDITA = 30 * 60000;
-const PERIODI = [7, 30, 90];
+import { PERIODI_DASHBOARD as PERIODI } from './periodi.mjs';
 let copia = null;
 
 const giornoRoma = (t) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome' }).format(new Date(t));

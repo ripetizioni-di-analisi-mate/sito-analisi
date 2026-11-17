@@ -2,6 +2,7 @@
 // I dati arrivano da /admin/api/*; il codice del browser è la funzione `cliente`, inserita nella pagina come sorgente.
 import { TIPI_EMAIL } from './storico-email.mjs';
 import { FONTI_CHATGPT, TESTI_PROVENIENZA } from './provenienza.mjs';
+import { PERIODI_DASHBOARD } from './periodi.mjs';
 
 const ICONE = {
   panoramica: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/>',
@@ -70,7 +71,7 @@ main{padding:1.4rem clamp(16px,3vw,2.2rem) 3rem;min-width:0}
 .testa .stato-agg{color:var(--ink-3);font-size:.85rem;display:flex;align-items:center;gap:.4rem}
 .testa .stato-agg::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--su);box-shadow:0 0 0 3px color-mix(in srgb,var(--su) 20%,transparent)}
 .testa .destra{margin-left:auto;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
-.segmenti{display:inline-flex;background:var(--pannello);border:1px solid var(--riga);border-radius:9px;padding:3px}
+.segmenti{display:inline-flex;max-width:100%;overflow-x:auto;background:var(--pannello);border:1px solid var(--riga);border-radius:9px;padding:3px}
 .segmenti button{border:0;background:none;padding:.3rem .75rem;border-radius:6px;cursor:pointer;color:var(--ink-2);font-weight:600;font-size:.88rem}
 .segmenti button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
 .bottone{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--riga);background:var(--pannello);border-radius:9px;padding:.42rem .8rem;cursor:pointer;font-weight:600;font-size:.88rem;color:var(--ink);text-decoration:none;white-space:nowrap}
@@ -305,9 +306,7 @@ td.destra,th.destra{text-align:right}
       <span class="stato-agg" id="stato-agg">Caricamento…</span>
       <div class="destra">
         <div class="segmenti" role="group" aria-label="Periodo">
-          <button type="button" data-giorni="7" aria-pressed="false">7 giorni</button>
-          <button type="button" data-giorni="30" aria-pressed="true">30 giorni</button>
-          <button type="button" data-giorni="90" aria-pressed="false">90 giorni</button>
+          ${PERIODI_DASHBOARD.map((g) => `<button type="button" data-giorni="${g}" aria-pressed="${g === 30}">${g}<span class="solo-largo"> giorni</span></button>`).join('')}
         </div>
         <button type="button" class="bottone" id="aggiorna" title="Aggiorna i dati">${icona('aggiorna')}<span class="solo-largo">Aggiorna</span></button>
       </div>
@@ -319,14 +318,14 @@ td.destra,th.destra{text-align:right}
 <aside class="cassetto" id="cassetto" aria-hidden="true" role="dialog" aria-label="Scheda dello studente"></aside>
 <div class="toast" id="toast" role="status"></div>
 <script>var __name = function (f) { return f; };
-(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)}, ${JSON.stringify(TIPI_EMAIL)}, ${JSON.stringify(FONTI_CHATGPT)}, ${JSON.stringify(TESTI_PROVENIENZA)});</script>
+(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)}, ${JSON.stringify(TIPI_EMAIL)}, ${JSON.stringify(FONTI_CHATGPT)}, ${JSON.stringify(TESTI_PROVENIENZA)}, ${JSON.stringify(PERIODI_DASHBOARD)});</script>
 </body></html>`;
 }
 
 // ---------------------------------------------------------------------------
 // Codice eseguito nel browser. Non usa variabili esterne: riceve i dati come argomenti.
 // Il bundler di Wrangler può inserire chiamate a __name nel sorgente: la pagina ne definisce una versione vuota.
-function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIENZA) {
+function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIENZA, PERIODI) {
   const M = Object.fromEntries(MATERIE.map((m) => [m.slug, m]));
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -348,7 +347,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
   const statoLeghe = { dati: null, settimana: '', gruppo: '', mostraBot: false, caricamento: false, errore: false };
   const filtriEmail = { giorni: '30', giorno: '', tipo: '', pagina: 1 };
   let pannelloPromo = null;
-  try { const g = Number(localStorage.getItem('dash-giorni')); if ([7, 30, 90].includes(g)) giorni = g; } catch {}
+  try { const g = Number(localStorage.getItem('dash-giorni')); if (PERIODI.includes(g)) giorni = g; } catch {}
 
   // ---------- utilità di data ----------
   const oggiISO = () => new Date().toISOString().slice(0, 10);
@@ -1200,7 +1199,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       '<section class="card"><header><h2>Flussi e risultati</h2><span class="nota">Ultimi 30 giorni</span></header><div class="corpo" id="email-flussi" role="status">Caricamento…</div></section>' +
       '<section class="card"><header><h2>Invii giorno per giorno</h2><span class="nota">Ora italiana</span></header>' +
       '<div class="strumenti-tab"><label for="email-periodo">Periodo</label><select class="scelta" id="email-periodo">' +
-      [7, 30, 90].map((n) => '<option value="' + n + '">Ultimi ' + n + ' giorni</option>').join('') +
+      PERIODI.map((n) => '<option value="' + n + '">Ultimi ' + n + ' giorni</option>').join('') +
       '</select><label for="email-tipo">Tipologia</label><select class="scelta" id="email-tipo"><option value="">Tutte le tipologie</option>' +
       Object.entries(TIPI_EMAIL).map(([tipo, nome]) => '<option value="' + esc(tipo) + '">' + esc(nome) + '</option>').join('') +
       '</select></div><p class="nota" style="margin:.35rem 1.2rem .7rem" id="email-copertura"></p>' +

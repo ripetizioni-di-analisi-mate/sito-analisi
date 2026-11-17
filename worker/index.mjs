@@ -31,6 +31,7 @@ import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti, cookieCampagna, campagnaIscrizione, riepilogoCampagne } from './provenienza.mjs';
 import { speseMeta } from './meta-ads.mjs';
+import { PERIODI_DASHBOARD } from './periodi.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { capitoli, abilitaDi, materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
 import { raccontaInStreaming, capisciBlocco, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
@@ -550,19 +551,20 @@ export class Archivio {
         };
         const campagne = (giorni) => this.righe(`SELECT materia AS campagna, SUM(n) AS n FROM eventi WHERE evento = 'campagna'
                                                  AND giorno >= date('now', '-${giorni - 1} days') GROUP BY materia ORDER BY n DESC LIMIT 30`);
+        const perPeriodo = (f) => Object.fromEntries(PERIODI_DASHBOARD.map((g) => [g, f(g)]));
         return Response.json({
           visite: this.righe(`SELECT giorno, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           visitatori: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM visitatori
                                   WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           inizioVisitatori: this.riga('SELECT MIN(giorno) AS g FROM visitatori')?.g || null,
-          sezioni: { 7: sezioni(7), 30: sezioni(30), 90: sezioni(90) },
-          percorsoAcquisto: { 7: percorsoAcquisto(7), 30: percorsoAcquisto(30), 90: percorsoAcquisto(90) },
-          campagne: { 7: campagne(7), 30: campagne(30), 90: campagne(90) },
-          ricaviCampagne: { 7: riepilogoCampagne(this, 7), 30: riepilogoCampagne(this, 30), 90: riepilogoCampagne(this, 90) },
+          sezioni: perPeriodo(sezioni),
+          percorsoAcquisto: perPeriodo(percorsoAcquisto),
+          campagne: perPeriodo(campagne),
+          ricaviCampagne: perPeriodo((g) => riepilogoCampagne(this, g)),
           studioGuidato: this.righe(`SELECT giorno, evento, materia, n FROM eventi WHERE (evento LIKE 'sg-%' OR evento = 'ap-clic') AND giorno >= date('now', '-179 days') ORDER BY giorno`),
           ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`)
             .map((r) => ({ ...r, fonte: fonteStorica(r.fonte, r.giorno) })),
-          provenienze: { 7: riepilogoFonti(this, 7), 30: riepilogoFonti(this, 30), 90: riepilogoFonti(this, 90) },
+          provenienze: perPeriodo((g) => riepilogoFonti(this, g)),
           fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
                               COUNT(DISTINCT a.email) AS paganti FROM utenti u
                               LEFT JOIN (SELECT DISTINCT email FROM acquisti) a ON a.email = u.email
