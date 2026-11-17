@@ -961,6 +961,17 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     graficoTraffico($('#g-visite'), andamento, { id: 'vis', titolo: 'Visite nei giorni conclusi' });
   }
 
+  // Le inserzioni di Meta arrivano con l'ID numerico della campagna in utm_campaign: qui il nome del post sponsorizzato.
+  // Per una campagna nuova: Gestione inserzioni → cercare l'ID → aggiungere una riga.
+  const CAMPAGNE_META = {
+    '120252248678190156': 'Compito di Analisi 1 svolto',
+    '120252106719050156': 'Analisi 1, il manuale',
+    '120252153743800156': 'Analisi 1, il manuale (seconda campagna)',
+    '120252343864460156': 'Formulario di Fisica 1',
+    '120252343874810156': 'Formulario di Fisica 1 (seconda campagna)',
+  };
+  const nomeCampagna = (c) => (CAMPAGNE_META[c] ? 'Inserzione Meta · ' + CAMPAGNE_META[c] + ' · ID ' + c : /^\d{15,}$/.test(c) ? 'Inserzione Meta senza nome · ID ' + c : c);
+
   // Percorso d'acquisto per materia (conteggi anonimi dal 02/11/2026) e campagne dei link (utm_campaign).
   function percorsoAcquisto() {
     const righe = ((D.percorsoAcquisto && D.percorsoAcquisto[giorni]) || []).slice().sort((a, b) => (b.pagine + b.sblocca) - (a.pagine + a.sblocca));
@@ -971,8 +982,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
         '<tr><td colspan="7"><div class="vuoto">Ancora nessun dato: i conteggi partono dal 2 novembre</div></td></tr>') +
       '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">Si contano solo i numeri, senza sapere chi. La percentuale accanto a «Tasto» è sul numero di pagine Sblocca viste; quella accanto a «Pagati» sul numero di tasti premuti. Per i videocorsi «Pagine» è la pagina del videocorso.</p></section>' +
       '<section class="card" style="margin-top:1rem"><header><h2>Campagne dei link</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
-      barre(camp.map((r) => ({ nome: r.campagna, valore: r.n, colore: 'var(--c6)' })), { quota: false, vuoto: 'Nessun ingresso con utm_campaign nel periodo' }) +
-      '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini).</p></div></section>';
+      barre(camp.map((r) => ({ nome: nomeCampagna(r.campagna), valore: r.n, colore: 'var(--c6)' })), { quota: false, vuoto: 'Nessun ingresso con utm_campaign nel periodo' }) +
+      '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini). Le righe «Inserzione Meta» sono le sponsorizzate: il numero è l’ID della campagna in Gestione inserzioni.</p></div></section>';
   }
 
   function pannelloPromozioni() {
