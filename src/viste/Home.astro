@@ -17,6 +17,7 @@ import PercorsiHome from '../components/PercorsiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
+import { BEST_SELLER } from '../data/best-seller';
 import { blocchiUsa, gruppiUsa, materieUsa } from '../data/stem-usa/catalog-view';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
 import { highSchoolName, highSchoolPath } from '../data/stem-usa/high-school/index.mjs';
@@ -33,6 +34,8 @@ const localizzato = linguaCatalogo(lingua);
 const MATERIE = usa ? materieUsa : materieL(lingua).filter((m) => !localizzato || !m.attiva || paginaLocalizzata(lingua, `/${m.slug}`));
 const notaLingue = fr ? 'Le catalogue est en français. Chaque chapitre indique les langues dans lesquelles les supports sont disponibles.' : es ? 'El catálogo está en español. Cada tema indica en qué idiomas está disponible el material.' : 'Der Kurskatalog ist auf Deutsch. Die Sprache der Lernmaterialien steht beim jeweiligen Thema.';
 const schedeDettagliate = lingua === 'it' || usa;
+// Nastro «Best seller» sull'angolo della scheda (versione C scelta da Carmine il 17/11/2026), solo nella home italiana.
+const bestSeller = (slug: string) => lingua === 'it' && !usa && BEST_SELLER.has(slug);
 const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, '/' + slug);
 const gruppi = (usa ? gruppiUsa : gruppiL(lingua)).map((nome, i) => ({
   nome,
@@ -129,11 +132,12 @@ const icona = {
         const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = true) => (
           <ul class="griglia-materie">
             {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
-              <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && schedeDettagliate }} style={`--accento: ${m.colore}`} data-materia={m.slug} data-usa-materia={usa ? m.argomenti.map(a => a.titolo).join(' ') : undefined}>
+              <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && schedeDettagliate, 'best-seller': m.attiva && bestSeller(m.slug) }} style={`--accento: ${m.colore}`} data-materia={m.slug} data-usa-materia={usa ? m.argomenti.map(a => a.titolo).join(' ') : undefined}>
                 {m.attiva && schedeDettagliate ? (() => {
                   const v = videoDi(m.slug);
                   return (
                     <>
+                      {bestSeller(m.slug) && <span class="nastro-bs"><span>Best seller</span></span>}
                       <div class="scheda-materia">
                         <h3>{nome}</h3>
                         <p>{m.descrizione}</p>
@@ -196,6 +200,11 @@ const icona = {
   :global(.home-chiarezza .pulsanti-scheda){justify-content:flex-start;flex-wrap:wrap;padding:.2rem 1.1rem .3rem;gap:.6rem;border:0;background:none}
   :global(.home-chiarezza .pulsante-scheda){font-size:.85rem;background:none;border:0;border-radius:0;padding:.25rem 0;color:var(--azione);gap:.35rem}
   :global(.home-chiarezza .pulsante-scheda:hover){text-decoration:underline;background:none}
+  li.best-seller{position:relative}
+  .nastro-bs{position:absolute;top:-1px;right:-1px;width:5.4rem;height:5.4rem;overflow:hidden;pointer-events:none;border-top-right-radius:var(--raggio)}
+  .nastro-bs>span{position:absolute;top:.95rem;right:-2.35rem;width:8rem;text-align:center;transform:rotate(45deg);background:linear-gradient(180deg,#e3d19b,#d3bd80);color:#3f300c;font:700 .6rem/1.5rem var(--ui);letter-spacing:.09em;text-transform:uppercase;box-shadow:0 1px 3px rgba(60,45,10,.2)}
+  li.best-seller .scheda-materia h3{padding-right:2.6rem}
+  li.best-seller .scheda-materia p{padding-right:1.6rem}
   .accesso-scheda{display:block;font:400 .76rem var(--ui);padding:0 1.1rem 1rem;color:var(--inchiostro-2)}
   .nota-accesso-scheda{display:none}
   :global(html.collegato.home-chiarezza .risorse-home){margin-top:1rem;font-size:.9rem}
