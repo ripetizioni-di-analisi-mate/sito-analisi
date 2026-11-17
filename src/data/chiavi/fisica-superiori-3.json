@@ -1,0 +1,68 @@
+{
+ "quantita-moto-urti/9": {
+  "campi": [
+   {
+    "e": "$J_x$",
+    "t": "numero",
+    "v": "-14",
+    "u": "N·s",
+    "esatto": true
+   }
+  ]
+ },
+ "quantita-moto-urti/10": {
+  "campi": [
+   {
+    "e": "$J_x$",
+    "t": "numero",
+    "v": "2",
+    "u": "N·s",
+    "esatto": true
+   }
+  ]
+ },
+ "quantita-moto-urti/11": {
+  "campi": [
+   {
+    "e": "$\\overline{N}$",
+    "t": "numero",
+    "v": "45",
+    "u": "N",
+    "esatto": true
+   }
+  ]
+ },
+ "quantita-moto-urti/12": {
+  "campi": [
+   {
+    "e": "$u_2$",
+    "t": "numero",
+    "v": "2",
+    "u": "m/s",
+    "esatto": true
+   }
+  ]
+ },
+ "quantita-moto-urti/13": {
+  "campi": [
+   {
+    "e": "$v_2$",
+    "t": "numero",
+    "v": "-2{,}2",
+    "u": "m/s",
+    "esatto": true
+   }
+  ]
+ },
+ "quantita-moto-urti/14": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "\\frac{2}{3}",
+    "u": "m",
+    "cifre": 3
+   }
+  ]
+ }
+}

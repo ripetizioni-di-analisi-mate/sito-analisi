@@ -452,7 +452,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     sottogruppo: 'Fisica',
     titolo: 'Fisica 1° anno',
     breve: 'Fisica 1° anno',
-    descrizione: "Fisica per il primo anno delle superiori: misure, incertezze, grafici, densità, vettori, forze, equilibrio e fluidi. Teoria, esercizi svolti passo passo e 90 domande per argomento per preparare le verifiche. Il percorso segue la prima del liceo scientifico; alcuni istituti affrontano i fluidi nel secondo anno.",
+    descrizione: "Il programma del primo anno delle superiori comprende misure, incertezze, grafici, densità, vettori, forze, equilibrio e fluidi. Ogni capitolo offre teoria illustrata, esercizi svolti passo passo, tracce da fare e 90 domande a tempo con spiegazione. Alcuni istituti affrontano i fluidi nel secondo anno.",
     colore: '#5c6658',
     gruppo: 'Superiori',
     attiva: true,

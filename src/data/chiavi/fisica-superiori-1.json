@@ -795,7 +795,7 @@
  "vettori/2": {
   "campi": [
    {
-    "e": "Componente verticale della somma",
+    "e": "$F_{2,y}$",
     "t": "numero",
     "v": "-2",
     "u": "N",

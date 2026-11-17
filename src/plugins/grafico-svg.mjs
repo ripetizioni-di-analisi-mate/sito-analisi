@@ -46,7 +46,10 @@ export function disegnaSvg(a, id) {
   }
 
   // Dimensioni: larghezza fissa; con uguale=1 l'altezza segue il rapporto tra gli intervalli.
-  const W = 640, m = { l: 40, r: 40, t: 32, b: 40 };
+  const senzaAssi = String(a.assi) === '0';
+  const lunghezzaTaccheY = Math.max(String(Math.ceil(ymin)).length, String(Math.floor(ymax)).length);
+  const sinistra = senzaAssi ? 40 : Math.max(40, 12 + 9 * lunghezzaTaccheY);
+  const W = 640, m = { l: sinistra, r: 40, t: 32, b: 40 };
   let H = 400;
   if (a.uguale) H = Math.round(Math.min(1100, Math.max(200, ((W - m.l - m.r) * (ymax - ymin)) / (xmax - xmin) + m.t + m.b)));
   const sx = (x) => m.l + ((x - xmin) / (xmax - xmin)) * (W - m.l - m.r);
@@ -66,12 +69,17 @@ export function disegnaSvg(a, id) {
   };
 
   // Assi: passano per l'origine se è nel riquadro, altrimenti sul bordo.
-  const ox = xmin <= 0 && 0 <= xmax ? sx(0) : m.l;
-  const oy = ymin <= 0 && 0 <= ymax ? sy(0) : H - m.b;
+  const zeroX = xmin <= 0 && 0 <= xmax;
+  const zeroY = ymin <= 0 && 0 <= ymax;
+  const origineVisibile = zeroX && zeroY;
+  const ox = zeroX ? sx(0) : m.l;
+  const oy = zeroY ? sy(0) : H - m.b;
   const tacche = (lo, hi) => {
     const passo = Math.max(1, Math.ceil((hi - lo) / 10));
     const out = [];
-    for (let v = Math.ceil(lo); v <= Math.floor(hi); v += passo) if (v !== 0) out.push(v);
+    for (let v = Math.ceil(lo); v <= Math.floor(hi); v += passo) {
+      if (v !== 0 || !origineVisibile) out.push(v);
+    }
     return out;
   };
   const tx = tacche(xmin, xmax).map((v) =>
@@ -81,6 +89,8 @@ export function disegnaSvg(a, id) {
     `<line x1="${ox - 4}" y1="${sy(v).toFixed(1)}" x2="${ox + 4}" y2="${sy(v).toFixed(1)}"/>` +
     `<text x="${ox - 8}" y="${(sy(v) + 4).toFixed(1)}" text-anchor="end">${v}</text>`).join('');
   const [nx = '', ny = ''] = a.nomi ? String(a.nomi).split(',').map((v) => v.trim()) : ['x', 'y'];
+  // Un nome con unità di misura richiede più spazio di quello dopo la freccia.
+  const nomeXEsteso = nx.length > 2;
 
   // Aree colorate tra due curve
   // (dalle figure con cursore anche un elenco di [sopra, sotto, a, b] con funzioni già pronte)
@@ -143,8 +153,6 @@ export function disegnaSvg(a, id) {
       `<text class="nome-asse" x="${(sx(x1) + 6).toFixed(1)}" y="${(sy(y1) + 16).toFixed(1)}">${esc(n1)}</text>` +
       `<text class="nome-asse" x="${(sx(x2) - 6).toFixed(1)}" y="${(sy(y2) - 8).toFixed(1)}" text-anchor="end">${esc(n2)}</text></g>`;
   })() : '';
-  const senzaAssi = String(a.assi) === '0';
-
   const punta = (k) => `<marker id="${id}-punta${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta v${k}" d="M0 0 L10 5 L0 10 z"/></marker>`;
   // Larghezza massima: i grafici alti si stringono, così non riempiono lo schermo
   const larghezza = Math.min(520, Math.round((340 * W) / H));
@@ -156,10 +164,10 @@ export function disegnaSvg(a, id) {
 ${aree}${pol}${senzaAssi ? '' : `<g class="assi">
 <line x1="${m.l - 12}" y1="${oy}" x2="${W - m.r + 12}" y2="${oy}" marker-end="url(#${id}-freccia)"/>
 <line x1="${ox}" y1="${H - m.b + 12}" x2="${ox}" y2="${m.t - 12}" marker-end="url(#${id}-freccia)"/>
-<text class="nome-asse" x="${W - m.r + 14}" y="${oy + 18}">${esc(nx)}</text>
+<text class="nome-asse" x="${W - m.r + (nomeXEsteso ? 10 : 14)}" y="${oy + (nomeXEsteso ? -9 : 18)}"${nomeXEsteso ? ' text-anchor="end"' : ''}>${esc(nx)}</text>
 <text class="nome-asse" x="${ox + 10}" y="${m.t - 10}">${esc(ny)}</text>
 <g class="tacche">${tx}${ty}</g>
-<text x="${ox - 8}" y="${oy + 17}" text-anchor="end">O</text>
+${origineVisibile ? `<text x="${ox - 8}" y="${oy + 17}" text-anchor="end">O</text>` : ''}
 </g>`}
 ${lin}${rif}${asint}${segm}${curve}${vett}${pt}${etich}
 </svg>`;

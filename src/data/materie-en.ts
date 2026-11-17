@@ -436,7 +436,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-superiori-1': {
     titolo: 'Physics, 1st year',
     breve: 'Physics 1st year',
-    descrizione: 'First-year Italian high school physics: measurements, uncertainty, graphs, density, vectors, forces, equilibrium and fluids, with worked examples and 90 questions per topic. Study materials are in Italian. Some schools cover fluids in the second year.',
+    descrizione: 'The first-year Italian high school physics syllabus covers measurement, uncertainty, graphs, density, vectors, forces, equilibrium and fluids. Each chapter offers illustrated theory, step-by-step worked problems, practice exercises and 90 timed questions with explanations. Some schools cover fluids in the second year.',
     argomenti: {
       'grandezze-e-unita': { titolo: 'Physical quantities and units', breve: 'Quantities and units' },
       'misure-e-incertezze': { titolo: 'Measurements, instruments and uncertainty', breve: 'Measurements and uncertainty' },
@@ -447,7 +447,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'equilibrio-punto': { titolo: 'Equilibrium of a particle', breve: 'Particle equilibrium' },
       'equilibrio-corpo-rigido': { titolo: 'Rigid-body equilibrium, levers and centre of mass', breve: 'Rigid-body equilibrium' },
       'pressione-fluidi': { titolo: 'Pressure and fluid statics', breve: 'Pressure and fluids' },
-      'archimede-galleggiamento': { titolo: 'Archimedes principle, buoyancy and floating', breve: 'Buoyancy and floating' },
+      'archimede-galleggiamento': { titolo: "Archimedes' principle, buoyancy and floating", breve: 'Buoyancy and floating' },
     },
   },
   'fisica-superiori-2': {
@@ -458,7 +458,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       "moto-uniforme": { titolo: "Uniform rectilinear motion and graphs", breve: "Uniform motion" },
       "moto-accelerato": { titolo: "Uniformly accelerated motion and free fall", breve: "Accelerated motion" },
       "moti-nel-piano": { titolo: "Motion in a plane and uniform circular motion", breve: "Motion in a plane" },
-      "principi-dinamica": { titolo: "Newton laws and forces", breve: "Dynamics and forces" },
+      "principi-dinamica": { titolo: "Newton's laws and forces", breve: "Dynamics and forces" },
       "lavoro-energia": { titolo: "Work, energy and power", breve: "Work and energy" },
       "temperatura-dilatazione": { titolo: "Temperature and thermal expansion", breve: "Temperature and expansion" },
       "calore": { titolo: "Heat, calorimetry and heat transfer", breve: "Heat and calorimetry" },
@@ -470,8 +470,21 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-superiori-3': {
     titolo: 'Physics, 3rd year',
     breve: 'Physics 3rd year',
-    descrizione: 'The physics syllabus of the 3rd year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'Mechanics for the third year of Italian high school. Motion, forces, energy, collisions, rotation, gravitation and fluids, with theory, worked problems and timed questions.',
+    argomenti: {
+      'misure-vettori': { titolo: 'Measurements, uncertainties and vectors', breve: 'Measurements and vectors' },
+      'cinematica-rettilinea': { titolo: 'Motion in a straight line and its graphs', breve: 'Rectilinear motion' },
+      'moti-nel-piano': { titolo: 'Motion in a plane, projectiles and circular motion', breve: 'Motion in a plane' },
+      'riferimenti-galileiani': { titolo: 'Reference frames and Galilean relativity', breve: 'Galilean relativity' },
+      'leggi-newton': { titolo: "Newton's laws of motion", breve: "Newton's laws" },
+      'forze-equilibrio': { titolo: 'Forces, friction and equilibrium', breve: 'Forces and equilibrium' },
+      'lavoro-energia': { titolo: 'Work, energy and power', breve: 'Work and energy' },
+      'quantita-moto-urti': { titolo: 'Momentum, impulse and collisions', breve: 'Momentum and collisions' },
+      'rotazioni': { titolo: 'Rotation, angular momentum and rolling', breve: 'Rotation' },
+      'gravitazione': { titolo: 'Gravitation and orbits', breve: 'Gravitation' },
+      'fluidi-equilibrio': { titolo: 'Fluids at rest', breve: 'Fluids at rest' },
+      'fluidi-movimento': { titolo: 'Fluids in motion', breve: 'Fluids in motion' },
+    },
   },
   'fisica-superiori-4': {
     titolo: 'Physics, 4th year',
