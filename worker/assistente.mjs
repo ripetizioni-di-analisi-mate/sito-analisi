@@ -25,6 +25,7 @@ const MAX_TOKEN_STUDENTE = 120000;  // circa 20 domande al giorno
 const MAX_TOKEN_OSPITE = 30000;     // circa 5 domande
 const MAX_TOKEN_GIORNO = 20000000;  // tutto il sito
 const MAX_USCITA = 1200;            // lunghezza massima di una risposta, in token
+const MAX_USCITA_CLAUDE = 4000;     // con Claude: risposta più ragionamento adattivo (impegno medio)
 const MAX_FOTO = 1500000;           // dimensione massima della foto (caratteri del data URL, circa 1 MB)
 
 const TIPI = { teoria: 'teoria', 'esercizi-svolti': 'esercizi svolti', esercizi: 'esercizi da fare' };
@@ -190,7 +191,7 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
     for (const [i, modello] of MODELLI_PI_CLAUDE.entries()) {
       try {
         const risp = await chiediClaude(env, modello, {
-          fisso, variabile, messaggi: messaggiClaude(messaggi, foto), maxTokens: MAX_USCITA,
+          fisso, variabile, messaggi: messaggiClaude(messaggi, foto), maxTokens: MAX_USCITA_CLAUDE,
           intestazioni: { 'x-rimasti': String(rimasti), 'x-token-entrata': String(tin) },
           fine: async (m, tinClaude, tout) => {
             await aDO(env, '/sg-ia-conta', { modello: `pi:${m}`, tin: tinClaude, tout }).catch(() => {});

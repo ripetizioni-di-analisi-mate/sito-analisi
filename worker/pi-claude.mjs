@@ -65,6 +65,9 @@ export async function chiediClaude(env, modello, { fisso, variabile, messaggi, m
     headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({
       model: modello, max_tokens: maxTokens, stream: true,
+      // Impegno medio (scelta di Carmine del 17/11/2026). Il ragionamento adattivo resta quello predefinito:
+      // non si mostra allo studente, ma conta nei token in uscita, perciò max_tokens è più alto che per i modelli gratuiti.
+      output_config: { effort: env.PI_CLAUDE_IMPEGNO || 'medium' },
       // Le istruzioni e le informazioni sul sito sono uguali per tutti: si mettono in cache. Il contesto della pagina cambia.
       system: [{ type: 'text', text: fisso, cache_control: { type: 'ephemeral' } }, ...(variabile ? [{ type: 'text', text: variabile }] : [])],
       messages: messaggi,
