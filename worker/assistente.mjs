@@ -26,6 +26,10 @@ const MAX_TOKEN_OSPITE = 30000;     // circa 5 domande
 const MAX_TOKEN_GIORNO = 20000000;  // tutto il sito
 const MAX_USCITA = 1200;            // lunghezza massima di una risposta, in token
 const MAX_USCITA_CLAUDE = 4000;     // con Claude: risposta più ragionamento adattivo (impegno medio)
+// Messaggi al giorno con Claude per studente (richiesta di Carmine del 18/11/2026): dopo questi Pi risponde ancora,
+// ma con i modelli gratuiti di Cloudflare, fino al limite di messaggi qui sopra.
+const MAX_CLAUDE_STUDENTE = 10;
+const MAX_CLAUDE_OSPITE = 3;
 const MAX_FOTO = 1500000;           // dimensione massima della foto (caratteri del data URL, circa 1 MB)
 
 const TIPI = { teoria: 'teoria', 'esercizi-svolti': 'esercizi svolti', esercizi: 'esercizi da fare' };
@@ -187,7 +191,9 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const conta = (tout) => aDO(env, '/assistente-token', { giorno, email: chi, tin, tout }).catch(() => {});
 
   // Prima Claude (Sonnet 5.5, poi Haiku 5.5), se la chiave c'è e il tetto di spesa non è superato.
-  if (await claudeDisponibile(env, aDO)) {
+  const maxClaude = io ? (Number(env.PI_CLAUDE_MSG_STUDENTE) || MAX_CLAUDE_STUDENTE) : (Number(env.PI_CLAUDE_MSG_OSPITE) || MAX_CLAUDE_OSPITE);
+  if (conto.n > maxClaude) await evento('claude-quota-studente');
+  else if (await claudeDisponibile(env, aDO)) {
     for (const [i, modello] of MODELLI_PI_CLAUDE.entries()) {
       try {
         const risp = await chiediClaude(env, modello, {
