@@ -186,3 +186,39 @@ test('la pagina amministrativa incorpora i testi italiani e inglesi senza riferi
     assert.ok(!script.includes('Iscritti da sempre con questa provenienza'));
   }
 });
+
+test('la campagna del link resta nel cookie e viene letta all’iscrizione', async () => {
+  const { cookieCampagna, campagnaIscrizione } = await import('../worker/provenienza.mjs');
+  const ora = Date.parse('2026-11-17T12:00:00Z');
+  const cookie = cookieCampagna('120252248678190156', ora);
+  assert.match(cookie, /^campagna-conversione=/);
+  assert.match(cookie, /HttpOnly; Secure; SameSite=Lax$/);
+  const req = (c) => new Request('https://sito.test/', { headers: { cookie: c } });
+  assert.equal(campagnaIscrizione(req(cookie.split(';')[0]), ora + 86400000), '120252248678190156');
+  assert.equal(campagnaIscrizione(req(cookie.split(';')[0]), ora + 91 * 86400000), null);
+  assert.equal(campagnaIscrizione(req('campagna-conversione=%7B%22c%22%3A%22%3Cscript%3E%22%2C%22t%22%3A1%7D'), ora), null);
+  assert.equal(cookieCampagna(null, ora), null);
+  assert.equal(cookieCampagna('Nome Con Spazi', ora), null);
+});
+
+test('la spesa di Meta si legge per campagna e senza chiave resta spenta', async () => {
+  const { speseMeta, azzeraSpeseMeta } = await import('../worker/meta-ads.mjs');
+  assert.deepEqual(await speseMeta({}), { collegato: false });
+  const chiamate = [];
+  const finto = async (url, opz) => {
+    chiamate.push({ url: String(url), opz });
+    return Response.json({ data: [{ campaign_id: '120252248678190156', campaign_name: 'Post di Instagram: Compito', spend: '156.12' }] });
+  };
+  const env = { META_ADS_TOKEN: 'chiave-di-prova', META_ADS_ACCOUNT: '206104238102726' };
+  azzeraSpeseMeta();
+  const d = await speseMeta(env, Date.parse('2026-11-17T12:00:00Z'), finto);
+  assert.equal(d.collegato, true);
+  assert.deepEqual(d[30], [{ campagna: '120252248678190156', nome: 'Post di Instagram: Compito', speso: 156.12 }]);
+  assert.equal(chiamate.length, 3);
+  assert.ok(chiamate.every((c) => !c.url.includes('chiave-di-prova') && c.opz.headers.authorization === 'Bearer chiave-di-prova'));
+  assert.match(decodeURIComponent(chiamate[1].url), /"since":"2026-10-19","until":"2026-11-17"/);
+  azzeraSpeseMeta();
+  const e = await speseMeta(env, Date.now(), async () => Response.json({ error: { message: 'no' } }, { status: 400 }));
+  assert.deepEqual(e, { collegato: true, errore: true });
+  azzeraSpeseMeta();
+});

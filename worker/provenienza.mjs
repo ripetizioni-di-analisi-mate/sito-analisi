@@ -74,6 +74,45 @@ export function fonteIscrizione(req, fontePrima, ora = Date.now()) {
   return fonteStorica(fontePrima);
 }
 
+// Campagna del link con cui la persona è arrivata (utm_campaign, per le inserzioni Meta l'ID della campagna):
+// resta in un cookie per 90 giorni e viene salvata nell'account al momento dell'iscrizione.
+export const COOKIE_CAMPAGNA = 'campagna-conversione';
+const CAMPAGNA_VALIDA = /^[a-z0-9-]{1,40}$/;
+
+export function cookieCampagna(campagna, ora = Date.now()) {
+  if (!campagna || !CAMPAGNA_VALIDA.test(campagna)) return null;
+  const valore = encodeURIComponent(JSON.stringify({ c: campagna, t: ora }));
+  return `${COOKIE_CAMPAGNA}=${valore}; Path=/; Max-Age=${DURATA_ATTRIBUZIONE / 1000}; HttpOnly; Secure; SameSite=Lax`;
+}
+
+export function campagnaIscrizione(req, ora = Date.now()) {
+  const valore = (req.headers.get('cookie') || '').split(';').map((p) => p.trim())
+    .find((p) => p.startsWith(COOKIE_CAMPAGNA + '='));
+  if (!valore) return null;
+  try {
+    const dati = JSON.parse(decodeURIComponent(valore.slice(COOKIE_CAMPAGNA.length + 1)));
+    if (typeof dati.c === 'string' && CAMPAGNA_VALIDA.test(dati.c)
+      && Number.isFinite(dati.t) && dati.t <= ora && ora - dati.t <= DURATA_ATTRIBUZIONE) return dati.c;
+  } catch {}
+  return null;
+}
+
+// Iscritti, paganti e incasso per campagna: contano gli account creati dopo l'arrivo da quella campagna.
+export function riepilogoCampagne(archivio, giorni) {
+  const dal = `date('now', '-${giorni - 1} days')`;
+  const voci = new Map();
+  const voce = (c) => { if (!voci.has(c)) voci.set(c, { campagna: c, iscritti: 0, paganti: 0, incasso: 0 }); return voci.get(c); };
+  for (const r of archivio.righe(`SELECT campagna, COUNT(*) AS n FROM utenti
+      WHERE campagna IS NOT NULL AND substr(creato, 1, 10) >= ${dal} GROUP BY campagna`)) voce(r.campagna).iscritti = r.n;
+  for (const r of archivio.righe(`SELECT u.campagna, COUNT(DISTINCT u.email) AS paganti,
+      SUM(CASE WHEN UPPER(a.valuta) = 'EUR' THEN a.importo ELSE 0 END) AS incasso
+    FROM utenti u JOIN acquisti a ON a.email = u.email
+    WHERE u.campagna IS NOT NULL AND substr(a.creato, 1, 10) >= ${dal} GROUP BY u.campagna`)) {
+    const v = voce(r.campagna); v.paganti = r.paganti; v.incasso = r.incasso || 0;
+  }
+  return [...voci.values()];
+}
+
 export function riepilogoFonti(archivio, giorni) {
   const fonti = new Map();
   const voce = (r) => {

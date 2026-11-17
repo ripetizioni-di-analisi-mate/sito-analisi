@@ -29,7 +29,8 @@ import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
-import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti } from './provenienza.mjs';
+import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti, cookieCampagna, campagnaIscrizione, riepilogoCampagne } from './provenienza.mjs';
+import { speseMeta } from './meta-ads.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { capitoli, abilitaDi, materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
 import { raccontaInStreaming, capisciBlocco, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
@@ -164,6 +165,7 @@ export class Archivio {
     // e la provenienza della prima visita (Instagram, Google, …)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte TEXT'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte_conversione TEXT'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN campagna TEXT'); } catch { /* già presente */ }
     // il corso di gruppo già seguito con Carmine, dichiarato all'iscrizione (facoltativo)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN corso TEXT'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN premium_manuale TEXT'); } catch { /* già presente */ }
@@ -301,6 +303,8 @@ export class Archivio {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
         this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, fonte_conversione, corso, attivo, lingua) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?)',
           c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.fonteConversione || null, c.corso || null, Date.now(), linguaEmail(c.lingua));
+        // campagna del link con cui la persona è arrivata (dashboard → Traffico → Inserzioni Meta: speso e ricavo)
+        if (typeof c.campagna === 'string' && c.campagna) this.sql.exec('UPDATE utenti SET campagna = ? WHERE email = ?', c.campagna.slice(0, 40), c.email);
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
@@ -554,6 +558,7 @@ export class Archivio {
           sezioni: { 7: sezioni(7), 30: sezioni(30), 90: sezioni(90) },
           percorsoAcquisto: { 7: percorsoAcquisto(7), 30: percorsoAcquisto(30), 90: percorsoAcquisto(90) },
           campagne: { 7: campagne(7), 30: campagne(30), 90: campagne(90) },
+          ricaviCampagne: { 7: riepilogoCampagne(this, 7), 30: riepilogoCampagne(this, 30), 90: riepilogoCampagne(this, 90) },
           studioGuidato: this.righe(`SELECT giorno, evento, materia, n FROM eventi WHERE (evento LIKE 'sg-%' OR evento = 'ap-clic') AND giorno >= date('now', '-179 days') ORDER BY giorno`),
           ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`)
             .map((r) => ({ ...r, fonte: fonteStorica(r.fonte, r.giorno) })),
@@ -1071,7 +1076,7 @@ export default {
       const hash = await hashPassword(password, sale);
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
       const fonteConversione = fonteIscrizione(req, fonte);
-      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, fonteConversione, corso, lingua });
+      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, fonteConversione, campagna: campagnaIscrizione(req), corso, lingua });
       if (!r.ok) return json({ errore: lingua === 'fr' ? 'Un compte est déjà associé à cette adresse. Connecte-toi.' : lingua === 'es' ? 'Ya existe una cuenta con este correo. Inicia sesión.' : lingua === 'de' ? 'Es gibt bereits ein Konto mit dieser E-Mail-Adresse. Melde dich an.' : 'Esiste già un account con questa email. Accedi.' }, 409);
       // arrivato con il link d'invito di un altro studente: 15% sul primo acquisto di una materia
       const invito = leggiCookie(req, 'invito');
@@ -1684,7 +1689,8 @@ export default {
       if (p === '/admin/api/dati') {
         // Chi tiene aperta la dashboard con il proprio account collegato risulta attivo anche come studente.
         ctx.waitUntil(utenteCollegato(env, req).catch(() => null));
-        return json(await aDO(env, '/dati'));
+        const [dati, spese] = await Promise.all([aDO(env, '/dati'), speseMeta(env)]);
+        return json({ ...dati, speseMeta: spese });
       }
       if (p === '/admin/api/leghe' && req.method === 'GET') {
         if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) {
@@ -1987,6 +1993,9 @@ export default {
       }
       const attribuzione = cookieAttribuzione(fonte);
       if (attribuzione) risposta.headers.append('set-cookie', attribuzione);
+      // L'ultima campagna con cui si è arrivati resta 90 giorni: all'iscrizione viene salvata nell'account.
+      const cookieCamp = cookieCampagna(campagna);
+      if (cookieCamp) { try { risposta.headers.append('set-cookie', cookieCamp); } catch { /* intestazioni bloccate */ } }
     }
     return risposta;
   },

@@ -970,7 +970,36 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     '120252343864460156': 'Formulario di Fisica 1',
     '120252343874810156': 'Formulario di Fisica 1 (seconda campagna)',
   };
-  const nomeCampagna = (c) => (CAMPAGNE_META[c] ? 'Inserzione Meta · ' + CAMPAGNE_META[c] + ' · ID ' + c : /^\d{15,}$/.test(c) ? 'Inserzione Meta senza nome · ID ' + c : c);
+  // Nome dato da Meta alla campagna (arriva con la spesa, quando la chiave di Meta è collegata).
+  const nomeDaMeta = (c) => {
+    const sp = D.speseMeta || {};
+    for (const g of [90, 30, 7]) { const x = (sp[g] || []).find((r) => r.campagna === c); if (x && x.nome) return x.nome.replace(/^Post di Instagram:\s*/, ''); }
+    return '';
+  };
+  const titoloCampagna = (c) => CAMPAGNE_META[c] || nomeDaMeta(c);
+  const nomeCampagna = (c) => (titoloCampagna(c) ? 'Inserzione Meta · ' + titoloCampagna(c) + ' · ID ' + c : /^\d{15,}$/.test(c) ? 'Inserzione Meta senza nome · ID ' + c : c);
+
+  // Speso (da Meta) e ricavo (acquisti di chi si è iscritto arrivando da quell'inserzione) per campagna.
+  function tabellaInserzioni() {
+    const sp = D.speseMeta || {};
+    const r = {};
+    const voce = (c) => (r[c] ??= { campagna: c, visite: 0, speso: null, ricavo: 0, paganti: 0, iscritti: 0 });
+    const meta = (c) => /^\d{15,}$/.test(c);
+    for (const x of sp[giorni] || []) if (x.speso > 0) voce(x.campagna).speso = x.speso;
+    for (const x of (D.campagne && D.campagne[giorni]) || []) if (meta(x.campagna)) voce(x.campagna).visite = x.n;
+    for (const x of (D.ricaviCampagne && D.ricaviCampagne[giorni]) || []) if (meta(x.campagna)) { const v = voce(x.campagna); v.ricavo = x.incasso; v.paganti = x.paganti; v.iscritti = x.iscritti; }
+    const righe = Object.values(r).sort((a, b) => (b.speso || 0) - (a.speso || 0) || b.visite - a.visite);
+    const conSpesa = sp.collegato && !sp.errore;
+    const speso = (v) => (conSpesa ? eur.format(v.speso || 0) : '—');
+    const tot = righe.reduce((t, v) => ({ speso: t.speso + (v.speso || 0), ricavo: t.ricavo + v.ricavo, paganti: t.paganti + v.paganti, iscritti: t.iscritti + v.iscritti, visite: t.visite + v.visite }), { speso: 0, ricavo: 0, paganti: 0, iscritti: 0, visite: 0 });
+    const riga = (nome, v, forte) => '<tr' + (forte ? ' style="font-weight:700"' : '') + '><td>' + nome + '</td><td class="destra">' + nf.format(v.visite) + '</td><td class="destra">' + nf.format(v.iscritti) + '</td><td class="destra">' + nf.format(v.paganti) + '</td><td class="destra">' + speso(v) + '</td><td class="destra">' + eur.format(v.ricavo) + '</td></tr>';
+    const avviso = !sp.collegato ? 'Speso: manca la chiave di Meta (segreto META_ADS_TOKEN su Cloudflare). '
+      : sp.errore ? 'Speso: Meta non ha risposto, si riprova fra due minuti. ' : '';
+    return '<section class="card"><header><h2>Inserzioni Meta: speso e ricavo</h2><span class="nota">' + giorni + ' giorni</span></header><div class="tabella"><table><thead><tr><th>Inserzione</th><th class="destra" title="Ingressi sul sito dal link dell’inserzione">Visite</th><th class="destra" title="Account creati da chi è arrivato dall’inserzione">Iscritti</th><th class="destra" title="Iscritti dall’inserzione che hanno comprato">Paganti</th><th class="destra" title="Importo speso su Meta nel periodo">Speso</th><th class="destra" title="Acquisti di chi si è iscritto arrivando dall’inserzione">Ricavo</th></tr></thead><tbody>' +
+      (righe.length ? righe.map((v) => riga(esc(titoloCampagna(v.campagna) || 'ID ' + v.campagna), v)).join('') + (righe.length > 1 ? riga('Totale', tot, true) : '')
+        : '<tr><td colspan="6"><div class="vuoto">Nessuna inserzione nel periodo</div></td></tr>') +
+      '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">' + avviso + 'Il ricavo conta gli acquisti di chi ha creato l’account dopo essere arrivato dall’inserzione, a partire dal 17 novembre 2026. Chi aveva già un account non è contato.</p></section>';
+  }
 
   // Percorso d'acquisto per materia (conteggi anonimi dal 02/11/2026) e campagne dei link (utm_campaign).
   function percorsoAcquisto() {
@@ -981,9 +1010,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       (righe.length ? righe.map((r) => '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' + ((M[r.materia] || {}).colore || '#7a8a87') + '"></i>' + esc(breveMateria(r.materia)) + '</span></td><td class="destra">' + nf.format(r.pagine) + '</td><td class="destra">' + nf.format(r.anteprima || 0) + '</td><td class="destra">' + nf.format(r.fine) + '</td><td class="destra">' + nf.format(r.sblocca) + '</td><td class="destra">' + nf.format(r.tasto) + quota(r.tasto, r.sblocca) + '</td><td class="destra"><b>' + nf.format(r.pagati) + '</b>' + quota(r.pagati, r.tasto) + '</td></tr>').join('') :
         '<tr><td colspan="7"><div class="vuoto">Ancora nessun dato: i conteggi partono dal 2 novembre</div></td></tr>') +
       '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">Si contano solo i numeri, senza sapere chi. La percentuale accanto a «Tasto» è sul numero di pagine Sblocca viste; quella accanto a «Pagati» sul numero di tasti premuti. Per i videocorsi «Pagine» è la pagina del videocorso.</p></section>' +
-      '<section class="card" style="margin-top:1rem"><header><h2>Campagne dei link</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
+      '<div class="due pari" style="margin-top:1rem"><section class="card"><header><h2>Campagne dei link</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
       barre(camp.map((r) => ({ nome: nomeCampagna(r.campagna), valore: r.n, colore: 'var(--c6)' })), { quota: false, vuoto: 'Nessun ingresso con utm_campaign nel periodo' }) +
-      '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini). Le righe «Inserzione Meta» sono le sponsorizzate: il numero è l’ID della campagna in Gestione inserzioni.</p></div></section>';
+      '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini). Le righe «Inserzione Meta» sono le sponsorizzate: il numero è l’ID della campagna in Gestione inserzioni.</p></div></section>' + tabellaInserzioni() + '</div>';
   }
 
   function pannelloPromozioni() {
