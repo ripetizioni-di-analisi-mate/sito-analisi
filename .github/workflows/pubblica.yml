@@ -117,6 +117,8 @@ jobs:
           key: immagini-og-v1-${{ github.run_id }}
           restore-keys: immagini-og-v1-
       - name: Vetrine, lingue, immagini di anteprima, mappa del sito
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
         run: node scripts/vetrine.mjs && node scripts/lingue.mjs && node scripts/immagini-og.mjs && node scripts/sitemap-verificata.mjs
       - name: Test sul sito costruito
         run: node --test strumenti/analisi3.test.mjs strumenti/finanziaria.test.mjs strumenti/seo.test.mjs

@@ -48,7 +48,9 @@ function leggiPagina(html, location) {
       return value['@graph'] ?? [value];
     });
   const corso = graphs.some((item) => item['@type'] === 'Course' && item.url === location);
-  return { location, lastmod: /^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(lastmod || '') ? lastmod : undefined, alternates, corso };
+  // Copia profonda: i pezzi ritagliati dall'HTML (slice, match) tengono in memoria l'intero file;
+  // con decine di migliaia di pagine si superava il limite di memoria di Node.
+  return JSON.parse(JSON.stringify({ location, lastmod: /^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(lastmod || '') ? lastmod : undefined, alternates, corso }));
 }
 
 function xmlPagina(page) {
