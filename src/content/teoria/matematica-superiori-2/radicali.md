@@ -16,17 +16,21 @@ Se $\sqrt2=\dfrac pq$ fosse una frazione ridotta, da $p^2=2q^2$ seguirebbe che $
 ## Radici pari e dispari
 
 :::definizione{#definizione titolo="Il radicale principale"}
-Per $a\ge0$, $\sqrt[2m]{a}$ è l'unico numero non negativo la cui potenza di esponente $2m$ vale $a$. Per indice dispari $2m+1$, la radice esiste per ogni reale $a$ e ha lo stesso segno del radicando. L'indice è un intero positivo.
+Per $a\ge0$, $\sqrt[2m]{a}$ è l'unico numero non negativo la cui potenza di esponente $2m$ vale $a$. Per indice dispari $2m+1$, la radice esiste per ogni reale $a$ e ha lo stesso segno del radicando. L'indice indica a quale potenza si eleva la radice per ritrovare il radicando. Gli indici considerati sono interi maggiori o uguali a due.
 
 Quindi $\sqrt{25}=5$, $\sqrt[4]{16}=2$ e $\sqrt[3]{-27}=-3$. L'equazione $x^2=25$ ha invece due soluzioni, $x=\pm5$. Il simbolo $\sqrt{25}$ indica soltanto la radice principale.
 
 La radice quadrata di $-4$ non è reale. La radice cubica di $-8$ vale $-2$, perché $(-2)^3=-8$.
 :::
 
+:::esempio{titolo="Due operazioni con risultati diversi"}
+Per calcolare la radice quarta di $81$ si cerca un numero non negativo la cui quarta potenza valga $81$. Poiché $3^4=81$, la radice è $3$. Se si risolve invece l'equazione $x^4=81$, entrano anche i valori negativi. Infatti $(-3)^4=81$, quindi le soluzioni sono $-3$ e $3$.
+:::
+
 ## Condizioni di esistenza
 
 :::teorema{#dominio titolo="Radicandi e denominatori"}
-Un radicale di indice pari richiede il radicando non negativo. Se il radicale è al denominatore, il radicando deve essere strettamente positivo.
+Un radicale di indice pari richiede il radicando non negativo. Se l’intero denominatore è un radicale di indice pari, il radicando deve essere strettamente positivo.
 
 Per $\sqrt{2x-6}$ si richiede $x\ge3$. Per $\dfrac1{\sqrt{2x-6}}$ si richiede $x>3$. Un indice dispari non impone da solo vincoli sul segno.
 
@@ -35,16 +39,44 @@ Se il radicando è una frazione, la frazione deve anche essere definita. Per $\s
 ::grafico{f="sqrt(x-1)" xmin=-1 xmax=8 ymin=-1 ymax=4 punti="1,0,pieno,A" titolo="Il grafico di $y=\sqrt{x-1}$ inizia in $(1;0)$"}
 :::
 
+:::esempio{titolo="Vincoli da soddisfare insieme"}
+Nell'espressione $\dfrac{\sqrt{2x-1}}{\sqrt{5-x}}$ il numeratore può annullarsi. Il denominatore deve avere una radice reale e diversa da zero. Le due condizioni sono
+
+$$
+\begin{cases}
+2x-1\ge0\\
+5-x>0,
+\end{cases}
+\qquad
+\begin{cases}
+x\ge\dfrac12\\[4pt]
+x<5.
+\end{cases}
+$$
+
+Il dominio è $\left[\dfrac12,5\right)$. In $x=\dfrac12$ la frazione vale zero e il suo denominatore è positivo. In $x=5$ il denominatore si annulla, quindi questo estremo è escluso.
+:::
+
 ## Semplificazione ed estrazione
 
 :::teorema{#semplificazione titolo="Fattori quadrati e valore assoluto"}
-Per $a\ge0$ vale $\sqrt{k^2a}=|k|\sqrt a$. In particolare $\sqrt{x^2}=|x|$ per ogni reale $x$. Il valore assoluto è necessario perché la radice principale è non negativa.
+Per $a\ge0$ e $k\in\mathbb R$ vale $\sqrt{k^2a}=|k|\sqrt a$. In particolare $\sqrt{x^2}=|x|$ per ogni reale $x$. Il valore assoluto è necessario perché la radice principale è non negativa.
 
 Per esempio $\sqrt{72}=6\sqrt2$, mentre $\sqrt{(-5)^2}=5$. Se $x<0$, da $\sqrt{x^2}$ si ottiene $-x$, che è positivo.
 
 Con indice dispari vale $\sqrt[3]{a^3}=a$. La riduzione dell'indice e dell'esponente deve rispettare il dominio iniziale. Per esempio $\sqrt[6]{x^2}=\sqrt[3]{|x|}$ per tutti i reali, mentre $\sqrt[3]x$ sarebbe negativo per $x<0$.
 
 ::grafico{f="abs(x)" xmin=-4 xmax=4 ymin=-1 ymax=5 titolo="La funzione $y=\sqrt{x^2}=|x|$ assume valori non negativi"}
+:::
+
+:::esempio{titolo="Estrazione con una lettera"}
+Per ogni $x\in\mathbb R$ il valore di $18x^2$ è non negativo. Scrivendo $18x^2=(3x)^2\cdot2$ segue
+
+$$
+\sqrt{18x^2}=|3x|\sqrt2=3|x|\sqrt2.
+$$
+
+Per $x=-2$ la forma semplificata vale $6\sqrt2$. Il valore assoluto conserva il segno della radice principale anche quando $x$ è negativo.
 :::
 
 ## Operazioni
@@ -86,6 +118,18 @@ Si cambia il segno fra i termini, mentre i radicali restano invariati. L'identit
 Se $a=b$, il denominatore iniziale è nullo e la frazione non esiste. Il nuovo denominatore $a-b$ conserva la stessa esclusione.
 :::
 
+:::esempio{titolo="Un denominatore negativo"}
+Il coniugato di $\sqrt2-3$ è $\sqrt2+3$. Il loro prodotto vale $2-9=-7$, quindi
+
+$$
+\frac{1}{\sqrt2-3}
+=\frac{\sqrt2+3}{2-9}
+=-\frac{\sqrt2+3}{7}.
+$$
+
+Poiché $\sqrt2<3$, il denominatore di partenza è negativo. Il segno del risultato corrisponde a quello della frazione iniziale.
+:::
+
 ## Potenze razionali e confronti
 
 :::definizione{#potenze titolo="Esponenti frazionari"}
@@ -93,9 +137,22 @@ Per $a>0$, $p$ intero e $q$ intero positivo si definisce
 $$
 a^{\frac pq}=\sqrt[q]{a^p}.
 $$
-Per esempio $16^{\frac34}=8$ e $9^{-\frac12}=\dfrac13$. La base positiva permette di applicare le proprietà delle potenze senza cambiare il dominio.
+Per $q=1$ si intende la consueta potenza intera. Per esempio $16^{\frac34}=8$ e $9^{-\frac12}=\dfrac13$. La base positiva permette di applicare le proprietà delle potenze senza cambiare il dominio.
 
 La funzione $y=\sqrt x$ è crescente in $[0,+\infty)$. Per confrontare due radici quadrate si possono quindi confrontare i radicandi. Per confrontare $2\sqrt3$ e $3\sqrt2$, entrambi positivi, si confrontano i loro quadrati $12$ e $18$. Segue $2\sqrt3<3\sqrt2$.
 
 L'elevamento al quadrato conserva l'ordine tra numeri non negativi; senza questa ipotesi il ragionamento non sarebbe valido.
+:::
+
+:::esempio{titolo="Esponente razionale negativo"}
+Per calcolare $27^{-\frac23}$ si trova prima la radice cubica di $27$, che vale $3$. L'esponente $-2$ richiede il reciproco del quadrato di $3$. Si ottiene
+
+$$
+27^{-\frac23}
+=(\sqrt[3]{27})^{-2}
+=\frac{1}{3^2}
+=\frac19.
+$$
+
+Dato che la base è maggiore di uno e l'esponente è negativo, il risultato è compreso fra zero e uno.
 :::

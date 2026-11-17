@@ -37,6 +37,20 @@ I segmenti devono essere individuati dalle stesse coppie di parallele. Confronta
 In un triangolo, una retta parallela a un lato divide gli altri due in parti proporzionali. Questo è il caso usato più spesso negli esercizi.
 :::
 
+:::esempio{titolo="Rapporto tra segmento totale e parte"}
+
+Sulla prima trasversale $AB=3$ e $BC=6$. Sulla seconda $A\prime B\prime=5$. Il rapporto dal segmento $AB$ al segmento $A\prime B\prime$ è $\dfrac53$. Il segmento totale $AC$ misura $9$, quindi il totale corrispondente misura $15$. Sottraendo il segmento noto $A\prime B\prime$ si trova il tratto restante, $B\prime C\prime=10$.
+
+$$
+\begin{aligned}
+A\prime C\prime&=\frac53(3+6)=15 \\[5pt]
+B\prime C\prime&=15-5=10
+\end{aligned}
+$$
+
+::grafico{assi=0 uguale=1 linee="-0.6,0 14,0;-0.6,3 14,3;-0.6,9 14,9;0,0 0,9;1,0 13,9" punti="0,0,pieno,A;0,3,pieno,B;0,9,pieno,C;1,0;5,3;13,9" etichette="1,-0.45,A';5.22,2.6,B';13.24,9.36,C'" xmin=-1 xmax=14.6 ymin=-1 ymax=10 titolo="Le tre parallele individuano la stessa successione di segmenti sulle due trasversali"}
+:::
+
 ## Criteri per i triangoli
 
 :::teorema{#criteri titolo="Tre modi di riconoscere la similitudine"}
@@ -85,6 +99,13 @@ Lo stesso risultato vale per poligoni simili mediante scomposizione in triangoli
 Con rapporto di lunghezze $3$, un'area di $8$ diventa $72$. Se il rapporto delle aree è $25$, il rapporto delle lunghezze è $5$. Si prende la radice positiva del rapporto delle aree.
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 2,0 2,1 0,1;4,0 8,0 8,2 4,2" xmin=-1 xmax=9 ymin=-1 ymax=3 titolo="Rapporto di lunghezze $2$: le aree dei rettangoli sono $2$ e $8$"}
+:::
+
+:::esempio{titolo="Area della parte rimanente"}
+
+Una parallela al lato $BC$ ritaglia il triangolo $ADE$ da un triangolo $ABC$ di area $45$. Se $\dfrac{AD}{AB}=\dfrac23$, l’area di $ADE$ vale $\left(\dfrac23\right)^2\cdot45=20$. Il trapezio $DBCE$ occupa la parte di area $45-20=25$. Il quadrato del rapporto si applica ai due triangoli simili, mentre l’area del trapezio si ricava per differenza.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 10,0 7,3 0.3333,3" linee="0,0 10,0 1,9 0,0;0.3333,3 7,3" punti="1,9,pieno,A;0,0,pieno,B;10,0,pieno,C;0.3333,3,pieno,D;7,3,pieno,E" xmin=-1 xmax=11 ymin=-1 ymax=10 titolo="Il trapezio occupa la parte del triangolo grande sotto il segmento parallelo"}
 :::
 
 ## Scale e applicazioni

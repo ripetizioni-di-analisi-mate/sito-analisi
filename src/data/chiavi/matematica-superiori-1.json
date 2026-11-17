@@ -119,6 +119,25 @@
    }
   ]
  },
+ "equazioni-primo-grado/14": {
+  "campi": [
+   {
+    "e": "Formula per $t$",
+    "t": "equazione",
+    "var": [
+     "s",
+     "t"
+    ],
+    "v": "t=\\frac{s-11}{3}"
+   },
+   {
+    "e": "$t$ per $s=33$",
+    "t": "numero",
+    "v": "\\frac{22}{3}",
+    "esatto": true
+   }
+  ]
+ },
  "frazioni-algebriche/1": {
   "campi": [
    {
@@ -170,6 +189,24 @@
    }
   ]
  },
+ "geometria-piano-triangoli/12": {
+  "campi": [
+   {
+    "e": "Lunghezza dei lati uguali",
+    "t": "numero",
+    "v": "14",
+    "esatto": true,
+    "u": "cm"
+   },
+   {
+    "e": "Lunghezza della base",
+    "t": "numero",
+    "v": "17",
+    "esatto": true,
+    "u": "cm"
+   }
+  ]
+ },
  "geometria-piano-triangoli/13": {
   "campi": [
    {
@@ -182,6 +219,16 @@
      "Nessun criterio"
     ],
     "v": "Lato-angolo-lato"
+   },
+   {
+    "e": "Lato corrispondente",
+    "t": "scelta",
+    "opzioni": [
+     "$PQ$",
+     "$PR$",
+     "$QR$"
+    ],
+    "v": "$QR$"
    }
   ]
  },
@@ -407,6 +454,24 @@
      "Le due rette sono parallele"
     ],
     "v": "Le due rette sono parallele"
+   }
+  ]
+ },
+ "parallele-e-quadrilateri/10": {
+  "campi": [
+   {
+    "e": "$AC$",
+    "t": "numero",
+    "v": "14",
+    "esatto": true,
+    "u": "cm"
+   },
+   {
+    "e": "$BO$",
+    "t": "numero",
+    "v": "10",
+    "esatto": true,
+    "u": "cm"
    }
   ]
  },

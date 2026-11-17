@@ -23,6 +23,10 @@ Ogni radice $t>0$ dà due radici $x=\pm\sqrt t$. La radice $t=0$ dà solo $x=0$.
 Per $x^4-5x^2+4=0$ si ha $t^2-5t+4=0$, quindi $t=1,4$ e $x=\pm1,\pm2$. Per $x^4+x^2-2=0$ le radici in $t$ sono $1$ e $-2$; resta soltanto $x=\pm1$.
 :::
 
+:::esempio{titolo="Il valore zero nella sostituzione"}
+Da $x^4+3x^2=0$ si passa a $t(t+3)=0$ con $t=x^2$. Le radici in $t$ sono $0$ e $-3$. La seconda è negativa, quindi non è il quadrato di un reale. La prima dà un solo valore $x=0$. Il numero di soluzioni in $x$ dipende dal segno delle radici in $t$.
+:::
+
 ## Le equazioni irrazionali
 
 :::teorema{#irrazionali titolo="Condizioni prima del quadrato"}
@@ -42,9 +46,23 @@ Elevare al quadrato può introdurre soluzioni estranee quando non si conserva la
 :::teorema{#due-radicali titolo="Isolamento e verifica"}
 Quando ci sono due radicali, si isola uno di essi e si controlla il segno del membro opposto prima di elevare al quadrato. Se rimane un radicale si ripete il procedimento.
 
-Per $\sqrt{x+1}+\sqrt x=3$ il dominio è $x\ge0$. Dopo aver isolato la prima radice e fatto il quadrato segue $1=9-6\sqrt x$, quindi $\sqrt x=\dfrac43$ e $x=\dfrac{16}{9}$. Sostituendo, le due radici valgono $\dfrac53$ e $\dfrac43$ e la somma vale $3$.
+Per $\sqrt{x+1}+\sqrt x=3$ il dominio è $x\ge0$. Isolando la prima radice si ottiene $\sqrt{x+1}=3-\sqrt x$. Il secondo membro deve essere non negativo, quindi si richiede anche $x\le9$. Uguagliando i quadrati segue $1=9-6\sqrt x$, quindi $\sqrt x=\dfrac43$ e $x=\dfrac{16}{9}$. Sostituendo, le due radici valgono $\dfrac53$ e $\dfrac43$ e la somma vale $3$.
 
 La verifica finale si esegue nella relazione iniziale. Il solo fatto di risolvere l'ultima equazione trasformata non controlla tutte le condizioni introdotte nei passaggi.
+:::
+
+:::esempio{titolo="Una radice resta dopo il quadrato"}
+Per risolvere $\sqrt{x+4}=\sqrt x+1$ si parte da $x\ge0$. Il secondo membro è positivo in tutto il dominio, quindi si possono uguagliare i quadrati.
+
+$$
+\begin{aligned}
+x+4&=x+2\sqrt x+1\\[6pt]
+2\sqrt x&=3\\[6pt]
+x&=\frac94.
+\end{aligned}
+$$
+
+Nel candidato $x=\dfrac94$ la prima radice vale $\dfrac52$, mentre il secondo membro vale $\dfrac32+1=\dfrac52$. L'equazione è quindi soddisfatta.
 :::
 
 ## Valore assoluto
@@ -59,6 +77,12 @@ Se il secondo membro dipende da $x$, si richiede prima che sia non negativo. Per
 ::grafico{f="abs(x-2);3" punti="-1,3,pieno,A;5,3,pieno,B" xmin=-3 xmax=7 ymin=-1 ymax=7 titolo="Le due soluzioni di $|x-2|=3$"}
 :::
 
+:::esempio{titolo="Valore assoluto e secondo membro variabile"}
+Per $|2x-1|=x+2$ serve $x+2\ge0$, quindi $x\ge-2$. Il ramo $x\ge\dfrac12$ dà $2x-1=x+2$ e la soluzione $x=3$. Il ramo $-2\le x<\dfrac12$ dà $1-2x=x+2$ e la soluzione $x=-\dfrac13$. In entrambi i casi il valore trovato appartiene all'intervallo usato per togliere il valore assoluto.
+
+::grafico{f="abs(2*x-1);x+2" legenda="y=|2x-1|;y=x+2" xmin=-2 xmax=4 ymin=-1 ymax=7 punti="-0.3333333333,1.6666666667,pieno,A;3,5,pieno,B" titolo="Ogni intersezione appartiene a uno dei due rami del valore assoluto"}
+:::
+
 ## Sistemi di secondo grado
 
 :::teorema{#sistemi titolo="Sostituzione di una relazione lineare"}
@@ -66,9 +90,13 @@ Un sistema con un'equazione lineare e una quadratica può essere risolto ricavan
 
 Per $\begin{cases}x+y=5\\x^2+y^2=13\end{cases}$ si pone $y=5-x$. Si ottiene $x^2+(5-x)^2=13$, quindi $x^2-5x+6=0$. Le coppie sono $(2;3)$ e $(3;2)$.
 
-I valori di $x$ e $y$ devono essere accoppiati attraverso la relazione usata. Non si possono combinare arbitrariamente le radici ottenute. Graficamente, i punti rappresentano le intersezioni delle curve del sistema.
+A ogni radice $x$ si associa il valore $y=5-x$. Per esempio $x=2$ impone $y=3$ e la coppia $(2;2)$ viola la prima equazione. Graficamente, i punti rappresentano le intersezioni delle curve del sistema.
 
-::grafico{f="5-x" curve="sqrt(13)*cos(t),sqrt(13)*sin(t),0,6.283185307" punti="2,3,pieno,P;3,2,pieno,Q" xmin=0 xmax=5 ymin=0 ymax=5 uguale=1 titolo="Le coppie $(2;3)$ e $(3;2)$ risolvono il sistema"}
+::grafico{f="5-x" curve="sqrt(13)*cos(t),sqrt(13)*sin(t),0,6.283185307" legenda="y=5-x;x^2+y^2=13" punti="2,3,pieno,P;3,2,pieno,Q" xmin=0 xmax=5 ymin=0 ymax=5 uguale=1 titolo="Le coppie $(2;3)$ e $(3;2)$ risolvono il sistema"}
+:::
+
+:::esempio{titolo="Una sola coppia nel caso di tangenza"}
+Nel sistema $\begin{cases}x+y=4\\x^2+y^2=8\end{cases}$ si scrive $y=4-x$. Il secondo vincolo diventa $x^2+(4-x)^2=8$, equivalente a $2(x-2)^2=0$. Si ottiene quindi $x=2$ e poi $y=2$. La retta e la circonferenza hanno una sola intersezione perché la retta è tangente. I due valori che si avrebbero per un'equazione quadratica con discriminante positivo coincidono qui nella radice doppia.
 :::
 
 ## Somma e prodotto

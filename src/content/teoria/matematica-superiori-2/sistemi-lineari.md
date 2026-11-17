@@ -14,7 +14,7 @@ $$
 $$
 la coppia $(4;3)$ è una soluzione, perché $4+3=7$ e $4-3=1$. La coppia $(3;4)$ soddisfa soltanto la prima equazione, quindi non risolve il sistema.
 
-Un sistema è **determinato** se ha una sola soluzione, **impossibile** se non ne ha, **indeterminato** se ne ha infinite. Nei sistemi lineari di due incognite le equazioni rappresentano rette. Due rette incidenti danno una soluzione, due parallele distinte nessuna, due coincidenti infinite.
+Un sistema è **determinato** se ha una sola soluzione, **impossibile** se non ne ha, **indeterminato** se ne ha infinite. In un sistema lineare di due incognite ogni equazione con almeno un coefficiente non nullo rappresenta una retta. Due rette incidenti danno una soluzione, due parallele distinte nessuna, due coincidenti infinite.
 :::
 
 ## Sostituzione e confronto
@@ -27,6 +27,29 @@ Per $\begin{cases}x+y=7\\x-y=1\end{cases}$ la prima dà $y=7-x$. Nella seconda s
 Nel **metodo del confronto** si ricava la stessa incognita da entrambe le equazioni e si uguagliano le espressioni ottenute. Per $y=2x+1$ e $y=-x+7$ si ha $2x+1=-x+7$, da cui $x=2$ e $y=5$. L'uguaglianza nasce dal fatto che entrambe le espressioni devono rappresentare lo stesso valore di $y$.
 :::
 
+:::esempio{titolo="Sostituzione con una soluzione frazionaria"}
+Nel sistema
+
+$$
+\begin{cases}
+3x-2y=1\\
+x+y=4
+\end{cases}
+$$
+
+la seconda equazione permette di ricavare $y=4-x$ senza introdurre denominatori. La prima diventa
+
+$$
+\begin{aligned}
+3x-2(4-x)&=1\\[6pt]
+3x-8+2x&=1\\[6pt]
+5x&=9.
+\end{aligned}
+$$
+
+La soluzione è $x=\dfrac95$ e $y=4-\dfrac95=\dfrac{11}5$. L'espressione sostituita compare moltiplicata per $-2$. Perciò il termine $-x$ in $4-x$ contribuisce con $+2x$.
+:::
+
 ## Il metodo di riduzione
 
 :::teorema{#riduzione titolo="Eliminazione di un’incognita"}
@@ -35,6 +58,21 @@ Sommando a un'equazione un multiplo dell'altra si ottiene un sistema equivalente
 Nel sistema $\begin{cases}2x+3y=13\\3x-2y=0\end{cases}$ si moltiplica la prima equazione per $2$ e la seconda per $3$. Sommando segue $13x=26$, quindi $x=2$. Dalla seconda equazione $6-2y=0$, quindi $y=3$.
 
 Se si moltiplica un'intera equazione per un numero, anche il termine noto viene moltiplicato. Per esempio $x-y=2$ diventa $3x-3y=6$. Questo passaggio è utilizzabile perché il moltiplicatore è diverso da zero.
+:::
+
+:::esempio{titolo="Riduzione mediante sottrazione"}
+Nel sistema
+
+$$
+\begin{cases}
+3x+4y=10\\
+5x+6y=16
+\end{cases}
+$$
+
+i coefficienti di $y$ diventano entrambi $12$ moltiplicando la prima equazione per $3$ e la seconda per $2$. Le equazioni risultanti sono $9x+12y=30$ e $10x+12y=32$. La seconda meno la prima dà $x=2$. Sostituendo nella prima equazione iniziale si trova $6+4y=10$, perciò $y=1$.
+
+Si conserva una delle due equazioni mentre si sostituisce l'altra con la differenza. Infatti, sommando alla differenza l'equazione conservata, si recupera quella sostituita.
 :::
 
 ## Determinanti e Cramer
@@ -64,7 +102,7 @@ Per $\begin{cases}x+y=3\\2x+2y=8\end{cases}$ la seconda meno il doppio della pri
 
 Quando tutti i coefficienti di un'equazione sono nulli, si esamina direttamente il termine noto. L'equazione $0x+0y=0$ non aggiunge condizioni; $0x+0y=1$ rende impossibile l'intero sistema. Questa lettura evita divisioni per coefficienti nulli.
 
-::grafico{f="x+1;x+3" xmin=-3 xmax=4 ymin=-3 ymax=7 titolo="Rette parallele distinte: nessuna coppia soddisfa entrambe le equazioni"}
+::grafico{f="3-x;4-x" xmin=-2 xmax=5 ymin=-2 ymax=7 titolo="Le rette $y=3-x$ e $y=4-x$ sono parallele e distinte"}
 :::
 
 ## Frazioni e parametri
@@ -75,6 +113,19 @@ I denominatori numerici si eliminano moltiplicando ogni equazione per il minimo 
 Un **parametro** è una lettera il cui valore è fissato durante la risoluzione. Per $\begin{cases}kx+y=1\\2x+y=3\end{cases}$ il determinante è $k-2$. Se $k\ne2$, sottraendo segue $x=-\dfrac2{k-2}$ e poi $y=1-kx$. Se $k=2$, le due equazioni avrebbero lo stesso primo membro e termini noti distinti, quindi il sistema è impossibile.
 
 La divisione per $k-2$ è stata usata soltanto nel caso in cui quel fattore è diverso da zero. Il caso escluso va studiato nelle equazioni iniziali.
+:::
+
+:::esempio{titolo="Una famiglia di soluzioni nel caso singolare"}
+Si consideri
+
+$$
+\begin{cases}
+kx+2y=6\\
+3x+y=3.
+\end{cases}
+$$
+
+Dalla prima equazione si sottrae il doppio della seconda. Si ottiene $(k-6)x=0$. Per $k\ne6$ segue $x=0$ e la seconda equazione dà $y=3$. Per $k=6$ la prima equazione è il doppio della seconda. Ogni coppia $(t;3-3t)$, con $t\in\mathbb R$, soddisfa entrambe. Il determinante si annulla in quest'ultimo caso e la riduzione mostra che le soluzioni sono infinite.
 :::
 
 ## Tre incognite e interpretazione grafica
@@ -97,4 +148,20 @@ Per tradurre un problema si assegnano nomi alle quantità richieste e si scrive 
 Se due biglietti interi e uno ridotto costano $23$ euro, mentre un intero e due ridotti costano $19$ euro, ponendo $i$ e $r$ i prezzi segue $\begin{cases}2i+r=23\\i+2r=19\end{cases}$. La soluzione è $i=9$, $r=5$ euro. Sostituendo si ritrovano entrambi i totali.
 
 Un numero di persone deve essere intero e non negativo; una lunghezza deve essere positiva. Una soluzione algebrica che viola queste condizioni non risolve il problema concreto. Anche le unità devono essere coerenti prima di costruire le equazioni.
+:::
+
+:::esempio{titolo="Due tariffe con lo stesso costo"}
+Siano $n$ il numero di lezioni e $C$ il costo in euro. La prima tariffa richiede $12$ euro di iscrizione e $4$ euro per lezione. La seconda richiede $3$ euro di iscrizione e $7$ euro per lezione. Per trovare quando le due tariffe coincidono si impone lo stesso valore di $C$.
+
+$$
+\begin{cases}
+C=12+4n\\
+C=3+7n.
+\end{cases}
+$$
+
+Il confronto dà $12+4n=3+7n$, perciò $3n=9$ e $n=3$. Entrambe le tariffe costano allora $24$ euro. L'ascissa del punto di intersezione è un intero non negativo, quindi la soluzione ha senso anche come numero di lezioni.
+
+::grafico{f="12+4*x;3+7*x" legenda="C=12+4n;C=3+7n" nomi="n,C" xmin=-0.5 xmax=6 ymin=-2 ymax=49 punti="0,12;0,3;3,24,pieno,P" segmenti="3,0,3,24;0,24,3,24" titolo="Le due tariffe costano 24 euro per tre lezioni"}
+
 :::

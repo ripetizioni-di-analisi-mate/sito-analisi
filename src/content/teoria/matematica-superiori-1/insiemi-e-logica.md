@@ -3,10 +3,6 @@ titolo: "Insiemi e logica elementare"
 sommario: "Appartenenza, inclusione, operazioni tra insiemi, conteggi, coppie ordinate e primi esempi di funzioni. Proposizioni, implicazioni e negazioni."
 ---
 
-:::percorso
-Parti dalla lettura dei simboli e dalle operazioni tra insiemi. Passa poi ai problemi di conteggio e alle frasi logiche: per ogni risposta devi poter indicare gli elementi coinvolti oppure la condizione che la rende vera. Sono sufficienti le quattro operazioni e il confronto tra numeri.
-:::
-
 ## Elementi, insiemi e sottoinsiemi
 
 :::definizione{#concetti titolo="Appartenenza e inclusione"}
@@ -52,6 +48,21 @@ La somma $|A|+|B|$ conta due volte gli elementi comuni; sottrarre una volta l'in
 In una classe di $25$ studenti, $15$ studiano inglese, $10$ francese e $5$ entrambe le lingue. Studiano almeno una delle due lingue $15+10-5=20$ studenti. Studiano soltanto inglese $15-5=10$ studenti; soltanto francese $10-5=5$. Non studiano nessuna delle due lingue $25-20=5$ studenti.
 
 Le quattro regioni disgiunte hanno numerosità $10$, $5$, $5$, $5$: la somma restituisce $25$. Questo controllo è utile prima di scegliere la risposta di un quiz.
+:::
+
+:::esempio{titolo="Ricavare l’intersezione da chi non partecipa"}
+Su $30$ studenti, $17$ frequentano teatro e $14$ musica. Cinque studenti non frequentano nessuno dei due laboratori, quindi $30-5=25$ studenti ne frequentano almeno uno. Le frequenze dei due laboratori sommano a $31$, perché chi li frequenta entrambi compare due volte.
+
+$$
+\begin{aligned}
+|T\cap M|&=|T|+|M|-|T\cup M|\\[6pt]
+&=17+14-25=6.
+\end{aligned}
+$$
+
+::venn{tipo="due" nomi="T,M" zone="ab" universo=1 elementi="a:11;ab:6;b:8;u:5" titolo="I sei studenti che frequentano entrambi i laboratori occupano la regione comune"}
+
+Nella regione di solo teatro restano $17-6=11$ studenti, in quella di sola musica ne restano $14-6=8$. Insieme ai sei studenti in comune e ai cinque esterni, si ritrova il totale $30$.
 :::
 
 ## Coppie ordinate, relazioni e funzioni
@@ -101,6 +112,10 @@ L'implicazione $p\Rightarrow q$ si legge «se $p$, allora $q$». È falsa nel ca
 Negare «tutti gli studenti hanno consegnato» significa «almeno uno studente non ha consegnato». Negare «esiste uno studente che ha consegnato» significa «nessuno studente ha consegnato». Occorre mantenere lo stesso gruppo di riferimento.
 
 Per un numero reale $x$, la negazione di $x>4$ è $x\le4$: anche l'uguaglianza rende falsa la frase iniziale. Analogamente, negare «$x>0$ e $x<3$» dà «$x\le0$ oppure $x\ge3$».
+:::
+
+:::esempio{titolo="Condizione sufficiente e condizione necessaria"}
+Fra gli interi, essere multiplo di $12$ è una condizione **sufficiente** per essere multiplo di $4$, perché $12=3\cdot4$. Essere multiplo di $4$ è dunque una condizione **necessaria** per essere multiplo di $12$. L’intero $8$ è un controesempio alla conclusione opposta, perché soddisfa la divisibilità per $4$ e non quella per $12$.
 :::
 
 ## Un esempio con più operazioni

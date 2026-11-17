@@ -37,6 +37,13 @@ Nel caso in cui un lato dell'angolo passa per il centro, il triangolo formato da
 ::grafico{curve="3*cos(t),3*sin(t),0,6.283185307" linee="3,0 0,0 1.5,2.598076;-3,0 3,0;-3,0 1.5,2.598076" punti="0,0,pieno,O;3,0,pieno,A;1.5,2.598076,pieno,B;-3,0,pieno,C" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 titolo="Sull’arco minore $AB$, l’angolo $AOB$ è $60^\circ$ e $ACB$ è $30^\circ$"}
 :::
 
+:::esempio{titolo="Due punti di osservazione della stessa corda"}
+
+Gli estremi $A$ e $B$ della corda dividono la circonferenza in un arco da $90^\circ$ e uno da $270^\circ$. Un punto $C$ sull’arco maggiore vede l’arco minore, quindi $\angle ACB=45^\circ$. Un punto $D$ sull’arco minore vede l’arco maggiore e quindi $\angle ADB=135^\circ$. Quando si cambia lato della corda, cambia anche l’arco intercettato.
+
+::grafico{assi=0 uguale=1 curve="4*cos(t),4*sin(t),0,6.283185307" linee="4,0 0,4;-4,0 0,4;-4,0 4,0;4,0 2.828427,2.828427 0,4" punti="4,0,pieno,A;0,4,pieno,B;-4,0,pieno,C;2.828427,2.828427,pieno,D" xmin=-5 xmax=5 ymin=-4.6 ymax=5 titolo="I punti $C$ e $D$ stanno su archi differenti della stessa corda"}
+:::
+
 ## Semicirconferenza e quadrilateri
 
 :::teorema{#inscritti titolo="Angoli retti e angoli opposti"}
@@ -69,6 +76,11 @@ Il centro è comune alla circonferenza circoscritta e a quella inscritta. L'**ap
 Nell'esagono regolare il lato è uguale al raggio della circonferenza circoscritta. I sei triangoli con vertice nel centro hanno angolo al centro di $60^\circ$ e sono equilateri.
 
 Un quadrilatero circoscritto a una circonferenza ha uguali somme dei lati opposti, perché i due segmenti tangenti condotti da ciascun vertice sono congruenti.
+:::
+
+:::esempio{titolo="Distinguere angoli interni, esterni e al centro"}
+
+In un ottagono regolare il giro completo si divide in otto angoli al centro di $45^\circ$. Nel passaggio da un lato al successivo la direzione cambia di $45^\circ$, che è l’angolo esterno. L’angolo interno è supplementare a quello esterno e quindi vale $180^\circ-45^\circ=135^\circ$.
 :::
 
 ## Circonferenze e archi

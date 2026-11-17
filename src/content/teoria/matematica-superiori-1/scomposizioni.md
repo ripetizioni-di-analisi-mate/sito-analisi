@@ -3,10 +3,6 @@ titolo: "Scomposizione dei polinomi"
 sommario: "Raccoglimenti, prodotti notevoli letti al contrario, trinomi e fattori comuni."
 ---
 
-:::percorso
-Sviluppare un prodotto trasforma fattori in una somma. Scomporre esegue il passaggio inverso e cerca un prodotto uguale al polinomio dato. I fattori ottenuti serviranno a semplificare frazioni algebriche e a individuare valori che annullano un’espressione.
-:::
-
 ## Raccoglimento totale
 
 :::teorema{#comune titolo="Raccogliere un fattore comune"}
@@ -37,6 +33,17 @@ $$
 La seconda uguaglianza raccoglie il binomio comune $y+3$. L’ordine dei termini si può cambiare grazie alla proprietà commutativa della somma. Il raggruppamento è utile quando produce fattori comuni effettivi, verificabili con la distributiva.
 :::
 
+:::esempio{titolo="Raccogliere due binomi opposti"}
+Per scomporre $3x(x-2)+4(2-x)$ si usa $2-x=-(x-2)$. Entrambi gli addendi diventano multipli di $x-2$.
+
+$$
+\begin{aligned}
+3x(x-2)+4(2-x)&=3x(x-2)-4(x-2)\\[6pt]
+&=(x-2)(3x-4).
+\end{aligned}
+$$
+:::
+
 ## Prodotti notevoli in senso inverso
 
 :::teorema{#quadrati titolo="Differenze di quadrati e trinomi quadrati"}
@@ -63,7 +70,11 @@ Dal prodotto $(x+r)(x+s)=x^2+(r+s)x+rs$ segue un metodo per scomporre $x^2+bx+c$
 
 Per $x^2+5x+6$, i numeri sono $2$ e $3$, quindi il prodotto è $(x+2)(x+3)$. Per $x^2-5x+6$ sono $-2$ e $-3$, quindi si ottiene $(x-2)(x-3)$. Per $x^2+x-6$ sono $3$ e $-2$.
 
-La ricerca di interi può non riuscire: questo significa che il metodo non trova fattori lineari con coefficienti interi, senza autorizzare una scomposizione inventata.
+Per cercare i fattori lineari interi basta esaminare le coppie di divisori di $c$ se $c\ne 0$. Se $c=0$ i termini contengono il fattore $x$.
+:::
+
+:::esempio{titolo="Il prodotto è negativo"}
+Per scomporre $x^2-5x-14$ si cercano due numeri di segno opposto, poiché il prodotto richiesto è $-14$. Le coppie di valori assoluti sono $1,14$ e $2,7$. La somma $-5$ si ottiene solo prendendo $2$ e $-7$, quindi la scomposizione è $(x+2)(x-7)$.
 :::
 
 ## Più passaggi e verifica finale
@@ -81,7 +92,7 @@ $$
 x^4-16=(x^2-4)(x^2+4)=(x-2)(x+2)(x^2+4).
 $$
 
-Il fattore $x^2+4$ non è una differenza di quadrati reali.
+Il fattore $x^2+4$ è positivo per ogni $x$ reale. Un fattore lineare reale avrebbe uno zero reale, quindi la scomposizione si arresta.
 
 Per controllare una scomposizione si sviluppa il prodotto e si confrontano tutti i coefficienti. Sostituire qualche valore numerico può scoprire un errore, ma non prova da solo un’identità per ogni valore.
 :::
@@ -92,4 +103,10 @@ Per controllare una scomposizione si sviluppa il prodotto e si confrontano tutti
 Per monomi con coefficienti interi positivi, il MCD usa il MCD dei coefficienti e il minimo esponente di ogni lettera comune. Il mcm usa il mcm dei coefficienti e il massimo esponente di tutte le lettere presenti. Per $12x^3y^2$ e $18x^2y^4$, si ottengono $6x^2y^2$ e $36x^3y^4$.
 
 Una forma fattorizzata permette anche di riconoscere rapidamente uno zero. Per $P(x)=(x+3)(x-1)$, si ha $P(-3)=0$, perché il primo fattore si annulla. Questo uso non richiede di sviluppare il polinomio.
+:::
+
+:::esempio{titolo="Zeri dei due fattori"}
+Per $P(x)=(x-2)(x+1)$ si ha $P(x)=0$ quando $x=2$ oppure $x=-1$. Nel grafico i due zeri sono le ascisse dei punti in cui la curva incontra l’asse orizzontale.
+
+::grafico{f="(x-2)*(x+1)" xmin=-3 xmax=4 ymin=-3 ymax=10 punti="-1,0,pieno;2,0,pieno" titolo="Intersezioni con l’asse x in corrispondenza degli zeri dei fattori"}
 :::

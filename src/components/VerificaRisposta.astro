@@ -1,6 +1,7 @@
 ---
 // La verifica del Worker è disponibile solo per i risultati che il sito riconosce.
 import { type Lingua } from '../i18n';
+import { ETICHETTE_ESERCIZI_BIENNIO_EN } from '../data/etichette-esercizi-biennio-en';
 import katex from 'katex';
 type Casella = { e: string; t: string; u?: string; vars?: string[]; primitiva?: boolean; n?: number; ordine?: boolean; righe?: number; colonne?: number; opzioni?: string[]; var?: string };
 interface Props { id: string; tipo?: 'numero' | 'funzione' | 'scelta' | 'multi'; primitiva?: boolean; unita?: string; campi?: Casella[]; lingua: Lingua; mostraIndizio?: boolean }
@@ -14,6 +15,8 @@ const leggibile = (u?: string) => u?.replace(/\^2/g, '²').replace(/\^3/g, '³')
 const unitaLeggibile = unita?.replace(/\^2/g, '²').replace(/\^3/g, '³').replace(/\^-1/g, '⁻¹').replace(/\^-2/g, '⁻²');
 const en = lingua === 'en';
 const es = lingua === 'es';
+const ingleseBiennio = en && /^matematica-superiori-[12]\//.test(id);
+const testoCasella = (testo: string) => ingleseBiennio ? ETICHETTE_ESERCIZI_BIENNIO_EN[testo] ?? testo : testo;
 const campo = `verifica-${id.replace(/[^a-z0-9]+/gi, '-')}`;
 const esempio = tipo === 'numero'
   ? (en ? 'e.g. 3/2, e^6, sqrt(2), pi/4, -inf' : es ? 'p. ej., 3/2, e^6, sqrt(2), pi/4, -inf' : 'per esempio 3/2, e^6, sqrt(2), pi/4, -inf')
@@ -42,7 +45,7 @@ const tasti = [
             : c.t === 'equazione' ? `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} ${c.vars?.includes('z') ? 'x + y - z = 1' : 'y = 2x - 1'}`
             : c.t === 'valori' ? (c.ordine ? `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} (1; 2${c.n! > 2 ? '; 0' : ''})` : `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} 2; -3`)
             : c.t === 'intervallo' ? (en ? `e.g. ${c.var ?? 'x'} < 1 or ${c.var ?? 'x'} >= 3` : es ? `p. ej., ${c.var ?? 'x'} < 1 o ${c.var ?? 'x'} >= 3` : `es. ${c.var ?? 'x'} < 1 o ${c.var ?? 'x'} >= 3`) : '';
-          const etichetta = c.e ? conFormule(c.e) : `${en ? 'Result' : es ? 'Resultado' : 'Risultato'} ${i + 1}`;
+          const etichetta = c.e ? conFormule(testoCasella(c.e)) : `${en ? 'Result' : es ? 'Resultado' : 'Risultato'} ${i + 1}`;
           return (
             <div class="vm-riga" data-i={i} data-t={c.t}>
               {c.t === 'scelta' || c.t === 'matrice'
@@ -51,7 +54,7 @@ const tasti = [
               <div class="vm-campo">
                 {c.t === 'scelta' ? (
                   <div class="vm-opzioni" role="radiogroup" aria-labelledby={`${idc}-et`}>
-                    {c.opzioni!.map((o, j) => <button type="button" role="radio" aria-checked="false" data-v={j} set:html={conFormule(o)} />)}
+                    {c.opzioni!.map((o, j) => <button type="button" role="radio" aria-checked="false" data-v={j} set:html={conFormule(testoCasella(o))} />)}
                   </div>
                 ) : c.t === 'matrice' ? (
                   <div class="vm-matrice" role="group" aria-labelledby={`${idc}-et`} style={`--colonne:${c.colonne}`}>
