@@ -24,9 +24,25 @@ con cui si passa dalla forma esponenziale alla forma logaritmica e viceversa; su
 $\log_2 8 = 3$ perché $2^{3} = 8$; $\log_3 \dfrac{1}{9} = -2$ perché $3^{-2} = \dfrac{1}{9}$; $\log_5 1 = 0$ perché $5^{0} = 1$.
 :::
 
+:::esempio{titolo="Argomenti con radici e basi frazionarie"}
+Quando la base e l'argomento sono potenze dello stesso numero, si scrivono entrambi come potenze di quel numero e si confrontano gli esponenti.
+$$
+\begin{gathered}
+\log_2 \sqrt{8} = \frac{3}{2} \quad \text{perché} \quad \sqrt{8} = 2^{\frac{3}{2}}, \\[6pt]
+\log_9 27 = \frac{3}{2} \quad \text{perché} \quad 9^{\frac{3}{2}} = \left(3^{2}\right)^{\frac{3}{2}} = 3^{3} = 27, \\[6pt]
+\log_{\frac{1}{2}} 8 = -3 \quad \text{perché} \quad \left(\frac{1}{2}\right)^{-3} = 2^{3} = 8 .
+\end{gathered}
+$$
+Nel secondo caso l'esponente $c$ soddisfa $3^{2c} = 3^{3}$, quindi $2c = 3$ e $c = \dfrac{3}{2}$.
+:::
+
+:::osservazione
+Due basi hanno un simbolo proprio. Il **logaritmo naturale** è il logaritmo in base $e \approx 2{,}718$ e si indica con $\ln x$; il logaritmo in base $10$ si indica spesso con $\operatorname{Log} x$ o con $\log x$. Nei corsi di Analisi la scrittura $\log x$ indica invece il logaritmo naturale, quindi il significato di $\log x$ senza base dipende dal testo. Per esempio $\ln e^{3} = 3$, $\ln 1 = 0$ e $\log_{10} 1000 = 3$.
+:::
+
 ## Le proprietà dei logaritmi
 
-:::teorema{#proprieta-logaritmi titolo="Proprietà dei logaritmi"}
+::::teorema{#proprieta-logaritmi titolo="Proprietà dei logaritmi"}
 Per $a > 0$, $a \neq 1$ e $x > 0$, $y > 0$:
 $$
 \begin{gathered}
@@ -36,7 +52,15 @@ $$
 \end{gathered}
 $$
 Le tre formule valgono quando gli argomenti $x$ e $y$ sono positivi, perciò prima di applicarle a espressioni con l'incognita vanno scritte le **condizioni di esistenza**. Nelle equazioni e nelle disequazioni servono a riunire più logaritmi in un **logaritmo solo**.
+
+:::dimostrazione
+L'idea è scrivere $x$ e $y$ come potenze di $a$ e usare le proprietà delle potenze. Siano $m = \log_a x$ e $n = \log_a y$; per la definizione di logaritmo si ha $x = a^{m}$ e $y = a^{n}$.
+
+- Per la regola del prodotto di potenze con la stessa base, $x y = a^{m} \cdot a^{n} = a^{m + n}$. Quindi l'esponente da dare ad $a$ per ottenere $xy$ è $m + n$, cioè $\log_a (xy) = \log_a x + \log_a y$.
+- Per la regola del quoziente, $\dfrac{x}{y} = \dfrac{a^{m}}{a^{n}} = a^{m - n}$, perciò $\log_a \dfrac{x}{y} = m - n = \log_a x - \log_a y$.
+- Per la regola della potenza di una potenza, $x^{p} = \left(a^{m}\right)^{p} = a^{p m}$, perciò $\log_a (x^{p}) = p m = p \log_a x$.
 :::
+::::
 
 :::esempio{titolo="Un esempio per ciascuna proprietà"}
 $$
@@ -49,12 +73,43 @@ $$
 In ogni caso gli argomenti sono numeri positivi, quindi le proprietà **si applicano**.
 :::
 
-:::teorema{#cambio-di-base titolo="Cambio di base"}
+:::attenzione
+Il logaritmo di una somma *non* è la somma dei logaritmi, e il quadrato di un logaritmo *non* è il logaritmo del quadrato. Con la base $2$:
+$$
+\begin{gathered}
+\log_2 (4 + 4) = \log_2 8 = 3, \qquad \log_2 4 + \log_2 4 = 2 + 2 = 4, \\[6pt]
+(\log_2 8)^{2} = 3^{2} = 9, \qquad \log_2 (8^{2}) = 2 \log_2 8 = 6 .
+\end{gathered}
+$$
+La scrittura $(\log_a x)^{2}$, che si trova anche come $\log_a^{2} x$, indica il quadrato del numero $\log_a x$ e compare nelle equazioni con sostituzione.
+:::
+
+:::attenzione
+Con l'incognita nell'argomento, la formula $\log_a (x^{p}) = p \log_a x$ richiede $x > 0$, mentre $x^{2}$ è positivo anche per $x < 0$. Per questo, con un esponente pari, si scrive $\log_a (x^{2}) = 2 \log_a |x|$, valida per ogni $x \neq 0$. L'equazione $\log_3 (x^{2}) = 2$ equivale a $x^{2} = 9$ e ha le soluzioni $x = 3$ e $x = -3$; la scrittura $2 \log_3 x = 2$ richiede $x > 0$ e porta a $x = 3$ soltanto, quindi la soluzione $x = -3$ non viene trovata.
+:::
+
+::::teorema{#cambio-di-base titolo="Cambio di base"}
 Per $a, b > 0$ entrambi diversi da $1$ e $x > 0$:
 $$
 \log_a x = \frac{\log_b x}{\log_b a} .
 $$
 Permette di esprimere *ogni* logaritmo in una base scelta, per esempio nella base $e$ oppure nella base $10$ disponibili sulla calcolatrice. Per esempio $\log_4 8 = \dfrac{\log_2 8}{\log_2 4} = \dfrac{3}{2}$.
+
+:::dimostrazione
+L'idea è applicare $\log_b$ ai due membri dell'uguaglianza che definisce $\log_a x$. Sia $c = \log_a x$; per la definizione di logaritmo si ha $a^{c} = x$. I due membri sono positivi e uguali, quindi hanno lo stesso logaritmo in base $b$:
+$$
+\log_b \left(a^{c}\right) = \log_b x .
+$$
+Per la proprietà del logaritmo di una potenza il primo membro vale $c \log_b a$, perciò $c \log_b a = \log_b x$. Poiché $a \neq 1$, si ha $\log_b a \neq 0$, e dividendo per $\log_b a$ si ottiene $c = \dfrac{\log_b x}{\log_b a}$.
+:::
+::::
+
+:::esempio{titolo="Calcolo con la calcolatrice e basi reciproche"}
+Il numero $10$ non è una potenza intera di $2$, quindi $\log_2 10$ si calcola passando al logaritmo naturale:
+$$
+\log_2 10 = \frac{\ln 10}{\ln 2} \approx \frac{2{,}3026}{0{,}6931} \approx 3{,}322 .
+$$
+Con $x = b$ la formula dà $\log_a b = \dfrac{1}{\log_b a}$; per esempio $\log_4 2 = \dfrac{1}{\log_2 4} = \dfrac{1}{2}$. Per un logaritmo in base $a^{n}$, con $a$ come base nuova, si ottiene $\log_{a^{n}} x = \dfrac{1}{n} \log_a x$, che serve per riportare alla stessa base logaritmi come $\log_4 x$ e $\log_2 x$: infatti $\log_4 x = \dfrac{\log_2 x}{\log_2 4} = \dfrac{1}{2} \log_2 x$.
 :::
 
 ## La funzione logaritmica

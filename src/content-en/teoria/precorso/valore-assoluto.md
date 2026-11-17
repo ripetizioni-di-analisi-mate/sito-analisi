@@ -10,13 +10,25 @@ The **absolute value** of a real number $x$ is
 $$
 |x| =
 \begin{cases}
-x & \text{se } x \geq 0 \\
--x & \text{se } x < 0
+x & \text{if } x \geq 0 \\
+-x & \text{if } x < 0
 \end{cases}
 $$
-The result is *never* negative: when $x < 0$, the number $-x$ is positive. For example $|7| = 7$ and $|-7| = -(-7) = 7$. Every rule for solving equations and inequalities in this chapter follows from this **piecewise definition**.
+The result is *never* negative: when $x < 0$, the number $-x$ is positive. For example $|7| = 7$ and $|-7| = -(-7) = 7$. Every solving rule in this chapter follows from this **piecewise definition**.
 
 ::grafico{f="abs(x)" xmin=-5 xmax=5 ymin=-1 ymax=5 titolo="$y = |x|$ coincides with $y = x$ for $x \geq 0$ and with $y = -x$ for $x < 0$"}
+:::
+
+:::esempio{titolo="An absolute value rewritten without bars"}
+To write $|2x - 6|$ without bars we study the sign of the argument, and $2x - 6 \geq 0$ for $x \geq 3$. Applying the definition with $2x - 6$ in place of $x$ we obtain
+$$
+|2x - 6| =
+\begin{cases}
+2x - 6 & \text{if } x \geq 3 \\
+6 - 2x & \text{if } x < 3
+\end{cases}
+$$
+For example at $x = 1$ we have $|2 - 6| = 4$, and indeed $6 - 2 \cdot 1 = 4$. This rewriting is the first step of the analysis by intervals, where it is applied to every absolute value present.
 :::
 
 :::definizione{#modulo-come-distanza titolo="Absolute value as distance"}
@@ -40,6 +52,58 @@ The absolute value is not removed by rewriting $|A| = A$: the equality holds *on
 
 :::
 
+::::teorema{#valore-assoluto-quoziente titolo="Absolute value of a quotient"}
+For all $a, b \in \mathbb{R}$ with $b \neq 0$,
+$$
+\left| \frac{a}{b} \right| = \frac{|a|}{|b|} .
+$$
+The property makes it possible to separate the numerator and the denominator of a fraction inside an absolute value. For example
+$$
+\left| \frac{x - 2}{-4} \right| = \frac{|x - 2|}{4} ,
+$$
+and therefore the equation $\left| \dfrac{x - 2}{-4} \right| = 1$ is equivalent to $|x - 2| = 4$, which has solutions $x = -2$ and $x = 6$.
+
+:::dimostrazione
+The idea is to write $a$ as the product of $\dfrac{a}{b}$ and $b$ and to apply the product rule. Since $a = \dfrac{a}{b} \cdot b$, the property $|ab| = |a|\,|b|$ gives
+$$
+|a| = \left| \frac{a}{b} \right| |b| .
+$$
+Since $b \neq 0$, we have $|b| > 0$, so both sides can be divided by $|b|$, and we obtain the claim.
+:::
+::::
+
+::::teorema{#disuguaglianza-triangolare titolo="Triangle inequality"}
+For all $a, b \in \mathbb{R}$,
+$$
+|a + b| \leq |a| + |b| ,
+$$
+and equality holds if and only if $ab \geq 0$, that is, if $a$ and $b$ do not have opposite signs. The inequality is used to bound the absolute value of a sum. For example, for $|x| \leq 2$ we have
+$$
+|x + 5| \leq |x| + 5 \leq 7 ,
+$$
+and the value $7$ is attained at $x = 2$.
+
+:::dimostrazione
+We compare the squares of the two sides, which are non-negative numbers. Since $|a + b|^2 = (a + b)^2$, expanding the square gives
+$$
+|a + b|^2 = a^2 + 2ab + b^2 .
+$$
+Since $ab \leq |ab| = |a|\,|b|$ and $a^2 = |a|^2$, $b^2 = |b|^2$, it follows that
+$$
+|a + b|^2 \leq |a|^2 + 2|a|\,|b| + |b|^2 = \left( |a| + |b| \right)^2 .
+$$
+Two non-negative numbers are in the same order as their squares, therefore $|a + b| \leq |a| + |b|$. Equality holds when $ab = |ab|$, and this happens exactly for $ab \geq 0$.
+:::
+::::
+
+:::attenzione
+The absolute value does *not* distribute over a sum or a difference: in general $|x - 3| \neq |x| - 3$. For $x = 1$ we have $|1 - 3| = 2$, while $|1| - 3 = -2$. For a sum only the triangle inequality holds.
+:::
+
+:::osservazione{#radice-del-quadrato titolo="Square root of a square"}
+For every $a \in \mathbb{R}$ we have $\sqrt{a^2} = |a|$, because $\sqrt{a^2}$ is the *non-negative* number whose square is $a^2$, and $|a|$ has both properties. The equality $\sqrt{a^2} = a$, on the other hand, holds only for $a \geq 0$: for $a = -2$ we have $\sqrt{4} = 2$, which is different from $-2$. For this reason an irrational equation such as $\sqrt{x^2 - 6x + 9} = 2x - 3$ becomes the equation with absolute value $|x - 3| = 2x - 3$, since $x^2 - 6x + 9 = (x - 3)^2$.
+:::
+
 ## The equation |A| = k
 
 :::teorema{#equazioni-con-modulo titolo="Equation of the form |A| = k"}
@@ -59,6 +123,14 @@ so $x = 10$ or $x = -2$: the two points at **distance** $6$ from $4$.
 
 ::grafico{f="abs(x-4);6" xmin=-4 xmax=12 ymin=-1 ymax=8 punti="-2,6,pieno;10,6,pieno" segmenti="-2,0,-2,6;10,0,10,6" titolo="The line $y = 6$ meets the graph of $y = |x - 4|$ at the points with x-coordinates $-2$ and $10$"}
 
+:::
+
+:::esempio{titolo="Argument of second degree"}
+$|x^2 - 4| = 5$. Since $5 > 0$, the equation is equivalent to
+$$
+x^2 - 4 = 5 \ \vee \ x^2 - 4 = -5 ,
+$$
+that is $x^2 = 9 \ \vee \ x^2 = -1$. The first equation has solutions $x = -3$ and $x = 3$; the second has no real solutions, because a square is never negative. The solutions are therefore $x = \pm 3$.
 :::
 
 ## The equation |A| = |B|
@@ -120,6 +192,22 @@ The first system gives $x = 3$, which satisfies the condition since $2 \cdot 3 -
 
 :::
 
+:::osservazione
+The same equation $|A| = B$ can also be solved by studying the sign of the argument $A$, as in the definition:
+$$
+\begin{cases}
+A \geq 0 \\
+A = B
+\end{cases}
+\ \cup \
+\begin{cases}
+A < 0 \\
+-A = B
+\end{cases}
+$$
+For $|x| = 2x - 3$ the first system gives $x = 3$, which satisfies $x \geq 0$; the second gives $-x = 2x - 3$, that is $x = 1$, which does not satisfy $x < 0$. The result $x = 3$ coincides with the one obtained with the condition $B \geq 0$. This second form is more convenient when the sign of $A$ is easier to study than the sign of $B$.
+:::
+
 ## The inequalities |A| < k and |A| ≤ k
 
 :::teorema{#disequazioni-minore titolo="Inequality of the form |A| < k"}
@@ -142,6 +230,10 @@ $|x - 1| < 4$ is equivalent to $-4 < x - 1 < 4$, so $-3 < x < 5$: the interval o
 
 ::grafico{f="abs(x-1);4" xmin=-5 xmax=7 ymin=-1 ymax=7 area="4;abs(x-1);-3;5" punti="-3,4,vuoto;5,4,vuoto" titolo="$y = |x - 1|$ lies below the line $y = 4$ for $-3 < x < 5$"}
 
+:::
+
+:::attenzione
+The two conditions $A < k$ and $A > -k$ must hold *together*, so they form a system. For $|x| < 2$ the union $x < 2 \ \vee \ x > -2$ is satisfied by every real number, including $x = 5$, for which $|5| = 5 > 2$; the system, instead, gives the correct interval $-2 < x < 2$.
 :::
 
 ## The inequalities |A| > k and |A| ≥ k
@@ -167,10 +259,14 @@ so $x < -5 \ \vee \ x > 1$.
 
 :::
 
+:::esempio{titolo="Right-hand side zero or negative"}
+The inequality $|x - 7| \geq -2$ is satisfied by every $x \in \mathbb{R}$, since $|x - 7| \geq 0 > -2$. An absolute value is zero only where its argument is zero, therefore the inequality $|x^2 - 1| > 0$ is equivalent to $x^2 - 1 \neq 0$; the solutions are therefore all $x$ with $x \neq -1$ and $x \neq 1$.
+:::
+
 ## Inequalities with an expression on the right-hand side
 
 :::teorema{#disequazione-modulo-espressione titolo="Inequalities of the form |A| < B and |A| > B"}
-When the right-hand side is an expression $B$, the forms used to solve them **remain the same** and the cases determined by the sign of $B$ are already included:
+When the right-hand side is an expression $B$, the solving forms **remain the same** and the cases on the sign of $B$ are already included:
 $$
 |A| < B \iff
 \begin{cases}
@@ -210,6 +306,30 @@ $$
 that is $x < 3 \ \vee \ x < -1$. The **union** of the two half-lines is $x < 3$.
 :::
 
+:::esempio{titolo="Argument of second degree and right-hand side with the variable"}
+$|x^2 - 2x| < x$ is equivalent to the system
+$$
+\begin{cases}
+x^2 - 2x < x \\
+x^2 - 2x > -x
+\end{cases}
+\qquad
+\begin{cases}
+x(x - 3) < 0 \\
+x(x - 1) > 0
+\end{cases}
+\qquad
+\begin{cases}
+0 < x < 3 \\
+x < 0 \ \vee \ x > 1
+\end{cases}
+$$
+The two conditions hold together for $1 < x < 3$. At $x = 2$ we have $|4 - 4| = 0 < 2$, while at $x = \dfrac{1}{2}$ we have $\left| \dfrac{1}{4} - 1 \right| = \dfrac{3}{4}$, which is greater than $\dfrac{1}{2}$.
+
+::grafico{f="abs(x^2-2*x);x" xmin=-1 xmax=4 ymin=-1 ymax=5 area="x;abs(x^2-2*x);1;3" punti="1,1,vuoto;3,3,vuoto" titolo="$y = |x^2 - 2x|$ lies below the line $y = x$ (dashed) for $1 < x < 3$"}
+
+:::
+
 ## Two absolute values: analysis by intervals
 
 :::teorema{#due-valori-assoluti titolo="Sign analysis by intervals"}
@@ -237,5 +357,33 @@ $$
 In the first interval $2 - 2x = 4$ gives $x = -1$, which is acceptable since $-1 < 0$; in the second the equation $2 = 4$ is **false**; in the third $2x - 2 = 4$ gives $x = 3$, which is acceptable since $3 \geq 2$. The solutions are $x = -1$ and $x = 3$.
 
 ::grafico{f="abs(x)+abs(x-2);4" xmin=-3 xmax=5 ymin=-1 ymax=7 punti="-1,4,pieno;3,4,pieno" titolo="$y = |x| + |x - 2|$ is constantly equal to $2$ in the interval $0 \leq x \leq 2$, where the equation has no solutions; the line $y = 4$ meets the graph at $x = -1$ and at $x = 3$"}
+
+:::
+
+:::osservazione{titolo="The endpoints of the intervals"}
+Each point where an argument vanishes is assigned to *a single* interval, so that no point is counted twice. The choice of the interval does not matter, because at that point the argument equals $0$ and the two rewritings of the absolute value give the same value: for $x = 2$ we have $x - 2 = 0 = 2 - x$. With $n$ distinct points there are $n + 1$ intervals.
+:::
+
+:::esempio{titolo="Difference of two absolute values"}
+$|x - 1| - |x + 1| > 1$. The arguments vanish at $-1$ and at $1$, so the inequality is equivalent to
+$$
+\begin{cases}
+x < -1 \\
+(1 - x) - (-x - 1) > 1
+\end{cases}
+\ \cup \
+\begin{cases}
+-1 \leq x < 1 \\
+(1 - x) - (x + 1) > 1
+\end{cases}
+\ \cup \
+\begin{cases}
+x \geq 1 \\
+(x - 1) - (x + 1) > 1
+\end{cases}
+$$
+In the first interval the left-hand side equals $2$ and the inequality $2 > 1$ is true, so the whole interval $x < -1$ is a solution. In the second we obtain $-2x > 1$, that is $x < -\dfrac{1}{2}$, which together with the interval condition gives $-1 \leq x < -\dfrac{1}{2}$. In the third the left-hand side equals $-2$ and the inequality is false. The union is $x < -\dfrac{1}{2}$.
+
+::grafico{f="abs(x-1)-abs(x+1);1" xmin=-4 xmax=4 ymin=-3 ymax=3 punti="-0.5,1,vuoto" titolo="$y = |x - 1| - |x + 1|$ equals $2$ for $x \leq -1$ and $-2$ for $x \geq 1$; it lies above the line $y = 1$ for $x < -\dfrac{1}{2}$"}
 
 :::

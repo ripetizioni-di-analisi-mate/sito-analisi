@@ -17,8 +17,28 @@ con $a_n \neq 0$. I numeri $a_n, \dots, a_0$ sono i coefficienti, $a_n$ è il **
 Due polinomi assumono lo stesso valore per ogni $x$ reale *se e solo se* hanno lo **stesso grado** e gli **stessi coefficienti**, termine per termine. Il principio permette di determinare coefficienti incogniti uguagliando i coefficienti dei termini dello stesso grado, e con esso si verificano divisioni e scomposizioni. Dall'uguaglianza $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ segue $b = -4$ e $c = 3$.
 :::
 
+:::esempio{titolo="Coefficienti indeterminati"}
+Si cercano $a$ e $b$ tali che $x^3 - 2x + 1 = (x - 1)(x^2 + ax + b)$ per ogni $x$. Lo sviluppo del secondo membro è
+$$
+(x - 1)(x^2 + ax + b) = x^3 + (a - 1)\,x^2 + (b - a)\,x - b .
+$$
+Per il **principio di identità** i coefficienti dei termini dello stesso grado coincidono, quindi
+$$
+\begin{cases}
+a - 1 = 0 \\[2pt]
+b - a = -2 \\[2pt]
+-b = 1
+\end{cases}
+$$
+La prima e la terza equazione danno $a = 1$ e $b = -1$, e anche la seconda è soddisfatta, poiché $-1 - 1 = -2$. Perciò $x^3 - 2x + 1 = (x - 1)(x^2 + x - 1)$. Il sistema ha tre equazioni e due incognite, quindi può essere incompatibile; questo accade quando $x - 1$ non è un fattore del polinomio.
+:::
+
 :::osservazione
 Nel prodotto di due polinomi i gradi **si sommano**, quindi $\deg (PQ) = \deg P + \deg Q$. Per questo un polinomio di grado $4$ scomposto in due fattori di grado positivo ha fattori di gradi $1$ e $3$ oppure $2$ e $2$.
+:::
+
+:::attenzione
+Il grado di una somma è al più il massimo dei gradi degli addendi, $\deg (P + Q) \leq \max(\deg P, \deg Q)$, e risulta minore quando i termini di grado massimo si cancellano. Per esempio $(x^2 + 3x) + (-x^2 + 1) = 3x + 1$ ha grado $1$, mentre entrambi gli addendi hanno grado $2$.
 :::
 
 ## Prodotti notevoli
@@ -40,6 +60,14 @@ Letti da destra verso sinistra **scompongono**: un trinomio è un **quadrato di 
 $(2x + 3)^2 = 4x^2 + 12x + 9$. Nel verso opposto, $x^2 - 10x + 25 = (x - 5)^2$, poiché $x^2$ e $25$ sono i quadrati di $x$ e $5$ e $-10x$ è il doppio prodotto $-2 \cdot x \cdot 5$. Per il cubo, $(x + 2)^3 = x^3 + 6x^2 + 12x + 8$.
 :::
 
+:::attenzione
+Il quadrato di una somma è diverso dalla somma dei quadrati, perché lo sviluppo $(A + B)^2 = A^2 + 2AB + B^2$ contiene il doppio prodotto; quindi l'uguaglianza $(A + B)^2 = A^2 + B^2$ vale solo se $2AB = 0$. Con $A = 1$ e $B = 2$ si ha $(1 + 2)^2 = 9$, mentre $1^2 + 2^2 = 5$; la differenza $4$ è il doppio prodotto $2 \cdot 1 \cdot 2$. Allo stesso modo $(x + 3)^2 = x^2 + 6x + 9$ contiene il termine $6x$, assente in $x^2 + 9$.
+:::
+
+:::esempio{titolo="Riconoscere un cubo di binomio"}
+Il polinomio $x^3 - 6x^2 + 12x - 8$ ha quattro termini e i due estremi sono i cubi $x^3$ e $-8 = (-2)^3$, quindi si prova il cubo di $x - 2$. Con $A = x$ e $B = 2$ i termini centrali dello sviluppo di $(A - B)^3$ sono $-3A^2 B = -6x^2$ e $3AB^2 = 12x$, uguali a quelli dati; perciò $x^3 - 6x^2 + 12x - 8 = (x - 2)^3$, e l'unica radice reale del polinomio è $2$.
+:::
+
 :::teorema{#differenza-di-quadrati titolo="Differenza di quadrati"}
 $$
 A^2 - B^2 = (A - B)(A + B)
@@ -51,6 +79,14 @@ $$
 $9x^2 - 16 = (3x - 4)(3x + 4)$. Con due applicazioni successive, $x^4 - 1 = (x^2 - 1)(x^2 + 1) = (x - 1)(x + 1)(x^2 + 1)$.
 :::
 
+:::esempio{titolo="Basi che sono polinomi"}
+Le basi $A$ e $B$ possono essere a loro volta polinomi. In $(x + 1)^2 - 4$ si ha $A = x + 1$ e $B = 2$, quindi
+$$
+(x + 1)^2 - 4 = (x + 1 - 2)(x + 1 + 2) = (x - 1)(x + 3) .
+$$
+Sviluppando prima il quadrato si ottiene $x^2 + 2x - 3$, che richiede un secondo passo con il trinomio speciale; la differenza di quadrati fornisce i fattori in un solo passo.
+:::
+
 :::attenzione
 La somma di due quadrati $x^2 + k^2$, con $k \neq 0$, *non* si scompone in fattori di primo grado con coefficienti reali. Per esempio $x^2 + 4 \geq 4 > 0$ per ogni $x$, quindi $x^2 + 4$ **non ha radici reali** e nessun fattore della forma $x - c$ lo divide.
 
@@ -58,13 +94,28 @@ La somma di due quadrati $x^2 + k^2$, con $k \neq 0$, *non* si scompone in fatto
 
 :::
 
-:::teorema{#somma-e-differenza-di-cubi titolo="Somma e differenza di cubi"}
+::::teorema{#somma-e-differenza-di-cubi titolo="Somma e differenza di cubi"}
 $$
 A^3 + B^3 = (A + B)(A^2 - AB + B^2), \qquad
 A^3 - B^3 = (A - B)(A^2 + AB + B^2)
 $$
 Il secondo fattore, detto **falso quadrato**, ha discriminante negativo e **non ha radici reali**, perciò la scomposizione non prosegue; il criterio con il discriminante si trova nel capitolo sulle equazioni e disequazioni polinomiali.
+
+:::dimostrazione
+L'idea è sviluppare il secondo membro e verificare che i termini misti si cancellano:
+$$
+\begin{aligned}
+(A + B)(A^2 - AB + B^2) &= A^3 - A^2 B + A B^2 + A^2 B - A B^2 + B^3 \\[6pt]
+&= A^3 + B^3 .
+\end{aligned}
+$$
+La formula per la differenza si ottiene sostituendo $B$ con $-B$. Per il falso quadrato si completa il quadrato:
+$$
+A^2 - AB + B^2 = \left( A - \frac{B}{2} \right)^2 + \frac{3}{4}\, B^2 .
+$$
+Se $B \neq 0$, il primo addendo è maggiore o uguale a zero e il secondo è positivo, quindi $A^2 - AB + B^2 > 0$ per ogni valore di $A$. Perciò, quando $A$ contiene la variabile $x$ e $B$ è una costante non nulla, il falso quadrato **non si annulla** per nessun $x$ reale. Per $A^2 + AB + B^2$ il conto è lo stesso con $A + \dfrac{B}{2}$. Per esempio, con $A = x$ e $B = 2$, si ha $x^2 - 2x + 4 = (x - 1)^2 + 3 \geq 3$.
 :::
+::::
 
 :::esempio
 $x^3 + 8 = (x + 2)(x^2 - 2x + 4)$, con $A = x$ e $B = 2$. Analogamente $27x^3 - 1 = (3x - 1)(9x^2 + 3x + 1)$, con $A = 3x$ e $B = 1$.
@@ -102,6 +153,10 @@ $$
 Il dividendo si scrive con i gradi in ordine decrescente e i **gradi mancanti** si contano con coefficiente $0$. La verifica usa il **principio di identità**: sviluppando $B(x)\,Q(x) + R(x)$ si deve ritrovare $A(x)$, coefficiente per coefficiente.
 :::
 
+:::osservazione
+Se $\deg A \geq \deg B$, il grado del quoziente è la differenza dei gradi, $\deg Q = \deg A - \deg B$. Infatti $\deg R < \deg B \leq \deg (BQ)$, quindi $A = BQ + R$ ha lo stesso grado di $BQ$, che per la regola del prodotto è $\deg B + \deg Q$. Nella divisione di $2x^3 - 3x^2 + 4x - 5$ per $x^2 - x + 1$ il quoziente $2x - 1$ ha grado $3 - 2 = 1$, e l'algoritmo ha richiesto due passi, uno per ciascun termine del quoziente.
+:::
+
 ## Teorema del resto e teorema di Ruffini
 
 ::::teorema{#teorema-del-resto titolo="Teorema del resto"}
@@ -117,6 +172,14 @@ $$
 perciò il resto **coincide con** $P(c)$.
 :::
 ::::
+
+:::esempio{titolo="Divisore di primo grado con coefficiente diverso da 1"}
+Il resto della divisione di $P(x)$ per $2x - 1$ è $P\left( \dfrac{1}{2} \right)$. Infatti $2x - 1 = 2\left( x - \dfrac{1}{2} \right)$, e se $P(x) = \left( x - \dfrac{1}{2} \right) Q(x) + R$, allora $P(x) = (2x - 1)\, \dfrac{Q(x)}{2} + R$, con lo stesso resto costante $R$. Per $P(x) = 4x^3 - 2x + 3$ si ottiene
+$$
+P\left( \frac{1}{2} \right) = 4 \cdot \frac{1}{8} - 2 \cdot \frac{1}{2} + 3 = \frac{1}{2} - 1 + 3 = \frac{5}{2} ,
+$$
+quindi il resto è $\dfrac{5}{2}$. Con lo stesso ragionamento, il resto della divisione per $ax + b$, con $a \neq 0$, è $P\left( -\dfrac{b}{a} \right)$.
+:::
 
 :::teorema{#teorema-di-ruffini titolo="Teorema di Ruffini"}
 Il binomio $x - c$ divide $P(x)$ *se e solo se* $P(c) = 0$, cioè se e solo se $c$ è una radice di $P$. L'enunciato segue dal **teorema del resto**, poiché la divisione è esatta se e solo se il resto $P(c)$ è nullo. Il teorema collega le radici alla fattorizzazione: ogni radice trovata produce un **fattore di primo grado**. Per $P(x) = x^2 - 5x + 6$ si ha $P(2) = 4 - 10 + 6 = 0$, quindi $x - 2$ divide $P$; infatti $P(x) = (x - 2)(x - 3)$.
@@ -140,6 +203,27 @@ $P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. La radice $2$ è **doppia**, poich�
 
 ::grafico{f="x^3-3*x^2+4" xmin=-1.8 xmax=3.3 ymin=-4 ymax=7 punti="-1,0,pieno;2,0,pieno" titolo="$y = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$ attraversa l'asse $x$ nella radice semplice $-1$ e lo tocca senza attraversarlo nella radice doppia $2$"}
 
+:::
+
+:::esempio{titolo="Molteplicità con divisioni successive"}
+Per $P(x) = x^3 - 3x + 2$ si ha $P(1) = 1 - 3 + 2 = 0$. Due schemi di Ruffini successivi con $c = 1$ danno
+$$
+\begin{array}{c|ccc|c}
+ & 1 & 0 & -3 & 2 \\
+1 &  & 1 & 1 & -2 \\ \hline
+ & 1 & 1 & -2 & 0
+\end{array}
+\qquad\qquad
+\begin{array}{c|cc|c}
+ & 1 & 1 & -2 \\
+1 &  & 1 & 2 \\ \hline
+ & 1 & 2 & 0
+\end{array}
+$$
+Il primo quoziente $x^2 + x - 2$ vale $0$ in $x = 1$, quindi la seconda divisione è esatta; il secondo quoziente $x + 2$ vale $3 \neq 0$ in $x = 1$, perciò una terza divisione non sarebbe esatta. Le divisioni esatte sono due, quindi $1$ è una radice **doppia** e
+$$
+x^3 - 3x + 2 = (x - 1)^2 (x + 2) .
+$$
 :::
 
 ## La regola di Ruffini
@@ -172,10 +256,42 @@ dove l'ultima uguaglianza si verifica sviluppando il prodotto $(x - 3)(x + 2) = 
 
 :::
 
+:::attenzione
+A sinistra dello schema si scrive il numero $c$ per cui il divisore ha la forma $x - c$, cioè la radice del divisore. Per il divisore $x + 3 = x - (-3)$ si usa $c = -3$. Con $P(x) = x^2 + x - 6$ e $c = -3$ lo schema dà $1$; poi $1 \cdot (-3) = -3$ e $1 - 3 = -2$; poi $-2 \cdot (-3) = 6$ e $-6 + 6 = 0$, quindi $x^2 + x - 6 = (x + 3)(x - 2)$. Con $c = 3$ lo schema calcola il resto $P(3) = 6$, che è il resto della divisione per $x - 3$.
+:::
+
+:::osservazione
+La regola di Ruffini si applica anche a un divisore $ax + b$ con $a \neq 0$ e $a \neq 1$. Poiché $ax + b = a\left( x + \dfrac{b}{a} \right)$, si divide per $x + \dfrac{b}{a}$ e poi si divide il quoziente per $a$; il resto non cambia. Per dividere $2x^2 + 3x - 2$ per $2x - 1$ si usa $c = \dfrac{1}{2}$:
+$$
+\begin{array}{c|cc|c}
+ & 2 & 3 & -2 \\
+\frac{1}{2} &  & 1 & 2 \\ \hline
+ & 2 & 4 & 0
+\end{array}
+$$
+Il quoziente della divisione per $x - \dfrac{1}{2}$ è $2x + 4$, quindi il quoziente della divisione per $2x - 1$ è $\dfrac{2x + 4}{2} = x + 2$, con resto $0$, e $2x^2 + 3x - 2 = (2x - 1)(x + 2)$.
+:::
+
 ## Radici razionali
 
-:::teorema{#radici-razionali titolo="Ricerca delle radici razionali"}
+::::teorema{#radici-razionali titolo="Ricerca delle radici razionali"}
 Sia $P(x) = a_n x^n + \dots + a_0$ a coefficienti interi, con $a_0 \neq 0$. Se la frazione $\dfrac{p}{q}$, ridotta ai minimi termini, è una radice di $P$, allora $p$ **divide il termine noto** $a_0$ e $q$ **divide il coefficiente direttore** $a_n$. Il teorema fornisce un elenco *finito* di candidati; ogni candidato $c$ si prova calcolando $P(c)$, e per il **teorema di Ruffini** ogni candidato con $P(c) = 0$ produce il fattore $x - c$. Quando il coefficiente direttore è $1$, le eventuali radici razionali sono numeri interi che dividono il termine noto.
+
+:::dimostrazione
+L'idea è eliminare i denominatori e leggere l'uguaglianza ottenuta come un'uguaglianza tra numeri interi. Sia $P\left( \dfrac{p}{q} \right) = 0$, con $p$ e $q$ interi primi tra loro e $q > 0$. Moltiplicando l'uguaglianza per $q^n$ si ottiene
+$$
+a_n p^n + a_{n-1} p^{n-1} q + \dots + a_1 p\, q^{n-1} + a_0 q^n = 0 .
+$$
+Tutti i termini tranne l'ultimo contengono il fattore $p$, quindi
+$$
+a_0 q^n = -p \left( a_n p^{n-1} + a_{n-1} p^{n-2} q + \dots + a_1 q^{n-1} \right) ,
+$$
+e il secondo fattore del secondo membro è un numero intero; perciò $p$ divide $a_0 q^n$. Si usa ora la proprietà dei numeri interi per cui, se un intero divide un prodotto ed è primo con uno dei due fattori, allora divide l'altro. Poiché $p$ è primo con $q$, è primo anche con $q^n$, quindi $p$ **divide** $a_0$. Allo stesso modo tutti i termini tranne il primo contengono il fattore $q$, quindi $q$ divide $a_n p^n$; poiché $q$ è primo con $p^n$, il denominatore $q$ **divide** $a_n$.
+:::
+::::
+
+:::attenzione
+Un polinomio i cui candidati non sono radici non ha radici *razionali*, e può avere radici reali irrazionali. Per $x^2 - 2$ i candidati $\pm 1$, $\pm 2$ danno i valori $-1$ e $2$, diversi da zero; tuttavia $x^2 - 2 = \left( x - \sqrt{2} \right)\left( x + \sqrt{2} \right)$, come differenza dei quadrati di $x$ e di $\sqrt{2}$. La ricerca delle radici razionali, quindi, non basta a stabilire che un fattore di secondo grado è privo di radici reali.
 :::
 
 :::esempio
@@ -212,6 +328,10 @@ $$
 Per esempio $x^2 + 5x + 6 = (x + 2)(x + 3)$, poiché $2 + 3 = 5$ e $2 \cdot 3 = 6$; analogamente $x^2 - x - 12 = (x + 3)(x - 4)$, poiché $3 + (-4) = -1$ e $3 \cdot (-4) = -12$.
 :::
 
+:::esempio{titolo="Trinomio speciale in due variabili"}
+Il trinomio $x^2 - 5xy + 6y^2$, letto come trinomio nella variabile $x$, ha somma $s = -5y$ e prodotto $p = 6y^2$. I due termini cercati sono $-2y$ e $-3y$, poiché $-2y + (-3y) = -5y$ e $(-2y)(-3y) = 6y^2$, quindi $x^2 - 5xy + 6y^2 = (x - 2y)(x - 3y)$.
+:::
+
 :::definizione{#strategia-di-fattorizzazione titolo="Strategia di fattorizzazione"}
 La scomposizione di un polinomio procede nell'ordine seguente, e dopo *ogni* passo **riparte dal primo** sui fattori ottenuti.
 
@@ -232,4 +352,16 @@ Il primo passaggio è il **raccoglimento totale** di $2x^2$. Il fattore $x^2 + x
 
 ::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: nelle radici semplici $-3$ e $2$ il grafico attraversa l'asse $x$; nella radice $0$, doppia per il fattore $x^2$, lo tocca senza attraversarlo"}
 
+:::
+
+:::esempio{titolo="Una somma di quadrati di quarto grado"}
+Il binomio $x^4 + 4$ è positivo per ogni $x$, quindi non ha radici reali e non ha fattori di primo grado; si scompone tuttavia in due fattori di secondo grado. Si aggiunge e si toglie $4x^2$, che è il doppio prodotto di $x^2$ e di $2$:
+$$
+\begin{aligned}
+x^4 + 4 &= x^4 + 4x^2 + 4 - 4x^2 \\[6pt]
+&= \left( x^2 + 2 \right)^2 - (2x)^2 \\[6pt]
+&= \left( x^2 - 2x + 2 \right)\left( x^2 + 2x + 2 \right) .
+\end{aligned}
+$$
+L'ultimo passaggio è una differenza di quadrati con $A = x^2 + 2$ e $B = 2x$. I due fattori si scrivono $(x - 1)^2 + 1$ e $(x + 1)^2 + 1$, quindi sono positivi per ogni $x$ e non hanno radici reali; perciò la scomposizione è **completa**.
 :::

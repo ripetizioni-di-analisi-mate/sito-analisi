@@ -217,6 +217,25 @@
    }
   ]
  },
+ "equazioni-polinomiali/17": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "intervallo",
+    "var": "k",
+    "v": "(-\\infty, -1) \\cup (4, +\\infty)"
+   }
+  ]
+ },
+ "equazioni-polinomiali/18": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "[-1, 3) \\cup \\{4\\}"
+   }
+  ]
+ },
  "esponenziali/1": {
   "campi": [
    {
@@ -330,6 +349,25 @@
     "e": "Soluzioni della disequazione",
     "t": "intervallo",
     "v": "\\left[0, \\frac{\\ln 3}{\\ln 2}\\right]"
+   }
+  ]
+ },
+ "esponenziali/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "\\left(-\\infty, \\frac{1}{2}\\right) \\cup [3, +\\infty)"
+   }
+  ]
+ },
+ "esponenziali/14": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "intervallo",
+    "var": "k",
+    "v": "\\left(0, \\frac{1}{4}\\right)"
    }
   ]
  },
@@ -628,6 +666,40 @@
    }
   ]
  },
+ "geometria-analitica/13": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\sqrt{3}}{3}",
+     "-\\frac{\\sqrt{3}}{3}"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/14": {
+  "campi": [
+   {
+    "e": "Equazione della parabola",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "y = -x^2 + 5x - 4"
+   },
+   {
+    "e": "Vertice $V$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "\\frac{5}{2}",
+     "\\frac{9}{4}"
+    ]
+   }
+  ]
+ },
  "goniometriche/1": {
   "campi": [
    {
@@ -774,6 +846,30 @@
    }
   ]
  },
+ "goniometriche/13": {
+  "campi": [
+   {
+    "e": "Soluzioni, con $n \\in \\mathbb{Z}$",
+    "t": "scelta",
+    "opzioni": [
+     "$x = \\frac{3\\pi}{4} + n\\pi$",
+     "$x = \\frac{\\pi}{4} + \\frac{n\\pi}{2}$",
+     "$x = \\frac{\\pi}{4} + n\\pi$",
+     "$x = \\frac{3\\pi}{4} + 2n\\pi$"
+    ],
+    "v": "$x = \\frac{3\\pi}{4} + n\\pi$"
+   }
+  ]
+ },
+ "goniometriche/14": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left[0, \\frac{\\pi}{6}\\right] \\cup \\left[\\frac{5\\pi}{6}, \\frac{7\\pi}{6}\\right] \\cup \\left[\\frac{11\\pi}{6}, 2\\pi\\right)"
+   }
+  ]
+ },
  "irrazionali/2": {
   "campi": [
    {
@@ -863,6 +959,26 @@
     "e": "Soluzioni della disequazione",
     "t": "intervallo",
     "v": "(-\\infty, 0] \\cup [4, +\\infty)"
+   }
+  ]
+ },
+ "irrazionali/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "4"
+    ]
+   }
+  ]
+ },
+ "irrazionali/14": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(0, 3)"
    }
   ]
  },
@@ -981,6 +1097,26 @@
     "e": "Soluzioni",
     "t": "intervallo",
     "v": "\\left(\\frac{3}{2}, 4\\right)"
+   }
+  ]
+ },
+ "logaritmiche/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "8"
+    ]
+   }
+  ]
+ },
+ "logaritmiche/14": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(0, 3) \\cup (9, +\\infty)"
    }
   ]
  },
@@ -1217,6 +1353,73 @@
    }
   ]
  },
+ "logica/11": {
+  "campi": [
+   {
+    "e": "Somma $n + (n + 1) + (n + 2)$ scritta come prodotto",
+    "t": "funzione",
+    "var": [
+     "n"
+    ],
+    "forma": "prodotto",
+    "v": "3(n + 1)"
+   }
+  ]
+ },
+ "logica/12": {
+  "campi": [
+   {
+    "e": "Contronominale",
+    "t": "scelta",
+    "opzioni": [
+     "se $x \\geq 0$ allora $x^2 + 2x \\geq 0$",
+     "se $x^2 + 2x \\geq 0$ allora $x \\geq 0$",
+     "se $x < 0$ allora $x^2 + 2x < 0$",
+     "se $x \\geq 0$ allora $x^2 + 2x < 0$"
+    ],
+    "v": "se $x \\geq 0$ allora $x^2 + 2x \\geq 0$"
+   }
+  ]
+ },
+ "logica/13": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "$\\exists \\varepsilon > 0 \\ \\forall n \\in \\mathbb{N} : \\frac{1}{n + 1} \\geq \\varepsilon$",
+     "$\\exists \\varepsilon > 0 \\ \\forall n \\in \\mathbb{N} : \\frac{1}{n + 1} > \\varepsilon$",
+     "$\\forall \\varepsilon > 0 \\ \\exists n \\in \\mathbb{N} : \\frac{1}{n + 1} \\geq \\varepsilon$",
+     "$\\exists \\varepsilon \\leq 0 \\ \\forall n \\in \\mathbb{N} : \\frac{1}{n + 1} \\geq \\varepsilon$"
+    ],
+    "v": "$\\exists \\varepsilon > 0 \\ \\forall n \\in \\mathbb{N} : \\frac{1}{n + 1} \\geq \\varepsilon$"
+   },
+   {
+    "e": "È vera",
+    "t": "scelta",
+    "opzioni": [
+     "la proposizione",
+     "la negazione"
+    ],
+    "v": "la proposizione"
+   }
+  ]
+ },
+ "logica/14": {
+  "campi": [
+   {
+    "e": "La condizione è",
+    "t": "scelta",
+    "opzioni": [
+     "necessaria e non sufficiente",
+     "sufficiente e non necessaria",
+     "necessaria e sufficiente",
+     "né necessaria né sufficiente"
+    ],
+    "v": "sufficiente e non necessaria"
+   }
+  ]
+ },
  "polinomi/1": {
   "campi": [
    {
@@ -1381,6 +1584,41 @@
    }
   ]
  },
+ "polinomi/13": {
+  "campi": [
+   {
+    "e": "Molteplicità della radice $2$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Scomposizione di $P(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x - 2)^3 (x + 1)"
+   }
+  ]
+ },
+ "polinomi/14": {
+  "campi": [
+   {
+    "e": "Frazione semplificata",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "\\frac{x^2 - x + 1}{x - 2}"
+   },
+   {
+    "e": "Condizioni di esistenza",
+    "t": "intervallo",
+    "v": "\\mathbb{R}\\setminus\\{-1, 2\\}"
+   }
+  ]
+ },
  "potenze-e-radici/1": {
   "campi": [
    {
@@ -1475,6 +1713,41 @@
      "$\\sqrt{2}$"
     ],
     "v": "$\\sqrt{2}$"
+   }
+  ]
+ },
+ "potenze-e-radici/11": {
+  "campi": [
+   {
+    "e": "Espressione semplificata",
+    "t": "funzione",
+    "var": [
+     "a"
+    ],
+    "v": "\\sqrt[3]{a^{2}}"
+   }
+  ]
+ },
+ "potenze-e-radici/13": {
+  "campi": [
+   {
+    "e": "Espressione semplificata",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "potenze-e-radici/14": {
+  "campi": [
+   {
+    "e": "Il numero maggiore è",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt{3} + \\sqrt{5}$",
+     "$\\sqrt{15}$",
+     "sono uguali"
+    ],
+    "v": "$\\sqrt{3} + \\sqrt{5}$"
    }
   ]
  },
@@ -1608,6 +1881,27 @@
     "e": "Soluzioni della disequazione",
     "t": "intervallo",
     "v": "(-\\infty, -3] \\cup [5, +\\infty)"
+   }
+  ]
+ },
+ "valore-assoluto/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-4",
+     "4"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto/14": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, -3) \\cup (-1, 3)"
    }
   ]
  }

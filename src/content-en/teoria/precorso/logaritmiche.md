@@ -24,9 +24,25 @@ which are used to pass from exponential form to logarithmic form and vice versa;
 $\log_2 8 = 3$ because $2^{3} = 8$; $\log_3 \dfrac{1}{9} = -2$ because $3^{-2} = \dfrac{1}{9}$; $\log_5 1 = 0$ because $5^{0} = 1$.
 :::
 
+:::esempio{titolo="Arguments with roots and fractional bases"}
+When the base and the argument are powers of the same number, both are written as powers of that number and the exponents are compared.
+$$
+\begin{gathered}
+\log_2 \sqrt{8} = \frac{3}{2} \quad \text{because} \quad \sqrt{8} = 2^{\frac{3}{2}}, \\[6pt]
+\log_9 27 = \frac{3}{2} \quad \text{because} \quad 9^{\frac{3}{2}} = \left(3^{2}\right)^{\frac{3}{2}} = 3^{3} = 27, \\[6pt]
+\log_{\frac{1}{2}} 8 = -3 \quad \text{because} \quad \left(\frac{1}{2}\right)^{-3} = 2^{3} = 8 .
+\end{gathered}
+$$
+In the second case the exponent $c$ satisfies $3^{2c} = 3^{3}$, so $2c = 3$ and $c = \dfrac{3}{2}$.
+:::
+
+:::osservazione
+Two bases have a symbol of their own. The **natural logarithm** is the logarithm to base $e \approx 2.718$ and is denoted by $\ln x$; the logarithm to base $10$ is often denoted by $\operatorname{Log} x$ or by $\log x$. In Mathematical Analysis courses, however, the notation $\log x$ denotes the natural logarithm, so the meaning of $\log x$ without a base depends on the text. For example $\ln e^{3} = 3$, $\ln 1 = 0$ and $\log_{10} 1000 = 3$.
+:::
+
 ## The properties of logarithms
 
-:::teorema{#proprieta-logaritmi titolo="Properties of logarithms"}
+::::teorema{#proprieta-logaritmi titolo="Properties of logarithms"}
 For $a > 0$, $a \neq 1$ and $x > 0$, $y > 0$:
 $$
 \begin{gathered}
@@ -36,7 +52,15 @@ $$
 \end{gathered}
 $$
 The three formulas hold when the arguments $x$ and $y$ are positive, therefore before applying them to expressions containing the unknown the **domain restrictions** must be written. In equations and inequalities they are used to combine several logarithms into a **single logarithm**.
+
+:::dimostrazione
+The idea is to write $x$ and $y$ as powers of $a$ and to use the properties of powers. Let $m = \log_a x$ and $n = \log_a y$; by the definition of logarithm, $x = a^{m}$ and $y = a^{n}$.
+
+- By the rule for the product of powers with the same base, $x y = a^{m} \cdot a^{n} = a^{m + n}$. Hence the exponent to which $a$ must be raised to obtain $xy$ is $m + n$, that is, $\log_a (xy) = \log_a x + \log_a y$.
+- By the quotient rule, $\dfrac{x}{y} = \dfrac{a^{m}}{a^{n}} = a^{m - n}$, therefore $\log_a \dfrac{x}{y} = m - n = \log_a x - \log_a y$.
+- By the rule for a power of a power, $x^{p} = \left(a^{m}\right)^{p} = a^{p m}$, therefore $\log_a (x^{p}) = p m = p \log_a x$.
 :::
+::::
 
 :::esempio{titolo="One example for each property"}
 $$
@@ -49,12 +73,43 @@ $$
 In each case the arguments are positive numbers, so the properties **apply**.
 :::
 
-:::teorema{#cambio-di-base titolo="Change of base"}
+:::attenzione
+The logarithm of a sum is *not* the sum of the logarithms, and the square of a logarithm is *not* the logarithm of the square. With base $2$:
+$$
+\begin{gathered}
+\log_2 (4 + 4) = \log_2 8 = 3, \qquad \log_2 4 + \log_2 4 = 2 + 2 = 4, \\[6pt]
+(\log_2 8)^{2} = 3^{2} = 9, \qquad \log_2 (8^{2}) = 2 \log_2 8 = 6 .
+\end{gathered}
+$$
+The notation $(\log_a x)^{2}$, also written $\log_a^{2} x$, denotes the square of the number $\log_a x$ and appears in equations solved by substitution.
+:::
+
+:::attenzione
+With the unknown in the argument, the formula $\log_a (x^{p}) = p \log_a x$ requires $x > 0$, whereas $x^{2}$ is positive also for $x < 0$. For this reason, with an even exponent, one writes $\log_a (x^{2}) = 2 \log_a |x|$, valid for every $x \neq 0$. The equation $\log_3 (x^{2}) = 2$ is equivalent to $x^{2} = 9$ and has the solutions $x = 3$ and $x = -3$; the expression $2 \log_3 x = 2$ requires $x > 0$ and leads to $x = 3$ only, so the solution $x = -3$ is not found.
+:::
+
+::::teorema{#cambio-di-base titolo="Change of base"}
 For $a, b > 0$ both different from $1$ and $x > 0$:
 $$
 \log_a x = \frac{\log_b x}{\log_b a} .
 $$
 It makes it possible to express *any* logarithm in a chosen base, for example in base $e$ or in base $10$, which are available on a calculator. For example $\log_4 8 = \dfrac{\log_2 8}{\log_2 4} = \dfrac{3}{2}$.
+
+:::dimostrazione
+The idea is to apply $\log_b$ to both sides of the equality that defines $\log_a x$. Let $c = \log_a x$; by the definition of logarithm, $a^{c} = x$. The two sides are positive and equal, so they have the same logarithm to base $b$:
+$$
+\log_b \left(a^{c}\right) = \log_b x .
+$$
+By the property of the logarithm of a power, the left-hand side equals $c \log_b a$, therefore $c \log_b a = \log_b x$. Since $a \neq 1$, one has $\log_b a \neq 0$, and dividing by $\log_b a$ gives $c = \dfrac{\log_b x}{\log_b a}$.
+:::
+::::
+
+:::esempio{titolo="Computing with a calculator and reciprocal bases"}
+The number $10$ is not an integer power of $2$, so $\log_2 10$ is computed by passing to the natural logarithm:
+$$
+\log_2 10 = \frac{\ln 10}{\ln 2} \approx \frac{2.3026}{0.6931} \approx 3.322 .
+$$
+With $x = b$ the formula gives $\log_a b = \dfrac{1}{\log_b a}$; for example $\log_4 2 = \dfrac{1}{\log_2 4} = \dfrac{1}{2}$. For a logarithm to base $a^{n}$, with $a$ as the new base, one obtains $\log_{a^{n}} x = \dfrac{1}{n} \log_a x$, which is used to bring logarithms such as $\log_4 x$ and $\log_2 x$ to the same base: indeed $\log_4 x = \dfrac{\log_2 x}{\log_2 4} = \dfrac{1}{2} \log_2 x$.
 :::
 
 ## The logarithmic function

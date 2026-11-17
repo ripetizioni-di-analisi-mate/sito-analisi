@@ -13,6 +13,10 @@ A **proposition** is a statement for which it makes sense to ask whether it is t
 - "$x + 1 = 3$": statement with a variable, which becomes a proposition when a value is assigned to $x$. A statement of this kind is called a **predicate** and is denoted by $p(x)$; predicates also become propositions through quantifiers.
 :::
 
+:::attenzione
+A predicate in which the variable has no assigned value is *not* a proposition. The statement "$x^2 > 4$" is true for $x = 3$, because $9 > 4$, and false for $x = 1$, because $1 < 4$; therefore it has a truth value only after $x$ has been chosen or after the variable has been quantified. "$100$ is a large number" is not a proposition either, because the adjective *large* has no precise mathematical meaning.
+:::
+
 ## Logical connectives
 
 Connectives build new propositions from given propositions; the truth value of the result depends only on the truth values of the parts, according to the truth tables.
@@ -23,8 +27,8 @@ $$
 \begin{array}{c|c}
 p & \lnot p \\
 \hline
-\text{V} & \text{F} \\
-\text{F} & \text{V}
+\text{T} & \text{F} \\
+\text{F} & \text{T}
 \end{array}
 $$
 The negation of "$7$ is prime" is "$7$ is not prime". Double negation gives back the original proposition: $\lnot(\lnot p)$ has the same truth table as $p$. Negation appears in counterexamples and in proofs by contradiction.
@@ -36,9 +40,9 @@ $$
 \begin{array}{c|c|c|c}
 p & q & p \land q & p \lor q \\
 \hline
-\text{V} & \text{V} & \text{V} & \text{V} \\
-\text{V} & \text{F} & \text{F} & \text{V} \\
-\text{F} & \text{V} & \text{F} & \text{V} \\
+\text{T} & \text{T} & \text{T} & \text{T} \\
+\text{T} & \text{F} & \text{F} & \text{T} \\
+\text{F} & \text{T} & \text{F} & \text{T} \\
 \text{F} & \text{F} & \text{F} & \text{F}
 \end{array}
 $$
@@ -54,7 +58,22 @@ For $x = 2$: the proposition "$x > 0 \land x > 3$" is false, because the second 
 In mathematics "or" is **inclusive**: $p \lor q$ is true also when $p$ and $q$ are true together. The statement "$6$ is even or $6$ is divisible by $3$" is true, and both parts are true.
 :::
 
-:::teorema{#leggi-di-de-morgan titolo="De Morgan's laws"}
+:::esempio{titolo="Truth table of a compound proposition"}
+The truth table of $(p \lor q) \land \lnot p$ is built column by column: first $p \lor q$ and $\lnot p$ are computed, then their conjunction.
+$$
+\begin{array}{c|c|c|c|c}
+p & q & p \lor q & \lnot p & (p \lor q) \land \lnot p \\
+\hline
+\text{T} & \text{T} & \text{T} & \text{F} & \text{F} \\
+\text{T} & \text{F} & \text{T} & \text{F} & \text{F} \\
+\text{F} & \text{T} & \text{T} & \text{T} & \text{T} \\
+\text{F} & \text{F} & \text{F} & \text{T} & \text{F}
+\end{array}
+$$
+The proposition is true only in the third row, that is, when $p$ is false and $q$ is true, therefore it has the same truth table as $\lnot p \land q$. Reasoning by elimination is based on this equivalence: if "$p$ or $q$" is true and $p$ is false, then $q$ is true. For example, from "$x = 1$ or $x = 4$" and from $x \neq 1$ it follows that $x = 4$.
+:::
+
+::::teorema{#leggi-di-de-morgan titolo="De Morgan's laws"}
 $$
 \lnot (p \land q) \equiv \lnot p \lor \lnot q,
 \qquad
@@ -66,10 +85,38 @@ The symbol $\equiv$ indicates that the two propositions have the **same truth ta
 
 ::venn{zone="u" nomi="P,Q" titolo="$\lnot(p \lor q)$ is true in the complement of $P \cup Q$, that is, outside $P$ and outside $Q$: it is the truth set of $\lnot p \land \lnot q$"}
 
+:::dimostrazione
+The truth tables are compared row by row. For the first law:
+$$
+\begin{array}{c|c|c|c|c|c|c}
+p & q & p \land q & \lnot (p \land q) & \lnot p & \lnot q & \lnot p \lor \lnot q \\
+\hline
+\text{T} & \text{T} & \text{T} & \text{F} & \text{F} & \text{F} & \text{F} \\
+\text{T} & \text{F} & \text{F} & \text{T} & \text{F} & \text{T} & \text{T} \\
+\text{F} & \text{T} & \text{F} & \text{T} & \text{T} & \text{F} & \text{T} \\
+\text{F} & \text{F} & \text{F} & \text{T} & \text{T} & \text{T} & \text{T}
+\end{array}
+$$
+The column of $\lnot (p \land q)$ and that of $\lnot p \lor \lnot q$ coincide in all four rows, therefore the two propositions are equivalent.
+
+The second law follows from the first applied to the propositions $\lnot p$ and $\lnot q$. One obtains $\lnot (\lnot p \land \lnot q) \equiv \lnot \lnot p \lor \lnot \lnot q$, and since double negation gives back the original proposition, $\lnot (\lnot p \land \lnot q) \equiv p \lor q$. Negating both sides gives $\lnot p \land \lnot q \equiv \lnot (p \lor q)$.
 :::
+
+::::
 
 :::esempio{titolo="Negating a conjunction"}
 The negation of "$x > 0$ and $x < 5$" is "$x \leq 0$ or $x \geq 5$". By **De Morgan's laws** the negation of a conjunction is the disjunction of the two negations; since negating $x > 0$ means asserting $x \leq 0$ and negating $x < 5$ means asserting $x \geq 5$, we obtain $x \leq 0 \lor x \geq 5$.
+:::
+
+:::esempio{titolo="Negating a disjunction"}
+The negation of "$x < -1$ or $x > 1$" is "$x \geq -1$ and $x \leq 1$", that is, $-1 \leq x \leq 1$. By the second **De Morgan's law** the negation of a disjunction is the conjunction of the two negations. The disjunction $x < -1 \lor x > 1$ describes the solutions of the inequality $x^2 > 1$, hence its negation describes the solutions of $x^2 \leq 1$.
+
+::grafico{f="x^2;1" xmin=-3 xmax=3 ymin=-1 ymax=6 area="1;x^2;-1;1" punti="-1,1,pieno;1,1,pieno" legenda="y = x^2;y = 1" titolo="For $-1 \leq x \leq 1$ the graph of $y = x^2$ lies below the line $y = 1$ or touches it, and these values form the truth set of the negation of $x < -1 \lor x > 1$"}
+
+:::
+
+:::attenzione
+The negation of "$x > 0$ and $x < 5$" is *not* "$x \leq 0$ and $x \geq 5$". For $x = 7$ the proposition "$x > 0$ and $x < 5$" is false, because $7 < 5$ is false, and "$x \leq 0$ and $x \geq 5$" is also false, because $7 \leq 0$ is false. Two propositions that are false for the same value of $x$ are not the negation of each other. In fact the conjunction $x \leq 0 \land x \geq 5$ is false for every real $x$, because no number is both less than or equal to $0$ and greater than or equal to $5$.
 :::
 
 ## Implication
@@ -80,10 +127,10 @@ $$
 \begin{array}{c|c|c}
 p & q & p \Rightarrow q \\
 \hline
-\text{V} & \text{V} & \text{V} \\
-\text{V} & \text{F} & \text{F} \\
-\text{F} & \text{V} & \text{V} \\
-\text{F} & \text{F} & \text{V}
+\text{T} & \text{T} & \text{T} \\
+\text{T} & \text{F} & \text{F} \\
+\text{F} & \text{T} & \text{T} \\
+\text{F} & \text{F} & \text{T}
 \end{array}
 $$
 When $p$ is false the implication is **true** whatever $q$ is: the implication makes a claim *only* in the cases in which the hypothesis is true. For example "if $x > 3$ then $x > 1$" is true for every real $x$; for $x = 0$ the hypothesis is false and the implication remains true. Every theorem has this form, therefore the truth table of the implication governs the use of theorems.
@@ -92,11 +139,31 @@ When $p$ is false the implication is **true** whatever $q$ is: the implication m
 
 :::
 
-:::teorema{#negazione-dell-implicazione titolo="Negation of an implication"}
+::::teorema{#negazione-dell-implicazione titolo="Negation of an implication"}
 $$
 \lnot (p \Rightarrow q) \equiv p \land \lnot q .
 $$
 The implication is false only when the hypothesis is true and the conclusion is false, therefore negating it means asserting exactly this case: the negation of an implication is a **conjunction**. To show that "if $x > 1$ then $x^2 > 4$" is false, one exhibits a value with $x > 1$ and $x^2 \leq 4$, for example $x = \dfrac{3}{2}$, for which $x^2 = \dfrac{9}{4} \leq 4$.
+
+:::dimostrazione
+The truth tables of the two propositions are compared.
+$$
+\begin{array}{c|c|c|c|c|c}
+p & q & p \Rightarrow q & \lnot (p \Rightarrow q) & \lnot q & p \land \lnot q \\
+\hline
+\text{T} & \text{T} & \text{T} & \text{F} & \text{F} & \text{F} \\
+\text{T} & \text{F} & \text{F} & \text{T} & \text{T} & \text{T} \\
+\text{F} & \text{T} & \text{T} & \text{F} & \text{F} & \text{F} \\
+\text{F} & \text{F} & \text{T} & \text{F} & \text{T} & \text{F}
+\end{array}
+$$
+The column of $\lnot (p \Rightarrow q)$ is obtained by inverting that of the implication, and it is true only in the second row. The proposition $p \land \lnot q$ is also true only in the second row, because it is the only row in which $p$ is true and $q$ is false. The two columns coincide, therefore the two propositions are equivalent.
+:::
+
+::::
+
+:::osservazione
+From the same table it follows that $p \Rightarrow q \equiv \lnot p \lor q$, because both propositions are false only when $p$ is true and $q$ is false. Applying the second De Morgan's law to $\lnot p \lor q$ gives back the negation of the implication: $\lnot (\lnot p \lor q) \equiv \lnot \lnot p \land \lnot q \equiv p \land \lnot q$. For example "if $x > 3$ then $x > 1$" is equivalent to "$x \leq 3$ or $x > 1$", which is true for every real $x$.
 :::
 
 :::definizione{#inversa-contronominale titolo="Converse and contrapositive"}
@@ -119,6 +186,10 @@ Implication: "if $n$ is a multiple of $4$, then $n$ is even", true. Contrapositi
 From $p \Rightarrow q$ true and $q$ true it does *not* follow that $p$ is true. The implication "if $x > 2$ then $x^2 > 4$" is true; for $x = -3$ the conclusion $x^2 > 4$ is true and the hypothesis $x > 2$ is false.
 :::
 
+:::attenzione
+The proposition $\lnot p \Rightarrow \lnot q$, which negates hypothesis and conclusion *without* swapping them, is *not* equivalent to $p \Rightarrow q$. The implication "if $n$ is a multiple of $4$, then $n$ is even" is true, while "if $n$ is not a multiple of $4$, then $n$ is odd" is false, because $n = 6$ is not a multiple of $4$ and is even. The proposition $\lnot p \Rightarrow \lnot q$ is the contrapositive of the converse $q \Rightarrow p$, therefore it has the same truth table as the converse.
+:::
+
 ## Necessary and sufficient condition
 
 :::definizione{#necessaria-sufficiente titolo="Necessary condition and sufficient condition"}
@@ -132,6 +203,17 @@ If both $p \Rightarrow q$ and $q \Rightarrow p$ hold, one writes $p \Leftrightar
 
 :::esempio
 For a natural number $n$, "being a multiple of $4$" is a *sufficient* condition for "being even", because every multiple of $4$ is even; consequently "being even" is a *necessary* condition for "being a multiple of $4$". The condition "being even" is instead not sufficient for "being a multiple of $4$", because $n = 6$ is even and has remainder $2$ in the division by $4$. In the real numbers $x = 2 \Leftrightarrow x^3 = 8$ holds, because the cube takes each value only once, therefore each equality is a necessary and sufficient condition for the other.
+:::
+
+:::esempio{titolo="Conditions with an inequality"}
+For real $x$ we compare "$x^2 < 4$" and "$x < 2$". The inequality $x^2 < 4$ has the solutions $-2 < x < 2$, and each of these values satisfies $x < 2$, therefore the implication $x^2 < 4 \Rightarrow x < 2$ is true. The opposite implication is false, because $x = -3$ satisfies $x < 2$ and for this value $x^2 = 9 \geq 4$. Hence "$x^2 < 4$" is a **sufficient and not necessary** condition for "$x < 2$", and "$x < 2$" is a **necessary and not sufficient** condition for "$x^2 < 4$".
+
+::grafico{f="x^2;4" xmin=-4 xmax=4 ymin=-1 ymax=10 area="4;x^2;-2;2" punti="-2,4,pieno;2,4,pieno;-3,9,pieno" segmenti="-3,0,-3,9" legenda="y = x^2;y = 4" titolo="For $-2 < x < 2$ the graph of $y = x^2$ lies below the line $y = 4$; the value $x = -3$ satisfies $x < 2$ and has $x^2 = 9$"}
+
+:::
+
+:::osservazione
+The phrase "$p$ only if $q$" means $p \Rightarrow q$, that is, it states that $q$ is a necessary condition for $p$. The sentence "an integer is a multiple of $6$ only if it is even" is true, because $6k = 2 \cdot 3k$; the sentence "an integer is even only if it is a multiple of $6$" is false, because $4$ is even and is not a multiple of $6$. In "$p$ if and only if $q$" the part "if $q$" expresses the implication $q \Rightarrow p$ and the part "only if $q$" expresses the implication $p \Rightarrow q$.
 :::
 
 ## Quantifiers
@@ -152,6 +234,10 @@ To prove a universal proposition one needs an argument valid for every element, 
 
 :::
 
+:::esempio{titolo="The role of the set"}
+With $A = \{1, 2, 3, 4\}$ the proposition "$\forall x \in A : x^2 \leq 16$" is true, because the squares of the elements of $A$ are $1$, $4$, $9$, $16$ and they are all less than or equal to $16$. The proposition "$\exists x \in A : x^2 = 8$" is false, because none of the four squares equals $8$; instead "$\exists x \in \mathbb{R} : x^2 = 8$" is true, because $x = 2\sqrt{2}$ satisfies $x^2 = 4 \cdot 2 = 8$. The set in which the variable ranges is therefore part of the proposition, and changing the set can change the truth value.
+:::
+
 :::teorema{#negazione-dei-quantificatori titolo="Negation of quantifiers"}
 $$
 \lnot \bigl( \forall x \in A : p(x) \bigr) \equiv \exists x \in A : \lnot p(x),
@@ -159,6 +245,10 @@ $$
 \lnot \bigl( \exists x \in A : p(x) \bigr) \equiv \forall x \in A : \lnot p(x) .
 $$
 Negation **swaps** $\forall$ with $\exists$ and **negates the predicate**. With several quantifiers one proceeds from the outside inward, swapping them one by one, and at the end negates the predicate. This rule is needed throughout Analysis, because the definitions of limit contain chains of quantifiers and their negation is the first step of many verifications and proofs.
+:::
+
+:::attenzione
+The negation of a universal proposition changes the quantifier as well as the predicate. The negation of "$\forall x \in \mathbb{R} : x^2 > 0$" is "$\exists x \in \mathbb{R} : x^2 \leq 0$", true for $x = 0$. The proposition "$\forall x \in \mathbb{R} : x^2 \leq 0$", obtained by negating only the predicate, is false, because for $x = 1$ one has $x^2 = 1 > 0$; since the original proposition is also false, the two are *not* the negation of each other.
 :::
 
 :::esempio{titolo="Negation with two quantifiers"}
@@ -185,6 +275,14 @@ $$
 The sum is twice the integer $a + b$, hence it is **even**.
 :::
 
+:::attenzione
+A universal proposition is *not* proved by checking a finite number of cases. The number $n^2 + n + 41$ is prime for every natural $n$ from $0$ to $39$; for $n = 40$, however, one has
+$$
+40^2 + 40 + 41 = 40 \cdot (40 + 1) + 41 = 41 \cdot 40 + 41 = 41^2 = 1681 ,
+$$
+which is not prime. Therefore the proposition "$\forall n \in \mathbb{N} : n^2 + n + 41$ is prime" is false and $n = 40$ is a **counterexample** to it.
+:::
+
 :::definizione{#dimostrazione-per-contronominale titolo="Proof by contrapositive"}
 To prove $p \Rightarrow q$ one proves the **contrapositive** $\lnot q \Rightarrow \lnot p$, which is an **equivalent** proposition. It is convenient when the negation of the conclusion is easier to handle than the hypothesis, as in statements about even and odd numbers.
 :::
@@ -202,5 +300,5 @@ One assumes that the conclusion is *false* and, deducing correctly, arrives at a
 :::
 
 :::esempio{titolo="The square root of 2 is irrational"}
-Suppose, **for contradiction**, that $\sqrt{2}$ is rational, that is, $\sqrt{2} = \dfrac{m}{n}$ with $m$ and $n$ coprime positive integers. Squaring gives $m^2 = 2n^2$, therefore $m^2$ is even; since the square of an odd number is odd, $m$ is even, that is, $m = 2k$ with $k$ an integer. Substituting gives $4k^2 = 2n^2$, that is, $n^2 = 2k^2$, therefore by the same argument $n$ is also even. Then $m$ and $n$ have the common factor $2$, contrary to the choice made at the beginning. The assumption leads to a contradiction, hence $\sqrt{2}$ is **irrational**.
+Suppose, **for contradiction**, that $\sqrt{2}$ is rational, that is, $\sqrt{2} = \dfrac{m}{n}$ with $m$ and $n$ positive integers with no common factors. Squaring gives $m^2 = 2n^2$, therefore $m^2$ is even; since the square of an odd number is odd, $m$ is even, that is, $m = 2k$ with $k$ an integer. Substituting gives $4k^2 = 2n^2$, that is, $n^2 = 2k^2$, therefore by the same argument $n$ is also even. Then $m$ and $n$ have the common factor $2$, contrary to the choice made at the beginning. The assumption leads to a contradiction, hence $\sqrt{2}$ is **irrational**.
 :::
