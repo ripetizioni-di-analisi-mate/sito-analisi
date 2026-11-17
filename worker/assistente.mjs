@@ -1,5 +1,6 @@
 // Assistente di studio: risponde alle domande degli studenti sulla pagina che stanno leggendo.
-// Usa l'intelligenza artificiale di Cloudflare (Workers AI, binding "AI" in wrangler.jsonc).
+// Dal 17/11/2026 risponde con Claude Sonnet 5.5, poi Claude Haiku 5.5 (worker/pi-claude.mjs, con tetto di spesa);
+// se Claude non risponde o il tetto è superato usa l'intelligenza artificiale di Cloudflare (Workers AI, binding "AI" in wrangler.jsonc).
 // La risposta arriva a pezzi (streaming), così lo studente la vede scrivere subito.
 // Le domande con una foto (esercizio fotografato) vanno a un modello che legge le immagini.
 // Limiti: per studente e per l'intero sito, in messaggi e in token.
@@ -8,6 +9,7 @@
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, valoreMateriale } from '../src/data/videocorsi.ts';
 import { LEZIONI, MATERIE_LEZIONI } from '../src/data/lezioni.ts';
+import { MODELLI_PI_CLAUDE, claudeDisponibile, chiediClaude, messaggiClaude } from './pi-claude.mjs';
 
 // Testo: Gemma 4 (veloce ed economico), riserva gpt-oss-120b (più lento perché ragiona prima di rispondere).
 const MODELLI = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
@@ -23,6 +25,7 @@ const MAX_TOKEN_STUDENTE = 120000;  // circa 20 domande al giorno
 const MAX_TOKEN_OSPITE = 30000;     // circa 5 domande
 const MAX_TOKEN_GIORNO = 20000000;  // tutto il sito
 const MAX_USCITA = 1200;            // lunghezza massima di una risposta, in token
+const MAX_USCITA_CLAUDE = 4000;     // con Claude: risposta più ragionamento adattivo (impegno medio)
 const MAX_FOTO = 1500000;           // dimensione massima della foto (caratteri del data URL, circa 1 MB)
 
 const TIPI = { teoria: 'teoria', 'esercizi-svolti': 'esercizi svolti', esercizi: 'esercizi da fare' };
@@ -117,7 +120,7 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const en = b.lingua === 'en', de = b.lingua === 'de', es = b.lingua === 'es', fr = b.lingua === 'fr';
   const msg = (it, eng, deu, esp, fra) => fr ? fra : es ? esp : de ? deu : en ? eng : it;
 
-  if (!env.AI) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.', 'Pi ist derzeit nicht verfügbar.', 'Pi no está disponible en este momento.', 'Pi est indisponible pour le moment.') }, 503);
+  if (!env.AI && !env.ANTHROPIC_API_KEY) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.', 'Pi ist derzeit nicht verfügbar.', 'Pi no está disponible en este momento.', 'Pi est indisponible pour le moment.') }, 503);
   const materia = MATERIE.find((m) => m.slug === b.materia) || null;
 
   const messaggi = (Array.isArray(b.messaggi) ? b.messaggi : []).slice(-10)
@@ -174,12 +177,33 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const sito = sulSito
     ? infoSito(aPagamento, prezzi, env)
     : 'Per domande su materie, prezzi, acquisto o accesso: pagina https://ripetizionidianalisi.com/prezzi, oppure Carmine su WhatsApp dal pulsante verde.';
-  const sistema = `${ISTRUZIONI}${fr ? '\n- La lingua dell’interfaccia è il francese. Rispondi in francese salvo richiesta esplicita di un’altra lingua.' : es ? '\n- La lingua dell’interfaccia è lo spagnolo. Rispondi in spagnolo salvo richiesta esplicita di un’altra lingua.' : ''}\n\n${sito}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}`;
+  const fisso = `${ISTRUZIONI}${fr ? '\n- La lingua dell’interfaccia è il francese. Rispondi in francese salvo richiesta esplicita di un’altra lingua.' : es ? '\n- La lingua dell’interfaccia è lo spagnolo. Rispondi in spagnolo salvo richiesta esplicita di un’altra lingua.' : ''}\n\n${sito}`;
+  const variabile = `Contesto della pagina che lo studente sta leggendo.\n${contesto}`;
+  const sistema = `${fisso}\n\n${variabile}`;
   const rimasti = Math.max(0, maxStudente - conto.n);
   const rimborsa = () => aDO(env, '/assistente-rimborso', { giorno, email: chi }).catch(() => {});
   // Token stimati dai caratteri (circa 4 caratteri per token), più un forfait per la foto.
   const tin = Math.round((sistema.length + messaggi.reduce((t, m) => t + m.content.length, 0)) / 4) + (foto ? 1500 : 0);
   const conta = (tout) => aDO(env, '/assistente-token', { giorno, email: chi, tin, tout }).catch(() => {});
+
+  // Prima Claude (Sonnet 5.5, poi Haiku 5.5), se la chiave c'è e il tetto di spesa non è superato.
+  if (await claudeDisponibile(env, aDO)) {
+    for (const [i, modello] of MODELLI_PI_CLAUDE.entries()) {
+      try {
+        const risp = await chiediClaude(env, modello, {
+          fisso, variabile, messaggi: messaggiClaude(messaggi, foto), maxTokens: MAX_USCITA_CLAUDE,
+          intestazioni: { 'x-rimasti': String(rimasti), 'x-token-entrata': String(tin) },
+          fine: async (m, tinClaude, tout) => {
+            await aDO(env, '/sg-ia-conta', { modello: `pi:${m}`, tin: tinClaude, tout }).catch(() => {});
+            await aDO(env, '/assistente-token', { giorno, email: chi, tin: tinClaude, tout }).catch(() => {});
+          },
+        });
+        if (risp) { await evento(`${foto ? 'foto' : 'testo'}-${i ? 'riserva' : 'primo'}:${modello}`); return risp; }
+      } catch (e) { console.log('Pi', modello, String(e?.message || e).slice(0, 200)); }
+    }
+    await evento('claude-non-risponde');
+  }
+  if (!env.AI) { await rimborsa(); return json({ errore: msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.', 'Pi hat nicht geantwortet. Versuch es gleich noch einmal.', 'Pi no ha respondido. Vuelve a intentarlo en unos instantes.', 'Pi n’a pas répondu. Réessaie dans quelques instants.') }, 502); }
 
   // Richieste da provare in ordine: per le foto i modelli che leggono le immagini (in due formati), altrimenti quelli di testo.
   const tentativi = [];

@@ -217,6 +217,14 @@ export function archivioIA(ar, pathname, c) {
     giorno, String(c.modello || '?').slice(0, 60), Number(c.tin) || 0, Number(c.tout) || 0);
     return { ok: true };
   }
+  if (pathname === '/sg-ia-spesa') {
+    // Spesa di oggi e del mese (Pi e Studio guidato): serve al tetto di spesa di Pi (worker/pi-claude.mjs).
+    const giorno = new Date().toISOString().slice(0, 10);
+    return {
+      giorno: ar.righe('SELECT modello, tin, tout FROM sg_ia WHERE giorno = ?', giorno),
+      mese: ar.righe('SELECT modello, SUM(tin) AS tin, SUM(tout) AS tout FROM sg_ia WHERE giorno LIKE ? GROUP BY modello', giorno.slice(0, 7) + '%'),
+    };
+  }
   if (pathname === '/sg-ia-uso') {
     return { righe: ar.righe('SELECT giorno, modello, chiamate, tin, tout FROM sg_ia ORDER BY giorno DESC LIMIT 200') };
   }
