@@ -495,7 +495,7 @@ async function* richiesteModello(env, modello, input, tipoIniziale, scadenza, sp
 
 // Il recupero copre l'intero confronto, anche un errore dopo la prima richiesta.
 // Una ripresa sostituisce tutte le righe del tentativo fallito; la quota resta una sola.
-async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codici) {
+async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codici, registro = []) {
   // Il numero delle righe si conta nel codice. Si controlla inoltre che nessun
   // esercizio esplicitamente numerato nel documento sia saltato dal modello.
   const titoliEsercizi = [...esame.matchAll(/(?:^|[\n.])\s*(?:#{1,6}\s*)?(?:esercizio|problema|quesito|domanda)\s+(?:n\.?\s*)?(\d+)\b/gi)];
@@ -513,8 +513,9 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
     let ultimo = null, avviato = false;
     const diagnostica = [];
     for (const m of inOrdine(MODELLI_TESTO)) {
+      const partenza = Date.now();
+      let n = 0;
       try {
-        let n = 0;
         const esercizi = new Set();
         const sottopunti = new Set();
         for await (const q of richiesteModello(env, m, { messages, max_tokens: /gpt-oss/.test(m) ? 8000 : 6000 }, tipoDaTesto(esame), Date.now() + 120000 * (Number(env.COMPATIBILITA_TEMPI) || 1))) {
@@ -526,13 +527,16 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
           if (q.nonUniversitario) return;
         }
         if (!n) throw new Error('nessuna richiesta dal modello');
-        if (attesi.some(({ numero, parti }) => !esercizi.has(numero) || parti.some((p) => !sottopunti.has(numero + p)))) throw new Error('esercizi mancanti dal confronto');
+        const saltati = attesi.flatMap(({ numero, parti }) => (!esercizi.has(numero) ? [numero] : parti.filter((p) => !sottopunti.has(numero + p)).map((p) => numero + p)));
+        if (saltati.length) throw new Error(`esercizi mancanti dal confronto: ${saltati.join(' ')} (letti ${[...esercizi].join(' ')}; ${[...sottopunti].join(' ')})`);
         delete guasti[m];
+        registro.tempi?.push({ da: 'esame', voci: n, ms: Date.now() - partenza, modello: m.split('/').pop().slice(0, 12), fase: 1 });
         return;
       } catch (e) {
         ultimo = e;
         diagnostica.push(diagnosticaConfronto(e));
-        console.log('compatibilita confronto', m, diagnosticaConfronto(e));
+        registro.push({ ...diagnosticaConfronto(e), modello: m.split('/').pop(), voci: 'esame', da: '', ms: Date.now() - partenza, lette: n, nota: String(e?.message || '').slice(0, 220) });
+        console.log('compatibilita confronto', m, diagnosticaConfronto(e), String(e?.message || '').slice(0, 200));
         guasti[m] = Date.now();
       }
     }
@@ -944,7 +948,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   try {
     avvio = elenco.length
       ? { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, elenco, registro, taglia) }
-      : await avviaConfronto(env, m.titolo, catalogoTesto, conTeoria, testo, codici);
+      : await avviaConfronto(env, m.titolo, catalogoTesto, conTeoria, testo, codici, registro);
   } catch (e) {
     await rimborsa('confronta');
     const quota = /4006|allocation|neurons|limit/i.test(String(e?.message || ''));

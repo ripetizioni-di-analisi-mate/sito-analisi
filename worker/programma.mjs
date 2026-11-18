@@ -32,6 +32,9 @@ const ETICHETTA_DI_RIGA = /^(?:docent[ei]\b|titolare|coordinatore|tutor\b|lingua
 const NOME_DELLA_MATERIA = /^(?:corso\s+di\s+)?(?:analisi(?:\s+matematica)?|matematica(?:\s+generale)?|fisica(?:\s+generale)?|algebra\s+lineare(?:\s+e\s+geometria(?:\s+analitica)?)?|geometria(?:\s+e\s+algebra(?:\s+lineare)?)?|statistica(?:\s+e\s+probabilita)?|idraulica|statica|meccanica\s+razionale|scienza\s+delle\s+costruzioni|calculus)\s*(?:[1-3]|i{1,3}|uno|due|tre)?$/;
 // Frasi di avviso o di regolamento finite fra i contenuti («Se l'esito è insufficiente, lo scritto va ripetuto»).
 const FRASE_DI_REGOLAMENTO = /\b(?:voto|esito|scritto|orale|prov[ae]|esam[ei]|appell[oi]|iscrizion|prenotazion|sufficient|insufficient|ammess|student|frequenza|lezion[ei]|ricevimento|docente|dispens[ae]|verbalizz|punteggio|trentesimi|consegn|compit[oi]|tutorato|post)\b.*\b(?:e|sono|viene|vengono|puo|possono|deve|devono|sara|saranno|verra|verranno|fara|va|vanno)\b|\b(?:e|sono|viene|vengono|puo|possono|deve|devono|sara|saranno|verra|verranno|fara|va|vanno)\b.*\b(?:voto|esito|scritto|orale|prov[ae]|esam[ei]|appell[oi]|iscrizion|prenotazion|sufficient|insufficient|ammess|student|frequenza|lezion[ei]|ricevimento|docente|dispens[ae]|verbalizz|punteggio|trentesimi|consegn|compit[oi]|tutorato|post)\b/;
+// Frasi che annunciano un elenco («Inoltre è richiesta la conoscenza della dimostrazione dei seguenti teoremi»):
+// non sono un argomento del corso.
+const FRASE_DI_ANNUNCIO = /^(?:inoltre\s+|in particolare\s+)?(?:e|sono|viene|vengono|si)\s+(?:richiest[aeio]|richied\w+|chied\w+|dat[aeio] per)\b.*\b(?:seguent[ei]|elencat[ei]|riportat[ei])\b|\b(?:conoscenza|dimostrazion[ei]|enunciat[oi])\s+de[il]\s+seguenti\s+\w+$|^(?:di seguito|qui sotto)\b/;
 // Righe di intestazione o di servizio, ovunque si trovino.
 const RIGA_DI_SERVIZIO = /\b(?:universita|politecnico|dipartimento|facolta|scuola di (?:ingegneria|scienze|economia)|c\.?\s?d\.?\s?l\b|corso di (?:laurea|studi|studio)|laurea (?:triennale|magistrale)|a\.\s?a\.|anno accademico|prof\.?(?:ssa)?\b|docent[ei]\b|cfu\b|crediti formativi|matricola|ricevimento|tutor\b|ultimo aggiornamento|ultima modifica|aggiornato il|pagina \d+ di \d+|svolto fino a|www\.|https?:|@)/;
 const RIGA_BIBLIOGRAFICA = /\b(?:zanichelli|liguori|mcgraw|mc graw|hoepli|springer|pitagora|esculapio|edises|bollati|boringhieri|pearson|apogeo|carocci|utet|cedam|giappichelli|ambrosiana|piccin|ecig|decibel|editori riuniti|editrice|editore|edizioni|isbn|\bed\.)/;
@@ -131,7 +134,7 @@ function ripulisciVoce(frase) {
   if (INIZIO_DISCORSIVO.test(piano(f)) && /:\s+\S+\s+\S+/.test(f)) f = f.replace(/^[^:]*:\s+/, '');
   const p = piano(f);
   if (RIGA_DI_SERVIZIO.test(p) || RIGA_BIBLIOGRAFICA.test(p) || LEGENDA_DIMOSTRAZIONI.test(p) || INIZIO_DISCORSIVO.test(p) || SOLO_GENERICO.test(p)) return '';
-  if (NOME_DELLA_MATERIA.test(p.replace(/[^a-z0-9]+/g, ' ').trim()) || FRASE_DI_REGOLAMENTO.test(p) || /^\(?(?:circa\s+)?\d+\s*(?:ore|h|cfu|lezioni)\)?$/.test(p)) return '';
+  if (NOME_DELLA_MATERIA.test(p.replace(/[^a-z0-9]+/g, ' ').trim()) || FRASE_DI_REGOLAMENTO.test(p) || FRASE_DI_ANNUNCIO.test(p) || /^\(?(?:circa\s+)?\d+\s*(?:ore|h|cfu|lezioni)\)?$/.test(p)) return '';
   if (/\b\d{1,2}[/.]\d{1,2}[/.]\d{2,4}\b|\b\d{1,2}[:.]\d{2}\b.*\b(?:aula|ore)\b|\bore\s+\d{1,2}[:.]\d{2}\b/.test(p)) return '';
   return f.length > 400 ? `${f.slice(0, 400).replace(/\s+\S*$/, '')}…` : f;
 }
