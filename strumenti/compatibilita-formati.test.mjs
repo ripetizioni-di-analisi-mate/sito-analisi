@@ -219,3 +219,12 @@ test('se il modello non risponde per una parte dei gruppi, il risultato arriva l
   assert.equal(esito.richieste.length, 98);
   assert.ok(esito.compatibilita >= 75, `compatibilità ${esito.compatibilita}`);
 });
+
+test('appunti con sole formule e frasi di annuncio non diventano voci di un programma', () => {
+  const appunti = 'Vi sono i seguenti insiemi numerici:\n\n* $N = \\{1, 2, 3, 4, ...\\}$;\n* $N_0 = \\{0,1,2,3,...\\}$;\n* $Z = \\{..., -2, -1, 0, 1, 2, ...\\}$;\n* $Q = \\{\\frac{m}{n} \\quad | \\quad m,n \\in \\mathbb{Z}, n \\neq 0\\}$;';
+  assert.equal(analizzaDocumento(appunti).voci.length, 0);
+  const conAnnuncio = `${PROGRAMMI['algebra-lineare'].sezioni.map(([titolo, voci]) => `${titolo}. ${voci.join('. ')}.`).join('\n')}\nInoltre è richiesta la conoscenza della dimostrazione dei seguenti teoremi. Formula di Grassmann. Teorema di Binet.`;
+  const voci = analizzaDocumento(`Programma del corso di Geometria\n\n${conAnnuncio}`).voci.map((v) => v.testo);
+  assert.ok(voci.every((v) => !/richiesta la conoscenza/.test(v)), voci.join(' | '));
+  assert.ok(voci.includes('Teorema di Binet'));
+});

@@ -130,6 +130,8 @@ function ripulisciVoce(frase) {
     .replace(/[([]\s*\d{1,3}\s*(?:h|ore|ora)\s*[)\]]/gi, ' ')
     .replace(/\s+/g, ' ').replace(/^[\s,:;.·–—-]+|[\s,:;·–—-]+$/g, '').replace(/\.$/, '').trim();
   if (!/\p{L}{3}/u.test(f)) return '';
+  // Una riga di sole formule (un insieme, un'uguaglianza) non è un argomento del corso.
+  if (!/\p{L}{3}/u.test(f.replace(/\\[a-zA-Z]+/g, ' ').replace(/\$[^$]*\$/g, ' '))) return '';
   // «Il corso verte sui seguenti argomenti: limiti, derivate…»: conta ciò che segue i due punti.
   if (INIZIO_DISCORSIVO.test(piano(f)) && /:\s+\S+\s+\S+/.test(f)) f = f.replace(/^[^:]*:\s+/, '');
   const p = piano(f);

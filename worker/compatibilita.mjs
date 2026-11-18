@@ -10,7 +10,7 @@
 //     delle richieste, senza dati della persona): Carmine lo vede in /admin/esami con le richieste non coperte.
 // Vale solo per gli esami universitari (src/data/compatibilita.ts).
 import { MATERIE } from '../src/data/materie.ts';
-import { MATERIE_COMPATIBILITA, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO } from '../src/data/compatibilita.ts';
+import { MATERIE_COMPATIBILITA, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO, SOGLIA_CONSIGLIATO } from '../src/data/compatibilita.ts';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { trovaVoceTeoria, riferimentiNominati } from './riscontro-teoria.mjs';
 import { trovaProcedimentoStudio, trovaSchedaAnalisiDue } from './riscontro-procedimenti.mjs';
@@ -1010,9 +1010,13 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       const rilette = new Set();
       let migliorate = 0;
       if (voci.length && grezze.length === voci.length) {
-        // Si rileggono le voci rimaste senza nessun riscontro: sono quelle che abbassano di più la stima.
+        // Seconda lettura, con l'altro modello, delle voci rimaste senza nessun riscontro: sono quelle che
+        // abbassano di più la stima. Si fa solo quando la stima è sotto la soglia dell'acquisto consigliato,
+        // cioè quando un riscontro in più può cambiare la risposta data allo studente.
         const livelloDi = (q) => rigaRisultato(materia, cat, codici, q, domandePer, testo).livello;
+        const stimaBassa = () => valutaRichieste(materia, cat, codici, grezze, null, domandePer, testo).compatibilita < SOGLIA_CONSIGLIATO;
         const deboli = prova && b.senzaRilettura ? [] : grezze.map((q, i) => ({ q, i })).filter(({ q }) => (prova && b.rileggiTutto ? livelloDi(q) !== 'stesso' : livelloDi(q) === 'nessuno'));
+        if (deboli.length && !(prova && b.rileggiTutto) && !stimaBassa()) deboli.length = 0;
         if (deboli.length && deboli.length <= MAX_RICONTROLLO) {
           manda({ fase: 'ricontrollo', voci: deboli.length });
           const forza = { stesso: 2, argomento: 1, nessuno: 0 };
