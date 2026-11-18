@@ -576,7 +576,7 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
   const nominati = riferimentiNominati(codici.T, righe);
   const messaggi = [
     { role: 'system', content: sistema },
-    { role: 'user', content: `${nominati ? `Riferimenti da verificare:\n${nominati}\n\n` : ''}Voci del programma${gruppo[0].proveRichieste ? ' (elenco delle dimostrazioni richieste)' : ''}:\n${righe}` },
+    { role: 'user', content: `${nominati ? `Riferimenti da verificare:\n${nominati}\n\n` : ''}Voci del programma${gruppo[0].proveRichieste ? ' (elenco delle dimostrazioni richieste)' : ''}:\n${righe}\n\nScrivi ${gruppo.length === 1 ? 'una riga' : `${gruppo.length} righe, una per ciascun identificatore`} (${gruppo.map((v) => v.id).join(', ')}), poi FINE_CONFRONTO. Per una voce che il catalogo non tratta la riga è: identificatore|T|-|-|-|testo della voce.` },
   ];
   // Una riga per voce: la risposta è breve. Il tetto basso ferma presto un modello che si ripete.
   const tetto = (modello) => (/gpt-oss/.test(modello) ? 6000 : 400 + 90 * gruppo.length);
@@ -606,7 +606,8 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
     const diagnostica = { ...diagnosticaConfronto(errore), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: `${String(errore?.message || '').slice(0, 140)}${risultati.size ? '' : ` | testo ${spia.testo.length}: ${spia.testo.slice(0, 160)}`}` };
     errori.push(diagnostica);
     console.log('compatibilita elenco', JSON.stringify(diagnostica));
-    if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
+    // Una risposta incompleta non è un guasto: il modello resta il primo per i gruppi seguenti.
+    if (['MODELLO', 'TEMPO'].includes(diagnostica.codice)) guasti[modello] = Date.now();
     // Le righe già lette restano valide: si richiedono soltanto le voci che mancano.
     if (risultati.size) {
       const mancanti = gruppo.filter((v) => !risultati.has(v.id));
