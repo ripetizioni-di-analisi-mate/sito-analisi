@@ -17,7 +17,7 @@ export const BOCCONI_SEO_EN = {
 export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
   informatica: {
     titolo: 'Fondamenti di Informatica in C | Esercizi e prova di laboratorio',
-    descrizione: 'Corso universitario di programmazione in C17. Studia puntatori, ricorsione, algoritmi e file con 180 esercizi svolti e 990 domande spiegate.',
+    descrizione: 'Corso universitario di programmazione in C17. Studia puntatori, ricorsione, algoritmi e file con 88 esercizi svolti e 990 domande spiegate.',
     preparazione: 'Il corso parte dalla rappresentazione dei numeri e segue il percorso di un programma C17 dalla compilazione alle prove sui file. Per affrontare lo scritto si impara a prevedere un risultato, tracciare le chiamate di una funzione e contare i confronti di un algoritmo.',
     metodo: 'In laboratorio, per distinguere un errore di indice da un errore sulla durata di un oggetto, bisogna seguire separatamente il cursore e i dati a cui punta. Le schede propongono tracce di esecuzione e casi di prova. I quiz permettono di confrontare la propria previsione con una spiegazione passo per passo.',
     esempi: ['rappresentazione-numeri', 'puntatori-e-memoria', 'file-e-laboratorio'],
@@ -325,7 +325,7 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
 export const GUIDE_DISCIPLINE_EN: Partial<Record<string, GuidaDisciplina>> = {
   informatica: {
     titolo: 'Foundations of Computer Science in C | Exercises and Lab Practice',
-    descrizione: 'A university course in C17 programming. Study pointers, recursion, algorithms and files with 180 worked exercises and 990 questions with explanations.',
+    descrizione: 'A university course in C17 programming. Study pointers, recursion, algorithms and files with 88 worked exercises and 990 questions with explanations.',
     preparazione: 'The course begins with number representation and follows a C17 program from compilation to tests on files. To prepare for a written exam, students learn to predict results, trace function calls and count the comparisons an algorithm makes.',
     metodo: 'In the lab, telling an indexing error from an object lifetime error requires tracking the cursor separately from the data it points to. The worksheets provide execution traces and test cases. The quizzes let students compare their predictions with step-by-step explanations.',
     esempi: GUIDE_DISCIPLINE.informatica.esempi,
