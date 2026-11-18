@@ -22,7 +22,7 @@ import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import GuidaMateria from '../components/GuidaMateria.astro';
-import { BOCCONI_SEO_EN, GUIDE_DISCIPLINE } from '../data/seo-discipline';
+import { BOCCONI_SEO_EN, GUIDE_DISCIPLINE, GUIDE_DISCIPLINE_EN } from '../data/seo-discipline';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const t = T(lingua);
@@ -34,7 +34,7 @@ const gruppo = materiaIt(materia).gruppo;
 const confTolc = TOLC[materia];
 const bocconi = materia === BOCCONI.slug;
 const sopra = bocconi ? (lingua === 'en' ? 'University admissions' : 'Test di ingresso') : confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
-const guida = lingua === 'it' ? GUIDE_DISCIPLINE[materia] : undefined;
+const guida = lingua === 'it' ? GUIDE_DISCIPLINE[materia] : lingua === 'en' ? GUIDE_DISCIPLINE_EN[materia] : undefined;
 const seoMateria = bocconi && lingua === 'en' ? BOCCONI_SEO_EN : guida;
 const titoloPagina = seoMateria?.titolo ?? (confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
@@ -188,7 +188,8 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
       </li>
     )}
   </ol>
-  {lingua === 'it' && <GuidaMateria materia={m} schede={svolti} />}
+  {guida && (lingua === 'it' || lingua === 'en') && <GuidaMateria materia={m} guida={guida} lingua={lingua}
+    schede={lingua === 'en' ? await getCollection('svolti_en', (s) => s.id.startsWith(materia + '/')) : svolti} />}
 </Base>
 
 <script is:inline define:vars={{ en }}>

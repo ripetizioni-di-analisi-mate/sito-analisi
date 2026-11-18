@@ -1,17 +1,19 @@
 ---
-import { MATERIE, type Materia } from '../data/materie';
-import { GUIDE_DISCIPLINE } from '../data/seo-discipline';
+import { type Materia } from '../data/materie';
+import type { GuidaDisciplina } from '../data/seo-discipline';
+import { link, materiaL } from '../i18n';
 import { originale } from '../lib/canonici';
 import { schedeLibere } from '../data/schede-libere.mjs';
-import { url } from '../lib/url';
 
 interface Props {
   materia: Materia;
+  guida: GuidaDisciplina;
+  lingua: 'it' | 'en';
   schede: { id: string; data: { titolo: string; parole: string[] } }[];
 }
-const { materia, schede } = Astro.props;
-const guida = GUIDE_DISCIPLINE[materia.slug];
-const argomenti = guida?.esempi.length ? guida.esempi : materia.argomenti.map((a) => a.slug);
+const { materia, schede, guida, lingua } = Astro.props;
+const inglese = lingua === 'en';
+const argomenti = guida.esempi.length ? guida.esempi : materia.argomenti.map((a) => a.slug);
 const esempi = argomenti.flatMap((slug) => {
   const scheda = schede.filter((s) => s.id.startsWith(`${materia.slug}/${slug}/`))
     .sort((a, b) => Number(a.id.split('/').pop()) - Number(b.id.split('/').pop()))
@@ -22,30 +24,29 @@ const esempi = argomenti.flatMap((slug) => {
     ?? `/${materia.slug}/${slug}/esercizi-svolti/${numero}`;
   return [{ ...scheda.data, href, argomento: materia.argomenti.find((a) => a.slug === slug)?.titolo }];
 }).slice(0, 3);
-const collegate = (guida?.collegate ?? []).map((slug) => MATERIE.find((m) => m.slug === slug && m.attiva))
-  .filter((m): m is Materia => Boolean(m));
+const collegate = guida.collegate.map((slug) => materiaL(lingua, slug)).filter((m) => m?.attiva);
 ---
-{guida && <section class="guida-materia" aria-labelledby="guida-materia-titolo">
-  <h2 id="guida-materia-titolo">Studiare {materia.titolo}</h2>
+<section class="guida-materia" aria-labelledby="guida-materia-titolo">
+  <h2 id="guida-materia-titolo">{inglese ? 'Studying' : 'Studiare'} {materia.titolo}</h2>
   <p>{guida.preparazione}</p>
   <p>{guida.metodo}</p>
   {esempi.length > 0 && <>
-    <h2>Esercizi svolti di {materia.titolo}</h2>
-    <p>Schede complete da leggere gratuitamente prima di proseguire con gli altri esercizi del programma.</p>
+    <h2>{inglese ? 'Worked exercises in' : 'Esercizi svolti di'} {materia.titolo}</h2>
+    <p>{inglese ? 'These complete worksheets are free to read before moving on to the other exercises in the course.' : 'Schede complete da leggere gratuitamente prima di proseguire con gli altri esercizi del programma.'}</p>
     <ul class="elenco-esercizi">
-      {esempi.map((esempio) => <li><a href={url(esempio.href)}>
+      {esempi.map((esempio) => <li><a href={link(lingua, esempio.href)}>
         <span>{esempio.titolo}<span class="parole">{esempio.argomento}</span></span>
       </a></li>)}
     </ul>
   </>}
   {collegate.length > 0 && <>
-    <h2>Materie collegate</h2>
+    <h2>{inglese ? 'Related subjects' : 'Materie collegate'}</h2>
     <ul>
-      {collegate.map((m) => <li><a href={url(`/${m.slug}`)}>{m.titolo}</a><p>{m.descrizione}</p></li>)}
+      {collegate.map((m) => <li><a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a><p>{m.descrizione}</p></li>)}
     </ul>
   </>}
-  <p class="nota">Materiale a cura di <a href={url('/chi-sono')}>Carmine Tornincasa</a>.</p>
-</section>}
+  <p class="nota">{inglese ? 'Course material by' : 'Materiale a cura di'} <a href={link(lingua, '/chi-sono')}>Carmine Tornincasa</a>.</p>
+</section>
 
 <style>
   .guida-materia { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--bordo, #ddd8cd); }

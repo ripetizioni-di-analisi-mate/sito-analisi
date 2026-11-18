@@ -87,6 +87,23 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'geometria-analitica': { titolo: 'Analytic geometry and conic sections', breve: 'Analytic geometry' },
     },
   },
+  'informatica': {
+    titolo: 'Foundations of Computer Science in C', breve: 'Computer Science',
+    descrizione: 'A university course in C17 covering number representation, pointers, recursion, algorithms and files, with worked exercises and lab exams in Italian and English.',
+    argomenti: {
+      'rappresentazione-numeri': { titolo: 'Number representation', breve: 'Number representation' },
+      'architettura-e-compilazione': { titolo: 'Computer architecture and compilation', breve: 'Architecture and compilation' },
+      'tipi-ed-espressioni': { titolo: 'Types, expressions and input/output', breve: 'Types and operations' },
+      'condizioni-e-cicli': { titolo: 'Conditionals, loops and invariants', breve: 'Loops and invariants' },
+      'funzioni-e-test': { titolo: 'Functions, specifications and testing', breve: 'Functions and testing' },
+      'vettori-matrici-stringhe': { titolo: 'Arrays, matrices and strings', breve: 'Arrays, matrices and strings' },
+      'puntatori-e-memoria': { titolo: 'Pointers and dynamic memory', breve: 'Pointers and memory' },
+      'ricorsione': { titolo: 'Recursion and activation records', breve: 'Recursion' },
+      'strutture-e-liste': { titolo: 'Structures, lists, stacks and queues', breve: 'Structures and lists' },
+      'ricerca-ordinamento-complessita': { titolo: 'Searching, sorting and complexity', breve: 'Searching and sorting' },
+      'file-e-laboratorio': { titolo: 'Text files and lab exam', breve: 'Files and lab exam' },
+    },
+  },
   'analisi-1': {
     titolo: 'Mathematical Analysis 1',
     breve: 'Analysis 1',
