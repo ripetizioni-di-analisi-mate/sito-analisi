@@ -17,9 +17,15 @@ import { trovaProcedimentoStudio, trovaSchedaAnalisiDue } from './riscontro-proc
 import { riconosciMateriaCompito } from './materia-compito.mjs';
 import { analizzaDocumento, testoLeggibile } from './programma.mjs';
 import { riscontroProgramma } from './riscontro-programma.mjs';
+import { MODELLI_COMPAT_CLAUDE, eClaude, aggiornaClaude, claudeAttivo, eseguiClaude } from './compatibilita-claude.mjs';
 
 const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
 const MODELLI_TESTO = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
+// Con Claude attivo (worker/compatibilita-claude.mjs) i modelli di Claude vengono prima di quelli gratuiti.
+const modelliTesto = (env) => (claudeAttivo(env) ? [...MODELLI_COMPAT_CLAUDE, ...MODELLI_TESTO] : MODELLI_TESTO);
+const modelliFoto = (env) => (claudeAttivo(env) ? [...MODELLI_COMPAT_CLAUDE, ...MODELLI_FOTO] : MODELLI_FOTO);
+// Contatore della spesa di Claude: lo imposta ogni richiesta (stessa funzione per tutte).
+let contaClaude = null;
 const MAX_IMMAGINE = 1500000;  // caratteri del data URL di una pagina (circa 1 MB)
 const MAX_RICHIESTE = 80;
 // Un programma scritto in prosa elenca un contenuto per frase: le voci sono più numerose delle richieste di un compito.
@@ -223,6 +229,7 @@ const PAUSA_GUASTO = 5 * 60 * 1000;
 const inOrdine = (modelli) => [...modelli].sort((a, b) => (Date.now() - (guasti[a] || 0) < PAUSA_GUASTO) - (Date.now() - (guasti[b] || 0) < PAUSA_GUASTO));
 
 async function esegui(env, modello, input) {
+  if (eClaude(modello)) return eseguiClaude(env, modello, input, { conta: contaClaude });
   const base = { ...input, temperature: 0.1 };
   if (!/gemma/.test(modello) || senzaOpzioni.has(modello)) return env.AI.run(modello, base);
   try {
@@ -250,9 +257,10 @@ async function leggiPagina(env, titolo, immagine) {
     { messages: [{ role: 'user', content: testo }], image: immagine, max_tokens: 3200 },
   ];
   let ultimo = null, vuota = false, illeggibile = false;
-  for (const m of inOrdine(MODELLI_FOTO)) {
+  for (const m of inOrdine(modelliFoto(env))) {
     // Prima il formato che questo modello ha già accettato.
-    const ordine = formatoFoto[m] === 1 ? [1, 0] : [0, 1];
+    // Claude riceve l'immagine solo nel primo formato (dentro il messaggio).
+    const ordine = eClaude(m) ? [0] : formatoFoto[m] === 1 ? [1, 0] : [0, 1];
     for (const k of ordine) {
       try {
         const risposta = await esegui(env, m, formati[k]);
@@ -533,7 +541,7 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
   // modello risponde «non universitario», prima di rifiutarlo si sente l'altro modello.
   const analisi = analizzaDocumento(esame);
   const sembraCompito = analisi.tipo === 'esame' && (analisi.richieste >= 2 || attesi.length >= 2 || /\(\s*\d+(?:[.,]\d+)?\s*(?:punti|pt)\b/i.test(esame));
-  const modelli = inOrdine(MODELLI_TESTO);
+  const modelli = inOrdine(modelliTesto(env));
   const it = (async function* () {
     let ultimo = null, avviato = false;
     const diagnostica = [];
@@ -693,7 +701,7 @@ const rigaDaVoce = (v, extra = {}) => ({
 async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, registro = [], taglia = {}) {
   const perGruppo = taglia.perGruppo || VOCI_PER_GRUPPO, insieme = taglia.insieme || GRUPPI_INSIEME;
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO;
-  const modelli = inOrdine(MODELLI_TESTO);
+  const modelli = inOrdine(modelliTesto(env));
   const pronte = new Map();
   if (taglia.perNome) for (const v of voci) { const q = taglia.perNome(v); if (q) pronte.set(v.id, q); }
   const daChiedere = voci.filter((v) => !pronte.has(v.id));
@@ -726,7 +734,7 @@ async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, regist
 // (gpt-oss) impiegava da 8 a 45 secondi e teneva ferma la pagina. Se non riesce, restano i risultati della prima.
 async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci, registro = []) {
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO + ISTRUZIONI_RICONTROLLO;
-  const modelli = inOrdine(MODELLI_TESTO);
+  const modelli = inOrdine(modelliTesto(env));
   const gruppi = [];
   for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
   const fine = Date.now() + 15000 * (Number(env.COMPATIBILITA_TEMPI) || 1);
@@ -897,6 +905,8 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
 
   if (!POST || (p !== '/api/compatibilita/leggi' && p !== '/api/compatibilita/confronta')) return null;
   const b = await req.json().catch(() => ({}));
+  contaClaude = (modello, tin, tout) => aDO(env, '/sg-ia-conta', { modello: `compat:${modello}`, tin, tout }).catch(() => {});
+  await aggiornaClaude(env, aDO);
   let materia = typeof b.materia === 'string' && MATERIE_COMPATIBILITA.includes(b.materia) ? b.materia : null;
   if (!materia) return json({ errore: 'Scegli la materia del tuo esame universitario.' }, 400);
   let m = MATERIE.find((x) => x.slug === materia);
@@ -908,6 +918,8 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   const cookieAdmin = h.leggiCookie?.(req, 'admin');
   const admin = Boolean(cookieAdmin && (await h.leggiToken(env, cookieAdmin).catch(() => null))?.admin);
   const prova = admin && b.prova === true;
+  // Solo nelle prove: confronto con i soli modelli gratuiti, per paragonarli a Claude.
+  if (prova && b.modelli === 'gratuiti') env = { ...env, SENZA_CLAUDE: true };
   const conta = async (tipo) => {
     if (admin) return { ok: true, rimasti: 99 };
     const max = tipo === 'leggi' ? (io ? LIMITI.leggiAccount : LIMITI.leggiOspite) : (io ? LIMITI.confrontaAccount : LIMITI.confrontaOspite);

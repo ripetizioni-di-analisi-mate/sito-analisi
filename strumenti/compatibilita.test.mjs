@@ -882,3 +882,66 @@ test('Analisi 2 recupera continuità applicata e disegni con le schede del corso
     '7b|E|-|-|-|Dimostrare che f(x,y) è uniformemente continua',
   ]).richieste.map((r) => r.livello), ['argomento', 'nessuno', 'nessuno', 'nessuno']);
 });
+
+// ---------- Claude (worker/compatibilita-claude.mjs) ----------
+const flussoClaude = (testo, motivo = 'end_turn') => {
+  const eventi = [
+    { type: 'message_start', message: { usage: { input_tokens: 1000, cache_read_input_tokens: 0 } } },
+    ...testo.match(/[\s\S]{1,40}/g).map((t) => ({ type: 'content_block_delta', delta: { type: 'text_delta', text: t } })),
+    { type: 'message_delta', delta: { stop_reason: motivo }, usage: { output_tokens: 50 } },
+    { type: 'message_stop' },
+  ];
+  return new Response(eventi.map((e) => `event: ${e.type}\ndata: ${JSON.stringify(e)}\n\n`).join(''), { headers: { 'content-type': 'text/event-stream' } });
+};
+async function conClaude(rispostaClaude, rispostaGratuita, testoEsame = 'Esercizio 1. Calcolare un integrale per parti.') {
+  const richieste = [], gratuiti = [], chiamate = [], attese = [];
+  const originale = globalThis.fetch;
+  globalThis.fetch = async (url, init) => { richieste.push({ url: String(url), corpo: JSON.parse(init.body) }); return rispostaClaude(richieste.length); };
+  try {
+    const env = {
+      ANTHROPIC_API_KEY: 'chiave-di-prova',
+      ASSETS: { fetch: async () => Response.json(cat) },
+      AI: { run: async (modello, input) => { gratuiti.push({ modello, input }); return { response: rispostaGratuita }; } },
+    };
+    const h = {
+      aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return percorso === '/sg-ia-spesa' ? { giorno: [], mese: [] } : { ok: true, rimasti: 3 }; },
+      json: (dati, status = 200, headers) => Response.json(dati, { status, headers }),
+      utenteCollegato: async () => null, catalogoDomande: async () => ({}),
+    };
+    const req = new Request('https://esempio.test/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia: 'analisi-1', testo: testoEsame }) });
+    const res = await gestisciCompatibilita(req, env, { waitUntil: (x) => attese.push(x) }, '/api/compatibilita/confronta', h);
+    const corpo = await res.text();
+    await Promise.all(attese);
+    return { res, richieste, gratuiti, chiamate, eventi: corpo.trim().split('\n').filter(Boolean).map((r) => JSON.parse(r)) };
+  } finally { globalThis.fetch = originale; }
+}
+
+test('con la chiave di Anthropic il confronto lo fa Claude, con il catalogo in cache e la spesa nel contatore', async () => {
+  const { eventi, richieste, gratuiti, chiamate } = await conClaude(() => flussoClaude(`TIPO_DOCUMENTO|ESAME\n${riga}FINE_CONFRONTO`), 'non usato');
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+  assert.equal(gratuiti.length, 0);
+  assert.equal(richieste.length, 1);
+  assert.equal(richieste[0].url, 'https://api.anthropic.com/v1/messages');
+  assert.equal(richieste[0].corpo.model, 'claude-sonnet-5-5');
+  assert.equal(richieste[0].corpo.stream, true);
+  assert.deepEqual(richieste[0].corpo.system[0].cache_control, { type: 'ephemeral' });
+  assert.match(richieste[0].corpo.system[0].text, /Catalogo/);
+  assert.equal(richieste[0].corpo.messages[0].role, 'user');
+  const spesa = chiamate.filter((c) => c.percorso === '/sg-ia-conta');
+  assert.equal(spesa.length, 1);
+  assert.equal(spesa[0].dati.modello, 'compat:claude-sonnet-5-5');
+  assert.equal(spesa[0].dati.tout, 50);
+});
+
+test('se Claude dà errore si passa al modello successivo, fino ai modelli gratuiti', async () => {
+  const { eventi, richieste, gratuiti } = await conClaude(() => new Response('sovraccarico', { status: 529 }), `${riga}FINE_CONFRONTO`);
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+  assert.deepEqual(richieste.map((r) => r.corpo.model), ['claude-sonnet-5-5', 'claude-haiku-5-5']);
+  assert.equal(gratuiti.length, 1);
+});
+
+test('una risposta di Claude tagliata dal limite dei token non produce un risultato parziale', async () => {
+  const { eventi, gratuiti } = await conClaude(() => flussoClaude(riga, 'max_tokens'), `${riga}FINE_CONFRONTO`);
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+  assert.equal(gratuiti.length, 1, 'il risultato viene dal modello di riserva');
+});

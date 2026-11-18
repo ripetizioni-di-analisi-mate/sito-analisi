@@ -20,11 +20,11 @@ export function entrataEquivalente(modello, u = {}) {
   return Math.round((u.input_tokens || 0) + (u.cache_read_input_tokens || 0) * (pread / pin) + (u.cache_creation_input_tokens || 0) * (pwrite / pin));
 }
 
-// Costo in dollari delle righe del contatore (modello con o senza il prefisso «pi:»).
+// Costo in dollari delle righe del contatore (modello con o senza il prefisso «pi:» o «compat:»).
 export function costoRighe(righe = []) {
   let usd = 0;
   for (const r of righe) {
-    const p = PREZZI[String(r.modello || '').replace(/^pi:/, '')];
+    const p = PREZZI[String(r.modello || '').replace(/^(?:pi|compat):/, '')];
     if (p) usd += ((Number(r.tin) || 0) * p[0] + (Number(r.tout) || 0) * p[1]) / 1e6;
   }
   return usd;
