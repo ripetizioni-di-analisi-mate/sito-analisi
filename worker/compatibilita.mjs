@@ -509,26 +509,58 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
     { role: 'system', content: ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, conTeoria) },
     { role: 'user', content: `${nominati ? `Voci del catalogo nominate nel documento (verifica sempre la richiesta completa):\n${nominati}\n\n` : ''}Documento da confrontare\n${esame}` },
   ];
+  const numeroDi = (q) => String(Number(q.esercizio));
+  // Esercizi numerati del documento che mancano, per intero o in un sottopunto, fra le righe del modello.
+  const mancanti = (righe) => {
+    const esercizi = new Set(righe.map(numeroDi));
+    const sottopunti = new Set(righe.filter((q) => typeof q.parte === 'string').map((q) => `${numeroDi(q)}${q.parte.toLowerCase()}`));
+    return [...new Set(attesi.filter(({ numero, parti }) => !esercizi.has(numero) || parti.some((p) => !sottopunti.has(numero + p))).map((a) => a.numero))];
+  };
+  const testoEsercizio = (numero) => {
+    const k = titoliEsercizi.findIndex((t) => String(Number(t[1])) === numero);
+    return esame.slice(titoliEsercizi[k].index, titoliEsercizi[k + 1]?.index).replace(/^[\n.]\s*/, '').trim();
+  };
+  const ordine = new Map(attesi.map((a, k) => [a.numero, k]));
+  const scala = Number(env.COMPATIBILITA_TEMPI) || 1;
   const it = (async function* () {
     let ultimo = null, avviato = false;
     const diagnostica = [];
     for (const m of inOrdine(MODELLI_TESTO)) {
       const partenza = Date.now();
+      const tetto = /gpt-oss/.test(m) ? 8000 : 6000;
       let n = 0;
       try {
-        const esercizi = new Set();
-        const sottopunti = new Set();
-        for await (const q of richiesteModello(env, m, { messages, max_tokens: /gpt-oss/.test(m) ? 8000 : 6000 }, tipoDaTesto(esame), Date.now() + 120000 * (Number(env.COMPATIBILITA_TEMPI) || 1))) {
+        const righe = [];
+        for await (const q of richiesteModello(env, m, { messages, max_tokens: tetto }, tipoDaTesto(esame), Date.now() + 120000 * scala)) {
           if (!n && avviato) yield { ricomincia: true };
           n++; avviato = true;
-          esercizi.add(String(Number(q.esercizio)));
-          if (typeof q.parte === 'string') sottopunti.add(`${Number(q.esercizio)}${q.parte.toLowerCase()}`);
+          righe.push(q);
           yield q;
           if (q.nonUniversitario) return;
         }
         if (!n) throw new Error('nessuna richiesta dal modello');
-        const saltati = attesi.flatMap(({ numero, parti }) => (!esercizi.has(numero) ? [numero] : parti.filter((p) => !sottopunti.has(numero + p)).map((p) => numero + p)));
-        if (saltati.length) throw new Error(`esercizi mancanti dal confronto: ${saltati.join(' ')} (letti ${[...esercizi].join(' ')}; ${[...sottopunti].join(' ')})`);
+        let saltati = mancanti(righe);
+        if (saltati.length) {
+          // Il modello ha saltato alcuni esercizi: si richiedono soltanto quelli, con il loro testo, invece di
+          // rifare tutto il compito con l'altro modello. Le righe già lette degli altri esercizi restano.
+          const ripresa = [];
+          const parte = saltati.map(testoEsercizio).join('\n\n');
+          const richiesta = [messages[0], { role: 'user', content: `Documento da confrontare (parte di un compito: ${saltati.length === 1 ? 'soltanto l’esercizio' : 'soltanto gli esercizi'} ${saltati.join(', ')}; conserva la numerazione originale)\n${parte}` }];
+          for await (const q of richiesteModello(env, m, { messages: richiesta, max_tokens: tetto }, 'esame', Date.now() + 60000 * scala)) {
+            if (!q.nonUniversitario && saltati.includes(numeroDi(q))) ripresa.push(q);
+          }
+          const finali = righe.filter((q) => !saltati.includes(numeroDi(q)));
+          for (const numero of saltati) {
+            const pos = finali.findIndex((q) => (ordine.get(numeroDi(q)) ?? -1) > ordine.get(numero));
+            finali.splice(pos < 0 ? finali.length : pos, 0, ...ripresa.filter((q) => numeroDi(q) === numero));
+          }
+          const ancora = mancanti(finali);
+          if (ancora.length) throw new Error(`esercizi mancanti dal confronto: ${ancora.join(' ')} (prima lettura: ${saltati.join(' ')})`);
+          registro.push({ codice: 'RIPRESA', modello: m.split('/').pop(), voci: 'esame', da: saltati.join(' '), ms: Date.now() - partenza, lette: finali.length, nota: 'esercizi saltati alla prima lettura e richiesti di nuovo' });
+          yield { ricomincia: true };
+          for (const q of finali) yield q;
+          saltati = [];
+        }
         delete guasti[m];
         registro.tempi?.push({ da: 'esame', voci: n, ms: Date.now() - partenza, modello: m.split('/').pop().slice(0, 12), fase: 1 });
         return;
@@ -537,7 +569,8 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
         diagnostica.push(diagnosticaConfronto(e));
         registro.push({ ...diagnosticaConfronto(e), modello: m.split('/').pop(), voci: 'esame', da: '', ms: Date.now() - partenza, lette: n, nota: String(e?.message || '').slice(0, 220) });
         console.log('compatibilita confronto', m, diagnosticaConfronto(e), String(e?.message || '').slice(0, 200));
-        guasti[m] = Date.now();
+        // Un esercizio saltato non è un guasto del modello.
+        if (!['ESERCIZI', 'CONTEGGIO', 'CHIUSURA'].includes(diagnosticaConfronto(e).codice)) guasti[m] = Date.now();
       }
     }
     const errore = new Error(ultimo?.message || 'nessun confronto completo', { cause: ultimo });
@@ -675,15 +708,15 @@ async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, regist
   }
 }
 
-// Seconda lettura delle voci rimaste senza un contenuto preciso, con i modelli nell'ordine inverso: un
-// modello diverso trova spesso il riferimento che il primo non ha visto. Se la seconda lettura non riesce,
-// restano i risultati della prima.
+// Seconda lettura delle voci rimaste senza riscontro: poche voci per volta e l'istruzione di cercare sinonimi
+// e paragrafi con un altro titolo. Usa il modello più veloce e ha quindici secondi: dal vivo l'altro modello
+// (gpt-oss) impiegava da 8 a 45 secondi e teneva ferma la pagina. Se non riesce, restano i risultati della prima.
 async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci, registro = []) {
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO + ISTRUZIONI_RICONTROLLO;
-  const modelli = inOrdine(MODELLI_TESTO).reverse();
+  const modelli = inOrdine(MODELLI_TESTO);
   const gruppi = [];
   for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
-  const fine = Date.now() + TEMPO_CHIAMATA * 1.6 * (Number(env.COMPATIBILITA_TEMPI) || 1);
+  const fine = Date.now() + 15000 * (Number(env.COMPATIBILITA_TEMPI) || 1);
   const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1), registro, { fine, fase: 2 }).catch(() => new Map())));
   return new Map(esiti.flatMap((m) => [...m]));
 }

@@ -788,6 +788,20 @@ test('un esercizio numerato mancante fa recuperare l’analisi, anche con un seg
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 1);
 });
 
+test('gli esercizi saltati dal modello si richiedono da soli, con il loro testo, e tornano al loro posto', async () => {
+  const testo = 'Esercizio 1. Calcolare un integrale.\nEsercizio 2. Calcolare un secondo integrale.\nEsercizio 3. a) Calcolare un limite. b) Studiare una serie.';
+  const { eventi, modelli } = await confronto((_m, input, n) => {
+    if (n === 1) return { response: `${riga}3a|E|A1|S1|-|Limite\nFINE_CONFRONTO` };
+    assert.match(input.messages[1].content, /soltanto gli esercizi 2, 3/);
+    assert.doesNotMatch(input.messages[1].content, /Esercizio 1\./);
+    return { response: '2|-|E|A1|S1|-|Secondo integrale\n3a|E|A1|S1|-|Limite\n3b|E|A1|S1|-|Serie\nFINE_CONFRONTO' };
+  }, 'analisi-1', true, testo);
+  assert.equal(modelli.length, 2);
+  assert.equal(modelli[0].modello, modelli[1].modello, 'la ripresa usa lo stesso modello');
+  assert.ok(eventi.some((e) => e.ricomincia));
+  assert.deepEqual(eventi.at(-1).fine.richieste.map((r) => `${r.esercizio}${r.parte || ''}`), ['1', '2', '3a', '3b']);
+});
+
 test('due risposte che saltano un esercizio non producono una percentuale', async () => {
   const testo = 'Esercizio 1. Calcolare un integrale.\nEsercizio 2. Calcolare un secondo integrale.';
   const { eventi } = await confronto(`${riga}FINE_CONFRONTO`, 'analisi-1', true, testo);
