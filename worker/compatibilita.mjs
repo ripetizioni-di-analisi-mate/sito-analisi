@@ -598,6 +598,7 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
       }
       if (risultati.size !== gruppo.length) throw new Error(`voci mancanti o duplicate: ${risultati.size} su ${gruppo.length}`);
       delete guasti[modello];
+      errori.tempi?.push({ da: gruppo[0].id, voci: gruppo.length, ms: Date.now() - partenza, modello: modello.split('/').pop().slice(0, 12), fase: opzioni.fase || 1 });
       return risultati;
     } catch (e) { errore = e; }
     const diagnostica = { ...diagnosticaConfronto(errore), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: String(errore?.message || '').slice(0, 140) };
@@ -631,15 +632,16 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
 }
 
 // Le voci del programma, a gruppi: più gruppi lavorano insieme, i risultati escono nell'ordine del documento.
-async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, registro = []) {
+async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, registro = [], taglia = {}) {
+  const perGruppo = taglia.perGruppo || VOCI_PER_GRUPPO, insieme = taglia.insieme || GRUPPI_INSIEME;
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO;
   const modelli = inOrdine(MODELLI_TESTO);
   const gruppi = [];
-  for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
+  for (let i = 0; i < voci.length; i += perGruppo) gruppi.push(voci.slice(i, i + perGruppo));
   const lavori = [];
   let prossimo = 0, attivi = 0;
   const avvia = () => {
-    while (attivi < GRUPPI_INSIEME && prossimo < gruppi.length) {
+    while (attivi < insieme && prossimo < gruppi.length) {
       const gruppo = gruppi[prossimo];
       attivi++;
       lavori[prossimo++] = confrontaGruppo(env, sistema, codici, gruppo, modelli, registro, { riserva: true }).finally(() => { attivi--; avvia(); });
@@ -656,13 +658,13 @@ async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, regist
 // Seconda lettura delle voci rimaste senza un contenuto preciso, con i modelli nell'ordine inverso: un
 // modello diverso trova spesso il riferimento che il primo non ha visto. Se la seconda lettura non riesce,
 // restano i risultati della prima.
-async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci) {
+async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci, registro = []) {
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO + ISTRUZIONI_RICONTROLLO;
   const modelli = inOrdine(MODELLI_TESTO).reverse();
   const gruppi = [];
   for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
   const fine = Date.now() + TEMPO_CHIAMATA * 1.5 * (Number(env.COMPATIBILITA_TEMPI) || 1);
-  const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1), [], { fine }).catch(() => new Map())));
+  const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1), registro, { fine, fase: 2 }).catch(() => new Map())));
   return new Map(esiti.flatMap((m) => [...m]));
 }
 
@@ -802,6 +804,14 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
 
   if (p.startsWith('/dati-compatibilita/')) return new Response('non trovato', { status: 404 });
 
+  // Prove dalla dashboard: stesso confronto della pagina pubblica. Il cookie della dashboard arriva solo
+  // sotto /admin, perciò le prove passano da qui.
+  if (p === '/admin/esami/prova') {
+    const ma = h.leggiCookie(req, 'admin');
+    if (!POST || !(ma ? await h.leggiToken(env, ma).catch(() => null) : null)?.admin) return new Response('accesso negato', { status: 401 });
+    p = '/api/compatibilita/confronta';
+  }
+
   if (p === '/admin/esami' || p.startsWith('/admin/esami/pagina/')) {
     const ma = h.leggiCookie(req, 'admin');
     const sess = ma ? await h.leggiToken(env, ma) : null;
@@ -905,10 +915,14 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   }).catch(() => ({}));
 
   const registro = []; // tentativi falliti dei modelli sulle voci di un programma
+  const tra = (x, min, max) => (Number(x) >= min && Number(x) <= max ? Math.round(Number(x)) : 0);
+  const taglia = prova ? { perGruppo: tra(b.perGruppo, 4, 30), insieme: tra(b.insieme, 1, 12) } : {};
+  if (prova) registro.tempi = [];
+  const inizioConfronto = Date.now();
   let avvio;
   try {
     avvio = elenco.length
-      ? { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, elenco, registro) }
+      ? { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, elenco, registro, taglia) }
       : await avviaConfronto(env, m.titolo, catalogoTesto, conTeoria, testo, codici);
   } catch (e) {
     await rimborsa('confronta');
@@ -929,7 +943,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       await avvio.it.return();
       voci = forzate.map((v) => ({ ...v, proveRichieste: false }));
       ({ testo: catalogoTesto, codici } = codifica(cat, 'programma'));
-      avvio = { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, voci, registro) };
+      avvio = { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, voci, registro, taglia) };
     }
   }
   const domandePer = await domandePerP;
@@ -974,7 +988,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         if (deboli.length && deboli.length <= MAX_RICONTROLLO) {
           manda({ fase: 'ricontrollo', voci: deboli.length });
           const forza = { stesso: 2, argomento: 1, nessuno: 0 };
-          const riletta = await ricontrollaVoci(env, m.titolo, catalogoTesto, codici, deboli.map(({ i }) => voci[i])).catch(() => new Map());
+          const riletta = await ricontrollaVoci(env, m.titolo, catalogoTesto, codici, deboli.map(({ i }) => voci[i]), registro).catch(() => new Map());
           for (const { q, i } of deboli) {
             const nuova = riletta.get(voci[i].id);
             if (!nuova) continue;
@@ -999,7 +1013,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });
       } else {
-        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), senzaModello: nonLette } : {}) } });
+        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), tempi: registro.tempi, senzaModello: nonLette, ms: Date.now() - inizioConfronto, catalogo: catalogoTesto.length } : {}) } });
         if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
           esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),
