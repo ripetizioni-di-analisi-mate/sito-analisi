@@ -637,9 +637,19 @@ test('quaranta voci di un elenco di dimostrazioni restano nel risultato anche do
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 1);
 });
 
-test('un elenco con una voce duplicata e una mancante non produce una percentuale', async () => {
+test('un elenco con una riga ripetuta e una voce mancante arriva lo stesso al risultato', async () => {
+  // Il modello divide una voce in due righe e ne salta una: le righe lette restano, la voce saltata
+  // si richiede di nuovo e, se il modello non la restituisce, si abbina per nome.
   const documento = '1. Limiti\n2. Derivate\n3. Integrali';
   const { eventi, chiamate } = await confronto('1|T|A1|-|-|Limiti\n1|T|A1|-|-|Duplicato\n3|T|A1|-|-|Integrali\nFINE_CONFRONTO', 'analisi-1', true, documento);
+  const esito = eventi.at(-1).fine;
+  assert.deepEqual(esito.richieste.map((r) => r.testo), ['Limiti', 'Derivate', 'Integrali']);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 0);
+});
+
+test('se il modello non restituisce nessuna delle voci, non si produce una percentuale', async () => {
+  const documento = '1. Limiti\n2. Derivate\n3. Integrali';
+  const { eventi, chiamate } = await confronto('7|T|A1|-|-|Altro\nFINE_CONFRONTO', 'analisi-1', true, documento);
   assert.ok(eventi.at(-1).verificaPersonale);
   assert.ok(eventi.every((e) => !e.fine));
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);

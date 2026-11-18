@@ -579,25 +579,37 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
   ];
   // Una riga per voce: la risposta è breve. Il tetto basso ferma presto un modello che si ripete.
   const tetto = (modello) => (/gpt-oss/.test(modello) ? 3500 : 400 + 90 * gruppo.length);
+  const forza = (q) => (q.scheda || q.teoria ? 2 : q.argomento ? 1 : 0);
   for (const modello of modelli) {
     if (Date.now() >= fine) break;
     const risultati = new Map();
     const partenza = Date.now();
+    let errore = null;
     try {
       const scadenza = Math.min(fine, Date.now() + TEMPO_CHIAMATA * scala * (/gpt-oss/.test(modello) ? 1.5 : 1));
       for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: tetto(modello) }, 'programma', scadenza)) {
+        // Una riga per una voce non richiesta si ignora. Se il modello divide una voce composta in più righe,
+        // resta la riga con il riferimento più preciso.
         const voce = attese.get(String(q.esercizio));
-        if (!voce || q.parte || risultati.has(voce.id)) throw new Error(`voci mancanti o duplicate: riga ${q.esercizio}${q.parte ? `/${q.parte}` : ''} ${voce ? 'ripetuta' : 'non richiesta'}`);
-        risultati.set(voce.id, { ...q, testo: voce.testo, sezione: voce.sezione, proveRichieste: voce.proveRichieste });
+        if (!voce) continue;
+        const prima = risultati.get(voce.id);
+        if (prima && forza(prima) >= forza(q)) continue;
+        risultati.set(voce.id, { ...q, parte: null, testo: voce.testo, sezione: voce.sezione, proveRichieste: voce.proveRichieste });
       }
       if (risultati.size !== gruppo.length) throw new Error(`voci mancanti o duplicate: ${risultati.size} su ${gruppo.length}`);
       delete guasti[modello];
       return risultati;
-    } catch (e) {
-      const diagnostica = { ...diagnosticaConfronto(e), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: String(e?.message || '').slice(0, 140) };
-      errori.push(diagnostica);
-      console.log('compatibilita elenco', JSON.stringify(diagnostica));
-      if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
+    } catch (e) { errore = e; }
+    const diagnostica = { ...diagnosticaConfronto(errore), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: String(errore?.message || '').slice(0, 140) };
+    errori.push(diagnostica);
+    console.log('compatibilita elenco', JSON.stringify(diagnostica));
+    if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
+    // Le righe già lette restano valide: si richiedono soltanto le voci che mancano.
+    if (risultati.size) {
+      const mancanti = gruppo.filter((v) => !risultati.has(v.id));
+      if (!mancanti.length) return risultati;
+      const altre = await confrontaGruppo(env, sistema, codici, mancanti, modelli, errori, { ...opzioni, fine });
+      return new Map([...risultati, ...altre]);
     }
   }
   if (gruppo.length > 4 && Date.now() < fine) {
