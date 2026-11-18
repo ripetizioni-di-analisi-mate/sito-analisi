@@ -403,6 +403,30 @@ async function riconcilia(env, h, r) {
   return (await h.aDO(env, '/dig-leggi', { id: r.id })).r;
 }
 
+// Chiude un ordine rimasto aperto e non pagato. Restituisce lo stato finale dell'ordine
+// ('scaduto', 'fallito', 'pagato', 'in_elaborazione') oppure 'in_attesa' se non si può chiudere.
+async function chiudiPendente(env, h, r) {
+  if (r.stato !== 'in_attesa') return r.stato;
+  if (!r.sessione) {
+    // Ordine senza sessione Stripe (apertura interrotta): dopo due minuti non può più essere pagato.
+    if (Date.now() - Date.parse(r.creato) < 120000) return 'in_attesa';
+    await h.aDO(env, '/dig-scaduto', { id: r.id });
+    return 'scaduto';
+  }
+  try {
+    const s = await stripe(env, 'POST', '/checkout/sessions/' + encodeURIComponent(r.sessione) + '/expire');
+    if (sessioneCoerente(s, r) && s.status === 'expired') {
+      await h.aDO(env, '/dig-scaduto', { id: r.id });
+      return 'scaduto';
+    }
+  } catch { /* sessione già chiusa o pagata: si controlla sotto */ }
+  try {
+    return (await riconcilia(env, h, r)).stato;
+  } catch {
+    return 'in_attesa';
+  }
+}
+
 export async function recuperaOrdiniDigitali(env, h) {
   const { righe } = await h.aDO(env, '/dig-da-recuperare');
   for (const r of righe) {
@@ -477,7 +501,11 @@ export async function gestisciAcquisti(req, env, p, h) {
     const { r } = await h.aDO(env, '/dig-leggi', { id: typeof c.id === 'string' ? c.id : '' });
     if (!r || r.email !== io.email) return errore('Ordine non trovato.', 404);
     if (r.stato !== 'in_attesa') return risposta({ stato: r.stato });
-    if (!r.sessione) return errore('Sessione in preparazione.', 409);
+    if (!r.sessione) {
+      const st = await chiudiPendente(env, h, r);
+      if (st === 'scaduto') return risposta({ stato: 'scaduto' });
+      return errore('Sessione in preparazione. Riprova tra due minuti.', 409);
+    }
     try {
       const s = await stripe(env, 'POST', '/checkout/sessions/' + r.sessione + '/expire');
       if (!sessioneCoerente(s, r) || s.status !== 'expired') return errore('Verifica il tuo ordine.', 409);
@@ -518,8 +546,20 @@ export async function gestisciAcquisti(req, env, p, h) {
       const precedente = await riconcilia(env, h, r);
       if (precedente.stato === 'pagato') return errore('Hai già acquistato questo materiale.', 409);
       if (precedente.stato === 'in_elaborazione') return risposta({ sessione: r.sessione });
-      if (precedente.stato === 'scaduto' || precedente.stato === 'fallito') apertura = await h.aDO(env, '/dig-apri', args);
-      else if (!apertura.uguale)
+      let chiuso = precedente.stato === 'scaduto' || precedente.stato === 'fallito';
+      const stessoAcquisto =
+        JSON.stringify([...(precedente.ordine?.risorse || [])].sort()) === JSON.stringify([...(q.risorse || [])].sort());
+      if (!chiuso && !apertura.uguale && stessoAcquisto) {
+        // Dati o prezzo cambiati: si chiude da solo il pagamento vecchio non completato e si apre il nuovo.
+        const st = await chiudiPendente(env, h, precedente);
+        if (st === 'pagato') return errore('Hai già acquistato questo materiale.', 409);
+        if (st === 'in_elaborazione') return risposta({ sessione: r.sessione });
+        chiuso = st === 'scaduto' || st === 'fallito';
+      }
+      if (chiuso) {
+        apertura = await h.aDO(env, '/dig-apri', args);
+        if (apertura.pendente) return errore('Verifica lo stato del pagamento prima di riprovare.', 409);
+      } else if (!apertura.uguale)
         return risposta(
           {
             errore: 'Hai già un pagamento aperto per questo acquisto o sconto. Puoi annullarlo prima di riprovare.',

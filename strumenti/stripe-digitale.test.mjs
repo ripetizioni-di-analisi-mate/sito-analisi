@@ -357,3 +357,17 @@ test('requisiti aggiornati nel registro prima di aprire Stripe e riprova dopo er
   b.o.sql.exec('INSERT INTO sconti_invito VALUES (?,?,?)', b.io.email, 'g', 'txn_vecchio');
   assert.deepEqual(await ad({ ...q, chiavi: ['analisi-2'], sconto: { id: 'g', tipo: 'premio' } }), { scontoUsato: true });
 });
+
+test('stesso acquisto con dati di fatturazione cambiati: il pagamento vecchio si chiude da solo', async (t) => {
+  const b = banco(t),
+    sel = { tipo: 'materia', slug: 'analisi-1' };
+  const q = await b.call('preventivo', sel);
+  const primo = await b.call('checkout', acquista(sel, q.totale));
+  assert.equal(primo.status, 200);
+  const cambiato = { ...acquista(sel, q.totale), fatturazione: { ...fattura, nome: 'Altro' } };
+  const secondo = await b.call('checkout', cambiato);
+  assert.equal(secondo.status, 200);
+  assert.notEqual(secondo.url, primo.url);
+  assert.equal(b.aperte(), 2);
+  assert.equal([...b.sessioni.values()][0].status, 'expired');
+});
