@@ -1,151 +1,210 @@
 ---
 titolo: "Statistica descrittiva"
-sommario: "Caratteri e frequenze, tabelle e grafici, media semplice e ponderata, mediana, moda, dispersione, varianza e deviazione standard."
+sommario: "Dalle frequenze alla forma dei dati. Media ponderata, mediana e quartili, scarti, varianza descrittiva e deviazione standard."
 ---
 
-## Dati e caratteri
+## Che cosa dicono le osservazioni
 
-:::definizione{#dati titolo="Che cosa viene osservato"}
-Una **popolazione statistica** è l'insieme delle unità considerate. Un **carattere** è la proprietà osservata su ciascuna unità. Può essere qualitativo, come il mezzo usato per andare a scuola, oppure quantitativo, come il tempo del tragitto.
+:::definizione{#dati titolo="Unità, carattere e gruppo di riferimento"}
+Una **popolazione** comprende tutte le unità a cui si riferisce un'indagine. Un **campione** è una parte della popolazione. Il **carattere** è la proprietà osservata su ogni unità. È qualitativo se descrive una categoria, come la linea di autobus usata. È quantitativo discreto se i valori sono separati, come il numero di fermate. È quantitativo continuo se la misura può assumere ogni valore in un intervallo, come la durata.
 
-Un carattere quantitativo è discreto se assume valori separati, come il numero di fratelli. È continuo se può assumere i valori di un intervallo, come una lunghezza. La precisione della misura non cambia la natura continua della grandezza.
-
-Un campione è un sottoinsieme della popolazione. Per descrivere correttamente una raccolta si indicano il gruppo osservato, il significato dei valori e l'unità di misura.
+Indicheremo con $N$ il numero di osservazioni che stiamo descrivendo. Se rileviamo il tempo di viaggio dello stesso autobus cinque volte, le cinque durate sono cinque osservazioni, ottenute però da un solo mezzo. Per confrontare la puntualità di due linee si specificano periodo, unità di misura, orario previsto e criterio di scelta delle corse.
 :::
 
-## Tabelle di frequenza
-
-:::definizione{#frequenze titolo="Conteggi, rapporti e percentuali"}
-La **frequenza assoluta** $n_i$ è il numero delle osservazioni con un certo valore. Se il totale è $N>0$, la frequenza relativa è $f_i=\dfrac{n_i}{N}$ e quella percentuale è $100f_i\%$.
-
-Le frequenze assolute sommano a $N$, quelle relative a $1$ e quelle percentuali a $100\%$. Per esempio, su venti studenti, otto che usano il bus rappresentano frequenza relativa $0{,}4$ e percentuale $40\%$.
-
-Le frequenze cumulate sommano progressivamente le frequenze fino a un valore assegnato. Richiedono un ordine significativo dei valori e sono utili per trovare la posizione della mediana.
+:::osservazione
+Una media dei ritardi alle otto del mattino descrive le corse selezionate a quell'ora. Trarre conclusioni su tutte le corse della giornata richiede che la rilevazione copra anche altri orari. Un numero maggiore di dati alle otto fornisce informazioni più dettagliate su quell'orario.
 :::
 
-## Grafici
+## Frequenze e gruppi di dimensione diversa
 
-:::osservazione{#grafici titolo="Barre, settori e istogrammi"}
-Un diagramma a barre confronta categorie o valori discreti. L'altezza di ciascuna barra indica la frequenza e l'asse deve dichiarare se la frequenza è assoluta o relativa.
-
-In un diagramma a settori, una categoria di frequenza relativa $f$ occupa un angolo di $360^\circ f$. Una frequenza del $25\%$ occupa $90^\circ$.
-
-Per dati raggruppati in intervalli si usa un istogramma. Se le classi hanno ampiezze diverse, la frequenza è proporzionale all'area della barra. L'altezza deve quindi essere la densità, cioè frequenza divisa per ampiezza.
-
-Un asse verticale che parte da un valore vicino alle altezze delle barre può far apparire grande una differenza piccola. La lettura di un grafico comprende sempre scala, etichette e unità.
-
-::grafico{poligoni="0.7,0 1.3,0 1.3,2 0.7,2;1.7,0 2.3,0 2.3,5 1.7,5;2.7,0 3.3,0 3.3,3 2.7,3" xmin=0 xmax=4 ymin=0 ymax=6 nomi="x,n" titolo="Nel diagramma a barre i valori $1$, $2$, $3$ hanno frequenze $2$, $5$, $3$"}
+:::definizione{#frequenze titolo="Conteggi e proporzioni"}
+Per $N>0$, una modalità con $n_i$ osservazioni ha frequenza relativa $f_i=\dfrac{n_i}{N}$ e rappresenta il $100f_i\%$. Se le modalità sono disgiunte ed esauriscono le osservazioni, la somma delle frequenze assolute è $N$ e quella delle relative è $1$. Per valori ordinati, la frequenza cumulata fino a una soglia somma le frequenze delle modalità minori o uguali a quella soglia.
 :::
 
-:::esempio{titolo="Istogramma con classi di ampiezza diversa"}
-Su $20$ tragitti, $8$ durano da $0$ a meno di $10$ minuti e $12$ durano da $10$ a meno di $30$ minuti. Le ampiezze delle classi sono quindi $10$ e $20$ minuti.
+:::esempio{titolo="Stesso conteggio, diversa diffusione"}
+In due turni disgiunti un laboratorio conta $8$ prove ripetute nel primo turno su $20$ e $8$ nel secondo su $40$. Il conteggio uguale dà quote diverse, $\dfrac8{20}=40\%$ e $\dfrac8{40}=20\%$. Se il laboratorio deve predisporre postazioni per chi ripete, conta otto in entrambi i turni. Per confrontare quanto è comune ripetere la prova, si confrontano le due quote.
+
+::grafico{xmin=-0.35 xmax=3.3 ymin=0 ymax=50 nomi="s,p" poligoni="0.73,0 1.27,0 1.27,40 0.73,40;1.73,0 2.27,0 2.27,20 1.73,20" etichette="0.81,43,40%;1.81,23,20%" titolo="Per il turno $s$ l'altezza dà la percentuale $p$ di prove ripetute sul totale di quel turno"}
+
+La quota dei due turni insieme è $\dfrac{8+8}{20+40}=\dfrac4{15}$. Entrambi i numeratori contribuiscono per otto. Al denominatore il secondo turno pesa il doppio, quindi la quota complessiva è più vicina al $20\%$ che al $40\%$.
+:::
+
+## Grafici, scale e istogrammi
+
+:::osservazione{#grafici titolo="Che cosa rappresentano altezza e area"}
+Un diagramma a barre assegna a ogni modalità una barra separata. La sua altezza indica il conteggio o la quota dichiarata sull'asse verticale. In un diagramma a settori, una quota $f_i$ occupa un angolo pari a $360^\circ f_i$. Queste rappresentazioni suddividono un totale quando le modalità sono disgiunte ed esauriscono le risposte.
+:::
+
+:::esempio{titolo="Separare lo scarto dal rapporto visibile"}
+Due termometri in una prova di laboratorio registrano rispettivamente $21$ e $24$ gradi Celsius. In entrambi i grafici i valori differiscono di $3$ gradi. Con una base a $20$, i tratti visibili sono alti $1$ e $4$ gradi. Il secondo tratto è quattro volte il primo, perché in entrambi i casi vengono omessi i gradi da $0$ a $20$. Confrontare i due valori in Celsius richiede di dichiarare la scala e l'origine.
+
+::grafico{xmin=-0.35 xmax=3.3 ymin=0 ymax=27 nomi="s,T" poligoni="0.72,0 1.28,0 1.28,21 0.72,21;1.72,0 2.28,0 2.28,24 1.72,24" etichette="0.91,22.1,21;1.91,25.1,24" titolo="Dalla base 0 si leggono le misure $T$ in gradi Celsius dei due strumenti $s$"}
+
+::grafico{xmin=-0.35 xmax=3.3 ymin=20 ymax=25.5 nomi="s,T" poligoni="0.72,20 1.28,20 1.28,21 0.72,21;1.72,20 2.28,20 2.28,24 1.72,24" etichette="0.91,21.38,21;1.91,24.38,24" titolo="La base a 20 ingrandisce visivamente la stessa differenza"}
+:::
+
+:::definizione{#istogrammi titolo="L'area ricostruisce il conteggio"}
+Raggruppando misure in intervalli, la base del rettangolo dell'**istogramma** ha ampiezza $h_i$. Se ci sono $n_i$ dati nella classe, si sceglie l'altezza $d_i=\dfrac{n_i}{h_i}$ in modo che l'area sia $n_i$. La densità relativa $\dfrac{f_i}{h_i}$ dà invece area $f_i$. La somma delle aree deve essere rispettivamente $N$ o $1$.
+:::
+
+:::esempio{titolo="Altezza uguale, conteggi diversi"}
+In una rilevazione le classi $[0,2)$, $[2,5)$ e $[5,9)$ minuti contengono $6$, $9$ e $8$ osservazioni. Le densità assolute sono $\dfrac{6}{2}=3$, $\dfrac{9}{3}=3$ e $\dfrac{8}{4}=2$ osservazioni al minuto. Le prime due barre arrivano entrambe a $3$, ma la seconda ha area maggiore perché la sua base è più larga. Una durata esattamente pari a cinque minuti va nella terza classe, per la parentesi quadra a sinistra.
+
+::grafico{xmin=-0.8 xmax=10.2 ymin=-0.35 ymax=4.35 nomi="t,d" poligoni="0,0 2,0 2,3 0,3;2,0 5,0 5,3 2,3;5,0 9,0 9,2 5,2" linee="0,3 2,3 2,0;2,3 5,3 5,0;5,2 9,2 9,0" etichette="0.68,1.25,6;3.25,1.25,9;6.75,0.89,8" titolo="La densità $d$ è in osservazioni al minuto. I numeri nelle regioni indicano le aree."}
+:::
+## Media e scarti con segno
+
+::::teorema{#media titolo="Frequenze come pesi e somma degli scarti"}
+La **media aritmetica** di $N>0$ misure è la somma delle misure divisa per $N$. Se il valore distinto $v_i$ compare $n_i$ volte, il suo contributo alla somma è $n_i v_i$. Uno **scarto** dalla media è la differenza con segno $x_j-\bar x$.
 
 $$
 \begin{aligned}
-d_1&=\frac8{10}=0{,}8,\\
-d_2&=\frac{12}{20}=0{,}6.
+\bar x&=\frac{\sum_{j=1}^N x_j}{N}
+=\frac{\sum_i n_i v_i}{\sum_i n_i},\\[5pt]
+\sum_{j=1}^N (x_j-\bar x)&=0.
 \end{aligned}
 $$
 
-La seconda barra è più bassa, ma ha area maggiore perché è larga il doppio. Le frequenze si leggono dalle aree $0{,}8\cdot10=8$ e $0{,}6\cdot20=12$. L’altezza ha unità di conteggio per minuto e misura la densità.
+:::dimostrazione
+Nella prima somma si possono raccogliere le $n_i$ copie di $v_i$, senza cambiare né il totale né il numero di termini. Per la seconda uguaglianza, dalla somma dei dati si sottrae $\bar x$ una volta per ogni osservazione. Si ottiene $\sum_jx_j-N\bar x$, che vale zero per definizione della media.
+:::
+::::
 
-::grafico{poligoni="0,0 10,0 10,0.8 0,0.8;10,0 30,0 30,0.6 10,0.6" xmin=-2 xmax=32 ymin=0 ymax=1 nomi="t,d" etichette="4,0.88,0.8;20,0.69,0.6" titolo="Le aree delle due barre valgono 8 e 12"}
+:::esempio{titolo="Lo stesso valore ripetuto ha più peso"}
+Tre valori sono $0$, $3$ e $6$, con frequenze $1$, $2$ e $3$. La media è $\dfrac{0\cdot1+3\cdot2+6\cdot3}{6}=4$. Gli scarti con segno sono $-4$, $-1$ per due volte e $2$ per tre volte. Il peso delle osservazioni a destra compensa quello delle osservazioni a sinistra, perché $3\cdot2=4+2\cdot1$.
+
+::grafico{xmin=-0.65 xmax=7.3 ymin=-0.35 ymax=4.25 nomi="x," punti="0,1;3,1;3,2;6,1;6,2;6,3" segmenti="4,0,4,3.6" etichette="3.53,3.94,4" titolo="Ciascun punto è un'osservazione. La linea tratteggiata indica la media."}
 :::
 
-## La media
+## Mediana e quartili
 
-:::definizione{#media titolo="Media aritmetica e ponderata"}
-La **media aritmetica** di $N>0$ valori è
-$$
-\bar x=\frac{x_1+\cdots+x_N}{N}.
-$$
-Con valori distinti $v_i$ e frequenze $n_i$ si usa la media ponderata
-$$
-\bar x=\frac{\sum_i n_iv_i}{\sum_i n_i}.
-$$
-Per i dati $4,6,8$, la media è $6$. Se $4$ compare una volta e $8$ tre volte, la media è $\dfrac{4+24}{4}=7$.
-
-La somma degli scarti dalla media è zero, perché $\sum_i(x_i-\bar x)=\sum_i x_i-N\bar x=0$. La media risente dei valori estremi, che entrano direttamente nella somma.
+:::definizione{#mediana titolo="Leggere le posizioni centrali"}
+Si ordinano i dati dal più piccolo al più grande, contando anche le ripetizioni. Con $N=2k+1$ la **mediana** è l'osservazione in posizione $k+1$. Con $N=2k>0$ è la media dei dati in posizione $k$ e $k+1$. In una tabella, il rango cercato si raggiunge alla prima cumulata che vale almeno quel numero.
 :::
 
-:::esempio{titolo="Ricavare la media di uno dei gruppi"}
-Due gruppi distinti comprendono $8$ e $12$ studenti. Il tempo medio del primo gruppo per andare a scuola è $12$ minuti e la media complessiva è $15$ minuti. Indichiamo con $m$ la media del secondo gruppo.
+:::definizione{#quartili titolo="Convenzione dei ranghi per il primo e il terzo quartile"}
+Per $Q_1$ si moltiplica $N$ per $\tfrac14$, per $Q_3$ per $\tfrac34$, e si arrotondano i prodotti all'intero superiore se occorre. Si prende il dato che occupa il rango ottenuto. È la convenzione del rango superiore, una fra le convenzioni possibili. Per $Q_2$ si usa la regola della mediana. La differenza $Q_3-Q_1$ si chiama **distanza interquartile**.
+:::
+
+:::esempio{titolo="Quartili e mediana in una lista con ripetizioni"}
+I dati ordinati sono $1,2,2,3,5,7,7,11$. Si ha $N=8$. Il primo quartile si legge al posto $\dfrac{8}{4}=2$, dunque $Q_1=2$. Il terzo si legge al posto $\dfrac{3\cdot8}{4}=6$, dunque $Q_3=7$. I due dati centrali sono al quarto e quinto posto e danno $Q_2=\dfrac{3+5}{2}=4$. La distanza interquartile vale $7-2=5$.
+
+::grafico{xmin=-0.3 xmax=9.2 ymin=-0.4 ymax=12.2 nomi="k,xₖ" punti="1,1;2,2;3,2;4,3;5,5;6,7;7,7;8,11" segmenti="2,0,2,2;6,0,6,7" titolo="I quartili $Q_1$ e $Q_3$ sono ai ranghi $2$ e $6$. La mediana usa i ranghi $4$ e $5$."}
+
+Qui un solo dato è strettamente inferiore a $Q_1$, mentre tre dati sono minori o uguali. Per interpretare un quartile si deve distinguere fra valori uguali alla soglia e valori strettamente sotto. Cambiando $11$ in $20$ si sposta il massimo e si allunga il campo di variazione. Le posizioni dei quartili e dei due valori centrali restano occupate dagli stessi dati.
+:::
+:::esempio{titolo="Stessi estremi, diversa dispersione centrale"}
+I due elenchi $1,3,4,5,6,8$ e $1,2,3,6,7,8$ hanno entrambi campo di variazione $8-1=7$ e mediana $\dfrac{4+5}{2}=\dfrac{3+6}{2}=4{,}5$. I ranghi dei quartili sono il secondo e il quinto. Nel primo elenco la distanza interquartile è $6-3=3$, nel secondo $7-2=5$. Nel disegno la scatola va da $Q_1$ a $Q_3$, la linea interna indica la mediana e i segmenti arrivano agli estremi.
+
+::grafico{xmin=-0.4 xmax=9.5 ymin=-0.35 ymax=3.05 nomi="x," poligoni="3,1.78 6,1.78 6,2.22 3,2.22;2,0.78 7,0.78 7,1.22 2,1.22" linee="1,2 3,2;6,2 8,2;1,1 2,1;7,1 8,1;1,1.81 1,2.19;8,1.81 8,2.19;1,0.81 1,1.19;8,0.81 8,1.19;4.5,0.78 4.5,1.22;4.5,1.78 4.5,2.22" etichette="0.38,2.15,A;0.38,1.15,B" titolo="Le scatole hanno ampiezza diversa pur condividendo mediana ed estremi"}
+:::
+
+:::esempio{titolo="La posizione si trova anche senza espandere i dati"}
+In questa tabella si contano nove osservazioni. I tre ranghi sono $3$, $5$ e $7$. La cumulata arriva a $5$ già al valore $2$, che copre le posizioni dalla seconda alla quinta. Perciò $Q_1=Q_2=2$. Il rango $7$ cade nel blocco del valore $8$, che comincia subito dopo la cumulata $6$. Il terzo quartile vale dunque $8$.
+
+| Valore | Frequenza | Cumulata |
+|---|---:|---:|
+| $1$ | $1$ | $1$ |
+| $2$ | $4$ | $5$ |
+| $5$ | $1$ | $6$ |
+| $8$ | $3$ | $9$ |
+:::
+
+## Moda e significato dell'indice
+
+:::definizione{#moda titolo="La modalità più frequente"}
+Una **moda** è una modalità con frequenza massima. Più valori possono condividere il massimo. Per le linee di autobus $A$, $B$ e $C$, con $5$, $7$ e $7$ utilizzi, sono mode $B$ e $C$. Il numero $7$ indica la frequenza di ciascuna. La moda è definita anche per categorie senza ordine.
+:::
+
+:::osservazione
+Se una misura è stata raggruppata in classi, si può indicare la classe con il conteggio più alto. Per classi di ampiezza diversa, la barra più alta indica la densità maggiore e può appartenere a una classe con meno osservazioni. Senza i singoli valori non si sa quale misura esatta sia comparsa più volte.
+:::
+
+## Varianza descrittiva
+
+::::teorema{#varianza titolo="Quadrati degli scarti e frequenze"}
+Il **campo di variazione** è il massimo meno il minimo. La **varianza descrittiva** $\sigma^2$ è la media dei quadrati degli scarti, per $N>0$. Si divide per $N$, il numero di osservazioni che si stanno descrivendo. Per dati raggruppati in valori uguali si può pesare ogni quadrato con la sua frequenza.
 
 $$
 \begin{aligned}
-8\cdot12+12m&=20\cdot15,\\[6pt]
-12m&=300-96=204,\\[6pt]
-m&=17.
+\sigma^2&=\frac{1}{N}\sum_{j=1}^N(x_j-\bar x)^2\\[5pt]
+&=\frac{\sum_i n_i(v_i-\bar x)^2}{\sum_i n_i}.
 \end{aligned}
 $$
 
-La media del secondo gruppo è $17$ minuti. La media complessiva, $15$ minuti, è più vicina a $17$ che a $12$, perché il secondo gruppo ha più studenti.
+:::dimostrazione
+Ogni occorrenza di $v_i$ contribuisce con lo stesso quadrato, quindi le $n_i$ occorrenze contribuiscono per $n_i(v_i-\bar x)^2$. I quadrati rendono tutti i contributi non negativi. La loro somma è zero solo se ogni scarto è zero, cioè se tutte le osservazioni sono uguali alla media.
 :::
 
-## La mediana
+La divisione per $N$ si usa anche se i dati descritti provengono da un campione. Il divisore $N-1$ compare in un diverso problema, quando si stima la varianza di una popolazione dai dati campionari. Gli esercizi di questo capitolo chiedono la varianza descrittiva.
+::::
 
-:::definizione{#mediana titolo="La posizione centrale"}
-La **mediana** si calcola dopo aver ordinato i dati. Se il numero delle osservazioni è dispari, è il valore centrale. Se è pari, per dati numerici si usa la media dei due valori centrali.
+:::esempio{titolo="Stessa media e stesso campo, varianza diversa"}
+Nei dati $A=(0,0,4,4)$ e $B=(0,2,2,4)$ la media è $2$ e il campo di variazione è $4$. In $A$ tutti i dati distano due unità dalla media. In $B$ due dati coincidono con la media e soltanto due sono agli estremi. Le varianze sono $\sigma_A^2=\dfrac{16}{4}=4$ e $\sigma_B^2=\dfrac{8}{4}=2$. Due distribuzioni con gli stessi estremi possono essere diverse anche nelle loro frequenze interne.
 
-Per $2,3,7,9,12$ la mediana è $7$. Per $2,3,7,9$ è $\dfrac{3+7}{2}=5$. La mediana può quindi non essere uno dei valori osservati.
-
-La mediana dipende dalla posizione, mentre la media usa tutti i valori. Nei dati $1,2,3,4,100$, la mediana è $3$ e la media è $22$. Il valore estremo modifica fortemente la media ma non cambia il valore centrale.
+::grafico{xmin=-0.7 xmax=5.2 ymin=-0.25 ymax=5.25 nomi="x," punti="0,3;0,4;4,3;4,4;0,0.9;2,0.9;2,1.9;4,0.9" segmenti="2,0,2,4.65" etichette="0.5,4.2,A;0.5,1.85,B;2.25,4.62,2" titolo="I due gruppi hanno la stessa media. In B due osservazioni hanno scarto zero."}
 :::
 
-:::esempio{titolo="Trovare la mediana dalle cumulate"}
-Per trovare le osservazioni centrali di una tabella si sommano le frequenze assolute nell’ordine dei valori.
+::::teorema{#secondo-momento titolo="Controllo con la media dei quadrati"}
+Sviluppando i quadrati si ottiene anche
 
-| Valore | $2$ | $4$ | $7$ | $9$ |
-| --- | --- | --- | --- | --- |
-| Frequenza assoluta | $2$ | $3$ | $1$ | $4$ |
-| Frequenza cumulata | $2$ | $5$ | $6$ | $10$ |
-
-Il totale è $10$, quindi servono la quinta e la sesta osservazione. La cumulata vale $5$ al valore $4$, che occupa fino alla quinta posizione. La posizione successiva corrisponde a $7$, perché lì la cumulata raggiunge $6$. Dunque la mediana è $\dfrac{4+7}{2}=5{,}5$.
-:::
-
-## Moda e scelta dell’indice
-
-:::definizione{#moda titolo="Il valore più frequente"}
-La **moda** è il valore o la categoria con frequenza massima. Può essere unica oppure possono esserci più valori di frequenza massima.
-
-Nei dati $2,2,3,4,4,4$ la moda è $4$. Nei dati $1,1,3,3,5$, i valori $1$ e $3$ hanno entrambi frequenza massima. La moda è utilizzabile anche per caratteri qualitativi senza ordine.
-
-Media, mediana e moda rispondono a domande diverse. Per una misura numerica con un valore molto estremo, la mediana descrive la posizione centrale, che dipende dall’ordine dei dati. Un indice si interpreta insieme alla distribuzione dei dati.
-:::
-
-## Misure di dispersione
-
-:::definizione{#varianza titolo="Scarti e varianza descrittiva"}
-Il **campo di variazione** è massimo meno minimo. Per $3,5,9$ vale $6$. Usa soltanto i due estremi e non descrive come sono distribuiti i valori intermedi.
-
-La **varianza descrittiva** di $N>0$ valori è la media dei quadrati degli scarti dalla media.
 $$
-\sigma^2=\frac1N\sum_{i=1}^N(x_i-\bar x)^2.
+\sigma^2=\frac{\sum_i n_i v_i^2}{N}-\bar x^2.
 $$
-Per $2,4,6$ la media è $4$, gli scarti sono $-2,0,2$ e la varianza è $\dfrac83$.
 
-La varianza è non negativa. È zero soltanto quando tutti i dati sono uguali, perché una somma di quadrati è zero solo se ogni quadrato è zero. Qui si divide per $N$, poiché si descrivono i dati osservati. La stima campionaria con divisore $N-1$ ha un altro scopo.
+:::dimostrazione
+Sviluppando $(v_i-\bar x)^2$ compare il termine $-2v_i\bar x$. Pesandolo per $n_i$ e sommando, esso produce $-2N\bar x^2$, perché $\sum_i n_i v_i=N\bar x$. L'ultimo termine produce $N\bar x^2$, perché le frequenze sommano a $N$. Dividendo per $N$ resta la differenza indicata.
+:::
+::::
+
+:::esempio{titolo="Controllare la varianza usando una tabella"}
+I valori $0$, $2$ e $8$ hanno frequenze $1$, $2$ e $1$. La media è $\dfrac{0+2\cdot2+8}{4}=3$. Con gli scarti pesati, le quantità da sommare sono $9$, $2$ e $25$. La varianza è $\dfrac{36}{4}=9$. La media dei quadrati dei dati è $\dfrac{0+2\cdot4+64}{4}=18$. Togliendo il quadrato della media, $3^2=9$, si ritrova la stessa varianza.
+
+| Valore $v_i$ | Conteggio $n_i$ | $n_i(v_i-3)^2$ |
+|---|---:|---:|
+| $0$ | $1$ | $9$ |
+| $2$ | $2$ | $2$ |
+| $8$ | $1$ | $25$ |
 :::
 
-:::esempio{titolo="Due gruppi con la stessa media"}
-I dati $0,3,6$ hanno media $3$, come i dati $2,3,4$. Nel primo gruppo gli scarti sono $-3,0,3$ e nel secondo sono $-1,0,1$.
+:::osservazione
+Se tutte le frequenze si moltiplicano per lo stesso numero positivo, le frequenze relative restano uguali. Nella media e nella varianza raddoppiare, per esempio, ciascun conteggio raddoppia numeratori e denominatori. Quindi due gruppi possono avere numerosità diverse e gli stessi indici, se i valori hanno le stesse proporzioni. Per decidere quale gruppo è più disperso bisogna confrontare la distribuzione delle quote, perché il solo numero di dati non determina la dispersione.
+:::
+
+## Deviazione standard e cambi di scala
+
+::::teorema{#deviazione titolo="Unità di misura e trasformazioni"}
+La **deviazione standard** è $\sigma=\sqrt{\sigma^2}$ ed è espressa nella stessa unità dei dati. La varianza ha quella unità al quadrato. Se si sostituisce ogni $x_j$ con $y_j=ax_j+b$, la media diventa $a\bar x+b$.
 
 $$
 \begin{aligned}
-\sigma_A^2&=\frac{9+0+9}{3}=6,\\
-\sigma_B^2&=\frac{1+0+1}{3}=\frac23.
+y_j-\bar y&=a(x_j-\bar x),\\[5pt]
+\sigma_y^2&=a^2\sigma_x^2,\qquad
+\sigma_y=|a|\sigma_x.
 \end{aligned}
 $$
 
-Il primo gruppo ha varianza maggiore, perché i dati ai lati della media ne distano di più. Una media uguale può quindi accompagnarsi a dispersioni diverse.
+:::dimostrazione
+La costante $b$ compare sia nel dato trasformato sia nella sua media, quindi si cancella nello scarto. Il fattore $a$ moltiplica lo scarto e il quadrato dello scarto viene moltiplicato per $a^2$. La media dei quadrati segue lo stesso fattore. Estraendo la radice, $\sqrt{a^2}=|a|$.
+:::
+::::
+
+:::esempio{titolo="Correggere lo zero o cambiare unità"}
+Le lunghezze $2,4,6$ centimetri hanno media $4$ e varianza $\dfrac{8}{3}$ centimetri quadrati. In millimetri la media è $40$ e la varianza è $\dfrac{800}{3}$ millimetri quadrati. Il cambio d'unità ha moltiplicato le distanze per dieci. Se in una taratura si aggiungono poi $3$ millimetri a ogni misura, la nuova media è $43$ e le distanze dal centro non cambiano.
+
+::grafico{xmin=-2 xmax=70 ymin=-0.3 ymax=2.8 nomi="x," punti="20,1;40,1;60,1;23,2;43,2;63,2" linee="20,1 60,1;23,2 63,2" etichette="5,1.17,A;5,2.17,B" titolo="Le misure A in millimetri e le misure B corrette di 3 millimetri conservano gli scarti dalle rispettive medie"}
 :::
 
-## Deviazione standard e trasformazioni
+:::attenzione
+Una trasformazione di scala riguarda tutti i dati. Per esempio, per $4,4,4,4$ la varianza è zero. Se si raddoppia soltanto l'ultima osservazione, il nuovo centro è $5$ e la varianza diventa $\dfrac{1+1+1+9}{4}=3$. Raddoppiando invece tutte le osservazioni si ottengono quattro $8$ e la varianza rimane zero. Prima di applicare la regola del fattore quadrato occorre capire a quali osservazioni si riferisce la modifica.
+:::
 
-:::definizione{#deviazione titolo="Una dispersione nella stessa unità"}
-La **deviazione standard** è $\sigma=\sqrt{\sigma^2}$. Ha la stessa unità di misura dei dati, mentre la varianza ha l'unità al quadrato.
+## Che cosa si perde raggruppando i valori
 
-Per i dati $1,5$ la media è $3$, la varianza è $4$ e la deviazione standard è $2$. Aggiungendo lo stesso numero a tutti i dati cambia la media ma non cambiano gli scarti e la dispersione.
+:::osservazione{#riepilogo titolo="Stimare con i punti medi delle classi"}
+Gli elenchi $1,2,6,7$ e $3,3,5,5$ forniscono entrambi due osservazioni in $[0,4)$ e due in $[4,8)$. La medesima tabella per classi darebbe lo stesso istogramma. In realtà la media è $4$ in entrambi, ma le varianze sono $\dfrac{26}{4}$ e $1$. Gli scarti al quadrato dipendono dai valori all'interno delle classi.
 
-Moltiplicando tutti i dati per $k$, la media si moltiplica per $k$, la varianza per $k^2$ e la deviazione standard per $|k|$. Queste regole aiutano a controllare conversioni di unità e risultati numerici.
+::grafico{xmin=-0.7 xmax=9.0 ymin=-0.35 ymax=5.1 nomi="x," punti="1,3;2,3;6,3;7,3;3,0.9;3,1.9;5,0.9;5,1.9" segmenti="4,0,4,4.7" etichette="0.45,3.5,A;0.45,1.6,B;4.24,4.45,4" titolo="Entrambe le distribuzioni hanno due osservazioni per classe, con distanze dal centro diverse"}
+
+Se si dispone soltanto della tabella, si possono usare i punti medi $2$ e $6$ come valori rappresentativi. Questo equivale a calcolare gli indici per $2,2,6,6$, che ha media $4$ e varianza $4$. Si ottiene un'approssimazione, perché la tabella non permette di ricostruire i singoli dati. Anche la media potrebbe cambiare a parità di istogramma. Per esempio le misure $3,3,7,7$ ricadono ancora due per classe e hanno media $5$. Prima di scegliere un indice conviene controllare se i dati disponibili sono individuali, raggruppati per valori uguali oppure raccolti in classi.
 :::

@@ -1,126 +1,229 @@
 ---
 titolo: "Probabilità elementare"
-sommario: "Esiti ed eventi, probabilità classica, complementare, unione, prove successive, indipendenza e frequenze relative."
+sommario: "Modelli equiprobabili, eventi, conteggio con alberi e tabelle, probabilità condizionata e analisi di frequenze osservate."
 ---
 
-## Esperimenti ed eventi
+## Esperimento, esiti ed eventi
 
-:::definizione{#eventi titolo="Spazio degli esiti"}
-Un **esperimento aleatorio** ha un risultato che non si conosce prima della prova. Lo **spazio degli esiti** $\Omega$ raccoglie tutti i risultati elementari possibili. Un **evento** è un insieme di tali esiti.
+:::definizione{#eventi titolo="Spazio degli esiti e scelta di che cosa registrare"}
+L’**esperimento aleatorio** ha esito incerto prima della prova. Lo **spazio degli esiti** $\Omega$ raccoglie tutti i risultati elementari previsti dal modello. Un **evento** $E\subseteq\Omega$ si verifica se l’esito osservato appartiene a $E$. L’insieme vuoto è l’evento impossibile. Tutto $\Omega$ è l’evento certo.
 
-Nel lancio di un dado regolare, $\Omega=\{1,2,3,4,5,6\}$. L'evento «numero pari» è $\{2,4,6\}$. L’evento certo è tutto $\Omega$. Quello impossibile è l’insieme vuoto.
-
-Una probabilità è compresa fra zero e uno. Zero corrisponde all'evento impossibile e uno all'evento certo nel modello finito equiprobabile usato qui.
+L’esito dipende da che cosa registriamo. Lanciando una moneta due volte possiamo tenere l’ordine dei lanci. Con $T$ per testa e $C$ per croce, lo spazio è $\{TT,TC,CT,CC\}$. L’evento «esattamente una testa» contiene due esiti, $TC$ e $CT$. Se registriamo solo il numero di teste otteniamo invece tre valori possibili, $0$, $1$ e $2$. Il valore $1$ raccoglie due esiti del modello iniziale.
 :::
 
-## Probabilità classica
+:::esempio{titolo="Gli esiti che producono uno stesso conteggio"}
+Il diagramma colloca ogni esito ordinato in una casella. Una testa equivale a prendere le due caselle fuori dalla diagonale. Con lanci indipendenti di una moneta regolare, le quattro caselle hanno lo stesso peso. Raggrupparle in base al numero di teste produce quindi pesi diversi per i tre gruppi.
 
-:::teorema{#classica titolo="Casi favorevoli e possibili"}
-Se gli esiti sono in numero finito e tutti equiprobabili,
-$$
-P(E)=\frac{\text{numero di esiti favorevoli}}{\text{numero di esiti possibili}}.
-$$
-Per un dado regolare, la probabilità di un numero maggiore di quattro è $\dfrac26=\dfrac13$.
-
-L'ipotesi di equiprobabilità va verificata nel modello. Una moneta truccata non assegna necessariamente probabilità uguali ai due lati. Un'urna con palline indistinguibili al tatto e scelta casuale uniforme è invece un modello in cui ogni singola pallina è equiprobabile.
-
-I colori non sono equiprobabili se i numeri di palline dei due colori sono diversi.
+::grafico{assi=0 xmin=-0.75 xmax=3.2 ymin=-0.7 ymax=3.2 linee="0,0 2.6,0 2.6,2.6 0,2.6 0,0;1.3,0 1.3,2.6;0,1.3 2.6,1.3" etichette="0.65,1.95,TT;1.95,1.95,TC;0.65,0.65,CT;1.95,0.65,CC;0.65,2.92,T;1.95,2.92,C;-0.32,1.95,T;-0.32,0.65,C" titolo="Il primo lancio fissa la riga, il secondo la colonna"}
 :::
 
-## Il complementare
+## Probabilità classica e peso delle categorie
 
-:::teorema{#complementare titolo="L’evento che non si verifica"}
-Il **complementare** $\overline E$ contiene tutti gli esiti che non appartengono a $E$. Poiché i due eventi sono disgiunti e insieme formano lo spazio degli esiti,
+::::teorema{#classica titolo="Conteggio degli esiti equiprobabili"}
+Se $\Omega$ ha $N>0$ esiti equiprobabili ed $E$ ne contiene $n$, si ha
 $$
-P(\overline E)=1-P(E).
+P(E)=\frac{n}{N}.
 $$
-Se una scatola contiene tre pezzi difettosi e diciassette integri, scegliendo uniformemente un pezzo la probabilità che sia integro è $1-\dfrac3{20}=\dfrac{17}{20}$.
+Il rapporto è tra $0$ e $1$. Si ottengono $0$ per l’evento vuoto e $1$ per tutto lo spazio.
 
-Il complementare è utile per «almeno uno». In tre lanci indipendenti di una moneta regolare, la probabilità di almeno una testa è $1-\dfrac18=\dfrac78$, perché l'unico caso contrario è avere tre croci.
+:::dimostrazione
+Gli $N$ esiti elementari sono incompatibili a due a due e insieme esauriscono le possibilità. Le loro probabilità sommano a $1$. Se hanno tutte il medesimo valore $p$, allora $Np=1$ e $p=\dfrac1N$. L’evento $E$ raccoglie $n$ esiti incompatibili, quindi i loro contributi sommano a $\dfrac nN$.
+:::
+::::
+
+:::esempio{titolo="Colori diversi, singole tessere equiprobabili"}
+Un sacchetto contiene quattro tessere arancioni e due viola, tutte identiche al tatto. Numerare le tessere rende espliciti i sei esiti elementari equiprobabili. La probabilità di arancione è $\dfrac46=\dfrac23$. Il colore viola ha peso $\dfrac26=\dfrac13$. Contare semplicemente i due nomi dei colori darebbe un peso uguale a categorie che raggruppano numeri diversi di tessere.
+
+::grafico{assi=0 xmin=-0.1 xmax=3.55 ymin=-0.8 ymax=4.8 poligoni="0.48,0 1.34,0 1.34,4 0.48,4;2,0 2.86,0 2.86,2 2,2" linee="0.15,0 3.21,0" etichette="0.4,-0.42,Arancione;2.05,-0.42,Viola;0.83,4.37,4;2.35,2.37,2" titolo="L’altezza delle barre conta gli esiti elementari per colore"}
 :::
 
-## Unione e intersezione
+:::esempio{titolo="Uno stesso dado, due modelli di probabilità"}
+Un dado assegna al $6$ peso doppio rispetto a ciascuna delle altre facce, che hanno lo stesso peso fra loro. Se il peso di ciascuna di queste è $p$, la somma dei pesi delle sei facce è $5p+2p=1$, quindi $p=\dfrac17$. L’evento «pari» contiene $2$, $4$ e $6$. Nel modello dato ha probabilità $\dfrac17+\dfrac17+\dfrac27=\dfrac47$.
 
-:::teorema{#unione titolo="Conteggi senza doppioni"}
-L'unione $A\cup B$ significa che si verifica almeno uno dei due eventi. L'intersezione $A\cap B$ significa che si verificano entrambi. Vale
+Nel modello di dado regolare, le stesse tre facce hanno invece probabilità complessiva $\dfrac12$. Cambiando il modello si è conservato lo spazio degli esiti e si sono cambiati i pesi. La probabilità di un evento si può trovare sommando i pesi delle singole facce anche quando il semplice rapporto fra i due conteggi non si applica.
+:::
+
+## Complementare e richieste con almeno uno
+
+::::teorema{#complementare titolo="Sottrarre dall’evento certo"}
+Il **complementare** $E^c=\Omega\setminus E$ comprende gli esiti in cui $E$ non si verifica. Vale
+$$
+P(E^c)=1-P(E).
+$$
+
+:::dimostrazione
+Ogni esito sta in uno solo fra $E$ ed $E^c$. Sommando le due probabilità otteniamo $P(\Omega)=1$, da cui si ricava la formula.
+:::
+::::
+
+:::esempio{titolo="Almeno un sei in due lanci"}
+Lanciando due volte un dado regolare, almeno un sei può comparire al primo lancio, al secondo, oppure in entrambi. Il caso «entrambi» farebbe doppia presenza sommando senza correzioni le due possibilità. Il complementare ha una forma più semplice. Nessuno dei due dadi mostra $6$, quindi si usano cinque valori ammessi per ciascuna coordinata. Le coppie favorevoli al complementare sono $5\cdot5=25$ su $36$ equiprobabili. Pertanto
+$$
+P(\text{almeno un sei})=1-\frac{25}{36}=\frac{11}{36}.
+$$
+Nella griglia, sono evidenziate la riga e la colonna che contengono un sei. Il punto $(6,6)$ è comune alle due file e rappresenta una sola coppia.
+
+::grafico{xmin=0 xmax=7 ymin=0 ymax=7 linee="1,6 6,6 6,1" punti="1,6;2,6;3,6;4,6;5,6;6,6;6,1;6,2;6,3;6,4;6,5" nomi="Primo,Secondo" titolo="Undici coppie ordinate hanno almeno una coordinata uguale a 6"}
+:::
+
+## Unione, intersezione e incompatibilità
+
+::::teorema{#unione titolo="Somma di due eventi con intersezione"}
+L’unione $A\cup B$ si verifica quando accade almeno uno degli eventi. L’intersezione $A\cap B$ richiede entrambi. Vale
 $$
 P(A\cup B)=P(A)+P(B)-P(A\cap B).
 $$
-Il contributo dell'intersezione viene sottratto perché era stato sommato due volte. Se gli eventi sono **incompatibili**, l'intersezione è vuota e si sommano direttamente le probabilità.
 
-Nel dado, «pari» e «maggiore di quattro» hanno intersezione $\{6\}$. L'unione è $\{2,4,5,6\}$ e ha probabilità $\dfrac46=\dfrac23$.
+:::dimostrazione
+Le tre regioni $A\setminus B$, $A\cap B$ e $B\setminus A$ sono incompatibili. La loro somma di probabilità dà l’unione. Nella somma $P(A)+P(B)$ la prima e l’ultima regione contribuiscono una volta. Il centro contribuisce due volte. Sottrarre una copia del centro dà la probabilità dell’unione.
+:::
+::::
 
-::venn{zone="a,ab,b" elementi="a:2,4;ab:6;b:5;u:1,3" nomi="Pari,>4" universo=1 titolo="L’unione comprende entrambi gli eventi e conta $6$ una sola volta"}
+:::esempio{titolo="Ricavare la parte comune dai tre totali"}
+Su cento partecipanti, $56$ hanno scelto $A$, $38$ hanno scelto $B$ e $74$ hanno scelto almeno un’attività. Per una scelta uniforme, le probabilità si leggono dividendo i conteggi per cento. La stessa relazione sui conteggi dà $56+38-74=20$ persone che hanno scelto entrambe. Restano $36$ solo in $A$, $18$ solo in $B$ e $26$ fuori da entrambe. Le quattro zone sommano a cento.
+
+::venn{zone="ab" elementi="a:36;ab:20;b:18;u:26" nomi="A,B" universo=1 titolo="Il centro è il conteggio in comune ai due gruppi"}
+
+Gli eventi sono **incompatibili** quando $A\cap B=\varnothing$. In tal caso ciascun esito contribuisce al più una volta e l’addizione diretta è corretta. Nell’esempio il centro contiene venti persone, quindi sommare $56+38$ produrrebbe un conteggio superiore a quello dell’unione.
 :::
 
-## Esperimenti composti
+:::esempio{titolo="Controllare se due probabilità possono stare nello stesso modello"}
+Se $P(A)=\dfrac34$ e $P(B)=\dfrac23$, la loro somma supera uno. L’intersezione deve avere probabilità almeno $\dfrac34+\dfrac23-1=\dfrac5{12}$ per mantenere $P(A\cup B)\le1$. Il valore più piccolo è possibile quando il complementare dell’unione è vuoto. Per costruirlo, si prendono dodici casi equiprobabili e si assegnano cinque al centro, quattro alla parte di solo $A$ e tre alla parte di solo $B$.
 
-:::teorema{#composti titolo="Coppie ordinate e alberi"}
-In due lanci successivi di un dado, un esito è una coppia ordinata. La prima coordinata registra il primo punteggio e la seconda registra il secondo. Le coppie possibili sono $6\cdot6=36$ e sono equiprobabili se i dadi sono regolari e indipendenti.
-
-La somma sette si ottiene con sei coppie, da $(1;6)$ a $(6;1)$, e ha probabilità $\dfrac16$. La somma due ha una sola coppia e probabilità $\dfrac1{36}$. Le undici somme possibili non sono quindi equiprobabili.
-
-Un diagramma ad albero rappresenta ogni prova con un livello. Il prodotto delle probabilità lungo un percorso dà la probabilità di quel percorso. Per un evento formato da percorsi distinti si sommano le probabilità dei percorsi, poiché essi sono incompatibili.
+Una proposta con intersezione $\dfrac13$ darebbe invece probabilità di unione $\dfrac{13}{12}$. È quindi incompatibile con quei marginali. Contare le zone consente sia di respingere la proposta sia di mostrare che il limite trovato può verificarsi.
 :::
 
-## Indipendenza e reimmissione
+## Prove composte e uso dell’albero
 
-:::definizione{#indipendenza titolo="Probabilità che restano uguali"}
-Due eventi $A$ e $B$ sono **indipendenti** se vale
+:::definizione{#composti titolo="Percorsi e coppie ordinate"}
+In un esperimento a più prove, un esito completo specifica il risultato di ciascuna prova nell’ordine in cui avviene. Nel diagramma ad albero, ogni nodo descrive la situazione raggiunta. Un arco porta al risultato successivo e reca la probabilità di quel passo nella situazione indicata dal nodo. Si moltiplica lungo un percorso. Se più percorsi completi formano l’evento, si sommano i loro pesi perché gli esiti completi sono incompatibili.
+:::
+
+:::esempio{titolo="Due totali al dado con pesi diversi"}
+Per due lanci indipendenti di un dado regolare, si hanno $36$ coppie equiprobabili. Il totale $7$ si ottiene dalle sei coppie $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$. Il totale $8$ parte da $(2,6)$ e termina in $(6,2)$, per cinque coppie. Le probabilità sono rispettivamente $\dfrac16$ e $\dfrac5{36}$. In un totale pari è possibile che le due coordinate coincidano, come in $(4,4)$, che rappresenta una sola coppia.
+
+::grafico{xmin=0 xmax=7 ymin=0 ymax=7 linee="1,6 6,1;2,6 6,2" punti="1,6;2,5;3,4;4,3;5,2;6,1;2,6;3,5;4,4;5,3;6,2" nomi="Primo,Secondo" titolo="La diagonale del totale 7 ha sei punti. Quella del totale 8 ne ha cinque."}
+:::
+
+## Indipendenza
+
+:::definizione{#indipendenza titolo="Verificare l’indipendenza con l’intersezione"}
+Due eventi $A$ e $B$ sono indipendenti se
 $$
 P(A\cap B)=P(A)P(B).
 $$
-Con un'urna contenente due rosse e tre blu, due estrazioni con reimmissione hanno probabilità di due rosse pari a $\dfrac25\cdot\dfrac25=\dfrac4{25}$.
-
-Eventi incompatibili e indipendenti esprimono proprietà diverse. Due eventi incompatibili con probabilità positive non sono indipendenti, perché sapere che uno si verifica rende impossibile l'altro.
+Nelle estrazioni uniformi da un’urna con reimmissione la composizione viene ripristinata dopo ogni estrazione. Se l’urna ha due rosse su cinque, la probabilità che siano rosse entrambe è $\dfrac25\cdot\dfrac25=\dfrac4{25}$.
 :::
 
-## Senza reimmissione
+:::esempio{titolo="Due domande sullo stesso numero"}
+Si estrae uniformemente un numero intero da $1$ a $8$. Sia $A$ «numero pari» e $B$ «numero maggiore di $4$». Entrambi comprendono quattro esiti su otto. I valori comuni sono $6$ e $8$, quindi
+$$
+\begin{aligned}
+P(A\cap B)&=\frac28=\frac14,\\[6pt]
+P(A)P(B)&=\frac12\cdot\frac12=\frac14.
+\end{aligned}
+$$
+La stessa proporzione di pari compare sotto e sopra $4$. L’indipendenza si può avere anche quando i due eventi provengono dal medesimo esperimento.
 
-:::teorema{#dipendenza titolo="Composizione aggiornata"}
-Senza reimmissione il risultato della prima estrazione modifica l'urna. La probabilità della seconda estrazione va calcolata sui casi rimasti.
+::venn{zone="ab" elementi="a:2,4;ab:6,8;b:5,7;u:1,3" nomi="A,B" universo=1 titolo="La parte comune contiene due degli otto esiti"}
 
-Con due rosse e tre blu, la probabilità di due rosse è
-$$
-\frac25\cdot\frac14=\frac1{10}.
-$$
-Dopo una prima rossa restano una rossa e tre blu. Per ottenere una rossa e una blu in qualsiasi ordine si sommano invece i percorsi rosso-blu e blu-rosso:
-$$
-\frac25\frac34+\frac35\frac24=\frac35.
-$$
-I due percorsi sono incompatibili e ciascuno usa la composizione corretta dopo la prima estrazione.
+Se due eventi incompatibili hanno probabilità positive, il loro prodotto è positivo mentre l’intersezione ha probabilità zero. L’equazione dell’indipendenza in quel caso non può valere.
 :::
 
-:::esempio{titolo="Il ramo cambia dopo la prima estrazione"}
-Un’urna ha tre palline rosse e due blu. Si fanno due estrazioni uniformi senza reimmissione. Scriviamo $R$ per rossa e $B$ per blu. Nel diagramma il primo livello indica il colore della prima pallina e il secondo il colore della seconda. Dopo una prima $R$, rimangono due rosse e due blu. Dopo una prima $B$, rimangono tre rosse e una blu.
+:::osservazione{titolo="Indipendenza e complementare di uno degli eventi"}
+Quando $A$ e $B$ sono indipendenti, si può separare $A$ negli esiti con $B$ e in quelli con $B^c$. Sottraendo i primi si ottiene
+$$
+\begin{aligned}
+P(A\cap B^c)&=P(A)-P(A\cap B)\\[6pt]
+&=P(A)-P(A)P(B)\\[6pt]
+&=P(A)(1-P(B))=P(A)P(B^c).
+\end{aligned}
+$$
+Quindi anche $A$ e $B^c$ sono indipendenti. Per esempio, se le probabilità di successo di due prove indipendenti sono $\dfrac23$ e $\dfrac14$, la probabilità di riuscire solo nella prima è $\dfrac23\cdot\dfrac34=\dfrac12$. La formula aggiunge il fallimento della seconda come condizione, con peso complementare a quello del suo successo.
+:::
 
-::grafico{assi=0 xmin=-0.7 xmax=7.6 ymin=-4 ymax=4 linee="0,0 3,2 6,3;3,2 6,1;0,0 3,-2 6,-1;3,-2 6,-3" etichette="1.5,1.85,3/5;1.5,-1.85,2/5;4.5,3.1,2/4;4.5,0.9,2/4;4.5,-0.9,3/4;4.5,-3.1,1/4;6.6,3,RR;6.6,1,RB;6.6,-1,BR;6.6,-3,BB" titolo="Probabilità sui rami per due estrazioni senza reimmissione"}
+## Estrazioni senza reimmissione
 
-Per un colore diverso alla seconda estrazione si considerano $RB$ e $BR$. I percorsi hanno la stessa probabilità, perché $\dfrac35\cdot\dfrac24=\dfrac25\cdot\dfrac34=\dfrac3{10}$. I percorsi sono incompatibili e quindi la probabilità complessiva è $\dfrac35$.
+:::esempio{#dipendenza titolo="Aggiornare l’urna dopo il primo esito"}
+In un’urna ci sono tre palline rosse $R$ e due blu $B$. Si fanno due estrazioni uniformi senza reimmissione. Dopo una prima rossa, restano due rosse e due blu. Dopo una prima blu, restano tre rosse e una blu. I pesi dei rami della seconda estrazione dipendono perciò dal primo esito.
+
+::grafico{assi=0 xmin=-0.7 xmax=7.6 ymin=-4 ymax=4 linee="0,0 3,2 6,3;3,2 6,1;0,0 3,-2 6,-1;3,-2 6,-3" etichette="1.5,1.85,3/5;1.5,-1.85,2/5;4.5,3.1,2/4;4.5,0.9,2/4;4.5,-0.9,3/4;4.5,-3.1,1/4;6.6,3,RR;6.6,1,RB;6.6,-1,BR;6.6,-3,BB" titolo="I due nodi intermedi descrivono composizioni diverse dell’urna"}
+
+| Percorso | Primo passo | Secondo passo | Probabilità del percorso |
+|---|---|---|---|
+| $RR$ | $\dfrac35$ | $\dfrac24$ | $\dfrac3{10}$ |
+| $RB$ | $\dfrac35$ | $\dfrac24$ | $\dfrac3{10}$ |
+| $BR$ | $\dfrac25$ | $\dfrac34$ | $\dfrac3{10}$ |
+| $BB$ | $\dfrac25$ | $\dfrac14$ | $\dfrac1{10}$ |
+
+Per l’evento «due colori diversi» si sommano $RB$ e $BR$, ottenendo $\dfrac35$. C’è anche un conteggio diretto. Numerando le cinque palline, le coppie ordinate possibili sono $5\cdot4=20$. Le coppie di colori diversi sono $3\cdot2+2\cdot3=12$. I due metodi concordano. La somma dei quattro pesi nella tabella vale $1$, perché i percorsi esauriscono tutte le possibilità.
+:::
+
+:::esempio{titolo="Il secondo colore quando il primo rimane sconosciuto"}
+Siano $r$ le rosse e $b$ le blu, con almeno una pallina per colore e $n=r+b$. Prima di conoscere il primo colore, la probabilità della seconda rossa somma due rami, prima rossa e prima blu.
+$$
+\frac rn\cdot\frac{r-1}{n-1}
++\frac bn\cdot\frac r{n-1}
+=\frac{r(r+b-1)}{n(n-1)}=\frac rn.
+$$
+La probabilità della seconda rossa presa da sola è uguale a quella della prima. Se invece si viene a sapere che la prima era rossa, resta il solo ramo con probabilità condizionata $\dfrac{r-1}{n-1}$. Con cinque rosse e tre blu, i due valori sono $\dfrac58$ e $\dfrac47$. Il risultato della prima estrazione incide quindi sul calcolo quando viene reso noto.
 :::
 
 ## Probabilità condizionata
 
-:::definizione{#condizionata titolo="Restringere gli esiti con un dato"}
-Se si sa che $B$ si verifica, si considerano soltanto gli esiti di $B$. Fra questi, i favorevoli ad $A$ sono quelli di $A\cap B$. La **probabilità condizionata** di $A$ dato $B$, con $P(B)>0$, è
-
+::::teorema{#condizionata titolo="Restringere l’insieme dei casi al dato disponibile"}
+Se $P(B)>0$, la probabilità di $A$ sapendo che è avvenuto $B$ si chiama **condizionata** e si calcola con
 $$
 P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
 $$
 
-Per esempio, si sceglie uniformemente un intero da $1$ a $8$. Siano $A$ l’evento «multiplo di $4$» e $B$ l’evento «numero pari». Se si sa che il numero è pari, si considerano $2$, $4$, $6$ e $8$. Due numeri pari sono multipli di $4$, quindi la probabilità condizionata è $\dfrac24=\dfrac12$.
+:::dimostrazione
+Nel modello finito equiprobabile, indichiamo con $N$ il numero totale di esiti, con $n_B$ gli esiti in $B$ e con $n_{AB}$ quelli in $A\cap B$. Il dato restringe il denominatore a $n_B$ e i favorevoli sono $n_{AB}$. Dividendo entrambi i termini del rapporto $\dfrac{n_{AB}}{n_B}$ per $N$ otteniamo il quoziente delle due probabilità. La stessa regola usa le somme dei pesi al posto dei conteggi quando gli esiti hanno probabilità diverse.
+:::
+::::
 
-::venn{tipo="incluso" zone="a,ab" elementi="a:2,6;ab:4,8;u:1,3,5,7" nomi="B,A" universo=1 titolo="Il dato restringe lo spazio ai quattro numeri pari"}
+:::esempio{titolo="Il dato stabilisce quale totale usare"}
+Fra $80$ studenti, $50$ hanno fatto una simulazione ($B$) e $40$ hanno superato la prova ($A$). Entrambe le condizioni valgono per $30$ di loro. Raccogliamo i conteggi in una tabella a doppia entrata.
 
-Dalla formula segue $P(A\cap B)=P(B)P(A\mid B)$. Per esempio, nelle estrazioni senza reimmissione la probabilità della seconda rossa viene calcolata sapendo che la prima pallina è stata rossa. Se gli eventi sono indipendenti e $P(B)>0$, vale $P(A\mid B)=P(A)$.
+| | Prova superata | Prova non superata | Totale |
+|---|---:|---:|---:|
+| Simulazione svolta | 30 | 20 | 50 |
+| Simulazione non svolta | 10 | 20 | 30 |
+| Totale | 40 | 40 | 80 |
+
+Fra chi ha fatto la simulazione, la quota di promossi è $P(A\mid B)=\dfrac{30}{50}=\dfrac35$. Fra chi ha superato la prova, la quota di chi ha fatto la simulazione è $P(B\mid A)=\dfrac{30}{40}=\dfrac34$. Il numeratore è lo stesso, ma nel primo calcolo si legge una riga, nel secondo una colonna.
+
+::venn{zone="ab" elementi="a:10;ab:30;b:20;u:20" nomi="A,B" universo=1 titolo="Entrambi i condizionamenti usano il centro ma cambiano la regione di riferimento"}
+
+Dalla definizione si ricava $P(A\cap B)=P(B)P(A\mid B)$, il prodotto che si usa lungo un ramo quando la seconda probabilità dipende dal primo esito. Se $A$ e $B$ sono indipendenti e $P(B)>0$, si ottiene $P(A\mid B)=P(A)$.
 :::
 
-## Frequenza e probabilità
+## Frequenze relative e confronto con il modello
 
-:::definizione{#frequenza titolo="Dati sperimentali"}
-Se un evento si verifica $n_E$ volte in $N>0$ prove, la sua **frequenza relativa** osservata è $f_E=\dfrac{n_E}{N}$. È un numero compreso tra zero e uno.
+:::definizione{#frequenza titolo="Probabilità teorica e dati osservati"}
+Se $E$ si verifica $n_E$ volte in $N>0$ prove, la frequenza relativa osservata è $f_E=\dfrac{n_E}{N}$. Per esprimerla in percentuale si calcola $100f_E\%$. In un modello di moneta regolare la probabilità di testa è $\dfrac12$. Il numero di teste osservate è invece un dato che può variare ogni volta che si ripete l’esperimento.
+:::
 
-Se una moneta dà testa $47$ volte in $100$ prove, la frequenza è $0{,}47$. Nel modello di moneta regolare la probabilità teorica resta $0{,}5$. I dati di un numero finito di prove possono differire dal valore teorico.
+:::esempio{titolo="Frequenza cumulata dopo blocchi di venti lanci"}
+Una sequenza di lanci dà $13$ teste dopo $20$ lanci e $51$ dopo $100$. Il grafico riporta i rapporti cumulati dopo cinque blocchi.
 
-La frequenza percentuale si ottiene moltiplicando per cento. Una frequenza di $0{,}35$ corrisponde al $35\%$. Nel descrivere un esperimento si distingue il modello teorico dalle osservazioni raccolte.
+| Lanci totali | Teste totali | Frequenza cumulata |
+|---:|---:|---:|
+| 20 | 13 | $0{,}650$ |
+| 40 | 23 | $0{,}575$ |
+| 60 | 32 | $\dfrac8{15}$ |
+| 80 | 42 | $0{,}525$ |
+| 100 | 51 | $0{,}510$ |
+
+::grafico{assi=0 xmin=-12 xmax=117 ymin=0.427 ymax=0.725 linee="12,0.69 12,0.46 105,0.46;20,0.46 20,0.454;40,0.46 40,0.454;60,0.46 60,0.454;80,0.46 80,0.454;100,0.46 100,0.454" segmenti="12,0.5,105,0.5" punti="20,0.65;40,0.575;60,0.533333333;80,0.525;100,0.51" etichette="17,0.440,20;37,0.440,40;57,0.440,60;77,0.440,80;96,0.440,100;-1,0.497,0,50;-1,0.547,0,55;-1,0.597,0,60;-1,0.647,0,65;12,0.711,Frequenza;104,0.473,Lanci" titolo="Punti osservati e linea orizzontale della probabilità teorica 0,5"}
+
+I rapporti si avvicinano a $\dfrac12$ in questa sequenza. Il dato dopo $40$ prove include già i primi venti lanci. Per sapere quante teste sono uscite soltanto nel secondo blocco si sottraggono i conteggi cumulati, $23-13=10$. La frequenza del solo secondo blocco è quindi $\dfrac{10}{20}=\dfrac12$.
+:::
+
+:::esempio{titolo="Unire gruppi di numerosità diversa"}
+Due classi lanciano la stessa moneta. La prima registra $8$ teste in $10$ lanci, la seconda $18$ in $30$. La frequenza complessiva è
+$$
+\frac{8+18}{10+30}=\frac{26}{40}=0{,}65.
+$$
+La media dei due rapporti con peso uguale sarebbe $0{,}70$. Ogni lancio deve pesare allo stesso modo, quindi il campione di trenta lanci pesa il triplo di quello da dieci. La frequenza complessiva è più vicina al rapporto del gruppo più numeroso.
 :::
