@@ -1,0 +1,28 @@
+## Università degli Studi
+### Dipartimento di Ingegneria Industriale – C.d.L. Ing. Gestionale
+### Programma del corso di Matematica I (9 cfu)
+#### A.A. 2025/2026
+### Nozioni di base: i numeri e le funzioni reali
+Assiomi dei numeri reali: assiomi relativi alle operazioni, assiomi relativi all’ordinamento, assioma di completezza. Cenni di teoria degli insiemi. Numeri naturali, interi, razionali. Funzioni e rappresentazione cartesiana. Funzioni invertibili. Funzioni composte. Funzioni monotone. Funzioni periodiche. Massimo, minimo, estremo superiore, estremo inferiore di una funzione.
+### Funzioni elementari e loro proprietà
+Funzioni polinomiali e razionali - Funzioni reali di una variabile reale. Funzioni lineari: coordinate cartesiane e rette nel piano. Circonferenza e cerchio. Traslazioni. Equazione canonica della parabola. Effetto di una traslazione. Equazione canonica dell’ellisse e dell’iperbole. Funzione valore assoluto. Funzione elevamento a potenza. Funzione esponenziale. Funzione logaritmo. Funzioni trigonometriche (seno, coseno, tangente e cotangente) e loro inverse (arcocoseno, arcseno, arcotangente e arcocotangente). Funzioni iperboliche (seno iperbolico, coseno iperbolico, tangente iperbolica) e loro inverse (settore seno iperbolico, settore coseno iperbolico, settore tangente iperbolica).
+### I numeri complessi
+Il campo dei numeri complessi. Forma algebrica dei numeri complessi. Coniugato e modulo di un numero complesso. Rappresentazione geometrica dei numeri complessi. Forma trigonometrica dei numeri complessi. Forma esponenziale dei numeri complessi: formula di Eulero. Operazioni elementari sui numeri complessi. Potenze e radici n-me di un numero complesso.
+### Successioni numeriche
+Definizione e proprietà. Successioni regolari e non regolari. Successioni limitate. Limite di successioni numeriche: definizione, operazioni con i limiti e forme indeterminate. Teorema di unicità del limite di una successione numerica. Successioni limitate e loro relazioni con successioni convergenti. Teoremi di confronto (teorema della permanenza del segno e corollari; teorema dei carabinieri). Teorema del limite di una successione limitata per una infinitesima. Successioni monotone: teorema sulle successioni monotone(\*).
+### Limiti di funzioni e continuità
+Intorno di un punto e punto di accumulazione. Definizione di limite per funzioni reali: limite destro e sinistro. Legame tra limiti di funzioni e limiti di successioni: il teorema ponte(\*) e sue conseguenze. Esempi e proprietà dei limiti di funzioni: operazioni con i limiti di funzioni, limiti di funzioni composte(\*). Limiti fondamentali. Funzioni continue. Discontinuità classificazione dei punti di discontinuità. Asintoti: verticale, orizzontale, obliquo. Teorema di esistenza degli zeri. Primo e secondo teorema dell’esistenza dei valori intermedi. Teorema di Weierstrass(\*). Criterio di invertibilità per le funzioni continue(\*). Continuità delle funzioni monotone e delle funzioni inverse. Confronto locale di funzioni: simboli di Landau e loro proprietà. Infinitesimi ed infiniti.
+## Analisi matematica 1
+### Calcolo differenziale
+Definizione di derivata. Significato geometrico della derivata e retta tangente. Operazioni con le derivate. Derivate delle funzioni elementari. Derivate delle funzioni composte e delle funzioni inverse. Relazione derivabilità–continuità. Punti di non derivabilità e loro classificazione. Massimi e minimi relativi. Teorema di Fermat. Teorema di Rolle. Teorema di Lagrange. Teorema di Cauchy. Funzioni crescenti e decrescenti: criterio di monotonia, caratterizzazione delle funzioni costanti in un intervallo, criterio di stretta monotonia. Funzioni convesse e concave: criterio di convessità. Teorema di de l'Hôpital$(*)$. Formula di Taylor con resto nella forma di Peano. Sviluppi di Taylor e Mc Laurin e applicazioni: criterio per lo studio dei punti di massimo e di minimo con l'uso delle derivate successive, calcolo di limiti, stima locale del valore di una funzione.
+### Calcolo Integrale
+#### Integrali definiti
+Definizioni e Notazioni Significato geometrico dell’integrale definito. Il problema dell’area. Proprietà dell’integrale definito (linearità, monotonia, disuguaglianza, spezzamento dell’integrale). Teorema della media e Media Integrale. Funzione integrale. Teorema fondamentale del calcolo integrale. Calcolo di aree di domini piani.
+#### Integrali indefiniti
+Primitiva di una funzione e integrale indefinito. Il teorema fondamentale del calcolo integrale.
+Integrali immediati. Integrazione per decomposizione in somma. Metodo di integrazione per parti. Integrazione per sostituzione. Integrazione delle funzioni razionali e scomposizione in fratti semplici.
+#### Integrali impropri
+Integrali impropri di prima e seconda specie. $p$-integrali. Determinazione della convergenza o della divergenza: Criterio del confronto$(*)$ e del Confronto asintotico$(*)$.
+### Serie numeriche
+Condizione necessaria per la convergenza di una serie. Serie geometrica. Serie a termini non negativi. Serie armonica. Criterio dell’integrale $(*)$. Serie armonica generalizzata. Criterio del confronto e del confronto asintotico$(*)$, Criterio del rapporto$(*)$, Criterio della radice$(*)$, Criterio degli infinitesimi$(*)$. Serie assolutamente convergenti. Serie alternate e criterio di Leibniz$(*)$.
+N.B. Tutti gli argomenti segnati con un asterisco non sono stati dimostrati.
