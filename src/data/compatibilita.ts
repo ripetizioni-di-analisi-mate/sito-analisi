@@ -24,6 +24,6 @@ export const LIMITI = {
 // Fino a questa soglia si propone un nuovo controllo. Sopra si può consigliare l'acquisto.
 export const SOGLIA_CONSIGLIATO = 80;
 export const MAX_PAGINE = 6;              // foto o pagine di PDF per documento
-export const MAX_CARATTERI_TESTO = 16000;  // testo del documento da confrontare
+export const MAX_CARATTERI_TESTO = 40000;  // testo del documento da confrontare (un programma svolto per lezioni è lungo)
 // Il successo (domande a tempo indovinate negli argomenti dell'esame) compare da questo numero di risposte in su.
 export const RISPOSTE_MINIME_SUCCESSO = 10;

@@ -4,6 +4,7 @@
 // Per non far aspettare: foto e PDF si preparano appena scelti (mentre lo studente sceglie la materia), e il risultato
 // del confronto arriva in streaming, una richiesta alla volta, con le percentuali alla fine.
 import katex from 'katex';
+import { analizzaDocumento } from '../../worker/programma.mjs';
 
 const MAX_LATO = 2200;
 const MAX_DATI = 1400000; // caratteri del data URL di una pagina (il Worker accetta fino a 1,5 milioni)
@@ -78,6 +79,41 @@ async function daPdf(f: File, quante: number): Promise<string[]> {
     }
     return pagine;
   } finally { await doc.destroy(); }
+}
+
+// Testo scritto dentro un PDF (non le sue pagine come immagini). Serve per i programmi dei corsi: sono fatti
+// di parole, il testo del PDF è esatto e non ha il limite di pagine delle foto. I compiti restano immagini,
+// perché le formule nel testo di un PDF arrivano spezzate.
+async function testoDaPdf(f: File): Promise<string> {
+  const pdfjs = await import(/* @vite-ignore */ `${PDFJS}pdf.min.mjs`);
+  pdfjs.GlobalWorkerOptions.workerSrc = `${PDFJS}pdf.worker.min.mjs`;
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(await f.arrayBuffer()) }).promise;
+  try {
+    if (doc.numPages > 40) return '';
+    const pagine: string[] = [];
+    for (let i = 1; i <= doc.numPages; i++) {
+      const contenuto = await (await doc.getPage(i)).getTextContent();
+      let riga = '', ultimaY: number | null = null;
+      const righe: string[] = [];
+      for (const pezzo of contenuto.items as { str?: string; hasEOL?: boolean; transform?: number[]; height?: number }[]) {
+        if (typeof pezzo.str !== 'string') continue;
+        const y = pezzo.transform?.[5] ?? null;
+        // Uno stacco verticale più alto di una riga separa due capoversi.
+        if (!riga && ultimaY !== null && y !== null && Math.abs(ultimaY - y) > 1.9 * (pezzo.height || 10)) righe.push('');
+        riga += pezzo.str;
+        if (pezzo.hasEOL) { righe.push(riga); riga = ''; ultimaY = y; }
+      }
+      if (riga) righe.push(riga);
+      pagine.push(righe.join('\n'));
+    }
+    return pagine.join('\n\n').replace(/[ \t]+/g, ' ').trim();
+  } finally { await doc.destroy(); }
+}
+// Il testo di un PDF si usa al posto delle immagini quando è il programma di un corso.
+function programmaLeggibile(testo: string): boolean {
+  if (testo.length < 300) return false;
+  const a = analizzaDocumento(testo);
+  return a.tipo === 'programma' && a.voci.length >= 8;
 }
 
 // ---------- pagina ----------
@@ -209,10 +245,10 @@ export function avviaCompatibilita() {
     <div class="compat-verifica">
       <strong>${errore ? 'Riprova la lettura' : 'Stima da ricontrollare'}</strong>
       ${errore ? `<p>${esc(errore)}</p>` : ''}
-      <p>La verifica automatica può leggere solo in parte alcune pagine o formule. Ricarica ${documento} con foto più nitide o un PDF. Per una verifica personale, mandamelo in privato su WhatsApp.</p>
+      <p>La verifica automatica può leggere solo in parte alcune pagine o formule. Ricarica ${documento} con foto più nitide o un PDF, oppure mandamelo su WhatsApp: lo esamino io personalmente.</p>
       <div class="compat-verifica-azioni">
         <button type="button" class="bottone-secondario" data-compat-ricarica>Carica di nuovo</button>
-        <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
+        <a href="https://wa.me/393885680393?text=${encodeURIComponent(`Ciao Carmine, ti mando ${documento} per la verifica personale della compatibilità con il sito.`)}" target="_blank" rel="noopener">Mandalo a Carmine su WhatsApp</a>
       </div>
     </div>`;
   esitoBox.addEventListener('click', (e) => {
@@ -306,6 +342,7 @@ export function avviaCompatibilita() {
         aggiornaFase('confronto', tipoDocumento === 'programma' ? 'Programma riconosciuto. Confronto gli argomenti con il materiale…' : 'Compito riconosciuto. Confronto le richieste con il materiale…');
         return;
       }
+      if (d.fase === 'ricontrollo') { aggiornaFase('confronto', 'Ricontrollo gli argomenti rimasti senza un riferimento…'); return; }
       if (d.ricomincia) {
         arrivate.length = 0;
         esitoBox.innerHTML = '';
@@ -353,6 +390,11 @@ export function avviaCompatibilita() {
     try {
       let testo = area.value.trim();
       idCompito = '';
+      if (!testo && files.length && files.every((f) => f.type === 'application/pdf')) {
+        aggiornaFase('lettura', 'Lettura del testo del PDF…');
+        const testi = await Promise.all(files.map((f) => testoDaPdf(f).catch(() => '')));
+        if (testi.every(programmaLeggibile)) { testo = testi.join('\n\n').slice(0, area.maxLength); aggiornaAvanzamento(44); }
+      }
       if (!testo) {
         if (!files.length) throw new Error('Carica il compito, il programma o incolla il testo.');
         aggiornaFase('lettura', 'Preparazione delle foto o delle pagine del PDF…');
