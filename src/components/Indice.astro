@@ -191,7 +191,12 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             return (usa ? blocchiUsa.filter(block => block.gruppo === g) : blocchiGruppo(MATERIE, g)).map((b, i) => b.sotto ? (
               <details class="indice-sottogruppo">
                 <summary>{b.sotto}</summary>
-                {lista(b.materie)}
+                {b.parti ? b.parti.map((p) => (
+                  <>
+                    <p class="indice-parte">{p.titolo}</p>
+                    {lista(p.materie)}
+                  </>
+                )) : lista(b.materie)}
               </details>
             ) : lista(b.materie, i === 0 ? guida : null));
           })()}

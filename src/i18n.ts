@@ -58,22 +58,23 @@ export function blocchiGruppo(materie: Materia[], g: string) {
     const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
     const assegnate = new Set<string>(FACOLTA.flatMap((f) => [...f.materie]));
     return [
-      ...FACOLTA.map((f) => ({
-        sotto: f[titoloFacolta],
-        materie: f.materie.flatMap((slug) => {
+      ...FACOLTA.map((f) => {
+        const voci = (slugs: readonly string[]) => slugs.flatMap((slug) => {
           const m = perSlug.get(slug);
           return m ? [{ m, nome: m.titolo }] : [];
-        }),
-      })),
+        });
+        const parti = 'parti' in f ? f.parti.map((p) => ({ titolo: p[titoloFacolta] as string, materie: voci(p.materie) })).filter((p) => p.materie.length) : undefined;
+        return { sotto: f[titoloFacolta], materie: voci(f.materie), parti };
+      }),
       // Le future materie ancora da assegnare restano raggiungibili nel catalogo.
-      { sotto: null as string | null, materie: delGruppo.filter((m) => !assegnate.has(m.slug)).map((m) => ({ m, nome: m.titolo })) },
+      { sotto: null as string | null, materie: delGruppo.filter((m) => !assegnate.has(m.slug)).map((m) => ({ m, nome: m.titolo })), parti: undefined },
     ].filter((b) => b.materie.length);
   }
   const sotto = [...new Set(delGruppo.map((m) => m.sottogruppo).filter(Boolean))] as string[];
   const etichetta = (m: Materia) => (m.sottogruppo && m.titolo.startsWith(m.sottogruppo) ? m.titolo.slice(m.sottogruppo.length).replace(/^[,\s]+/, '') : m.titolo);
   return [
-    { sotto: null as string | null, materie: delGruppo.filter((m) => !m.sottogruppo).map((m) => ({ m, nome: m.titolo })) },
-    ...sotto.map((x) => ({ sotto: x as string | null, materie: delGruppo.filter((m) => m.sottogruppo === x).map((m) => ({ m, nome: etichetta(m) })) })),
+    { sotto: null as string | null, materie: delGruppo.filter((m) => !m.sottogruppo).map((m) => ({ m, nome: m.titolo })), parti: undefined as { titolo: string; materie: { m: Materia; nome: string }[] }[] | undefined },
+    ...sotto.map((x) => ({ sotto: x as string | null, materie: delGruppo.filter((m) => m.sottogruppo === x).map((m) => ({ m, nome: etichetta(m) })), parti: undefined as { titolo: string; materie: { m: Materia; nome: string }[] }[] | undefined })),
   ].filter((b) => b.materie.length);
 }
 export function sezioniL(l: Lingua) {
