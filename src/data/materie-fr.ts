@@ -14,7 +14,7 @@ export const MATERIE_FR: Record<string, [string, string]> = {
   'analisi-1': ['Analyse I', 'Limites, continuité, dérivation, intégration, séries et équations différentielles ordinaires.'],
   'analisi-2': ['Analyse II', 'Fonctions de plusieurs variables, intégrales multiples, courbes, surfaces, séries de fonctions et systèmes différentiels.'],
   'analisi-3': ['Analyse III', 'Analyse complexe, transformées de Fourier et de Laplace, intégrale de Lebesgue, espaces de Hilbert et de Banach, équations aux dérivées partielles.'],
-  'algebra-lineare': ['Algèbre linéaire et géométrie analytique', 'Vecteurs, matrices, systèmes linéaires, espaces vectoriels, applications linéaires, valeurs propres et diagonalisation. Droites, plans, coniques et quadriques.'],
+  'algebra-lineare': ['Algèbre linéaire et géométrie analytique', 'Nombres complexes, vecteurs, matrices, systèmes linéaires, espaces vectoriels, applications linéaires, valeurs propres et diagonalisation. Droites, plans, coniques et quadriques.'],
   'fisica-1': ['Physique I', 'Mécanique et thermodynamique. Mouvement, forces, énergie, chocs, oscillations, gravitation et fluides.'],
   'fisica-2': ['Physique II', 'Électrostatique, circuits électriques, magnétisme, induction, courant alternatif, équations de Maxwell, ondes électromagnétiques et optique.'],
   statica: ['Statique', 'Systèmes de forces, centres de gravité, réactions d’appui, poutres, portiques et treillis. Efforts internes, travaux virtuels et lignes d’influence.'],

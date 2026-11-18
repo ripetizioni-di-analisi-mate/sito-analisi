@@ -48,7 +48,7 @@ jobs:
           key: astro-deposito-v1-${{ hashFiles('package-lock.json', 'astro.config.mjs', 'src/content.config.ts', 'src/plugins/**') }}-${{ github.run_id }}
           restore-keys: astro-deposito-v1-${{ hashFiles('package-lock.json', 'astro.config.mjs', 'src/content.config.ts', 'src/plugins/**') }}-
       - name: Contenuti generati e date delle pagine
-        run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node scripts/date-pagine.mjs
+        run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node scripts/algebra-lineare-condivisi.mjs && node scripts/date-pagine.mjs
       - name: Pagine del pezzo ${{ matrix.pezzo }}
         run: npx astro build
         env:
@@ -84,7 +84,7 @@ jobs:
           cache: 'npm'
       - run: npm ci --no-audit --no-fund
       - name: Verifiche dei contenuti (Analisi 3, Matematica finanziaria)
-        run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node strumenti/verifica-analisi3.mjs && node strumenti/finanziaria/verifica.mjs
+        run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node scripts/algebra-lineare-condivisi.mjs && node strumenti/verifica-analisi3.mjs && node strumenti/finanziaria/verifica.mjs
 
   pubblica:
     needs: [pezzi, controlli]
@@ -102,7 +102,7 @@ jobs:
           node-version: '24'
           cache: 'npm'
       - run: npm ci --no-audit --no-fund
-      - run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs
+      - run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node scripts/algebra-lineare-condivisi.mjs
       - uses: actions/download-artifact@v8.0.2
         with:
           pattern: pezzo-*

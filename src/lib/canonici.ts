@@ -4,11 +4,14 @@
 // - Analisi 2 riprende le equazioni differenziali di Analisi 1 (scripts/analisi-2-condivisi.mjs) e aggiunge i sistemi:
 //   sono copie le schede e gli esercizi con lo stesso numero e le voci della teoria presenti in Analisi 1;
 //   la teoria e gli elenchi contengono materiale in più e restano pagine a sé.
+// - Algebra lineare riprende il capitolo Numeri complessi di Analisi 1 (scripts/algebra-lineare-condivisi.mjs):
+//   teoria, voci, schede ed esercizi sono copie identiche.
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const CONDIVISI_ANALISI_3 = ['successioni-e-serie-di-funzioni', 'serie-di-potenze', 'serie-di-fourier'];
 const CAPITOLO_ANALISI_2 = 'equazioni-differenziali';
+const CONDIVISI_ALGEBRA = ['numeri-complessi'];
 const CARTELLA = { 'esercizi-svolti': 'svolti', esercizi: 'dafare' } as const;
 const radice = join(process.cwd(), 'src', 'content');
 
@@ -27,6 +30,7 @@ function ancoraInAnalisi1(ancora: string): boolean {
 export function originale(materia: string, argomento: string, sezione: 'teoria' | 'esercizi-svolti' | 'esercizi', voce?: string): string | undefined {
   const coda = `${argomento}/${sezione}${voce ? `/${voce}` : ''}`;
   if (materia === 'analisi-3' && CONDIVISI_ANALISI_3.includes(argomento)) return `/analisi-2/${coda}`;
+  if (materia === 'algebra-lineare' && CONDIVISI_ALGEBRA.includes(argomento)) return `/analisi-1/${coda}`;
   if (materia === 'analisi-2' && argomento === CAPITOLO_ANALISI_2 && voce) {
     if (sezione === 'teoria') return ancoraInAnalisi1(voce) ? `/analisi-1/${coda}` : undefined;
     return existsSync(join(radice, CARTELLA[sezione], 'analisi-1', argomento, `${voce}.md`)) ? `/analisi-1/${coda}` : undefined;

@@ -2998,5 +2998,258 @@
     ]
    }
   ]
+ },
+ "numeri-complessi/1": {
+  "campi": [
+   {
+    "e": "$z$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "8",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/2": {
+  "campi": [
+   {
+    "e": "$z$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/3": {
+  "campi": [
+   {
+    "e": "Modulo di $z$",
+    "t": "numero",
+    "v": "2\\sqrt{2}"
+   },
+   {
+    "e": "Argomento di $z$ in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "\\frac{3\\pi}{4}"
+   }
+  ]
+ },
+ "numeri-complessi/4": {
+  "campi": [
+   {
+    "e": "Modulo di $z$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Argomento principale di $z$ in $(-\\pi, \\pi]$",
+    "t": "numero",
+    "v": "-\\frac{5\\pi}{6}"
+   }
+  ]
+ },
+ "numeri-complessi/5": {
+  "campi": [
+   {
+    "e": "$(1 - i)^{10}$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "-32"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/6": {
+  "campi": [
+   {
+    "e": "Modulo delle radici",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Argomenti principali delle radici, in $(-\\pi, \\pi]$",
+    "t": "valori",
+    "v": [
+     "-\\frac{\\pi}{6}",
+     "-\\frac{5\\pi}{6}",
+     "\\frac{1}{2}\\pi"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/7": {
+  "campi": [
+   {
+    "e": "Modulo delle soluzioni",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Argomenti principali delle soluzioni, in $(-\\pi, \\pi]$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\frac{\\pi}{2}",
+     "-\\frac{\\pi}{2}",
+     "\\pi"
+    ]
+   },
+   {
+    "e": "Poligono formato dalle soluzioni",
+    "t": "scelta",
+    "opzioni": [
+     "triangolo equilatero",
+     "quadrato",
+     "pentagono regolare",
+     "esagono regolare"
+    ],
+    "v": "quadrato"
+   }
+  ]
+ },
+ "numeri-complessi/8": {
+  "campi": [
+   {
+    "e": "Soluzione con parte immaginaria positiva (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "5"
+    ]
+   },
+   {
+    "e": "Soluzione con parte immaginaria negativa (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "-5"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/9": {
+  "campi": [
+   {
+    "e": "Soluzioni reali",
+    "t": "valori",
+    "v": [
+     "2",
+     "-2"
+    ]
+   },
+   {
+    "e": "Parte immaginaria della soluzione non reale con parte immaginaria positiva",
+    "t": "numero",
+    "v": "\\sqrt{2}"
+   }
+  ]
+ },
+ "numeri-complessi/10": {
+  "campi": [
+   {
+    "e": "Modulo delle soluzioni",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Argomenti principali delle soluzioni, in $(-\\pi, \\pi]$",
+    "t": "valori",
+    "v": [
+     "-\\frac{\\pi}{2}",
+     "\\frac{\\pi}{6}",
+     "\\frac{5}{6}\\pi"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/11": {
+  "campi": [
+   {
+    "e": "$z$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "1"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/12": {
+  "campi": [
+   {
+    "e": "$z$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "3"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/13": {
+  "campi": [
+   {
+    "e": "Tipo di luogo",
+    "t": "scelta",
+    "opzioni": [
+     "circonferenza",
+     "cerchio",
+     "retta",
+     "semipiano"
+    ],
+    "v": "circonferenza"
+   },
+   {
+    "e": "Centro",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-1",
+     "2"
+    ]
+   },
+   {
+    "e": "Raggio",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "numeri-complessi/14": {
+  "campi": [
+   {
+    "e": "Radice reale di $p$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Radice non reale diversa da $i$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "e": "Fattore reale di secondo grado di $p$, con coefficiente direttivo $1$",
+    "t": "funzione",
+    "v": "z^2 + 1",
+    "var": [
+     "z"
+    ]
+   }
+  ]
  }
 }

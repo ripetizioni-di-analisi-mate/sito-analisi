@@ -160,8 +160,9 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'algebra-lineare': {
     titolo: 'Linear algebra and analytic geometry',
     breve: 'Linear algebra',
-    descrizione: 'Vectors, matrices and linear systems, vector spaces and linear maps, eigenvalues and diagonalization, lines, planes, conics and quadrics.',
+    descrizione: 'Complex numbers, vectors, matrices and linear systems, vector spaces and linear maps, eigenvalues and diagonalization, lines, planes, conics and quadrics.',
     argomenti: {
+      'numeri-complessi': { titolo: 'Complex numbers', breve: 'Complex numbers' },
       vettori: { titolo: 'Vectors in the plane and in space', breve: 'Vectors' },
       matrici: { titolo: 'Matrices and matrix operations', breve: 'Matrices' },
       determinanti: { titolo: 'Determinant and inverse matrix', breve: 'Determinants' },

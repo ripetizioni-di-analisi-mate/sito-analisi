@@ -14,7 +14,7 @@ export const MATERIE_DE: Record<string, [string, string]> = {
   'analisi-1': ['Analysis I', 'Grenzwerte, Stetigkeit, Differential- und Integralrechnung, Reihen und gewöhnliche Differentialgleichungen.'],
   'analisi-2': ['Analysis II', 'Funktionen mehrerer Variablen, Mehrfachintegrale, Kurven, Flächen, Funktionenreihen und lineare Differentialgleichungssysteme.'],
   'analisi-3': ['Analysis III', 'Funktionentheorie, Fourier- und Laplace-Transformation, Lebesgue-Integral, Hilbert- und Banachräume sowie partielle Differentialgleichungen.'],
-  'algebra-lineare': ['Lineare Algebra und analytische Geometrie', 'Vektoren, Matrizen, lineare Gleichungssysteme, Vektorräume, lineare Abbildungen, Eigenwerte und Diagonalisierung. Dazu Geraden, Ebenen, Kegelschnitte und Quadriken.'],
+  'algebra-lineare': ['Lineare Algebra und analytische Geometrie', 'Komplexe Zahlen, Vektoren, Matrizen, lineare Gleichungssysteme, Vektorräume, lineare Abbildungen, Eigenwerte und Diagonalisierung. Dazu Geraden, Ebenen, Kegelschnitte und Quadriken.'],
   'fisica-1': ['Physik I', 'Mechanik und Thermodynamik. Der Kurs behandelt Bewegung, Kräfte, Energie, Stöße, Schwingungen, Gravitation und Strömungsmechanik.'],
   'fisica-2': ['Physik II', 'Elektrostatik, elektrische Schaltungen, Magnetfelder, Induktion, Wechselstrom, Maxwell-Gleichungen, elektromagnetische Wellen und Optik.'],
   statica: ['Technische Mechanik: Statik', 'Kräftesysteme, Schwerpunkte, Lagerreaktionen, Gerberträger, Rahmen, Bögen und Fachwerke. Dazu Schnittgrößen, virtuelle Arbeit und Einflusslinien.'],

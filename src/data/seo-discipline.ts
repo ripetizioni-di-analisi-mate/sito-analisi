@@ -57,8 +57,8 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
   },
   'algebra-lineare': {
     titolo: 'Algebra lineare e geometria | Teoria ed esercizi svolti',
-    descrizione: 'Algebra lineare e geometria analitica con matrici, sistemi, spazi vettoriali, autovalori, diagonalizzazione, rette e piani. Esercizi svolti.',
-    preparazione: 'Il corso collega il calcolo con matrici e sistemi lineari alla geometria degli spazi vettoriali. Eliminazione di Gauss, rango e determinanti preparano lo studio di basi, applicazioni lineari, autovalori e diagonalizzazione. Rette, piani e coniche sviluppano le applicazioni geometriche.',
+    descrizione: 'Algebra lineare e geometria: numeri complessi, matrici, sistemi, spazi vettoriali, autovalori, diagonalizzazione, rette e piani. Esercizi svolti.',
+    preparazione: 'Il corso parte dai numeri complessi e collega il calcolo con matrici e sistemi lineari alla geometria degli spazi vettoriali. Eliminazione di Gauss, rango e determinanti preparano lo studio di basi, applicazioni lineari, autovalori e diagonalizzazione. Rette, piani e coniche sviluppano le applicazioni geometriche.',
     metodo: 'Una soluzione completa distingue il procedimento numerico dal suo significato. Il rango determina la compatibilità di un sistema, una base descrive un sottospazio e gli autovettori permettono di discutere la diagonalizzabilità. Le schede mostrano i calcoli necessari in ciascun caso.',
     esempi: ['sistemi-lineari', 'autovalori', 'rette-e-piani'],
     collegate: ['analisi-1', 'analisi-2', 'matematica-generale'],
