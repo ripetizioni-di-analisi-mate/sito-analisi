@@ -625,19 +625,31 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
   // I modelli non hanno risposto in tempo per queste voci: restano da abbinare per nome (riscontro nel codice)
   // e passano alla seconda lettura.
   console.log('compatibilita elenco: riserva per', gruppo.length, 'voci');
-  return new Map(gruppo.map((v) => [v.id, {
-    esercizio: v.id, parte: null, testo: v.testo, tipo: 'teoria', argomento: null, scheda: null, teoria: null,
-    livello: 'nessuno', punti: null, puntiTipo: 'esercizio', tipoDocumento: 'programma', sezione: v.sezione, proveRichieste: v.proveRichieste, senzaModello: true,
-  }]));
+  return new Map(gruppo.map((v) => [v.id, rigaDaVoce(v, { senzaModello: true })]));
 }
 
+// Riga grezza di una voce che nessun modello ha letto: il riferimento, se c'è, lo trova il riscontro per nome.
+const rigaDaVoce = (v, extra = {}) => ({
+  esercizio: v.id, parte: null, testo: v.testo, tipo: 'teoria', argomento: null, scheda: null, teoria: null,
+  livello: 'nessuno', punti: null, puntiTipo: 'esercizio', tipoDocumento: 'programma', sezione: v.sezione, proveRichieste: v.proveRichieste, ...extra,
+});
+
 // Le voci del programma, a gruppi: più gruppi lavorano insieme, i risultati escono nell'ordine del documento.
+// Le voci che portano già il nome di un contenuto del sito (`taglia.perNome`) non passano dal modello:
+// il confronto è più veloce e consuma meno. Le altre si confrontano a gruppi.
 async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, registro = [], taglia = {}) {
   const perGruppo = taglia.perGruppo || VOCI_PER_GRUPPO, insieme = taglia.insieme || GRUPPI_INSIEME;
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO;
   const modelli = inOrdine(MODELLI_TESTO);
-  const gruppi = [];
-  for (let i = 0; i < voci.length; i += perGruppo) gruppi.push(voci.slice(i, i + perGruppo));
+  const pronte = new Map();
+  if (taglia.perNome) for (const v of voci) { const q = taglia.perNome(v); if (q) pronte.set(v.id, q); }
+  const daChiedere = voci.filter((v) => !pronte.has(v.id));
+  const gruppi = [], gruppoDi = new Map();
+  for (let i = 0; i < daChiedere.length; i += perGruppo) {
+    const gruppo = daChiedere.slice(i, i + perGruppo);
+    for (const v of gruppo) gruppoDi.set(v.id, gruppi.length);
+    gruppi.push(gruppo);
+  }
   const lavori = [];
   let prossimo = 0, attivi = 0;
   const avvia = () => {
@@ -649,9 +661,10 @@ async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, regist
     }
   };
   avvia();
-  for (let i = 0; i < gruppi.length; i++) {
-    const abbinate = await lavori[i];
-    for (const voce of gruppi[i]) yield abbinate.get(voce.id);
+  for (const voce of voci) {
+    if (pronte.has(voce.id)) { yield pronte.get(voce.id); continue; }
+    const abbinate = await lavori[gruppoDi.get(voce.id)];
+    yield abbinate.get(voce.id);
   }
 }
 
@@ -917,6 +930,11 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   const registro = []; // tentativi falliti dei modelli sulle voci di un programma
   const tra = (x, min, max) => (Number(x) >= min && Number(x) <= max ? Math.round(Number(x)) : 0);
   const taglia = prova ? { perGruppo: tra(b.perGruppo, 4, 30), insieme: tra(b.insieme, 1, 12) } : {};
+  // Voce con il nome di un contenuto del sito: l'esito «stesso» si ricava senza modello.
+  if (!(prova && b.tuttoAlModello)) taglia.perNome = (v) => {
+    const q = rigaDaVoce(v, { perNome: true });
+    return rigaRisultato(materia, cat, codici, q, {}, testo).livello === 'stesso' ? q : null;
+  };
   if (prova) registro.tempi = [];
   const inizioConfronto = Date.now();
   let avvio;
@@ -1001,7 +1019,8 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       // Se i modelli non hanno letto più della metà delle voci, il riscontro per nome da solo darebbe una stima
       // troppo bassa: meglio dirlo e proporre la verifica personale.
       const nonLette = grezze.filter((q, i) => q.senzaModello && !rilette.has(i)).length;
-      if (nonLette > grezze.length / 2) {
+      const chieste = grezze.filter((q) => !q.perNome).length;
+      if (nonLette > chieste / 2 && nonLette > grezze.length * 0.08) {
         console.log('compatibilita elenco: modelli assenti per', nonLette, 'voci su', grezze.length);
         await rimborsa('confronta');
         manda({ errore: 'Non sono riuscito a confrontare tutto il documento. Il tentativo non è stato conteggiato.', verificaPersonale: true, diagnostica: registro.length ? registro.slice(0, 20) : [{ codice: 'TEMPO' }] });
@@ -1013,7 +1032,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });
       } else {
-        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), tempi: registro.tempi, senzaModello: nonLette, ms: Date.now() - inizioConfronto, catalogo: catalogoTesto.length } : {}) } });
+        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), tempi: registro.tempi, senzaModello: nonLette, perNome: grezze.length - chieste, ms: Date.now() - inizioConfronto, catalogo: catalogoTesto.length } : {}) } });
         if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
           esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),
