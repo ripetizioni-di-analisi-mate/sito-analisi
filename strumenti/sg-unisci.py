@@ -14,7 +14,11 @@ for f in os.listdir('.sg/rif'):
             r = r.rstrip('\n')
             if r.startswith('## '): cap = r[3:]
             elif r: ancore.setdefault(f'{m}/{cap}', set()).add(r.split('\t')[0])
-CONDIVISI = {'analisi-3': ['successioni-e-serie-di-funzioni', 'serie-di-potenze', 'serie-di-fourier']}
+# capitoli copiati da un'altra materia: materia -> {capitolo: materia sorgente}
+CONDIVISI = {
+    'analisi-3': {a: 'analisi-2' for a in ['successioni-e-serie-di-funzioni', 'serie-di-potenze', 'serie-di-fourier']},
+    'algebra-lineare': {'numeri-complessi': 'analisi-1'},
+}
 errori, descrittive = [], []
 blocchi_dip, blocchi_rim = {}, {}
 
@@ -33,15 +37,16 @@ for m in sys.argv[1:]:
     ordine = [a for a, _ in M[m]['argomenti']]
     nuove_ab, nuove_dom, righe = {}, {}, {}
     for a in ordine:
-        if a in CONDIVISI.get(m, []):
-            src = f'analisi-2/{a}'
+        if a in CONDIVISI.get(m, {}):
+            orig = CONDIVISI[m][a]
+            src = f'{orig}/{a}'
             nuove_ab[f'{m}/{a}'] = L['abilita'][src]
-            for q, v in L['domande']['analisi-2'].items():
+            for q, v in L['domande'][orig].items():
                 if q.startswith(a + '/'): nuove_dom[q] = v
             rr = []
             for r in RIM_ESISTENTI[src]:
                 t, s_, b = r.split('|')
-                b = ','.join(re.sub(r'^analisi-2/(%s)#' % '|'.join(CONDIVISI[m]), r'analisi-3/\1#', x) for x in b.split(',') if x)
+                b = ','.join(re.sub(r'^%s/(%s)#' % (orig, '|'.join(c for c, o in CONDIVISI[m].items() if o == orig)), m + r'/\1#', x) for x in b.split(',') if x)
                 rr.append(f'{t}|{s_}|{b}')
             righe[a] = rr
             continue
@@ -81,9 +86,9 @@ for m in sys.argv[1:]:
                     basi.append(k)
             rr.append(f"{','.join(t)}|{','.join(sc)}|{','.join(dict.fromkeys(basi))}")
         righe[a] = rr
-    # basi nei capitoli condivisi (Analisi 2 → Analisi 3): restano dentro la materia acquistata
-    if m in CONDIVISI:
-        rx = re.compile(r'analisi-2/(%s)#' % '|'.join(CONDIVISI[m]))
+    # basi nei capitoli condivisi (es. Analisi 2 → Analisi 3): restano dentro la materia acquistata
+    for c, orig in CONDIVISI.get(m, {}).items():
+        rx = re.compile(r'%s/(%s)#' % (orig, c))
         righe = {a: [rx.sub(m + r'/\1#', r) for r in rr] for a, rr in righe.items()}
     # controllo delle basi con chiave
     tutte_ab = dict(L['abilita']); tutte_ab.update(nuove_ab)

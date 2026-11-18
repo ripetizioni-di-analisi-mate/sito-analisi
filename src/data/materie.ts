@@ -132,11 +132,12 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'algebra-lineare',
     titolo: 'Algebra lineare e geometria analitica',
     breve: 'Algebra lineare',
-    descrizione: 'Vettori, matrici e sistemi lineari, spazi vettoriali e applicazioni lineari, autovalori e diagonalizzazione, rette, piani, coniche e quadriche.',
+    descrizione: 'Numeri complessi, vettori, matrici e sistemi lineari, spazi vettoriali e applicazioni lineari, autovalori e diagonalizzazione, rette, piani, coniche e quadriche.',
     colore: '#44687d',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
+      { slug: 'numeri-complessi', titolo: 'Numeri complessi', breve: 'Numeri complessi' },
       { slug: 'vettori', titolo: 'Vettori nel piano e nello spazio', breve: 'Vettori' },
       { slug: 'matrici', titolo: 'Matrici e operazioni tra matrici', breve: 'Matrici' },
       { slug: 'determinanti', titolo: 'Determinante e matrice inversa', breve: 'Determinanti' },

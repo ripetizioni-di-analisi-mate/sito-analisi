@@ -47,3 +47,13 @@ strumenti/statistica/__pycache__/
 
 /strumenti/finanziaria/__pycache__/
 .sg/
+
+# Numeri complessi di Algebra lineare, rigenerati dalla sorgente Analisi 1 (scripts/algebra-lineare-condivisi.mjs)
+/src/content/teoria/algebra-lineare/numeri-complessi.md
+/src/content/svolti/algebra-lineare/numeri-complessi/
+/src/content/dafare/algebra-lineare/numeri-complessi/
+/src/content/domande/algebra-lineare/numeri-complessi/
+/src/content-en/teoria/algebra-lineare/numeri-complessi.md
+/src/content-en/svolti/algebra-lineare/numeri-complessi/
+/src/content-en/dafare/algebra-lineare/numeri-complessi/
+/src/content-en/domande/algebra-lineare/numeri-complessi/

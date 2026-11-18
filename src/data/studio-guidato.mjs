@@ -143,6 +143,7 @@ export const STUDIO_GUIDATO = {
   // Classificazione del 14/11/2026 (brief istruzioni-agenti/brief-studio-guidato-materia.md), generata da .sg/unisci.py.
   'algebra-lineare': {
     dipendenze: {
+      'numeri-complessi': { interni: [], basi: ['polinomi', 'potenze-e-radici', 'goniometriche', 'equazioni-polinomiali', 'geometria-analitica'] },
       'vettori': { interni: [], basi: ['equazioni-polinomiali', 'geometria-analitica', 'potenze-e-radici', 'goniometriche', 'polinomi'] },
       'matrici': { interni: ['vettori'], basi: ['polinomi', 'potenze-e-radici'] },
       'determinanti': { interni: ['matrici', 'vettori'], basi: ['equazioni-polinomiali', 'polinomi'] },
@@ -993,6 +994,15 @@ export const RIMANDI = {
   ],
   // <</sg:idraulica>>
   // <<sg:algebra-lineare>>
+  'algebra-lineare/numeri-complessi': [
+    'operazioni|1|precorso/polinomi#0',
+    'coniugato,piano-di-gauss|7|precorso/potenze-e-radici#5',
+    'forma-trigonometrica,forma-esponenziale|2|precorso/goniometriche#0',
+    'radici-n-esime,forma-trigonometrica|3,4|algebra-lineare/numeri-complessi#2',
+    'equazioni-in-campo-complesso|5,6|precorso/equazioni-polinomiali#1',
+    'piano-di-gauss|8|precorso/geometria-analitica#5',
+    'teorema-fondamentale-dellalgebra|8|precorso/polinomi#6',
+  ],
   'algebra-lineare/vettori': [
     'vettori-geometrici-e-operazioni||',
     'componenti-in-un-riferimento-cartesiano|1|precorso/equazioni-polinomiali#3',
