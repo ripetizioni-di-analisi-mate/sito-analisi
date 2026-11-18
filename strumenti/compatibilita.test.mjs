@@ -802,6 +802,13 @@ test('gli esercizi saltati dal modello si richiedono da soli, con il loro testo,
   assert.deepEqual(eventi.at(-1).fine.richieste.map((r) => `${r.esercizio}${r.parte || ''}`), ['1', '2', '3a', '3b']);
 });
 
+test('sottopunti chiamati con i numeri invece delle lettere non sono sottopunti saltati', async () => {
+  const testo = 'Esercizio 1. a) Integrare per parti. b) Calcolare un secondo integrale.\nEsercizio 2. Calcolare un terzo integrale.';
+  const { eventi, modelli } = await confronto('1|1|E|A1|S1|-|Primo integrale\n1|2|E|A1|S1|-|Secondo integrale\n2|-|E|A1|S1|-|Terzo integrale\nFINE_CONFRONTO', 'analisi-1', true, testo);
+  assert.equal(modelli.length, 1);
+  assert.equal(eventi.at(-1).fine.richieste.length, 3);
+});
+
 test('due risposte che saltano un esercizio non producono una percentuale', async () => {
   const testo = 'Esercizio 1. Calcolare un integrale.\nEsercizio 2. Calcolare un secondo integrale.';
   const { eventi } = await confronto(`${riga}FINE_CONFRONTO`, 'analisi-1', true, testo);

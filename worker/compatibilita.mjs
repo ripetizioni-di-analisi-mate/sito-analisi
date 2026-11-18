@@ -514,7 +514,12 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
   const mancanti = (righe) => {
     const esercizi = new Set(righe.map(numeroDi));
     const sottopunti = new Set(righe.filter((q) => typeof q.parte === 'string').map((q) => `${numeroDi(q)}${q.parte.toLowerCase()}`));
-    return [...new Set(attesi.filter(({ numero, parti }) => !esercizi.has(numero) || parti.some((p) => !sottopunti.has(numero + p))).map((a) => a.numero))];
+    // I modelli a volte chiamano i sottopunti con i numeri del documento (1, 2, 3) invece delle lettere: se le
+    // righe dell'esercizio sono almeno quante i suoi sottopunti, nessun sottopunto è stato saltato.
+    const quante = new Map();
+    for (const q of righe) quante.set(numeroDi(q), (quante.get(numeroDi(q)) || 0) + 1);
+    return [...new Set(attesi.filter(({ numero, parti }) => !esercizi.has(numero)
+      || (parti.some((p) => !sottopunti.has(numero + p)) && (quante.get(numero) || 0) < parti.length)).map((a) => a.numero))];
   };
   const testoEsercizio = (numero) => {
     const k = titoliEsercizi.findIndex((t) => String(Number(t[1])) === numero);
