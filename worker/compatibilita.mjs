@@ -325,7 +325,8 @@ export function leggiRiga(riga) {
   const [es, parte, tipo, arg, cod, punti] = (sei ? [campi[0], '-', ...campi.slice(1, 5)] : campi.slice(0, 6)).map((x) => x.trim().replace(/^[*_`]+|[*_`]+$/g, ''));
   const testo = campi.slice(inizioTesto).join('|').trim();
   const etichetta = es.replace(/^(es(ercizio)?\.?\s*)/i, '').replace(/[).:]+$/, '');
-  const uniti = /^(\d+)[.:-]?([a-z])$/i.exec(etichetta);
+  // «1a», «1.a» e anche «2.1» (sottopunto 1 dell'esercizio 2, come lo scrivono alcuni modelli).
+  const uniti = /^(\d+)[.:-]?([a-z])$/i.exec(etichetta) || /^(\d+)\.(\d{1,2})$/.exec(etichetta);
   const esercizio = uniti ? uniti[1] : etichetta;
   if (!testo || !/^(\d[\w.]*|[IVX]+|[A-Z]\d*)$/i.test(esercizio) || /^esercizio$/i.test(es)) return null;
   const teoria = /^t/i.test(tipo);
