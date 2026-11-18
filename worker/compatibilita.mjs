@@ -15,6 +15,8 @@ import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { trovaVoceTeoria, riferimentiNominati } from './riscontro-teoria.mjs';
 import { trovaProcedimentoStudio, trovaSchedaAnalisiDue } from './riscontro-procedimenti.mjs';
 import { riconosciMateriaCompito } from './materia-compito.mjs';
+import { analizzaDocumento, testoLeggibile } from './programma.mjs';
+import { riscontroProgramma } from './riscontro-programma.mjs';
 
 const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
 const MODELLI_TESTO = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
@@ -23,6 +25,8 @@ const MAX_RICHIESTE = 80;
 // Un programma scritto in prosa elenca un contenuto per frase: le voci sono più numerose delle richieste di un compito.
 const MAX_VOCI_PROGRAMMA = 140;
 const VOCI_PER_GRUPPO = 14;
+const GRUPPI_INSIEME = 3;      // gruppi di voci di un programma confrontati nello stesso momento
+const MAX_RICONTROLLO = 56;    // voci senza riscontro che si fanno rileggere al secondo modello
 const ARCHIVIO_MAX = 3000;     // confronti anonimi conservati per /admin/esami (tabella vecchia, solo lettura)
 const PAGINE_MAX = 1500;       // compiti di cui si conservano anche le immagini; dei più vecchi resta il testo
 const PARTE = 1024 * 1024;     // le immagini si salvano a pezzi da 1 MB (limite di un valore SQLite: 2 MB)
@@ -141,10 +145,33 @@ const CHIEDE_TEORIA = /\b(enunci\w*|dimostr\w*|defini(sci|sca|re|zione|zioni)|te
 // Catalogo in forma compatta per il modello, con codici brevi (A = argomento, S = scheda svolta, T = voce di teoria).
 // I codici sono gli stessi con e senza teoria, perché il contatore delle voci T avanza comunque.
 const cacheCodifiche = new WeakMap();
+// Per un programma («programma») il catalogo è fatto di soli titoli: capitoli, paragrafi, riquadri della
+// teoria con i loro altri nomi, schede con le parole chiave. È un quarto del catalogo completo, quindi ogni
+// gruppo di voci si confronta più in fretta; i paragrafi ricevono un codice T dopo quelli dei riquadri.
 export function codifica(cat, conTeoria) {
   const cache = cacheCodifiche.get(cat) || {};
-  const chiave = conTeoria ? 1 : 0;
+  const chiave = conTeoria === 'programma' ? 2 : conTeoria ? 1 : 0;
   if (cache[chiave]) return cache[chiave];
+  if (chiave === 2) {
+    const base = codifica(cat, false);
+    const codici = { A: base.codici.A, S: base.codici.S, T: { ...base.codici.T } };
+    const codiceDi = new Map([...Object.entries(codici.S), ...Object.entries(codici.T)].map(([c, v]) => [v, c]));
+    let t = Object.keys(codici.T).length;
+    const righe = [];
+    cat.argomenti.forEach((a, i) => {
+      righe.push(`A${i + 1} ${a.titolo}`);
+      for (const z of a.sezioni || []) {
+        const ct = `T${++t}`;
+        codici.T[ct] = { argomento: a.slug, ancora: z.ancora, titolo: z.titolo, tipo: 'paragrafo', contenuto: '', dimostrazione: false };
+        righe.push(`${ct} ${z.titolo} [paragrafo]`);
+      }
+      for (const [c, v] of Object.entries(base.codici.T)) if (v.argomento === a.slug) righe.push(`${c} ${v.titolo}${v.dimostrazione ? ' [con dimostrazione]' : ''}${v.alias?.length ? ` (anche: ${v.alias.slice(0, 3).join('; ')})` : ''}`);
+      for (const [c, sc] of Object.entries(base.codici.S)) if (sc.argomento === a.slug) righe.push(`${c} ${sc.titolo}${sc.parole.length ? ` (${sc.parole.join(', ')})` : ''}`);
+    });
+    cache[2] = { testo: righe.join('\n'), codici };
+    cacheCodifiche.set(cat, cache);
+    return cache[2];
+  }
   const codici = { A: {}, S: {}, T: {} };
   let s = 0, t = 0;
   const righe = [];
@@ -502,117 +529,98 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
   return { primo: primo.value, it };
 }
 
-const TITOLO_PROGRAMMA = /^\s*(?:#{1,6}\s*)?\*{0,2}(?:programma(?:\s+(?:del|di|d[’']|dettagliato|didattico|svolto|ufficiale)|\s*[:\n]|\s*$)|syllabus\b|contenuti\s+(?:del corso|dell[’']insegnamento)\b|elenco\s+(?:(?:delle|dei|di)\s+)?(?:dimostrazioni|argomenti)\b)/i;
-const VOCE_PROGRAMMA = /^[ \t]*(?:[-*+•▪◦]|\d{1,3}[.)])[ \t]+(\S.*)$/;
 
-// Programma scritto in prosa (un titolo per sezione e, sotto, i contenuti separati da punti), come quelli
-// pubblicati dai docenti. Senza questa divisione il modello riceveva il documento intero in una sola
-// richiesta e ne confrontava soltanto le prime voci (programma di Matematica I del 18/11/2026: 12 voci su 97).
-const RIGA_AMMINISTRATIVA = /\b(?:universit[àa]|dipartimento|facolt[àa]|c\.?\s?d\.?\s?l\b|corso di (?:laurea|studi)|programma|syllabus|a\.\s?a\.|anno accademico|prof\.?(?:ssa)?\b|docente|cfu|crediti|ore di|testi consigliati|bibliografia|modalit[àa] d['’]esame)/i;
-const NOTA_PROGRAMMA = /^\s*(?:n\.?\s?b\.?|nota|note|legenda)\b|\basterisco\b/i;
-function frasiDi(riga) {
-  const frasi = [];
-  let corrente = '', tonde = 0, formula = false;
-  for (let i = 0; i < riga.length; i++) {
-    const c = riga[i];
-    if (c === '$') formula = !formula;
-    else if (!formula && c === '(') tonde++;
-    else if (!formula && c === ')') tonde = Math.max(0, tonde - 1);
-    const fine = !formula && !tonde && (c === ';' || (c === '.' && (i === riga.length - 1 || /\s/.test(riga[i + 1])) && !/\b(?:es|cfr|ecc|risp|pag|cap|sez|n|p)$/i.test(corrente)));
-    if (fine) { frasi.push(corrente); corrente = ''; } else corrente += c;
-  }
-  frasi.push(corrente);
-  // I segni «(*)» indicano di solito i teoremi senza dimostrazione: non fanno parte del nome del contenuto.
-  return frasi.map((f) => f.replace(/\$?\(\s*\\?\*\s*\)\$?/g, '').replace(/\s+/g, ' ').replace(/^[\s,:–-]+|[\s,:–-]+$/g, '')).filter((f) => /\p{L}{3}/u.test(f));
-}
-function vociInProsa(righe) {
-  const voci = [];
-  let sezione = '';
-  for (const riga of righe) {
-    const titolo = /^\s*#{1,6}\s+(.*)$/.exec(riga);
-    if (titolo) { if (!RIGA_AMMINISTRATIVA.test(titolo[1])) sezione = titolo[1].replace(/\*+/g, '').trim(); continue; }
-    if (!riga.trim() || NOTA_PROGRAMMA.test(riga) || (!voci.length && RIGA_AMMINISTRATIVA.test(riga))) continue;
-    for (const testo of frasiDi(riga.trim())) voci.push({ id: String(voci.length + 1), sezione, testo, proveRichieste: false });
-  }
-  // Gli elenchi brevi restano sul confronto ordinario, che li gestisce in una sola richiesta.
-  return voci.length >= 15 ? voci : [];
-}
-
+// Il documento si divide in voci nel codice (worker/programma.mjs): elenchi, prosa, titoli numerati con il
+// loro paragrafo, diario delle lezioni, scheda dell'insegnamento. Un elenco puntato si confronta voce per voce
+// da tre voci in su; un testo senza elenco da dodici, perché sotto quella soglia il confronto ordinario basta.
 function elencoProgramma(testo) {
-  if (tipoDaTesto(testo) !== 'programma') return [];
-  const righe = testo.split(/\r?\n/);
-  const primo = righe.findIndex((r) => VOCE_PROGRAMMA.test(r));
-  if (primo < 0) return vociInProsa(righe);
-  if ( (!righe.slice(0, primo).some((r) => TITOLO_PROGRAMMA.test(r)) && righe.slice(0, primo).some((r) => r.trim()))) return [];
-  const voci = [];
-  let sezione = righe.slice(0, primo).filter((r) => /^\s*#{2,6}\s+/.test(r)).at(-1)?.replace(/^\s*#{2,6}\s+/, '').trim() || '';
-  const introduzione = righe.slice(0, primo).join('\n');
-  const proveRichieste = /elenco\s+(?:(?:delle|di)\s+)?dimostrazioni|(?:richiest\w+|conoscere|sapere)[^.\n]{0,90}\bdimostrazion/i.test(introduzione);
-  for (const riga of righe.slice(primo)) {
-    const voce = VOCE_PROGRAMMA.exec(riga);
-    if (voce) {
-      voci.push({ id: String(voci.length + 1), sezione, testo: voce[1].trim(), proveRichieste });
-    } else if (/^\s*#{1,6}\s+/.test(riga)) {
-      sezione = riga.replace(/^\s*#{1,6}\s+/, '').trim();
-    } else if (riga.trim()) {
-      // Le righe di continuazione appartengono alla voce precedente, anche quando il PDF va a capo.
-      voci.at(-1).testo += ` ${riga.trim()}`;
-    }
-  }
-  return voci.length >= 3 ? voci : [];
+  const a = analizzaDocumento(testo, { massimo: MAX_VOCI_PROGRAMMA });
+  if (a.tipo !== 'programma') return [];
+  const soglia = a.puntati >= 3 && a.puntati >= a.voci.length * 0.6 ? 3 : 12;
+  if (a.voci.length < soglia) return [];
+  const proveRichieste = /elenco\s+(?:(?:delle|di)\s+)?dimostrazioni|(?:richiest\w+|conoscere|sapere)[^.\n]{0,90}\bdimostrazion/i.test(testo.slice(0, 600));
+  return a.voci.map((v) => ({ ...v, proveRichieste }));
 }
 
-async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci) {
-  const sistema = `${ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true)}
-Per il gruppo di voci già numerate restituisci esattamente una riga per ogni identificatore fornito, nello stesso ordine. Usa gli identificatori originali senza rinumerare, senza dividere o unire voci. Anche una voce assente dal catalogo deve avere una riga. Se una voce comprende più contenuti, assegna un codice specifico solo se le fonti coprono tutta la voce. Una sezione «dimostrazioni» richiede le prove delle affermazioni teoriche.`;
-  for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) {
-    const gruppo = voci.slice(i, i + VOCI_PER_GRUPPO);
-    const attese = new Map(gruppo.map((v) => [v.id, v]));
-    const righe = gruppo.map((v) => `${v.id}. ${v.sezione ? `[${v.sezione}] ` : ''}${v.testo}`).join('\n');
-    const nominati = riferimentiNominati(codici.T, righe);
-    const messaggi = [
-      { role: 'system', content: sistema },
-      { role: 'user', content: `${nominati ? `Riferimenti da verificare:\n${nominati}\n\n` : ''}Voci del programma${gruppo[0].proveRichieste ? ' (elenco delle dimostrazioni richieste)' : ''}:\n${righe}` },
-    ];
-    const errori = [];
-    let abbinate = null;
-    for (const modello of inOrdine(MODELLI_TESTO)) {
-      const risultati = new Map();
-      try {
-        for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: 6000 }, 'programma')) {
-          const voce = attese.get(String(q.esercizio));
-          if (!voce || q.parte || risultati.has(voce.id)) throw new Error('voci mancanti o duplicate');
-          risultati.set(voce.id, { ...q, testo: voce.testo, proveRichieste: voce.proveRichieste });
-        }
-        if (risultati.size !== gruppo.length) throw new Error('voci mancanti o duplicate');
-        abbinate = risultati;
-        delete guasti[modello];
-        break;
-      } catch (e) {
-        const diagnostica = diagnosticaConfronto(e);
-        errori.push(diagnostica);
-        console.log('compatibilita elenco', modello, diagnostica);
-        if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
+const ISTRUZIONI_ELENCO = `
+Per il gruppo di voci già numerate restituisci esattamente una riga per ogni identificatore fornito, nello stesso ordine. Usa gli identificatori originali senza rinumerare, senza dividere o unire voci. Anche una voce assente dal catalogo deve avere una riga. Tra parentesi quadre, prima della voce, c'è il titolo della sezione del programma a cui appartiene: serve a capire di che cosa parla la voce. Nel catalogo le righe T segnate [paragrafo] sono i paragrafi della teoria: il paragrafo che tratta la voce la copre, anche senza un riquadro con lo stesso nome. Un nome diverso per lo stesso contenuto (un sinonimo, il nome di chi ha dimostrato il teorema) indica lo stesso contenuto. Se una voce comprende più contenuti, assegna un codice specifico solo se le fonti coprono tutta la voce. Una sezione «dimostrazioni» richiede le prove delle affermazioni teoriche.`;
+const ISTRUZIONI_RICONTROLLO = `
+Queste voci non hanno trovato un riferimento in una prima lettura. Rileggi il catalogo voce per voce: cerca sinonimi, nomi alternativi dello stesso teorema, il paragrafo o la scheda che spiega quel contenuto anche con un titolo diverso. Indica un codice solo se il contenuto c'è davvero; altrimenti lascia -.`;
+
+// Un gruppo di voci → Map id → richiesta. Si prova ogni modello; se nessuno restituisce una riga per ogni
+// voce, il gruppo si divide a metà (un gruppo piccolo è più facile da completare) prima di rinunciare.
+async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = []) {
+  const attese = new Map(gruppo.map((v) => [v.id, v]));
+  const righe = gruppo.map((v) => `${v.id}. ${v.sezione ? `[${v.sezione}] ` : ''}${v.testo}`).join('\n');
+  const nominati = riferimentiNominati(codici.T, righe);
+  const messaggi = [
+    { role: 'system', content: sistema },
+    { role: 'user', content: `${nominati ? `Riferimenti da verificare:\n${nominati}\n\n` : ''}Voci del programma${gruppo[0].proveRichieste ? ' (elenco delle dimostrazioni richieste)' : ''}:\n${righe}` },
+  ];
+  for (const modello of modelli) {
+    const risultati = new Map();
+    try {
+      for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: 6000 }, 'programma')) {
+        const voce = attese.get(String(q.esercizio));
+        if (!voce || q.parte || risultati.has(voce.id)) throw new Error('voci mancanti o duplicate');
+        risultati.set(voce.id, { ...q, testo: voce.testo, sezione: voce.sezione, proveRichieste: voce.proveRichieste });
       }
+      if (risultati.size !== gruppo.length) throw new Error('voci mancanti o duplicate');
+      delete guasti[modello];
+      return risultati;
+    } catch (e) {
+      const diagnostica = diagnosticaConfronto(e);
+      errori.push(diagnostica);
+      console.log('compatibilita elenco', modello, diagnostica);
+      if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
     }
-    if (!abbinate) throw Object.assign(new Error('Impossibile verificare tutte le voci del programma'), { diagnostica: errori });
-    for (const voce of gruppo) yield abbinate.get(voce.id);
+  }
+  if (gruppo.length > 4) {
+    const meta = Math.ceil(gruppo.length / 2);
+    const [a, b] = await Promise.all([confrontaGruppo(env, sistema, codici, gruppo.slice(0, meta), modelli, errori), confrontaGruppo(env, sistema, codici, gruppo.slice(meta), modelli, errori)]);
+    return new Map([...a, ...b]);
+  }
+  throw Object.assign(new Error('Impossibile verificare tutte le voci del programma'), { diagnostica: errori });
+}
+
+// Le voci del programma, a gruppi: più gruppi lavorano insieme, i risultati escono nell'ordine del documento.
+async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci) {
+  const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO;
+  const modelli = inOrdine(MODELLI_TESTO);
+  const gruppi = [];
+  for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
+  const lavori = [];
+  let prossimo = 0, attivi = 0;
+  const avvia = () => {
+    while (attivi < GRUPPI_INSIEME && prossimo < gruppi.length) {
+      const gruppo = gruppi[prossimo];
+      attivi++;
+      lavori[prossimo++] = confrontaGruppo(env, sistema, codici, gruppo, modelli).finally(() => { attivi--; avvia(); });
+      lavori.at(-1).catch(() => {});
+    }
+  };
+  avvia();
+  for (let i = 0; i < gruppi.length; i++) {
+    const abbinate = await lavori[i];
+    for (const voce of gruppi[i]) yield abbinate.get(voce.id);
   }
 }
 
-// Riserva per i modelli che omettono la riga TIPO_DOCUMENTO. Il confronto
-// riconosce anche elenchi senza intestazione; una citazione «fuori programma»
-// dentro un compito non è invece un'intestazione di programma.
-function tipoDaTesto(testo) {
-  if (testo.split(/\r?\n/).some((r) => TITOLO_PROGRAMMA.test(r))) return 'programma';
-  // Un elenco nominale non contiene richieste da svolgere. In questo caso
-  // il riconoscimento non dipende dalla riga facoltativa scritta dal modello.
-  const t = testo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const richiesta = /\?|\b(?:esercizio|quesito|problema|domanda)\s*(?:n\.?\s*)?\d|\b(?:calcola(?:re|te)?|calcoli|determina(?:re|te)?|determini|risolv(?:ere|i|a|ete)|studia(?:re|te)?|studi|dimostr(?:are|a|i|ate)|enunci(?:are|a|i|ate)|defini(?:re|sci|sca|te)|trova(?:re|te)?|trovi|giustifica(?:re|te)?|giustifichi|verifica(?:re|te)?|verifichi|si\s+(?:consideri|mostri|provi|discuta))\b/;
-  if (richiesta.test(t)) return 'esame';
-  const voci = new Set(t.split(/[\n;,.•]+/).map((v) => v.replace(/^\s*(?:[-*]|\d+[.)]?)\s*/, '').trim()).filter((v) => /[a-z]{3}/.test(v)));
-  return voci.size >= 3 ? 'programma' : 'esame';
+// Seconda lettura delle voci rimaste senza un contenuto preciso, con i modelli nell'ordine inverso: un
+// modello diverso trova spesso il riferimento che il primo non ha visto. Se la seconda lettura non riesce,
+// restano i risultati della prima.
+async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci) {
+  const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO + ISTRUZIONI_RICONTROLLO;
+  const modelli = inOrdine(MODELLI_TESTO).reverse();
+  const gruppi = [];
+  for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
+  const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1)).catch(() => new Map())));
+  return new Map(esiti.flatMap((m) => [...m]));
 }
+
+// Riserva per i modelli che omettono la riga TIPO_DOCUMENTO: il tipo si ricava dal documento
+// (worker/programma.mjs). Una citazione «fuori programma» dentro un compito non lo rende un programma.
+const tipoDaTesto = (testo) => analizzaDocumento(testo).tipo;
 
 // ---------- calcolo delle percentuali ----------
 // Una richiesta grezza del modello → riga del risultato: controlla i codici e rende coerenti livello, scheda e argomento.
@@ -635,14 +643,32 @@ function rigaRisultato(materia, cat, codici, r, domandePer, documento) {
   // Per una prova serve anche la dimostrazione nel materiale, oltre all'enunciato.
   const provaRichiesta = (r.proveRichieste || /dimostr/i.test(r.testo || '')) && !/\bsenza\s+dimostrazion/i.test(r.testo || '');
   const provaMancante = tipo === 'teoria' && provaRichiesta && !voce?.dimostrazione;
-  const livello = legato && arg && !provaMancante ? 'stesso' : arg ? 'argomento' : 'nessuno';
+  let livello = legato && arg && !provaMancante ? 'stesso' : arg ? 'argomento' : 'nessuno';
+  let schedaTrovata = livello === 'stesso' ? scheda : null;
+  let voceTrovata = voce && arg ? { titolo: voce.titolo, tipo: voce.tipo, link: `/${materia}/${voce.argomento}/teoria#${voce.ancora}` } : null;
+  // Voce di un programma rimasta senza un contenuto preciso: si cerca il suo nome fra i titoli del materiale
+  // (worker/riscontro-programma.mjs). Il riscontro può soltanto alzare l'esito, e porta il link al contenuto.
+  if (r.tipoDocumento === 'programma' && livello !== 'stesso') {
+    const nome = riscontroProgramma(cat, r.testo, r.sezione);
+    const senzaProva = provaRichiesta && !nome?.voce?.dimostrazione;
+    const trovato = nome ? (nome.livello === 'stesso' && !senzaProva ? 'stesso' : 'argomento') : 'nessuno';
+    if (trovato === 'stesso' || (trovato === 'argomento' && livello === 'nessuno')) {
+      livello = trovato;
+      arg = nome.argomento;
+      if (trovato === 'stesso' || !voceTrovata) {
+        const paragrafo = nome.voce || nome.sezione;
+        voceTrovata = paragrafo ? { titolo: paragrafo.titolo, tipo: nome.voce ? nome.voce.tipo : 'paragrafo', link: `/${materia}/${arg.slug}/teoria${paragrafo.ancora ? `#${paragrafo.ancora}` : ''}` } : voceTrovata;
+        schedaTrovata = trovato === 'stesso' && nome.scheda ? { ...nome.scheda, argomento: arg.slug } : null;
+      }
+    }
+  }
   const punti = typeof r.punti === 'number' && r.punti > 0 && r.punti <= 100 ? r.punti : null;
   return {
     esercizio: pulito(r.esercizio, 8) || '?', parte: pulito(r.parte, 4) || null, testo: pulito(r.testo, 400), tipo, livello, punti,
     puntiTipo: r.puntiTipo === 'parte' ? 'parte' : 'esercizio',
     argomento: arg ? { slug: arg.slug, titolo: arg.titolo } : null,
-    scheda: livello === 'stesso' && scheda ? { n: scheda.n, titolo: scheda.titolo, libera: scheda.n <= schedeLibere(materia, scheda.argomento), link: `/${materia}/${scheda.argomento}/esercizi-svolti/${scheda.n}` } : null,
-    voce: voce && arg ? { titolo: voce.titolo, tipo: voce.tipo, link: `/${materia}/${voce.argomento}/teoria#${voce.ancora}` } : null,
+    scheda: schedaTrovata ? { n: schedaTrovata.n, titolo: schedaTrovata.titolo, libera: schedaTrovata.n <= schedeLibere(materia, schedaTrovata.argomento), link: `/${materia}/${schedaTrovata.argomento}/esercizi-svolti/${schedaTrovata.n}` } : null,
+    voce: voceTrovata,
     riferimenti: procedimento?.voci?.map((v) => ({ titolo: v.titolo, link: `/${materia}/${v.argomento}/teoria#${v.ancora}` })) || [],
     teoriaLink: arg ? `/${materia}/${arg.slug}/teoria` : null,
     domandeLink: arg && domandePer[arg.slug] ? `/${materia}/${arg.slug}/domande` : null,
@@ -653,7 +679,7 @@ function rigaRisultato(materia, cat, codici, r, domandePer, documento) {
 // e calcola la compatibilità.
 export function valutaRichieste(materia, cat, codici, grezze, successoArg = null, domandePer = {}, documento = '') {
   const viste = new Set();
-  const richieste = grezze.slice(0, MAX_VOCI_PROGRAMMA).map((r) => rigaRisultato(materia, cat, codici, r, domandePer, documento)).filter((r) => {
+  const richieste = grezze.slice(0, Math.max(MAX_RICHIESTE, MAX_VOCI_PROGRAMMA)).map((r) => rigaRisultato(materia, cat, codici, r, domandePer, documento)).filter((r) => {
     const chiave = JSON.stringify([r.esercizio.toLowerCase(), r.parte?.toLowerCase(), r.testo.toLowerCase()]);
     if (!r.testo || viste.has(chiave)) return false;
     viste.add(chiave);
@@ -754,7 +780,12 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
   const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
   const giorno = new Date().toISOString().slice(0, 10);
+  // Carmine, entrato nella dashboard, prova la funzione senza limiti; con «prova» il documento non entra nell'archivio.
+  const cookieAdmin = h.leggiCookie?.(req, 'admin');
+  const admin = Boolean(cookieAdmin && (await h.leggiToken(env, cookieAdmin).catch(() => null))?.admin);
+  const prova = admin && b.prova === true;
   const conta = async (tipo) => {
+    if (admin) return { ok: true, rimasti: 99 };
     const max = tipo === 'leggi' ? (io ? LIMITI.leggiAccount : LIMITI.leggiOspite) : (io ? LIMITI.confrontaAccount : LIMITI.confrontaOspite);
     const maxSito = tipo === 'leggi' ? LIMITI.leggiSito : LIMITI.confrontaSito;
     return aDO(env, '/comp-conta', { giorno, chi, tipo, max, maxSito });
@@ -790,7 +821,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         return json({ errore: `Il documento supera ${MAX_CARATTERI_TESTO} caratteri. Carica una sezione alla volta: il controllo non è stato conteggiato.` }, 422);
       }
       const id = crypto.randomUUID();
-      ctx.waitUntil(aDO(env, '/comp-compito-nuovo', { id, materia, letto, pagine }).catch((e) => console.log('compatibilita archivio', String(e?.message || e).slice(0, 200))));
+      if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-nuovo', { id, materia, letto, pagine }).catch((e) => console.log('compatibilita archivio', String(e?.message || e).slice(0, 200))));
       return json({ testo: letto, id }, 200, { 'cache-control': 'no-store' });
     } catch (e) {
       await rimborsa('leggi');
@@ -801,12 +832,11 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   }
 
   // ----- 2. confronto con il materiale -----
-  const testo = typeof b.testo === 'string' ? b.testo.replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim() : '';
+  const testo = typeof b.testo === 'string' ? testoLeggibile(b.testo.replace(/[\u0000-\u0008\u000b-\u001f]/g, '')).trim() : '';
   if (testo.length < 20) return json({ errore: 'Il testo è troppo breve: scrivi o incolla gli esercizi o gli argomenti del programma.' }, 400);
   if (testo.length > MAX_CARATTERI_TESTO) return json({ errore: `Il testo è troppo lungo: al massimo ${MAX_CARATTERI_TESTO} caratteri. Per un programma più lungo, confronta una sezione alla volta.` }, 400);
   const elenco = elencoProgramma(testo);
-  if (elenco.length > MAX_VOCI_PROGRAMMA) return json({ errore: `Il programma contiene più di ${MAX_VOCI_PROGRAMMA} voci. Carica una sezione alla volta per confrontarla per intero.` }, 422);
-  const materiaScelta = materia;
+    const materiaScelta = materia;
   const riconoscimento = riconosciMateriaCompito(testo, materiaScelta, MATERIE_COMPATIBILITA);
   materia = riconoscimento.materia;
   m = MATERIE.find((x) => x.slug === materia);
@@ -818,7 +848,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   if (!cat) { if (c.ok) await rimborsa('confronta'); return json({ errore: 'Il confronto per questa materia non è ancora disponibile.' }, 503); }
   if (!c.ok) return limite(c);
   const conTeoria = tipoDaTesto(testo) === 'programma' || CHIEDE_TEORIA.test(testo);
-  const { testo: catalogoTesto, codici } = codifica(cat, conTeoria);
+  let { testo: catalogoTesto, codici } = codifica(cat, elenco.length ? 'programma' : conTeoria);
   // Dati del successo e delle domande a tempo: si leggono mentre il modello lavora.
   const successoP = io ? aDO(env, '/comp-successo', { email: io.email, materia }).then((x) => x.argomenti).catch(() => null) : Promise.resolve(null);
   const domandePerP = h.catalogoDomande(env).then((tutte) => {
@@ -840,6 +870,18 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
     await avvio.it.return();
     await rimborsa('confronta');
     return json({ errore: 'Il testo non sembra un compito o un programma universitario. Per concorsi e test a quiz ci sono le simulazioni a quiz.', nonUniversitario: true }, 422);
+  }
+  // Il modello ha riconosciuto un programma che il codice aveva preso per un compito: se il documento si
+  // divide in abbastanza voci, si passa al confronto voce per voce, che non ne lascia indietro nessuna.
+  let voci = elenco;
+  if (!voci.length && avvio.primo?.tipoDocumento === 'programma') {
+    const forzate = analizzaDocumento(testo, { massimo: MAX_VOCI_PROGRAMMA }).voci;
+    if (forzate.length >= 12) {
+      await avvio.it.return();
+      voci = forzate.map((v) => ({ ...v, proveRichieste: false }));
+      ({ testo: catalogoTesto, codici } = codifica(cat, 'programma'));
+      avvio = { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, voci) };
+    }
   }
   const domandePer = await domandePerP;
   const universita = typeof b.universita === 'string' ? b.universita.replace(/[\u0000-\u001f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80) : '';
@@ -876,13 +918,28 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         ctl.close();
         return;
       }
+      // Programma confrontato voce per voce: le voci rimaste senza un contenuto preciso si rileggono una volta.
+      if (voci.length && grezze.length === voci.length) {
+        const deboli = grezze.map((q, i) => ({ q, i })).filter(({ q }) => rigaRisultato(materia, cat, codici, q, domandePer, testo).livello !== 'stesso');
+        if (deboli.length && deboli.length <= MAX_RICONTROLLO) {
+          manda({ fase: 'ricontrollo', voci: deboli.length });
+          const forza = { stesso: 2, argomento: 1, nessuno: 0 };
+          const riletta = await ricontrollaVoci(env, m.titolo, catalogoTesto, codici, deboli.map(({ i }) => voci[i])).catch(() => new Map());
+          for (const { q, i } of deboli) {
+            const nuova = riletta.get(voci[i].id);
+            if (!nuova) continue;
+            const candidata = { ...nuova, tipoDocumento: 'programma', punti: null };
+            if (forza[rigaRisultato(materia, cat, codici, candidata, domandePer, testo).livello] > forza[rigaRisultato(materia, cat, codici, q, domandePer, testo).livello]) grezze[i] = candidata;
+          }
+        }
+      }
       const esito = valutaRichieste(materia, cat, codici, grezze, await successoP, domandePer, testo);
       if (!esito.richieste.length) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });
       } else {
         manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti } });
-        ctx.waitUntil(aDO(env, '/comp-compito-esito', {
+        if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
           esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),
         }).catch(() => {}));
@@ -925,9 +982,12 @@ function paginaAdminEsami(compiti, vecchi) {
     const img = (k, cl) => `<img class="${cl}" src="/admin/esami/pagina/${esc(e.id)}/${k}" alt="Pagina ${k + 1}" loading="lazy" decoding="async" data-compito="${esc(e.id)}" data-n="${k}" data-tot="${n}">`;
     const mini = n ? Array.from({ length: n }, (_, k) => img(k, 'mini')).join('') : `<span class="piccolo">${e.vecchio ? 'solo esito' : 'testo incollato'}</span>`;
     const testo = e.testo || e.letto;
+    // Come il codice di oggi legge il documento: un programma del corso si riconosce dalle voci in cui si divide.
+    const analisi = testo ? analizzaDocumento(testo, { massimo: MAX_VOCI_PROGRAMMA }) : null;
+    const programma = analisi?.tipo === 'programma' ? analisi.voci.length : 0;
     const voto = e.compatibilita != null ? `<span class="pc ${e.compatibilita >= 80 ? 'alta' : e.compatibilita >= 50 ? 'media' : 'bassa'}">${e.compatibilita}%</span>` : '<span class="pc nulla">—</span>';
     return `<details class="compito" data-materia="${esc(e.materia)}"><summary>
-<span class="quando">${esc(data(e.quando))}</span><span class="materia">${esc(titoloDi(e.materia))}</span><span class="uni">${esc(e.universita || '')}</span>${voto}<span class="pagine">${mini}</span><span class="freccia" aria-hidden="true"></span></summary>
+<span class="quando">${esc(data(e.quando))}</span><span class="materia">${esc(titoloDi(e.materia))}${programma ? ` <span class="piccolo">· programma, ${programma} voci</span>` : ''}</span><span class="uni">${esc(e.universita || '')}</span>${voto}<span class="pagine">${mini}</span><span class="freccia" aria-hidden="true"></span></summary>
 <div class="dentro">${n ? `<div class="grandi">${Array.from({ length: n }, (_, k) => img(k, 'grande')).join('')}</div>` : ''}
 ${rr.length ? `<ol class="richieste">${rr.map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l] || ''}</span> <b>${esc(r.e)}${r.p ? esc(r.p) : ''}.</b> ${esc(r.t)}${r.a ? ` <span class="piccolo">${esc(r.a)}${r.s ? ` · scheda ${r.s}` : ''}${r.v && r.vl?.startsWith(`/${e.materia}/`) ? ` · <a href="${esc(r.vl)}">${esc(r.v)}</a>` : ''}</span>` : ''}</li>`).join('')}</ol>` : '<p class="piccolo">Non ancora confrontato.</p>'}
 ${testo ? `<details class="testo"><summary>Testo del compito</summary><pre>${esc(testo)}</pre></details>` : ''}</div></details>`;

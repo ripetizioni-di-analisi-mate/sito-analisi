@@ -6,7 +6,8 @@ import { getCollection } from 'astro:content';
 import { materia as datiMateria } from '../../data/materie';
 import { MATERIE_COMPATIBILITA } from '../../data/compatibilita';
 import { indiceAnalitico } from '../../lib/indice-analitico';
-import { dettagliScheda, dettagliTeoria } from '../../lib/catalogo-compatibilita';
+import { ALIAS } from '../../data/alias-teoremi';
+import { dettagliScheda, dettagliTeoria, sezioniTeoria } from '../../lib/catalogo-compatibilita';
 
 export function getStaticPaths() {
   return MATERIE_COMPATIBILITA.map((m) => ({ params: { materia: m } }));
@@ -22,12 +23,14 @@ export const GET: APIRoute = async ({ params }) => {
   const indice = await indiceAnalitico('it', m.slug, m.argomenti.map((a) => a.slug));
   const argomenti = m.argomenti.map((a) => ({
     slug: a.slug,
+    // Paragrafi della teoria, per riconoscere le voci di un programma dal loro nome.
+    sezioni: sezioniTeoria(teoria.get(`${m.slug}/${a.slug}`) || ''),
     titolo: a.titolo,
     schede: svolti
       .filter((v) => v.id.startsWith(`${m.slug}/${a.slug}/`))
       .map((v) => ({ n: numero(v.id), titolo: String(v.data.titolo), parole: ((v.data as { parole?: string[] }).parole || []).map(String), ...dettagliScheda(v.body || '') }))
       .sort((x, y) => x.n - y.n),
-    teoria: (indice.find((x) => x.argomento === a.slug)?.voci || []).map((v) => ({ ancora: v.ancora, titolo: v.titolo, tipo: v.tipo, ...dettagliTeoria(teoria.get(`${m.slug}/${a.slug}`) || '', v.ancora) })),
+    teoria: (indice.find((x) => x.argomento === a.slug)?.voci || []).map((v) => ({ ancora: v.ancora, titolo: v.titolo, tipo: v.tipo, ...(ALIAS[v.titolo.toLowerCase()] ? { alias: ALIAS[v.titolo.toLowerCase()] } : {}), ...dettagliTeoria(teoria.get(`${m.slug}/${a.slug}`) || '', v.ancora) })),
     esercizi: dafare.filter((v) => v.id.startsWith(`${m.slug}/${a.slug}/`)).length,
   }));
   return new Response(JSON.stringify({ materia: m.slug, titolo: m.titolo, argomenti }), { headers: { 'content-type': 'application/json' } });

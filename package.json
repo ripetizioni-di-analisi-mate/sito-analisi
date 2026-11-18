@@ -6,7 +6,7 @@
   "scripts": {
     "test:lega": "node --test strumenti/avvisi-lega.test.mjs strumenti/bot-lega.test.mjs",
     "test:pacchetti": "node --test strumenti/pacchetti.test.mjs",
-    "test:compatibilita": "node --test strumenti/compatibilita.test.mjs",
+    "test:compatibilita": "node --test strumenti/compatibilita.test.mjs strumenti/compatibilita-formati.test.mjs",
     "test:studio-guidato": "node --test strumenti/studio-guidato.test.mjs",
     "test:orientamento": "node --test strumenti/orientamento-studio.test.mjs strumenti/orientamento-universita.test.mjs strumenti/orientamento-api.test.mjs strumenti/orientamento-privacy.test.mjs",
     "dev": "node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && astro dev",

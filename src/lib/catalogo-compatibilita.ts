@@ -29,3 +29,17 @@ export function dettagliTeoria(corpo: string, ancora: string) {
   const enunciato = blocco.split(/^::/m)[0];
   return { contenuto: breve(compatto(enunciato), 220), dimostrazione: /^:::dimostrazione\b/m.test(blocco) };
 }
+
+// Titoli dei paragrafi della teoria (righe «## …») con la loro ancora: servono al riscontro per nome delle
+// voci di un programma (worker/riscontro-programma.mjs). L'ancora segue la regola con cui Astro la dà ai
+// titoli (minuscole, via la punteggiatura, spazi in trattini, un numero in coda ai titoli ripetuti).
+export function sezioniTeoria(corpo: string) {
+  const viste = new Map<string, number>();
+  return [...corpo.matchAll(/^## +(.+?)\s*$/gm)].map((r) => {
+    const titolo = compatto(r[1]).replace(/\$/g, '');
+    const base = titolo.toLowerCase().replace(/[^\p{L}\p{M}\p{N}\s_-]/gu, '').replace(/ /g, '-');
+    const n = viste.get(base) || 0;
+    viste.set(base, n + 1);
+    return { ancora: n ? `${base}-${n}` : base, titolo };
+  }).filter((z) => z.titolo);
+}

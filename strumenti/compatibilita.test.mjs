@@ -544,7 +544,7 @@ test('una trascrizione tagliata al limite viene sostituita con una lettura compl
 });
 
 test('un programma troppo lungo non viene troncato e confrontato solo in parte', async () => {
-  const { res, dati, chiamate } = await letturaDocumento('Programma del corso. ' + 'Argomento; '.repeat(1500));
+  const { res, dati, chiamate } = await letturaDocumento('Programma del corso. ' + 'Argomento; '.repeat(4000));
   assert.equal(res.status, 422);
   assert.match(dati.errore, /una sezione alla volta/);
   assert.ok(!dati.testo);
@@ -598,7 +598,7 @@ test('un programma scritto in prosa viene diviso in voci e confrontato per inter
   // Programma di Matematica I caricato il 18/11/2026: il modello ne aveva confrontate 12 voci su 97 (esito 50%).
   const documento = readFileSync(join(radice, 'strumenti/compatibilita-programma-prosa.txt'), 'utf8');
   const voci = elencoProgramma(documento);
-  assert.equal(voci.length, 97);
+  assert.equal(voci.length, 98);
   assert.ok(voci.every((v) => !/universit|dipartimento|asterisco|cfu/i.test(v.testo) && !v.testo.includes('*')));
   assert.equal(voci[0].sezione, 'Nozioni di base: i numeri e le funzioni reali');
   assert.equal(voci.find((v) => v.testo.startsWith('Teoremi di confronto')).testo, 'Teoremi di confronto (teorema della permanenza del segno e corollari; teorema dei carabinieri)');
@@ -610,7 +610,7 @@ test('un programma scritto in prosa viene diviso in voci e confrontato per inter
   const { eventi, modelli } = await confronto(risposta, 'analisi-1', true, documento);
   const esito = eventi.at(-1).fine;
   assert.equal(esito.tipoDocumento, 'programma');
-  assert.equal(esito.richieste.length, 97);
+  assert.equal(esito.richieste.length, 98);
   assert.equal(esito.compatibilita, 100);
   assert.equal(modelli.length, 7);
   // Un compito e un elenco breve restano sul confronto ordinario.
@@ -632,7 +632,8 @@ test('quaranta voci di un elenco di dimostrazioni restano nel risultato anche do
   assert.equal(esito.richieste.length, 40);
   assert.deepEqual(esito.richieste.map((r) => r.testo), voci);
   assert.deepEqual(esito.conteggi, { stesso: 1, argomento: 1, nessuno: 38 });
-  assert.equal(modelli.length, 4);
+  // 3 gruppi, più il secondo modello per il primo gruppo, più la rilettura delle 39 voci senza un contenuto preciso (3 gruppi).
+  assert.equal(modelli.length, 7);
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 1);
 });
 
