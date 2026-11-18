@@ -116,11 +116,12 @@ test('il riscontro per nome trova i contenuti del sito e non inventa quelli che 
 });
 
 // ---------- confronto completo con modelli simulati ----------
-async function confronto(risposta, testo, materia = 'analisi-1') {
+async function confronto(risposta, testo, materia = 'analisi-1', extra = {}) {
   const chiamate = [], attese = [], modelli = [];
   const env = {
     ASSETS: { fetch: async () => Response.json(catalogo) },
     AI: { run: async (modello, input) => { modelli.push({ modello, input }); return risposta(modello, input, modelli.length); } },
+    ...extra,
   };
   const h = {
     aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return { ok: true, rimasti: 3 }; },
@@ -199,4 +200,22 @@ test('se il modello riconosce un programma che il codice aveva preso per un comp
   const esito = eventi.at(-1).fine;
   assert.equal(esito.tipoDocumento, 'programma');
   assert.ok(esito.richieste.length >= 30, `${esito.richieste.length} voci`);
+});
+
+test('un modello che non risponde non tiene fermo il confronto: si chiude entro il limite e propone la verifica personale', async () => {
+  const mai = () => new Promise(() => {});
+  const inizio = Date.now();
+  const { eventi } = await confronto(mai, salerno, 'analisi-1', { COMPATIBILITA_TEMPI: 0.002 });
+  assert.ok(Date.now() - inizio < 5000, 'il confronto si chiude entro il limite di tempo');
+  assert.ok(eventi.at(-1).verificaPersonale);
+  assert.ok(eventi.every((e) => !e.fine));
+});
+
+test('se il modello non risponde per una parte dei gruppi, il risultato arriva lo stesso per tutte le voci', async () => {
+  let n = 0;
+  const alterno = (m, input) => (++n % 4 === 0 ? new Promise(() => {}) : senzaRiferimenti(m, input));
+  const { eventi } = await confronto(alterno, salerno, 'analisi-1', { COMPATIBILITA_TEMPI: 0.002 });
+  const esito = eventi.at(-1).fine;
+  assert.equal(esito.richieste.length, 98);
+  assert.ok(esito.compatibilita >= 75, `compatibilità ${esito.compatibilita}`);
 });

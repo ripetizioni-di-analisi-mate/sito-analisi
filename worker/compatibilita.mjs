@@ -378,13 +378,27 @@ function diagnosticaConfronto(e) {
     : /esercizi mancanti/.test(messaggio) ? 'ESERCIZI'
     : /voci mancanti o duplicate/.test(messaggio) ? 'PROGRAMMA'
     : /non ha completato/.test(messaggio) ? 'CHIUSURA'
+    : /tempo scaduto/.test(messaggio) ? 'TEMPO'
     : /risposta del modello interrotta/.test(messaggio) ? 'TRONCAMENTO' : 'MODELLO';
   return { codice };
 }
 
 // Testo del modello a pezzi, in streaming (o tutto insieme, se il modello ignora lo streaming).
-async function* testoModello(env, modello, input, confermaFine) {
-  const r = await esegui(env, modello, { ...input, stream: true });
+// Con `scadenza` (istante in millisecondi) l'attesa del modello ha un limite: un modello che non risponde
+// o scrive senza fine non tiene fermo il confronto.
+const TEMPO_SCADUTO = 'tempo scaduto';
+function entro(promessa, scadenza) {
+  if (!scadenza) return promessa;
+  const resto = scadenza - Date.now();
+  if (resto <= 0) { promessa.catch?.(() => {}); return Promise.reject(new Error(TEMPO_SCADUTO)); }
+  let timer;
+  const limite = new Promise((_, no) => { timer = setTimeout(() => no(new Error(TEMPO_SCADUTO)), resto); });
+  promessa.catch?.(() => {});
+  return Promise.race([promessa, limite]).finally(() => clearTimeout(timer));
+}
+
+async function* testoModello(env, modello, input, confermaFine, scadenza) {
+  const r = await entro(esegui(env, modello, { ...input, stream: true }), scadenza);
   if (!(r instanceof ReadableStream)) {
     verificaEvento(r || {});
     yield testoDi(r);
@@ -407,7 +421,7 @@ async function* testoModello(env, modello, input, confermaFine) {
   };
   try {
     for (;;) {
-      const { done, value } = await lettore.read();
+      const { done, value } = await entro(lettore.read(), scadenza);
       if (done) break;
       resto += value;
       const righe = resto.split('\n');
@@ -430,7 +444,7 @@ async function* testoModello(env, modello, input, confermaFine) {
 }
 
 // Richieste grezze man mano che il modello le scrive; { nonUniversitario: true } se il testo non è un esame universitario.
-async function* richiesteModello(env, modello, input, tipoIniziale) {
+async function* richiesteModello(env, modello, input, tipoIniziale, scadenza) {
   let resto = '', tutto = '', pensa = false, n = 0, completo = false, nonUniversitario = false, trasportoCompleto = false;
   let tipoDocumento = tipoIniziale;
   const dallaRiga = function* (riga) {
@@ -457,7 +471,7 @@ async function* richiesteModello(env, modello, input, tipoIniziale) {
       n++; yield { ...q, tipoDocumento };
     }
   };
-  for await (const pezzo of testoModello(env, modello, input, () => { trasportoCompleto = true; })) {
+  for await (const pezzo of testoModello(env, modello, input, () => { trasportoCompleto = true; }, scadenza)) {
     tutto += pezzo;
     resto += pezzo;
     const righe = resto.split('\n');
@@ -502,7 +516,7 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
         let n = 0;
         const esercizi = new Set();
         const sottopunti = new Set();
-        for await (const q of richiesteModello(env, m, { messages, max_tokens: /gpt-oss/.test(m) ? 8000 : 6000 }, tipoDaTesto(esame))) {
+        for await (const q of richiesteModello(env, m, { messages, max_tokens: /gpt-oss/.test(m) ? 8000 : 6000 }, tipoDaTesto(esame), Date.now() + 120000 * (Number(env.COMPATIBILITA_TEMPI) || 1))) {
           if (!n && avviato) yield { ricomincia: true };
           n++; avviato = true;
           esercizi.add(String(Number(q.esercizio)));
@@ -549,7 +563,13 @@ Queste voci non hanno trovato un riferimento in una prima lettura. Rileggi il ca
 
 // Un gruppo di voci → Map id → richiesta. Si prova ogni modello; se nessuno restituisce una riga per ogni
 // voce, il gruppo si divide a metà (un gruppo piccolo è più facile da completare) prima di rinunciare.
-async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = []) {
+// Tempo per un gruppo di voci: una chiamata al modello, e il gruppo intero con i tentativi di riserva.
+const TEMPO_CHIAMATA = 28000;
+const TEMPO_GRUPPO = 70000;
+
+async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [], opzioni = {}) {
+  const scala = Number(env.COMPATIBILITA_TEMPI) || 1; // solo per le prove: accorcia le attese
+  const fine = opzioni.fine || Date.now() + TEMPO_GRUPPO * scala;
   const attese = new Map(gruppo.map((v) => [v.id, v]));
   const righe = gruppo.map((v) => `${v.id}. ${v.sezione ? `[${v.sezione}] ` : ''}${v.testo}`).join('\n');
   const nominati = riferimentiNominati(codici.T, righe);
@@ -557,34 +577,49 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
     { role: 'system', content: sistema },
     { role: 'user', content: `${nominati ? `Riferimenti da verificare:\n${nominati}\n\n` : ''}Voci del programma${gruppo[0].proveRichieste ? ' (elenco delle dimostrazioni richieste)' : ''}:\n${righe}` },
   ];
+  // Una riga per voce: la risposta è breve. Il tetto basso ferma presto un modello che si ripete.
+  const tetto = (modello) => (/gpt-oss/.test(modello) ? 3500 : 400 + 90 * gruppo.length);
   for (const modello of modelli) {
+    if (Date.now() >= fine) break;
     const risultati = new Map();
+    const partenza = Date.now();
     try {
-      for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: 6000 }, 'programma')) {
+      const scadenza = Math.min(fine, Date.now() + TEMPO_CHIAMATA * scala * (/gpt-oss/.test(modello) ? 1.5 : 1));
+      for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: tetto(modello) }, 'programma', scadenza)) {
         const voce = attese.get(String(q.esercizio));
-        if (!voce || q.parte || risultati.has(voce.id)) throw new Error('voci mancanti o duplicate');
+        if (!voce || q.parte || risultati.has(voce.id)) throw new Error(`voci mancanti o duplicate: riga ${q.esercizio}${q.parte ? `/${q.parte}` : ''} ${voce ? 'ripetuta' : 'non richiesta'}`);
         risultati.set(voce.id, { ...q, testo: voce.testo, sezione: voce.sezione, proveRichieste: voce.proveRichieste });
       }
-      if (risultati.size !== gruppo.length) throw new Error('voci mancanti o duplicate');
+      if (risultati.size !== gruppo.length) throw new Error(`voci mancanti o duplicate: ${risultati.size} su ${gruppo.length}`);
       delete guasti[modello];
       return risultati;
     } catch (e) {
-      const diagnostica = diagnosticaConfronto(e);
+      const diagnostica = { ...diagnosticaConfronto(e), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: String(e?.message || '').slice(0, 140) };
       errori.push(diagnostica);
-      console.log('compatibilita elenco', modello, diagnostica);
+      console.log('compatibilita elenco', JSON.stringify(diagnostica));
       if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
     }
   }
-  if (gruppo.length > 4) {
+  if (gruppo.length > 4 && Date.now() < fine) {
     const meta = Math.ceil(gruppo.length / 2);
-    const [a, b] = await Promise.all([confrontaGruppo(env, sistema, codici, gruppo.slice(0, meta), modelli, errori), confrontaGruppo(env, sistema, codici, gruppo.slice(meta), modelli, errori)]);
+    const [a, b] = await Promise.all([
+      confrontaGruppo(env, sistema, codici, gruppo.slice(0, meta), modelli, errori, { ...opzioni, fine }),
+      confrontaGruppo(env, sistema, codici, gruppo.slice(meta), modelli, errori, { ...opzioni, fine }),
+    ]);
     return new Map([...a, ...b]);
   }
-  throw Object.assign(new Error('Impossibile verificare tutte le voci del programma'), { diagnostica: errori });
+  if (!opzioni.riserva) throw Object.assign(new Error('Impossibile verificare tutte le voci del programma'), { diagnostica: errori });
+  // I modelli non hanno risposto in tempo per queste voci: restano da abbinare per nome (riscontro nel codice)
+  // e passano alla seconda lettura.
+  console.log('compatibilita elenco: riserva per', gruppo.length, 'voci');
+  return new Map(gruppo.map((v) => [v.id, {
+    esercizio: v.id, parte: null, testo: v.testo, tipo: 'teoria', argomento: null, scheda: null, teoria: null,
+    livello: 'nessuno', punti: null, puntiTipo: 'esercizio', tipoDocumento: 'programma', sezione: v.sezione, proveRichieste: v.proveRichieste, senzaModello: true,
+  }]));
 }
 
 // Le voci del programma, a gruppi: più gruppi lavorano insieme, i risultati escono nell'ordine del documento.
-async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci) {
+async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci, registro = []) {
   const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO;
   const modelli = inOrdine(MODELLI_TESTO);
   const gruppi = [];
@@ -595,7 +630,7 @@ async function* confrontaElenco(env, titolo, catalogoTesto, codici, voci) {
     while (attivi < GRUPPI_INSIEME && prossimo < gruppi.length) {
       const gruppo = gruppi[prossimo];
       attivi++;
-      lavori[prossimo++] = confrontaGruppo(env, sistema, codici, gruppo, modelli).finally(() => { attivi--; avvia(); });
+      lavori[prossimo++] = confrontaGruppo(env, sistema, codici, gruppo, modelli, registro, { riserva: true }).finally(() => { attivi--; avvia(); });
       lavori.at(-1).catch(() => {});
     }
   };
@@ -614,7 +649,8 @@ async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci) {
   const modelli = inOrdine(MODELLI_TESTO).reverse();
   const gruppi = [];
   for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
-  const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1)).catch(() => new Map())));
+  const fine = Date.now() + TEMPO_CHIAMATA * 1.5 * (Number(env.COMPATIBILITA_TEMPI) || 1);
+  const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1), [], { fine }).catch(() => new Map())));
   return new Map(esiti.flatMap((m) => [...m]));
 }
 
@@ -856,10 +892,11 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
     return Object.fromEntries((Array.isArray(domande) ? domande : Object.keys(domande)).map((a) => [typeof a === 'string' ? a : a.slug, true]));
   }).catch(() => ({}));
 
+  const registro = []; // tentativi falliti dei modelli sulle voci di un programma
   let avvio;
   try {
     avvio = elenco.length
-      ? { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, elenco) }
+      ? { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, elenco, registro) }
       : await avviaConfronto(env, m.titolo, catalogoTesto, conTeoria, testo, codici);
   } catch (e) {
     await rimborsa('confronta');
@@ -880,7 +917,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       await avvio.it.return();
       voci = forzate.map((v) => ({ ...v, proveRichieste: false }));
       ({ testo: catalogoTesto, codici } = codifica(cat, 'programma'));
-      avvio = { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, voci) };
+      avvio = { primo: null, it: confrontaElenco(env, m.titolo, catalogoTesto, codici, voci, registro) };
     }
   }
   const domandePer = await domandePerP;
@@ -919,6 +956,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         return;
       }
       // Programma confrontato voce per voce: le voci rimaste senza un contenuto preciso si rileggono una volta.
+      const rilette = new Set();
       if (voci.length && grezze.length === voci.length) {
         const deboli = grezze.map((q, i) => ({ q, i })).filter(({ q }) => rigaRisultato(materia, cat, codici, q, domandePer, testo).livello !== 'stesso');
         if (deboli.length && deboli.length <= MAX_RICONTROLLO) {
@@ -928,17 +966,28 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
           for (const { q, i } of deboli) {
             const nuova = riletta.get(voci[i].id);
             if (!nuova) continue;
+            rilette.add(i);
             const candidata = { ...nuova, tipoDocumento: 'programma', punti: null };
             if (forza[rigaRisultato(materia, cat, codici, candidata, domandePer, testo).livello] > forza[rigaRisultato(materia, cat, codici, q, domandePer, testo).livello]) grezze[i] = candidata;
           }
         }
+      }
+      // Se i modelli non hanno letto più della metà delle voci, il riscontro per nome da solo darebbe una stima
+      // troppo bassa: meglio dirlo e proporre la verifica personale.
+      const nonLette = grezze.filter((q, i) => q.senzaModello && !rilette.has(i)).length;
+      if (nonLette > grezze.length / 2) {
+        console.log('compatibilita elenco: modelli assenti per', nonLette, 'voci su', grezze.length);
+        await rimborsa('confronta');
+        manda({ errore: 'Non sono riuscito a confrontare tutto il documento. Il tentativo non è stato conteggiato.', verificaPersonale: true, diagnostica: registro.length ? registro.slice(0, 20) : [{ codice: 'TEMPO' }] });
+        ctl.close();
+        return;
       }
       const esito = valutaRichieste(materia, cat, codici, grezze, await successoP, domandePer, testo);
       if (!esito.richieste.length) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });
       } else {
-        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti } });
+        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), senzaModello: nonLette } : {}) } });
         if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
           esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),
