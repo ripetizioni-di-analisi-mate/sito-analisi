@@ -1,0 +1,3 @@
+# Verifica del rifacimento delle domande a tempo di Analisi 2 (un capitolo)
+
+**Segui per intero `istruzioni-agenti/brief-verifica-domande-rifacimento-analisi1-fisica1.md`**, con MATERIA = `analisi-2`; l'autore ha lavorato con `istruzioni-agenti/brief-domande-rifacimento-analisi-2.md`. Analisi 2 non ha il catalogo degli errori tipici: in `esito.json` niente campo `errori`. Le domande a testo vuoto del capitolo sono elencate in `domande_a_testo_vuoto` di `/home/claude/lavoro-af/analisi-2__<CAPITOLO>-sg.json`: solo quelle non si toccano. Controlla in particolare che non restino domande con lo stesso testo di un'altra a meno dei numeri (era il difetto principale: circa 30 per capitolo).
