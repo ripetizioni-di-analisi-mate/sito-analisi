@@ -444,7 +444,7 @@ async function* testoModello(env, modello, input, confermaFine, scadenza) {
 }
 
 // Richieste grezze man mano che il modello le scrive; { nonUniversitario: true } se il testo non è un esame universitario.
-async function* richiesteModello(env, modello, input, tipoIniziale, scadenza) {
+async function* richiesteModello(env, modello, input, tipoIniziale, scadenza, spia) {
   let resto = '', tutto = '', pensa = false, n = 0, completo = false, nonUniversitario = false, trasportoCompleto = false;
   let tipoDocumento = tipoIniziale;
   const dallaRiga = function* (riga) {
@@ -473,6 +473,7 @@ async function* richiesteModello(env, modello, input, tipoIniziale, scadenza) {
   };
   for await (const pezzo of testoModello(env, modello, input, () => { trasportoCompleto = true; }, scadenza)) {
     tutto += pezzo;
+    if (spia) spia.testo = tutto;
     resto += pezzo;
     const righe = resto.split('\n');
     resto = righe.pop();
@@ -578,16 +579,17 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
     { role: 'user', content: `${nominati ? `Riferimenti da verificare:\n${nominati}\n\n` : ''}Voci del programma${gruppo[0].proveRichieste ? ' (elenco delle dimostrazioni richieste)' : ''}:\n${righe}` },
   ];
   // Una riga per voce: la risposta è breve. Il tetto basso ferma presto un modello che si ripete.
-  const tetto = (modello) => (/gpt-oss/.test(modello) ? 3500 : 400 + 90 * gruppo.length);
+  const tetto = (modello) => (/gpt-oss/.test(modello) ? 6000 : 400 + 90 * gruppo.length);
   const forza = (q) => (q.scheda || q.teoria ? 2 : q.argomento ? 1 : 0);
   for (const modello of modelli) {
     if (Date.now() >= fine) break;
     const risultati = new Map();
     const partenza = Date.now();
     let errore = null;
+    const spia = { testo: '' };
     try {
       const scadenza = Math.min(fine, Date.now() + TEMPO_CHIAMATA * scala * (/gpt-oss/.test(modello) ? 1.5 : 1));
-      for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: tetto(modello) }, 'programma', scadenza)) {
+      for await (const q of richiesteModello(env, modello, { messages: messaggi, max_tokens: tetto(modello) }, 'programma', scadenza, spia)) {
         // Una riga per una voce non richiesta si ignora. Se il modello divide una voce composta in più righe,
         // resta la riga con il riferimento più preciso.
         const voce = attese.get(String(q.esercizio));
@@ -601,7 +603,7 @@ async function confrontaGruppo(env, sistema, codici, gruppo, modelli, errori = [
       errori.tempi?.push({ da: gruppo[0].id, voci: gruppo.length, ms: Date.now() - partenza, modello: modello.split('/').pop().slice(0, 12), fase: opzioni.fase || 1 });
       return risultati;
     } catch (e) { errore = e; }
-    const diagnostica = { ...diagnosticaConfronto(errore), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: String(errore?.message || '').slice(0, 140) };
+    const diagnostica = { ...diagnosticaConfronto(errore), modello: modello.split('/').pop(), voci: gruppo.length, da: gruppo[0].id, ms: Date.now() - partenza, lette: risultati.size, nota: `${String(errore?.message || '').slice(0, 140)}${risultati.size ? '' : ` | testo ${spia.testo.length}: ${spia.testo.slice(0, 160)}`}` };
     errori.push(diagnostica);
     console.log('compatibilita elenco', JSON.stringify(diagnostica));
     if (diagnostica.codice !== 'PROGRAMMA') guasti[modello] = Date.now();
@@ -676,7 +678,7 @@ async function ricontrollaVoci(env, titolo, catalogoTesto, codici, voci, registr
   const modelli = inOrdine(MODELLI_TESTO).reverse();
   const gruppi = [];
   for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
-  const fine = Date.now() + TEMPO_CHIAMATA * 1.5 * (Number(env.COMPATIBILITA_TEMPI) || 1);
+  const fine = Date.now() + TEMPO_CHIAMATA * 1.6 * (Number(env.COMPATIBILITA_TEMPI) || 1);
   const esiti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, modelli.slice(0, 1), registro, { fine, fase: 2 }).catch(() => new Map())));
   return new Map(esiti.flatMap((m) => [...m]));
 }
@@ -1001,8 +1003,11 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       }
       // Programma confrontato voce per voce: le voci rimaste senza un contenuto preciso si rileggono una volta.
       const rilette = new Set();
+      let migliorate = 0;
       if (voci.length && grezze.length === voci.length) {
-        const deboli = grezze.map((q, i) => ({ q, i })).filter(({ q }) => rigaRisultato(materia, cat, codici, q, domandePer, testo).livello !== 'stesso');
+        // Si rileggono le voci rimaste senza nessun riscontro: sono quelle che abbassano di più la stima.
+        const livelloDi = (q) => rigaRisultato(materia, cat, codici, q, domandePer, testo).livello;
+        const deboli = prova && b.senzaRilettura ? [] : grezze.map((q, i) => ({ q, i })).filter(({ q }) => (prova && b.rileggiTutto ? livelloDi(q) !== 'stesso' : livelloDi(q) === 'nessuno'));
         if (deboli.length && deboli.length <= MAX_RICONTROLLO) {
           manda({ fase: 'ricontrollo', voci: deboli.length });
           const forza = { stesso: 2, argomento: 1, nessuno: 0 };
@@ -1012,7 +1017,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
             if (!nuova) continue;
             rilette.add(i);
             const candidata = { ...nuova, tipoDocumento: 'programma', punti: null };
-            if (forza[rigaRisultato(materia, cat, codici, candidata, domandePer, testo).livello] > forza[rigaRisultato(materia, cat, codici, q, domandePer, testo).livello]) grezze[i] = candidata;
+            if (forza[livelloDi(candidata)] > forza[livelloDi(q)]) { grezze[i] = candidata; migliorate++; }
           }
         }
       }
@@ -1032,7 +1037,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });
       } else {
-        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), tempi: registro.tempi, senzaModello: nonLette, perNome: grezze.length - chieste, ms: Date.now() - inizioConfronto, catalogo: catalogoTesto.length } : {}) } });
+        manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), tempi: registro.tempi, senzaModello: nonLette, rilette: rilette.size, migliorate, perNome: grezze.length - chieste, ms: Date.now() - inizioConfronto, catalogo: catalogoTesto.length } : {}) } });
         if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
           esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),
