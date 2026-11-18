@@ -380,6 +380,7 @@ function diagnosticaConfronto(e) {
     : /voci mancanti o duplicate/.test(messaggio) ? 'PROGRAMMA'
     : /non ha completato/.test(messaggio) ? 'CHIUSURA'
     : /tempo scaduto/.test(messaggio) ? 'TEMPO'
+    : /non riconosciuto dal modello/.test(messaggio) ? 'TIPO'
     : /risposta del modello interrotta/.test(messaggio) ? 'TRONCAMENTO' : 'MODELLO';
   return { codice };
 }
@@ -528,16 +529,22 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
   };
   const ordine = new Map(attesi.map((a, k) => [a.numero, k]));
   const scala = Number(env.COMPATIBILITA_TEMPI) || 1;
+  // Il documento ha i segni di un compito universitario (esercizi numerati, punteggi, più richieste): se un
+  // modello risponde «non universitario», prima di rifiutarlo si sente l'altro modello.
+  const analisi = analizzaDocumento(esame);
+  const sembraCompito = analisi.tipo === 'esame' && (analisi.richieste >= 2 || attesi.length >= 2 || /\(\s*\d+(?:[.,]\d+)?\s*(?:punti|pt)\b/i.test(esame));
+  const modelli = inOrdine(MODELLI_TESTO);
   const it = (async function* () {
     let ultimo = null, avviato = false;
     const diagnostica = [];
-    for (const m of inOrdine(MODELLI_TESTO)) {
+    for (const m of modelli) {
       const partenza = Date.now();
       const tetto = /gpt-oss/.test(m) ? 8000 : 6000;
       let n = 0;
       try {
         const righe = [];
         for await (const q of richiesteModello(env, m, { messages, max_tokens: tetto }, tipoDaTesto(esame), Date.now() + 120000 * scala)) {
+          if (q.nonUniversitario && sembraCompito && m !== modelli.at(-1)) throw new Error('compito universitario non riconosciuto dal modello');
           if (!n && avviato) yield { ricomincia: true };
           n++; avviato = true;
           righe.push(q);
@@ -576,7 +583,7 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
         registro.push({ ...diagnosticaConfronto(e), modello: m.split('/').pop(), voci: 'esame', da: '', ms: Date.now() - partenza, lette: n, nota: String(e?.message || '').slice(0, 220) });
         console.log('compatibilita confronto', m, diagnosticaConfronto(e), String(e?.message || '').slice(0, 200));
         // Un esercizio saltato non è un guasto del modello.
-        if (!['ESERCIZI', 'CONTEGGIO', 'CHIUSURA'].includes(diagnosticaConfronto(e).codice)) guasti[m] = Date.now();
+        if (!['ESERCIZI', 'CONTEGGIO', 'CHIUSURA', 'TIPO'].includes(diagnosticaConfronto(e).codice)) guasti[m] = Date.now();
       }
     }
     const errore = new Error(ultimo?.message || 'nessun confronto completo', { cause: ultimo });

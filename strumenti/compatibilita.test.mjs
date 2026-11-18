@@ -816,6 +816,17 @@ test('righe numerate «2.1» sono sottopunti dell’esercizio 2, non un esercizi
   assert.deepEqual(eventi.at(-1).fine.richieste.map((r) => `${r.esercizio}${r.parte || ''}`), ['01', '02', '1']);
 });
 
+test('un compito con esercizi e punteggi non si rifiuta perché un solo modello lo dice non universitario', async () => {
+  const testo = 'Metodi matematici\nEsercizio 1. Calcolare per quali valori di t la serie converge. (6 punti)\nEsercizio 2. Calcolare gli autovalori della matrice. (6 punti)';
+  const due = '1|-|E|A1|S1|-|Serie di potenze\n2|-|E|A1|S1|-|Autovalori\nFINE_CONFRONTO';
+  const { eventi, modelli } = await confronto((_m, _i, n) => ({ response: n === 1 ? 'NON_UNIVERSITARIO' : due }), 'analisi-1', true, testo);
+  assert.equal(modelli.length, 2);
+  assert.notEqual(modelli[0].modello, modelli[1].modello);
+  assert.equal(eventi.at(-1).fine.richieste.length, 2);
+  const rifiuto = await confronto('NON_UNIVERSITARIO', 'analisi-1', true, testo);
+  assert.equal(rifiuto.res.status, 422);
+});
+
 test('due risposte che saltano un esercizio non producono una percentuale', async () => {
   const testo = 'Esercizio 1. Calcolare un integrale.\nEsercizio 2. Calcolare un secondo integrale.';
   const { eventi } = await confronto(`${riga}FINE_CONFRONTO`, 'analisi-1', true, testo);
