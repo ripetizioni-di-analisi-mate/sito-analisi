@@ -15,7 +15,7 @@ const compila = async (file, nome) => {
   execFileSync(process.execPath, [join(radice, 'node_modules/rolldown/bin/cli.mjs'), join(radice, file), '--file', destinazione, '--format', 'esm', '--platform', 'node', '--logLevel', 'silent'], { cwd: radice });
   return import(pathToFileURL(destinazione).href);
 };
-const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita, rivalutaEsitoArchiviato, ISTRUZIONI_CONFRONTO, creaTabelleCompatibilita, archivioCompatibilita } = await compila('worker/compatibilita.mjs', 'worker');
+const { elencoProgramma, codifica, leggiRiga, valutaRichieste, gestisciCompatibilita, rivalutaEsitoArchiviato, ISTRUZIONI_CONFRONTO, creaTabelleCompatibilita, archivioCompatibilita } = await compila('worker/compatibilita.mjs', 'worker');
 const { riconosciMateriaCompito } = await compila('worker/materia-compito.mjs', 'materia');
 const { dettagliScheda, dettagliTeoria } = await compila('src/lib/catalogo-compatibilita.ts', 'catalogo');
 const { MATERIE_COMPATIBILITA } = await compila('src/data/compatibilita.ts', 'materie');
@@ -592,6 +592,30 @@ test('il confronto comprende tutte le ottanta richieste consentite', async () =>
   const righe = Array.from({ length: 80 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
   const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|80`);
   assert.equal(eventi.at(-1).fine.richieste.length, 80);
+});
+
+test('un programma scritto in prosa viene diviso in voci e confrontato per intero', async () => {
+  // Programma di Matematica I caricato il 18/11/2026: il modello ne aveva confrontate 12 voci su 97 (esito 50%).
+  const documento = readFileSync(join(radice, 'strumenti/compatibilita-programma-prosa.txt'), 'utf8');
+  const voci = elencoProgramma(documento);
+  assert.equal(voci.length, 97);
+  assert.ok(voci.every((v) => !/universit|dipartimento|asterisco|cfu/i.test(v.testo) && !v.testo.includes('*')));
+  assert.equal(voci[0].sezione, 'Nozioni di base: i numeri e le funzioni reali');
+  assert.equal(voci.find((v) => v.testo.startsWith('Teoremi di confronto')).testo, 'Teoremi di confronto (teorema della permanenza del segno e corollari; teorema dei carabinieri)');
+  assert.equal(voci.at(-1).testo, 'Serie alternate e criterio di Leibniz');
+  const risposta = (_m, input) => {
+    const ids = [...input.messages[1].content.matchAll(/^(\d+)\. /gm)].map((m) => Number(m[1]));
+    return { response: `${ids.map((id) => `${id}|T|A1|T1|-|Voce ${id}`).join('\n')}\nFINE_CONFRONTO` };
+  };
+  const { eventi, modelli } = await confronto(risposta, 'analisi-1', true, documento);
+  const esito = eventi.at(-1).fine;
+  assert.equal(esito.tipoDocumento, 'programma');
+  assert.equal(esito.richieste.length, 97);
+  assert.equal(esito.compatibilita, 100);
+  assert.equal(modelli.length, 7);
+  // Un compito e un elenco breve restano sul confronto ordinario.
+  assert.deepEqual(elencoProgramma('Esercizio 1. Calcolare il limite. Esercizio 2. Studiare la funzione. Esercizio 3. Calcolare. Es 4. Trovare. Es 5. Dire. Es 6. Fare.'), []);
+  assert.deepEqual(elencoProgramma('Teorema fondamentale del calcolo; formula fondamentale del calcolo.'), []);
 });
 
 test('quaranta voci di un elenco di dimostrazioni restano nel risultato anche dopo un tentativo parziale', async () => {

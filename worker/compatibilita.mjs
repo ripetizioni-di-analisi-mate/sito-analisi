@@ -20,6 +20,8 @@ const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/
 const MODELLI_TESTO = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
 const MAX_IMMAGINE = 1500000;  // caratteri del data URL di una pagina (circa 1 MB)
 const MAX_RICHIESTE = 80;
+// Un programma scritto in prosa elenca un contenuto per frase: le voci sono più numerose delle richieste di un compito.
+const MAX_VOCI_PROGRAMMA = 140;
 const VOCI_PER_GRUPPO = 14;
 const ARCHIVIO_MAX = 3000;     // confronti anonimi conservati per /admin/esami (tabella vecchia, solo lettura)
 const PAGINE_MAX = 1500;       // compiti di cui si conservano anche le immagini; dei più vecchi resta il testo
@@ -286,6 +288,7 @@ TIPO_DOCUMENTO|ESAME
 FINE_CONFRONTO`;
 
 // Una riga della risposta del modello → richiesta grezza (stessa forma che legge valutaRichieste); null se la riga non è una richiesta.
+export { elencoProgramma };
 export function leggiRiga(riga) {
   const s = String(riga || '').replace(/^[\s*>`•]+/, '').trim();
   const campi = s.split('|');
@@ -502,11 +505,45 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
 const TITOLO_PROGRAMMA = /^\s*(?:#{1,6}\s*)?\*{0,2}(?:programma(?:\s+(?:del|di|d[’']|dettagliato|didattico|svolto|ufficiale)|\s*[:\n]|\s*$)|syllabus\b|contenuti\s+(?:del corso|dell[’']insegnamento)\b|elenco\s+(?:(?:delle|dei|di)\s+)?(?:dimostrazioni|argomenti)\b)/i;
 const VOCE_PROGRAMMA = /^[ \t]*(?:[-*+•▪◦]|\d{1,3}[.)])[ \t]+(\S.*)$/;
 
+// Programma scritto in prosa (un titolo per sezione e, sotto, i contenuti separati da punti), come quelli
+// pubblicati dai docenti. Senza questa divisione il modello riceveva il documento intero in una sola
+// richiesta e ne confrontava soltanto le prime voci (programma di Matematica I del 18/11/2026: 12 voci su 97).
+const RIGA_AMMINISTRATIVA = /\b(?:universit[àa]|dipartimento|facolt[àa]|c\.?\s?d\.?\s?l\b|corso di (?:laurea|studi)|programma|syllabus|a\.\s?a\.|anno accademico|prof\.?(?:ssa)?\b|docente|cfu|crediti|ore di|testi consigliati|bibliografia|modalit[àa] d['’]esame)/i;
+const NOTA_PROGRAMMA = /^\s*(?:n\.?\s?b\.?|nota|note|legenda)\b|\basterisco\b/i;
+function frasiDi(riga) {
+  const frasi = [];
+  let corrente = '', tonde = 0, formula = false;
+  for (let i = 0; i < riga.length; i++) {
+    const c = riga[i];
+    if (c === '$') formula = !formula;
+    else if (!formula && c === '(') tonde++;
+    else if (!formula && c === ')') tonde = Math.max(0, tonde - 1);
+    const fine = !formula && !tonde && (c === ';' || (c === '.' && (i === riga.length - 1 || /\s/.test(riga[i + 1])) && !/\b(?:es|cfr|ecc|risp|pag|cap|sez|n|p)$/i.test(corrente)));
+    if (fine) { frasi.push(corrente); corrente = ''; } else corrente += c;
+  }
+  frasi.push(corrente);
+  // I segni «(*)» indicano di solito i teoremi senza dimostrazione: non fanno parte del nome del contenuto.
+  return frasi.map((f) => f.replace(/\$?\(\s*\\?\*\s*\)\$?/g, '').replace(/\s+/g, ' ').replace(/^[\s,:–-]+|[\s,:–-]+$/g, '')).filter((f) => /\p{L}{3}/u.test(f));
+}
+function vociInProsa(righe) {
+  const voci = [];
+  let sezione = '';
+  for (const riga of righe) {
+    const titolo = /^\s*#{1,6}\s+(.*)$/.exec(riga);
+    if (titolo) { if (!RIGA_AMMINISTRATIVA.test(titolo[1])) sezione = titolo[1].replace(/\*+/g, '').trim(); continue; }
+    if (!riga.trim() || NOTA_PROGRAMMA.test(riga) || (!voci.length && RIGA_AMMINISTRATIVA.test(riga))) continue;
+    for (const testo of frasiDi(riga.trim())) voci.push({ id: String(voci.length + 1), sezione, testo, proveRichieste: false });
+  }
+  // Gli elenchi brevi restano sul confronto ordinario, che li gestisce in una sola richiesta.
+  return voci.length >= 15 ? voci : [];
+}
+
 function elencoProgramma(testo) {
   if (tipoDaTesto(testo) !== 'programma') return [];
   const righe = testo.split(/\r?\n/);
   const primo = righe.findIndex((r) => VOCE_PROGRAMMA.test(r));
-  if (primo < 0 || (!righe.slice(0, primo).some((r) => TITOLO_PROGRAMMA.test(r)) && righe.slice(0, primo).some((r) => r.trim()))) return [];
+  if (primo < 0) return vociInProsa(righe);
+  if ( (!righe.slice(0, primo).some((r) => TITOLO_PROGRAMMA.test(r)) && righe.slice(0, primo).some((r) => r.trim()))) return [];
   const voci = [];
   let sezione = righe.slice(0, primo).filter((r) => /^\s*#{2,6}\s+/.test(r)).at(-1)?.replace(/^\s*#{2,6}\s+/, '').trim() || '';
   const introduzione = righe.slice(0, primo).join('\n');
@@ -616,7 +653,7 @@ function rigaRisultato(materia, cat, codici, r, domandePer, documento) {
 // e calcola la compatibilità.
 export function valutaRichieste(materia, cat, codici, grezze, successoArg = null, domandePer = {}, documento = '') {
   const viste = new Set();
-  const richieste = grezze.slice(0, MAX_RICHIESTE).map((r) => rigaRisultato(materia, cat, codici, r, domandePer, documento)).filter((r) => {
+  const richieste = grezze.slice(0, MAX_VOCI_PROGRAMMA).map((r) => rigaRisultato(materia, cat, codici, r, domandePer, documento)).filter((r) => {
     const chiave = JSON.stringify([r.esercizio.toLowerCase(), r.parte?.toLowerCase(), r.testo.toLowerCase()]);
     if (!r.testo || viste.has(chiave)) return false;
     viste.add(chiave);
@@ -768,7 +805,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   if (testo.length < 20) return json({ errore: 'Il testo è troppo breve: scrivi o incolla gli esercizi o gli argomenti del programma.' }, 400);
   if (testo.length > MAX_CARATTERI_TESTO) return json({ errore: `Il testo è troppo lungo: al massimo ${MAX_CARATTERI_TESTO} caratteri. Per un programma più lungo, confronta una sezione alla volta.` }, 400);
   const elenco = elencoProgramma(testo);
-  if (elenco.length > MAX_RICHIESTE) return json({ errore: `Il programma contiene più di ${MAX_RICHIESTE} voci. Carica una sezione alla volta per confrontarla per intero.` }, 422);
+  if (elenco.length > MAX_VOCI_PROGRAMMA) return json({ errore: `Il programma contiene più di ${MAX_VOCI_PROGRAMMA} voci. Carica una sezione alla volta per confrontarla per intero.` }, 422);
   const materiaScelta = materia;
   const riconoscimento = riconosciMateriaCompito(testo, materiaScelta, MATERIE_COMPATIBILITA);
   materia = riconoscimento.materia;
