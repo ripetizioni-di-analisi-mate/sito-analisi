@@ -27,3 +27,23 @@ export const MAX_PAGINE = 6;              // foto o pagine di PDF per documento
 export const MAX_CARATTERI_TESTO = 40000;  // testo del documento da confrontare (un programma svolto per lezioni è lungo)
 // Il successo (domande a tempo indovinate negli argomenti dell'esame) compare da questo numero di risposte in su.
 export const RISPOSTE_MINIME_SUCCESSO = 10;
+
+// Materie vicine: quando una richiesta non è coperta dalla materia scelta, si cerca in queste
+// (worker/compatibilita.mjs, `altreMaterie`). L'ordine è quello di ricerca; al più due per documento.
+// Solo coppie in cui lo stesso corso universitario mescola davvero gli argomenti, così un nome in comune
+// («legge di Gauss», «metodo di Gauss») non porta a una materia che non c'entra.
+export const MATERIE_AFFINI: Record<string, string[]> = {
+  'analisi-1': ['analisi-2', 'algebra-lineare', 'analisi-3'],
+  'analisi-2': ['analisi-1', 'analisi-3', 'algebra-lineare'],
+  'analisi-3': ['analisi-2', 'analisi-1'],
+  'algebra-lineare': ['analisi-1', 'analisi-2'],
+  'fisica-1': ['fisica-2', 'meccanica-razionale'],
+  'fisica-2': ['fisica-1', 'analisi-2'],
+  statica: ['scienza-delle-costruzioni', 'meccanica-razionale'],
+  'scienza-delle-costruzioni': ['statica', 'meccanica-razionale'],
+  'meccanica-razionale': ['fisica-1', 'statica'],
+  idraulica: ['fisica-1', 'meccanica-razionale'],
+  'matematica-generale': ['analisi-1', 'algebra-lineare', 'matematica-finanziaria', 'statistica'],
+  'matematica-finanziaria': ['matematica-generale', 'statistica'],
+  statistica: ['matematica-generale', 'analisi-1'],
+};

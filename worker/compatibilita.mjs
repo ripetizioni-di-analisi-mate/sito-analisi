@@ -10,7 +10,7 @@
 //     delle richieste, senza dati della persona): Carmine lo vede in /admin/esami con le richieste non coperte.
 // Vale solo per gli esami universitari (src/data/compatibilita.ts).
 import { MATERIE } from '../src/data/materie.ts';
-import { MATERIE_COMPATIBILITA, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO, SOGLIA_CONSIGLIATO } from '../src/data/compatibilita.ts';
+import { MATERIE_COMPATIBILITA, MATERIE_AFFINI, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO, SOGLIA_CONSIGLIATO } from '../src/data/compatibilita.ts';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { trovaVoceTeoria, riferimentiNominati } from './riscontro-teoria.mjs';
 import { trovaProcedimentoStudio, trovaSchedaAnalisiDue } from './riscontro-procedimenti.mjs';
@@ -1104,16 +1104,82 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });
       } else {
+        if (esito.conteggi.nessuno && !(prova && b.senzaAltreMaterie)) {
+          manda({ fase: 'altre-materie' });
+          await altreMaterie(env, materia, esito, registro, tipoDocumento).catch((e) => console.log('compatibilita altre materie', e?.message || e));
+        }
         manda({ fine: { materia, titolo: m.titolo, tipoDocumento, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti, ...(prova ? { registro: registro.slice(0, 40), tempi: registro.tempi, senzaModello: nonLette, rilette: rilette.size, migliorate, perNome: grezze.length - chieste, ms: Date.now() - inizioConfronto, catalogo: catalogoTesto.length } : {}) } });
         if (!prova) ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
-          esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),
+          esito: JSON.stringify(esito.richieste.map((r) => ({ d: tipoDocumento, e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null, ...(r.altrove ? { x: r.altrove.materia, xl: r.altrove.link } : {}) }))),
         }).catch(() => {}));
       }
       ctl.close();
     },
   });
   return new Response(corpo, { headers: { 'content-type': 'application/x-ndjson; charset=utf-8', 'cache-control': 'no-store', 'x-accel-buffering': 'no' } });
+}
+
+
+// ---------- argomenti che sono in un'altra materia del sito ----------
+// Scelta di Carmine del 18/11/2026 (alternativa C): le richieste non coperte dalla materia scelta si cercano
+// nelle materie vicine (MATERIE_AFFINI). Se ci sono, la riga dice «In <materia>» con il link e il riassunto mostra
+// la copertura della materia scelta e quella delle materie insieme. Si guardano al più due materie, in quindici
+// secondi; senza risposta del modello resta il solo riscontro per nome, e solo se il nome coincide.
+const MAX_ALTRE_MATERIE = 2;
+const TEMPO_ALTRE_MATERIE = 15000;
+const MAX_VOCI_ALTROVE = 42;
+async function altreMaterie(env, materia, esito, registro = [], tipoDocumento = 'programma') {
+  const scoperte = esito.richieste.filter((r) => r.livello === 'nessuno').slice(0, MAX_VOCI_ALTROVE);
+  const affini = (MATERIE_AFFINI[materia] || []).filter((s) => MATERIE_COMPATIBILITA.includes(s));
+  if (!scoperte.length || !affini.length) return;
+  const cataloghi = (await Promise.all(affini.map(async (slug) => ({ slug, cat: await catalogo(env, slug).catch(() => null) })))).filter((x) => x.cat);
+  // Prima le materie in cui il nome di qualche voce compare già fra i titoli.
+  const perNome = (cat) => scoperte.filter((r) => riscontroProgramma(cat, r.testo, '')?.livello === 'stesso').length;
+  const scelte = cataloghi.map((x, k) => ({ ...x, k, nomi: perNome(x.cat) })).sort((a, b) => b.nomi - a.nomi || a.k - b.k).slice(0, MAX_ALTRE_MATERIE);
+  // Con una sola richiesta scoperta non si chiama il modello: basta il nome.
+  const conModello = scoperte.length >= 2;
+  const fine = Date.now() + TEMPO_ALTRE_MATERIE * (Number(env.COMPATIBILITA_TEMPI) || 1);
+  const forza = { stesso: 2, argomento: 1, nessuno: 0 };
+  const voci = scoperte.map((r, k) => ({ id: String(k + 1), testo: r.testo, sezione: '', proveRichieste: false }));
+  const esiti = await Promise.all(scelte.map(async ({ slug, cat }) => {
+    const titolo = MATERIE.find((m) => m.slug === slug)?.titolo || slug;
+    const { testo: catalogoTesto, codici } = codifica(cat, 'programma');
+    let grezze = new Map(voci.map((v) => [v.id, rigaDaVoce(v, { senzaModello: true })]));
+    if (conModello) {
+      const sistema = ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, true) + ISTRUZIONI_ELENCO;
+      const gruppi = [];
+      for (let i = 0; i < voci.length; i += VOCI_PER_GRUPPO) gruppi.push(voci.slice(i, i + VOCI_PER_GRUPPO));
+      const parti = await Promise.all(gruppi.map((g) => confrontaGruppo(env, sistema, codici, g, inOrdine(modelliTesto(env)).slice(0, 2), registro, { fine, riserva: true, fase: 3 }).catch(() => new Map())));
+      grezze = new Map([...grezze, ...parti.flatMap((m) => [...m])]);
+    }
+    return voci.map((v) => {
+      const q = grezze.get(v.id);
+      const daModello = !q.senzaModello && Boolean(q.argomento || q.scheda || q.teoria);
+      const r = rigaRisultato(slug, cat, codici, { ...q, tipoDocumento: 'programma', punti: null }, {}, '');
+      // «In parte» vale solo se lo dice il modello: un nome in comune non basta per un'altra materia.
+      if (r.livello === 'nessuno' || (r.livello === 'argomento' && !daModello)) return null;
+      // Per la voce di un programma il riferimento è il contenuto di teoria o il capitolo; per l'esercizio di un compito, la scheda svolta.
+      const riferimenti = tipoDocumento === 'programma'
+        ? [[r.voce?.titolo, r.voce?.link], [r.argomento?.titolo, r.teoriaLink], [r.scheda?.titolo, r.scheda?.link]]
+        : [[r.scheda?.titolo, r.scheda?.link], [r.voce?.titolo, r.voce?.link], [r.argomento?.titolo, r.teoriaLink]];
+      const [cosa, link] = riferimenti.find(([t, l]) => t && l) || [titolo, `/${slug}`];
+      return { materia: slug, titolo, livello: r.livello, cosa, link };
+    });
+  }));
+  scoperte.forEach((r, k) => {
+    const migliore = esiti.map((e) => e[k]).filter(Boolean).sort((a, b) => forza[b.livello] - forza[a.livello])[0];
+    if (migliore) r.altrove = migliore;
+  });
+  const trovate = esito.richieste.filter((r) => r.altrove);
+  if (!trovate.length) return;
+  const totale = esito.richieste.reduce((t, r) => t + r.peso, 0);
+  const punti = esito.richieste.reduce((t, r) => t + r.peso * Math.max(PESI[r.livello], r.altrove ? PESI[r.altrove.livello] : 0), 0);
+  const tutte = esito.richieste.every((r) => r.livello === 'stesso' || r.altrove?.livello === 'stesso');
+  const conta = Object.create(null);
+  for (const r of trovate) (conta[r.altrove.materia] ||= { materia: r.altrove.materia, titolo: r.altrove.titolo, richieste: 0 }).richieste++;
+  esito.altre = Object.values(conta).sort((a, b) => b.richieste - a.richieste);
+  esito.insieme = totale ? Math.min(tutte ? 100 : 99, Math.round(100 * punti / totale)) : esito.compatibilita;
 }
 
 

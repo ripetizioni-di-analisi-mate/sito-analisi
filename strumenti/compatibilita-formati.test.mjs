@@ -228,3 +228,82 @@ test('appunti con sole formule e frasi di annuncio non diventano voci di un prog
   assert.ok(voci.every((v) => !/richiesta la conoscenza/.test(v)), voci.join(' | '));
   assert.ok(voci.includes('Teorema di Binet'));
 });
+
+// ---------- argomenti che sono in un'altra materia del sito ----------
+const catStatica = { materia: 'statica', titolo: 'Statica', argomenti: [
+  { slug: 'reazioni-vincolari', titolo: 'Reazioni vincolari', sezioni: [{ ancora: 'equazioni-cardinali', titolo: 'Equazioni cardinali della statica' }], schede: [{ n: 1, titolo: 'Calcolo di una reazione vincolare', parole: ['reazioni vincolari'] }], teoria: [] },
+  { slug: 'travature-reticolari', titolo: 'Travature reticolari', sezioni: [{ ancora: 'metodo-dei-nodi', titolo: 'Metodo dei nodi' }], schede: [], teoria: [] },
+] };
+const catCostruzioni = { materia: 'scienza-delle-costruzioni', titolo: 'Scienza delle costruzioni', argomenti: [
+  { slug: 'linea-elastica', titolo: 'Linea elastica', sezioni: [{ ancora: 'equazione-della-linea-elastica', titolo: 'Equazione della linea elastica' }], schede: [], teoria: [] },
+  { slug: 'taglio', titolo: 'Taglio', sezioni: [], schede: [], teoria: [{ ancora: 'formula-di-jourawski', titolo: 'Formula di Jourawski', tipo: 'teorema', dimostrazione: true }] },
+  { slug: 'legame-costitutivo', titolo: 'Legame elastico lineare', sezioni: [], schede: [], teoria: [] },
+] };
+async function conAltreMaterie(risposta, testo, materia = 'statica') {
+  const modelli = [], attese = [], chiamate = [];
+  const cataloghi = { statica: catStatica, 'scienza-delle-costruzioni': catCostruzioni };
+  const env = {
+    COMPATIBILITA_TEMPI: 0.05,
+    ASSETS: { fetch: async (r) => { const s = new URL(r.url).pathname.split('/').pop().replace('.json', ''); return cataloghi[s] ? Response.json(cataloghi[s]) : new Response('no', { status: 404 }); } },
+    AI: { run: async (modello, input) => { modelli.push({ modello, input }); return risposta(modello, input, modelli.length); } },
+  };
+  const h = {
+    aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return { ok: true, rimasti: 3 }; },
+    json: (dati, status = 200, headers) => Response.json(dati, { status, headers }),
+    utenteCollegato: async () => null, catalogoDomande: async () => ({}),
+  };
+  const req = new Request('https://esempio.test/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo }) });
+  const res = await gestisciCompatibilita(req, env, { waitUntil: (p) => attese.push(p) }, '/api/compatibilita/confronta', h);
+  const corpo = await res.text();
+  await Promise.all(attese);
+  return { res, modelli, chiamate, eventi: corpo.trim().split('\n').filter(Boolean).map((r) => JSON.parse(r)) };
+}
+const programmaMisto = 'Programma del corso\n- Calcolo delle reazioni vincolari\n- Travature reticolari\n- Teoria della linea elastica\n- Taglio e formula di Jourawski\n- Legame costitutivo dei materiali elastici\n- Fondazioni su pali';
+
+test('le voci non coperte che stanno in una materia vicina portano la materia, il link e la copertura delle due insieme', async () => {
+  // Il modello trova in Scienza delle costruzioni anche la voce che il nome da solo non trova (legame costitutivo).
+  const risposta = (_m, input) => {
+    const altra = input.messages[0].content.includes('di Scienza delle costruzioni.');
+    const voci = [...input.messages[1].content.matchAll(/^(\d+)\. (.*)$/gm)];
+    return { response: `${voci.map(([, id, t]) => `${id}|T|${altra && /costitutivo/.test(t) ? 'A3' : altra && /linea elastica/.test(t) ? 'A1' : '-'}|-|-|${t}`).join('\n')}\nFINE_CONFRONTO` };
+  };
+  const { eventi, chiamate } = await conAltreMaterie(risposta, programmaMisto);
+  assert.ok(eventi.some((e) => e.fase === 'altre-materie'));
+  const esito = eventi.at(-1).fine;
+  const per = Object.fromEntries(esito.richieste.map((r) => [r.testo, r]));
+  assert.equal(per['Calcolo delle reazioni vincolari'].livello, 'stesso');
+  assert.equal(per['Calcolo delle reazioni vincolari'].altrove, undefined);
+  assert.equal(per['Teoria della linea elastica'].altrove.materia, 'scienza-delle-costruzioni');
+  assert.equal(per['Teoria della linea elastica'].altrove.titolo, 'Scienza delle costruzioni');
+  assert.match(per['Teoria della linea elastica'].altrove.link, /^\/scienza-delle-costruzioni\/linea-elastica\/teoria/);
+  assert.equal(per['Taglio e formula di Jourawski'].altrove.livello, 'stesso');
+  assert.equal(per['Legame costitutivo dei materiali elastici'].altrove.materia, 'scienza-delle-costruzioni');
+  assert.equal(per['Fondazioni su pali'].altrove, undefined, 'una voce che non è in nessuna materia resta scoperta');
+  assert.deepEqual(esito.altre, [{ materia: 'scienza-delle-costruzioni', titolo: 'Scienza delle costruzioni', richieste: 3 }]);
+  assert.equal(esito.compatibilita, 33);
+  assert.ok(esito.insieme > 75 && esito.insieme < 100, `insieme ${esito.insieme}`);
+  const salvato = JSON.parse(chiamate.find((c) => c.percorso === '/comp-compito-esito').dati.esito);
+  assert.equal(salvato.filter((r) => r.x === 'scienza-delle-costruzioni').length, 3);
+});
+
+test('se il modello non risponde per la materia vicina, resta solo ciò che ha lo stesso nome', async () => {
+  const risposta = (_m, input) => {
+    if (input.messages[0].content.includes('di Scienza delle costruzioni.')) return new Promise(() => {});
+    return { response: `${[...input.messages[1].content.matchAll(/^(\d+)\. /gm)].map(([, id]) => `${id}|T|-|-|-|Voce ${id}`).join('\n')}\nFINE_CONFRONTO` };
+  };
+  const inizio = Date.now();
+  const { eventi } = await conAltreMaterie(risposta, programmaMisto);
+  assert.ok(Date.now() - inizio < 6000);
+  const esito = eventi.at(-1).fine;
+  const altrove = esito.richieste.filter((r) => r.altrove).map((r) => r.testo);
+  // «Teoria della linea elastica» somiglia al capitolo «Linea elastica», ma senza il modello una somiglianza non basta.
+  assert.deepEqual(altrove, ['Taglio e formula di Jourawski']);
+});
+
+test('un documento tutto coperto non cerca nelle altre materie', async () => {
+  const { eventi, modelli } = await conAltreMaterie((_m, input) => ({ response: `${[...input.messages[1].content.matchAll(/^(\d+)\. /gm)].map(([, id]) => `${id}|T|A1|-|-|Voce ${id}`).join('\n')}\nFINE_CONFRONTO` }), 'Programma\n- Calcolo delle reazioni vincolari\n- Travature reticolari\n- Metodo dei nodi');
+  const esito = eventi.at(-1).fine;
+  assert.equal(esito.altre, undefined);
+  assert.equal(esito.insieme, undefined);
+  assert.ok(modelli.every((x) => !x.input.messages[0].content.includes('di Scienza delle costruzioni.')));
+});

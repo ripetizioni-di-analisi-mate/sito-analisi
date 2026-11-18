@@ -18,6 +18,8 @@ interface Richiesta {
   riferimenti?: { titolo: string; link: string }[];
   teoriaLink: string | null; domandeLink: string | null;
   successo?: { risposte: number; corrette: number } | null;
+  // La richiesta non è coperta dalla materia scelta, ma il contenuto è in un'altra materia del sito.
+  altrove?: { materia: string; titolo: string; livello: 'stesso' | 'argomento'; cosa: string; link: string };
 }
 interface Esito {
   materia: string; titolo: string; compatibilita: number; conteggi: Record<'stesso' | 'argomento' | 'nessuno', number>;
@@ -26,6 +28,9 @@ interface Esito {
   perPunti: boolean; richieste: Richiesta[]; collegato: boolean;
   quote?: { stesso: number; argomento: number };
   successo: { percentuale: number | null; risposte: number } | null;
+  // Materie vicine in cui stanno le richieste scoperte, e copertura delle materie insieme.
+  altre?: { materia: string; titolo: string; richieste: number }[];
+  insieme?: number;
 }
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (x) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[x]!));
@@ -342,6 +347,7 @@ export function avviaCompatibilita() {
         aggiornaFase('confronto', tipoDocumento === 'programma' ? 'Programma riconosciuto. Confronto gli argomenti con il materiale…' : 'Compito riconosciuto. Confronto le richieste con il materiale…');
         return;
       }
+      if (d.fase === 'altre-materie') { aggiornaFase('confronto', 'Cerco gli argomenti scoperti nelle altre materie del sito…'); return; }
       if (d.fase === 'ricontrollo') { aggiornaFase('confronto', 'Ricontrollo gli argomenti rimasti senza un riferimento…'); return; }
       if (d.ricomincia) {
         arrivate.length = 0;
@@ -417,6 +423,11 @@ export function avviaCompatibilita() {
   const ETICHETTE = { stesso: 'Coperto', argomento: 'In parte', nessuno: 'Non coperto' };
   const rigaHtml = (materia: string, r: Richiesta) => {
     const link: string[] = [];
+    if (r.livello === 'nessuno' && r.altrove) {
+      return `<li><span class="compat-n">${esc(r.esercizio)}${r.parte ? esc(r.parte) : ''}</span><div class="compat-r">
+        <div class="testo-richiesta">${conFormule(r.testo)}</div>
+        <p class="compat-link"><span class="compat-et altrove">In ${esc(r.altrove.titolo)}</span><a href="${esc(r.altrove.link)}">${conFormule(r.altrove.cosa)}</a></p></div></li>`;
+    }
     if (r.scheda) link.push(`<a href="${esc(r.scheda.link)}">${conFormule(r.scheda.titolo)}</a>${r.scheda.libera && !possiede(materia) ? ' (gratuita)' : ''}`);
     else if (r.riferimenti?.length) link.push(...r.riferimenti.map((v) => `<a href="${esc(v.link)}">${conFormule(v.titolo)}</a>`));
     else if (r.voce) link.push(`<a href="${esc(r.voce.link)}">${conFormule(r.voce.titolo)}</a>`);
@@ -450,7 +461,25 @@ export function avviaCompatibilita() {
       ? `<p class="compat-righe-sintesi">Successo nelle domande a tempo sugli stessi argomenti: <b>${e.successo.percentuale}%</b></p>`
       : !e.collegato ? `<p class="compat-righe-sintesi">Con l’account vedi anche il successo nelle domande a tempo sugli argomenti del ${documento}.</p>` : '';
     const daComprare = !possiede(e.materia) && prezzi[e.materia];
+    // Alternativa C scelta da Carmine il 18/11: se una parte del documento sta in altre materie del sito, due barre
+    // mostrano la copertura della materia scelta e quella delle materie insieme.
+    const altre = e.altre || [];
+    const altrove = altre.reduce((t, a) => t + a.richieste, 0);
+    const dueMaterie = altre.length > 0 && e.insieme != null && altrove >= 2 && e.insieme - e.compatibilita >= 5;
+    const insieme = e.insieme ?? e.compatibilita;
+    const riquadroMaterie = dueMaterie ? `
+        <div class="compat-due">
+          <p class="cd-titolo"><strong>Il tuo ${documento} comprende ${altre.length === 1 ? 'due' : 'più'} materie del sito</strong></p>
+          <div class="cd-barre">
+            <div class="cd-riga"><span>${esc(e.titolo)}</span><i><b style="width:${e.compatibilita}%"></b></i><em>${e.compatibilita}%</em></div>
+            <div class="cd-riga forte"><span>${esc([e.titolo, ...altre.map((a) => a.titolo)].join(' + '))}</span><i><b style="width:${insieme}%"></b></i><em>${insieme}%</em></div>
+          </div>
+          <p class="cd-azioni">${altre.map((a, k) => `<a ${k ? '' : 'class="cd-tasto" '}href="/${esc(a.materia)}">Vedi ${esc(a.titolo)}</a>`).join('')}${altre.every((a) => possiede(a.materia)) && possiede(e.materia) ? '' : '<a href="/pacchetti">Pacchetti e sconti →</a>'}</p>
+        </div>` : '';
+    // Una stima bassa spiegata dalle altre materie non è una lettura incerta: il riquadro «Stima da ricontrollare»
+    // resta solo se anche le materie insieme stanno sotto la soglia.
     const ricontrolla = e.compatibilita <= SOGLIA;
+    const mostraVerifica = ricontrolla && !(dueMaterie && insieme > SOGLIA);
     const consigliato = daComprare && !ricontrolla && e.conteggi.stesso > 0;
     const acquisto = consigliato
       ? `<div class="compat-consigliato">
@@ -466,13 +495,14 @@ export function avviaCompatibilita() {
         <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di copertura stimata con ${esc(e.titolo)}</span></p>
         <div class="compat-barra" aria-hidden="true"><i class="b-stesso" style="width:${quota('stesso')}%"></i><i class="b-argomento" style="width:${quota('argomento')}%"></i></div>
         <p class="compat-righe-sintesi">${programma ? `${e.conteggi.stesso} argomenti coperti · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperti` : `${e.conteggi.stesso} richieste coperte · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperte`}</p>
-        ${ricontrolla ? riquadroVerifica(`il ${documento}`) : ''}
+        ${riquadroMaterie}
+        ${mostraVerifica ? riquadroVerifica(`il ${documento}`) : ''}
         ${successo}${acquisto}
       </div>
       <ol class="compat-richieste">${voci}</ol>
       <details class="compat-dettagli">
         <summary>Come si calcola</summary>
-        <p>Ogni ${programma ? 'voce' : 'richiesta'} vale per intero quando il sito spiega il contenuto o il metodo necessario. Vale il ${Math.round(PESO_PARZIALE * 100)}% se il corso tratta l’argomento ma manca un passaggio o la dimostrazione richiesta, e zero se manca anche l’argomento. ${e.perPunti ? 'Si usano i punteggi indicati e si ripartisce il totale tra i sottopunti quando necessario.' : 'Le voci hanno tutte lo stesso peso.'} I riferimenti sono indicati in ogni riga.</p>
+        <p>Ogni ${programma ? 'voce' : 'richiesta'} vale per intero quando il sito spiega il contenuto o il metodo necessario. Vale il ${Math.round(PESO_PARZIALE * 100)}% se il corso tratta l’argomento ma manca un passaggio o la dimostrazione richiesta, e zero se manca anche l’argomento. ${e.perPunti ? 'Si usano i punteggi indicati e si ripartisce il totale tra i sottopunti quando necessario.' : 'Le voci hanno tutte lo stesso peso.'} I riferimenti sono indicati in ogni riga.${dueMaterie ? ' La seconda barra conta anche le voci coperte dalle altre materie indicate, con le stesse regole.' : ''}</p>
       </details>
       <details class="compat-dettagli">
         <summary>Correggi il testo letto</summary>

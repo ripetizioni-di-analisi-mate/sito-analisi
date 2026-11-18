@@ -633,7 +633,10 @@ test('quaranta voci di un elenco di dimostrazioni restano nel risultato anche do
   assert.deepEqual(esito.richieste.map((r) => r.testo), voci);
   assert.deepEqual(esito.conteggi, { stesso: 1, argomento: 1, nessuno: 38 });
   // 3 gruppi, più il secondo modello per il primo gruppo, più la rilettura delle 39 voci senza un contenuto preciso (3 gruppi).
-  assert.equal(modelli.length, 7);
+  // Le chiamate per le materie vicine (voci non coperte cercate altrove) si contano a parte.
+  const principale = modelli.filter((x) => x.input.messages[0].content.includes('di Analisi matematica 1.'));
+  assert.equal(principale.length, 7);
+  assert.ok(modelli.length > principale.length, 'le voci non coperte si cercano anche nelle materie vicine');
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 1);
 });
 
@@ -691,9 +694,10 @@ test('il limite di token del modello non viene scambiato per un esame completo',
 });
 
 test('un catalogo temporaneamente indisponibile viene ritentato', async () => {
-  const primo = await confronto(`${riga}FINE_CONFRONTO|1`, 'analisi-2', false);
+  // Idraulica non è fra le materie vicine di nessun'altra: il suo catalogo non è ancora in memoria.
+  const primo = await confronto(`${riga}FINE_CONFRONTO|1`, 'idraulica', false);
   assert.equal(primo.res.status, 503);
-  const secondo = await confronto(`${riga}FINE_CONFRONTO|1`, 'analisi-2', true);
+  const secondo = await confronto(`${riga}FINE_CONFRONTO|1`, 'idraulica', true);
   assert.equal(secondo.eventi.at(-1).fine.compatibilita, 100);
 });
 
