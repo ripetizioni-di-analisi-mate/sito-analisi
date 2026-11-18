@@ -282,8 +282,6 @@ export function avviaAccount(root) {
   let preferenzePronte = false, caricamentoPreferenze = null;
   function mostraPreferenzeEmail(d) {
     campiEmail.studio.checked = d.studio;
-    campiEmail.offerte.checked = d.offerte || d.inAttesa;
-    campiEmail.materiaEmail.value = d.materia || '';
     const messaggio = d.inAttesa ? (fr ? 'Confirme ton choix en suivant le lien reçu par e-mail.' : es ? 'Confirma tu elección con el enlace que te enviamos por correo.' : de ? 'Bestätige deine Auswahl über den Link in deinem Postfach.' : en ? 'Check your inbox to confirm your choice.' : 'Controlla la posta per confermare la tua scelta.') : '';
     esito(esitoEmail, d.errore || messaggio, Boolean(d.errore));
   }
@@ -307,7 +305,7 @@ export function avviaAccount(root) {
     pulsante.disabled = true;
     try {
       const d = await api('/api/email/preferenze', {
-        studio: campiEmail.studio.checked, offerte: campiEmail.offerte.checked, materia: campiEmail.materiaEmail.value, lingua,
+        studio: campiEmail.studio.checked, offerte: false, lingua,
       });
       mostraPreferenzeEmail(d);
       if (!d.inAttesa && !d.errore) esito(esitoEmail, fr ? 'Préférences enregistrées.' : es ? 'Preferencias guardadas.' : de ? 'Einstellungen gespeichert.' : en ? 'Preferences saved.' : 'Preferenze salvate.');

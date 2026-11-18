@@ -65,8 +65,9 @@ function flussoAttivo(ar, tipo) {
 function disponibile(env, tipo) {
   if (!env.RESEND_API_KEY) return false;
   if (tipo === 'studio') return env.PROMEMORIA !== '0';
-  if (tipo === 'seconda-materia') return Boolean(env.STRIPE_SECRET_KEY && MATERIE_ATTIVE.has(DESTINAZIONE));
-  return true;
+  // Email promozionali (esercizio gratuito, sconto sulla seconda materia) spente il 18/11/2026: Carmine non vuole
+  // newsletter né offerte via email. Restano solo i promemoria per studiare.
+  return false;
 }
 
 export function archivioEmail(ar, p, c) {
@@ -159,7 +160,7 @@ function accoda(ar, ora, prove) {
     (id, email, tipo, evento, materia, argomento, riferimento, prossimo, scadenza) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     crypto.randomUUID(), r.email, tipo, evento, r.materia, r.argomento || null, r.ultima || null, ora, scadenza);
 
-  if (flussoAttivo(ar, 'prima-prova')) {
+  if (flussoAttivo(ar, 'prima-prova') && disponibile(ar.env, 'prima-prova')) {
     for (const r of ar.righe(`SELECT u.email, u.creato, e.materia, e.confermato
       FROM email_preferenze e JOIN utenti u ON u.email = e.email
       WHERE u.hash IS NOT NULL AND e.confermato IS NOT NULL AND u.creato BETWEEN ? AND ?

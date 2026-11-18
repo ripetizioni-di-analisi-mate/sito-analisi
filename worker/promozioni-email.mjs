@@ -13,7 +13,8 @@ const materie = new Map(MATERIE.filter((m) => m.attiva && m.prezzo > 0).map((m) 
 const slugs = JSON.stringify([...materie.keys()]);
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const problema = (errore, stato = 400) => ({ errore, stato });
-const disponibile = (env) => Boolean(env.RESEND_API_KEY && env.STRIPE_SECRET_KEY && env.STRIPE_WEBHOOK_SECRET && env.VENDITA !== '0');
+// Promozioni via email spente il 18/11/2026 (Carmine non vuole offerte via email).
+const disponibile = () => false;
 const prezzoScontato = (prezzo, percentuale) => Math.round(Math.round(prezzo * 100) * (100 - percentuale) / 100);
 
 export function creaTabellePromozioni(sql) {

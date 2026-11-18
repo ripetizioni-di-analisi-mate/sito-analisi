@@ -5,7 +5,6 @@
 // nella barra; al telefono la barra è compatta e il tasto «Crea l'account» apre i campi.
 // L'account si crea con /api/registrati (`benvenuto: true`); lo sconto si applica da solo nella pagina Sblocca.
 // Prova: ?barra=1 mostra la barra anche se chiusa o con l'accesso fatto.
-import ConsensoEmail from './ConsensoEmail.astro';
 import { link, type Lingua } from '../i18n';
 import { SCONTO_BENVENUTO, GIORNI_RIPROPOSTA, RITARDO_SECONDI, PAGINE_SENZA_BARRA } from '../data/benvenuto';
 interface Props { lingua: Lingua }
@@ -57,7 +56,6 @@ const accedi = link(lingua, '/accedi');
         <input id="bs-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="200" placeholder={s.password} />
         <button type="submit" class="bs-tasto">{s.crea}</button>
       </div>
-      <ConsensoEmail lingua={lingua} />
       <p class="bs-nota">{s.nota} <a href={link(lingua, '/privacy')} target="_blank" rel="noopener">{s.privacy}</a> · {s.gia} <a href={accedi}>{s.accedi}</a></p>
       <p class="bs-esito" role="status" aria-live="polite"></p>
     </form>
@@ -161,8 +159,7 @@ const accedi = link(lingua, '/accedi');
       try {
         const r = await fetch('/api/registrati', {
           method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ nome, email, password, lingua, benvenuto: true, pagina: location.pathname, offerte: modulo.offerte.checked,
-            materiaEmail: location.pathname.replace(/^\/en(?=\/)/, '').split('/')[1] }),
+          body: JSON.stringify({ nome, email, password, lingua, benvenuto: true, pagina: location.pathname }),
         });
         const d = await r.json().catch(() => ({}));
         if (r.status === 409) { esito.innerHTML = ''; esito.append(`${t.esiste} `); const a = document.createElement('a'); a.href = accedi; a.textContent = t.accedi; esito.append(a); return; }

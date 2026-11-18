@@ -861,7 +861,8 @@ async function eseguiInvii(env, giornaliero) {
 }
 
 async function salvaPreferenzeEmail(env, email, c, lingua) {
-  const r = await aDO(env, '/em-salva', { email, offerte: c.offerte === true, studio: c.studio, materia: c.materia });
+  // offerte via email spente il 18/11/2026: chi salva le preferenze revoca anche un vecchio consenso
+  const r = await aDO(env, '/em-salva', { email, offerte: false, studio: c.studio, materia: c.materia });
   const { token, limite, ...pubbliche } = r;
   if (limite) return { ...pubbliche, errore: lingua === 'fr' ? 'La limite quotidienne de confirmations est atteinte. Réessaie demain.' : lingua === 'es' ? 'Se alcanzó el límite diario de confirmaciones. Vuelve a intentarlo mañana.' : linguaEmail(lingua) === 'en' ? 'Daily confirmation limit reached. Try again tomorrow.' : 'Limite giornaliero di conferme raggiunto. Riprova domani.' };
   if (!token) return pubbliche;
@@ -1069,7 +1070,7 @@ export default {
       return json(await salvaPreferenzeEmail(env, io.email, c, linguaAccount(c.lingua)), 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/registrati' && POST) {
-      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina, offerte, materiaEmail } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const corso = typeof corsoDato === 'string' ? corsoDato.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 120) || null : null;
       if (!emailValida(email)) return json({ errore: lingua === 'fr' ? 'Saisis une adresse e-mail valide.' : lingua === 'es' ? 'Introduce una dirección de correo válida.' : lingua === 'de' ? 'Gib eine gültige E-Mail-Adresse ein.' : 'Scrivi un indirizzo email valido.' }, 400);
@@ -1085,7 +1086,6 @@ export default {
       if (invito) await registraInvitato(env, aDO, email, invito).catch((e) => console.log('inviti: registrazione', String(e)));
       // account creato dalla barra in basso: 10% sul primo acquisto di una materia (worker/benvenuto.mjs)
       if (benvenuto === true) await aDO(env, '/bv-registra', { email, pagina: String(pagina || '') }).catch(() => {});
-      if (offerte === true) ctx.waitUntil(salvaPreferenzeEmail(env, email, { offerte, materia: materiaEmail }, linguaAccount(lingua)).catch(() => {}));
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {

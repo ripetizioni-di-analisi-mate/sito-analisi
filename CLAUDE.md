@@ -491,3 +491,9 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Indice laterale: angolo oro con la stella nella riga della materia (`.angolo-bs` in `src/components/Indice.astro`; scelta fra tre, il nastro con la scritta non ci sta nella riga stretta).
 - Solo in italiano; pagina Prezzi e versione inglese non toccate.
 - Anteprima veloce di una sola pagina: nel filtro delle pagine di `astro.config.mjs` si aggiunge a mano una condizione sul percorso (per esempio solo `/` e `/index`), si fa `npx astro build` (3 minuti) e si toglie la modifica prima del commit.
+
+## Offerte via email tolte (18/11/2026, Carmine: «ripulisci il sito da cose inutili»)
+- Carmine non vuole newsletter né offerte via email (scelta del 05/11). Era comparsa una casella «Ho almeno 18 anni e acconsento a ricevere per email esercizi gratuiti e offerte…» con il menu «Materia per il primo esercizio» nella barra in basso, in Accedi, in Sblocca e nelle preferenze dell'account: **tolta** (`ConsensoEmail.astro` eliminato). Nell'account resta solo «Promemoria per riprendere da dove ero».
+- Lato Worker: in `worker/email-automatiche.mjs` i flussi `prima-prova` e `seconda-materia` non sono più disponibili (`disponibile` dà `false` per tutto tranne `studio`); in `worker/promozioni-email.mjs` le promozioni sono spente; `/api/registrati` ignora `offerte`; salvare le preferenze revoca anche un vecchio consenso. In dashboard → Email automatiche restano solo i promemoria (pannello «Promozioni via email» non mostrato). Codice e tabelle restano, per un eventuale ripensamento.
+- Informativa privacy IT/EN: tolto il paragrafo `#email-studio-offerte` e la base giuridica del consenso alle offerte.
+- **Regola**: non reintrodurre email promozionali, newsletter o caselle di consenso alle offerte senza una richiesta esplicita di Carmine.

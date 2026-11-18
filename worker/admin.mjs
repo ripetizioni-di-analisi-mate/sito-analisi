@@ -1186,9 +1186,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
 
   function email() {
     const modelli = {
-      'prima-prova': ['Prima prova', 'Dopo 2 giorni dall’iscrizione, prima di iniziare a studiare.'],
       studio: ['Riprendi lo studio', 'Dopo 3 e 10 giorni di inattività.'],
-      'seconda-materia': ['Seconda materia', 'Analisi 1 → Analisi 2. Dopo 7 giorni, con il 15% di sconto.'],
       lega: ['Sorpasso in lega', 'Quando cambia la posizione in classifica.'],
     };
     const formatoData = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeZone: 'Europe/Rome' });
@@ -1291,7 +1289,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
           d.statoConsegne === 'ok' ? 'Le consegne sono verificate con Resend.' : 'Le consegne saranno verificate dopo i primi invii.';
         flussi.innerHTML = '<p class="nota">' + nf.format(d.consensi || 0) + ' consensi confermati · ' + nf.format(d.revoche || 0) +
           ' disiscrizioni o revoche · ' + esc(nota) + '</p><div class="tabella"><table><thead><tr><th>Flusso</th><th>Stato</th><th>Primo avvio registrato</th><th>In coda</th><th>Accettate</th><th>Consegnate</th><th>Errori</th><th>Acquisti</th></tr></thead><tbody>' +
-          d.flussi.map((f) => '<tr><td><strong>' + esc(modelli[f.tipo][0]) + '</strong><br><span class="nota">' + esc(modelli[f.tipo][1]) + '</span></td>' +
+          d.flussi.filter((f) => modelli[f.tipo]).map((f) => '<tr><td><strong>' + esc(modelli[f.tipo][0]) + '</strong><br><span class="nota">' + esc(modelli[f.tipo][1]) + '</span></td>' +
             '<td><button type="button" class="bottone" data-email-flusso="' + f.tipo + '" aria-pressed="' + f.attivo + '"' +
             (!f.disponibile ? ' disabled' : '') + '>' + (!f.disponibile ? 'Non disponibile' : f.attivo ? 'Attivo' : 'In pausa') + '</button></td>' +
             '<td>' + (f.avvio ? esc(formatoOra.format(f.avvio)) : 'In attesa di rilevazione') + '</td>' +
@@ -1322,9 +1320,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       } catch { esito.textContent = 'Invio di prova non riuscito.'; }
       finally { prova.disabled = false; }
     });
-    const spazioPromo = $('#email-promozioni');
-    spazioPromo.append(pannelloPromo ||= pannelloPromozioni());
-    spazioPromo.addEventListener('promozione-inviata', caricaStorico);
+    // Promozioni via email spente il 18/11/2026 (Carmine non vuole offerte via email): pannello non mostrato.
     caricaStato();
     caricaStorico();
   }
