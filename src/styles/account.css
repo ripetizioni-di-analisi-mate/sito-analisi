@@ -1,30 +1,10 @@
 /* Area personale: studio, progressi e impostazioni condividono la stessa colonna. */
 .pagina-account { min-width: 0; }
-.pagina-account .account-intestazione { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.85rem 1.2rem; margin-bottom: 1.5rem; }
-.pagina-account .account-intestazione > h1 { min-width: 0; margin: 0; }
-.pagina-account .account-esci { display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; flex: none; min-height: 44px; max-width: 100%; padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: var(--carta); color: var(--inchiostro); font-family: var(--ui); font-size: 0.9rem; font-weight: 600; line-height: 1.3; cursor: pointer; }
-.pagina-account .account-esci[hidden] { display: none; }
-.pagina-account .account-esci svg { width: 1.1rem; height: 1.1rem; flex: none; }
-.pagina-account .account-esci:hover:not(:disabled) { border-color: var(--accento); color: var(--accento); background: color-mix(in srgb, var(--accento) 5%, var(--carta)); }
-.pagina-account .account-esci:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
-.pagina-account .account-esci[aria-busy="true"] { cursor: wait; }
-.pagina-account #esito-esci { margin: -0.7rem 0 1.2rem; }
 .pagina-account .account-caricamento,
 .pagina-account .account-nota { font-family: var(--ui); font-size: 0.92rem; color: var(--inchiostro-2); overflow-wrap: anywhere; }
 .pagina-account .account-caricamento:empty,
 .pagina-account .account-nota:empty,
 .pagina-account .esito-modulo:empty { display: none; }
-.pagina-account .schede-account { display: flex; gap: 1.7rem; margin: 0 0 1.6rem; border-bottom: 1px solid var(--riga); font-family: var(--ui); }
-.pagina-account .schede-account > button { margin: 0 0 -1px; padding: 0 0 0.75rem; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--inchiostro-2); font: inherit; font-size: 0.96rem; cursor: pointer; }
-.pagina-account .schede-account > button[aria-selected="true"] { border-bottom-color: var(--accento); color: var(--accento); font-weight: 700; }
-.pagina-account .account-titolo-sezione { font-family: var(--titoli); font-size: 1.2rem; margin: 0 0 0.8rem; }
-.pagina-account .riprendi-account { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 1.3rem 1.4rem; margin-bottom: 1.8rem; border: 1px solid color-mix(in srgb, var(--accento) 18%, var(--carta)); border-radius: var(--raggio); background: color-mix(in srgb, var(--accento) 6%, var(--carta)); }
-.pagina-account .riprendi-account > div { min-width: 0; flex: 1; }
-.pagina-account .account-sopratitolo { margin: 0 0 0.45rem; font-family: var(--ui); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.085em; text-transform: uppercase; color: var(--accento); }
-.pagina-account .riprendi-account h2 { font-size: 1.3rem; margin: 0 0 0.3rem; }
-.pagina-account .riprendi-account #ultimo-argomento { margin: 0; font-family: var(--ui); color: var(--inchiostro-2); font-size: 0.9rem; overflow-wrap: anywhere; }
-.pagina-account .riprendi-account > .bottone-primario { display: inline-flex; align-items: center; gap: 0.65rem; flex: none; padding: 0.65rem 0.95rem; border-radius: var(--raggio); font-size: 0.9rem; }
-.pagina-account .contenuti-account { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--riga); font-family: var(--ui); }
 .pagina-account .contenuti-account > li { margin: 0; padding: 0; border-bottom: 1px solid var(--riga); }
 .pagina-account .contenuto-account-link { display: flex; align-items: center; gap: 0.8rem; min-width: 0; padding: 0.9rem 0; text-decoration: none; color: var(--inchiostro); }
 .pagina-account .contenuto-account-link:hover { color: var(--accento); }
@@ -34,32 +14,15 @@
 .pagina-account .contenuto-account-freccia { flex: none; font-size: 1.15rem; color: var(--inchiostro-2); }
 .pagina-account .contenuto-video-dettagli { margin: 0 0 0.9rem; padding-left: 1.95rem; font-family: var(--ui); font-size: 0.84rem; line-height: 1.5; color: var(--inchiostro-2); overflow-wrap: anywhere; }
 .pagina-account .contenuto-video-dettagli p { margin: 0.2rem 0; }
-.pagina-account .account-livello { display: flex; align-items: center; gap: 1.3rem; margin: 0 0 1.5rem; padding: 0 0 1.4rem; border-bottom: 1px solid var(--riga); font-family: var(--ui); }
-.pagina-account .account-livello .stemma-account { width: 5.4rem; height: 5.25rem; flex: none; }
-.pagina-account .account-livello-dati { flex: 1; min-width: 0; }
-.pagina-account .account-livello .fascia-livello { margin: 0 0 0.3rem; font-family: var(--titoli); font-size: 1.35rem; color: var(--rango-testo, var(--inchiostro)); }
-.pagina-account #numero-livello { margin: 0 0 0.7rem; font-size: 0.9rem; color: var(--inchiostro-2); }
 .pagina-account .barra-exp { height: 5px; background: color-mix(in srgb, var(--accento) 14%, var(--carta)); }
 .pagina-account .barra-exp > span { background: var(--accento); }
-.pagina-account #barra-livello > span { background: var(--rango-bordo, var(--accento)); }
-.pagina-account .numeri-livello { margin: 0.45rem 0 0; gap: 0.3rem 0.8rem; font-size: 0.83rem; }
-.pagina-account .account-statistiche { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0 0 1.6rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--riga); font-family: var(--ui); }
-.pagina-account .account-statistiche > div { min-width: 0; padding: 0 0.95rem; border-left: 1px solid var(--riga); }
-.pagina-account .account-statistiche > div:first-child { padding-left: 0; border-left: 0; }
-.pagina-account .account-statistiche > div:last-child { padding-right: 0; }
-.pagina-account .account-statistiche strong { display: block; margin-bottom: 0.2rem; font-family: var(--titoli); font-size: 1.6rem; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
-.pagina-account .account-statistiche span { display: block; color: var(--inchiostro-2); font-size: 0.84rem; }
-.pagina-account #obiettivo-account { margin-bottom: 1.7rem; }
-.pagina-account .account-obiettivo-testo { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.2rem; margin: 0 0 0.7rem; font-family: var(--ui); font-size: 0.95rem; }
 .pagina-account #obiettivo-testo { min-width: 0; overflow-wrap: anywhere; }
 .pagina-account #obiettivo-numeri { flex: none; color: var(--inchiostro-2); font-size: 0.83rem; }
 .pagina-account #obiettivi-completati { margin: 0 0 1.6rem; }
-.pagina-account .account-traguardi { list-style: none; margin: 0 0 0.8rem; padding: 0; border-top: 1px solid var(--riga); font-family: var(--ui); }
 .pagina-account .account-traguardo { display: flex; align-items: baseline; justify-content: space-between; gap: 0.8rem; padding: 0.75rem 0; border-bottom: 1px solid var(--riga); font-size: 0.93rem; }
 .pagina-account .account-traguardo > span { min-width: 0; overflow-wrap: anywhere; }
 .pagina-account .account-traguardo > small { flex: none; color: var(--inchiostro-2); font-size: 0.82rem; }
 .pagina-account .account-dettagli { border-bottom: 1px solid var(--riga); font-family: var(--ui); }
-.pagina-account .account-dettagli > summary { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0.85rem 0; list-style: none; cursor: pointer; font-size: 0.96rem; font-weight: 500; }
 .pagina-account .account-dettagli > summary::-webkit-details-marker { display: none; }
 .pagina-account .account-dettagli > summary::after { content: ''; flex: none; width: 0.45rem; height: 0.45rem; margin: 0 0.2rem 0.2rem; border-right: 1.5px solid var(--inchiostro-2); border-bottom: 1.5px solid var(--inchiostro-2); transform: rotate(45deg); }
 .pagina-account .account-dettagli[open] > summary::after { transform: rotate(225deg); margin-bottom: -0.2rem; }
@@ -72,18 +35,7 @@
 .pagina-account .account-sessioni strong { min-width: 0; font-weight: 500; overflow-wrap: anywhere; }
 .pagina-account .account-sessioni small { color: var(--inchiostro-2); font-size: 0.82rem; }
 .pagina-account .account-guida { margin-top: 0.9rem; font-size: 0.84rem; }
-.pagina-account .account-gruppo { margin: 0 0 1.8rem; }
-.pagina-account .account-dati { margin: 0; border-top: 1px solid var(--riga); font-family: var(--ui); font-size: 0.95rem; }
-.pagina-account .account-dati > div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 0.6rem 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--riga); }
-.pagina-account .account-dati dt { font-weight: 500; }
-.pagina-account .account-dati dd { margin: 0; color: var(--inchiostro-2); overflow-wrap: anywhere; }
-.pagina-account .modulo { max-width: 24rem; margin: 0.6rem 0 1.1rem; }
 .pagina-account .modulo input { min-width: 0; }
-.pagina-account .account-sezione-testata { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem 1rem; }
-.pagina-account .account-sezione-testata > h2 { margin: 0; }
-.pagina-account #dispositivi-conto { font-family: var(--ui); font-size: 0.83rem; color: var(--inchiostro-2); }
-.pagina-account .dispositivi-account > .account-nota { margin: 0.6rem 0 0.9rem; }
-.pagina-account .account-dispositivi { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--riga); font-family: var(--ui); }
 .pagina-account .account-dispositivo { display: grid; grid-template-columns: 1.15rem minmax(0, 1fr) auto; align-items: center; gap: 0.6rem 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--riga); }
 .pagina-account .account-dispositivo-dati { min-width: 0; }
 .pagina-account .account-dispositivo-nome { display: block; font-size: 0.95rem; font-weight: 500; overflow-wrap: anywhere; }
@@ -93,7 +45,6 @@
 .pagina-account .dispositivo-scollega:hover { color: var(--accento); border-color: var(--accento); }
 .pagina-account .account-azione-testo { border: 0; padding: 0.4rem 0; background: none; color: var(--accento); font-family: var(--ui); font-size: 0.88rem; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
 .pagina-account #aggiorna-dispositivi { margin-top: 0.55rem; }
-.pagina-account .invita-amico { margin: 0.2rem 0 1rem; background: none; border-color: var(--riga); }
 .pagina-account .account-conferma { width: min(27rem, calc(100vw - 2rem)); max-width: none; max-height: calc(100dvh - 2rem); overflow-y: auto; margin: auto; padding: 1.4rem; border: 1px solid var(--riga); border-radius: 10px; background: var(--carta); color: var(--inchiostro); box-shadow: 0 0.8rem 2.6rem rgb(0 0 0 / 16%); }
 .pagina-account .account-conferma::backdrop { background: rgb(15 28 25 / 42%); }
 .pagina-account .account-conferma h2 { margin: 0 0 0.8rem; font-size: 1.3rem; }
@@ -106,30 +57,14 @@
 .pagina-account button:disabled { opacity: 0.6; cursor: default; }
 .pagina-account [aria-busy="true"] button { cursor: wait; }
 @media (max-width: 30rem) {
-  .pagina-account .account-esci { width: 100%; }
-  .pagina-account .schede-account { gap: 1.4rem; }
-  .pagina-account .schede-account > button { font-size: 0.9rem; }
-  .pagina-account .riprendi-account { display: block; padding: 1.05rem 1.1rem; }
-  .pagina-account .riprendi-account > .bottone-primario { margin-top: 0.95rem; }
   .pagina-account .contenuto-account-link { gap: 0.65rem; }
   .pagina-account .contenuto-account-nome { font-size: 0.95rem; }
-  .pagina-account .account-livello { gap: 0.85rem; }
-  .pagina-account .account-livello .stemma-account { width: 4.5rem; height: 4.7rem; }
-  .pagina-account .account-livello .fascia-livello { font-size: 1.15rem; }
-  .pagina-account .numeri-livello { font-size: 0.78rem; }
-  .pagina-account .account-statistiche > div { padding-inline: 0.65rem; }
-  .pagina-account .account-statistiche > div:first-child { padding-left: 0; }
-  .pagina-account .account-statistiche > div:last-child { padding-right: 0; }
-  .pagina-account .account-statistiche strong { font-size: 1.45rem; }
-  .pagina-account .account-statistiche span { font-size: 0.78rem; }
-  .pagina-account .account-obiettivo-testo { flex-wrap: wrap; }
   .pagina-account .account-dispositivo { gap: 0.6rem; }
   .pagina-account .account-dispositivo-attuale { max-width: 7.2rem; font-size: 0.75rem; }
   .pagina-account .modulo input { font-size: 1rem; }
   .pagina-account .account-conferma { padding: 1.15rem; }
 }
 @media (pointer: coarse) {
-  .pagina-account .schede-account > button,
   .pagina-account .contenuto-account-link,
   .pagina-account .account-dettagli > summary,
   .pagina-account .dispositivo-scollega,
@@ -139,3 +74,154 @@
 @media (prefers-reduced-motion: reduce) {
   .pagina-account .barra-exp > span { transition: none; }
 }
+
+/* Pagina unica (19/11/2026): copertina come lo spazio personale della home, scheda «Riprendi» appoggiata sotto,
+   voci di sezione che seguono la lettura, poi contenuti, progressi e impostazioni in una sola colonna. */
+.pagina-account { font-family: var(--ui); }
+.pagina-account .account-sopratitolo { margin: 0 0 0.5rem; font-family: var(--ui); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.085em; line-height: 1.4; text-transform: uppercase; color: var(--accento); }
+.pagina-account .ac-copertina {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem 1.6rem; padding: 1.55rem 1.8rem 1.6rem;
+  border-radius: 18px; background: radial-gradient(120% 140% at 90% 10%, #f6ead8 0%, #f7f0e5 45%, #faf7f1 100%); box-shadow: inset 0 0 0 1px #efe2cd;
+}
+.pagina-account .ac-copertina:has(+ .riprendi-account:not([hidden])) { padding-bottom: 2.9rem; }
+.pagina-account .ac-copertina .account-sopratitolo { color: var(--bronzo); }
+.pagina-account .ac-nome { margin: 0; font: 600 2.2rem/1.12 var(--titoli); letter-spacing: -0.015em; color: var(--inchiostro); overflow-wrap: anywhere; }
+.pagina-account .fascia-livello { margin: 0.35rem 0 0; font-size: 1rem; color: var(--rango-testo, var(--bronzo)); }
+.pagina-account .fascia-livello:empty, .pagina-account .ac-copertina:has(.fascia-livello:empty) .ac-cammino { display: none; }
+.pagina-account .ac-cammino { margin-top: 1rem; max-width: 23rem; }
+.pagina-account .barra-exp { height: 6px; background: color-mix(in srgb, var(--accento) 12%, var(--carta)); }
+.pagina-account .barra-exp > span { background: var(--accento); }
+.pagina-account #barra-livello { background: rgba(165, 124, 80, 0.18); }
+.pagina-account #barra-livello > span { min-width: 6px; background: linear-gradient(90deg, var(--rango-chiaro, #d9b98f), var(--rango-medio, var(--bronzo))); }
+.pagina-account .numeri-livello { margin: 0.4rem 0 0; gap: 0.2rem 0.8rem; font-size: 0.8rem; }
+.pagina-account .stemma-account { width: 8.2rem; height: 8.2rem; filter: drop-shadow(0 12px 18px rgba(120, 87, 53, 0.18)); }
+.pagina-account .stemma-account:empty { display: none; }
+.pagina-account .stemma-account svg { width: 100%; height: 100%; overflow: visible; }
+
+.pagina-account .riprendi-account { position: relative; margin: -1.7rem 1.2rem 0; }
+.pagina-account .ac-continua {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.95rem 1rem 0.95rem 1.3rem; border-radius: 14px; background: #fff;
+  box-shadow: 0 1px 0 #efe2cd, 0 14px 28px -20px rgba(35, 48, 46, 0.35); color: var(--inchiostro); text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.pagina-account .ac-continua:hover { transform: translateY(-1px); box-shadow: 0 1px 0 #efe2cd, 0 18px 30px -20px rgba(35, 48, 46, 0.42); }
+.pagina-account .ac-continua:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
+.pagina-account .ac-c-testo { display: flex; flex-direction: column; min-width: 0; }
+.pagina-account .ac-c-su { font-size: 0.78rem; color: var(--bronzo); }
+.pagina-account #ultima-materia { font: 600 1.25rem/1.25 var(--titoli); }
+.pagina-account #ultimo-argomento { font-size: 0.86rem; color: var(--inchiostro-2); }
+.pagina-account #ultima-materia, .pagina-account #ultimo-argomento { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pagina-account .ac-c-tasto { flex: none; display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.6rem 1.05rem; border-radius: 999px; background: var(--azione); color: #fff; font-size: 0.9rem; font-weight: 600; }
+.pagina-account .ac-c-tasto svg { width: 1.05rem; height: 1.05rem; transition: transform 0.15s ease; }
+.pagina-account .ac-continua:hover .ac-c-tasto svg { transform: translateX(2px); }
+
+/* Voci di sezione: restano sotto la testata mentre si scorre. */
+.pagina-account .schede-account {
+  position: sticky; top: var(--altezza-testata); z-index: 5; display: flex; gap: 1.7rem; margin: 1.5rem 0 0; padding-top: 0.75rem;
+  border-bottom: 1px solid var(--riga); background: color-mix(in srgb, var(--carta) 94%, transparent); backdrop-filter: blur(6px);
+}
+.pagina-account .schede-account > a { margin: 0 0 -1px; padding: 0 0 0.7rem; border-bottom: 2px solid transparent; color: var(--inchiostro-2); font-size: 0.95rem; text-decoration: none; }
+.pagina-account .schede-account > a:hover { color: var(--accento); }
+.pagina-account .schede-account > a[aria-current] { border-bottom-color: var(--accento); color: var(--accento); font-weight: 700; }
+.pagina-account .schede-account > a:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
+
+.pagina-account .ac-sezione { padding-top: 2.3rem; scroll-margin-top: var(--altezza-testata); }
+.pagina-account .account-titolo-sezione { margin: 0 0 0.9rem; font-family: var(--titoli); font-size: 1.45rem; line-height: 1.2; }
+.pagina-account .contenuti-account, .pagina-account .account-traguardi, .pagina-account .account-dispositivi { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--riga); font-family: var(--ui); }
+.pagina-account .account-traguardi { margin-bottom: 0; }
+.pagina-account .account-dettagli .account-dispositivi { border-top: 1px solid var(--riga); }
+
+.pagina-account .account-statistiche { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0 0 1.5rem; padding: 0.95rem 0; border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); }
+.pagina-account .account-statistiche > div { min-width: 0; padding: 0 1.1rem; border-left: 1px solid var(--riga); }
+.pagina-account .account-statistiche > div:first-child { padding-left: 0; border-left: 0; }
+.pagina-account .account-statistiche strong { display: block; margin-bottom: 0.1rem; font-family: var(--titoli); font-size: 1.6rem; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
+.pagina-account .account-statistiche span { display: block; color: var(--inchiostro-2); font-size: 0.84rem; }
+.pagina-account #obiettivo-account { margin: 0 0 1.6rem; padding: 0.95rem 1.1rem 1.05rem; border-radius: 12px; background: color-mix(in srgb, var(--accento) 5%, var(--carta)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accento) 14%, var(--carta)); }
+.pagina-account #obiettivo-account[hidden] { display: none; }
+.pagina-account .account-obiettivo-testo { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.2rem; margin: 0 0 0.65rem; font-size: 0.97rem; }
+.pagina-account .account-obiettivo-testo a { color: var(--inchiostro); font-weight: 500; text-decoration: none; }
+.pagina-account .account-obiettivo-testo a:hover { color: var(--accento); text-decoration: underline; text-underline-offset: 0.2em; }
+.pagina-account #traguardi-raggiunti + #traguardi-vuoti { margin-top: 0.7rem; }
+
+/* Impostazioni: una riga per voce, con il valore a destra; ciò che si modifica si apre sul posto. */
+.pagina-account .ac-righe { border-top: 1px solid var(--riga); }
+.pagina-account .ac-riga { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.3rem 1rem; margin: 0; padding: 0.85rem 0; border-bottom: 1px solid var(--riga); font-size: 0.96rem; font-weight: 500; }
+.pagina-account .account-dettagli > summary { display: flex; align-items: center; gap: 0.8rem; padding: 0.85rem 0; list-style: none; cursor: pointer; font-size: 0.96rem; font-weight: 500; }
+.pagina-account .account-dettagli > summary::after { margin-left: auto; }
+.pagina-account .account-dettagli > summary:hover { color: var(--accento); }
+.pagina-account .account-dettagli > summary:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
+.pagina-account .ac-valore { margin-left: auto; min-width: 0; color: var(--inchiostro-2); font-size: 0.9rem; font-weight: 400; overflow-wrap: anywhere; text-align: right; }
+.pagina-account summary > .ac-valore + *, .pagina-account summary:has(.ac-valore)::after { margin-left: 0.2rem; }
+.pagina-account .modulo { max-width: 24rem; margin: 0.2rem 0 1.1rem; }
+.pagina-account .dispositivi-account > .account-nota { margin: 0 0 0.8rem; }
+.pagina-account .ac-preferenze { max-width: none; }
+.pagina-account .account-email-spunta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex: 1; margin: 0; font-weight: 500; cursor: pointer; }
+.pagina-account .account-email-spunta input { appearance: none; flex: none; position: relative; width: 2.35rem; height: 1.35rem; margin: 0; border-radius: 999px; background: color-mix(in srgb, var(--inchiostro-2) 32%, var(--carta)); cursor: pointer; transition: background 0.18s ease; }
+.pagina-account .account-email-spunta input::after { content: ''; position: absolute; top: 0.16rem; left: 0.16rem; width: 1.03rem; height: 1.03rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 22%); transition: transform 0.18s ease; }
+.pagina-account .account-email-spunta input:checked { background: var(--accento); }
+.pagina-account .account-email-spunta input:checked::after { transform: translateX(1rem); }
+.pagina-account .account-email-spunta input:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
+.pagina-account .account-email-spunta input:disabled { opacity: 0.55; cursor: default; }
+.pagina-account .ac-preferenze .esito-modulo { flex-basis: 100%; margin: 0; font-size: 0.86rem; font-weight: 400; }
+.pagina-account .account-esci { display: inline-flex; align-items: center; gap: 0.55rem; min-height: 44px; margin-top: 0.9rem; padding: 0.4rem 0; border: 0; background: none; color: var(--inchiostro-2); font-family: var(--ui); font-size: 0.93rem; cursor: pointer; }
+.pagina-account .account-esci[hidden] { display: none; }
+.pagina-account .account-esci svg { width: 1.1rem; height: 1.1rem; flex: none; }
+.pagina-account .account-esci:hover:not(:disabled) { color: var(--c-attenzione); }
+.pagina-account .account-esci:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
+.pagina-account .account-esci[aria-busy="true"] { cursor: wait; }
+.pagina-account #esito-esci { margin: 0.2rem 0 0; }
+@media (max-width: 35rem) {
+  .pagina-account .ac-copertina { padding: 1.25rem 1.15rem 1.35rem; gap: 0.8rem; }
+  .pagina-account .ac-copertina:has(+ .riprendi-account:not([hidden])) { padding-bottom: 2.7rem; }
+  .pagina-account .ac-nome { font-size: 1.7rem; }
+  .pagina-account .fascia-livello { font-size: 0.92rem; }
+  .pagina-account .stemma-account { width: 5.4rem; height: 5.4rem; align-self: start; }
+  .pagina-account .numeri-livello { font-size: 0.76rem; }
+  .pagina-account .riprendi-account { margin-left: 0.7rem; margin-right: 0.7rem; }
+  .pagina-account .ac-continua { padding: 0.85rem 0.85rem 0.85rem 1rem; }
+  .pagina-account #ultima-materia { font-size: 1.1rem; }
+  .pagina-account .ac-c-tasto { padding: 0; width: 2.7rem; height: 2.7rem; justify-content: center; }
+  .pagina-account .ac-c-tasto > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .pagina-account .schede-account { gap: 1.3rem; }
+  .pagina-account .schede-account > a { font-size: 0.9rem; }
+  .pagina-account .account-titolo-sezione { font-size: 1.3rem; }
+  .pagina-account .account-statistiche > div { padding-inline: 0.65rem; }
+  .pagina-account .account-statistiche strong { font-size: 1.2rem; white-space: nowrap; }
+  .pagina-account .account-statistiche span { font-size: 0.78rem; }
+}
+@media (pointer: coarse) { .pagina-account .schede-account > a { display: inline-flex; align-items: flex-end; min-height: 40px; } }
+@media (prefers-reduced-motion: reduce) { .pagina-account .ac-continua, .pagina-account .ac-c-tasto svg, .pagina-account .account-email-spunta input, .pagina-account .account-email-spunta input::after { transition: none; } }
+/* Versione sintetica: traguardi e attività chiusi in una riga, niente nota sotto il videocorso. */
+.pagina-account .contenuto-account-nota { display: none; }
+.pagina-account #percorso .ac-righe { margin-top: 0.2rem; }
+.pagina-account #percorso .account-traguardi { border-top: 0; }
+.pagina-account #percorso .account-traguardi > li:last-child { border-bottom: 0; }
+.pagina-account #traguardi-vuoti { margin: 0 0 0.9rem; }
+/* Progressi: tre numeri soltanto (studio della settimana, esperienza accumulata, giorni all'esame). */
+.pagina-account .account-statistiche { margin-bottom: 0; }
+.pagina-account .account-statistiche span a { color: inherit; text-underline-offset: 0.2em; }
+.pagina-account .account-statistiche span a:hover { color: var(--accento); }
+.pagina-account #esame-etichetta a { display: block; }
+/* Passata minimal (19/11/2026): niente nota sotto il videocorso, niente «Come funziona» nella striscia dell'invito, etichette brevi. */
+.pagina-account .contenuto-video-dettagli { display: none; }
+.pagina-account #esame-etichetta a { display: inline; color: inherit; text-decoration: none; }
+.pagina-account #esame-etichetta a:hover { text-decoration: underline; }
+/* «Invita un amico», versione «riga» (scelta il 19/11/2026): una riga sottile come quelle dei contenuti, nei toni bronzo. */
+.invita-riga { display: flex; align-items: center; gap: 0.9rem; margin: 1.7rem 0 0; padding: 0.95rem 0; border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); color: var(--inchiostro); }
+.invita-riga .invita-icona { flex: none; display: grid; }
+.invita-riga .invita-icona svg { width: 1.25rem; height: 1.25rem; color: var(--bronzo-icona); }
+.invita-riga .invita-testo { flex: 1; min-width: 0; margin: 0; font-size: 0.98rem; }
+.invita-riga .invita-testo b { font-weight: 600; }
+.invita-riga .invita-testo > span { color: var(--inchiostro-2); }
+.invita-riga .invita-numeri { display: block; margin: 0.15rem 0 0; font-size: 0.84rem; }
+.invita-riga .invita-copia { flex: none; padding: 0.3rem 0; border: 0; background: none; color: var(--bronzo); font: 600 0.9rem var(--ui); text-decoration: underline; text-underline-offset: 0.2em; white-space: nowrap; cursor: pointer; }
+.invita-riga .invita-copia:hover, .invita-riga .invita-wa:hover { color: var(--bronzo-scuro); }
+.invita-riga .invita-wa { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; color: var(--bronzo); }
+.invita-riga .invita-wa svg { width: 1.25rem; height: 1.25rem; }
+.invita-riga .invita-copia:focus-visible, .invita-riga .invita-wa:focus-visible { outline: 2px solid var(--bronzo); outline-offset: 3px; }
+@media (max-width: 35rem) {
+  .invita-riga { gap: 0.65rem; }
+  .invita-riga .invita-testo > span { display: block; font-size: 0.88rem; }
+  .invita-riga .invita-testo i { display: none; }
+}
+@media (pointer: coarse) { .invita-riga .invita-copia { min-height: 44px; } .invita-riga .invita-wa { width: 2.75rem; height: 2.75rem; } }
+.invita-riga .invita-testo i { font-style: normal; }

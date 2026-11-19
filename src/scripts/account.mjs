@@ -44,37 +44,41 @@ export function avviaAccount(root) {
     el.textContent = testo;
     el.classList.toggle('errore', errore);
   }
-  const schede = [...root.querySelectorAll('[data-area]')];
+  // Pagina unica: le voci in alto portano alle sezioni e segnano quella che si sta leggendo.
+  const schede = [...root.querySelectorAll('.schede-account [data-area]')];
   let io = null, caricamentoDispositivi = null;
-  function attiva(area, aggiornaHash = false) {
-    if (!schede.some((b) => b.dataset.area === area)) area = 'studio';
-    for (const b of schede) {
-      const scelta = b.dataset.area === area;
-      b.setAttribute('aria-selected', String(scelta));
-      b.tabIndex = scelta ? 0 : -1;
-      q(b.getAttribute('aria-controls')).hidden = !scelta;
-    }
-    if (aggiornaHash) history.replaceState(null, '', '#' + area);
-    if (area === 'impostazioni' && io) { caricaDispositivi(); caricaPreferenzeEmail(); }
+  const ALIAS = { percorso: 'progressi', contenuti: 'studio' };
+  function segna(area) {
+    for (const b of schede) { if (b.dataset.area === area) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); }
+  }
+  function vai(el) {
+    el?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
   function daHash() {
     const hash = location.hash.slice(1);
-    attiva(hash === 'percorso' ? 'progressi' : hash === 'dispositivi' ? 'impostazioni' : hash);
-    if (hash === 'dispositivi' && io) q('dispositivi').scrollIntoView({ block: 'start' });
-    if (hash === 'videocorsi') root.querySelector('#videocorsi')?.scrollIntoView({ block: 'start' });
-    if (hash === 'orientamento' && io?.gm === true) root.querySelector('#orientamento')?.scrollIntoView({ block: 'start' });
+    if (!hash || !io) return;
+    const area = ALIAS[hash] || hash;
+    if (hash === 'dispositivi') { q('dispositivi').open = true; vai(q('dispositivi')); return; }
+    if (hash === 'videocorsi') { vai(root.querySelector('#videocorsi')); return; }
+    if (hash === 'orientamento') { if (io.gm === true) vai(root.querySelector('#orientamento')); return; }
+    if (['studio', 'progressi', 'impostazioni'].includes(area)) vai(q(area + '-account'));
   }
-  schede.forEach((b) => b.addEventListener('click', () => attiva(b.dataset.area, true)));
-  root.querySelector('.schede-account').addEventListener('keydown', (event) => {
-    const i = schede.indexOf(document.activeElement);
-    if (i < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  schede.forEach((b) => b.addEventListener('click', (event) => {
     event.preventDefault();
-    const n = event.key === 'Home' ? 0 : event.key === 'End' ? schede.length - 1 : (i + (event.key === 'ArrowRight' ? 1 : -1) + schede.length) % schede.length;
-    attiva(schede[n].dataset.area, true);
-    schede[n].focus();
-  });
+    history.replaceState(null, '', '#' + b.dataset.area);
+    vai(q(b.dataset.area + '-account'));
+  }));
+  if ('IntersectionObserver' in window) {
+    const visibili = new Set();
+    const osservatore = new IntersectionObserver((voci) => {
+      for (const v of voci) { if (v.isIntersecting) visibili.add(v.target); else visibili.delete(v.target); }
+      const prima = schede.map((b) => q(b.dataset.area + '-account')).find((el) => visibili.has(el));
+      if (prima) segna(prima.id.replace('-account', ''));
+    }, { rootMargin: '-25% 0px -60% 0px' });
+    schede.forEach((b) => osservatore.observe(q(b.dataset.area + '-account')));
+  }
+  segna('studio');
   window.addEventListener('hashchange', daHash);
-  daHash();
 
   function rigaContenuto(titolo, href, video = false) {
     const li = elemento('li', video ? 'contenuto-videocorso' : '');
@@ -121,47 +125,31 @@ export function avviaAccount(root) {
     const stemma = root.querySelector('.stemma-account');
     stemma.innerHTML = stemmaSVG(rango, { perc: percentuale, id: 'a', nastro: true, livello: st.livello, etichetta: fr ? 'NIV.' : es ? 'NIVEL' : de ? 'STUFE' : en ? 'LV.' : 'LIV.' });
     stemma.setAttribute('aria-label', `${s.livello} ${st.livello}, ${nomeRango(st.livello, lingua)}`);
-    root.querySelector('.account-livello').setAttribute('style', stileRango(rango));
+    root.querySelector('.ac-copertina').setAttribute('style', stileRango(rango));
     root.querySelector('.fascia-livello').textContent = `${nomeRango(st.livello, lingua)} · ${st.fascia}`;
-    q('numero-livello').textContent = `${s.livello} ${st.livello}`;
     q('barra-livello').setAttribute('aria-valuenow', String(percentuale));
     q('barra-livello').firstElementChild.style.width = percentuale + '%';
-    root.querySelector('.exp-totale').textContent = `${numero(st.exp)} ${s.totale}`;
     root.querySelector('.exp-mancano').textContent = st.prossimo === null ? s.limite : `${numero(st.mancano)} ${s.punti} ${s.alLivello} ${st.livello + 1}`;
+    // Tre numeri soltanto: studio della settimana, esperienza accumulata, giorni all'esame più vicino.
     const minuti = d.settimana?.minuti || 0;
     q('sett-minuti').textContent = minuti >= 60 ? `${Math.floor(minuti / 60)} h ${minuti % 60} min` : `${minuti} min`;
-    q('sett-corrette').textContent = numero(d.settimana?.corrette);
-    q('sett-giorni').textContent = numero((d.settimana?.giorni || []).filter((g) => g.attivo).length);
-    const obiettivi = d.obiettivi || [], obiettivo = obiettivi.find((o) => !o.completato);
-    q('obiettivo-account').hidden = !obiettivo;
-    q('obiettivi-completati').hidden = Boolean(obiettivo);
-    q('obiettivi-completati').textContent = obiettivi.length ? s.completati : s.nessunObiettivo;
-    if (obiettivo) {
-      const testo = q('obiettivo-testo'), href = destinazioneObiettivo(obiettivo, catalogo, lingua);
-      testo.replaceChildren();
-      if (href) { const a = elemento('a', '', obiettivo.testo); a.href = href; testo.append(a); } else testo.textContent = obiettivo.testo;
-      if (de) testo.lang = 'en';
-      q('obiettivo-numeri').textContent = `${obiettivo.fatto} / ${obiettivo.totale} · ${obiettivo.punti} ${s.punti}`;
-      const p = obiettivo.totale > 0 ? Math.max(0, Math.min(100, Math.round(obiettivo.fatto / obiettivo.totale * 100))) : 0;
-      q('barra-obiettivo').setAttribute('aria-valuenow', String(p)); q('barra-obiettivo').firstElementChild.style.width = p + '%';
+    q('exp-accumulata').textContent = `${numero(st.exp)} ${s.punti}`;
+    const esame = (d.esami || [])[0], etichetta = q('esame-etichetta');
+    etichetta.replaceChildren();
+    if (esame) {
+      const giorni = Math.max(0, Math.round((new Date(esame.data + 'T12:00:00').getTime() - new Date().setHours(12, 0, 0, 0)) / 86400000));
+      q('giorni-esame').textContent = numero(giorni);
+      const a = elemento('a', '', fr ? 'Jours avant l’examen' : es ? 'Días para el examen' : de ? 'Tage bis zur Prüfung' : en ? 'Days to the exam' : 'Giorni all’esame');
+      a.href = `${pref}/${esame.materia}`; a.title = esame.titolo || '';
+      etichetta.append(a);
+    } else {
+      q('giorni-esame').textContent = '—';
+      const prima = materie.find((m) => (io.materie || []).includes(m.slug));
+      const a = elemento('a', '', fr ? 'Ajoute la date de ton examen' : es ? 'Añade la fecha de tu examen' : de ? 'Prüfungstermin eintragen' : en ? 'Add your exam date' : 'Aggiungi la data dell’esame');
+      a.href = prima ? (prima.href || `${pref}/${prima.slug}`) : (pref || '/');
+      etichetta.append(a);
     }
-    const traguardi = [...(d.traguardi || [])].reverse();
-    q('traguardi-vuoti').hidden = traguardi.length > 0;
-    q('traguardi-raggiunti').replaceChildren(); q('elenco-altri-traguardi').replaceChildren();
-    traguardi.forEach((t, i) => { const li = elemento('li', 'account-traguardo'); const titolo = elemento('span', '', t.nome); if (de) titolo.lang = 'en'; li.append(titolo, elemento('small', '', `+${t.punti} ${s.punti}`)); q(i < 3 ? 'traguardi-raggiunti' : 'elenco-altri-traguardi').append(li); });
-    q('altri-traguardi').hidden = traguardi.length <= 3;
     const sessioni = d.sessioni || [];
-    q('sessioni-account').replaceChildren();
-    if (!sessioni.length) q('sessioni-account').append(elemento('li', 'account-nota', s.vuotoSessioni));
-    for (const ses of sessioni) {
-      const dest = destinazione(ses), li = elemento('li');
-      const titolo = elemento(dest ? 'a' : 'strong', '', ses.titolo || catalogo[ses.materia]?.titolo || s.studio);
-      if (dest) titolo.href = dest.href;
-      if (de) titolo.lang = 'en';
-      const data = new Date(ses.inizio).toLocaleDateString(locale, { day: 'numeric', month: 'short' });
-      li.append(titolo, elemento('small', '', `${data} · ${ses.minuti} min${ses.risposte > 0 ? ` · ${ses.corrette} / ${ses.risposte}` : ''} · +${ses.punti} ${s.punti}`));
-      q('sessioni-account').append(li);
-    }
     const ultima = sessioni.find((ses) => destinazione(ses));
     if (ultima) {
       const dest = destinazione(ultima);
@@ -301,7 +289,7 @@ export function avviaAccount(root) {
   preferenzeEmail.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!preferenzePronte) return;
-    const pulsante = preferenzeEmail.querySelector('button');
+    const pulsante = campiEmail.studio;
     pulsante.disabled = true;
     try {
       const d = await api('/api/email/preferenze', {
@@ -313,13 +301,16 @@ export function avviaAccount(root) {
     finally { pulsante.disabled = false; }
   });
 
+  // L'interruttore dei promemoria si salva da solo, senza tasto.
+  campiEmail.studio.addEventListener('change', () => preferenzeEmail.requestSubmit());
+
   const nome = q('form-nome'), cambio = q('cambio');
   nome.addEventListener('submit', async (event) => {
     event.preventDefault();
     const value = nome.elements.nome.value.trim(), b = nome.querySelector('button[type="submit"]');
     if (!value) { esito(q('esito-nome'), js.nomeMancante, true); return; }
     b.disabled = true;
-    try { const d = await api('/api/nome', { nome: value }); io.nome = d.nome || value; q('nome-account').textContent = io.nome; esito(q('esito-nome'), js.nomeSalvato); }
+    try { const d = await api('/api/nome', { nome: value }); io.nome = d.nome || value; q('nome-account').textContent = io.nome; q('ac-nome').textContent = io.nome; esito(q('esito-nome'), js.nomeSalvato); }
     catch { esito(q('esito-nome'), js.erroreGenerico, true); }
     finally { b.disabled = false; }
   });
@@ -351,11 +342,6 @@ export function avviaAccount(root) {
       esci.removeAttribute('aria-busy');
     } finally { clearTimeout(attesa); }
   });
-  const invito = root.querySelector('#invita-amico');
-  if (invito) {
-    const mostraInvito = () => { q('inviti-account').hidden = invito.hidden; };
-    mostraInvito(); new MutationObserver(mostraInvito).observe(invito, { attributes: true, attributeFilter: ['hidden'] });
-  }
   (async () => {
     try { io = await api('/api/io'); }
     catch (error) {
@@ -364,12 +350,13 @@ export function avviaAccount(root) {
     }
     if (!io?.email) { esito(q('chi'), js.erroreGenerico, true); return; }
     q('nome-account').textContent = io.nome || '—'; q('email-account').textContent = io.email;
+    q('ac-nome').textContent = io.nome || io.email;
     nome.elements.nome.value = io.nome || '';
     q('chi').hidden = true; q('pannello').hidden = false; esci.hidden = false;
     // Riusa l'identità appena verificata: Premium da solo non apre l'anteprima GM.
     document.querySelectorAll('[data-orientamento-gm]').forEach((el) => { el.hidden = io.gm !== true; });
     if (lingua === 'it' && io.gm === true) avviaRisultatiSalvati(root);
+    await Promise.allSettled([mostraContenuti(), caricaPercorso(), caricaDispositivi(), caricaPreferenzeEmail()]);
     daHash();
-    await Promise.allSettled([mostraContenuti(), caricaPercorso()]);
   })();
 }
