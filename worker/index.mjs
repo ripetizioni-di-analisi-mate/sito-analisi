@@ -137,6 +137,21 @@ const normalizza = (e) => String(e || '').trim().toLowerCase();
 // ---------- archivio (Durable Object con SQLite) ----------
 const DATI_VALIDI = 3 * 60 * 1000;
 const MODIFICHE_DASHBOARD = new Set(['/abilita', '/revoca', '/dispositivo-rimuovi', '/utente-password', '/segnalazione-letta', '/registra-acquisto', '/utente-crea']);
+// Visitatori unici e pagine viste di ieri (UTC) a fasce di 10 minuti, per il confronto «ieri a quest'ora» in dashboard.
+// completo = ieri è stato registrato per intero con l'orario (prima del 19/11/2026 l'orario non si salvava).
+function orarioIeri(a) {
+  const ieri = a.riga("SELECT date('now', '-1 day') AS g").g;
+  const senzaOra = a.riga('SELECT COUNT(*) AS n FROM visitatori WHERE giorno = ? AND minuto IS NULL', ieri)?.n || 0;
+  const primo = a.riga('SELECT MIN(giorno) AS g FROM pagine_orarie')?.g || null;
+  return {
+    giorno: ieri,
+    primo,
+    completo: !senzaOra && !!primo && primo < ieri,
+    visitatori: a.righe('SELECT minuto / 10 AS fascia, COUNT(*) AS n FROM visitatori WHERE giorno = ? AND minuto IS NOT NULL GROUP BY minuto / 10', ieri),
+    pagine: a.righe('SELECT fascia, n FROM pagine_orarie WHERE giorno = ?', ieri),
+  };
+}
+
 export class Archivio {
   constructor(state, env) {
     this.state = state;
@@ -175,6 +190,9 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE pi_prove ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
+    // minuto UTC della prima visita del giorno e pagine viste a fasce di 10 minuti: servono al confronto «ieri a quest'ora» in dashboard
+    try { this.sql.exec('ALTER TABLE visitatori ADD COLUMN minuto INTEGER'); } catch { /* già presente */ }
+    this.sql.exec('CREATE TABLE IF NOT EXISTS pagine_orarie (giorno TEXT, fascia INTEGER, n INTEGER, PRIMARY KEY (giorno, fascia))');
     // promemoria per tornare a studiare (worker/promemoria.mjs): ultima attività, consenso, lingua, registro degli invii
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN attivo INTEGER'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN promemoria INTEGER DEFAULT 1'); } catch { /* già presente */ }
@@ -284,8 +302,14 @@ export class Archivio {
                        ON CONFLICT(giorno, fonte) DO UPDATE SET n = n + 1`, c.giorno, c.fonte);
         if (c.campagna) this.sql.exec(`INSERT INTO eventi (giorno, evento, materia, n) VALUES (?, 'campagna', ?, 1)
                        ON CONFLICT(giorno, evento, materia) DO UPDATE SET n = n + 1`, c.giorno, c.campagna);
+        const minuto = Number.isInteger(c.minuto) && c.minuto >= 0 && c.minuto < 1440 ? c.minuto : null;
+        if (minuto !== null) {
+          this.sql.exec(`INSERT INTO pagine_orarie (giorno, fascia, n) VALUES (?, ?, 1)
+                         ON CONFLICT(giorno, fascia) DO UPDATE SET n = n + 1`, c.giorno, Math.floor(minuto / 10));
+          if (Math.random() < 0.01) this.sql.exec("DELETE FROM pagine_orarie WHERE giorno < date('now', '-10 days')");
+        }
         if (c.h) {
-          this.sql.exec('INSERT OR IGNORE INTO visitatori (giorno, h, mobile) VALUES (?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0);
+          this.sql.exec('INSERT OR IGNORE INTO visitatori (giorno, h, mobile, minuto) VALUES (?, ?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0, minuto);
           if (Math.random() < 0.01) this.sql.exec("DELETE FROM visitatori WHERE giorno < date('now', '-200 days')");
         }
         return Response.json({ ok: true });
@@ -557,6 +581,7 @@ export class Archivio {
           visitatori: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM visitatori
                                   WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           inizioVisitatori: this.riga('SELECT MIN(giorno) AS g FROM visitatori')?.g || null,
+          orarioIeri: orarioIeri(this),
           sezioni: perPeriodo(sezioni),
           percorsoAcquisto: perPeriodo(percorsoAcquisto),
           campagne: perPeriodo(campagne),
@@ -1973,7 +1998,9 @@ export default {
     // Si contano solo le persone: robot, anteprime dei link e strumenti automatici restano fuori.
     const ua = req.headers.get('user-agent') || '';
     if (req.method === 'GET' && html && ua && !ROBOT.test(ua) && risposta.status < 400) {
-      const giorno = new Date().toISOString().slice(0, 10);
+      const adesso = new Date();
+      const giorno = adesso.toISOString().slice(0, 10);
+      const minuto = adesso.getUTCHours() * 60 + adesso.getUTCMinutes();
       // La pagina Sblocca di ogni materia e la pagina di ogni videocorso si contano a parte (percorso d'acquisto in dashboard).
       const senzaEn = p.replace(/^\/en(?=\/)/, '');
       const sbl = senzaEn.match(/^\/([^/]+)\/sblocca\/?$/), vid = senzaEn.match(/^\/videocorsi\/([^/]+)\/?$/);
@@ -1988,7 +2015,7 @@ export default {
       const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${giorno}|${req.headers.get('cf-connecting-ip') || ''}|${ua}`));
       const h = [...new Uint8Array(impronta).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
       const mobile = /Mobi|Android|iPhone|iPad/i.test(ua);
-      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte, campagna, h, mobile }).catch(() => {}));
+      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte, campagna, h, mobile, minuto }).catch(() => {}));
       // La prima provenienza resta in un cookie per 90 giorni: serve a sapere da dove arriva chi poi si iscrive.
       if (fonte && !leggiCookie(req, 'fonte')) {
         try { risposta.headers.append('set-cookie', `fonte=${encodeURIComponent(fonte)}; Path=/; Max-Age=7776000; HttpOnly; Secure; SameSite=Lax`); } catch { /* intestazioni bloccate */ }

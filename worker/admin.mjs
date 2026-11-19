@@ -116,6 +116,11 @@ main{padding:1.4rem clamp(16px,3vw,2.2rem) 3rem;min-width:0}
 .legenda i{display:inline-block;width:.7rem;height:.7rem;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
 .traffico-parziale{display:flex;align-items:baseline;flex-wrap:wrap;gap:.25rem .9rem;padding:.5rem .7rem;margin-bottom:.6rem;border:1px solid var(--riga);border-radius:9px;background:var(--pannello-2);color:var(--ink-2);font-size:.84rem}
 .traffico-parziale b{color:var(--ink);font-variant-numeric:tabular-nums}
+.traffico-parziale .ieri-ora{margin-left:auto;color:var(--ink-3)}
+.traffico-parziale .ieri-ora b{color:var(--ink-2)}
+.traffico-parziale .ieri-ora i{font-style:normal;font-weight:700}
+.traffico-parziale .ieri-ora i.su{color:var(--su)}.traffico-parziale .ieri-ora i.giu{color:var(--giu)}.traffico-parziale .ieri-ora i.pari{color:var(--ink-3)}
+.traffico-parziale .ieri-ora.attesa{font-size:.78rem}
 
 /* elenchi a barre */
 .barre{display:grid;gap:.55rem}
@@ -466,6 +471,23 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
   }
   const somma = (a) => a.reduce((s, x) => s + x, 0);
 
+  // Confronto con lo stesso orario di ieri: visitatori unici e pagine viste fino a quest'ora (fasce di 10 minuti, UTC).
+  function ieriAQuestOra(oggi) {
+    const o = D.orarioIeri;
+    const ieri = giornoISO(new Date(Date.parse(oggi + 'T00:00:00Z') - 864e5));
+    if (!o || o.giorno !== ieri) return '';
+    if (!o.completo) {
+      const dal = giornoISO(new Date(Date.parse((o.primo || oggi) + 'T00:00:00Z') + 2 * 864e5));
+      return '<span class="ieri-ora attesa">Confronto con ieri a quest’ora disponibile dal ' + breveData(dal) + '</span>';
+    }
+    const adesso = new Date(), fascia = Math.floor((adesso.getUTCHours() * 60 + adesso.getUTCMinutes()) / 10);
+    const fino = (righe) => righe.reduce((s, r) => s + (r.fascia <= fascia ? r.n : 0), 0);
+    const vis = fino(o.visitatori), pag = fino(o.pagine);
+    const oggiVis = seriePerGiorni('visitatori', [oggi])[0];
+    let delta = '';
+    if (vis > 0) { const p = ((oggiVis - vis) / vis) * 100; const cl = Math.abs(p) < 0.5 ? 'pari' : p > 0 ? 'su' : 'giu'; delta = ' <i class="' + cl + '">' + (p > 0 ? '▲ ' : p < 0 ? '▼ ' : '') + Math.abs(Math.round(p)) + '%</i>'; }
+    return '<span class="ieri-ora" title="Ieri dalla mezzanotte UTC fino allo stesso orario di adesso">Ieri a quest’ora <b>' + nf.format(vis) + '</b> visitatori unici · <b>' + nf.format(pag) + '</b> pagine viste' + delta + '</span>';
+  }
   function andamentoTraffico(conIngressi = false) {
     // Il Worker aggrega le visite per data UTC. L'ultima data è ancora in corso.
     const date = elencoGiorni(giorni + 1);
@@ -482,7 +504,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       valori: seriePerGiorni(m.chiave, conclusi).map((v, i) => m.dal && conclusi[i] >= m.dal ? v : null),
     }));
     const parziale = '<div class="traffico-parziale"><span title="Giornata calcolata in UTC">In corso · ' + breveData(oggi) + '</span>' +
-      metriche.map((m) => '<span><b>' + nf.format(seriePerGiorni(m.chiave, [oggi])[0]) + '</b> ' + m.etichetta + '</span>').join('') + '</div>';
+      metriche.map((m) => '<span><b>' + nf.format(seriePerGiorni(m.chiave, [oggi])[0]) + '</b> ' + m.etichetta + '</span>').join('') +
+      ieriAQuestOra(oggi) + '</div>';
     return { conclusi, serieG, parziale };
   }
   function graficoTraffico(el, andamento, opz) {
