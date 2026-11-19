@@ -192,10 +192,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
               <details class="indice-sottogruppo">
                 <summary>{b.sotto}</summary>
                 {b.parti ? b.parti.map((p) => (
-                  <>
-                    <p class="indice-parte">{p.titolo}</p>
+                  <details class="indice-parte-gruppo">
+                    <summary class="indice-parte">{p.titolo}</summary>
                     {lista(p.materie)}
-                  </>
+                  </details>
                 )) : lista(b.materie)}
               </details>
             ) : lista(b.materie, i === 0 ? guida : null));
