@@ -1,0 +1,9 @@
+---
+import RaccoltaSvolti from '../../../viste/RaccoltaSvolti.astro';
+import { raccolteSvolti } from '../../../lib/raccolte-svolti';
+
+export async function getStaticPaths() {
+  return [...(await raccolteSvolti('en')).keys()].map((materia) => ({ params: { materia } }));
+}
+---
+<RaccoltaSvolti lingua="en" materia={Astro.params.materia!} />

@@ -3,6 +3,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { verificaScoperta } from './scoperta-pagine.mjs';
 
 const ORIGINE = 'https://ripetizionidianalisi.com';
 const ESCLUSE = /^(?:vetrine|risorse|dati-[^/]+|email|pdf)(?:\/|$)/;
@@ -124,6 +125,9 @@ export async function generaSitemap(directory = 'dist') {
   await writeFile(join(directory, 'sitemap.xml'), xmlMappa(sorted));
   const index = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="${XML}">\n${maps.map((name) => `<sitemap><loc>${ORIGINE}/${name}</loc></sitemap>`).join('\n')}\n</sitemapindex>\n`;
   await writeFile(join(directory, 'sitemap-index.xml'), index);
+  const scoperta = await verificaScoperta(directory, sorted);
+  console.log(`SEO: ${scoperta.dirette}/${scoperta.totali} URL raggiungibili seguendo i link dalle home delle lingue. Dalla home italiana, incluse le alternative di lingua, ${scoperta.orfane.length} pagine senza percorso.`);
+  if (scoperta.orfane.length) console.warn('Pagine da collegare:', scoperta.orfane.slice(0, 12).join(', '));
   console.log(`SEO: ${pages.size} URL canonici verificati, ${maps.length} sitemap per materia e pagine generali, ${alternatiRimossi} alternative di lingua non valide rimosse.`);
   return { pagine: pages.size, mappe: maps.length };
 }

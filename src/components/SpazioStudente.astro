@@ -10,7 +10,7 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
 ---
-<section class="spazio-studente" aria-labelledby="ss-saluto">
+<section class="spazio-studente" data-solo-sessione data-nosnippet aria-labelledby="ss-saluto">
   <div class="ss-copertina">
     <div class="ss-dati">
       <h2 class="ss-saluto" id="ss-saluto">{en ? 'Hi, ' : 'Ciao, '}<span class="ss-nome"></span>.</h2>

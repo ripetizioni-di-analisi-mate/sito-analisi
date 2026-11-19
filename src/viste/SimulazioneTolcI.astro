@@ -7,7 +7,7 @@ const { materia = 'tolc-i' } = Astro.props;
 const conf = TOLC[materia];
 const prezzo = materiaIt(materia).prezzo;
 ---
-<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Allenamento al ${conf.nome} per ${conf.area}: tempi separati per sezione, cinque alternative, correzione e spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
+<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Allenamento al ${conf.nome} per ${conf.area}: tempi separati per sezione, cinque alternative, correzione e spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true }}>
   <div class="tolc-simulazione" data-materia={materia} data-massimo={conf.quesiti}>
     <p class="sopratitolo">Preparati a {conf.area}</p>
     <h1>Simulazione {conf.nome}</h1>

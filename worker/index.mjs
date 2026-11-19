@@ -9,6 +9,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { CODICI_LINGUA, prefissoLingua } from '../src/data/codici-lingua.mjs';
+import { alternativaStudio } from './risorse-studio.mjs';
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { CATALOGO_USA_PUBBLICO } from '../src/data/cataloghi-studio.mjs';
@@ -1924,6 +1925,15 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
+    if (risposta.status === 404 && (req.method === 'GET' || req.method === 'HEAD')) {
+      const alternativa = alternativaStudio(url.pathname);
+      if (alternativa) {
+        const destinazione = new URL(alternativa.percorso, url);
+        const verifica = await env.ASSETS.fetch(new Request(destinazione, { method: 'HEAD' }));
+        if (verifica.status === 200 && verifica.headers.get('content-type')?.includes('text/html'))
+          return new Response(null, { status: alternativa.stato, headers: { location: destinazione.pathname + url.search, 'cache-control': 'no-store' } });
+      }
+    }
     if (orientamentoRiservato) risposta = rispostaPrivataOrientamento(risposta);
     // Indirizzi tecnici di Cloudflare (*.workers.dev, anteprime dei rami): mai negli indici, la pagina vera è su ripetizionidianalisi.com.
     if (url.hostname.endsWith('.workers.dev')) {
@@ -1950,9 +1960,12 @@ export default {
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
       if (io?.gm !== true) {
-        risposta = new HTMLRewriter().on('[data-orientamento-gm]', {
-          element(element) { element.remove(); },
-        }).transform(risposta);
+        const rimuovi = { element(element) { element.remove(); } };
+        const filtro = new HTMLRewriter().on('[data-orientamento-gm]', rimuovi);
+        // Gli ospiti ricevono solo il catalogo pubblico. Dati di ripresa, spunte
+        // e materiali personali servono dopo l'accesso, anche per i non GM.
+        if (!io) filtro.on('[data-solo-sessione]', rimuovi);
+        risposta = filtro.transform(risposta);
       }
       if (primo === BOCCONI.slug && percorsoNormalizzato.endsWith('/simulazione') && accessoBocconi(env, io)) {
         risposta = new HTMLRewriter().on('[data-bocconi]', {

@@ -2,6 +2,7 @@
 // I titoli seguono le ricerche reali degli studenti ("limiti esercizi svolti", "teorema di Rolle dimostrazione").
 import type { Lingua } from '../i18n';
 import { MATERIE } from '../data/materie';
+import { MATERIE_EN } from '../data/materie-en';
 
 // Tipo di materia: decide le parole dei titoli (un concorso ha «quiz», non «teoremi»; alle superiori ci sono
 // le verifiche, non l'esame) e il nome con cui la materia si cerca («Matematica 3° anno superiori»).
@@ -16,6 +17,8 @@ const PER_NOME = new Map<string, Contesto>();
 for (const x of MATERIE) {
   const c: Contesto = { tipo: TIPO_GRUPPO[x.gruppo] ?? 'universita', slug: x.slug, titolo: x.titolo, breve: x.breve };
   PER_NOME.set(x.titolo, c); PER_NOME.set(x.breve, c);
+  const en = MATERIE_EN[x.slug];
+  if (en) { PER_NOME.set(en.titolo, c); PER_NOME.set(en.breve, c); }
 }
 const tipoDi = (m: string): Tipo => PER_NOME.get(m)?.tipo ?? 'universita';
 // Nome della materia in coda ai titoli, come si cerca: le superiori con «superiori», il semestre filtro per esteso.
@@ -97,7 +100,7 @@ const TITOLI_MATERIA: Record<string, string> = {
 };
 const IT = {
   home: 'Matematica e fisica: teoria ed esercizi svolti | Ripetizioni di Analisi',
-  homeDescr: 'Teoria ed esercizi svolti di matematica, fisica, chimica e biologia: esami universitari, superiori, semestre filtro di Medicina, TOLC e concorsi.',
+  homeDescr: 'Studia matematica e fisica con teoria ed esercizi svolti per università, superiori e test d’ingresso. Trovi schede gratuite, videocorsi e ripetizioni di Analisi online.',
   materia: (m: string) => {
     const c = PER_NOME.get(m);
     if (c && TITOLI_MATERIA[c.slug]) return TITOLI_MATERIA[c.slug];
@@ -185,7 +188,7 @@ const EN: typeof IT = {
   // All'estero si cerca «calculus», «solved problems» (USA) o «worked examples» (Regno Unito) e «proofs»: i titoli usano
   // questi termini, le descrizioni li affiancano, e dicono che le pagine sono in inglese per gli studenti in Italia e all'estero.
   home: 'Calculus, Linear Algebra and Physics: theory and solved problems',
-  homeDescr: 'Theory, theorems with proofs and step-by-step solved problems for university exams: Calculus 1 and 2 (Mathematical Analysis 1 and 2), Precalculus, Linear Algebra, Physics 1 and 2, Mathematics for Economics. Free previews, in English.',
+  homeDescr: 'Study calculus, linear algebra and physics with worked examples, proofs and practice problems. Browse free worksheets by topic and prepare for university exams.',
   materia: (m) => scegli(`${cercato(m, true)}: theory, proofs and solved problems for the exam | Ripetizioni di Analisi`, `${cercato(m, true)}: theory, proofs and solved problems for the exam`, `${cercato(m, true)}: theory, proofs and solved problems`, `${cercato(m)}: theory, proofs and solved problems`),
   materiaDescr: (m, d, n) => `${cercato(m, true)}: ${n} topics with theory, proofs of the theorems, step-by-step worked examples and practice problems with solutions. ${d}`,
   teoria: (a, m, ab) => titoloCapitolo(argEn(a), ARGOMENTI_CERCATI_EN[a] ? undefined : ab, ['definitions, theorems and proofs', 'theory and proofs'], cercato(m)),
@@ -198,7 +201,7 @@ const EN: typeof IT = {
   dafare: (s, m, ab, numero) => { const t = conCapitolo(s, ab); return numero && ab ? `${s} | ${ab} · ${numero} · ${cercato(m)}` : scegliCon([`${t}: practice problem with solution | ${cercato(m)}`, `${t}: practice problem | ${cercato(m)}`], `${t}: practice problem with solution`); },
   dafareDescr: (s, a, m) => `${cercato(m)} practice problem on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
   livello: 'University',
-  livelloDi: () => 'University',
+  livelloDi: (m) => LIVELLI[tipoDi(m)][1],
   teoremi: (m, b) => scegli(`${cercato(m)}: all definitions and theorems with proofs | Ripetizioni di Analisi`, `${cercato(m)}: all definitions and theorems with proofs`, `${cercato(m)}: all definitions and theorems`, `${cercato(b)}: definitions and theorems`),
   teoremiDescr: (m, nd, nt, primi) => conNomi(`${nt} theorems and ${nd} definitions of ${cercato(m)}, each linked to its statement and proof`, primi),
   voce: (v, tipo, dim, b, a, ripetuta = false) => {

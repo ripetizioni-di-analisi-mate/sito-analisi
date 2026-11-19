@@ -1,15 +1,14 @@
 ---
-// Timed questions of all subjects with English questions (free). Same layout as the Italian page src/pages/domande-a-tempo.astro.
+// Timed questions of all subjects with English questions. Same layout as the Italian page src/pages/domande-a-tempo.astro.
 import Base from '../../layouts/Base.astro';
 import { RIPASSO } from '../../data/livelli';
 import { elencoDomande } from '../../lib/domande-elenco';
 import { nomiAllenamento } from '../../lib/allenamento.mjs';
 const { materie, gruppi, totale } = await elencoDomande('en');
 ---
-<Base titolo="Timed questions: free calculus, linear algebra and physics quizzes" descrizione={`Free multiple-choice quizzes on ${materie.length} subjects: four answers, two minutes per question and an explanation after every answer. No account needed.`} lingua="en" percorso={[{ titolo: 'Timed questions' }]} seo={{ titolo: 'Free calculus and physics quizzes with explanations' }}>
-  <p class="sopratitolo">Free</p>
-  <h1>Timed questions</h1>
-  <p class="sommario">{totale} multiple-choice questions: four answers, two minutes per question and the explanation after you confirm. No account needed.</p>
+<Base titolo="Timed quizzes by subject and topic" descrizione={`Practise with multiple-choice quizzes in ${materie.length} subjects. Choose a topic, try a free preview and read the explanation after each answer.`} lingua="en" percorso={[{ titolo: 'Timed questions' }]} seo={{ titolo: 'Timed quizzes by subject and topic' }}>
+  <h1>Timed quizzes by subject and topic</h1>
+  <p class="sommario">{totale.toLocaleString('en-US')} multiple-choice questions across the courses. You have two minutes per question and can read the explanation after answering. Try a free preview or <a href="/en/livelli-e-punti">see how quizzes earn experience points</a>.</p>
   {gruppi.map((g) => (
     <>
       <p class="dta-gruppo">{g}</p>
@@ -17,9 +16,9 @@ const { materie, gruppi, totale } = await elencoDomande('en');
         {materie.filter((m) => m.gruppo === g).map((m) => (
           <li style={`--accento: ${m.colore}`}>
             <h3>{m.titolo}</h3>
-            <p class="dta-conti">{m.argomenti.length} argomenti · {m.totale} domande</p>
+            <p class="dta-conti">{m.argomenti.length} topics · {m.totale} questions</p>
             <div class="dta-tasti">
-              <a class="dta-primario" href={`/en/${m.slug}/${RIPASSO}/domande`}>Review on everything</a>
+              <a class="dta-primario" href={`/en/${m.slug}/${RIPASSO}/domande`}>Review all topics</a>
               {m.simulazione && <a class="dta-secondario" href={`/en/${m.slug}/simulazione`}>{nomiAllenamento(m, 'en').simulazione}</a>}
             </div>
             <details>

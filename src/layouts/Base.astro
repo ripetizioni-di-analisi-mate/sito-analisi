@@ -70,7 +70,7 @@ const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
     : sezione === 'home' ? `${link(l.codice, '/')}?lingua=${l.codice}`
     : linguaCatalogo(l.codice) ? destinazioneLocalizzata(l.codice, versioneIt)
     : l.codice === 'en' && (seo.senzaInglese || (seo.soloQuestaLingua && !localizzato))
-      ? link('en', '/') : altraLingua(Astro.url.pathname, l.codice),
+      ? link('en', sezione === 'domande' && materia ? '/' + materia : '/') : altraLingua(Astro.url.pathname, l.codice),
 }));
 const versoIt = altraLingua(Astro.url.pathname, 'it');
 const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({
@@ -169,7 +169,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   {[fontMarchio, fontIndice, fontIndiceSemibold, fontIndiceBold].map((href) => (
     <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
   ))}
-  <style is:inline set:html={regoleStato}></style>
+  <style is:inline data-solo-sessione set:html={regoleStato}></style>
   <link rel="icon" href={url('/logo.svg')} type="image/svg+xml" />
   <title>{titoloCompleto}</title>
   <meta name="description" content={descrizioneSeo} />
@@ -382,7 +382,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
 
   {!localizzato && sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
   {sezione !== 'stampa' && MISURAZIONE_ATTIVA && <ConsensoCookie lingua={lingua} />}
-  <script type="application/json" id="catalogo-percorso" is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
+  <script type="application/json" id="catalogo-percorso" data-solo-sessione is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
 
   <div class="avviso-premio" role="status" aria-live="polite" hidden></div>
   <div class="avviso-duello" role="status" aria-live="polite" hidden></div>

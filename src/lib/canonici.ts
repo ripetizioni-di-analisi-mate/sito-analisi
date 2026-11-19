@@ -12,7 +12,7 @@ import { join } from 'node:path';
 const CONDIVISI_ANALISI_3 = ['successioni-e-serie-di-funzioni', 'serie-di-potenze', 'serie-di-fourier'];
 const CAPITOLO_ANALISI_2 = 'equazioni-differenziali';
 const CONDIVISI_ALGEBRA = ['numeri-complessi'];
-const CARTELLA = { 'esercizi-svolti': 'svolti', esercizi: 'dafare' } as const;
+const CARTELLA = { 'esercizi-svolti': 'svolti', esercizi: 'dafare', domande: 'domande' } as const;
 const radice = join(process.cwd(), 'src', 'content');
 
 let ancoreAnalisi1: Set<string> | undefined;
@@ -27,7 +27,7 @@ function ancoraInAnalisi1(ancora: string): boolean {
 
 // Percorso (senza prefisso di lingua) della pagina originale, oppure undefined se la pagina è già l'originale.
 // `voce` è il numero della scheda o dell'esercizio, oppure l'ancora di un teorema o di una definizione.
-export function originale(materia: string, argomento: string, sezione: 'teoria' | 'esercizi-svolti' | 'esercizi', voce?: string): string | undefined {
+export function originale(materia: string, argomento: string, sezione: 'teoria' | 'esercizi-svolti' | 'esercizi' | 'domande', voce?: string): string | undefined {
   const coda = `${argomento}/${sezione}${voce ? `/${voce}` : ''}`;
   if (materia === 'analisi-3' && CONDIVISI_ANALISI_3.includes(argomento)) return `/analisi-2/${coda}`;
   if (materia === 'algebra-lineare' && CONDIVISI_ALGEBRA.includes(argomento)) return `/analisi-1/${coda}`;

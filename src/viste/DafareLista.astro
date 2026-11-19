@@ -37,8 +37,8 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
   precedente={precedente} successivo={successivo}
   lingua={lingua} nonTradotta={nonTradotta}
 >
-  <p class="sopratitolo">{t.sezioni.esercizi}</p>
-  <h1>{arg.titolo}</h1>
+  <p class="sopratitolo">{materiaL(lingua, materia).titolo}</p>
+  <h1>{arg.titolo} · {t.sezioni.esercizi}</h1>
   <p class="sommario">{t.dafareSommario}</p>
   {voci.length === 0 && <p class="nota-segnaposto">{t.dafareInPreparazione}</p>}
   {resi.map(({ v, Content }) => (
