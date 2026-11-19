@@ -61,7 +61,7 @@ export function avviaAccount(root) {
     if (hash === 'dispositivi') { q('dispositivi').open = true; vai(q('dispositivi')); return; }
     if (hash === 'videocorsi') { vai(root.querySelector('#videocorsi')); return; }
     if (hash === 'orientamento') { if (io.gm === true) vai(root.querySelector('#orientamento')); return; }
-    if (schede.some((b) => b.dataset.area === area)) vai(q(area + '-account'));
+    if (['studio', 'progressi', 'impostazioni'].includes(area)) vai(q(area + '-account'));
   }
   schede.forEach((b) => b.addEventListener('click', (event) => {
     event.preventDefault();

@@ -125,7 +125,7 @@
 .pagina-account .schede-account > a[aria-current] { border-bottom-color: var(--accento); color: var(--accento); font-weight: 700; }
 .pagina-account .schede-account > a:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
 
-.pagina-account .ac-sezione { padding-top: 2.1rem; scroll-margin-top: calc(var(--altezza-testata) + 2.4rem); }
+.pagina-account .ac-sezione { padding-top: 2.3rem; scroll-margin-top: var(--altezza-testata); }
 .pagina-account .account-titolo-sezione { margin: 0 0 0.9rem; font-family: var(--titoli); font-size: 1.45rem; line-height: 1.2; }
 .pagina-account .contenuti-account, .pagina-account .account-traguardi, .pagina-account .account-dispositivi { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--riga); font-family: var(--ui); }
 .pagina-account .account-traguardi { margin-bottom: 0; }
