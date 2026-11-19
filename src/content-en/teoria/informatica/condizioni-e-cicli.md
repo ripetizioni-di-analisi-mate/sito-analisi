@@ -6,19 +6,19 @@ sommario: From guards and selection to proofs of loop correctness and terminatio
 ## Expressions that determine the next step
 
 :::definizione{#verita-scalare titolo="Truth value of a scalar"}
-The controlling expressions of `if` statements and loops in C have scalar type. For an integer condition, zero is false and every nonzero integer is true, including negative integers. A comparison such as `x < 10` produces a value of type `int` that is exactly `0` or `1`. The same convention applies to equality `==`, inequality `!=`, and the logical operators.
+A program often has to choose what to do on the basis of a **condition**, for example “`x` is less than $10$”. In C a condition is a numeric expression, which is *false* if it is zero and *true* if it is nonzero, even when it is negative. Comparisons such as `x < 10`, `x == y` and `x != y` produce $1$ when they are true and $0$ when they are false.
 
-The **state** includes the values of the variables at a point in the program. A **guard** is the condition that decides whether to execute a branch or another iteration. In the state `x = -6`, the guard `x` is true, while `x > 0` is false. The two expressions describe different properties of the same integer, so the choice depends on the property the problem calls for.
+The **state** of the program at a certain point is the set of the values of its variables at that moment. The condition that decides whether to execute a branch of a selection or another repetition of a loop is called a **guard**. With `x` equal to $-6$ the guard `x` is true, because $-6$ is nonzero, whereas the guard `x > 0` is false. Writing just `x` is therefore equivalent to writing `x != 0`.
 :::
 
 :::definizione{#cortocircuito titolo="Short-circuit evaluation"}
-The `&&` and `||` operators evaluate the left operand first. In a conjunction, a false first operand gives a result of `0` and the right operand is skipped. In a disjunction, a true first operand gives a result of `1` and the right operand is skipped. In the remaining cases, the second evaluation determines the result. The `!` operator produces `1` when its operand is zero and `0` when its operand is nonzero.
+Conditions are combined with three **logical operators**. `a && b` (and) is true when both are true. `a || b` (or) is true when at least one of them is true. `!a` (not) is true when `a` is false. These operators too produce $1$ for true and $0$ for false.
 
-Because `&&` takes precedence over `||`, the expression `a || b && c` groups the last two operands. Parentheses express the grouping `(a || b) && c`, in which the value of `c` contributes when the first disjunction is true.
+The operators `&&` and `||` compute the left operand first, and compute the right one only if it is needed; the mechanism is called **short-circuit evaluation**. In `a && b`, if `a` is false the result is already false and `b` is not computed. In `a || b`, if `a` is true the result is already true and `b` is not computed. The operator `&&` has precedence over `||`, so `a || b && c` is equivalent to `a || (b && c)`; to obtain the other grouping one writes `(a || b) && c`.
 :::
 
 :::esempio{titolo="Guarding an integer division"}
-The fragment checks whether the integer quotient exceeds `3` after checking that the divisor is nonzero.
+Short-circuit evaluation makes it possible to protect an operation that cannot always be performed. The fragment checks that the divisor is nonzero before dividing.
 
 ```c
 int numerator = 18, divisor = 0;
@@ -29,7 +29,7 @@ With the given values, the first comparison is false, so `ok` is `0` and the div
 :::
 
 :::attenzione
-In the expression `0 < x < 10` the first comparison produces `0` or `1`. Both results are less than `10`, so the entire expression is true even when `x = 12`. The expression `0 < x && x < 10` tests both inequalities directly.
+The mathematical notation $0<x<10$ does not translate into `0 < x < 10`. C first computes `0 < x`, which is $0$ or $1$, and then compares this result with $10$; the second comparison is always true, even for `x` equal to $12$. The correct form is `0 < x && x < 10`.
 
 Short-circuit evaluation also applies to side effects. If `count = 2`, the disjunction `count > 0 || ++count == 3` is `1` and `count` is still `2`, because the right operand is skipped.
 :::
@@ -37,9 +37,9 @@ Short-circuit evaluation also applies to side effects. If `count = 2`, the disju
 ## Choosing which branch to execute
 
 :::definizione{#selezione-if titolo="Selection with if"}
-With `if (condition) statement`, the controlled statement executes when the condition is true. If the `else` clause is present, exactly one of the two branches executes. Braces group several statements into a single block. In an `else if` chain, each guard is evaluated only if all earlier guards are false. A true guard determines the block to execute and completes the selection. A final `else`, when present, covers the states in which every previous comparison is false.
+The statement `if (condition) statement` executes the statement only if the condition is true. With `else` one adds an alternative statement, executed when the condition is false; of the two branches exactly one is always executed. To put several statements in a branch one encloses them in braces, forming a **block**. In a chain `if … else if … else` the conditions are checked from top to bottom. The branch of the first true condition is executed and the following ones are not even computed; the final `else`, if present, is executed when all of them are false.
 
-An execution trace can record the guards in the order in which they are tested. Two consecutive `if` statements are separate selections. Both can execute their branch if the corresponding conditions are true when they are evaluated.
+Two `if` statements written one after the other, without `else`, are instead two independent choices, and both branches may be executed if both conditions are true.
 :::
 
 :::esempio{titolo="Partitioning values at two thresholds"}
@@ -56,29 +56,42 @@ if (t < 0) {
 }
 ```
 
-To enter the second branch, both `t >= 0` and `t < 7` must hold. Its range therefore includes the integers from `0` to `6`. For the given value `t = 7` both guards are false, and the third branch assigns `1`. If `t = 6`, the second guard is true and determines category `0`. With `t = -1`, the first branch is entered directly, so the second comparison is skipped.
+The second branch is reached only if the first condition is false, that is, if `t >= 0`; it is therefore executed for the values from `0` to `6`. With `t = 7` both conditions are false and the third branch assigns `1`. With `t = 6` the second condition is true and `band` is `0`. With `t = -1` the first branch is executed and the second condition is not computed.
 :::
 
 :::definizione{#selezione-switch titolo="Selection with switch"}
-The controlling expression of a `switch` has integer type and undergoes the integer promotions. Each `case` label requires an integer constant expression. The values of these expressions, converted to the promoted type, must all be distinct and identify the points in the body at which execution can resume. If the controlling value matches a constant, execution starts at the corresponding label. When no constant matches, a `default` label supplies the entry point if present. With no `default` and no match, the body is skipped.
+The `switch` statement chooses among several cases on the basis of the value of an integer expression. The body contains `case` labels followed by an integer constant, all different from one another. If the value of the expression equals one of the constants, execution jumps to that label. If it equals none of them, it jumps to the `default` label, when there is one; otherwise the whole body is skipped.
 
-After entry, the statements are executed in their written order. A later label supplies another possible entry point and by itself allows execution to proceed. This behavior is called **fall-through**. A `break` whose target is the `switch` ends the selection.
+From the label reached, execution continues line after line and does not stop at the next label; this continuation is called **fall-through**. To leave the `switch` at the end of a case one writes `break`.
+
+```c
+switch (day) {
+case 6:
+case 7:
+    rest = 1;
+    break;
+default:
+    rest = 0;
+}
+```
+
+In this fragment the values $6$ and $7$ both lead to `rest = 1`, because from the label `case 6` execution continues into the next case. Every other value of `day` leads to `rest = 0`.
 :::
 
 :::attenzione
-With two nested `if` statements, an `else` is attached to the nearest preceding `if` to which the grammar still permits an `else` to be attached. For example, if `if (x > 0)` directly controls `if (y > 0) s = 1; else s = -1;`, the alternative assignment belongs to the selection on `y`. With `x = 0` the whole inner `if` is skipped. A block enclosed in braces lets the selection on `y` end before the `else` for the selection on `x` is written.
+When two `if` statements are written one inside the other without braces, an `else` always belongs to the nearest `if` that does not yet have one, whatever the indentation of the lines. In `if (x > 0) if (y > 0) s = 1; else s = -1;` the `else` belongs to the `if` on `y`. With `x` equal to $0$ neither of the two assignments is executed. To attach the `else` to the `if` on `x` one encloses the inner `if` in braces.
 :::
 
 ## Testing before and after the body
 
 :::definizione{#ciclo-while titolo="The while loop"}
-In a `while` loop, the condition is evaluated before the body. A true condition starts an iteration and, when the body reaches its end normally, control returns to the guard. A false condition transfers control to the statement after the loop. If the first check is false, the body executes zero times.
+A **loop** repeats a group of statements, called the **body**; each repetition is called an **iteration**. The loop `while (condition) body` checks the condition before each iteration. If it is true it executes the body and goes back to check it; if it is false it moves on to the statement after the loop. If the condition is already false at the first check, the body is not executed even once.
 
-A **trace table** can reconstruct the execution with one row per guard evaluation, including the false evaluation that ends the loop. Its columns record only the state needed to evaluate the guard and compute the update. The last row also shows the state available after the loop.
+To follow a loop by hand one fills in a **trace table**, with one row for each check of the guard, including the last one, the false one. The columns report the values of the variables at that moment. The last row contains the values that the variables have after the loop.
 :::
 
 :::esempio{titolo="Tripling up to a threshold"}
-The program counts the multiplications by three needed to make `p` at least `13`.
+The loop multiplies `p` by three as long as `p` is less than `13`, and counts the multiplications in `steps`. The statement `p *= 3` is equivalent to `p = p * 3`.
 
 ```c
 int p = 1, steps = 0;
@@ -95,11 +108,11 @@ while (p < 13) {
 | 9 | 2 | true |
 | 27 | 3 | false |
 
-The last value used in the body is `9` because it is the last entry state with a true guard. The final value is `27` because the update completes before the next check. The value can therefore exceed the threshold.
+The last iteration starts from `p` equal to `9`, which is the last value for which the guard is true, and brings `p` to `27`. The final value therefore exceeds the threshold `13`, because the guard is checked only after the multiplication has been performed. There are three multiplications.
 :::
 
 :::definizione{#ciclo-do titolo="The do while loop"}
-In a `do while` loop, control reaches the body before evaluating the guard. When execution reaches the trailing test, a true condition starts another execution of the body and a false condition ends the loop. The syntax requires a semicolon after the closing parenthesis of the condition.
+The loop `do body while (condition);` executes the body first and checks the condition afterwards. The body is therefore executed at least once. If the condition is true the body is repeated, otherwise the loop ends. A semicolon is required after the condition.
 
 ```c
 int x = 9;
@@ -108,56 +121,61 @@ do {
 } while (x > 10);
 ```
 
-The update produces `x = 7` before the first test, so the comparison with `10` is false and the loop ends. The sequence contains one update. Starting from `9` with an initial guard `x > 10` would result in zero updates. The position of the first check determines what happens for boundary input values.
+The body brings `x` from `9` to `7`, then the condition `7 > 10` is false and the loop ends after a single iteration. A `while (x > 10)` with the same body would never execute it, because `9 > 10` is already false at the start. The two loops behave differently precisely when the condition is false at the outset.
 :::
 
 :::osservazione
-In a `while` loop that exits on a false guard, with $k$ complete executions of the body and no early exit, the guard is evaluated $k+1$ times. The first $k$ evaluations are true and the last is false. Under the same conditions, a `do while` loop has $k$ checks for $k$ complete executions, because each check follows the body. These counts distinguish the operations in the guard from those in the body.
+If the body of a `while` is executed $k$ times, the guard is checked $k+1$ times, that is, $k$ times with a true outcome and one last time with a false outcome. In a `do while` with $k$ iterations there are $k$ checks, because each check follows an execution of the body. In the tripling example there are $3$ iterations and $4$ checks, like the rows of the table.
 :::
 
 ## Counters and bounds in for loops
 
 :::definizione{#ciclo-for titolo="Stages of the for loop"}
-A `for` loop has an initialization, a controlling condition, and an update. The initialization executes once on entry. The condition is checked before each possible iteration. After an execution of the body that reaches its end, the update executes and the condition is evaluated again. If the initialization declares a counter, its name is visible in the remainder of the declaration and throughout the loop, so the condition and the update can both use it. An omitted condition is treated as always true.
+The `for` loop gathers on a single line the three parts of a loop with a counter, in the form `for (initialization; condition; update) body`. For example `for (int i = 0; i < 3; ++i)` executes the body with `i` equal to $0$, $1$ and $2$. The order of execution is as follows.
 
-When counting iterations, separate the values used by the body from the first value that makes the condition false. If the body modifies the counter or other values on which the condition depends, the sequence of values follows from the updates that actually execute.
+1. The initialization is executed only once, at the beginning.
+2. The condition is checked; if it is false the loop ends.
+3. The body is executed.
+4. The update is executed and one goes back to step 2.
+
+A variable declared in the initialization, like `i` in the example, exists only inside the loop. When counting iterations one distinguishes the values with which the body is executed from the first value that makes the condition false. In the example the body is executed for $0$, $1$, $2$ and the loop ends when `i` is $3$.
 :::
 
 ::::teorema{#intervalli-discreti titolo="Counting with a positive step"}
-Let $a,b$ be integers and let $d>0$ be an integer. Consider a `for` loop with initial counter $a$, guard `i < b`, and update `i += d`, where `b` and `d` represent the corresponding mathematical values. Suppose that each execution of the body terminates, the body leaves the counter, the bound and the step unchanged, the loop exits via its guard, and all updates are representable. If $a\ge b$, there are zero iterations. If $a<b$, the number $m$ of iterations is
+A `for` loop with a counter starting at $a$, condition `i < b` and update `i += d`, with $d>0$, executes the body for the values $a$, $a+d$, $a+2d$ and so on, as long as they remain less than $b$. Here $a$, $b$ and $d$ are integers. It is assumed that the body does not modify the counter, the limit or the step, and that the values of the counter are representable. If $a\ge b$ there are zero iterations. If $a<b$, the number $m$ of iterations is
 
 $$
 m=\left\lceil\frac{b-a}{d}\right\rceil .
 $$
-
+where the symbol $\lceil x\rceil$ denotes the smallest integer greater than or equal to $x$, that is, rounding up.
 :::dimostrazione
 After $j$ updates the counter is $a+jd$. This holds for $j=0$, and if it holds for $j$, adding $d$ gives $a+(j+1)d$. The loop therefore exits at the first $j$ for which $a+jd\ge b$. When $a<b$ the inequality is equivalent to $j\ge \dfrac{b-a}{d}$, so the least admissible integer is the ceiling.
 :::
 ::::
 
 :::esempio{titolo="Traversing a half-open interval"}
-With a step of $1$, a loop from $a$ inclusive to $b$ exclusive, where $a\le b$, visits $b-a$ integers. The interval $[a,b)$ makes it explicit that $a=b$ gives zero visits. With step $3$ and interval $[5,19)$, the data give
+With step $1$ and $a\le b$ the loop executes the body for the integers from $a$ included to $b$ excluded, of which there are $b-a$. The set of these integers is denoted by $[a,b)$, and for $a=b$ it is empty. With step $3$ and interval $[5,19)$ the formula gives
 
 $$
 m=\left\lceil\frac{19-5}{3}\right\rceil
  =\left\lceil\frac{14}{3}\right\rceil=5 .
 $$
 
-The visited values are $5$, $8$, $11$, $14$, and $17$. The update from $17$ to $20$ takes place after the last execution of the body. Since $20\ge 19$, the loop exits after five visits.
+The values with which the body is executed are $5$, $8$, $11$, $14$ and $17$. After the last execution the update brings the counter to $20$; since $20\ge 19$, the loop ends after five iterations.
 :::
 
 :::attenzione
-Representability also matters for the last update. For an `int` counter, the guard `i <= INT_MAX` admits the value `INT_MAX`. A subsequent increment has a mathematical result outside the range of `int`, so its behavior is undefined. An exclusive bound `i < n`, with representable `n`, executes the last iteration at `i = n - 1` and keeps the final increment within the type when the starting value is below `n` and the step is one.
+The last update of the counter must give a representable value too. With an `int` counter, the condition `i <= INT_MAX` is always true; after the iteration with `i` equal to `INT_MAX` the increment produces an overflow, with undefined behavior. With an excluded limit, `i < n`, the last iteration takes place for `i` equal to `n - 1` and the last increment brings `i` to `n`, which is representable.
 :::
 
 ## Exiting and proceeding to the next test
 
 :::definizione{#interruzione-break titolo="Exiting with break"}
-A `break` terminates the innermost loop or `switch` that lexically encloses it. Execution resumes with the statement that follows the terminated control statement. A `break` in a `for` body also skips the loop's update expression. The state after an early exit reflects the assignments already executed and the conditions that hold where `break` is reached.
+The `break` statement immediately leaves the innermost loop, or `switch`, that contains it. Execution continues from the first statement after that loop. In a `for` the update is not executed. `break` is used to interrupt a loop as soon as what was being looked for has been found; for example, in a loop that looks for the first divisor of a number, one leaves at the first divisor found.
 :::
 
 :::definizione{#salto-continue titolo="The next test after continue"}
-A `continue` transfers control to the continuation point of the innermost loop that encloses it. In a `for` loop, this point precedes evaluation of the update expression and the next guard. In a `while` or `do while` loop, control goes directly to the guard. Statements later in the current body are skipped. The position of the increment therefore matters when an execution path ends with `continue`.
+The `continue` statement interrupts the current iteration and moves on to the next one, skipping the statements that remain in the body. In a `while` and in a `do while` one goes directly to the check of the guard. In a `for` the update is executed first and then the check. If in a `while` the increment of the counter is placed after the `continue`, it is skipped as well, and the loop may not terminate.
 :::
 
 :::esempio{titolo="Updating before a possible jump"}
@@ -178,19 +196,19 @@ The values produced by `++i` are `1`, `2`, `3`, `4`, and `5`. For `2` and `4`, e
 :::
 
 :::osservazione
-When a `switch` appears inside a loop, a `break` in its body normally ends the `switch`. Execution can therefore continue with other statements in the loop body. A `continue` within the same `switch` belongs to the innermost loop enclosing it, because only an iteration statement supplies a continuation point for `continue`. The statements' structure identifies the destinations without tracing all of the values.
+Inside a `switch` written in the body of a loop, `break` leaves only the `switch`, and the loop goes on. A `continue` at the same point concerns the loop instead, because `continue` makes sense only for loops, and it moves on to the next iteration.
 :::
 
 ## Reasoning about two levels of repetition
 
 :::definizione{#cicli-annidati titolo="Outer and inner loops"}
-Two loops are nested when the body of the outer loop contains the inner loop. Each outer iteration enters the inner loop and executes its initialization again, if present. The inner iterations can be identified by pairs $(i,j)$, where $i$ is the outer index and $j$ is the inner index. If $m_i$ is the number of inner iterations for row $i$, the total count is the sum of all the $m_i$.
+Two loops are **nested** when one is written in the body of the other. At each iteration of the outer loop the inner loop is executed in full, starting again from its initialization. If the outer loop performs $r$ iterations and the inner one performs $c$ each time, the inner body is executed $r\cdot c$ times; for example $3$ rows by $4$ columns give $12$ executions.
 
-When $m_i$ is the same integer $c$ for all $r$ outer iterations, the sum is $rc$. If the inner guard uses $i$, first determine which values of $j$ are allowed in a fixed row.
+If the number of inner iterations depends on the outer counter $i$, and is $m_i$, the total is the sum of all the $m_i$. In this case one first counts, for a fixed value of $i$, how many values the inner counter $j$ takes.
 :::
 
 :::esempio{titolo="Counting a triangular set of pairs"}
-An accumulator counts the integer pairs $1\le i\le j\le 4$.
+The fragment counts the pairs of integers $(i,j)$ with $1\le i\le j\le 4$. The inner counter starts from `i`, so the number of inner iterations changes at each row.
 
 ```c
 int count = 0;
@@ -201,23 +219,23 @@ for (int i = 1; i <= 4; ++i) {
 }
 ```
 
-For $i=1$ there are four possible values of $j$. For $i=2$ there are three values, from $2$ to $4$. In general, row $i$ has $4-i+1$ values. This gives $4+3+2+1=10$. As a combinatorial check, each pair with unequal indices chooses two distinct numbers out of four, so there are six such pairs. The four pairs with $i=j$ bring the total to ten.
+For $i=1$ the counter $j$ takes the four values from $1$ to $4$. For $i=2$ it takes three, from $2$ to $4$. In general for row $i$ there are $4-i+1$ values. The total is $4+3+2+1=10$, so at the end `count` is $10$.
 :::
 
 :::osservazione
-A `break` within the inner loop can reduce a single $m_i$. For instance, let $i$ be $2$, $3$, or $4$, try values of $j$ in order from $1$, and end the inner loop when `j % i == 0`, before counting that iteration. The first positive multiples encountered are $2$, $3$, and $4$, respectively. Thus $1$, $2$, and $3$ iterations reach the accumulator in the three separate rows. If the problem asks how many times the body started executing, the execution of the body that reaches `break` has to be included separately.
+A `break` in the inner loop leaves only that loop, and the outer loop goes on with the next iteration. In this way the inner iterations can be fewer than expected. Suppose that for $i$ equal to $2$, $3$ and $4$ the inner loop tries $j=1,2,3,\dots$ and stops with `break` as soon as `j % i == 0`, before incrementing a counter. The first $j$ divisible by $i$ is $i$ itself, so the counter is incremented $i-1$ times, that is, $1$, $2$ and $3$ times in the three rows, for a total of $6$.
 :::
 
 ## Properties preserved at the loop test
 
 :::definizione{#invariante-di-ciclo titolo="Invariant at the loop head"}
-A property is a **loop invariant** at the test point if it holds before the first evaluation of the guard and at every subsequent return to that point. The property refers to values in the state and can include mathematical quantities the code itself does not compute. To verify it, prove initialization and preservation. In the preservation step, assume that the property holds in the entry state, then prove that every transition of the body back to the test point preserves it.
+To prove that a loop computes what it should, one uses a **loop invariant**, that is, a property of the variables that is true every time execution reaches the check of the guard, before the first iteration and after each one. In the loop that adds into `s` the integers from $1$ to `i`, an invariant is “`s` is the sum of the first `i` positive integers”. Proving that a property is an invariant takes two steps. In the **initialization** one verifies that it holds before the first iteration. In the **maintenance** one assumes that it holds at the start of an iteration, with the guard true, and proves that it still holds at the end of the body.
 
-Choosing the test point specifies which values enter the relation. A property required at the guard can temporarily fail during the body and become true again after all updates have run.
+The invariant concerns the moment at which the guard is checked. In the middle of the body, when only some of the variables have been updated, it may be temporarily false.
 :::
 
 ::::teorema{#correttezza-parziale titolo="Normal exit with an invariant"}
-Consider a `while` loop whose guard evaluation leaves the state unchanged and whose operations are defined in the states under consideration. Assume that executions that exit the loop do so on a false guard. If $P$ holds initially and each execution of the body that returns to the guard from a state where $P$ holds and the guard is true preserves $P$, then each exit satisfies both $P$ and the negation of the guard.
+Consider a `while` loop in which the check of the guard does not modify the variables and which is left only when the guard is false. If a property $P$ holds before the loop, and every execution of the body that starts with $P$ and the guard true ends with $P$ still true, then on leaving the loop both $P$ and the negation of the guard hold. From these two pieces of information one derives the result of the loop.
 
 :::dimostrazione
 At the first test, $P$ holds by assumption. If the guard is true at a test, preservation gives $P$ when control next returns to the condition. By induction, $P$ therefore holds at every test that is reached. Normal exit takes place on a false evaluation. Since the evaluation leaves the state unchanged, both required properties hold on exit.
@@ -225,7 +243,7 @@ At the first test, $P$ holds by assumption. If the guard is true at a test, pres
 ::::
 
 :::esempio{titolo="Accumulating the first positive integers"}
-At each return to the condition, `s` contains the sum of the first `i` positive integers.
+The loop adds into `s` the integers from $1$ to $4$. One proves that the result is $10$ using the invariant “`s` is the sum of the first `i` positive integers, and `i` lies between $0$ and $4$”.
 
 ```c
 int i = 0, s = 0;
@@ -237,27 +255,27 @@ while (i < 4) {
 
 ![States at the test i less than 4. The points are (0,0), (1,1), (2,3), (3,6), and (4,10).](/immagini/informatica/condizioni-e-cicli/schema-teoria-en.png)
 
-The invariant combines $0\le i\le 4$ with $s=\sum_{k=1}^{i} k$, where the empty sum equals zero. Initially $i=s=0$. If the guard is true, $i<4$ and the new counter is $i'=i+1\le 4$. Because the assignment to `s` uses the new counter, the updated state satisfies
+In formulas the invariant is $0\le i\le 4$ and $s=\sum_{k=1}^{i} k$, where the sum with no terms is zero. **Initialization.** At the start $i=0$ and $s=0$, and the sum of the first zero integers is zero. **Maintenance.** If the guard is true, $i<4$. The body brings the counter to $i'=i+1\le 4$ and then adds the new counter to `s`, so the new value $s'$ satisfies
 
 $$
 s'=s+i'=\sum_{k=1}^{i}k+(i+1)=\sum_{k=1}^{i'} k .
 $$
 
-On the false guard, $i\ge 4$, so the invariant yields $i=4$. The formula for the sum gives $s=\dfrac{4\cdot 5}{2}=10$, in agreement with the last state in the figure.
+**Exit.** When the guard is false we have $i\ge 4$; together with $i\le 4$ from the invariant this gives $i=4$. Hence $s=1+2+3+4=\dfrac{4\cdot 5}{2}=10$, in agreement with the last point of the figure.
 :::
 
 :::attenzione
-The condition $i\ge 0$ alone is too weak an invariant to conclude that `i` equals the bound when the guard is false. For instance, starting from `i = 0` with guard `i < 4` and update `i += 3` leads to `i = 6`. Proving equality on exit requires a second fact that also bounds the counter from above.
+An invariant that is too weak is not enough to derive the result. The condition $i\ge 0$ alone is an invariant, but on exit, together with $i\ge 4$, it does not say what `i` is worth. With `i = 0`, guard `i < 4` and update `i += 3` the counter takes the values $0$, $3$ and $6$, and on exit it is $6$. To conclude $i=4$ the invariant must bound the counter from above as well, as $i\le 4$ does in the example.
 :::
 
 ## A measure that proves termination
 
 :::definizione{#variante-di-ciclo titolo="Nonnegative integer loop variant"}
-A **loop variant** with nonnegative integer values is a quantity calculated from the state at the points where the guard is tested. It is nonnegative in every state reached at that point and decreases strictly from a state with a true guard to the next test state. The expression for the variant describes a mathematical quantity and may use values left implicit in the program.
+The invariant guarantees that the result is correct *if* the loop terminates. To prove that it terminates one uses a **loop variant**, that is, an integer quantity computed from the variables that satisfies two conditions. At every check of the guard it is greater than or equal to zero. At every iteration it decreases by at least one. In `for (int i = 0; i < n; ++i)` a variant is $n-i$, the number of iterations that remain. A non-negative integer cannot decrease forever, so the loop terminates.
 :::
 
 ::::teorema{#terminazione-con-variante titolo="Termination by descent in the integers"}
-Assume that control reaches the initial guard of a loop and that all subsequent guard evaluations and iterations that begin terminate with defined operations. Also assume that each iteration ends by exiting the loop or returning to the guard. If a variant as defined exists, the loop ends after finitely many iterations.
+Consider a loop in which every iteration terminates, either going back to the guard or leaving the loop. If the loop has a variant, that is, an integer quantity that is non-negative at every check of the guard and decreases at every iteration, then the loop terminates after a finite number of iterations, at most equal to the initial value of the variant.
 
 :::dimostrazione
 Let $V_0$ be the initial value. After $k$ full steps back to the guard, the quantity is at most $V_0-k$, because a strict decrease between integers is at least one unit. If $k>V_0$, this bound is negative, contradicting the nonnegativity assumption. Control therefore cannot return to the test infinitely often. Since every iteration and every test terminates, an exit is reached.
@@ -275,15 +293,15 @@ while (r >= 7) {
 }
 ```
 
-The mathematical value of `r` is a variant because it starts nonnegative and the guard permits subtraction of `7` while leaving a nonnegative value. The identity $43=7q+r$ holds before entry. Changing $q$ to $q+1$ and $r$ to $r-7$ leaves the right-hand side unchanged. The false guard gives $r<7$. The final conditions are
+The quantity `r` is a variant. At the start it is $43$; the guard `r >= 7` guarantees that after the subtraction it remains greater than or equal to zero, and at every iteration it decreases by $7$. The loop therefore terminates. The invariant is $43=7q+r$. At the start it holds because $43=7\cdot 0+43$. One iteration brings $q$ to $q+1$ and $r$ to $r-7$, and $7(q+1)+(r-7)=7q+r$, so the equality is preserved. On exit the guard is false, that is, $r<7$. Therefore
 
 $$
 43=7q+r,\qquad 0\le r<7 .
 $$
 
-Euclidean division therefore determines $q=6$ and $r=1$. The identity and the inequality prove the result, while the variant proves that the final state is reached.
+These are the quotient and the remainder of the division of $43$ by $7$, that is, $q=6$ and $r=1$. The invariant proves that the result is correct, the variant proves that the loop terminates.
 :::
 
 :::attenzione
-A nonnegative counter may fail to prove progress. When an `unsigned int` with value zero is decremented, C produces `UINT_MAX`. The mathematical value of the counter increases during that transition. A proof using a decreasing variant must therefore show that the reachable steps, including the last, give the required decrease without modular wraparound.
+With an `unsigned int` counter the condition “greater than or equal to zero” is always true and does not help. In `for (unsigned int i = n; i >= 0; --i)` the guard is always true; when `i` is $0$ the decrement produces `UINT_MAX`, by the rule of unsigned arithmetic, and the loop does not terminate. At that step the value of `i` increases, so `i` is not a variant.
 :::
