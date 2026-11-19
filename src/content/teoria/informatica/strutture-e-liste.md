@@ -6,7 +6,7 @@ sommario: Come rappresentare record e sequenze in C17, mantenere validi i colleg
 ## Dai valori ai record
 
 :::definizione{#strutture-e-membri titolo="Tipo struttura e membri"}
-Una **struttura** raccoglie in un oggetto più membri con nome e tipo propri. La dichiarazione seguente definisce il tipo `struct Item`.
+Una **struttura** riunisce sotto un solo nome più dati, anche di tipo diverso, che descrivono lo stesso oggetto, per esempio il codice e la quantità di un articolo di magazzino. I dati che la compongono si chiamano **membri**, o campi. La dichiarazione seguente definisce un nuovo tipo, `struct Item`, con due membri interi.
 
 ```c
 struct Item {
@@ -15,15 +15,15 @@ struct Item {
 };
 ```
 
-La parola `Item` è un tag. È parte della specificazione `struct Item`, che si può usare per dichiarare oggetti, parametri e puntatori. Se `item` è un oggetto di quel tipo, `item.code` designa il membro `code`. Se `ptr` è un puntatore valido a un oggetto del tipo, `ptr->code` designa il membro dello stesso oggetto. È una forma equivalente a `(*ptr).code`.
+Il tipo si chiama `struct Item`, con entrambe le parole. Una variabile di questo tipo si dichiara con `struct Item item;`, e i suoi membri si indicano con il punto, come in `item.code` e `item.qty`. Quando si ha un puntatore `ptr` a una struttura, i membri si indicano con la freccia `->`; `ptr->code` è una forma abbreviata di `(*ptr).code`.
 
-I membri appartengono all’oggetto struttura e ne seguono la durata. Un puntatore a un suo membro richiede che il membro esista e che l’oggetto sia ancora vivo. Per ottenere la dimensione dell’intera struttura si usa `sizeof(struct Item)`: la rappresentazione può comprendere byte di riempimento.
+I membri fanno parte della variabile struttura ed esistono finché esiste la variabile. La dimensione di una struttura si ottiene con `sizeof(struct Item)` e può essere maggiore della somma delle dimensioni dei membri, perché il compilatore può inserire fra un membro e l’altro alcuni byte inutilizzati, detti di riempimento.
 :::
 
 :::definizione{#inizializzazione-assegnamento titolo="Inizializzazione e copia di strutture"}
-Un inizializzatore può designare direttamente un membro con `.nome = espressione`. Gli eventuali membri omessi in un inizializzatore aggregato ricevono l’inizializzazione prevista per la durata statica. Per esempio, un membro intero omesso riceve $0$ e un membro di tipo puntatore omesso diventa nullo. Questa regola riguarda un inizializzatore presente. La dichiarazione di un oggetto automatico priva di inizializzatore è un caso diverso.
+Una struttura si inizializza con una lista fra graffe, in cui ogni membro si può indicare per nome nella forma `.nome = valore`. I membri non nominati nella lista ricevono zero, o il puntatore nullo se sono puntatori. Una struttura dichiarata dentro una funzione senza lista ha invece membri dal valore imprevedibile.
 
-Dentro una funzione il frammento seguente mostra due oggetti indipendenti.
+Le strutture si copiano con un semplice assegnamento, che copia tutti i membri. Nel frammento seguente, dentro una funzione, `b` è una copia di `a` e le due variabili sono poi indipendenti.
 
 ```c
 struct Item a = {.code = 4, .qty = 6};
@@ -31,17 +31,17 @@ struct Item b = a;
 b.qty = 3;
 ```
 
-L’inizializzazione di `b` con `a` copia il valore della struttura. Dopo il successivo assegnamento le quantità dei due oggetti sono quindi $6$ e $3$. Un assegnamento tra strutture di tipo compatibile copia analogamente il valore della struttura di destra in quella di sinistra.
+La seconda riga copia in `b` i valori di tutti i membri di `a`. La terza modifica soltanto `b`, quindi alla fine `a.qty` vale $6$ e `b.qty` vale $3$.
 :::
 
 :::attenzione
-Un membro di tipo puntatore contiene un indirizzo. Copiarlo in una seconda struttura rende raggiungibile dallo stesso indirizzo l’oggetto puntato. La copia della struttura lascia separati i due membri puntatore, mentre entrambi possono designare il medesimo nodo. Per costruire copie indipendenti di una lista dinamica occorre allocare i nodi della copia e ricostruirne i collegamenti. La proprietà della memoria è una convenzione dell’interfaccia.
+Se una struttura ha un membro puntatore, la copia della struttura copia l’indirizzo e non il dato a cui l’indirizzo si riferisce. Dopo la copia le due strutture hanno ciascuna il proprio puntatore, ma i due puntatori indicano lo stesso dato, e una modifica fatta attraverso uno si vede attraverso l’altro. Per ottenere una copia indipendente di una lista, per esempio, bisogna allocare nuovi nodi e ricopiare i dati uno per uno.
 :::
 
 ## Sequenze rappresentate da collegamenti
 
 :::definizione{#nodi-e-collegamenti titolo="Nodo, testa e successore"}
-Un **nodo** di una lista semplicemente collegata contiene un dato e un puntatore al successore. Il tipo seguente usa `key` come dato intero.
+Una **lista collegata** è una sequenza di elementi in cui ciascun elemento contiene, oltre al proprio dato, l’indirizzo dell’elemento successivo. A differenza di un vettore, gli elementi non sono vicini in memoria e si possono aggiungere e togliere senza spostare gli altri. Ogni elemento si chiama **nodo**, ed è una struttura con il dato, qui l’intero `key`, e un puntatore al nodo seguente.
 
 ```c
 typedef struct Node {
@@ -50,19 +50,19 @@ typedef struct Node {
 } Node;
 ```
 
-All’interno della dichiarazione di `struct Node` il tipo è ancora incompleto. È già possibile usare `struct Node *` per il campo `next`, perché un puntatore può designare un oggetto di quel tipo senza contenerlo per valore. Dopo la definizione `Node` è un nome alternativo per `struct Node`.
+Il membro `next` è un puntatore a un’altra struttura dello stesso tipo. Dentro la dichiarazione si scrive `struct Node *`, perché il nome breve `Node`, introdotto da `typedef`, è disponibile soltanto dopo la fine della dichiarazione. Da quel punto `Node` e `struct Node` indicano lo stesso tipo.
 
-La variabile `head` rappresenta la testa. Se la lista è vuota, `head` è nullo. Altrimenti punta al primo nodo. In una lista non vuota l’ultimo nodo ha successore nullo. L’ordine logico è quindi definito dalla catena di puntatori. Due nodi consecutivi nella sequenza possono occupare regioni lontane della memoria.
+Il programma tiene un puntatore al primo nodo, chiamato **testa** (`head`). Dalla testa si raggiunge il secondo nodo seguendo `next`, e così via. L’ultimo nodo ha `next` uguale a `NULL`, che segnala la fine della lista. Una lista vuota è rappresentata da una testa uguale a `NULL`. L’ordine degli elementi è quello dei collegamenti, e non dipende dalla posizione dei nodi in memoria.
 :::
 
 :::definizione{#invariante-lista titolo="Invariante di una lista lineare"}
-Si assume che ogni puntatore non nullo percorso nella catena designi un nodo vivo e che ogni nodo raggiungibile compaia una sola volta seguendo `next`. Una lista così definita è aciclica. La catena è finita e termina al puntatore nullo. Quando la lista possiede dinamicamente i nodi, ciascuno dei nodi raggiungibili è responsabilità dell’operazione di rilascio della lista.
+Perché le funzioni sulle liste funzionino, una lista deve sempre rispettare alcune condizioni, che formano il suo **invariante**. Ogni puntatore diverso da `NULL` che si incontra seguendo i collegamenti punta a un nodo esistente. Nessun nodo compare due volte, quindi la lista non contiene cicli, e seguendo `next` si arriva a `NULL` dopo un numero finito di passi. Ogni funzione che modifica la lista riceve una lista che rispetta l’invariante e deve lasciarla in uno stato che lo rispetta ancora.
 
-Si possono usare catene temporanee di oggetti automatici negli esercizi di tracciamento, purché la durata di ciascun oggetto copra tutti i suoi accessi. Una funzione che rilascia una lista proprietaria presuppone nodi ottenuti da allocazioni compatibili con `free`. La durata richiesta e la politica di rilascio dipendono dall’operazione dichiarata.
+Di solito i nodi sono allocati con `malloc`, e la lista ne è proprietaria, cioè chi la gestisce deve rilasciarli tutti con `free`. Negli esercizi di tracciamento i nodi possono essere anche variabili ordinarie, e in quel caso `free` non va chiamata.
 :::
 
 :::esempio{titolo="Visitare le chiavi in ordine"}
-Si assume visibile la definizione di `Node`. Il frammento usa `<stddef.h>` e una `head` che soddisfa l’invariante. La lunghezza è rappresentabile in `size_t`.
+Il frammento conta i nodi di una lista. Il puntatore `p` parte dalla testa e a ogni iterazione passa al nodo successivo con `p = p->next`, finché vale `NULL`. Sono visibili la definizione di `Node` e `<stddef.h>`.
 
 ```c
 size_t count = 0;
@@ -71,13 +71,13 @@ for (const Node *p = head; p != NULL; p = p->next) {
 }
 ```
 
-All’inizio di ogni iterazione `count` registra la lunghezza del prefisso già visitato, e `p` indica il primo nodo ancora da visitare. Il corpo conta quel nodo. L’aggiornamento passa al suo successore, quindi ricostituisce la relazione per l’iterazione seguente. Quando `p` è nullo, il prefisso coincide con l’intera lista. Con testa nulla il primo controllo è falso e il conteggio resta zero.
+All’inizio di ogni iterazione `count` è il numero di nodi già contati e `p` punta al primo nodo non ancora contato. Il corpo conta quel nodo e l’aggiornamento sposta `p` sul successivo. Quando `p` vale `NULL` tutti i nodi sono stati contati. Se la lista è vuota la testa è `NULL`, il corpo non viene eseguito e `count` resta zero.
 :::
 
 ## Inserire senza perdere un collegamento
 
 :::definizione{#inserimento-in-lista titolo="Inserimento e proprietà del nuovo nodo"}
-Inserire in testa richiede un nuovo nodo che punti alla testa precedente e l’aggiornamento della variabile `head` del chiamante. Il parametro `Node **head` contiene l’indirizzo di tale variabile. Si assume che `head` designi una variabile valida e che `*head` rappresenti una lista proprietaria lineare. Nel codice sono visibili `Node`, `<stdbool.h>` e `<stdlib.h>`.
+Per inserire un nodo in testa si alloca il nodo, si fa puntare il suo `next` al vecchio primo nodo e si fa puntare la testa al nodo nuovo. La funzione deve quindi modificare la variabile `head` di chi la chiama, e per questo riceve il suo indirizzo. Poiché `head` è un `Node *`, il suo indirizzo è un `Node **`, cioè un puntatore a puntatore, e dentro la funzione `*head` è la testa. Sono visibili `Node`, `<stdbool.h>` e `<stdlib.h>`.
 
 ```c
 bool push_front(Node **head, int key)
@@ -93,25 +93,25 @@ bool push_front(Node **head, int key)
 }
 ```
 
-L’allocazione richiede lo spazio del nodo intero. Se fallisce, si restituisce `false` prima di cambiare la testa. Se riesce, si inizializzano i due membri e si rende il nodo raggiungibile dalla testa. Nel caso vuoto il nuovo successore è nullo, quindi si ottiene una lista di un solo nodo.
+Se `malloc` fallisce, la funzione restituisce `false` senza aver modificato la lista. Altrimenti riempie i due membri del nodo e solo alla fine aggiorna la testa. L’ordine delle due ultime assegnazioni conta, perché `node->next = *head;` deve leggere la vecchia testa prima che `*head = node;` la sostituisca. Se la lista era vuota, la vecchia testa è `NULL` e il nuovo nodo, che è anche l’ultimo, ha `next` uguale a `NULL`.
 :::
 
 :::esempio{titolo="Inserire dopo un nodo presente"}
-Nella figura si inserisce la chiave $20$ dopo il nodo di chiave $10$. Il nodo nuovo ha una propria allocazione e non è ancora nella catena.
+Nella figura si inserisce un nodo con chiave $20$ dopo il nodo con chiave $10$. Il nodo nuovo è già stato allocato ma non fa ancora parte della lista.
 
 ![Prima la catena 10, 30, fine. Dopo la catena 10, 20, 30, fine. Il nodo 20 è quello nuovo.](/immagini/informatica/strutture-e-liste/schema-teoria-it.png)
 
-Siano `prev` il puntatore al nodo $10$ e `node` il puntatore al nuovo nodo. L’assegnamento `node->next = prev->next;` memorizza nel nodo nuovo l’indirizzo del nodo $30$. L’assegnamento `prev->next = node;` rende poi raggiungibile $20$ seguendo il collegamento di $10$. Il successore del nodo $30$ resta nullo. L’invariante si conserva perché la catena nuova attraversa il nodo appena allocato una volta e riprende nel suffisso preesistente. La stessa sequenza di aggiornamenti funziona quando `prev` è l’ultimo nodo: in tal caso il collegamento salvato è nullo.
+Sia `prev` il puntatore al nodo $10$ e `node` il puntatore al nodo nuovo. Servono due assegnazioni, in quest’ordine. La prima, `node->next = prev->next;`, fa puntare il nodo nuovo al nodo $30$. La seconda, `prev->next = node;`, fa puntare il nodo $10$ al nodo nuovo. La lista diventa $10$, $20$, $30$. Le stesse due istruzioni funzionano anche quando `prev` è l’ultimo nodo; in quel caso `prev->next` vale `NULL` e il nodo nuovo diventa l’ultimo.
 :::
 
 :::attenzione
-Quando si inserisce nel mezzo della lista, il suffisso successivo alla posizione conserva la propria identità. L’assegnamento che cambia il collegamento precedente va fatto dopo aver salvato il successore. Invertendo i due assegnamenti, il valore letto da `prev->next` sarebbe già `node`. Si costruirebbe un ciclo contenente il nuovo nodo e il suffisso originario non sarebbe più raggiungibile dalla testa.
+L’ordine delle due assegnazioni non si può scambiare. Eseguendo prima `prev->next = node;` si perde l’indirizzo del nodo $30$, che era contenuto soltanto in `prev->next`. La successiva `node->next = prev->next;` farebbe allora puntare il nodo nuovo a se stesso. La lista conterrebbe un ciclo, e il nodo $30$ non sarebbe più raggiungibile.
 :::
 
 ## Staccare un nodo e rilasciarne la memoria
 
 :::definizione{#rimozione-e-rilascio titolo="Rimozione dalla testa"}
-Si assume che `head` designi una variabile testa valida, riferita a una lista proprietaria, e che `out` punti a un `int` del chiamante esterno alla lista. Se la testa è nulla l’operazione fallisce e lascia gli oggetti invariati. Quando c’è almeno un nodo, si restituisce il suo dato e si collega la testa al successore. Sono visibili `Node`, `<stdbool.h>` e `<stdlib.h>`.
+La funzione toglie il primo nodo dalla lista, ne restituisce il dato attraverso il puntatore `out` e ne rilascia la memoria. Come per l’inserimento riceve l’indirizzo della testa, perché deve modificarla. Se la lista è vuota restituisce `false` e non modifica nulla. Sono visibili `Node`, `<stdbool.h>` e `<stdlib.h>`.
 
 ```c
 bool pop_front(Node **head, int *out)
@@ -127,27 +127,27 @@ bool pop_front(Node **head, int *out)
 }
 ```
 
-Il dato e il successore sono letti quando il nodo è ancora vivo. Poi la testa punta al suffisso e il nodo staccato può essere rilasciato. Con un nodo solo, il suffisso è vuoto e la nuova testa è nulla. Quando si rimuove un nodo interno, il collegamento da aggiornare è `next` del predecessore. Se il nodo rimosso è l’ultimo, il nuovo successore del predecessore è nullo.
+L’ordine delle operazioni è obbligato. Prima si salva in `old` l’indirizzo del nodo da togliere. Poi si copiano il dato e il collegamento `old->next`, finché il nodo esiste ancora. Solo alla fine si chiama `free(old)`. Se la lista aveva un solo nodo, `old->next` è `NULL` e la testa diventa `NULL`, cioè la lista è vuota. Per togliere un nodo che non è il primo si modifica allo stesso modo il membro `next` del nodo che lo precede.
 :::
 
 ::::teorema{#svuotamento-lista titolo="Rilascio completo di una lista"}
-Sia `head` la testa di una lista proprietaria finita, con $n$ nodi distinti. Se finché la testa è non nulla si salva il successore, si rilascia il nodo corrente e si assegna il successore alla testa, il rilascio avviene esattamente $n$ volte. Alla fine la testa è nulla.
+Per rilasciare un’intera lista di $n$ nodi si ripetono tre operazioni finché la testa è diversa da `NULL`. Si salva l’indirizzo del nodo successivo, si rilascia il nodo in testa e si assegna alla testa l’indirizzo salvato. Il procedimento esegue esattamente $n$ rilasci e termina con la testa uguale a `NULL`.
 
 :::dimostrazione
-All’inizio restano $n$ nodi da rilasciare. Un passo legge il primo collegamento prima del rilascio e poi porta la testa al suffisso. La coda della catena rimane valida, perché ciascuna sua allocazione è distinta da quella appena rilasciata. Dopo $k$ passi restano dunque $n-k$ nodi, tutti vivi e raggiungibili, e i primi $k$ sono stati rilasciati. Ogni passo diminuisce di uno il numero intero non negativo dei nodi rimasti. Il processo termina al primo valore zero, che corrisponde a testa nulla.
+All’inizio i nodi da rilasciare sono $n$. Ogni passo legge il collegamento del primo nodo prima di rilasciarlo e poi sposta la testa sul nodo successivo. Gli altri nodi restano validi, perché sono blocchi di memoria distinti da quello rilasciato. Dopo $k$ passi sono stati rilasciati $k$ nodi e ne restano $n-k$, tutti raggiungibili dalla testa. Il numero dei nodi rimasti diminuisce di uno a ogni passo, quindi dopo $n$ passi è zero e la testa vale `NULL`.
 :::
 ::::
 
 :::attenzione
-Dopo `free(old)` l’oggetto rilasciato ha concluso la propria durata. Le informazioni da conservare, come `old->next`, devono essere state lette prima della chiamata. Cambiare il collegamento di una lista fatta di oggetti automatici è possibile mentre quegli oggetti sono vivi. Quel cambio non comporta una chiamata a `free`.
+Dopo `free(old)` il nodo non esiste più, e leggere `old->next` ha comportamento indefinito. Il collegamento al nodo successivo va quindi salvato prima del rilascio. Un ciclo scritto come `for (p = head; p != NULL; p = p->next) free(p);` è sbagliato proprio per questo, perché l’aggiornamento legge `p->next` dopo che `p` è stato rilasciato.
 :::
 
 ## Pila con capacità finita
 
 :::definizione{#pila-vettore titolo="Disciplina LIFO e prefisso occupato"}
-Una **pila** estrae per primo l’ultimo elemento ancora presente che vi è entrato. La disciplina è detta **LIFO**, da *last in, first out*. Una rappresentazione usa un vettore di capacità $C$ e un contatore `used` con $0\leq\mathrm{used}\leq C$. Le celle occupate hanno indici da zero a `used - 1` quando `used` è positivo. L’ultima di queste celle è la cima.
+Una **pila** (*stack*) è una raccolta di elementi in cui si inserisce e si toglie sempre dalla stessa estremità, detta **cima**, come in una pila di piatti. L’elemento tolto è sempre l’ultimo inserito; la regola si chiama **LIFO**, da *last in, first out*. L’inserimento si chiama *push* e l’estrazione *pop*. Una pila si realizza con un vettore di capacità $C$ e un contatore `used` degli elementi presenti, con $0\leq\mathrm{used}\leq C$. Gli elementi occupano gli indici da $0$ a `used - 1`, e la cima è l’elemento di indice `used - 1`.
 
-In questo esempio $C=5$. Sono visibili `<stddef.h>` e `<stdbool.h>`. Si assume che `s` designi una pila valida e che `out` punti a un `int` esterno alla pila.
+Nell’esempio $C=5$. Le due funzioni ricevono un puntatore alla pila e restituiscono `false` quando l’operazione non si può eseguire. Sono visibili `<stddef.h>` e `<stdbool.h>`.
 
 ```c
 enum { CAPACITY = 5 };
@@ -177,19 +177,19 @@ bool stack_pop(Stack *s, int *out)
 }
 ```
 
-La guardia inserisce solo se `used` è più piccolo della capacità. In quel caso il primo indice libero è valido. L’estrazione presuppone che il contatore sia positivo. Diminuirlo di uno porta all’indice della cima precedente, che è ancora leggibile nella stessa cella. L’occupazione logica esclude quella posizione dopo il decremento.
+L’inserimento fallisce se la pila è piena. Altrimenti scrive il valore nella prima posizione libera, che ha indice `used`, e aumenta il contatore. L’estrazione fallisce se la pila è vuota. Altrimenti diminuisce il contatore, che diventa l’indice della cima, e copia quell’elemento in `*out`. Il valore resta scritto nel vettore, ma non fa più parte della pila, e il prossimo inserimento lo sovrascrive.
 :::
 
 :::esempio{titolo="Una sequenza di inserimenti ed estrazioni"}
-Da una pila vuota si inseriscono prima $6$ e poi $9$. Le celle occupate sono in ordine $\langle 6,9\rangle$ e la cima occupa l’indice $1$. La prima estrazione restituisce $9$ e riduce il contatore a $1$. Inserire $4$ scrive nella cella liberata. Da quel momento la cima vale $4$ e l’elemento $6$ resta sottostante. Il controllo indipendente consiste nel leggere gli elementi ancora presenti in ordine inverso rispetto all’inserimento: sono $4$ e $6$.
+Si parte da una pila vuota e si inseriscono $6$ e poi $9$. La pila contiene $6$ all’indice $0$ e $9$ all’indice $1$, che è la cima. Un’estrazione restituisce $9$ e porta `used` a $1$. Inserendo poi $4$, il valore viene scritto all’indice $1$, al posto di $9$. Due estrazioni successive restituiscono $4$ e poi $6$.
 :::
 
 ## Coda lineare con due estremi
 
 :::definizione{#coda-collegata titolo="Disciplina FIFO e coppia front–rear"}
-Una **coda** estrae per primo l’elemento presente da più tempo. La disciplina è detta **FIFO**, da *first in, first out*. In una coda collegata `front` indica il primo nodo e `rear` l’ultimo. La coda vuota ha entrambi i puntatori nulli. La coda non vuota è una lista lineare raggiungibile da `front`, e il suo ultimo nodo è proprio `rear`, con successore nullo.
+Una **coda** (*queue*) è una raccolta di elementi in cui si inserisce da un’estremità e si toglie dall’altra, come in una fila di persone. L’elemento tolto è sempre quello presente da più tempo; la regola si chiama **FIFO**, da *first in, first out*. Una coda si realizza con una lista collegata e due puntatori. `front` punta al primo nodo, da cui si toglie, e `rear` all’ultimo, dopo il quale si inserisce. Nella coda vuota entrambi valgono `NULL`.
 
-Nel frammento seguente `q` designa una coda proprietaria valida. `out` designa un `int` esterno alla coda. Sono disponibili `Node`, `<stdlib.h>` e `<stdbool.h>`.
+L’inserimento si chiama *enqueue* e l’estrazione *dequeue*. Sono visibili `Node`, `<stdlib.h>` e `<stdbool.h>`.
 
 ```c
 typedef struct {
@@ -229,45 +229,45 @@ bool dequeue(Queue *q, int *out)
 }
 ```
 
-Inserire in coda conserva la sequenza preesistente come prefisso. Nel caso vuoto il nuovo nodo è sia il primo sia l’ultimo. Nel caso non vuoto si collega il precedente ultimo nodo al nuovo nodo e si aggiorna `rear`. L’estrazione stacca sempre il primo nodo. Quando quello staccato era l’ultimo, la nuova testa è nulla e il ramo della funzione azzera anche `rear`. Così l’operazione ripristina la rappresentazione della coda vuota.
+L’inserimento crea un nodo con `next` uguale a `NULL`, perché sarà l’ultimo. Se la coda era vuota, il nodo nuovo è sia il primo sia l’ultimo, quindi `front` e `rear` puntano entrambi a esso. Altrimenti il vecchio ultimo nodo viene collegato al nuovo, e `rear` passa al nuovo. L’estrazione toglie il primo nodo come in una lista. Se il nodo tolto era l’unico, `front` diventa `NULL` e va messo a `NULL` anche `rear`, che altrimenti punterebbe a un nodo rilasciato.
 :::
 
 :::osservazione
-Se `rear` punta all’ultimo nodo, l’inserimento modifica direttamente il suo collegamento. Se la rappresentazione dispone della sola testa, trovare l’ultimo nodo richiede una visita della catena. Il numero di aggiornamenti dei puntatori nella versione con due estremi è indipendente dalla lunghezza, mentre il tempo dell’allocatore dipende dall’implementazione. La presenza del puntatore all’ultimo nodo comporta una condizione da mantenere dopo estrazioni e azzeramento.
+Il puntatore `rear` serve a rendere rapido l’inserimento. Senza di esso, per inserire in fondo bisognerebbe percorrere l’intera lista a partire da `front`, con un tempo proporzionale alla lunghezza. Con `rear` l’inserimento richiede sempre le stesse poche assegnazioni, qualunque sia la lunghezza. In cambio le funzioni devono tenere `rear` aggiornato, in particolare quando la coda si svuota.
 :::
 
 ## Coda circolare e indici logici
 
 :::definizione{#coda-circolare titolo="Posizioni modulo la capacità"}
-Una **coda circolare** usa un vettore con capacità positiva $C$, un indice `first` in $[0,C)$ e una lunghezza `used` in $[0,C]$. L’elemento di posizione logica $k$ con $0\leq k<\mathrm{used}$ occupa l’indice fisico
+Una coda si può realizzare anche con un vettore, senza allocazioni. Poiché si toglie dall’inizio e si inserisce in fondo, gli elementi occupati si spostano verso gli indici alti; arrivati alla fine del vettore si riprende dall’indice $0$, come se il vettore fosse chiuso ad anello. Questa è una **coda circolare**. Si usano un vettore di capacità $C>0$, l’indice `first` del primo elemento, con $0\leq\mathrm{first}<C$, e il numero `used` di elementi presenti. L’elemento che occupa la posizione $k$ nella coda, con $0\leq k<\mathrm{used}$, si trova nel vettore all’indice
 $$
 (\mathrm{first}+k)\bmod C.
 $$
-A coda vuota `used` è zero. Se `used<C`, si inserisce all’indice $(\mathrm{first}+\mathrm{used})\bmod C$ e si aumenta la lunghezza. Se `used>0`, si legge l’elemento in `first`, si avanza `first` di una posizione modulo $C$ e si diminuisce la lunghezza.
+dove $\bmod$ indica il resto della divisione. La coda è vuota quando `used` è zero e piena quando `used` è uguale a $C$. Per inserire, se la coda non è piena, si scrive all’indice $(\mathrm{first}+\mathrm{used})\bmod C$ e si aumenta `used`. Per estrarre, se la coda non è vuota, si legge l’elemento di indice `first`, si porta `first` a $(\mathrm{first}+1)\bmod C$ e si diminuisce `used`.
 
-Con capacità $5$ e `first` uguale a $4$, le prime tre posizioni logiche occupano $4$, $0$ e $1$. Un quarto elemento si inserisce all’indice $2$. Dopo la prima estrazione, `first` diventa $0$ e la sequenza delle posizioni ancora occupate è $0$, $1$, $2$. Il modulo rende indipendente l’ordine logico dal raggiungimento del limite del vettore.
+Con capacità $5$, `first` uguale a $4$ e tre elementi, questi occupano gli indici $4$, $0$ e $1$, perché $(4+1)\bmod 5=0$ e $(4+2)\bmod 5=1$. Un quarto elemento va all’indice $(4+3)\bmod 5=2$. Dopo un’estrazione `first` diventa $(4+1)\bmod 5=0$ e gli elementi rimasti occupano gli indici $0$, $1$ e $2$.
 :::
 
 ::::teorema{#unicita-indici-circolari titolo="Indici distinti entro una capacità"}
-Siano $C>0$ e $0\leq\mathrm{first}<C$. Le posizioni logiche da $0$ a $C-1$ producono indici fisici distinti. In particolare, quando la lunghezza è inferiore a $C$, l’indice di inserimento è libero.
+Siano $C>0$ e $0\leq\mathrm{first}<C$. Le posizioni $k$ da $0$ a $C-1$ corrispondono a indici $(\mathrm{first}+k)\bmod C$ tutti diversi fra loro. Di conseguenza due elementi della coda non occupano mai la stessa cella, e quando la coda non è piena l’indice di inserimento è libero.
 
 :::dimostrazione
-Se due posizioni $k_1$ e $k_2$ producono lo stesso indice, la differenza $k_2-k_1$ è un multiplo di $C$. Per posizioni distinte nell’intervallo da $0$ a $C-1$ il valore assoluto della differenza è compreso tra $1$ e $C-1$. Un multiplo di $C$ non ha quella grandezza. Le posizioni occupate e la prima posizione libera danno quindi indici diversi.
+Se due posizioni $k_1$ e $k_2$ dessero lo stesso indice, la differenza $k_2-k_1$ sarebbe un multiplo di $C$. Per due posizioni diverse fra $0$ e $C-1$ il valore assoluto della differenza è compreso fra $1$ e $C-1$, e nessun multiplo di $C$ sta in questo intervallo.
 :::
 ::::
 
 :::attenzione
-La formula con modulo usa interi matematici. Nell’aritmetica del C la somma intermedia deve rientrare nell’intervallo del tipo dell’operazione. Se l’aritmetica senza segno riduce già la somma, l’operazione `%` successiva usa il valore ridotto. Per capacità grandi si calcola prima `gap = capacity - first`. Se `k < gap`, la somma `first + k` è minore di `capacity` ed è rappresentabile. Negli altri casi l’indice cercato è `k - gap`. Qui $k<C$ e anche `capacity` è rappresentabile.
+Nel programma la somma `first + k` va calcolata prima del resto, e deve stare nel tipo usato. Con indici di tipo `size_t` e capacità ordinarie questo è sempre vero. Per capacità vicine al massimo del tipo si evita la somma. Si calcola `gap = capacity - first`; se `k < gap` l’indice è `first + k`, altrimenti è `k - gap`.
 :::
 
 ## Verificare gli stati di confine
 
 :::osservazione
-Per confrontare rappresentazioni diverse si fissa la stessa sequenza logica e si controlla come cambiano campi e indici. Una pila restituisce l’ultimo elemento inserito ancora presente, e una coda restituisce il primo. Una lista conserva l’ordine dei collegamenti e ammette inserimenti locali quando la posizione è già disponibile. Una pila su vettore ha un prefisso occupato. Una coda circolare può occupare celle a entrambi i lati del confine degli indici. La scelta dipende quindi dalle operazioni richieste.
+Le tre strutture differiscono per l’elemento che restituiscono. La pila restituisce l’ultimo elemento inserito, la coda il primo; la lista permette di inserire e togliere in qualsiasi punto, purché si abbia il puntatore al nodo precedente. Pila e coda circolare su vettore non richiedono allocazioni ma hanno capacità fissa, mentre le versioni con lista crescono finché c’è memoria. La scelta dipende dalle operazioni che servono al programma.
 
-Le verifiche di un’interfaccia comprendono gli stati vuoto, unitario e pieno quando la capacità è finita. Per una coda dinamica si prova anche il percorso in cui l’allocatore fallisce prima di ogni aggiornamento. Si confrontano i collegamenti e il contenuto logico preesistenti. Se l’operazione dichiara fallimento e l’invariante è conservato, la struttura resta utilizzabile dal chiamante.
+Nel provare queste funzioni i casi più importanti sono quelli di confine, cioè struttura vuota, struttura con un solo elemento e, se la capacità è fissa, struttura piena. Per le versioni con allocazione si prova anche il caso in cui `malloc` fallisce, controllando che la struttura resti invariata e utilizzabile.
 :::
 
 :::esempio{titolo="Controllare gli estremi dopo l’ultima uscita"}
-Si parte da una coda vuota. Si inserisce $7$, si estrae $7$ e si inserisce $11$. Dopo la prima estrazione entrambi gli estremi devono essere nulli. Il secondo inserimento deve così percorrere il ramo della coda vuota e dare una coda con `front` uguale a `rear` e successore nullo. Estraendo di nuovo si deve ottenere $11$. La sequenza esercita il passaggio da un nodo a zero nodi e da zero a un nodo, e verifica che il successivo inserimento usi lo stato già ricostituito.
+Si parte da una coda vuota, si inserisce $7$, lo si estrae e si inserisce $11$. Dopo l’estrazione la coda è di nuovo vuota, e sia `front` sia `rear` devono valere `NULL`. Il secondo inserimento trova quindi `rear` uguale a `NULL`, esegue il ramo della coda vuota e fa puntare entrambi al nodo nuovo. Una nuova estrazione restituisce $11$. Se `dequeue` non azzerasse `rear`, il secondo inserimento scriverebbe nel nodo già rilasciato.
 :::
