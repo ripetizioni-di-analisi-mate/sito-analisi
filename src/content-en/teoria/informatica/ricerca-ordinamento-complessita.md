@@ -6,13 +6,13 @@ sommario: Specifications and invariants for searching and sorting, with counts o
 ## Specifying the position to find
 
 :::definizione{#precondizione-ricerca titolo="Search contract"}
-Let `a` be an array of `n` integers. Assume that positions `0` through `n - 1` are readable when `n` is positive. The smallest index at which a value `key` occurs is its **first occurrence**. The value `n` can represent absence because every readable index is strictly less than `n`. For the empty array the result is `0`, which is also the length.
+**Searching** for a value in an array means finding the position where it is located. Let `a` be an array of `n` integers and `key` the value searched for, called the **key**. If the key occurs several times, the function returns the smallest index at which it occurs, that is, the **first occurrence**. If it does not occur, it returns `n`, which is not a valid index and therefore cannot be confused with a position. For an empty array the result is `0`, which coincides with `n`.
 
-The specification distinguishes membership, which needs only a Boolean answer, from a search for the first position. With duplicates, a function that promises any occurrence may return several different indices. The first-occurrence contract determines one result. The C examples use `size_t` from `<stddef.h>` for lengths and indices.
+Specifying “the first occurrence” makes the result unique. In the array $(7,2,6,2,1)$ the key $2$ occurs at indices $1$ and $3$, and the required result is $1$. In the examples the type `size_t`, from `<stddef.h>`, is used for lengths and indices.
 :::
 
 :::definizione{#ricerca-lineare titolo="Scanning in index order"}
-**Linear search** tests equality between the key and each element starting at index zero. Each false comparison rules out one more element. A true comparison follows the exclusion of every previous position, so the return gives the first occurrence. This method works on an array in any order.
+**Linear search** compares the key with the elements one after the other, starting from index zero, and stops at the first equal element. Since the elements are examined in order of index, the one found is the first occurrence. The method works on any array, even an unsorted one.
 
 ```c
 size_t linear_first(const int a[], size_t n, int key)
@@ -26,25 +26,25 @@ size_t linear_first(const int a[], size_t n, int key)
 }
 ```
 
-At the guard `i < n`, the invariant is that no element of $[0,i)$ matches the key. It holds initially because that range is empty. If `a[i] == key` is false, the excluded range grows by one. When the guard is false, `i == n` and the invariant rules out the whole array.
+The loop invariant is “no element with index in $[0,i)$ equals the key”. At the start $i=0$ and the stretch is empty. If `a[i] == key` is false, the stretch without the key grows by one element. If the loop ends because `i == n`, the invariant says that the key does not occur anywhere in the array, and the function returns `n`.
 :::
 
 :::esempio{titolo="Index order determines the result"}
-The array $(7,2,6,2,1)$ contains two values equal to $2$. A scan for this key compares $7$ first and then $2$, so it returns index $1$. The later occurrence at index $3$ is irrelevant to the contract.
+In the array $(7,2,6,2,1)$ the search for the key $2$ compares first $7$ and then $2$, and returns the index $1$. The second $2$, at index $3$, is never examined.
 
-If the first occurrence is at index $i$, there are $i+1$ equality comparisons because the scan starts at zero. If the value is absent, there are $n$ comparisons. For the empty array, the initial length test prevents access to any element, and there are zero comparisons with the key.
+If the first occurrence is at index $i$, there are $i+1$ comparisons with the key. If the key is absent there are $n$, that is, all of them. For an empty array there are zero, because the condition `i < n` is already false at the start.
 :::
 
 ## Narrowing a sorted range
 
 :::definizione{#lower-bound titolo="Lower bound for a key"}
-An array is **nondecreasing** when $a_i\le a_{i+1}$ for each adjacent pair that exists. In such an array, the **lower bound** for `key` is the first index whose element is greater than or equal to the key, or `n` when every element is smaller. The indices before the lower bound therefore contain smaller values. From the lower-bound position onward, every value is greater than or equal to the key.
+If the array is sorted one can search much faster. An array is **non-decreasing** when every element is less than or equal to the next, that is, $a_i\le a_{i+1}$; equal elements are allowed. In a non-decreasing array the **lower bound** of `key` is the first index whose element is greater than or equal to the key, or `n` if all the elements are smaller. In the array $(1,3,4,4,4,7,9)$ the lower bound of $4$ is $2$, that of $5$ is $5$ and that of $10$ is $7$. Before the lower bound all the elements are smaller than the key, from the bound onwards they are all greater than or equal to it.
 
-To find the first occurrence, check whether the lower bound is a readable index and whether its key equals the search key. A strictly larger value at the lower bound proves absence. The values to its left are all smaller than the key, and the sorted order makes the values to its right at least as large as the value at the lower bound.
+From the lower bound $p$ one obtains the first occurrence. If $p<n$ and `a[p]` equals the key, $p$ is the first occurrence. Otherwise the key is absent, because the elements before $p$ are smaller and those from $p$ onwards are greater.
 :::
 
 ::::teorema{#dicotomia-invariante titolo="Bounds and invariant of binary search"}
-With a nondecreasing array as its precondition, the following function computes the lower bound. The range of elements still to examine is half-open, $[\mathrm{lo},\mathrm{hi})$.
+**Binary search** finds the lower bound in a non-decreasing array by halving at each step the stretch in which it may lie. It keeps two indices, `lo` and `hi`, which delimit the stretch $[\mathrm{lo},\mathrm{hi})$ still to be examined, and compares the key with the middle element `a[mid]`. If `a[mid]` is smaller than the key, the bound lies after `mid` and the left half is discarded; otherwise it lies at `mid` or before, and the right half is discarded.
 
 ```c
 size_t lower_bound(const int a[], size_t n, int key)
@@ -62,21 +62,21 @@ size_t lower_bound(const int a[], size_t n, int key)
 }
 ```
 
-The bounds satisfy $0\le \mathrm{lo}\le\mathrm{hi}\le n$. Each index in $[0,\mathrm{lo})$ has an element smaller than the key. Each index in $[\mathrm{hi},n)$ has an element greater than or equal to it. The required position is therefore one of the possible boundaries from `lo` through `hi`, including both endpoints.
+The invariant consists of three conditions. We have $0\le \mathrm{lo}\le\mathrm{hi}\le n$. Every element with index in $[0,\mathrm{lo})$ is smaller than the key. Every element with index in $[\mathrm{hi},n)$ is greater than or equal to the key. The lower bound therefore always lies between `lo` and `hi`, endpoints included, and when the two indices coincide it is their common value.
 
 :::dimostrazione
-Initially the two classified ranges are empty, and the inequalities on the bounds hold. When `lo < hi`, the difference `hi - lo` is positive. Integer division gives a value smaller than the difference, so `lo <= mid` and `mid < hi`. The subtraction and addition in the midpoint expression are representable because each result is between zero and `hi`. Also, `mid + 1` is at most `hi`.
+At the start `lo` is $0$ and `hi` is $n$, the two stretches already examined are empty and the invariant holds. If `lo < hi`, the integer half of $\mathrm{hi}-\mathrm{lo}$ is smaller than $\mathrm{hi}-\mathrm{lo}$, so $\mathrm{lo}\le\mathrm{mid}<\mathrm{hi}$ and `mid` is a valid index. The midpoint is computed as `lo + (hi - lo) / 2`, and not as `(lo + hi) / 2`, because the sum `lo + hi` might exceed the maximum of the type.
 
-If `a[mid] < key`, the sorted order extends that inequality to all earlier elements, so the excluded prefix can reach through `mid`. In the other branch, every element from `mid` onward is at least the key, so `mid` can become the new `hi`. In both cases, the length still to classify strictly decreases and remains nonnegative. At the end, the bounds coincide. The two relations in the invariant then characterize the lower bound.
+If `a[mid] < key`, by the ordering all the elements before `mid` are smaller than the key too, so `lo` can move to `mid + 1`. Otherwise `a[mid]` and all the following elements are greater than or equal to the key, so `hi` can move to `mid`. In both cases the invariant is preserved and the length $\mathrm{hi}-\mathrm{lo}$ decreases by at least one, so the loop ends with `lo == hi`, which is the lower bound.
 :::
 ::::
 
 :::esempio{titolo="The first position in a group of duplicates"}
-Use key $4$ on the array $(1,3,4,4,4,7,9)$.
+One searches for the key $4$ in the array $(1,3,4,4,4,7,9)$, which has $n=7$ elements.
 
 ![Lower bound for key 4. The lo, hi, mid, a[mid] rows are (0,7,3,4), (0,3,1,3), (2,3,2,4), and finally the bounds (2,2).](/immagini/informatica/ricerca-ordinamento-complessita/schema-teoria-en.png)
 
-The comparison at index $3$ finds an equal value, so the branch that moves the right bound sets `hi` to $3$. The comparison at index $1$ finds a smaller value and moves `lo` to $2$. At index $2$, equality narrows the range again, until both bounds equal $2$. The lower bound coincides with the first occurrence.
+At the start the stretch is $[0,7)$ and `mid` is $3$. Since `a[3]` is $4$, which is not smaller than the key, `hi` becomes $3$. In the stretch $[0,3)$ `mid` is $1$; `a[1]` is $3$, smaller than the key, so `lo` becomes $2$. In the stretch $[2,3)$ `mid` is $2$; `a[2]` is $4$, so `hi` becomes $2$. Now `lo` and `hi` coincide and the lower bound is $2$, which is also the first occurrence of $4$. The following function completes the search.
 
 ```c
 size_t binary_first(const int a[], size_t n, int key)
@@ -86,41 +86,41 @@ size_t binary_first(const int a[], size_t n, int key)
 }
 ```
 
-If `p == n`, short-circuit evaluation prevents reading `a[p]`. The equality test is added only when the lower bound belongs to the array.
+The lower bound `p` is the first occurrence only if the key itself is at that position. If `p == n`, the condition `p < n` is false and, by short-circuit evaluation, `a[p]` is not read.
 :::
 
 ## Counting operations and comparing growth
 
 :::definizione{#modello-di-costo titolo="Cost model and input size"}
-The **input size** for a search or sort here is the number $n$ of array elements. A **cost model** fixes which operation to count. In comparing order-based algorithms, it is common to count key comparisons. That count excludes tests on indices, counter updates, and writes. Writes give a second useful count because two algorithms can make the same number of comparisons and a different number of writes.
+To compare two algorithms one counts how many operations they perform as a function of the **input size**, which for searching and sorting is the number $n$ of elements. One must decide which operations to count, that is, fix a **cost model**. For searching and sorting one usually counts the comparisons between elements, because the rest of the work is proportional to them. Sometimes the writes into the array are counted too, because two algorithms with the same number of comparisons may perform a different number of writes.
 
-For each $n$, the cost can vary with the initial data. The worst case is the maximum over inputs of that size and the best case is the minimum. An estimate based on unit-cost operations describes how work grows with $n$. Available memory and the range of the index type limit the concrete instances on a C machine.
+For the same $n$ the cost depends on the data. The **worst case** is the maximum cost over all inputs of size $n$, and the **best case** is the minimum. In linear search the best case is $1$ comparison, when the key is in the first place, and the worst case is $n$ comparisons, when it is absent.
 :::
 
 :::definizione{#ordini-asintotici titolo="Upper and tight bounds"}
-For nonnegative cost functions, $T\in O(g)$ means that a constant $C>0$ and a threshold $n_0$ exist such that $T(n)\le Cg(n)$ for every $n\ge n_0$. The notation $T\in\Theta(g)$ also requires a lower bound $T(n)\ge cg(n)$ for a constant $c>0$ beyond a threshold. The constants can differ, and the bounds must hold for all sufficiently large sizes.
+What matters most about a cost is how it grows as $n$ grows, without regard to constants. The notation $T\in O(g)$, read “$T$ is big O of $g$”, means that from a certain $n$ onwards the cost $T(n)$ is at most a fixed multiple of $g(n)$; in formulas, there exist a constant $C>0$ and a threshold $n_0$ such that $T(n)\le Cg(n)$ for every $n\ge n_0$. It is an upper bound. The notation $T\in\Theta(g)$ means that $T$ lies between two multiples of $g$, that is, $T(n)\ge cg(n)$ also holds for a constant $c>0$; in this case $T$ grows exactly like $g$.
 
-For example, if $T(n)=4n+7$, then for $n\ge1$ we have $4n\le T(n)\le 11n$. This proves $T\in\Theta(n)$. Since $n\le n^2$ for $n\ge1$, the same cost also belongs to $O(n^2)$. The quadratic bound is a looser upper bound.
+For example, if $T(n)=4n+7$, for $n\ge1$ we have $4n\le T(n)\le 11n$, so $T\in\Theta(n)$, and the cost is said to be linear. Since $n\le n^2$, $T\in O(n^2)$ holds as well, which is a true but less precise statement. Linear search has cost $\Theta(n)$ in the worst case.
 :::
 
 ::::teorema{#confronti-dicotomici titolo="Binary-search cost"}
-The lower bound on $n\ge1$ elements requires at most $1+\lfloor\log_2 n\rfloor$ comparisons of `a[mid] < key`. This bound is attained on an array in which every element is at least the key. For $n=0$ the count is zero.
+Binary search on $n\ge1$ elements performs at most $1+\lfloor\log_2 n\rfloor$ comparisons `a[mid] < key`, so its cost is $O(\log n)$. For an array of one million elements there are at most $20$ comparisons, against the million of linear search. The maximum is attained when all the elements are greater than or equal to the key. For $n=0$ there are zero comparisons.
 
 :::dimostrazione
-With current length $m$, the branch that assigns `hi = mid` leaves $\left\lfloor\dfrac{m}{2}\right\rfloor$ elements. The other branch also discards the middle element, so it leaves at most the same number. After $k$ comparisons, at most $\left\lfloor\dfrac{n}{2^k}\right\rfloor$ elements remain. This quantity is zero when $2^k>n$. The least integer $k$ satisfying that inequality is $1+\lfloor\log_2 n\rfloor$. If all elements are at least the key, execution always takes the branch that keeps exactly $\left\lfloor\dfrac{m}{2}\right\rfloor$ elements, and the bound is attained.
+If the stretch has $m$ elements, after one comparison at most $\left\lfloor\dfrac{m}{2}\right\rfloor$ remain. The branch `hi = mid` leaves exactly this number, and the branch `lo = mid + 1` discards the middle element too and leaves at most as many. After $k$ comparisons at most $\left\lfloor\dfrac{n}{2^k}\right\rfloor$ elements therefore remain, and the loop ends when this quantity is zero, that is, when $2^k>n$. The smallest $k$ with this property is $1+\lfloor\log_2 n\rfloor$. If all the elements are greater than or equal to the key the first branch is always executed and the maximum is attained.
 :::
 ::::
 
 :::esempio{titolo="Boundaries in the logarithmic count"}
-If $n=13$ and all keys are at least the target, the remaining lengths are $13$, $6$, $3$, $1$, and $0$. Four comparisons reduce the length to zero. For $n=16$ under the same conditions, $8$ elements remain after the first step, and five comparisons are needed. The difference is that $2^4$ equals $16$, leaving one element after four halvings.
+With $n=13$ and all the elements greater than or equal to the key, the lengths of the stretch are $13$, $6$, $3$, $1$ and $0$, so there are four comparisons; indeed $\lfloor\log_2 13\rfloor=3$. With $n=16$ the lengths are $16$, $8$, $4$, $2$, $1$ and $0$, and there are five comparisons, because $\log_2 16=4$.
 
-These sequences count only the lower-bound calculation. In the first-occurrence function, the lower bound can identify a value strictly greater than the key. In that case the final equality comparison takes place and is false. If the lower bound is `n`, the function establishes absence using only the test on indices.
+These numbers concern the computation of the lower bound. The function that searches for the first occurrence performs in addition, when the bound is smaller than $n$, one equality comparison.
 :::
 
 ## Inserting a key into the prefix
 
 :::definizione{#insertion-sort titolo="Insertion sort"}
-**Insertion sort** extends a sorted prefix by one position per pass. In the pass with index `i`, it saves the key to insert and shifts the greater preceding keys right. The guard checks `j > 0` before reading `a[j - 1]`. At the end, `j` is the position for the saved key.
+**Sorting** an array means arranging its elements in non-decreasing order. **Insertion sort** proceeds like someone sorting the cards in their hand. It considers the elements one at a time from the left, and inserts each one in the right place among the already sorted ones that precede it. At the step with index `i` the elements with index smaller than `i` are already sorted. One saves `a[i]` in `key`, moves the elements greater than `key` one position to the right and writes `key` in the place left free. The condition `j > 0` is written before `a[j - 1] > key`, so that by short-circuit evaluation `a[j - 1]` is not read when `j` is zero.
 
 ```c
 void insertion_sort(int a[], size_t n)
@@ -139,27 +139,27 @@ void insertion_sort(int a[], size_t n)
 :::
 
 ::::teorema{titolo="Preserving the sorted prefix"}
-For each pass, the prefix $[0,i)$ is a sorted permutation of the records originally in that prefix. On completion, the whole array is a nondecreasing permutation of its input.
+At the start of every step with index $i$ the stretch $[0,i)$ contains the same elements it contained initially, arranged in non-decreasing order. At the end the whole array contains the initial elements in non-decreasing order.
 
 :::dimostrazione
-The initial prefix has one element, so it is sorted. Assuming the earlier prefix is sorted, keys strictly greater than `key` make up a trailing run in the prefix. The `while` loop shifts precisely those keys and preserves their order. When the guard stops the loop, the free slot is either at the start or after a key at most `key`. Inserting the saved key preserves the order and extends the permutation by one. The property therefore holds for every pass. Arrays of length zero or one are already sorted.
+At the first step the stretch $[0,1)$ has a single element, so it is sorted. Suppose the stretch $[0,i)$ is sorted. The elements greater than `key` occupy its final part, and the `while` loop moves all of them one position to the right, without changing their order. The loop stops when the free place is at the beginning of the array or is preceded by an element less than or equal to `key`. Writing `key` in that place the stretch $[0,i+1)$ is sorted and contains the same elements as before. An array with zero or one element is already sorted and the outer loop performs no step.
 :::
 ::::
 
 :::osservazione
-In the pass with index $i$, there are at most $i$ key comparisons. On a strictly decreasing sequence, each new key must be moved to the start, so the bound is attained in every pass. For $n\ge1$ the worst-case total is $\dfrac{n(n-1)}{2}$. On nondecreasing data, each pass's first key comparison is false, so there are $n-1$ comparisons. Count the shift writes after true comparisons separately from the final write of the saved key.
+At the step with index $i$ there are at most $i$ comparisons between elements. The worst case is an array in decreasing order, in which every element must be brought all the way to the beginning; there are $1+2+\dots+(n-1)=\dfrac{n(n-1)}{2}$ comparisons, so the cost is $\Theta(n^2)$. The best case is an array already sorted, in which at each step the first comparison is false; there are $n-1$ comparisons, and the cost is $\Theta(n)$. For $n=1000$ the two cases give $499\,500$ and $999$ comparisons.
 :::
 
 :::esempio{titolo="Shifts and inversions"}
-An **inversion** is a pair of initial positions in which the earlier key is strictly greater than the later one. Inserting the second key causes a shift of the first because the prefix already contains the earlier record. Thus, in this code, the number of shifts equals the number of initial inversions.
+An **inversion** is a pair of elements that are in the wrong order, that is, in which the one that comes first is greater than the one that comes after. In insertion sort every move to the right removes exactly one inversion, so the number of moves equals the number of inversions of the initial array.
 
-On the array $(5,2,4,2)$, the first $2$ shifts $5$. Key $4$ shifts $5$ again on the next pass. The final $2$ shifts $5$ and $4$, giving a total of four shifts. Counting the writes separately, there are also three writes of saved keys, one per pass. The pair of records with key $2$ keeps its original order and does not contribute to the inversion count.
+In the array $(5,2,4,2)$ there are four inversions, namely $5$ with the first $2$, $5$ with $4$, $5$ with the last $2$ and $4$ with the last $2$. Inserting the first $2$ moves $5$. Inserting $4$ moves $5$. Inserting the last $2$ moves $5$ and $4$. There are four moves, like the inversions. The two elements equal to $2$ do not form an inversion and stay in their initial order.
 :::
 
 ## Choosing the smallest key in the suffix
 
 :::definizione{#selection-sort titolo="Selection sort"}
-**Selection sort** finds the minimum in positions `i` through `n - 1` and swaps it with the element at `i`. The function keeps the index of the first minimum on each scan because it updates `min_index` only for a strictly smaller key.
+**Selection sort** looks for the smallest element of the array and swaps it with the first; then it looks for the smallest among the remaining ones and swaps it with the second, and so on. At the step with index `i` it looks for the minimum among the indices from `i` to `n - 1` and brings it to position `i`. The variable `min_index` contains the index of the minimum found so far, and is updated only when a strictly smaller element is found.
 
 ```c
 void selection_sort(int a[], size_t n)
@@ -180,35 +180,35 @@ void selection_sort(int a[], size_t n)
 }
 ```
 
-After a pass, the extended prefix is nondecreasing and every key in it is at most every remaining key. The new key placed at the end of the prefix is a minimum of the previous suffix, which gives both properties. The swap retains all keys.
+After the step with index $i$ the elements with indices from $0$ to $i$ are in order and are all less than or equal to the elements that follow, because the minimum of those that remained has been put in position $i$. The swap neither adds nor removes elements.
 :::
 
 :::osservazione
-Pass $i$ compares exactly $n-i-1$ elements with the current minimum. For $n\ge1$ the total is $\dfrac{n(n-1)}{2}$ for every initial arrangement. The comparison count therefore belongs to $\Theta(n^2)$ in both the best and worst cases. A swap occurs only when the minimum is in a different position. This permits zero through $n-1$ swaps when $n\ge1$, because the last position has a suffix of length one.
+At the step with index $i$ there are $n-i-1$ comparisons, whatever the data. The total is $(n-1)+(n-2)+\dots+0=\dfrac{n(n-1)}{2}$, so the cost in comparisons is $\Theta(n^2)$ both in the best and in the worst case; an array already sorted saves nothing. The swaps, on the other hand, are few, at most $n-1$, because each step performs at most one.
 :::
 
 :::esempio{titolo="Two counts for the same array"}
-For six equal keys, selection performs $5+4+3+2+1=15$ comparisons. Since the selected minimum stays at the first position of each suffix, it performs zero swaps. Insertion uses five comparisons, all false in the `a[j - 1] > key` test. It performs zero shifts, and the code still writes the saved key to `a[j]` on every pass. A comparison of memory traffic therefore needs to specify whether it counts shifts of one record, swaps of two records, or each individual write.
+On an array of six elements all equal, selection sort performs $5+4+3+2+1=15$ comparisons and no swap. Insertion sort performs five comparisons and no move, but it still writes `key` in its place at each step, for five writes. When comparing two algorithms one must therefore state what is being counted, that is, comparisons, swaps or single writes.
 :::
 
 ## Identifying stable sorting
 
 :::definizione{#stabilita-ordinamento titolo="Relative order of equal keys"}
-A sort is **stable** if each pair of records with equal keys preserves its original relative order. Two records may have the same key and different fields. To observe their order, give each a tag that moves with the record even though comparisons use only the key.
+When sorting data with several fields, for example students sorted by mark, two different items may have the same key. A sort is **stable** if two elements with the same key remain in the order they were in initially. To see this one writes each element as a pair (key, label), where the label distinguishes elements with the same key but does not enter the comparisons.
 
-The insertion sort shown is stable because a key equal to the one being inserted stops the shifts. The new key therefore goes after all equivalent occurrences already in the prefix. By induction, equal keys retain their original relative order.
+Insertion sort is stable. The moving stops when it meets an element equal to `key`, because the condition is `a[j - 1] > key` with strict inequality, so the new element is placed after the equal ones already present.
 :::
 
 :::esempio{titolo="A swap that reverses two records"}
-Consider $(2,A)$, $(2,B)$, and $(1,C)$ in this order. The first selection-sort pass chooses the unique minimum, $(1,C)$, and swaps it with $(2,A)$. The array becomes $(1,C)$, $(2,B)$, $(2,A)$. On subsequent passes the first minimum in the suffix is also its first position. Thus the final order for the equal keys is $B$ followed by $A$.
+One sorts by selection the elements $(2,A)$, $(2,B)$ and $(1,C)$. The first step finds the minimum $(1,C)$ and swaps it with $(2,A)$, and the array becomes $(1,C)$, $(2,B)$, $(2,A)$. The following steps change nothing. The two elements with key $2$ now appear in the order $B$, $A$, the opposite of the initial one.
 
-The result is sorted and contains the three input records, so it meets the sorting specification. Stability is an extra property of relative order. Keeping the first minimum by value does not prevent a swap from moving another record past its equals.
+The final array is sorted, so the result is correct, but selection sort is not stable. The swap has carried $(2,A)$ past $(2,B)$.
 :::
 
 ## Merging already sorted runs
 
 :::definizione{#fusione-ordinata titolo="Merging from two heads"}
-Assume that $[\mathrm{lo},\mathrm{mid})$ and $[\mathrm{mid},\mathrm{hi})$ are nondecreasing runs in `a`, with `lo <= mid` and `mid <= hi`. A **merge** compares the first remaining element of each run and writes the one with the smaller key to `tmp`. The array `tmp` is writable in the same positions and uses storage disjoint from `a`. Once one run is exhausted, the tail of the other is copied.
+**Merging** builds a single sorted stretch from two stretches that are already sorted. The two stretches are consecutive in the array `a`, namely $[\mathrm{lo},\mathrm{mid})$ and $[\mathrm{mid},\mathrm{hi})$ with `lo <= mid` and `mid <= hi`, and the result is written into a second array `tmp`, distinct from `a`. At each step one compares the first elements not yet copied of the two stretches and copies the smaller one into `tmp`. When one of the two stretches is finished, what remains of the other is copied.
 
 ```c
 void merge_range(const int a[], int tmp[],
@@ -231,25 +231,25 @@ void merge_range(const int a[], int tmp[],
 }
 ```
 
-Before each write, $[\mathrm{lo},k)$ contains all consumed elements in sorted order. The next remaining minimum must be at one of the two heads because each run is sorted. Consuming that head preserves the invariant. Choosing the left run on a tie preserves relative order when the two runs came from adjacent sections of the same array.
+The indices `i` and `j` give the first element not yet copied of the two stretches, and `k` the position at which to write. The smallest element among those not yet copied is necessarily the first of one of the two stretches, because each stretch is sorted; for this reason it is enough to compare `a[i]` and `a[j]`. In case of a tie the condition `a[i] <= a[j]` copies the element of the left stretch, and this makes merging stable.
 :::
 
 :::esempio{titolo="Counting comparisons before the tail"}
-Merging $(3,7)$ and $(4,8,9)$ requires checking $3$ against $4$, then $7$ against $4$, and finally $7$ against $8$. After writing $7$, the first run is exhausted. Values $8$ and $9$ are copied without comparing them with the first run. The merge therefore costs three key comparisons and five writes.
+One merges $(3,7)$ and $(4,8,9)$. The comparison between $3$ and $4$ copies $3$. The comparison between $7$ and $4$ copies $4$. The comparison between $7$ and $8$ copies $7$. The first stretch is finished, so $8$ and $9$ are copied without further comparisons. In all there are three comparisons and five writes.
 
-With two runs of positive lengths $p$ and $q$, each comparison transfers one key to the output. When the first run is exhausted, at least one element remains in the other run because both were nonempty before that transfer. This gives the upper bound $p+q-1$ on comparisons. With an empty run there are zero comparisons.
+In general, for two non-empty stretches of lengths $p$ and $q$ each comparison copies one element, and when one stretch is finished at least one element remains in the other, which is copied without comparisons. There are therefore at most $p+q-1$ comparisons. The cost of merging is proportional to the total number of elements.
 :::
 
 :::esempio{titulo="Equal keys at the heads of both runs"}
-Merge the records $(2,A),(4,B)$ and $(2,C),(3,D)$. The first comparison finds equal keys, so it writes $(2,A)$ from the left run. The next comparison has $4$ on the left and $2$ on the right and writes $(2,C)$. Then $(3,D)$ is written because $3<4$, and the tail $(4,B)$ is copied. The relative order $A,C$ matches the input.
+One merges $(2,A),(4,B)$ and $(2,C),(3,D)$. In the first comparison the keys are equal and $(2,A)$ is copied, which belongs to the left stretch. Then $4$ and $2$ are compared and $(2,C)$ is copied; then $4$ and $3$ and $(3,D)$ is copied; finally $(4,B)$ is copied. The two elements with key $2$ are in the order $A$, $C$, as at the start.
 
-If a comparison chose the right run on a tie, the first record written would be $(2,C)$. The order by key would still be correct, and the relative order of the two equal-key records would be reversed.
+With the condition `a[i] < a[j]` in place of `a[i] <= a[j]`, in case of a tie $(2,C)$ would be copied first. The result would still be sorted, but merging would no longer be stable.
 :::
 
 ## Following the divisions in merge sort
 
 :::definizione{#merge-sort titolo="Sorting by splitting and merging"}
-**Merge sort** splits a range in two, sorts each half using the same procedure, then merges the results. The base case has length zero or one. The following function receives a disjoint auxiliary array. The positions of `a` and `tmp` in the range must exist and be writable. The function `merge_range` is declared before its use.
+**Merge sort** is a recursive algorithm. It divides the stretch to be sorted into two halves, sorts each half by calling itself, and then merges the two sorted halves. The base case is a stretch with zero or one element, which is already sorted. The function also receives the auxiliary array `tmp`, of the same length as `a`, into which `merge_range` writes the result of the merge, which is then copied back into `a`.
 
 ```c
 void merge_sort(int a[], int tmp[], size_t lo, size_t hi)
@@ -268,15 +268,15 @@ void merge_sort(int a[], int tmp[], size_t lo, size_t hi)
 }
 ```
 
-The function requires `lo <= hi` and chooses `mid` so that the two halves differ in length by at most one. Both lengths are less than $n$ when $n\ge2$, so the base case is reached. By induction on the lengths, the two calls return nondecreasing runs. The merge builds the entire range in order, and the copy puts it back into the input array.
+The precondition is `lo <= hi`. For $n\ge2$ the two halves have lengths that differ by at most one and are both smaller than $n$, so the recursive calls reach the base case. By induction on the length, the two calls leave the two halves sorted; merging produces in `tmp` the whole sorted stretch, and the final loop copies it back into `a`. For $(5,2,4,1)$ the two halves $(5,2)$ and $(4,1)$ become $(2,5)$ and $(1,4)$, and merging gives $(1,2,4,5)$.
 :::
 
 ::::teorema{#spazio-ausiliario titolo="Work per level and reused storage"}
-With $n=2^k$, for integer $k\ge0$, the number of writes that copy from auxiliary storage back to the array is $nk$. The merge sort shown has total cost $\Theta(n\log n)$ when the count includes at least those writes and comparisons, accesses, updates, and writes have unit cost. Sorting the whole array uses one auxiliary array of $n$ positions, plus the storage for active calls.
+Merge sort has cost $\Theta(n\log n)$ in every case, counting comparisons and writes. It uses an auxiliary array of $n$ elements, in addition to the space for the recursive calls, whose depth is $O(\log n)$. In particular, for $n=2^k$ with $k\ge0$ an integer the writes that copy back from `tmp` to `a` are exactly $nk$. For $n=1000$, $n\log_2 n$ is about $10\,000$, against the half million comparisons of the worst case of insertion sort and selection sort.
 
 :::dimostrazione
-For a power of two, on every one of the $k$ merge levels the runs partition the array. Each run is written once into auxiliary storage and once when copying back, so the copy-back step totals $n$ writes per level. This gives $nk$ writes. The total work at each level is at most a constant multiple of $n$, because each merge makes at most one comparison per element written, and the cost of all instructions is proportional to the lengths.
+Consider first $n=2^k$. The calls are arranged in levels, that is, one stretch of $n$ elements, two of $\dfrac{n}{2}$, four of $\dfrac{n}{4}$, down to the stretches of one element. There are $k$ levels at which a merge takes place, and at each of them the merged stretches together cover all $n$ elements. Each element is written once into `tmp` and once copied back into `a`, so there are $n$ copies back per level and $nk$ in all. The work of each level is proportional to $n$, because each merge performs at most one comparison per element copied; the total is proportional to $nk=n\log_2 n$.
 
-For general $n$, the number of merge levels is at most $\lceil\log_2 n\rceil$ for $n\ge2$. At the first $\lfloor\log_2 n\rfloor$ levels counted from the longest calls, all runs have length at least two and their merges cover $n$ elements. This also gives the lower bound on the order of growth. The child calls execute one after the other and use parts of the same auxiliary array, so $n$ positions suffice. Each activation record contains a fixed amount of data, and the maximum number of simultaneous calls is in $O(\log n)$.
+For arbitrary $n$ there are at most $\lceil\log_2 n\rceil$ merge levels, and in the first $\lfloor\log_2 n\rfloor$ the merges cover all $n$ elements, so the cost remains $\Theta(n\log n)$. The two recursive calls are executed one after the other and use different parts of the same array `tmp`, for which $n$ elements are therefore enough. On the stack there are at most $O(\log n)$ activation records at the same time, each of fixed size.
 :::
 ::::
