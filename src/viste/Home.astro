@@ -70,6 +70,9 @@ const conti = (m: (typeof MATERIE)[number]) => {
 const icona = {
   teoria: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.8 10h5M7.8 13h5"/></svg>',
   video: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5v7l5.5-3.5z" fill="#fff"/></svg>',
+  videoFilo: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="10" cy="10" r="7.6"/><path d="M8.4 7v6l4.8-3z"/></svg>',
+  gratis: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="7" width="15" height="3.5" rx="0.8"/><path d="M4 10.5V17h12v-6.5M10 7v10M10 7c-1.2-2.8-5-3.3-5-1.2C5 7 8 7 10 7Zm0 0c1.2-2.8 5-3.3 5-1.2C15 7 12 7 10 7Z"/></svg>',
+  account: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.8" r="3.3"/><path d="M3.5 17c.6-3.4 3.2-5 6.5-5s5.9 1.6 6.5 5"/></svg>',
   ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 ---
@@ -97,18 +100,22 @@ const icona = {
     </div>
     <button type="submit">{t.cerca}</button>
   </form>
+  {/* 20/11/2026, scelta di Carmine fra più anteprime (stile «allineato», testo B): quattro righe con la stessa forma, etichetta e descrizione in colonna.
+        «Gratis» è una frase generica al posto dell'elenco di link (GratisHome resta per le altre lingue); «Prova gratis» è confluita in «Gratis»;
+        tolto il link alle ripetizioni dopo «Videocorsi»; la riga «Con l'iscrizione» si vede solo senza accesso. */}
   {usa ? (
     <ul class="legenda-home"><li><Fragment set:html={icona.teoria} /><span><b>Theory and exercises</b> · worked examples and exam practice.</span></li></ul>
   ) : lingua === 'it' ? (
-    <ul class="legenda-home">
-      <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
-      <li><Fragment set:html={icona.video} /><span><a href={url('/videocorsi')}>Videocorsi</a> con video e PDF. Per una lezione in diretta, <a href={url('/ripetizioni-analisi')}>ripetizioni online di Analisi 1 e 2</a>.</span></li>
-    </ul>
-    <p class="gratis-home solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span><b>Prova gratis</b>: anteprime di teoria ed esercizi, senza account.</span></p>
+    <dl class="legenda-home-2">
+      <dt><Fragment set:html={icona.teoria} /><span>Teoria ed esercizi</span></dt><dd>Spiegazioni, svolgimenti e soluzioni</dd>
+      <dt><Fragment set:html={icona.videoFilo} /><a href={url('/videocorsi')}>Videocorsi</a></dt><dd>Video e PDF</dd>
+      <dt><Fragment set:html={icona.gratis} /><span>Gratis</span></dt><dd>Anteprime, quiz, formulari e corsi da zero</dd>
+      <dt class="solo-ospiti"><Fragment set:html={icona.account} /><a href={url('/accedi?nuovo=1')}>Con l’iscrizione</a></dt><dd class="solo-ospiti">Livelli e punti, lega settimanale, Studio guidato e progressi verso l’esame</dd>
+    </dl>
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
-  {!usa && <div class="risorse-home"><GratisHome lingua={lingua} /></div>}
+  {!usa && lingua !== 'it' && <div class="risorse-home"><GratisHome lingua={lingua} /></div>}
   {lingua === 'it' && <div class="solo-ospiti"><PacchettiHome /></div>}
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {usa && <p class="esito-ricerca-usa" role="status" data-esito-usa hidden></p>}
