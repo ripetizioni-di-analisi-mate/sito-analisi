@@ -22,6 +22,10 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
     <p id="chi" class="account-caricamento" role="status">{t.caricamento}</p>
     <div id="pannello" hidden>
       {/* Copertina: stessa fascia calda dello spazio personale in home, con nome, rango e avanzamento del livello. */}
+      <div class="ac-esci-alto"><button class="account-esci" type="button" id="esci-alto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M14 8l4 4-4 4M9 12h11"/></svg>
+        <span>{s.esci}</span>
+      </button></div>
       <header class="ac-copertina">
         <div class="ac-dati">
           <h1 class="account-sopratitolo">{s.studio}</h1>

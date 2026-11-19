@@ -323,6 +323,8 @@ export function avviaAccount(root) {
     finally { b.disabled = false; }
   });
   const esci = q('esci'), testoEsci = q('esci-testo');
+  // Il tasto in alto a destra fa la stessa uscita di quello in fondo.
+  q('esci-alto').addEventListener('click', () => { q('esci-alto').disabled = true; esci.click(); setTimeout(() => { q('esci-alto').disabled = false; }, 4000); });
   esci.addEventListener('click', async () => {
     if (esci.disabled) return;
     esci.disabled = true;

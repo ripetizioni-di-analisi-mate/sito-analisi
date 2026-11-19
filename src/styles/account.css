@@ -225,3 +225,6 @@
 }
 @media (pointer: coarse) { .invita-riga .invita-copia { min-height: 44px; } .invita-riga .invita-wa { width: 2.75rem; height: 2.75rem; } }
 .invita-riga .invita-testo i { font-style: normal; }
+/* «Esci dall'account» anche in alto a destra, sulla riga del percorso (19/11/2026). */
+.pagina-account .ac-esci-alto { display: flex; justify-content: flex-end; height: 0; }
+.pagina-account .ac-esci-alto .account-esci { margin: 0; transform: translateY(calc(-100% - 0.85rem)); font-size: 0.88rem; }
