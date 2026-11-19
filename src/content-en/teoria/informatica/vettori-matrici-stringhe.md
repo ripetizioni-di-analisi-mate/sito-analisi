@@ -6,38 +6,38 @@ sommario: How to traverse an array within its bounds, read a matrix row by row, 
 ## Aggregate objects and valid indices
 
 :::definizione{#vettore-c titolo="Array of elements of the same type"}
-An **array** in C is an object made up of contiguous elements of the same type. The declaration `int a[5];` reserves five elements of type `int`. The array has length $n=5$, and each element can be identified by its index $i$. The index bounds are
+An **array** is a sequence of variables of the same type, placed one after the other in memory and referred to by a single name. The declaration `int a[5];` creates five `int` variables, called **elements**. Each element is referred to by the name of the array and an **index** in square brackets, as in `a[2]`. Indices start from zero, so for an array of length $n$ the valid indices are
 $$
 0\le i<n .
 $$
-The first element is `a[0]`, and the last is `a[n - 1]`. The value $n$ is the first excluded index, so it provides a natural endpoint for a traversal. An array declared with a constant size has a strictly positive size in portable C17. A procedure can still process zero elements when its active range is empty.
+The first element is `a[0]` and the last is `a[n - 1]`; in an array of five elements the last is `a[4]`, and `a[5]` does not exist. An array is usually processed with a loop `for (i = 0; i < n; ++i)`, in which $n$ is the first excluded index.
 :::
 
 :::definizione{#inizializzazione-vettore titolo="Initialization from a list"}
-A list of values in braces initializes the cells in increasing index order. In `int a[5] = {7, -2};`, the elements at indices $0$ and $1$ receive $7$ and $-2$, respectively. Because the declaration provides a list, the remaining three elements receive zero. In `int b[] = {7, -2};`, the compiler instead infers the size $2$ from the length of the list. Every cell has a definite initial value in both examples.
+An array is initialized with a list of values in braces, assigned to the elements in order. In `int a[5] = {7, -2};` the element `a[0]` is $7$ and `a[1]` is $-2$. If the list has fewer values than there are elements, the remaining ones receive zero, so `a[2]`, `a[3]` and `a[4]` are $0$. If the size is omitted, as in `int b[] = {7, -2};`, the compiler derives it from the list, and `b` has two elements.
 :::
 
 :::esempio{titolo="Reading an initialized cell"}
-Consider the following fragment, where all indices are in the range $[0,5)$.
+In the following fragment the array has five elements, and the second line reads two of them.
 ```c
 int a[5] = {7, -2};
 int value = a[1] + a[4];
 ```
-The value of `a[1]` is $-2$ because the second value in the list initializes that cell. The value of `a[4]` is $0$ because that cell is initialized implicitly. The assignment to `value` therefore stores $-2+0=-2$. First establish how each value was assigned, because an index on its own identifies only a position.
+The element `a[1]` is $-2$, the second value of the list. The element `a[4]` does not appear in the list and is $0$. Hence `value` receives $-2+0=-2$.
 :::
 
 :::attenzione
-A declaration such as `int a[5];` inside a block, with automatic storage duration, leaves the array contents initially indeterminate. An algorithm that uses these cells assigns a value to each cell before reading it. The access `a[5]` is outside the array even when all five elements are initialized. The first case concerns whether a value is available, and the second concerns the domain of the indices.
+An array declared inside a function without a list, such as `int a[5];`, is not zeroed, and its elements have unpredictable values until the program assigns them a value. Reading an element before assigning it is an error. A different error is using an index outside the range, such as `a[5]` for an array of five elements; C does not check indices, and the access has undefined behavior.
 :::
 
 ## Ranges and traversal invariants
 
 :::definizione{#intervallo-semichiuso titolo="Half-open index range"}
-Let $n$ be an array’s capacity in elements. For integer endpoints satisfying $0\le lo\le hi\le n$, the **half-open** range $[lo,hi)$ contains the indices from $lo$ inclusive to $hi$ exclusive. The number of indices is $hi-lo$. If $lo=hi$, the range is empty and its length is zero. The ranges $[lo,k)$ and $[k,hi)$, with $lo\le k\le hi$, cover $[lo,hi)$ without sharing indices. This makes it possible to split a traversal into two groups and combine the results.
+A part of an array is specified by two indices, the first included and the second excluded. The **half-open** interval $[lo,hi)$ contains the indices from $lo$ to $hi-1$; for example $[1,4)$ contains $1$, $2$ and $3$. With this convention the number of indices is $hi-lo$, the interval is empty when $lo=hi$, and the whole array of capacity $n$ is $[0,n)$. The endpoints must satisfy $0\le lo\le hi\le n$. An interval is divided into two non-overlapping parts by choosing an intermediate index $k$, and the parts are $[lo,k)$ and $[k,hi)$.
 :::
 
 ::::teorema{#traversata-vettore titolo="Accumulator over a range"}
-Suppose that $0\le lo\le hi\le n$ and that the elements in $[lo,hi)$ are initialized. If every partial sum is representable in the type of `sum`, the following loop produces the sum of the segment. The type `size_t` is declared in `<stddef.h>`.
+The following loop computes the sum of the elements with index in $[lo,hi)$. It is assumed that $0\le lo\le hi\le n$, that the elements of the interval have a value and that no intermediate sum overflows. The type `size_t`, declared in `<stddef.h>`, is the unsigned integer type used for indices and sizes.
 ```c
 int sum = 0;
 for (size_t i = lo; i < hi; ++i) {
@@ -46,38 +46,38 @@ for (size_t i = lo; i < hi; ++i) {
 ```
 
 :::dimostrazione
-Before the condition is tested with index $i$, the accumulator holds the sum over $[lo,i)$. Initially $i=lo$, so the sum is over an empty range and equals zero. If $i<hi$, the index $i$ is valid and `a[i]` is the sole element added when moving to $[lo,i+1)$. Incrementing the index to $i+1$ preserves the invariant. Every execution of the body reduces the number $hi-i$ of remaining elements by one. The loop stops at $i=hi$, so the sum covers all of $[lo,hi)$.
+The invariant is “before every check of the condition, `sum` contains the sum of the elements with index in $[lo,i)$”. At the start $i=lo$, the interval is empty and `sum` is zero. If $i<hi$, the index $i$ is valid; the body adds `a[i]` and the increment brings the index to $i+1$, so `sum` contains the sum over $[lo,i+1)$ and the invariant is preserved. The quantity $hi-i$ decreases by one at each iteration, so the loop terminates, and it terminates with $i=hi$. At that moment `sum` contains the sum over the whole of $[lo,hi)$.
 :::
 ::::
 
 :::esempio{titolo="Counting under a condition"}
-To count the negative cells of `int a[5] = {4, -1, -3, 2, -2};` in the range $[1,4)$, start a count at zero. Add one only when `a[i] < 0`. In the input, the indices $1,2,3$ correspond to the values $-1,-3,2$. The first two satisfy the condition, so the final count is $2$. The element `a[4]` is negative but has an excluded index, so it remains outside the count. The invariant uses the number of negative values in the prefix already examined, and the same measure $hi-i$ proves termination.
+One wants to count the negative elements of `int a[5] = {4, -1, -3, 2, -2};` in the interval $[1,4)$. One starts from a counter at zero and increases it by one when `a[i] < 0`. The indices $1$, $2$ and $3$ correspond to the values $-1$, $-3$ and $2$; the first two are negative, so the result is $2$. The element `a[4]` is negative, but the index $4$ is excluded from the interval and is not counted.
 :::
 
 :::osservazione
-Establish the order of the endpoints before computing the length of the segment. If $hi<lo$, the mathematical difference is negative. Storing this difference in a variable of type `size_t` produces the congruent value in the unsigned type. For $hi-lo$ to represent a count, the relation $lo\le hi$ is therefore necessary. Similarly, for a sum, it is sufficient that all *prefix sums* in the chosen traversal order be representable. Requiring the final result alone to be representable is a weaker condition.
+The length $hi-lo$ makes sense only if $lo\le hi$. If $hi<lo$ the difference would be negative, but in a `size_t` variable, which is unsigned, it becomes a huge positive number. For this reason one checks $lo\le hi$ before subtracting. For the sum, moreover, every intermediate sum must be representable and not only the final result. With a $4$-byte `int`, adding in order $2\,000\,000\,000$, $1\,000\,000\,000$ and $-2\,000\,000\,000$ the final result $1\,000\,000\,000$ is representable, but the first intermediate sum $3\,000\,000\,000$ exceeds `INT_MAX`.
 :::
 
 :::osservazione
-For a function that also receives capacity $n$, the checks `lo <= hi` and `hi <= n` can be combined into one condition. The type `size_t` already excludes negative endpoints. If $n=5$, the pair $(4,2)$ fails the first check, while $(3,6)$ fails the second. The pair $(5,5)$ passes both checks and specifies an empty traversal. Requiring `hi < n` would also reject $[0,5)$, which contains exactly the five cells. The comparison with $n$ concerns the excluded endpoint, whereas the comparison with $hi$ bounds each index visited.
+A function that receives $lo$, $hi$ and the capacity $n$ checks the validity of the interval with `lo <= hi && hi <= n`; negative endpoints are already excluded by the type `size_t`. With $n=5$, the pair $(4,2)$ fails the first check and the pair $(3,6)$ fails the second. The pair $(5,5)$ passes both and denotes an empty interval. The second comparison is `hi <= n` and not `hi < n`, because $hi$ is the excluded endpoint; with `hi < n` even $[0,5)$, that is, the whole array, would be rejected.
 :::
 
 ## Object size and parameters
 
 :::definizione{#dimensione-vettore titolo="Size in bytes and element count"}
-The `sizeof` operator returns the size of its operand in C bytes as a value of type `size_t`. For an object declared as `int a[7];`, `sizeof a` measures the complete array and `sizeof a[0]` measures one element. The elements are contiguous and have the same size, so
+The `sizeof` operator applied to an array gives the number of bytes occupied by the whole array, and applied to an element gives the bytes of one element. For `int a[7];`, with a $4$-byte `int`, `sizeof a` is $28$ and `sizeof a[0]` is $4$. Since the elements all have the same size,
 $$
 \texttt{sizeof a}=7\cdot\texttt{sizeof a[0]} .
 $$
-The expression `sizeof a / sizeof a[0]` has value $7$ even on an implementation where `sizeof(int)` differs from four. Here `sizeof a[0]` measures the type `int`, so it can be used immediately after the declaration, before the cells receive values.
+The number of elements is therefore obtained with `sizeof a / sizeof a[0]`, which is $7$ whatever the size of an `int`. In this way, if the size in the declaration changes, the rest of the program remains correct without modifications.
 :::
 
 :::definizione{#parametro-vettore titolo="Passing an array to a function"}
-In a parameter declaration, `const int a[]` is adjusted to `const int *a`. The declaration `const int a[7]`, without the `static` keyword inside the brackets, also gives the same parameter type. The function can use `a[i]` when the caller provides the required elements. Pass the actual length as a separate parameter or, between functions that share a fixed size, specify it in a contract. Within the function, `sizeof a` measures the parameter after adjustment to a pointer. The formula for finding the element count therefore applies in the block where `a` is an array object.
+When an array is passed to a function, the function receives the address of the first element and not a copy of the elements. A parameter declared `const int a[]` is in fact a **pointer**, that is, a variable that contains an address, and can equivalently be written `const int *a`; pointers are the subject of the next chapter. Inside the function one writes `a[i]` as usual, and the word `const` says that the function reads the elements without modifying them. There are two consequences. The function does not know the length of the array, which must be passed in another parameter. Inside the function `sizeof a` gives the size of an address, so the formula `sizeof a / sizeof a[0]` works only where the array is declared.
 :::
 
 :::esempio{titolo="Contract for a partial sum"}
-Assume `<stddef.h>` is available. The caller provides access to at least $hi$ elements if the range has positive length. The cells from $lo$ up to $hi$ exclusive are initialized, and each partial sum is representable in `int`.
+The function computes the sum of the elements with index in $[lo,hi)$. Its contract requires that the array passed has at least $hi$ elements, that those in the interval have a value and that the intermediate sums do not overflow.
 ```c
 int sum_range(const int a[], size_t lo, size_t hi)
 {
@@ -88,26 +88,26 @@ int sum_range(const int a[], size_t lo, size_t hi)
     return sum;
 }
 ```
-For `int samples[4] = {9, 1, 6, 3};`, `sum_range(samples, 1, 4)` equals $1+6+3=10$. Calling it with $lo=4$ and $hi=4$ returns $0$ without reading any element. The contract identifies the part to visit. The signature `const int a[]` allows reads through the parameter and prevents assignments through `a[i]`.
+With `int samples[4] = {9, 1, 6, 3};` the call `sum_range(samples, 1, 4)` returns $1+6+3=10$. The call with $lo=4$ and $hi=4$ denotes an empty interval and returns $0$ without reading any element. Since the parameter is declared `const`, a statement such as `a[i] = 0;` in the body would be reported as an error by the compiler.
 :::
 
 :::osservazione
-A function parameter can be declared as `const int a[static 4]`. In C17 this form requires the argument to provide access to the first element of an array containing at least four elements. The actual size remains a caller-side fact and the parameter still has pointer type. For example, a function that reads a fixed group of four samples can use this contract. An array of seven samples meets it if its first element is accessible. A three-sample array is ruled out by the contract before the function body is considered. In other cases, such as summing a range that can be empty, an explicit length parameter is suitable.
+A parameter can also be declared in the form `const int a[static 4]`. It means that the caller must pass an array with at least four elements, and the compiler may report calls that do not respect this. An array of seven elements is allowed, one of three is not. The form suits functions that always read a fixed number of elements; when the length varies, or may be zero, one uses a parameter with the length.
 :::
 
 ## Physical layout of rows
 
 :::definizione{#matrice-per-righe titolo="Matrix as an array of arrays"}
-The declaration `int m[3][4];` creates three elements of type `int[4]`. Each element is therefore a row of four integers. The expression `m[r][c]` selects the row with index $r$, then the element with index $c$ within that row. Valid indices satisfy $0\le r<3$ and $0\le c<4$. The second dimension describes the type of a row and determines how far its position changes when moving to the next row.
+A **matrix** is a table of elements arranged in rows and columns. The declaration `int m[3][4];` creates a matrix with $3$ rows and $4$ columns, that is, $12$ integers. The element in row $r$ and column $c$ is written `m[r][c]`, with $0\le r<3$ and $0\le c<4$. For C the matrix is an array of three elements, each of which is a row, that is, an array of four `int` values. In memory the rows are written one after the other, first the whole of row $0$, then row $1$, then row $2$.
 :::
 
 ::::teorema{#scostamento-matrice titolo="Cell offset in row-major layout"}
-Let $R>0$ and $C>0$ be the row and column counts of an object `T m[R][C]`, with constant dimensions and valid indices $r,c$. The offset of cell `m[r][c]` from the start of the matrix, first in elements and then in C bytes, is
+Let `T m[R][C]` be a matrix with $R>0$ rows and $C>0$ columns of elements of type `T`. Since the rows are stored one after the other, the element `m[r][c]` is preceded by $k$ elements and lies $b$ bytes after the start of the matrix, with
 $$
 k=rC+c,\qquad b=k\,\texttt{sizeof(T)} .
 $$
 :::dimostrazione
-The first $r$ rows are contiguous and contain $C$ elements each, which accounts for $rC$ skipped elements. Within row $r$, the chosen cell is preceded by the $c$ cells at indices $0$ through $c-1$. The total is $rC+c$ and each element takes `sizeof(T)` C bytes. The formula identifies a position in the object representation. Indexed accesses still follow the bounds of each row.
+Before row $r$ there are $r$ complete rows of $C$ elements each, that is, $rC$ elements. In row $r$, before column $c$ there are the elements of the columns from $0$ to $c-1$, of which there are $c$. The total is $rC+c$, and each element occupies `sizeof(T)` bytes.
 :::
 ::::
 
@@ -116,21 +116,21 @@ Consider the matrix shown in the diagram.
 
 ![Three rows with values 5, 9, 2, 7, then 4, 0, 8, 1, then 6, 3, 5, 2. The cell at row 1 and column 2 contains 8.](/immagini/informatica/vettori-matrici-stringhe/schema-teoria-en.png)
 
-The cell `m[1][2]` has value $8$. Reaching it means skipping row $0$, which contains four elements, and cells $0$ and $1$ in row $1$. The offset is $1\cdot4+2=6$ elements. If `sizeof(int)` is four on the machine under consideration, the offset in C bytes is $6\cdot4=24$.
+The element `m[1][2]` is $8$. Before it in memory there are the four elements of row $0$ and the elements `m[1][0]` and `m[1][1]`, in all $1\cdot4+2=6$ elements. With a $4$-byte `int` the element lies $6\cdot4=24$ bytes after the start of the matrix.
 :::
 
 :::attenzione
-In the inner array of length $4$, index $4$ is outside the valid domain. Therefore `m[0][4]` does not access cell `m[1][0]`, even though rows are stored contiguously. The first cell of the second row has row index $1$ and column index $0$. Dividing a linear offset by $C$ gives those two indices as quotient and remainder when the offset lies between $0$ and $RC-1$.
+Even though the rows are consecutive in memory, each index must stay in its own range. In a matrix with rows of $4$ elements, `m[0][4]` is an access outside row $0$ and has undefined behavior, even though in memory `m[1][0]` is located at that point. To pass from a position $k$ counted from the start, with $0\le k<RC$, to the indices one uses division by $C$, whose quotient is the row and whose remainder is the column. With $C=4$ position $6$ gives row $1$ and column $2$.
 :::
 
 ## Traversing rectangular matrices
 
 :::definizione{#traversata-matrice titolo="Visiting cells, columns and the diagonal"}
-To visit each cell of an $R\times C$ matrix, one may use an outer loop over the rows and an inner loop over the columns. When the outer loop fixes $r$, the inner loop examines $c\in[0,C)$. To visit only column $j$, it is sufficient to vary $r$ and access `m[r][j]`, after checking $0\le j<C$. On the main diagonal, set $r=c=i$. The index must belong to both $[0,R)$ and $[0,C)$, so the diagonal contains $\min(R,C)$ cells. This condition keeps the traversal valid for a rectangular matrix.
+To process all the elements of a matrix with $R$ rows and $C$ columns one uses two nested loops. The outer loop makes the row $r$ vary from $0$ to $R-1$ and, for each row, the inner one makes the column $c$ vary from $0$ to $C-1$. To process a single column $j$ one loop over the rows is enough, reading `m[r][j]`. The elements of the **main diagonal** are those whose row index equals the column index, that is, `m[i][i]`. The index $i$ must be valid both as a row and as a column, so there are $\min(R,C)$ diagonal elements; in a $3\times 4$ matrix there are three.
 :::
 
 :::esempio{titolo="Summing a column with a fixed row width"}
-The function receives rows of four integers and reads column `col`, with `col < 4`. The caller provides `rows` accessible rows. The column is initialized, and every partial sum is representable in `int`. Assume `<stddef.h>` is available.
+The function adds the elements of column `col` of a matrix with rows of four elements. In a matrix parameter the number of columns must always be written, here `[4]`, because the compiler needs it to compute the position of the elements; the number of rows is passed in the parameter `rows`. The contract requires `col < 4`.
 ```c
 int column_sum(const int m[][4], size_t rows, size_t col)
 {
@@ -141,50 +141,50 @@ int column_sum(const int m[][4], size_t rows, size_t col)
     return sum;
 }
 ```
-For the three rows in the diagram, declared with elements of type `const int`, execution with `col = 2` reads $2$, $8$ and $5$ in order. The sum is $2+8+5=15$. The parameter type lets the compiler determine the width of one row. The number of rows depends on the object supplied and is passed separately.
+With the matrix in the figure and `col = 2` the function reads $2$, $8$ and $5$ and returns $2+8+5=15$.
 :::
 
 :::osservazione
-The transpose of an $R\times C$ matrix has dimensions $C\times R$. The value `m[r][c]` is assigned to `t[c][r]`. Since $c<C$ and $r<R$, both indices are valid in the transposed shape. Each pair of indices in the source matrix reaches a distinct pair in the destination matrix, and swapping the indices again restores the source pair. This correspondence justifies transposition with two loops when the matrices occupy separate storage.
+The **transpose** of a matrix is obtained by exchanging rows and columns. If `m` has $R$ rows and $C$ columns, the transpose `t` has $C$ rows and $R$ columns, and `t[c][r]` equals `m[r][c]`. It is computed with two nested loops that execute `t[c][r] = m[r][c];` for every pair of indices, using for `t` a matrix distinct from `m`.
 :::
 
 :::osservazione
-Two matrices can have the same total size while having different row types. For example, the constant matrices of types `const int[2][6]` and `const int[3][4]` both contain twelve integers. The `column_sum` function in the example receives a pointer to a four-element row. The second type provides that row type, while the first provides a row of six integers. The cell at row index $1$ and column $0$ occupies linear position $6$ in the first matrix and position $4$ in the second. The total cell count is therefore insufficient for choosing the parameter. To accept varying widths, one may design a representation with a one-dimensional array and state an explicit contract on the row count, column count and array size.
+Two matrices with the same total number of elements may have rows of different length, and they are not interchangeable. An `int[2][6]` matrix and an `int[3][4]` matrix both contain twelve integers, but the function `column_sum` accepts only the second, because its parameter requires rows of four elements. The element in row $1$ and column $0$ is preceded by $6$ elements in the first matrix and by $4$ in the second. To write a function that accepts matrices of any width one stores the matrix in a plain array of $R\cdot C$ elements and computes the position with the formula $rC+c$.
 :::
 
 ## Text termination and length
 
 :::definizione{#stringa-c titolo="Null-terminated string"}
-A **C string** is a sequence of characters ending at the first null character `'\0'`. The terminator is stored in the object and has value zero. The digit character `'0'` is part of the text and has a different code. If the first element is `'\0'`, the string is empty and still occupies the cell holding the terminator. An array of `char` can contain other data after the first null. Within the array, the string starting at index $0$ ends at the first null reached from that position.
+In C a text is stored in an array of `char`, one character per element. To mark where the text ends, after the last character one puts a special character with value zero, written `'\0'` and called the **null character** or **terminator**. A **C string** is therefore a sequence of characters followed by the terminator. The string `"ciao"` occupies five elements, the four characters and the terminator. The null character `'\0'`, with value $0$, is different from the digit `'0'`, which is a printable character and in the ASCII code has value $48$. An empty string contains only the terminator. All the functions that work on strings read the characters up to the first terminator and ignore what the array contains after it.
 :::
 
 :::definizione{#dimensione-e-lunghezza titolo="Capacity, sizeof and strlen"}
-Let `s` be a `char` array object with capacity $B$, measured in elements. Because `sizeof(char)` is one, `sizeof s` equals $B$ C bytes. The function `strlen(s)`, declared in `<string.h>`, returns the number $\ell$ of characters before the first null. Its precondition is that the terminator lies within the array and every cell from the starting character through the terminator is readable. It follows that
+For a string one distinguishes two numbers. The **capacity** $B$ is the number of elements of the array; for an array `s` of `char` it is given by `sizeof s`, because a `char` occupies one byte. The **length** $\ell$ is the number of characters before the terminator, and is given by the function `strlen(s)` from `<string.h>`. For `char s[10] = "ciao";` the capacity is $10$ and the length is $4$. Since one element is needed for the terminator too, we always have
 $$
 0\le\ell<B .
 $$
-The terminator occupies element `s[ell]`. The length counts units of type `char` before the null. If the text is encoded with several bytes per symbol, the number of symbols can differ from $\ell$.
+The terminator is in the element with index $\ell$. `strlen` counts `char` elements and requires the array to contain a terminator; otherwise it goes on past the end of the array, with undefined behavior.
 :::
 
 :::esempio{titolo="Sequence with an embedded null"}
-In the declaration `char s[8] = "ab\0cd";`, the first six cells hold `'a'`, `'b'`, `'\0'`, `'c'`, `'d'` and the final null that the language appends to the literal. The remaining two cells are initialized to zero. The operator `sizeof s` gives $8$. The function `strlen(s)` gives $2$ because the first null is at index $2$. The cells containing `'c'` and `'d'` remain in the object. Their contents can be read with valid indices, while they lie outside the string starting at `s[0]`.
+In the declaration `char s[8] = "ab\0cd";` the array contains in order `'a'`, `'b'`, `'\0'`, `'c'`, `'d'`, then the terminator that the compiler adds at the end of every text in double quotes, and finally two elements set to zero. The capacity `sizeof s` is $8$. The length `strlen(s)` is $2$, because the first terminator is at index $2$. The characters `'c'` and `'d'` are in the array and can be read with `s[3]` and `s[4]`, but they are outside the string.
 :::
 
 :::attenzione
-The declaration `char raw[3] = "ram";` initializes the three cells with the three visible characters and uses all the capacity. The literal also has a terminating character, but the destination array has no room for it. The resulting array is valid as a sequence of three `char` values. Using it as an argument to a function that requires a C string would violate the precondition. With `char text[4] = "ram";`, the terminator fits at index $3$.
+The declaration `char raw[3] = "ram";` fills the three elements with the three characters and leaves no room for the terminator. The array is valid as a sequence of three characters, but it is not a string, and passing it to `strlen` or to `printf` with `%s` has undefined behavior. With `char text[4] = "ram";` the terminator is in the element with index $3$. An array that must contain a text of $\ell$ characters therefore needs at least $\ell+1$ elements.
 :::
 
 ## Space for building a string
 
 ::::teorema{#capacita-stringa titolo="Capacity needed for concatenation"}
-Let $u$ and $v$ be the lengths of two texts, excluding their terminators. Concatenating them into a single array of capacity $B$ and keeping a terminator at the end requires at least $u+v+1$ cells.
+**Concatenating** two strings means writing the second right after the first. If the two strings have lengths $u$ and $v$, the array that contains the result must have capacity $B$ at least equal to $u+v+1$, that is, the characters of the two strings plus one terminator. For `"ciao"` and `"mondo"` $4+5+1=10$ elements are needed.
 :::dimostrazione
-The first text occupies $[0,u)$ and the second occupies $[u,u+v)$. Together they occupy $[0,u+v)$, so the terminator goes at index $u+v$. A valid index satisfies $u+v<B$. Since the quantities are integers, this is equivalent to $B\ge u+v+1$. This proof uses mathematical integers. To check the inequality with `size_t` without first forming the sum, verify $u<B$ first. Under this assumption, $B-1-u$ is representable and the second text must satisfy $v\le B-1-u$.
+The first string occupies the indices $[0,u)$ and the second the indices $[u,u+v)$, so the terminator goes at index $u+v$. This index is valid if $u+v<B$, that is, $B\ge u+v+1$. In a program that uses `size_t` it is better to avoid computing $u+v$, which might exceed the maximum of the type. One checks first $u<B$ and then $v\le B-1-u$, two comparisons that cannot overflow.
 :::
 ::::
 
 :::esempio{#costruzione-stringa titolo="Appending a character with known capacity"}
-Let `s` be a valid string of length `len` in an array of capacity `cap`. To append a character `ch` different from `'\0'`, the function checks for at least two cells starting at position `len`. The caller updates the length if the function returns `true`. Assume `<stdbool.h>` and `<stddef.h>` are available.
+The function appends the character `ch` to the end of a string `s` of length `len`, contained in an array of capacity `cap`. Two elements are needed starting from index `len`, one for the character and one for the new terminator. If they are not available, the function modifies nothing and returns `false`; the type `bool` and the values `true` and `false` come from `<stdbool.h>`.
 ```c
 bool append_char(char s[], size_t cap, size_t len, char ch)
 {
@@ -196,21 +196,21 @@ bool append_char(char s[], size_t cap, size_t len, char ch)
     return true;
 }
 ```
-With `char s[5] = "tre";`, `len = 3` and `cap = 5`. The difference is $2$, so the character `'s'` can be written at index $3$ and the new null at index $4$. The resulting string is `"tres"`. With a capacity of four cells, the rejection branch runs before the assignments and leaves the elements unchanged. The condition `len >= cap` is evaluated first, preventing an oversized length from being subtracted from `cap`.
+With `char s[5] = "tre";` we have `len = 3` and `cap = 5`. The difference `cap - len` is $2$, so `'s'` is written at index $3$ and the terminator at index $4$, and the string becomes `"tres"`. With a capacity of four elements the difference would be $1$ and the function would return `false` without writing. The condition `len >= cap` is written first because it protects the subtraction `cap - len`, which between `size_t` values would give a huge number if `len` were greater than `cap`.
 :::
 
 :::osservazione
-Checking the write index and checking the terminator serve two separate purposes. With $B=5$ and $\ell=4$, the last valid cell is `s[4]`, which holds the terminator. Writing a character into `s[4]` stays within the array for that single assignment. For the result to be a valid string after the append, however, `s[5]` would also be needed. Requiring two cells prevents this loss of termination.
+Checking that the write index is valid is not enough. With capacity $5$ and length $4$ the element `s[4]` exists, and it is the one that contains the terminator. Writing the new character into `s[4]` would be a valid access, but it would erase the terminator, and the new terminator would go into `s[5]`, which does not exist. For this reason the function requires two free elements.
 :::
 
 ## Reading and rewriting with two indices
 
 :::definizione{#traversata-stringa titolo="Read and write indices"}
-To filter the characters of a string, keep a read index $i$ and a write index $k$, both initially zero. At the start of an iteration, the output prefix $[0,k)$ contains exactly the characters to keep among the first $i$ input characters, in their original order. The relation $k\le i$ follows because each character read produces at most one character written. If the input length is $\ell$, a capacity of at least $\ell+1$ elements covers every character write and the final null.
+To copy only some of the characters of a string one uses two indices. The read index $i$ runs over all the characters of the source string. The write index $k$ gives the position at which to write the next character that is kept, and it increases only when a character is copied. At every moment the first $k$ elements of the result contain, in the same order, the characters to keep among the first $i$ read, and $k\le i$ holds. At the end the terminator is written at index $k$. If the source string has length $\ell$, $\ell+1$ elements are enough for the result.
 :::
 
 :::esempio{titolo="Filtering without changing the order"}
-Consider the string `"sasso"` and copy the characters different from `'s'` into a separate array. The output capacity is $6$, so it can also handle keeping all five characters. Assume the type `size_t` is available.
+The fragment copies into `out` the characters of `"sasso"` different from `'s'`. The capacity of `out` is $6$, enough even if all five characters were kept. The loop stops when `source[i]` is the terminator.
 ```c
 char source[] = "sasso";
 char out[6];
@@ -223,9 +223,9 @@ for (size_t i = 0; source[i] != '\0'; ++i) {
 }
 out[k] = '\0';
 ```
-The loop skips the three `'s'` characters, copies `'a'` to index $0$ and copies `'o'` to index $1$. The null is written at index $2$, giving `"ao"`. If the input is empty, the condition fails at index $0$ and the null is written to `out[0]`. The empty case therefore meets the same output contract.
+The three characters `'s'` are skipped, `'a'` is copied at index $0$ and `'o'` at index $1$. At the end `k` is $2$, the terminator is written into `out[2]` and the result is `"ao"`. If the source string is empty the loop performs no iteration and the terminator is written into `out[0]`, so the result is the empty string.
 :::
 
 :::osservazione
-To find a nonempty pattern of length $q$ in a text of length $\ell$, each attempt checks $q$ consecutive characters. If $q>\ell$, no valid starting position exists. If $q\le\ell$, the last valid start is $\ell-q$, and only indices $j\in[0,q)$ are checked within the pattern. Visiting starts one at a time makes it possible to count overlapping occurrences. For instance, in `"ananas"` the pattern `"ana"` occurs at indices $0$ and $2$, so the count is $2$.
+To search for a word of length $q$ inside a text of length $\ell$ one tries every starting position and compares $q$ consecutive characters. If $q>\ell$ the word cannot occur. Otherwise the possible starting positions go from $0$ to $\ell-q$, because beyond that not enough characters remain. Trying all the positions one by one also counts occurrences that overlap; in `"ananas"` the word `"ana"` occurs at indices $0$ and $2$, so the count is $2$.
 :::

@@ -6,38 +6,38 @@ sommario: Come attraversare un vettore entro i suoi limiti, leggere una matrice 
 ## Oggetti composti e indici validi
 
 :::definizione{#vettore-c titolo="Vettore di elementi omogenei"}
-Un **vettore** in C è un oggetto composto da elementi contigui dello stesso tipo. La dichiarazione `int a[5];` riserva cinque elementi di tipo `int`. Il vettore ha lunghezza $n=5$ ed è possibile individuare ciascun elemento tramite il suo indice $i$. I vincoli sugli indici sono
+Un **vettore** (in inglese *array*) è una sequenza di variabili dello stesso tipo, poste una dopo l’altra in memoria e indicate con un solo nome. La dichiarazione `int a[5];` crea cinque variabili `int`, chiamate **elementi**. Ogni elemento si indica con il nome del vettore e un **indice** fra parentesi quadre, come in `a[2]`. Gli indici partono da zero, quindi per un vettore di lunghezza $n$ gli indici validi sono
 $$
 0\le i<n .
 $$
-Il primo elemento è `a[0]` e l’ultimo è `a[n - 1]`. Il valore $n$ è il primo indice escluso, perciò appartiene naturalmente alla descrizione del confine di una traversata. Un vettore dichiarato con dimensione costante ha una dimensione strettamente positiva nel C17 portabile. Una procedura può comunque elaborare zero elementi quando il suo intervallo attivo è vuoto.
+Il primo elemento è `a[0]` e l’ultimo è `a[n - 1]`; in un vettore di cinque elementi l’ultimo è `a[4]`, e `a[5]` non esiste. Un vettore si elabora di solito con un ciclo `for (i = 0; i < n; ++i)`, in cui $n$ è il primo indice escluso.
 :::
 
 :::definizione{#inizializzazione-vettore titolo="Inizializzazione con una lista"}
-Una lista di valori tra graffe inizializza le celle nell’ordine degli indici crescenti. In `int a[5] = {7, -2};`, gli elementi di indice $0$ e $1$ ricevono rispettivamente $7$ e $-2$. Poiché la dichiarazione fornisce una lista, i tre elementi rimanenti ricevono zero. In `int b[] = {7, -2};`, il compilatore deduce invece la dimensione $2$ dalla lunghezza della lista. In entrambi gli esempi, ogni cella del vettore ha un valore iniziale determinato.
+Un vettore si inizializza con una lista di valori fra graffe, assegnati agli elementi in ordine. In `int a[5] = {7, -2};` l’elemento `a[0]` vale $7$ e `a[1]` vale $-2$. Se la lista ha meno valori degli elementi, quelli che restano ricevono zero, quindi `a[2]`, `a[3]` e `a[4]` valgono $0$. Se la dimensione è omessa, come in `int b[] = {7, -2};`, il compilatore la ricava dalla lista, e `b` ha due elementi.
 :::
 
 :::esempio{titolo="Leggere una cella inizializzata"}
-Si consideri il frammento seguente, in cui tutti gli indici appartengono all’intervallo $[0,5)$.
+Nel frammento seguente il vettore ha cinque elementi, e la seconda riga ne legge due.
 ```c
 int a[5] = {7, -2};
 int value = a[1] + a[4];
 ```
-La cella `a[1]` vale $-2$ perché è stata inizializzata dal secondo valore della lista. La cella `a[4]` vale $0$ perché è stata inizializzata implicitamente. L’assegnazione a `value` memorizza dunque $-2+0=-2$. La prima operazione utile è stabilire come ciascun valore è stato assegnato, perché il solo indice individua una posizione.
+L’elemento `a[1]` vale $-2$, il secondo valore della lista. L’elemento `a[4]` non compare nella lista e vale $0$. Perciò `value` riceve $-2+0=-2$.
 :::
 
 :::attenzione
-Una dichiarazione come `int a[5];`, in un blocco e con durata automatica, lascia inizialmente indeterminato il contenuto del vettore. Un algoritmo che usa quelle celle assegna un valore a ciascuna cella prima di leggerla. L’accesso `a[5]` esce invece dal vettore anche quando tutti i suoi cinque elementi sono inizializzati. Il primo caso riguarda la disponibilità del valore, il secondo riguarda il dominio degli indici.
+Un vettore dichiarato dentro una funzione senza lista, come `int a[5];`, non viene azzerato, e i suoi elementi hanno valori imprevedibili finché il programma non assegna loro un valore. Leggere un elemento prima di averlo assegnato è un errore. Un errore diverso è usare un indice fuori dall’intervallo, come `a[5]` per un vettore di cinque elementi; il C non controlla gli indici, e l’accesso ha comportamento indefinito.
 :::
 
 ## Intervalli e invarianti di scansione
 
 :::definizione{#intervallo-semichiuso titolo="Intervallo semichiuso di indici"}
-Sia $n$ la capacità in elementi di un vettore. Per estremi interi che soddisfano $0\le lo\le hi\le n$, l’intervallo **semichiuso** $[lo,hi)$ contiene gli indici da $lo$ incluso a $hi$ escluso. Il numero di indici è $hi-lo$. Se $lo=hi$, l’intervallo è vuoto e la sua lunghezza è zero. Gli intervalli $[lo,k)$ e $[k,hi)$, con $lo\le k\le hi$, coprono $[lo,hi)$ senza condividere indici. Si possono così dividere le letture in due gruppi e ricomporre il risultato.
+Una parte di un vettore si indica con due indici, il primo incluso e il secondo escluso. L’intervallo **semichiuso** $[lo,hi)$ contiene gli indici da $lo$ a $hi-1$; per esempio $[1,4)$ contiene $1$, $2$ e $3$. Con questa convenzione il numero di indici è $hi-lo$, l’intervallo è vuoto quando $lo=hi$, e l’intero vettore di capacità $n$ è $[0,n)$. Gli estremi devono soddisfare $0\le lo\le hi\le n$. Un intervallo si divide in due parti senza sovrapposizioni scegliendo un indice intermedio $k$, e le parti sono $[lo,k)$ e $[k,hi)$.
 :::
 
 ::::teorema{#traversata-vettore titolo="Accumulatore su un intervallo"}
-Siano $0\le lo\le hi\le n$ e siano inizializzati gli elementi di $[lo,hi)$. Se tutte le somme parziali sono rappresentabili nel tipo di `sum`, il seguente ciclo produce la somma del segmento. Il tipo `size_t` è quello dichiarato da `<stddef.h>`.
+Il ciclo seguente calcola la somma degli elementi di indice in $[lo,hi)$. Si suppone $0\le lo\le hi\le n$, che gli elementi dell’intervallo abbiano un valore e che nessuna somma intermedia dia overflow. Il tipo `size_t`, dichiarato in `<stddef.h>`, è il tipo intero senza segno usato per indici e dimensioni.
 ```c
 int sum = 0;
 for (size_t i = lo; i < hi; ++i) {
@@ -46,38 +46,38 @@ for (size_t i = lo; i < hi; ++i) {
 ```
 
 :::dimostrazione
-Prima della condizione con indice $i$, l’accumulatore contiene la somma su $[lo,i)$. All’inizio $i=lo$, quindi la somma è quella di un intervallo vuoto e vale zero. Se $i<hi$, l’indice $i$ è valido e `a[i]` è l’unico elemento che si aggiunge passando a $[lo,i+1)$. L’incremento porta l’indice a $i+1$ e conserva l’enunciato dell’invariante. A ogni esecuzione del corpo, il numero $hi-i$ di elementi che restano scende di uno. Il ciclo si arresta a $i=hi$, quindi la somma copre tutto $[lo,hi)$.
+L’invariante è «prima di ogni controllo della condizione, `sum` contiene la somma degli elementi di indice in $[lo,i)$». All’inizio $i=lo$, l’intervallo è vuoto e `sum` vale zero. Se $i<hi$, l’indice $i$ è valido; il corpo aggiunge `a[i]` e l’incremento porta l’indice a $i+1$, quindi `sum` contiene la somma su $[lo,i+1)$ e l’invariante si conserva. La quantità $hi-i$ diminuisce di uno a ogni iterazione, quindi il ciclo termina, e termina con $i=hi$. In quel momento `sum` contiene la somma su tutto $[lo,hi)$.
 :::
 ::::
 
 :::esempio{titolo="Contare con una condizione"}
-Per contare le celle negative in `int a[5] = {4, -1, -3, 2, -2};` nell’intervallo $[1,4)$, si inizializza un conteggio a zero. Si aggiunge uno solo quando `a[i] < 0`. All’ingresso gli indici $1,2,3$ corrispondono ai valori $-1,-3,2$. I primi due soddisfano la condizione, quindi il conteggio finale è $2$. L’elemento `a[4]` è negativo e ha indice escluso, perciò resta fuori dal conteggio. L’invariante usa il numero di valori negativi nel prefisso già esaminato e la stessa misura $hi-i$ prova la terminazione.
+Si vogliono contare gli elementi negativi di `int a[5] = {4, -1, -3, 2, -2};` nell’intervallo $[1,4)$. Si parte da un contatore a zero e lo si aumenta di uno quando `a[i] < 0`. Gli indici $1$, $2$ e $3$ corrispondono ai valori $-1$, $-3$ e $2$; i primi due sono negativi, quindi il risultato è $2$. L’elemento `a[4]` è negativo, ma l’indice $4$ è escluso dall’intervallo e non viene contato.
 :::
 
 :::osservazione
-La lunghezza del segmento si calcola dopo aver stabilito l’ordine degli estremi. Se $hi<lo$, la differenza matematica è negativa. Memorizzare tale differenza in una variabile di tipo `size_t` produce il valore congruente nel tipo senza segno. Per mantenere il significato di $hi-lo$ come numerosità occorre quindi la relazione $lo\le hi$. Analogamente, per la somma basta che tutte le somme *del prefisso*, nell’ordine di visita scelto, siano rappresentabili. La sola rappresentabilità del risultato finale è una condizione più debole.
+La lunghezza $hi-lo$ ha senso soltanto se $lo\le hi$. Se $hi<lo$ la differenza sarebbe negativa, ma in una variabile `size_t`, che è senza segno, diventa un numero positivo enorme. Per questo si controlla $lo\le hi$ prima di sottrarre. Per la somma, inoltre, deve essere rappresentabile ogni somma intermedia e non soltanto il risultato finale. Con `int` di $4$ byte, sommando nell’ordine $2\,000\,000\,000$, $1\,000\,000\,000$ e $-2\,000\,000\,000$ il risultato finale $1\,000\,000\,000$ è rappresentabile, ma la prima somma intermedia $3\,000\,000\,000$ supera `INT_MAX`.
 :::
 
 :::osservazione
-Per una funzione a cui si passa anche la capacità $n$, i controlli `lo <= hi` e `hi <= n` si possono riunire in una condizione. Il tipo `size_t` esclude già gli estremi negativi. Se $n=5$, la coppia $(4,2)$ non rispetta il primo controllo, mentre $(3,6)$ non rispetta il secondo. La coppia $(5,5)$ soddisfa entrambi i controlli e specifica una traversata vuota. Imporre `hi < n` farebbe rifiutare anche $[0,5)$, che comprende esattamente le cinque celle. Il confronto con $n$ riguarda l’estremo escluso, mentre quello con $hi$ limita ogni singolo indice visitato.
+Una funzione che riceve $lo$, $hi$ e la capacità $n$ controlla la validità dell’intervallo con `lo <= hi && hi <= n`; gli estremi negativi sono già esclusi dal tipo `size_t`. Con $n=5$, la coppia $(4,2)$ non supera il primo controllo e la coppia $(3,6)$ non supera il secondo. La coppia $(5,5)$ li supera entrambi e indica un intervallo vuoto. Il secondo confronto è `hi <= n` e non `hi < n`, perché $hi$ è l’estremo escluso; con `hi < n` verrebbe rifiutato anche $[0,5)$, cioè l’intero vettore.
 :::
 
 ## Dimensione dell’oggetto e parametri
 
 :::definizione{#dimensione-vettore titolo="Misura in byte e numero di elementi"}
-L’operatore `sizeof` restituisce la dimensione dell’operando in byte C, come valore di tipo `size_t`. Per un oggetto dichiarato `int a[7];`, `sizeof a` misura l’intero vettore e `sizeof a[0]` misura un elemento. Gli elementi sono contigui e hanno la stessa dimensione, quindi
+L’operatore `sizeof` applicato a un vettore dà il numero di byte occupati dall’intero vettore, e applicato a un elemento dà i byte di un elemento. Per `int a[7];`, con `int` di $4$ byte, `sizeof a` vale $28$ e `sizeof a[0]` vale $4$. Poiché gli elementi hanno tutti la stessa dimensione,
 $$
 \texttt{sizeof a}=7\cdot\texttt{sizeof a[0]} .
 $$
-L’espressione `sizeof a / sizeof a[0]` vale $7$ anche su un’implementazione in cui `sizeof(int)` ha un valore diverso da quattro. Qui `sizeof a[0]` misura il tipo `int`, quindi può essere usato subito dopo la dichiarazione, prima che le celle ricevano un valore.
+Il numero di elementi si ottiene quindi con `sizeof a / sizeof a[0]`, che vale $7$ qualunque sia la dimensione di un `int`. In questo modo, se la dimensione nella dichiarazione cambia, il resto del programma resta corretto senza modifiche.
 :::
 
 :::definizione{#parametro-vettore titolo="Vettore passato a una funzione"}
-Nella dichiarazione di un parametro, `const int a[]` è adattato a `const int *a`. Anche `const int a[7]`, senza la parola chiave `static` tra le parentesi quadre, dà lo stesso tipo di parametro. La funzione può usare `a[i]` quando il chiamante le mette a disposizione gli elementi necessari. Il valore della dimensione effettiva si comunica con un parametro di lunghezza o, tra funzioni che condividono una misura fissa, con un contratto esplicito. Dentro la funzione, `sizeof a` misura il parametro adattato a puntatore. La formula per dedurre il numero di elementi si applica dunque nel blocco in cui `a` è un oggetto vettore.
+Quando un vettore viene passato a una funzione, la funzione riceve l’indirizzo del primo elemento e non una copia degli elementi. Un parametro dichiarato `const int a[]` è in realtà un **puntatore**, cioè una variabile che contiene un indirizzo, e si può scrivere in modo equivalente `const int *a`; i puntatori sono l’argomento del capitolo successivo. Dentro la funzione si scrive `a[i]` come al solito, e la parola `const` indica che la funzione legge gli elementi senza modificarli. Le conseguenze sono due. La funzione non conosce la lunghezza del vettore, che va passata con un altro parametro. Dentro la funzione `sizeof a` dà la dimensione di un indirizzo, quindi la formula `sizeof a / sizeof a[0]` funziona soltanto dove il vettore è dichiarato.
 :::
 
 :::esempio{titolo="Contratto per una somma parziale"}
-Nel frammento si assume disponibile `<stddef.h>`. Il chiamante fornisce accesso ad almeno $hi$ elementi se l’intervallo ha lunghezza positiva. Le celle da $lo$ a $hi$ escluso sono inizializzate e ogni somma parziale è rappresentabile in `int`.
+La funzione calcola la somma degli elementi di indice in $[lo,hi)$. Il suo contratto richiede che il vettore passato abbia almeno $hi$ elementi, che quelli dell’intervallo abbiano un valore e che le somme intermedie non diano overflow.
 ```c
 int sum_range(const int a[], size_t lo, size_t hi)
 {
@@ -88,26 +88,26 @@ int sum_range(const int a[], size_t lo, size_t hi)
     return sum;
 }
 ```
-Da `int samples[4] = {9, 1, 6, 3};` si ottiene `sum_range(samples, 1, 4)` uguale a $1+6+3=10$. La chiamata con $lo=4$ e $hi=4$ restituisce $0$ senza leggere alcun elemento. Il contratto identifica la parte da visitare. La firma `const int a[]` consente letture attraverso il parametro e impedisce assegnazioni tramite `a[i]`.
+Con `int samples[4] = {9, 1, 6, 3};` la chiamata `sum_range(samples, 1, 4)` restituisce $1+6+3=10$. La chiamata con $lo=4$ e $hi=4$ indica un intervallo vuoto e restituisce $0$ senza leggere alcun elemento. Poiché il parametro è dichiarato `const`, un’istruzione come `a[i] = 0;` nel corpo sarebbe segnalata come errore dal compilatore.
 :::
 
 :::osservazione
-È possibile dichiarare `const int a[static 4]` come parametro di funzione. In C17 questa forma impone che l’argomento fornisca accesso al primo elemento di un array che contiene almeno quattro elementi. La dimensione effettiva resta un dato del chiamante e il parametro ha comunque tipo puntatore. Per esempio, una funzione che legga un gruppo fisso di quattro campioni può adottare quel contratto. Un vettore di sette campioni lo soddisfa, purché il suo primo elemento sia accessibile. Un vettore di tre campioni viene escluso dal contratto prima di considerare il corpo della funzione. In altri casi, come la somma di un intervallo che può essere vuoto, risulta adatto un parametro di lunghezza esplicito.
+Un parametro si può dichiarare anche nella forma `const int a[static 4]`. Significa che chi chiama deve passare un vettore con almeno quattro elementi, e il compilatore può segnalare le chiamate che non lo rispettano. Un vettore di sette elementi è ammesso, uno di tre no. La forma è adatta a funzioni che leggono sempre un numero fisso di elementi; quando la lunghezza varia, o può essere zero, si usa un parametro con la lunghezza.
 :::
 
 ## Struttura fisica delle righe
 
 :::definizione{#matrice-per-righe titolo="Matrice come vettore di vettori"}
-La dichiarazione `int m[3][4];` crea tre elementi del tipo `int[4]`. Ciascun elemento è quindi una riga di quattro interi. L’espressione `m[r][c]` seleziona prima la riga di indice $r$, poi l’elemento di indice $c$ della riga. Gli indici validi soddisfano $0\le r<3$ e $0\le c<4$. La seconda dimensione descrive il tipo di una riga e determina di quanto cambia la posizione quando si passa alla riga successiva.
+Una **matrice** è una tabella di elementi disposti in righe e colonne. La dichiarazione `int m[3][4];` crea una matrice di $3$ righe e $4$ colonne, cioè $12$ interi. L’elemento della riga $r$ e della colonna $c$ si scrive `m[r][c]`, con $0\le r<3$ e $0\le c<4$. Per il C la matrice è un vettore di tre elementi, ciascuno dei quali è una riga, cioè un vettore di quattro `int`. In memoria le righe sono scritte una dopo l’altra, prima tutta la riga $0$, poi la riga $1$, poi la riga $2$.
 :::
 
 ::::teorema{#scostamento-matrice titolo="Scostamento della cella sotto la disposizione per righe"}
-Siano $R>0$ il numero di righe e $C>0$ il numero di colonne di un oggetto `T m[R][C]`, con dimensioni costanti e indici validi $r,c$. Lo scostamento della cella `m[r][c]` rispetto all’inizio della matrice, espresso prima in elementi e poi in byte C, è dato da
+Sia `T m[R][C]` una matrice con $R>0$ righe e $C>0$ colonne di elementi di tipo `T`. Poiché le righe sono memorizzate una dopo l’altra, l’elemento `m[r][c]` è preceduto da $k$ elementi e si trova $b$ byte dopo l’inizio della matrice, con
 $$
 k=rC+c,\qquad b=k\,\texttt{sizeof(T)} .
 $$
 :::dimostrazione
-Le prime $r$ righe sono contigue e contengono $C$ elementi ciascuna, quindi si saltano $rC$ elementi. All’interno della riga $r$, prima della cella scelta compaiono le $c$ celle di indice da $0$ a $c-1$. Il totale è $rC+c$ e ogni elemento occupa `sizeof(T)` byte C. La formula individua una posizione nella rappresentazione dell’oggetto. Gli accessi indicizzati continuano a rispettare i limiti di ogni riga.
+Prima della riga $r$ ci sono $r$ righe complete di $C$ elementi ciascuna, cioè $rC$ elementi. Nella riga $r$, prima della colonna $c$ ci sono gli elementi delle colonne da $0$ a $c-1$, che sono $c$. Il totale è $rC+c$, e ogni elemento occupa `sizeof(T)` byte.
 :::
 ::::
 
@@ -116,21 +116,21 @@ Si consideri la matrice mostrata nella figura.
 
 ![Tre righe con valori 5, 9, 2, 7, poi 4, 0, 8, 1, poi 6, 3, 5, 2. La cella di riga 1 e colonna 2 vale 8.](/immagini/informatica/vettori-matrici-stringhe/schema-teoria-it.png)
 
-La cella `m[1][2]` ha valore $8$. Per raggiungerla si passa oltre la riga $0$, composta da quattro elementi, e oltre le celle $0$ e $1$ della riga $1$. Lo scostamento è $1\cdot4+2=6$ elementi. Se `sizeof(int)` vale quattro per la macchina considerata, lo scostamento in byte C è $6\cdot4=24$.
+L’elemento `m[1][2]` vale $8$. Prima di esso in memoria ci sono i quattro elementi della riga $0$ e gli elementi `m[1][0]` e `m[1][1]`, in tutto $1\cdot4+2=6$ elementi. Con `int` di $4$ byte l’elemento si trova $6\cdot4=24$ byte dopo l’inizio della matrice.
 :::
 
 :::attenzione
-Nel vettore interno di lunghezza $4$, l’indice $4$ è fuori dal dominio. Di conseguenza `m[0][4]` non accede alla cella `m[1][0]`, anche se la rappresentazione delle righe è contigua. Alla prima cella della seconda riga corrispondono l’indice di riga $1$ e l’indice di colonna $0$. Il quoziente e il resto della divisione di uno scostamento lineare per $C$ danno questi due indici, quando lo scostamento è compreso tra $0$ e $RC-1$.
+Anche se le righe sono consecutive in memoria, ogni indice deve restare nel proprio intervallo. In una matrice con righe di $4$ elementi, `m[0][4]` è un accesso fuori dalla riga $0$ e ha comportamento indefinito, anche se in memoria in quel punto si trova `m[1][0]`. Per passare da una posizione $k$ contata dall’inizio, con $0\le k<RC$, agli indici si usa la divisione per $C$, il cui quoziente è la riga e il cui resto è la colonna. Con $C=4$ la posizione $6$ dà riga $1$ e colonna $2$.
 :::
 
 ## Scansioni di matrici rettangolari
 
 :::definizione{#traversata-matrice titolo="Visita, colonne e diagonale"}
-Per visitare ogni cella di una matrice $R\times C$, si può scegliere un ciclo esterno sulle righe e uno interno sulle colonne. Quando il ciclo esterno fissa $r$, quello interno esamina $c\in[0,C)$. Per una sola colonna $j$ è sufficiente variare $r$ e accedere a `m[r][j]`, dopo aver verificato $0\le j<C$. Sulla diagonale principale si impone $r=c=i$. L’indice deve appartenere sia a $[0,R)$ sia a $[0,C)$, quindi la diagonale contiene $\min(R,C)$ celle. Questa condizione rende valida la visita anche quando la matrice è rettangolare.
+Per elaborare tutti gli elementi di una matrice con $R$ righe e $C$ colonne si usano due cicli annidati. Il ciclo esterno fa variare la riga $r$ da $0$ a $R-1$ e, per ogni riga, quello interno fa variare la colonna $c$ da $0$ a $C-1$. Per elaborare una sola colonna $j$ basta un ciclo sulle righe, che legge `m[r][j]`. Gli elementi della **diagonale principale** sono quelli con indice di riga uguale all’indice di colonna, cioè `m[i][i]`. L’indice $i$ deve essere valido sia come riga sia come colonna, quindi gli elementi della diagonale sono $\min(R,C)$; in una matrice $3\times 4$ sono tre.
 :::
 
 :::esempio{titolo="Somma di una colonna con larghezza fissa"}
-La funzione riceve righe di quattro interi e legge la colonna `col`, con `col < 4`. Il chiamante fornisce `rows` righe accessibili, la colonna è inizializzata e ogni somma parziale è rappresentabile in `int`. Si assume disponibile `<stddef.h>`.
+La funzione somma gli elementi della colonna `col` di una matrice con righe di quattro elementi. In un parametro matrice il numero di colonne va sempre scritto, qui `[4]`, perché serve al compilatore per calcolare la posizione degli elementi; il numero di righe si passa con il parametro `rows`. Il contratto richiede `col < 4`.
 ```c
 int column_sum(const int m[][4], size_t rows, size_t col)
 {
@@ -141,50 +141,50 @@ int column_sum(const int m[][4], size_t rows, size_t col)
     return sum;
 }
 ```
-Con le tre righe della figura, dichiarate con elementi `const int`, l’esecuzione con `col = 2` legge in ordine $2$, $8$ e $5$. La somma è $2+8+5=15$. Il tipo del parametro consente al compilatore di stabilire la larghezza di una riga. Il numero di righe, che dipende dall’oggetto passato, è fornito separatamente.
+Con la matrice della figura e `col = 2` la funzione legge $2$, $8$ e $5$ e restituisce $2+8+5=15$.
 :::
 
 :::osservazione
-La trasposta di una matrice $R\times C$ ha dimensioni $C\times R$. Il valore `m[r][c]` è assegnato a `t[c][r]`. Poiché $c<C$ e $r<R$, entrambi gli indici sono validi nella forma trasposta. Ogni coppia di indici della matrice di partenza raggiunge una coppia distinta nella matrice di arrivo, e scambiare nuovamente gli indici restituisce la coppia di partenza. Questa corrispondenza giustifica una trasposizione con due cicli quando le matrici occupano zone distinte.
+La **trasposta** di una matrice si ottiene scambiando le righe con le colonne. Se `m` ha $R$ righe e $C$ colonne, la trasposta `t` ha $C$ righe e $R$ colonne, e `t[c][r]` è uguale a `m[r][c]`. Si calcola con due cicli annidati che eseguono `t[c][r] = m[r][c];` per ogni coppia di indici, usando per `t` una matrice distinta da `m`.
 :::
 
 :::osservazione
-Le dimensioni totali di due matrici possono coincidere senza che coincida il tipo delle loro righe. Per esempio, le matrici costanti di tipi `const int[2][6]` e `const int[3][4]` contengono entrambe dodici interi. La funzione `column_sum` dell’esempio riceve un puntatore a una riga di quattro elementi. Il secondo tipo fornisce quel tipo di riga, mentre il primo fornisce una riga di sei interi. La cella di indice di riga $1$ a colonna $0$ occupa la posizione lineare $6$ nella prima matrice e la posizione $4$ nella seconda. La coincidenza del numero totale di celle non basta dunque a scegliere il parametro. Per accettare una larghezza variabile si può progettare una rappresentazione con un vettore unidimensionale e dichiarare un contratto esplicito su righe, colonne e dimensione del vettore.
+Due matrici con lo stesso numero totale di elementi possono avere righe di lunghezza diversa, e non sono intercambiabili. Una matrice `int[2][6]` e una `int[3][4]` contengono entrambe dodici interi, ma la funzione `column_sum` accetta soltanto la seconda, perché il suo parametro richiede righe di quattro elementi. L’elemento di riga $1$ e colonna $0$ è preceduto da $6$ elementi nella prima matrice e da $4$ nella seconda. Per scrivere una funzione che accetti matrici di larghezza qualsiasi si memorizza la matrice in un vettore semplice di $R\cdot C$ elementi e si calcola la posizione con la formula $rC+c$.
 :::
 
 ## Terminazione e lunghezza del testo
 
 :::definizione{#stringa-c titolo="Stringa terminata da carattere nullo"}
-Una **stringa C** è una sequenza di caratteri che termina al primo carattere nullo `'\0'`. Il terminatore è contenuto nell’oggetto e ha valore zero. La cifra `'0'` appartiene invece ai caratteri del testo e ha un codice diverso. Se il primo elemento vale `'\0'`, la stringa è vuota e occupa comunque la cella che contiene il terminatore. Un vettore di `char` può contenere altri dati dopo il primo nullo. All’interno del vettore, la stringa che inizia dall’indice $0$ termina al primo nullo raggiunto da quella posizione.
+In C un testo si memorizza in un vettore di `char`, un carattere per elemento. Per indicare dove il testo finisce, dopo l’ultimo carattere si mette un carattere speciale di valore zero, scritto `'\0'` e chiamato **carattere nullo** o **terminatore**. Una **stringa C** è quindi una sequenza di caratteri seguita dal terminatore. La stringa `"ciao"` occupa cinque elementi, i quattro caratteri e il terminatore. Il carattere nullo `'\0'`, di valore $0$, è diverso dalla cifra `'0'`, che è un carattere stampabile e nel codice ASCII vale $48$. Una stringa vuota contiene soltanto il terminatore. Tutte le funzioni che lavorano sulle stringhe leggono i caratteri fino al primo terminatore e ignorano ciò che il vettore contiene dopo.
 :::
 
 :::definizione{#dimensione-e-lunghezza titolo="Capacità, sizeof e strlen"}
-Sia `s` un oggetto vettore di `char` con capacità $B$, misurata in elementi. Poiché `sizeof(char)` vale uno, `sizeof s` vale $B$ byte C. La funzione `strlen(s)`, dichiarata in `<string.h>`, restituisce invece il numero $\ell$ di caratteri che precedono il primo nullo. La sua precondizione è che il terminatore si trovi nel vettore e che ogni cella dal carattere iniziale al terminatore sia leggibile. Segue
+Per una stringa si distinguono due numeri. La **capacità** $B$ è il numero di elementi del vettore; per un vettore `s` di `char` è data da `sizeof s`, perché un `char` occupa un byte. La **lunghezza** $\ell$ è il numero di caratteri prima del terminatore, ed è data dalla funzione `strlen(s)` di `<string.h>`. Per `char s[10] = "ciao";` la capacità è $10$ e la lunghezza è $4$. Poiché serve un elemento anche per il terminatore, vale sempre
 $$
 0\le\ell<B .
 $$
-Il terminatore occupa l’elemento `s[ell]`. La lunghezza conta unità di tipo `char` prima del nullo. Se il testo usa una codifica con più byte per un simbolo, il numero di tali simboli può essere diverso da $\ell$.
+Il terminatore si trova nell’elemento di indice $\ell$. `strlen` conta gli elementi `char` e richiede che il vettore contenga un terminatore; in caso contrario prosegue oltre la fine del vettore, con comportamento indefinito.
 :::
 
 :::esempio{titolo="Sequenza con un nullo interno"}
-Nella dichiarazione `char s[8] = "ab\0cd";`, le prime sei celle contengono in ordine `'a'`, `'b'`, `'\0'`, `'c'`, `'d'` e il nullo finale aggiunto al letterale dal linguaggio. Le due celle restanti sono inizializzate a zero. L’operatore `sizeof s` dà $8$. La funzione `strlen(s)` dà $2$ perché il primo nullo ha indice $2$. Le celle contenenti `'c'` e `'d'` restano nell’oggetto. Il loro contenuto può essere letto con indici validi, mentre è escluso dalla stringa che inizia in `s[0]`.
+Nella dichiarazione `char s[8] = "ab\0cd";` il vettore contiene nell’ordine `'a'`, `'b'`, `'\0'`, `'c'`, `'d'`, poi il terminatore che il compilatore aggiunge alla fine di ogni testo fra virgolette, e infine due elementi a zero. La capacità `sizeof s` è $8$. La lunghezza `strlen(s)` è $2$, perché il primo terminatore si trova all’indice $2$. I caratteri `'c'` e `'d'` sono nel vettore e si possono leggere con `s[3]` e `s[4]`, ma sono fuori dalla stringa.
 :::
 
 :::attenzione
-La dichiarazione `char raw[3] = "ram";` inizializza le tre celle con i tre caratteri visibili ed esaurisce la capacità. Il letterale ha anche un carattere di terminazione, ma nel vettore di destinazione manca lo spazio che lo conterrebbe. Il vettore ottenuto è valido come sequenza di tre valori `char`. Usarlo come argomento di una funzione che richiede una stringa C violerebbe la precondizione. Con `char text[4] = "ram";` il terminatore trova posto all’indice $3$.
+La dichiarazione `char raw[3] = "ram";` riempie i tre elementi con i tre caratteri e non lascia posto per il terminatore. Il vettore è valido come sequenza di tre caratteri, ma non è una stringa, e passarlo a `strlen` o a `printf` con `%s` ha comportamento indefinito. Con `char text[4] = "ram";` il terminatore sta nell’elemento di indice $3$. Un vettore che deve contenere un testo di $\ell$ caratteri ha quindi bisogno di almeno $\ell+1$ elementi.
 :::
 
 ## Spazio per costruire una stringa
 
 ::::teorema{#capacita-stringa titolo="Capacità per una concatenazione"}
-Siano $u$ e $v$ le lunghezze di due testi, esclusi i terminatori. Per concatenarli in un unico vettore di capacità $B$, mantenendo un terminatore in coda, occorrono almeno $u+v+1$ celle.
+**Concatenare** due stringhe significa scrivere la seconda di seguito alla prima. Se le due stringhe hanno lunghezze $u$ e $v$, il vettore che contiene il risultato deve avere capacità $B$ almeno pari a $u+v+1$, cioè i caratteri delle due stringhe più un terminatore. Per `"ciao"` e `"mondo"` servono $4+5+1=10$ elementi.
 :::dimostrazione
-Il primo testo occupa $[0,u)$ e il secondo $[u,u+v)$. Insieme occupano $[0,u+v)$, quindi il terminatore va scritto all’indice $u+v$. La condizione per un indice valido è $u+v<B$. Poiché le quantità sono intere, equivale a $B\ge u+v+1$. Questa dimostrazione usa interi matematici. Per verificare la disuguaglianza con `size_t` senza formare subito la somma, si verifica prima $u<B$. Sotto questa ipotesi, $B-1-u$ è rappresentabile e il secondo testo deve soddisfare $v\le B-1-u$.
+La prima stringa occupa gli indici $[0,u)$ e la seconda gli indici $[u,u+v)$, quindi il terminatore va all’indice $u+v$. Questo indice è valido se $u+v<B$, cioè $B\ge u+v+1$. In un programma che usa `size_t` conviene evitare di calcolare $u+v$, che potrebbe superare il massimo del tipo. Si controlla prima $u<B$ e poi $v\le B-1-u$, due confronti che non possono dare overflow.
 :::
 ::::
 
 :::esempio{#costruzione-stringa titolo="Aggiungere un carattere con capacità nota"}
-Sia `s` una stringa valida di lunghezza `len` in un vettore di capacità `cap`. Per aggiungere un carattere `ch` diverso da `'\0'`, la funzione verifica che ci siano almeno due celle a partire dalla posizione `len`. Il chiamante aggiorna la lunghezza se la funzione restituisce `true`. Si assumono disponibili `<stdbool.h>` e `<stddef.h>`.
+La funzione aggiunge il carattere `ch` in fondo a una stringa `s` di lunghezza `len`, contenuta in un vettore di capacità `cap`. Servono due elementi liberi a partire dall’indice `len`, uno per il carattere e uno per il nuovo terminatore. Se non ci sono, la funzione non modifica nulla e restituisce `false`; il tipo `bool` e i valori `true` e `false` vengono da `<stdbool.h>`.
 ```c
 bool append_char(char s[], size_t cap, size_t len, char ch)
 {
@@ -196,21 +196,21 @@ bool append_char(char s[], size_t cap, size_t len, char ch)
     return true;
 }
 ```
-Con `char s[5] = "tre";` si ha `len = 3` e `cap = 5`. La differenza è $2$, quindi il carattere `'s'` può essere scritto all’indice $3$ e il nuovo nullo all’indice $4$. La stringa risultante è `"tres"`. Con una capacità di quattro celle, il ramo di rifiuto si esegue prima delle assegnazioni e lascia invariati gli elementi. La condizione `len >= cap` è valutata per prima e impedisce di sottrarre una lunghezza troppo grande dal valore `cap`.
+Con `char s[5] = "tre";` si ha `len = 3` e `cap = 5`. La differenza `cap - len` è $2$, quindi `'s'` viene scritto all’indice $3$ e il terminatore all’indice $4$, e la stringa diventa `"tres"`. Con una capacità di quattro elementi la differenza sarebbe $1$ e la funzione restituirebbe `false` senza scrivere. La condizione `len >= cap` è scritta per prima perché protegge la sottrazione `cap - len`, che fra valori `size_t` darebbe un numero enorme se `len` fosse maggiore di `cap`.
 :::
 
 :::osservazione
-Il controllo dell’indice di scrittura e il controllo del terminatore svolgono due compiti separati. Con $B=5$ e $\ell=4$ l’ultima cella correttamente accessibile è `s[4]`, ed è quella che contiene il terminatore. Scrivere un carattere in `s[4]` resterebbe all’interno del vettore per quella singola assegnazione. Per ottenere una stringa valida dopo l’aggiunta occorrerebbe però anche `s[5]`. La richiesta di due celle evita questa perdita della terminazione.
+Controllare che l’indice di scrittura sia valido non basta. Con capacità $5$ e lunghezza $4$ l’elemento `s[4]` esiste, ed è quello che contiene il terminatore. Scrivere il nuovo carattere in `s[4]` sarebbe un accesso valido, ma cancellerebbe il terminatore, e il nuovo terminatore andrebbe in `s[5]`, che non esiste. Per questo la funzione richiede due elementi liberi.
 :::
 
 ## Lettura e riscrittura con due indici
 
 :::definizione{#traversata-stringa titolo="Indice di lettura e indice di scrittura"}
-Per filtrare i caratteri di una stringa si mantiene un indice di lettura $i$ e un indice di scrittura $k$, entrambi inizialmente zero. All’ingresso di una iterazione, il prefisso di uscita $[0,k)$ contiene esattamente i caratteri da conservare tra i primi $i$ caratteri d’ingresso, nell’ordine originale. La relazione $k\le i$ segue perché ogni carattere letto produce al più un carattere scritto. Se la lunghezza d’ingresso è $\ell$, una capacità di almeno $\ell+1$ elementi copre sia tutte le scritture dei caratteri sia la scrittura finale del nullo.
+Per copiare da una stringa soltanto alcuni caratteri si usano due indici. L’indice di lettura $i$ scorre tutti i caratteri della stringa di partenza. L’indice di scrittura $k$ indica la posizione in cui scrivere il prossimo carattere conservato, e aumenta soltanto quando un carattere viene copiato. In ogni momento i primi $k$ elementi del risultato contengono, nello stesso ordine, i caratteri da conservare fra i primi $i$ letti, e vale $k\le i$. Alla fine si scrive il terminatore all’indice $k$. Se la stringa di partenza ha lunghezza $\ell$, al risultato bastano $\ell+1$ elementi.
 :::
 
 :::esempio{titolo="Filtro che conserva l’ordine"}
-Si consideri la stringa `"sasso"` e si copino in un vettore distinto i caratteri diversi da `'s'`. La capacità di uscita vale $6$, quindi può contenere anche il caso in cui si conservino tutti e cinque i caratteri. Si assume disponibile il tipo `size_t`.
+Il frammento copia in `out` i caratteri di `"sasso"` diversi da `'s'`. La capacità di `out` è $6$, sufficiente anche se tutti e cinque i caratteri venissero conservati. Il ciclo si ferma quando `source[i]` è il terminatore.
 ```c
 char source[] = "sasso";
 char out[6];
@@ -223,9 +223,9 @@ for (size_t i = 0; source[i] != '\0'; ++i) {
 }
 out[k] = '\0';
 ```
-Il ciclo salta i tre caratteri `'s'`, copia `'a'` all’indice $0$ e copia `'o'` all’indice $1$. Il nullo è scritto all’indice $2$, quindi si ottiene `"ao"`. Se l’ingresso è vuoto, la condizione fallisce già all’indice $0$ e si scrive il nullo in `out[0]`. Il caso vuoto rispetta quindi lo stesso contratto di uscita.
+I tre caratteri `'s'` vengono saltati, `'a'` viene copiato all’indice $0$ e `'o'` all’indice $1$. Alla fine `k` vale $2$, il terminatore viene scritto in `out[2]` e il risultato è `"ao"`. Se la stringa di partenza è vuota il ciclo non esegue alcuna iterazione e il terminatore viene scritto in `out[0]`, quindi il risultato è la stringa vuota.
 :::
 
 :::osservazione
-Per cercare un motivo non vuoto di lunghezza $q$ dentro un testo lungo $\ell$, ciascun tentativo verifica $q$ caratteri consecutivi. Se $q>\ell$ non esiste alcuna posizione iniziale valida. Se $q\le\ell$, l’ultimo inizio valido è $\ell-q$ e il controllo dei caratteri si svolge solo per indici $j\in[0,q)$. Scorrere gli inizi uno alla volta permette di contare occorrenze sovrapposte. Per esempio, in `"ananas"`, il motivo `"ana"` appare agli indici $0$ e $2$, perciò il conteggio vale $2$.
+Per cercare una parola di lunghezza $q$ dentro un testo di lunghezza $\ell$ si prova ogni posizione di partenza e si confrontano $q$ caratteri consecutivi. Se $q>\ell$ la parola non può comparire. Altrimenti le posizioni di partenza possibili vanno da $0$ a $\ell-q$, perché oltre non restano abbastanza caratteri. Provando tutte le posizioni una per una si contano anche le occorrenze che si sovrappongono; in `"ananas"` la parola `"ana"` compare agli indici $0$ e $2$, quindi il conteggio è $2$.
 :::
