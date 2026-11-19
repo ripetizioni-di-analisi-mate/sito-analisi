@@ -6,27 +6,31 @@ sommario: Dall’apertura di uno stream alla validazione delle righe, con aggreg
 ## File esterno e stream
 
 :::definizione{#stream titolo="Stream di testo"}
-Uno **stream** mette in relazione il programma con una sorgente o una destinazione di dati. In C17 le funzioni di ingresso e uscita su stream sono dichiarate in `<stdio.h>`. Il tipo `FILE` rappresenta le informazioni che la libreria usa per gestire l’operazione. Un puntatore di tipo `FILE *` identifica lo stream e si passa alle funzioni che lo leggono, lo scrivono o lo chiudono. Ogni lettura riuscita consuma una parte dell’ingresso. Le letture successive riprendono dalla posizione risultante.
+Un **file** è una sequenza di dati conservata su disco, che resta disponibile anche dopo la fine del programma. Per leggere o scrivere un file il programma lo apre e ottiene uno **stream**, cioè un canale da cui i dati arrivano, o verso cui vanno, uno dopo l’altro. Le funzioni per gli stream sono dichiarate in `<stdio.h>`. Uno stream è rappresentato da un puntatore di tipo `FILE *`, che si ottiene all’apertura e si passa a tutte le funzioni che leggono, scrivono o chiudono. La lettura è sequenziale, cioè ogni lettura parte dal punto in cui è finita la precedente.
 
-Uno **stream di testo** fornisce caratteri organizzati in righe. Il carattere `'\n'` rappresenta il ritorno a capo nel programma. L’ambiente può convertire la rappresentazione esterna durante la lettura o la scrittura. Nel ragionamento sul programma si usano i caratteri osservabili attraverso lo stream. Per esempio, la riga `73` seguita da un ritorno a capo fornisce i caratteri `'7'`, `'3'` e `'\n'`.
+Un **file di testo** contiene caratteri organizzati in righe, e ogni riga termina con il carattere di ritorno a capo `'\n'`. La riga `73`, per esempio, arriva al programma come i tre caratteri `'7'`, `'3'` e `'\n'`.
 :::
 
 :::osservazione
-Il file esterno e lo stream hanno durate distinte. Aprire un file stabilisce la relazione tra il nome e lo stream. Chiudere lo stream conclude quella relazione. Un altro programma può riaprire lo stesso file per leggere i dati persistenti. Lo stesso programma può aprire più stream, per esempio uno per l’ingresso delle misure e uno per il rapporto prodotto. L’indicatore di fine file di uno stream riguarda la sua lettura. L’esito di scrittura dello stream del rapporto si controlla a parte.
+Il file e lo stream sono due cose distinte. Il file sta sul disco ed esiste prima e dopo l’esecuzione; lo stream esiste soltanto nel programma, dall’apertura alla chiusura. Un programma può tenere aperti più stream nello stesso momento, per esempio uno per leggere le misure e uno per scrivere un rapporto, e ciascuno ha la propria posizione e i propri indicatori di errore.
 
-Per descrivere una prova si specificano il contenuto iniziale del file, il modo di apertura e le operazioni riuscite. Indicare anche l’ordine delle operazioni consente di ricostruire quali caratteri vengono letti e quali restano nel file.
+Per prevedere che cosa fa un programma su un file servono tre informazioni, cioè il contenuto iniziale del file, il modo in cui viene aperto e l’ordine delle operazioni eseguite.
 :::
 
 ## Apertura con il modo richiesto
 
 :::definizione{#apertura titolo="Modo e risultato di fopen"}
-`fopen(name, mode)` apre il file identificato da `name` nel modo richiesto dalla stringa `mode`. Restituisce un puntatore allo stream se l’apertura riesce, oppure un puntatore nullo. I tre modi impiegati in questo capitolo sono `"r"` per la lettura di un file esistente, `"w"` per la scrittura a partire da un file vuoto e `"a"` per la scrittura in coda. I modi `"w"` e `"a"` possono creare il file. Un’apertura riuscita in `"w"` tronca un file che esiste già. In `"a"` le scritture si aggiungono alla fine del file.
+La funzione `fopen(name, mode)` apre il file di nome `name` e restituisce lo stream, oppure `NULL` se l’apertura non riesce, per esempio perché il file non esiste. Il secondo argomento è una stringa che indica il **modo** di apertura.
 
-Questo comportamento determina la scelta del modo nell’enunciato. Un rapporto da rigenerare si apre in `"w"`. Un registro che conserva le misure già acquisite si estende con `"a"`. Se il solo scopo è esaminare il registro, il modo pertinente è `"r"`.
+- `"r"` (*read*) apre in lettura un file che esiste già.
+- `"w"` (*write*) apre in scrittura. Se il file non esiste lo crea; se esiste lo svuota, e il contenuto precedente è perduto.
+- `"a"` (*append*) apre in scrittura in coda. Se il file non esiste lo crea; se esiste, ciò che si scrive viene aggiunto alla fine.
+
+Il modo si sceglie in base a ciò che deve accadere al contenuto esistente. Un rapporto da rifare ogni volta si apre con `"w"`, un registro a cui aggiungere dati con `"a"`, un file da consultare con `"r"`.
 :::
 
 :::esempio{titolo="Scrittura dopo un controllo"}
-Se il registro contiene la riga `41`, il codice aggiunge una seconda riga con `52` quando tutte le operazioni riescono.
+Il file `log.txt` contiene la riga `41`. Il frammento, che fa parte di `main` e usa `<stdio.h>` e `<stdlib.h>`, aggiunge in coda la riga `52`.
 
 ```c
 FILE *log = fopen("log.txt", "a");
@@ -40,23 +44,23 @@ if (fclose(log) != 0) {
 return ok ? EXIT_SUCCESS : EXIT_FAILURE;
 ```
 
-Il frammento appartiene a `main` e richiede `<stdio.h>` e `<stdlib.h>`. Dopo l’apertura riuscita la chiusura si esegue anche se `fputs` segnala un errore. Dopo `fclose` è terminata l’associazione con quello stream. Il risultato della chiusura può segnalare un errore di scrittura di dati che erano ancora nel buffer della libreria.
+Dopo `fopen` si controlla subito che lo stream sia diverso da `NULL`. La funzione `fputs` scrive una stringa sullo stream e restituisce `EOF` in caso di errore. La funzione `fclose` chiude lo stream e restituisce zero se tutto è andato bene; va chiamata anche quando `fputs` fallisce. Il risultato di `fclose` va controllato, perché le funzioni di scrittura accumulano i dati in una memoria temporanea, il **buffer**, e possono scriverli davvero sul disco soltanto alla chiusura.
 :::
 
 :::attenzione
-Controllare `log != NULL` verifica l’apertura. Il valore di ritorno di `fputs` e quello di `fclose` rispondono a domande successive, quindi un programma che annuncia di aver completato il rapporto controlla anche questi due risultati. Un’apertura riuscita in `"w"` ha già l’effetto di troncamento, anche quando il programma ritorna prima di chiamare una funzione di scrittura.
+I controlli da fare sono tre, cioè l’apertura, ogni scrittura e la chiusura; un’apertura riuscita non garantisce che le scritture riescano. Inoltre l’apertura con `"w"` svuota il file nel momento stesso in cui avviene, anche se poi il programma termina senza scrivere nulla.
 :::
 
 ## Lettura e fine del file
 
 :::definizione{#fine-flusso titolo="Caratteri, EOF e indicatori"}
-`fgetc(file)` restituisce un carattere come valore di tipo `int` oppure `EOF`, un valore negativo definito in `<stdio.h>`. Per i caratteri del testo impiegati nelle tracce il valore ottenuto distingue sempre un carattere letto correttamente da `EOF`. Conservare il risultato in un `int` consente di fare il confronto prima di qualsiasi conversione verso un tipo carattere.
+La funzione `fgetc(file)` legge un carattere dallo stream e lo restituisce. Quando non ci sono più caratteri, o si verifica un errore, restituisce il valore speciale `EOF` (*end of file*), un numero negativo definito in `<stdio.h>`. Per questo `fgetc` restituisce un `int` e non un `char`, e il risultato va messo in una variabile `int`; così `EOF` resta distinto da tutti i caratteri.
 
-Il valore `EOF` indica che la chiamata non ha prodotto un carattere. `feof(file)` interroga l’indicatore di fine file dello stream. `ferror(file)` interroga l’indicatore di errore. Ciascuna funzione dà zero quando il relativo indicatore è spento e un valore diverso da zero quando è acceso. Dopo il ciclo, `ferror(file) != 0` permette di rilevare una lettura interrotta da un errore. La verifica avviene prima di chiudere lo stream.
+`EOF` da solo non dice perché la lettura si è fermata. Lo dicono due funzioni. `feof(file)` è diversa da zero se è stata raggiunta la fine del file. `ferror(file)` è diversa da zero se c’è stato un errore di lettura. Dopo un ciclo di lettura si controlla `ferror` per sapere se il file è stato letto tutto o se la lettura si è interrotta.
 :::
 
 :::esempio{titolo="Misurare i separatori"}
-Un file fornisce la sequenza `A\nB\nC\n`. Per studiare il numero di ritorni a capo bastano un contatore e la variabile che conserva l’ultimo risultato. Si assume che il conteggio sia rappresentabile come `size_t`.
+Il file contiene `A\nB\nC\n`, cioè tre righe di un carattere. Il frammento conta i ritorni a capo. Il ciclo legge un carattere alla volta e termina quando `fgetc` restituisce `EOF`.
 
 ```c
 size_t newlines = 0;
@@ -69,37 +73,37 @@ while ((ch = fgetc(file)) != EOF) {
 int read_failed = ferror(file) != 0;
 ```
 
-Il contatore aumenta dopo ciascun ritorno a capo, quindi vale $3$ quando tutte le letture riescono. La chiamata successiva restituisce `EOF` per raggiunta fine del file. Se la terza riga è l’ultima e il suo ritorno a capo manca nel flusso osservato, i separatori letti sono $2$. Il numero di separatori e il numero di righe logiche coincidono quando ogni riga ha un ritorno a capo finale.
+La condizione del ciclo assegna a `ch` il carattere letto e lo confronta con `EOF`; le parentesi interne sono necessarie perché `!=` ha precedenza su `=`. Il contatore aumenta a ogni ritorno a capo, quindi alla fine vale $3$. Se all’ultima riga mancasse il ritorno a capo finale, cioè con il contenuto `A\nB\nC`, il contatore varrebbe $2$ pur essendo le righe tre. Il numero di ritorni a capo coincide con il numero di righe soltanto se ogni riga, compresa l’ultima, termina con `'\n'`.
 :::
 
 :::attenzione
-La condizione `!feof(file)` descrive lo stato dello stream prima della lettura. La prossima operazione può ancora fallire e accendere l’indicatore. Il ciclo controlla quindi l’esito della lettura e aggiorna i risultati all’interno della parte che elabora un dato effettivamente ottenuto. Per un file che fornisce una sola misura, questo ordine impedisce di elaborare la vecchia misura una seconda volta dopo il tentativo successivo.
+Un ciclo scritto come `while (!feof(file))` è sbagliato. L’indicatore di fine file si accende soltanto *dopo* che una lettura ha tentato di andare oltre la fine, quindi dopo l’ultimo dato `feof` vale ancora zero. Il ciclo esegue un giro in più, in cui la lettura fallisce e il programma elabora una seconda volta il dato precedente. La forma corretta controlla il risultato della lettura stessa, come nel frammento precedente.
 :::
 
 ## Righe e frammenti
 
 :::definizione{#fgets titolo="Contratto di fgets"}
-Per un array `buffer` con almeno `capacity` elementi e `capacity` maggiore o uguale a $2$, `fgets(buffer, capacity, file)` legge al più `capacity - 1` caratteri. Si ferma anche quando legge il ritorno a capo, che conserva nell’array, oppure quando incontra la fine del file. Dopo una lettura riuscita aggiunge `'\0'`. Il valore restituito è `buffer` se la lettura riesce. Interrogare il valore restituito prima di usare la stringa è parte del contratto.
+La funzione `fgets(buffer, capacity, file)` legge una riga di testo e la mette nel vettore `buffer` come stringa. Si ferma dopo aver letto il ritorno a capo, che viene copiato nel vettore, oppure alla fine del file, oppure dopo `capacity - 1` caratteri, in modo che resti posto per il terminatore `'\0'`, che aggiunge sempre. Restituisce `buffer` se ha letto almeno un carattere e `NULL` se non ha letto nulla. Il risultato va controllato prima di usare la stringa.
 
-Con capacità $5$, la lettura iniziale della riga `1234567` seguita da un ritorno a capo produce la stringa `"1234"`. Nel buffer i primi quattro posti contengono le quattro cifre e l’ultimo contiene `'\0'`. La prossima lettura parte da `'5'`. Ottiene `"567\n"` perché quattro caratteri riempiono lo spazio disponibile e il quarto è già il separatore.
+Se la riga è più lunga del vettore, `fgets` ne legge soltanto una parte e il resto rimane da leggere. Con capacità $5$ e la riga `1234567`, la prima chiamata mette nel vettore `"1234"`, cioè quattro caratteri e il terminatore. La seconda chiamata riprende da `'5'` e legge `"567\n"`.
 :::
 
 :::definizione{#validazione-righe titolo="Confine di una riga"}
-Il programma specifica quali righe sono ammesse prima di convertirle. In una prova con righe sempre terminate da ritorno a capo, testo senza caratteri nulli interni e capacità sufficiente per ogni riga valida, `strchr(buffer, '\n')` individua il separatore dopo una lettura riuscita. Se il separatore manca, il programma classifica la riga come incompleta o troppo lunga secondo la specifica. Se decide di proseguire dopo una riga troppo lunga, consuma fino al suo separatore oppure fino alla fine del file e ricontrolla gli errori. Così il frammento successivo resta associato alla stessa riga fisica.
+Dopo una chiamata a `fgets` il programma deve quindi sapere se ha ricevuto una riga intera. La riga è intera se la stringa contiene il ritorno a capo, e lo si verifica con `strchr(buffer, '\n')`, che restituisce l’indirizzo del primo `'\n'` oppure `NULL` se non c’è. Se manca, la riga era troppo lunga per il vettore, oppure è l’ultima del file ed è priva di ritorno a capo. Quando il programma scarta una riga troppo lunga, deve leggere e buttare via anche i pezzi successivi fino al ritorno a capo, altrimenti il pezzo seguente verrebbe scambiato per una riga nuova.
 
-Con un limite di $60$ caratteri prima del ritorno a capo e un buffer da $64$, una riga valida può stare per intero nell’array. Contiene al più $60+1$ caratteri di testo, quindi anche il terminatore di stringa trova posto. Se il programma accetta l’ultima riga priva di separatore, specifica quel caso e distingue la fine normale da una lettura ripresa che trova altri caratteri.
+La capacità del vettore si calcola dalla lunghezza massima ammessa. Se una riga valida ha al più $60$ caratteri prima del ritorno a capo, servono $60+1$ caratteri più il terminatore, cioè $62$ elementi, e un vettore di $64$ è sufficiente.
 :::
 
 ## Interpretazione dei campi numerici
 
 :::definizione{#conversione-controllata titolo="Conversione con strtol"}
-`strtol(text, &end, 10)` tenta di leggere un intero in base dieci e restituisce un `long`. Nella locale C riconosce gli spazi iniziali, l’eventuale segno e una sequenza di cifre. Se c’è una conversione, `end` punta al primo carattere dopo la parte letta. Se le cifre mancano, `end` coincide con `text`. Impostare `errno = 0` prima della chiamata consente di attribuire un eventuale `ERANGE` a questa conversione.
+La riga letta è una stringa di caratteri. Per ottenere il numero che contiene si usa `strtol(text, &end, 10)`, che converte in `long` il numero scritto in base dieci all’inizio di `text`. La funzione salta gli spazi iniziali, legge un eventuale segno e le cifre, e mette in `end` l’indirizzo del primo carattere che non fa parte del numero. Questo permette due controlli. Se `end` è uguale a `text`, non è stata letta alcuna cifra. Se il numero è troppo grande per un `long`, `strtol` mette nella variabile `errno`, dichiarata in `<errno.h>`, il valore `ERANGE`; per accorgersene si azzera `errno` prima della chiamata.
 
-Questi controlli sono distinti dalla convalida dei valori ammessi dall’esercizio. Se il programma accetta soltanto misure tra $-100$ e $100$, si verifica anche quell’intervallo in `long` prima di convertire verso `int`. La rappresentabilità come `int` segue dai limiti scelti. Per controllare che la riga contenga proprio un numero, dopo le cifre si accettano soltanto eventuali spazi e il terminatore.
+A questi controlli il programma aggiunge i propri. Se sono ammessi soltanto valori fra $-100$ e $100$, si controlla l’intervallo sul valore `long`, e solo dopo lo si converte in `int`. Per accertare che la riga contenga soltanto il numero, si controlla che dopo le cifre ci siano al più spazi e poi il terminatore.
 :::
 
 :::esempio{titolo="Una riga con un intero"}
-La riga fornita dal file contiene uno spazio, le cifre di `27` e un ritorno a capo. La conversione restituisce `27` e lascia il puntatore sul ritorno a capo. La procedura salta tutti i caratteri di spazio ammessi dalla locale C, compreso il separatore, e verifica il terminatore. Per `"27x\n"`, il puntatore è invece sul carattere `'x'`. Il controllo sulla parte residua distingue i due casi.
+La riga è formata da uno spazio, le cifre `27` e il ritorno a capo. `strtol` salta lo spazio, restituisce $27$ e lascia `end` sul ritorno a capo. Il programma salta gli spazi finali, fra cui il ritorno a capo, e trova il terminatore, quindi accetta la riga. Per la riga `"27x\n"` il valore restituito sarebbe ancora $27$, ma `end` punterebbe a `'x'`, e la riga verrebbe rifiutata.
 
 ![Lo stream fornisce la riga con 27, strtol restituisce 27 e lascia il puntatore sul ritorno a capo, quindi il controllo della coda accetta la riga.](/immagini/informatica/file-e-laboratorio/schema-teoria-it.png)
 
@@ -117,70 +121,70 @@ if (end != buffer && errno != ERANGE && -100 <= value && value <= 100) {
 }
 ```
 
-Il frammento usa `<errno.h>`, `<stdlib.h>` e `<ctype.h>`. Per la verifica si assume che i caratteri di ingresso siano quelli del repertorio di base impiegato nel corso. Il cast nella chiamata a `isspace` mantiene il valore nel dominio dei caratteri senza segno. Il controllo finale sulla parte residua distingue una riga intera da un prefisso interpretabile.
+Il frammento usa `<errno.h>`, `<stdlib.h>` e `<ctype.h>`. La condizione dell’`if` riunisce tre controlli, cioè che sia stata letta almeno una cifra, che non ci sia stato overflow e che il valore sia nell’intervallo ammesso. La funzione `isspace` dice se un carattere è uno spazio, una tabulazione o un ritorno a capo; il cast a `unsigned char` è richiesto perché la funzione non accetta valori negativi. Solo se dopo gli spazi c’è il terminatore il valore viene assegnato a `reading`.
 :::
 
 :::osservazione
-Con due campi separati da spazi orizzontali serve controllare anche il delimitatore. Per esempio, due conversioni consecutive potrebbero interpretare `"12+3"` come `12` seguito da `+3`. Se la specifica richiede almeno uno spazio o una tabulazione tra i campi, il programma controlla il carattere puntato da `end` dopo il primo campo e chiama la seconda conversione soltanto se il delimitatore è presente. Si controllano poi il dominio del secondo valore e l’assenza di altri token.
+Quando una riga contiene due numeri separati da spazi si chiama `strtol` due volte, la seconda a partire da `end`. Va però controllato anche il separatore. La stringa `"12+3"` verrebbe letta come $12$ seguito da $+3$, perché il segno `+` fa parte del secondo numero. Se la specifica richiede almeno uno spazio fra i due campi, il programma controlla che il carattere puntato da `end` dopo il primo numero sia uno spazio o una tabulazione prima di convertire il secondo, e alla fine controlla che non ci sia altro.
 :::
 
 ## Scrittura e completamento
 
 :::definizione{#scrittura-controllata titolo="Esito della scrittura e chiusura"}
-`fprintf(file, format, ...)` formatta i dati e li scrive sullo stream. In caso di successo restituisce il numero di caratteri trasmessi secondo il formato. Un esito negativo segnala un errore di scrittura o di codifica. Il conteggio riguarda i caratteri dello stream e include gli eventuali separatori del formato.
+La funzione `fprintf(file, format, ...)` funziona come `printf` ma scrive sullo stream indicato. Restituisce il numero di caratteri scritti, oppure un valore negativo in caso di errore.
 
-Se una scrittura usa un buffer, i dati possono essere ancora in attesa nella libreria dopo il ritorno di `fprintf`. `fflush(file)` consegna all’ambiente ospite i dati in attesa su uno stream di uscita. `fclose` esegue anche lo svuotamento dei dati in attesa e il suo risultato permette di rilevare un eventuale errore. Se l’output è `stdout`, mantenere lo stream utilizzabile e chiamare `fflush(stdout)` permette di testare quell’esito prima di restituire il codice dal programma.
+I caratteri scritti passano dal buffer e possono arrivare al file in un secondo momento. La funzione `fflush(file)` li trasferisce subito, e `fclose` lo fa prima di chiudere. Un errore di scrittura può quindi manifestarsi soltanto in queste due chiamate, e per questo se ne controlla il risultato. Quando l’uscita è `stdout`, che non va chiuso, si chiama `fflush(stdout)` e se ne controlla il risultato prima di terminare il programma.
 :::
 
 :::esempio{titolo="Misura con segno e separatore"}
-Nella locale C, `fprintf(file, "%d\n", -125)` trasmette il segno meno, tre cifre e un ritorno a capo. Se riesce restituisce $1+3+1=5$. In un rapporto con una misura per riga, il carattere finale permette alla procedura di lettura di riconoscere il confine della riga anche quando quella misura è l’ultima. Il conteggio delle cifre è diverso dal numero complessivo di caratteri prodotti.
+La chiamata `fprintf(file, "%d\n", -125)` scrive il segno meno, tre cifre e un ritorno a capo, quindi restituisce $1+3+1=5$. Il ritorno a capo va scritto anche dopo l’ultima misura, così chi rilegge il file trova tutte le righe complete.
 :::
 
 ## Aggregazione di record validi
 
 ::::teorema{#aggregati-file titolo="Invariante dell’aggregazione"}
-Siano $r_1,\ldots,r_k$ i record già esaminati. Un predicato $P$ identifica i record validi che interessano il calcolo, e $v(r)$ è il valore da sommare di un record ammesso. A ogni passo si aggiunge $v(r)$ alla variabile $s$ se $P(r)$ è vero. Se $s$ parte da zero e ogni somma intermedia è rappresentabile, dopo $k$ passi vale
+Molti programmi di laboratorio leggono un file una riga alla volta e sommano soltanto i valori delle righe che soddisfano una condizione. Siano $r_1,\ldots,r_k$ i record già letti, cioè i dati ricavati dalle righe, sia $P(r)$ la condizione che seleziona i record da sommare e $v(r)$ il valore di un record. La variabile $s$ parte da zero, e per ogni record letto si aggiunge $v(r)$ a $s$ soltanto se $P(r)$ è vera. Se nessuna somma dà overflow, dopo $k$ record vale
 $$
 s = \sum_{\substack{1\le i\le k\\P(r_i)}}v(r_i).
 $$
-
+In parole, $s$ è la somma dei valori dei record selezionati fra i primi $k$.
 :::dimostrazione
-Prima della prima lettura non è stato esaminato alcun record. La somma vuota vale zero e coincide con il valore iniziale. Se il record successivo soddisfa $P$, la somma prescritta acquista esattamente il suo valore. L’istruzione di accumulazione esegue quell’aggiunta. Se $P$ è falso, sia l’insieme dei record ammessi sia $s$ restano uguali. In entrambi i casi la proprietà si conserva dopo il passo. Alla fine di una lettura completata, il prefisso esaminato coincide con l’intero ingresso.
+Prima della prima lettura non ci sono record, la somma senza termini vale zero e $s$ vale zero. Se il record successivo soddisfa $P$, alla somma si aggiunge il suo valore e il programma esegue la stessa aggiunta su $s$. Se non la soddisfa, né la somma né $s$ cambiano. L’uguaglianza si conserva quindi a ogni record, e alla fine della lettura riguarda tutti i record del file.
 :::
 ::::
 
 :::esempio{titolo="Due aggregati e controllo incrociato"}
-Per le misure di categoria `A` e `B` si mantengono due somme, una per categoria. I record $(A,8)$, $(B,4)$, $(A,-3)$, $(B,5)$ producono dopo l’ultimo passo $s_A=5$ e $s_B=9$. La somma diretta delle quattro misure è $8+4-3+5=14$ e coincide con $5+9$. Questo controllo segue dal fatto che le categorie formano una partizione dei record validi. Se una categoria sconosciuta deve essere esclusa, il confronto usa la somma diretta dei soli record ammessi.
+Un file contiene misure di due categorie, `A` e `B`, e si vuole la somma per categoria. Si usano due somme, $s_A$ e $s_B$, ciascuna aggiornata soltanto dai record della propria categoria. Con i record $(A,8)$, $(B,4)$, $(A,-3)$ e $(B,5)$ si ottengono $s_A=8-3=5$ e $s_B=4+5=9$. Come controllo, la somma di tutte le misure è $8+4-3+5=14$, uguale a $5+9$, perché ogni record appartiene a una sola delle due categorie.
 
-Prima di scegliere il tipo degli accumulatori conviene applicare un limite. Con al più $2000$ righe valide e valori in $[-100,100]$, il valore assoluto di ogni somma parziale è al più $200000$. Tale limite rientra nel dominio garantito di `long` in C17. Grazie al controllo preliminare, l’invariante matematico è utilizzabile anche come proprietà del valore memorizzato dal programma.
+Il tipo delle somme si sceglie stimando il valore massimo. Con al più $2000$ righe e valori fra $-100$ e $100$, ogni somma è compresa fra $-200\,000$ e $200\,000$, e sta in un `long`, che per lo standard contiene almeno i valori fino a circa due miliardi.
 :::
 
 ## Progettazione di una prova completa
 
 :::definizione{#prova-laboratorio titolo="Specifica, componenti e test"}
-Una consegna di laboratorio specifica il formato di ogni record, il dominio dei campi, il trattamento delle righe non valide e la forma dell’uscita. Le funzioni sono organizzate in base a queste responsabilità. Una funzione trasforma la riga in un record valido, il ciclo principale governa la lettura e una funzione di aggregazione aggiorna soltanto lo stato relativo ai record ammessi. Se la specifica richiede il primo massimo, l’aggiornamento usa un confronto stretto. La condizione più ampia che include l’uguaglianza realizza la scelta dell’ultimo massimo.
+Il testo di una prova di laboratorio stabilisce quattro cose, cioè il formato di ogni riga, i valori ammessi per ogni campo, che cosa fare delle righe non valide e che cosa stampare. Il programma si divide di conseguenza in parti con un compito ciascuna. Una funzione riceve una riga e ne ricava un record, oppure segnala che la riga non è valida. Il ciclo principale legge le righe e controlla gli errori di lettura. Un’altra funzione aggiorna i risultati con i soli record validi. I dettagli della richiesta vanno letti con attenzione. Se si chiede il primo massimo fra valori uguali, l’aggiornamento usa `>`, mentre `>=` conserverebbe l’ultimo.
 
-Una verifica efficace comprende un ingresso normale, un caso di confine e un caso in cui nessuna riga viene accettata. Per il massimo, una variabile booleana segnala se esiste già un candidato. In questo modo un numero arbitrario, per esempio zero, non viene confuso con il massimo di una sequenza di valori negativi. Una prova con due massimi uguali controlla quale identificativo viene mantenuto. Una riga con un campo extra controlla che il parser distingua l’intera riga dal solo prefisso.
+Il programma si prova con almeno tre file, cioè uno normale, uno con valori di confine e uno in cui nessuna riga è valida. Per calcolare un massimo si usa una variabile booleana che dice se è già stato trovato almeno un valore, invece di partire da un valore fisso come zero, che con dati tutti negativi darebbe un risultato sbagliato. Altri casi utili sono due massimi uguali e una riga con un campo in più, che deve essere rifiutata.
 :::
 
 :::esempio{titolo="Consegna e verifica prima della codifica"}
-Un sensore registra righe formate da classe e misura. Le classi ammesse sono $0$, $1$ e $2$ e la misura deve stare tra $10$ e $30$. Il rapporto contiene la somma della sola classe $2$. Il parser controlla entrambi i campi e il resto della stringa prima di consegnare il record al ciclo. Per le righe `2 20`, `2 30`, `1 15` e `2 31` l’ultima è fuori dal dominio dei valori. Le prime due contribuiscono e la terza appartiene a un’altra classe. Il risultato atteso per questo caso è quindi $20+30=50$.
+Un file contiene righe con due interi, la classe e la misura. Le classi ammesse sono $0$, $1$ e $2$, e la misura deve essere compresa fra $10$ e $30$. Il programma stampa la somma delle misure di classe $2$. Con le righe `2 20`, `2 30`, `1 15` e `2 31`, le prime due vengono sommate, la terza è valida ma di un’altra classe, e la quarta ha la misura fuori intervallo. Il risultato atteso è $20+30=50$.
 
-Un secondo caso fornisce `1 10` e `0 30`. Entrambi i record sono validi, ma la somma della classe $2$ resta zero. Un terzo caso fornisce `2 20 4` e `2 30`. Il campo extra invalida il primo record e l’uscita attesa è $30$. Questi casi legano la correttezza della conversione, la regola di selezione e il valore finale. La scheda di laboratorio aggiunge il controllo degli esiti di apertura, lettura e scrittura a questo ragionamento.
+Con le righe `1 10` e `0 30` entrambi i record sono validi, ma nessuno è di classe $2$, e il risultato atteso è $0$. Con le righe `2 20 4` e `2 30` la prima ha un campo in più e viene rifiutata, e il risultato atteso è $30$. Scrivere questi casi con il loro risultato prima di scrivere il codice chiarisce che cosa il programma deve fare.
 :::
 
 ## Ripetere e verificare la lettura
 
 :::definizione{#posizione-stream titolo="Posizione e stato dello stream"}
-La posizione fa parte dello stato dello stream. Due chiamate a `fgets` sullo stesso puntatore, una dopo l’altra, iniziano in posizioni diverse quando la prima ha consumato caratteri. Per rielaborare un file si può chiuderlo e riaprirlo in lettura. Lo stream nuovo parte dall’inizio del file nel suo stato attuale. Su un file di testo un conteggio dei caratteri letti non dà in generale un offset portabile. Una chiamata a `fseek(file, 0L, SEEK_SET)` con esito zero riposiziona uno stream che supporta l’operazione all’inizio e azzera l’indicatore di fine file. `clearerr` azzera i due indicatori e lascia nella stessa posizione lo stream.
+Uno stream ricorda la **posizione** a cui è arrivato, e ogni lettura prosegue da lì. Per leggere un file una seconda volta dall’inizio ci sono due modi. Il primo è chiuderlo e riaprirlo. Il secondo è chiamare `fseek(file, 0L, SEEK_SET)`, che riporta la posizione all’inizio e restituisce zero se riesce; la chiamata spegne anche l’indicatore di fine file. La funzione `clearerr(file)` spegne gli indicatori di fine file e di errore senza spostare la posizione.
 
-Il programma distingue gli esiti dei due passaggi. Se la prima scansione termina con un errore, si prende una decisione sulla base di quell’esito prima di iniziare l’altra. Quando `fgets` restituisce `NULL` per errore di lettura, il contenuto dell’array è indeterminato. Dopo il ciclo si usano gli indicatori e i risultati già accumulati. Il codice potrà segnalare un aggregato riferito al prefisso quando la specifica ammette risultati parziali.
+Prima di una seconda lettura si controlla come è finita la prima. Se `fgets` restituisce `NULL` per un errore, il contenuto del vettore non è utilizzabile, e il programma decide in base a `ferror` se fermarsi o se usare i risultati ottenuti fino a quel punto, quando la specifica lo permette.
 :::
 
 :::esempio{titolo="Capacità esatta e rilettura"}
-Un file di prova contiene una riga con `91753` e il ritorno a capo. Il testo richiede sei caratteri e un terminatore di stringa. Con capacità $6$, una prima lettura conserva le cinque cifre. La seconda può fornire il solo ritorno a capo. La stessa riga con capacità $7$ è fornita tutta dalla prima lettura. Per effettuare la seconda prova sullo stesso file serve una nuova apertura in lettura oppure un riposizionamento riuscito. Si confrontano due scansioni distinte dello stesso contenuto. L’invariante riguarda le righe fisiche, quindi la presenza del separatore determina quando aggiornare gli aggregati.
+Un file contiene la riga `91753` con il ritorno a capo, cioè sei caratteri. Con un vettore di capacità $6$ la prima chiamata a `fgets` legge le cinque cifre, e il ritorno a capo resta per la chiamata successiva. Con capacità $7$ la prima chiamata legge la riga intera. Per provare le due capacità sullo stesso file, fra una prova e l’altra il file va riaperto oppure riportato all’inizio con `fseek`. In entrambe le prove la riga è una sola, e il programma la riconosce come conclusa quando trova il ritorno a capo.
 :::
 
 :::osservazione
-Per verificare una durata da un registro vale una proprietà analoga a un controllo di somma. Siano $t_0,\ldots,t_{k-1}$ i tempi in ordine non decrescente e $\ell_i$ il livello associato a $t_i$. Il livello del record di indice $i$ vale su $[t_i,t_{i+1})$. La lettura di un nuovo record permette di concludere l’intervallo precedente. Due tempi consecutivi uguali delimitano un intervallo vuoto. La somma di tutte le durate vale $t_{k-1}-t_0$ per $k\ge 1$, perché i tempi interni si cancellano nella somma delle differenze. Un aggregato per un singolo livello è compreso fra zero e questa durata totale. L’uso dei soli estremi temporali verifica quindi un limite sul valore prodotto dal ciclo senza ripetere la sua selezione dei record.
+Un controllo simile alla somma per categorie vale per le durate. Si supponga che il file registri, in ordine di tempo, gli istanti $t_0,\ldots,t_{k-1}$ in cui una grandezza cambia livello, e che il livello registrato all’istante $t_i$ duri fino all’istante successivo, cioè per un tempo $t_{i+1}-t_i$. La durata si può calcolare soltanto quando si legge il record successivo. Sommando tutte le durate i tempi intermedi si cancellano, e il totale è $t_{k-1}-t_0$. Il tempo totale passato a un certo livello è quindi compreso fra zero e $t_{k-1}-t_0$, e la somma dei tempi di tutti i livelli deve dare esattamente $t_{k-1}-t_0$.
 :::
