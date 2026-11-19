@@ -221,5 +221,7 @@
 @media (max-width: 35rem) {
   .invita-riga { gap: 0.65rem; }
   .invita-riga .invita-testo > span { display: block; font-size: 0.88rem; }
+  .invita-riga .invita-testo i { display: none; }
 }
 @media (pointer: coarse) { .invita-riga .invita-copia { min-height: 44px; } .invita-riga .invita-wa { width: 2.75rem; height: 2.75rem; } }
+.invita-riga .invita-testo i { font-style: normal; }
