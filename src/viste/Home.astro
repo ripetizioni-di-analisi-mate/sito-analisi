@@ -4,7 +4,6 @@ import { linguaCatalogo, paginaLocalizzata } from '../lib/lingue-sito';
 import { GRUPPI_DE } from '../data/materie-de';
 import { GRUPPI_ES } from '../data/materie-es';
 import { GRUPPI_FR } from '../data/materie-fr';
-import { percorsoRaccolta, raccolteSvolti } from '../lib/raccolte-svolti';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, elencoCorsi } from '../lib/seo';
 import Base from '../layouts/Base.astro';
@@ -34,7 +33,6 @@ const fr = lingua === 'fr';
 const localizzato = linguaCatalogo(lingua);
 const MATERIE = usa ? materieUsa : materieL(lingua).filter((m) => !localizzato || !m.attiva || paginaLocalizzata(lingua, `/${m.slug}`));
 const notaLingue = fr ? 'Le catalogue est en français. Chaque chapitre indique les langues dans lesquelles les supports sont disponibles.' : es ? 'El catálogo está en español. Cada tema indica en qué idiomas está disponible el material.' : 'Der Kurskatalog ist auf Deutsch. Die Sprache der Lernmaterialien steht beim jeweiligen Thema.';
-const raccoltaAnalisi = !usa && (lingua === 'it' || lingua === 'en') && (await raccolteSvolti(lingua)).has('analisi-1');
 const schedeDettagliate = lingua === 'it' || usa;
 // Nastro «Best seller» sull'angolo della scheda (versione C scelta da Carmine il 17/11/2026), solo nella home italiana.
 const bestSeller = (slug: string) => lingua === 'it' && !usa && BEST_SELLER.has(slug);
@@ -77,15 +75,8 @@ const icona = {
 ---
 <Base titolo={t.nomeSito} descrizione={usa ? 'Mathematics and science for U.S. high school and university courses, with worked examples and practice.' : localizzato ? t.homeDescrizione : SEO(lingua).homeDescr} lingua={lingua} usa={usa} sezione="home" ricercaPrincipale seo={{ titolo: usa ? 'U.S. High School and University STEM Courses · Ripetizioni di Analisi' : localizzato ? `${t.homeTitolo} | ${t.nomeSito}` : SEO(lingua).home, soloQuestaLingua: usa, schema: lingua === 'it' && !usa ? [elencoCorsi(MATERIE.filter((m) => m.attiva), lingua)] : [] }}>
   <div class="home-intro solo-ospiti">
-    {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
+    {/* Il titolo resta per i motori di ricerca e gli screen reader. La frase introduttiva sotto la testata è stata tolta il 19/11/2026 (Carmine: non funzionale, copriva solo in parte gli argomenti): a schermo la home parte dalla presentazione. */}
     <h1 class="solo-lettori">{localizzato ? t.homeTitolo : lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. High School and University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
-    <p class="sommario">{localizzato ? t.homeSommario : usa ? 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'
-      : lingua === 'it' ? 'Teoria ed esercizi svolti per l’università, le superiori e i test d’ingresso.'
-      : 'Theory and worked examples for university, high school and entrance exams.'}
-      {raccoltaAnalisi && (lingua === 'it'
-        ? <> Inizia dagli <a href={link(lingua, percorsoRaccolta('analisi-1'))}>esercizi gratuiti di Analisi 1</a> o scegli una materia dal catalogo.</>
-        : <> Start with the <a href={link(lingua, percorsoRaccolta('analisi-1'))}>free Calculus 1 worksheets</a> or choose a subject below.</>)}
-    </p>
     {localizzato && <p class="nota-accesso">{notaLingue}</p>}
   </div>
   <div class="solo-ospiti">
@@ -195,9 +186,8 @@ const icona = {
   [data-catalogo-usa][hidden], [data-catalogo-usa] [hidden], .esito-ricerca-usa[hidden] { display: none !important; }
   .esito-ricerca-usa { font: .9rem var(--ui); color: var(--inchiostro-2); }
   .pacchetti-studente{padding-top:0}
-  .home-intro{margin-bottom:1.4rem}
+  .home-intro:has(.nota-accesso){margin-bottom:1.4rem}
   .solo-lettori{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-  .home-intro .sommario{margin-top:0}
   .home-personale{margin-bottom:1.4rem}.catalogo-testa{scroll-margin-top:6rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;margin:2rem 0 .8rem;font-family:var(--ui)}
   .catalogo-testa h2{margin:0;font-size:1.3rem}.catalogo-testa>span{color:var(--inchiostro-2);font-size:.88rem}
   :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-color:#e8e2d7;border-left:3px solid var(--azione);box-shadow:none;background:#fffdf9}
