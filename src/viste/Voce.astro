@@ -53,7 +53,8 @@ const dafareT = await Promise.all(dafare.map(async (e) => ({ n: numero(e.id), ti
 const descr = testoPiano(voce.testo);
 // lo stesso titolo in un altro capitolo della stessa materia: il titolo per i motori conserva il capitolo
 const ripetuta = (await vociGlobali(lingua)).some((g) => g.chiave === chiave && g.materia === materia && g.argomento !== argomento);
-const titoloSeo = SEO(lingua).voce(voce.titolo, voce.tipo, conDimostrazione, m.breve, arg.breve, ripetuta);
+const titoloVoce = SEO(lingua).voce(voce.titolo, voce.tipo, conDimostrazione, m.breve, arg.breve, ripetuta);
+const titoloSeo = titoloVoce === voce.titolo && gruppoVoce.some((g) => g.materia !== materia) ? titoloVoce + ' | ' + m.breve : titoloVoce;
 const descrizioneSeo = SEO(lingua).voceDescr(voce.titolo, voce.tipo, conDimostrazione, arg.breve, m.breve, descr, alias);
 const sopratitolo = `${etichetta} · ${arg.breve}`;
 // nella pagina singola il numero progressivo del capitolo non serve

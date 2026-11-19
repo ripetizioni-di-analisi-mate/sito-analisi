@@ -183,6 +183,8 @@ test('gli URL didattici storici propongono lo stesso contenuto o la raccolta di 
     assert.deepEqual(alternativaStudio('/en' + percorso), { percorso, stato: 302 });
   }
   for (const pref of ['', '/en']) {
+    assert.deepEqual(alternativaStudio(pref + '/matematica-superiori-4/successioni-e-progressioni/teoria/successioni'),
+      { percorso: '/matematica-superiori-4/successioni-e-progressioni/teoria/successione', stato: 301 });
     assert.deepEqual(alternativaStudio(pref + '/algebra-lineare/prove-d-esame/esercizi-svolti'),
       { percorso: pref + '/algebra-lineare/esercizi-svolti-gratuiti', stato: 301 });
   }
@@ -211,3 +213,20 @@ test('la navigazione pubblica esclude link personali, script e copie integrali d
     assert.deepEqual(await verificaScoperta(directory, pagine), { dirette: 4, totali: 5, orfane: [sito + '/solo-account'] });
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('da ogni quiz in sitemap il selettore inglese apre una pagina esistente',
+  { skip: !existsSync('dist/sitemap.xml') }, async () => {
+    const xml = await readFile('dist/sitemap.xml', 'utf8');
+    for (const [, url] of xml.matchAll(/<loc>([^<]+\/domande)<\/loc>/g)) {
+      const percorso = new URL(url).pathname;
+      if (percorso.startsWith('/en/')) continue;
+      const html = await readFile('dist' + percorso + '.html', 'utf8');
+      const cambio = [...html.matchAll(/<a\b[^>]*\bdata-lingua="en"[^>]*>/g)];
+      assert.ok(cambio.length, percorso);
+      for (const [tag] of cambio) {
+        const href = tag.match(/\bhref="([^"]+)"/)[1];
+        const destinazione = new URL(href, sito).pathname;
+        assert.ok(existsSync('dist' + destinazione + '.html'), percorso + ' → ' + destinazione);
+      }
+    }
+  });

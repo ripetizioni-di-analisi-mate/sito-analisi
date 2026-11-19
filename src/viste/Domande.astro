@@ -24,12 +24,13 @@ const quizStatistica = materia === 'statistica'
   ? Object.values((await conteggiDomande('it')).statistica ?? {}).reduce((somma, numero) => somma + numero, 0).toLocaleString(en ? 'en-US' : 'it-IT', { useGrouping: 'always' })
   : '';
 const semestreFiltro = materia.endsWith('-semestre-filtro');
-const senzaInglese = !en && (semestreFiltro || materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && !(await catalogoDomande('en'))[materia];
 const nomiProve = nomiAllenamento(m, lingua);
 // Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
 // Ripasso di oggi: le domande sbagliate dello studente che tornano dopo 1, 3 e 7 giorni (scelte dal Worker).
 const personale = argomento === RIPASSO_OGGI;
 const ripasso = argomento === RIPASSO || personale;
+const argomentiInglesi = !usa && !en ? (await catalogoDomande('en'))[materia] ?? [] : [];
+const senzaInglese = !usa && !en && (ripasso ? !argomentiInglesi.length : !argomentiInglesi.includes(argomento));
 const anteprimaScienza = materia === 'scienza-delle-costruzioni' && m.prezzo;
 const anteprimaUsa = usa && usStudyPreviewPage(materia, argomento + '/domande');
 const notaAnteprima = personale

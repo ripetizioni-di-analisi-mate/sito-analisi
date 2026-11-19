@@ -70,7 +70,7 @@ const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
     : sezione === 'home' ? `${link(l.codice, '/')}?lingua=${l.codice}`
     : linguaCatalogo(l.codice) ? destinazioneLocalizzata(l.codice, versioneIt)
     : l.codice === 'en' && (seo.senzaInglese || (seo.soloQuestaLingua && !localizzato))
-      ? link('en', '/') : altraLingua(Astro.url.pathname, l.codice),
+      ? link('en', sezione === 'domande' && materia ? '/' + materia : '/') : altraLingua(Astro.url.pathname, l.codice),
 }));
 const versoIt = altraLingua(Astro.url.pathname, 'it');
 const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({

@@ -25,7 +25,7 @@ const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i +
 const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'svolti', id)).tradotta;
 const arg = argomentoL(lingua, materia, argomento);
 const descrizioneSeo = voce.data.sommario || estrattoTraccia(voce.body, true) || SEO(lingua).schedaDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo);
-const ripetuto = await titoloRipetuto(tradotta ? lingua : 'it', 'svolti', materia, voce.data.titolo);
+const ripetuto = [arg.titolo, arg.breve].includes(voce.data.titolo) || await titoloRipetuto(tradotta ? lingua : 'it', 'svolti', materia, voce.data.titolo);
 const titoloSeo = SEO(lingua).scheda(voce.data.titolo, materiaL(lingua, materia).breve, ripetuto ? `${arg.breve} · ${t.scheda} ${n}` : undefined);
 // Quando la scheda non è tradotta si mostra quella italiana: i plugin devono vedere il percorso vero.
 const resa = await resaVoce(tradotta ? lingua : 'it', 'svolti', voce);
