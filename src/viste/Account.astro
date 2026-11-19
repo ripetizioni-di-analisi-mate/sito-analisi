@@ -57,9 +57,10 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
           <div class="account-statistiche"><div><strong id="sett-minuti"></strong><span>{s.minuti}</span></div><div><strong id="sett-corrette"></strong><span>{s.corrette}</span></div><div><strong id="sett-giorni"></strong><span>{s.giorni}</span></div></div>
           <div id="obiettivo-account"><p class="account-sopratitolo">{s.obiettivo}</p><div class="account-obiettivo-testo"><span id="obiettivo-testo"></span><span id="obiettivo-numeri"></span></div><div class="barra-exp" id="barra-obiettivo" role="progressbar" aria-label={s.obiettivo} aria-valuemin="0" aria-valuemax="100"><span></span></div></div>
           <p class="account-nota" id="obiettivi-completati" hidden>{s.completati}</p>
-          <p class="account-sopratitolo">{s.raggiunti}</p><ul class="account-traguardi" id="traguardi-raggiunti"></ul><p class="account-nota" id="traguardi-vuoti" hidden>{s.vuotoTraguardi}</p>
-          <details class="account-dettagli" id="altri-traguardi" hidden><summary>{s.tutti}</summary><ul class="account-traguardi" id="elenco-altri-traguardi"></ul></details>
+          <div class="ac-righe">
+          <details class="account-dettagli" id="altri-traguardi"><summary><span>{s.raggiunti}</span><span class="ac-valore" id="traguardi-conto"></span></summary><ul class="account-traguardi" id="traguardi-raggiunti"></ul><p class="account-nota" id="traguardi-vuoti" hidden>{s.vuotoTraguardi}</p></details>
           <details class="account-dettagli"><summary>{s.attivita}</summary><ul class="account-sessioni" id="sessioni-account"></ul></details>
+          </div>
           <p class="account-nota account-guida"><a href={de || es || fr ? '/en/livelli-e-punti?lingua=en' : `${pref}/livelli-e-punti`}>{fr ? 'Fonctionnement des niveaux et des points (en anglais)' : es ? 'Cómo funcionan los niveles y los puntos (en inglés)' : de ? 'So funktionieren Stufen und Punkte (Englisch)' : en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a></p>
         </div>
       </section>

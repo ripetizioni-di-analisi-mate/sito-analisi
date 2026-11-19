@@ -150,9 +150,9 @@ export function avviaAccount(root) {
     }
     const traguardi = [...(d.traguardi || [])].reverse();
     q('traguardi-vuoti').hidden = traguardi.length > 0;
-    q('traguardi-raggiunti').replaceChildren(); q('elenco-altri-traguardi').replaceChildren();
-    traguardi.forEach((t, i) => { const li = elemento('li', 'account-traguardo'); const titolo = elemento('span', '', t.nome); if (de) titolo.lang = 'en'; li.append(titolo, elemento('small', '', `+${t.punti} ${s.punti}`)); q(i < 3 ? 'traguardi-raggiunti' : 'elenco-altri-traguardi').append(li); });
-    q('altri-traguardi').hidden = traguardi.length <= 3;
+    q('traguardi-raggiunti').replaceChildren();
+    q('traguardi-conto').textContent = traguardi.length ? numero(traguardi.length) : '';
+    traguardi.forEach((t) => { const li = elemento('li', 'account-traguardo'); const titolo = elemento('span', '', t.nome); if (de) titolo.lang = 'en'; li.append(titolo, elemento('small', '', `+${t.punti} ${s.punti}`)); q('traguardi-raggiunti').append(li); });
     const sessioni = d.sessioni || [];
     q('sessioni-account').replaceChildren();
     if (!sessioni.length) q('sessioni-account').append(elemento('li', 'account-nota', s.vuotoSessioni));

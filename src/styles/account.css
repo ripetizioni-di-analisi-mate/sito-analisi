@@ -191,3 +191,9 @@
 }
 @media (pointer: coarse) { .pagina-account .schede-account > a { display: inline-flex; align-items: flex-end; min-height: 40px; } }
 @media (prefers-reduced-motion: reduce) { .pagina-account .ac-continua, .pagina-account .ac-c-tasto svg, .pagina-account .account-email-spunta input, .pagina-account .account-email-spunta input::after { transition: none; } }
+/* Versione sintetica: traguardi e attività chiusi in una riga, niente nota sotto il videocorso. */
+.pagina-account .contenuto-account-nota { display: none; }
+.pagina-account #percorso .ac-righe { margin-top: 0.2rem; }
+.pagina-account #percorso .account-traguardi { border-top: 0; }
+.pagina-account #percorso .account-traguardi > li:last-child { border-bottom: 0; }
+.pagina-account #traguardi-vuoti { margin: 0 0 0.9rem; }
