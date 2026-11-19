@@ -193,6 +193,8 @@ export class Archivio {
     // minuto UTC della prima visita del giorno e pagine viste a fasce di 10 minuti: servono al confronto «ieri a quest'ora» in dashboard
     try { this.sql.exec('ALTER TABLE visitatori ADD COLUMN minuto INTEGER'); } catch { /* già presente */ }
     this.sql.exec('CREATE TABLE IF NOT EXISTS pagine_orarie (giorno TEXT, fascia INTEGER, n INTEGER, PRIMARY KEY (giorno, fascia))');
+    // persone verificate: visitatori il cui browser ha tenuto la pagina in primo piano per 2 secondi (dal 19/11/2026)
+    this.sql.exec('CREATE TABLE IF NOT EXISTS presenze (giorno TEXT, h TEXT, mobile INTEGER, minuto INTEGER, PRIMARY KEY (giorno, h))');
     // promemoria per tornare a studiare (worker/promemoria.mjs): ultima attività, consenso, lingua, registro degli invii
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN attivo INTEGER'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN promemoria INTEGER DEFAULT 1'); } catch { /* già presente */ }
@@ -311,6 +313,14 @@ export class Archivio {
         if (c.h) {
           this.sql.exec('INSERT OR IGNORE INTO visitatori (giorno, h, mobile, minuto) VALUES (?, ?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0, minuto);
           if (Math.random() < 0.01) this.sql.exec("DELETE FROM visitatori WHERE giorno < date('now', '-200 days')");
+        }
+        return Response.json({ ok: true });
+
+      case '/presenza':
+        if (c.h) {
+          this.sql.exec('INSERT OR IGNORE INTO presenze (giorno, h, mobile, minuto) VALUES (?, ?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0,
+            Number.isInteger(c.minuto) ? c.minuto : null);
+          if (Math.random() < 0.01) this.sql.exec("DELETE FROM presenze WHERE giorno < date('now', '-200 days')");
         }
         return Response.json({ ok: true });
 
@@ -582,6 +592,9 @@ export class Archivio {
                                   WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           inizioVisitatori: this.riga('SELECT MIN(giorno) AS g FROM visitatori')?.g || null,
           orarioIeri: orarioIeri(this),
+          verificati: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM presenze
+                                  WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
+          inizioVerificati: this.riga('SELECT MIN(giorno) AS g FROM presenze')?.g || null,
           sezioni: perPeriodo(sezioni),
           percorsoAcquisto: perPeriodo(percorsoAcquisto),
           campagne: perPeriodo(campagne),
@@ -1140,6 +1153,20 @@ export default {
     }
 
     // ===== percorso d'acquisto: conteggi anonimi (fine dell'anteprima, tasto di acquisto premuto) =====
+    // ===== persone verificate: segnale mandato dal browser dopo 2 secondi di pagina in primo piano =====
+    if (p === '/api/presenza' && POST) {
+      const ua = req.headers.get('user-agent') || '';
+      if (ua && !ROBOT.test(ua) && (req.headers.get('sec-fetch-site') || 'same-origin') === 'same-origin') {
+        const adesso = new Date();
+        const giorno = adesso.toISOString().slice(0, 10);
+        // stessa impronta del conteggio delle visite (giorno, indirizzo, browser): i due numeri si confrontano persona per persona
+        const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${giorno}|${req.headers.get('cf-connecting-ip') || ''}|${ua}`));
+        const h = [...new Uint8Array(impronta).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
+        ctx.waitUntil(aDO(env, '/presenza', { giorno, h, mobile: /Mobi|Android|iPhone|iPad/i.test(ua), minuto: adesso.getUTCHours() * 60 + adesso.getUTCMinutes() }).catch(() => {}));
+      }
+      return new Response(null, { status: 204 });
+    }
+
     if (p === '/api/evento' && POST) {
       const ua = req.headers.get('user-agent') || '';
       const { e, m } = await req.json().catch(() => ({}));

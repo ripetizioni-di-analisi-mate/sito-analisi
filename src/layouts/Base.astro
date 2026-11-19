@@ -702,6 +702,21 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     })();
   </script>
   <script is:inline>
+    // Persone verificate: la pagina avvisa il Worker dopo 2 secondi passati in primo piano in un browser vero
+    // (i programmi che scaricano le pagine senza eseguirle non mandano nulla). Serve al conteggio della dashboard.
+    (() => {
+      if (!navigator.sendBeacon || navigator.webdriver) return;
+      let fatto = false, timer = 0;
+      const manda = () => {
+        if (fatto) return; fatto = true;
+        try { navigator.sendBeacon('/api/presenza', new Blob([JSON.stringify({ p: location.pathname.slice(0, 200) })], { type: 'application/json' })); } catch (_) {}
+      };
+      const prova = () => { clearTimeout(timer); if (document.visibilityState === 'visible') timer = setTimeout(manda, 2000); };
+      document.addEventListener('visibilitychange', prova);
+      prova();
+    })();
+  </script>
+  <script is:inline>
     // Percorso d'acquisto: solo conteggi anonimi (fine dell'anteprima vista, tasto di acquisto premuto), mostrati nella dashboard.
     (() => {
       // Studio guidato: clic sui link che aprono il test (una volta al giorno per browser e materia, quindi circa le persone).

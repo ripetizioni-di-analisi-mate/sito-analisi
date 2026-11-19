@@ -448,7 +448,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       .map((e) => ({ email: e, nome: '', fonte: '', creato: (ab[e][0] || {}).creato, ultimo_accesso: null, ultima: null, abil: ab[e], acquisti: acq[e] || [], spesa: 0, tipo: 'attesa', dispositivi: [], registrato: false }));
     const primoAcquisto = {}; D.acquisti.forEach((a) => { const g = a.creato.slice(0, 10); if (!primoAcquisto[a.email] || g < primoAcquisto[a.email]) primoAcquisto[a.email] = g; });
     const perGiorno = (righe) => Object.fromEntries(righe.map((r) => [r.giorno, r]));
-    S = { studenti: studenti.concat(attesa), primoAcquisto, visite: perGiorno(D.visite), visitatori: perGiorno(D.visitatori || []) };
+    S = { studenti: studenti.concat(attesa), primoAcquisto, visite: perGiorno(D.visite), visitatori: perGiorno(D.visitatori || []), verificati: perGiorno(D.verificati || []) };
   }
   // serie giornaliere su un intervallo; fine = quanti giorni prima di oggi termina (per il periodo precedente)
   function serie(nome, n, fine = 0) {
@@ -461,6 +461,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     switch (nome) {
       case 'visite': return g.map((d) => (S.visite[d] || {}).n || 0);
       case 'visitatori': return g.map((d) => (S.visitatori[d] || {}).n || 0);
+      case 'verificati': return g.map((d) => (S.verificati[d] || {}).n || 0);
       case 'iscritti': return conta(D.utenti.map((u) => u.creato));
       case 'paganti': return conta(Object.values(S.primoAcquisto));
       case 'vendite': return conta(D.acquisti.map((a) => a.creato));
@@ -496,6 +497,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       { chiave: 'visitatori', nome: 'Visitatori unici', etichetta: 'visitatori unici', colore: 'var(--c1)', dal: D.inizioVisitatori },
       { chiave: 'visite', nome: 'Pagine viste', etichetta: 'pagine viste', colore: 'var(--c2)', area: false, tratteggio: !conIngressi, dal: D.visite[0]?.giorno },
     ];
+    // Persone verificate (browser vero, pagina in primo piano per 2 secondi): compaiono da quando esiste il primo dato.
+    if (D.inizioVerificati) metriche.push({ chiave: 'verificati', nome: 'Persone verificate', etichetta: 'persone verificate', colore: 'var(--c4)', area: false, dal: D.inizioVerificati });
     if (conIngressi) metriche.push({ chiave: 'ingressi', nome: 'Ingressi dall’esterno', etichetta: 'ingressi dall’esterno', colore: 'var(--c6)', area: false, tratteggio: true, dal: D.ingressi[0]?.giorno });
     const dal = metriche.map((m) => m.dal).filter(Boolean).sort()[0];
     const conclusi = date.filter((g) => dal && g >= dal);
