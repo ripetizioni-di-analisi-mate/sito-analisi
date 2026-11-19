@@ -20,7 +20,6 @@ import { RIPASSO } from '../data/livelli';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
-import Concentrazione from '../components/Concentrazione.astro';
 import ConsensoCookie from '../components/ConsensoCookie.astro';
 import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA } from '../data/misurazione';
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
@@ -117,6 +116,18 @@ const avanti: Passo | undefined = tappaDopo ? {
   href: tappaDopo.href,
   etichetta: es ? 'Continuar con este tema' : en ? 'Continue with this topic' : 'Continua su questo argomento',
 } : successivo;
+// Pagine di studio di un capitolo (teoria, esercizi svolti, esercizi da fare, domande a tempo, con le pagine singole):
+// in alto solo la riga delle sezioni con la freccia indietro, la ricerca nel capitolo e Concentrazione (19/11/2026).
+const paginaStudio = Boolean(materia && argomento && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
+const partiQui = qui.replace(/\/$/, '').split('/');
+const posSezione = partiQui.lastIndexOf(sezione ?? '');
+const indietroStudio = posSezione >= 0 && posSezione < partiQui.length - 1 ? partiQui.slice(0, posSezione + 1).join('/') : hrefMateria;
+// «Argomento successivo» non è più in alto al computer: lo si ripete fra i passi in fondo alla pagina.
+const posArgomento = m?.argomenti.findIndex((a) => a.slug === argomento) ?? -1;
+const argomentoDopo = paginaStudio && !usa && (lingua === 'it' || lingua === 'en') && posArgomento >= 0 ? m?.argomenti[posArgomento + 1] : undefined;
+const hrefArgomentoDopo = argomentoDopo ? link(lingua, `/${materia}/${argomentoDopo.slug}/teoria`) : undefined;
+const giaIndicato = (tappaDopo && successivo && successivo.href !== avanti?.href) || successivo?.href === hrefArgomentoDopo || avanti?.href === hrefArgomentoDopo;
+const prossimoArgomento = hrefArgomentoDopo && !giaIndicato ? { titolo: argomentoDopo!.breve, href: hrefArgomentoDopo } : undefined;
 const versioneEn = nellaLingua('en', versioneIt);
 const versioniLocalizzate = lingueLocalizzate(versioneIt).map((l) => ({ l, path: nellaLingua(l, versioneIt) }));
 // seo.canonico: la pagina è la copia di un'altra (src/lib/canonici.ts); ai motori si indica l'originale, nella stessa lingua,
@@ -314,8 +325,8 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   <div class="corpo">
     <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} ricercaPrincipale={ricercaPrincipale} />
     <main id="contenuto-principale">
-      <div class="pagina">
-        {m && (
+      <div class:list={['pagina', { 'pagina-studio': paginaStudio }]}>
+        {m && !paginaStudio && (
           <div class="contesto-materia">
             <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={hrefMateria}>
               {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5l3.6 3.5L15.5 6.5"/></svg>}
@@ -324,7 +335,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
             </a>
           </div>
         )}
-        {(percorso.length > 0 || m) && (
+        {(percorso.length > 0 || m) && !paginaStudio && (
           <nav class="percorso" aria-label={fr ? 'Fil d’Ariane' : es ? 'Ruta de navegación' : de ? 'Navigationspfad' : en ? 'Breadcrumb' : 'Percorso'}>
             {livelloSopra && <a class="indietro" href={livelloSopra} title={fr ? 'Retour' : es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'} aria-label={fr ? 'Retour' : es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
             <ol>
@@ -339,15 +350,13 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           </nav>
         )}
         {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoIt} data-lingua="it">Italiano</a></p>}
-        {materia && argomento && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '') && <>
-          <Concentrazione lingua={lingua} />
-          <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} />
-        </>}
+        {paginaStudio && <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} indietro={indietroStudio} />}
         <slot />
-        {(precedente || avanti) && (
+        {(precedente || avanti || prossimoArgomento) && (
           <nav class="passi" aria-label={es ? "Página anterior y siguiente" : "Pagina precedente e successiva"}>
             {avanti && <a class="successivo" href={avanti.href}><small>{avanti.etichetta ?? t.successivo}</small><span>{avanti.titolo}{avanti.sotto ? <em> · {avanti.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
             {tappaDopo && successivo && successivo.href !== avanti?.href && <a class="altro-argomento" href={successivo.href}>{successivo.etichetta ?? t.argomentoSuccessivo}: {successivo.titolo} →</a>}
+            {prossimoArgomento && <a class="altro-argomento" href={prossimoArgomento.href}>{t.argomentoSuccessivo}: {prossimoArgomento.titolo} →</a>}
             {precedente && <a class="precedente" href={precedente.href}>← {precedente.titolo}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</a>}
           </nav>
         )}

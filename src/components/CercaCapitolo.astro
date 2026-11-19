@@ -1,0 +1,202 @@
+---
+// Ricerca nel capitolo (versione A scelta da Carmine il 19/11/2026): campo nella riga delle sezioni.
+// Scrivendo si apre l'elenco dei punti della pagina in cui compare la parola (riquadro o paragrafo, con la frase
+// e le formule vere) e delle voci del capitolo nelle altre sezioni; un tocco porta al punto con la parola evidenziata.
+// La ricerca nella pagina legge solo ciò che è sullo schermo: chi non ha la materia trova solo ciò che può leggere.
+import type { Lingua } from '../i18n';
+import type { IndiceCapitolo } from '../lib/indice-capitolo';
+interface Props { lingua?: Lingua; sezione?: string; indice?: IndiceCapitolo; modo: 'desktop' | 'mobile' }
+const { lingua = 'it', sezione = '', indice, modo } = Astro.props;
+const en = lingua === 'en', es = lingua === 'es';
+const testi = es ? {
+  campo: 'Buscar en el tema', pagina: 'En esta página', teoria: 'Teoría', svolti: 'Ejercicios resueltos', dafare: 'Ejercicios propuestos',
+  nessuno: 'Ningún resultado en este tema.', volte: 'veces', titolo: 'Título del apartado', altri: 'y otros {n} puntos de la página', testo: 'Texto',
+} : en ? {
+  campo: 'Search this topic', pagina: 'On this page', teoria: 'Theory', svolti: 'Worked examples', dafare: 'Practice problems',
+  nessuno: 'No results in this topic.', volte: 'times', titolo: 'Section heading', altri: 'and {n} more on this page', testo: 'Text',
+} : {
+  campo: 'Cerca nel capitolo', pagina: 'In questa pagina', teoria: 'Teoria', svolti: 'Esercizi svolti', dafare: 'Esercizi da fare',
+  nessuno: 'Nessun risultato in questo capitolo.', volte: 'volte', titolo: 'Titolo del paragrafo', altri: 'e altri {n} punti della pagina', testo: 'Testo',
+};
+---
+<div class:list={['cerca-capitolo', `cerca-capitolo-${modo}`]} data-cerca-capitolo data-sezione={sezione}>
+  <svg class="cc-lente" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+  <input type="search" placeholder={testi.campo} aria-label={testi.campo} autocomplete="off" spellcheck="false" enterkeyhint="search" />
+  <div class="cc-ris" hidden role="listbox" aria-label={testi.campo}></div>
+  {indice && <script is:inline type="application/json" data-cerca-indice set:html={JSON.stringify(indice).replace(/</g, '\\u003c')} />}
+  {modo === 'desktop' && <script is:inline type="application/json" data-cerca-testi set:html={JSON.stringify(testi)} />}
+</div>
+
+<script>
+  type Voce = { t: string; h: string; p?: string; n?: number; k?: string };
+  type Indice = { teoria: Voce[]; svolti: Voce[]; dafare: Voce[] };
+  const campi = [...document.querySelectorAll<HTMLElement>('[data-cerca-capitolo]')];
+  const leggi = <T,>(sel: string, d: T): T => { try { return JSON.parse(document.querySelector(sel)?.textContent || '') as T; } catch { return d; } };
+  const indice = leggi<Indice>('[data-cerca-indice]', { teoria: [], svolti: [], dafare: [] });
+  const testi = leggi<Record<string, string>>('[data-cerca-testi]', {});
+  const sezione = campi[0]?.dataset.sezione ?? '';
+  // Pagina di un solo esercizio o di una sola voce: l'elenco della stessa sezione resta utile.
+  const elenco = /\/(teoria|esercizi-svolti|esercizi|domande)\/?$/.test(location.pathname.replace(/\.html$/, ''));
+
+  // Confronto senza accenti né maiuscole, carattere per carattere (le posizioni restano quelle del testo).
+  const norm = (s: string) => [...s].map((c) => c.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()[0] || c).join('').replace(/[’`]/g, "'");
+  const esc = (t: string) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]!));
+  const ESCLUSI = '.katex, script, style, nav, button, form, input, textarea, select, .cerca-capitolo, .studio-percorso-mobile, .blocco-esercizi, .blocco-soluzione, .collegamenti, .passi, .segnala-errore, [hidden], .solo-lettori, .fine-traccia';
+  const pianoDi = (el: Element) => { const c = el.cloneNode(true) as Element; c.querySelectorAll('.katex, .blocco-esercizi, .numero-blocco, .numero').forEach((k) => k.remove()); return (c.textContent ?? '').replace(/\s+/g, ' ').trim(); };
+
+  const area = () => document.querySelector('main .pagina');
+  // Nella teoria l'elenco delle schede in fondo ripete il gruppo «Esercizi svolti».
+  const esclusi = ESCLUSI + (sezione === 'teoria' ? ', .elenco-esercizi, .vai-esercizi' : '');
+  let segni: HTMLElement[] = [], attuale = -1;
+  const pulisci = () => {
+    for (const m of document.querySelectorAll('mark.cc-segno')) { const p = m.parentNode!; p.replaceChild(document.createTextNode(m.textContent ?? ''), m); p.normalize(); }
+    segni = []; attuale = -1;
+  };
+  const cercaPagina = (q: string) => {
+    pulisci();
+    const nq = norm(q.trim()), radice = area();
+    if (nq.length < 2 || !radice) return;
+    const w = document.createTreeWalker(radice, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (n.parentElement?.closest(esclusi) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) });
+    const nodi: Text[] = []; while (w.nextNode()) nodi.push(w.currentNode as Text);
+    for (const n of nodi) {
+      const nt = norm(n.data); const pos: number[] = [];
+      for (let k = nt.indexOf(nq); k >= 0; k = nt.indexOf(nq, k + nq.length)) pos.push(k);
+      for (const p of pos.reverse()) {
+        const r = document.createRange(); r.setStart(n, p); r.setEnd(n, p + nq.length);
+        const m = document.createElement('mark'); m.className = 'cc-segno'; r.surroundContents(m); segni.push(m);
+      }
+    }
+    segni.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+  };
+  // Nome del punto: titolo del paragrafo, etichetta del riquadro (con il teorema per la dimostrazione) o paragrafo che lo contiene.
+  const etichetta = (m: HTMLElement): { e: string; titolo?: boolean } => {
+    const h = m.parentElement!.closest('h1, h2, h3, h4');
+    if (h) return { e: pianoDi(h), titolo: true };
+    const b = m.closest('.blocco, .traccia, section');
+    if (b) {
+      const e = b.querySelector(':scope > .blocco-etichetta, :scope > summary, :scope > h2, :scope > h3');
+      let nome = e ? pianoDi(e) : '';
+      const su = b.parentElement?.closest('.blocco');
+      const es2 = su?.querySelector(':scope > .blocco-etichetta');
+      if (es2 && nome) nome = pianoDi(es2) + ' · ' + nome.charAt(0) + nome.slice(1).toLowerCase();
+      if (nome) return { e: nome };
+    }
+    let el: Element | null = m; while (el && el.parentElement && !el.parentElement.matches('.testo-studio, .pagina')) el = el.parentElement;
+    let t: Element | null = el; while (t && !/^H[23]$/.test(t.tagName)) t = t.previousElementSibling;
+    return { e: t ? pianoDi(t) : (document.querySelector('main h1') ? pianoDi(document.querySelector('main h1')!) : testi.testo) };
+  };
+  // Frase attorno alla parola, con le formule vere.
+  const estratto = (m: HTMLElement) => {
+    const c = m.closest('p, li, td, h2, h3, figcaption') || m.parentElement!;
+    const pezzi: { c?: string; h?: string; w?: number; ok?: boolean }[] = [];
+    const giro = (n: Node) => {
+      if (n.nodeType === 3) { for (const ch of (n as Text).data.replace(/\s+/g, ' ')) pezzi.push({ c: ch, ok: (n as Text).parentElement === m }); return; }
+      const e = n as Element;
+      if (n.nodeType !== 1 || e.matches('.blocco-esercizi, .numero-blocco, script, style')) return;
+      if (e.matches('.katex-display')) { pezzi.push({ c: ' … ', w: 3 }); return; }
+      if (e.matches('.katex')) { pezzi.push({ h: e.outerHTML, w: 4 }); return; }
+      n.childNodes.forEach(giro);
+    };
+    giro(c);
+    const k = pezzi.findIndex((x) => x.ok); if (k < 0) return '';
+    let z = k; while (z < pezzi.length && pezzi[z].ok) z++;
+    let a = k, peso = 0; while (a > 0 && peso < 48) { a--; peso += pezzi[a].w || 1; }
+    let b = z; peso = 0; while (b < pezzi.length && peso < 70) { peso += pezzi[b].w || 1; b++; }
+    const h = (x: typeof pezzi[number]) => x.h || esc(x.c ?? '');
+    return (a ? '…' : '') + pezzi.slice(a, k).map(h).join('') + '<mark>' + pezzi.slice(k, z).map(h).join('') + '</mark>' + pezzi.slice(z, b).map(h).join('') + (b < pezzi.length ? '…' : '');
+  };
+  const vai = (n: number) => {
+    if (!segni.length) return;
+    segni.forEach((s) => s.classList.remove('ora'));
+    attuale = (n + segni.length) % segni.length;
+    const s = segni[attuale]; s.classList.add('ora');
+    for (let d = s.closest('details'); d; d = d.parentElement?.closest('details') ?? null) d.open = true;
+    s.scrollIntoView({ block: 'center' });
+  };
+  const altre = (q: string) => {
+    const nq = norm(q.trim());
+    const trova = (v: Voce[]) => nq.length < 2 ? [] : v.filter((x) => norm(x.t.replace(/<[^>]+>/g, ' ') + ' ' + (x.p ?? '')).includes(nq));
+    return {
+      teoria: sezione === 'teoria' ? [] : trova(indice.teoria),
+      svolti: sezione === 'esercizi-svolti' && elenco ? [] : trova(indice.svolti),
+      dafare: sezione === 'esercizi' && elenco ? [] : trova(indice.dafare),
+    };
+  };
+  const elencoHtml = (q: string) => {
+    const MAX = 6;
+    const per = new Map<string, { e: string; titolo?: boolean; m: HTMLElement; n: number; s: string }>();
+    for (const m of segni) {
+      // Titolo e testo dello stesso paragrafo vanno in una riga sola; la frase mostrata è quella del testo.
+      const { e, titolo } = etichetta(m);
+      const g = per.get(e);
+      if (!g) per.set(e, { e, titolo, m, n: 1, s: titolo ? '' : estratto(m) });
+      else { g.n++; if (g.titolo && !titolo) { g.titolo = false; g.s = estratto(m); } }
+    }
+    const g = [...per.values()], o = altre(q);
+    if (!g.length && !o.teoria.length && !o.svolti.length && !o.dafare.length) return `<div class="cc-vuoto">${testi.nessuno}</div>`;
+    let h = '';
+    if (g.length) {
+      h += `<div class="cc-gr">${sezione === 'teoria' ? testi.teoria : testi.pagina} <span>· ${segni.length}</span></div>`;
+      h += g.slice(0, MAX).map((x) => `<a class="cc-v" href="#" data-segno="${segni.indexOf(x.m)}"><b>${esc(x.e)}${x.n > 1 ? ` <span>· ${x.n} ${testi.volte}</span>` : ''}</b><small>${x.titolo ? testi.titolo : x.s}</small></a>`).join('');
+      if (g.length > MAX) h += `<div class="cc-vuoto cc-altri">${testi.altri.replace('{n}', String(g.length - MAX))}</div>`;
+    }
+    const gruppo = (nome: string, v: Voce[], max: number) => v.length ? `<div class="cc-gr">${nome}</div>` + v.slice(0, max).map((x) =>
+      `<a class="cc-v" href="${x.h}"><b>${x.n ? `<span class="cc-n">${x.n}</span>` : ''}${x.t}</b>${x.k ? `<small>${x.k}</small>` : x.p && v === o.svolti ? `<small>${esc(x.p)}</small>` : ''}</a>`).join('') : '';
+    h += gruppo(testi.teoria, o.teoria, 6) + gruppo(testi.svolti, o.svolti, 6) + gruppo(testi.dafare, o.dafare, 5);
+    return h;
+  };
+
+  for (const c of campi) {
+    const inp = c.querySelector('input')!, ris = c.querySelector<HTMLElement>('.cc-ris')!;
+    let ritardo: number | undefined;
+    const aggiorna = () => {
+      const q = inp.value;
+      cercaPagina(q);
+      ris.innerHTML = elencoHtml(q);
+      ris.hidden = q.trim().length < 2;
+    };
+    inp.addEventListener('input', () => { clearTimeout(ritardo); ritardo = window.setTimeout(aggiorna, 120); });
+    inp.addEventListener('focus', () => { if (inp.value.trim().length > 1) ris.hidden = false; });
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { ris.hidden = true; inp.blur(); }
+      if (e.key === 'Enter') { e.preventDefault(); (ris.querySelector<HTMLElement>('.cc-v'))?.click(); }
+    });
+    inp.addEventListener('search', () => { if (!inp.value) { pulisci(); ris.hidden = true; } });
+    ris.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest<HTMLElement>('[data-segno]');
+      if (!a) return;
+      e.preventDefault(); ris.hidden = true; inp.blur(); vai(Number(a.dataset.segno));
+    });
+    document.addEventListener('click', (e) => { if (!c.contains(e.target as Node)) ris.hidden = true; });
+  }
+</script>
+
+<style is:global>
+  mark.cc-segno { background: #f3e2ad; color: inherit; padding: .12em 0; border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  mark.cc-segno.ora { background: #e4c46a; box-shadow: 0 0 0 2px #e4c46a; }
+  .cerca-capitolo { position: relative; display: flex; align-items: center; font-family: var(--ui); }
+  .cerca-capitolo input { width: 100%; border: 1px solid var(--riga); border-radius: 999px; background: transparent; padding: .38rem .8rem .38rem 2rem; font: inherit; font-size: .84rem; color: var(--inchiostro); outline: none; }
+  .cerca-capitolo input:focus { background: #fff; border-color: color-mix(in srgb, var(--accento) 45%, var(--riga)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accento) 10%, transparent); }
+  .cc-lente { position: absolute; left: .7rem; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--inchiostro-2); pointer-events: none; }
+  .cc-ris { position: absolute; top: calc(100% + .35rem); right: 0; width: 26rem; max-width: calc(100vw - 2rem); max-height: 62vh; overflow: auto; background: #fff; border: 1px solid var(--riga); border-radius: 10px; box-shadow: 0 10px 30px rgba(35, 48, 46, .12); z-index: 30; padding-bottom: .4rem; font-size: .88rem; }
+  .cc-ris[hidden] { display: none; }
+  .cc-gr { padding: .55rem .9rem .25rem; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--inchiostro-2); font-weight: 700; }
+  .cc-gr span { font-weight: 400; letter-spacing: 0; text-transform: none; }
+  .cc-v { display: block; padding: .45rem .9rem; color: var(--inchiostro); text-decoration: none; border-left: 2px solid transparent; }
+  .cc-v:hover, .cc-v:focus-visible { background: var(--carta-2); border-left-color: var(--accento); outline: none; }
+  .cc-v b { display: block; font-weight: 600; }
+  .cc-v b > span:not(.cc-n) { font-weight: 400; color: var(--inchiostro-2); }
+  .cc-v small { display: block; color: var(--inchiostro-2); font-size: .8rem; line-height: 1.4; margin-top: .1rem; }
+  .cc-v small .katex, .cc-v b .katex { font-size: 1em; }
+  .cc-v small mark { background: #f3e2ad; color: inherit; padding: 0; }
+  .cc-n { display: inline-block; min-width: 1.4rem; color: var(--accento); font-weight: 700; }
+  .cc-vuoto { padding: .8rem .9rem; color: var(--inchiostro-2); }
+  .cc-altri { padding: .3rem .9rem .5rem; }
+  .cerca-capitolo-mobile { display: none; }
+  @media (max-width: 40rem) {
+    .cerca-capitolo-mobile { display: flex; margin: 0 0 1.25rem; }
+    .cerca-capitolo-mobile input { padding-top: .45rem; padding-bottom: .45rem; font-size: .92rem; }
+    .cerca-capitolo-mobile .cc-ris { left: 0; width: auto; max-height: 65vh; }
+  }
+  @media print { .cerca-capitolo, mark.cc-segno { all: unset; } .cerca-capitolo { display: none; } }
+</style>

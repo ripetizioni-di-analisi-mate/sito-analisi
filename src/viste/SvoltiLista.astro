@@ -36,7 +36,7 @@ const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
   precedente={precedente} successivo={successivo}
   lingua={lingua} nonTradotta={nonTradotta}
 >
-  <p class="sopratitolo">{materiaL(lingua, materia).titolo}</p>
+  <p class="sopratitolo ripete">{materiaL(lingua, materia).titolo}</p>
   <h1>{arg.titolo} · {t.sezioni['esercizi-svolti']}</h1>
   <p class="sommario">{t.svoltiSommario}</p>
   {voci.length === 0 && <p class="nota-segnaposto">{t.svoltiInPreparazione}</p>}
