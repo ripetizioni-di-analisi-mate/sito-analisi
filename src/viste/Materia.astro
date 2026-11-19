@@ -47,7 +47,7 @@ const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
 // Domande a tempo: quante per argomento.
 const scienza = materia === 'scienza-delle-costruzioni';
-const linguaDomande = quizPerEsercitarsi || scienza ? 'it' : lingua;
+const linguaDomande = quizPerEsercitarsi ? 'it' : lingua;
 const domande = await getCollection(linguaDomande === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 const domandeMateria = domande.filter((v) => v.id.startsWith(`${materia}/`)).length;
@@ -119,7 +119,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}
     compatibilita={lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}
     argomenti={m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo, riassunto: riassunti[materia + '/' + a.slug], pronto: teorie.has(`${materia}/${a.slug}`), svolti: conta(svolti, a.slug), dafare: quizPerEsercitarsi ? 0 : conta(dafare, a.slug), verificabili: quizPerEsercitarsi ? 0 : verificabili(a.slug), domande: conta(domande, a.slug) }))}
-    ripasso={domandeMateria > 0 ? { titolo: nomeRipasso, domande: domandeMateria, href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), simulazione: quizPerEsercitarsi ? undefined : { href: link(scienza ? 'it' : lingua, indirizzoSimulazione), titolo: nomeCompito }, oggi: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`) } : undefined}
+    ripasso={domandeMateria > 0 ? { titolo: nomeRipasso, domande: domandeMateria, href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), simulazione: quizPerEsercitarsi ? undefined : { href: link(lingua, indirizzoSimulazione), titolo: nomeCompito }, oggi: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`) } : undefined}
     teoremi={indice.length > 0 ? { href: link(lingua, `/${materia}/teoremi`), teoremi: nTeoremi, definizioni: nDefinizioni } : undefined} />}
   {m.prezzo && (<div class:list={{ 'vista-classica': nuova }}>
     <AccessoMateria materia={m.slug} titolo={m.titolo} prezzo={m.prezzo} lingua={lingua} testo={anteprimaTesto}
@@ -175,7 +175,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     {domandeMateria > 0 && (
       <SchedaRipasso materia={materia} titolo={nomeRipasso}
         domande={{ href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), titolo: en ? (linguaDomande === 'it' ? 'Review questions in Italian' : 'Review questions') : 'Domande di ripasso', conteggio: domandeMateria }}
-        simulazione={quizPerEsercitarsi ? undefined : { href: link(scienza ? 'it' : lingua, `/${materia}/simulazione`), titolo: scienza && en ? 'Exam simulation in Italian' : nomeCompito }}
+        simulazione={quizPerEsercitarsi ? undefined : { href: link(lingua, `/${materia}/simulazione`), titolo: nomeCompito }}
         personale={{ href: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`), titolo: en ? 'Today’s review' : 'Il tuo ripasso di oggi' }}>
         {quizPerEsercitarsi ? notaQuiz : confTolc?.tempoUnico ? (en ? `Practice across all topics and a full ${confTolc.nome} simulation: ${confTolc.quesiti} questions in ${confTolc.minuti} minutes, with the minimum score of each area.` : `Quiz su tutti gli argomenti e simulazione ${confTolc.nome} completa: ${confTolc.quesiti} quesiti in ${confTolc.minuti} minuti, con il confronto con la soglia minima di ogni area.`) : confTolc ? (en ? `Practice across all topics and a section-timed ${confTolc.nome} simulation with separate English results.` : `Quiz su tutti gli argomenti e simulazione ${confTolc.nome} con tempi per sezione, correzione finale e risultato di inglese separato.`) : semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Practice questions across all topics in ${m.titolo}, or try a timed exam with exercises from several chapters. Sign in to review questions you missed.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}
       </SchedaRipasso>

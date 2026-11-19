@@ -233,16 +233,16 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'statica': {
     titolo: 'Structural statics',
     breve: 'Statics',
-    descrizione: 'Statics for engineering students: force systems, centroids and moments of inertia, constraints and kinematic analysis, support reactions, Gerber beams, frames, three-hinged arches and trusses, axial force, shear and bending moment diagrams, virtual work and influence lines. Learning materials are currently in Italian.',
+    descrizione: 'Study the equilibrium of structures, from force systems and support reactions to frames, trusses and three-hinged arches. Work through centroids and moments of inertia, internal force diagrams, virtual work and influence lines, with worked examples and timed questions.',
     argomenti: {
       'sistemi-di-forze': { titolo: 'Applied vectors, moments and equivalent force systems', breve: 'Force systems' },
       'geometria-delle-masse': { titolo: 'Centroids and moments of inertia', breve: 'Centroids and inertia' },
-      'cinematica-dei-rigidi': { titolo: 'Planar rigid-body kinematics and instantaneous centres', breve: 'Rigid-body kinematics' },
+      'cinematica-dei-rigidi': { titolo: 'Planar rigid-body kinematics and instantaneous centers of rotation', breve: 'Rigid-body kinematics' },
       'analisi-cinematica': { titolo: 'Constraints and kinematic analysis: mechanisms and statically determinate structures', breve: 'Constraints' },
       'reazioni-vincolari': { titolo: 'Equilibrium equations and support reactions', breve: 'Support reactions' },
       'strutture-composte': { titolo: 'Compound structures: Gerber beams, frames and three-hinged arches', breve: 'Compound structures' },
       'travature-reticolari': { titolo: 'Trusses: method of joints and method of sections', breve: 'Trusses' },
-      'caratteristiche-della-sollecitazione': { titolo: 'Internal forces and N, V, M diagrams', breve: 'Internal force diagrams' },
+      'caratteristiche-della-sollecitazione': { titolo: 'Axial force, shear force and bending moment diagrams', breve: 'Internal force diagrams' },
       'equazioni-indefinite': { titolo: 'Differential equilibrium equations of beams', breve: 'Differential equilibrium' },
       'lavori-virtuali': { titolo: 'Principle of virtual work', breve: 'Virtual work' },
       'linee-di-influenza': { titolo: 'Influence lines', breve: 'Influence lines' },
@@ -270,7 +270,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'scienza-delle-costruzioni': {
     titolo: 'Structural mechanics',
     breve: 'Structural mechanics',
-    descrizione: 'Structural mechanics for engineering students, covering reactions, internal forces, stress and failure criteria, deflections, indeterminate structures, energy methods, buckling and plates. The study materials and quizzes are in Italian.',
+    descrizione: 'Structural mechanics for engineering students. Determine reactions and internal forces, evaluate stresses and failure criteria, and calculate deflections in beams and plates. The course includes indeterminate structures, energy methods, buckling and worked examples.',
     argomenti: {
       'statica-vincoli': { titolo: 'Equilibrium, supports and reactions', breve: 'Equilibrium and supports' },
       'sollecitazioni': { titolo: 'Axial force, shear force and bending moment', breve: 'Internal force diagrams' },
@@ -289,7 +289,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'idraulica': {
     titolo: 'Hydraulics',
     breve: 'Hydraulics',
-    descrizione: 'Hydraulics for engineering students: fluid statics and hydrostatic forces, the continuity equation, Bernoulli’s theorem, the momentum equation, head losses, long pipelines and pumps, pipe networks, orifices and weirs, open-channel flow, gradually varied flow profiles and the hydraulic jump. Learning materials are currently in Italian.',
+    descrizione: 'Study hydrostatic pressure and forces, the continuity, energy and momentum equations, and how head losses govern pipe and pump systems. Worked examples and quizzes also cover orifices, weirs, open-channel flow, water-surface profiles and hydraulic jumps.',
     argomenti: {
       'idrostatica': { titolo: 'Fluid properties and fluid statics', breve: 'Fluid statics' },
       'spinte-idrostatiche': { titolo: 'Hydrostatic forces on plane and curved surfaces and buoyancy', breve: 'Hydrostatic forces' },

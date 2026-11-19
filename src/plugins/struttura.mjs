@@ -36,7 +36,7 @@
 //   tratteggi    "x,y x,y …;…"  spezzate tratteggiate (assi di simmetria, configurazione spostata)
 //   frecce       "x0,y0,x1,y1,etichetta"  frecce sottili (assi di una sezione, spostamenti)
 //   etichette    "x,y,testo"  testi in posizione (pedici con _ : M_A)
-//   Nei testi delle etichette e delle quote i decimali si scrivono con il punto (2.5 m): il disegno mostra 2,5 m.
+//   Nei dati delle etichette e delle quote i decimali usano il punto (2.5 m), localizzato nel disegno.
 //   diagramma    "x0,y0,x1,y1,espressione;…"  diagramma di una sollecitazione lungo uno o più tratti rettilinei:
 //                l'espressione è nella variabile s (da 0 alla lunghezza del tratto, dal primo punto) e il valore
 //                positivo si disegna a sinistra del verso del tratto (per un tratto da sinistra a destra: sopra).
@@ -73,9 +73,10 @@ const f = (v) => v.toFixed(1);
 let contatore = 0;
 
 // Testo con pedici: "R_A" → R con pedice A; "M_{AB}" → pedice AB.
-// I decimali si scrivono con il punto (la virgola separa i campi): il disegno mostra la virgola, 2.5 m → 2,5 m.
-function testoSvg(t) {
-  const parti = String(t).replace(/(\d)\.(\d)/g, '$1,$2').split(/_(\{[^}]*\}|[^\s_]+)/);
+// La virgola separa i campi nei dati. Nel disegno il separatore decimale dipende dalla lingua.
+function testoConPedici(t, inglese) {
+  const testo = inglese ? String(t) : String(t).replace(/(\d)\.(\d)/g, '$1,$2');
+  const parti = testo.split(/_(\{[^}]*\}|[^\s_]+)/);
   let out = esc(parti[0]);
   for (let i = 1; i < parti.length; i += 2) {
     const p = parti[i].replace(/^\{|\}$/g, '');
@@ -86,13 +87,13 @@ function testoSvg(t) {
   return out;
 }
 
-// Numero all'italiana: al massimo due decimali, virgola, niente zeri finali, meno tipografico.
-function numero(v) {
+// Numero per il diagramma: separatore locale, niente zeri finali, meno tipografico.
+function numero(v, inglese) {
   if (Math.abs(v) < 5e-4) return '0';
   // tre decimali solo se il valore è esatto con tre (15/8 = 1,875), altrimenti due
   const tre = Math.abs(v * 1000 - Math.round(v * 1000)) < 1e-6;
   let t = tre ? (Math.round(v * 1000) / 1000).toFixed(3).replace(/\.?0+$/, '') : (Math.round(v * 100) / 100).toFixed(2).replace(/\.?0+$/, '');
-  return t.replace('.', ',').replace('-', '−');
+  return (inglese ? t : t.replace('.', ',')).replace('-', '−');
 }
 
 // Versore perpendicolare al segmento p1-p2: con lato = 1 sta a sinistra del verso da p1 a p2.
@@ -101,7 +102,8 @@ function normale(p1, p2, lato = 1) {
   return [(-(p2[1] - p1[1]) / L) * lato, ((p2[0] - p1[0]) / L) * lato];
 }
 
-export function struttura(a) {
+export function struttura(a, inglese = false) {
+  const testoSvg = (t) => testoConPedici(t, inglese);
   const id = `s${++contatore}`;
   // Nodi
   const nodi = new Map(), nascosti = new Set();
@@ -282,7 +284,7 @@ export function struttura(a) {
         if (Math.abs(v) < 5e-4) continue;
         const q = sulDiagramma(t, s2, v);
         const segno = v >= 0 ? 1 : -1;
-        etDiagramma.push({ x: X(q[0] + t.nrm[0] * segno * 0.04 * D), y: Y(q[1] + t.nrm[1] * segno * 0.04 * D), n: t.nrm, segno, t: numero(v) });
+        etDiagramma.push({ x: X(q[0] + t.nrm[0] * segno * 0.04 * D), y: Y(q[1] + t.nrm[1] * segno * 0.04 * D), n: t.nrm, segno, t: numero(v, inglese) });
       }
     }
     if (String(a.segni) === '1') {
@@ -571,7 +573,7 @@ export function struttura(a) {
 
   const marker = (nome, classe, dim) => `<marker id="${id}-${nome}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="${dim}" markerHeight="${dim}" orient="auto-start-reverse"><path class="${classe}" d="M0 0 L10 5 L0 10 z"/></marker>`;
   const larghezza = Math.min(560, Math.round((360 * W) / H));
-  const descr = a.titolo || 'Schema della struttura';
+  const descr = a.titolo || (inglese ? 'Engineering diagram' : 'Schema della struttura');
   return `<figure class="grafico struttura"><svg viewBox="0 0 ${W} ${H}" style="max-width: ${larghezza}px" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs><pattern id="${id}-campitura" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="campitura" x1="0" y1="0" x2="0" y2="7"/></pattern>${marker('forza', 'punta-forza', 6)}${marker('reazione', 'punta-reazione', 6)}${marker('carico', 'punta-carico', 5)}${marker('sottile', 'punta-sottile', 7)}</defs>
 ${svg}

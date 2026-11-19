@@ -2,6 +2,7 @@
 // La verifica del Worker è disponibile solo per i risultati che il sito riconosce.
 import { type Lingua } from '../i18n';
 import { ETICHETTE_ESERCIZI_ANALISI_STATISTICA_FINANZIARIA_EN } from '../data/etichette-esercizi-analisi-statistica-finanziaria-en';
+import { ETICHETTE_ESERCIZI_INGEGNERIA_EN } from '../data/etichette-esercizi-ingegneria-en';
 import { ETICHETTE_ESERCIZI_BIENNIO_EN } from '../data/etichette-esercizi-biennio-en';
 import { ETICHETTE_ESERCIZI_FISICA_PRIMO_ANNO_EN } from '../data/etichette-esercizi-fisica-primo-anno-en';
 import { ETICHETTE_ESERCIZI_FISICA_SECONDO_ANNO_EN } from '../data/etichette-esercizi-fisica-secondo-anno-en';
@@ -22,6 +23,9 @@ const etichettePerMateria: Record<string, Readonly<Record<string, string>>> = {
   'analisi-3': ETICHETTE_ESERCIZI_ANALISI_STATISTICA_FINANZIARIA_EN,
   'statistica': ETICHETTE_ESERCIZI_ANALISI_STATISTICA_FINANZIARIA_EN,
   'matematica-finanziaria': ETICHETTE_ESERCIZI_ANALISI_STATISTICA_FINANZIARIA_EN,
+  'statica': ETICHETTE_ESERCIZI_INGEGNERIA_EN,
+  'scienza-delle-costruzioni': ETICHETTE_ESERCIZI_INGEGNERIA_EN,
+  'idraulica': ETICHETTE_ESERCIZI_INGEGNERIA_EN,
   'matematica-superiori-1': ETICHETTE_ESERCIZI_BIENNIO_EN,
   'matematica-superiori-2': ETICHETTE_ESERCIZI_BIENNIO_EN,
   'fisica-superiori-1': ETICHETTE_ESERCIZI_FISICA_PRIMO_ANNO_EN,

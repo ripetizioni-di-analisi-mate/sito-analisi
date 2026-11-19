@@ -24,7 +24,7 @@ const scienza = materia === 'scienza-delle-costruzioni';
 const bocconi = materia === BOCCONI.slug;
 const en = lingua === 'en';
 const domande = scienza || bocconi
-  ? (await getCollection(bocconi && en ? 'domande_en' : 'domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
+  ? (await getCollection(en ? 'domande_en' : 'domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
 const hrefDiagnostico = bocconi ? link(lingua, `/${materia}/simulazione#diagnostico`) : '';
 
 // Tabella «Gratis / Accesso completo» (versione B scelta da Carmine il 16/11/2026), per le materie ordinarie.
@@ -128,7 +128,7 @@ const invito = lingua === 'en' ? {
       {usCounts!.review > 0 && <li><strong>{usCounts!.review} review questions</strong> with explanations</li>}
     </> : <>
       <li set:html={t.includeSoluzioni(dafare)} />
-      {scienza && <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li>}
+      {scienza && <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'with explanations and a review covering all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li>}
       {bocconi && <>
         <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'with explanations' : 'con spiegazione'}</li>
         <li><strong>{BOCCONI.simulazioni} {en ? 'full mock tests' : 'simulazioni complete'}</strong> {en ? 'with worked solutions in Italian and English' : 'con correzione ragionata in italiano e in inglese'}</li>

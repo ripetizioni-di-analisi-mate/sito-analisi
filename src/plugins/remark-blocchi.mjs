@@ -86,6 +86,7 @@ export default function remarkBlocchi() {
     const percorso = String(file?.path || file?.history?.[0] || '');
     const E = /content-fr[\\/]/.test(percorso) ? FR : /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-(en|us)[\\/]/.test(percorso) ? EN : IT;
     const traduciAssi = E === EN && /[\\/](analisi-3|statistica|matematica-finanziaria)[\\/]/.test(percorso);
+    const schemaInglese = E === EN && /[\\/](statica|scienza-delle-costruzioni|idraulica)[\\/]/.test(percorso);
     // Numerazione: dentro ogni sezione (##), se ci sono almeno due definizioni/teoremi/proposizioni,
     // i loro titoli diventano "1. …", "2. …"; un blocco da solo resta senza numero.
     // Un blocco che ha lo stesso titolo della sua sezione non ripete il titolo.
@@ -107,7 +108,7 @@ export default function remarkBlocchi() {
         if (node.name === 'grafico' && traduciAssi && attr.nomi) {
           attr.nomi = String(attr.nomi).split(',').map((nome) => ASSI_ANALISI_STATISTICA_FINANZIARIA_EN.get(nome.trim()) ?? nome).join(',');
         }
-        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}, schemaInglese) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;
