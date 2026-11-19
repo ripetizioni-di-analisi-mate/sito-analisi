@@ -6,19 +6,21 @@ sommario: Come leggere e costruire codifiche numeriche, riconoscere un overflow 
 ## Basi e pesi delle cifre
 
 :::definizione{#notazione-posizionale titolo="Notazione posizionale"}
-In una **notazione posizionale** ogni cifra contribuisce al valore del numero con un peso che dipende dalla sua posizione. Sia $b$ un intero maggiore o uguale a $2$ e sia $k\geq 1$ il numero di cifre. Per ogni indice $i$ con $0\leq i<k$, la cifra $d_i$ è un intero con $0\leq d_i<b$. L’indice $0$ identifica la posizione a destra. Il valore della scrittura $(d_{k-1}\cdots d_0)_b$ è
+Nel numero $345$ la cifra $3$ vale trecento, la cifra $4$ vale quaranta e la cifra $5$ vale cinque, infatti $345=3\cdot 100+4\cdot 10+5\cdot 1$. Il valore di ogni cifra dipende quindi dalla posizione che occupa. Una scrittura con questa proprietà si chiama **notazione posizionale**. I numeri $1$, $10$ e $100$ sono potenze di $10$, e $10$ è la **base** della scrittura decimale.
+
+La stessa regola vale con una base $b$ qualsiasi, purché intera e maggiore o uguale a $2$. Le cifre ammesse sono gli interi da $0$ a $b-1$. Le posizioni si numerano da destra a partire da $0$, e la cifra nella posizione $i$, indicata con $d_i$, si moltiplica per il **peso** $b^i$. Una scrittura di $k$ cifre vale quindi
 $$
 (d_{k-1}\cdots d_0)_b = \sum_{i=0}^{k-1} d_i b^i .
 $$
-Il pedice $b$ indica la **base**. Il peso della cifra a destra è $1$ perché $b^0=1$. Ogni spostamento di una posizione verso sinistra moltiplica il peso per $b$, quindi la stessa cifra vale diversamente in due posizioni diverse.
+Il pedice $b$ indica la base. La cifra a destra ha peso $b^0=1$, e ogni spostamento di una posizione verso sinistra moltiplica il peso per $b$. In base $2$ i pesi sono $1$, $2$, $4$, $8$, $16$ e così via.
 :::
 
 :::esempio{titolo="Dal binario al decimale"}
-In base $2$ le cifre $0$ e $1$ si chiamano **bit**, da *binary digit*. Nella parola $101101$ l’indice a sinistra è $5$ perché ci sono sei posizioni a partire da $0$.
+In base $2$ le cifre ammesse sono soltanto $0$ e $1$ e si chiamano **bit**, da *binary digit*. Una sequenza di bit si chiama **parola**. La parola $101101$ ha sei bit, quindi le posizioni vanno da $0$, a destra, a $5$, a sinistra.
 
 ![Sei posizioni con indici da 5 a 0, bit 1 0 1 1 0 1 e pesi da 32 a 1.](/immagini/informatica/rappresentazione-numeri/pesi-binari-it.png)
 
-Poiché ogni cifra $0$ moltiplica il peso della sua posizione per zero, contribuiscono solo i quattro bit a $1$.
+Un bit $0$ non aggiunge nulla, perché moltiplica per zero il peso della sua posizione. Si sommano quindi i pesi delle quattro posizioni in cui il bit vale $1$.
 $$
 \begin{aligned}
 (101101)_2
@@ -27,24 +29,24 @@ $$
   &= 32+8+4+1 = 45 .
 \end{aligned}
 $$
-L’addendo $1$ proviene dal bit di indice $0$. Poiché tutti i pesi a sinistra sono pari, quel bit da solo determina la parità dell’intero senza segno.
+L’addendo $1$ proviene dal bit di indice $0$. Tutti gli altri pesi sono pari, quindi un numero scritto in binario è dispari esattamente quando il bit a destra vale $1$.
 :::
 
 :::osservazione
-La scrittura $(110)_2$ vale $4+2=6$, mentre $(110)_{10}$ vale $100+10=110$. Specificare la base elimina l’ambiguità quando le stesse cifre sono ammesse in più basi. Uno zero iniziale aggiunge un peso moltiplicato per $0$, quindi $(00110)_2$ vale ancora $6$. Le due scritture hanno lunghezze diverse, una proprietà che conta quando si specifica quante posizioni ha una parola.
+La scrittura $(110)_2$ vale $4+2=6$, mentre $(110)_{10}$ vale $100+10=110$. Le stesse cifre indicano quindi numeri diversi in basi diverse, e per questo si scrive la base a pedice. Uno zero iniziale non cambia il valore, perché il suo peso è moltiplicato per $0$, quindi $(00110)_2$ vale ancora $6$. Le due scritture hanno però lunghezze diverse, cinque cifre e tre cifre. La lunghezza diventa importante più avanti, nelle parole con un numero fissato di bit.
 :::
 
 ## Dall’intero alle cifre
 
 ::::teorema{#conversione-interi titolo="Divisioni successive per la base"}
-Sia $N$ un intero positivo. Dividendo $N$ per la base $b$ si ottengono un quoziente intero $q$ e un resto $r$ con
+Per trovare le cifre di un numero in una base $b$ si divide ripetutamente per $b$ e si raccolgono i resti. Sia $N$ un intero positivo. Dividendo $N$ per la base $b$ si ottengono un quoziente intero $q$ e un resto $r$ con
 $$
 N=bq+r,\qquad 0\leq r<b .
 $$
-Il resto è la cifra di indice $0$. Si ripete la divisione sul quoziente fino a ottenere quoziente zero. I resti, letti nell’ordine inverso a quello di calcolo, danno l’unica scrittura di $N$ in base $b$ priva di zeri iniziali. L’intero $0$ si scrive con la cifra $0$.
+Il resto è la cifra di indice $0$, cioè quella a destra. Si ripete la divisione sul quoziente fino a ottenere quoziente zero. I resti, letti dall’ultimo al primo, danno l’unica scrittura di $N$ in base $b$ priva di zeri iniziali. L’intero $0$ si scrive con la cifra $0$.
 
 :::dimostrazione
-La divisione euclidea determina univocamente quoziente e resto. Nella scrittura posizionale, i termini con indice almeno $1$ sono divisibili per $b$, quindi il termine di indice $0$ coincide con il resto. Il quoziente ha per cifre quelle rimaste, con gli indici diminuiti di uno.
+La divisione con resto fra interi, detta divisione euclidea, ha un solo quoziente e un solo resto. Nella scrittura posizionale, i termini con indice almeno $1$ sono divisibili per $b$, quindi il termine di indice $0$ coincide con il resto. Il quoziente ha per cifre quelle rimaste, con gli indici diminuiti di uno.
 
 Per $N>0$ e $b\geq 2$ il quoziente è minore del dividendo, perché $q\leq \dfrac{N}{2}<N$. Ripetendo il passaggio si ottiene dunque quoziente zero dopo un numero finito di divisioni. Sostituendo ciascun dividendo con il suo quoziente moltiplicato per $b$ più il suo resto, si ricostruisce $N$ come somma dei resti pesati. L’unicità delle divisioni determina tutte le cifre.
 :::
@@ -61,17 +63,17 @@ $$
 1 &= 2\cdot 0+1 .
 \end{aligned}
 $$
-Il primo resto vale $0$ e occupa la posizione di peso $1$. L’ultimo vale $1$ e occupa la posizione di peso $16$. La parola ottenuta è $(11010)_2$. La decodifica restituisce $16+8+2=26$, quindi le due conversioni concordano.
+Il primo resto vale $0$ e occupa la posizione di peso $1$. L’ultimo vale $1$ e occupa la posizione di peso $16$. I resti si leggono quindi dal basso verso l’alto, e la parola ottenuta è $(11010)_2$. Il calcolo inverso dà $16+8+2=26$, quindi le due conversioni concordano.
 :::
 
 :::osservazione
-Una seconda procedura legge le cifre di una parola a partire da sinistra. Se $v$ è il valore del prefisso già letto e $d$ la nuova cifra, il nuovo prefisso ha valore $bv+d$. Infatti, con l’aggiunta della cifra a destra, ciascuna cifra del prefisso precedente aumenta di uno il proprio indice. Applicando la regola a $(102)_3$, si ottengono in sequenza $1$, $3$ e $11$. La scrittura estesa dà $1\cdot3^2+0\cdot3+2=11$.
+Il valore di una scrittura si può calcolare anche da sinistra, una cifra alla volta. Si parte dalla prima cifra. A ogni cifra nuova $d$ si moltiplica per $b$ il valore ottenuto fino a quel punto e si somma $d$. Per $(102)_3$ si ottiene prima $1$, poi $1\cdot 3+0=3$, poi $3\cdot 3+2=11$. Il risultato coincide con la scrittura estesa $1\cdot3^2+0\cdot3+2=11$. La regola funziona perché l’aggiunta di una cifra a destra sposta tutte le cifre precedenti di una posizione verso sinistra, cioè moltiplica il loro valore per $b$.
 :::
 
 ## Esadecimale e gruppi di quattro bit
 
 :::definizione{#esadecimale titolo="Base esadecimale"}
-La **base esadecimale** è la base $16$. Le cifre da $0$ a $9$ conservano il loro valore e $A,B,C,D,E,F$ denotano rispettivamente $10,11,12,13,14,15$. Poiché $16=2^4$, quattro bit hanno $16$ configurazioni e rappresentano esattamente le sedici cifre esadecimali.
+La **base esadecimale** è la base $16$. Serve a scrivere in forma breve le parole binarie, perché una cifra esadecimale sostituisce quattro bit. Le cifre necessarie sono sedici. Le cifre da $0$ a $9$ conservano il loro valore e le lettere $A,B,C,D,E,F$ valgono rispettivamente $10,11,12,13,14,15$. Poiché $16=2^4$, quattro bit hanno $16$ configurazioni, da $0000$ a $1111$, una per ciascuna cifra esadecimale.
 :::
 
 ::::teorema{titolo="Raggruppamento per quartine"}
@@ -94,17 +96,17 @@ Il gruppo $1010$ vale $8+2=10$ e si scrive $A$. Il gruppo $1101$ vale $8+4+1=13$
 :::
 
 :::attenzione
-Nella conversione di una parte intera si allineano i gruppi al bit di peso $1$. Aggiungere tre zeri a destra di $1$ produrrebbe $1000$, che in binario vale $8$. Aggiungerli a sinistra produce invece $0001$, che conserva il valore $1$.
+I gruppi di quattro bit si formano a partire da destra, e gli zeri di completamento si aggiungono a sinistra. Il gruppo incompleto $1$ diventa quindi $0001$, che vale ancora $1$. Con tre zeri aggiunti a destra si otterrebbe $1000$, che in binario vale $8$.
 :::
 
 ## Interi senza segno e larghezza
 
 :::definizione{#interi-senza-segno titolo="Interi senza segno su n bit"}
-Una parola di $n$ bit è una sequenza di lunghezza fissata $n$, con $n\geq 1$. Chiamato $b_i$ il bit di indice $i$, il valore **senza segno** $U$ è
+In un calcolatore ogni numero occupa un numero fissato di bit, per esempio $8$, $16$ o $32$. Una **parola di $n$ bit** è una sequenza di esattamente $n$ bit, con $n\geq 1$, in cui si scrivono anche gli zeri iniziali. Il bit a sinistra, di indice $n-1$, si chiama **bit più significativo**; quello a destra, di indice $0$, è il **bit meno significativo**. Chiamato $b_i$ il bit di indice $i$, se la parola si legge come numero non negativo il suo valore **senza segno** $U$ è
 $$
 U=\sum_{i=0}^{n-1} b_i2^i .
 $$
-I valori possibili sono tutti gli interi da $0$ a $2^n-1$. Il minimo ha tutti i bit a zero. Il massimo ha tutti i bit a uno e vale $1+2+\dots+2^{n-1}=2^n-1$. La rappresentazione è univoca perché la scrittura posizionale di ciascun valore è univoca a meno di zeri a sinistra, e la larghezza impone quanti zeri inserire.
+I valori possibili sono tutti gli interi da $0$ a $2^n-1$. Il minimo ha tutti i bit a zero. Il massimo ha tutti i bit a uno e vale $1+2+\dots+2^{n-1}=2^n-1$. Per $n=3$ le otto parole da $000$ a $111$ valgono da $0$ a $7$. A ogni valore corrisponde una sola parola, perché la larghezza fissata stabilisce quanti zeri iniziali scrivere.
 :::
 
 :::esempio{titolo="Dimensionare una parola"}
@@ -112,21 +114,21 @@ Il contatore di un apparato deve contenere i valori interi da $0$ a $1000$. Su $
 :::
 
 :::osservazione
-Per un intero positivo $N$, la larghezza minima $n$ soddisfa $2^{n-1}\leq N<2^n$. La disuguaglianza a sinistra esprime la necessità della posizione di peso $2^{n-1}$. La disuguaglianza a destra garantisce la rappresentabilità su $n$ bit. Per esempio, $128=2^7$ richiede otto bit e si scrive $10000000$.
+La larghezza minima per un intero positivo $N$ è il più piccolo $n$ per cui $N\leq 2^n-1$, cioè $N<2^n$. Per $N=1000$ si ha $2^9=512\leq 1000<1024=2^{10}$, quindi servono dieci bit. Una potenza di due richiede un bit in più del suo esponente. Per esempio, $128=2^7$ richiede otto bit e si scrive $10000000$.
 :::
 
 ## Codifica in complemento a due
 
 :::definizione{#complemento-a-due titolo="Interpretazione in complemento a due"}
-In una parola di $n$ bit, la codifica in **complemento a due** attribuisce il peso $-2^{n-1}$ al bit più significativo e conserva i pesi positivi dei bit restanti. Il valore con segno $T$ è
+Per rappresentare anche i numeri negativi con $n$ bit, la codifica più usata è il **complemento a due**. I bit hanno gli stessi pesi della lettura senza segno, tranne il bit più significativo, che ha peso negativo $-2^{n-1}$ invece di $2^{n-1}$. Su $4$ bit i pesi sono $-8$, $4$, $2$, $1$, quindi $1011$ vale $-8+2+1=-5$ e $0101$ vale $4+1=5$. In generale il valore con segno $T$ è
 $$
 T=-b_{n-1}2^{n-1}+\sum_{i=0}^{n-2} b_i2^i .
 $$
-Per $n=1$ la somma è vuota, quindi vale $0$. Se il bit iniziale è $0$, il valore è fra $0$ e $2^{n-1}-1$. Se è $1$, il valore è fra $-2^{n-1}$ e $-1$. L’intervallo comprende dunque un valore negativo in più dei valori strettamente positivi, perché una configurazione con bit iniziale $0$ rappresenta lo zero.
+Se il bit più significativo è $0$, il valore è fra $0$ e $2^{n-1}-1$. Se è $1$, il valore è negativo, fra $-2^{n-1}$ e $-1$; per questo si chiama anche **bit di segno**. Su $4$ bit i valori vanno da $-8$ a $7$. I valori negativi sono uno in più di quelli positivi, perché fra le parole con bit di segno $0$ c’è anche lo zero. Per $n=1$ la somma non ha termini e vale $0$.
 :::
 
 ::::teorema{titolo="Conversione fra valore con segno e parola"}
-Sia $x$ un intero nell’intervallo rappresentabile in complemento a due su $n$ bit. La parola corrispondente è la codifica senza segno di $x$ se $x\ge 0$ e di $x+2^n$ se $x<0$. Per decodificare, si legge il valore senza segno $U$ e si sottrae $2^n$ quando il primo bit è $1$.
+Sia $x$ un intero rappresentabile in complemento a due su $n$ bit. Se $x\ge 0$, la sua parola è la scrittura binaria di $x$ su $n$ bit. Se $x<0$, la sua parola è la scrittura binaria su $n$ bit del numero positivo $x+2^n$. Nel verso opposto, per trovare il valore di una parola si legge il suo valore senza segno $U$ e si sottrae $2^n$ quando il primo bit è $1$.
 
 :::dimostrazione
 Per la stessa parola, la differenza fra valore senza segno e valore con segno viene dal solo bit più significativo. Il suo peso cambia da $2^{n-1}$ a $-2^{n-1}$, quindi $U-T=b_{n-1}2^n$. Se $T$ è negativo, il primo bit è $1$, perciò $U=T+2^n$. Se $T$ è nullo o positivo, il primo bit è $0$ e i due valori coincidono. La codifica di $U$ senza segno è univoca, quindi la codifica con segno è a sua volta univoca.
@@ -138,17 +140,17 @@ Per rappresentare $-34$ su $8$ bit si calcola $-34+2^8=222$. Poiché $222=128+64
 $$
 -128+64+16+8+4+2=-34.
 $$
-La stessa parola vale $222$ senza segno. La differenza $222-(-34)=256$ è proprio $2^8$, quindi entrambe le letture sono coerenti con la loro regola.
+La stessa parola vale $222$ senza segno. La differenza $222-(-34)=256$ è proprio $2^8$, come afferma il teorema.
 :::
 
 :::osservazione
-Il minimo su $8$ bit in complemento a due è $-128$ e il massimo è $127$. Perciò il valore opposto di $-128$ richiede una larghezza maggiore. Il caso è rilevante quando si calcola il valore assoluto mantenendo lo stesso formato di destinazione.
+Su $8$ bit in complemento a due i valori vanno da $-128$ a $127$. L’opposto di $-128$ è $128$, che supera il massimo, quindi non si può scrivere su $8$ bit. Per questo il valore assoluto di $-128$ richiede una parola più larga.
 :::
 
 ## Somma su larghezza fissa ed estensione
 
 ::::teorema{#somma-su-n-bit titolo="Somma modulo una potenza di due"}
-Il resto modulo $m$ è il resto della divisione euclidea per l’intero positivo $m$. Se si sommano due parole di $n$ bit e si conservano le $n$ posizioni meno significative, il valore senza segno della parola ottenuta è il resto della somma dei valori degli operandi modulo $2^n$. Questo vale anche quando gli operandi sono interpretati in complemento a due.
+La somma di due parole di $n$ bit può richiedere $n+1$ bit. Il calcolatore conserva soltanto gli $n$ bit a destra e scarta il riporto finale. Su $4$ bit, $1100+0101$ dà $10001$, e scartando il bit a sinistra resta $0001$. Senza segno la somma esatta è $12+5=17$ e il valore conservato è $1$, cioè il resto della divisione di $17$ per $16=2^4$. In generale, il valore senza segno della parola conservata è il resto della divisione della somma esatta per $2^n$; questo resto si chiama somma **modulo** $2^n$. La stessa regola vale quando gli operandi sono letti in complemento a due.
 
 :::dimostrazione
 Le cifre conservate hanno indici da $0$ a $n-1$. Ogni cifra scartata ha indice almeno $n$, quindi il suo contributo è un multiplo di $2^n$. La somma dei pesi conservati è fra $0$ e $2^n-1$, perciò rappresenta il resto. Passare dal valore senza segno al valore con segno di ciascun operando modifica l’addendo di zero oppure di $-2^n$, quantità che lasciano invariato il resto.
@@ -156,17 +158,17 @@ Le cifre conservate hanno indici da $0$ a $n-1$. Ogni cifra scartata ha indice a
 ::::
 
 :::definizione{titolo="Overflow della somma"}
-Si ha **overflow** se la somma matematica cade fuori dall’intervallo rappresentabile nel formato degli operandi. Senza segno, l’overflow si riconosce dal riporto oltre l’ultima posizione. In complemento a due, si riconosce quando gli addendi hanno lo stesso bit di segno e il risultato ridotto ha bit di segno opposto.
+Si ha **overflow** quando il risultato esatto di una somma non è rappresentabile con gli $n$ bit del formato, e quindi la parola conservata non contiene il risultato corretto. Senza segno, l’overflow si riconosce dal riporto oltre l’ultima posizione. In complemento a due si riconosce dai bit di segno, perché i due addendi hanno lo stesso bit di segno e il risultato ha il bit di segno opposto.
 
-Due addendi di segno diverso hanno una somma compresa fra i due addendi, quindi il valore resta rappresentabile. La somma di due non negativi che supera il massimo va da $2^{n-1}$ a $2^n-2$, e il suo resto ha bit iniziale $1$. La somma di due negativi che scende sotto il minimo va da $-2^n$ a $-2^{n-1}-1$. Aggiungendo $2^n$ si ottiene un resto da $0$ a $2^{n-1}-1$, con bit iniziale $0$.
+La regola per il complemento a due segue da tre casi. Se gli addendi hanno segno diverso, la somma è compresa fra i due e quindi è rappresentabile. Se sono entrambi non negativi e la somma supera il massimo, la parola conservata ha bit di segno $1$ e si legge come un numero negativo. Se sono entrambi negativi e la somma scende sotto il minimo, la parola conservata ha bit di segno $0$ e si legge come un numero non negativo.
 :::
 
 :::esempio{titolo="Interpretare le stesse parole dopo la somma"}
-Su quattro bit, sommare $0111$ e $0011$ produce $1010$. Senza segno si calcola $7+3=10$, valore che appartiene all’intervallo da $0$ a $15$. In complemento a due la somma matematica è ancora $10$, ma il massimo è $7$. La parola finale vale $10-16=-6$ secondo quel formato, quindi si verifica overflow con segno. La regola di conservazione delle cifre descrive il modello matematico della parola, mentre il comportamento di un’operazione in un linguaggio dipende dalle regole del tipo e dell’operatore.
+Su quattro bit la somma di $0111$ e $0011$ è $1010$, senza riporto finale. Senza segno le parole valgono $7$ e $3$ e il risultato vale $10$, che è corretto perché l’intervallo va da $0$ a $15$. In complemento a due gli addendi valgono ancora $7$ e $3$, ma il massimo rappresentabile è $7$. La parola $1010$ si legge $-8+2=-6$, che non è la somma corretta, quindi c’è overflow. I due addendi hanno bit di segno $0$ e il risultato ha bit di segno $1$, come prevede la regola.
 :::
 
 ::::teorema{#estensione-di-segno titolo="Estensione di segno"}
-Per passare da $n$ a $m$ bit con $m>n$ in complemento a due, si antepongono $m-n$ copie del bit più significativo. Questa operazione conserva il valore. Per passare alla stessa larghezza nel formato senza segno si antepongono zeri.
+Capita di dover copiare un numero da una parola di $n$ bit a una parola più larga, di $m$ bit, senza cambiarne il valore. In complemento a due si antepongono $m-n$ copie del bit più significativo, e questa operazione conserva il valore. Nel formato senza segno si antepongono zeri.
 
 :::dimostrazione
 Sia $s$ il bit più significativo della parola iniziale. I bit già presenti conservano le posizioni da $0$ a $n-1$. Se si chiamano $U_n$ e $U_m$ i valori senza segno delle due parole, i bit aggiunti valgono complessivamente $s(2^m-2^n)$, poiché $\sum_{i=n}^{m-1}2^i=2^m-2^n$. Nella lettura con segno, il valore della parola estesa è
@@ -195,15 +197,17 @@ $$
 (0{,}101)_2=\frac{1}{2}+\frac{0}{4}+\frac{1}{8}
 =\frac{5}{8}.
 $$
-Per risalire alle cifre a partire da una frazione $r$ compresa fra $0$ incluso e $1$ escluso, si raddoppia $r$. La parte intera di $2r$ è il primo bit e la parte frazionaria è il residuo su cui si ripete il procedimento. Se $a_1$ è la parte intera e $r_1$ è il residuo, l’uguaglianza $2r=a_1+r_1$ dà $r=a_1 2^{-1}+r_1 2^{-1}$. Alla seconda iterazione, scrivendo $2r_1=a_2+r_2$, si ottiene
-$$
-r=a_1 2^{-1}+a_2 2^{-2}+r_2 2^{-2} .
-$$
-A ogni iterazione il nuovo bit occupa la posizione immediatamente a destra del precedente. Dopo $f$ iterazioni il contributo ancora da sviluppare è inferiore a $2^{-f}$ perché il residuo è inferiore a $1$. Quando un residuo vale zero, i bit già ottenuti danno il valore esatto.
+Per trovare i bit di una frazione $r$ con $0\leq r<1$ si raddoppia più volte. A ogni raddoppio la parte intera del risultato, $0$ oppure $1$, è il bit successivo, e la parte dopo la virgola è il numero da raddoppiare al passo seguente. Per $r=0{,}625$ i passi sono tre.
+
+- $2\cdot 0{,}625=1{,}25$, quindi il primo bit è $1$ e resta $0{,}25$.
+- $2\cdot 0{,}25=0{,}5$, quindi il secondo bit è $0$ e resta $0{,}5$.
+- $2\cdot 0{,}5=1$, quindi il terzo bit è $1$ e resta $0$.
+
+Il resto è zero, quindi il procedimento termina e $0{,}625=(0{,}101)_2$, in accordo con $\dfrac{5}{8}=0{,}625$. Il metodo funziona perché raddoppiare sposta la virgola binaria di una posizione verso destra, e così il primo bit frazionario diventa la parte intera. Se il resto non diventa mai zero, la scrittura binaria ha infiniti bit. Dopo $f$ passi la parte non ancora scritta vale meno di $2^{-f}$.
 :::
 
 ::::teorema{titolo="Condizione per una scrittura binaria finita"}
-Sia $\dfrac{a}{d}$ una frazione ridotta ai minimi termini con interi $a\ge 0$ e $d\ge 1$. Il valore ammette una scrittura binaria con un numero finito di bit frazionari se e solo se il denominatore $d$ è una potenza di $2$, compreso $1=2^0$.
+Non tutte le frazioni hanno una scrittura binaria finita. Sia $\dfrac{a}{d}$ una frazione ridotta ai minimi termini con interi $a\ge 0$ e $d\ge 1$. Il valore ammette una scrittura binaria con un numero finito di bit frazionari se e solo se il denominatore $d$ è una potenza di $2$, compreso $1=2^0$.
 
 :::dimostrazione
 Se la scrittura ha $f$ bit frazionari, moltiplicando il valore per $2^f$ si ottiene un intero $K$. Dunque $\dfrac{a}{d}=\dfrac{K}{2^f}$. Poiché $a$ e $d$ sono coprimi, $d$ divide $2^f$, quindi è una potenza di $2$.
@@ -213,11 +217,11 @@ Viceversa, se $d=2^f$, si scrive $a$ in base $2$ e si sposta la virgola di $f$ p
 ::::
 
 :::esempio{titolo="Dimezzamenti e denominatore ridotto"}
-La frazione $\dfrac{3}{8}$ ha denominatore $2^3$, quindi basta partire da $11$ e collocare tre posizioni dopo la virgola. Si ha $(0{,}011)_2=\dfrac{1}{4}+\dfrac{1}{8}=\dfrac{3}{8}$. Per $0{,}1$ in base dieci, la frazione ridotta è $\dfrac{1}{10}$. Poiché $10$ ha un fattore $5$, la sua espansione binaria richiede infiniti bit frazionari. Un formato con precisione finita rappresenterà un valore approssimato.
+La frazione $\dfrac{3}{8}$ ha denominatore $2^3$, quindi basta scrivere $3$ in binario, cioè $11$, e spostare la virgola di tre posizioni verso sinistra. Si ha $(0{,}011)_2=\dfrac{1}{4}+\dfrac{1}{8}=\dfrac{3}{8}$. Il numero decimale $0{,}1$ è la frazione $\dfrac{1}{10}$. Poiché $10=2\cdot 5$ non è una potenza di $2$, la sua scrittura binaria ha infiniti bit frazionari. Per questo un calcolatore, che dispone di un numero finito di bit, conserva di $0{,}1$ soltanto un valore approssimato.
 :::
 
 :::definizione{#virgola-fissa titolo="Formato binario in virgola fissa"}
-In **virgola fissa** il numero intero $f\geq 0$ di bit frazionari è una proprietà del formato. Una parola di $n$ bit si interpreta prima come intero $K$, con o senza segno secondo il formato, poi si divide $K$ per $2^f$. La differenza fra due valori consecutivi è $2^{-f}$ perché gli interi corrispondenti differiscono di $1$.
+In **virgola fissa** si stabilisce una volta per tutte quanti bit della parola stanno dopo la virgola. Se i bit frazionari sono $f$, la parola di $n$ bit si legge prima come intero $K$, con o senza segno secondo il formato, e il suo valore è $\dfrac{K}{2^f}$. Con $n=4$ e $f=2$ la parola $0111$ vale $K=7$ come intero e $\dfrac{7}{4}=1{,}75$ in virgola fissa, cioè $(01{,}11)_2$. Due valori consecutivi distano $2^{-f}$, perché gli interi corrispondenti differiscono di $1$; questa distanza è il **passo** del formato.
 :::
 
 :::esempio{titolo="Intervallo e passo del formato"}
@@ -227,21 +231,21 @@ Una parola di sei bit in complemento a due con tre bit frazionari usa gli interi
 ## Virgola mobile e arrotondamento
 
 :::definizione{#virgola-mobile titolo="Forma binaria normalizzata"}
-Una forma binaria **normalizzata** per un numero positivo usa un significando compreso fra $1$ incluso e $2$ escluso, moltiplicato per una potenza di $2$. Nel modello didattico a precisione $p$, con $p\geq 2$, un valore positivo rappresentabile ha forma
+La **virgola mobile** è la notazione scientifica in base due. In base dieci si scrive $4250=4{,}25\cdot 10^3$, con una sola cifra diversa da zero prima della virgola e una potenza di dieci. In base due la sola cifra diversa da zero è $1$, quindi un numero positivo si scrive nella forma
 $$
 x=(1{,}b_1\cdots b_{p-1})_2\cdot 2^e .
 $$
-Il numero $p$ conta anche il bit iniziale $1$ del significando. L’intero $e$ si chiama **esponente**. In questo modello gli esponenti sono liberi e lo zero è rappresentato a parte. Spostare la virgola per avere un solo bit prima di essa modifica l’esponente in modo che il prodotto conservi il valore. Per esempio, $(110{,}01)_2=(1{,}1001)_2\cdot 2^2$. Per numeri positivi minori di $1$, la virgola si sposta verso destra fino alla prima cifra $1$, quindi l’esponente è negativo. In $(0{,}0011)_2$ il primo bit a $1$ è al terzo posto dopo la virgola, perciò $(0{,}0011)_2=(1{,}1)_2\cdot 2^{-3}$. A precisione $p=4$ si può scrivere il significando come $1{,}100$, poiché gli zeri aggiunti a destra hanno contributo nullo.
+Questa forma si dice **normalizzata**. Il fattore $(1{,}b_1\cdots b_{p-1})_2$ è il **significando**, compreso fra $1$ incluso e $2$ escluso, e l’intero $e$ è l’**esponente**. La **precisione** $p\geq 2$ è il numero di bit del significando, compreso l’$1$ iniziale. Per esempio $(110{,}01)_2=(1{,}1001)_2\cdot 2^2$, perché la virgola si sposta di due posizioni verso sinistra. Per un numero positivo minore di $1$ la virgola si sposta verso destra fino al primo bit $1$ e l’esponente è negativo. In $(0{,}0011)_2$ il primo bit $1$ è al terzo posto dopo la virgola, perciò $(0{,}0011)_2=(1{,}1)_2\cdot 2^{-3}$; con precisione $p=4$ il significando si scrive $1{,}100$. In questo capitolo l’esponente può essere un intero qualsiasi e lo zero si tratta a parte.
 :::
 
 :::osservazione
-A esponente $e$ fissato, due significandi consecutivi distano $2^{-(p-1)}$. Quindi due valori consecutivi all’interno della stessa fascia $[2^e,2^{e+1})$ distano $2^{e-(p-1)}$. Al raddoppio della scala, da $e$ a $e+1$, raddoppia anche la distanza. Per $p=4$ il passo fra $4$ e $8$ è $2^{-1}$, mentre il passo da $8$ in poi, fino a $16$, è $1$.
+Con precisione $p$ i numeri rappresentabili non sono tutti i numeri reali, ma una griglia di valori. Con esponente $e$ fissato, due significandi consecutivi distano $2^{-(p-1)}$, quindi due valori consecutivi fra $2^e$ e $2^{e+1}$ distano $2^{e-(p-1)}$. Quando l’esponente aumenta di uno, la distanza raddoppia. Per $p=4$ i valori fra $4$ e $8$ sono $4$; $4{,}5$; $5$; $5{,}5$ e così via, a passi di $0{,}5$, mentre fra $8$ e $16$ il passo è $1$.
 :::
 
 :::definizione{#arrotondamento titolo="Arrotondamento al più vicino con parità"}
-Siano $L$ e $H$ i due valori consecutivi rappresentabili immediatamente sotto e sopra un valore positivo $x$ da approssimare. L’**arrotondamento al più vicino** sceglie quello con distanza minore da $x$. Se le distanze coincidono, la regola *ties to even* sceglie il valore il cui ultimo bit del significando è $0$. Un valore già rappresentabile resta invariato. Se il valore cade al di sotto del punto medio aritmetico $\dfrac{L+H}{2}$, la distanza da $L$ è minore della distanza da $H$ e si sceglie $L$. Se cade al di sopra, si sceglie $H$. La differenza fra il valore esatto e quello arrotondato ha quindi modulo al più pari a metà della distanza $H-L$.
+Un numero che non appartiene alla griglia si sostituisce con un valore rappresentabile vicino, e questa operazione è l’**arrotondamento**. Siano $L$ e $H$ i due valori rappresentabili consecutivi con $L<x<H$. L’**arrotondamento al più vicino** sceglie quello dei due che dista meno da $x$. Con $p=4$, il numero $5{,}6$ sta fra $5{,}5$ e $6$ ed è più vicino a $5{,}5$, quindi si arrotonda a $5{,}5$. Un valore già rappresentabile resta invariato, e l’errore commesso è al più metà della distanza $H-L$.
 
-Il criterio di parità riguarda i bit del significando, quindi si applica anche a valori che in base dieci presentano una parte frazionaria. Fra due significandi consecutivi con lo stesso esponente, gli ultimi bit sono uno $0$ e uno $1$. Al confine fra esponenti il significando passa da $1{,}11\ldots 1$ a $1{,}00\ldots 0$, che ha ultimo bit $0$.
+Se $x$ è esattamente a metà fra $L$ e $H$, si sceglie il valore il cui significando termina con il bit $0$. La regola si chiama *ties to even*, cioè «in caso di parità, al pari». Di due significandi consecutivi uno termina con $0$ e l’altro con $1$, quindi la scelta è sempre determinata.
 :::
 
 :::esempio{titolo="Punto medio fra due valori rappresentabili"}

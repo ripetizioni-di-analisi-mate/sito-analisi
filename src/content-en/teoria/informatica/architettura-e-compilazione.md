@@ -6,39 +6,39 @@ sommario: The stored-program model, memory hierarchies and the path from C17 sou
 ## Components at run time
 
 :::definizione{#programma-memorizzato titolo="Stored program"}
-In a **stored-program computer**, instructions are encoded and kept in memory accessible to the processor. The processor fetches an encoding, determines the operation it denotes and performs that operation on the data. Loading different instructions changes the computer’s behaviour while preserving the set of operations that the hardware can perform.
+A computer executes **instructions**, that is, elementary operations such as “add two numbers” or “copy a value”. A **program** is a sequence of instructions. In a **stored-program** computer the instructions are written in memory as numbers, like the data. The **processor** reads them one at a time and executes them. To make the computer carry out a different task it is therefore enough to load another program into memory, without modifying the circuits.
 
-In the von Neumann model, memory space contains both data and instructions. The role of a bit sequence depends on the access that interprets it. When the processor fetches the sequence for instruction decoding, it reads it as code. When a load instruction reads the same sequence as a value, it interprets it as data. Some machines separate instruction and data accesses, for example by using two distinct caches. Separate caches can coexist with a unified address space.
+**Memory** is a sequence of numbered cells, and the number of a cell is its **address**. In the von Neumann model the same memory contains both instructions and data. A sequence of bits, by itself, does not say whether it is an instruction or a datum. It is an instruction when the processor reads it in order to execute it, and it is a datum when an instruction reads it as a value to operate on.
 :::
 
 :::definizione{#stato-macchina titolo="Processor state and registers"}
-The **state** of the model includes the contents of memory, the registers and whether execution has halted. Registers hold values directly available to the processor. The program counter, denoted by `PC`, specifies the address of the instruction to fetch at the start of the next step. The control unit decodes the instruction and coordinates the accesses. The arithmetic logic unit can, for example, add the values held in registers.
+The processor contains a few very fast internal cells, called **registers**, in which it keeps the values it is working on. One particular register, the **program counter** `PC`, contains the address of the next instruction to execute. The work is divided between two parts of the processor. The **control unit** reads the instruction, recognizes which operation it denotes and directs the transfers. The **arithmetic logic unit** performs the computations, for example an addition. The **state** of the machine at a given instant is the set of the contents of memory and of the registers, plus the information on whether the machine has halted.
 
-A memory access specifies an address and a read or write operation. On a read, the value moves from memory to a register or to the fetch mechanism. On a write, the value moves from the processor to the addressed cell. The channel that carries addresses, the one that carries data and the control signals may be separate or may share part of the physical interconnect. Analysing the step requires distinguishing the selected address, the transferred data and the direction of transfer.
+The processor exchanges values with memory in two ways. In a **read** it specifies an address and receives a copy of the value contained in that cell, which is left unchanged. In a **write** it specifies an address and a value, and the value replaces the contents of the cell. In every access one therefore distinguishes the address, the value transferred and the direction of the transfer.
 :::
 
 :::esempio{titolo="Effect of a read"}
-Consider register `R` holding $8$ and the memory cell at address $12$ holding $43$. A read instruction that copies cell $12$ into `R` sets the register to $43$. The memory at address $12$ retains $43$ because this is a read. The number $12$ identifies the location, so the new contents of the register are the data value $43$.
+The register `R` contains $8$ and the cell with address $12$ contains $43$. A read instruction copies cell $12$ into `R`. After the instruction `R` contains $43$ and the value $8$ is lost. Cell $12$ still contains $43$, because a read copies the value without removing it. The number $12$ is the address, that is, it says where to read; the number $43$ is the datum that is read.
 :::
 
 ## Stepping through a simple machine
 
 :::definizione{#istruzioni-modello titolo="Instructions in the accumulator model"}
-The instructional machine uses an accumulator `A` for a mathematical integer and a counter `PC`. Data cells contain integers, and each instruction occupies one cell. Let $M[a]$ denote the data at address $a$. Each fetch uses the current value of `PC`, so the next step depends on the update performed in the present step.
+To follow the execution of a program by hand one uses a very simple machine. It has a single register for computations, the **accumulator** `A`, and the counter `PC`. Each memory cell contains an integer or an instruction, and $M[a]$ denotes the contents of the cell with address $a$. At each step the machine executes the instruction found at the address contained in `PC` and then updates `PC`.
 
-| Instruction | Effect, apart from updating `PC` |
+| Instruction | Effect |
 |---|---|
 | `LOAD a` | Copies $M[a]$ into `A` |
 | `ADD a` | Adds $M[a]$ to the value of `A` |
 | `STORE a` | Copies `A` into $M[a]$ |
-| `JZ a` | Selects the next address |
+| `JZ a` | Jumps to address $a$ if `A` is zero |
 | `HALT` | Stops the machine |
 
-For `LOAD`, `ADD` and `STORE` the counter advances by one cell. With `JZ a` it is set to $a$ if `A` is zero and advances by one cell otherwise. In this model, `HALT` preserves the current `PC` and sets the halted state. In the traces, every specified access is to an existing cell. A real processor may have instructions of varying lengths, finite-width arithmetic and a different convention for observing the counter.
+After `LOAD`, `ADD` and `STORE` the counter increases by one, so the machine moves on to the next instruction. `JZ a` (*jump if zero*) is a conditional jump. If `A` is zero, `PC` becomes $a$; otherwise it increases by one. `HALT` stops the machine and leaves `PC` unchanged. Real processors have many more instructions and numbers with a finite number of bits, but they work according to the same scheme.
 :::
 
 :::esempio{titolo="Fetching, branching and writing"}
-Assume an initial `PC` of $0$ and data values $M[20]=0$, $M[21]=7$, $M[22]=0$. The program loads the value of cell $20$, tests for zero and decides whether to add the contents of cell $21$.
+Initially `PC` is $0$ and the data are $M[20]=0$, $M[21]=7$, $M[22]=0$. The program copies cell $20$ into `A`. If the value is zero it skips the addition, otherwise it adds cell $21$. Finally it writes the result into cell $22$. In the listing the number on the left is the address of the instruction.
 
 ```text
 0  LOAD 20
@@ -55,55 +55,55 @@ Assume an initial `PC` of $0$ and data values $M[20]=0$, $M[21]=7$, $M[22]=0$. T
 | 3 | 0 | 4 |
 | 4 | 0 | 4 |
 
-First the machine reads `LOAD 20` and the data value $M[20]$ replaces the initial contents of `A`. Since the new value is zero, the branch sets `PC` directly to $3$. The addition at address $2$ is absent from the trace. The write to $M[22]$ therefore transfers zero. To check the result, trace the origin of the data written. The last assignment to `A` comes from cell $20$, which indeed holds zero.
+Each row of the table is one step. At the step with `PC` equal to $0$ the machine executes `LOAD 20`, so `A` becomes $M[20]=0$ and `PC` moves to $1$. At address $1$ there is `JZ 3`. Since `A` is zero, `PC` becomes $3$ and the instruction `ADD 21` at address $2$ is not executed. `STORE 22` copies `A`, that is, $0$, into cell $22$, and `HALT` stops the machine. If cell $20$ contained a nonzero value, the jump would not take place and cell $22$ would end up with that value plus $7$.
 :::
 
 :::osservazione
-The instruction cycle distinguishes **fetching**, decoding and execution. Fetching `JZ 3` reads the instruction cell indicated by `PC`. Decoding recognises a branch and extracts the operand $3$. Execution tests the condition on `A` and determines the next address. These are logical stages. A design may overlap operations from successive instructions provided it preserves the effects specified by the model visible to the program.
+The execution of each instruction is divided into three phases, which together form the **instruction cycle**. In the **fetch** phase the processor reads the instruction from the cell indicated by `PC`. In the **decode** phase it recognizes which instruction it is and what its operand is; for `JZ 3` it recognizes a jump with operand $3$. In the **execute** phase it carries out the operation and updates `PC`.
 
-A trace shows `PC` before the step and records the value after each update. As each row describes the execution of one instruction, a branch appears as a change to the next address. Always adding one to the address of the instruction just executed would include the addition that the branch skips in this example.
+A trace, like the table in the example, reports for each step the value of `PC` before the instruction and the values after it. After a jump the new `PC` differs from the previous one plus one. In the example, always adding one would also execute `ADD 21`, which the jump avoids.
 :::
 
 ## From addresses to bytes
 
 ::::teorema{#indirizzi-e-capacita titolo="Capacity and address ranges"}
-Let $p$ be the positive number of bits in an address. If every address identifies an installed byte and addresses and bytes are in one-to-one correspondence, the capacity is $2^p$ bytes. For integers $u$ and $v$ with $0\leq u\leq v$, the half-open region $[u,v)$ contains $v-u$ consecutive addresses. If each group of $g$ bytes identifies a register, with $g$ a positive integer, and the entire region is partitioned into such groups, the number of registers is $\dfrac{v-u}{g}$.
+With $p$ bits one can write $2^p$ different addresses, from $0$ to $2^p-1$. If each address corresponds to a **byte**, that is, a group of eight bits, the memory has a capacity of $2^p$ bytes; with $p=16$ that is $65536$ bytes. A region of memory is specified by its starting address $u$, included, and its ending address $v$, excluded, and is written $[u,v)$, with $0\leq u\leq v$. The region contains $v-u$ bytes. If the region is divided into groups of $g$ bytes each, with $g$ a positive integer, there are $\dfrac{v-u}{g}$ groups.
 
 :::dimostrazione
-Each of the $p$ bits has two independent choices, so the number of addresses is the product of $p$ factors equal to two. The one-to-one correspondence assigns exactly one byte to each combination. For the second claim, the range is empty when $u=v$. When $u<v$, subtracting $u$ from the addresses in $[u,v)$ gives the integers from $0$ to $v-u-1$, giving $v-u$ addresses. Each register contains $g$ bytes and the registers are disjoint, so the total number of bytes is $g$ times the number of registers.
+Each of the $p$ bits can be $0$ or $1$, so there are $2\cdot 2\cdots 2=2^p$ combinations, and each corresponds to one byte. For the second statement, subtracting $u$ from the addresses of $[u,v)$ gives the integers from $0$ to $v-u-1$, of which there are $v-u$; if the region is empty, that is, $u=v$, the count gives zero. Since the groups do not overlap and each contains $g$ bytes, the total number of bytes is $g$ times the number of groups.
 :::
 ::::
 
 :::esempio{titolo="A device’s address range"}
-A device occupies addresses from `0x100` inclusive to `0x130` exclusive. Each register occupies $4$ consecutive bytes. The region spans $(30)_{16}=48$ bytes, so it contains $\dfrac{48}{4}=12$ registers. As a check, the starting address of the twelfth register is $11\cdot4=44$ bytes from the beginning. Its four bytes end at offset $47$, the last admissible position.
+A peripheral, for example a network card, occupies the addresses from `0x100` included to `0x130` excluded; the prefix `0x` denotes a hexadecimal number. The peripheral is divided into registers of $4$ consecutive bytes each. The region measures $(130)_{16}-(100)_{16}=(30)_{16}=48$ bytes, so it contains $\dfrac{48}{4}=12$ registers. As a check, the twelfth register starts $11\cdot4=44$ bytes after the beginning and its four bytes reach position $47$, the last one in the region.
 :::
 
 :::attenzione
-The address width determines how many positions can be expressed. Actual installed capacity may be smaller. For example, $16$ bits admit addresses from $0$ through $65535$, while a machine may have $4096$ installed bytes and leave all other positions unused. Physical capacity counts the positions actually assigned to memory. A C byte is the unit measured by `sizeof`. Its number of bits is given by `CHAR_BIT` in `<limits.h>`.
+The number of bits of the address determines how many addresses can be written, not how much memory is installed. With $16$ bits the addresses run from $0$ to $65535$, but a machine may have only $4096$ bytes of memory, and nothing corresponds to the other addresses. The actual capacity is computed by counting the addresses to which memory corresponds. In C the size of a datum is measured in bytes with the `sizeof` operator, and the number of bits in a byte is the constant `CHAR_BIT` from `<limits.h>`, which on common machines is $8$.
 :::
 
 :::definizione{#ordine-byte titolo="Byte order within a word"}
-Consider a $k$-byte unsigned word on a machine with eight-bit bytes. Let $b_j$ be the value of the byte at the starting address plus $j$, where $0\leq j<k$. In **little-endian** order, byte $0$ is least significant, so the value of the word is $\sum_{j=0}^{k-1}b_j256^j$. In **big-endian** order, byte $0$ is most significant, giving the value $\sum_{j=0}^{k-1}b_j256^{k-1-j}$. The base $256$ comes from $2^8$, the number of bit patterns in a byte on the assumed machine.
+A number that occupies several bytes, for example an integer of two or four bytes, is stored in consecutive cells, and it remains to decide in which order. With **little endian** order the lowest address holds the least significant byte, that is, the one with the smallest weight. With **big endian** order the lowest address holds the most significant byte.
 
-With two bytes for which the lower address holds `0x2A` and the following byte holds `0x01`, the little-endian reading gives $(012A)_{16}=298$. The big-endian reading gives $(2A01)_{16}=10753$. The two byte addresses and the contents of each byte stay the same across both interpretations. The order determines which byte carries the weight $256$.
+For example, the number $(012A)_{16}=298$ occupies the two bytes `0x01` and `0x2A`. In little endian the lowest address contains `0x2A` and the next one `0x01`; in big endian the order is the opposite. In the other direction, if the lowest address contains `0x2A` and the next one `0x01`, the little endian reading gives $(012A)_{16}=298$ and the big endian reading gives $(2A01)_{16}=10753$. In formulas, if there are $k$ bytes and $b_j$ is the byte at the starting address plus $j$, the unsigned value is $\sum_{j=0}^{k-1}b_j256^j$ in little endian and $\sum_{j=0}^{k-1}b_j256^{k-1-j}$ in big endian. The weight $256=2^8$ is the number of values of an eight-bit byte.
 :::
 
 ## Blocks, caches and access times
 
 :::definizione{#localita-memoria titolo="Memory hierarchy and locality of access"}
-A **memory hierarchy** organises levels with different capacities and access times. Registers are directly available to processor instructions. A cache keeps copies of memory blocks. Main memory holds instructions and data for running programs. Mass storage is designed to keep information for the long term. An access that finds its block in the cache completes at the nearest level considered in the model. Otherwise, the system retrieves the data from another level.
+Fast memories are expensive and small, whereas large ones are slow. A computer therefore uses several kinds together, organized in a **memory hierarchy** of four levels, from the fastest and smallest to the slowest and largest. The **registers** are inside the processor. The **cache** is a small, fast memory that keeps a copy of recently used data. **Main memory** (RAM) contains the instructions and data of the running programs. **Mass storage**, that is, disks and solid-state drives, keeps data even when the computer is switched off. When the processor asks for a datum, it looks for it in the cache first. If it is there, the access is fast; otherwise the datum must be fetched from main memory, which takes longer.
 
-**Temporal locality** concerns the reuse of a location or block after a short interval in the access sequence. **Spatial locality** concerns accesses to nearby locations. Reading addresses $5$, $6$ and $7$ with four-byte blocks touches one block and benefits from spatial locality. Reading $5$ again after those accesses also exhibits temporal locality. Locality describes the access sequence. The presence of a particular block also depends on the cache configuration and on any replacements.
+The cache is useful because programs do not access memory at random. By **temporal locality** a datum that has just been used is usually reused shortly afterwards, like the counter of a loop. By **spatial locality**, after one datum the nearby ones are usually used, like the consecutive elements of an array. To exploit spatial locality the cache copies a **block** of consecutive bytes each time rather than a single byte. With blocks of four bytes, the addresses $4$, $5$, $6$ and $7$ lie in the same block, so after reading $5$ the bytes $6$ and $7$ are already in the cache as well.
 :::
 
 :::definizione{#cache-diretta titolo="Blocks and direct-mapped caches"}
-A byte-addressed memory starting at zero is divided into blocks of $B>0$ bytes. For integer address $a\geq0$, the block number is $b=\lfloor\dfrac{a}{B}\rfloor$ and the offset, or displacement within the block, is $a-bB$. This follows because block $b$ occupies the range $[bB,(b+1)B)$. Equal offsets indicate the same relative position in blocks that may be different.
+Memory is divided into blocks of $B>0$ bytes, numbered from zero. Block $0$ contains the addresses from $0$ to $B-1$, block $1$ those from $B$ to $2B-1$ and so on. The address $a\geq 0$ therefore belongs to block $b=\left\lfloor\dfrac{a}{B}\right\rfloor$, that is, the integer quotient of the division of $a$ by $B$. The remainder of the division, $a-bB$, is the **offset**, that is, the position of the byte inside the block. With $B=4$, address $11$ lies in block $2$ with offset $3$, because $11=4\cdot 2+3$.
 
-In a **direct-mapped cache** with $L>0$ lines, block $b$ can occupy only line $b\bmod L$. Each line keeps enough information to identify the block it holds. In the tracing model, the line stores the full block number or is empty. A read is a **hit** when the line already holds the requested block. A **miss** occurs when the line is empty or holds a different block. In the latter case, the requested block is loaded in place of the previous one. The exercise assumes that there are no other accesses or prefetches.
+The cache consists of $L>0$ **lines**, each of which contains one block or is empty. In a **direct-mapped** cache each block can be stored in only one line, and block $b$ goes into line $b\bmod L$, that is, the remainder of the division of $b$ by $L$. With $L=2$ the even blocks go into line $0$ and the odd ones into line $1$. At each read one looks at the line of the requested block. If it contains exactly that block, the access is a **hit** and the datum is available immediately. If the line is empty or contains another block, the access is a **miss**; in this case the requested block is copied from main memory into the line and replaces the one that was there.
 :::
 
 :::esempio{titolo="A conflict within one cache line"}
-Use blocks of $4$ bytes and two initially empty lines. The reads go to $3$, $4$, $5$, $11$ and $2$.
+The blocks have $4$ bytes and the cache has two lines, initially empty. The program reads, in order, the addresses $3$, $4$, $5$, $11$, $2$. For each one computes the block, as the integer quotient of the division by $4$, and the line, as the remainder of the division of the block by $2$.
 
 | Address | Block | Line | Result |
 |---:|---:|---:|---|
@@ -113,23 +113,23 @@ Use blocks of $4$ bytes and two initially empty lines. The reads go to $3$, $4$,
 | 11 | 2 | 0 | miss |
 | 2 | 0 | 0 | miss |
 
-Address $5$ meets the same block as address $4$, so it is a hit. Block $2$ uses the line occupied by block $0$ because both yield a remainder of zero when divided by two. When the trace returns to block $0$, the only line that can hold it contains block $2$. The accesses to addresses $3$ and $2$ belong to the same block, yet the intervening access to block $2$ causes another miss.
+The read of $3$ finds line $0$ empty, so it is a miss and block $0$ is loaded. The same happens for $4$, with block $1$ in line $1$. Address $5$ still belongs to block $1$, which is already in line $1$, so it is a hit. Address $11$ belongs to block $2$, which goes into line $0$ because $2$ is even; the line contains block $0$, so it is a miss and block $2$ takes its place. Address $2$ belongs to block $0$, which had been loaded at the first read but has just been replaced, so it is a miss again.
 :::
 
 :::definizione{#costo-medio titolo="Mean time in the two-level model"}
-Let $t_h$ be the time spent checking the cache on every access. Let $P$ be the fixed extra time on a miss. If $h$ is the fraction of hits in a sequence with at least one access, the mean time is
+Every access takes the time $t_h$ to look up the cache. A miss takes an additional time $P$, called the **penalty**, to fetch the block from main memory. If $h$ is the fraction of accesses that are hits, the fraction of misses is $1-h$ and the average time of an access is
 $$
 \bar{t}=h\,t_h+(1-h)(t_h+P)=t_h+(1-h)P .
 $$
-In the final expression, $t_h$ accounts for the cache check incurred by every access. The term $(1-h)P$ adds the penalty only to the fraction $1-h$ of accesses. For the five accesses in the table, $h=\dfrac{1}{5}$. With $t_h=2\,\mathrm{ns}$ and $P=15\,\mathrm{ns}$ the mean is $14\,\mathrm{ns}$. Adding the actual access times gives $2+4\cdot17=70\,\mathrm{ns}$, which confirms the mean. If the problem gives the **total** miss time, use that time in place of $t_h+P$ in the weighted average.
+The term $t_h$ is paid by all accesses, the penalty $P$ only by the misses. In the five accesses of the table there is a single hit, so $h=\dfrac{1}{5}$. With $t_h=2\,\mathrm{ns}$ and $P=15\,\mathrm{ns}$ one obtains $\bar{t}=2+\dfrac{4}{5}\cdot 15=14\,\mathrm{ns}$. The direct count gives the same result, because a hit lasts $2\,\mathrm{ns}$ and each of the four misses lasts $17\,\mathrm{ns}$, for a total of $70\,\mathrm{ns}$, and $\dfrac{70}{5}=14\,\mathrm{ns}$. If an exercise gives the **total** time of a miss, that value replaces $t_h+P$.
 :::
 
 ## How the preprocessor sees the source
 
 :::definizione{#preprocessore titolo="Preprocessing directives"}
-The preprocessor treats the source as a sequence of preprocessing tokens. For the cases in this chapter, `#include` brings in the content located for the header, `#define` associates a name with a replacement and `#if` determines which part of the source remains based on an expression accepted by the preprocessor. The directives operate before the resulting code is analysed as a C program.
+A C program is a text file, the **source file**. Before compilation proper the source passes through the **preprocessor**, a program that modifies the text according to the lines beginning with `#`, called **directives**. Three directives are used most. `#include` inserts at that point the contents of another file, called a **header**. `#define` associates a text with a name, and every later occurrence of the name is replaced by that text; a name defined in this way is called a **macro**. `#if` keeps or removes a part of the source according to the value of a condition. The compiler receives the text already modified.
 
-For example, after `#define SIZE 12`, the token `SIZE` in `int n = SIZE;` is replaced by the token `12`. In a string literal such as `"SIZE"` the characters form part of a single token, so they remain unchanged. Macro replacement operates on source tokens. By contrast, an object declared in C has a type and, when used as a value, is part of the code analysed after preprocessing.
+For example, after `#define SIZE 12` the line `int n = SIZE;` becomes `int n = 12;`. The replacement concerns the name when it appears as a word of its own; inside a string such as `"SIZE"` the characters are left unchanged. A macro is therefore a text replacement carried out before compilation, whereas a variable is a region of memory with a type, which exists while the program is running.
 :::
 
 :::esempio{titolo="A branch selected before compilation"}
@@ -145,25 +145,30 @@ Consider the following source fragment.
 int factor = SCALE;
 ```
 
-After expansion in the condition, `#if` receives the value $1$ and selects the first branch. Replacing `SCALE` in the initializer therefore gives `int factor = 4;`. Changing `MEASURE` to $0$ causes the alternative branch to establish the replacement with $2$. In either case, the final initializer is one C expression. The executable incorporates the result of that choice in the code or the data generated by the compiler.
+The first line defines `MEASURE` as `1`. The directive `#if MEASURE` becomes `#if 1`; the condition is true, so the preprocessor keeps `#define SCALE 4` and removes the branch after `#else`. The last line becomes `int factor = 4;`. Changing the first line to `#define MEASURE 0` would keep the other branch and the last line would become `int factor = 2;`. The choice is made before compilation, so only one of the two values remains in the executable program.
 :::
 
 :::definizione{#unita-traduzione titolo="Translation units and shared declarations"}
-In the multiple-file example, a **translation unit** comes from a `.c` source file and the material made available by its directives. Each source file is preprocessed with its own set of definitions and inclusions. Including the same header in two source files makes its declarations available in both translation units. If a function defined in one file is called from another, a shared declaration tells the compiler which type applies to the call.
+A program of some size is divided into several `.c` source files, which are compiled one at a time. The text that the compiler receives for one source file, after the preprocessor has inserted the headers and made the replacements, is called a **translation unit**. When a function is defined in one file and called in another, the compiler translating the second file must know at least its **declaration**, that is, its name, the type of its result and the types of its parameters. The declaration is written only once in a `.h` header, and every source file that uses the function includes that header.
 
-An include guard uses a macro name defined the first time the header is expanded in a translation unit. A subsequent inclusion of the same header finds the name already defined and omits the guarded portion. Because the preprocessing of another source file is separate, the guard takes effect anew for that source file. A header change can affect every translation unit that includes it, including those where the inclusion goes through another header.
+If a header is included twice in the same unit, for example because another header includes it too, its declarations appear twice. **Include guards** prevent this. The header begins with `#ifndef NAME`, which means “if `NAME` is not defined”, followed by `#define NAME`, and ends with `#endif`. At the first inclusion `NAME` is not defined, so the contents are kept and `NAME` gets defined. At the second inclusion `NAME` is already defined and the contents are skipped. Each source file is preprocessed separately, so the guard starts afresh for each one.
 :::
 
 ## From source code to object code
 
 :::definizione{#file-oggetto titolo="Separate translation and object files"}
-In a GCC-compatible toolchain, the `cc` command is a driver that starts the requested stages. Starting with `.c` source, it can save the preprocessed source in `.i`. Compilation proper checks the resulting C code and can produce an assembly listing `.s`. The assembler converts the listing to an object file `.o`. The object file holds sections containing code or data and the information the linker needs for references and locations that remain to be resolved. The driver can also produce the object file in a single command, leaving the intermediate products implicit.
+The translation of a source file into an executable program takes place in four phases. On Unix-like systems the `cc` command starts all of them.
 
-The file extensions and the following options are driver conventions. The logical phases of translation specified by ISO C may be implemented with different tools and file formats. In the commands in this chapter, `-std=c17` selects the language version in invocations that handle C, while `-o` names the requested output.
+1. **Preprocessing** applies the directives and produces a C source without directives (`.i` file).
+2. **Compilation** checks that the text obeys the rules of C and translates it into **assembly**, a language in which each line corresponds to one processor instruction (`.s` file).
+3. **Assembly** translates the assembly text into machine code, that is, into the numbers that the processor executes, and produces an **object file** (`.o` file).
+4. **Linking** joins the object files into a single executable file.
+
+An object file contains the machine code of a single source file. Calls to functions defined in other files are left pending in it, annotated with the name of the function, and are completed during linking. Usually a single command performs the first three phases without saving the intermediate files. In the commands of this chapter `-std=c17` specifies the version of the C language and `-o` the name of the file to produce.
 :::
 
 :::esempio{titolo="Saving the intermediate products"}
-Source file `main.c` contains a program that calls the external function `scale`, which is defined in `scale.c`. The diagram shows the explicit path for `main.c` in an environment with a GCC-compatible driver, an object-file format and a POSIX-style shell.
+The program consists of two source files. The file `main.c` calls the function `scale`, defined in `scale.c`. The diagram shows the phases for `main.c`, carried out one at a time with the `cc` command in a terminal.
 
 ![Source main.c produces main.i, then main.s and main.o. Linking combines main.o and scale.o to produce app.](/immagini/informatica/architettura-e-compilazione/schema-teoria-en.png)
 
@@ -175,19 +180,19 @@ cc -std=c17 -c scale.c -o scale.o
 cc main.o scale.o -o app
 ```
 
-`-E` stops after preprocessing. Applying `-S` to `main.i` produces the assembly listing. The driver treats `main.s` as assembler input and `-c` produces `main.o`. The same `-c` applied to `scale.c` also runs the earlier stages. The final command uses the two object files as linker inputs. If only `scale.c` changes and the interfaces remain the same, it is possible to rebuild `scale.o` and link again while reusing `main.o` produced from the same set of declarations.
+The `-E` option stops `cc` after preprocessing, and the result is `main.i`. The `-S` option stops it after compilation, and the result is the assembly file `main.s`. The `-c` option stops it after assembly, and the result is the object file `main.o`. In the fourth line `-c` is applied directly to `scale.c`, so `cc` performs the first three phases in sequence and produces `scale.o`. The last line has no stopping option and links the two object files into the executable `app`. If later only `scale.c` is modified, without changing the declaration of the function, it is enough to repeat the fourth and fifth lines, because `main.o` is still valid.
 :::
 
 :::osservazione
-The compiler interprets the text according to the syntax and semantics of the language. One C statement can contribute to several machine instructions, while several C operations can be combined or removed if observable behaviour remains equivalent in the defined cases. A source line count and an instruction count in `.s` therefore measure different quantities. By contrast, traces for the instructional processor use a sequence of instructions already defined for that machine.
+One line of C does not correspond to a single processor instruction. A C statement such as `a = b + c * d;` requires several machine instructions, and the compiler may also reorder or remove operations, provided the program produces the same results. The number of lines in the source and the number of instructions in the `.s` file are therefore different.
 :::
 
 ## From object files to an executable
 
 :::definizione{#risoluzione-simboli titolo="Definitions and references during linking"}
-In the object-file model, an external symbol represents a name visible across translation units, such as a function defined in another source file. Every caller can generate a reference to that name. **Linking** associates references with definitions and updates the code and data locations according to the final layout. The model considers object files passed explicitly to the driver and containing ordinary strong symbols. Each external reference to be resolved requires a corresponding definition, and the same external function requires compatible declarations.
+In the object file every function defined in the source appears with its name, called a **symbol**, next to its code. Every call to a function defined elsewhere appears as a **reference** to a symbol that has no code yet. **Linking** joins the object files, looks for the definition with the same name for each reference and inserts into the call the address that the function has in the executable.
 
-A name with no definition among the inputs being used remains unresolved. Two ordinary external definitions for the same name produce a conflict. A declaration supplies the type during compilation. A function definition adds its body, thereby supplying the code associated with the name. Successful linking makes the requested definitions available. Checking type compatibility also relies on consistent declarations in the source files.
+Linking fails in two cases. If no object file contains the definition of a name that is used, the reference remains **undefined** (*undefined reference*). If two object files define the same name, there is a **multiple definition**. The declaration and the definition therefore have different jobs. The declaration, usually in a header, lets the compiler check that the call uses the right types. The definition contains the body of the function and is needed by the linker, which must find the code to execute.
 :::
 
 :::esempio{titolo="Two units with a shared header"}
@@ -200,7 +205,7 @@ int scale(int value);
 #endif
 ```
 
-The file `scale.c` includes the header and defines the function. The inputs used in the example fall within $[-100,100]$, so doubling them gives a value representable in `int`.
+The file `scale.c` includes the header and defines the function. In the example the argument lies between $-100$ and $100$, so its double certainly fits in an `int`.
 
 ```c
 #include "scale.h"
@@ -211,7 +216,7 @@ int scale(int value)
 }
 ```
 
-The file `main.c` includes the same header for the call. Assume that writing to standard output succeeds.
+The file `main.c` includes the same header in order to call the function.
 
 ```c
 #include <stdio.h>
@@ -224,25 +229,30 @@ int main(void)
 }
 ```
 
-With the separate-translation commands, `main.o` holds the reference to `scale` and `scale.o` resolves it. Doubling $6$ gives $12$, so the executable prints `12` followed by a newline. Passing only `main.o` and the standard libraries supplied by the driver would leave the project's `scale` symbol without a definition. The prototype makes the call valid during the compilation of `main.c` and the body in `scale.c` supplies the implementation to the linker.
+When the two source files are compiled separately, `main.o` contains a reference to `scale` and `scale.o` contains its definition, so linking succeeds. Twice $6$ is $12$, and the program prints `12` followed by a newline. If only `main.o` were passed to the linker, the name `scale` would be left without a definition and linking would fail with an undefined reference. The header lets the compiler check the call in `main.c`; the body in `scale.c` provides the code that linking puts into the executable.
 :::
 
 :::attenzione
-Two units can be compiled separately with incompatible declarations for the same external function. If each compilation sees just one local declaration, that invocation can miss the problem. A linker that resolves references by name can accept the objects despite the defect. Compatibility remains a requirement for the C program. Including the header in both the caller and the source file containing the definition lets the compiler compare the declarations where they are used.
+Linking matches references and definitions by name only and does not check types. If `main.c` declared on its own `double scale(double value);` while `scale.c` defines the function with an `int` parameter, each file would compile without errors and linking would succeed, but the program would give wrong results. For this reason the declaration is written only once in the header and the header is included both in the file that calls the function and in the one that defines it; in this way the compiler compares the declaration with the definition and reports any difference.
 :::
 
 ## Starting and diagnosing a C program
 
 :::definizione{#avvio-hosted titolo="Input, output and termination in a hosted environment"}
-In a C17 **hosted** environment, `int main(void)` is a permitted signature for the function called at program startup when it takes zero parameters. The value returned from the initial call to `main` participates in program termination. Under the C standard’s convention, `return 0;` reports success to the environment. `EXIT_SUCCESS` from `<stdlib.h>` also indicates success, while `EXIT_FAILURE` indicates failure. For other values, the status reported to the environment is determined by the implementation.
+The execution of a C program starts from the function `main`. A program that runs under an operating system is said to run in a **hosted** environment. The form `int main(void)` says that `main` receives no parameters and returns an integer. This integer is passed to the operating system when the program ends and indicates whether the program ended correctly. By convention `return 0;` signals success. The header `<stdlib.h>` defines two names for the same purpose, `EXIT_SUCCESS` for success and `EXIT_FAILURE` for failure.
 
-`printf` writes to `stdout`, the standard output stream. The destination can be a terminal, a file or another process, depending on how the program is started. The value returned by `main` is distinct from the characters sent to the stream. In the preceding example, a successful write sends two digits and a newline, and `return 0;` reports success. A test can compare the captured output with the expected output and check the termination status separately.
+The function `printf` writes characters to **standard output**, called `stdout`, which is usually the terminal but can be redirected to a file. The printed text and the value returned by `main` are two distinct results. The program of the previous example prints `12` and a newline, and in addition returns $0$. Whoever tests a program checks both, that is, that the printed text is the expected one and that the returned value indicates success.
 :::
 
 :::definizione{#diagnosi-fasi titolo="Diagnosing errors from the expected build product"}
-To locate an error, observe the command that ran and the artifact it was supposed to produce. A directive that requests a missing header fails during preprocessing. A constraint violation in the resulting source, such as calling a function with one more argument than its visible prototype accepts, is diagnosed during translation. If an object contains an external reference with no definition among the objects provided, the problem appears during linking. A difference between the expected and actual output after a successful build calls for examining execution and the program specification.
+When building a program fails, the first step is to understand in which phase the error occurred, because each phase produces errors of a different kind.
 
-Messages can differ across drivers. Locating the stage helps identify the information to inspect. For inclusion, examine the name and the search paths. For an unresolved reference, identify the caller, the intended definition and the object files actually passed to the driver. For an incorrect result, a reproducible test case fixes the input data and expected output.
+- **Preprocessing.** An `#include` names a file that cannot be found; the message contains the name of the file.
+- **Compilation.** The source violates a rule of the language, for example with a call that has one more argument than the declaration; the message gives the file and the line.
+- **Linking.** A function is called but no object file defines it; the message contains the name of the function and not a line of the source.
+- **Execution.** The program is built without errors but prints a result different from the expected one; the error is in the logic of the program.
+
+The wording of the messages changes from one compiler to another, whereas the phase can always be recognized. For a missing header one checks the name and the folder in which it is located. For an undefined reference one checks which file defines the function and whether its object file was passed to the linker. For a wrong result one fixes a test case, that is, a precise input with the expected output, and follows the execution on that case.
 :::
 
 :::osservazione
