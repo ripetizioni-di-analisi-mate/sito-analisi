@@ -6,103 +6,184 @@ sommario: "From membrane selectivity to protein targeting: transport, energy, de
 ## Membranes and compartments
 
 :::definizione{#membrane titolo="Bilayer, fluidity and asymmetry"}
-A cell can maintain internal concentrations different from those outside because the **biological membrane** provides a selective barrier. Phospholipids have polar heads in contact with water and hydrophobic tails pointing towards the interior of the bilayer. Proteins embedded in the membrane enable exchange, adhesion and signal reception. A small nonpolar molecule, such as oxygen, crosses the bilayer more readily than an ion, which would have to lose part of its hydration shell and enter a hydrophobic environment.
+A **biological membrane** is a thin sheet, made of lipids and proteins, that separates two watery environments. The plasma membrane separates the inside of the cell from the outside, and internal membranes enclose the organelles. Its basis is a **phospholipid bilayer**. Each phospholipid has a polar head, attracted to water, and two hydrophobic tails. In the bilayer the heads lie on the two faces, in contact with water, and the tails lie inside.
 
-The **fluid mosaic** model describes components capable of lateral movement. This movement is influenced by attachments to the cytoskeleton, junctions and lipid domains. Other conditions being equal, shorter tails and cis double bonds hinder packing and increase fluidity. Cholesterol restricts some movements at high temperatures and hinders ordered packing at low temperatures; its effect therefore depends on the conditions.
+The hydrophobic interior decides what crosses the membrane. A small nonpolar molecule, such as oxygen or carbon dioxide, crosses it easily. An ion, such as Na⁺, is surrounded by water molecules and does not enter a hydrophobic environment, so it does not pass. For this reason the membrane is a **selective barrier** and the cell maintains internal concentrations different from the external ones. Substances that do not cross the bilayer pass through proteins embedded in the membrane. Other membrane proteins serve to adhere to other cells and to receive signals.
 
-The two leaflets have different compositions. ATP-dependent flippases can maintain a selective distribution of lipids; activated scramblases allow redistribution between leaflets. Phosphatidylserine is normally enriched on the cytosolic side of the plasma membrane. Its exposure on the outside can contribute to recognition of apoptotic cells. The carbohydrates of glycoproteins and glycolipids face the extracellular side and form the glycocalyx. This hydrated layer protects the surface and participates in cell recognition and adhesion.
+The **fluid mosaic** model describes the membrane as a two-dimensional liquid. Lipids and proteins move sideways in the plane of the membrane, while passage from one face to the other is rare. Fluidity depends on composition.
+
+- Fatty acid tails that are short, or that have double bonds bending them (unsaturated), pack poorly together, so the membrane is more fluid.
+- Long saturated tails pack well, so the membrane is more rigid.
+- Cholesterol dampens the variations. At high temperature it restrains the movement of phospholipids, at low temperature it prevents them from packing tightly.
+
+Some proteins do not move freely, because they are anchored to the cytoskeleton or to junctions between cells.
+
+The two halves of the bilayer are called **leaflets** and have different compositions. This difference is called asymmetry. Enzymes called **flippases** maintain it by moving specific lipids from one leaflet to the other with consumption of ATP. **Scramblases**, when activated, redistribute them between the two leaflets. Phosphatidylserine, for example, normally lies on the leaflet facing the cytosol. When a cell dies by apoptosis, phosphatidylserine appears on the outer leaflet, and macrophages recognise it as a signal to remove the cell. Sugars attached to proteins (glycoproteins) and to lipids (glycolipids) face only the outside of the cell. Together they form the **glycocalyx**, a layer that protects the surface and takes part in recognition and adhesion between cells.
 
 ![Polar heads, hydrophobic tails and a transmembrane protein](/figure/biologia-semestre-filtro/strutture-cellulari/membrana-en.svg)
 :::
 
 :::esempio{titolo="Tracking a fluorescent protein"}
-A small membrane region containing fluorescent proteins is bleached with a laser. If fluorescence returns through lateral entry of unbleached molecules, a mobile fraction exists. Incomplete recovery can indicate an immobilized fraction. This experiment, called FRAP, measures lateral mobility under the observed conditions; recovery alone does not demonstrate that proteins cross the bilayer from one leaflet to the other.
+In a living cell the membrane proteins are labelled with a fluorescent substance. A laser permanently switches off the fluorescence in a small area of the membrane, which becomes dark. In the following seconds the fluorescence in that area is measured. If the area becomes bright again, proteins that are still fluorescent have entered from neighbouring regions, so the proteins move sideways in the membrane. If the fluorescence returns only in part, a fraction of the proteins is immobile, for example because it is anchored to the cytoskeleton. This experiment is called **FRAP** (fluorescence recovery after photobleaching). It measures lateral movement and gives no information about passage from one leaflet to the other.
 :::
 
 ## Transport, water and electricity
 
 :::definizione{#trasporti titolo="Gradients, channels and carriers"}
-The spontaneous direction of transport depends on the difference in chemical potential and, for ions, on the electrical difference as well. A cation is favoured towards a region at a more negative potential, while concentration may favour the opposite direction. The **electrochemical gradient** combines these contributions.
+A dissolved substance moves spontaneously from the region where it is more concentrated to the one where it is less concentrated. The difference in concentration between the two sides of a membrane is called the **concentration gradient**. For an ion, charge also matters. The inside of the cell is negative relative to the outside, so a positive ion is attracted inwards and a negative one is repelled. The sum of the two effects, concentration and charge, is called the **electrochemical gradient** and sets the direction in which the ion moves spontaneously.
 
-Simple diffusion crosses the bilayer. Facilitated diffusion involves proteins: a channel provides a selective pathway, whereas a carrier alternately exposes its binding site to the two sides. A finite supply of carriers produces saturation as substrate concentration increases. Both forms of diffusion are passive because they follow the gradient of the transported species.
+**Passive** transport goes down the gradient and consumes no energy. It has two forms.
 
-A pump couples transport against a gradient to an energy source. Na⁺/K⁺-ATPase expels three Na⁺ and brings in two K⁺ for each ATP hydrolysed. The cycle therefore transfers one net positive charge outwards. A Na⁺-glucose cotransporter uses favourable sodium movement to accumulate glucose: this is secondary active transport, indirectly supported by the pump maintaining the sodium gradient.
+- In **simple diffusion** the substance crosses the bilayer directly. This is the case for oxygen and carbon dioxide.
+- In **facilitated diffusion** the substance passes through a protein. A **channel** is a pore that lets one type of ion through. A **transporter** binds the substance on one side, changes shape and releases it on the other side.
 
-ABC proteins possess ATP-binding domains, but the family includes different functions. **CFTR** is an anion channel, mainly for chloride and bicarbonate, whose opening is regulated by phosphorylation and ATP. Anions pass through the channel down their own electrochemical gradient. ATP consumption during regulation does not make that flow a pump against the gradient.
+Transporters are limited in number. When all of them are occupied, the transport rate no longer increases, even if the concentration of the substance rises. This behaviour is called **saturation**.
+
+**Active** transport moves a substance against its gradient and requires energy. It has two forms.
+
+- In **primary** active transport a protein, called a **pump**, uses ATP directly. In each cycle the sodium-potassium pump (Na⁺/K⁺-ATPase) consumes one ATP, moves three Na⁺ out and moves two K⁺ in. In each cycle, therefore, one more positive charge leaves than enters.
+- In **secondary** active transport the energy comes from the gradient of another ion. The pump keeps Na⁺ more concentrated outside than inside. The Na⁺-glucose cotransporter lets Na⁺ flow back in down its gradient and at the same time brings glucose in against its gradient. ATP is consumed by the pump, which rebuilds the sodium gradient.
+
+**ABC proteins** are a family of membrane proteins that bind ATP. Most are pumps. The exception is **CFTR**, the protein altered in cystic fibrosis, which is a channel for negative ions, mainly chloride and bicarbonate. In CFTR, phosphorylation and ATP binding serve to open the channel. Once it is open, ions cross it down their own electrochemical gradient, so the transport is passive.
 
 ![Sodium-potassium pump and glucose cotransport](/figure/biologia-semestre-filtro/strutture-cellulari/trasporto-en.svg)
 :::
 
 :::definizione{#osmosi-potenziali titolo="Tonicity and membrane potential"}
-**Osmosis** is the net movement of water across a selectively permeable membrane. In the absence of an initial pressure difference, water tends towards the compartment with the higher effective concentration of nonpenetrating solutes. Aquaporins increase water permeability without transporting ions along with it.
+**Osmosis** is the passage of water across a membrane that lets water through and holds back solutes. Water moves towards the side where solutes are more concentrated, and the movement tends to make the two concentrations equal. The total concentration of solutes is called osmolarity and is measured in mOsm/L. Water crosses the membrane partly directly and mostly through channels called **aquaporins**, which let water through and not ions.
 
-Tonicity expresses the effect of a solution on cell volume and requires knowledge of solute permeability. An iso-osmotic solution of a solute that enters the cell readily can cause swelling. For an ideal cell with a constant amount of nonpenetrating solute, neglecting other volumes and pressures, equilibrium obeys $C_iV_i=C_fV_f$. If a very large bath of nonpenetrating solutes changes from $300$ to $200\,\mathrm{mOsm/L}$, the predicted volume becomes $V_f=\dfrac{300}{200}V_i=1.5V_i$. A real cell may regulate its volume or lyse, so the model has specific conditions.
+**Tonicity** describes the effect of a solution on the volume of a cell immersed in it. Only solutes that do not cross the membrane are considered.
 
-Membrane potential requires separation of a small fraction of the total charges. Pumps and carriers maintain ionic gradients; selective channel permeability contributes to the instantaneous potential. In the classical neuronal model, rapid opening of voltage-gated Na⁺ channels causes depolarization; their inactivation and increased K⁺ permeability favour repolarization. The pump maintains gradients over time, whereas rapid changes depend mainly on channels.
+- In an **isotonic** solution the cell volume does not change.
+- In a **hypotonic** solution, less concentrated than the inside, water enters and the cell swells.
+- In a **hypertonic** solution, more concentrated than the inside, water leaves and the cell shrinks.
+
+The final volume is calculated with a simple model. If the amount of solute inside the cell stays constant, the product of concentration and volume stays constant, so $C_iV_i=C_fV_f$. A cell at $300\,\mathrm{mOsm/L}$ is immersed in a $200\,\mathrm{mOsm/L}$ solution of solutes that do not enter. Water enters until the internal concentration falls to $200\,\mathrm{mOsm/L}$, so $V_f=\dfrac{300}{200}V_i=1.5\,V_i$. The volume increases by half. The model holds for an ideal cell. A real cell regulates its volume and, if it swells too much, it bursts (lysis).
+
+A solute that crosses the membrane does not count towards tonicity. A $300\,\mathrm{mOsm/L}$ urea solution has the same osmolarity as the cell, but urea enters the cell and water follows it, so the cell swells.
+
+The **membrane potential** is the difference in electric charge between the inside and the outside of the cell. At rest the inside is negative, about $-70\,\mathrm{mV}$ in a neuron. The potential has two origins. The sodium-potassium pump keeps K⁺ concentrated inside and Na⁺ concentrated outside. At rest mainly K⁺ channels are open, so a little K⁺ leaves down its gradient and leaves an excess of negative charges inside. The ions that move are a tiny fraction of the total.
+
+In a neuron the potential changes rapidly during the **action potential**, in two phases.
+
+1. Voltage-sensitive Na⁺ channels open. Na⁺ enters and the inside becomes positive. This phase is **depolarisation**.
+2. The Na⁺ channels inactivate and K⁺ channels open. K⁺ leaves and the inside becomes negative again. This phase is **repolarisation**.
+
+The rapid changes therefore depend on channels. The pump works slowly and maintains over time the gradients that the channels exploit.
 :::
 
 ## Nucleus and targeting
 
 :::definizione{#nucleo-ran titolo="Nuclear pores and Ran directionality"}
-The nucleus contains the genome and is bounded by two membranes, connected at the pores; the outer membrane is continuous with the endoplasmic reticulum. Nucleoporins form a selective barrier. Small molecules can diffuse, while many macromolecules use receptors that interact with the pore. The nucleolus is a membrane-free compartment where rRNA is produced and processed and ribosomal subunit assembly begins. Other nuclear condensates concentrate RNA processing and regulatory factors through dynamic associations, without forming organelles bounded by a bilayer.
+The **nucleus** contains the DNA of the cell. It is bounded by the **nuclear envelope**, made of two membranes. The outer membrane is continuous with the endoplasmic reticulum. The two membranes join around the **nuclear pores**, large complexes of proteins called nucleoporins, which are the only passages between nucleus and cytosol. Small molecules cross the pore by diffusion. Large molecules, such as proteins and RNA, cross it only when accompanied by a transport receptor.
 
-An **NLS**, or nuclear localization signal, enables recognition by importins. In the cytosol, importin binds the cargo; after passage through the pore, Ran-GTP favours its release into the nucleus. Chromatin-associated RanGEF maintains abundant nuclear Ran-GTP. In the cytosol, RanGAP stimulates GTP hydrolysis. This distribution creates different binding conditions on the two sides.
+Inside the nucleus lies the **nucleolus**, a region without a membrane where the cell produces ribosomal RNAs and begins to assemble the ribosomal subunits.
 
-In Ran-dependent export, an NES signal is recognized by an exportin. Cargo, exportin and Ran-GTP associate in the nucleus; hydrolysis in the cytosol favours dissociation. Receptors return and are reused. The NLS often remains in the protein and can be used again after cell division.
+A protein enters the nucleus if its sequence contains a **nuclear localisation signal (NLS)**, that is, a short stretch of amino acids. The receptor that recognises the NLS is called an **importin**. The direction of transport is set by a small protein, **Ran**, which exists in two forms: bound to GTP (Ran-GTP) or to GDP (Ran-GDP). The nucleus contains the enzyme RanGEF, which loads Ran with GTP, so Ran-GTP prevails in the nucleus. The cytosol contains the enzyme RanGAP, which makes Ran hydrolyse GTP, so Ran-GDP prevails in the cytosol. Import takes place in three steps.
 
-Localization can be regulated. IκB degradation makes NF-κB available for import; SREBP1 processing releases a fragment that reaches the nucleus. Many steroid receptors change their distribution and activity in response to a ligand. Export of most mRNAs uses the NXF1-NXT1 complex and remodelling of ribonucleoprotein particles: it must be distinguished from classical Ran-dependent export.
+1. In the cytosol the importin binds the protein carrying the NLS.
+2. The complex crosses the pore.
+3. In the nucleus Ran-GTP binds the importin, which releases the protein.
+
+Export works as a mirror image. The protein to be exported has a **nuclear export signal (NES)**, recognised by a receptor called an **exportin**. In the nucleus the exportin binds the protein only together with Ran-GTP. The complex crosses the pore and in the cytosol GTP is hydrolysed, so the complex comes apart and the protein is released. Importins and exportins then return and are reused. The NLS is not cut off after entry. At the end of cell division, when the nucleus re-forms, the same protein re-enters thanks to the same signal.
+
+The cell regulates entry into the nucleus by hiding or exposing the signal. The transcription factor NF-κB, for example, stays in the cytosol because it is bound to an inhibitor, IκB, which covers its NLS. A stimulus causes IκB to be degraded, the NLS becomes accessible and NF-κB enters the nucleus. Most mRNAs leave the nucleus with a different receptor (NXF1-NXT1), which does not depend on Ran.
 
 ![Ran-dependent nuclear import and export](/figure/biologia-semestre-filtro/strutture-cellulari/ran-en.svg)
 :::
 
 :::esempio{titolo="Necessity and sufficiency of a signal"}
-A large fluorescent protein remains in the cytosol; adding a functional NLS makes it accumulate in the nucleus. If size and other conditions are controlled, the result supports that signal being sufficient for import of the construct. To test its necessity in the natural protein, its NLS is mutated and protein stability and folding are checked. Loss of import and general loss of structure have different meanings.
+A large fluorescent protein with no signals stays in the cytosol. An NLS is added to its sequence and the protein accumulates in the nucleus. The NLS alone is therefore enough to bring a protein into the nucleus, that is, it is a **sufficient** signal. To find out whether the NLS of a natural nuclear protein is also **necessary**, the opposite test is carried out. The NLS is altered by a mutation and the protein is observed to see whether it stays in the cytosol. It is also checked that the mutant protein is still correctly folded, because a misfolded protein too might stay out of the nucleus, for a reason other than loss of the signal.
 :::
 
 ## Mitochondria: energy and import
 
 :::definizione{#mitocondri titolo="From glucose breakdown to the proton gradient"}
-A mitochondrion comprises an outer membrane, intermembrane space, an inner membrane folded into cristae, and a matrix. The outer membrane contains porins; the inner membrane is highly selective and maintains the proton gradient. Glycolysis occurs in the cytosol. Pyruvate enters the mitochondrion and can be converted to acetyl-CoA in the matrix, where most of the tricarboxylic acid cycle takes place.
+The **mitochondrion** is the organelle that produces most of the cell's ATP. It has two membranes, which enclose two spaces.
 
-NADH and FADH₂ transfer reducing equivalents to the respiratory chain. Complexes I, III and IV contribute to proton transfer from the matrix to the intermembrane space; complex II transfers electrons without pumping protons. Oxygen is the final electron acceptor and is reduced to water. Proton return to the matrix through **ATP synthase** can power ADP phosphorylation.
+- The **outer membrane** contains wide channels, the porins, and lets small molecules through.
+- The **intermembrane space** is the space between the two membranes.
+- The **inner membrane** is folded into **cristae** and is impermeable to ions, including protons (H⁺).
+- The **matrix** is the innermost space.
 
-An uncoupler makes it easier for protons to return through an alternative pathway. The gradient decreases and ATP production per oxygen consumed falls; when substrates and oxygen are available, respiratory consumption may increase. A chain inhibitor instead directly impedes electron transfer. Distinguishing these mechanisms allows an experiment to be interpreted.
+The breakdown of glucose begins in the cytosol with **glycolysis**, which converts one molecule of glucose into two of pyruvate and produces two ATP. Pyruvate enters the matrix and is converted into acetyl-CoA, which enters the **Krebs cycle** (tricarboxylic acid cycle). The cycle completes the breakdown to carbon dioxide. In these stages the electrons removed from glucose are loaded onto two carrier molecules, NADH and FADH₂.
 
-Complete aerobic oxidation of one glucose is often estimated to yield about 30–32 ATP in eukaryotic cells. Reducing-equivalent shuttles, transport and the degree of coupling modify the balance. Glycolysis directly produces two net ATP; conversion of pyruvate to lactate regenerates NAD⁺ without adding ATP. Human mitochondrial DNA encodes some oxidative phosphorylation proteins and RNAs needed for local translation; most mitochondrial proteins come from nuclear genes.
+ATP is then formed in the inner membrane, in two steps.
+
+1. NADH and FADH₂ give their electrons to the **respiratory chain**, a series of four protein complexes numbered I to IV. The electrons pass from one complex to the next and finally bind oxygen, which becomes water. The energy released is used by complexes I, III and IV to move protons from the matrix to the intermembrane space. Complex II transfers electrons without moving protons.
+2. Protons accumulate in the intermembrane space and form a **proton gradient**. They return to the matrix through **ATP synthase**, an enzyme of the inner membrane that uses this flow to join ADP and phosphate into ATP.
+
+The two steps together are called **oxidative phosphorylation**. Two types of substance alter it in different ways.
+
+- An **uncoupler** makes the inner membrane permeable to protons. Protons return without passing through ATP synthase, so less ATP is produced. The respiratory chain keeps working, and in fact speeds up, and oxygen consumption increases.
+- A **chain inhibitor**, such as cyanide, blocks the passage of electrons. Oxygen consumption and ATP production fall together.
+
+The complete breakdown of one glucose molecule in the presence of oxygen yields about 30–32 molecules of ATP. Without oxygen only glycolysis remains, with two ATP. In this case pyruvate is converted into lactate. The reaction produces no ATP and serves to regenerate the NAD⁺ that glycolysis needs in order to continue.
+
+The mitochondrion has its own DNA. In humans it encodes 13 proteins of oxidative phosphorylation and the RNAs needed to synthesise them in the mitochondrion. All other mitochondrial proteins are encoded by nuclear genes.
 
 ![Mitochondrial compartments and directions of proton movement](/figure/biologia-semestre-filtro/strutture-cellulari/mitocondrio-en.svg)
 :::
 
 :::definizione{#importazione-mitocondriale titolo="Signals, translocases and dynamics"}
-Many proteins destined for the matrix are synthesized on cytosolic ribosomes with an amino-terminal presequence. Chaperones keep the chain suitable for translocation. TOM enables passage through the outer membrane and TIM23 participates in transfer across the inner one. The electrical potential across the inner membrane favours import of positively charged presequences; matrix chaperones use ATP. The presequence is often removed after entry. Some precursors destined for the intermembrane space also have a signal that stops transfer at the inner membrane; cleavage can then release the domain into the intermembrane space. Destination therefore also depends on signals following the first one.
+The mitochondrial proteins encoded by the nucleus are built by cytosolic ribosomes and then imported. A protein destined for the matrix has at the start of its chain (amino-terminal end) a stretch of positively charged amino acids, called a **presequence**, which acts as a signal. Import takes place in four steps.
 
-Mitochondrial destinations require different pathways. TIM22 inserts several multipass carriers into the inner membrane; SAM promotes assembly of outer-membrane beta-barrel proteins; OXA inserts proteins into the inner membrane from the matrix side, including locally synthesized subunits. A general TOM defect can therefore affect many cargoes, whereas a defect in a later pathway can be more selective.
+1. Proteins called **chaperones** keep the chain extended in the cytosol, because a folded chain does not pass.
+2. The chain crosses the outer membrane through the **TOM** complex.
+3. It crosses the inner membrane through the **TIM23** complex. The matrix is negative relative to the intermembrane space, so the positive presequence is drawn inwards. Matrix chaperones complete entry by consuming ATP.
+4. In the matrix an enzyme cuts off the presequence and the protein folds.
 
-Fusion and fission modify the mitochondrial network. Mitofusins participate in outer-membrane fusion, OPA1 in inner-membrane fusion and DRP1 in fission. These events contribute to mitochondrial distribution and quality control. A damaged fragment can be separated and directed to mitophagy, connecting dynamics with degradation.
+A protein destined for the intermembrane space has, after the presequence, a second signal that stops it in the inner membrane. A cut then releases the protein into the intermembrane space.
+
+Proteins destined for the mitochondrial membranes use other complexes, after passing through TOM.
+
+- **TIM22** inserts into the inner membrane the carriers that span it several times.
+- **SAM** inserts beta-barrel proteins, such as porins, into the outer membrane.
+- **OXA** inserts into the inner membrane the proteins arriving from the matrix, including those encoded by mitochondrial DNA.
+
+Almost all imported proteins pass through TOM, so a TOM defect affects almost all mitochondrial proteins. A defect in one of the other complexes affects only the group of proteins that uses it.
+
+The mitochondria of a cell form a network that changes continuously. In **fusion** two mitochondria join: mitofusins join the outer membranes and OPA1 the inner ones. In **fission** one mitochondrion divides in two through the action of the protein DRP1. Fission serves to distribute mitochondria and to isolate a damaged part, which is then removed by a process called **mitophagy**.
 :::
 
 ## Peroxisomes and targeting signals
 
 :::definizione{#perossisomi titolo="Oxidation reactions and PTS import"}
-**Peroxisomes** have a single membrane and contain neither DNA nor ribosomes. They import proteins produced in the cytosol and participate, among other functions, in very-long-chain fatty acid breakdown and plasmalogen synthesis. Several oxidases produce hydrogen peroxide; catalase helps transform it, limiting its accumulation.
+**Peroxisomes** are small organelles with a single membrane, without DNA or ribosomes. All their proteins are built in the cytosol and then imported. They mainly carry out oxidation reactions. They break down, for example, very-long-chain fatty acids and take part in the synthesis of plasmalogens, lipids abundant in the sheath of nerves. These oxidations produce hydrogen peroxide ($\mathrm{H_2O_2}$), which is toxic. A peroxisomal enzyme, **catalase**, converts it into water and oxygen.
 
-Many peroxisomal matrix proteins expose a PTS1 signal at their carboxy terminus, often represented by the sequence SKL. PEX5 recognizes PTS1; PEX7 participates in the PTS2 pathway. Other peroxins enable docking, import and receptor recycling, which requires ATP. Peroxisomes can also import already folded proteins, unlike many mitochondrial translocation pathways.
+A protein enters the peroxisome if it has a signal called a **PTS** (peroxisomal targeting signal). There are two types.
 
-Biogenesis includes membrane-protein insertion, cargo import, growth and division. Membrane precursors derived from the reticulum can also contribute; the organelle forms through coordinated processes despite lacking a genome.
+- **PTS1** consists of the last three amino acids of the chain (carboxy-terminal end), often serine, lysine and leucine, abbreviated SKL. It is recognised by the receptor **PEX5**.
+- **PTS2** lies near the start of the chain. It is recognised by the receptor **PEX7**.
 
-The signal must remain accessible. Adding a long tail after a carboxy-terminal PTS1 may impair recognition. Defects in different PEX genes can cause Zellweger spectrum disorders; the biological connection is loss of several peroxisomal functions following a biogenesis defect. Peroxisomes and mitochondria share some metabolic substrates but have distinct compartments, import machinery and energetic mechanisms.
+The receptor accompanies the protein to the peroxisomal membrane, the protein enters and the receptor returns to the cytosol with consumption of ATP. The proteins that carry out these steps are called **peroxins** and their genes are denoted by the abbreviation PEX. Unlike the mitochondrion, the peroxisome imports proteins that are already folded.
+
+New peroxisomes form by growth and division of existing ones. Part of their membrane comes from the endoplasmic reticulum.
+
+PTS1 works only if it lies at the very end of the chain. If further amino acids are added after the SKL sequence, PEX5 no longer recognises it and the protein stays in the cytosol. Mutations in PEX genes cause the diseases of the **Zellweger spectrum**. In these diseases peroxisomes do not import their own proteins, so all their functions are missing together.
 :::
 
 ## Reticulum, Golgi and maturation
 
 :::definizione{#reticolo-golgi titolo="Entry into the secretory pathway and quality control"}
-Synthesis of a protein destined for secretion begins on a cytosolic ribosome. When a hydrophobic signal sequence emerges, **SRP** can bind it and target the complex to its receptor on the reticulum. The ribosome associates with the translocon and the chain enters the lumen during synthesis. Many amino-terminal signal sequences are removed; other hydrophobic sequences act as internal signals or stop-transfer sequences and determine membrane protein topology.
+The **secretory pathway** is the route followed by proteins destined for the outside of the cell, the plasma membrane or the lysosomes. The stages are endoplasmic reticulum, Golgi apparatus and final destination. The **endoplasmic reticulum** is a network of membranes enclosing an internal space, called the **lumen**. The rough reticulum carries ribosomes on its surface. The smooth reticulum has none and produces lipids, stores calcium ions and, in the liver, neutralises toxic substances.
 
-The luminal portion retains its orientation during vesicular transport. When a vesicle fuses with the plasma membrane, that portion becomes extracellular. This explains why sugars added to glycoproteins in the reticulum or Golgi lumen appear on the outer surface. Smooth reticulum participates in lipid synthesis, calcium handling and, in specialized cells, detoxification.
+A protein of the secretory pathway enters the reticulum while it is being built, in four steps.
 
-Folding, disulfide-bond formation and the start of N-glycosylation occur in the lumen. Calnexin and calreticulin participate in glycoprotein quality control. An incompletely assembled immunoglobulin can be retained until folding is complete. Persistently defective proteins can be retrotranslocated and degraded by the proteasome through **ERAD**. Accumulation of misfolded cargo activates the UPR, which can reduce synthesis and increase the reticulum's quality-control capacity.
+1. Synthesis begins on a free ribosome in the cytosol. The first amino acids of the chain form a hydrophobic **signal sequence**.
+2. A particle called **SRP** (signal recognition particle) binds the signal sequence and brings the ribosome to the reticulum membrane.
+3. The ribosome docks onto a channel in the membrane, the **translocon**, and the growing chain passes into the lumen.
+4. An enzyme cuts off the signal sequence.
 
-The ΔF508 variant of CFTR illustrates how a folding defect can reduce the amount of channel reaching the surface. The Golgi receives cargo at its cis side, modifies proteins and lipids, and sorts them at the trans-Golgi network. Constitutive secretion continuously supplies membrane and the external environment; regulated secretion stores cargo in vesicles that fuse after a stimulus, often associated with increased cytosolic Ca²⁺.
+A membrane protein contains other hydrophobic stretches, which stop the passage and remain inserted in the bilayer. The number and position of these stretches determine which parts of the protein face the lumen and which face the cytosol.
+
+This orientation is preserved all the way to the destination. A protein travels from the reticulum to the Golgi, and from the Golgi to the plasma membrane, inside vesicles. When a vesicle fuses with the plasma membrane its interior opens to the outside of the cell. The part of a protein that faced the lumen in the reticulum therefore ends up facing the outside. For this reason the sugars of glycoproteins, added in the lumen, lie on the outer face of the plasma membrane.
+
+In the lumen of the reticulum the protein folds and is modified. Disulfide bridges form, that is, bonds between two cysteine amino acids, and **N-glycosylation** begins, that is, the addition of sugar chains. The reticulum also performs **quality control**. The chaperones calnexin and calreticulin retain glycoproteins until they are correctly folded. A protein that fails to fold is returned to the cytosol and degraded by the proteasome. This route is called **ERAD** (ER-associated degradation). If misfolded proteins accumulate, the cell activates a response called the **UPR**, which reduces the synthesis of new proteins and increases the production of chaperones.
+
+Cystic fibrosis shows the effect of this control. The most common mutation, ΔF508, removes one amino acid from the CFTR channel. The mutant channel folds badly, is retained in the reticulum and degraded, so very little of it reaches the plasma membrane.
+
+The **Golgi apparatus** is a stack of flattened cisternae. Proteins enter at the **cis** side, facing the reticulum, and are modified as they pass from one cisterna to the next. At the opposite side, the **trans-Golgi network**, they are sorted to their destination. Secretion has two modes. In **constitutive** secretion vesicles fuse with the plasma membrane continuously. In **regulated** secretion vesicles accumulate and fuse only after a signal, often a rise in calcium ions in the cytosol. This is the case for insulin and neurotransmitters.
 
 ![Secretory pathway and preservation of luminal orientation](/figure/biologia-semestre-filtro/strutture-cellulari/secretoria-en.svg)
 :::
@@ -110,19 +191,36 @@ The ΔF508 variant of CFTR illustrates how a folding defect can reduce the amoun
 ## Trafficking, endocytosis and degradation
 
 :::definizione{#traffico-vescicolare titolo="Cargo selection and fusion"}
-Budding must select cargo and deform the membrane. **COPII** participates in exit from the reticulum; COPI in retrieval to the reticulum and traffic within the Golgi. Clathrin participates in endocytosis and certain routes from the trans-Golgi. Coats and adaptors concentrate specific components; the coat is generally removed before fusion.
+The compartments of the secretory pathway exchange material by means of **vesicles**, small membrane spheres that pinch off from one compartment (budding) and fuse with another. A vesicle forms when a protein **coat** assembles on the cytosolic face of the membrane. The coat curves the membrane and, through adaptor proteins, collects the molecules to be transported, called **cargo**. There are three coats, and each serves one route.
 
-Rab proteins and tethering factors contribute to recognition of the target compartment. SNARE pairing brings membranes close together and promotes fusion. After fusion, the ATPase NSF, recruited by SNAP proteins, hydrolyses ATP to disassemble SNARE complexes and allow their reuse. Characteristic phosphoinositides recruit other trafficking proteins. Specificity therefore results from several coordinated recognition events.
+- **COPII** coats the vesicles going from the reticulum to the Golgi.
+- **COPI** coats the vesicles returning from the Golgi to the reticulum and those moving between Golgi cisternae.
+- **Clathrin** coats the vesicles of endocytosis, which leave from the plasma membrane, and some of those leaving from the trans-Golgi network.
 
-A soluble reticulum-resident protein can escape towards the Golgi and be retrieved using its KDEL signal. Its stable presence in the reticulum also depends on this retrieval. Vesicular transport preserves topological equivalence of lumens: a soluble protein transferred from the reticulum to the Golgi remains separated from the cytosol.
+After pinching off, the coat disassembles, and the naked vesicle reaches the destination membrane. Fusion with the right membrane depends on two groups of proteins.
+
+- **Rab** proteins occur in different forms on different compartments. Together with tethering proteins they allow the vesicle to recognise the target membrane.
+- **SNARE** proteins lie partly on the vesicle and partly on the target membrane. They wind around one another, bring the two membranes together and cause them to fuse.
+
+After fusion the SNAREs stay wound together. The enzyme **NSF**, with the help of SNAP proteins, separates them by consuming ATP and makes them usable again.
+
+Proteins that work in the lumen of the reticulum have a four-amino-acid signal, **KDEL**, at the end of their chain. When one of them ends up by mistake in a vesicle bound for the Golgi, a Golgi receptor recognises the signal and sends it back to the reticulum in a COPI vesicle. Throughout this traffic the content of a vesicle never comes into contact with the cytosol. The lumen of the reticulum, the lumen of the Golgi, the inside of vesicles and the outside of the cell are therefore equivalent spaces.
 :::
 
 :::definizione{#endocitosi-autofagia titolo="Recycling, lysosomes and autophagy"}
-Endocytosis internalizes external material and membrane. Receptors allow specific cargo to be concentrated; fluid-phase endocytosis samples the liquid. In the early endosome, acidification can favour separation of receptor and cargo. In the classical LDL pathway, the receptor recycles while cargo reaches degradative compartments. Transferrin and its receptor recycle after iron release; activated EGF receptors can be directed to multivesicular bodies and lysosomes, reducing signalling.
+In **endocytosis** the cell brings external material inside, enclosing it in vesicles that form from the plasma membrane. In **receptor-mediated** endocytosis a membrane protein, the receptor, binds a specific substance and concentrates it in the vesicle. The vesicles fuse with the **early endosome**, a compartment whose interior is slightly acidic. The acidity detaches many substances from their receptor. From here receptor and substance follow different routes, as three examples show.
 
-Many lysosomal hydrolases receive a mannose-6-phosphate signal in the Golgi. Recognition of this signal enables delivery to endosomes; V-ATPase acidifies the lumen and supports hydrolase activity. Enzyme or sorting defects can cause substrate accumulation. In transcytosis, cargo crosses a polarized cell in vesicles between different surfaces. Phagocytosis uses actin remodelling to engulf large particles.
+- **LDL**, particles that carry cholesterol in the blood, detach from the receptor. The receptor returns to the plasma membrane (recycling) and the LDL continue to the lysosomes, where they are broken down.
+- **Transferrin**, a protein that carries iron, releases the iron in the endosome and returns to the surface together with its receptor.
+- The **EGF receptor**, the receptor of a growth factor, once activated is sent to the lysosomes and degraded together with EGF. In this way the cell reduces the number of receptors and therefore the signal.
 
-In **macroautophagy**, a double-membrane autophagosome encloses cytoplasmic material and delivers it to the lysosomal system. Microautophagy involves remodelling of the degradative compartment's membrane; chaperone-mediated autophagy transfers specific proteins across the lysosomal membrane. Mitophagy selectively removes mitochondria and can involve PINK1 and Parkin. An increase in autophagosomes can result from greater formation or blocked degradation; distinguishing these hypotheses requires measuring flux through the entire pathway.
+**Lysosomes** are the organelles of degradation. They contain enzymes called hydrolases, active at acidic pH. A pump in their membrane, the **V-ATPase**, moves protons inside and keeps the pH close to 5. Hydrolases are produced in the reticulum. In the Golgi they receive a tag, **mannose-6-phosphate**, and a receptor that recognises this tag sends them to the endosomes and from there to the lysosomes. If a hydrolase is missing, or does not receive the tag, the substance it should degrade accumulates in the lysosomes. This is the origin of lysosomal storage diseases.
+
+Two other processes use vesicles. In **transcytosis** a substance enters on one side of a cell and is released on the opposite side. In **phagocytosis** a cell, for example a macrophage, engulfs a large particle such as a bacterium, extending its membrane around it by means of actin filaments.
+
+**Autophagy** is the degradation, in lysosomes, of components of the cell itself. In the main form, **macroautophagy**, a double membrane wraps a portion of cytoplasm and forms an **autophagosome**, which fuses with a lysosome. **Mitophagy** is the selective autophagy of damaged mitochondria, which are flagged by the proteins PINK1 and Parkin. There are also microautophagy, in which the lysosome directly engulfs small portions of cytoplasm, and chaperone-mediated autophagy, in which single proteins cross the lysosomal membrane.
+
+An increase in the number of autophagosomes in a cell has two possible explanations. Either more of them are formed, or their fusion with lysosomes is blocked and they accumulate. To distinguish the two cases, degradation in lysosomes is blocked with a drug and the number of autophagosomes is observed to see whether it increases further.
 
 ![Distinct fates of receptor, cargo and cytoplasmic material](/figure/biologia-semestre-filtro/strutture-cellulari/endocitosi-en.svg)
 :::
@@ -130,19 +228,33 @@ In **macroautophagy**, a double-membrane autophagosome encloses cytoplasmic mate
 ## Cytoskeleton, forces and movement
 
 :::definizione{#microtubuli titolo="Polarity, dynamic instability and motors"}
-**Microtubules** are polarized polymers of alpha/beta-tubulin dimers. Nucleation can occur on gamma-TuRC complexes; the centrosome organizes many microtubules in animal cells. The two ends have different properties. Loss of a stabilizing cap rich in GTP-tubulin favours catastrophe, the transition from growth to shortening; rescue is the opposite transition.
+The **cytoskeleton** is a network of protein filaments that gives the cell its shape, makes it move and transports material inside it. The filaments are of three types: microtubules, actin filaments and intermediate filaments.
 
-Many kinesins move towards the plus end, while cytoplasmic dynein moves towards the minus end. Microtubule orientation therefore allows cargo direction to be predicted when the motor involved is known. ATP powers the mechanical cycle; MAP proteins regulate stability and interactions.
+**Microtubules** are hollow tubes made of a protein, tubulin, whose units are pairs (dimers) of alpha-tubulin and beta-tubulin. The dimers all line up in the same direction, so the two ends of the microtubule are different. The **plus** end (+) grows and shrinks rapidly. The **minus** end (−) is anchored to the **centrosome**, the structure near the nucleus from which microtubules originate in animal cells. Here a protein complex, γ-TuRC, acts as the base for the growth of each microtubule.
 
-In motile cilia and eukaryotic flagella, the axoneme often contains nine peripheral doublets and two central microtubules. Axonemal dyneins generate relative sliding, converted into bending by constraints between doublets. Primary cilia generally have a nine-plus-zero organization and sensory functions; exceptions exist, so counting alone does not describe every ciliary structure.
+A microtubule alternates phases of growth and phases of shrinkage. This behaviour is called **dynamic instability**. Dimers add to the plus end bound to GTP, and shortly afterwards the GTP is hydrolysed to GDP. As long as addition is fast, the end carries a cap of GTP-tubulin that stabilises it. If the cap is lost, the microtubule shrinks rapidly. The switch from growth to shrinkage is called catastrophe, the opposite switch is called rescue.
+
+Microtubules act as tracks for **motor proteins**, which walk along the filament consuming ATP and carry vesicles and organelles.
+
+- **Kinesins** generally move towards the plus end, that is, towards the periphery of the cell.
+- **Dynein** moves towards the minus end, that is, towards the centre.
+
+The **cilia** and **flagella** of eukaryotes are projections of the cell supported by a bundle of microtubules, the **axoneme**. In motile cilia and flagella the axoneme has nine pairs of microtubules arranged in a circle and two microtubules in the centre (9+2 structure). Dyneins make one pair slide on its neighbour. Because the pairs are linked together, the sliding becomes bending and the cilium bends. Primary cilia, present as a single copy on many cells, generally lack the central pair (9+0 structure), are immotile and receive signals from the environment.
 :::
 
 :::definizione{#actina-intermedi titolo="Actin networks and mechanical resistance"}
-Actin forms polarized filaments whose dynamics are influenced by ATP binding and hydrolysis. Arp2/3 promotes branched networks suited to protrusions at the cell edge; formins favour elongation of unbranched filaments. Different myosins convert ATP into movement or tension on actin. In the sarcomere, relative sliding decreases the distance between Z lines while filament lengths remain substantially constant.
+**Actin filaments** (microfilaments) are the thinnest filaments of the cytoskeleton. They are made of actin units bound to ATP and, like microtubules, have two different ends. They are concentrated beneath the plasma membrane, where they set the shape of the cell and produce its movements. Two groups of proteins organise the filaments in different ways.
 
-Rho, Rac and Cdc42 coordinate contractility, protrusions and polarity. In the model of chemotaxis on an adhesive surface, a neutrophil combines front advancement, substrate adhesion and rear retraction. In confined three-dimensional environments, it can use migration modes less dependent on integrin-mediated adhesion. Dystrophin helps transmit forces from the actin system towards muscle membrane complexes and the matrix; damage to that connection makes the membrane more vulnerable during contraction.
+- The **Arp2/3** complex starts a new filament from the side of an existing one. The result is a branched network, which pushes forward the edge of a moving cell.
+- **Formins** elongate straight, unbranched filaments.
 
-**Intermediate filaments**, such as keratins and lamins, increase resistance to deformation. Antiparallel association of subunits contributes to apolar assembly. They do not provide a track for kinesins, dyneins or myosins. Lamins support the nuclear envelope; LINC complexes connect nuclear structures and the cytoskeleton across that envelope. The three networks interact, but the predominant function of each helps interpret the phenotype of a selective defect.
+**Myosins** are the motor proteins of actin. They consume ATP to slide along the filaments. In muscle the unit that contracts is the **sarcomere**, bounded by two Z lines. Myosin pulls the actin filaments towards the centre of the sarcomere, so the two Z lines move closer and the muscle shortens. The filaments slide over one another and their length stays unchanged.
+
+Three small proteins, **Rho**, **Rac** and **Cdc42**, coordinate actin in moving cells. A neutrophil, for example, is a white blood cell that moves towards the site of an infection by following a chemical signal (chemotaxis). Its movement on a surface repeats in three phases: the cell extends its front edge, adheres to the surface and retracts its rear.
+
+In muscle the protein **dystrophin** links actin filaments to the plasma membrane and, through it, to the external matrix. When dystrophin is missing, as in Duchenne muscular dystrophy, the membrane tears during contractions.
+
+**Intermediate filaments** are the strongest and serve to withstand mechanical forces. Examples are the **keratins** of epithelial cells and the **lamins**, which form a supporting network beneath the nuclear envelope. Unlike the other two types of filament they have two identical ends, so no motor protein travels along them. In diseases where a keratin is defective the skin blisters at the slightest rubbing, because the cells break.
 
 ![Comparison of actin, microtubules and intermediate filaments](/figure/biologia-semestre-filtro/strutture-cellulari/citoscheletro-en.svg)
 :::
