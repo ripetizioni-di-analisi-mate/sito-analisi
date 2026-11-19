@@ -9,6 +9,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { CODICI_LINGUA, prefissoLingua } from '../src/data/codici-lingua.mjs';
+import { alternativaStudio } from './risorse-studio.mjs';
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { CATALOGO_USA_PUBBLICO } from '../src/data/cataloghi-studio.mjs';
@@ -1924,14 +1925,14 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
-    // I vecchi link inglesi alle definizioni possono precedere la traduzione.
-    // Riapri la stessa voce italiana solo se esiste, finché quella inglese non è pronta.
-    if (risposta.status === 404 && info?.tipo === 'voce' && info.pref === '/en' && (req.method === 'GET' || req.method === 'HEAD')) {
-      const originale = new URL(req.url);
-      originale.pathname = `/${info.materia}/${info.argomento}/teoria/${info.ancora}`;
-      const verifica = await env.ASSETS.fetch(new Request(originale, { method: 'HEAD' }));
-      if (verifica.status === 200 && verifica.headers.get('content-type')?.includes('text/html'))
-        return new Response(null, { status: 302, headers: { location: originale.pathname + originale.search, 'cache-control': 'no-store' } });
+    if (risposta.status === 404 && (req.method === 'GET' || req.method === 'HEAD')) {
+      const alternativa = alternativaStudio(url.pathname);
+      if (alternativa) {
+        const destinazione = new URL(alternativa.percorso, url);
+        const verifica = await env.ASSETS.fetch(new Request(destinazione, { method: 'HEAD' }));
+        if (verifica.status === 200 && verifica.headers.get('content-type')?.includes('text/html'))
+          return new Response(null, { status: alternativa.stato, headers: { location: destinazione.pathname + url.search, 'cache-control': 'no-store' } });
+      }
     }
     if (orientamentoRiservato) risposta = rispostaPrivataOrientamento(risposta);
     // Indirizzi tecnici di Cloudflare (*.workers.dev, anteprime dei rami): mai negli indici, la pagina vera è su ripetizionidianalisi.com.

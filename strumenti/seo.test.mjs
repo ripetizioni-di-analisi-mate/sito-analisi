@@ -175,3 +175,39 @@ test('gli estratti SEO provengono soltanto dalla traccia pubblica', async () => 
   assert.equal(estrattoTraccia('Calcolare\n$$\nx^2\n$$\n\n:::soluzione\nTesto riservato.'), '');
   assert.equal(estrattoTraccia('## Svolgimento\n\n' + domanda, true), '');
 });
+
+test('gli URL didattici storici propongono lo stesso contenuto o la raccolta di svolti della materia', async () => {
+  const { alternativaStudio } = await import('../worker/risorse-studio.mjs');
+  for (const percorso of ['/fisica-superiori-3/misure-vettori/teoria/propagazione', '/analisi-1/limiti/domande',
+    '/analisi-1/prove-d-esame/domande', '/fisica-2/teoremi', '/analisi-1/simulazione', '/videocorsi/algebra']) {
+    assert.deepEqual(alternativaStudio('/en' + percorso), { percorso, stato: 302 });
+  }
+  for (const pref of ['', '/en']) {
+    assert.deepEqual(alternativaStudio(pref + '/algebra-lineare/prove-d-esame/esercizi-svolti'),
+      { percorso: pref + '/algebra-lineare/esercizi-svolti-gratuiti', stato: 301 });
+  }
+  for (const privato of ['/prova-font', '/en/account', '/en/lega', '/en/admin', '/en/analisi-1/ripasso-di-oggi/domande'])
+    assert.equal(alternativaStudio(privato), undefined);
+});
+
+test('la navigazione pubblica esclude link personali, script e copie integrali delle anteprime', async () => {
+  const { verificaScoperta } = await import('../scripts/scoperta-pagine.mjs');
+  const directory = await mkdtemp(join(tmpdir(), 'seo-link-'));
+  try {
+    await mkdir(join(directory, 'vetrine'));
+    const pagine = [];
+    for (const [nome, percorso, corpo] of [
+      ['index', '/', '<section data-solo-sessione><a href="/solo-account">Account</a></section><a href="/corso">Corso</a>'],
+      ['corso', '/corso', '<a href="/solo-account">Soluzione completa</a>'],
+      ['esercizio', '/esercizio', 'Esercizio'],
+      ['solo-account', '/solo-account', 'Riservato'],
+      ['en', '/en', 'Home'],
+    ]) {
+      const path = join(directory, nome + '.html');
+      await writeFile(path, '<main>' + corpo + '</main>');
+      pagine.push({ path, location: sito + percorso, alternates: percorso === '/' ? [{ href: sito + '/en' }] : [] });
+    }
+    await writeFile(join(directory, 'vetrine/corso.html'), '<script>const s = \'<a href="/solo-account">\';</script><a href="/esercizio#traccia">Traccia</a>');
+    assert.deepEqual(await verificaScoperta(directory, pagine), { dirette: 4, totali: 5, orfane: [sito + '/solo-account'] });
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
