@@ -5,9 +5,12 @@
 // 03/11: in testa le domande a tempo e la simulazione a quiz dei concorsi, gratuite anche senza account (richiesta di Carmine).
 // 03/11 (SEO internazionale): la stessa riga anche nella home inglese, con le pagine gratuite tradotte.
 // 04/11: tolto il glossario (richiesta di Carmine).
+// 19/11: in testa gli esercizi svolti gratuiti di Analisi 1, prima linkati dalla frase introduttiva della home, tolta (richiesta di Carmine).
 import type { Lingua } from '../i18n';
 import { url } from '../lib/url';
+import { percorsoRaccolta, raccolteSvolti } from '../lib/raccolte-svolti';
 const { lingua = 'it', usa = false } = Astro.props as { lingua?: Lingua; usa?: boolean };
+const raccoltaAnalisi = !usa && (lingua === 'it' || lingua === 'en') && (await raccolteSvolti(lingua)).has('analisi-1');
 const voci = usa ? [
   { href: url('/us/calculus-1#course-practice'), titolo: 'Timed questions' },
   { href: url('/us/calculus-1/practice-exam'), titolo: 'Exam simulations' },
@@ -25,9 +28,11 @@ const voci = usa ? [
   { href: '/formulari?lingua=it', titolo: 'Formelsammlungen (Italienisch)' },
   { href: '/en/domande-a-tempo?lingua=en', titolo: 'Quiz mit Zeitlimit (Englisch)' },
 ] : lingua === 'en' ? [
+  ...(raccoltaAnalisi ? [{ href: '/en' + percorsoRaccolta('analisi-1'), titolo: 'Calculus 1 worked examples' }] : []),
   { href: '/en/domande-a-tempo', titolo: 'Timed questions' },
   { href: '/en/formulari', titolo: 'Formula sheets' },
 ] : [
+  ...(raccoltaAnalisi ? [{ href: percorsoRaccolta('analisi-1'), titolo: 'Esercizi svolti di Analisi 1' }] : []),
   { href: '/domande-a-tempo', titolo: 'Domande a tempo' },
   { href: '/concorsi/simulazione', titolo: 'Simulazioni a quiz' },
   { href: '/matematica-da-zero', titolo: 'Matematica zero' },
