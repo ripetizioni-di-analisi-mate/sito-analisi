@@ -6,13 +6,13 @@ sommario: Come ricavare il tipo e il valore di un’espressione C17 e controllar
 ## Oggetti, valori e costanti
 
 :::definizione{#oggetti-e-tipi titolo="Oggetto e tipo"}
-Un **oggetto** è una regione di memoria il cui contenuto può rappresentare valori. In una definizione come `int count = 12;`, il nome `count` designa un oggetto di tipo `int` e `12` ne è l’inizializzatore. Il tipo stabilisce l’insieme dei valori ammessi e le regole per accedere all’oggetto e usarne il valore. Per interpretare `count + 2` occorre conoscere il tipo di entrambi gli operandi.
+Una **variabile** è una zona di memoria con un nome, in cui il programma conserva un valore che può cambiare. La riga `int count = 12;` crea una variabile di nome `count` che contiene il numero $12$. La parola `int` è il **tipo** della variabile. Il tipo stabilisce quali valori la variabile può contenere, quanta memoria occupa e quali operazioni sono ammesse; `int` indica un numero intero. Nello standard del C la zona di memoria si chiama **oggetto**, e in questo corso i due termini si usano come sinonimi.
 
-L’**inizializzazione** attribuisce un valore quando l’oggetto viene definito. L’istruzione `count = 15;` eseguita dopo la definizione è un assegnamento. Il valore dell’espressione a destra viene convertito nel tipo dell’oggetto a sinistra e memorizzato nell’oggetto. In questo caso `15` è già un `int`, perciò viene memorizzato senza variazioni.
+Dare il valore nella stessa riga in cui la variabile viene creata si chiama **inizializzazione**. Cambiarlo in seguito, come in `count = 15;`, si chiama **assegnamento**. Nell’assegnamento il segno `=` è un comando, con cui si calcola il valore a destra e lo si copia nella variabile a sinistra, al posto del valore precedente.
 :::
 
 :::esempio{titolo="Valore iniziale e valore aggiornato"}
-Nel frammento seguente `total` ha un valore definito prima di essere letto.
+Nel frammento seguente ogni variabile riceve un valore prima di essere usata.
 
 ```c
 int total = 4;
@@ -20,45 +20,45 @@ int next = total + 3;
 total = next + 2;
 ```
 
-La prima riga fissa `total` a $4$. La seconda usa quel valore per inizializzare `next` a $7$. La terza legge `next` e poi assegna $9$ a `total`. Il valore di `next` resta $7$, perché l’inizializzazione ha memorizzato il risultato della somma in un oggetto distinto.
+La prima riga crea `total` con valore $4$. La seconda calcola $4+3$ e crea `next` con valore $7$. La terza calcola $7+2$ e mette $9$ in `total`, al posto di $4$. Il valore di `next` resta $7$, perché `next` è una variabile distinta e la terza riga la legge soltanto.
 :::
 
 :::definizione{#limiti-dei-tipi titolo="Limiti, byte e sizeof"}
-Gli interi di tipo `int` coprono almeno l’intervallo da $-32767$ a $32767$. `unsigned int` parte da $0$ e arriva almeno a $65535$. I limiti effettivi `INT_MIN`, `INT_MAX` e `UINT_MAX` sono definiti in `<limits.h>`. Poiché C17 ammette implementazioni con limiti diversi, un calcolo che dipende dal massimo deve usare il limite del tipo oppure dichiarare la macchina assunta.
+Una variabile occupa un numero fissato di byte, quindi può contenere soltanto i numeri di un certo intervallo. Sulla maggior parte dei calcolatori attuali un `int` occupa $4$ byte e contiene gli interi da $-2\,147\,483\,648$ a $2\,147\,483\,647$. Il tipo `unsigned int` contiene soltanto interi non negativi, di solito da $0$ a $4\,294\,967\,295$. Lo standard garantisce intervalli più piccoli, almeno da $-32767$ a $32767$ per `int` e almeno da $0$ a $65535$ per `unsigned int`, perché i valori effettivi dipendono dal calcolatore e dal compilatore. Un programma li trova nell’header `<limits.h>` con i nomi `INT_MIN`, `INT_MAX` e `UINT_MAX`.
 
-`sizeof` esprime una dimensione in byte del C e il suo risultato ha tipo `size_t`, un tipo intero senza segno. Per `char`, `signed char` e `unsigned char` la dimensione è sempre $1$. Il numero di bit in un byte è `CHAR_BIT` ed è almeno $8$. `sizeof(int) * CHAR_BIT` conta i bit della rappresentazione dell’oggetto, inclusi eventuali bit di riempimento. Per conoscere l’intervallo di `int` si leggono quindi i limiti, anziché ricavarlo dalla sola dimensione.
+L’operatore `sizeof` dà il numero di byte occupati da un tipo o da una variabile; per esempio `sizeof(int)` vale di solito $4$. Il risultato ha tipo `size_t`, un tipo intero senza segno usato per le dimensioni. Il tipo `char` occupa sempre $1$ byte, e il numero di bit di un byte è `CHAR_BIT`, che vale almeno $8$. Per conoscere l’intervallo di un tipo si usano i limiti di `<limits.h>`.
 
-Il tipo `char` è distinto da `signed char` e da `unsigned char`. L’implementazione specifica quale dei due intervalli adotta per `char`. Quando serve un piccolo intero con segno dichiarato in modo esplicito si può usare `signed char`.
+Il tipo `char` contiene un carattere, memorizzato come un piccolo intero. Se questo intero abbia il segno oppure no dipende dal compilatore. Quando serve un piccolo intero con un segno certo si usano `signed char` oppure `unsigned char`, che sono tipi distinti da `char`.
 :::
 
 :::definizione{#letterali titolo="Costanti scritte nel sorgente"}
-Il tipo di una **costante** dipende dalla sua forma. Le piccole costanti decimali intere senza suffisso, come `12`, sono `int`. Il suffisso `u` in `12u` dà qui il tipo `unsigned int`. Per costanti più grandi valgono le liste dei tipi candidati dipendenti da base e suffisso. Si seleziona il primo tipo della lista che rappresenta il valore.
+Un numero scritto direttamente nel sorgente, come `12`, si chiama **costante**, e ha anch’esso un tipo, che dipende da come è scritto. Una costante intera senza suffisso, come `12`, è un `int`; se il valore è troppo grande per un `int`, il compilatore usa un tipo intero più grande. Con il suffisso `u`, come in `12u`, la costante è un `unsigned int`.
 
-La forma `14.0`, priva di suffisso ma con il punto, è `double`. `14.0f` è `float` e `14.0L` è `long double`. Nelle costanti del sorgente il separatore decimale è il punto. Il locale numerico riguarda la conversione di testo durante l’esecuzione e si studia con l’ingresso-uscita formattato.
+Una costante con il punto, come `14.0`, è un `double`, cioè un numero in virgola mobile. Con il suffisso `f`, come `14.0f`, è un `float`, che ha meno cifre di precisione; con il suffisso `L`, come `14.0L`, è un `long double`. Nel sorgente il separatore decimale è sempre il punto.
 :::
 
 :::osservazione
-La scrittura `-7` applica l’operatore unario `-` alla costante intera `7`. Questa distinzione diventa rilevante agli estremi dell’intervallo. Per citare il minimo di `int` in un programma portabile, il nome `INT_MIN` esprime direttamente il limite dell’implementazione. I termini «larghezza», «segno» e «rappresentazione» assumono così il significato del tipo dichiarato.
+La scrittura `-7` è l’operatore `-` applicato alla costante `7`. La distinzione conta soltanto per il minimo di `int`. Con `int` di $4$ byte il numero $2\,147\,483\,648$ supera `INT_MAX`, quindi la costante `2147483648` ha un tipo più grande di `int`, e così anche `-2147483648`. Per indicare il minimo si usa il nome `INT_MIN`.
 :::
 
 ## Raggruppamento, valutazione ed effetti
 
 :::definizione{#operatori-aritmetici titolo="Operandi e risultati"}
-Gli operatori aritmetici `+`, `-`, `*` e `/` combinano due valori aritmetici e producono un valore. L’operatore `%` richiede operandi interi. Il tipo comune dei due operandi si determina con le promozioni e le conversioni aritmetiche usuali. Si applica poi l’operazione a valori del tipo comune.
+Gli operatori `+`, `-`, `*` e `/` eseguono somma, differenza, prodotto e divisione di due numeri. L’operatore `%` dà il resto della divisione fra due interi; per esempio `17 % 5` vale $2$. Se i due operandi hanno tipi diversi, prima dell’operazione vengono portati a un tipo comune, con le regole descritte più avanti in questo capitolo, e il risultato ha quel tipo.
 
-Un confronto come `a < b` o `a != b` produce un `int` che vale $1$ quando la relazione è vera e $0$ quando è falsa. Si può quindi sommare il risultato di due confronti per contare quante condizioni risultano vere. I confronti sugli interi esaminano i valori dopo le conversioni previste per i rispettivi operandi.
+Gli operatori di confronto sono `<`, `<=`, `>`, `>=`, `==` (uguale) e `!=` (diverso). In C il risultato di un confronto è un `int`, che vale $1$ se la relazione è vera e $0$ se è falsa. Per esempio `3 < 5` vale $1$ e `3 == 5` vale $0$. Per questo la somma `(a > 0) + (b > 0)` conta quanti fra `a` e `b` sono positivi.
 :::
 
 :::definizione{#precedenza titolo="Precedenza e associatività"}
-La **precedenza** determina quali operatori raccolgono per primi i propri operandi nella struttura sintattica di un’espressione. A parità di precedenza, l’**associatività** risolve il raggruppamento. I cast e gli altri operatori unari legano più di `*`, `/` e `%`, che a loro volta legano più di `+` e `-`. Gli operatori di confronto relazionale seguono quelli aritmetici. Gli operatori di uguaglianza seguono i confronti relazionali.
+Quando un’espressione contiene più operatori, la **precedenza** stabilisce quale si applica per primo, come in matematica. Dal più forte al più debole l’ordine è il seguente. Vengono prima gli operatori con un solo operando, come il segno `-` e il cast; poi `*`, `/` e `%`; poi `+` e `-`; poi i confronti `<`, `<=`, `>`, `>=`; infine `==` e `!=`. Fra operatori con la stessa precedenza decide l’**associatività**, che per quelli aritmetici va da sinistra a destra.
 
-Poiché la sottrazione associa da sinistra, `18 - 7 - 4` si raggruppa come `(18 - 7) - 4` e vale $7$. In `14 - 2 * 5` la moltiplicazione forma l’operando a destra della sottrazione e dà `14 - (2 * 5)`, che vale $4$. Le parentesi possono imporre un raggruppamento diverso.
+Per esempio in `14 - 2 * 5` la moltiplicazione ha precedenza, quindi l’espressione equivale a `14 - (2 * 5)` e vale $4$. In `18 - 7 - 4` i due operatori hanno la stessa precedenza e si procede da sinistra, quindi l’espressione equivale a `(18 - 7) - 4` e vale $7$. Le parentesi tonde impongono un ordine diverso, e `(14 - 2) * 5` vale $60$.
 :::
 
 :::definizione{#effetti-collaterali titolo="Valori, effetti e sequenze"}
-La valutazione di un’espressione può calcolare un valore e produrre un **effetto collaterale**, per esempio aggiornare un oggetto. `n++` produce il valore precedente di `n` e ne incrementa il contenuto. `++n` produce il valore dopo l’incremento. In entrambi i casi l’operazione presuppone che l’incremento sia definito per il tipo di `n`.
+Alcune espressioni, oltre a produrre un valore, modificano una variabile, e la modifica si chiama **effetto collaterale**. L’assegnamento è il caso più comune. Gli operatori `++` e `--` aumentano e diminuiscono di uno una variabile, e hanno due forme. L’espressione `n++` (post-incremento) vale quanto `n` valeva *prima* dell’aumento. L’espressione `++n` (pre-incremento) vale quanto `n` vale *dopo* l’aumento. In entrambi i casi alla fine `n` è aumentata di uno.
 
-L’inizializzatore completo e l’espressione completa di un’istruzione sono separati dalla sequenza di esecuzione delle istruzioni. Nel frammento seguente la lettura di `n` nella terza riga avviene a incremento compiuto.
+Le istruzioni si eseguono una dopo l’altra, e gli effetti di una riga sono completi prima che cominci la successiva. Nel frammento seguente la terza riga legge quindi `n` già aumentata.
 
 ```c
 int n = 6;
@@ -66,21 +66,21 @@ int before = n++;
 int after = n;
 ```
 
-Si ottengono `before` uguale a $6$ e `after` uguale a $7$. I due valori rispondono a due letture distinte, una operata dal post-incremento e l’altra dall’inizializzatore successivo.
+La variabile `before` vale $6$, cioè il valore di `n` prima dell’aumento, e `after` vale $7$. Con `int before = ++n;` nella seconda riga, entrambe varrebbero $7$.
 :::
 
 :::attenzione
-Le parentesi determinano la struttura dell’espressione. Per esempio `(a + b) + c` impone quale somma è operando della seconda. L’ordine in cui sono valutati operandi o argomenti dipende dalle garanzie di sequenziamento del linguaggio. Se un’espressione modifica un oggetto scalare e lo legge in una valutazione non sequenziata rispetto alla modifica, si ha comportamento indefinito. Una forma portabile separa l’aggiornamento e l’uso in espressioni complete successive.
+Il C non stabilisce in quale ordine vengono calcolati i due operandi di un operatore come `+`, né gli argomenti di una funzione. Di solito l’ordine non conta, ma conta quando la stessa espressione modifica una variabile e la legge in un altro punto. Un’espressione come `n + n++` non ha un valore determinato, e lo standard classifica il caso come **comportamento indefinito**, definito più avanti in questo capitolo. La forma corretta separa la modifica e l’uso in due istruzioni, come nel frammento precedente.
 :::
 
 ## Divisione e resto tra interi
 
 ::::teorema{#quoziente-e-resto titolo="Identità del quoziente e del resto"}
-Siano `a` e `b` di tipo `int`, con `b` diverso da zero e con il quoziente troncato rappresentabile in `int`. Si denotino con $q$ il valore di `a / b` e con $r$ quello di `a % b`. La divisione tronca verso zero e vale l’identità
+Fra due interi l’operatore `/` calcola la divisione intera, cioè scarta la parte dopo la virgola; `17 / 5` vale $3$ e `17 % 5` vale $2$. Con i numeri negativi lo scarto avviene verso lo zero, quindi `-17 / 5` vale $-3$. In generale, siano `a` e `b` di tipo `int`, con `b` diverso da zero e con il quoziente rappresentabile in `int`. Indicati con $q$ il valore di `a / b` e con $r$ quello di `a % b`, vale l’identità
 $$
 a=bq+r,\qquad |r|<|b|.
 $$
-Se il resto è diverso da zero, ha lo stesso segno del dividendo $a$. L’identità permette di calcolare entrambi i valori con una sola divisione e controllare il risultato sostituendoli nell’uguaglianza.
+Se il resto è diverso da zero, ha lo stesso segno del dividendo $a$; per esempio `-17 % 5` vale $-2$, infatti $-17=5\cdot(-3)+(-2)$. L’identità permette di controllare quoziente e resto sostituendoli nell’uguaglianza.
 
 :::dimostrazione
 Scriviamo $x=\dfrac{a}{b}$ per il rapporto esatto e $q=\operatorname{trunc}(x)$ per il suo troncamento verso zero. Il resto previsto dal linguaggio, quando il quoziente è rappresentabile, è $r=a-bq$. Dunque $r=b(x-q)$. Poiché $|x-q|<1$, si ha $|r|<|b|$.
@@ -90,120 +90,124 @@ Quando $x-q$ è diverso da zero, il suo segno è quello di $x$. Moltiplicandolo 
 ::::
 
 :::esempio{titolo="Dividendo e divisore negativi"}
-Per $a=-23$ e $b=-5$ il rapporto esatto è positivo e appartiene all’intervallo da $4$ a $5$, estremi esclusi. Il troncamento dà $q=4$. Il resto si ricava con
+Per $a=-23$ e $b=-5$ il rapporto esatto è $4{,}6$. Scartando la parte dopo la virgola si ottiene $q=4$. Il resto si ricava dall’identità,
 $$
 r=-23-(-5)\cdot4=-3 .
 $$
-La verifica dà $(-5)\cdot4+(-3)=-23$. Il resto è negativo anche con divisore negativo, perché il segno pertinente è quello del dividendo.
+La verifica dà $(-5)\cdot4+(-3)=-23$. Il resto è negativo perché il dividendo è negativo; il segno del divisore non conta.
 :::
 
 :::attenzione
-I prerequisiti riguardano sia `/` sia `%`. Se `b` vale zero oppure il quoziente è fuori dall’intervallo di `int`, il comportamento di entrambe le espressioni è indefinito. Un caso dipendente dai limiti è `INT_MIN / -1`. Quando `INT_MIN` è più piccolo di `-INT_MAX`, l’opposto matematico di `INT_MIN` è fuori intervallo. L’analisi deve quindi verificare il denominatore e la rappresentabilità prima di assegnare un valore alle espressioni.
+Le espressioni `a / b` e `a % b` non hanno un risultato in due casi. Il primo è la divisione per zero. Il secondo, con `int` di $4$ byte, è `INT_MIN / -1`, perché il risultato matematico sarebbe $2\,147\,483\,648$, che supera `INT_MAX` di uno. In entrambi i casi il comportamento del programma è indefinito, quindi il programma deve controllare i valori prima di dividere.
 :::
 
 ## Scelta del tipo prima del calcolo
 
 :::definizione{#promozioni-intere titolo="Promozioni intere"}
-Nelle espressioni soggette a **promozioni intere**, come l’addizione di due `short`, gli operandi di tipo intero con rango inferiore a `int` sono convertiti in `int` se il tipo rappresenta tutti i loro valori. In caso contrario sono convertiti in `unsigned int`. I ranghi stabiliscono un ordine tra i tipi interi. Per i tipi con segno standard il rango cresce da `signed char` a `short`, `int`, `long` e `long long`. Il tipo senza segno corrispondente ha lo stesso rango.
+Il C esegue i calcoli fra interi almeno nel tipo `int`. I tipi interi più piccoli di `int`, cioè `char` e `short` nelle loro varianti, vengono convertiti in `int` ogni volta che compaiono in un’operazione aritmetica; la conversione si chiama **promozione intera** e lascia invariato il valore. Lo standard ordina i tipi interi per **rango**, dal più piccolo al più grande, cioè `char`, `short`, `int`, `long`, `long long`; un tipo senza segno ha lo stesso rango del corrispondente con segno.
 
-Per esempio, due `signed short` inizializzati a $100$ e $200$ sono promossi a `int` prima della somma. Gli operandi e il risultato della somma sono quindi `int`. Un `unsigned short` è promosso a `int` quando `USHRT_MAX` è al più `INT_MAX` e a `unsigned int` negli altri casi ammessi.
+Per esempio, se `a` e `b` sono due `short` che valgono $100$ e $200$, in `a + b` entrambi vengono promossi a `int` e il risultato $300$ è un `int`. Nel caso raro in cui `int` non contiene tutti i valori del tipo di partenza, come può accadere per `unsigned short` su macchine in cui `short` e `int` hanno la stessa dimensione, la promozione avviene verso `unsigned int`.
 :::
 
 :::definizione{#conversioni-aritmetiche titolo="Conversioni aritmetiche usuali"}
-Per gli operatori aritmetici a due operandi reali, le **conversioni aritmetiche usuali** determinano un tipo comune. Se uno dei due operandi ha tipo `long double`, l’altro è convertito in `long double`. In assenza di `long double`, si applica lo stesso criterio a `double` e poi a `float`.
+Quando i due operandi di un operatore aritmetico hanno tipi diversi, il C li porta a un tipo comune prima di calcolare, con regole chiamate **conversioni aritmetiche usuali**. L’idea è che prevale il tipo più capiente. Se uno dei due è in virgola mobile, l’altro viene convertito in quel tipo; fra tipi in virgola mobile l’ordine crescente è `float`, `double`, `long double`. Per esempio in `7 + 2.5` il $7$ diventa $7{,}0$ e il risultato è il `double` $9{,}5$.
 
-Se entrambi gli operandi sono interi, si applicano prima le promozioni. Se i tipi risultanti coincidono, il tipo comune è quello. Se hanno lo stesso segno e tipi diversi, il tipo di rango minore è convertito in quello di rango maggiore. In caso di segno misto, sia $U$ il tipo senza segno e sia $S$ quello con segno. La conversione dipende dal rango e dall’intervallo di ciascun tipo.
+Se entrambi sono interi, si applicano prima le promozioni. Se dopo le promozioni i tipi sono uguali, quello è il tipo comune. Se sono entrambi con segno o entrambi senza segno, quello di rango minore viene convertito nell’altro; per esempio in una somma fra un `int` e un `long` il calcolo avviene in `long`. Se uno è con segno, di tipo $S$, e l’altro senza segno, di tipo $U$, valgono tre casi.
 
 - Se $U$ ha rango almeno pari a $S$, l’operando di tipo $S$ è convertito in $U$.
 - Se $S$ ha rango maggiore e rappresenta ogni valore di $U$, l’operando di tipo $U$ è convertito in $S$.
 - Altrimenti entrambi gli operandi sono convertiti nel tipo senza segno corrispondente a $S$.
 
-In `9u + (-2)` entrambi i tipi hanno il rango di `int`, dunque l’operazione si svolge in `unsigned int`. La conversione dell’operando negativo segue la regola modulare degli interi senza segno.
+Il caso più comune è il primo. In `9u + (-2)` i tipi sono `unsigned int` e `int`, che hanno lo stesso rango, quindi $-2$ viene convertito in `unsigned int`. Un numero negativo convertito in un tipo senza segno diventa un numero positivo molto grande, secondo la regola del teorema sull’aritmetica senza segno più avanti in questo capitolo; il risultato finale della somma è comunque $7$.
 :::
 
 :::definizione{#conversioni-assegnamento titolo="Cast e conversioni di destinazione"}
-Il **cast** `(T) expr` converte il risultato di `expr` nel tipo `T`. L’inizializzazione e l’assegnamento effettuano una conversione alla destinazione anche quando il cast è assente. Per individuare i valori intermedi si distingue la conversione che precede l’operatore dalla conversione che memorizza il risultato.
+Il **cast** `(T) expr` converte il valore di `expr` nel tipo `T`; per esempio `(double) 3` vale $3{,}0$. Una conversione avviene anche senza cast in ogni inizializzazione e in ogni assegnamento, perché il valore a destra viene convertito nel tipo della variabile a sinistra. In `int k = 2.9;` la variabile `k` riceve $2$.
 
-La conversione di un valore finito in virgola mobile a un tipo intero diverso da `_Bool` elimina la parte frazionaria, con troncamento verso zero. Il valore troncato deve essere rappresentabile nel tipo di destinazione. Per esempio, su un sistema binario, `(int)(-5.75)` vale $-5$. La conversione di un intero in un tipo reale conserva il valore quando è rappresentabile esattamente. Se il valore è compreso nell’intervallo reale ma è tra due valori rappresentabili, la scelta tra i due adiacenti è definita dall’implementazione.
+La conversione da virgola mobile a intero elimina la parte dopo la virgola, senza arrotondare, quindi `(int) 5.75` vale $5$ e `(int)(-5.75)` vale $-5$. Il valore così ottenuto deve stare nell’intervallo del tipo intero. La conversione da intero a virgola mobile conserva il valore quando il tipo di arrivo ha abbastanza cifre; per interi molto grandi il risultato è uno dei due valori rappresentabili più vicini.
 :::
 
 :::esempio{titolo="Posizione del cast nella divisione"}
-Si assume un `double` con base due e aritmetica secondo l’allegato F di C17, in arrotondamento al più vicino. Le due espressioni della figura differiscono per il punto in cui si converte un valore.
+Le due espressioni della figura contengono gli stessi numeri, ma il cast è applicato in due punti diversi e il risultato cambia.
 
 ![Le espressioni (double)(11 / 4) e (double)11 / 4. La prima esegue la divisione intera e vale 2,0. La seconda converte 11 e vale 2,75.](/immagini/informatica/tipi-ed-espressioni/schema-teoria-it.png)
 
-In `(double)(11 / 4)` i due operandi della divisione sono `int`. La divisione produce $2$, dal quale il cast ricava $2{,}0$. In `(double)11 / 4` il cast converte l’operando a sinistra prima della divisione. La conversione aritmetica porta anche il $4$ a `double`, quindi il rapporto è
+In `(double)(11 / 4)` la divisione viene calcolata per prima, fra due `int`. È quindi una divisione intera e vale $2$; il cast converte poi $2$ in $2{,}0$, e la parte frazionaria è già perduta. In `(double)11 / 4` il cast ha precedenza sulla divisione e converte $11$ in $11{,}0$. A questo punto i due operandi hanno tipi diversi, quindi anche $4$ viene convertito in `double`, e la divisione fra numeri in virgola mobile dà
 $$
 \dfrac{11}{4}=2+\dfrac{3}{4}=2{,}75 .
 $$
-Il valore è esatto in base due perché il denominatore della parte frazionaria è una potenza di $2$ e queste cifre rientrano nella precisione di `double`.
+Il risultato è esatto, perché $2{,}75=\dfrac{11}{4}$ ha per denominatore una potenza di $2$ e quindi una scrittura binaria finita.
 :::
 
 ## Risultati rappresentabili e semantica
 
 ::::teorema{#interi-unsigned titolo="Aritmetica modulo il numero di valori"}
-Sia $U$ un tipo intero senza segno con massimo $U_{\max}$. Poniamo $M=U_{\max}+1$ come intero matematico. Una conversione da un tipo intero a $U$ restituisce l’unico intero in $[0,M-1]$ congruente al valore di partenza modulo $M$. Un risultato matematico di somma, differenza o prodotto, quando l’operazione si esegue nel tipo $U$, è ridotto nello stesso intervallo.
+Nei tipi senza segno i calcoli non escono mai dall’intervallo, perché un risultato troppo grande o negativo viene riportato dentro con la regola del resto. Sia $U$ un tipo intero senza segno con massimo $U_{\max}$, e sia $M=U_{\max}+1$ il numero dei suoi valori; per un `unsigned int` di $4$ byte $M=2^{32}$. Il risultato di una somma, una differenza o un prodotto calcolati nel tipo $U$ è il resto della divisione del risultato matematico per $M$, cioè l’unico intero fra $0$ e $M-1$ che differisce dal risultato matematico per un multiplo di $M$. La stessa regola vale quando un intero di un altro tipo viene convertito in $U$.
 
 :::dimostrazione
-La regola di conversione aggiunge o sottrae il numero di valori $M$ fino a rientrare nell’intervallo. Due interi distinti dell’intervallo differiscono al più di $M-1$ in valore assoluto, quindi hanno resti distinti modulo $M$. Poiché l’intervallo contiene $M$ interi, ogni classe ha un rappresentante. Per l’aritmetica del tipo senza segno si applica la stessa riduzione al risultato matematico.
+Per rientrare nell’intervallo si aggiunge o si sottrae $M$ quante volte serve. Il valore ottenuto è unico, perché due interi distinti fra $0$ e $M-1$ differiscono al più di $M-1$ e quindi la loro differenza non è un multiplo di $M$.
 :::
 ::::
 
 :::esempio{titolo="Una sottrazione di unsigned int"}
-In `3u - 5u` il tipo dell’operazione è `unsigned int`. Il risultato matematico è $-2$. Posto $M=\mathrm{UINT\_MAX}+1$, il rappresentante in $[0,M-1]$ è $M-2$, cioè $\mathrm{UINT\_MAX}-1$. Come controllo, la somma in `unsigned int` di questo valore e `2u` è $0$.
+In `3u - 5u` i due operandi sono `unsigned int`, quindi il calcolo avviene in quel tipo. Il risultato matematico è $-2$, che è fuori dall’intervallo. Aggiungendo $M=\mathrm{UINT\_MAX}+1$ si ottiene $M-2=\mathrm{UINT\_MAX}-1$, che con `unsigned int` di $4$ byte è $4\,294\,967\,294$. Come controllo, sommando `2u` a questo valore si ottiene $M$, che riportato nell’intervallo dà $0$.
 :::
 
 :::definizione{#rappresentabilita titolo="Operazione e intervallo di risultato"}
-La **rappresentabilità** richiede che il valore risulti ammesso nel tipo pertinente. Per l’aritmetica ordinaria di tipo intero con segno, un risultato matematico fuori intervallo comporta comportamento indefinito. Per la conversione di un intero in un tipo con segno che non lo rappresenta, C17 prevede un risultato definito dall’implementazione oppure un segnale definito dall’implementazione. La distinzione dipende dall’operazione eseguita.
+Un valore è **rappresentabile** in un tipo se appartiene all’intervallo di quel tipo. Per gli interi con segno la regola del resto non vale. Se il risultato matematico di una somma, una differenza o un prodotto fra `int` esce dall’intervallo, si ha un **overflow** e il comportamento del programma è indefinito. Per esempio `INT_MAX + 1` non ha un valore su cui si possa contare. Diverso è il caso di una conversione, come l’assegnamento a un `int` di un valore troppo grande, in cui il risultato è deciso dal compilatore.
 
-Per verificare una somma `int` di `value` e `delta` con `delta > 0`, basta confrontare `value` con `INT_MAX - delta`. Il valore della differenza di soglia è rappresentabile, perché `delta` è già un `int` positivo. Se `value` è almeno `INT_MIN` e al più quella soglia, anche la somma è nell’intervallo. Questo controllo precede l’eventuale somma. Si ritrova lo stesso criterio analizzando le disuguaglianze $a+b\leq \mathrm{INT\_MAX}$ e $a+b\geq\mathrm{INT\_MIN}$.
+Il controllo va quindi fatto *prima* della somma. Se `delta` è positivo, la somma `value + delta` è rappresentabile quando `value <= INT_MAX - delta`. La sottrazione `INT_MAX - delta` non può dare overflow, perché `delta` è positivo. Per esempio, con `INT_MAX` uguale a $2\,147\,483\,647$ e `delta` uguale a $10$, la somma è sicura per `value` fino a $2\,147\,483\,637$. La condizione è la disuguaglianza $\mathrm{value}+\mathrm{delta}\leq \mathrm{INT\_MAX}$ con `delta` portato a destra.
 :::
 
 :::definizione{#categorie-comportamento titolo="Categorie previste dal C17"}
-Un comportamento **definito dall’implementazione** ammette una scelta tra possibilità consentite e richiede che l’implementazione documenti la scelta. L’intervallo adottato per `char` è un esempio. Il comportamento **non specificato** ammette possibilità consentite e l’implementazione può scegliere senza documentare quale valga in ciascun caso. Per esempio l’ordine di valutazione di due argomenti indipendenti può variare.
+Lo standard del C non fissa ogni dettaglio, e classifica i casi lasciati liberi in tre categorie.
 
-In presenza di comportamento **indefinito** lo standard non pone requisiti sul comportamento del programma per quel caso. Un’operazione aritmetica con segno fuori intervallo rientra in questa categoria. Quando la domanda richiede di classificare un’operazione, serve la categoria prevista dallo standard. Un valore osservato in un’esecuzione costituisce soltanto un’osservazione su quella esecuzione.
+- **Definito dall’implementazione.** Il compilatore sceglie fra alcune possibilità e documenta la scelta, che resta sempre la stessa. Un esempio è se `char` abbia il segno oppure no.
+- **Non specificato.** Il compilatore sceglie fra alcune possibilità senza doverlo documentare, e la scelta può cambiare da un punto all’altro del programma. Un esempio è l’ordine in cui vengono calcolati due argomenti di una funzione.
+- **Indefinito.** Lo standard non dice nulla su ciò che accade, e il programma può dare un risultato sbagliato, interrompersi o sembrare corretto. Esempi sono l’overflow di un `int` e la divisione per zero.
+
+Un programma corretto non esegue mai un’operazione dal comportamento indefinito. Il fatto che in una prova il programma stampi il valore atteso non dimostra che l’operazione sia definita, perché con un altro compilatore o con altre opzioni il risultato può cambiare.
 :::
 
 ## Scrittura numerica su stdout
 
 :::definizione{#printf-formati titolo="Specificatori di printf"}
-La funzione `printf`, dichiarata in `<stdio.h>`, scrive su `stdout`. La stringa di formato alterna caratteri ordinari, scritti direttamente, e specifiche di conversione, che stabiliscono come leggere e mostrare un argomento. Nelle chiamate a una funzione variadica, gli argomenti dopo la parte dichiarata sono soggetti alle promozioni predefinite. In particolare `float` diventa `double` e si applicano le promozioni intere.
+La funzione `printf`, dichiarata in `<stdio.h>`, stampa testo sull’uscita standard. Il primo argomento è la **stringa di formato**. I caratteri normali della stringa vengono stampati così come sono. Ogni **specifica di conversione**, che inizia con `%`, viene sostituita dal valore dell’argomento successivo, scritto nel modo indicato dalla specifica. Per esempio `printf("x = %d\n", 7);` stampa `x = 7` e va a capo, perché `\n` è il carattere di ritorno a capo. La specifica deve corrispondere al tipo dell’argomento.
 
-| Specifica | Tipo dell’argomento dopo le promozioni |
+| Specifica | Tipo dell’argomento |
 |---|---|
 | `%d` | `int` |
 | `%u` | `unsigned int` |
 | `%ld` | `long` |
-| `%zu` | `size_t`, con le eventuali promozioni |
+| `%zu` | `size_t` |
 | `%f` | `double` |
 | `%Lf` | `long double` |
 
-`%%` scrive il carattere `%` senza consumare un argomento. Se la scrittura riesce, `printf` restituisce il numero di caratteri trasmessi dalla chiamata. Se si verifica un errore di scrittura o di codifica, restituisce un valore negativo. Una specifica con tipo incompatibile con l’argomento produce comportamento indefinito.
+Un argomento `float` viene convertito automaticamente in `double`, e uno più piccolo di `int` in `int`, quindi `%f` e `%d` valgono anche per questi tipi. Per stampare il carattere `%` si scrive `%%`. `printf` restituisce il numero di caratteri stampati, oppure un valore negativo se la scrittura non riesce. Se una specifica non corrisponde al tipo dell’argomento, per esempio `%d` con un `double`, il comportamento è indefinito.
 :::
 
 :::definizione{#larghezza-e-precisione titolo="Larghezza di campo e precisione"}
-La **larghezza di campo** indica un minimo di caratteri per la conversione. Per impostazione predefinita, uno spazio viene inserito a sinistra per ciascun carattere mancante. In `%5d` la larghezza è $5$. Il valore $36$ occupa due caratteri e quindi richiede tre spazi iniziali. Il valore $123456$ occupa sei caratteri e viene scritto per intero.
+Fra `%` e la lettera si può scrivere un numero, la **larghezza di campo**, che è il numero minimo di caratteri occupati dal valore. Se il valore ne ha meno, vengono aggiunti spazi a sinistra; se ne ha di più, viene stampato per intero. Con `%5d` il valore $36$ è stampato con tre spazi davanti, e $123456$ è stampato con tutte le sue sei cifre. La larghezza serve a incolonnare i numeri.
 
-Per `f` la precisione è il numero di cifre dopo il separatore decimale. In `%.2f` la precisione è $2$. Per `d` la precisione indica invece il numero minimo di cifre e può anteporre zeri. Segno, cifre e separatore fanno parte del campo e concorrono alla larghezza.
+Dopo un punto si scrive la **precisione**. Con `%f` è il numero di cifre dopo il punto decimale, quindi `%.2f` stampa due decimali e $3{,}14159$ diventa `3.14`. Con `%d` è il numero minimo di cifre, ottenuto aggiungendo zeri a sinistra, quindi `%.3d` stampa $7$ come `007`. Il segno, le cifre e il punto decimale contano tutti nella larghezza.
 :::
 
 :::esempio{titolo="Allineare due campi"}
-Si assumono una realizzazione conforme all’allegato F di C17 in arrotondamento al più vicino, il locale numerico C e scrittura riuscita. Il frammento include `<stdio.h>`.
+Il frammento seguente, con `<stdio.h>` incluso, stampa un intero e un numero con due decimali, ciascuno in un campo di larghezza fissata.
 
 ```c
 printf("[%4d][%6.2f]", 17, 1.25);
 ```
 
-L’output è `[  17][  1.25]`. Il primo campo è largo $4$ e contiene due cifre. Il secondo è largo $6$ e la conversione `1.25` occupa quattro caratteri. In entrambi servono due spazi a sinistra. Le parentesi quadre sono caratteri ordinari e aggiungono quattro caratteri in tutto, quindi il valore restituito è $4+6+4=14$.
+Il testo stampato è `[  17][  1.25]`. Il primo campo è largo $4$ e il numero $17$ ha due cifre, quindi è preceduto da due spazi. Il secondo campo è largo $6$ e `1.25` occupa quattro caratteri, quindi è preceduto da due spazi. Le quattro parentesi quadre sono caratteri normali. In tutto i caratteri sono $4+6+4=14$, e questo è il valore restituito da `printf`.
 :::
 
 ## Lettura formattata e valori assegnati
 
 :::definizione{#scanf-formati titolo="Specificatori di scanf"}
-La funzione `scanf`, dichiarata in `<stdio.h>`, legge da `stdin`. Per ciascuna conversione che assegna un risultato si passa l’indirizzo dell’oggetto della destinazione. L’operatore `&` ricava tale indirizzo. Il formato deve corrispondere al tipo dell’oggetto.
+La funzione `scanf`, dichiarata in `<stdio.h>`, legge dall’**ingresso standard** `stdin`, che di solito è la tastiera, e mette i valori letti in variabili. Anche `scanf` usa una stringa di formato; per ogni specifica si passa l’**indirizzo** della variabile da riempire, che si ottiene scrivendo `&` davanti al nome. Per leggere un intero nella variabile `n` si scrive `scanf("%d", &n);`. L’indirizzo serve perché `scanf` deve modificare la variabile, e per farlo deve sapere dove si trova in memoria. La specifica deve corrispondere al tipo della variabile.
 
-| Specifica | Tipo dell’oggetto puntato |
+| Specifica | Tipo della variabile |
 |---|---|
 | `%d` e `%i` | `int` |
 | `%u` | `unsigned int` |
@@ -211,19 +215,19 @@ La funzione `scanf`, dichiarata in `<stdio.h>`, legge da `stdin`. Per ciascuna c
 | `%lf` | `double` |
 | `%Lf` | `long double` |
 
-`%d` riconosce un intero in base dieci. `%i` determina la base dall’inizio del campo. Per esempio `014` corrisponde a $12$ in base dieci con `%i`, mentre con `%d` il valore è $14$. Le conversioni numeriche saltano gli spazi bianchi iniziali prima del campo. Una direttiva di spazio bianco nel formato consuma zero o più caratteri di spazio bianco e si ferma al primo altro carattere o a fine ingresso.
+A differenza di `printf`, per un `double` si usa `%lf` e per un `float` si usa `%f`. `%d` legge un intero scritto in base dieci. `%i` riconosce anche le altre basi dal prefisso, quindi legge `014` come numero ottale, cioè $12$, mentre `%d` lo legge come $14$. Prima di un numero `scanf` salta spazi, tabulazioni e ritorni a capo. Uno spazio nella stringa di formato indica di saltare tutti gli spazi presenti in quel punto dell’ingresso, anche nessuno.
 :::
 
 :::definizione{#esito-lettura titolo="Esito e numero di assegnamenti"}
-Il valore restituito da `scanf` conta quanti oggetti ha assegnato. Se un campo non corrisponde, la funzione si arresta e restituisce il numero di assegnamenti già effettuati. Può restituire $0$ quando il primo campo è presente e non corrisponde. Se un fallimento di ingresso interviene prima che sia completata la prima conversione, il risultato è `EOF`. Questo caso include, per esempio, un ingresso vuoto nella lettura di un intero.
+`scanf` restituisce il numero di variabili che è riuscita a riempire. Questo valore va sempre controllato, perché l’ingresso può non contenere ciò che il programma si aspetta. Se un campo non ha la forma richiesta, per esempio lettere al posto di un numero, `scanf` si ferma in quel punto e restituisce il numero di variabili riempite fino a lì, che può essere $0$. Se l’ingresso finisce prima che sia stato letto il primo valore, restituisce il valore speciale `EOF`.
 
-Consideriamo `scanf("%d %lf", &count, &rate)` con `count` di tipo `int` e `rate` di tipo `double`. Con ingresso `8 stop`, il primo campo converte $8$ e il secondo si arresta sul testo `stop`. Il valore restituito è $1$. Il programma può quindi usare `count` come risultato di quella chiamata, mentre `rate` conserva il valore precedente. Una verifica che richiede $2$ assegnamenti distingue la lettura completa da quella parziale.
+Si consideri `scanf("%d %lf", &count, &rate)` con `count` di tipo `int` e `rate` di tipo `double`. Se l’ingresso è `8 stop`, il primo campo viene letto e `count` vale $8$; il secondo campo dovrebbe essere un numero ma trova `stop`, quindi la lettura si ferma. Il valore restituito è $1$ e `rate` conserva il valore che aveva prima. Il programma riconosce la lettura completa controllando che il valore restituito sia $2$.
 :::
 
 :::attenzione
-Le letture numeriche con `scanf` richiedono che il risultato riconosciuto sia rappresentabile nell’oggetto di destinazione. C17 definisce come indefinito il comportamento della conversione il cui risultato è fuori intervallo. Il controllo di ritorno è utile per individuare un errore di corrispondenza e per sapere quante assegnazioni sono avvenute. Per accettare testo arbitrario e controllare esplicitamente gli estremi numerici si può leggere una riga e usare `strtol`, come nel capitolo sui file di testo.
+Se il numero letto è troppo grande per la variabile, per esempio venti cifre lette con `%d`, il comportamento di `scanf` è indefinito, e il valore restituito non lo segnala. Per leggere dati di cui non si conosce la forma è più sicuro leggere l’intera riga come testo e convertirla con la funzione `strtol`, che segnala i valori fuori intervallo; il metodo è descritto nel capitolo sui file di testo.
 :::
 
 :::osservazione
-Il locale numerico C usa il punto nella rappresentazione decimale di ingresso e uscita. Le formule in italiano riportano invece la virgola. Nel frammento sorgente e nella riga di output della prova si conserva il carattere effettivo. Negli esempi numerici di formattazione si assume l’arrotondamento al più vicino su una realizzazione conforme all’allegato F di C17. Così `printf("%.2f", 1.25)` produce `1.25` nel locale C, mentre la stessa quantità scritta in una formula italiana è $1{,}25$.
+Nel sorgente e nel testo stampato dal programma il separatore decimale è il punto, mentre nelle formule di questo corso è la virgola. Così `printf("%.2f", 1.25)` stampa `1.25`, e la stessa quantità in una formula si scrive $1{,}25$. Negli esempi di stampa si assume inoltre che i numeri in virgola mobile siano arrotondati al valore più vicino, come avviene sui calcolatori comuni.
 :::
