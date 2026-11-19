@@ -11,37 +11,48 @@ const es = Astro.props.lingua === 'es';
 const fr = Astro.props.lingua === 'fr';
 const s = fr ? {
   breve: `Invite un ami et profitez chacun de ${SCONTO_INVITO} % de réduction`,
+  su: 'Inviter un ami', titolo: 'Invite un camarade de promo', lui: 'pour lui, sur sa première matière', te: 'pour toi, sur ton prochain achat', corto: 'Copier',
   copia: 'Copier le lien', copiato: 'Lien copié', come: 'Comment ça marche (en italien)',
   messaggio: `Je révise avec Ripetizioni di Analisi. Avec ce lien, tu bénéficies de ${SCONTO_INVITO} % de réduction sur ta première matière.`,
 } : es ? {
   breve: `Invita a un amigo y ambos tendrán un ${SCONTO_INVITO} % de descuento`,
+  su: 'Invita a un amigo', titolo: 'Trae a un compañero de clase', lui: 'para él, en su primera asignatura', te: 'para ti, en tu próxima compra', corto: 'Copiar',
   copia: 'Copiar enlace', copiato: 'Copiado', come: 'Cómo funciona (en italiano)',
   messaggio: `Estudio con Ripetizioni di Analisi. Con este enlace tienes un ${SCONTO_INVITO} % de descuento en tu primera asignatura.`,
 } : de ? {
   breve: `Freunde einladen und je ${SCONTO_INVITO} % Rabatt erhalten`,
+  su: 'Freunde einladen', titolo: 'Bring jemanden aus deinem Kurs mit', lui: 'für sie oder ihn, auf das erste Fach', te: 'für dich, auf den nächsten Kauf', corto: 'Kopieren',
   copia: 'Link kopieren', copiato: 'Kopiert', come: 'So funktioniert es (Italienisch)',
   messaggio: `Ich lerne mit Ripetizioni di Analisi. Mit diesem Link bekommst du ${SCONTO_INVITO} % Rabatt auf dein erstes Fach.`,
 } : en ? {
   breve: `Invite a friend: ${SCONTO_INVITO}% off for both of you`,
+  su: 'Invite a friend', titolo: 'Bring a classmate', lui: 'for them, on their first subject', te: 'for you, on your next purchase', corto: 'Copy',
   copia: 'Copy link', copiato: 'Copied', come: 'How it works',
   messaggio: `I study on Ripetizioni di Analisi: with this link you get ${SCONTO_INVITO}% off your first subject.`,
 } : {
   breve: `Invita un amico: ${SCONTO_INVITO}% di sconto a lui e a te`,
+  su: 'Invita un amico', titolo: 'Porta un compagno di corso', lui: 'a lui, sulla prima materia', te: 'a te, sul prossimo acquisto', corto: 'Copia',
   copia: 'Copia il link', copiato: 'Copiato', come: 'Come funziona',
   messaggio: `Studio su Ripetizioni di Analisi: con questo link hai il ${SCONTO_INVITO}% di sconto sulla prima materia.`,
 };
 const regalo = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="7" width="15" height="3.5" rx="0.8"/><path d="M4 10.5V17h12v-6.5M10 7v10M10 7c-1.2-2.8-5-3.3-5-1.2C5 7 8 7 10 7Zm0 0c1.2-2.8 5-3.3 5-1.2C15 7 12 7 10 7Z"/></svg>';
 ---
-<section class="invita-amico invita-b" id="invita-amico" hidden>
-  <span class="invita-icona" set:html={regalo} />
-  <div class="invita-corpo">
-    <p class="invita-breve"><strong>{s.breve}</strong> <a href={de || es || fr ? '/invito?lingua=it' : '/invito'}>{s.come}</a></p>
-    <p class="invita-numeri" data-invita-numeri hidden></p>
+<section class="invita-amico invita-c" id="invita-amico" aria-labelledby="invita-titolo" hidden>
+  <p class="invita-su">{s.su}</p>
+  <h2 class="invita-titolo" id="invita-titolo">{s.titolo}</h2>
+  <div class="invita-due">
+    <p class="invita-meta"><b>{SCONTO_INVITO}%</b><span>{s.lui}</span></p>
+    <span class="invita-piu" aria-hidden="true">+</span>
+    <p class="invita-meta"><b>{SCONTO_INVITO}%</b><span>{s.te}</span></p>
   </div>
-  <div class="invita-tasti">
-    <button type="button" class="bottone-primario" data-invita-copia>{s.copia}</button>
-    <a class="bottone-secondario" data-invita-wa target="_blank" rel="noopener">WhatsApp</a>
+  <div class="invita-azioni">
+    <div class="invita-link">
+      <span data-invita-link></span>
+      <button type="button" data-invita-copia aria-label={s.copia}><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M13 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/></svg><span data-invita-copia-testo>{s.corto}</span></button>
+    </div>
+    <a class="invita-wa" data-invita-wa target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.500 4.800 16A8.500 8.500 0 1 1 8 19.200Z"/><path d="M9 8.500c0 3 2.500 6 6 6.500l1.200-1.500-2-1-.9.800c-1-.5-1.800-1.300-2.300-2.300l.8-.9-1-2Z"/></svg></a>
   </div>
+  <p class="invita-numeri" data-invita-numeri hidden></p>
 </section>
 
 <script is:inline define:vars={{ s, en, de, es, fr }}>
@@ -57,12 +68,14 @@ const regalo = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="
     if (d.premiDisponibili) numeri.push(fr ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'réduction disponible' : 'réductions disponibles'}` : es ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'descuento disponible' : 'descuentos disponibles'}` : de ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'Rabatt verfügbar' : 'Rabatte verfügbar'}` : en ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'discount' : 'discounts'} to use` : `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'sconto' : 'sconti'} del ${d.percentuale}% da usare`);
     const n = box.querySelector('[data-invita-numeri]');
     n.textContent = numeri.join(' · '); n.hidden = !numeri.length;
+    box.querySelector('[data-invita-link]').textContent = d.link.replace(/^https?:\/\//, '');
     box.querySelector('[data-invita-wa]').href = `https://wa.me/?text=${encodeURIComponent(`${s.messaggio} ${d.link}`)}`;
     const b = box.querySelector('[data-invita-copia]');
     b.addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(d.link); }
       catch { const t = document.createElement('textarea'); t.value = d.link; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
-      b.textContent = s.copiato; setTimeout(() => { b.textContent = s.copia; }, 1800);
+      const testo = b.querySelector('[data-invita-copia-testo]');
+      testo.textContent = s.copiato; setTimeout(() => { testo.textContent = s.corto; }, 1800);
     });
     box.hidden = false;
   })();
