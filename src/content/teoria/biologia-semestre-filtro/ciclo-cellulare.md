@@ -6,149 +6,292 @@ sommario: "Punti di controllo, cicline e CDK, Rb e p53, mitosi, meiosi, cellule 
 ## Fasi e controlli del ciclo
 
 :::definizione{#ciclo titolo="G1, S, G2 e fase M"}
-Il **ciclo cellulare** coordina crescita, duplicazione del DNA e divisione. In G1 la cellula valuta condizioni e segnali; in S replica il DNA; in G2 completa la preparazione alla divisione; nella fase M avvengono mitosi e citodieresi. G1, S e G2 costituiscono l'interfase. Alcune cellule entrano in G0, uno stato esterno al ciclo proliferativo che può essere reversibile o molto stabile secondo il tipo cellulare.
+Il **ciclo cellulare** è la serie di eventi che va dalla nascita di una cellula alla sua divisione in due cellule figlie. Ha quattro fasi, sempre nello stesso ordine.
 
-I punti di controllo coordinano il passaggio tra fasi con integrità del DNA, completamento della replicazione e attacco dei cromosomi al fuso. Se un requisito manca possono ritardare la progressione e permettere riparazione. Il controllo riduce il rischio di trasmissione di errori; la sua alterazione può favorire instabilità genomica.
+1. **G1**. La cellula cresce e, in base ai segnali che riceve, stabilisce se dividersi.
+2. **S** (sintesi). La cellula replica il DNA.
+3. **G2**. La cellula controlla che il DNA sia stato copiato tutto e si prepara alla divisione.
+4. **M**. La cellula si divide. Questa fase comprende la **mitosi**, cioè la divisione del nucleo, e la **citodieresi**, cioè la divisione del citoplasma.
 
-Una cellula che si divide deve prima copiare l'informazione e poi consegnarne una copia completa a ciascuna figlia. **Crescita, replicazione e divisione non sono sinonimi**: una cellula può aumentare di volume senza duplicare il DNA, oppure replicarlo senza completare la citodieresi. Per riconoscere una fase servono quindi misure adatte al processo che interessa.
+Le prime tre fasi insieme si chiamano **interfase**. Una cellula che non si divide esce dal ciclo ed entra in uno stato detto **G0**. Alcune cellule vi restano per sempre, come i neuroni. Altre rientrano nel ciclo quando ricevono uno stimolo, come le cellule del fegato dopo una lesione.
 
-In una cellula somatica diploide umana in G1 si contano normalmente 46 cromosomi, ciascuno con una molecola di DNA. Dopo S i cromosomi sono ancora 46, ma ciascuno comprende due cromatidi fratelli: le molecole di DNA sono diventate 92. Il conteggio dei cromosomi segue le unità centromeriche non ancora separate; il conteggio delle molecole segue invece i cromatidi. La lettera $n$ indica il numero di cromosomi di un corredo e $C$ la quantità di DNA di un corredo aploide non replicato. Duplicare il DNA porta da $2n,2C$ a $2n,4C$, senza rendere la cellula tetraploide.
+Il passaggio da una fase alla successiva è sorvegliato da **punti di controllo** (checkpoint). In ciascuno la cellula verifica una condizione e, se non è soddisfatta, si ferma finché il problema è risolto. I tre principali sono i seguenti.
+
+- Al passaggio **G1/S** la cellula verifica che il DNA sia integro e che siano presenti i segnali di crescita.
+- Al passaggio **G2/M** verifica che la replicazione sia completa e che il DNA non sia danneggiato.
+- Durante la **mitosi** verifica che tutti i cromosomi siano attaccati al fuso.
+
+Se un punto di controllo non funziona, gli errori passano alle cellule figlie e si accumulano.
+
+Crescita, replicazione e divisione sono tre processi distinti. Una cellula aumenta di volume senza replicare il DNA, oppure replica il DNA senza dividersi. Per sapere in quale fase si trova una cellula si misura quindi il processo che interessa.
+
+Durante il ciclo cambia la quantità di DNA, mentre il numero di cromosomi resta lo stesso. Si usano i simboli $n$, numero di cromosomi di un corredo, e $C$, quantità di DNA di un corredo non replicato. Una cellula umana in G1 ha 46 cromosomi, ciascuno con una molecola di DNA, e si indica con $2n,2C$. Dopo la fase S ha ancora 46 cromosomi, ciascuno formato da due cromatidi fratelli, quindi 92 molecole di DNA, e si indica con $2n,4C$. La replicazione raddoppia il DNA e lascia la cellula diploide.
 
 ![Fasi del ciclo e quantità di DNA](/figure/biologia-semestre-filtro/ciclo-cellulare/ciclo-it.svg)
 
-**Leggere un esperimento.** Una misura di fluorescenza proporzionale al DNA distingue cellule con $2C$, quantità intermedie e $4C$. Questi tre gruppi sono compatibili rispettivamente con G1 o G0, fase S e G2 o mitosi prima della separazione cellulare. Il solo DNA non distingue G0 da G1 né G2 da M: servono altri marcatori, per esempio un impulso di un analogo della timidina per riconoscere la sintesi del DNA o l'osservazione dei cromosomi condensati.
+**Leggere un esperimento.** Si colorano le cellule di una coltura con una sostanza fluorescente che si lega al DNA, e si misura la fluorescenza di ogni cellula. Le cellule si dividono in tre gruppi. Quelle con fluorescenza $2C$ sono in G1 o in G0. Quelle con fluorescenza $4C$ sono in G2 o in mitosi. Quelle con valori intermedi sono in fase S, perché hanno copiato solo una parte del DNA. La misura del DNA non distingue G1 da G0, né G2 da M. Per farlo servono altre osservazioni, per esempio la presenza di cromosomi condensati, che indica la mitosi.
 :::
 
 :::definizione{#cicline-cdk titolo="Attivazione delle chinasi del ciclo"}
-Le **CDK** sono chinasi la cui attività dipende da associazione con cicline e da regolazioni aggiuntive. La quantità di diverse cicline varia durante il ciclo mediante sintesi e degradazione. Fosforilazioni attivanti o inibenti e proteine inibitrici, come p21, modificano l'attività dei complessi.
+Il ciclo cellulare avanza grazie a una famiglia di enzimi, le **CDK** (chinasi dipendenti da cicline). Una chinasi è un enzima che aggiunge un gruppo fosfato ad altre proteine. Una CDK da sola è inattiva. Diventa attiva quando si lega a una proteina detta **ciclina**. Le CDK sono presenti in quantità costante per tutto il ciclo. Le cicline, invece, vengono prodotte e poi distrutte a ogni ciclo, ciascuna in una fase precisa, e da questo prendono il nome. Ogni fase ha quindi il proprio complesso ciclina-CDK attivo.
 
-Nel modello delle cellule animali ciclina D-CDK4/6 contribuisce alla progressione in G1; ciclina E-CDK2 alla transizione G1/S; ciclina A associata a CDK sostiene fasi S e G2; ciclina B-CDK1 promuove l'ingresso in mitosi. I complessi agiscono in reti con retroazioni, quindi la sola presenza di una ciclina non prova che tutti i suoi bersagli siano attivi.
+| Complesso | Momento in cui agisce |
+|---|---|
+| Ciclina D con CDK4 o CDK6 | avanzamento in G1 |
+| Ciclina E con CDK2 | passaggio da G1 a S |
+| Ciclina A con CDK2 | fase S |
+| Ciclina B con CDK1 | ingresso in mitosi |
 
-Il nome «chinasi» descrive l'azione: trasferire un gruppo fosfato a proteine bersaglio. La ciclina contribuisce ad attivare la CDK e a selezionare quando e su quali bersagli agisce. La fosforilazione può cambiare localizzazione, interazioni o attività del bersaglio; non equivale sempre a un'attivazione. Anche la CDK è regolata da fosforilazioni: Cdc25 rimuove siti inibitori, mentre Wee1 contribuisce a inserirli nel controllo di CDK1.
+Il complesso attivo fosforila le proteine che eseguono gli eventi di quella fase. Quando la ciclina viene degradata la CDK torna inattiva e la fase si conclude.
 
-**Come distinguere quantità e attività.** Due campioni possono contenere la stessa quantità di ciclina B, ma mostrare attività CDK1 diversa se uno conserva la fosforilazione inibitoria. Misurare la sola ciclina non basta per prevedere l'ingresso in mitosi. Analogamente, degradare una ciclina spegne un complesso senza richiedere la distruzione della CDK. Attivazione rapida e degradazione selettiva permettono di ordinare gli eventi: la cellula non deve avviare una seconda replicazione mentre sta separando i cromosomi.
+Il legame con la ciclina è necessario, ma l'attività della CDK è regolata anche in altri due modi.
+
+- **Fosforilazione della CDK stessa.** La chinasi Wee1 aggiunge alla CDK1 un fosfato che la inibisce. La fosfatasi Cdc25 lo toglie, e solo allora il complesso ciclina B-CDK1 si attiva e la cellula entra in mitosi.
+- **Inibitori.** Proteine come **p21** si legano al complesso ciclina-CDK e lo bloccano.
+
+La quantità di ciclina e l'attività della CDK sono quindi due cose diverse. Due cellule con la stessa quantità di ciclina B, per esempio, differiscono nell'attività di CDK1 se in una la CDK1 porta ancora il fosfato inibitorio. La prima entra in mitosi e la seconda resta in G2.
 :::
 
 ## Punto di restrizione e danno al DNA
 
 :::definizione{#rb-e2f titolo="Fattori di crescita e ingresso in S"}
-Nel modello classico la proteina **Rb** limita l'attività dei fattori E2F e l'espressione di geni necessari alla fase S. I fattori di crescita favoriscono l'attività di ciclina D-CDK4/6; la fosforilazione di Rb, con ulteriori regolazioni dei complessi del ciclo, riduce il freno su E2F e favorisce il programma replicativo.
+Una cellula animale si divide solo se riceve dall'esterno segnali detti **fattori di crescita** (o mitogeni). Il loro effetto passa attraverso due proteine, Rb ed E2F.
 
-Il **punto di restrizione** descrive un passaggio di G1 dopo il quale una cellula può proseguire verso la replicazione anche se diminuiscono alcuni segnali mitogeni esterni. È distinto dai controlli che verificano il danno al DNA: una cellula impegnata a proliferare deve comunque coordinare il ciclo con l'integrità del genoma.
+- **E2F** è un fattore di trascrizione. Attiva i geni necessari alla fase S, per esempio quelli degli enzimi della replicazione.
+- **Rb** (proteina del retinoblastoma) si lega a E2F e la tiene inattiva. È quindi un freno all'ingresso in fase S.
 
-Il circuito si interpreta seguendo la direzione dei rapporti: Rb attiva sul piano del freno trattiene E2F; l'inattivazione funzionale di quel freno aumenta l'espressione di geni replicativi. L'effetto finale della fosforilazione di Rb è quindi favorire il ciclo perché riduce un'inibizione, non perché Rb diventa una polimerasi. Questa è una descrizione didattica della rete: le modificazioni di Rb sono progressive e dipendono dal contesto cellulare.
+Il freno viene tolto con la seguente sequenza.
+
+1. I fattori di crescita fanno aumentare la ciclina D.
+2. La ciclina D attiva CDK4 e CDK6, che fosforilano Rb.
+3. Rb fosforilata si stacca da E2F.
+4. E2F libera attiva i geni della fase S, e la cellula comincia a replicare il DNA.
+
+La fosforilazione in questo caso inattiva una proteina, Rb. La cellula avanza nel ciclo perché viene tolto un freno.
+
+Il **punto di restrizione** è il momento di G1 dopo il quale la cellula completa il ciclo anche se i fattori di crescita vengono a mancare. Prima di quel punto, se i fattori di crescita mancano, la cellula si ferma ed entra in G0. Il punto di restrizione riguarda i segnali esterni. Il controllo dei danni al DNA è un sistema separato e resta attivo anche dopo.
 
 ![Segnali mitogeni e freno Rb](/figure/biologia-semestre-filtro/ciclo-cellulare/rb-it.svg)
 
-**Esempio ragionato.** Si rimuovono i fattori di crescita da due popolazioni sincronizzate in momenti diversi di G1. Quella che non ha ancora superato il punto di restrizione può arrestarsi; l'altra può continuare il ciclo già intrapreso. Il risultato non dimostra che i fattori di crescita siano inutili, ma che la dipendenza dai segnali cambia nel tempo. Un successivo danno al DNA può comunque attivare un arresto: decisione proliferativa e sorveglianza dell'integrità sono controlli distinti.
+**Esempio ragionato.** Si tolgono i fattori di crescita a due gruppi di cellule in G1. Il primo gruppo è all'inizio di G1 e non ha ancora superato il punto di restrizione. Rb non è stata ancora fosforilata, quindi E2F resta bloccata e le cellule si fermano. Il secondo gruppo è alla fine di G1 e ha già superato il punto di restrizione. Rb è già fosforilata ed E2F è libera, quindi le cellule entrano in fase S e completano il ciclo. I fattori di crescita servono dunque fino al punto di restrizione e non oltre. Se in queste cellule il DNA viene danneggiato, il ciclo si ferma comunque, per opera del controllo descritto nel prossimo riquadro.
 :::
 
 :::definizione{#p53-tumori titolo="Arresto, riparazione e trasformazione"}
-Il danno al DNA può stabilizzare **p53**, che modifica l'espressione di geni coinvolti in arresto del ciclo, riparazione, senescenza o apoptosi. Tra i bersagli vi è p21, inibitore di complessi ciclina-CDK. La risposta dipende da tipo, durata e gravità del danno e dallo stato della cellula.
+Quando il DNA è danneggiato la cellula ferma il ciclo, in modo da non copiare e non trasmettere l'errore. La proteina centrale di questa risposta è **p53**, un fattore di trascrizione. In una cellula sana p53 viene degradata di continuo e la sua quantità è bassa. La risposta al danno ha quattro passaggi.
 
-Un proto-oncogene può diventare oncogene attraverso alterazioni che ne aumentano o deregolano l'azione. I geni **oncosoppressori**, come RB1 e TP53, limitano proliferazione o sostengono integrità e morte controllata. Per molti oncosoppressori la perdita di entrambe le copie è rilevante, ma esistono dominanza negativa e insufficienza di dose. Alcuni virus oncogeni producono proteine che interferiscono con questi controlli; per esempio le proteine E6 ed E7 di HPV ad alto rischio alterano rispettivamente le vie di p53 e Rb.
+1. Il danno blocca la degradazione di p53, che si accumula.
+2. p53 attiva il gene di **p21**.
+3. p21 si lega ai complessi ciclina-CDK e li blocca, quindi il ciclo si ferma.
+4. Durante l'arresto gli enzimi di riparazione riparano il DNA.
 
-Per ricostruire la risposta a un danno si parte dal sensore e si arriva all'effetto: il segnale di danno favorisce l'accumulo di p53, p53 può aumentare p21, p21 limita l'attività di complessi CDK e la progressione rallenta. Il tempo guadagnato permette alla rete di riparazione di intervenire. p53 è un fattore di trascrizione, non l'enzima che ricuce direttamente ogni rottura del DNA. Un arresto temporaneo, la senescenza stabile e l'apoptosi sono esiti diversi.
+p53 non ripara il DNA: attiva i geni che fermano il ciclo. Secondo la gravità del danno gli esiti sono tre. Se il danno viene riparato, la cellula riprende il ciclo. Se il danno persiste, la cellula smette definitivamente di dividersi (senescenza). Se il danno è molto grave, p53 attiva i geni dell'**apoptosi** e la cellula muore.
 
-La distinzione oncogene/oncosoppressore si usa sul **meccanismo**, non sul semplice nome del gene. Un segnale proliferativo continuamente attivo può derivare da un guadagno di funzione; perdere un freno può derivare da una perdita di funzione. Il modello delle «due alterazioni» aiuta a capire molti oncosoppressori, ma non autorizza a classificare ogni variante con un'unica regola. Neppure una singola alterazione dimostra da sola che una cellula sia già tumorale: trasformazione e selezione clonale coinvolgono più proprietà cellulari.
+Un tumore nasce quando le cellule si dividono senza controllo. I geni coinvolti sono di due classi.
+
+- Un **oncogene** deriva da un gene normale, detto proto-oncogene, che stimola la divisione. La mutazione rende la proteina troppo attiva (guadagno di funzione). Basta la mutazione di una sola delle due copie del gene. Un esempio è Ras.
+- Un **oncosoppressore** è un gene che frena la divisione o fa morire le cellule danneggiate. Contribuisce al tumore quando smette di funzionare (perdita di funzione). In genere devono essere inattivate entrambe le copie, perché una sola copia funzionante basta a frenare. Ne sono esempi *RB1*, il gene di Rb, e *TP53*, il gene di p53.
+
+Il gene *TP53* è mutato in circa metà dei tumori umani. Alcuni virus causano tumori inattivando queste stesse proteine. Il papillomavirus (HPV) ad alto rischio, responsabile del tumore del collo dell'utero, produce due proteine: E6 fa degradare p53 ed E7 blocca Rb.
+
+Una sola mutazione non basta a formare un tumore. Un tumore si sviluppa quando nella stessa cellula e nelle sue discendenti si accumulano più alterazioni, di solito in oncogeni e in oncosoppressori insieme.
 :::
 
 ## Ingresso in mitosi e fuso
 
 :::definizione{#mitosi-fuso titolo="Condensazione e collegamento ai cromosomi"}
-Durante la **profase** i cromosomi si condensano e si organizza il fuso. In molte cellule animali la rottura dell'involucro nucleare durante la prometafase permette l'accesso ai cromosomi; la fosforilazione delle lamine contribuisce al disassemblaggio della lamina. Reticolo, Golgi e altri organelli si riorganizzano per la distribuzione alle cellule figlie.
+La **mitosi** è la divisione del nucleo. Distribuisce i cromosomi replicati in modo che ciascuna cellula figlia riceva una copia di ogni cromosoma. All'inizio della mitosi ogni cromosoma è formato da due cromatidi fratelli. Due complessi proteici li preparano.
 
-I microtubuli del **cinetocore** collegano il fuso ai cromosomi; quelli interpolari si sovrappongono nella regione centrale; quelli astrali interagiscono con la corteccia e contribuiscono a posizione e orientamento. NDC80 è un complesso del cinetocore che partecipa al legame con i microtubuli. Chinesine, dineine e dinamica della tubulina producono e coordinano i movimenti.
+- Le **coesine** tengono uniti i due cromatidi fratelli.
+- Le **condensine** compattano ogni cromosoma, che diventa corto, spesso e visibile al microscopio.
 
-In metafase i cromosomi sono allineati e i cinetocori fratelli collegati a poli opposti. Il controllo del fuso ritarda l'anafase in presenza di attacchi mancanti o inappropriati. L'allineamento è un indicatore utile, mentre la corretta biorientazione è il requisito meccanico per la segregazione.
+I cromosomi sono spostati dal **fuso mitotico**, una struttura di microtubuli che parte dai due poli della cellula. A ciascun polo c'è un centrosoma. I microtubuli del fuso sono di tre tipi.
 
-Le condensine favoriscono l'organizzazione compatta dei cromosomi, mentre le coesine mantengono collegati i cromatidi fratelli: i due complessi svolgono compiti diversi. Il cinetocore è un assemblaggio proteico costruito sulla regione centromerica, non coincide con l'intero centromero. NDC80 contribuisce al collegamento con le estremità dei microtubuli; la loro crescita e depolimerizzazione cooperano con i motori nel movimento dei cromosomi.
+- I microtubuli del **cinetocore** si attaccano ai cromosomi.
+- I microtubuli **interpolari** partono dai due poli e si sovrappongono al centro della cellula. Spingono i poli lontano l'uno dall'altro.
+- I microtubuli **astrali** vanno dai poli verso la membrana e tengono il fuso nella posizione corretta.
+
+I microtubuli si attaccano al cromosoma nel **cinetocore**, un complesso di proteine montato sul centromero. Ogni cromatidio ha il proprio cinetocore, quindi un cromosoma replicato ne ha due, rivolti in versi opposti. Il centromero è la regione di DNA, il cinetocore è la struttura proteica costruita su di essa. Una proteina del cinetocore, NDC80, forma il legame diretto con il microtubulo.
+
+La mitosi è divisa in cinque fasi.
+
+1. **Profase**. I cromosomi si condensano e il fuso comincia a formarsi.
+2. **Prometafase**. L'involucro nucleare si disgrega, perché le lamine che lo sostengono vengono fosforilate. I microtubuli raggiungono i cromosomi e si attaccano ai cinetocori.
+3. **Metafase**. Tutti i cromosomi sono allineati al centro della cellula, sulla piastra metafasica. I due cinetocori di ogni cromosoma sono attaccati a poli opposti.
+4. **Anafase**. I cromatidi fratelli si separano e si spostano verso i due poli.
+5. **Telofase**. Intorno a ciascun gruppo di cromosomi si riforma un involucro nucleare e i cromosomi si decondensano.
 
 ![Fuso mitotico e tre classi di microtubuli](/figure/biologia-semestre-filtro/ciclo-cellulare/fuso-it.svg)
 
-In una cellula con un cromosoma visivamente sulla piastra metafasica può persistere un attacco scorretto. Per questo **posizione e connessione non sono la stessa osservazione**. Un cinetocore non attaccato mantiene attivo il checkpoint del fuso, che inibisce l'attivazione efficace di APC/C-Cdc20. La correzione degli attacchi instabili e il checkpoint cooperano, ma il sistema non è infallibile: alcuni errori possono sfuggire e produrre una segregazione anomala. La mitosi distribuisce normalmente anche organelli e componenti citoplasmatici, senza richiedere per ciascun organello lo stesso conteggio uno-a-uno applicato ai cromosomi.
+La separazione corretta richiede che i due cinetocori di ogni cromosoma siano attaccati a poli opposti. Questa disposizione si chiama **biorientamento**. Il **punto di controllo del fuso** la verifica. Finché anche un solo cinetocore è privo di microtubuli, quel cinetocore produce un segnale che blocca l'inizio dell'anafase. Quando tutti i cinetocori sono attaccati il segnale cessa e l'anafase comincia.
+
+Un cromosoma che si trova al centro della cellula non è necessariamente attaccato in modo corretto. Può avere, per esempio, entrambi i cinetocori attaccati allo stesso polo. La cellula corregge molti di questi attacchi, ma non tutti. Un attacco sbagliato che sfugge al controllo fa andare due cromatidi nella stessa cellula figlia, e le due cellule figlie hanno un cromosoma in più e uno in meno.
 :::
 
 ## Anafase e citodieresi
 
 :::definizione{#apc-citodieresi titolo="APC/C, separasi e anello contrattile"}
-Quando i controlli lo permettono, il complesso **APC/C**, una ubiquitina-ligasi, favorisce la degradazione della securina e di determinate cicline mitotiche. La rimozione della securina permette l'attività della separasi, che taglia una subunità delle coesine e rende possibile la separazione dei cromatidi fratelli. La degradazione della ciclina B favorisce l'uscita dalla mitosi.
+All'inizio dell'anafase i cromatidi fratelli, tenuti insieme dalle coesine, si separano tutti nello stesso momento. Il comando viene da un complesso proteico detto **APC/C** (complesso che promuove l'anafase). APC/C è una ubiquitina-ligasi, cioè un enzima che attacca ubiquitina ad altre proteine e le destina così alla degradazione nel proteasoma. Quando il punto di controllo del fuso è soddisfatto, APC/C diventa attivo e la separazione avviene in quattro passaggi.
 
-Nell'anafase i cromosomi figli si separano; nella telofase si riorganizzano i nuclei. La **citodieresi** delle cellule animali utilizza un anello di actina e miosina per restringere il solco di divisione. La segregazione cromosomica e la separazione del citoplasma sono processi coordinati ma distinti. Una divisione asimmetrica può distribuire determinanti diversi o collocare le figlie in ambienti differenti.
+1. APC/C attacca ubiquitina alla **securina**.
+2. Il proteasoma degrada la securina. La securina era legata a un enzima, la **separasi**, e lo teneva inattivo.
+3. La separasi, ora libera, taglia le coesine.
+4. I cromatidi fratelli non sono più uniti e i microtubuli li tirano verso i poli opposti.
 
-Occorre distinguere tre azioni consecutive. APC/C **aggiunge un segnale di ubiquitina** a substrati selezionati; il proteasoma degrada la securina marcata; la separasi, liberata dal suo inibitore, **taglia una subunità della coesina**. APC/C non taglia direttamente il DNA e non è la proteasi che recide la coesina. La distruzione della securina e quella della ciclina B coordinano due risultati diversi: separazione dei fratelli e riduzione dell'attività mitotica.
+In questa sequenza ogni proteina ha un solo compito. APC/C marca, il proteasoma degrada e la separasi taglia. APC/C non taglia le coesine e non agisce sul DNA.
+
+APC/C ha un secondo bersaglio, la **ciclina B**. Degradata la ciclina B, la CDK1 torna inattiva e la cellula esce dalla mitosi. I cromosomi si decondensano e l'involucro nucleare si riforma.
+
+La **citodieresi** è la divisione del citoplasma e comincia alla fine dell'anafase. Nelle cellule animali, sotto la membrana e a metà della cellula, si forma un **anello contrattile** di actina e miosina. L'anello si stringe e forma un solco sempre più profondo, finché la cellula si divide in due. Mitosi e citodieresi sono processi distinti e di solito coordinati.
 
 ![Sequenza APC/C, securina, separasi e coesina](/figure/biologia-semestre-filtro/ciclo-cellulare/apc-it.svg)
 
-**Esperimento di blocco.** Se la securina è resa non degradabile e mantiene il legame con separasi, il fuso può essere formato e i cromosomi allineati, ma la coesione dei fratelli non viene rimossa normalmente. Se invece si blocca l'anello contrattile dopo una segregazione regolare, possono comparire due nuclei in un unico citoplasma. I due risultati separano la funzione del controllo cromosomico da quella della citodieresi. Durante l'anafase il conteggio nell'intera cellula cambia quando i centromeri fratelli si separano; per evitare ambiguità si deve sempre precisare se si conta l'intera cellula o il patrimonio destinato a ciascun polo.
+**Esperimento di blocco.** Due esperimenti mostrano che la separazione dei cromosomi e la divisione del citoplasma sono indipendenti. Nel primo si usa una securina modificata, che il proteasoma non riesce a degradare. La separasi resta bloccata e le coesine non vengono tagliate. Il fuso si forma e i cromosomi si allineano, ma i cromatidi fratelli non si separano. Nel secondo si blocca l'anello contrattile con un farmaco che agisce sull'actina. I cromosomi si separano normalmente e si formano due nuclei, ma il citoplasma non si divide. Si ottiene una sola cellula con due nuclei.
+
+Nei conteggi l'anafase richiede attenzione. Appena i cromatidi fratelli si separano, ciascuno si conta come un cromosoma. Una cellula umana in anafase contiene quindi 92 cromosomi, 46 diretti a ciascun polo, fino a quando la citodieresi la divide.
 :::
 
 ## Meiosi e variabilità
 
 :::definizione{#meiosi titolo="Una replicazione e due divisioni"}
-La **meiosi** comprende una fase S seguita da due divisioni. Nella meiosi I si separano gli omologhi; nella meiosi II i cromatidi fratelli. Durante la profase I gli omologhi si appaiano e il crossing over scambia tratti tra cromatidi non fratelli. I chiasmi, insieme alla coesione, contribuiscono alla corretta segregazione degli omologhi.
+La **meiosi** è la divisione che produce i gameti. Parte da una cellula diploide e dà quattro cellule aploidi, ciascuna con un solo cromosoma di ogni coppia. Alla fecondazione due gameti aploidi si uniscono e il numero diploide si ricostituisce. La meiosi comprende una sola replicazione del DNA seguita da due divisioni.
 
-La separazione degli omologhi riduce la ploidia; la separazione dei fratelli nella seconda divisione non è preceduta da una nuova replicazione. Usando C per la quantità di DNA di un corredo aploide non replicato, una cellula diploide passa da $2n,2C$ in G1 a $2n,4C$ dopo S; dopo la prima divisione ogni cellula è $n,2C$; dopo la seconda $n,1C$.
+- Nella **meiosi I** si separano i cromosomi omologhi. Ogni cellula figlia riceve un cromosoma di ogni coppia, ancora formato da due cromatidi fratelli. Il numero di cromosomi si dimezza, e per questo la divisione si dice riduzionale.
+- Nella **meiosi II** si separano i cromatidi fratelli, come in una mitosi. Il numero di cromosomi resta lo stesso, e la divisione si dice equazionale. Fra le due divisioni il DNA non viene replicato.
 
-Assortimento degli omologhi e ricombinazione aumentano la variabilità dei gameti. La non disgiunzione in meiosi I o II può produrre gameti con cromosomi in eccesso o in difetto. Se in meiosi I una coppia non si separa e la meiosi II procede normalmente, tutti i prodotti sono aneuploidi per quel cromosoma; se l'errore interessa una sola divisione II, il modello genera due prodotti normali e due anomali.
+Il conto dei cromosomi e del DNA, per una cellula umana, è il seguente.
 
-Nella profase I si distinguono leptotene, zigotene, pachitene, diplotene e diacinesi. L'appaiamento degli omologhi è sostenuto dal complesso sinaptonemale; la ricombinazione avviata durante la profase produce scambi la cui conseguenza meccanica è visibile nei chiasmi quando gli omologhi iniziano a separarsi. Un bivalente contiene due cromosomi omologhi duplicati, dunque quattro cromatidi: «tetrade» non significa quattro cromosomi indipendenti.
+| Momento | Cromosomi e DNA | Nell'uomo |
+|---|---|---|
+| Prima della replicazione | $2n,2C$ | 46 cromosomi, 46 molecole |
+| Dopo la replicazione | $2n,4C$ | 46 cromosomi, 92 molecole |
+| Dopo la meiosi I, in ogni cellula | $n,2C$ | 23 cromosomi, 46 molecole |
+| Dopo la meiosi II, in ogni cellula | $n,1C$ | 23 cromosomi, 23 molecole |
+
+La parte più lunga della meiosi è la **profase I**, in cui avvengono due eventi che non esistono nella mitosi.
+
+- L'**appaiamento**. I due omologhi di ogni coppia si affiancano per tutta la lunghezza, tenuti insieme da una struttura proteica detta **complesso sinaptonemale**. La coppia di omologhi appaiati si chiama **bivalente** o tetrade. Contiene due cromosomi e quindi quattro cromatidi.
+- Il **crossing over**. Un cromatidio di un omologo e un cromatidio dell'altro si spezzano nello stesso punto e si scambiano i tratti corrispondenti. I punti di scambio restano visibili come incroci fra i due omologhi, detti **chiasmi**. I chiasmi tengono uniti gli omologhi fino all'anafase I, e questo permette di separarli correttamente.
+
+La profase I è suddivisa in cinque stadi, che in ordine sono leptotene, zigotene, pachitene, diplotene e diacinesi. L'appaiamento si completa nello zigotene, il crossing over avviene nel pachitene e i chiasmi diventano visibili nel diplotene.
 
 ![Numero dei corredi e quantità di DNA nella meiosi](/figure/biologia-semestre-filtro/ciclo-cellulare/meiosi-it.svg)
 
-In meiosi I i cinetocori dei fratelli si orientano verso lo stesso polo, mentre gli omologhi si collegano a poli opposti. La coesione dei bracci viene rimossa per consentire la separazione degli omologhi; quella centromerica è protetta, anche tramite shugoshin, fino alla seconda divisione. In meiosi II i fratelli possono quindi biorientarsi e separarsi. Questo diverso comportamento spiega perché la prima divisione è riduzionale e la seconda equazionale.
+Le due divisioni differiscono per il modo in cui i cromosomi si attaccano al fuso. In meiosi I i due cinetocori fratelli di un cromosoma si attaccano allo stesso polo, e i due omologhi di un bivalente si attaccano a poli opposti. All'anafase I la separasi taglia le coesine lungo i bracci dei cromosomi, quindi gli omologhi si separano. Le coesine del centromero sono protette da una proteina detta **shugoshin**, e i cromatidi fratelli restano uniti. In meiosi II la protezione viene tolta. I cinetocori fratelli si attaccano a poli opposti, la separasi taglia le coesine del centromero e i cromatidi si separano.
 
-Per una specie con $2n=6$, dopo la prima divisione ogni cellula contiene tre cromosomi duplicati, non sei cromosomi semplici. Dopo la seconda ne contiene ancora tre, ora non duplicati. Ignorando il crossing over, l'assortimento di tre coppie produce fino a $2^3=8$ combinazioni di origine materna/paterna nei gameti, nell'insieme di molte meiosi. Una sola meiosi produce al massimo quattro prodotti: non si devono confondere il numero di combinazioni possibili con il numero di gameti formati in un singolo evento.
+La meiosi produce gameti tutti diversi fra loro per due motivi.
+
+- L'**assortimento indipendente**. In metafase I ogni bivalente si orienta a caso, e l'orientamento di una coppia non dipende da quello delle altre. Ogni gamete riceve quindi una combinazione casuale di cromosomi di origine materna e paterna. Con $n$ coppie le combinazioni possibili sono $2^n$. Con 3 coppie sono $2^3=8$, e nell'uomo, con 23 coppie, sono $2^{23}$, cioè più di 8 milioni.
+- Il **crossing over**. Ogni cromosoma che arriva al gamete è un mosaico di tratti materni e paterni.
+
+Il numero $2^n$ conta le combinazioni possibili nell'insieme di molte meiosi. Una singola meiosi produce quattro cellule. In una specie con $2n=6$, per esempio, dopo la meiosi I ogni cellula ha 3 cromosomi formati da due cromatidi, e dopo la meiosi II ogni cellula ha 3 cromosomi formati da un solo cromatidio.
+
+Se in una delle due divisioni due cromosomi non si separano (non-disgiunzione), si formano gameti con un cromosoma in più o in meno. Un errore in meiosi I dà quattro gameti anomali. Un errore in una sola delle due cellule in meiosi II dà due gameti normali e due anomali.
 :::
 
 ## Gametogenesi e cellule staminali
 
 :::definizione{#gametogenesi titolo="Spermatogenesi e ovogenesi umane"}
-Nella **spermatogenesi** uno spermatocita primario può produrre quattro spermatidi aploidi, che maturano in spermatozoi. Nell'ovogenesi la distribuzione del citoplasma è asimmetrica: si forma una grande cellula uovo e globuli polari. Gli ovociti primari umani iniziano la meiosi prima della nascita e si arrestano in profase I; l'ovocita secondario si arresta in metafase II e normalmente completa la divisione dopo l'attivazione associata alla fecondazione.
+La **gametogenesi** è la formazione dei gameti. Nei due sessi usa la stessa meiosi, con tempi e risultati diversi.
 
-Le pause e i tempi differiscono quindi tra gametogenesi maschile e femminile. Il numero di prodotti con capacità di contribuire allo sviluppo non coincide semplicemente con il numero teorico di nuclei generati da due divisioni.
+La **spermatogenesi** avviene nei testicoli, in modo continuo dalla pubertà in poi. Le tappe sono quattro.
 
-Nell'uomo adulto spermatogoni proliferanti mantengono la linea germinale; gli spermatociti primari entrano in meiosi, gli spermatociti secondari hanno già separato gli omologhi e gli spermatidi hanno completato la seconda divisione. La spermiogenesi rimodella gli spermatidi, ma non è una terza divisione meiotica. La cellula ovulata nella donna è normalmente un ovocita secondario in metafase II, ancora con cromosomi duplicati: aploide non significa necessariamente $1C$.
+1. Gli **spermatogoni** sono cellule diploidi che si dividono per mitosi e mantengono la riserva.
+2. Uno spermatogonio diventa **spermatocita primario** ed entra in meiosi I.
+3. Dalla meiosi I si ottengono due **spermatociti secondari**, aploidi, con cromosomi ancora formati da due cromatidi.
+4. Dalla meiosi II si ottengono quattro **spermatidi**, aploidi.
 
-La lunga permanenza degli ovociti in arresto e la necessità di conservare connessioni cromosomiche aiutano a comprendere la vulnerabilità della segregazione, senza ridurre tutte le aneuploidie a una sola causa. Nei problemi numerici si deve dichiarare se si stanno contando tutti i prodotti meiotici oppure soltanto i gameti funzionali; l'ovogenesi concentra quasi tutto il citoplasma in una sola cellula.
+Gli spermatidi si trasformano poi in spermatozoi con un processo di maturazione detto spermiogenesi, in cui la cellula cambia forma e non si divide. Da uno spermatocita primario si ottengono quindi quattro spermatozoi.
+
+L'**ovogenesi** avviene nelle ovaie e differisce in due aspetti.
+
+- Le divisioni sono **asimmetriche**. A ogni divisione quasi tutto il citoplasma resta in una sola cellula, e l'altra è una cellula piccolissima, detta **globulo polare**, che degenera. Da un ovocita primario si ottiene quindi una sola cellula uovo.
+- La meiosi si **ferma due volte**. Gli ovociti primari cominciano la meiosi nel feto, prima della nascita, e si fermano in profase I. Restano così per anni. Dalla pubertà, a ogni ciclo, un ovocita completa la meiosi I e diventa **ovocita secondario**, che si ferma di nuovo in metafase II. La cellula rilasciata all'ovulazione è questo ovocita secondario. La meiosi II si completa solo se avviene la fecondazione.
+
+L'ovocita secondario è aploide ($n$) e i suoi cromosomi hanno ancora due cromatidi, quindi il suo DNA è $2C$ e non $1C$. Una cellula aploide non ha necessariamente la quantità minima di DNA.
+
+Un ovocita resta fermo in profase I anche per quarant'anni, con gli omologhi tenuti insieme dalle coesine. Con il passare del tempo le coesine si deteriorano e gli errori di separazione diventano più frequenti. Questo è uno dei motivi per cui il rischio di trisomie, come la sindrome di Down, aumenta con l'età della madre.
 :::
 
 :::definizione{#staminali titolo="Autorinnovamento e potenza differenziativa"}
-Una **cellula staminale** possiede capacità di autorinnovamento e di generare progenie differenziata. L'autorinnovamento mantiene il compartimento staminale; il differenziamento produce cellule con funzioni specifiche. Divisioni simmetriche e asimmetriche possono contribuire a questo equilibrio anche in relazione alla nicchia.
+Una **cellula staminale** è una cellula non specializzata che possiede due capacità insieme.
 
-La potenza differenziativa descrive l'insieme dei tipi cellulari producibili: cellule pluripotenti possono generare derivati dei tre foglietti embrionali, mentre cellule multipotenti hanno potenzialità più ristrette. Una cellula progenitrice può proliferare e differenziarsi senza mantenere la stessa capacità di autorinnovamento a lungo termine di una staminale.
+- L'**autorinnovamento**. Dividendosi produce altre cellule staminali, quindi la riserva non si esaurisce.
+- Il **differenziamento**. Produce cellule che si specializzano in uno o più tipi cellulari.
 
-Per identificare una staminale non basta osservare che si divide una volta. Occorre dimostrare nel tempo sia mantenimento di cellule con la stessa capacità sia produzione di progenie differenziata. Anche una popolazione può autorinnovarsi attraverso un equilibrio di divisioni simmetriche: una singola divisione non deve obbligatoriamente produrre una staminale e una cellula differenziata.
+Le cellule staminali del midollo osseo, per esempio, producono ogni giorno miliardi di cellule del sangue e restano presenti per tutta la vita.
+
+La **potenza** di una cellula staminale è il numero di tipi cellulari che è capace di produrre.
+
+- Una cellula **totipotente** produce tutti i tipi cellulari dell'organismo e anche gli annessi embrionali, come la placenta. Lo zigote è totipotente.
+- Una cellula **pluripotente** produce tutti i tipi cellulari dell'organismo. Le cellule staminali embrionali sono pluripotenti.
+- Una cellula **multipotente** produce solo i tipi cellulari di un tessuto. Le staminali del midollo osseo producono le cellule del sangue.
+
+Una **cellula progenitrice** è una discendente della staminale. Si divide rapidamente, ma solo per un numero limitato di volte, poi le sue discendenti si differenziano tutte. Non ha quindi un autorinnovamento duraturo.
+
+Una staminale si divide in due modi. In una divisione **asimmetrica** produce una staminale e una cellula che si differenzia. In una divisione **simmetrica** produce due staminali oppure due cellule che si differenziano. La riserva resta costante se, nell'insieme della popolazione, i due tipi di divisione simmetrica si compensano. Per dimostrare che una cellula è staminale si seguono le sue discendenti nel tempo, e si verifica che fra esse restino cellule staminali e compaiano cellule differenziate.
 
 ![Divisioni simmetriche e asimmetriche](/figure/biologia-semestre-filtro/ciclo-cellulare/staminali-it.svg)
 
-La nicchia fornisce contatti, segnali e condizioni che influenzano il destino cellulare. Spostare una figlia fuori dalla nicchia può favorirne il differenziamento anche se le due figlie hanno ricevuto lo stesso DNA. Potenza e velocità proliferativa restano proprietà diverse: una staminale può essere quiescente; una progenitrice può dividersi rapidamente ma esaurire la propria capacità nel tempo.
+Le cellule staminali vivono in un ambiente particolare del tessuto, detto **nicchia**. Le cellule vicine e la matrice della nicchia forniscono i segnali che mantengono la cellula allo stato staminale. Dopo una divisione, la cellula figlia che resta nella nicchia rimane staminale e quella che ne esce si differenzia, anche se le due cellule hanno lo stesso DNA.
+
+Potenza e velocità di divisione sono proprietà distinte. Molte cellule staminali si dividono raramente e passano lunghi periodi a riposo. Le cellule progenitrici si dividono rapidamente.
 :::
 
 ## Apoptosi e necrosi
 
 :::definizione{#apoptosi-necrosi titolo="Aspetti morfologici e caspasi"}
-Nell'**apoptosi** la cellula attiva un programma che può comprendere condensazione della cromatina, frammentazione e formazione di corpi apoptotici. La membrana conserva inizialmente la propria integrità e i frammenti possono essere fagocitati. La necrosi presenta tipicamente rigonfiamento, perdita d'integrità e rilascio di contenuto cellulare; può favorire infiammazione. Esistono anche forme regolate di morte con morfologia necrotica, quindi «regolata» non equivale automaticamente ad «apoptotica».
+Una cellula muore in due modi principali, con conseguenze diverse per il tessuto.
 
-Le **caspasi** sono proteasi attivate da precursori. Le iniziatrici, come caspasi 8 e 9, attivano caspasi esecutrici, come 3 e 7, che tagliano substrati responsabili di molte modificazioni cellulari. La rimozione efficiente delle cellule apoptotiche limita il rilascio del contenuto; se fallisce può comparire necrosi secondaria.
+L'**apoptosi** è una morte programmata, che la cellula stessa esegue in modo ordinato. La cellula si rimpicciolisce, la cromatina si condensa, il DNA viene tagliato in frammenti e la cellula si divide in piccole vescicole chiuse da membrana, i **corpi apoptotici**. La membrana resta integra per tutto il processo, quindi il contenuto della cellula non si disperde. I macrofagi inglobano i corpi apoptotici e non c'è infiammazione. L'apoptosi elimina le cellule non più necessarie o danneggiate. Nell'embrione, per esempio, elimina le cellule fra le dita della mano.
 
-L'esposizione esterna della fosfatidilserina può favorire il riconoscimento da parte dei fagociti. In un esperimento l'annessina V rileva questa esposizione, mentre un colorante che non attraversa una membrana integra aiuta a valutarne la permeabilità. Una cellula positiva per annessina V e negativa per il colorante è compatibile con una fase apoptotica precoce nel contesto appropriato. La doppia positività, da sola, non distingue con certezza apoptosi tardiva e morte con perdita primaria dell'integrità: servono tempi, controlli e altri indicatori.
+La **necrosi** è una morte accidentale, causata da un danno grave come la mancanza di ossigeno. La cellula si gonfia, la membrana si rompe e il contenuto si riversa nel tessuto, dove provoca **infiammazione**.
 
-Le caspasi esecutrici tagliano proteine del citoscheletro, della lamina e altri substrati. La frammentazione del DNA dipende anche dall'attivazione di nucleasi a valle della cascata: le caspasi sono proteasi, non nucleasi. Per attribuire un meccanismo di morte è quindi più solido combinare morfologia, marcatori e perturbazioni che affidarsi a una sola colorazione.
+L'apoptosi è eseguita da enzimi detti **caspasi**. Sono proteasi, cioè enzimi che tagliano altre proteine. Nella cellula sana sono presenti in forma inattiva, dette procaspasi, e vengono attivate a cascata.
+
+- Le caspasi **iniziatrici** (caspasi 8 e caspasi 9) sono attivate per prime, dal segnale di morte.
+- Le caspasi **esecutrici** (caspasi 3 e caspasi 7) sono attivate dalle iniziatrici. Tagliano centinaia di proteine della cellula, fra cui quelle del citoscheletro e le lamine del nucleo.
+
+Le caspasi tagliano proteine e non DNA. Il DNA viene frammentato da una nucleasi, che le caspasi attivano.
+
+In laboratorio una cellula in apoptosi si riconosce da un cambiamento della membrana. La fosfatidilserina, un fosfolipide che di norma sta sul foglietto interno della membrana, passa sul foglietto esterno. È anche il segnale che i macrofagi riconoscono. Si usano insieme due coloranti.
+
+- L'**annessina V** si lega alla fosfatidilserina esposta all'esterno.
+- Lo **ioduro di propidio** entra solo nelle cellule con la membrana rotta.
+
+Una cellula positiva all'annessina V e negativa allo ioduro di propidio è nella fase iniziale dell'apoptosi, perché espone la fosfatidilserina e ha la membrana ancora integra. Una cellula positiva a entrambi ha la membrana rotta. È in apoptosi avanzata oppure in necrosi, e i due coloranti da soli non distinguono i due casi.
 :::
 
 ## Vie apoptotiche
 
 :::definizione{#vie-apoptotiche titolo="Via intrinseca ed estrinseca"}
-Nella via **intrinseca** stress e danno possono attivare proteine della famiglia BCL2 che favoriscono la permeabilizzazione della membrana mitocondriale esterna, detta MOMP. BAX e BAK partecipano alla permeabilizzazione; BCL2 e BCL-XL possono contrastarla. Proteine BH3-only regolano l'equilibrio attraverso interazioni con membri pro- e anti-apoptotici.
+L'apoptosi viene avviata per due vie, secondo l'origine del segnale.
 
-Il citocromo c rilasciato nel citosol favorisce l'assemblaggio dell'**apoptosoma** con APAF1 e nucleotidi appropriati; questo complesso recluta e attiva la procaspasi 9. Seguono attivazione delle esecutrici e smantellamento cellulare.
+La **via intrinseca** (mitocondriale) parte dall'interno della cellula, in risposta a un danno al DNA o a un altro stress. È controllata dalle proteine della **famiglia BCL2**, che si dividono in tre gruppi.
 
-Nella via **estrinseca**, ligandi di recettori di morte, come Fas, favoriscono assemblaggi con adattatori e procaspasi iniziatrici, tra cui la caspasi 8. In diversi contesti il taglio di BID collega la via estrinseca a quella mitocondriale. Le due vie convergono quindi sulle caspasi esecutrici; il collegamento tramite BID può amplificare la risposta al recettore di morte, con esiti modulati dagli inibitori e dallo stato della cellula.
+- Le proteine **pro-apoptotiche** BAX e BAK formano pori nella membrana esterna del mitocondrio.
+- Le proteine **anti-apoptotiche** BCL2 e BCL-XL si legano a BAX e BAK e le tengono inattive.
+- Le proteine **BH3-only** sono i sensori del danno. Quando sono attivate bloccano le anti-apoptotiche e liberano BAX e BAK.
 
-La localizzazione del citocromo c è decisiva: nello spazio intermembrana partecipa alla catena respiratoria; nel citosol può contribuire alla via apoptotica. MOMP riguarda la membrana **esterna** del mitocondrio e non va confusa con la normale sintesi di ATP attraverso la membrana interna. APAF1 e procaspasi 9 devono essere disponibili affinché il rilascio del citocromo c conduca all'assemblaggio funzionale dell'apoptosoma.
+La via prosegue in quattro passaggi.
+
+1. BAX e BAK formano pori nella membrana esterna del mitocondrio. Questo evento si indica con la sigla **MOMP**.
+2. Attraverso i pori esce nel citosol il **citocromo c**, una proteina che di norma sta nello spazio intermembrana e partecipa alla catena respiratoria.
+3. Nel citosol il citocromo c si lega alla proteina APAF1. Più copie di questo complesso si uniscono in una struttura a ruota, l'**apoptosoma**.
+4. L'apoptosoma attiva la caspasi 9, che attiva le caspasi esecutrici.
+
+Il citocromo c ha quindi due funzioni, secondo il luogo in cui si trova: nel mitocondrio serve alla respirazione, nel citosol avvia l'apoptosi. I pori riguardano la membrana esterna del mitocondrio. La membrana interna, dove si produce l'ATP, non viene forata.
+
+La **via estrinseca** parte dall'esterno della cellula. Un'altra cellula, per esempio un linfocita, espone un segnale di morte che si lega a un **recettore di morte** sulla cellula bersaglio. La coppia più nota è formata dal recettore Fas e dal suo ligando.
 
 ![Due vie dell'apoptosi e punto di convergenza](/figure/biologia-semestre-filtro/ciclo-cellulare/apoptosi-it.svg)
 
-Nel modello di Fas, l'adattatore FADD favorisce l'assemblaggio del complesso di segnalazione che attiva caspasi 8. Una cellula può richiedere anche l'amplificazione mitocondriale attraverso BID: perciò bloccare BAX/BAK non ha necessariamente lo stesso effetto in tutti i tipi cellulari stimolati da un recettore di morte. Negli esercizi si esplicita se il modello include questa dipendenza. Un inibitore delle caspasi può ridurre alcuni segni dell'apoptosi senza dimostrare che ogni cellula danneggiata abbia recuperato una sopravvivenza duratura.
+La via estrinseca ha tre passaggi.
+
+1. Il ligando si lega al recettore Fas.
+2. La parte interna del recettore richiama una proteina adattatrice, FADD, che a sua volta richiama la procaspasi 8.
+3. La caspasi 8 si attiva e attiva le caspasi esecutrici.
+
+Le due vie arrivano quindi alle stesse caspasi esecutrici, la 3 e la 7. Sono anche collegate fra loro. La caspasi 8 taglia una proteina BH3-only detta **BID**, e BID tagliata attiva BAX e BAK. In questo modo un segnale arrivato dall'esterno avvia anche la via mitocondriale, che lo rinforza. In alcuni tipi di cellule questo rinforzo è indispensabile perché la cellula muoia, in altri la sola caspasi 8 è sufficiente.
+
+Un farmaco che inibisce le caspasi blocca i segni dell'apoptosi. La cellula trattata non è però necessariamente salva, perché il danno che aveva avviato il processo è ancora presente.
 :::

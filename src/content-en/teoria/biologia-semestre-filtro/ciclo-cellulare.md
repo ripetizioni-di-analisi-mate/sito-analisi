@@ -6,149 +6,292 @@ sommario: "Checkpoints, cyclins and CDKs, Rb and p53, mitosis, meiosis, stem cel
 ## Cell-cycle phases and checkpoints
 
 :::definizione{#ciclo titolo="G1, S, G2 and M phase"}
-The **cell cycle** coordinates growth, DNA duplication and division. In G1 the cell responds to conditions and signals; in S it replicates its DNA; in G2 it completes preparations for division; M phase includes mitosis and cytokinesis. G1, S and G2 together constitute interphase. Some cells enter G0, a state outside the proliferative cycle that may be reversible or highly stable, depending on cell type.
+The **cell cycle** is the series of events from the birth of a cell to its division into two daughter cells. It has four phases, always in the same order.
 
-Checkpoints coordinate transitions with DNA integrity, completion of replication and chromosome attachment to the spindle. If a requirement is not met, progression can be delayed to allow repair. These controls reduce the risk of transmitting errors; their disruption can promote genomic instability.
+1. **G1**. The cell grows and, according to the signals it receives, determines whether to divide.
+2. **S** (synthesis). The cell replicates its DNA.
+3. **G2**. The cell checks that all the DNA has been copied and prepares for division.
+4. **M**. The cell divides. This phase includes **mitosis**, that is, division of the nucleus, and **cytokinesis**, that is, division of the cytoplasm.
 
-A dividing cell must first copy its information and then deliver a complete copy to each daughter. **Growth, replication and division are different processes**: a cell can enlarge without duplicating DNA, or replicate DNA without completing cytokinesis. Identifying a phase therefore requires measurements suited to the process being examined.
+The first three phases together are called **interphase**. A cell that does not divide leaves the cycle and enters a state called **G0**. Some cells stay there permanently, such as neurons. Others re-enter the cycle when they receive a stimulus, such as liver cells after an injury.
 
-A diploid human somatic cell in G1 normally contains 46 chromosomes, each with one DNA molecule. After S phase it still has 46 chromosomes, but each consists of two sister chromatids: there are now 92 DNA molecules. Chromosome counts follow centromeric units that have not yet separated; DNA molecule counts follow chromatids. The symbol $n$ denotes the chromosome number in one set, while $C$ denotes the DNA content of one unreplicated haploid set. DNA replication changes $2n,2C$ to $2n,4C$ without making the cell tetraploid.
+The passage from one phase to the next is monitored by **checkpoints**. At each one the cell verifies a condition and, if it is not met, stops until the problem is solved. The three main ones are as follows.
+
+- At the **G1/S** transition the cell verifies that the DNA is intact and that growth signals are present.
+- At the **G2/M** transition it verifies that replication is complete and that the DNA is not damaged.
+- During **mitosis** it verifies that all chromosomes are attached to the spindle.
+
+If a checkpoint does not work, errors pass to the daughter cells and accumulate.
+
+Growth, replication and division are three distinct processes. A cell increases in volume without replicating its DNA, or replicates its DNA without dividing. To know which phase a cell is in, the process of interest is therefore measured.
+
+During the cycle the amount of DNA changes, while the number of chromosomes stays the same. The symbols used are $n$, the number of chromosomes in one set, and $C$, the amount of DNA in one unreplicated set. A human cell in G1 has 46 chromosomes, each with one DNA molecule, and is written $2n,2C$. After S phase it still has 46 chromosomes, each made of two sister chromatids, so 92 DNA molecules, and is written $2n,4C$. Replication doubles the DNA and leaves the cell diploid.
 
 ![Cell-cycle phases and DNA content](/figure/biologia-semestre-filtro/ciclo-cellulare/ciclo-en.svg)
 
-**Reading an experiment.** Fluorescence proportional to DNA content distinguishes cells with $2C$, intermediate amounts and $4C$. These are compatible with G1 or G0, S phase, and G2 or mitosis before cellular separation, respectively. DNA content alone cannot distinguish G0 from G1 or G2 from M. Additional markers are needed, such as a pulse of a thymidine analogue to detect DNA synthesis or observation of condensed chromosomes.
+**Reading an experiment.** The cells of a culture are stained with a fluorescent substance that binds DNA, and the fluorescence of each cell is measured. The cells fall into three groups. Those with fluorescence $2C$ are in G1 or G0. Those with fluorescence $4C$ are in G2 or in mitosis. Those with intermediate values are in S phase, because they have copied only part of their DNA. Measuring DNA does not distinguish G1 from G0, nor G2 from M. Other observations are needed for that, for example the presence of condensed chromosomes, which indicates mitosis.
 :::
 
 :::definizione{#cicline-cdk titolo="Activation of cell-cycle kinases"}
-**CDKs** are kinases whose activity depends on binding cyclins and on additional regulation. Different cyclin concentrations vary through synthesis and degradation. Activating or inhibitory phosphorylation and inhibitory proteins such as p21 modify the activity of the complexes.
+The cell cycle advances thanks to a family of enzymes, the **CDKs** (cyclin-dependent kinases). A kinase is an enzyme that adds a phosphate group to other proteins. A CDK alone is inactive. It becomes active when it binds a protein called a **cyclin**. CDKs are present in constant amount throughout the cycle. Cyclins, by contrast, are produced and then destroyed in each cycle, each at a precise phase, and take their name from this. Each phase therefore has its own active cyclin-CDK complex.
 
-In the animal-cell model, cyclin D–CDK4/6 contributes to G1 progression; cyclin E–CDK2 to the G1/S transition; cyclin A associated with CDKs supports S and G2; cyclin B–CDK1 promotes mitotic entry. The complexes act within networks with feedback, so the presence of a cyclin alone does not prove that all its targets are active.
+| Complex | When it acts |
+|---|---|
+| Cyclin D with CDK4 or CDK6 | progression through G1 |
+| Cyclin E with CDK2 | transition from G1 to S |
+| Cyclin A with CDK2 | S phase |
+| Cyclin B with CDK1 | entry into mitosis |
 
-The term kinase describes the action: transferring a phosphate group to target proteins. A cyclin helps activate its CDK and select when and on which targets it acts. Phosphorylation may change a target's location, interactions or activity; it does not always activate it. CDKs are themselves regulated by phosphorylation: Cdc25 removes inhibitory phosphates, whereas Wee1 helps add them in the control of CDK1.
+The active complex phosphorylates the proteins that carry out the events of that phase. When the cyclin is degraded the CDK becomes inactive again and the phase ends.
 
-**Distinguishing abundance from activity.** Two samples can contain the same amount of cyclin B yet display different CDK1 activities if one retains inhibitory phosphorylation. Measuring cyclin alone is insufficient to predict mitotic entry. Similarly, degrading a cyclin switches off its complex without requiring destruction of the CDK. Rapid activation and selective degradation order events: the cell must not initiate another round of replication while separating its chromosomes.
+Binding to the cyclin is necessary, but CDK activity is also regulated in two other ways.
+
+- **Phosphorylation of the CDK itself.** The kinase Wee1 adds to CDK1 a phosphate that inhibits it. The phosphatase Cdc25 removes it, and only then is the cyclin B-CDK1 complex activated and the cell enters mitosis.
+- **Inhibitors.** Proteins such as **p21** bind the cyclin-CDK complex and block it.
+
+The amount of cyclin and the activity of the CDK are therefore two different things. Two cells with the same amount of cyclin B, for example, differ in CDK1 activity if in one of them CDK1 still carries the inhibitory phosphate. The first enters mitosis and the second stays in G2.
 :::
 
 ## The restriction point and DNA damage
 
 :::definizione{#rb-e2f titolo="Growth factors and entry into S phase"}
-In the classical model, **Rb** limits E2F transcription-factor activity and expression of genes required for S phase. Growth factors promote cyclin D–CDK4/6 activity; Rb phosphorylation, together with further cell-cycle regulation, reduces the brake on E2F and promotes the replication programme.
+An animal cell divides only if it receives from outside signals called **growth factors** (or mitogens). Their effect passes through two proteins, Rb and E2F.
 
-The **restriction point** is a G1 transition after which a cell can continue towards replication even if certain external mitogenic signals decline. It is distinct from DNA-damage checkpoints: a cell committed to proliferation must still coordinate its cycle with genome integrity.
+- **E2F** is a transcription factor. It activates the genes needed for S phase, for example those of the replication enzymes.
+- **Rb** (retinoblastoma protein) binds E2F and keeps it inactive. It is therefore a brake on entry into S phase.
 
-Follow the direction of the interactions to understand the circuit. Rb acting as a brake restrains E2F; functionally disabling that brake increases expression of replication-related genes. Rb phosphorylation ultimately promotes the cycle by reducing inhibition, not by turning Rb into a polymerase. This is a teaching model of the network: Rb modifications are progressive and context-dependent.
+The brake is released by the following sequence.
+
+1. Growth factors raise cyclin D.
+2. Cyclin D activates CDK4 and CDK6, which phosphorylate Rb.
+3. Phosphorylated Rb detaches from E2F.
+4. Free E2F activates the S-phase genes, and the cell begins to replicate its DNA.
+
+Phosphorylation in this case inactivates a protein, Rb. The cell advances through the cycle because a brake is released.
+
+The **restriction point** is the moment in G1 after which the cell completes the cycle even if growth factors are withdrawn. Before that point, if growth factors are missing, the cell stops and enters G0. The restriction point concerns external signals. The control of DNA damage is a separate system and stays active afterwards too.
 
 ![Mitogenic signals and the Rb brake](/figure/biologia-semestre-filtro/ciclo-cellulare/rb-en.svg)
 
-**Worked reasoning.** Growth factors are withdrawn from two populations synchronised at different points in G1. The population that has not passed the restriction point may arrest; the other may complete the cycle already initiated. The result does not show that growth factors are unnecessary. It shows that dependence on their signals changes over time. Subsequent DNA damage may still trigger arrest: proliferative commitment and integrity surveillance are distinct controls.
+**Worked example.** Growth factors are withdrawn from two groups of cells in G1. The first group is at the start of G1 and has not yet passed the restriction point. Rb has not yet been phosphorylated, so E2F stays blocked and the cells stop. The second group is at the end of G1 and has already passed the restriction point. Rb is already phosphorylated and E2F is free, so the cells enter S phase and complete the cycle. Growth factors are therefore needed up to the restriction point and not beyond. If the DNA of these cells is damaged, the cycle stops anyway, through the control described in the next box.
 :::
 
 :::definizione{#p53-tumori titolo="Arrest, repair and transformation"}
-DNA damage can stabilise **p53**, which changes the expression of genes involved in arrest, repair, senescence or apoptosis. Its targets include p21, an inhibitor of cyclin–CDK complexes. The response depends on the type, duration and severity of damage and on the cell's state.
+When DNA is damaged the cell stops the cycle, so as not to copy and pass on the error. The central protein of this response is **p53**, a transcription factor. In a healthy cell p53 is continuously degraded and its amount is low. The response to damage has four steps.
 
-A proto-oncogene can become an oncogene through alterations that increase or deregulate its action. **Tumour-suppressor genes**, including RB1 and TP53, restrain proliferation or support genome integrity and controlled death. Loss of both copies matters for many tumour suppressors, but dominant-negative effects and haploinsufficiency also occur. Some oncogenic viruses produce proteins that disrupt these controls: for example, high-risk HPV E6 and E7 interfere with the p53 and Rb pathways, respectively.
+1. The damage blocks the degradation of p53, which accumulates.
+2. p53 activates the gene for **p21**.
+3. p21 binds the cyclin-CDK complexes and blocks them, so the cycle stops.
+4. During the arrest the repair enzymes repair the DNA.
 
-Reconstruct the damage response from signal to effect. Damage signalling promotes p53 accumulation; p53 can increase p21; p21 limits CDK-complex activity; progression slows. This provides time for repair networks to act. p53 is a transcription factor, not the enzyme that directly reseals every DNA break. Temporary arrest, stable senescence and apoptosis are different outcomes.
+p53 does not repair DNA: it activates the genes that stop the cycle. Depending on the severity of the damage there are three outcomes. If the damage is repaired, the cell resumes the cycle. If the damage persists, the cell permanently stops dividing (senescence). If the damage is very severe, p53 activates the genes of **apoptosis** and the cell dies.
 
-The oncogene/tumour-suppressor distinction concerns the **mechanism**, not just a gene's name. A continuously active proliferative signal can result from gain of function; loss of a brake can result from loss of function. The two-hit model helps explain many tumour suppressors but does not classify every variant by a single rule. Nor does one alteration alone prove that a cell is already cancerous: transformation and clonal selection involve several cellular properties.
+A tumour arises when cells divide without control. The genes involved fall into two classes.
+
+- An **oncogene** derives from a normal gene, called a proto-oncogene, that stimulates division. The mutation makes the protein too active (gain of function). Mutation of only one of the two copies of the gene is enough. An example is Ras.
+- A **tumour suppressor** is a gene that restrains division or makes damaged cells die. It contributes to the tumour when it stops working (loss of function). In general both copies must be inactivated, because a single working copy is enough to restrain division. Examples are *RB1*, the gene for Rb, and *TP53*, the gene for p53.
+
+The *TP53* gene is mutated in about half of human tumours. Some viruses cause tumours by inactivating these same proteins. High-risk papillomavirus (HPV), responsible for cervical cancer, produces two proteins: E6 causes p53 to be degraded and E7 blocks Rb.
+
+A single mutation is not enough to form a tumour. A tumour develops when several alterations accumulate in the same cell and its descendants, usually in oncogenes and tumour suppressors together.
 :::
 
 ## Mitotic entry and the spindle
 
 :::definizione{#mitosi-fuso titolo="Condensation and chromosome attachment"}
-During **prophase**, chromosomes condense and the spindle develops. In many animal cells, nuclear-envelope breakdown during prometaphase gives spindle microtubules access to chromosomes; lamin phosphorylation contributes to nuclear-lamina disassembly. The endoplasmic reticulum, Golgi and other organelles reorganise for distribution to daughter cells.
+**Mitosis** is the division of the nucleus. It distributes the replicated chromosomes so that each daughter cell receives one copy of every chromosome. At the start of mitosis each chromosome consists of two sister chromatids. Two protein complexes prepare them.
 
-**Kinetochore microtubules** connect chromosomes to the spindle; interpolar microtubules overlap in its central region; astral microtubules interact with the cortex and help position and orient the spindle. NDC80 is a kinetochore complex involved in microtubule binding. Kinesins, dyneins and tubulin dynamics produce and coordinate movements.
+- **Cohesins** hold the two sister chromatids together.
+- **Condensins** compact each chromosome, which becomes short, thick and visible under the microscope.
 
-In metaphase, chromosomes align with sister kinetochores attached to opposite poles. The spindle checkpoint delays anaphase when attachments are absent or inappropriate. Alignment is useful evidence, but correct biorientation is the mechanical requirement for segregation.
+The chromosomes are moved by the **mitotic spindle**, a structure of microtubules originating from the two poles of the cell. At each pole there is a centrosome. Spindle microtubules are of three types.
 
-Condensins promote compact chromosome organisation, whereas cohesins maintain the connection between sister chromatids: these complexes have different tasks. A kinetochore is a protein assembly built on the centromeric region, not the entire centromere. NDC80 helps connect it to microtubule ends; microtubule growth and depolymerisation cooperate with motors in chromosome movement.
+- **Kinetochore** microtubules attach to the chromosomes.
+- **Interpolar** microtubules start from the two poles and overlap at the centre of the cell. They push the poles apart.
+- **Astral** microtubules run from the poles towards the membrane and keep the spindle in the correct position.
+
+Microtubules attach to the chromosome at the **kinetochore**, a protein complex assembled on the centromere. Each chromatid has its own kinetochore, so a replicated chromosome has two, facing in opposite directions. The centromere is the DNA region, the kinetochore is the protein structure built on it. One kinetochore protein, NDC80, forms the direct link with the microtubule.
+
+Mitosis is divided into five phases.
+
+1. **Prophase**. The chromosomes condense and the spindle begins to form.
+2. **Prometaphase**. The nuclear envelope breaks down, because the lamins supporting it are phosphorylated. Microtubules reach the chromosomes and attach to the kinetochores.
+3. **Metaphase**. All chromosomes are aligned at the centre of the cell, on the metaphase plate. The two kinetochores of each chromosome are attached to opposite poles.
+4. **Anaphase**. The sister chromatids separate and move towards the two poles.
+5. **Telophase**. A nuclear envelope re-forms around each group of chromosomes and the chromosomes decondense.
 
 ![Mitotic spindle and three microtubule classes](/figure/biologia-semestre-filtro/ciclo-cellulare/fuso-en.svg)
 
-A chromosome visually located on the metaphase plate can still have an incorrect attachment. **Position and connection are different observations.** An unattached kinetochore maintains spindle-checkpoint activity, inhibiting effective APC/C–Cdc20 activation. Correction of unstable attachments and checkpoint signalling cooperate, but the system is not infallible: some errors escape and cause abnormal segregation. Mitosis normally also distributes organelles and cytoplasmic components, without requiring the same one-for-one counting rule used for chromosomes.
+Correct separation requires the two kinetochores of each chromosome to be attached to opposite poles. This arrangement is called **biorientation**. The **spindle checkpoint** verifies it. As long as even a single kinetochore has no microtubules, that kinetochore produces a signal that blocks the start of anaphase. When all kinetochores are attached the signal stops and anaphase begins.
+
+A chromosome lying at the centre of the cell is not necessarily attached correctly. It may have, for example, both kinetochores attached to the same pole. The cell corrects many of these attachments, but not all. A wrong attachment that escapes the control sends two chromatids to the same daughter cell, and the two daughter cells have one chromosome too many and one too few.
 :::
 
 ## Anaphase and cytokinesis
 
 :::definizione{#apc-citodieresi titolo="APC/C, separase and the contractile ring"}
-When checkpoint conditions permit, **APC/C**, a ubiquitin ligase, promotes degradation of securin and selected mitotic cyclins. Removing securin permits separase activity; separase cleaves a cohesin subunit, allowing sister chromatids to separate. Cyclin B degradation promotes mitotic exit.
+At the start of anaphase the sister chromatids, held together by cohesins, all separate at the same moment. The command comes from a protein complex called **APC/C** (anaphase-promoting complex). APC/C is a ubiquitin ligase, that is, an enzyme that attaches ubiquitin to other proteins and thereby sends them for degradation in the proteasome. When the spindle checkpoint is satisfied, APC/C becomes active and separation takes place in four steps.
 
-In anaphase, daughter chromosomes move apart; in telophase, nuclei reorganise. Animal-cell **cytokinesis** uses an actin–myosin ring to constrict the division furrow. Chromosome segregation and cytoplasmic separation are coordinated but distinct processes. An asymmetric division may distribute different determinants or place daughters in different environments.
+1. APC/C attaches ubiquitin to **securin**.
+2. The proteasome degrades securin. Securin was bound to an enzyme, **separase**, and kept it inactive.
+3. Separase, now free, cuts the cohesins.
+4. The sister chromatids are no longer joined and the microtubules pull them towards opposite poles.
 
-Distinguish three consecutive actions. APC/C **adds a ubiquitin signal** to selected substrates; the proteasome degrades tagged securin; separase, released from its inhibitor, **cleaves a cohesin subunit**. APC/C does not directly cut DNA and is not the protease that cleaves cohesin. Destruction of securin and cyclin B coordinates two different outcomes: sister separation and reduced mitotic activity.
+In this sequence each protein has a single task. APC/C tags, the proteasome degrades and separase cuts. APC/C does not cut cohesins and does not act on DNA.
+
+APC/C has a second target, **cyclin B**. Once cyclin B is degraded, CDK1 becomes inactive again and the cell exits mitosis. The chromosomes decondense and the nuclear envelope re-forms.
+
+**Cytokinesis** is the division of the cytoplasm and begins at the end of anaphase. In animal cells a **contractile ring** of actin and myosin forms beneath the membrane at the middle of the cell. The ring tightens and forms an ever deeper furrow, until the cell divides in two. Mitosis and cytokinesis are distinct processes and are usually coordinated.
 
 ![The APC/C, securin, separase and cohesin sequence](/figure/biologia-semestre-filtro/ciclo-cellulare/apc-en.svg)
 
-**A blocking experiment.** If securin is made non-degradable while retaining separase binding, the spindle may form and chromosomes may align, but sister cohesion is not removed normally. By contrast, blocking the contractile ring after normal segregation can produce two nuclei in one cytoplasm. These outcomes distinguish chromosome control from cytokinesis. During anaphase, whole-cell chromosome counts change when sister centromeres separate. Always specify whether a count concerns the entire cell or the complement destined for each pole.
+**Blocking experiment.** Two experiments show that chromosome separation and division of the cytoplasm are independent. In the first a modified securin is used, which the proteasome cannot degrade. Separase stays blocked and cohesins are not cut. The spindle forms and the chromosomes align, but the sister chromatids do not separate. In the second the contractile ring is blocked with a drug that acts on actin. The chromosomes separate normally and two nuclei form, but the cytoplasm does not divide. The result is a single cell with two nuclei.
+
+In counting, anaphase requires care. As soon as the sister chromatids separate, each counts as a chromosome. A human cell in anaphase therefore contains 92 chromosomes, 46 heading to each pole, until cytokinesis divides it.
 :::
 
 ## Meiosis and variation
 
 :::definizione{#meiosi titolo="One replication and two divisions"}
-**Meiosis** comprises one S phase followed by two divisions. Homologues separate in meiosis I; sister chromatids separate in meiosis II. During prophase I, homologues pair and crossing over exchanges segments between non-sister chromatids. Chiasmata, together with cohesion, contribute to correct homologue segregation.
+**Meiosis** is the division that produces gametes. It starts from a diploid cell and gives four haploid cells, each with a single chromosome of every pair. At fertilisation two haploid gametes join and the diploid number is restored. Meiosis comprises a single DNA replication followed by two divisions.
 
-Homologue separation reduces ploidy; sister separation in the second division is not preceded by another replication. With C denoting the DNA content of an unreplicated haploid set, a diploid cell progresses from $2n,2C$ in G1 to $2n,4C$ after S; each cell is $n,2C$ after division I and $n,1C$ after division II.
+- In **meiosis I** the homologous chromosomes separate. Each daughter cell receives one chromosome of every pair, still made of two sister chromatids. The number of chromosomes is halved, and for this reason the division is called reductional.
+- In **meiosis II** the sister chromatids separate, as in a mitosis. The number of chromosomes stays the same, and the division is called equational. Between the two divisions the DNA is not replicated.
 
-Homologue assortment and recombination increase gamete variation. Nondisjunction in meiosis I or II can generate gametes with extra or missing chromosomes. If one pair fails to separate in meiosis I and meiosis II proceeds normally, all products are aneuploid for that chromosome. If the error affects only one division II, the model yields two normal and two abnormal products.
+The count of chromosomes and DNA, for a human cell, is as follows.
 
-Prophase I is divided into leptotene, zygotene, pachytene, diplotene and diakinesis. Homologue pairing is supported by the synaptonemal complex; recombination initiated during prophase produces exchanges whose mechanical consequence is visible as chiasmata when homologues begin to separate. A bivalent contains two duplicated homologous chromosomes and therefore four chromatids: a tetrad does not mean four independent chromosomes.
+| Moment | Chromosomes and DNA | In humans |
+|---|---|---|
+| Before replication | $2n,2C$ | 46 chromosomes, 46 molecules |
+| After replication | $2n,4C$ | 46 chromosomes, 92 molecules |
+| After meiosis I, in each cell | $n,2C$ | 23 chromosomes, 46 molecules |
+| After meiosis II, in each cell | $n,1C$ | 23 chromosomes, 23 molecules |
+
+The longest part of meiosis is **prophase I**, in which two events take place that do not exist in mitosis.
+
+- **Pairing**. The two homologues of each pair line up along their whole length, held together by a protein structure called the **synaptonemal complex**. The pair of paired homologues is called a **bivalent** or tetrad. It contains two chromosomes and therefore four chromatids.
+- **Crossing over**. One chromatid of one homologue and one chromatid of the other break at the same point and exchange the corresponding stretches. The exchange points remain visible as crossings between the two homologues, called **chiasmata**. Chiasmata hold the homologues together until anaphase I, and this allows them to be separated correctly.
+
+Prophase I is subdivided into five stages, which in order are leptotene, zygotene, pachytene, diplotene and diakinesis. Pairing is completed in zygotene, crossing over occurs in pachytene and chiasmata become visible in diplotene.
 
 ![Chromosome sets and DNA content during meiosis](/figure/biologia-semestre-filtro/ciclo-cellulare/meiosi-en.svg)
 
-In meiosis I, sister kinetochores are oriented towards the same pole, while homologues attach to opposite poles. Arm cohesion is removed to permit homologue separation; centromeric cohesion is protected, partly through shugoshin, until the second division. In meiosis II, sisters can therefore biorient and separate. This different behaviour explains why division I is reductional and division II equational.
+The two divisions differ in the way chromosomes attach to the spindle. In meiosis I the two sister kinetochores of a chromosome attach to the same pole, and the two homologues of a bivalent attach to opposite poles. At anaphase I separase cuts the cohesins along the chromosome arms, so the homologues separate. The cohesins at the centromere are protected by a protein called **shugoshin**, and the sister chromatids stay joined. In meiosis II the protection is removed. The sister kinetochores attach to opposite poles, separase cuts the centromeric cohesins and the chromatids separate.
 
-For a species with $2n=6$, each cell after division I contains three duplicated chromosomes, not six single-chromatid chromosomes. After division II it still contains three, now unduplicated. Ignoring crossing over, assortment of three pairs allows up to $2^3=8$ maternal/paternal combinations among gametes across many meioses. A single meiosis produces at most four products: possible combinations must not be confused with gametes produced by one event.
+Meiosis produces gametes that are all different from one another for two reasons.
+
+- **Independent assortment**. At metaphase I each bivalent orients at random, and the orientation of one pair does not depend on that of the others. Each gamete therefore receives a random combination of chromosomes of maternal and paternal origin. With $n$ pairs the possible combinations number $2^n$. With 3 pairs there are $2^3=8$, and in humans, with 23 pairs, there are $2^{23}$, that is, more than 8 million.
+- **Crossing over**. Each chromosome that reaches the gamete is a mosaic of maternal and paternal stretches.
+
+The number $2^n$ counts the combinations possible over many meioses. A single meiosis produces four cells. In a species with $2n=6$, for example, after meiosis I each cell has 3 chromosomes made of two chromatids, and after meiosis II each cell has 3 chromosomes made of a single chromatid.
+
+If two chromosomes fail to separate in one of the two divisions (nondisjunction), gametes with one chromosome too many or too few are formed. An error in meiosis I gives four abnormal gametes. An error in only one of the two cells in meiosis II gives two normal gametes and two abnormal ones.
 :::
 
 ## Gametogenesis and stem cells
 
 :::definizione{#gametogenesi titolo="Human spermatogenesis and oogenesis"}
-In **spermatogenesis**, a primary spermatocyte can produce four haploid spermatids, which mature into sperm. In oogenesis, cytoplasmic distribution is asymmetric, producing a large egg cell and polar bodies. Human primary oocytes begin meiosis before birth and arrest in prophase I; the secondary oocyte arrests in metaphase II and normally completes division following activation associated with fertilisation.
+**Gametogenesis** is the formation of gametes. In the two sexes it uses the same meiosis, with different timing and results.
 
-Arrests and timing therefore differ between male and female gametogenesis. The number of products able to contribute to development does not simply equal the theoretical number of nuclei generated by two divisions.
+**Spermatogenesis** takes place in the testes, continuously from puberty onwards. There are four stages.
 
-In adult men, proliferating spermatogonia maintain the germ line; primary spermatocytes enter meiosis, secondary spermatocytes have separated homologues, and spermatids have completed division II. Spermiogenesis remodels spermatids but is not a third meiotic division. The cell normally ovulated in women is a secondary oocyte in metaphase II, still with duplicated chromosomes: haploid does not necessarily mean $1C$.
+1. **Spermatogonia** are diploid cells that divide by mitosis and maintain the reserve.
+2. A spermatogonium becomes a **primary spermatocyte** and enters meiosis I.
+3. Meiosis I gives two **secondary spermatocytes**, haploid, with chromosomes still made of two chromatids.
+4. Meiosis II gives four **spermatids**, haploid.
 
-The prolonged oocyte arrest and the need to preserve chromosome connections help explain segregation vulnerability without reducing all aneuploidies to one cause. Numerical problems must specify whether all meiotic products or only functional gametes are counted; oogenesis concentrates almost all the cytoplasm in one cell.
+The spermatids then turn into spermatozoa through a maturation process called spermiogenesis, in which the cell changes shape and does not divide. One primary spermatocyte therefore yields four spermatozoa.
+
+**Oogenesis** takes place in the ovaries and differs in two respects.
+
+- The divisions are **asymmetric**. At each division almost all the cytoplasm stays in one cell, and the other is a very small cell, called a **polar body**, which degenerates. One primary oocyte therefore yields a single egg cell.
+- Meiosis **stops twice**. Primary oocytes begin meiosis in the fetus, before birth, and stop in prophase I. They stay like this for years. From puberty, in each cycle, one oocyte completes meiosis I and becomes a **secondary oocyte**, which stops again in metaphase II. The cell released at ovulation is this secondary oocyte. Meiosis II is completed only if fertilisation occurs.
+
+The secondary oocyte is haploid ($n$) and its chromosomes still have two chromatids, so its DNA is $2C$ and not $1C$. A haploid cell does not necessarily have the minimum amount of DNA.
+
+An oocyte stays arrested in prophase I for up to forty years, with the homologues held together by cohesins. As time passes the cohesins deteriorate and separation errors become more frequent. This is one of the reasons why the risk of trisomies, such as Down syndrome, increases with the mother's age.
 :::
 
 :::definizione{#staminali titolo="Self-renewal and differentiation potential"}
-A **stem cell** can self-renew and generate differentiated progeny. Self-renewal maintains the stem-cell compartment; differentiation produces cells with specialised functions. Symmetric and asymmetric divisions can both contribute to this balance, also in response to the niche.
+A **stem cell** is an unspecialised cell that has two capacities together.
 
-Differentiation potential describes the range of cell types a cell can generate. Pluripotent cells can produce derivatives of all three embryonic germ layers, whereas multipotent cells have a narrower range. A progenitor may proliferate and differentiate without retaining the same long-term self-renewal capacity as a stem cell.
+- **Self-renewal**. By dividing it produces more stem cells, so the reserve is not exhausted.
+- **Differentiation**. It produces cells that specialise into one or more cell types.
 
-Observing a cell divide once does not establish stemness. Both continued production of cells with the same capacity and generation of differentiated progeny must be demonstrated over time. A population can also self-renew through balanced symmetric divisions: each individual division need not produce exactly one stem cell and one differentiated cell.
+The stem cells of the bone marrow, for example, produce billions of blood cells every day and remain present throughout life.
+
+The **potency** of a stem cell is the number of cell types it is able to produce.
+
+- A **totipotent** cell produces all the cell types of the organism and also the extra-embryonic tissues, such as the placenta. The zygote is totipotent.
+- A **pluripotent** cell produces all the cell types of the organism. Embryonic stem cells are pluripotent.
+- A **multipotent** cell produces only the cell types of one tissue. Bone marrow stem cells produce blood cells.
+
+A **progenitor cell** is a descendant of the stem cell. It divides rapidly, but only a limited number of times, then all its descendants differentiate. It therefore has no lasting self-renewal.
+
+A stem cell divides in two ways. In an **asymmetric** division it produces one stem cell and one cell that differentiates. In a **symmetric** division it produces two stem cells or two cells that differentiate. The reserve stays constant if, over the whole population, the two types of symmetric division balance out. To show that a cell is a stem cell its descendants are followed over time, and it is verified that stem cells remain among them and differentiated cells appear.
 
 ![Symmetric and asymmetric divisions](/figure/biologia-semestre-filtro/ciclo-cellulare/staminali-en.svg)
 
-The niche provides contacts, signals and conditions that influence cell fate. Moving one daughter outside the niche can promote differentiation even if both daughters received the same DNA. Potential and proliferation rate remain different properties: a stem cell can be quiescent; a progenitor can divide rapidly yet exhaust its capacity over time.
+Stem cells live in a particular environment of the tissue, called the **niche**. The neighbouring cells and the matrix of the niche supply the signals that keep the cell in the stem state. After a division, the daughter cell that stays in the niche remains a stem cell and the one that leaves it differentiates, even though the two cells have the same DNA.
+
+Potency and rate of division are distinct properties. Many stem cells divide rarely and spend long periods at rest. Progenitor cells divide rapidly.
 :::
 
 ## Apoptosis and necrosis
 
 :::definizione{#apoptosi-necrosi titolo="Morphology and caspases"}
-During **apoptosis**, a cell activates a programme that can include chromatin condensation, fragmentation and formation of apoptotic bodies. The plasma membrane initially retains its integrity and fragments can be engulfed. Necrosis typically involves swelling, loss of integrity and release of cellular contents, potentially promoting inflammation. Regulated forms of death with necrotic morphology also exist: regulated does not automatically mean apoptotic.
+A cell dies in two main ways, with different consequences for the tissue.
 
-**Caspases** are proteases activated from precursors. Initiators such as caspases 8 and 9 activate executioners such as 3 and 7, which cleave substrates responsible for many cellular changes. Efficient apoptotic-cell clearance limits content release; if clearance fails, secondary necrosis can occur.
+**Apoptosis** is a programmed death, which the cell itself carries out in an orderly way. The cell shrinks, the chromatin condenses, the DNA is cut into fragments and the cell divides into small membrane-bound vesicles, the **apoptotic bodies**. The membrane stays intact throughout the process, so the content of the cell is not dispersed. Macrophages engulf the apoptotic bodies and there is no inflammation. Apoptosis removes cells that are no longer needed or are damaged. In the embryo, for example, it removes the cells between the fingers of the hand.
 
-External exposure of phosphatidylserine can promote recognition by phagocytes. In an experiment, annexin V detects this exposure, while a dye unable to cross an intact membrane helps assess permeability. An annexin-V-positive, dye-negative cell is compatible with early apoptosis in the appropriate context. Double positivity alone does not reliably distinguish late apoptosis from death involving primary loss of integrity: timing, controls and other indicators are needed.
+**Necrosis** is an accidental death, caused by severe damage such as lack of oxygen. The cell swells, the membrane ruptures and the content spills into the tissue, where it causes **inflammation**.
 
-Executioner caspases cleave cytoskeletal proteins, lamins and other substrates. DNA fragmentation also depends on nucleases activated downstream of the cascade: caspases are proteases, not nucleases. Assigning a death mechanism is therefore more reliable when morphology, markers and perturbations are combined rather than relying on one stain.
+Apoptosis is carried out by enzymes called **caspases**. They are proteases, that is, enzymes that cut other proteins. In the healthy cell they are present in an inactive form, called procaspases, and are activated in a cascade.
+
+- **Initiator** caspases (caspase 8 and caspase 9) are activated first, by the death signal.
+- **Executioner** caspases (caspase 3 and caspase 7) are activated by the initiators. They cut hundreds of the cell's proteins, including those of the cytoskeleton and the nuclear lamins.
+
+Caspases cut proteins and not DNA. The DNA is fragmented by a nuclease, which the caspases activate.
+
+In the laboratory a cell in apoptosis is recognised by a change in the membrane. Phosphatidylserine, a phospholipid that normally lies on the inner leaflet of the membrane, moves to the outer leaflet. It is also the signal that macrophages recognise. Two stains are used together.
+
+- **Annexin V** binds phosphatidylserine exposed on the outside.
+- **Propidium iodide** enters only cells with a ruptured membrane.
+
+A cell positive for annexin V and negative for propidium iodide is in the early phase of apoptosis, because it exposes phosphatidylserine and its membrane is still intact. A cell positive for both has a ruptured membrane. It is in late apoptosis or in necrosis, and the two stains alone do not distinguish the two cases.
 :::
 
 ## Apoptotic pathways
 
 :::definizione{#vie-apoptotiche titolo="Intrinsic and extrinsic pathways"}
-In the **intrinsic** pathway, stress and damage can activate BCL2-family proteins that promote mitochondrial outer membrane permeabilisation, or MOMP. BAX and BAK participate in permeabilisation; BCL2 and BCL-XL can oppose it. BH3-only proteins regulate the balance through interactions with pro- and anti-apoptotic family members.
+Apoptosis is started by two pathways, according to the origin of the signal.
 
-Cytochrome c released into the cytosol promotes **apoptosome** assembly with APAF1 and appropriate nucleotides; this complex recruits and activates procaspase 9. Executioner activation and cellular dismantling follow.
+The **intrinsic** (mitochondrial) pathway starts from inside the cell, in response to DNA damage or another stress. It is controlled by the proteins of the **BCL2 family**, which fall into three groups.
 
-In the **extrinsic** pathway, ligands of death receptors such as Fas promote assemblies containing adaptors and initiator procaspases, including caspase 8. In several contexts, BID cleavage links the extrinsic pathway to the mitochondrial pathway. The pathways converge on executioner caspases; the link through BID can amplify the death-receptor response, with outcomes modulated by inhibitors and cell state.
+- The **pro-apoptotic** proteins BAX and BAK form pores in the outer membrane of the mitochondrion.
+- The **anti-apoptotic** proteins BCL2 and BCL-XL bind BAX and BAK and keep them inactive.
+- **BH3-only** proteins are the damage sensors. When activated they block the anti-apoptotic proteins and release BAX and BAK.
 
-Cytochrome c location matters: in the intermembrane space it participates in electron transport; in the cytosol it can contribute to apoptosis. MOMP affects the mitochondrial **outer** membrane and must not be confused with normal ATP synthesis across the inner membrane. APAF1 and procaspase 9 must be available for cytochrome c release to lead to functional apoptosome assembly.
+The pathway continues in four steps.
+
+1. BAX and BAK form pores in the outer membrane of the mitochondrion. This event is denoted by the abbreviation **MOMP**.
+2. Through the pores **cytochrome c**, a protein that normally lies in the intermembrane space and takes part in the respiratory chain, leaves for the cytosol.
+3. In the cytosol cytochrome c binds the protein APAF1. Several copies of this complex join into a wheel-shaped structure, the **apoptosome**.
+4. The apoptosome activates caspase 9, which activates the executioner caspases.
+
+Cytochrome c therefore has two functions, according to where it is: in the mitochondrion it serves respiration, in the cytosol it starts apoptosis. The pores concern the outer membrane of the mitochondrion. The inner membrane, where ATP is produced, is not perforated.
+
+The **extrinsic** pathway starts from outside the cell. Another cell, for example a lymphocyte, displays a death signal that binds a **death receptor** on the target cell. The best-known pair consists of the Fas receptor and its ligand.
 
 ![Two apoptotic pathways and their convergence](/figure/biologia-semestre-filtro/ciclo-cellulare/apoptosi-en.svg)
 
-In the Fas model, the adaptor FADD promotes assembly of the signalling complex that activates caspase 8. A cell may additionally require mitochondrial amplification through BID, so blocking BAX/BAK need not have the same effect in every cell type stimulated through a death receptor. Problems state whether this dependency is included in the model. A caspase inhibitor may reduce certain signs of apoptosis without proving that every damaged cell has recovered lasting survival.
+The extrinsic pathway has three steps.
+
+1. The ligand binds the Fas receptor.
+2. The inner part of the receptor recruits an adaptor protein, FADD, which in turn recruits procaspase 8.
+3. Caspase 8 is activated and activates the executioner caspases.
+
+The two pathways therefore reach the same executioner caspases, 3 and 7. They are also connected to each other. Caspase 8 cuts a BH3-only protein called **BID**, and cut BID activates BAX and BAK. In this way a signal arriving from outside also starts the mitochondrial pathway, which reinforces it. In some cell types this reinforcement is indispensable for the cell to die, in others caspase 8 alone is sufficient.
+
+A drug that inhibits caspases blocks the signs of apoptosis. The treated cell is not necessarily saved, however, because the damage that had started the process is still present.
 :::
