@@ -49,6 +49,9 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
         {lingua === 'it' && <OrientamentoAccount />}
       </section>
 
+      {/* «Invita un amico»: striscia fra contenuti e progressi (posizione B scelta il 19/11/2026). */}
+      <InvitaAmico lingua={lingua} />
+
       <section id="progressi-account" class="ac-sezione" aria-labelledby="titolo-progressi">
         <h2 class="account-titolo-sezione" id="titolo-progressi">{s.progressi}</h2>
         <p class="account-nota" id="progressi-caricamento" role="status">{t.caricamento}</p><button class="bottone-secondario" type="button" id="progressi-riprova" hidden>{s.riprova}</button>
@@ -86,7 +89,6 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
             <p class="esito-modulo" id="esito-email" role="status"></p>
           </form>
           <details class="account-dettagli dispositivi-account" id="dispositivi"><summary><span id="dispositivi-titolo">{s.dispositivi}</span><span class="ac-valore" id="dispositivi-conto"></span></summary><p class="account-nota">{s.notaDispositivi}</p><p class="account-nota" id="esito-dispositivi" role="status"></p><ul class="account-dispositivi" id="elenco-dispositivi" aria-busy="false"></ul><button class="account-azione-testo" type="button" id="aggiorna-dispositivi">{s.aggiorna}</button></details>
-          <details class="account-dettagli" id="inviti-account" hidden><summary>{s.inviti}</summary><InvitaAmico lingua={lingua} /></details>
         </div>
         <button class="account-esci" type="button" id="esci" hidden>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M14 8l4 4-4 4M9 12h11"/></svg>

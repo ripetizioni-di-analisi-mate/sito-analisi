@@ -357,11 +357,6 @@ export function avviaAccount(root) {
       esci.removeAttribute('aria-busy');
     } finally { clearTimeout(attesa); }
   });
-  const invito = root.querySelector('#invita-amico');
-  if (invito) {
-    const mostraInvito = () => { q('inviti-account').hidden = invito.hidden; };
-    mostraInvito(); new MutationObserver(mostraInvito).observe(invito, { attributes: true, attributeFilter: ['hidden'] });
-  }
   (async () => {
     try { io = await api('/api/io'); }
     catch (error) {

@@ -45,7 +45,7 @@
 .pagina-account .dispositivo-scollega:hover { color: var(--accento); border-color: var(--accento); }
 .pagina-account .account-azione-testo { border: 0; padding: 0.4rem 0; background: none; color: var(--accento); font-family: var(--ui); font-size: 0.88rem; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
 .pagina-account #aggiorna-dispositivi { margin-top: 0.55rem; }
-.pagina-account .invita-amico { margin: 0.2rem 0 1rem; background: none; border-color: var(--riga); }
+.pagina-account .invita-amico { margin: 1.5rem 0 0; }
 .pagina-account .account-conferma { width: min(27rem, calc(100vw - 2rem)); max-width: none; max-height: calc(100dvh - 2rem); overflow-y: auto; margin: auto; padding: 1.4rem; border: 1px solid var(--riga); border-radius: 10px; background: var(--carta); color: var(--inchiostro); box-shadow: 0 0.8rem 2.6rem rgb(0 0 0 / 16%); }
 .pagina-account .account-conferma::backdrop { background: rgb(15 28 25 / 42%); }
 .pagina-account .account-conferma h2 { margin: 0 0 0.8rem; font-size: 1.3rem; }
