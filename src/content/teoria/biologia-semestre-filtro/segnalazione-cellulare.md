@@ -6,111 +6,160 @@ sommario: "Dalle giunzioni alle risposte cellulari: matrice, recettori, secondi 
 ## Matrice extracellulare e proprietà dei tessuti
 
 :::definizione{#matrice titolo="Componenti, organizzazione e rimodellamento"}
-Un tendine resiste alla trazione, mentre la cartilagine sopporta compressioni ripetute. Queste proprietà dipendono anche dalla **matrice extracellulare**, una rete di macromolecole prodotte e secrete dalle cellule. I collageni formano strutture resistenti alla trazione; l'elastina permette deformazioni reversibili. I proteoglicani contengono catene di glicosamminoglicani ricche di cariche negative, che richiamano cationi e acqua. Il gel idratato così ottenuto contribuisce alla resistenza alla compressione.
+La **matrice extracellulare** è il materiale che riempie lo spazio fra le cellule di un tessuto. È una rete di proteine e zuccheri prodotta dalle cellule stesse e rilasciata all'esterno. Le proprietà meccaniche di un tessuto dipendono in gran parte dalla sua matrice. Un tendine, per esempio, resiste quando viene tirato, mentre la cartilagine di un ginocchio resiste quando viene schiacciata. I componenti principali sono tre.
 
-La fibronectina è una glicoproteina adesiva con regioni capaci di legare integrine e componenti della matrice. La laminina partecipa all'organizzazione della lamina basale, insieme a collagene IV, nidogeno e proteoglicani. La lamina basale sostiene epiteli e altre cellule e contribuisce alla loro organizzazione. Composizione, quantità e orientamento delle molecole contano quanto la loro presenza; due tessuti contenenti collagene possono avere proprietà meccaniche diverse.
+- Il **collagene** forma fibre che resistono alla trazione. È abbondante nei tendini.
+- L'**elastina** forma fibre elastiche, che si allungano e tornano alla lunghezza iniziale. È abbondante nelle arterie e nei polmoni.
+- I **proteoglicani** sono proteine a cui sono legate lunghe catene di zuccheri, i glicosamminoglicani, ricche di cariche negative. Le cariche attirano ioni positivi e acqua, quindi i proteoglicani formano un gel pieno d'acqua che resiste alla compressione. Sono abbondanti nella cartilagine.
 
-Il **rimodellamento** comprende deposizione, riorganizzazione e degradazione. Metalloproteasi della matrice, controllate anche da inibitori specifici, tagliano componenti extracellulari. Questo rende possibile la migrazione durante sviluppo e riparazione, ma modifica anche adesioni e disponibilità di segnali. Una matrice eccessivamente depositata può irrigidire un tessuto; una degradazione eccessiva può indebolirlo. La matrice è quindi parte dell'ambiente che regola la funzione cellulare.
+Altre due proteine collegano le cellule alla matrice. La **fibronectina** si lega da un lato alle fibre della matrice e dall'altro a recettori della superficie cellulare, le integrine. La **laminina** è il componente principale della **lamina basale**, uno strato sottile di matrice su cui poggiano gli epiteli. La lamina basale contiene anche collagene di tipo IV e proteoglicani.
+
+La matrice cambia nel tempo. Le cellule depositano nuovi componenti e degradano quelli vecchi, e l'insieme di questi processi si chiama **rimodellamento**. La degradazione è compiuta da enzimi detti **metalloproteasi della matrice** (MMP), tenuti sotto controllo da inibitori specifici. Il rimodellamento permette alle cellule di spostarsi nel tessuto durante lo sviluppo e la riparazione di una ferita. I due eccessi sono dannosi. Una deposizione eccessiva irrigidisce il tessuto, come nella fibrosi. Una degradazione eccessiva lo indebolisce.
 
 ![Collagene, proteoglicani e fibronectina svolgono funzioni diverse nella matrice.](/figure/biologia-semestre-filtro/segnalazione-cellulare/matrice-it.svg)
 :::
 
 :::esempio{titolo="Interpretare una variazione della matrice"}
-In un campione di cartilagine si riducono i proteoglicani mentre la rete di collagene rimane inizialmente conservata. La perdita delle catene cariche riduce la capacità di trattenere acqua. Il tessuto può quindi opporsi meno efficacemente alla compressione anche senza una perdita iniziale delle fibre collageniche. L'osservazione non permette invece di concludere che ogni proprietà meccanica sia diminuita nella stessa proporzione, perché trazione e compressione coinvolgono componenti e organizzazioni differenti.
+In un campione di cartilagine i proteoglicani sono diminuiti, mentre le fibre di collagene sono ancora intatte. I proteoglicani sono il componente che trattiene l'acqua, quindi la cartilagine contiene meno acqua e resiste meno alla compressione. Il collagene è il componente che resiste alla trazione ed è intatto, quindi la resistenza alla trazione è ancora conservata. Le due proprietà dipendono da componenti diversi e si perdono in modo indipendente.
 :::
 
 ## Adesione alla matrice e trasmissione delle forze
 
 :::definizione{#integrine titolo="Integrine, citoscheletro e meccanotrasduzione"}
-Una cellula aderente deve collegare le strutture esterne al proprio citoscheletro. Le **integrine** sono recettori transmembrana costituiti da una subunità alfa e una beta. La porzione extracellulare riconosce ligandi della matrice; le code citoplasmatiche reclutano proteine che realizzano il collegamento interno. Nelle adesioni focali talina e vinculina partecipano al collegamento con l'actina. Negli emidesmosomi l'integrina alfa6beta4 si collega, attraverso proteine come la plectina, ai filamenti intermedi e alla laminina della lamina basale.
+Le **integrine** sono le proteine con cui una cellula si attacca alla matrice extracellulare. Attraversano la membrana plasmatica e sono formate da due catene, una alfa e una beta. La parte esterna si lega a una proteina della matrice, come la fibronectina o la laminina. La parte interna si lega, tramite proteine adattatrici, al citoscheletro. L'integrina è quindi un ponte fra la matrice, all'esterno, e il citoscheletro, all'interno. Esistono due tipi di attacco.
 
-Le integrine possono cambiare conformazione e affinità per il ligando. Nella segnalazione dall'interno verso l'esterno, proteine intracellulari favoriscono uno stato di maggiore affinità. Nella direzione dall'esterno verso l'interno, legame del ligando e organizzazione delle adesioni modificano attività di proteine, fra cui la chinasi FAK. Il recettore può così partecipare sia all'adesione sia alla regolazione di migrazione, sopravvivenza e proliferazione.
+- Nelle **adesioni focali** l'integrina è collegata ai filamenti di actina. Gli adattatori sono la talina e la vinculina.
+- Negli **emidesmosomi** l'integrina α6β4 è collegata ai filamenti intermedi tramite la plectina, e all'esterno si lega alla laminina della lamina basale. Gli emidesmosomi fissano gli epiteli alla lamina basale.
 
-La **meccanotrasduzione** converte una forza o una variazione delle proprietà meccaniche in una risposta biochimica. La tensione generata dall'actomiosina può deformare proteine adesive e rendere disponibili siti di legame. Una superficie rigida e una deformabile possono quindi produrre risposte diverse anche quando espongono lo stesso ligando. L'esito dipende dal tipo cellulare e dai controlli presenti; la rigidità, da sola, non determina una risposta universale.
+Un'integrina ha due forme, una ripiegata che lega debolmente la matrice e una distesa che la lega con forza. Il passaggio da una forma all'altra trasmette informazioni nei due versi.
+
+- **Dall'interno verso l'esterno**. La talina si lega alla parte interna dell'integrina e la porta nella forma distesa, quindi la cellula decide quando aderire.
+- **Dall'esterno verso l'interno**. L'integrina legata alla matrice attiva enzimi all'interno della cellula, fra cui la chinasi FAK. Questi segnali regolano la migrazione, la sopravvivenza e la divisione della cellula.
+
+La **meccanotrasduzione** è la trasformazione di una forza meccanica in un segnale chimico. I filamenti di actina, tirati dalla miosina, mettono in tensione le proteine dell'adesione. Sotto tensione la talina si distende e scopre siti a cui si lega la vinculina, quindi l'adesione si rinforza. Su una superficie rigida la tensione è alta, su una superficie morbida è bassa. Per questo motivo la stessa cellula si comporta in modo diverso su superfici di rigidità diversa, anche se portano la stessa proteina della matrice.
 
 ![Connessione tra matrice, integrina, adattatori e actina.](/figure/biologia-semestre-filtro/segnalazione-cellulare/adesione-it.svg)
 :::
 
 :::esempio{titolo="Separare riconoscimento e ancoraggio"}
-Una cellula possiede integrine che legano fibronectina, ma la talina non riesce a collegarsi al complesso adesivo. La presenza di recettori occupati dimostra il riconoscimento del ligando. La riduzione della trasmissione di forza indica invece un difetto del collegamento intracellulare. Per distinguere i due passaggi si misurano separatamente il legame alla superficie e le forze esercitate; un unico conteggio delle integrine non descriverebbe entrambe le funzioni.
+Una cellula ha integrine che si legano normalmente alla fibronectina, ma la sua talina non riesce a collegarsi all'integrina. Si misurano due cose. La prima è quante integrine sono legate alla fibronectina, e il valore è normale. La seconda è la forza con cui la cellula tira sulla superficie, e il valore è molto basso. Il legame con la matrice quindi funziona, mentre manca il collegamento fra integrina e actina, che è il compito della talina. Contare le integrine legate non sarebbe bastato a scoprire il difetto, perché l'adesione richiede due passaggi distinti: il legame all'esterno e l'ancoraggio all'interno.
 :::
 
 ## Riconoscimento tra cellule e giunzioni
 
 :::definizione{#giunzioni titolo="Barriere, ancoraggi e canali intercellulari"}
-Le cellule di un epitelio devono restare unite, separare ambienti diversi e coordinare alcune attività. Le **caderine** mediano molte adesioni cellula-cellula dipendenti dal calcio extracellulare. Il calcio stabilizza la loro porzione esterna, permettendo l'interazione adesiva. Molecole della superfamiglia delle immunoglobuline, come alcune CAM, partecipano invece ad adesioni con caratteristiche differenti; la dipendenza dal calcio delle caderine non si estende automaticamente a tutte le molecole adesive.
+In un epitelio, come quello che riveste l'intestino, le cellule sono unite fra loro da strutture dette **giunzioni**. Le proteine che tengono unite due cellule vicine sono soprattutto le **caderine**. Una caderina attraversa la membrana e, all'esterno, si lega a una caderina uguale della cellula vicina. Il legame richiede ioni calcio. Se dal mezzo si toglie il calcio, le caderine si staccano e le cellule si separano. Altre molecole di adesione, come le CAM della famiglia delle immunoglobuline, non richiedono calcio.
 
-Le giunzioni si distinguono per struttura collegata e funzione:
+Le giunzioni sono di cinque tipi. Ciascuna ha una funzione e un collegamento caratteristico.
 
-- Le giunzioni aderenti collegano caderine al citoscheletro di actina tramite complessi proteici comprendenti catenine.
-- I desmosomi collegano caderine specializzate, desmogleine e desmocolline, ai filamenti intermedi di cellule adiacenti.
-- Gli emidesmosomi collegano una cellula alla lamina basale attraverso integrine e filamenti intermedi.
-- Le giunzioni occludenti, con proteine come claudine e occludina, regolano la permeabilità paracellulare e contribuiscono a separare domini apicale e basolaterale.
-- Le giunzioni comunicanti collegano direttamente due citoplasmi mediante canali formati dall'accoppiamento di connessoni, ciascuno costituito da sei connessine.
+- Le **giunzioni aderenti** uniscono due cellule con caderine collegate ai filamenti di actina. Il collegamento è fatto da proteine dette catenine.
+- I **desmosomi** uniscono due cellule con caderine particolari (desmogleine e desmocolline) collegate ai filamenti intermedi. Danno resistenza meccanica e sono numerosi nella pelle e nel cuore.
+- Gli **emidesmosomi** uniscono una cellula alla lamina basale con integrine collegate ai filamenti intermedi.
+- Le **giunzioni occludenti** (strette) sigillano lo spazio fra due cellule con le proteine claudina e occludina. Impediscono alle sostanze di passare fra una cellula e l'altra (via paracellulare) e separano la parte apicale della membrana, rivolta verso il lume, dalla parte basolaterale.
+- Le **giunzioni comunicanti** (gap junction) sono canali che collegano il citoplasma di due cellule. Ogni cellula fornisce mezzo canale, detto connessone, formato da sei proteine dette connessine.
 
-I canali delle gap junction permettono il passaggio selettivo di ioni e piccole molecole. La loro permeabilità dipende dalle connessine e dalla regolazione del canale. Il passaggio di un colorante piccolo tra cellule adiacenti può quindi indicare comunicazione diretta; il passaggio di una proteina grande richiederebbe un'altra spiegazione.
+Attraverso le giunzioni comunicanti passano ioni e molecole piccole, fino a circa 1000 dalton. Le proteine sono troppo grandi per passare. Nel cuore, per esempio, queste giunzioni lasciano passare gli ioni da una cellula all'altra, quindi il segnale elettrico si propaga e le cellule si contraggono insieme. In laboratorio si inietta in una cellula un colorante di piccole dimensioni. Se il colorante compare nelle cellule vicine, le cellule sono collegate da giunzioni comunicanti.
 
 ![Le diverse giunzioni collegano actina, filamenti intermedi o citoplasmi.](/figure/biologia-semestre-filtro/segnalazione-cellulare/giunzioni-it.svg)
 :::
 
 :::esempio{titolo="Due misure dello stesso epitelio"}
-Un trattamento aumenta il passaggio di un tracciante extracellulare fra le cellule, mentre il trasferimento di un colorante citosolico tra cellule adiacenti resta invariato. Il primo dato suggerisce una variazione della barriera paracellulare; il secondo indica che la comunicazione studiata attraverso gap junction è conservata. Le due misure interrogano percorsi differenti. Per attribuire il difetto alle giunzioni occludenti servono inoltre controlli su morte cellulare e continuità dell'epitelio.
+Su uno strato di cellule epiteliali si eseguono due misure prima e dopo un trattamento. Nella prima si mette un tracciante nel liquido sopra le cellule e si misura quanto ne arriva sotto, passando negli spazi fra una cellula e l'altra. Dopo il trattamento ne passa di più. Nella seconda si inietta un colorante dentro una cellula e si misura quanto ne arriva nelle cellule vicine. Dopo il trattamento il valore è invariato. La prima misura riguarda lo spazio fra le cellule, sigillato dalle giunzioni occludenti, quindi il trattamento ha indebolito queste giunzioni. La seconda riguarda il passaggio da citoplasma a citoplasma, quindi le giunzioni comunicanti funzionano ancora. Prima di concludere si controlla che le cellule non siano morte, perché anche un buco nello strato lascerebbe passare il tracciante.
 :::
 
 ## Modalità e logica della comunicazione
 
 :::definizione{#comunicazione titolo="Distanza, recettori e selettività della risposta"}
-Un segnale raggiunge una cellula bersaglio attraverso modalità diverse. Nella comunicazione **da contatto** il ligando rimane associato alla superficie della cellula emittente. Un segnale paracrino diffonde nel tessuto vicino; un segnale autocrino agisce sulla cellula che lo produce o su cellule dello stesso tipo. Nella comunicazione endocrina un ormone viene trasportato dal sangue verso bersagli anche distanti. Nella comunicazione sinaptica il neurotrasmettitore viene liberato in corrispondenza di una giunzione specializzata.
+Le cellule comunicano per mezzo di molecole dette **segnali**. Una cellula produce il segnale e un'altra, la **cellula bersaglio**, lo riceve con una proteina detta **recettore**. La molecola che si lega a un recettore si chiama anche **ligando**. Le modalità di comunicazione si distinguono per la strada che il segnale percorre.
 
-La distanza percorsa dal segnale e la durata della risposta sono proprietà distinte. Una risposta endocrina può iniziare rapidamente attraverso proteine già presenti. Un segnale locale può invece modificare l'espressione genica e produrre conseguenze più durature. La classificazione dipende dal percorso con cui il segnale raggiunge il bersaglio.
+- **Da contatto**. Il segnale resta attaccato alla membrana della cellula che lo produce, quindi agisce solo su una cellula che la tocca.
+- **Paracrina**. Il segnale si diffonde nel liquido fra le cellule e agisce sulle cellule vicine.
+- **Autocrina**. Il segnale agisce sulla stessa cellula che lo ha prodotto.
+- **Endocrina**. Il segnale è un **ormone**, che viaggia nel sangue e raggiunge cellule lontane. L'insulina prodotta dal pancreas, per esempio, agisce su muscoli e fegato.
+- **Sinaptica**. Un neurone rilascia un **neurotrasmettitore** in una **sinapsi**, lo spazio ristretto che lo separa dalla cellula successiva.
 
-La **cellula bersaglio** possiede un recettore appropriato e un apparato capace di trasmettere il segnale. Due cellule con lo stesso recettore possono rispondere diversamente perché esprimono effettori, fattori di trascrizione o regolatori differenti. Anche concentrazione del ligando, affinità, numero dei recettori e durata dell'esposizione influenzano la risposta. Aumentare il ligando può avere effetti modesti quando i recettori sono già quasi saturi.
+Questa classificazione riguarda solo il percorso. La velocità e la durata della risposta dipendono da ciò che accade dentro la cellula bersaglio. Una risposta che usa proteine già presenti comincia in pochi secondi. Una risposta che richiede di attivare geni e produrre proteine nuove comincia dopo minuti o ore e dura più a lungo.
+
+Una cellula risponde a un segnale solo se possiede il recettore corrispondente. Due cellule con lo stesso recettore, inoltre, danno risposte diverse se contengono proteine diverse a valle del recettore. L'acetilcolina, per esempio, fa contrarre il muscolo scheletrico e rallenta il battito del cuore. L'intensità della risposta dipende dalla concentrazione del segnale e dal numero di recettori. Quando quasi tutti i recettori sono occupati, aggiungere altro segnale cambia poco la risposta.
 :::
 
 :::definizione{#trasduzione titolo="Amplificazione, specificità e terminazione"}
-La **trasduzione del segnale** è la successione di eventi che collega il riconoscimento di un ligando a una risposta. Alcuni passaggi producono secondi messaggeri; altri modificano proteine già presenti mediante fosforilazione, legame di nucleotidi o interazioni fra domini. Se una molecola attiva modifica molte molecole del passaggio successivo, si ha amplificazione. Una cascata con più livelli può quindi generare una risposta ampia a partire da pochi recettori occupati.
+La **trasduzione del segnale** è la serie di passaggi che, dentro la cellula, collega il recettore attivato alla risposta finale. L'insieme dei passaggi si chiama **via di segnalazione**. In ogni passaggio una proteina ne attiva un'altra, spesso aggiungendole un gruppo fosfato. Alcune vie producono anche piccole molecole che si diffondono nella cellula, dette **secondi messaggeri**. Il primo messaggero è il segnale arrivato dall'esterno.
 
-Le proteine di impalcatura, o scaffold, riuniscono componenti nello stesso compartimento e favoriscono incontri selettivi. Le fosfatasi rimuovono gruppi fosfato; le fosfodiesterasi degradano nucleotidi ciclici; pompe e scambiatori riducono il calcio citosolico. Questi processi contribuiscono allo spegnimento. La fosforilazione può attivare oppure inibire una proteina, secondo il sito interessato. Per prevedere un effetto occorre quindi conoscere il segno del collegamento nella via studiata.
+Una via di segnalazione **amplifica** il segnale. Un recettore attivato attiva molte molecole del primo enzima, ciascuna delle quali attiva molte molecole del successivo. Se a ogni passaggio una molecola ne attiva dieci, dopo tre passaggi le molecole attive sono $10\cdot 10\cdot 10=1000$. Pochi recettori occupati bastano quindi a produrre una risposta ampia.
+
+Le proteine di una via spesso sono tenute vicine da una **proteina di impalcatura** (scaffold), che le lega insieme. In questo modo ciascuna incontra il proprio bersaglio e non le proteine di altre vie.
+
+Ogni via ha anche un sistema di **spegnimento**, che interrompe la risposta quando il segnale cessa.
+
+- Le **fosfatasi** tolgono i gruppi fosfato aggiunti dalle chinasi.
+- Le **fosfodiesterasi** degradano i secondi messaggeri cAMP e cGMP.
+- Pompe e scambiatori riportano gli ioni calcio fuori dal citosol.
+
+Una fosforilazione attiva alcune proteine e ne inattiva altre. Per prevedere l'effetto di un farmaco su una via è quindi necessario sapere, per ogni passaggio, se è un'attivazione o un'inibizione.
 
 ![Una cascata collega riconoscimento, trasduzione e risposta, con controlli di spegnimento.](/figure/biologia-semestre-filtro/segnalazione-cellulare/cascata-it.svg)
 :::
 
 :::esempio{titolo="Ordine dei componenti in una via"}
-In una via lineare A attiva B e B attiva C. Il blocco di A riduce C. Se una forma di B attiva indipendentemente da A ripristina C, il risultato è coerente con la posizione di B a valle di A. Questa conclusione richiede che C sia ancora funzionante e che l'intervento non attivi una via alternativa. Il recupero della risposta è quindi informativo quando è accompagnato da controlli sulla specificità delle perturbazioni.
+In una via tre proteine agiscono in fila: A attiva B e B attiva C. L'ordine si verifica con due prove. Nella prima si blocca A, e l'attività di C scompare, quindi A serve all'attivazione di C. Nella seconda, sempre con A bloccata, si introduce nella cellula una forma di B modificata in modo da essere sempre attiva. L'attività di C ricompare. B attiva quindi C senza bisogno di A, e ciò indica che B agisce dopo A nella via, cioè **a valle** di A. Se B agisse prima di A, il blocco di A avrebbe fermato il segnale anche con B attiva. La conclusione vale se la forma attiva di B non accende C attraverso un'altra via, e questo si controlla con una prova separata.
 :::
 
 ## Recettori intracellulari e recettori-canale
 
 :::definizione{#recettori-intracellulari titolo="Regolazione genica e via NO–cGMP"}
-Molti ormoni steroidei attraversano la membrana e si legano a recettori citoplasmatici o nucleari. Il complesso recettoriale regola la trascrizione di geni bersaglio attraverso specifiche sequenze di DNA e cofattori. Una variazione che richiede nuova sintesi proteica compare con tempi coerenti con trascrizione e traduzione. La risposta dipende anche dall'accessibilità dei geni e dai cofattori espressi in quella cellula.
+I recettori si trovano in due posizioni. La maggior parte sta sulla membrana plasmatica e riceve segnali che non la attraversano. Alcuni stanno dentro la cellula e ricevono segnali piccoli e idrofobi, che attraversano il doppio strato.
 
-L'**ossido nitrico**, NO, attraversa le membrane e attiva la guanilato ciclasi solubile legandosi al suo gruppo eme. L'enzima produce cGMP a partire da GTP. Nella muscolatura liscia vascolare l'attivazione di effettori come PKG favorisce il rilassamento. Poiché NO viene rapidamente trasformato, la sua azione è spesso locale. Il recettore intracellulare può dunque essere un enzima; la localizzazione interna non implica sempre una regolazione diretta della trascrizione.
+Gli **ormoni steroidei**, come il cortisolo e gli estrogeni, derivano dal colesterolo e attraversano la membrana. Nella cellula si legano a un **recettore intracellulare**. Il recettore con l'ormone legato entra nel nucleo, o vi si trova già, e si lega a sequenze specifiche del DNA, dove attiva o reprime la trascrizione di determinati geni. Il recettore è quindi un fattore di trascrizione attivato dall'ormone. La risposta richiede la produzione di nuovo RNA e nuove proteine, perciò compare dopo decine di minuti o ore.
+
+L'**ossido nitrico** (NO) è un gas che attraversa le membrane. Il suo recettore è un enzima del citosol, la **guanilato ciclasi solubile**. NO si lega all'enzima e lo attiva, e l'enzima trasforma il GTP in **cGMP**, un secondo messaggero. Nelle cellule muscolari della parete dei vasi sanguigni il cGMP attiva la chinasi PKG, che fa rilassare il muscolo, quindi il vaso si dilata. NO viene distrutto in pochi secondi, perciò agisce solo sulle cellule vicine a quella che lo produce. Questo esempio mostra che un recettore intracellulare non agisce sempre sui geni.
 :::
 
 :::definizione{#recettori-canale titolo="Legame del ligando e variazione elettrica"}
-Un **recettore-canale** collega il riconoscimento di un ligando alla probabilità di apertura di un poro ionico. Il recettore nicotinico dell'acetilcolina è un esempio di canale cationico regolato da ligando. A un potenziale di riposo muscolare negativo, il flusso netto di cariche positive tende a depolarizzare la membrana. Direzione e intensità della corrente dipendono dai gradienti elettrochimici e dal potenziale iniziale.
+Un **recettore-canale** è una proteina di membrana che è insieme recettore e canale ionico. Il canale è chiuso a riposo e si apre quando il ligando si lega. Gli ioni lo attraversano secondo il loro gradiente elettrochimico e cambiano il potenziale di membrana. L'esempio classico è il **recettore nicotinico dell'acetilcolina**, che si trova sulla cellula muscolare nel punto di contatto con il nervo. Quando l'acetilcolina si lega, il canale si apre e lascia passare ioni positivi. Entra soprattutto Na⁺, perché l'interno della cellula è negativo. L'interno diventa meno negativo, cioè la membrana si depolarizza, e questo avvia la contrazione.
 
-Il legame diretto del ligando al canale richiede meno passaggi di una cascata che modifichi indirettamente un canale. Nell'esperimento, una variazione rapida di corrente può suggerire un meccanismo ionotropico, ma il solo tempo non basta a identificarlo. Occorre verificare quale proteina lega il ligando e quali intermedi sono necessari.
+Nel recettore-canale il legame del ligando apre direttamente il canale, senza passaggi intermedi. La risposta è quindi la più rapida fra tutti i tipi di recettore e compare in millisecondi. Un recettore di questo tipo si dice anche **ionotropico**. Un recettore che apre un canale in modo indiretto, attraverso una via di segnalazione, si dice **metabotropico** ed è più lento.
 :::
 
 ## Proteine G e secondi messaggeri
 
 :::definizione{#proteine-g titolo="Ciclo GDP–GTP e accoppiamento ai GPCR"}
-Le **proteine G** cambiano attività secondo il nucleotide legato. Una GEF facilita il rilascio del GDP, permettendo il legame di GTP disponibile nel citosol. Una GAP accelera l'idrolisi del GTP e favorisce il ritorno allo stato con GDP. Si tratta di sostituzione del nucleotide seguita da idrolisi; la GEF non aggiunge direttamente un fosfato al GDP legato.
+Una **proteina G** è una proteina che funziona da interruttore. Lega un nucleotide della guanina e ha due stati: è **spenta** quando lega GDP ed è **accesa** quando lega GTP. Due tipi di proteine la fanno passare da uno stato all'altro.
 
-Le proteine G monomeriche comprendono Ras e diverse famiglie coinvolte in traffico e citoscheletro. Le proteine G eterotrimeriche comprendono subunità alfa, beta e gamma. Un **GPCR** attivato dal ligando favorisce lo scambio GDP–GTP su Gα. Sia Gα-GTP sia Gβγ possono regolare effettori. L'idrolisi del GTP su Gα contribuisce alla terminazione e al ripristino del complesso inattivo.
+- Una **GEF** la accende. Fa staccare il GDP, e al suo posto si lega un GTP, che nel citosol è abbondante. Il GDP viene quindi sostituito con un GTP intero e non riceve un fosfato in più.
+- Una **GAP** la spegne. Accelera l'idrolisi del GTP legato, che diventa GDP.
 
-Nella via Gs, Gα-GTP stimola l'adenilato ciclasi, che converte ATP in cAMP. Il cAMP si lega alle subunità regolatrici della PKA, aumentando l'attività delle subunità catalitiche. Gαi può invece inibire determinate adenilato ciclasi. Gαq-GTP può attivare la fosfolipasi C beta, collegando un GPCR alla produzione di IP3 e DAG. L'effetto di un GPCR dipende quindi dalla proteina G e dagli effettori con cui è accoppiato nella cellula considerata.
+Le proteine G sono di due tipi. Quelle **monomeriche** sono formate da una sola catena. Ne sono esempi Ras, descritta più avanti, e Ran, che regola il trasporto nel nucleo. Quelle **eterotrimeriche** sono formate da tre subunità diverse, α, β e γ, e la subunità α è quella che lega il nucleotide.
+
+Le proteine G eterotrimeriche lavorano con i **GPCR** (recettori accoppiati a proteine G), recettori di membrana che attraversano il doppio strato sette volte. L'adrenalina, il glucagone e molti neurotrasmettitori agiscono su recettori di questo tipo. La sequenza è la seguente.
+
+1. Il ligando si lega al GPCR, che cambia forma.
+2. Il recettore attivato agisce da GEF sulla proteina G: la subunità α rilascia il GDP e lega GTP.
+3. La subunità α con GTP si separa dalla coppia βγ. Entrambe le parti regolano enzimi o canali della membrana.
+4. La subunità α idrolizza il GTP a GDP, si riunisce a βγ e il segnale si interrompe.
+
+Esistono tre famiglie principali di subunità α, che agiscono su enzimi diversi.
+
+- **Gs** attiva l'**adenilato ciclasi**, un enzima che trasforma l'ATP in **cAMP**. Il cAMP è un secondo messaggero e attiva la chinasi **PKA**. La PKA è formata da subunità regolatrici e subunità catalitiche. Il cAMP si lega alle regolatrici, che rilasciano le catalitiche attive.
+- **Gi** inibisce l'adenilato ciclasi, quindi abbassa il cAMP.
+- **Gq** attiva la **fosfolipasi C**, che produce i secondi messaggeri IP3 e DAG descritti nel prossimo riquadro.
+
+L'effetto di un ligando dipende quindi dal tipo di proteina G a cui il suo recettore è accoppiato. L'adrenalina, per esempio, alza il cAMP nelle cellule in cui il suo recettore è accoppiato a Gs.
 
 ![Ciclo della proteina G e via Gs–cAMP–PKA.](/figure/biologia-semestre-filtro/segnalazione-cellulare/gpcr-it.svg)
 :::
 
 :::definizione{#secondi-messaggeri titolo="Fosfoinositidi, calcio e compartimenti"}
-I **secondi messaggeri** sono molecole intracellulari la cui disponibilità cambia dopo l'attivazione di un recettore. La fosfolipasi C, attivata in diverse vie, scinde il fosfolipide PIP2 in IP3 e DAG. IP3 è solubile e raggiunge recettori-canale sulla membrana del reticolo endoplasmatico; la loro apertura libera calcio nel citosol. Il DAG rimane nel doppio strato lipidico. DAG e calcio partecipano all'attivazione delle PKC convenzionali; altre isoforme hanno requisiti differenti.
+Un **secondo messaggero** è una piccola molecola, o uno ione, la cui concentrazione nella cellula cambia rapidamente quando un recettore viene attivato. I principali sono cAMP, cGMP, IP3, DAG e gli ioni calcio (Ca²⁺).
 
-Il calcio citosolico può legare la calmodulina, che modifica l'attività di enzimi bersaglio. La risposta dipende anche dalla durata, frequenza e localizzazione degli aumenti di calcio. Pompe del reticolo, come SERCA, ricaptano calcio; pompe e scambiatori della membrana plasmatica contribuiscono alla sua estrusione. Una risposta reversibile richiede quindi sia il rilascio sia il ripristino dei gradienti.
+La **fosfolipasi C** (PLC) produce due secondi messaggeri in una sola reazione. Taglia un fosfolipide della membrana plasmatica, il **PIP2**, in due parti che hanno destini diversi.
 
-Le fosfodiesterasi degradano cAMP o cGMP secondo la loro specificità. Inibire una fosfodiesterasi può prolungare un segnale già prodotto; l'effetto dipende dalla presenza di sintesi del nucleotide ciclico. La quantità misurata a un istante deriva dal bilancio fra produzione e rimozione.
+- L'**IP3** è la testa del fosfolipide. È solubile, si diffonde nel citosol e si lega a un recettore-canale sulla membrana del reticolo endoplasmatico. Il canale si apre e gli ioni calcio, accumulati nel reticolo, escono nel citosol.
+- Il **DAG** è la parte con le due code. Resta nella membrana plasmatica e, insieme al calcio, attiva la chinasi **PKC**.
+
+Il **calcio** è a sua volta un secondo messaggero. A riposo la sua concentrazione nel citosol è circa diecimila volte più bassa che all'esterno della cellula e nel reticolo, quindi basta l'apertura di pochi canali per farla salire molto. Nel citosol il calcio si lega a una proteina, la **calmodulina**, e il complesso attiva diversi enzimi. Il segnale termina quando il calcio viene tolto dal citosol. La pompa SERCA lo riporta nel reticolo, e altre pompe e scambiatori della membrana plasmatica lo portano all'esterno.
+
+La concentrazione di un secondo messaggero dipende in ogni momento da due velocità, quella con cui è prodotto e quella con cui è eliminato. Il cAMP e il cGMP sono eliminati dalle **fosfodiesterasi**. Un farmaco che inibisce una fosfodiesterasi fa quindi durare più a lungo il segnale. Il farmaco ha effetto solo se il secondo messaggero viene prodotto, perché la fosfodiesterasi agisce su molecole già presenti.
 
 ![PIP2 produce IP3 solubile e DAG di membrana; IP3 favorisce il rilascio di calcio.](/figure/biologia-semestre-filtro/segnalazione-cellulare/plc-it.svg)
 :::
@@ -118,11 +167,26 @@ Le fosfodiesterasi degradano cAMP o cGMP secondo la loro specificità. Inibire u
 ## Desensitizzazione e fototrasduzione
 
 :::definizione{#desensitizzazione titolo="Riduzione della risposta e segnale luminoso"}
-La **desensitizzazione** riduce la risposta durante stimolazione persistente o ripetuta. Per molti GPCR, le GRK fosforilano il recettore attivato e favoriscono il legame di arrestine. L'accoppiamento alla proteina G diminuisce; può seguire internalizzazione. I recettori internalizzati possono essere riciclati oppure degradati. Una risposta ridotta può quindi verificarsi anche quando il ligando resta presente, e la sua durata dipende dal destino dei recettori e dagli altri controlli.
+La **desensitizzazione** è la diminuzione della risposta di una cellula a un segnale che resta presente a lungo. Protegge la cellula da una stimolazione eccessiva. Per i GPCR avviene in tre passaggi.
 
-Nei bastoncelli, la rodopsina contiene il cromoforo retinale. L'assorbimento della luce converte il retinale dalla configurazione 11-cis a quella tutto-trans, innescando il cambiamento conformazionale che attiva il recettore. La rodopsina attiva la transducina, che favorisce l'attività della fosfodiesterasi PDE6. La concentrazione di cGMP diminuisce e si chiudono canali cationici dipendenti da cGMP. Poiché si riduce la corrente entrante mentre continua l'uscita di potassio, la membrana si **iperpolarizza** e diminuisce il rilascio di glutammato.
+1. Una chinasi detta **GRK** aggiunge gruppi fosfato al recettore attivato.
+2. Una proteina detta **arrestina** si lega al recettore fosforilato e gli impedisce di attivare la proteina G.
+3. Il recettore viene portato dentro la cellula per endocitosi. Da lì torna sulla membrana oppure viene degradato nei lisosomi.
 
-Al buio il cGMP mantiene una quota di canali aperti; il bastoncello è relativamente depolarizzato e rilascia glutammato. Spegnimento della rodopsina, idrolisi del GTP sulla transducina e ripristino del cGMP favoriscono il recupero. La diminuzione del calcio intracellulare contribuisce all'adattamento, regolando fra l'altro la sintesi di cGMP. La risposta luminosa si comprende seguendo tutti i passaggi, perché un aumento dell'attività della fosfodiesterasi produce una diminuzione del messaggero.
+La risposta diminuisce quindi anche se il ligando è ancora presente.
+
+La **fototrasduzione** è la trasformazione della luce in un segnale nervoso. Nei bastoncelli della retina, le cellule della visione con poca luce, il recettore è la **rodopsina**. La rodopsina è un GPCR che contiene una piccola molecola sensibile alla luce, il **retinale**. La via ha una particolarità: la luce fa diminuire il secondo messaggero. La sequenza è la seguente.
+
+1. La luce cambia la forma del retinale, da 11-cis a tutto-trans, e la rodopsina si attiva.
+2. La rodopsina attiva una proteina G, la **transducina**.
+3. La transducina attiva una fosfodiesterasi, la **PDE6**, che degrada il cGMP.
+4. Il cGMP diminuisce. Nella membrana del bastoncello ci sono canali per ioni positivi tenuti aperti dal cGMP, quindi questi canali si chiudono.
+5. Gli ioni positivi non entrano più, mentre il K⁺ continua a uscire. L'interno diventa più negativo, cioè la membrana si **iperpolarizza**.
+6. Il bastoncello rilascia meno neurotrasmettitore (glutammato).
+
+Al buio accade l'opposto. Il cGMP è alto, i canali sono aperti, la membrana è depolarizzata e il bastoncello rilascia glutammato in modo continuo. Il bastoncello segnala quindi la luce con una diminuzione del glutammato rilasciato.
+
+Dopo il lampo di luce la cellula torna allo stato di buio. La rodopsina viene spenta, la transducina idrolizza il proprio GTP e la guanilato ciclasi produce nuovo cGMP. Con i canali chiusi anche il calcio nel bastoncello diminuisce, e questa diminuzione stimola la sintesi di cGMP. È uno dei meccanismi con cui l'occhio si adatta alla luce intensa.
 
 ![La luce abbassa il cGMP, chiude canali e iperpolarizza il bastoncello.](/figure/biologia-semestre-filtro/segnalazione-cellulare/visione-it.svg)
 :::
@@ -130,17 +194,32 @@ Al buio il cGMP mantiene una quota di canali aperti; il bastoncello è relativam
 ## Recettori tirosin-chinasici, crescita e metabolismo
 
 :::definizione{#rtk-ras titolo="EGF, Ras e cascata MAPK"}
-Molti **recettori tirosin-chinasici**, o RTK, vengono attivati dall'organizzazione del complesso recettoriale indotta dal ligando. La fosforilazione di specifiche tirosine crea siti di reclutamento per proteine intracellulari. Nel caso del recettore EGF, adattatori come Grb2 e la GEF SOS collegano il recettore all'attivazione di Ras. Ras-GTP favorisce l'attivazione di Raf, seguita dalle chinasi MEK ed ERK. ERK modifica bersagli citoplasmatici e nucleari, contribuendo a risposte come proliferazione e differenziamento secondo il contesto.
+I **recettori tirosin-chinasici** (RTK) sono recettori di membrana che hanno, nella parte interna alla cellula, un'attività di chinasi. Questa chinasi aggiunge gruppi fosfato all'amminoacido tirosina. Sono i recettori di molti **fattori di crescita**, cioè segnali che stimolano le cellule a crescere e a dividersi, come l'EGF (fattore di crescita dell'epidermide). L'attivazione avviene in tre passaggi.
 
-Una variante di Ras con idrolisi del GTP ridotta può mantenere il segnale più a lungo del normale. Un **proto-oncogene** svolge normalmente funzioni che contribuiscono a crescita, proliferazione o sopravvivenza. Alterazioni che ne aumentano o rendono persistente l'attività, o ne aumentano l'espressione, possono trasformarlo in un **oncogene**, favorendo risposte inappropriate. Questo modello di acquisizione di funzione si distingue dalla perdita di un freno oncosoppressore. L'attivazione persistente di una via non basta da sola a descrivere tutti i passaggi della trasformazione tumorale, che dipende anche da altri controlli e alterazioni.
+1. Il ligando si lega e due molecole di recettore si accostano (dimerizzazione).
+2. Ciascun recettore fosforila le tirosine dell'altro.
+3. Le tirosine fosforilate diventano punti di attacco per proteine del citosol, che in questo modo sono richiamate sotto la membrana.
+
+Nel caso dell'EGF il segnale prosegue lungo la via **Ras–MAPK**. Alle tirosine fosforilate si lega l'adattatore Grb2, che porta con sé la proteina SOS. SOS è una GEF e accende la proteina G monomerica **Ras**, facendole scambiare GDP con GTP. Ras-GTP attiva una fila di tre chinasi, ciascuna delle quali fosforila la successiva: **Raf**, poi **MEK**, poi **ERK**. ERK entra nel nucleo e attiva fattori di trascrizione che stimolano la divisione cellulare.
+
+Questa via spiega l'origine di molti tumori. Un **proto-oncogene** è un gene normale la cui proteina stimola la crescita o la divisione delle cellule quando arriva il segnale. Il gene di Ras è un proto-oncogene. Una mutazione che rende la proteina sempre attiva trasforma il proto-oncogene in un **oncogene**. In circa un quarto dei tumori umani Ras ha una mutazione che le impedisce di idrolizzare il GTP. La proteina resta accesa e la via stimola la divisione anche in assenza del fattore di crescita. L'oncogene agisce quindi per acquisto di funzione. I geni **oncosoppressori**, trattati nell'unità sul ciclo cellulare, contribuiscono ai tumori in modo opposto, cioè quando perdono la funzione. Un tumore si sviluppa in genere quando si sommano più alterazioni di questi due tipi.
 :::
 
 :::definizione{#insulina-pi3k titolo="Insulina, PIP3 e trasporto del glucosio"}
-Il recettore dell'insulina è un RTK già presente come complesso di subunità associate. Il legame dell'ormone modifica l'attività del recettore e promuove la fosforilazione di substrati come IRS. La PI3K reclutata produce PIP3 a partire da PIP2. PIP3 rimane nella membrana e viene riconosciuto da domini di legame appropriati, come il dominio PH di Akt. Questo reclutamento contribuisce all'attivazione di Akt, che richiede ulteriori fosforilazioni e non coincide con il solo legame al lipide. La fosfatasi lipidica PTEN converte PIP3 in PIP2 e limita questo ramo della segnalazione.
+L'**insulina** è l'ormone che il pancreas rilascia dopo un pasto, quando il glucosio nel sangue aumenta. Fa entrare il glucosio nelle cellule dei muscoli e del tessuto adiposo. Il suo recettore è un RTK formato da due metà già unite prima dell'arrivo dell'ormone. La via principale è la via **PI3K–Akt**, in cinque passaggi.
 
-In muscolo scheletrico e tessuto adiposo, la via insulinica favorisce la traslocazione di vescicole contenenti GLUT4 verso la membrana. Aumenta quindi il numero di trasportatori esposti e la capacità di ingresso del glucosio. Una risposta rapida può avvenire impiegando proteine già sintetizzate. L'insulina attiva anche altri rami, fra cui Ras-MAPK; i diversi effetti dell'ormone dipendono dall'integrazione di queste vie.
+1. L'insulina si lega e il recettore fosforila una proteina del citosol, detta **IRS**.
+2. IRS fosforilata richiama l'enzima **PI3K** sotto la membrana.
+3. PI3K aggiunge un fosfato al fosfolipide di membrana PIP2 e lo trasforma in **PIP3**.
+4. PIP3 resta nella membrana e fa da punto di attacco per la chinasi **Akt**, che lo riconosce con una sua parte detta dominio PH. Sulla membrana Akt viene fosforilata da altre chinasi e si attiva.
+5. Akt attiva fa spostare sulla membrana plasmatica delle vescicole che contengono il trasportatore del glucosio **GLUT4**.
 
-IP3 e PIP3 hanno proprietà diverse. IP3 deriva dal taglio di PIP2 operato dalla fosfolipasi C ed è solubile. PIP3 deriva dalla fosforilazione di PIP2 operata dalla PI3K ed è un lipide di membrana. Identificare l'enzima e il compartimento permette di distinguere i due percorsi anche quando le sigle sono simili.
+A riposo la maggior parte dei GLUT4 sta in vescicole dentro la cellula. Dopo il segnale dell'insulina le vescicole si fondono con la membrana plasmatica, i trasportatori esposti aumentano e il glucosio entra più velocemente. La risposta usa trasportatori già costruiti, quindi compare in pochi minuti. Il segnale è spento dalla fosfatasi **PTEN**, che toglie un fosfato a PIP3 e lo riporta a PIP2. Il gene di PTEN è un oncosoppressore. L'insulina attiva anche la via Ras–MAPK, che regola la crescita.
+
+Due molecole con sigle simili, IP3 e PIP3, derivano entrambe dal PIP2 e hanno ruoli diversi.
+
+- L'**IP3** si ottiene quando la fosfolipasi C *taglia* il PIP2. È solubile, si diffonde nel citosol e fa uscire calcio dal reticolo.
+- Il **PIP3** si ottiene quando la PI3K *aggiunge un fosfato* al PIP2. È un lipide, resta nella membrana e richiama Akt.
 
 ![Confronto tra il ramo Ras–MAPK e il ramo PI3K–Akt del segnale recettoriale.](/figure/biologia-semestre-filtro/segnalazione-cellulare/rtk-it.svg)
 :::
