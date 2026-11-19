@@ -6,9 +6,9 @@ sommario: Recursive contracts, return traces, induction and analysis of call cou
 ## A function that calls itself
 
 :::definizione{#contratto-ricorsivo titolo="Contract of a recursive function"}
-A function is **directly recursive** when its body contains a call to that same function. At the start of each invocation, the preconditions of the contract hold. In the **base case**, the function returns the result without recursive calls. In the recursive step, it calls itself on data that satisfy the same contract and uses the result to complete the original problem.
+A function is **recursive** when it calls itself in its own body. The idea is to solve a problem by reducing it to a smaller version of the same problem. For example, the sum of the integers from $1$ to $n$ equals $n$ plus the sum of the integers from $1$ to $n-1$, and the latter is the same problem with a smaller input. A recursive function therefore has two parts. The **base case** is the smallest case, in which the result is known directly without further calls; for the sum it is $n=0$, with result $0$. The **recursive step** calls the function on a smaller input and uses the result to build the one required.
 
-The argument passed to the inner call specifies a new problem. For example, adding the integers from $1$ to $n$ amounts to adding $n$ to the sum through $n-1$. The case $n=0$ is the sum of an empty set and returns $0$. Treating the cases separately makes it possible to check the formation of the next problem and the construction of the result independently.
+Every call, including the inner one, must respect the precondition of the function. When writing a recursive function one checks two things separately, namely that the input passed to the inner call is admissible and closer to the base case, and that the result is rebuilt correctly.
 :::
 
 :::esempio{titolo="A contract for the sum"}
@@ -24,25 +24,25 @@ unsigned sum(unsigned n)
 }
 ```
 
-If the recursive branch runs, then $n\geq1$. The subtraction therefore produces an argument between $0$ and $19$. The largest expected result is $210$, so there is room for every sum in the type `unsigned` on this domain. In the trace for `sum(3)`, the requests shrink to $3$, $2$, $1$ and $0$. Starting at the base, the recovered return values are $0$, $1$, $3$ and $6$ in order.
+The recursive branch is executed only for $n\geq1$, so `n - 1u` lies between $0$ and $19$ and respects the precondition. The largest result is $210$, for $n=20$, and it fits in an `unsigned`. For `sum(3)` the calls follow one another with arguments $3$, $2$, $1$ and $0$. The last is the base case and returns $0$; going back one obtains $1+0=1$, then $2+1=3$, then $3+3=6$.
 :::
 
 :::osservazione
-The contract calls for at least three checks. The arguments of the inner calls must meet the preconditions. The process must reach directly solvable cases in finitely many steps. Finally, the operation that combines the inner results must give the required value for the original data. For `sum`, the first check follows from the test on $n$. A decreasing measure proves termination, and induction proves the value returned.
+For a recursive function three properties must be verified. The arguments of the inner calls must satisfy the precondition. The chain of calls must reach a base case after a finite number of steps, that is, the function must **terminate**. The result built from that of the inner call must be the one required. For `sum` the first follows from the check on $n$; the other two are proved in the following sections, termination with a decreasing measure and the result by induction.
 :::
 
 ## A measure that guarantees termination
 
 ::::teorema{#misura-decrescente titolo="Termination criterion using a natural-number measure"}
-Let $\mu$ assign a nonnegative integer to each admissible invocation. Assume that each individual invocation performs finitely many operations apart from the recursive calls and starts finitely many calls. If every recursive call stays within the domain and has strictly smaller measure than its caller, every invocation terminates.
+To prove that a recursive function terminates one associates with each call an integer greater than or equal to zero, called the **measure** and denoted by $\mu$, computed from its arguments; for `sum` the measure is $n$. If every inner call has a measure strictly smaller than that of the call that makes it, and every call performs a finite number of operations and of inner calls, then every call terminates. Indeed a non-negative integer cannot decrease forever.
 
 :::dimostrazione
-Proceed by strong induction on the measure $m$. At $m=0$, a recursive call would need a natural number strictly less than zero. The local work therefore suffices and terminates. Now assume that every invocation of measure less than $m$ terminates. Each call started by an invocation of measure $m$ has smaller measure and terminates by the induction hypothesis. Since the number of calls is finite and the remaining work is finite, the invocation of measure $m$ also terminates.
+One proceeds by induction on the measure $m$. A call of measure $0$ cannot make inner calls, because there is no non-negative integer measure smaller than zero, so it performs a finite number of operations and terminates. Suppose now that all calls of measure smaller than $m$ terminate. A call of measure $m$ makes a finite number of inner calls, all of smaller measure, which terminate by hypothesis; since the other operations are finite in number too, the call terminates.
 :::
 ::::
 
 :::esempio{titolo="Reducing the argument by division"}
-For the following function, the domain is $0\leq n\leq127$. The division uses two unsigned integers, so it gives the integer quotient.
+The function counts how many times $n$ can be halved, with integer division, before reaching zero. The domain is $0\leq n\leq127$.
 
 ```c
 unsigned halves(unsigned n)
@@ -54,31 +54,31 @@ unsigned halves(unsigned n)
 }
 ```
 
-For $n>0$, the value $\lfloor\dfrac{n}{2}\rfloor$ is at least zero and strictly smaller than $n$. The measure $\mu(n)=n$ therefore meets the criterion. Starting from $13$ gives $13$, $6$, $3$, $1$ and $0$. Four invocations take the recursive step, each adding one to the received result. Thus `halves(13)` returns $4$. Across the whole domain the chain has at most seven reductions, so every intermediate sum is representable.
+For $n>0$ the integer quotient $\left\lfloor\dfrac{n}{2}\right\rfloor$ is strictly smaller than $n$, so the measure $\mu(n)=n$ decreases at each call and the function terminates. Starting from $13$ the arguments are $13$, $6$, $3$, $1$ and $0$. The first four calls perform the recursive step and each adds $1$, so `halves(13)` returns $4$. In the domain there are at most seven recursive calls, because $127<2^7$.
 :::
 
 :::osservazione
-For halving, powers of two give a way to check the number of reductions. After $k$ consecutive integer divisions by two, the result is the quotient on division by $2^k$. Indeed, if $n=2^kq+r$ with $0\leq r<2^k$ and $q=2t+s$ with $s$ equal to $0$ or $1$, then $n=2^{k+1}t+2^ks+r$. The final remainder is less than $2^{k+1}$, so the next quotient is $t$. For positive $n$ from $2^{k-1}$ inclusive to $2^k$ exclusive, the quotient after $k-1$ divisions is one. After the next division it is zero. For $13$, the inequality $8\leq13<16$ confirms the count of four reductions without listing all the arguments.
+The number of halvings can be obtained from the powers of two without listing the arguments. Dividing $k$ times by two with integer division is equivalent to dividing once by $2^k$. If $2^{k-1}\leq n<2^k$, after $k-1$ halvings the quotient is $1$ and after $k$ it is $0$, so `halves(n)` is $k$. For $13$ we have $2^3=8\leq13<16=2^4$, so $k=4$, in agreement with the example.
 :::
 
 :::attenzione
-Writing a base branch in the source does not by itself give termination. If a function tests for $n=0$ and calls itself with the same $n$ otherwise, starting at $n=3$ leaves the measure at $3$ in every invocation. The base branch stays outside the logical trace. Subtraction, too, must be justified in its declared type. For example, with `unsigned` and $n=0$, subtracting one gives the maximum of the type. That subtraction therefore fails to decrease the natural-number measure.
+Writing a base case is not enough to guarantee termination; the inner calls must reach it. A function that checks $n=0$ and in the other cases calls itself with the same $n$ never terminates for $n=3$, because the measure stays $3$. The subtraction in the type used must be checked as well. With `unsigned`, `n - 1u` for $n=0$ does not give $-1$ but the maximum of the type, so an inner call made for $n=0$ too would not decrease the measure.
 :::
 
 :::esempio{titolo="Choosing a measure with two parameters"}
-A rule replaces the nonnegative pair $(a,b)$ with $(b,a\bmod b)$ whenever $b>0$. The first parameter can increase. For example, with $(6,15)$ the first inner call uses $(15,6)$. The useful measure is the second parameter because the remainder is always smaller than the positive divisor. After the first call, the rule produces $(6,3)$ and $(3,0)$. The measures are thus $15$, $6$, $3$ and $0$. The base case examines the second parameter and is reached at measure zero. Since the test occurs before the remainder calculation, the divisor is positive whenever the remainder is evaluated. The criterion proves termination of this sequence of transformations. Relating the requested result to the result at the base also requires a property that the transformation preserves.
+A function receives two non-negative integers $(a,b)$ and, when $b>0$, calls itself with $(b, a \bmod b)$, where $a\bmod b$ is the remainder of the division of $a$ by $b$; the base case is $b=0$. The first argument may increase, as in the step from $(6,15)$ to $(15,6)$, so it is not a measure. The suitable measure is the second argument, because the remainder of a division is always smaller than the divisor. Starting from $(6,15)$ the calls are $(15,6)$, $(6,3)$ and $(3,0)$, with measures $15$, $6$, $3$ and $0$. The function therefore terminates. That the result is the desired one, namely the greatest common divisor, is proved separately, in the last section of the chapter.
 :::
 
 ## The state of active invocations
 
 :::definizione{#record-attivazione titolo="Activation records in the logical model"}
-An **activation record** represents the data needed for one invocation. It includes the parameter values, the values of the local automatic objects needed and the point at which execution resumes after a call. Two invocations of the same function have separate records. For example, parameter `n` may hold one value in the initial call and another in the inner call, although both are declared by the same function body.
+Every function call needs a memory space of its own, in which to keep the parameters, the local variables and the point of the program from which to resume when the call ends. This space is called an **activation record**. When a recursive function calls itself, the new call receives a new record, distinct from that of the call that made it. For this reason the parameter `n` can be $3$ in the first call and $2$ in the second without the two values being confused.
 
-In the model, starting a call creates a record. The caller remains active while the callee works. When the callee returns a value, its record leaves the active sequence and the caller resumes its suspended computation. This order describes a logical stack. In C17, the choice of a physical structure with that layout depends on the implementation, which may use another layout if it preserves the required effects.
+The records accumulate on a **stack**. Each call adds its own record on top; the function that made the call stays waiting, with its record underneath. When a call ends, its record is removed from the top and the waiting function resumes from the point where it had stopped. The last record added is therefore the first to be removed.
 :::
 
 :::definizione{#traccia-ritorni titolo="Descending through calls and recovering results"}
-To construct a trace, record the arguments in call order on the way down. If some operation remains to be done after a return, associate it with the caller’s record. Starting from the base, recover the results in reverse order and insert each one into the suspended computation of its caller. The trace therefore distinguishes a value belonging to the active record from a value already returned.
+The **trace** of a recursive function is built in two phases. On the way down one writes the arguments of the calls, one below the other, and next to each the computation left pending while waiting for the result of the inner call. Once the base case is reached one goes back up. The result of each call is inserted into the pending computation of the previous row, until the first call is reached.
 :::
 
 :::esempio{titolo="A local term for each invocation"}
@@ -96,16 +96,16 @@ unsigned scaled_total(unsigned n)
 }
 ```
 
-For `scaled_total(3)` the three retained values of `term` are $6$, $4$ and $2$, respectively. The base call never initializes `term` because it finishes in the first branch.
+For `scaled_total(3)` three records exist at the same time, in which `term` is $6$, $4$ and $2$. In the call with argument $0$ the function returns from the first branch and `term` is not created.
 
-| Argument | Pending computation | Return value |
+| Argument | Pending computation | Result |
 |---:|---|---:|
 | $3$ | $6+$ inner result | $12$ |
 | $2$ | $4+$ inner result | $6$ |
 | $1$ | $2+$ inner result | $2$ |
 | $0$ | none | $0$ |
 
-After the base call, the record with argument $1$ receives $0$ and returns $2$. The record with argument $2$ retains its own $4$, so it returns $6$. The initial record retains its own $6$ and returns $12$. As a check, the direct sum $2+4+6$ gives the same result. These local values show why the calculation on return uses the caller’s data.
+The call with argument $0$ returns $0$. The one with argument $1$ computes $2+0$ and returns $2$. The one with argument $2$ uses its own `term`, which is $4$, and returns $4+2=6$. The first one uses its own `term`, which is $6$, and returns $6+6=12$. The result coincides with the sum $2+4+6$.
 :::
 
 ## Proving the return value
@@ -117,7 +117,7 @@ S(n)=\frac{n(n+1)}{2}.
 $$
 
 :::dimostrazione
-For termination, apply the criterion with measure $n$, since the recursive branch runs only when $n\geq1$ and calls the function with $n-1$. Next prove the formula by induction. At $n=0$ the function returns zero and the formula gives $0$. For $n\geq1$, the induction hypothesis gives $\dfrac{(n-1)n}{2}$ for the inner call. The function adds $n$, so
+The function terminates by the measure criterion, with measure $n$. The formula is proved by induction on $n$. For $n=0$ the function returns $0$ and the formula gives $\dfrac{0\cdot 1}{2}=0$. For $n\geq1$ one assumes the formula true for $n-1$, that is, that the inner call returns $\dfrac{(n-1)n}{2}$. The function adds $n$, so it returns
 $$
 \begin{aligned}
 n+\frac{(n-1)n}{2}
@@ -125,28 +125,28 @@ n+\frac{(n-1)n}{2}
  &= \frac{n(n+1)}{2}.
 \end{aligned}
 $$
-The intermediate values are nonnegative, and the largest result is $210$. The program’s sums are therefore representable in `unsigned`, and the algebra describes their actual results.
+All the values are non-negative and the largest is $210$, so the sums performed by the program do not leave the range of `unsigned` and coincide with the mathematical ones.
 :::
 ::::
 
 :::osservazione
-The induction hypothesis applies to the inner call, whose contract is known for a smaller argument. Using the formula for the current argument before deriving it would leave the induction step unjustified. The closed form also belongs to the mathematical proof. Translating it into C would require a separate check on the product before division. On the domain used here, the product $20\cdot21$ is representable in the type in question as well.
+Induction corresponds exactly to the structure of the function. The base case of the proof is the base case of the code, and the induction hypothesis is the statement that the inner call, with a smaller argument, returns the right value. In the induction step one therefore uses the formula only for $n-1$, and derives it for $n$.
 :::
 
 :::esempio{titolo="A second check using a difference"}
-The contract predicts that the value at step $n$ exceeds the value at step $n-1$ by $n$. The formula gives
+The formula can also be checked in another way. According to the code, the result for $n$ exceeds that for $n-1$ by exactly $n$. With the formula one finds
 $$
 S(n)-S(n-1)=\frac{n(n+1)-(n-1)n}{2}=n .
 $$
-The difference agrees with the term added by the code. The initial value $S(0)=0$ fixes the sequence, so checking the difference confirms the formula.
+The difference is exactly the term $n$ added in the code, and the initial value $S(0)=0$ coincides with the base case.
 :::
 
 ## Applying the method to an array prefix
 
 :::definizione{#ricorsione-su-prefisso titolo="Splitting off the last position of a prefix"}
-Let `a` be an array accessible at least at positions $0$ through $n-1$. The sum of those positions is the sum of the prefix of length $n-1$ plus the element at index $n-1$. For $n=0$, return zero before reading any elements. The measure is the number of elements in the prefix. The same memory remains available at every call and only the limit being considered changes.
+Recursion applies to arrays too. The sum of the first $n$ elements of an array `a` is the sum of the first $n-1$ elements plus the element `a[n - 1]`. The base case is $n=0$, in which the sum is zero and no element is read. The measure is $n$, the number of elements still to be added. The array is the same in all the calls, and only the number of elements considered changes.
 
-For the example, assume $0\leq n\leq6$ and element values from $0$ through $100$. The bound $600$ ensures that all sums are representable in `unsigned`.
+In the example one assumes $0\leq n\leq6$ with elements between $0$ and $100$, so the sum is at most $600$ and fits in an `unsigned`.
 
 ```c
 #include <stddef.h>
@@ -160,11 +160,11 @@ unsigned prefix_sum(const unsigned a[], size_t n)
 }
 ```
 
-With data values $3$, $5$ and $1$, the prefix of length one gives $3$. The prefix of length two gives $3+5=8$. The whole prefix gives $8+1=9$. The branch with $n>0$ accesses only index $n-1$ of the current prefix. That access is within the valid range when the preconditions hold.
+With the elements $3$, $5$ and $1$ and $n=3$, the call with $n=1$ returns $0+3=3$, the one with $n=2$ returns $3+5=8$ and the one with $n=3$ returns $8+1=9$. In the recursive branch $n>0$ holds, so the index $n-1$ is valid.
 :::
 
 :::esempio{titolo="A base case for the maximum"}
-The maximum of a one-element array is that element. For a longer prefix, compare the maximum already determined for the shorter prefix with the last element. This contract requires at least one element for the value to be defined. In the example, `a` is accessible at its first $n$ positions and $1\leq n\leq6$.
+The maximum of the first $n$ elements is the larger of the maximum of the first $n-1$ and the element `a[n - 1]`. Here the base case is $n=1$, because the maximum of a single element is the element itself, whereas an array with no elements has no maximum. The precondition is therefore $1\leq n\leq6$.
 
 ```c
 #include <stddef.h>
@@ -179,13 +179,13 @@ int max_prefix(const int a[], size_t n)
 }
 ```
 
-For data values $-5$, $-2$ and $-8$, the successive maxima are $-5$, $-2$ and $-2$. The result is one of the elements in the array and is at least as large as the other two. The base case at length one works when every element is negative. Using zero as an initial maximum would instead give a value outside the array for these data.
+With the elements $-5$, $-2$ and $-8$ the calls with $n=1$, $2$ and $3$ return $-5$, $-2$ and $-2$. The base case with one element works even when all the values are negative. Choosing $n=0$ with result $0$ as the base case, for these data one would obtain $0$, which is not an element of the array.
 :::
 
 ## When one call starts two more
 
 :::definizione{#albero-chiamate titolo="Logical tree of invocations"}
-A **call tree** associates a node with each invocation. The root is the initial invocation. Each child corresponds to a call started directly by its parent. Leaves finish their local work without starting recursive calls. Two nodes with the same argument represent separate invocations if the program executes them separately. The parent’s return value follows from the children’s results and the data in its record.
+When a call makes more than one inner call, the calls are represented by a **call tree**. Each call is a **node**. The node at the top, the **root**, is the initial call. Below each node one draws its **children**, that is, the calls it makes directly. The nodes without children, the **leaves**, are the base cases. Two calls with the same argument, if both are executed, are two distinct nodes. The result of a node is computed from the results of its children.
 :::
 
 :::esempio{titolo="Decomposing the fourth Fibonacci number"}
@@ -205,59 +205,59 @@ unsigned fib(unsigned n)
 
 ![Tree of fib(4) with two distinct fib(2) nodes and leaves labelled fib(0) or fib(1).](/immagini/informatica/ricorsione/schema-teoria-en.png)
 
-Each of the two invocations with argument $2$ obtains $1+0=1$. The invocation with argument $3$ receives $1$ and $1$, so it returns $2$. The root adds $2$ and $1$ and returns $3$. The two nodes with argument $2$ calculate the same value, while each has its own parent. Recomputing the sequence directly gives $F_2=1$, $F_3=2$ and $F_4=3$. On the stated domain, the maximum return value is $55$.
+The tree is read from the bottom. Each of the two nodes `fib(2)` receives $1$ from `fib(1)` and $0$ from `fib(0)` and returns $1$. The node `fib(3)` receives $1$ from `fib(2)` and $1$ from `fib(1)` and returns $2$. The root receives $2$ and $1$ and returns $3$, which is $F_4$. The value `fib(2)` is computed twice, at two different points of the tree. In the domain the largest result is $F_{10}=55$.
 :::
 
 :::osservazione
-Strong induction proves correctness of `fib`. The two base cases meet the two initial values. For $n\geq2$, the induction hypothesis gives both $F_{n-1}$ and $F_{n-2}$ because the arguments are already in the domain and are smaller than $n$. The code adds them and therefore implements the relation defining $F_n$. The values are nonnegative and the sequence is nondecreasing, so $F_{10}=55$ also bounds every sum encountered on the domain.
+The correctness of `fib` is proved by strong induction, that is, assuming the result true for all arguments smaller than $n$ and not only for $n-1$. The two base cases return $F_0=0$ and $F_1=1$. For $n\geq2$ the two inner calls have arguments $n-1$ and $n-2$, both smaller than $n$, so by hypothesis they return $F_{n-1}$ and $F_{n-2}$; the function returns their sum, which by definition is $F_n$.
 :::
 
 :::definizione{#sequenza-chiamate titolo="Order set by separate expressions"}
-In `fib` the initializer for `left` finishes before the initializer for `right`. Thus the call with argument $n-1$ completes before the call with argument $n-2$ starts. The caller’s record retains `left` while `right` is calculated.
+In the code of `fib` the two calls are in two separate statements, so their order is determined. The call with argument $n-1$ is completed, and its result saved in `left`, before the one with argument $n-2$ begins.
 
-Putting both calls in the operands of one `+` determines the value of the sum in the cases considered. The `+` operator leaves unspecified which operand is evaluated first. When a trace needs the order in which calls start, use the sequencing written in the code. The shape and node count of the tree can be determined even when the branch order is free, provided that both branches perform the same computations in either order.
+Writing instead `return fib(n - 1u) + fib(n - 2u);` the result would be the same, but the order of the two calls would not be determined, because C does not fix which operand of `+` is computed first. The tree and the number of nodes are the same in the two cases; only the order in which the branches are traversed changes.
 :::
 
 :::esempio{titolo="Recording when invocations start"}
-Consider checking the chronology of `fib(4)` in the version with separate initializers. Observing the argument on entry to each invocation must occur before the base-case test so that the record includes the leaves. The first observation is $4$. The first branch records $3$, then the inner path records $2$, $1$, $0$ and its next leaf $1$. Once that branch finishes, the root starts its second child, which records $2$, $1$, $0$. The nine observations are, in order, $4$, $3$, $2$, $1$, $0$, $1$, $2$, $1$, $0$. The record distinguishes the two invocations with argument $2$ by their positions. The chronology determines how many invocations started, while depth also requires knowing when each record finishes.
+One wants to list the order in which the calls of `fib(4)` begin, in the version with the two separate statements. The list includes the base cases as well. The root has argument $4$ and starts with its left child, `fib(3)`, which in turn starts with `fib(2)`, which calls `fib(1)` and then `fib(0)`. Once `fib(2)` is complete, the node `fib(3)` calls its second child, `fib(1)`. Once `fib(3)` is complete, the root calls its second child, `fib(2)`, which calls `fib(1)` and `fib(0)`. The order is therefore $4$, $3$, $2$, $1$, $0$, $1$, $2$, $1$, $0$, nine calls in all.
 :::
 
 ## Separating depth from number of calls
 
 :::definizione{#profondita-ricorsione titolo="Maximum number of active records"}
-The **depth** of an invocation in the logical model is the maximum number of simultaneously active records during its computation. Count the initial record as well. A leaf has depth one. If a call starts several children in sequence, the parent remains active while a child runs. The depth is one plus the greatest depth among the children. The total number of calls also includes branches that have already finished.
+Two different quantities are of interest for a recursive function. The **number of calls** is the total number of nodes of the tree, and measures the work done. The **depth** is the maximum number of activation records present on the stack at the same time, and measures the memory needed. A call stays on the stack until it ends, so at every moment the stack contains the nodes of a single path from the root downwards. The depth is therefore the number of nodes of the longest path from the root to a leaf.
 
-In `fib(4)` the path with arguments $4$, $3$, $2$, $1$ has four nodes. Every other path has at most four nodes, so the depth is $4$. Counting the nodes in the figure gives a different number, $9$. Once the left branch finishes, its internal records have returned their results and have left the active sequence while the right branch runs. The total can also be checked without a drawing. Each base case has one node. For `fib(2)` the root and its two children give $3$ nodes. For `fib(3)` they give $1+3+1=5$, and for `fib(4)` they give $1+5+3=9$.
+For `fib(4)` the longest path goes through the arguments $4$, $3$, $2$, $1$, so the depth is $4$, whereas there are $9$ calls. When the left branch has ended its records have already been removed from the stack, and the right branch reuses the same space. The number of calls can also be computed without a drawing. A base case is one call. For `fib(2)` there are $1+1+1=3$ calls, for `fib(3)` there are $1+3+1=5$ and for `fib(4)` there are $1+5+3=9$.
 :::
 
 ::::teorema{#ricorrenza-costo titolo="Counting a complete binary tree"}
-Consider a computation with integer argument $n\geq0$. At $n=0$ it performs just the base case. For $n>0$, the invocation starts two calls with argument $n-1$, completing them in sequence. The total number of calls $N(n)$ is $2^{n+1}-1$, and the depth is $n+1$.
+Consider a function with integer argument $n\geq0$ that for $n=0$ is a base case and for $n>0$ makes, one after the other, two calls with argument $n-1$. The total number of calls is $N(n)=2^{n+1}-1$ and the depth is $n+1$. The work doubles each time $n$ increases, whereas the memory grows by a single record; for $n=10$ there are $2047$ calls and the depth is $11$.
 
 :::dimostrazione
-The root contributes one node and each child starts a tree with $N(n-1)$ nodes. It follows that $N(0)=1$ and $N(n)=1+2N(n-1)$ for $n>0$. Substituting the formula for the smaller argument gives
+The initial call counts as one, and each of the two inner calls generates $N(n-1)$ in all. Hence $N(0)=1$ and $N(n)=1+2N(n-1)$ for $n>0$. By induction, if $N(n-1)=2^n-1$ then $N(n)$ equals
 $$
 1+2(2^n-1)=2^{n+1}-1.
 $$
-The formula holds in the base case, so the result follows by induction. For the depth, only the additional record for the root stays active during each branch. Consequently the recurrence is $D(0)=1$ and $D(n)=1+D(n-1)$, which gives $n+1$.
+The formula holds for $n=0$ as well, because $2^1-1=1$. For the depth, while one of the two inner calls is running the stack contains in addition only the record of the initial call. So $D(0)=1$ and $D(n)=1+D(n-1)$, that is, $D(n)=n+1$.
 :::
 ::::
 
 :::osservazione
-The call count measures work when each invocation performs a comparable amount of local computation. The depth tells how many invocations must be represented at the same time in the model. A C implementation may store extra data or simplify some operations. These logical measures alone do not determine actual memory in bytes or time in seconds.
+The number of calls is a good estimate of the time when each call performs about the same amount of operations. The depth says how many records must be on the stack at the same moment. A recursion that is too deep exhausts the space of the stack and the program stops (*stack overflow*). The bytes actually occupied and the seconds taken then depend on the compiler and on the machine.
 :::
 
 ## Identifying the state to carry forward
 
 :::definizione{#ricorsione-in-coda titolo="Recursive call in tail position"}
-A call is in **tail position** when its return value becomes the caller’s result directly. In `return n + sum(n - 1u);` an addition remains after the return, so that case requires keeping the term. An expression of the form `return gcd(b, a % b);` can return the inner call’s result directly. Tail position makes a transformation into a loop possible when the new state depends only on data already available. Eliminating the physical record remains a choice of the implementation.
+A recursive call is in **tail position** when it is the last operation of the function, that is, when its result is returned as it is. In `return gcd(b, a % b);` the call is in tail position. In `return n + sum(n - 1u);` it is not, because after the inner call returns the sum with `n` remains to be performed, and for this reason the record must keep `n`. A function with tail recursion has no pending computations, and can be rewritten as a loop that updates the variables instead of making the call.
 :::
 
 :::osservazione
-To turn the sum into tail recursion, add an accumulator $d$ to the state and initialize it to zero. Moving to $(n-1,d+n)$ preserves $d+S(n)$, where $S$ is the sum that remains to be performed. Since $S(n)=n+S(n-1)$, adding $n$ to the accumulator and removing it from the remaining sum keeps the total constant. At $n=0$ the result is directly $d$. For $n=3$, the accumulator values are $0$, $3$, $5$ and $6$. The intermediate sums do not exceed the initial $S(n)$, which is at most $210$ on the function’s domain. The bound also ensures that the new addition is representable. A loop can perform the same state transition in the same order while keeping a single value of $n$ and one accumulator.
+The recursive sum is brought into tail form by adding a parameter, the **accumulator** $d$, which contains the partial sum and starts from zero. The call with $(n,d)$ makes the call with $(n-1,d+n)$, and the base case $n=0$ returns $d$. For $n=3$ the calls have arguments $(3,0)$, $(2,3)$, $(1,5)$ and $(0,6)$, and the result is $6$. The quantity $d+S(n)$, where $S(n)$ is the sum of the integers from $1$ to $n$, stays the same at every step, because $n$ moves from the sum still to be done to the accumulator. The same computation is written as a loop with two variables, `n` and the accumulator.
 :::
 
 :::esempio{titolo="Euclid with a direct call and with a loop"}
-Consider two unsigned integers $a$ and $b$, at least one of which is positive. When $b>0$, write $a=qb+r$ with $0\leq r<b$. Any common divisor of $a$ and $b$ also divides $r=a-qb$. Any common divisor of $b$ and $r$ also divides $a=qb+r$. The sets of common divisors are equal. The state $(a,b)$ can therefore be replaced by $(b,r)$ while preserving the greatest common divisor.
+**Euclid’s algorithm** computes the greatest common divisor of two unsigned integers $a$ and $b$, not both zero. If $b>0$, let $r$ be the remainder of the division of $a$ by $b$, that is, $a=qb+r$ with $0\leq r<b$. A number that divides $a$ and $b$ also divides $r=a-qb$, and a number that divides $b$ and $r$ also divides $a=qb+r$. The pairs $(a,b)$ and $(b,r)$ therefore have the same common divisors and the same greatest common divisor. If $b=0$, the greatest common divisor is $a$.
 
 ```c
 unsigned gcd(unsigned a, unsigned b)
@@ -269,7 +269,7 @@ unsigned gcd(unsigned a, unsigned b)
 }
 ```
 
-The measure $b$ decreases at every step. At $b=0$ the result is $a$. With arguments $48$ and $18$, the path is $(48,18)$, $(18,12)$, $(12,6)$ and $(6,0)$, so the result is $6$. The following loop repeats the same transformation through the same sequence of pairs.
+The measure is $b$, which decreases at each call because the remainder is smaller than the divisor. For $48$ and $18$ the calls have arguments $(48,18)$, $(18,12)$, $(12,6)$ and $(6,0)$, and the result is $6$. The recursive call is in tail position, so the function is rewritten as a loop.
 
 ```c
 unsigned gcd_loop(unsigned a, unsigned b)
@@ -283,9 +283,9 @@ unsigned gcd_loop(unsigned a, unsigned b)
 }
 ```
 
-The value of `remainder` is calculated before changing `a` and `b`, so the new values match the recursive call’s arguments. When the loop ends, $b=0$ and the result is the same as for the base case. As a check, $6$ divides both $48$ and $18$, and the identity $6=3\cdot18-48$ shows that every common divisor also divides $6$.
+The remainder is saved in `remainder` before modifying `a` and `b`, because its computation uses the old values of both. At each iteration the pair `(a, b)` takes the same values as the arguments of the recursive calls. The loop ends when `b` is $0$ and returns `a`, like the base case. The result $6$ divides both $48$ and $18$.
 :::
 
 :::osservazione
-Check the case $b=0$ with `gcd(7,0)`, which returns $7$ directly. Check `gcd(0,7)` as well. In the second case the first remainder is $0$, so the next pair is $(7,0)$ and the return value is again $7$. The two cases test immediate termination and the transition to the base when the first input is zero, respectively. The test values complement the proof, which covers every pair in the contract.
+Two special cases to test are those with a zero. `gcd(7, 0)` is the base case and returns $7$ at once. In `gcd(0, 7)` the remainder of $0$ divided by $7$ is $0$, so the inner call is `gcd(7, 0)`, which returns $7$.
 :::

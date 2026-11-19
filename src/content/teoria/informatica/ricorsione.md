@@ -6,9 +6,9 @@ sommario: Contratti ricorsivi, tracce dei ritorni, induzione e analisi del numer
 ## Una funzione che richiama se stessa
 
 :::definizione{#contratto-ricorsivo titolo="Contratto di una funzione ricorsiva"}
-Una funzione è **direttamente ricorsiva** quando il suo corpo contiene una chiamata alla stessa funzione. All’inizio di ogni invocazione valgono le precondizioni del contratto. Nel **caso base** si restituisce il risultato senza chiamate ricorsive. Nel passo ricorsivo si invoca la funzione su dati che soddisfano lo stesso contratto e si usa il risultato per completare il problema iniziale.
+Una funzione è **ricorsiva** quando nel proprio corpo chiama se stessa. L’idea è risolvere un problema riducendolo a una versione più piccola dello stesso problema. Per esempio, la somma degli interi da $1$ a $n$ è uguale a $n$ più la somma degli interi da $1$ a $n-1$, e quest’ultima è lo stesso problema con un dato più piccolo. Una funzione ricorsiva ha quindi due parti. Il **caso base** è il caso più piccolo, in cui il risultato si conosce direttamente senza altre chiamate; per la somma è $n=0$, con risultato $0$. Il **passo ricorsivo** chiama la funzione su un dato più piccolo e usa il risultato per costruire quello richiesto.
 
-Il parametro passato alla chiamata interna specifica un nuovo problema. Per esempio, la somma degli interi da $1$ a $n$ si ottiene aggiungendo $n$ alla somma fino a $n-1$. Il caso $n=0$ corrisponde alla somma di un insieme vuoto e restituisce $0$. Separare i casi permette di controllare in modo distinto la formazione del problema successivo e la ricostruzione del risultato.
+Ogni chiamata, anche quella interna, deve rispettare la precondizione della funzione. Nello scrivere una funzione ricorsiva si controllano separatamente due cose, cioè che il dato passato alla chiamata interna sia ammesso e più vicino al caso base, e che il risultato venga ricostruito correttamente.
 :::
 
 :::esempio{titolo="Un contratto per la somma"}
@@ -24,25 +24,25 @@ unsigned sum(unsigned n)
 }
 ```
 
-Se il ramo ricorsivo viene eseguito, allora $n\geq1$. La sottrazione produce dunque un argomento compreso tra $0$ e $19$. Il risultato atteso più grande è $210$, perciò il dominio lascia spazio per tutte le somme nel tipo `unsigned`. Nel percorso per `sum(3)`, le richieste si riducono a $3$, $2$, $1$ e $0$. Dalla base si recuperano nell’ordine i valori $0$, $1$, $3$ e $6$.
+Il ramo ricorsivo viene eseguito soltanto per $n\geq1$, quindi `n - 1u` è compreso fra $0$ e $19$ e rispetta la precondizione. Il risultato più grande è $210$, per $n=20$, e sta in un `unsigned`. Per `sum(3)` le chiamate si susseguono con argomenti $3$, $2$, $1$ e $0$. L’ultima è il caso base e restituisce $0$; tornando indietro si ottengono $1+0=1$, poi $2+1=3$, poi $3+3=6$.
 :::
 
 :::osservazione
-Il contratto richiede almeno tre verifiche. Gli argomenti delle chiamate interne devono soddisfare le precondizioni. Il processo deve raggiungere casi risolvibili direttamente in un numero finito di passi. Infine l’operazione che combina i risultati interni deve produrre il valore richiesto per i dati iniziali. Per `sum` la prima verifica deriva dal test su $n$. La proprietà di terminazione e il valore restituito si dimostrano usando rispettivamente una misura decrescente e un’induzione.
+Per una funzione ricorsiva vanno verificate tre proprietà. Gli argomenti delle chiamate interne devono soddisfare la precondizione. La catena di chiamate deve arrivare a un caso base dopo un numero finito di passi, cioè la funzione deve **terminare**. Il risultato costruito a partire da quello della chiamata interna deve essere quello richiesto. Per `sum` la prima segue dal controllo su $n$; le altre due si dimostrano nei paragrafi seguenti, la terminazione con una misura che diminuisce e il risultato con l’induzione.
 :::
 
 ## Una misura che garantisce la fine
 
 ::::teorema{#misura-decrescente titolo="Criterio di terminazione per misura naturale"}
-Sia $\mu$ una funzione che assegna un intero non negativo a ogni invocazione ammissibile. Si supponga che ogni singola invocazione, a parte le chiamate ricorsive, svolga un numero finito di operazioni e avvii un numero finito di chiamate. Se ogni chiamata ricorsiva resta nel dominio e ha misura strettamente minore di quella del chiamante, ogni invocazione termina.
+Per dimostrare che una funzione ricorsiva termina si associa a ogni chiamata un numero intero maggiore o uguale a zero, chiamato **misura** e indicato con $\mu$, calcolato dai suoi argomenti; per `sum` la misura è $n$. Se ogni chiamata interna ha una misura strettamente minore di quella della chiamata che la esegue, e ogni chiamata esegue un numero finito di operazioni e di chiamate interne, allora ogni chiamata termina. Infatti un intero non negativo non può diminuire all’infinito.
 
 :::dimostrazione
-Si procede per induzione forte sulla misura $m$. Con $m=0$ una chiamata ricorsiva richiederebbe una misura naturale strettamente minore di zero. Perciò il calcolo locale è sufficiente e termina. Si supponga ora che tutte le invocazioni di misura minore di $m$ terminino. Ogni chiamata avviata da una invocazione di misura $m$ ha misura minore e termina per ipotesi induttiva. Poiché le chiamate avviate sono in numero finito e il resto dei passi è finito, anche l’invocazione di misura $m$ termina.
+Si procede per induzione sulla misura $m$. Una chiamata di misura $0$ non può eseguire chiamate interne, perché non esiste una misura intera non negativa minore di zero, quindi esegue un numero finito di operazioni e termina. Si supponga ora che terminino tutte le chiamate di misura minore di $m$. Una chiamata di misura $m$ esegue un numero finito di chiamate interne, tutte di misura minore, che terminano per ipotesi; poiché anche le altre operazioni sono in numero finito, la chiamata termina.
 :::
 ::::
 
 :::esempio{titolo="Ridurre l’argomento con una divisione"}
-Nella funzione seguente il dominio è $0\leq n\leq127$. La divisione riguarda due interi senza segno, quindi restituisce il quoziente intero.
+La funzione conta quante volte si può dimezzare $n$, con divisione intera, prima di arrivare a zero. Il dominio è $0\leq n\leq127$.
 
 ```c
 unsigned halves(unsigned n)
@@ -54,31 +54,31 @@ unsigned halves(unsigned n)
 }
 ```
 
-Per $n>0$ il valore $\lfloor\dfrac{n}{2}\rfloor$ è almeno zero ed è strettamente minore di $n$. La misura $\mu(n)=n$ soddisfa quindi il criterio. Partendo da $13$ si ottengono $13$, $6$, $3$, $1$ e $0$. Quattro invocazioni eseguono il passo ricorsivo e ciascuna aggiunge uno al risultato ricevuto. Perciò `halves(13)` restituisce $4$. In tutto il dominio la catena ha al massimo sette riduzioni, quindi ogni somma intermedia è rappresentabile.
+Per $n>0$ il quoziente intero $\left\lfloor\dfrac{n}{2}\right\rfloor$ è strettamente minore di $n$, quindi la misura $\mu(n)=n$ diminuisce a ogni chiamata e la funzione termina. Partendo da $13$ gli argomenti sono $13$, $6$, $3$, $1$ e $0$. Le prime quattro chiamate eseguono il passo ricorsivo e ciascuna aggiunge $1$, quindi `halves(13)` restituisce $4$. Nel dominio le chiamate ricorsive sono al più sette, perché $127<2^7$.
 :::
 
 :::osservazione
-Nel dimezzamento si può controllare il numero di riduzioni con le potenze di due. Dopo $k$ divisioni intere successive per due si ottiene il quoziente della divisione per $2^k$. Infatti, se $n=2^kq+r$ con $0\leq r<2^k$ e $q=2t+s$ con $s$ uguale a $0$ oppure $1$, allora $n=2^{k+1}t+2^ks+r$. L’ultimo resto è minore di $2^{k+1}$, quindi il quoziente successivo è $t$. Per un $n$ positivo tra $2^{k-1}$ incluso e $2^k$ escluso, dopo $k-1$ divisioni il quoziente è uno. Dopo la divisione successiva è zero. Per $13$ si ha $8\leq13<16$, quindi il conteggio di quattro riduzioni è verificato anche senza elencare tutti gli argomenti.
+Il numero di dimezzamenti si ricava dalle potenze di due senza elencare gli argomenti. Dividere $k$ volte per due con divisione intera equivale a dividere una volta per $2^k$. Se $2^{k-1}\leq n<2^k$, dopo $k-1$ dimezzamenti il quoziente è $1$ e dopo $k$ è $0$, quindi `halves(n)` vale $k$. Per $13$ si ha $2^3=8\leq13<16=2^4$, quindi $k=4$, in accordo con l’esempio.
 :::
 
 :::attenzione
-La presenza testuale di un ramo base non basta per la terminazione. Se la funzione verifica $n=0$ e negli altri casi richiama se stessa con lo stesso $n$, partendo da $n=3$ tutte le invocazioni mantengono la misura $3$. Il ramo base resta fuori dalla traccia logica. Anche una sottrazione va giustificata nel tipo dichiarato. Per esempio, con `unsigned` e $n=0$, sottrarre uno produce il massimo del tipo, quindi quella sottrazione non realizza un decremento naturale.
+Scrivere un caso base non basta a garantire la terminazione; serve che le chiamate interne lo raggiungano. Una funzione che controlla $n=0$ e negli altri casi chiama se stessa con lo stesso $n$ non termina mai per $n=3$, perché la misura resta $3$. Va controllata anche la sottrazione nel tipo usato. Con `unsigned`, `n - 1u` per $n=0$ non dà $-1$ ma il massimo del tipo, quindi una chiamata interna eseguita anche per $n=0$ non diminuirebbe la misura.
 :::
 
 :::esempio{titolo="Scegliere la misura con due parametri"}
-Una regola sostituisce la coppia non negativa $(a,b)$ con $(b,a\bmod b)$ ogni volta che $b>0$. Il primo parametro può aumentare. Per esempio, con $(6,15)$ la prima chiamata interna usa $(15,6)$. La misura utile è il secondo parametro, perché il resto è sempre minore del divisore positivo. Dopo la prima chiamata si generano $(6,3)$ e $(3,0)$. Le misure sono quindi $15$, $6$, $3$ e $0$. Il caso base esamina proprio il secondo parametro e si raggiunge con misura zero. Poiché il test precede il calcolo del resto, il divisore è positivo dovunque il resto sia valutato. Il criterio dimostra la terminazione di questa sequenza di trasformazioni. L’uguaglianza fra il risultato richiesto e quello del caso base richiede anche una proprietà conservata dalla trasformazione.
+Una funzione riceve due interi non negativi $(a,b)$ e, quando $b>0$, chiama se stessa con $(b, a \bmod b)$, dove $a\bmod b$ è il resto della divisione di $a$ per $b$; il caso base è $b=0$. Il primo argomento può aumentare, come nel passaggio da $(6,15)$ a $(15,6)$, quindi non è una misura. La misura adatta è il secondo argomento, perché il resto di una divisione è sempre minore del divisore. Partendo da $(6,15)$ le chiamate sono $(15,6)$, $(6,3)$ e $(3,0)$, con misure $15$, $6$, $3$ e $0$. La funzione quindi termina. Che il risultato sia quello voluto, cioè il massimo comune divisore, si dimostra a parte, nell’ultimo paragrafo del capitolo.
 :::
 
 ## Lo stato delle invocazioni attive
 
 :::definizione{#record-attivazione titolo="Record di attivazione nel modello logico"}
-Un **record di attivazione** rappresenta i dati necessari a una singola invocazione. Comprende i valori dei parametri, i valori degli oggetti automatici locali necessari e il punto al quale riprendere l’esecuzione dopo una chiamata. Due invocazioni della stessa funzione conservano record distinti. Per esempio, il parametro `n` della chiamata iniziale e quello della chiamata interna possono avere valori diversi, pur essendo dichiarati nello stesso corpo.
+Ogni chiamata di funzione ha bisogno di uno spazio di memoria proprio, in cui tenere i parametri, le variabili locali e il punto del programma da cui riprendere quando la chiamata termina. Questo spazio si chiama **record di attivazione**. Quando una funzione ricorsiva chiama se stessa, la nuova chiamata riceve un record nuovo, distinto da quello della chiamata che l’ha eseguita. Per questo il parametro `n` può valere $3$ nella prima chiamata e $2$ nella seconda senza che i due valori si confondano.
 
-Nel modello, l’avvio di una chiamata crea un record. Il chiamante rimane attivo mentre il chiamato lavora. Quando il chiamato restituisce un valore, il suo record esce dalla sequenza attiva e il chiamante riprende il calcolo sospeso. Questo ordine descrive una pila logica. In C17 l’uso di una struttura fisica di memoria con quel particolare formato dipende dall’implementazione, che può scegliere un’altra disposizione purché conservi gli effetti richiesti.
+I record si accumulano in una **pila** (*stack*). Ogni chiamata aggiunge il proprio record in cima; la funzione che ha chiamato resta in attesa, con il suo record sotto. Quando una chiamata termina, il suo record viene tolto dalla cima e la funzione in attesa riprende dal punto in cui si era fermata. L’ultimo record aggiunto è quindi il primo a essere tolto.
 :::
 
 :::definizione{#traccia-ritorni titolo="Discesa delle chiamate e risalita dei risultati"}
-Per costruire una traccia si registrano all’andata gli argomenti nell’ordine di chiamata. Se rimane un’operazione da eseguire dopo il ritorno, la si associa al record del chiamante. Dalla base si ricostruiscono all’indietro i risultati, inserendo ciascuno nel calcolo sospeso del relativo chiamante. La traccia distingue così un valore che appartiene al record attivo da un valore già restituito.
+La **traccia** di una funzione ricorsiva si costruisce in due fasi. Nella discesa si scrivono gli argomenti delle chiamate, una sotto l’altra, e accanto a ciascuna il calcolo che resta in sospeso in attesa del risultato della chiamata interna. Arrivati al caso base si risale. Il risultato di ogni chiamata si inserisce nel calcolo in sospeso della riga precedente, fino ad arrivare alla prima chiamata.
 :::
 
 :::esempio{titolo="Un termine locale per ogni invocazione"}
@@ -96,16 +96,16 @@ unsigned scaled_total(unsigned n)
 }
 ```
 
-Per `scaled_total(3)` si conservano tre valori di `term`, rispettivamente $6$, $4$ e $2$. Nella chiamata di base `term` non viene inizializzato perché l’esecuzione termina nel primo ramo.
+Per `scaled_total(3)` esistono contemporaneamente tre record, in cui `term` vale $6$, $4$ e $2$. Nella chiamata con argomento $0$ la funzione ritorna dal primo ramo e `term` non viene creata.
 
-| Argomento | Calcolo in attesa | Ritorno |
+| Argomento | Calcolo in sospeso | Risultato |
 |---:|---|---:|
 | $3$ | $6+$ risultato interno | $12$ |
 | $2$ | $4+$ risultato interno | $6$ |
 | $1$ | $2+$ risultato interno | $2$ |
 | $0$ | nessuno | $0$ |
 
-Dopo la base, il record con argomento $1$ riceve $0$ e restituisce $2$. Il record con argomento $2$ conserva il proprio $4$, quindi restituisce $6$. Il record iniziale conserva il proprio $6$ e restituisce $12$. Come verifica, la somma diretta $2+4+6$ dà lo stesso risultato. I valori dei termini locali dimostrano perché il calcolo in risalita usa il dato del chiamante.
+La chiamata con argomento $0$ restituisce $0$. Quella con argomento $1$ calcola $2+0$ e restituisce $2$. Quella con argomento $2$ usa il proprio `term`, che vale $4$, e restituisce $4+2=6$. La prima usa il proprio `term`, che vale $6$, e restituisce $6+6=12$. Il risultato coincide con la somma $2+4+6$.
 :::
 
 ## Dimostrare il valore restituito
@@ -117,7 +117,7 @@ S(n)=\frac{n(n+1)}{2}.
 $$
 
 :::dimostrazione
-Per la terminazione si applica il criterio con misura $n$, poiché il ramo ricorsivo viene eseguito soltanto per $n\geq1$ e richiama la funzione con $n-1$. Si dimostra poi per induzione la formula. A $n=0$ si restituisce zero e la formula dà $0$. Per $n\geq1$ la chiamata interna, per ipotesi induttiva, restituisce $\dfrac{(n-1)n}{2}$. La funzione aggiunge $n$, quindi
+La funzione termina per il criterio della misura, con misura $n$. La formula si dimostra per induzione su $n$. Per $n=0$ la funzione restituisce $0$ e la formula dà $\dfrac{0\cdot 1}{2}=0$. Per $n\geq1$ si suppone la formula vera per $n-1$, cioè che la chiamata interna restituisca $\dfrac{(n-1)n}{2}$. La funzione aggiunge $n$, quindi restituisce
 $$
 \begin{aligned}
 n+\frac{(n-1)n}{2}
@@ -125,28 +125,28 @@ n+\frac{(n-1)n}{2}
  &= \frac{n(n+1)}{2}.
 \end{aligned}
 $$
-I valori intermedi sono non negativi e il maggiore risultato è $210$. Perciò le somme del programma sono rappresentabili in `unsigned` e l’algebra descrive il loro risultato effettivo.
+Tutti i valori sono non negativi e il più grande è $210$, quindi le somme eseguite dal programma non escono dall’intervallo di `unsigned` e coincidono con quelle matematiche.
 :::
 ::::
 
 :::osservazione
-L’ipotesi induttiva riguarda la chiamata interna, della quale si conosce il contratto con argomento minore. Usare la formula per l’argomento attuale prima di derivarla lascerebbe scoperto il passo induttivo. Inoltre la formula chiusa appartiene alla dimostrazione matematica. Una sua eventuale traduzione in C richiederebbe di controllare separatamente il prodotto prima della divisione. Per il dominio qui assunto anche il prodotto $20\cdot21$ è rappresentabile nel tipo considerato.
+L’induzione corrisponde esattamente alla struttura della funzione. Il caso base della dimostrazione è il caso base del codice, e l’ipotesi induttiva è l’affermazione che la chiamata interna, con argomento più piccolo, restituisce il valore giusto. Nel passo induttivo si usa quindi la formula soltanto per $n-1$, e la si ricava per $n$.
 :::
 
 :::esempio{titolo="Una seconda verifica a partire da una differenza"}
-Dal contratto ci si aspetta che il valore al passo $n$ superi quello al passo $n-1$ di $n$. Calcolando con la formula si trova
+La formula si può controllare anche in un altro modo. Secondo il codice, il risultato per $n$ supera quello per $n-1$ esattamente di $n$. Con la formula si trova
 $$
 S(n)-S(n-1)=\frac{n(n+1)-(n-1)n}{2}=n .
 $$
-La differenza concorda con l’addendo del codice. Il valore iniziale $S(0)=0$ fissa la sequenza, quindi la verifica della differenza conferma la stessa formula.
+La differenza è proprio l’addendo $n$ del codice, e il valore iniziale $S(0)=0$ coincide con il caso base.
 :::
 
 ## Applicare il metodo a un prefisso di vettore
 
 :::definizione{#ricorsione-su-prefisso titolo="Tagliare un prefisso alla sua ultima posizione"}
-Sia `a` un vettore accessibile almeno nelle posizioni da $0$ a $n-1$. La somma di quelle posizioni si può esprimere come somma del prefisso di lunghezza $n-1$ e dell’elemento di indice $n-1$. Con $n=0$ si restituisce zero prima di leggere elementi. La misura è il numero di elementi del prefisso. La stessa memoria è disponibile a ogni chiamata e cambia soltanto il limite da considerare.
+La ricorsione si applica anche ai vettori. La somma dei primi $n$ elementi di un vettore `a` è la somma dei primi $n-1$ elementi più l’elemento `a[n - 1]`. Il caso base è $n=0$, in cui la somma vale zero e non si legge alcun elemento. La misura è $n$, il numero di elementi ancora da sommare. Il vettore è lo stesso in tutte le chiamate, e cambia soltanto quanti elementi si considerano.
 
-Per l’esempio si assumono $0\leq n\leq6$ e valori degli elementi nell’intervallo da $0$ a $100$. Il limite $600$ garantisce che tutte le somme sono rappresentabili in `unsigned`.
+Nell’esempio si assume $0\leq n\leq6$ con elementi compresi fra $0$ e $100$, quindi la somma è al più $600$ e sta in un `unsigned`.
 
 ```c
 #include <stddef.h>
@@ -160,11 +160,11 @@ unsigned prefix_sum(const unsigned a[], size_t n)
 }
 ```
 
-Con i dati $3$, $5$ e $1$, il prefisso di lunghezza uno dà $3$. Quello di lunghezza due dà $3+5=8$. Il prefisso intero dà $8+1=9$. Il ramo con $n>0$ usa solo l’indice $n-1$ del prefisso corrente. Perciò il riferimento è compreso nell’intervallo ammesso quando valgono le precondizioni.
+Con gli elementi $3$, $5$ e $1$ e $n=3$, la chiamata con $n=1$ restituisce $0+3=3$, quella con $n=2$ restituisce $3+5=8$ e quella con $n=3$ restituisce $8+1=9$. Nel ramo ricorsivo vale $n>0$, quindi l’indice $n-1$ è valido.
 :::
 
 :::esempio{titolo="Un caso base per il massimo"}
-Il massimo di un vettore con un solo elemento è quell’elemento. Per un prefisso più lungo si confrontano il massimo già determinato per il prefisso ridotto e l’ultimo elemento. Affinché questo contratto definisca un valore occorre almeno un elemento. Nell’esempio, `a` è accessibile nelle prime $n$ posizioni e $1\leq n\leq6$.
+Il massimo dei primi $n$ elementi è il più grande fra il massimo dei primi $n-1$ e l’elemento `a[n - 1]`. Qui il caso base è $n=1$, perché il massimo di un solo elemento è l’elemento stesso, mentre un vettore senza elementi non ha massimo. La precondizione è quindi $1\leq n\leq6$.
 
 ```c
 #include <stddef.h>
@@ -179,13 +179,13 @@ int max_prefix(const int a[], size_t n)
 }
 ```
 
-Per i dati $-5$, $-2$ e $-8$ si ottengono nell’ordine i massimi $-5$, $-2$, $-2$. Il risultato è uno degli elementi del vettore e domina gli altri due. Il caso base a lunghezza uno vale anche quando tutti gli elementi sono negativi. Partire da zero come massimo darebbe invece un valore esterno al vettore per questi dati.
+Con gli elementi $-5$, $-2$ e $-8$ le chiamate con $n=1$, $2$ e $3$ restituiscono $-5$, $-2$ e $-2$. Il caso base con un elemento funziona anche quando tutti i valori sono negativi. Scegliendo come caso base $n=0$ con risultato $0$, per questi dati si otterrebbe $0$, che non è un elemento del vettore.
 :::
 
 ## Quando una chiamata ne avvia due
 
 :::definizione{#albero-chiamate titolo="Albero logico delle invocazioni"}
-L’**albero delle chiamate** associa un nodo a ciascuna invocazione. La radice è l’invocazione iniziale. Ogni figlio corrisponde a una chiamata avviata direttamente dal genitore. Le foglie completano il calcolo locale senza avviare chiamate ricorsive. Due nodi con lo stesso argomento rappresentano invocazioni distinte se il programma le esegue separatamente. Il valore di ritorno del genitore si ricava dai risultati dei figli e dai dati del suo record.
+Quando una chiamata ne esegue più di una interna, le chiamate si rappresentano con un **albero delle chiamate**. Ogni chiamata è un **nodo**. Il nodo in alto, la **radice**, è la chiamata iniziale. Sotto ogni nodo si disegnano i suoi **figli**, cioè le chiamate che esso esegue direttamente. I nodi senza figli, le **foglie**, sono i casi base. Due chiamate con lo stesso argomento, se vengono eseguite entrambe, sono due nodi distinti. Il risultato di un nodo si calcola dai risultati dei suoi figli.
 :::
 
 :::esempio{titolo="Scomposizione del quarto numero di Fibonacci"}
@@ -205,59 +205,59 @@ unsigned fib(unsigned n)
 
 ![Albero di fib(4) con due distinti nodi fib(2) e foglie etichettate fib(0) oppure fib(1).](/immagini/informatica/ricorsione/schema-teoria-it.png)
 
-Ciascuna delle due invocazioni con argomento $2$ ottiene $1+0=1$. L’invocazione con argomento $3$ riceve a sua volta $1$ e $1$, quindi restituisce $2$. La radice somma $2$ e $1$ e restituisce $3$. I due nodi con argomento $2$ calcolano lo stesso valore, ma ciascuno ha il proprio genitore. Il ricalcolo diretto della successione dà $F_2=1$, $F_3=2$ e $F_4=3$. Nel dominio assunto, il massimo valore restituito è $55$.
+Si legge l’albero dal basso. Ciascuno dei due nodi `fib(2)` riceve $1$ da `fib(1)` e $0$ da `fib(0)` e restituisce $1$. Il nodo `fib(3)` riceve $1$ da `fib(2)` e $1$ da `fib(1)` e restituisce $2$. La radice riceve $2$ e $1$ e restituisce $3$, che è $F_4$. Il valore `fib(2)` viene calcolato due volte, in due punti diversi dell’albero. Nel dominio il risultato più grande è $F_{10}=55$.
 :::
 
 :::osservazione
-Per la correttezza di `fib` si usa l’induzione forte. I due casi base rispettano i due valori iniziali. Per $n\geq2$ l’ipotesi induttiva dà entrambi i risultati $F_{n-1}$ e $F_{n-2}$, perché gli argomenti sono già nel dominio e sono minori di $n$. Il codice ne calcola la somma e realizza quindi la relazione che definisce $F_n$. I valori sono non negativi e la successione è non decrescente, quindi dal valore $F_{10}=55$ si ottiene anche un limite per ogni somma incontrata nel dominio.
+La correttezza di `fib` si dimostra per induzione forte, cioè supponendo il risultato vero per tutti gli argomenti minori di $n$ e non soltanto per $n-1$. I due casi base restituiscono $F_0=0$ e $F_1=1$. Per $n\geq2$ le due chiamate interne hanno argomenti $n-1$ e $n-2$, entrambi minori di $n$, quindi per ipotesi restituiscono $F_{n-1}$ e $F_{n-2}$; la funzione restituisce la loro somma, che per definizione è $F_n$.
 :::
 
 :::definizione{#sequenza-chiamate titolo="Ordine stabilito da espressioni distinte"}
-Nel codice di `fib` l’inizializzatore di `left` termina prima dell’inizializzatore di `right`. La chiamata con argomento $n-1$ si completa quindi prima dell’avvio della chiamata con argomento $n-2$. Nel record del chiamante il valore di `left` rimane disponibile mentre si calcola `right`.
+Nel codice di `fib` le due chiamate sono in due istruzioni separate, quindi il loro ordine è stabilito. La chiamata con argomento $n-1$ viene completata, e il suo risultato salvato in `left`, prima che cominci quella con argomento $n-2$.
 
-Una scrittura con entrambe le chiamate come operandi del medesimo `+` determina il valore della somma nei casi considerati. L’operatore `+` lascia non specificato quale operando venga valutato per primo. Quando una traccia chiede l’ordine di avvio, si deve quindi usare il sequenziamento presente nel codice. La forma dell’albero e il suo numero di nodi si possono determinare anche se l’ordine dei due rami è libero, purché entrambi i rami eseguano gli stessi calcoli nei due ordini.
+Scrivendo invece `return fib(n - 1u) + fib(n - 2u);` il risultato sarebbe lo stesso, ma l’ordine delle due chiamate non sarebbe stabilito, perché il C non fissa quale operando di `+` venga calcolato per primo. L’albero e il numero dei nodi sono gli stessi nei due casi; cambia soltanto l’ordine in cui i rami vengono percorsi.
 :::
 
 :::esempio{titolo="Registrare l’avvio delle invocazioni"}
-Si vuole verificare la cronologia di `fib(4)` nella versione con inizializzatori separati. Un’osservazione dell’argomento all’ingresso di ogni invocazione deve avvenire prima di controllare il caso base, così il registro comprende anche le foglie. Si osserva anzitutto $4$. Il primo ramo registra $3$, poi la catena interna registra $2$, $1$, $0$ e la sua foglia successiva $1$. Terminato quel ramo, la radice avvia il secondo figlio, che registra $2$, $1$, $0$. Si ottengono nove osservazioni, nell’ordine $4$, $3$, $2$, $1$, $0$, $1$, $2$, $1$, $0$. Il registro distingue le due invocazioni con argomento $2$ grazie alla loro posizione. La cronologia determina quanti avvii sono avvenuti, ma la profondità richiede anche di individuare quando termina ciascun record.
+Si vuole elencare in che ordine cominciano le chiamate di `fib(4)`, nella versione con le due istruzioni separate. L’elenco comprende anche i casi base. La radice ha argomento $4$ e comincia dal figlio sinistro, `fib(3)`, che a sua volta comincia da `fib(2)`, che chiama `fib(1)` e poi `fib(0)`. Completato `fib(2)`, il nodo `fib(3)` chiama il suo secondo figlio, `fib(1)`. Completato `fib(3)`, la radice chiama il secondo figlio, `fib(2)`, che chiama `fib(1)` e `fib(0)`. L’ordine è quindi $4$, $3$, $2$, $1$, $0$, $1$, $2$, $1$, $0$, in tutto nove chiamate.
 :::
 
 ## Separare profondità e numero di chiamate
 
 :::definizione{#profondita-ricorsione titolo="Massimo numero di record attivi"}
-La **profondità** di un’invocazione nel modello logico è il massimo numero di record simultaneamente attivi durante il suo calcolo. Si conta anche il record iniziale. Una foglia ha profondità uno. Se una chiamata avvia più figli in sequenza, durante l’attività di un figlio il genitore resta attivo. La profondità è uno più la maggiore profondità fra i figli. Il numero totale di invocazioni, invece, conta anche i rami già completati.
+Di una funzione ricorsiva interessano due quantità diverse. Il **numero di chiamate** è il totale dei nodi dell’albero, e misura il lavoro svolto. La **profondità** è il massimo numero di record di attivazione presenti contemporaneamente nella pila, e misura la memoria necessaria. Una chiamata resta nella pila finché non termina, quindi in ogni momento la pila contiene i nodi di un solo cammino dalla radice verso il basso. La profondità è perciò il numero di nodi del cammino più lungo dalla radice a una foglia.
 
-In `fib(4)` il cammino con argomenti $4$, $3$, $2$, $1$ contiene quattro nodi. Gli altri cammini hanno al massimo quattro nodi, quindi la profondità è $4$. Il conteggio dei nodi della figura dà un numero diverso, $9$. Quando il ramo sinistro è terminato, i suoi record interni hanno già restituito i valori e non sono più attivi mentre procede il ramo destro. Si può controllare il totale senza disegno. I due casi base hanno un nodo ciascuno. Per `fib(2)` la radice e i due figli danno $3$ nodi, per `fib(3)` danno $1+3+1=5$ e per `fib(4)` danno $1+5+3=9$.
+Per `fib(4)` il cammino più lungo passa per gli argomenti $4$, $3$, $2$, $1$, quindi la profondità è $4$, mentre le chiamate sono $9$. Quando il ramo sinistro è terminato i suoi record sono già stati tolti dalla pila, e il ramo destro riusa lo stesso spazio. Il numero di chiamate si calcola anche senza disegno. Un caso base è una chiamata. Per `fib(2)` le chiamate sono $1+1+1=3$, per `fib(3)` sono $1+3+1=5$ e per `fib(4)` sono $1+5+3=9$.
 :::
 
 ::::teorema{#ricorrenza-costo titolo="Conteggio di un albero binario completo"}
-Si consideri un calcolo con argomento intero $n\geq0$. Quando $n=0$ esegue un solo caso base. Per $n>0$ l’invocazione avvia due chiamate con argomento $n-1$, completandole in sequenza. Il numero complessivo $N(n)$ delle chiamate è $2^{n+1}-1$ e la profondità è $n+1$.
+Si consideri una funzione con argomento intero $n\geq0$ che per $n=0$ è un caso base e per $n>0$ esegue, una dopo l’altra, due chiamate con argomento $n-1$. Il numero totale di chiamate è $N(n)=2^{n+1}-1$ e la profondità è $n+1$. Il lavoro raddoppia a ogni aumento di $n$, mentre la memoria cresce di un solo record; per $n=10$ le chiamate sono $2047$ e la profondità è $11$.
 
 :::dimostrazione
-La radice contribuisce un nodo e ogni figlio avvia un albero che ha $N(n-1)$ nodi. Perciò $N(0)=1$ e $N(n)=1+2N(n-1)$ per $n>0$. Sostituendo la formula per l’argomento minore si ottiene
+La chiamata iniziale conta per uno, e ciascuna delle due chiamate interne ne genera in tutto $N(n-1)$. Perciò $N(0)=1$ e $N(n)=1+2N(n-1)$ per $n>0$. Per induzione, se $N(n-1)=2^n-1$ allora $N(n)$ vale
 $$
 1+2(2^n-1)=2^{n+1}-1.
 $$
-La formula vale anche nella base, quindi il risultato segue per induzione. Per la profondità, durante ciascun ramo resta attivo il solo record aggiuntivo della radice. Di conseguenza la ricorrenza è $D(0)=1$ e $D(n)=1+D(n-1)$, che dà $n+1$.
+La formula vale anche per $n=0$, perché $2^1-1=1$. Per la profondità, mentre una delle due chiamate interne è in esecuzione la pila contiene in più soltanto il record della chiamata iniziale. Quindi $D(0)=1$ e $D(n)=1+D(n-1)$, cioè $D(n)=n+1$.
 :::
 ::::
 
 :::osservazione
-Il conteggio delle chiamate è una misura del lavoro quando ogni invocazione esegue una quantità comparabile di operazioni locali. La profondità descrive invece quante invocazioni devono essere rappresentate nello stesso momento nel modello. Un’implementazione C può conservare dati aggiuntivi o semplificare alcuni passaggi. Queste misure logiche non determinano da sole i byte effettivi di memoria né il tempo in secondi.
+Il numero di chiamate è una buona stima del tempo quando ogni chiamata esegue circa la stessa quantità di operazioni. La profondità indica quanti record devono stare nella pila nello stesso momento. Una ricorsione troppo profonda esaurisce lo spazio della pila e il programma si interrompe (*stack overflow*). I byte realmente occupati e i secondi impiegati dipendono poi dal compilatore e dalla macchina.
 :::
 
 ## Riconoscere lo stato da trasferire
 
 :::definizione{#ricorsione-in-coda titolo="Chiamata ricorsiva in posizione di coda"}
-Una chiamata è in **posizione di coda** quando il valore ricevuto costituisce direttamente il risultato del chiamante. In `return n + sum(n - 1u);` rimane da eseguire una somma dopo il ritorno, quindi quel caso richiede di conservare il valore del termine. Un’espressione della forma `return gcd(b, a % b);` può restituire direttamente il valore della chiamata interna. La posizione di coda consente una trasformazione in ciclo quando il nuovo stato dipende soltanto dai dati già disponibili. L’eliminazione del record fisico resta una scelta dell’implementazione.
+Una chiamata ricorsiva è in **posizione di coda** quando è l’ultima operazione della funzione, cioè quando il suo risultato viene restituito così com’è. In `return gcd(b, a % b);` la chiamata è in coda. In `return n + sum(n - 1u);` non lo è, perché dopo il ritorno della chiamata interna resta da eseguire la somma con `n`, e per questo il record deve conservare `n`. Una funzione con ricorsione in coda non ha calcoli in sospeso, e si può riscrivere come un ciclo che aggiorna le variabili al posto di eseguire la chiamata.
 :::
 
 :::osservazione
-Per trasformare la somma in una ricorsione in coda si aggiunge allo stato un accumulatore $d$, inizializzato a zero. Il passaggio a $(n-1,d+n)$ mantiene la quantità $d+S(n)$, dove $S$ è la somma ancora da svolgere. Infatti $S(n)=n+S(n-1)$, quindi aggiungere $n$ all’accumulatore e rimuoverlo dalla somma rimanente lascia costante il totale. Con $n=0$ si restituisce direttamente $d$. Per $n=3$ i valori dell’accumulatore sono $0$, $3$, $5$ e $6$. Le somme intermedie non superano il valore iniziale di $S(n)$, che nel dominio della funzione è al più $210$. Il limite garantisce quindi anche la rappresentabilità della nuova addizione. Il passaggio di stato può essere effettuato, nello stesso ordine, da un ciclo che conserva un solo valore di $n$ e un solo accumulatore.
+La somma ricorsiva si porta in forma di coda aggiungendo un parametro, l’**accumulatore** $d$, che contiene la somma parziale e parte da zero. La chiamata con $(n,d)$ esegue la chiamata con $(n-1,d+n)$, e il caso base $n=0$ restituisce $d$. Per $n=3$ le chiamate hanno argomenti $(3,0)$, $(2,3)$, $(1,5)$ e $(0,6)$, e il risultato è $6$. La quantità $d+S(n)$, dove $S(n)$ è la somma degli interi da $1$ a $n$, resta uguale a ogni passo, perché $n$ passa dalla somma ancora da fare all’accumulatore. Lo stesso calcolo si scrive come ciclo con due variabili, `n` e l’accumulatore.
 :::
 
 :::esempio{titolo="Euclide con chiamata diretta e con ciclo"}
-Si considerano due interi senza segno $a$ e $b$, con almeno uno dei due positivo. Quando $b>0$ si può scrivere $a=qb+r$, con $0\leq r<b$. Ogni divisore comune di $a$ e $b$ divide anche $r=a-qb$. Ogni divisore comune di $b$ e $r$ divide inoltre $a=qb+r$. I due insiemi di divisori comuni coincidono. Si può quindi sostituire lo stato $(a,b)$ con $(b,r)$ e conservare il massimo comune divisore.
+L’**algoritmo di Euclide** calcola il massimo comune divisore di due interi senza segno $a$ e $b$, non entrambi nulli. Se $b>0$, sia $r$ il resto della divisione di $a$ per $b$, cioè $a=qb+r$ con $0\leq r<b$. Un numero che divide $a$ e $b$ divide anche $r=a-qb$, e un numero che divide $b$ e $r$ divide anche $a=qb+r$. Le coppie $(a,b)$ e $(b,r)$ hanno quindi gli stessi divisori comuni e lo stesso massimo comune divisore. Se $b=0$, il massimo comune divisore è $a$.
 
 ```c
 unsigned gcd(unsigned a, unsigned b)
@@ -269,7 +269,7 @@ unsigned gcd(unsigned a, unsigned b)
 }
 ```
 
-La misura $b$ diminuisce a ogni passo. Nel caso $b=0$ il risultato è $a$. Per gli argomenti $48$ e $18$ il percorso è $(48,18)$, $(18,12)$, $(12,6)$ e $(6,0)$, quindi il valore restituito è $6$. Il ciclo seguente ripete la stessa trasformazione nell’ordine delle stesse coppie.
+La misura è $b$, che diminuisce a ogni chiamata perché il resto è minore del divisore. Per $48$ e $18$ le chiamate hanno argomenti $(48,18)$, $(18,12)$, $(12,6)$ e $(6,0)$, e il risultato è $6$. La chiamata ricorsiva è in posizione di coda, quindi la funzione si riscrive come ciclo.
 
 ```c
 unsigned gcd_loop(unsigned a, unsigned b)
@@ -283,9 +283,9 @@ unsigned gcd_loop(unsigned a, unsigned b)
 }
 ```
 
-Il valore di `remainder` è calcolato prima della modifica di `a` e `b`, perciò i nuovi valori coincidono con gli argomenti della chiamata ricorsiva. Quando il ciclo termina, $b=0$ e resta lo stesso risultato del caso base. Come verifica, $6$ divide sia $48$ sia $18$ e l’identità $6=3\cdot18-48$ mostra che ogni loro divisore comune divide $6$.
+Il resto viene salvato in `remainder` prima di modificare `a` e `b`, perché il suo calcolo usa i vecchi valori di entrambe. A ogni iterazione la coppia `(a, b)` assume gli stessi valori degli argomenti delle chiamate ricorsive. Il ciclo termina quando `b` vale $0$ e restituisce `a`, come il caso base. Il risultato $6$ divide sia $48$ sia $18$.
 :::
 
 :::osservazione
-Si verifica il caso $b=0$ con `gcd(7,0)`, che restituisce direttamente $7$. Si verifica anche `gcd(0,7)`. Nel secondo caso il primo resto è $0$, quindi si passa alla coppia $(7,0)$ e si restituisce di nuovo $7$. I due casi controllano respettivamente la terminazione immediata e il passaggio alla base quando il primo dato è zero. I valori di prova affiancano la dimostrazione, che copre tutte le coppie del contratto.
+Due casi particolari da provare sono quelli con uno zero. `gcd(7, 0)` è il caso base e restituisce subito $7$. In `gcd(0, 7)` il resto di $0$ diviso $7$ è $0$, quindi la chiamata interna è `gcd(7, 0)`, che restituisce $7$.
 :::
