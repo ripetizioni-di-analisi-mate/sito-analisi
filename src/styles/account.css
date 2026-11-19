@@ -197,3 +197,8 @@
 .pagina-account #percorso .account-traguardi { border-top: 0; }
 .pagina-account #percorso .account-traguardi > li:last-child { border-bottom: 0; }
 .pagina-account #traguardi-vuoti { margin: 0 0 0.9rem; }
+/* Progressi: tre numeri soltanto (studio della settimana, esperienza accumulata, giorni all'esame). */
+.pagina-account .account-statistiche { margin-bottom: 0; }
+.pagina-account .account-statistiche span a { color: inherit; text-underline-offset: 0.2em; }
+.pagina-account .account-statistiche span a:hover { color: var(--accento); }
+.pagina-account #esame-etichetta a { display: block; }

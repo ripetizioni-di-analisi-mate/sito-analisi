@@ -29,7 +29,7 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
           <p class="fascia-livello"></p>
           <div class="ac-cammino">
             <div class="barra-exp" id="barra-livello" role="progressbar" aria-label={fr ? 'Progression vers le niveau suivant' : es ? 'Progreso hasta el siguiente nivel' : de ? 'Fortschritt bis zur nächsten Stufe' : en ? 'Level progress' : 'Avanzamento del livello'} aria-valuemin="0" aria-valuemax="100"><span></span></div>
-            <p class="numeri-livello"><span class="exp-totale"></span><span class="exp-mancano"></span></p>
+            <p class="numeri-livello"><span class="exp-mancano"></span></p>
           </div>
         </div>
         <div class="stemma-account" role="img" aria-label={s.livello}></div>
@@ -56,15 +56,11 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
         <h2 class="account-titolo-sezione" id="titolo-progressi">{s.progressi}</h2>
         <p class="account-nota" id="progressi-caricamento" role="status">{t.caricamento}</p><button class="bottone-secondario" type="button" id="progressi-riprova" hidden>{s.riprova}</button>
         <div id="percorso" hidden>
-          <p class="account-sopratitolo">{s.settimana}</p>
-          <div class="account-statistiche"><div><strong id="sett-minuti"></strong><span>{s.minuti}</span></div><div><strong id="sett-corrette"></strong><span>{s.corrette}</span></div><div><strong id="sett-giorni"></strong><span>{s.giorni}</span></div></div>
-          <div id="obiettivo-account"><p class="account-sopratitolo">{s.obiettivo}</p><div class="account-obiettivo-testo"><span id="obiettivo-testo"></span><span id="obiettivo-numeri"></span></div><div class="barra-exp" id="barra-obiettivo" role="progressbar" aria-label={s.obiettivo} aria-valuemin="0" aria-valuemax="100"><span></span></div></div>
-          <p class="account-nota" id="obiettivi-completati" hidden>{s.completati}</p>
-          <div class="ac-righe">
-          <details class="account-dettagli" id="altri-traguardi"><summary><span>{s.raggiunti}</span><span class="ac-valore" id="traguardi-conto"></span></summary><ul class="account-traguardi" id="traguardi-raggiunti"></ul><p class="account-nota" id="traguardi-vuoti" hidden>{s.vuotoTraguardi}</p></details>
-          <details class="account-dettagli"><summary>{s.attivita}</summary><ul class="account-sessioni" id="sessioni-account"></ul></details>
+          <div class="account-statistiche">
+            <div><strong id="sett-minuti"></strong><span>{s.minuti} · {s.settimana.toLowerCase()}</span></div>
+            <div><strong id="exp-accumulata"></strong><span>{fr ? 'Expérience accumulée' : es ? 'Experiencia acumulada' : de ? 'Gesammelte Erfahrung' : en ? 'Experience earned' : 'Esperienza accumulata'}</span></div>
+            <div><strong id="giorni-esame"></strong><span id="esame-etichetta"></span></div>
           </div>
-          <p class="account-nota account-guida"><a href={de || es || fr ? '/en/livelli-e-punti?lingua=en' : `${pref}/livelli-e-punti`}>{fr ? 'Fonctionnement des niveaux et des points (en anglais)' : es ? 'Cómo funcionan los niveles y los puntos (en inglés)' : de ? 'So funktionieren Stufen und Punkte (Englisch)' : en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a></p>
         </div>
       </section>
 

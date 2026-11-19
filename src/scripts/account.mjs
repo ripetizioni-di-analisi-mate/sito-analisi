@@ -129,42 +129,27 @@ export function avviaAccount(root) {
     root.querySelector('.fascia-livello').textContent = `${nomeRango(st.livello, lingua)} · ${st.fascia}`;
     q('barra-livello').setAttribute('aria-valuenow', String(percentuale));
     q('barra-livello').firstElementChild.style.width = percentuale + '%';
-    root.querySelector('.exp-totale').textContent = `${numero(st.exp)} ${s.totale}`;
     root.querySelector('.exp-mancano').textContent = st.prossimo === null ? s.limite : `${numero(st.mancano)} ${s.punti} ${s.alLivello} ${st.livello + 1}`;
+    // Tre numeri soltanto: studio della settimana, esperienza accumulata, giorni all'esame più vicino.
     const minuti = d.settimana?.minuti || 0;
     q('sett-minuti').textContent = minuti >= 60 ? `${Math.floor(minuti / 60)} h ${minuti % 60} min` : `${minuti} min`;
-    q('sett-corrette').textContent = numero(d.settimana?.corrette);
-    q('sett-giorni').textContent = numero((d.settimana?.giorni || []).filter((g) => g.attivo).length);
-    const obiettivi = d.obiettivi || [], obiettivo = obiettivi.find((o) => !o.completato);
-    q('obiettivo-account').hidden = !obiettivo;
-    q('obiettivi-completati').hidden = Boolean(obiettivo);
-    q('obiettivi-completati').textContent = obiettivi.length ? s.completati : s.nessunObiettivo;
-    if (obiettivo) {
-      const testo = q('obiettivo-testo'), href = destinazioneObiettivo(obiettivo, catalogo, lingua);
-      testo.replaceChildren();
-      if (href) { const a = elemento('a', '', obiettivo.testo); a.href = href; testo.append(a); } else testo.textContent = obiettivo.testo;
-      if (de) testo.lang = 'en';
-      q('obiettivo-numeri').textContent = `${obiettivo.fatto} / ${obiettivo.totale} · ${obiettivo.punti} ${s.punti}`;
-      const p = obiettivo.totale > 0 ? Math.max(0, Math.min(100, Math.round(obiettivo.fatto / obiettivo.totale * 100))) : 0;
-      q('barra-obiettivo').setAttribute('aria-valuenow', String(p)); q('barra-obiettivo').firstElementChild.style.width = p + '%';
+    q('exp-accumulata').textContent = `${numero(st.exp)} ${s.punti}`;
+    const esame = (d.esami || [])[0], etichetta = q('esame-etichetta');
+    etichetta.replaceChildren();
+    if (esame) {
+      const giorni = Math.max(0, Math.round((new Date(esame.data + 'T12:00:00').getTime() - new Date().setHours(12, 0, 0, 0)) / 86400000));
+      q('giorni-esame').textContent = numero(giorni);
+      const a = elemento('a', '', esame.titolo || catalogo[esame.materia]?.titolo || '');
+      a.href = `${pref}/${esame.materia}`;
+      etichetta.append(fr ? 'Jours avant l’examen' : es ? 'Días para el examen' : de ? 'Tage bis zur Prüfung' : en ? 'Days to the exam' : 'Giorni all’esame', a);
+    } else {
+      q('giorni-esame').textContent = '—';
+      const prima = materie.find((m) => (io.materie || []).includes(m.slug));
+      const a = elemento('a', '', fr ? 'Ajoute la date de ton examen' : es ? 'Añade la fecha de tu examen' : de ? 'Prüfungstermin eintragen' : en ? 'Add your exam date' : 'Aggiungi la data dell’esame');
+      a.href = prima ? (prima.href || `${pref}/${prima.slug}`) : (pref || '/');
+      etichetta.append(a);
     }
-    const traguardi = [...(d.traguardi || [])].reverse();
-    q('traguardi-vuoti').hidden = traguardi.length > 0;
-    q('traguardi-raggiunti').replaceChildren();
-    q('traguardi-conto').textContent = traguardi.length ? numero(traguardi.length) : '';
-    traguardi.forEach((t) => { const li = elemento('li', 'account-traguardo'); const titolo = elemento('span', '', t.nome); if (de) titolo.lang = 'en'; li.append(titolo, elemento('small', '', `+${t.punti} ${s.punti}`)); q('traguardi-raggiunti').append(li); });
     const sessioni = d.sessioni || [];
-    q('sessioni-account').replaceChildren();
-    if (!sessioni.length) q('sessioni-account').append(elemento('li', 'account-nota', s.vuotoSessioni));
-    for (const ses of sessioni) {
-      const dest = destinazione(ses), li = elemento('li');
-      const titolo = elemento(dest ? 'a' : 'strong', '', ses.titolo || catalogo[ses.materia]?.titolo || s.studio);
-      if (dest) titolo.href = dest.href;
-      if (de) titolo.lang = 'en';
-      const data = new Date(ses.inizio).toLocaleDateString(locale, { day: 'numeric', month: 'short' });
-      li.append(titolo, elemento('small', '', `${data} · ${ses.minuti} min${ses.risposte > 0 ? ` · ${ses.corrette} / ${ses.risposte}` : ''} · +${ses.punti} ${s.punti}`));
-      q('sessioni-account').append(li);
-    }
     const ultima = sessioni.find((ses) => destinazione(ses));
     if (ultima) {
       const dest = destinazione(ultima);
