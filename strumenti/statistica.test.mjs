@@ -24,7 +24,9 @@ async function banco(materie = null) {
     ASSETS: { async fetch(req) {
       const path = new URL(req.url || req).pathname;
       richieste.push(path);
-      if (path === `/dati-domande/${materia}.json`) return new Response(readFileSync(join(root, 'dist', path)), { headers: { 'content-type': 'application/json' } });
+      if (/^\/dati-domande\/(?:en\/)?statistica(?:--\d+)?\.json$/.test(path)) {
+        return new Response(readFileSync(join(root, 'dist', path)), { headers: { 'content-type': 'application/json' } });
+      }
       // Si verifica la selezione della pagina, senza simulare HTMLRewriter di Cloudflare.
       return new Response(path, { headers: { 'content-type': 'text/plain' } });
     } },
@@ -113,4 +115,19 @@ test('chi acquista Statistica può esercitarsi su tutti i 1.080 quiz', async () 
   assert.equal(capitolo.lunghezzaSerie, undefined);
   const seconda = await (await b.invia({argomento:'probabilita-e-combinatoria',id:capitolo.ordine[1]})).json();
   assert.equal(seconda.id, capitolo.ordine[1]);
+});
+
+test('il ripasso inglese contiene gli stessi 1.080 quiz e presenta testo e opzioni in inglese', async () => {
+  const b = await banco([materia]);
+  const ripasso = await (await b.invia({ lingua: 'en', argomento: 'prove-d-esame' })).json();
+  assert.equal(ripasso.totale, 1080);
+  const richiesta = { argomento: 'dati-e-frequenze', id: 'dati-e-frequenze/1' };
+  const inglese = await (await b.invia({ lingua: 'en', ...richiesta })).json();
+  const italiana = await (await b.invia({ lingua: 'it', ...richiesta })).json();
+  assert.equal(inglese.id, italiana.id);
+  assert.equal(inglese.scelte.length, 4);
+  assert.match(inglese.testo, /train/i);
+  assert.match(italiana.testo, /treno/i);
+  const istogramma = await (await b.invia({ lingua: 'en', argomento: 'dati-e-frequenze', id: 'dati-e-frequenze/58' })).json();
+  assert.match(istogramma.scelte.join(' '), /equal/i);
 });

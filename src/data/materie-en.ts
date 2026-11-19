@@ -14,9 +14,9 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   },
   'matematica-finanziaria': {
     titolo: 'Financial mathematics', breve: 'Financial mathematics',
-    descrizione: 'A dedicated university course in cash-flow valuation, annuities, amortization, NPV and IRR, bonds, term structures, duration, convexity and immunization. Study materials are in Italian.',
+    descrizione: 'Interest and discount rates, cash-flow equivalence, annuities, amortization, NPV and IRR, bonds, the term structure of interest rates, duration, convexity, and immunization. Includes theory, worked examples, exercises with solutions, and quizzes.',
     argomenti: {
-      'regimi-e-tassi': { titolo: 'Financial regimes and equivalent rates', breve: 'Regimes and rates' },
+      'regimi-e-tassi': { titolo: 'Interest models and equivalent rates', breve: 'Interest models and rates' },
       'equivalenza-finanziaria': { titolo: 'Financial equivalence and cash-flow valuation', breve: 'Financial equivalence' },
       'rendite-costanti': { titolo: 'Level, deferred and perpetual annuities', breve: 'Level annuities' },
       'rendite-variabili': { titolo: 'Variable annuities, continuous cash flows and savings plans', breve: 'Variable annuities' },
@@ -142,7 +142,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'analisi-3': {
     titolo: 'Mathematical Analysis 3',
     breve: 'Analysis 3',
-    descrizione: 'Complex analysis, Fourier and Laplace transforms, Lebesgue integration, Hilbert and Banach spaces and partial differential equations. New chapters are available in Italian.',
+    descrizione: 'Complex analysis, Cauchy’s integral formula and residues, Fourier series and transforms, the Laplace transform, Lebesgue integration, Hilbert and Banach spaces, and partial differential equations. The modules cover topics from different university syllabuses.',
     argomenti: {
       'successioni-e-serie-di-funzioni': { titolo: 'Sequences and series of functions', breve: 'Sequences and series of functions' },
       'serie-di-potenze': { titolo: 'Power series and Taylor series', breve: 'Power series and Taylor series' },
@@ -150,7 +150,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'funzioni-complesse': { titolo: 'Complex analysis: holomorphic functions and logarithms', breve: 'Complex analysis: holomorphic functions and logarithms' },
       'integrali-complessi-e-residui': { titolo: 'Complex analysis: Cauchy, Laurent series and residues', breve: 'Complex analysis: Cauchy, Laurent series and residues' },
       'misura-e-integrale-di-lebesgue': { titolo: 'Lebesgue measure and integration', breve: 'Lebesgue measure and integration' },
-      'spazi-lp-e-hilbert': { titolo: 'Lp and Hilbert spaces', breve: 'Lp and Hilbert spaces' },
+      'spazi-lp-e-hilbert': { titolo: 'Lᵖ spaces and Hilbert spaces', breve: 'Lᵖ spaces and Hilbert spaces' },
       'banach-e-operatori': { titolo: 'Banach spaces and linear operators', breve: 'Banach spaces and linear operators' },
       'trasformata-di-fourier': { titolo: 'Fourier transform and convolution', breve: 'Fourier transform and convolution' },
       'trasformata-di-laplace': { titolo: 'Laplace transform', breve: 'Laplace transform' },
@@ -307,12 +307,12 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'statistica': {
     titolo: 'Statistics and probability',
     breve: 'Statistics and probability',
-    descrizione: 'A university course in descriptive statistics, probability, random variables, inference and regression. Learning materials are currently in Italian.',
+    descrizione: 'A university course in data analysis, descriptive statistics, probability, random variables, sampling, estimation, confidence intervals, hypothesis testing, and regression. Includes theory, worked examples, exercises with solutions, quizzes, and practice exams.',
     argomenti: {
       "dati-e-frequenze": { titolo: "Data, frequencies and charts", breve: "Data and frequencies" },
-      "indici-descrittivi": { titolo: "Location and dispersion indices", breve: "Descriptive indices" },
+      "indici-descrittivi": { titolo: "Measures of location and dispersion", breve: "Descriptive measures" },
       "probabilita-e-combinatoria": { titolo: "Probability and combinatorics", breve: "Probability and counting" },
-      "probabilita-condizionata": { titolo: "Conditional probability, independence and Bayes", breve: "Conditional probability" },
+      "probabilita-condizionata": { titolo: "Conditional probability, independence, and Bayes’ theorem", breve: "Conditional probability" },
       "variabili-discrete": { titolo: "Random variables and discrete distributions", breve: "Discrete variables" },
       "variabili-continue": { titolo: "Continuous random variables and distributions", breve: "Continuous variables" },
       "distribuzioni-congiunte": { titolo: "Joint distributions, covariance and transformations", breve: "Joint distributions" },

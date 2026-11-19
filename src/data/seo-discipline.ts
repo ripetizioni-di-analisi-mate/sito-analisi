@@ -323,6 +323,30 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
 
 
 export const GUIDE_DISCIPLINE_EN: Partial<Record<string, GuidaDisciplina>> = {
+  'analisi-3': {
+    titolo: 'Mathematical Analysis 3 | Complex Analysis, Transforms and Worked Examples',
+    descrizione: 'Mathematical Analysis 3 covers complex functions, residues, Fourier and Laplace transforms, Lebesgue integration, and function spaces. Includes theory and exercises for university courses.',
+    preparazione: 'The syllabus for Mathematical Analysis 3 varies by degree program. This course covers complex analysis, measure and integration, function spaces, transforms, and partial differential equations. Check which chapters appear on your instructor’s syllabus.',
+    metodo: 'To calculate residues, first identify the singularities and their orders. When applying a transform, check the hypotheses of the formula you use. The worked examples connect each calculation to the theorem that justifies it. The chapters on function spaces develop the definitions and proofs.',
+    esempi: GUIDE_DISCIPLINE['analisi-3'].esempi,
+    collegate: GUIDE_DISCIPLINE['analisi-3'].collegate,
+  },
+  statistica: {
+    titolo: 'Statistics and Probability | Theory and Worked Examples',
+    descrizione: 'Statistics and probability with distributions, random variables, estimation, confidence intervals, hypothesis tests, and regression. Includes theory and worked examples.',
+    preparazione: 'The course connects descriptive statistics with probability and statistical inference. It begins with tables and summary statistics, then introduces random variables, distributions, sampling, and estimation. The chapters on confidence intervals, hypothesis tests, and regression explain the assumptions behind each method.',
+    metodo: 'Before calculating, identify the variable, the probability model, and the information available. In inference problems, distinguish the parameter, the sample statistic, and the significance level. The worked examples show the calculation and explain how to interpret the result.',
+    esempi: GUIDE_DISCIPLINE.statistica.esempi,
+    collegate: GUIDE_DISCIPLINE.statistica.collegate,
+  },
+  'matematica-finanziaria': {
+    titolo: 'Financial Mathematics | Formulas, Theory and Worked Examples',
+    descrizione: 'Financial mathematics for economics students. Study interest rates, annuities, amortization, NPV, bonds, duration, and immunization through theory and worked examples.',
+    preparazione: 'Financial mathematics studies when amounts of money available on different dates are equivalent. The course introduces interest models and rates before moving on to annuities, amortization, and investment appraisal. Later chapters cover bonds, the term structure of interest rates, duration, and immunization.',
+    metodo: 'The timing of the cash flows determines which formula applies. The worked examples show how to choose a valuation date, convert interest rates, and set up the equation of value. Amortization schedules distinguish the principal repaid, the interest paid, and the outstanding balance.',
+    esempi: GUIDE_DISCIPLINE['matematica-finanziaria'].esempi,
+    collegate: GUIDE_DISCIPLINE['matematica-finanziaria'].collegate,
+  },
   informatica: {
     titolo: 'Foundations of Computer Science in C | Exercises and Lab Practice',
     descrizione: 'A university course in C17 programming. Study pointers, recursion, algorithms and files with 88 worked exercises and 990 questions with explanations.',

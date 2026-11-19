@@ -1382,7 +1382,13 @@ export default {
       const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
-      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
+      if (!elenco.length && quizConAnteprima && vendita) {
+        const corsiInglesi = { 'analisi-3': 'Mathematical Analysis 3', statistica: 'Statistics and Probability', 'matematica-finanziaria': 'Financial Mathematics' };
+        if (l === 'en' && Object.hasOwn(corsiInglesi, materia)) {
+          return json({ errore: `These topic quizzes are included in the full ${corsiInglesi[materia]} course. You can try ten sample questions in the course review.`, sblocca: `/en/${materia}/sblocca` }, 403);
+        }
+        return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
+      }
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : l === 'es' ? 'No hay preguntas para este tema.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
       if (!q && anteprimaUsa && typeof id === 'string') return rispostaCorsoUsaRiservato(materia);

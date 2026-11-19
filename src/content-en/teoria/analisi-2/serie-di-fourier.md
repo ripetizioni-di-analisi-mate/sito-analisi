@@ -9,7 +9,7 @@ sommario: How a periodic function is expanded in a series of sines and cosines, 
 $f : \mathbb{R} \to \mathbb{R}$ is **periodic** with period $T > 0$ if $f(x + T) = f(x)$ for every $x \in \mathbb{R}$. A function defined only on $[-\pi, \pi)$ extends uniquely to a $2\pi$-periodic function on $\mathbb{R}$, the **periodic extension**, by repeating its values on each interval $[\pi, 3\pi)$, $[-3\pi, -\pi)$ and so on. For an integrable $T$-periodic function the integral over one period does *not* depend on the starting point:
 $$
 \int_{a}^{a + T} f(x)\, dx = \int_{0}^{T} f(x)\, dx
-\qquad \text{per ogni } a \in \mathbb{R} .
+\qquad \text{for every } a \in \mathbb{R} .
 $$
 Periodic functions describe phenomena that repeat, such as oscillations, waves and signals. The theory is developed for the period $2\pi$, the common period of $\sin x$ and $\cos x$, and is carried over to an arbitrary period by a change of variable.
 
@@ -21,7 +21,7 @@ A **trigonometric polynomial** of degree $N$ is a function of the form
 $$
 s_N(x) = \frac{a_0}{2} + \sum_{n=1}^{N} \bigl( a_n \cos(nx) + b_n \sin(nx) \bigr),
 $$
-with $a_0, a_1, \dots, a_N, b_1, \dots, b_N \in \mathbb{R}$. Every trigonometric polynomial is $2\pi$-periodic and **infinitely differentiable**, since it is a finite sum of sines and cosines. Trigonometric polynomials are the building blocks of the theory: the Fourier series represents a periodic function as a limit of trigonometric polynomials, just as the Taylor series represents a smooth function as a limit of algebraic polynomials.
+with $a_0, a_1, \dots, a_N, b_1, \dots, b_N \in \mathbb{R}$. Every trigonometric polynomial is $2\pi$-periodic and **infinitely differentiable**, since it is a finite sum of sines and cosines. Trigonometric polynomials are the building blocks of the theory: the Fourier series represents a periodic function as a limit of trigonometric polynomials, just as the Taylor series of an analytic function represents it locally as a limit of algebraic polynomials.
 :::
 
 ## Orthogonality of the trigonometric system
@@ -32,14 +32,14 @@ $$
 \begin{gathered}
 \int_{-\pi}^{\pi} \cos(nx) \cos(mx)\, dx =
 \begin{cases}
-0 & \text{se } n \neq m \\
-\pi & \text{se } n = m
+0 & \text{if } n \neq m \\
+\pi & \text{if } n = m
 \end{cases}
 \\[8pt]
 \int_{-\pi}^{\pi} \sin(nx) \sin(mx)\, dx =
 \begin{cases}
-0 & \text{se } n \neq m \\
-\pi & \text{se } n = m
+0 & \text{if } n \neq m \\
+\pi & \text{if } n = m
 \end{cases}
 \\[8pt]
 \int_{-\pi}^{\pi} \sin(nx) \cos(mx)\, dx = 0,

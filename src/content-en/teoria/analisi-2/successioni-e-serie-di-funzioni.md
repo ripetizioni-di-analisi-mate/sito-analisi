@@ -1,6 +1,6 @@
 ---
 titolo: Sequences and series of functions
-sommario: Pointwise and uniform convergence of a sequence of functions, the theorems on passing to the limit for continuity, integral and derivative, and total convergence for series of functions.
+sommario: Pointwise and uniform convergence of a sequence of functions, the theorems on passing to the limit for continuity, integral and derivative, and normal convergence for series of functions.
 ---
 
 ## Sequences of functions and pointwise convergence
@@ -12,7 +12,7 @@ A **sequence of functions** is a family $(f_n)_{n \in \mathbb{N}}$ of functions 
 :::definizione{#convergenza-puntuale titolo="Pointwise convergence"}
 The sequence $(f_n)$ **converges pointwise** to $f$ on $A$ if for every $x \in A$ the numerical sequence $f_n(x)$ converges to $f(x)$, that is, if
 $$
-\lim_{n \to +\infty} f_n(x) = f(x) \qquad \text{per ogni } x \in A .
+\lim_{n \to +\infty} f_n(x) = f(x) \qquad \text{for every } x \in A .
 $$
 In the $\varepsilon$ definition: for every $x \in A$ and every $\varepsilon > 0$ there exists $N$ such that $|f_n(x) - f(x)| < \varepsilon$ for every $n \geq N$; the index $N$ depends on $\varepsilon$ and *also* on the point $x$. Pointwise convergence is studied with the methods for limits of sequences from Mathematical Analysis 1, one point at a time, and it determines the candidate limit $f$: every other notion of convergence in the chapter compares $f_n$ with this function.
 :::
@@ -22,8 +22,8 @@ $f_n(x) = x^n$ on $[0, 1]$. For $0 \leq x < 1$ the geometric sequence $x^n$ tend
 $$
 f(x) =
 \begin{cases}
-0 & \text{se } 0 \leq x < 1 \\[4pt]
-1 & \text{se } x = 1
+0 & \text{if } 0 \leq x < 1 \\[4pt]
+1 & \text{if } x = 1
 \end{cases}
 $$
 As $n$ increases the graph drops toward the $x$-axis on the whole interval $[0, 1)$, but *every* curve rises back up to the point $(1, 1)$.
@@ -44,7 +44,7 @@ The pointwise limit of continuous functions need not be continuous. Each $f_n(x)
 :::definizione{#convergenza-uniforme titolo="Uniform convergence"}
 The sequence $(f_n)$ **converges uniformly** to $f$ on $A$ if for every $\varepsilon > 0$ there exists $N$ such that
 $$
-|f_n(x) - f(x)| < \varepsilon \qquad \text{per ogni } n \geq N \text{ e per ogni } x \in A .
+|f_n(x) - f(x)| < \varepsilon \qquad \text{for every } n \geq N \text{ and for every } x \in A .
 $$
 The difference from pointwise convergence lies in the order of the requirements: the *same* index $N$ works for *all* points $x \in A$ simultaneously. Geometrically, for $n \geq N$ the graph of $f_n$ is contained in the tube of radius $\varepsilon$ around the graph of $f$, that is, in the strip between $f - \varepsilon$ and $f + \varepsilon$. Uniform convergence implies pointwise convergence; the converse does not hold, as shown by the sequence $x^n$ on $[0, 1)$.
 
@@ -76,7 +76,7 @@ Therefore the convergence is **uniform** on $[0, +\infty)$.
 :::attenzione
 The same sequence can converge uniformly on one set and not on another. $f_n(x) = x^n$ converges pointwise to $0$ on $[0, 1)$, but $\sup_{x \in [0,1)} x^n = 1$ for every $n$, so the convergence **is not uniform** on $[0, 1)$. On $[0, a]$ with $0 < a < 1$ we get $M_n = a^n \to 0$, so the convergence is **uniform** on *every* interval $[0, a]$. The set one works on is part of the answer.
 
-::grafico{f="x^8" xmin=0 xmax=1.2 ymin=-0.1 ymax=1.2 punti="0.8,0.1678,pieno;1,1,vuoto" segmenti="0.8,0,0.8,0.1678;0,0.1678,0.8,0.1678" etichette="0.78,-0.08,a" titolo="$y = x^8$ with $a = \dfrac{4}{5}$: on $[0, a]$ the maximum is $a^8 \approx 0{,}17$, while on $[0, 1)$ the values approach $1$ as $x \to 1^-$"}
+::grafico{f="x^8" xmin=0 xmax=1.2 ymin=-0.1 ymax=1.2 punti="0.8,0.1678,pieno;1,1,vuoto" segmenti="0.8,0,0.8,0.1678;0,0.1678,0.8,0.1678" etichette="0.78,-0.08,a" titolo="$y = x^8$ with $a = \dfrac{4}{5}$: on $[0, a]$ the maximum is $a^8 \approx 0.17$, while on $[0, 1)$ the values approach $1$ as $x \to 1^-$"}
 :::
 
 :::osservazione
@@ -91,7 +91,7 @@ If the $f_n$ are continuous on $A$ and $f_n \to f$ uniformly on $A$, then $f$ is
 :::dimostrazione
 Fix $x_0 \in A$ and $\varepsilon > 0$. By uniform convergence there exists an index $n$ such that
 $$
-|f_n(x) - f(x)| < \frac{\varepsilon}{3} \qquad \text{per ogni } x \in A .
+|f_n(x) - f(x)| < \frac{\varepsilon}{3} \qquad \text{for every } x \in A .
 $$
 Since $f_n$ is continuous at $x_0$, there exists $\delta > 0$ such that $|f_n(x) - f_n(x_0)| < \dfrac{\varepsilon}{3}$ for every $x \in A$ with $|x - x_0| < \delta$. For such $x$, the **triangle inequality** gives
 $$
@@ -145,8 +145,8 @@ The area under the graph concentrates in an ever taller and narrower peak near $
 Let $f_n \in C^1([a, b])$ be such that
 $$
 \begin{cases}
-f_n(x_0) \text{ converge per almeno un punto } x_0 \in [a, b] \\[4pt]
-f_n' \to g \text{ uniformemente su } [a, b]
+f_n(x_0) \text{ converges at some point } x_0 \in [a, b] \\[4pt]
+f_n' \to g \text{ uniformly on } [a, b]
 \end{cases}
 $$
 Then $f_n$ converges uniformly on $[a, b]$ to a function $f \in C^1([a, b])$ and $f' = g$, that is,
@@ -186,8 +186,8 @@ The quantity to control is the $N$-th **remainder** of the series. Since the sum
 The series $\sum f_n$ **converges normally** on $A$ if there exists a numerical sequence $(M_n)$ such that
 $$
 \begin{cases}
-|f_n(x)| \leq M_n \ \text{ per ogni } x \in A \\[4pt]
-\displaystyle\sum_{n=1}^{\infty} M_n \ \text{ converge}
+|f_n(x)| \leq M_n \ \text{ for every } x \in A \\[4pt]
+\displaystyle\sum_{n=1}^{\infty} M_n \ \text{ converges}
 \end{cases}
 $$
 The sharpest choice is $M_n = \sup_{A} |f_n|$: normal convergence is equivalent to the convergence of the numerical series $\sum_n \sup_A |f_n|$. The condition is checked by bounding each term, *without* knowing the sum of the series, and for this reason it is the standard working tool in exercises.
@@ -196,7 +196,7 @@ The sharpest choice is $M_n = \sup_{A} |f_n|$: normal convergence is equivalent 
 ::::teorema{#totale-implica-uniforme titolo="Weierstrass M-test: normal convergence implies uniform convergence"}
 If $\sum f_n$ converges normally on $A$, then it converges **absolutely** at every point of $A$ and **uniformly** on $A$. The chain between the notions of convergence is
 $$
-\text{totale} \implies \text{uniforme} \implies \text{puntuale},
+\text{normal} \implies \text{uniform} \implies \text{pointwise},
 $$
 and *neither* of the two implications can be reversed.
 
@@ -239,7 +239,7 @@ If $(a_n)$ is decreasing and $a_n \to 0$, the series $\sum (-1)^n a_n$ **converg
 The limit theorems for sequences, applied to the partial sums $s_N$, give the following three results.
 
 :::teorema{#continuita-della-somma titolo="Continuity of the sum"}
-If the $f_n$ are continuous on $A$ and the series $\sum f_n$ converges uniformly on $A$ (in particular, if it converges normally), the sum $f$ is **continuous** on $A$. The statement follows from the **continuity of the uniform limit**, since the partial sums $s_N$ are continuous as finite sums of continuous functions. Continuity is a local property, so to conclude that $f$ is continuous on $A$ it suffices to have normal convergence on *every* closed and bounded interval contained in $A$; this remark is used when normal convergence on all of $A$ does not hold.
+If the $f_n$ are continuous on $A$ and the series $\sum f_n$ converges uniformly on $A$ (in particular, if it converges normally), the sum $f$ is **continuous** on $A$. The statement follows from the **continuity of the uniform limit**, since the partial sums $s_N$ are continuous as finite sums of continuous functions. Continuity is a local property. To conclude that $f$ is continuous on $A$, it suffices to prove normal convergence on *every* compact subset of $A$. This applies even when the series fails to converge normally on all of $A$.
 :::
 
 :::teorema{#integrazione-termine-a-termine titolo="Term-by-term integration"}
@@ -254,8 +254,8 @@ The statement follows from **passing to the limit under the integral sign** appl
 Let $f_n \in C^1([a, b])$ be such that
 $$
 \begin{cases}
-\displaystyle\sum f_n(x_0) \ \text{ converge per almeno un punto } x_0 \in [a, b] \\[4pt]
-\displaystyle\sum f_n' \ \text{ converge uniformemente su } [a, b]
+\displaystyle\sum f_n(x_0) \ \text{ converges at some point } x_0 \in [a, b] \\[4pt]
+\displaystyle\sum f_n' \ \text{ converges uniformly on } [a, b]
 \end{cases}
 $$
 Then the series $\sum f_n$ converges uniformly on $[a, b]$, the sum $f$ is of class $C^1$ and

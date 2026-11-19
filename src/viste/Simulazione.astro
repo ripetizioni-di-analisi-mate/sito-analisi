@@ -41,14 +41,14 @@ const pronta = !usa && argomenti.length > 0 && (!tradotte || dafare.filter((v) =
 const hrefMateria = (section: string) => usa ? url(courseUrl(materia) + '/' + section) : link(lingua, `/${materia}/${section}`);
 const T = en ? {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
-  sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
+  sommario: `This timed exam draws practice exercises at random from several topics in ${m.titolo}. After you submit, you can mark each answer as correct, partially correct, or incorrect to get a score out of 30. Full course access includes the worked solutions.`,
   quanti: 'Exercises', durata: 'Time', minuti: 'minutes', argomenti: 'Topics', tutti: 'all', nessuno: 'none', inizia: 'Start the simulation',
-  consegna: 'Hand in', rimasto: 'Time left', scaduto: 'Time is up: the paper has been handed in.', punti: 'points',
+  consegna: 'Submit exam', rimasto: 'Time left', scaduto: 'Time is up. Your exam has been submitted.', punti: 'points',
   esercizio: 'Exercise', valuta: 'How did it go?', giusto: 'Correct', parziale: 'Partly correct', sbagliato: 'Wrong',
-  risultato: 'Score', tempo: 'Time used', nuova: 'New simulation', soluzione: 'Solution', riservata: 'The solution is in the full access to the subject.', sblocca: 'Unlock',
-  caricamento: 'Preparing the paper…', errore: 'The exercises did not load. Reload the page.', storico: 'Previous simulations', vota: 'Mark every exercise to see the score.', conferma: 'Hand in the paper now?',
+  risultato: 'Score', tempo: 'Time used', nuova: 'New simulation', soluzione: 'Solution', riservata: 'Full course access includes the worked solution.', sblocca: 'Unlock',
+  caricamento: 'Preparing the paper…', errore: 'The exercises did not load. Reload the page.', storico: 'Previous simulations', vota: 'Mark every exercise to see the score.', conferma: 'Submit your exam now?',
   originale: 'Open this exercise in the course',
-  confronto: 'Your score is higher than § of the simulations of this subject marked on the site (# simulations).',
+  confronto: 'You scored higher than § of the # completed practice exams in this subject.',
 } : {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
   sommario: `Un compito a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è in trentesimi.`,

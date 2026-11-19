@@ -69,6 +69,14 @@ const FR = {
 };
 const IT = { ...ETICHETTE, mostra: 'Mostra soluzione', nascondi: 'Nascondi soluzione' };
 
+// Le coordinate e i nomi degli assi nei sorgenti seguono l'originale italiano.
+// Il testo di questi assi viene localizzato solo per le figure dei rispettivi corsi.
+const ASSI_ANALISI_STATISTICA_FINANZIARIA_EN = new Map([
+  ['valore', 'value'], ['modulo', 'magnitude'], ['massa', 'mass'], ['VPP', 'PPV'],
+  ['densità', 'density'], ['euro', 'EUR'], ['euro/anno', 'EUR/year'], ['VAN', 'NPV'],
+  ['fattore', 'factor'], ['peso', 'weight'], ['tasso (%)', 'rate (%)'], ['rate', 'payments'],
+]);
+
 const NUMERATI = new Set(['definizione', 'teorema', 'proposizione']);
 const testo = (n) => (n.value ?? '') + (n.children || []).map(testo).join('');
 const norma = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
@@ -77,6 +85,7 @@ export default function remarkBlocchi() {
   return (tree, file) => {
     const percorso = String(file?.path || file?.history?.[0] || '');
     const E = /content-fr[\\/]/.test(percorso) ? FR : /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-(en|us)[\\/]/.test(percorso) ? EN : IT;
+    const traduciAssi = E === EN && /[\\/](analisi-3|statistica|matematica-finanziaria)[\\/]/.test(percorso);
     // Numerazione: dentro ogni sezione (##), se ci sono almeno due definizioni/teoremi/proposizioni,
     // i loro titoli diventano "1. …", "2. …"; un blocco da solo resta senza numero.
     // Un blocco che ha lo stesso titolo della sua sezione non ripete il titolo.
@@ -95,6 +104,9 @@ export default function remarkBlocchi() {
       if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura' || node.name === 'schema')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };
+        if (node.name === 'grafico' && traduciAssi && attr.nomi) {
+          attr.nomi = String(attr.nomi).split(',').map((nome) => ASSI_ANALISI_STATISTICA_FINANZIARIA_EN.get(nome.trim()) ?? nome).join(',');
+        }
         node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
         return;
       }

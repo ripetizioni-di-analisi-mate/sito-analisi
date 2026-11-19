@@ -38,7 +38,7 @@ The geometric series $\sum M q^n$ converges because $0 \leq q < 1$, so by the **
 
 Now set
 $$
-R = \sup \{ |x - x_0| : \text{la serie converge in } x \} ,
+R = \sup \{ |x - x_0| : \text{the series converges at } x \} ,
 $$
 the supremum of a nonempty set, since it contains $0$. If $|x - x_0| < R$, by definition of supremum there exists a point of convergence $x_1$ with $|x - x_0| < |x_1 - x_0|$, so by the initial fact the series converges absolutely at $x$. If $|x - x_0| > R$, the series **does not converge** at $x$, because otherwise the number $|x - x_0|$ would belong to the set and would be greater than its supremum, which is absurd.
 :::
@@ -83,7 +83,7 @@ then $R = \dfrac{1}{\ell}$, with the same conventions as in the ratio test. The 
 :::
 
 :::osservazione{#serie-lacunari titolo="Lacunary series"}
-A power series is **lacunary** if it contains *only* some powers, for example only the even ones ($x^{2n}$), only the odd ones ($x^{2n+1}$) or only the multiples of three ($x^{3n}$). Infinitely many zeros appear in the sequence of coefficients, so the formulas based on the ratio and on the root of the coefficients **do not apply**. In these cases the series is studied with a substitution: for $\displaystyle\sum_{n=0}^{\infty} \frac{x^{2n}}{4^n}$ we set $t = x^2$ and obtain the geometric series $\sum \left( \dfrac{t}{4} \right)^{\! n}$, which converges if and only if $|t| < 4$, that is, $x^2 < 4$, that is, $|x| < 2$. The radius is therefore $R = 2$ and *not* $4$. Alternatively, the ratio or root test is applied directly to the terms of the series, with $x$ as a parameter.
+A power series is **lacunary** if it contains *only* some powers, for example only the even ones ($x^{2n}$), only the odd ones ($x^{2n+1}$) or only the multiples of three ($x^{3n}$). With infinitely many zero coefficients, the formula based on consecutive ratios **does not apply**, and the limit required by the root formula need not exist. In these cases the series is studied with a substitution: for $\displaystyle\sum_{n=0}^{\infty} \frac{x^{2n}}{4^n}$ we set $t = x^2$ and obtain the geometric series $\sum \left( \dfrac{t}{4} \right)^{\! n}$, which converges if and only if $|t| < 4$, that is, $x^2 < 4$, that is, $|x| < 2$. The radius is therefore $R = 2$ and *not* $4$. Alternatively, the ratio or root test is applied directly to the terms of the series, with $x$ as a parameter.
 :::
 
 ## Behavior at the endpoints
@@ -179,7 +179,7 @@ whose partial sums are the Taylor polynomials of $f$ at $x_0$. For $x_0 = 0$ the
 ::::teorema{#unicita-dello-sviluppo titolo="Uniqueness of the power series expansion"}
 If $f(x) = \displaystyle\sum_{n=0}^{\infty} a_n (x - x_0)^n$ for every $x$ in an interval $(x_0 - \delta, x_0 + \delta)$ with $\delta > 0$, then
 $$
-a_n = \frac{f^{(n)}(x_0)}{n!} \qquad \text{per ogni } n .
+a_n = \frac{f^{(n)}(x_0)}{n!} \qquad \text{for every } n .
 $$
 The *only* power series centered at $x_0$ that can represent $f$ is therefore its **Taylor series**. For this reason an expansion obtained by any of the legitimate procedures (substitution into a known expansion, sum, multiplication by a power, differentiation, integration) is automatically the Taylor series of the function, without computing the derivatives.
 
@@ -197,7 +197,7 @@ If $f$ is the sum of a power series with radius $R > 0$, then $f$ is **different
 :::
 
 :::definizione{#funzione-analitica titolo="Analytic function"}
-$f$ is **analytic** at $x_0$ (or **expandable in a Taylor series** at $x_0$) if there exists a neighborhood of $x_0$ in which $f$ coincides with the sum of its Taylor series centered at $x_0$; it is analytic on an open set if it is analytic at each of its points. The elementary functions (exponentials, logarithms, powers, trigonometric functions and their inverses) are analytic at every interior point of their domain, so for these functions the standard expansions really represent the function in the regions indicated.
+$f$ is **analytic** at $x_0$ (or **expandable in a Taylor series** at $x_0$) if there exists a neighborhood of $x_0$ in which $f$ coincides with the sum of its Taylor series centered at $x_0$; it is analytic on an open set if it is analytic at each of its points. The elementary functions listed here (exponentials, logarithms, powers, trigonometric functions and their inverses) are analytic on the open intervals where their usual formulas are smooth, so for these functions the standard expansions really represent the function in the regions indicated.
 :::
 
 :::attenzione
