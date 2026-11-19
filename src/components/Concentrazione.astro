@@ -27,10 +27,12 @@ const testi = lingua === 'es' ? {
 <script>
   const comandi = document.querySelector<HTMLElement>('[data-concentrazione]');
   const bottone = comandi?.querySelector<HTMLButtonElement>('button');
+  // Sotto i 60rem l'indice laterale è già chiuso: la funzione non serve e non si mostra.
+  const largo = window.matchMedia('(min-width: 60rem)');
   if (comandi && bottone) {
     const testi = JSON.parse(bottone.dataset.testi ?? '{}');
     const applica = (attiva: boolean, annuncia = false) => {
-      document.documentElement.classList.toggle('studio-concentrato', attiva);
+      document.documentElement.classList.toggle('studio-concentrato', attiva && largo.matches);
       bottone.setAttribute('aria-pressed', String(attiva));
       const nome = bottone.querySelector('span');
       if (nome) nome.textContent = attiva ? testi.attiva : testi.etichetta;
@@ -47,6 +49,7 @@ const testi = lingua === 'es' ? {
     applica(attiva);
     comandi.hidden = false;
     bottone.addEventListener('click', () => applica(bottone.getAttribute('aria-pressed') !== 'true', true));
+    largo.addEventListener('change', () => applica(bottone.getAttribute('aria-pressed') === 'true'));
   }
 </script>
 <style>
@@ -55,8 +58,9 @@ const testi = lingua === 'es' ? {
   .studio-concentrazione:hover { background: var(--carta-2); }
   .studio-concentrazione[aria-pressed="true"] { color: var(--accento); border-color: var(--accento); background: color-mix(in srgb, var(--accento) 6%, var(--carta)); }
   .studio-stato { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  :global(html.studio-concentrato .barra-sconto) { display: none !important; }
+  @media (max-width: 59.99rem) { .studio-comandi { display: none !important; } }
   @media (min-width: 60rem) {
+    :global(html.studio-concentrato .barra-sconto) { display: none !important; }
     :global(html.studio-concentrato .corpo) { grid-template-columns: 1fr; }
     :global(html.studio-concentrato .corpo > .indice) { display: none; }
     :global(html.studio-concentrato .bottone-indice) { display: inline-flex; }
