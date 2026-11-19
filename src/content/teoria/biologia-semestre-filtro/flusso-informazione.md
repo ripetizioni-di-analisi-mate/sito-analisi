@@ -6,129 +6,241 @@ sommario: "Come il DNA viene copiato e usato per produrre RNA e proteine, con co
 ## Copiare il DNA conservando l'informazione
 
 :::definizione{#replicazione titolo="Complementarità e replicazione semiconservativa"}
-Prima della divisione, una cellula deve fornire a ciascuna cellula figlia una copia del patrimonio genetico. I due filamenti del DNA contengono informazioni complementari: una adenina determina una timina sul filamento opposto, una guanina determina una citosina. La separazione dei filamenti rende quindi disponibili due stampi. La **replicazione semiconservativa** produce due doppie eliche, ciascuna formata da un filamento parentale e uno nuovo. Il termine descrive la composizione delle molecole figlie, mentre *bidirezionale* descrive il movimento delle forcelle.
+La **replicazione** è la copia del DNA. Avviene prima di ogni divisione cellulare, in modo che ciascuna delle due cellule figlie riceva un genoma completo. Si basa sulla complementarità delle basi. Di fronte a una A c'è sempre una T e di fronte a una G c'è sempre una C, quindi la sequenza di un filamento stabilisce quella dell'altro. I due filamenti della doppia elica si separano, e ciascuno fa da **stampo** per costruire un filamento nuovo. Si ottengono due doppie eliche, ciascuna formata da un filamento vecchio e da uno nuovo. Per questo motivo la replicazione si dice **semiconservativa**: di ogni molecola figlia si conserva una metà.
 
-La DNA polimerasi aggiunge un nucleotide al gruppo 3′-OH dell'ultimo zucchero della catena in crescita. Il filamento nuovo si allunga perciò in direzione **5′ → 3′**, mentre lo stampo viene percorso in direzione 3′ → 5′. Occorrono uno stampo, deossiribonucleotidi trifosfato e un'estremità da allungare. L'incorporazione libera pirofosfato; la sua successiva idrolisi favorisce la reazione. La sequenza dello stampo determina quale nucleotide viene incorporato, attraverso l'appaiamento delle basi.
+L'enzima che costruisce il filamento nuovo è la **DNA polimerasi**. Il suo funzionamento segue tre regole.
 
-La polimerasi replicativa richiede un innesco. La primasi può iniziare una breve catena di RNA; negli eucarioti il complesso primasi-polimerasi alfa aggiunge anche un breve tratto di DNA. Una volta disponibile l'estremità 3′-OH, le polimerasi replicative proseguono l'allungamento. Nel modello di *Escherichia coli* il cromosoma circolare possiede una principale origine di replicazione. I lunghi cromosomi nucleari eucariotici impiegano molte origini, attivate in modo regolato durante la fase S. Questo consente di copiare regioni diverse in parallelo.
+- Aggiunge un nucleotide alla volta, scegliendo quello complementare alla base dello stampo.
+- Attacca ogni nucleotide all'estremità 3′ della catena che cresce. Il filamento nuovo si allunga quindi sempre nel verso **5′ → 3′**, mentre lo stampo viene letto nel verso 3′ → 5′.
+- Allunga soltanto una catena già iniziata. Non è capace di unire i primi due nucleotidi.
 
-Negli eucarioti il complesso ORC e altre proteine permettono il caricamento delle elicasi MCM sulle origini durante la preparazione alla replicazione. La successiva attivazione in fase S avvia le forcelle. Separare il caricamento dall’attivazione, e impedire un nuovo caricamento nello stesso ciclo, contribuisce a fare in modo che una regione venga copiata una volta per ciclo cellulare. L’origine è quindi una sede di assemblaggio regolato di un complesso d’inizio.
+I nucleotidi entrano nella reazione con tre gruppi fosfato (dATP, dGTP, dCTP, dTTP). Quando un nucleotide si lega alla catena perde due fosfati, e questa reazione fornisce l'energia per formare il legame.
+
+Poiché la DNA polimerasi non sa iniziare una catena, serve un **innesco** (primer). È un breve tratto di RNA complementare allo stampo, costruito da un enzima detto **primasi**. La polimerasi parte dall'estremità 3′ dell'innesco e prosegue con il DNA.
+
+La replicazione comincia in punti precisi del DNA, le **origini di replicazione**. In ogni origine la doppia elica si apre e si formano due **forcelle di replicazione**, che avanzano in versi opposti. Per questo la replicazione si dice bidirezionale. Il cromosoma circolare del batterio *Escherichia coli* ha una sola origine. I cromosomi eucariotici sono molto più lunghi e ne hanno migliaia, quindi molte regioni vengono copiate nello stesso momento.
+
+Nelle cellule eucariotiche ogni tratto di DNA viene copiato una sola volta per ciclo. Il controllo si basa su due momenti separati. Prima della fase S un complesso proteico, **ORC**, riconosce le origini e vi carica le elicasi **MCM**, gli enzimi che apriranno la doppia elica. Le elicasi restano inattive. In fase S vengono attivate e la replicazione parte. Durante la fase S non si possono caricare nuove elicasi, quindi un'origine che ha già funzionato non riparte.
 :::
 
 :::esempio{titolo="Seguire i filamenti parentali"}
-Una doppia elica contiene due filamenti marcati. Dopo un ciclo in un mezzo privo di marcatore, entrambe le molecole figlie hanno un filamento marcato e uno nuovo. Dopo un secondo ciclo si ottengono quattro molecole: due conservano ciascuna uno dei filamenti iniziali, due contengono soltanto filamenti sintetizzati nel mezzo nuovo. La frazione di molecole ibride è quindi $\dfrac{2}{4}=\dfrac{1}{2}$. La marcatura segue i filamenti; il numero totale di doppie eliche raddoppia a ogni ciclo completo.
+Una doppia elica ha entrambi i filamenti marcati, per esempio con un isotopo pesante dell'azoto. La cellula viene trasferita in un mezzo senza marcatore, quindi tutti i filamenti costruiti da quel momento sono non marcati. Dopo la prima replicazione le molecole sono 2, e ciascuna ha un filamento marcato e uno nuovo. Dopo la seconda replicazione le molecole sono 4. I filamenti marcati sono sempre i due iniziali, quindi 2 molecole ne contengono uno ciascuna e le altre 2 sono formate solo da filamenti nuovi. La frazione di molecole con un filamento marcato è $\dfrac{2}{4}=\dfrac{1}{2}$. A ogni replicazione il numero di molecole raddoppia, mentre i filamenti marcati restano due. Dopo la terza replicazione la frazione è quindi $\dfrac{2}{8}=\dfrac{1}{4}$.
 
 ![Due cicli di replicazione semiconservativa](/figure/biologia-semestre-filtro/flusso-informazione/semiconservativa-it.svg)
 :::
 
 :::definizione{#forcella titolo="Forcella, frammenti di Okazaki e fedeltà"}
-L'**elicasi** apre la doppia elica, mentre proteine leganti il DNA a singolo filamento limitano il riappaiamento delle regioni esposte. L'apertura genera tensioni torsionali nel DNA ancora avvolto. Le topoisomerasi le riducono mediante tagli transitori controllati, seguiti dalla richiusura; alcune intervengono anche nella separazione delle molecole intrecciate. La pinza scorrevole mantiene la polimerasi associata allo stampo e aumenta la processività, cioè il numero di nucleotidi incorporati prima del distacco.
+La **forcella di replicazione** è il punto in cui la doppia elica si apre e i due filamenti vengono copiati. Vi lavorano insieme diverse proteine.
 
-I due stampi sono antiparalleli, ma tutte le catene nuove crescono 5′ → 3′. Alla stessa forcella, il filamento **leading** può essere sintetizzato nella direzione di avanzamento dell'apertura. Il filamento **lagging** viene costruito in frammenti di Okazaki, ciascuno iniziato vicino alla forcella e allungato in direzione opposta al suo avanzamento. Ogni frammento richiede un nuovo innesco. Leading e lagging indicano il comportamento di un filamento *rispetto a una specifica forcella*: alla forcella opposta cambia quale stampo permette la sintesi continua.
+- L'**elicasi** separa i due filamenti, rompendo i legami a idrogeno fra le basi.
+- Le **proteine SSB** si legano ai filamenti singoli e impediscono che si riappaino.
+- La **topoisomerasi** agisce davanti alla forcella. L'apertura dell'elica fa attorcigliare troppo il DNA che sta più avanti. La topoisomerasi taglia il DNA, lo lascia ruotare e lo richiude, eliminando la tensione.
+- La **pinza scorrevole** è un anello che circonda il DNA e tiene la polimerasi attaccata allo stampo, così che la polimerasi aggiunga migliaia di nucleotidi senza staccarsi.
+
+I due filamenti stampo sono antiparalleli e la polimerasi lavora solo nel verso 5′ → 3′. Alla forcella i due filamenti nuovi vengono quindi costruiti in modi diversi.
+
+- Il filamento **guida** (leading) cresce nello stesso verso in cui avanza la forcella. Viene costruito in modo continuo, a partire da un solo innesco.
+- Il filamento **in ritardo** (lagging) dovrebbe crescere nel verso opposto all'avanzamento della forcella. Viene costruito a pezzi, detti **frammenti di Okazaki**. Ogni volta che la forcella apre un nuovo tratto di stampo, la primasi costruisce un innesco e la polimerasi sintetizza un frammento che si allontana dalla forcella, fino a raggiungere il frammento precedente.
+
+Quale dei due filamenti sia guida e quale in ritardo dipende dalla forcella. Nell'altra forcella della stessa origine, che avanza nel verso opposto, i ruoli dei due stampi sono scambiati.
 
 ![Direzioni dei filamenti alla forcella](/figure/biologia-semestre-filtro/flusso-informazione/forcella-it.svg)
 
-Gli inneschi vengono rimossi e sostituiti con DNA. Nel batterio interviene anche la DNA polimerasi I; negli eucarioti partecipano, tra gli altri, RNasi H e FEN1. Dopo il riempimento resta una discontinuità nello scheletro zucchero-fosfato. La ligasi forma il legame fosfodiestere mancante tra estremità adiacenti. Un tratto privo di nucleotidi richiede prima il riempimento da parte di una polimerasi.
+Alla fine il filamento in ritardo è formato da frammenti di DNA separati, ciascuno con un innesco di RNA all'inizio. Tre operazioni li trasformano in un filamento continuo.
 
-Molte polimerasi replicative possiedono **proofreading** esonucleasico 3′ → 5′. Quando viene incorporata una base errata, l'estremità può essere trasferita al sito di correzione, il nucleotide rimosso e la sintesi ripresa. La direzione della rimozione è opposta a quella della sintesi. I sistemi di riparazione degli appaiamenti errati intervengono successivamente e aumentano ulteriormente la fedeltà. Questi controlli riducono la probabilità di errore senza renderla nulla.
+1. Gli inneschi di RNA vengono rimossi. Nei batteri lo fa la DNA polimerasi I, negli eucarioti gli enzimi RNasi H e FEN1.
+2. Una DNA polimerasi riempie con DNA lo spazio lasciato dall'innesco.
+3. La **DNA ligasi** forma l'ultimo legame fosfodiestere fra un frammento e il successivo.
+
+La ligasi unisce soltanto due nucleotidi adiacenti. Se fra due frammenti mancano dei nucleotidi, prima deve intervenire una polimerasi.
+
+La replicazione è molto precisa, con circa un errore ogni miliardo di nucleotidi copiati. Due controlli successivi producono questa precisione.
+
+- La **correzione di bozze** (proofreading) è eseguita dalla polimerasi stessa. Quando la polimerasi aggiunge un nucleotide sbagliato, la sua attività di esonucleasi 3′ → 5′ lo toglie dall'estremità appena costruita, e la sintesi riprende. Questa attività procede all'indietro, cioè nel verso opposto a quello della sintesi.
+- La **riparazione degli appaiamenti errati** (mismatch repair) agisce dopo il passaggio della forcella. Riconosce le coppie di basi sbagliate sfuggite al primo controllo e sostituisce il tratto di filamento nuovo che le contiene.
 :::
 
 ## Completare le estremità dei cromosomi
 
 :::definizione{#telomerasi titolo="Telomeri, telomerasi e proliferazione"}
-Un cromosoma lineare presenta un problema alle estremità. Dopo la rimozione dell'ultimo innesco del filamento discontinuo può mancare un'estremità 3′-OH adatta da cui riempire il tratto terminale. Le normali polimerasi replicative, quindi, possono lasciare una copia più corta. I telomeri comprendono sequenze ripetute e proteine che proteggono le estremità e ne distinguono la struttura da una rottura interna del DNA.
+In un cromosoma lineare le estremità non vengono copiate per intero. Il motivo sta nel filamento in ritardo. Quando viene rimosso l'ultimo innesco, quello più vicino all'estremità, resta uno spazio vuoto. Nessuna polimerasi lo riempie, perché oltre quello spazio non c'è un'estremità 3′ da allungare. A ogni replicazione il cromosoma perde quindi un breve tratto a ciascuna estremità. Questo fatto si chiama **problema della replicazione delle estremità**.
 
-La **telomerasi** contiene una componente proteica con attività di trascrittasi inversa e un RNA che fornisce lo stampo. Allunga l'estremità 3′ del filamento telomerico ricco in guanine, aggiungendo ripetizioni di DNA. Primasi e polimerasi convenzionali possono poi sintetizzare il filamento complementare. L'enzima risolve quindi parte del problema fornendo ulteriore stampo; l'estremità telomerica matura mantiene comunque una sporgenza a singolo filamento.
+Le estremità dei cromosomi, i **telomeri**, sono fatte di una breve sequenza ripetuta migliaia di volte, che nell'uomo è TTAGGG, e non contengono geni. A ogni divisione si perde una parte di queste ripetizioni e i geni restano intatti.
 
-In molte cellule somatiche umane l'attività telomerasica è bassa. Telomeri criticamente corti o privi di protezione possono attivare una risposta al danno e contribuire alla **senescenza replicativa**. La senescenza può essere indotta anche da altre forme di stress. Molte cellule tumorali mantengono i telomeri attraverso la telomerasi; altre usano meccanismi alternativi basati su ricombinazione. L'attivazione della telomerasi, da sola, non descrive tutte le alterazioni necessarie alla trasformazione tumorale.
+La **telomerasi** è l'enzima che riallunga i telomeri. Contiene un piccolo RNA con la sequenza complementare alla ripetizione, e lo usa come stampo per aggiungere nuove ripetizioni all'estremità 3′ del cromosoma. Poiché sintetizza DNA a partire da uno stampo di RNA, è una trascrittasi inversa. Una volta allungato questo filamento, primasi e DNA polimerasi costruiscono il filamento complementare. All'estremità resta comunque un breve tratto a filamento singolo.
+
+La telomerasi è attiva nelle cellule germinali e nelle cellule staminali. Nella maggior parte delle cellule del corpo è quasi assente, quindi i telomeri si accorciano a ogni divisione. Quando diventano troppo corti la cellula li tratta come DNA danneggiato e smette definitivamente di dividersi. Questo stato si chiama **senescenza replicativa** e limita il numero di divisioni di una cellula normale. Circa il 90% dei tumori riattiva la telomerasi, e in questo modo le cellule tumorali si dividono senza limite. La telomerasi da sola non basta a formare un tumore, perché servono anche altre alterazioni.
 :::
 
 ## Organizzazione di un gene
 
 :::definizione{#gene titolo="Prodotto funzionale, esoni e regioni regolative"}
-Per **gene** si intende una regione di DNA la cui espressione contribuisce a un prodotto funzionale, RNA o proteina. Un gene che produce un tRNA, per esempio, termina il proprio percorso funzionale a livello di RNA. Nei geni codificanti proteine, la trascrizione produce un RNA che può essere maturato e poi tradotto. Il promotore contribuisce a stabilire dove e con quale orientamento inizia la trascrizione; altri elementi regolativi ne modificano l'efficienza.
+Un **gene** è un tratto di DNA che contiene le istruzioni per costruire un prodotto. Il prodotto è una proteina oppure un RNA che funziona come tale, per esempio un tRNA. L'informazione di un gene per una proteina viene usata in due tappe. Nella **trascrizione** il gene viene copiato in una molecola di RNA messaggero (mRNA). Nella **traduzione** i ribosomi leggono l'mRNA e costruiscono la proteina. L'insieme delle due tappe si chiama **espressione genica**.
 
-Un elemento che agisce **in cis** è una sequenza di DNA che regola una regione fisicamente collegata. Un fattore **in trans** è una molecola diffusibile, spesso una proteina, capace di riconoscere elementi bersaglio. Una mutazione di un operatore interessa direttamente la copia di DNA che lo contiene; una proteina repressore funzionale può invece raggiungere più copie compatibili. Questa distinzione permette di interpretare esperimenti con due copie di un sistema regolativo.
+Un gene non comprende solo la parte che viene copiata. Davanti a essa si trova il **promotore**, la sequenza a cui si lega l'enzima della trascrizione. Il promotore stabilisce dove comincia la trascrizione e in quale verso procede. Altre sequenze regolatrici, vicine o lontane, stabiliscono quanto spesso il gene viene trascritto.
 
-Molti mRNA batterici sono policistronici: contengono più regioni codificanti tradotte in proteine distinte. Gli mRNA nucleari eucariotici sono generalmente monocistronici. Un gene eucariotico può comprendere **esoni**, presenti nell'RNA maturo, e introni, rimossi dallo splicing. Le regioni 5′ UTR e 3′ UTR sono trascritte e conservate nel messaggero maturo, ma si trovano rispettivamente prima del codone d'inizio e dopo il codone di arresto della regione codificante. Perciò un esone può contenere sequenze non tradotte. Il conteggio degli esoni, da solo, non determina la lunghezza della proteina.
+Nella regolazione si distinguono due tipi di componenti.
+
+- Un elemento **in cis** è una sequenza di DNA, come un promotore. Regola soltanto il gene che si trova sulla sua stessa molecola di DNA.
+- Un fattore **in trans** è una molecola, in genere una proteina, prodotta da un altro gene. Si sposta nella cellula e regola tutti i geni che portano la sequenza a cui si lega.
+
+Questa distinzione serve negli esperimenti con due copie dello stesso gene. Una mutazione in una sequenza in cis altera solo la copia che la contiene. Una mutazione in un fattore in trans è compensata dalla proteina normale prodotta dall'altra copia.
+
+Nei batteri un solo mRNA contiene spesso le istruzioni per più proteine, una di seguito all'altra, e si dice **policistronico**. Negli eucarioti ogni mRNA contiene in genere le istruzioni per una sola proteina.
+
+I geni eucariotici sono interrotti. Lungo il gene si alternano gli **esoni**, tratti che restano nell'mRNA finale, e gli **introni**, tratti che vengono trascritti e poi eliminati. L'mRNA finale ha tre parti.
+
+- La **5′ UTR** (regione non tradotta) va dall'inizio dell'mRNA al codone d'inizio.
+- La **regione codificante** va dal codone d'inizio al codone di arresto. È la sola parte tradotta in proteina.
+- La **3′ UTR** va dal codone di arresto alla fine dell'mRNA.
+
+Le due UTR fanno parte degli esoni e non vengono tradotte. Un esone non coincide quindi con una parte codificante, e il numero di esoni non indica la lunghezza della proteina.
 :::
 
 ## Trascrizione e controllo dell'inizio
 
 :::definizione{#trascrizione-lac titolo="Filamento stampo e operone lac"}
-Durante la **trascrizione** la RNA polimerasi sintetizza RNA 5′ → 3′ usando un filamento di DNA letto 3′ → 5′. Può iniziare senza un innesco. Per uno stesso tratto trascritto, il filamento codificante possiede la stessa sequenza del trascritto primario, sostituendo T con U, quando entrambi sono scritti 5′ → 3′. Il filamento stampo è complementare. Geni diversi possono usare filamenti opposti della stessa molecola di DNA.
+Nella **trascrizione** un enzima, la **RNA polimerasi**, costruisce una molecola di RNA copiando un tratto di DNA. In quel tratto la doppia elica si apre e uno solo dei due filamenti viene usato come stampo. La RNA polimerasi segue le stesse regole di verso della DNA polimerasi: legge lo stampo 3′ → 5′ e allunga l'RNA 5′ → 3′. A differenza della DNA polimerasi comincia una catena senza bisogno di innesco. I due filamenti del DNA hanno nomi diversi.
 
-Nei batteri un fattore sigma contribuisce al riconoscimento del promotore. Dopo l'inizio seguono allungamento e terminazione. La mancanza di un involucro nucleare consente alla traduzione di alcuni mRNA batterici di iniziare mentre la trascrizione è ancora in corso.
+- Il **filamento stampo** è quello che la polimerasi legge. L'RNA è complementare a esso.
+- Il **filamento codificante** è l'altro. Ha la stessa sequenza dell'RNA, con T al posto di U.
 
-Nell'**operone lac**, i geni necessari all'utilizzo del lattosio sono regolati da due segnali. In assenza di induttore il repressore LacI si lega all'operatore e ostacola la trascrizione. L'allolattosio, derivato dal lattosio, lega LacI e ne riduce l'affinità per l'operatore. Quando il glucosio è scarso, il segnale cAMP aumenta e il complesso CAP-cAMP favorisce il reclutamento della RNA polimerasi. Nel modello classico, l'espressione è elevata quando il lattosio è disponibile e il glucosio è scarso; con entrambi presenti è bassa, perché la rimozione della repressione non fornisce la stessa attivazione positiva.
+Se il filamento codificante è 5′-ATGGCA-3′, per esempio, l'RNA è 5′-AUGGCA-3′. Lungo lo stesso cromosoma alcuni geni usano come stampo un filamento e altri geni usano l'altro.
+
+Nei batteri la RNA polimerasi riconosce il promotore con l'aiuto di una proteina, il **fattore sigma**. I batteri non hanno il nucleo, quindi i ribosomi cominciano a tradurre un mRNA mentre la polimerasi lo sta ancora costruendo.
+
+L'**operone lac** di *Escherichia coli* è l'esempio classico di regolazione della trascrizione. Un **operone** è un gruppo di geni vicini, trascritti insieme in un solo mRNA a partire da un unico promotore. L'operone lac contiene i geni degli enzimi che servono a utilizzare lo zucchero lattosio. Produrli costa energia, quindi il batterio li produce solo quando il lattosio c'è e il glucosio, lo zucchero che preferisce, manca. Due proteine controllano l'operone.
+
+- Il **repressore LacI** risponde al lattosio. Senza lattosio si lega a una sequenza accanto al promotore, l'**operatore**, e blocca la RNA polimerasi. Quando il lattosio è presente, una molecola che ne deriva, l'allolattosio, si lega al repressore e lo stacca dall'operatore. L'allolattosio si chiama **induttore**.
+- L'**attivatore CAP** risponde al glucosio. Quando il glucosio è scarso nella cellula aumenta il cAMP, che si lega a CAP. Il complesso CAP-cAMP si lega vicino al promotore e aiuta la RNA polimerasi ad attaccarsi.
+
+La trascrizione è elevata solo se il repressore è staccato e l'attivatore è legato. I quattro casi sono i seguenti.
+
+| Lattosio | Glucosio | Repressore | CAP-cAMP | Trascrizione |
+|---|---|---|---|---|
+| assente | presente | legato | assente | spenta |
+| assente | assente | legato | legato | spenta |
+| presente | presente | staccato | assente | bassa |
+| presente | assente | staccato | legato | elevata |
 
 ![Due controlli sull’operone lac](/figure/biologia-semestre-filtro/flusso-informazione/lac-it.svg)
 
-L'operatore è DNA, LacI è una proteina e l'allolattosio è una piccola molecola. Una mutazione che impedisce a LacI di legare l'induttore può mantenere la repressione anche in presenza di lattosio. Una mutazione dell'operatore che impedisce il legame di LacI elimina invece quel controllo soltanto dalla copia collegata. Sono meccanismi diversi, distinguibili considerando quale interazione viene alterata.
+Le mutazioni dell'operone si interpretano individuando quale legame viene alterato. I tre componenti sono di natura diversa: l'operatore è una sequenza di DNA, LacI è una proteina e l'allolattosio è una piccola molecola. Si considerano due mutazioni.
+
+- Una mutazione di LacI che gli impedisce di legare l'allolattosio lascia il repressore sempre attaccato all'operatore. L'operone resta spento anche con il lattosio. LacI è un fattore in trans, quindi il repressore mutato spegne tutte le copie dell'operone presenti nella cellula.
+- Una mutazione dell'operatore che impedisce a LacI di legarsi lascia l'operone sempre libero dal repressore. L'operatore è un elemento in cis, quindi l'effetto riguarda solo la copia dell'operone che porta la mutazione.
 :::
 
 :::definizione{#trascrizione-eucariotica titolo="Polimerasi nucleari e fattori di trascrizione"}
-Negli eucarioti le RNA polimerasi nucleari svolgono compiti differenti. La **polimerasi I** produce il precursore dei maggiori rRNA, escluso il 5S. La **polimerasi II** produce i precursori degli mRNA e diversi RNA non codificanti. La polimerasi III produce, tra gli altri, tRNA e rRNA 5S. Queste differenze consentono di collegare una perturbazione selettiva alle classi di RNA direttamente coinvolte.
+Gli eucarioti hanno tre RNA polimerasi nel nucleo, ciascuna per una classe di RNA.
 
-I fattori generali di trascrizione organizzano il complesso di preinizio della polimerasi II. TBP riconosce la TATA box nei promotori che la contengono; molti promotori funzionano con un'organizzazione differente. I fattori specifici riconoscono elementi prossimali, enhancer o silencer e reclutano cofattori. Il ripiegamento del DNA può avvicinare un enhancer al promotore bersaglio. L'accessibilità della cromatina influenza questi incontri e collega la trascrizione ai meccanismi descritti nel capitolo su genoma e cromatina.
+- La **RNA polimerasi I** trascrive i geni degli rRNA maggiori.
+- La **RNA polimerasi II** trascrive tutti i geni che codificano proteine, quindi produce gli mRNA.
+- La **RNA polimerasi III** trascrive i geni dei tRNA e dell'rRNA più piccolo, il 5S.
 
-Dopo l’assemblaggio del complesso di preinizio, l’apertura locale del DNA e la sintesi dei primi nucleotidi permettono l’avvio. Durante l’allungamento, modificazioni della coda CTD della polimerasi II coordinano il reclutamento di fattori di maturazione dell’RNA. Per molti geni, il taglio dell’RNA al sito di poliadenilazione precede la terminazione della polimerasi più a valle; la degradazione del trascritto residuo, anche tramite XRN2, contribuisce al distacco. Il punto in cui termina il messaggero maturo può quindi essere distinto dal punto in cui la polimerasi abbandona il DNA.
+La RNA polimerasi II non riconosce il promotore da sola. Ha bisogno di proteine dette **fattori di trascrizione**, che sono di due tipi.
 
-I recettori degli ormoni steroidei possono regolare la trascrizione in risposta al ligando. Una variazione nella quantità di proteina, tuttavia, può dipendere anche dalla stabilità dell'mRNA, dall'efficienza della traduzione o dalla degradazione proteica. Per attribuire un effetto alla trascrizione servono misure adatte, per esempio la produzione di RNA nascente, oltre alla sola quantità di proteina finale.
+- I **fattori generali** servono per tutti i geni. Si montano sul promotore insieme alla polimerasi e formano il complesso d'inizio. Uno di essi, **TBP**, riconosce una sequenza presente in molti promotori, la **TATA box**.
+- I **fattori specifici** si legano a sequenze regolatrici proprie di alcuni geni e stabiliscono in quali cellule e in quali momenti il gene è attivo. Una sequenza regolatrice che aumenta la trascrizione si chiama **enhancer**, una che la riduce si chiama **silencer**.
+
+Un enhancer si trova spesso a migliaia di coppie di basi dal gene che regola. Agisce perché il DNA si ripiega ad ansa e porta l'enhancer, con le proteine legate, a contatto con il promotore. Tutto questo richiede che la cromatina sia aperta in quei punti, come descritto nell'unità su genoma e cromatina.
+
+Dopo l'inizio la polimerasi II percorre il gene e allunga l'RNA. La polimerasi ha una lunga coda, detta **CTD**, che durante il percorso viene fosforilata. Alla coda fosforilata si legano gli enzimi che modificano l'RNA mentre viene prodotto. Alla fine del gene l'RNA viene tagliato in un punto preciso, il sito di poliadenilazione. La polimerasi prosegue ancora per un tratto e poi si stacca dal DNA. La fine dell'mRNA è quindi stabilita dal taglio e non dal punto in cui la polimerasi si ferma.
+
+La quantità di una proteina in una cellula non dipende solo dalla trascrizione del suo gene. Dipende anche da quanto dura l'mRNA, da quante volte viene tradotto e dalla velocità con cui la proteina viene degradata. Se la quantità di una proteina aumenta, per attribuire l'aumento alla trascrizione si misura l'RNA appena prodotto, e non solo la proteina.
 :::
 
 ## Maturazione e durata degli RNA
 
 :::definizione{#maturazione-rna titolo="Cap, splicing e poliadenilazione"}
-Il pre-mRNA eucariotico viene modificato mentre è prodotto e dopo la trascrizione. Il **cap 5′** contiene una guanosina modificata unita con un legame 5′–5′; partecipa alla protezione dell'estremità, al processamento e al riconoscimento del messaggero durante l'inizio della traduzione. Al lato 3′, un taglio specifico precede l'aggiunta della coda poli-A da parte della poli-A polimerasi. La coda viene quindi aggiunta enzimaticamente: la sua lunghezza non deriva dalla trascrizione di una lunga sequenza di T nello stampo. Esistono eccezioni, come diversi mRNA degli istoni dipendenti dalla replicazione, che hanno un diverso processamento 3′.
+Negli eucarioti l'RNA appena trascritto, detto **pre-mRNA**, non è pronto per essere tradotto. Nel nucleo subisce tre modificazioni, che insieme si chiamano **maturazione**. Solo l'mRNA maturo esce dal nucleo.
 
-Lo **splicing** unisce gli esoni eliminando gli introni. Lo spliceosoma contiene snRNA e proteine; il riconoscimento dei siti di splicing e del punto di ramificazione porta a due reazioni di transesterificazione. L'introne viene rilasciato inizialmente in una struttura a cappio, o lariat, mentre gli esoni adiacenti vengono uniti. Gli snRNA contribuiscono all'organizzazione del centro catalitico. Questo illustra come un RNA possa avere una funzione catalitica: un RNA catalitico è detto ribozima.
+1. **Cap 5′**. All'estremità 5′ viene aggiunto un nucleotide di guanina modificato, legato al contrario rispetto agli altri. Il cap protegge l'mRNA dalla degradazione ed è il punto in cui il ribosoma si attacca all'inizio della traduzione.
+2. **Coda poli-A**. L'RNA viene tagliato all'estremità 3′ e un enzima, la poli-A polimerasi, aggiunge circa 200 nucleotidi di adenina. La coda non è scritta nel DNA: è aggiunta dall'enzima senza uno stampo. Anch'essa protegge l'mRNA dalla degradazione.
+3. **Splicing**. Gli introni vengono tagliati via e gli esoni vengono uniti fra loro.
+
+Lo splicing è eseguito dallo **spliceosoma**, un complesso formato da proteine e da piccoli RNA detti **snRNA**. Gli snRNA riconoscono, per appaiamento di basi, le sequenze che segnano l'inizio e la fine di ogni introne. L'introne viene tagliato a un'estremità e ripiegato su sé stesso a formare un cappio (lariat), poi viene tagliato all'altra estremità e i due esoni vengono uniti. Le reazioni di taglio sono catalizzate dagli snRNA e non dalle proteine. Lo spliceosoma è quindi un esempio di **ribozima**, cioè di RNA con attività di enzima.
 
 ![Esclusione di un esone e formazione delle isoforme](/figure/biologia-semestre-filtro/flusso-informazione/splicing-it.svg)
 
-Nello **splicing alternativo** una stessa unità di trascrizione può produrre RNA maturi con combinazioni differenti di esoni o siti di splicing. Il risultato dipende da segnali nelle sequenze e da fattori regolativi, spesso specifici di un tessuto. Se un esone codificante viene escluso, la cornice di lettura è conservata soltanto quando la giunzione mantiene il raggruppamento in triplette. L'editing modifica invece nucleotidi dell'RNA; può cambiare un codone senza modificare il DNA corrispondente. Splicing ed editing agiscono quindi in modo diverso sulla sequenza del prodotto maturo.
+Nello **splicing alternativo** lo stesso pre-mRNA viene maturato in modi diversi, e da un solo gene si ottengono mRNA diversi e quindi proteine diverse. Un gene con gli esoni 1, 2, 3 e 4, per esempio, in un tessuto dà un mRNA con tutti e quattro gli esoni e in un altro tessuto dà un mRNA con gli esoni 1, 2 e 4. La scelta dipende da proteine regolatrici presenti in quel tessuto. Grazie allo splicing alternativo i circa 20 000 geni umani producono molte più di 20 000 proteine.
+
+Quando un esone viene saltato conta la sua lunghezza. L'mRNA viene letto a gruppi di tre nucleotidi. Se l'esone saltato ha un numero di nucleotidi multiplo di 3, alla proteina mancano alcuni amminoacidi e il resto è invariato. Se il numero non è multiplo di 3, tutti i gruppi successivi risultano spostati e la proteina cambia completamente da quel punto in poi.
+
+L'**editing dell'RNA** è un processo diverso. Un enzima cambia chimicamente una singola base dell'RNA dopo la trascrizione, per esempio una C in U. Un codone dell'mRNA risulta così diverso da quello scritto nel DNA.
 :::
 
 :::definizione{#regolazione-rna titolo="Turnover, piccoli RNA e RNA strutturali"}
-La quantità di mRNA dipende sia dalla sintesi sia dalla rimozione. Se la sintesi si arresta e ogni intervallo uguale elimina la stessa frazione di molecole, il decadimento può essere descritto da una **emivita**, cioè il tempo necessario per dimezzare la quantità. Con un'emivita di 20 minuti, dopo 40 minuti resta $\dfrac{1}{4}$ della quantità iniziale. Questa conclusione richiede assenza di nuova sintesi e condizioni di degradazione costanti.
+La quantità di un mRNA nella cellula dipende da due velocità, quella con cui viene prodotto e quella con cui viene degradato. La durata di un mRNA si misura con l'**emivita**, cioè il tempo in cui la sua quantità si dimezza quando la produzione è ferma. Un mRNA ha, per esempio, un'emivita di 20 minuti. Si blocca la trascrizione. Dopo 20 minuti ne resta $\dfrac{1}{2}$. Dopo altri 20 minuti si dimezza di nuovo, quindi dopo 40 minuti ne resta $\dfrac{1}{2}\cdot\dfrac{1}{2}=\dfrac{1}{4}$.
 
-Deadenilazione e decapping possono favorire l'accesso delle esonucleasi. Nei complessi di silenziamento, i **miRNA** guidano il riconoscimento di RNA bersaglio. Nei metazoi molti appaiamenti sono parziali e favoriscono repressione della traduzione e destabilizzazione del messaggero. Una complementarità estesa può permettere il taglio da parte di un'Argonaute cataliticamente competente. La presenza di un miRNA, quindi, non implica automaticamente il taglio immediato di ogni suo bersaglio.
+La degradazione di un mRNA comincia dalle sue due protezioni. La coda poli-A viene accorciata (deadenilazione) e il cap viene rimosso (decapping). A quel punto le esonucleasi, enzimi che demoliscono un acido nucleico a partire da un'estremità, consumano l'mRNA.
 
-Nell’**RNA interference**, piccoli RNA possono derivare dal processamento di precursori a doppio filamento, spesso mediante Dicer, ed essere caricati in complessi contenenti Argonaute. Un filamento guida indirizza il riconoscimento. Gli siRNA con complementarità estesa possono favorire il taglio del bersaglio nei sistemi con Argonaute cataliticamente attiva. Siti nelle UTR possono inoltre reclutare proteine che controllano localizzazione, durata e traduzione del messaggero: una sequenza non tradotta può dunque avere una funzione regolativa precisa.
+I **miRNA** (microRNA) regolano la durata e la traduzione degli mRNA. Sono RNA di circa 22 nucleotidi, prodotti dalla cellula. Un miRNA si associa a una proteina, **Argonaute**, e guida il complesso verso gli mRNA che contengono una sequenza complementare alla sua, di solito nella 3′ UTR. Negli animali l'appaiamento è in genere parziale. L'mRNA bersaglio viene tradotto di meno e degradato più in fretta, quindi la proteina corrispondente diminuisce. Un solo miRNA regola molti mRNA diversi.
 
-Anche rRNA e tRNA richiedono maturazione. Nel nucleolo i precursori degli rRNA vengono tagliati e modificati e partecipano all'assemblaggio delle subunità ribosomiali. I tRNA subiscono processamento delle estremità, modificazioni delle basi e, in alcuni casi, rimozione di introni. La sequenza CCA all'estremità 3′ accoglie l'amminoacido; può essere codificata oppure aggiunta da un enzima, secondo il sistema. Il nucleolo produce e assembla componenti dei ribosomi, mentre la traduzione delle proteine nucleari e citosoliche avviene sui ribosomi citoplasmatici.
+L'**RNA interference** (RNAi) usa lo stesso meccanismo. Un RNA a doppio filamento viene tagliato dall'enzima **Dicer** in corti frammenti, detti **siRNA**. Un filamento del siRNA si lega ad Argonaute e la guida verso l'mRNA con sequenza perfettamente complementare. In questo caso Argonaute taglia l'mRNA, che viene poi distrutto. In laboratorio si introduce nella cellula un siRNA per spegnere un gene a scelta.
+
+Anche gli altri RNA vengono maturati. I precursori degli rRNA sono tagliati e modificati nel nucleolo, dove vengono anche uniti alle proteine per formare le due subunità del ribosoma. I precursori dei tRNA vengono accorciati alle estremità e alcune loro basi vengono modificate. Ogni tRNA termina all'estremità 3′ con la sequenza **CCA**, a cui si attacca l'amminoacido. Le subunità dei ribosomi sono costruite nel nucleolo, mentre la traduzione avviene nel citoplasma.
 :::
 
 ## Dal codone all'amminoacido
 
 :::definizione{#codice-genetico titolo="Codice, cornice di lettura e tRNA"}
-Il ribosoma legge l'mRNA in gruppi di tre nucleotidi chiamati **codoni**. Nel codice standard 61 triplette specificano amminoacidi e tre sono segnali di arresto. Il codice è degenerato perché codoni differenti possono indicare lo stesso amminoacido; nel contesto standard una tripletta ha comunque un significato definito. Il codice è quasi universale: alcuni sistemi, tra cui i mitocondri, utilizzano varianti. Negli esercizi il codice adottato e l'eventuale inizio della lettura devono perciò essere specificati.
+Una proteina è una sequenza di amminoacidi e un mRNA è una sequenza di nucleotidi. Il **codice genetico** è la regola che fa corrispondere le due sequenze. L'mRNA viene letto a gruppi di tre nucleotidi, detti **codoni**, e ogni codone indica un amminoacido. Con quattro basi i codoni possibili sono $4\cdot 4\cdot 4=64$. Di questi, 61 indicano un amminoacido e 3 sono **codoni di stop** (UAA, UAG, UGA), che segnano la fine della proteina. Il codone AUG indica l'amminoacido metionina ed è anche il **codone d'inizio**. Il codice ha tre proprietà.
 
-L'anticodone di un tRNA si appaia al codone con orientamento antiparallelo. Il codone 5′-AUG-3′ riconosce l'anticodone 3′-UAC-5′, che scritto nel verso 5′ → 3′ diventa 5′-CAU-3′. Il *wobble* permette alcuni appaiamenti meno restrittivi alla terza posizione del codone, per cui un tRNA può riconoscere più codoni sinonimi. Questo non autorizza appaiamenti arbitrari nelle tre posizioni.
+- È **degenerato**. Gli amminoacidi sono 20 e i codoni che li indicano sono 61, quindi quasi ogni amminoacido corrisponde a più codoni. La leucina, per esempio, ne ha sei.
+- È **non ambiguo**. Ogni codone indica un solo amminoacido.
+- È **quasi universale**. È lo stesso in quasi tutti gli organismi. Fanno eccezione pochi casi, fra cui i mitocondri, in cui alcuni codoni hanno un significato diverso.
 
-Le **aminoacil-tRNA sintetasi** riconoscono l'amminoacido e i tRNA appropriati, quindi collegano l'amminoacido all'estremità 3′ del tRNA consumando ATP, convertito in AMP e pirofosfato. Molte possiedono controlli che eliminano prodotti caricati in modo scorretto. Il ribosoma verifica soprattutto l'appaiamento codone-anticodone: se un tRNA viene caricato artificialmente con l'amminoacido sbagliato, può incorporarlo al codone riconosciuto dal proprio anticodone. La precisione dipende quindi sia dal caricamento sia dalla lettura del messaggero.
+La lettura parte dal codone d'inizio e prosegue a tre a tre. Il modo in cui la sequenza viene divisa in codoni si chiama **cornice di lettura**. La sequenza AUGGCAUAA, letta dal primo nucleotide, dà i codoni AUG, GCA e UAA.
+
+La corrispondenza fra codone e amminoacido è realizzata dai **tRNA**. Un tRNA porta un amminoacido a un'estremità e ha, in un'altra regione, tre basi dette **anticodone**. L'anticodone si appaia al codone complementare dell'mRNA, con orientamento antiparallelo. Al codone 5′-AUG-3′ si appaia l'anticodone 3′-UAC-5′. I tRNA sono meno di 61, perché la terza base del codone ammette un appaiamento meno rigido, detto **vacillamento** (wobble). Uno stesso tRNA riconosce quindi più codoni che differiscono solo nella terza base e indicano lo stesso amminoacido.
+
+Ogni tRNA riceve il proprio amminoacido da un enzima, l'**amminoacil-tRNA sintetasi**. Ne esiste una per ogni amminoacido. Riconosce sia l'amminoacido sia i tRNA che gli corrispondono e li unisce consumando ATP. La precisione della traduzione dipende da questo passaggio, perché il ribosoma controlla solo l'appaiamento fra codone e anticodone e non l'amminoacido trasportato. Se in laboratorio si attacca a un tRNA l'amminoacido sbagliato, il ribosoma lo inserisce comunque nella proteina.
 :::
 
 ## Costruire la catena polipeptidica
 
 :::definizione{#traduzione titolo="Inizio, allungamento e arresto"}
-L'inizio riunisce mRNA, subunità ribosomiali, fattori e tRNA iniziatore. Nel modello eucariotico cap-dipendente la subunità minore scansiona il messaggero fino a un AUG in un contesto favorevole. Il tRNA iniziatore occupa il sito P. Nei batteri, in molti mRNA, una sequenza di riconoscimento ribosomiale contribuisce a posizionare il codone d'inizio. I due meccanismi richiedono quindi segnali differenti.
+La **traduzione** è la costruzione di una proteina secondo la sequenza di un mRNA. La esegue il **ribosoma**, formato da due subunità, una minore e una maggiore, fatte di rRNA e proteine. Il ribosoma ha tre siti in cui si alloggiano i tRNA.
 
-Durante l'allungamento un aminoacil-tRNA entra nel **sito A**. La catena presente sul tRNA nel **sito P** viene trasferita all'amminoacido nel sito A, formando un legame peptidico. La traslocazione sposta il ribosoma di un codone: il tRNA con la catena passa da A a P e quello scarico procede verso il sito E, da cui esce. Fattori di allungamento e GTP partecipano alla selezione e alla traslocazione. Il centro peptidil-transferasico della subunità maggiore è costituito principalmente da rRNA.
+- Il **sito A** accoglie il tRNA che arriva con un nuovo amminoacido.
+- Il **sito P** contiene il tRNA a cui è attaccata la catena in crescita.
+- Il **sito E** è l'uscita, da cui il tRNA ormai scarico lascia il ribosoma.
+
+La traduzione ha tre fasi. Nell'**inizio** il ribosoma trova il codone d'inizio. Negli eucarioti la subunità minore si lega al cap e scorre lungo l'mRNA fino al primo AUG adatto. Nei batteri si lega a una sequenza dell'mRNA posta poco prima dell'AUG. Un tRNA speciale, il tRNA iniziatore, porta la metionina e si colloca sull'AUG nel sito P. Poi si aggiunge la subunità maggiore.
+
+Nell'**allungamento** si ripete un ciclo di tre passaggi, uno per ogni amminoacido.
+
+1. Un tRNA con il suo amminoacido entra nel sito A, se il suo anticodone è complementare al codone che si trova lì.
+2. La catena attaccata al tRNA del sito P viene trasferita sull'amminoacido del sito A, con la formazione di un **legame peptidico**. Questa reazione è catalizzata dall'rRNA della subunità maggiore.
+3. Il ribosoma avanza di un codone (traslocazione). Il tRNA con la catena passa dal sito A al sito P, e il tRNA scarico passa dal sito P al sito E ed esce. Il sito A è di nuovo libero.
+
+L'ingresso del tRNA e la traslocazione richiedono proteine dette fattori di allungamento e consumano GTP.
 
 ![Siti E, P e A durante l’allungamento](/figure/biologia-semestre-filtro/flusso-informazione/ribosoma-it.svg)
 
-L'mRNA viene percorso 5′ → 3′ e la proteina cresce dall'estremità amminica N-terminale verso quella carbossilica C-terminale. Al codone stop un fattore di rilascio promuove l'idrolisi del legame tra polipeptide e tRNA. Il codone stop, quindi, occupa tre nucleotidi senza aggiungere un amminoacido. Una regione che contiene 300 nucleotidi dal primo nucleotide del codone d'inizio all'ultimo dello stop comprende 100 codoni e produce, nel modello standard senza ricodifica, 99 amminoacidi. Più ribosomi possono tradurre contemporaneamente lo stesso mRNA formando un polisoma; ciascuno sintetizza una propria catena.
+La **terminazione** avviene quando nel sito A arriva un codone di stop. Nessun tRNA lo riconosce. Al suo posto entra una proteina, il **fattore di rilascio**, che stacca la catena dall'ultimo tRNA. La proteina è libera e il ribosoma si separa dall'mRNA.
+
+Il ribosoma legge l'mRNA nel verso 5′ → 3′. La proteina cresce dall'estremità amminoterminale (N-terminale) verso l'estremità carbossiterminale (C-terminale), quindi il primo amminoacido inserito è quello N-terminale.
+
+Il numero di amminoacidi si ricava dalla lunghezza della regione codificante. Il codone di stop occupa tre nucleotidi e non corrisponde ad alcun amminoacido. Una regione codificante di 300 nucleotidi, contati dal primo nucleotide dell'AUG all'ultimo del codone di stop, contiene $\dfrac{300}{3}=100$ codoni. Uno è lo stop, quindi la proteina ha $100-1=99$ amminoacidi.
+
+Uno stesso mRNA è tradotto da molti ribosomi contemporaneamente, uno dietro l'altro. L'insieme si chiama **polisoma**. Ogni ribosoma costruisce una copia della proteina.
 :::
 
 ## Conservare le proteine funzionanti
 
 :::definizione{#proteostasi titolo="Ripiegamento, modificazioni e degradazione"}
-La sequenza amminoacidica permette interazioni che favoriscono il ripiegamento, ma l'ambiente cellulare è affollato e può favorire aggregazioni inappropriate. Le **chaperon** assistono il ripiegamento, limitando queste interazioni e offrendo ulteriori tentativi; molte usano ATP. Le proteine possono inoltre subire tagli, fosforilazione, acetilazione, glicosilazione o altre modificazioni che ne regolano attività e localizzazione. Una proteina prodotta in quantità normale può dunque avere attività ridotta per un difetto di maturazione.
+Una catena di amminoacidi appena costruita non è ancora una proteina funzionante. Deve ripiegarsi nella forma corretta. Nel citoplasma, che è affollato di altre molecole, una catena non ancora ripiegata tende ad attaccarsi ad altre catene e a formare ammassi inutili, detti aggregati. I **chaperon** sono proteine che lo impediscono. Si legano alla catena, la tengono isolata mentre si ripiega e, se il ripiegamento non riesce, le permettono di riprovare. Molti consumano ATP. Dopo il ripiegamento molte proteine ricevono modificazioni, come la fosforilazione o l'aggiunta di zuccheri, oppure vengono tagliate in un punto preciso. Una proteina presente in quantità normale è quindi inattiva se una di queste tappe non è avvenuta.
 
-La **proteostasi** comprende il bilancio tra sintesi, ripiegamento, trasporto e degradazione. Nella via ubiquitina-proteasoma, E1 attiva l'ubiquitina, E2 la trasporta e una ligasi E3 contribuisce al riconoscimento del substrato e al trasferimento. Alcune catene di poliubiquitina, come quelle con legami K48, possono favorire il riconoscimento da parte del proteasoma. Il substrato viene svolto e degradato in peptidi; l'ubiquitina viene recuperata. L'attività ATPasica aiuta il processamento del substrato.
+La **proteostasi** è l'equilibrio fra le proteine che la cellula produce e quelle che elimina. Le proteine danneggiate, mal ripiegate o non più necessarie sono eliminate dal sistema **ubiquitina-proteasoma**, in due tempi.
+
+1. La proteina da eliminare viene marcata con una catena di molecole di **ubiquitina**, una piccola proteina. La marcatura richiede tre enzimi in successione. E1 attiva l'ubiquitina, E2 la trasporta ed E3 riconosce la proteina bersaglio e vi fa attaccare l'ubiquitina.
+2. Il **proteasoma**, un grande complesso a forma di cilindro, riconosce la catena di ubiquitine, distende la proteina consumando ATP e la taglia in brevi frammenti (peptidi). Le ubiquitine vengono staccate e riusate.
 
 ![Destini di una proteina e controllo della qualità](/figure/biologia-semestre-filtro/flusso-informazione/proteostasi-it.svg)
 
-Il significato dell'ubiquitinazione dipende dalla struttura del segnale: altre forme partecipano a traffico, segnalazione e riparazione del DNA. La SUMOilazione usa una proteina simile all'ubiquitina e modifica interazioni o localizzazione senza equivalere automaticamente a degradazione proteasomica. Aggregati voluminosi e organelli possono essere eliminati attraverso l'autofagia e i lisosomi, descritti nel capitolo sulle strutture cellulari. Un aumento della quantità di proteina dopo blocco del proteasoma indica un cambiamento del suo smaltimento; per concludere che è aumentata la trascrizione occorre misurare anche la produzione di RNA.
+L'ubiquitina non segnala sempre la degradazione. Il significato dipende dal modo in cui le ubiquitine sono unite fra loro. Una catena in cui ogni ubiquitina è legata alla lisina 48 della precedente (catena K48) invia la proteina al proteasoma. Una sola ubiquitina, o catene di altro tipo, regolano il trasporto della proteina, la segnalazione o la riparazione del DNA. Una proteina simile all'ubiquitina, **SUMO**, cambia la posizione o i legami di una proteina e non ne provoca la degradazione. Gli aggregati e gli organelli, che sono troppo grandi per il proteasoma, vengono eliminati con l'autofagia nei lisosomi.
+
+Un esperimento mostra come si usano queste nozioni. Si tratta una coltura con un farmaco che blocca il proteasoma, e la quantità di una proteina aumenta. La proteina veniva quindi degradata dal proteasoma, e ora si accumula. Il dato riguarda l'eliminazione della proteina. Per sapere se è cambiata anche la sua produzione si misura l'RNA del gene.
 :::
