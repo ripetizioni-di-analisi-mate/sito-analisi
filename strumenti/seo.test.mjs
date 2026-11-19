@@ -166,3 +166,12 @@ test('quiz, ripasso generale e simulazioni pubblici restano distinti dal ripasso
       if (existsSync('dist' + bocconi + '.html')) assert.ok(xml.includes('<loc>' + sito + bocconi + '</loc>'));
     }
   });
+
+test('gli estratti SEO provengono soltanto dalla traccia pubblica', async () => {
+  const { estrattoTraccia } = await import('../src/lib/estratto-traccia.mjs');
+  const domanda = 'Quanto tempo impiega un treno a percorrere 120 km se mantiene una velocità costante di 80 km/h?';
+  assert.equal(estrattoTraccia(domanda + '\n\n:::soluzione\nUn’ora e mezza.'), domanda);
+  assert.equal(estrattoTraccia('Premessa\n\n## Esercizio 1\n\n' + domanda + '\n\nRisposta riservata.', true), domanda);
+  assert.equal(estrattoTraccia('Calcolare\n$$\nx^2\n$$\n\n:::soluzione\nTesto riservato.'), '');
+  assert.equal(estrattoTraccia('## Svolgimento\n\n' + domanda, true), '');
+});

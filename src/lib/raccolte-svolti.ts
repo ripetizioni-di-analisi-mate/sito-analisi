@@ -4,7 +4,7 @@ import { schedeLibere } from '../data/schede-libere.mjs';
 import { originale } from './canonici';
 
 type LinguaRaccolta = 'it' | 'en';
-interface Scheda { numero: number; titolo: string; percorso: string }
+interface Scheda { numero: number; titolo: string; percorso: string; teoria: string[] }
 interface Capitolo { slug: string; titolo: string; schede: Scheda[] }
 
 const cache = new Map<LinguaRaccolta, Promise<Map<string, Capitolo[]>>>();
@@ -26,7 +26,7 @@ async function raccogli(lingua: LinguaRaccolta) {
     const chiave = materia + '/' + argomento;
     const gruppo = perCapitolo.get(chiave) ?? [];
     const percorso = originale(materia, argomento, 'esercizi-svolti', id) ?? '/' + chiave + '/esercizi-svolti/' + id;
-    gruppo.push({ numero, titolo, percorso });
+    gruppo.push({ numero, titolo, percorso, teoria: scheda.data.teoria });
     perCapitolo.set(chiave, gruppo);
   }
   const raccolte = new Map<string, Capitolo[]>();
@@ -46,3 +46,13 @@ export function raccolteSvolti(lingua: LinguaRaccolta) {
 }
 
 export const percorsoRaccolta = (materia: string) => '/' + materia + '/esercizi-svolti-gratuiti';
+
+export async function esempiPerEsercizio(lingua: LinguaRaccolta, materia: string, argomento: string, teoria: string[]) {
+  if (!teoria.length) return [];
+  const capitolo = (await raccolteSvolti(lingua)).get(materia)?.find((c) => c.slug === argomento);
+  return (capitolo?.schede ?? [])
+    .map((scheda) => ({ scheda, inComune: scheda.teoria.filter((t) => teoria.includes(t)).length }))
+    .filter((s) => s.inComune > 0)
+    .sort((a, b) => b.inComune - a.inComune || a.scheda.numero - b.scheda.numero)
+    .slice(0, 2).map((s) => s.scheda);
+}
