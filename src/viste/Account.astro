@@ -57,8 +57,8 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
         <p class="account-nota" id="progressi-caricamento" role="status">{t.caricamento}</p><button class="bottone-secondario" type="button" id="progressi-riprova" hidden>{s.riprova}</button>
         <div id="percorso" hidden>
           <div class="account-statistiche">
-            <div><strong id="sett-minuti"></strong><span>{s.minuti} · {s.settimana.toLowerCase()}</span></div>
-            <div><strong id="exp-accumulata"></strong><span>{fr ? 'Expérience accumulée' : es ? 'Experiencia acumulada' : de ? 'Gesammelte Erfahrung' : en ? 'Experience earned' : 'Esperienza accumulata'}</span></div>
+            <div><strong id="sett-minuti"></strong><span>{s.minuti}</span></div>
+            <div><strong id="exp-accumulata"></strong><span>{fr ? 'Expérience' : es ? 'Experiencia' : de ? 'Erfahrung' : en ? 'Experience' : 'Esperienza'}</span></div>
             <div><strong id="giorni-esame"></strong><span id="esame-etichetta"></span></div>
           </div>
         </div>

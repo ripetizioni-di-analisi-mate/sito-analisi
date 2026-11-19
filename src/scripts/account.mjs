@@ -139,9 +139,9 @@ export function avviaAccount(root) {
     if (esame) {
       const giorni = Math.max(0, Math.round((new Date(esame.data + 'T12:00:00').getTime() - new Date().setHours(12, 0, 0, 0)) / 86400000));
       q('giorni-esame').textContent = numero(giorni);
-      const a = elemento('a', '', esame.titolo || catalogo[esame.materia]?.titolo || '');
-      a.href = `${pref}/${esame.materia}`;
-      etichetta.append(fr ? 'Jours avant l’examen' : es ? 'Días para el examen' : de ? 'Tage bis zur Prüfung' : en ? 'Days to the exam' : 'Giorni all’esame', a);
+      const a = elemento('a', '', fr ? 'Jours avant l’examen' : es ? 'Días para el examen' : de ? 'Tage bis zur Prüfung' : en ? 'Days to the exam' : 'Giorni all’esame');
+      a.href = `${pref}/${esame.materia}`; a.title = esame.titolo || '';
+      etichetta.append(a);
     } else {
       q('giorni-esame').textContent = '—';
       const prima = materie.find((m) => (io.materie || []).includes(m.slug));

@@ -202,3 +202,7 @@
 .pagina-account .account-statistiche span a { color: inherit; text-underline-offset: 0.2em; }
 .pagina-account .account-statistiche span a:hover { color: var(--accento); }
 .pagina-account #esame-etichetta a { display: block; }
+/* Passata minimal (19/11/2026): niente nota sotto il videocorso, niente «Come funziona» nella striscia dell'invito, etichette brevi. */
+.pagina-account .contenuto-video-dettagli, .pagina-account .invita-breve a { display: none; }
+.pagina-account #esame-etichetta a { display: inline; color: inherit; text-decoration: none; }
+.pagina-account #esame-etichetta a:hover { text-decoration: underline; }
