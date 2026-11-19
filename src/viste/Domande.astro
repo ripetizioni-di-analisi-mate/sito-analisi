@@ -136,7 +136,7 @@ const JS = es ? {
   <div class="domande" data-materia={materia} data-bocconi-quiz={bocconi || undefined} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
       <div>
-        <p class="sopratitolo">{pubblica ? m.titolo : T.titolo}</p>
+        <p class="sopratitolo ripete">{pubblica ? m.titolo : T.titolo}</p>
         <h1>{pubblica ? titoloQuiz : arg.titolo}</h1>
       </div>
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>

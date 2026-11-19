@@ -64,7 +64,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
   materia={materia} argomento={argomento} sezione="teoria"
   precedente={precedente} successivo={successivo}   lingua={lingua} nonTradotta={!tradotta}
 >
-  <p class="sopratitolo">{t.sezioni.teoria}</p>
+  <p class="sopratitolo ripete">{t.sezioni.teoria}</p>
   <h1>{voce?.data.titolo ?? arg.titolo}</h1>
   {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
   <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sezioni} />

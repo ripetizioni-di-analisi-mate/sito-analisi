@@ -220,6 +220,7 @@ main {
 .percorso li[aria-current] { color: var(--inchiostro); }
 
 .sopratitolo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accento); font-weight: 600; margin: 0 0 0.3rem; }
+.pagina-studio .sopratitolo.ripete { display: none; } /* materia o sezione: sono già nella riga delle linguette */
 .sommario { color: var(--inchiostro-2); font-size: 1.05rem; margin-top: 0.5rem; }
 
 /* precedente / successivo */
