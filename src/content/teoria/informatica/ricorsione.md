@@ -287,5 +287,5 @@ Il valore di `remainder` è calcolato prima della modifica di `a` e `b`, perciò
 :::
 
 :::osservazione
-Si verifica il caso $b=0$ con `gcd(7,0)`, che restituisce direttamente $7$. Si verifica anche `gcd(0,7)`. Nel secondo caso il primo resto è $0$, quindi si passa alla coppia $(7,0)$ e si restituisce di nuovo $7$. I due casi controllano respettivamente la terminazione immediata e il passaggio alla base quando il primo dato è zero. I valori di prova affiancano la dimostrazione, che copre tutte le coppie del contratto.
+Si verifica il caso $b=0$ con `gcd(7,0)`, che restituisce direttamente $7$. Si verifica anche `gcd(0,7)`. Nel secondo caso il primo resto è $0$, quindi si passa alla coppia $(7,0)$ e si restituisce di nuovo $7$. I due casi controllano rispettivamente la terminazione immediata e il passaggio alla base quando il primo dato è zero. I valori di prova affiancano la dimostrazione, che copre tutte le coppie del contratto.
 :::
