@@ -14,7 +14,9 @@ La definizione si estende agli esponenti interi ponendo, per $a \neq 0$,
 $$
 a^0 = 1, \qquad a^{-n} = \frac{1}{a^n} .
 $$
-Queste posizioni sono le *uniche* che conservano le proprietà delle potenze: da $a^n \cdot a^0 = a^{n+0} = a^n$ segue $a^0 = 1$, e da $a^n \cdot a^{-n} = a^0 = 1$ segue $a^{-n} = \dfrac{1}{a^n}$. Per esempio $2^{-3} = \dfrac{1}{8}$ e $\left(\dfrac{2}{3}\right)^{-1} = \dfrac{3}{2}$.
+Per esempio $2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}$ e $\left(\dfrac{2}{3}\right)^{-1} = \dfrac{1}{\frac{2}{3}} = \dfrac{3}{2}$.
+
+Le due posizioni sono scelte in modo che la regola del prodotto di potenze con la stessa base, $a^m \cdot a^n = a^{m+n}$, continui a valere quando un esponente è nullo o negativo. La regola richiede $a^n \cdot a^0 = a^{n+0} = a^n$, e dividendo per $a^n$ si ottiene $a^0 = 1$. Richiede inoltre $a^n \cdot a^{-n} = a^{n-n} = a^0 = 1$, quindi $a^{-n}$ è il numero che moltiplicato per $a^n$ dà $1$, cioè $\dfrac{1}{a^n}$.
 :::
 
 :::osservazione
@@ -29,7 +31,7 @@ Con base $0$ e $n \geq 1$ vale $0^n = 0$, perché un prodotto che contiene un fa
 :::
 
 :::attenzione
-In generale $a^{-n}$ è **diverso** da $-a^n$. Per $a = 2$ e $n = 3$ si ha $2^{-3} = \dfrac{1}{8}$, che è positivo, mentre $-2^3 = -8$. L'esponente negativo indica il **reciproco**, quindi lascia invariato il segno di $a^n$; per esempio $(-2)^{-3} = \dfrac{1}{(-2)^3} = -\dfrac{1}{8}$ è negativo perché l'esponente $3$ è dispari.
+In generale $a^{-n}$ è **diverso** da $-a^n$. Per $a = 2$ e $n = 3$ si ha $2^{-3} = \dfrac{1}{8}$, che è positivo, mentre $-2^3 = -8$. L'esponente negativo indica il **reciproco**, cioè $1$ diviso per la potenza, quindi lascia invariato il segno di $a^n$; per esempio $(-2)^{-3} = \dfrac{1}{(-2)^3} = -\dfrac{1}{8}$ è negativo perché l'esponente $3$ è dispari.
 :::
 
 ## Proprietà delle potenze
@@ -116,7 +118,7 @@ Vale inoltre la **proprietà invariantiva**: per ogni naturale $p \geq 1$,
 $$
 \sqrt[n]{a^k} = \sqrt[np]{a^{kp}} .
 $$
-Con la prima proprietà si **estraggono i fattori** dal segno di radice, per esempio $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$; con la proprietà invariantiva si portano due radici allo stesso indice, operazione su cui si fonda il confronto tra radici.
+Con la prima proprietà si **estraggono i fattori** dal segno di radice, per esempio $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$; con la proprietà invariantiva si portano due radici allo stesso indice, per esempio $\sqrt{3} = \sqrt[2 \cdot 3]{3^{1 \cdot 3}} = \sqrt[6]{27}$, operazione su cui si fonda il confronto tra radici.
 
 :::dimostrazione
 L'idea è usare l'unicità della radice. Per definizione $\sqrt[n]{ab}$ è l'unico numero maggiore o uguale a zero la cui potenza di esponente $n$ vale $ab$. Il numero $\sqrt[n]{a}\,\sqrt[n]{b}$ è maggiore o uguale a zero, perché è il prodotto di due numeri maggiori o uguali a zero, e per la potenza di un prodotto vale
@@ -132,7 +134,7 @@ perciò coincide con $\sqrt[mn]{a}$.
 ::::
 
 :::attenzione
-Per la radice quadrata di un quadrato vale $\sqrt{a^2} = |a|$, mentre l'uguaglianza $\sqrt{a^2} = a$ è **falsa** per $a < 0$: per esempio $\sqrt{(-5)^2} = \sqrt{25} = 5 = |-5|$.
+Il simbolo $|a|$ indica il **valore assoluto** di $a$, cioè $a$ stesso se $a \geq 0$ e $-a$ se $a < 0$; per esempio $|5| = 5$ e $|-5| = 5$. Si rimanda al capitolo sulle equazioni e disequazioni con il valore assoluto. Per la radice quadrata di un quadrato vale $\sqrt{a^2} = |a|$, mentre l'uguaglianza $\sqrt{a^2} = a$ è **falsa** per $a < 0$: per esempio $\sqrt{(-5)^2} = \sqrt{25} = 5 = |-5|$.
 
 ::grafico{f="sqrt(x^2);x" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="-3,3,pieno;-3,-3,vuoto" titolo="$y = \sqrt{x^2}$ coincide con $y = |x|$; la retta $y = x$ (tratteggiata) coincide con il grafico soltanto per $x \geq 0$, e in $x = -3$ il grafico passa per $(-3, 3)$, la retta per $(-3, -3)$"}
 
@@ -188,11 +190,11 @@ La base delle potenze a esponente razionale è **positiva**. Con base negativa l
 :::
 
 :::definizione{#esponente-reale titolo="Potenza a esponente reale"}
-Per $a > 0$ e $x$ reale, la potenza $a^x$ si definisce **approssimando** $x$ con esponenti razionali: $2^{\sqrt{2}}$ è il numero a cui si avvicinano $2^{1{,}4}$, $2^{1{,}41}$, $2^{1{,}414}$ e così via. Tutte le proprietà delle potenze restano valide, e il risultato è *sempre* **positivo**: $a^x > 0$ per ogni $x$ reale. Su questa definizione si costruisce la funzione esponenziale, trattata nel capitolo sulle funzioni elementari.
+Per $a > 0$ e $x$ reale, la potenza $a^x$ si definisce **approssimando** $x$ con esponenti razionali: $2^{\sqrt{2}}$ è il numero a cui si avvicinano $2^{1{,}4}$, $2^{1{,}41}$, $2^{1{,}414}$ e così via. Tutte le proprietà delle potenze restano valide, e il risultato è *sempre* **positivo**: $a^x > 0$ per ogni $x$ reale. Su questa definizione si costruisce la funzione esponenziale, trattata nel capitolo sulle equazioni e disequazioni esponenziali.
 :::
 
 :::esempio{titolo="Una potenza con esponente irrazionale"}
-Vale $1{,}4 < \sqrt{2} < 1{,}5$ e la base $2$ è maggiore di $1$. Per il confronto tra potenze con la stessa base la potenza cresce con l'esponente, quindi
+Vale $1{,}4 < \sqrt{2} < 1{,}5$ e la base $2$ è maggiore di $1$. Con base maggiore di $1$ la potenza cresce al crescere dell'esponente, come in $2^1 < 2^2 < 2^3$, quindi
 $$
 2^{1{,}4} < 2^{\sqrt{2}} < 2^{1{,}5}, \qquad 2^{1{,}4} \approx 2{,}639, \qquad 2^{1{,}5} = 2\sqrt{2} \approx 2{,}828 .
 $$
@@ -206,9 +208,9 @@ Con approssimazioni più precise di $\sqrt{2}$ si ottengono $2^{1{,}41} \approx 
 
 - radice singola: si moltiplica per la radice stessa, perché $\sqrt{a} \cdot \sqrt{a} = a$; per esempio $\dfrac{1}{\sqrt{3}} = \dfrac{\sqrt{3}}{3}$;
 - binomio con radici quadrate: si moltiplica per il **binomio coniugato**, perché $(\sqrt{a} - \sqrt{b})(\sqrt{a} + \sqrt{b}) = a - b$; per esempio $\dfrac{1}{\sqrt{5} - \sqrt{3}} = \dfrac{\sqrt{5} + \sqrt{3}}{2}$;
-- radice cubica: si moltiplica per il fattore che completa il cubo sotto radice, cioè $\sqrt[3]{a^2}$ per $\sqrt[3]{a}$; per esempio $\dfrac{1}{\sqrt[3]{2}} = \dfrac{\sqrt[3]{4}}{2}$.
+- radice cubica: si moltiplica per il fattore che completa il cubo sotto radice, cioè $\sqrt[3]{a^2}$ per $\sqrt[3]{a}$, perché $\sqrt[3]{a} \cdot \sqrt[3]{a^2} = \sqrt[3]{a^3} = a$; per esempio $\dfrac{1}{\sqrt[3]{2}} = \dfrac{\sqrt[3]{4}}{\sqrt[3]{2} \cdot \sqrt[3]{4}} = \dfrac{\sqrt[3]{4}}{2}$.
 
-La razionalizzazione serve per sommare e confrontare frazioni con radici e ritorna nei limiti con differenze di radici, trattati nel capitolo sui limiti.
+La razionalizzazione serve per sommare e confrontare frazioni con radici e ritorna nei limiti con differenze di radici, trattati nel capitolo sui limiti di Analisi 1.
 :::
 
 :::esempio{titolo="Razionalizzazione con il binomio coniugato"}
@@ -258,7 +260,7 @@ Il confronto tra potenze con la stessa base vale anche quando la base è un nume
 :::
 
 :::teorema{#confronto-tra-radici titolo="Confronto tra radici"}
-Radici con lo stesso indice si confrontano attraverso i radicandi: per $0 \leq a < b$ vale $\sqrt[n]{a} < \sqrt[n]{b}$. Radici con indici diversi si portano allo **stesso indice** con la **proprietà invariantiva**, usando come indice comune il minimo comune multiplo degli indici.
+Radici con lo stesso indice si confrontano attraverso i radicandi: per $0 \leq a < b$ vale $\sqrt[n]{a} < \sqrt[n]{b}$. Radici con indici diversi si portano allo **stesso indice** con la **proprietà invariantiva**, usando come indice comune il minimo comune multiplo degli indici. Per $\sqrt{3}$ e $\sqrt[3]{5}$ gli indici sono $2$ e $3$, quindi l'indice comune è $6$.
 $$
 \sqrt{3} = \sqrt[6]{3^3} = \sqrt[6]{27}, \qquad
 \sqrt[3]{5} = \sqrt[6]{5^2} = \sqrt[6]{25},

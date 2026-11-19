@@ -59,7 +59,7 @@ La seconda equazione è $x^2 + x - 2 = 0$, con radici $x = 1$ e $x = -2$. Poich�
 :::
 
 :::attenzione
-Elevare al quadrato entrambi i membri senza la condizione $B \geq 0$ introduce **soluzioni estranee**. Da $\sqrt{x} = x - 2$, elevando al quadrato, si ottiene $x = x^2 - 4x + 4$, cioè $x^2 - 5x + 4 = 0$, con radici $x = 1$ e $x = 4$. Per $x = 1$ il primo membro vale $\sqrt{1} = 1$ e il secondo vale $1 - 2 = -1$, quindi $x = 1$ non risolve l'equazione di partenza; la sola soluzione è $x = 4$. Il quadrato cancella i segni, perciò l'uguaglianza tra i quadrati *non* garantisce l'uguaglianza tra i membri.
+Elevare al quadrato entrambi i membri senza la condizione $B \geq 0$ introduce **soluzioni estranee**. Da $\sqrt{x} = x - 2$, elevando al quadrato, si ottiene $x = x^2 - 4x + 4$, cioè $x^2 - 5x + 4 = 0$, con radici $x = 1$ e $x = 4$. Per $x = 1$ il primo membro vale $\sqrt{1} = 1$ e il secondo vale $1 - 2 = -1$, quindi $x = 1$ non risolve l'equazione di partenza; la sola soluzione è $x = 4$. Due numeri opposti hanno lo stesso quadrato, come $1$ e $-1$, perciò l'uguaglianza tra i quadrati *non* garantisce l'uguaglianza tra i membri.
 
 ::grafico{f="sqrt(x);x-2;-sqrt(x)" xmin=-1 xmax=7 ymin=-3 ymax=4 punti="4,2,pieno;1,-1,vuoto" etichette="5.9,2.9,y = √x;4.6,-2.7,y = −√x" titolo="La retta $y = x - 2$ incontra $y = \sqrt{x}$ solo in $x = 4$; in $x = 1$ incontra $y = -\sqrt{x}$, in rosso"}
 :::
@@ -187,7 +187,7 @@ x \geq 0 \\
 2x + 3 > x^2
 \end{cases}
 $$
-Il primo sistema dà $-\dfrac{3}{2} \leq x < 0$. Nel secondo, la disequazione $x^2 - 2x - 3 < 0$ equivale a $-1 < x < 3$, quindi con $x \geq 0$ restano i valori $0 \leq x < 3$. L'**unione** dei due sistemi dà $-\dfrac{3}{2} \leq x < 3$.
+Il primo sistema dà $-\dfrac{3}{2} \leq x < 0$. Nel secondo, la disequazione $2x + 3 > x^2$ si riscrive $x^2 - 2x - 3 < 0$; il trinomio ha radici $-1$ e $3$ ed è negativo tra le radici, quindi la disequazione equivale a $-1 < x < 3$, quindi con $x \geq 0$ restano i valori $0 \leq x < 3$. L'**unione** dei due sistemi dà $-\dfrac{3}{2} \leq x < 3$.
 
 ::grafico{f="sqrt(2*x+3);x" xmin=-3 xmax=5 ymin=-3 ymax=4 area="sqrt(2*x+3);x;-1.5;3" punti="-1.5,0,pieno;3,3,vuoto" titolo="Il grafico di $y = \sqrt{2x + 3}$ sta sopra la retta $y = x$ per $-\dfrac{3}{2} \leq x < 3$"}
 :::
@@ -213,7 +213,7 @@ e la sua seconda condizione si riduce a $x^2 + x - 6 < 0$, cioè a $-3 < x < 2$;
 ## Radici di indice dispari
 
 :::teorema{#indice-dispari titolo="Radici di indice dispari"}
-La radice cubica, come ogni radice di indice dispari, è definita *per ogni* numero reale e può assumere valori negativi: $\sqrt[3]{-8} = -2$. L'elevamento al cubo **conserva sempre l'ordine**, perché la funzione $y = x^3$ è crescente su tutto $\mathbb{R}$, quindi
+La radice cubica, come ogni radice di indice dispari, è definita *per ogni* numero reale e può assumere valori negativi: $\sqrt[3]{-8} = -2$. L'elevamento al cubo **conserva sempre l'ordine**, perché la funzione $y = x^3$ è crescente su tutto $\mathbb{R}$, cioè a un numero più grande corrisponde un cubo più grande, quindi
 $$
 \sqrt[3]{A} = B \iff A = B^3 , \qquad\qquad \sqrt[3]{A} < B \iff A < B^3 ,
 $$

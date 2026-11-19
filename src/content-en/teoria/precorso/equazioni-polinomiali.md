@@ -15,7 +15,7 @@ This form is reached with the **equivalence principles**: adding the same quanti
 - $b \neq 0$: no solution (**inconsistent** equation);
 - $b = 0$: every $x$ is a solution (**identity**).
 
-For example, $3(x - 2) + 5 = 2x$ is equivalent to $3x - 1 = 2x$, hence $x = 1$.
+For example, $3(x - 2) + 5 = 2x$ is equivalent to $3x - 6 + 5 = 2x$, that is, to $3x - 1 = 2x$. Subtracting $2x$ from both sides and adding $1$ to both sides gives $x = 1$.
 :::
 
 :::esempio{titolo="A linear equation with a parameter"}
@@ -78,7 +78,7 @@ We look for the values of $k$ for which $x^2 - 2kx + k + 2 = 0$ has **two distin
 $$
 \frac{\Delta}{4} = k^2 - (k + 2) = k^2 - k - 2 = (k - 2)(k + 1) .
 $$
-There are two distinct solutions when $\dfrac{\Delta}{4} > 0$, which is a **quadratic inequality** in the parameter $k$. The trinomial $(k - 2)(k + 1)$ has roots $-1$ and $2$ and positive leading coefficient, so it is positive outside the interval between the roots, and the condition is satisfied for $k < -1$ or $k > 2$. For $k = -1$ and for $k = 2$ the discriminant is zero and the equation becomes $(x + 1)^2 = 0$ or $(x - 2)^2 = 0$, with a double solution.
+There are two distinct solutions when $\dfrac{\Delta}{4} > 0$, which is a **quadratic inequality** in the parameter $k$. The product $(k - 2)(k + 1)$ is positive when the two factors have the same sign. They are both positive for $k > 2$ and both negative for $k < -1$, so the condition is satisfied for $k < -1$ or $k > 2$. For $k = -1$ and for $k = 2$ the discriminant is zero and the equation becomes $(x + 1)^2 = 0$ or $(x - 2)^2 = 0$, with a double solution.
 :::
 
 :::definizione{#equazioni-incomplete titolo="Incomplete equations"}
@@ -170,7 +170,7 @@ with solutions $t = 1$ and $t = 8$, because their sum is $9$ and their product i
 ## Linear inequalities
 
 :::definizione{#disequazioni-primo-grado titolo="Linear inequality"}
-An inequality of the type $ax + b > 0$ (or with $\geq$, $<$, $\leq$), with $a \neq 0$, is solved by isolating $x$ with two rules: adding the same quantity to both sides preserves the direction; multiplying both sides by a positive quantity preserves the direction, by a *negative* quantity **reverses it**. The solutions form a **half-line**. From $5 - 2x > 1$ it follows that $-2x > -4$, and dividing by $-2$, with the direction reversed, $x < 2$.
+An inequality of the type $ax + b > 0$ (or with $\geq$, $<$, $\leq$), with $a \neq 0$, is solved by isolating $x$ with two rules: adding the same quantity to both sides preserves the direction; multiplying both sides by a positive quantity preserves the direction, by a *negative* quantity **reverses it**. The solutions form a **half-line**, that is, they are all the numbers less than, or all the numbers greater than, a fixed number. From $5 - 2x > 1$ it follows that $-2x > -4$, and dividing by $-2$, with the direction reversed, $x < 2$.
 :::
 
 :::osservazione
@@ -180,7 +180,7 @@ If after simplification the coefficient of $x$ is zero, the inequality reduces t
 ## Quadratic inequalities
 
 ::::teorema{#segno-della-parabola titolo="Sign of the quadratic trinomial"}
-Let $y = ax^2 + bx + c$ with $a > 0$ and $\Delta = b^2 - 4ac$. The graph is a parabola opening upward, and the trinomial is **positive** where the parabola lies **above** the $x$-axis.
+Let $y = ax^2 + bx + c$ with $a > 0$ and $\Delta = b^2 - 4ac$. The graph is a parabola opening upward, treated in the chapter on analytic geometry, and the trinomial is **positive** where the parabola lies **above** the $x$-axis.
 
 - $\Delta > 0$, roots $x_1 < x_2$: the trinomial is positive for $x < x_1$ or $x > x_2$, zero at the roots, negative for $x_1 < x < x_2$.
 - $\Delta = 0$, double root $x_0$: the trinomial is positive for every $x \neq x_0$ and zero at $x_0$.

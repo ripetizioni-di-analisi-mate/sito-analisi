@@ -6,11 +6,13 @@ sommario: What a polynomial is, how to expand and recognize special products, ho
 ## Polynomials and degree
 
 :::definizione{#polinomi titolo="Polynomial and degree"}
-A **polynomial** in the variable $x$ is a sum of monomials,
+A **monomial** in the variable $x$ is the product of a number and a power of $x$ with a natural exponent, such as $-5x^3$, $4x$ or $7$. A **polynomial** in the variable $x$ is a sum of monomials; writing the terms from the highest exponent to the lowest gives
 $$
 P(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 ,
 $$
-with $a_n \neq 0$. The numbers $a_n, \dots, a_0$ are the coefficients, $a_n$ is the **leading coefficient**, $a_0$ is the constant term and $n$ is the **degree**, denoted by $\deg P$. A number $c$ is a **root** of $P$ if $P(c) = 0$. The polynomial $P(x) = 2x^3 - 5x + 1$ has degree $3$, leading coefficient $2$ and constant term $1$; the coefficient of $x^2$ is $0$.
+with $a_n \neq 0$. The numbers $a_n, \dots, a_0$ are the coefficients, $a_n$ is the **leading coefficient**, $a_0$ is the constant term and $n$ is the **degree**, denoted by $\deg P$. The polynomial $P(x) = 2x^3 - 5x + 1$ has degree $3$, leading coefficient $2$ and constant term $1$; the coefficient of $x^2$ is $0$.
+
+The notation $P(c)$ denotes the number obtained by substituting $c$ for $x$, and a number $c$ is a **root** of $P$ if $P(c) = 0$. For the polynomial above $P(2) = 2 \cdot 8 - 5 \cdot 2 + 1 = 7$, so $2$ is not a root.
 :::
 
 :::teorema{#principio-di-identita titolo="Identity principle for polynomials"}
@@ -160,7 +162,7 @@ If $\deg A \geq \deg B$, the degree of the quotient is the difference of the deg
 ## Remainder theorem and factor theorem
 
 ::::teorema{#teorema-del-resto titolo="Remainder theorem"}
-The remainder of the division of $P(x)$ by $x - c$ is $P(c)$. The remainder is therefore obtained with a *single* evaluation of the polynomial, **without carrying out the division**. The remainder of $x^3 - 2x + 1$ divided by $x - 2$ is $P(2) = 8 - 4 + 1 = 5$.
+The remainder of the division of $P(x)$ by $x - c$ is $P(c)$. The remainder is therefore obtained by computing the *single* value $P(c)$, **without carrying out the division**. The remainder of $x^3 - 2x + 1$ divided by $x - 2$ is $P(2) = 8 - 4 + 1 = 5$.
 
 ::grafico{f="x^3-2*x+1" xmin=-2.5 xmax=2.6 ymin=-4 ymax=8 punti="2,5,pieno,P(2) = 5" segmenti="2,0,2,5" titolo="$y = x^3 - 2x + 1$: the remainder of the division by $x - 2$ is the y-coordinate $P(2) = 5$ of the point of the graph with x-coordinate $2$"}
 
@@ -195,11 +197,11 @@ P(x) = (x - c)^m\, Q(x) \qquad \text{with } Q(c) \neq 0 ,
 $$
 that is, if $(x - c)^m$ divides $P$ and $(x - c)^{m + 1}$ does not. A root of multiplicity $1$ is called **simple**, of multiplicity $2$ **double**, of multiplicity $3$ triple. The multiplicity is found by dividing by $x - c$ until the quotient no longer has $c$ as a root: the number of exact divisions is $m$.
 
-The multiplicity determines the sign of $P$ near $c$. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even*, while if $m$ is *odd* it has the sign of $x - c$, which changes at $c$. The factor $Q$ does not vanish at $c$, so near $c$ it has the sign of $Q(c)$ (this is **preservation of sign**, found in the chapter on limits of Mathematical Analysis 1). Therefore the graph of $P$ **crosses** the $x$-axis at roots of odd multiplicity and **touches it without crossing** at roots of even multiplicity; in the study of the sign this property decides whether a row of the sign chart changes sign, as shown in the chapter on polynomial equations and inequalities.
+Whether $P$ changes sign as $x$ passes through $c$ depends on the multiplicity. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even* and has the sign of $x - c$ if $m$ is *odd*. The factor $Q$ does not vanish at $c$, so for the values of $x$ close enough to $c$ it has the sign of $Q(c)$. Therefore, if $m$ is odd, $P$ **changes sign** at $c$ and the graph crosses the $x$-axis; if $m$ is even, $P$ **does not change sign** and the graph touches the $x$-axis without crossing it. In the chapter on polynomial equations and inequalities this rule indicates at which roots the sign of a polynomial changes.
 :::
 
 :::esempio
-$P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. The root $2$ is **double**, since $P(x) = (x - 2)^2\, Q(x)$ with $Q(x) = x + 1$ and $Q(2) = 3 \neq 0$; the root $-1$ is **simple**, since $P(x) = (x + 1)\,(x - 2)^2$ and $(-1 - 2)^2 = 9 \neq 0$. Near $2$ the polynomial has the sign of $3\,(x - 2)^2$, positive on both sides, while near $-1$ it has the sign of $9\,(x + 1)$, which changes at $-1$.
+$P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. The root $2$ is **double**, since $P(x) = (x - 2)^2\, Q(x)$ with $Q(x) = x + 1$ and $Q(2) = 3 \neq 0$; the root $-1$ is **simple**, since $P(x) = (x + 1)\,(x - 2)^2$ and $(-1 - 2)^2 = 9 \neq 0$. Near $2$ the polynomial has the sign of $3\,(x - 2)^2$, positive on both sides; indeed $P(1.9) = 0.01 \cdot 2.9 = 0.029$ and $P(2.1) = 0.01 \cdot 3.1 = 0.031$. Near $-1$ it has the sign of $9\,(x + 1)$, which changes at $-1$; indeed $P(-1.1) = 9.61 \cdot (-0.1) = -0.961$ and $P(-0.9) = 8.41 \cdot 0.1 = 0.841$.
 
 ::grafico{f="x^3-3*x^2+4" xmin=-1.8 xmax=3.3 ymin=-4 ymax=7 punti="-1,0,pieno;2,0,pieno" titolo="$y = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$ crosses the $x$-axis at the simple root $-1$ and touches it without crossing at the double root $2$"}
 
@@ -238,7 +240,7 @@ $$
 :::
 
 :::esempio{titolo="The scheme step by step"}
-Division of $P(x) = x^3 - 2x^2 - 5x + 6$ by $x - 1$, so $c = 1$. The first coefficient $1$ is brought down; then $1 \cdot 1 = 1$ and $-2 + 1 = -1$; then $-1 \cdot 1 = -1$ and $-5 + (-1) = -6$; finally $-6 \cdot 1 = -6$ and $6 + (-6) = 0$.
+Division of $P(x) = x^3 - 2x^2 - 5x + 6$ by $x - 1$. The divisor has the form $x - c$ with $c = 1$. In the first row one writes the coefficients $1$, $-2$, $-5$, $6$ and on the left the number $c = 1$.
 $$
 \begin{array}{c|ccc|c}
  & 1 & -2 & -5 & 6 \\
@@ -246,7 +248,14 @@ $$
  & 1 & -1 & -6 & 0
 \end{array}
 $$
-The quotient is $x^2 - x - 6$ and the remainder is $0$, so $x - 1$ **divides** $P$ and
+The row of results, below the line, is filled from left to right, one column at a time.
+
+- First column: the coefficient $1$ is brought down unchanged below the line.
+- Second column: the last result is $1$, so below $-2$ one writes $1 \cdot 1 = 1$; the sum in the column is $-2 + 1 = -1$.
+- Third column: the last result is $-1$, so below $-5$ one writes $-1 \cdot 1 = -1$; the sum is $-5 + (-1) = -6$.
+- Fourth column: the last result is $-6$, so below $6$ one writes $-6 \cdot 1 = -6$; the sum is $6 + (-6) = 0$.
+
+The first three numbers below the line, $1$, $-1$, $-6$, are the coefficients of the quotient. The dividend has degree $3$, so the quotient has degree $2$ and is $x^2 - x - 6$. The last number, $0$, is the remainder, so $x - 1$ **divides** $P$ and
 $$
 x^3 - 2x^2 - 5x + 6 = (x - 1)(x^2 - x - 6) = (x - 1)(x - 3)(x + 2) ,
 $$
@@ -257,7 +266,15 @@ where the last equality is checked by expanding the product $(x - 3)(x + 2) = x^
 :::
 
 :::attenzione
-On the left of the scheme one writes the number $c$ for which the divisor has the form $x - c$, that is, the root of the divisor. For the divisor $x + 3 = x - (-3)$ one uses $c = -3$. With $P(x) = x^2 + x - 6$ and $c = -3$ the scheme gives $1$; then $1 \cdot (-3) = -3$ and $1 - 3 = -2$; then $-2 \cdot (-3) = 6$ and $-6 + 6 = 0$, so $x^2 + x - 6 = (x + 3)(x - 2)$. With $c = 3$ the scheme computes the remainder $P(3) = 6$, which is the remainder of the division by $x - 3$.
+On the left of the scheme one writes the number $c$ for which the divisor has the form $x - c$, that is, the root of the divisor. For the divisor $x + 3 = x - (-3)$ one uses $c = -3$. With $P(x) = x^2 + x - 6$ and $c = -3$ the scheme is
+$$
+\begin{array}{c|cc|c}
+ & 1 & 1 & -6 \\
+-3 &  & -3 & 6 \\ \hline
+ & 1 & -2 & 0
+\end{array}
+$$
+where $1 \cdot (-3) = -3$ and $1 + (-3) = -2$, then $-2 \cdot (-3) = 6$ and $-6 + 6 = 0$. The quotient is $x - 2$ and the remainder is $0$, so $x^2 + x - 6 = (x + 3)(x - 2)$. With $c = 3$ the scheme computes the remainder $P(3) = 6$, which is the remainder of the division by $x - 3$.
 :::
 
 :::osservazione
@@ -278,7 +295,7 @@ The quotient of the division by $x - \dfrac{1}{2}$ is $2x + 4$, therefore the qu
 Let $P(x) = a_n x^n + \dots + a_0$ have integer coefficients, with $a_0 \neq 0$. If the fraction $\dfrac{p}{q}$, in lowest terms, is a root of $P$, then $p$ **divides the constant term** $a_0$ and $q$ **divides the leading coefficient** $a_n$. The theorem provides a *finite* list of candidates; each candidate $c$ is tested by computing $P(c)$, and by the **factor theorem** every candidate with $P(c) = 0$ produces the factor $x - c$. When the leading coefficient is $1$, any rational roots are integers that divide the constant term.
 
 :::dimostrazione
-The idea is to clear the denominators and read the resulting equality as an equality between integers. Let $P\left( \dfrac{p}{q} \right) = 0$, with $p$ and $q$ coprime integers and $q > 0$. Multiplying the equality by $q^n$ gives
+The idea is to clear the denominators and read the resulting equality as an equality between integers. Let $P\left( \dfrac{p}{q} \right) = 0$, with $p$ and $q$ coprime integers, that is, with no common divisor greater than $1$, and $q > 0$. Multiplying the equality by $q^n$ gives
 $$
 a_n p^n + a_{n-1} p^{n-1} q + \dots + a_1 p\, q^{n-1} + a_0 q^n = 0 .
 $$

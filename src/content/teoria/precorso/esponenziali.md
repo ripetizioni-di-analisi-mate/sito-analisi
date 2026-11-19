@@ -8,12 +8,12 @@ sommario: La funzione a^x con le sue proprietà, e i metodi per risolvere equazi
 :::definizione{#funzione-esponenziale titolo="Funzione esponenziale"}
 Per $a > 0$, $a \neq 1$, la **funzione esponenziale** di base $a$ associa a *ogni* $x \in \mathbb{R}$ il numero $a^{x}$. Proprietà:
 
-- $a^{x} > 0$ per ogni $x \in \mathbb{R}$, quindi il grafico sta sopra l'asse $x$; la retta $y = 0$ è asintoto orizzontale;
+- $a^{x} > 0$ per ogni $x \in \mathbb{R}$, quindi il grafico sta sopra l'asse $x$; la retta $y = 0$ è asintoto orizzontale, cioè il grafico si avvicina all'asse $x$ senza toccarlo;
 - $a^{0} = 1$, quindi il grafico passa per il punto $(0, 1)$ qualunque sia la base;
 - la funzione è **iniettiva**: esponenti diversi danno potenze diverse;
-- per $a > 1$ la funzione è strettamente **crescente**; per $0 < a < 1$ è strettamente **decrescente**.
+- per $a > 1$ la funzione è strettamente **crescente**, cioè da $x_1 < x_2$ segue $a^{x_1} < a^{x_2}$; per $0 < a < 1$ è strettamente **decrescente**, cioè da $x_1 < x_2$ segue $a^{x_1} > a^{x_2}$.
 
-Su iniettività e monotonia si fondano tutti i metodi risolutivi di questo capitolo: l'iniettività giustifica il passaggio dalle potenze agli esponenti nelle equazioni, la monotonia governa il verso nelle disequazioni.
+Su queste due proprietà si fondano tutti i metodi risolutivi di questo capitolo. L'iniettività giustifica il passaggio dalle potenze agli esponenti nelle equazioni; il fatto che la funzione sia crescente o decrescente, cioè la sua **monotonia**, stabilisce il verso nelle disequazioni.
 :::
 
 :::esempio{titolo="I due grafici di base"}
@@ -147,7 +147,7 @@ $$
 &\iff x = \frac{\log_2 3}{\log_2 3 - 1}
 \end{aligned}
 $$
-Il teorema si applica con $a = 2$ e $b = 3$. Poiché $3 > 2$, si ha $\log_2 3 > 1$, quindi il coefficiente $\log_2 3 - 1$ è diverso da zero e la divisione è lecita. Con $\log_2 3 \approx 1{,}585$ la soluzione vale circa $2{,}71$.
+Il teorema si applica con $a = 2$ e $b = 3$. Sviluppando il secondo membro si ha $x = x \log_2 3 - \log_2 3$; portando i termini con $x$ allo stesso membro si ottiene $x \log_2 3 - x = \log_2 3$, cioè $x\,(\log_2 3 - 1) = \log_2 3$. Poiché $3 > 2$, si ha $\log_2 3 > 1$, quindi il coefficiente $\log_2 3 - 1$ è diverso da zero e la divisione è lecita. Con $\log_2 3 \approx 1{,}585$ la soluzione vale circa $2{,}71$.
 
 ::grafico{f="2^x;3^(x-1)" xmin=-2 xmax=4 ymin=-1 ymax=12 punti="2.71,6.541,pieno" segmenti="2.71,0,2.71,6.541" legenda="y = 2^x;y = 3^{x-1}" titolo="I grafici di $y = 2^{x}$ e $y = 3^{x - 1}$ si incontrano in un solo punto, di ascissa $\dfrac{\log_2 3}{\log_2 3 - 1}$"}
 :::
@@ -228,7 +228,7 @@ In una disequazione la sostituzione $t = a^{x}$ si usa come nelle equazioni, con
 $$
 4^{x} - 3 \cdot 2^{x} + 2 > 0
 $$
-Con $t = 2^{x}$, $t > 0$, la disequazione $t^{2} - 3t + 2 > 0$ è soddisfatta per $t < 1$ oppure $t > 2$; l'intersezione con $t > 0$ dà $0 < t < 1$ oppure $t > 2$. Da $0 < 2^{x} < 1 = 2^{0}$ segue $x < 0$, poiché la base $2$ è maggiore di $1$; da $2^{x} > 2$ segue $x > 1$. Le soluzioni sono $x < 0$ oppure $x > 1$.
+Con $t = 2^{x}$, $t > 0$, la disequazione diventa $t^{2} - 3t + 2 > 0$. Il trinomio ha radici $1$ e $2$ ed è positivo all'esterno delle radici, quindi la disequazione è soddisfatta per $t < 1$ oppure $t > 2$; l'intersezione con $t > 0$ dà $0 < t < 1$ oppure $t > 2$. Da $0 < 2^{x} < 1 = 2^{0}$ segue $x < 0$, poiché la base $2$ è maggiore di $1$; da $2^{x} > 2$ segue $x > 1$. Le soluzioni sono $x < 0$ oppure $x > 1$.
 
 ::grafico{f="4^x-3*2^x+2" xmin=-4 xmax=2 ymin=-1 ymax=4 asintoti="y=2" punti="0,0,vuoto;1,0,vuoto" titolo="$y = 4^{x} - 3 \cdot 2^{x} + 2$ è positiva per $x < 0$ e per $x > 1$; la retta $y = 2$, in rosso, è il suo asintoto orizzontale"}
 :::

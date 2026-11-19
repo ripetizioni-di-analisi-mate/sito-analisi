@@ -42,7 +42,9 @@ For all $a, b \in \mathbb{R}$,
 $$
 |ab| = |a|\,|b|, \qquad |a|^2 = a^2, \qquad |a + b| \leq |a| + |b| .
 $$
-The first is verified by examining the four cases for the signs of $a$ and $b$, and it is used to split an absolute value, for example $|{-3x}| = 3\,|x|$. The second holds because $a$ and $|a|$ differ at most in sign, which squaring cancels; since absolute values are not negative, comparing two absolute values is equivalent to **comparing their squares**, and this observation is the basis for solving $|A| > |B|$ by squaring. The third is the **triangle inequality** and is used in estimates, for example in the chapter on limits: for $a = 5$ and $b = -3$ we have $|5 + (-3)| = 2 \leq 8 = |5| + |-3|$, and equality holds if and only if $ab \geq 0$.
+- **Absolute value of a product.** The absolute value of a product is the product of the absolute values. For example $|(-3) \cdot 4| = |-12| = 12$ and $|-3| \cdot |4| = 3 \cdot 4 = 12$. The property is verified by examining the four cases for the signs of $a$ and $b$, and it allows a number to be taken out of the absolute value, as in $|{-3x}| = |-3| \cdot |x| = 3\,|x|$.
+- **Square of the absolute value.** The number $|a|$ is equal to $a$ or to $-a$, and these two numbers have the same square, because $(-a)^2 = a^2$; hence $|a|^2 = a^2$. For example $|-5|^2 = 5^2 = 25$ and $(-5)^2 = 25$. Absolute values are non-negative numbers, and of two non-negative numbers the larger one has the larger square; therefore $|a| > |b|$ is equivalent to $a^2 > b^2$. For example $|-4| > |3|$ and $16 > 9$. With this equivalence $|A| > |B|$ is solved **by squaring**.
+- **Triangle inequality.** The absolute value of a sum is less than or equal to the sum of the absolute values. For example $|5 + (-3)| = 2$ and $|5| + |-3| = 8$. The inequality is used to bound from above the absolute value of a sum and appears in the chapter on limits of Mathematical Analysis 1; the case in which equality holds is stated in the theorem on the triangle inequality.
 :::
 
 :::attenzione
@@ -77,7 +79,7 @@ For all $a, b \in \mathbb{R}$,
 $$
 |a + b| \leq |a| + |b| ,
 $$
-and equality holds if and only if $ab \geq 0$, that is, if $a$ and $b$ do not have opposite signs. The inequality is used to bound the absolute value of a sum. For example, for $|x| \leq 2$ we have
+and equality holds if and only if $ab \geq 0$, that is, if $a$ and $b$ do not have opposite signs. The inequality is used to bound from above the absolute value of a sum. For example, for $|x| \leq 2$ we have
 $$
 |x + 5| \leq |x| + 5 \leq 7 ,
 $$
@@ -109,7 +111,7 @@ For every $a \in \mathbb{R}$ we have $\sqrt{a^2} = |a|$, because $\sqrt{a^2}$ is
 :::teorema{#equazioni-con-modulo titolo="Equation of the form |A| = k"}
 $A$ is an expression in the variable $x$ and $k$ is a constant. The cases to distinguish depend on the sign of $k$.
 
-- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$, because the *only* numbers with absolute value $k$ are $k$ and $-k$.
+- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$, because the *only* numbers with absolute value $k$ are $k$ and $-k$. The symbol $\vee$ is read "or".
 - $k = 0$: $\ |A| = 0 \iff A = 0$, because the only number with absolute value zero is $0$.
 - $k < 0$: **no solution**, because $|A| \geq 0$ for every $x$.
 :::
@@ -170,7 +172,7 @@ B \geq 0 \\
 A = -B
 \end{cases}
 $$
-Solutions of the two equations that do not satisfy the condition $B \geq 0$ are **discarded**.
+The symbol $\cup$ between the two systems indicates that the solutions of the equation are those of the first system together with those of the second. Solutions of the two equations that do not satisfy the condition $B \geq 0$ are **discarded**.
 :::
 
 :::esempio
@@ -337,7 +339,7 @@ When two or more absolute values with different arguments appear, we look for th
 :::
 
 :::esempio
-$|x| + |x - 2| = 4$. The arguments vanish at $0$ and at $2$, so there are three intervals:
+$|x| + |x - 2| = 4$. The arguments vanish at $0$ and at $2$, so there are three intervals. For $x < 0$ both $x$ and $x - 2$ are negative, so $|x| = -x$ and $|x - 2| = 2 - x$. For $0 \leq x < 2$ only $x - 2$ is negative, so $|x| = x$ and $|x - 2| = 2 - x$. For $x \geq 2$ neither argument is negative, so $|x| = x$ and $|x - 2| = x - 2$. The equation is therefore equivalent to
 $$
 \begin{cases}
 x < 0 \\

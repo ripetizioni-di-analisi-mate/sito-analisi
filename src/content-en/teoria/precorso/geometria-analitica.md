@@ -6,7 +6,9 @@ sommario: Points and lines in the Cartesian plane, then parabola, circle, ellips
 ## The Cartesian plane
 
 :::definizione{#distanza-e-punto-medio titolo="Distance between two points and midpoint"}
-Given $A(x_1, y_1)$ and $B(x_2, y_2)$:
+In the **Cartesian plane** two perpendicular lines, the horizontal $x$-axis and the vertical $y$-axis, meet at the **origin** $O$. Every point $P$ is determined by a pair of numbers $(x, y)$: the **abscissa** $x$ is read on the horizontal axis and the **ordinate** $y$ on the vertical axis. The axes divide the plane into four **quadrants**, numbered counterclockwise starting from the one in which $x > 0$ and $y > 0$.
+
+Given $A(x_1, y_1)$ and $B(x_2, y_2)$, the distance between the two points and the midpoint $M$ of the segment $AB$ are
 $$
 \overline{AB} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2},
 \qquad
@@ -36,11 +38,11 @@ A non-vertical line has the **slope-intercept equation**
 $$
 y = mx + q ,
 $$
-where $m$ is the **slope** and $q$ is the ordinate of the point of intersection with the $y$-axis. A vertical line has equation $x = c$. Every line, vertical or not, can be written in **general form**
+where $m$ is the **slope**, which measures the steepness of the line, and $q$ is the ordinate of the point of intersection with the $y$-axis. A vertical line has equation $x = c$. Every line, vertical or not, can be written in **general form**
 $$
 ax + by + c = 0, \qquad (a, b) \neq (0, 0) ;
 $$
-for $b \neq 0$ the two forms translate into each other through $m = -\dfrac{a}{b}$ and $q = -\dfrac{c}{b}$. The slope-intercept form is read as a function and can be drawn immediately; the general form *also* includes vertical lines and appears in the point-line distance formula.
+for $b \neq 0$ the two forms translate into each other through $m = -\dfrac{a}{b}$ and $q = -\dfrac{c}{b}$. In the slope-intercept form each $x$ corresponds to a single value of $y$, so the line is drawn by computing two of its points; for example $y = 2x - 5$ passes through $(0, -5)$ and $(1, -3)$. The general form *also* includes vertical lines and appears in the point-line distance formula.
 :::
 
 :::definizione{#coefficiente-angolare titolo="Slope, lines through a point, parallelism and perpendicularity"}
@@ -129,7 +131,7 @@ The intersections with the $x$-axis are the solutions of $ax^2 + bx + c = 0$: tw
 :::
 
 :::esempio
-$y = x^2 - 2x - 3$: the vertex is $V(1, -4)$, the parabola opens upward since $a = 1 > 0$, the intersections with the $x$-axis are $(-1, 0)$ and $(3, 0)$, the one with the $y$-axis is $(0, -3)$.
+$y = x^2 - 2x - 3$: the abscissa of the vertex is $x_V = -\dfrac{-2}{2 \cdot 1} = 1$ and the ordinate is $y_V = 1^2 - 2 \cdot 1 - 3 = -4$, so the vertex is $V(1, -4)$; the parabola opens upward since $a = 1 > 0$, the intersections with the $x$-axis are $(-1, 0)$ and $(3, 0)$, the one with the $y$-axis is $(0, -3)$.
 
 ::grafico{f="x^2-2*x-3" xmin=-3 xmax=5 ymin=-5 ymax=6 punti="1,-4,pieno,V" titolo="$y = x^2 - 2x - 3$ with vertex $V(1, -4)$"}
 :::
@@ -179,7 +181,7 @@ For $x = y^2 - 2y$ we have $y_V = 1$ and $x_V = 1 - 2 = -1$, so $V(-1, 1)$; the 
 ## The circle
 
 :::definizione{#circonferenza titolo="Circle"}
-The circle with center $C(x_0, y_0)$ and radius $r > 0$ is the **locus of points** at distance $r$ from $C$; squaring the distance formula gives the **standard equation**
+The circle with center $C(x_0, y_0)$ and radius $r > 0$ is the **locus of points** at distance $r$ from $C$, that is, the set of all the points of the plane whose distance from $C$ is $r$; squaring the distance formula gives the **standard equation**
 $$
 (x - x_0)^2 + (y - y_0)^2 = r^2 .
 $$
@@ -308,7 +310,13 @@ represents a conic with axes parallel to the coordinate axes. The type is read f
 - $A$ and $C$ have the same sign but different values: ellipse;
 - $A$ and $C$ have opposite signs: hyperbola.
 
-Completing the squares can also lead to a **degenerate case**, such as a single point or no point for a sum of squares equal to zero or to a negative number, or a pair of lines for a difference of squares equal to zero; the **final type** is confirmed after the reduction.
+After completing the squares the equation may turn out to be a **degenerate case**, which is none of the four curves.
+
+- A sum of squares equal to zero is satisfied by a single point; for example $(x - 1)^2 + y^2 = 0$ holds only at $(1, 0)$.
+- A sum of squares equal to a negative number is satisfied by no point.
+- A difference of squares equal to zero represents a pair of lines.
+
+For this reason the type read from the coefficients is confirmed after the reduction.
 :::
 
 :::esempio{titolo="A degenerate case: a pair of lines"}
@@ -329,7 +337,7 @@ To draw the conic of equation $A x^2 + C y^2 + D x + E y + F = 0$:
 3. move the constant to the right-hand side and divide by it, obtaining the **standard form** centered at a point $(x_0, y_0)$;
 4. mark the center and the vertices, and for the hyperbola the asymptotes, translated to the center.
 
-The standard form is the one from the previous sections with $x - x_0$ and $y - y_0$ in place of $x$ and $y$: the conic is the standard one **translated** by the vector $(x_0, y_0)$.
+The standard form is the one from the previous sections with $x - x_0$ and $y - y_0$ in place of $x$ and $y$: the conic is the standard one **translated**, that is, shifted by $x_0$ horizontally and by $y_0$ vertically.
 :::
 
 :::esempio

@@ -48,6 +48,8 @@ p & q & p \land q & p \lor q \\
 $$
 For $x = 2$: the proposition "$x > 0 \land x > 3$" is false, because the second part is false; the proposition "$x > 0 \lor x > 3$" is true, because the first part is true.
 
+The **truth set** of a predicate $p(x)$ is the set of the values of $x$ for which $p(x)$ is true. For example the truth set of "$x > 3$" consists of the numbers greater than $3$. In the figures $P$ and $Q$ are the truth sets of $p(x)$ and $q(x)$.
+
 ::venn{zone="ab" nomi="P,Q" universo=1 titolo="$P$ and $Q$ are the truth sets of $p(x)$ and $q(x)$: $p \land q$ is true in the intersection $P \cap Q$"}
 
 ::venn{zone="a,ab,b" nomi="P,Q" universo=1 titolo="$p \lor q$ is true in the union $P \cup Q$, including the part common to the two sets"}
@@ -116,7 +118,12 @@ The negation of "$x < -1$ or $x > 1$" is "$x \geq -1$ and $x \leq 1$", that is, 
 :::
 
 :::attenzione
-The negation of "$x > 0$ and $x < 5$" is *not* "$x \leq 0$ and $x \geq 5$". For $x = 7$ the proposition "$x > 0$ and $x < 5$" is false, because $7 < 5$ is false, and "$x \leq 0$ and $x \geq 5$" is also false, because $7 \leq 0$ is false. Two propositions that are false for the same value of $x$ are not the negation of each other. In fact the conjunction $x \leq 0 \land x \geq 5$ is false for every real $x$, because no number is both less than or equal to $0$ and greater than or equal to $5$.
+The negation of "$x > 0$ and $x < 5$" is *not* "$x \leq 0$ and $x \geq 5$". A proposition and its negation always have opposite truth values, that is, when one is false the other is true. For $x = 7$ this does not happen.
+
+- "$x > 0$ and $x < 5$" is false, because $7 < 5$ is false.
+- "$x \leq 0$ and $x \geq 5$" is false, because $7 \leq 0$ is false.
+
+The two propositions are both false, so the second is not the negation of the first. The correct negation is "$x \leq 0$ or $x \geq 5$", which for $x = 7$ is **true**, because $7 \geq 5$ is true.
 :::
 
 ## Implication
@@ -133,7 +140,7 @@ p & q & p \Rightarrow q \\
 \text{F} & \text{F} & \text{T}
 \end{array}
 $$
-When $p$ is false the implication is **true** whatever $q$ is: the implication makes a claim *only* in the cases in which the hypothesis is true. For example "if $x > 3$ then $x > 1$" is true for every real $x$; for $x = 0$ the hypothesis is false and the implication remains true. Every theorem has this form, therefore the truth table of the implication governs the use of theorems.
+When $p$ is false the implication is **true** whatever $q$ is, because the implication makes a claim *only* in the cases in which the hypothesis is true. For example "if $x > 3$ then $x > 1$" is true for every real $x$; for $x = 0$ the hypothesis is false and the implication remains true. Every theorem has this form, therefore the truth table of the implication governs the use of theorems.
 
 ::venn{tipo="incluso" zone="ab" nomi="Q,P" universo=1 titolo="$p(x) \Rightarrow q(x)$ true for every $x$: the truth set $P$ of the hypothesis is contained in the truth set $Q$ of the conclusion"}
 
@@ -224,6 +231,8 @@ A predicate $p(x)$ becomes a proposition when the variable is quantified:
 - $\forall x \in A : p(x)$ ("for every $x$ in $A$, $p(x)$ holds") is true when $p(x)$ is true for *all* the elements of $A$;
 - $\exists x \in A : p(x)$ ("there exists at least one $x$ in $A$ for which $p(x)$ holds") is true when $p(x)$ is true for *at least one* element of $A$.
 
+The symbol $\in$ is read "belongs to", and $A$ is the set of the values that the variable $x$ can take; $\mathbb{R}$ denotes the set of real numbers and $\mathbb{N}$ the set of natural numbers $0, 1, 2, \dots$
+
 To prove a universal proposition one needs an argument valid for every element, and a single **counterexample** is enough to refute it; to prove an existential proposition it is enough to exhibit an element that satisfies the predicate.
 :::
 
@@ -248,7 +257,7 @@ Negation **swaps** $\forall$ with $\exists$ and **negates the predicate**. With 
 :::
 
 :::attenzione
-The negation of a universal proposition changes the quantifier as well as the predicate. The negation of "$\forall x \in \mathbb{R} : x^2 > 0$" is "$\exists x \in \mathbb{R} : x^2 \leq 0$", true for $x = 0$. The proposition "$\forall x \in \mathbb{R} : x^2 \leq 0$", obtained by negating only the predicate, is false, because for $x = 1$ one has $x^2 = 1 > 0$; since the original proposition is also false, the two are *not* the negation of each other.
+The negation of a universal proposition changes the quantifier as well as the predicate. The proposition "$\forall x \in \mathbb{R} : x^2 > 0$" is false, because for $x = 0$ one has $x^2 = 0$. Its negation is "$\exists x \in \mathbb{R} : x^2 \leq 0$", which is true precisely for $x = 0$. Negating only the predicate gives instead "$\forall x \in \mathbb{R} : x^2 \leq 0$", which is false, because for $x = 1$ one has $x^2 = 1 > 0$. This proposition and the original one are both false, so they are *not* the negation of each other, because a proposition and its negation always have opposite truth values.
 :::
 
 :::esempio{titolo="Negation with two quantifiers"}

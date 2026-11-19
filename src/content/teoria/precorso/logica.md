@@ -48,6 +48,8 @@ p & q & p \land q & p \lor q \\
 $$
 Per $x = 2$: la proposizione "$x > 0 \land x > 3$" è falsa, perché la seconda parte è falsa; la proposizione "$x > 0 \lor x > 3$" è vera, perché la prima parte è vera.
 
+L'**insieme di verità** di un predicato $p(x)$ è l'insieme dei valori di $x$ per cui $p(x)$ è vera. Per esempio l'insieme di verità di "$x > 3$" è formato dai numeri maggiori di $3$. Nelle figure $P$ e $Q$ sono gli insiemi di verità di $p(x)$ e $q(x)$.
+
 ::venn{zone="ab" nomi="P,Q" universo=1 titolo="$P$ e $Q$ sono gli insiemi di verità di $p(x)$ e $q(x)$: $p \land q$ è vera nell'intersezione $P \cap Q$"}
 
 ::venn{zone="a,ab,b" nomi="P,Q" universo=1 titolo="$p \lor q$ è vera nell'unione $P \cup Q$, compresa la parte comune ai due insiemi"}
@@ -116,7 +118,12 @@ La negazione di "$x < -1$ oppure $x > 1$" è "$x \geq -1$ e $x \leq 1$", cioè $
 :::
 
 :::attenzione
-La negazione di "$x > 0$ e $x < 5$" *non* è "$x \leq 0$ e $x \geq 5$". Per $x = 7$ la proposizione "$x > 0$ e $x < 5$" è falsa, perché $7 < 5$ è falsa, e anche "$x \leq 0$ e $x \geq 5$" è falsa, perché $7 \leq 0$ è falsa. Due proposizioni false per lo stesso valore di $x$ non sono una la negazione dell'altra. La congiunzione $x \leq 0 \land x \geq 5$ è anzi falsa per ogni $x$ reale, perché nessun numero è insieme minore o uguale a $0$ e maggiore o uguale a $5$.
+La negazione di "$x > 0$ e $x < 5$" *non* è "$x \leq 0$ e $x \geq 5$". Una proposizione e la sua negazione hanno sempre valori di verità opposti, cioè quando una è falsa l'altra è vera. Per $x = 7$ questo non accade.
+
+- "$x > 0$ e $x < 5$" è falsa, perché $7 < 5$ è falsa.
+- "$x \leq 0$ e $x \geq 5$" è falsa, perché $7 \leq 0$ è falsa.
+
+Le due proposizioni sono entrambe false, quindi la seconda non è la negazione della prima. La negazione corretta è "$x \leq 0$ oppure $x \geq 5$", che per $x = 7$ è **vera**, perché $7 \geq 5$ è vera.
 :::
 
 ## Implicazione
@@ -133,7 +140,7 @@ p & q & p \Rightarrow q \\
 \text{F} & \text{F} & \text{V}
 \end{array}
 $$
-Quando $p$ è falsa l'implicazione è **vera** qualunque sia $q$: l'implicazione impegna *soltanto* nei casi in cui l'ipotesi è vera. Per esempio "se $x > 3$ allora $x > 1$" è vera per ogni $x$ reale; per $x = 0$ l'ipotesi è falsa e l'implicazione resta vera. Ogni teorema ha questa forma, quindi la tavola di verità dell'implicazione regola l'uso dei teoremi.
+Quando $p$ è falsa l'implicazione è **vera** qualunque sia $q$, perché l'implicazione afferma qualcosa *soltanto* nei casi in cui l'ipotesi è vera. Per esempio "se $x > 3$ allora $x > 1$" è vera per ogni $x$ reale; per $x = 0$ l'ipotesi è falsa e l'implicazione resta vera. Ogni teorema ha questa forma, quindi la tavola di verità dell'implicazione regola l'uso dei teoremi.
 
 ::venn{tipo="incluso" zone="ab" nomi="Q,P" universo=1 titolo="$p(x) \Rightarrow q(x)$ vera per ogni $x$: l'insieme di verità $P$ dell'ipotesi è contenuto nell'insieme di verità $Q$ della tesi"}
 
@@ -224,6 +231,8 @@ Un predicato $p(x)$ diventa una proposizione quando si quantifica la variabile:
 - $\forall x \in A : p(x)$ ("per ogni $x$ in $A$ vale $p(x)$") è vera quando $p(x)$ è vera per *tutti* gli elementi di $A$;
 - $\exists x \in A : p(x)$ ("esiste almeno un $x$ in $A$ per cui vale $p(x)$") è vera quando $p(x)$ è vera per *almeno un* elemento di $A$.
 
+Il simbolo $\in$ si legge "appartiene a", e $A$ è l'insieme dei valori che la variabile $x$ può assumere; $\mathbb{R}$ indica l'insieme dei numeri reali e $\mathbb{N}$ quello dei numeri naturali $0, 1, 2, \dots$
+
 Per dimostrare una proposizione universale serve un argomento valido per ogni elemento, e un solo **controesempio** basta a confutarla; per dimostrare una proposizione esistenziale basta esibire un elemento che soddisfa il predicato.
 :::
 
@@ -248,7 +257,7 @@ La negazione **scambia** $\forall$ con $\exists$ e **nega il predicato**. Con pi
 :::
 
 :::attenzione
-La negazione di una proposizione universale cambia anche il quantificatore, oltre al predicato. La negazione di "$\forall x \in \mathbb{R} : x^2 > 0$" è "$\exists x \in \mathbb{R} : x^2 \leq 0$", vera per $x = 0$. La proposizione "$\forall x \in \mathbb{R} : x^2 \leq 0$", ottenuta negando soltanto il predicato, è falsa, perché per $x = 1$ si ha $x^2 = 1 > 0$; poiché anche la proposizione di partenza è falsa, le due *non* sono una la negazione dell'altra.
+La negazione di una proposizione universale cambia anche il quantificatore, oltre al predicato. La proposizione "$\forall x \in \mathbb{R} : x^2 > 0$" è falsa, perché per $x = 0$ si ha $x^2 = 0$. La sua negazione è "$\exists x \in \mathbb{R} : x^2 \leq 0$", che è vera proprio per $x = 0$. Negando soltanto il predicato si ottiene invece "$\forall x \in \mathbb{R} : x^2 \leq 0$", che è falsa, perché per $x = 1$ si ha $x^2 = 1 > 0$. Questa proposizione e quella di partenza sono entrambe false, quindi *non* sono una la negazione dell'altra, perché una proposizione e la sua negazione hanno sempre valori di verità opposti.
 :::
 
 :::esempio{titolo="Negazione con due quantificatori"}

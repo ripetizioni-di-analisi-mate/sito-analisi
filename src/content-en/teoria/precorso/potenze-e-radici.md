@@ -14,7 +14,9 @@ The definition is extended to integer exponents by setting, for $a \neq 0$,
 $$
 a^0 = 1, \qquad a^{-n} = \frac{1}{a^n} .
 $$
-These definitions are the *only* ones that preserve the properties of powers: from $a^n \cdot a^0 = a^{n+0} = a^n$ it follows that $a^0 = 1$, and from $a^n \cdot a^{-n} = a^0 = 1$ it follows that $a^{-n} = \dfrac{1}{a^n}$. For example $2^{-3} = \dfrac{1}{8}$ and $\left(\dfrac{2}{3}\right)^{-1} = \dfrac{3}{2}$.
+For example $2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}$ and $\left(\dfrac{2}{3}\right)^{-1} = \dfrac{1}{\frac{2}{3}} = \dfrac{3}{2}$.
+
+The two definitions are chosen so that the rule for the product of powers with the same base, $a^m \cdot a^n = a^{m+n}$, continues to hold when an exponent is zero or negative. The rule requires $a^n \cdot a^0 = a^{n+0} = a^n$, and dividing by $a^n$ gives $a^0 = 1$. It also requires $a^n \cdot a^{-n} = a^{n-n} = a^0 = 1$, so $a^{-n}$ is the number that multiplied by $a^n$ gives $1$, that is, $\dfrac{1}{a^n}$.
 :::
 
 :::osservazione
@@ -29,7 +31,7 @@ With base $0$ and $n \geq 1$ we have $0^n = 0$, because a product containing a z
 :::
 
 :::attenzione
-In general $a^{-n}$ is **different** from $-a^n$. For $a = 2$ and $n = 3$ we have $2^{-3} = \dfrac{1}{8}$, which is positive, while $-2^3 = -8$. The negative exponent denotes the **reciprocal**, so it leaves the sign of $a^n$ unchanged; for example $(-2)^{-3} = \dfrac{1}{(-2)^3} = -\dfrac{1}{8}$ is negative because the exponent $3$ is odd.
+In general $a^{-n}$ is **different** from $-a^n$. For $a = 2$ and $n = 3$ we have $2^{-3} = \dfrac{1}{8}$, which is positive, while $-2^3 = -8$. The negative exponent denotes the **reciprocal**, that is, $1$ divided by the power, so it leaves the sign of $a^n$ unchanged; for example $(-2)^{-3} = \dfrac{1}{(-2)^3} = -\dfrac{1}{8}$ is negative because the exponent $3$ is odd.
 :::
 
 ## Properties of powers
@@ -116,7 +118,7 @@ Moreover the **invariance property** holds: for every natural number $p \geq 1$,
 $$
 \sqrt[n]{a^k} = \sqrt[np]{a^{kp}} .
 $$
-With the first property **factors are taken out** of the radical sign, for example $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$; with the invariance property two roots are brought to the same index, an operation on which the comparison of roots is based.
+With the first property **factors are taken out** of the radical sign, for example $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$; with the invariance property two roots are brought to the same index, for example $\sqrt{3} = \sqrt[2 \cdot 3]{3^{1 \cdot 3}} = \sqrt[6]{27}$, an operation on which the comparison of roots is based.
 
 :::dimostrazione
 The idea is to use the uniqueness of the root. By definition $\sqrt[n]{ab}$ is the unique number greater than or equal to zero whose power with exponent $n$ equals $ab$. The number $\sqrt[n]{a}\,\sqrt[n]{b}$ is greater than or equal to zero, because it is the product of two numbers greater than or equal to zero, and by the power of a product
@@ -132,7 +134,7 @@ so it coincides with $\sqrt[mn]{a}$.
 ::::
 
 :::attenzione
-For the square root of a square $\sqrt{a^2} = |a|$ holds, while the equality $\sqrt{a^2} = a$ is **false** for $a < 0$: for example $\sqrt{(-5)^2} = \sqrt{25} = 5 = |-5|$.
+The symbol $|a|$ denotes the **absolute value** of $a$, that is, $a$ itself if $a \geq 0$ and $-a$ if $a < 0$; for example $|5| = 5$ and $|-5| = 5$. See the chapter on equations and inequalities with absolute value. For the square root of a square $\sqrt{a^2} = |a|$ holds, while the equality $\sqrt{a^2} = a$ is **false** for $a < 0$: for example $\sqrt{(-5)^2} = \sqrt{25} = 5 = |-5|$.
 
 ::grafico{f="sqrt(x^2);x" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="-3,3,pieno;-3,-3,vuoto" titolo="$y = \sqrt{x^2}$ coincides with $y = |x|$; the line $y = x$ (dashed) coincides with the graph only for $x \geq 0$, and at $x = -3$ the graph passes through $(-3, 3)$, the line through $(-3, -3)$"}
 
@@ -188,11 +190,11 @@ The base of powers with rational exponents is **positive**. With a negative base
 :::
 
 :::definizione{#esponente-reale titolo="Power with real exponent"}
-For $a > 0$ and real $x$, the power $a^x$ is defined by **approximating** $x$ with rational exponents: $2^{\sqrt{2}}$ is the number approached by $2^{1.4}$, $2^{1.41}$, $2^{1.414}$ and so on. All the properties of powers remain valid, and the result is *always* **positive**: $a^x > 0$ for every real $x$. The exponential function, treated in the chapter on elementary functions, is built on this definition.
+For $a > 0$ and real $x$, the power $a^x$ is defined by **approximating** $x$ with rational exponents: $2^{\sqrt{2}}$ is the number approached by $2^{1.4}$, $2^{1.41}$, $2^{1.414}$ and so on. All the properties of powers remain valid, and the result is *always* **positive**: $a^x > 0$ for every real $x$. The exponential function, treated in the chapter on exponential equations and inequalities, is built on this definition.
 :::
 
 :::esempio{titolo="A power with an irrational exponent"}
-We have $1.4 < \sqrt{2} < 1.5$ and the base $2$ is greater than $1$. By the comparison of powers with the same base the power increases with the exponent, therefore
+We have $1.4 < \sqrt{2} < 1.5$ and the base $2$ is greater than $1$. With a base greater than $1$ the power increases as the exponent increases, as in $2^1 < 2^2 < 2^3$, therefore
 $$
 2^{1.4} < 2^{\sqrt{2}} < 2^{1.5}, \qquad 2^{1.4} \approx 2.639, \qquad 2^{1.5} = 2\sqrt{2} \approx 2.828 .
 $$
@@ -206,9 +208,9 @@ With more precise approximations of $\sqrt{2}$ we obtain $2^{1.41} \approx 2.657
 
 - single root: one multiplies by the root itself, because $\sqrt{a} \cdot \sqrt{a} = a$; for example $\dfrac{1}{\sqrt{3}} = \dfrac{\sqrt{3}}{3}$;
 - binomial with square roots: one multiplies by the **conjugate binomial**, because $(\sqrt{a} - \sqrt{b})(\sqrt{a} + \sqrt{b}) = a - b$; for example $\dfrac{1}{\sqrt{5} - \sqrt{3}} = \dfrac{\sqrt{5} + \sqrt{3}}{2}$;
-- cube root: one multiplies by the factor that completes the cube under the root, that is, $\sqrt[3]{a^2}$ for $\sqrt[3]{a}$; for example $\dfrac{1}{\sqrt[3]{2}} = \dfrac{\sqrt[3]{4}}{2}$.
+- cube root: one multiplies by the factor that completes the cube under the root, that is, $\sqrt[3]{a^2}$ for $\sqrt[3]{a}$, because $\sqrt[3]{a} \cdot \sqrt[3]{a^2} = \sqrt[3]{a^3} = a$; for example $\dfrac{1}{\sqrt[3]{2}} = \dfrac{\sqrt[3]{4}}{\sqrt[3]{2} \cdot \sqrt[3]{4}} = \dfrac{\sqrt[3]{4}}{2}$.
 
-Rationalization is used to add and compare fractions with roots and appears again in limits with differences of roots, treated in the chapter on limits.
+Rationalization is used to add and compare fractions with roots and appears again in limits with differences of roots, treated in the chapter on limits of Mathematical Analysis 1.
 :::
 
 :::esempio{titolo="Rationalization with the conjugate binomial"}
@@ -258,7 +260,7 @@ The comparison of powers with the same base also holds when the base is any numb
 :::
 
 :::teorema{#confronto-tra-radici titolo="Comparison of roots"}
-Roots with the same index are compared through their radicands: for $0 \leq a < b$, $\sqrt[n]{a} < \sqrt[n]{b}$ holds. Roots with different indices are brought to the **same index** with the **invariance property**, using the least common multiple of the indices as the common index.
+Roots with the same index are compared through their radicands: for $0 \leq a < b$, $\sqrt[n]{a} < \sqrt[n]{b}$ holds. Roots with different indices are brought to the **same index** with the **invariance property**, using the least common multiple of the indices as the common index. For $\sqrt{3}$ and $\sqrt[3]{5}$ the indices are $2$ and $3$, so the common index is $6$.
 $$
 \sqrt{3} = \sqrt[6]{3^3} = \sqrt[6]{27}, \qquad
 \sqrt[3]{5} = \sqrt[6]{5^2} = \sqrt[6]{25},

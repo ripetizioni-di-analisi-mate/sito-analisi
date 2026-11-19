@@ -59,7 +59,7 @@ The second equation is $x^2 + x - 2 = 0$, with roots $x = 1$ and $x = -2$. Since
 :::
 
 :::attenzione
-Squaring both sides without the condition $B \geq 0$ introduces **extraneous solutions**. From $\sqrt{x} = x - 2$, squaring gives $x = x^2 - 4x + 4$, that is, $x^2 - 5x + 4 = 0$, with roots $x = 1$ and $x = 4$. For $x = 1$ the left-hand side equals $\sqrt{1} = 1$ and the right-hand side equals $1 - 2 = -1$, so $x = 1$ does not solve the original equation; the only solution is $x = 4$. Squaring cancels signs, therefore the equality between the squares does *not* guarantee the equality between the two sides.
+Squaring both sides without the condition $B \geq 0$ introduces **extraneous solutions**. From $\sqrt{x} = x - 2$, squaring gives $x = x^2 - 4x + 4$, that is, $x^2 - 5x + 4 = 0$, with roots $x = 1$ and $x = 4$. For $x = 1$ the left-hand side equals $\sqrt{1} = 1$ and the right-hand side equals $1 - 2 = -1$, so $x = 1$ does not solve the original equation; the only solution is $x = 4$. Two opposite numbers have the same square, like $1$ and $-1$, therefore the equality between the squares does *not* guarantee the equality between the two sides.
 
 ::grafico{f="sqrt(x);x-2;-sqrt(x)" xmin=-1 xmax=7 ymin=-3 ymax=4 punti="4,2,pieno;1,-1,vuoto" etichette="5.9,2.9,y = √x;4.6,-2.7,y = −√x" titolo="The line $y = x - 2$ meets $y = \sqrt{x}$ only at $x = 4$; at $x = 1$ it meets $y = -\sqrt{x}$, in red"}
 :::
@@ -187,7 +187,7 @@ x \geq 0 \\
 2x + 3 > x^2
 \end{cases}
 $$
-The first system gives $-\dfrac{3}{2} \leq x < 0$. In the second, the inequality $x^2 - 2x - 3 < 0$ is equivalent to $-1 < x < 3$, so with $x \geq 0$ the values $0 \leq x < 3$ remain. The **union** of the two systems gives $-\dfrac{3}{2} \leq x < 3$.
+The first system gives $-\dfrac{3}{2} \leq x < 0$. In the second, the inequality $2x + 3 > x^2$ is rewritten as $x^2 - 2x - 3 < 0$; the trinomial has roots $-1$ and $3$ and is negative between the roots, so the inequality is equivalent to $-1 < x < 3$, so with $x \geq 0$ the values $0 \leq x < 3$ remain. The **union** of the two systems gives $-\dfrac{3}{2} \leq x < 3$.
 
 ::grafico{f="sqrt(2*x+3);x" xmin=-3 xmax=5 ymin=-3 ymax=4 area="sqrt(2*x+3);x;-1.5;3" punti="-1.5,0,pieno;3,3,vuoto" titolo="The graph of $y = \sqrt{2x + 3}$ lies above the line $y = x$ for $-\dfrac{3}{2} \leq x < 3$"}
 :::
@@ -213,7 +213,7 @@ and its second condition reduces to $x^2 + x - 6 < 0$, that is, to $-3 < x < 2$;
 ## Odd roots
 
 :::teorema{#indice-dispari titolo="Odd roots"}
-The cube root, like every odd root, is defined *for every* real number and can take negative values: $\sqrt[3]{-8} = -2$. Cubing **always preserves order**, because the function $y = x^3$ is increasing on all of $\mathbb{R}$, so
+The cube root, like every odd root, is defined *for every* real number and can take negative values: $\sqrt[3]{-8} = -2$. Cubing **always preserves order**, because the function $y = x^3$ is increasing on all of $\mathbb{R}$, that is, a larger number has a larger cube, so
 $$
 \sqrt[3]{A} = B \iff A = B^3 , \qquad\qquad \sqrt[3]{A} < B \iff A < B^3 ,
 $$

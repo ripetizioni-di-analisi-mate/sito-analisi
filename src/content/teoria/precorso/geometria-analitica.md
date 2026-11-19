@@ -6,7 +6,9 @@ sommario: Punti e rette nel piano cartesiano, poi parabola, circonferenza, ellis
 ## Il piano cartesiano
 
 :::definizione{#distanza-e-punto-medio titolo="Distanza tra due punti e punto medio"}
-Dati $A(x_1, y_1)$ e $B(x_2, y_2)$:
+Nel **piano cartesiano** due rette perpendicolari, l'asse $x$ orizzontale e l'asse $y$ verticale, si incontrano nell'**origine** $O$. Ogni punto $P$ è individuato da una coppia di numeri $(x, y)$: l'**ascissa** $x$ si legge sull'asse orizzontale e l'**ordinata** $y$ sull'asse verticale. Gli assi dividono il piano in quattro **quadranti**, numerati in verso antiorario a partire da quello in cui $x > 0$ e $y > 0$.
+
+Dati $A(x_1, y_1)$ e $B(x_2, y_2)$, la distanza tra i due punti e il punto medio $M$ del segmento $AB$ sono
 $$
 \overline{AB} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2},
 \qquad
@@ -36,11 +38,11 @@ Una retta non verticale ha **equazione esplicita**
 $$
 y = mx + q ,
 $$
-dove $m$ è il **coefficiente angolare** e $q$ è l'ordinata del punto di intersezione con l'asse $y$. Una retta verticale ha equazione $x = c$. Ogni retta, verticale o no, si scrive in **forma implicita**
+dove $m$ è il **coefficiente angolare**, che misura la pendenza della retta, e $q$ è l'ordinata del punto di intersezione con l'asse $y$. Una retta verticale ha equazione $x = c$. Ogni retta, verticale o no, si scrive in **forma implicita**
 $$
 ax + by + c = 0, \qquad (a, b) \neq (0, 0) ;
 $$
-per $b \neq 0$ le due forme si traducono l'una nell'altra con $m = -\dfrac{a}{b}$ e $q = -\dfrac{c}{b}$. La forma esplicita si legge come funzione e si disegna subito; la forma implicita comprende *anche* le rette verticali e compare nella formula della distanza punto-retta.
+per $b \neq 0$ le due forme si traducono l'una nell'altra con $m = -\dfrac{a}{b}$ e $q = -\dfrac{c}{b}$. Nella forma esplicita a ogni $x$ corrisponde un solo valore di $y$, quindi la retta si disegna calcolando due suoi punti; per esempio $y = 2x - 5$ passa per $(0, -5)$ e per $(1, -3)$. La forma implicita comprende *anche* le rette verticali e compare nella formula della distanza punto-retta.
 :::
 
 :::definizione{#coefficiente-angolare titolo="Coefficiente angolare, rette per un punto, parallelismo e perpendicolarità"}
@@ -129,7 +131,7 @@ Le intersezioni con l'asse $x$ sono le soluzioni di $ax^2 + bx + c = 0$: due pun
 :::
 
 :::esempio
-$y = x^2 - 2x - 3$: il vertice è $V(1, -4)$, la concavità è verso l'alto poiché $a = 1 > 0$, le intersezioni con l'asse $x$ sono $(-1, 0)$ e $(3, 0)$, quella con l'asse $y$ è $(0, -3)$.
+$y = x^2 - 2x - 3$: l'ascissa del vertice è $x_V = -\dfrac{-2}{2 \cdot 1} = 1$ e l'ordinata è $y_V = 1^2 - 2 \cdot 1 - 3 = -4$, quindi il vertice è $V(1, -4)$; la concavità è verso l'alto poiché $a = 1 > 0$, le intersezioni con l'asse $x$ sono $(-1, 0)$ e $(3, 0)$, quella con l'asse $y$ è $(0, -3)$.
 
 ::grafico{f="x^2-2*x-3" xmin=-3 xmax=5 ymin=-5 ymax=6 punti="1,-4,pieno,V" titolo="$y = x^2 - 2x - 3$ con il vertice $V(1, -4)$"}
 :::
@@ -179,7 +181,7 @@ Per $x = y^2 - 2y$ si ha $y_V = 1$ e $x_V = 1 - 2 = -1$, quindi $V(-1, 1)$; le i
 ## La circonferenza
 
 :::definizione{#circonferenza titolo="Circonferenza"}
-La circonferenza di centro $C(x_0, y_0)$ e raggio $r > 0$ è il **luogo dei punti** a distanza $r$ da $C$; elevando al quadrato la formula della distanza si ottiene l'**equazione canonica**
+La circonferenza di centro $C(x_0, y_0)$ e raggio $r > 0$ è il **luogo dei punti** a distanza $r$ da $C$, cioè l'insieme di tutti i punti del piano che distano $r$ da $C$; elevando al quadrato la formula della distanza si ottiene l'**equazione canonica**
 $$
 (x - x_0)^2 + (y - y_0)^2 = r^2 .
 $$
@@ -279,7 +281,7 @@ L'equazione $\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = -1$ rappresenta un'iperbole c
 :::
 
 :::esempio
-$\dfrac{x^2}{4} - \dfrac{y^2}{9} = 1$: i vertici sono $(\pm 2, 0)$, da $c^2 = 4 + 9 = 13$ i fuochi sono $(\pm\sqrt{13}, 0)$, gli asintoti sono $y = \pm\dfrac{3}{2}x$. I rami passano per i vertici e si schiacciano sugli asintoti allontanandosi dall'origine.
+$\dfrac{x^2}{4} - \dfrac{y^2}{9} = 1$: i vertici sono $(\pm 2, 0)$, da $c^2 = 4 + 9 = 13$ i fuochi sono $(\pm\sqrt{13}, 0)$, gli asintoti sono $y = \pm\dfrac{3}{2}x$. I rami passano per i vertici e, allontanandosi dall'origine, si avvicinano agli asintoti.
 
 ::grafico{curve="2/cos(t),3*tan(t),0,6.2832" uguale=1 xmin=-6.5 xmax=6.5 ymin=-6 ymax=6 segmenti="-4,-6,4,6;-4,6,4,-6;2,-3,2,3;-2,-3,-2,3;-2,3,2,3;-2,-3,2,-3" punti="2,0;-2,0;3.606,0,vuoto,F₁;-3.606,0,vuoto,F₂" titolo="Iperbole $\dfrac{x^2}{4} - \dfrac{y^2}{9} = 1$: vertici $(\pm 2, 0)$, fuochi $(\pm\sqrt{13}, 0)$; i rami si avvicinano agli asintoti $y = \pm\dfrac{3}{2}x$, diagonali del rettangolo di lati $x = \pm 2$ e $y = \pm 3$"}
 :::
@@ -308,7 +310,13 @@ rappresenta una conica con assi paralleli agli assi cartesiani. Il tipo si legge
 - $A$ e $C$ hanno lo stesso segno ma valori diversi: ellisse;
 - $A$ e $C$ hanno segni opposti: iperbole.
 
-Il completamento dei quadrati può anche portare a un **caso degenere**, come un solo punto o nessun punto per una somma di quadrati uguale a zero o a un numero negativo, oppure una coppia di rette per una differenza di quadrati uguale a zero; il **tipo definitivo** si conferma dopo la riduzione.
+Dopo il completamento dei quadrati l'equazione può risultare un **caso degenere**, che non è una delle quattro curve.
+
+- Una somma di quadrati uguale a zero è soddisfatta da un solo punto; per esempio $(x - 1)^2 + y^2 = 0$ vale soltanto in $(1, 0)$.
+- Una somma di quadrati uguale a un numero negativo non è soddisfatta da alcun punto.
+- Una differenza di quadrati uguale a zero rappresenta una coppia di rette.
+
+Per questo il tipo letto dai coefficienti si conferma dopo la riduzione.
 :::
 
 :::esempio{titolo="Un caso degenere: coppia di rette"}
@@ -329,7 +337,7 @@ Per disegnare la conica di equazione $A x^2 + C y^2 + D x + E y + F = 0$:
 3. si porta la costante a destra e si divide per essa, ottenendo la **forma canonica** centrata in un punto $(x_0, y_0)$;
 4. si segnano centro e vertici, e per l'iperbole gli asintoti, traslati nel centro.
 
-La forma canonica è quella delle sezioni precedenti con $x - x_0$ e $y - y_0$ al posto di $x$ e $y$: la conica è quella canonica **traslata** del vettore $(x_0, y_0)$.
+La forma canonica è quella delle sezioni precedenti con $x - x_0$ e $y - y_0$ al posto di $x$ e $y$: la conica è quella canonica **traslata**, cioè spostata di $x_0$ in orizzontale e di $y_0$ in verticale.
 :::
 
 :::esempio

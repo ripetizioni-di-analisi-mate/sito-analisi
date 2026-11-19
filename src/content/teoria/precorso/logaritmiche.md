@@ -10,7 +10,7 @@ Per $a > 0$, $a \neq 1$ e $b > 0$, il **logaritmo** in base $a$ di $b$ è l'**es
 $$
 \log_a b = c \iff a^{c} = b .
 $$
-Il logaritmo esiste *solo* per argomenti **positivi**, perché $a^{c} > 0$ per ogni $c$. Dalla definizione seguono le due identità
+Il numero $b$ si chiama **argomento** del logaritmo. Il logaritmo esiste *solo* per argomenti **positivi**, perché $a^{c} > 0$ per ogni $c$. Dalla definizione seguono le due identità
 $$
 \log_a (a^{x}) = x \quad (x \in \mathbb{R}), \qquad
 a^{\log_a x} = x \quad (x > 0),
@@ -118,11 +118,11 @@ Con $x = b$ la formula dà $\log_a b = \dfrac{1}{\log_b a}$; per esempio $\log_4
 Per $a > 0$, $a \neq 1$, la funzione $\log_a x$ è definita per $x > 0$. Proprietà:
 
 - il grafico passa per il punto $(1, 0)$, perché $\log_a 1 = 0$;
-- la retta $x = 0$ è asintoto verticale;
+- la retta $x = 0$ è asintoto verticale, cioè il grafico si avvicina all'asse $y$ senza toccarlo;
 - la funzione è **iniettiva**: argomenti diversi danno logaritmi diversi;
-- per $a > 1$ la funzione è strettamente **crescente**; per $0 < a < 1$ è strettamente **decrescente**.
+- per $a > 1$ la funzione è strettamente **crescente**, cioè da $x_1 < x_2$ segue $\log_a x_1 < \log_a x_2$; per $0 < a < 1$ è strettamente **decrescente**, cioè da $x_1 < x_2$ segue $\log_a x_1 > \log_a x_2$.
 
-Come per la funzione esponenziale, l'iniettività giustifica il passaggio dai logaritmi agli argomenti nelle equazioni e la monotonia governa il verso nelle disequazioni.
+L'iniettività giustifica il passaggio dai logaritmi agli argomenti nelle equazioni, e il fatto che la funzione sia crescente o decrescente stabilisce il verso nelle disequazioni. Le stesse proprietà valgono per la funzione esponenziale, trattata nel capitolo sulle equazioni e disequazioni esponenziali.
 :::
 
 :::esempio{titolo="I due grafici di base"}

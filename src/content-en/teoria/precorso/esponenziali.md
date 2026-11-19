@@ -8,12 +8,12 @@ sommario: The function a^x with its properties, and the methods for solving equa
 :::definizione{#funzione-esponenziale titolo="Exponential function"}
 For $a > 0$, $a \neq 1$, the **exponential function** with base $a$ assigns to *every* $x \in \mathbb{R}$ the number $a^{x}$. Properties:
 
-- $a^{x} > 0$ for every $x \in \mathbb{R}$, so the graph lies above the $x$-axis; the line $y = 0$ is a horizontal asymptote;
+- $a^{x} > 0$ for every $x \in \mathbb{R}$, so the graph lies above the $x$-axis; the line $y = 0$ is a horizontal asymptote, that is, the graph approaches the $x$-axis without touching it;
 - $a^{0} = 1$, so the graph passes through the point $(0, 1)$ whatever the base;
 - the function is **injective**: different exponents give different powers;
-- for $a > 1$ the function is strictly **increasing**; for $0 < a < 1$ it is strictly **decreasing**.
+- for $a > 1$ the function is strictly **increasing**, that is, $x_1 < x_2$ implies $a^{x_1} < a^{x_2}$; for $0 < a < 1$ it is strictly **decreasing**, that is, $x_1 < x_2$ implies $a^{x_1} > a^{x_2}$.
 
-All the solution methods in this chapter rest on injectivity and monotonicity: injectivity justifies passing from the powers to the exponents in equations, and monotonicity governs the direction of the inequality sign in inequalities.
+All the solution methods in this chapter rest on these two properties. Injectivity justifies passing from the powers to the exponents in equations; the fact that the function is increasing or decreasing, that is, its **monotonicity**, determines the direction of the inequality sign in inequalities.
 :::
 
 :::esempio{titolo="The two basic graphs"}
@@ -147,7 +147,7 @@ $$
 &\iff x = \frac{\log_2 3}{\log_2 3 - 1}
 \end{aligned}
 $$
-The theorem applies with $a = 2$ and $b = 3$. Since $3 > 2$, we have $\log_2 3 > 1$, so the coefficient $\log_2 3 - 1$ is nonzero and the division is allowed. With $\log_2 3 \approx 1.585$ the solution is approximately $2.71$.
+The theorem applies with $a = 2$ and $b = 3$. Expanding the right-hand side gives $x = x \log_2 3 - \log_2 3$; collecting the terms with $x$ on the same side gives $x \log_2 3 - x = \log_2 3$, that is, $x\,(\log_2 3 - 1) = \log_2 3$. Since $3 > 2$, we have $\log_2 3 > 1$, so the coefficient $\log_2 3 - 1$ is nonzero and the division is allowed. With $\log_2 3 \approx 1.585$ the solution is approximately $2.71$.
 
 ::grafico{f="2^x;3^(x-1)" xmin=-2 xmax=4 ymin=-1 ymax=12 punti="2.71,6.541,pieno" segmenti="2.71,0,2.71,6.541" legenda="y = 2^x;y = 3^{x-1}" titolo="The graphs of $y = 2^{x}$ and $y = 3^{x - 1}$ meet at a single point, with abscissa $\dfrac{\log_2 3}{\log_2 3 - 1}$"}
 :::
@@ -228,7 +228,7 @@ In an inequality the substitution $t = a^{x}$ is used as in equations, with the 
 $$
 4^{x} - 3 \cdot 2^{x} + 2 > 0
 $$
-With $t = 2^{x}$, $t > 0$, the inequality $t^{2} - 3t + 2 > 0$ is satisfied for $t < 1$ or $t > 2$; the intersection with $t > 0$ gives $0 < t < 1$ or $t > 2$. From $0 < 2^{x} < 1 = 2^{0}$ it follows that $x < 0$, since the base $2$ is greater than $1$; from $2^{x} > 2$ it follows that $x > 1$. The solutions are $x < 0$ or $x > 1$.
+With $t = 2^{x}$, $t > 0$, the inequality becomes $t^{2} - 3t + 2 > 0$. The trinomial has roots $1$ and $2$ and is positive outside the roots, so the inequality is satisfied for $t < 1$ or $t > 2$; the intersection with $t > 0$ gives $0 < t < 1$ or $t > 2$. From $0 < 2^{x} < 1 = 2^{0}$ it follows that $x < 0$, since the base $2$ is greater than $1$; from $2^{x} > 2$ it follows that $x > 1$. The solutions are $x < 0$ or $x > 1$.
 
 ::grafico{f="4^x-3*2^x+2" xmin=-4 xmax=2 ymin=-1 ymax=4 asintoti="y=2" punti="0,0,vuoto;1,0,vuoto" titolo="$y = 4^{x} - 3 \cdot 2^{x} + 2$ is positive for $x < 0$ and for $x > 1$; the line $y = 2$, in red, is its horizontal asymptote"}
 :::

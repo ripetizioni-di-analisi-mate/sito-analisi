@@ -6,11 +6,13 @@ sommario: Che cos'è un polinomio, come si sviluppano e si riconoscono i prodott
 ## Polinomi e grado
 
 :::definizione{#polinomi titolo="Polinomio e grado"}
-Un **polinomio** nella variabile $x$ è una somma di monomi,
+Un **monomio** nella variabile $x$ è il prodotto di un numero per una potenza di $x$ con esponente naturale, come $-5x^3$, $4x$ oppure $7$. Un **polinomio** nella variabile $x$ è una somma di monomi; scrivendo i termini dall'esponente più alto al più basso si ottiene
 $$
 P(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 ,
 $$
-con $a_n \neq 0$. I numeri $a_n, \dots, a_0$ sono i coefficienti, $a_n$ è il **coefficiente direttore**, $a_0$ è il termine noto e $n$ è il **grado**, indicato con $\deg P$. Un numero $c$ è una **radice** di $P$ se $P(c) = 0$. Il polinomio $P(x) = 2x^3 - 5x + 1$ ha grado $3$, coefficiente direttore $2$, termine noto $1$; il coefficiente di $x^2$ è $0$.
+con $a_n \neq 0$. I numeri $a_n, \dots, a_0$ sono i coefficienti, $a_n$ è il **coefficiente direttore**, $a_0$ è il termine noto e $n$ è il **grado**, indicato con $\deg P$. Il polinomio $P(x) = 2x^3 - 5x + 1$ ha grado $3$, coefficiente direttore $2$, termine noto $1$; il coefficiente di $x^2$ è $0$.
+
+La scrittura $P(c)$ indica il numero che si ottiene sostituendo $c$ al posto di $x$, e un numero $c$ è una **radice** di $P$ se $P(c) = 0$. Per il polinomio precedente $P(2) = 2 \cdot 8 - 5 \cdot 2 + 1 = 7$, quindi $2$ non è una radice.
 :::
 
 :::teorema{#principio-di-identita titolo="Principio di identità dei polinomi"}
@@ -160,7 +162,7 @@ Se $\deg A \geq \deg B$, il grado del quoziente è la differenza dei gradi, $\de
 ## Teorema del resto e teorema di Ruffini
 
 ::::teorema{#teorema-del-resto titolo="Teorema del resto"}
-Il resto della divisione di $P(x)$ per $x - c$ è $P(c)$. Il resto si ottiene quindi con una *sola* valutazione del polinomio, **senza eseguire la divisione**. Il resto di $x^3 - 2x + 1$ diviso $x - 2$ è $P(2) = 8 - 4 + 1 = 5$.
+Il resto della divisione di $P(x)$ per $x - c$ è $P(c)$. Il resto si ottiene quindi calcolando il *solo* valore $P(c)$, **senza eseguire la divisione**. Il resto di $x^3 - 2x + 1$ diviso $x - 2$ è $P(2) = 8 - 4 + 1 = 5$.
 
 ::grafico{f="x^3-2*x+1" xmin=-2.5 xmax=2.6 ymin=-4 ymax=8 punti="2,5,pieno,P(2) = 5" segmenti="2,0,2,5" titolo="$y = x^3 - 2x + 1$: il resto della divisione per $x - 2$ è l'ordinata $P(2) = 5$ del punto del grafico di ascissa $2$"}
 
@@ -195,11 +197,11 @@ P(x) = (x - c)^m\, Q(x) \qquad \text{con } Q(c) \neq 0 ,
 $$
 cioè se $(x - c)^m$ divide $P$ e $(x - c)^{m + 1}$ non lo divide. Una radice di molteplicità $1$ si dice **semplice**, di molteplicità $2$ **doppia**, di molteplicità $3$ tripla. La molteplicità si determina dividendo per $x - c$ finché il quoziente ottenuto non ha più $c$ come radice: il numero di divisioni esatte è $m$.
 
-La molteplicità stabilisce il segno di $P$ vicino a $c$. Per $x \neq c$ il fattore $(x - c)^m$ è positivo se $m$ è *pari*, mentre se $m$ è *dispari* ha il segno di $x - c$, che cambia in $c$. Il fattore $Q$ non si annulla in $c$, quindi vicino a $c$ ha il segno di $Q(c)$ (è la **permanenza del segno**, che si trova nel capitolo sui limiti di Analisi 1). Perciò il grafico di $P$ **attraversa** l'asse $x$ nelle radici di molteplicità dispari e lo **tocca senza attraversarlo** in quelle di molteplicità pari; nello studio del segno questa proprietà decide se una riga della tabella dei segni cambia segno, come si vede nel capitolo sulle equazioni e disequazioni polinomiali.
+Dalla molteplicità dipende se $P$ cambia segno quando $x$ passa per $c$. Per $x \neq c$ il fattore $(x - c)^m$ è positivo se $m$ è *pari* e ha il segno di $x - c$ se $m$ è *dispari*. Il fattore $Q$ non si annulla in $c$, quindi per i valori di $x$ abbastanza vicini a $c$ ha il segno di $Q(c)$. Perciò, se $m$ è dispari, $P$ **cambia segno** in $c$ e il grafico attraversa l'asse $x$; se $m$ è pari, $P$ **non cambia segno** e il grafico tocca l'asse $x$ senza attraversarlo. Nel capitolo sulle equazioni e disequazioni polinomiali questa regola indica in quali radici cambia il segno di un polinomio.
 :::
 
 :::esempio
-$P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. La radice $2$ è **doppia**, poiché $P(x) = (x - 2)^2\, Q(x)$ con $Q(x) = x + 1$ e $Q(2) = 3 \neq 0$; la radice $-1$ è **semplice**, poiché $P(x) = (x + 1)\,(x - 2)^2$ e $(-1 - 2)^2 = 9 \neq 0$. Vicino a $2$ il polinomio ha il segno di $3\,(x - 2)^2$, positivo da entrambe le parti, mentre vicino a $-1$ ha il segno di $9\,(x + 1)$, che cambia in $-1$.
+$P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. La radice $2$ è **doppia**, poiché $P(x) = (x - 2)^2\, Q(x)$ con $Q(x) = x + 1$ e $Q(2) = 3 \neq 0$; la radice $-1$ è **semplice**, poiché $P(x) = (x + 1)\,(x - 2)^2$ e $(-1 - 2)^2 = 9 \neq 0$. Vicino a $2$ il polinomio ha il segno di $3\,(x - 2)^2$, positivo da entrambe le parti; infatti $P(1{,}9) = 0{,}01 \cdot 2{,}9 = 0{,}029$ e $P(2{,}1) = 0{,}01 \cdot 3{,}1 = 0{,}031$. Vicino a $-1$ ha il segno di $9\,(x + 1)$, che cambia in $-1$; infatti $P(-1{,}1) = 9{,}61 \cdot (-0{,}1) = -0{,}961$ e $P(-0{,}9) = 8{,}41 \cdot 0{,}1 = 0{,}841$.
 
 ::grafico{f="x^3-3*x^2+4" xmin=-1.8 xmax=3.3 ymin=-4 ymax=7 punti="-1,0,pieno;2,0,pieno" titolo="$y = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$ attraversa l'asse $x$ nella radice semplice $-1$ e lo tocca senza attraversarlo nella radice doppia $2$"}
 
@@ -238,7 +240,7 @@ La **regola di Ruffini** è lo schema che esegue la divisione di $P(x)$ per $x -
 :::
 
 :::esempio{titolo="Lo schema passo per passo"}
-Divisione di $P(x) = x^3 - 2x^2 - 5x + 6$ per $x - 1$, quindi $c = 1$. Si riporta il primo coefficiente $1$; poi $1 \cdot 1 = 1$ e $-2 + 1 = -1$; poi $-1 \cdot 1 = -1$ e $-5 + (-1) = -6$; infine $-6 \cdot 1 = -6$ e $6 + (-6) = 0$.
+Divisione di $P(x) = x^3 - 2x^2 - 5x + 6$ per $x - 1$. Il divisore ha la forma $x - c$ con $c = 1$. Nella prima riga si scrivono i coefficienti $1$, $-2$, $-5$, $6$ e a sinistra il numero $c = 1$.
 $$
 \begin{array}{c|ccc|c}
  & 1 & -2 & -5 & 6 \\
@@ -246,7 +248,14 @@ $$
  & 1 & -1 & -6 & 0
 \end{array}
 $$
-Il quoziente è $x^2 - x - 6$ e il resto è $0$, quindi $x - 1$ **divide** $P$ e
+La riga dei risultati, sotto la linea, si riempie da sinistra a destra, una colonna alla volta.
+
+- Prima colonna: il coefficiente $1$ scende invariato sotto la linea.
+- Seconda colonna: l'ultimo risultato è $1$, quindi sotto $-2$ si scrive $1 \cdot 1 = 1$; la somma in colonna è $-2 + 1 = -1$.
+- Terza colonna: l'ultimo risultato è $-1$, quindi sotto $-5$ si scrive $-1 \cdot 1 = -1$; la somma è $-5 + (-1) = -6$.
+- Quarta colonna: l'ultimo risultato è $-6$, quindi sotto $6$ si scrive $-6 \cdot 1 = -6$; la somma è $6 + (-6) = 0$.
+
+I primi tre numeri sotto la linea, $1$, $-1$, $-6$, sono i coefficienti del quoziente. Il dividendo ha grado $3$, quindi il quoziente ha grado $2$ ed è $x^2 - x - 6$. L'ultimo numero, $0$, è il resto, quindi $x - 1$ **divide** $P$ e
 $$
 x^3 - 2x^2 - 5x + 6 = (x - 1)(x^2 - x - 6) = (x - 1)(x - 3)(x + 2) ,
 $$
@@ -257,7 +266,15 @@ dove l'ultima uguaglianza si verifica sviluppando il prodotto $(x - 3)(x + 2) = 
 :::
 
 :::attenzione
-A sinistra dello schema si scrive il numero $c$ per cui il divisore ha la forma $x - c$, cioè la radice del divisore. Per il divisore $x + 3 = x - (-3)$ si usa $c = -3$. Con $P(x) = x^2 + x - 6$ e $c = -3$ lo schema dà $1$; poi $1 \cdot (-3) = -3$ e $1 - 3 = -2$; poi $-2 \cdot (-3) = 6$ e $-6 + 6 = 0$, quindi $x^2 + x - 6 = (x + 3)(x - 2)$. Con $c = 3$ lo schema calcola il resto $P(3) = 6$, che è il resto della divisione per $x - 3$.
+A sinistra dello schema si scrive il numero $c$ per cui il divisore ha la forma $x - c$, cioè la radice del divisore. Per il divisore $x + 3 = x - (-3)$ si usa $c = -3$. Con $P(x) = x^2 + x - 6$ e $c = -3$ lo schema è
+$$
+\begin{array}{c|cc|c}
+ & 1 & 1 & -6 \\
+-3 &  & -3 & 6 \\ \hline
+ & 1 & -2 & 0
+\end{array}
+$$
+dove $1 \cdot (-3) = -3$ e $1 + (-3) = -2$, poi $-2 \cdot (-3) = 6$ e $-6 + 6 = 0$. Il quoziente è $x - 2$ e il resto è $0$, quindi $x^2 + x - 6 = (x + 3)(x - 2)$. Con $c = 3$ lo schema calcola il resto $P(3) = 6$, che è il resto della divisione per $x - 3$.
 :::
 
 :::osservazione
@@ -278,7 +295,7 @@ Il quoziente della divisione per $x - \dfrac{1}{2}$ è $2x + 4$, quindi il quozi
 Sia $P(x) = a_n x^n + \dots + a_0$ a coefficienti interi, con $a_0 \neq 0$. Se la frazione $\dfrac{p}{q}$, ridotta ai minimi termini, è una radice di $P$, allora $p$ **divide il termine noto** $a_0$ e $q$ **divide il coefficiente direttore** $a_n$. Il teorema fornisce un elenco *finito* di candidati; ogni candidato $c$ si prova calcolando $P(c)$, e per il **teorema di Ruffini** ogni candidato con $P(c) = 0$ produce il fattore $x - c$. Quando il coefficiente direttore è $1$, le eventuali radici razionali sono numeri interi che dividono il termine noto.
 
 :::dimostrazione
-L'idea è eliminare i denominatori e leggere l'uguaglianza ottenuta come un'uguaglianza tra numeri interi. Sia $P\left( \dfrac{p}{q} \right) = 0$, con $p$ e $q$ interi primi tra loro e $q > 0$. Moltiplicando l'uguaglianza per $q^n$ si ottiene
+L'idea è eliminare i denominatori e leggere l'uguaglianza ottenuta come un'uguaglianza tra numeri interi. Sia $P\left( \dfrac{p}{q} \right) = 0$, con $p$ e $q$ interi primi tra loro, cioè senza divisori comuni maggiori di $1$, e $q > 0$. Moltiplicando l'uguaglianza per $q^n$ si ottiene
 $$
 a_n p^n + a_{n-1} p^{n-1} q + \dots + a_1 p\, q^{n-1} + a_0 q^n = 0 .
 $$

@@ -10,7 +10,7 @@ For $a > 0$, $a \neq 1$ and $b > 0$, the **logarithm** to base $a$ of $b$ is the
 $$
 \log_a b = c \iff a^{c} = b .
 $$
-The logarithm exists *only* for **positive** arguments, because $a^{c} > 0$ for every $c$. From the definition follow the two identities
+The number $b$ is called the **argument** of the logarithm. The logarithm exists *only* for **positive** arguments, because $a^{c} > 0$ for every $c$. From the definition follow the two identities
 $$
 \log_a (a^{x}) = x \quad (x \in \mathbb{R}), \qquad
 a^{\log_a x} = x \quad (x > 0),
@@ -118,11 +118,11 @@ With $x = b$ the formula gives $\log_a b = \dfrac{1}{\log_b a}$; for example $\l
 For $a > 0$, $a \neq 1$, the function $\log_a x$ is defined for $x > 0$. Properties:
 
 - the graph passes through the point $(1, 0)$, because $\log_a 1 = 0$;
-- the line $x = 0$ is a vertical asymptote;
+- the line $x = 0$ is a vertical asymptote, that is, the graph approaches the $y$-axis without touching it;
 - the function is **injective**: different arguments give different logarithms;
-- for $a > 1$ the function is strictly **increasing**; for $0 < a < 1$ it is strictly **decreasing**.
+- for $a > 1$ the function is strictly **increasing**, that is, $x_1 < x_2$ implies $\log_a x_1 < \log_a x_2$; for $0 < a < 1$ it is strictly **decreasing**, that is, $x_1 < x_2$ implies $\log_a x_1 > \log_a x_2$.
 
-As for the exponential function, injectivity justifies passing from the logarithms to the arguments in equations, and monotonicity determines the direction in inequalities.
+Injectivity justifies passing from the logarithms to the arguments in equations, and the fact that the function is increasing or decreasing determines the direction in inequalities. The same properties hold for the exponential function, treated in the chapter on exponential equations and inequalities.
 :::
 
 :::esempio{titolo="The two basic graphs"}

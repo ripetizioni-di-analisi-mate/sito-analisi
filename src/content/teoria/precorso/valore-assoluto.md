@@ -42,7 +42,9 @@ Per ogni $a, b \in \mathbb{R}$ valgono
 $$
 |ab| = |a|\,|b|, \qquad |a|^2 = a^2, \qquad |a + b| \leq |a| + |b| .
 $$
-La prima si verifica esaminando i quattro casi sui segni di $a$ e $b$ e serve a scomporre un modulo, per esempio $|{-3x}| = 3\,|x|$. La seconda vale perché $a$ e $|a|$ differiscono al più per il segno, che il quadrato cancella; poiché i moduli non sono negativi, confrontare due moduli equivale a **confrontare i loro quadrati**, e su questa osservazione si fonda la risoluzione di $|A| > |B|$ per elevamento al quadrato. La terza è la **disuguaglianza triangolare** e viene usata nelle maggiorazioni, per esempio nel capitolo sui limiti: per $a = 5$ e $b = -3$ si ha $|5 + (-3)| = 2 \leq 8 = |5| + |-3|$, e l'uguaglianza vale se e solo se $ab \geq 0$.
+- **Modulo di un prodotto.** Il modulo di un prodotto è il prodotto dei moduli. Per esempio $|(-3) \cdot 4| = |-12| = 12$ e $|-3| \cdot |4| = 3 \cdot 4 = 12$. La proprietà si verifica esaminando i quattro casi sui segni di $a$ e $b$, e permette di portare un numero fuori dal modulo, come in $|{-3x}| = |-3| \cdot |x| = 3\,|x|$.
+- **Quadrato del modulo.** Il numero $|a|$ è uguale ad $a$ oppure a $-a$, e questi due numeri hanno lo stesso quadrato, perché $(-a)^2 = a^2$; quindi $|a|^2 = a^2$. Per esempio $|-5|^2 = 5^2 = 25$ e $(-5)^2 = 25$. I moduli sono numeri non negativi, e tra due numeri non negativi il più grande ha il quadrato più grande; perciò $|a| > |b|$ equivale ad $a^2 > b^2$. Per esempio $|-4| > |3|$ e $16 > 9$. Con questa equivalenza si risolve $|A| > |B|$ **elevando al quadrato**.
+- **Disuguaglianza triangolare.** Il modulo di una somma è minore o uguale alla somma dei moduli. Per esempio $|5 + (-3)| = 2$ e $|5| + |-3| = 8$. La disuguaglianza serve a stimare dall'alto il modulo di una somma e si usa nel capitolo sui limiti di Analisi 1; il caso in cui vale l'uguaglianza è precisato nel teorema sulla disuguaglianza triangolare.
 :::
 
 :::attenzione
@@ -77,7 +79,7 @@ Per ogni $a, b \in \mathbb{R}$ vale
 $$
 |a + b| \leq |a| + |b| ,
 $$
-e l'uguaglianza vale se e solo se $ab \geq 0$, cioè se $a$ e $b$ non hanno segni opposti. La disuguaglianza serve a maggiorare il modulo di una somma. Per esempio, per $|x| \leq 2$ si ha
+e l'uguaglianza vale se e solo se $ab \geq 0$, cioè se $a$ e $b$ non hanno segni opposti. La disuguaglianza serve a maggiorare, cioè a stimare dall'alto, il modulo di una somma. Per esempio, per $|x| \leq 2$ si ha
 $$
 |x + 5| \leq |x| + 5 \leq 7 ,
 $$
@@ -109,7 +111,7 @@ Per ogni $a \in \mathbb{R}$ vale $\sqrt{a^2} = |a|$, perché $\sqrt{a^2}$ è il 
 :::teorema{#equazioni-con-modulo titolo="Equazione della forma |A| = k"}
 $A$ è un'espressione nella variabile $x$ e $k$ una costante. I casi da distinguere dipendono dal segno di $k$.
 
-- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$, perché i *soli* numeri con valore assoluto $k$ sono $k$ e $-k$.
+- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$, perché i *soli* numeri con valore assoluto $k$ sono $k$ e $-k$. Il simbolo $\vee$ si legge "oppure".
 - $k = 0$: $\ |A| = 0 \iff A = 0$, perché il solo numero con valore assoluto nullo è $0$.
 - $k < 0$: **nessuna soluzione**, perché $|A| \geq 0$ per ogni $x$.
 :::
@@ -170,7 +172,7 @@ B \geq 0 \\
 A = -B
 \end{cases}
 $$
-Le soluzioni delle due equazioni che non soddisfano la condizione $B \geq 0$ vanno **scartate**.
+Il simbolo $\cup$ tra i due sistemi indica che le soluzioni dell'equazione sono quelle del primo sistema insieme a quelle del secondo. Le soluzioni delle due equazioni che non soddisfano la condizione $B \geq 0$ vanno **scartate**.
 :::
 
 :::esempio
@@ -337,7 +339,7 @@ Quando compaiono due o più valori assoluti con argomenti diversi, si cercano i 
 :::
 
 :::esempio
-$|x| + |x - 2| = 4$. Gli argomenti si annullano in $0$ e in $2$, quindi le zone sono tre:
+$|x| + |x - 2| = 4$. Gli argomenti si annullano in $0$ e in $2$, quindi le zone sono tre. Per $x < 0$ sono negativi sia $x$ sia $x - 2$, quindi $|x| = -x$ e $|x - 2| = 2 - x$. Per $0 \leq x < 2$ è negativo soltanto $x - 2$, quindi $|x| = x$ e $|x - 2| = 2 - x$. Per $x \geq 2$ nessuno dei due argomenti è negativo, quindi $|x| = x$ e $|x - 2| = x - 2$. L'equazione equivale perciò a
 $$
 \begin{cases}
 x < 0 \\

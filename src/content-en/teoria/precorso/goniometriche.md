@@ -6,7 +6,7 @@ sommario: Sine, cosine and tangent on the unit circle, the identities that relat
 ## The unit circle
 
 :::definizione{#circonferenza-goniometrica titolo="Unit circle, sine and cosine"}
-The **unit circle** is the circle with center at the origin and radius $1$. An angle $x$, measured in radians from the positive half of the horizontal axis in the counterclockwise direction, determines a point $P$ on it, and one sets
+In the Cartesian plane every point is determined by two coordinates: the **abscissa**, read on the horizontal axis, and the **ordinate**, read on the vertical axis; the origin is the point with coordinates $(0, 0)$. The **unit circle** is the circle with center at the origin and radius $1$. An angle $x$, measured in radians from the positive half of the horizontal axis in the counterclockwise direction, determines a point $P$ on it, and one sets
 $$
 \cos x = \text{abscissa of } P, \qquad \sin x = \text{ordinate of } P .
 $$
@@ -67,7 +67,7 @@ $$
 It is the **Pythagorean theorem** applied to the triangle with legs $|\cos x|$ and $|\sin x|$ and hypotenuse the radius $1$. It is used to pass from one function to the other: given $\sin x$, the value of $\cos x$ is determined **up to sign**, and the sign is read from the quadrant in which the angle lies. In equations it allows one to write $\sin^2 x = 1 - \cos^2 x$, and with this substitution an equation containing both functions reduces to one containing *a single* function.
 
 :::dimostrazione
-The idea is to write that the point $P$ is at distance $1$ from the origin. The point $P = (\cos x, \sin x)$ lies on the circle with center $O = (0, 0)$ and radius $1$, so $\overline{OP} = 1$. By the formula for the distance between two points, seen in the chapter on analytic geometry,
+The idea is to write that the point $P$ is at distance $1$ from the origin. The point $P = (\cos x, \sin x)$ lies on the circle with center $O = (0, 0)$ and radius $1$, so $\overline{OP} = 1$. By the formula for the distance between two points, which is found in the chapter on analytic geometry,
 $$
 \overline{OP} = \sqrt{(\cos x - 0)^2 + (\sin x - 0)^2} = \sqrt{\cos^2 x + \sin^2 x} .
 $$
@@ -214,7 +214,7 @@ Dividing the *whole* right-hand side by $2$, including the term $2n\pi$, gives
 $$
 x = \frac{\pi}{12} + n\pi \quad \text{or} \quad x = \frac{5\pi}{12} + n\pi .
 $$
-The solutions repeat every $\pi$, so in $[0, 2\pi)$ there are four of them: $\dfrac{\pi}{12}$, $\dfrac{5\pi}{12}$, $\dfrac{13\pi}{12}$ and $\dfrac{17\pi}{12}$.
+The solutions repeat every $\pi$, so in the interval $[0, 2\pi)$, that is, for $0 \leq x < 2\pi$, there are four of them: $\dfrac{\pi}{12}$, $\dfrac{5\pi}{12}$, $\dfrac{13\pi}{12}$ and $\dfrac{17\pi}{12}$.
 
 ::grafico{f="sin(2*x);0.5" xmin=-0.3 xmax=6.6 ymin=-1.5 ymax=1.5 punti="0.2618,0.5,pieno;1.309,0.5,pieno;3.4034,0.5,pieno;4.4506,0.5,pieno" titolo="On $[0, 2\pi)$ the graph of $y = \sin 2x$ meets the line $y = \dfrac{1}{2}$ at $\dfrac{\pi}{12}$, $\dfrac{5\pi}{12}$, $\dfrac{13\pi}{12}$ and $\dfrac{17\pi}{12}$"}
 :::
@@ -361,7 +361,7 @@ $$
 :::
 
 :::esempio
-$\cos x > -\dfrac{\sqrt{2}}{2}$. On $[0, 2\pi)$ the equation $\cos x = -\dfrac{\sqrt{2}}{2}$ has solutions $\dfrac{3\pi}{4}$ and $\dfrac{5\pi}{4}$; the arc with abscissa greater than $-\dfrac{\sqrt{2}}{2}$ is the one containing the point of angle $0$, therefore the solutions on $[0, 2\pi)$ are $\left[0, \dfrac{3\pi}{4}\right) \cup \left(\dfrac{5\pi}{4}, 2\pi\right)$ and the general solution is
+$\cos x > -\dfrac{\sqrt{2}}{2}$. On $[0, 2\pi)$ the equation $\cos x = -\dfrac{\sqrt{2}}{2}$ has solutions $\dfrac{3\pi}{4}$ and $\dfrac{5\pi}{4}$; the arc with abscissa greater than $-\dfrac{\sqrt{2}}{2}$ is the one containing the point of angle $0$, therefore the solutions on $[0, 2\pi)$ are $\left[0, \dfrac{3\pi}{4}\right) \cup \left(\dfrac{5\pi}{4}, 2\pi\right)$, that is, $0 \leq x < \dfrac{3\pi}{4}$ or $\dfrac{5\pi}{4} < x < 2\pi$, and the general solution is
 $$
 -\frac{3\pi}{4} + 2n\pi < x < \frac{3\pi}{4} + 2n\pi, \qquad n \in \mathbb{Z} .
 $$
@@ -403,7 +403,7 @@ $$
 \sin x < 1
 \end{cases}
 $$
-The first inequality is satisfied on $\left[0, \dfrac{7\pi}{6}\right) \cup \left(\dfrac{11\pi}{6}, 2\pi\right)$. The second is satisfied for every $x$ except $x = \dfrac{\pi}{2}$, where the sine equals $1$. Therefore the solutions are
+The first inequality is satisfied on $\left[0, \dfrac{7\pi}{6}\right) \cup \left(\dfrac{11\pi}{6}, 2\pi\right)$, that is, for $0 \leq x < \dfrac{7\pi}{6}$ or $\dfrac{11\pi}{6} < x < 2\pi$. The second is satisfied for every $x$ except $x = \dfrac{\pi}{2}$, where the sine equals $1$. Therefore the solutions are
 $$
 0 \leq x < \frac{\pi}{2}, \qquad \frac{\pi}{2} < x < \frac{7\pi}{6}, \qquad \frac{11\pi}{6} < x < 2\pi .
 $$

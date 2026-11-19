@@ -6,7 +6,7 @@ sommario: Seno, coseno e tangente sulla circonferenza goniometrica, le identità
 ## La circonferenza goniometrica
 
 :::definizione{#circonferenza-goniometrica titolo="Circonferenza goniometrica, seno e coseno"}
-La **circonferenza goniometrica** è la circonferenza di centro l'origine e raggio $1$. Un angolo $x$, misurato in radianti a partire dal semiasse positivo delle ascisse in verso antiorario, individua su di essa un punto $P$, e si pone
+Nel piano cartesiano ogni punto è individuato da due coordinate: l'**ascissa**, che si legge sull'asse orizzontale, e l'**ordinata**, che si legge sull'asse verticale; l'origine è il punto di coordinate $(0, 0)$. La **circonferenza goniometrica** è la circonferenza di centro l'origine e raggio $1$. Un angolo $x$, misurato in radianti a partire dal semiasse positivo delle ascisse in verso antiorario, individua su di essa un punto $P$, e si pone
 $$
 \cos x = \text{ascissa di } P, \qquad \sin x = \text{ordinata di } P .
 $$
@@ -67,7 +67,7 @@ $$
 È il **teorema di Pitagora** applicato al triangolo di cateti $|\cos x|$ e $|\sin x|$ e ipotenusa il raggio $1$. Serve per passare da una funzione all'altra: noto $\sin x$, il valore di $\cos x$ è determinato **a meno del segno**, e il segno si legge dal quadrante in cui sta l'angolo. Nelle equazioni permette di scrivere $\sin^2 x = 1 - \cos^2 x$, e con questa sostituzione un'equazione che contiene entrambe le funzioni si riduce a *una sola*.
 
 :::dimostrazione
-L'idea è scrivere che il punto $P$ dista $1$ dall'origine. Il punto $P = (\cos x, \sin x)$ appartiene alla circonferenza di centro $O = (0, 0)$ e raggio $1$, quindi $\overline{OP} = 1$. Per la formula della distanza tra due punti, vista nel capitolo di geometria analitica,
+L'idea è scrivere che il punto $P$ dista $1$ dall'origine. Il punto $P = (\cos x, \sin x)$ appartiene alla circonferenza di centro $O = (0, 0)$ e raggio $1$, quindi $\overline{OP} = 1$. Per la formula della distanza tra due punti, che si trova nel capitolo di geometria analitica,
 $$
 \overline{OP} = \sqrt{(\cos x - 0)^2 + (\sin x - 0)^2} = \sqrt{\cos^2 x + \sin^2 x} .
 $$
@@ -214,7 +214,7 @@ Dividendo per $2$ *tutto* il secondo membro, compreso il termine $2n\pi$, si ott
 $$
 x = \frac{\pi}{12} + n\pi \quad \text{oppure} \quad x = \frac{5\pi}{12} + n\pi .
 $$
-Le soluzioni si ripetono ogni $\pi$, quindi in $[0, 2\pi)$ sono quattro: $\dfrac{\pi}{12}$, $\dfrac{5\pi}{12}$, $\dfrac{13\pi}{12}$ e $\dfrac{17\pi}{12}$.
+Le soluzioni si ripetono ogni $\pi$, quindi nell'intervallo $[0, 2\pi)$, cioè per $0 \leq x < 2\pi$, sono quattro: $\dfrac{\pi}{12}$, $\dfrac{5\pi}{12}$, $\dfrac{13\pi}{12}$ e $\dfrac{17\pi}{12}$.
 
 ::grafico{f="sin(2*x);0.5" xmin=-0.3 xmax=6.6 ymin=-1.5 ymax=1.5 punti="0.2618,0.5,pieno;1.309,0.5,pieno;3.4034,0.5,pieno;4.4506,0.5,pieno" titolo="Su $[0, 2\pi)$ il grafico di $y = \sin 2x$ incontra la retta $y = \dfrac{1}{2}$ in $\dfrac{\pi}{12}$, $\dfrac{5\pi}{12}$, $\dfrac{13\pi}{12}$ e $\dfrac{17\pi}{12}$"}
 :::
@@ -361,7 +361,7 @@ $$
 :::
 
 :::esempio
-$\cos x > -\dfrac{\sqrt{2}}{2}$. Su $[0, 2\pi)$ l'equazione $\cos x = -\dfrac{\sqrt{2}}{2}$ ha soluzioni $\dfrac{3\pi}{4}$ e $\dfrac{5\pi}{4}$; l'arco di ascissa maggiore di $-\dfrac{\sqrt{2}}{2}$ è quello che contiene il punto di angolo $0$, quindi le soluzioni su $[0, 2\pi)$ sono $\left[0, \dfrac{3\pi}{4}\right) \cup \left(\dfrac{5\pi}{4}, 2\pi\right)$ e la soluzione generale è
+$\cos x > -\dfrac{\sqrt{2}}{2}$. Su $[0, 2\pi)$ l'equazione $\cos x = -\dfrac{\sqrt{2}}{2}$ ha soluzioni $\dfrac{3\pi}{4}$ e $\dfrac{5\pi}{4}$; l'arco di ascissa maggiore di $-\dfrac{\sqrt{2}}{2}$ è quello che contiene il punto di angolo $0$, quindi le soluzioni su $[0, 2\pi)$ sono $\left[0, \dfrac{3\pi}{4}\right) \cup \left(\dfrac{5\pi}{4}, 2\pi\right)$, cioè $0 \leq x < \dfrac{3\pi}{4}$ oppure $\dfrac{5\pi}{4} < x < 2\pi$, e la soluzione generale è
 $$
 -\frac{3\pi}{4} + 2n\pi < x < \frac{3\pi}{4} + 2n\pi, \qquad n \in \mathbb{Z} .
 $$
@@ -403,7 +403,7 @@ $$
 \sin x < 1
 \end{cases}
 $$
-La prima disequazione è soddisfatta su $\left[0, \dfrac{7\pi}{6}\right) \cup \left(\dfrac{11\pi}{6}, 2\pi\right)$. La seconda è soddisfatta per ogni $x$ tranne $x = \dfrac{\pi}{2}$, dove il seno vale $1$. Perciò le soluzioni sono
+La prima disequazione è soddisfatta su $\left[0, \dfrac{7\pi}{6}\right) \cup \left(\dfrac{11\pi}{6}, 2\pi\right)$, cioè per $0 \leq x < \dfrac{7\pi}{6}$ oppure $\dfrac{11\pi}{6} < x < 2\pi$. La seconda è soddisfatta per ogni $x$ tranne $x = \dfrac{\pi}{2}$, dove il seno vale $1$. Perciò le soluzioni sono
 $$
 0 \leq x < \frac{\pi}{2}, \qquad \frac{\pi}{2} < x < \frac{7\pi}{6}, \qquad \frac{11\pi}{6} < x < 2\pi .
 $$

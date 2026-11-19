@@ -15,7 +15,7 @@ A questa forma si arriva con i **principi di equivalenza**: sommare ai due membr
 - $b \neq 0$: nessuna soluzione (equazione **impossibile**);
 - $b = 0$: ogni $x$ è soluzione (**identità**).
 
-Per esempio $3(x - 2) + 5 = 2x$ equivale a $3x - 1 = 2x$, da cui $x = 1$.
+Per esempio $3(x - 2) + 5 = 2x$ equivale a $3x - 6 + 5 = 2x$, cioè a $3x - 1 = 2x$. Sottraendo $2x$ e sommando $1$ ai due membri si ottiene $x = 1$.
 :::
 
 :::esempio{titolo="Un'equazione di primo grado con parametro"}
@@ -78,7 +78,7 @@ Si cercano i valori di $k$ per cui $x^2 - 2kx + k + 2 = 0$ ha **due soluzioni re
 $$
 \frac{\Delta}{4} = k^2 - (k + 2) = k^2 - k - 2 = (k - 2)(k + 1) .
 $$
-Le soluzioni sono due e distinte quando $\dfrac{\Delta}{4} > 0$, che è una **disequazione di secondo grado** nel parametro $k$. Il trinomio $(k - 2)(k + 1)$ ha radici $-1$ e $2$ e coefficiente direttore positivo, quindi è positivo fuori dall'intervallo delle radici, e la condizione è soddisfatta per $k < -1$ oppure $k > 2$. Per $k = -1$ e per $k = 2$ il discriminante è nullo e l'equazione diventa $(x + 1)^2 = 0$ oppure $(x - 2)^2 = 0$, con una soluzione doppia.
+Le soluzioni sono due e distinte quando $\dfrac{\Delta}{4} > 0$, che è una **disequazione di secondo grado** nel parametro $k$. Il prodotto $(k - 2)(k + 1)$ è positivo quando i due fattori hanno lo stesso segno. Sono entrambi positivi per $k > 2$ ed entrambi negativi per $k < -1$, quindi la condizione è soddisfatta per $k < -1$ oppure $k > 2$. Per $k = -1$ e per $k = 2$ il discriminante è nullo e l'equazione diventa $(x + 1)^2 = 0$ oppure $(x - 2)^2 = 0$, con una soluzione doppia.
 :::
 
 :::definizione{#equazioni-incomplete titolo="Equazioni incomplete"}
@@ -115,7 +115,7 @@ Se $\Delta = 0$ le due espressioni coincidono e i calcoli restano validi con $x_
 ::::
 
 :::osservazione
-Il segno delle radici si legge dai coefficienti senza risolvere l'equazione. Se $\dfrac{c}{a} < 0$, il prodotto delle radici è negativo, quindi le radici sono reali e **discordi**; il discriminante è infatti positivo, perché $ac < 0$ dà $-4ac > 0$ e quindi $\Delta = b^2 - 4ac > 0$. Per $3x^2 + 5x - 7 = 0$ il prodotto vale $-\dfrac{7}{3}$, perciò l'equazione ha una radice positiva e una negativa; la formula risolutiva le dà uguali a $\dfrac{-5 \pm \sqrt{109}}{6}$, cioè circa $0{,}91$ e $-2{,}57$.
+Il segno delle radici si legge dai coefficienti senza risolvere l'equazione. Se $\dfrac{c}{a} < 0$, il prodotto delle radici è negativo, quindi le radici sono reali e **discordi**, cioè di segno opposto; il discriminante è infatti positivo, perché $ac < 0$ dà $-4ac > 0$ e quindi $\Delta = b^2 - 4ac > 0$. Per $3x^2 + 5x - 7 = 0$ il prodotto vale $-\dfrac{7}{3}$, perciò l'equazione ha una radice positiva e una negativa; la formula risolutiva le dà uguali a $\dfrac{-5 \pm \sqrt{109}}{6}$, cioè circa $0{,}91$ e $-2{,}57$.
 :::
 
 ## Equazioni di grado superiore
@@ -170,7 +170,7 @@ con soluzioni $t = 1$ e $t = 8$, perché la loro somma è $9$ e il loro prodotto
 ## Disequazioni di primo grado
 
 :::definizione{#disequazioni-primo-grado titolo="Disequazione di primo grado"}
-Una disequazione del tipo $ax + b > 0$ (o con $\geq$, $<$, $\leq$), con $a \neq 0$, si risolve isolando $x$ con due regole: sommare ai due membri la stessa quantità conserva il verso; moltiplicare i due membri per una quantità positiva conserva il verso, per una quantità *negativa* **lo inverte**. Le soluzioni formano una **semiretta**. Da $5 - 2x > 1$ segue $-2x > -4$, e dividendo per $-2$, con il verso invertito, $x < 2$.
+Una disequazione del tipo $ax + b > 0$ (o con $\geq$, $<$, $\leq$), con $a \neq 0$, si risolve isolando $x$ con due regole: sommare ai due membri la stessa quantità conserva il verso; moltiplicare i due membri per una quantità positiva conserva il verso, per una quantità *negativa* **lo inverte**. Le soluzioni formano una **semiretta**, cioè sono tutti i numeri minori, oppure tutti i numeri maggiori, di un numero fissato. Da $5 - 2x > 1$ segue $-2x > -4$, e dividendo per $-2$, con il verso invertito, $x < 2$.
 :::
 
 :::osservazione
@@ -180,7 +180,7 @@ Se dopo le semplificazioni il coefficiente di $x$ è nullo, la disequazione si r
 ## Disequazioni di secondo grado
 
 ::::teorema{#segno-della-parabola titolo="Segno del trinomio di secondo grado"}
-Sia $y = ax^2 + bx + c$ con $a > 0$ e $\Delta = b^2 - 4ac$. Il grafico è una parabola con concavità verso l'alto, e il trinomio è **positivo** dove la parabola sta **sopra** l'asse $x$.
+Sia $y = ax^2 + bx + c$ con $a > 0$ e $\Delta = b^2 - 4ac$. Il grafico è una parabola con concavità verso l'alto, trattata nel capitolo sulla geometria analitica, e il trinomio è **positivo** dove la parabola sta **sopra** l'asse $x$.
 
 - $\Delta > 0$, radici $x_1 < x_2$: il trinomio è positivo per $x < x_1$ oppure $x > x_2$, nullo nelle radici, negativo per $x_1 < x < x_2$.
 - $\Delta = 0$, radice doppia $x_0$: il trinomio è positivo per ogni $x \neq x_0$ e nullo in $x_0$.
