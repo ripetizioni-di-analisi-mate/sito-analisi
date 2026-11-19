@@ -73,7 +73,7 @@ const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
       ? link('en', sezione === 'domande' && materia ? '/' + materia : '/') : altraLingua(Astro.url.pathname, l.codice),
 }));
 const versoIt = altraLingua(Astro.url.pathname, 'it');
-const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({
+const legali = ['/privacy', '/termini'].map((path) => ({
   path, href: localizzato ? `${link('it', path)}?lingua=it` : link(lingua, path),
 }));
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
@@ -363,7 +363,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
       {lingua === 'it' && <a href={url('/materie')}>Tutte le materie</a>}
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
-      {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{fr ? ' (en italien)' : es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
+      {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini][i]}{fr ? ' (en italien)' : es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
       {cambioLingua.map(({ codice, nome, href }) => <a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a>)}
     </nav>
     {CATALOGO_USA_PUBBLICO && <StudyCountry lingua={lingua} corrente={usa ? 'US' : CATALOGO_PREDEFINITO} />}
