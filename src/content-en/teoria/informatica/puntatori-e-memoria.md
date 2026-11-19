@@ -6,13 +6,13 @@ sommario: Follow the memory of a C17 program from its first allocation to releas
 ## Addresses, values and access to an object
 
 :::definizione{#indirizzo-e-accesso titolo="Pointed-to object and dereferencing"}
-An object in C is a region of memory whose contents represent a value. Given an object `x` of type `int`, the expression `&x` gives its address and has type `int *`. This value can be stored in a variable `p` of type `int *`. The variable `p` is also an object. The value stored in `p` identifies `x`, while `&p` identifies the pointer itself and has type `int **`.
+Every variable occupies a position in memory, and the number of that position is its **address**. The operator `&` gives the address of a variable, so if `x` is an `int`, `&x` is the address of `x`. A **pointer** is a variable that contains an address. The declaration `int *p = &x;` creates a pointer `p` that contains the address of `x`; one says that `p` **points to** `x`. The type `int *` is read “pointer to `int`”. `p` is a variable too and in turn has an address, `&p`, of type `int **`.
 
-If `p` points to a live `int` object, **dereferencing** it with `*p` gives an expression that designates that object. Reading the expression obtains the stored value. On the left side of an assignment, provided no qualifier prevents modification, it specifies where to write. A trace therefore records the pointer’s target and the object’s contents in separate columns.
+The operator `*` applied to a pointer gives the variable the pointer points to; the operation is called **dereferencing**. If `p` points to `x`, writing `*p` is equivalent to writing `x`. When read, `*p` gives the value of `x`; on the left of an assignment, `*p = 14;` puts $14$ into `x`. To follow a program with pointers one keeps two pieces of information distinct, namely which variable each pointer points to and what each variable is worth.
 :::
 
 :::esempio{titolo="Copying a value and writing through an address"}
-The fragment occurs in a function body. Each of the objects `x`, `p` and `copy` occupies its own storage.
+The fragment is in the body of a function and uses three variables, the integer `x`, the pointer `p` and the integer `copy`.
 
 ```c
 int x = 7;
@@ -21,41 +21,41 @@ int copy = *p;
 *p = 14;
 ```
 
-During the initialization of `copy`, dereferencing reads $7$ from `x`. The last statement still selects `x` as its destination and writes $14$ there. At that point `x` is $14$ and `copy` is $7$, because its value was copied before the write.
+The third line reads `x` through `p` and puts $7$ into `copy`. The fourth writes $14$ into `x` through `p`. At the end `x` is $14$ and `copy` is still $7$, because `copy` is a distinct variable that had received a copy of the value before the modification.
 
-| Statement completed | Target of `p` | `x` | `copy` |
+| Statement executed | `p` points to | `x` | `copy` |
 |---|---|---:|---:|
-| `int *p = &x;` | `x` | 7 | not yet declared |
+| `int *p = &x;` | `x` | 7 | does not exist yet |
 | `int copy = *p;` | `x` | 7 | 7 |
 | `*p = 14;` | `x` | 14 | 7 |
 :::
 
 :::osservazione{#puntatore-nullo titolo="Explicit indication of absence"}
-The macro `NULL`, available in `<stddef.h>` among other headers, expands to a null pointer constant. Assigning it to a pointer produces the null value of that type. A null pointer compares unequal to a pointer to an object or function. A function that looks up an object can therefore return `NULL` to report its absence. The caller compares the result with `NULL` before attempting to access an object through it.
+A pointer may also point to nothing. This state is denoted by the special value `NULL`, defined for example in `<stddef.h>`, and the pointer is said to be **null**. `NULL` is different from the address of any variable. A function that searches for an element and returns its address uses `NULL` to signal that the element is not there, and whoever calls it compares the result with `NULL` before using it.
 :::
 
 :::attenzione
-An automatic pointer declared as `int *p;` has an indeterminate value until it is initialized or assigned. The test `p != NULL` requires a value that is already determinate. If the pointer initially represents absence, the declaration is `int *p = NULL;`. Dereferencing a null pointer has undefined behaviour.
+A pointer declared without an initial value, such as `int *p;` inside a function, contains an unpredictable address, and even comparing it with `NULL` gives no reliable information. A pointer that initially points to nothing is declared with `int *p = NULL;`. Dereferencing a null pointer, that is, writing `*p` when `p` is `NULL`, has undefined behavior, and usually the program stops.
 :::
 
 ## Effects of copies and the meaning of const
 
 :::definizione{#alias-e-const titolo="Aliases and qualified access"}
-Two pointers are **aliases** for an object when they both designate it. The initialization `int *q = p;` copies the value of an already initialized `int *`. If `p` points to `x`, the copy makes `q` point to `x` as well. The subsequent assignment `p = &y;` changes only the value stored in `p`. In a trace diagram, one arrow moves while the other keeps its target.
+Assigning one pointer to another copies the address. After `int *q = p;`, if `p` points to `x` then `q` points to `x` as well. Two pointers that point to the same variable are called **aliases**, and a modification made through one of them is seen through the other too. A later assignment `p = &y;` changes only `p`, whereas `q` keeps pointing to `x`.
 
-In the declaration `const int *p`, the qualifier applies to the integer accessed through `p`. The expression `*p` designates a `const int`, so assigning through that expression violates the constraint that requires a modifiable lvalue. In the declaration `int *const p`, the qualifier applies to the pointer. In that case the pointed-to object can be a modifiable integer, while the initial target stays fixed throughout the lifetime of `p`.
+The word `const` in a pointer declaration has two different meanings depending on its position. In `const int *p` the integer pointed to is constant, so through `p` it can be read but not modified, and `*p = 5;` is a compilation error; `p` itself can be made to point elsewhere. In `int *const p` the pointer is constant, always pointing to the same variable, whereas the integer pointed to can be modified.
 :::
 
 ::::teorema{titolo="Observing a write through an alias"}
-Let `p` and `q` be valid pointers to the same modifiable `int` object. If an assignment `*p = v;` writes a representable value and a later read through `*q` occurs before any other write, the read returns the assigned value. The criterion concerns the identity of the object designated by the two expressions.
+Let `p` and `q` be two pointers that point to the same `int` variable. After the assignment `*p = v;`, reading `*q` gives the value `v`, provided the variable has not been modified again in the meantime. What matters is therefore which variable the pointers point to, and not the name through which it is reached.
 
 :::dimostrazione
-The destination of the assignment is the object designated by `*p`. By hypothesis, `*q` designates that same object. The later read accesses its contents after the assignment. Since the contents remain unchanged between those operations, the read returns the stored value.
+The assignment writes `v` into the variable `p` points to. By hypothesis it is the same one `q` points to, so `*q` reads that variable, which contains `v`.
 :::
 ::::
 
 :::esempio{titolo="Changing the target of an alias"}
-Start from two distinct integers inside a function body.
+The fragment, in the body of a function, uses two integers and two pointers.
 
 ```c
 int x = 4;
@@ -67,11 +67,11 @@ q = &y;
 *q = *p + 3;
 ```
 
-Before `q` is updated, both pointers designate `x` and the assignment sets that object to $9$. After `q = &y`, the write through `q` goes to `y`, while the read through `p` gets $9$ from `x`. The final pair of values is $(9,12)$.
+After the fourth line `p` and `q` both point to `x`, and `*p = 9;` brings `x` to $9$. The line `q = &y;` makes `q` point to `y`. The last line reads `x` through `p`, obtains $9$, and writes $9+3=12$ into `y` through `q`. At the end `x` is $9$ and `y` is $12$.
 :::
 
 :::osservazione
-A function receives each argument **by value**, including an address. For example, in the following definition the parameter `out` is a copy of the address passed. Writing through the copy modifies the caller’s object, provided the argument points to a writable, live `int`.
+Pointers allow a function to modify a variable of its caller. The pass-by-value rule still holds, but what is copied into the parameter is an address, and through the address the function reaches the original variable.
 
 ```c
 void store(int *out, int value)
@@ -80,15 +80,15 @@ void store(int *out, int value)
 }
 ```
 
-The call `store(&x, 18)` writes $18$ to `x`. An assignment to the parameter `out` itself would affect the local parameter. To update a pointer variable in the caller, pass its address, which adds one level of indirection.
+The call `store(&x, 18)` copies the address of `x` into the parameter `out`, and `*out = value;` writes $18$ into `x`. It is the same mechanism as in `scanf("%d", &n)`. An assignment to `out` itself, such as `out = NULL;`, would modify only the local copy of the address.
 :::
 
 ## Valid positions within one array
 
 :::definizione{#passi-nello-stesso-array titolo="Offsets and differences in elements"}
-Let `a` be an array of $n\geq1$ elements of the same type `T`. In `a + i`, the name `a` is converted to a pointer to the first element. For an index $i$ satisfying $0\leq i<n$, `a + i` points to element `a[i]`. The value `a + n` is the **one-past pointer**. It denotes a boundary and can be compared with pointers within the same array.
+The name of an array, used in an expression, is worth the address of its first element, so `a` is equivalent to `&a[0]`. An integer can be added to a pointer. If `a` is an array of $n\geq 1$ elements, `a + i` is the address of the element with index $i$, that is, `&a[i]`, and `*(a + i)` is equivalent to `a[i]`. The sum counts in elements and not in bytes, because the compiler takes the size of the type into account. The value `a + n` is the address of the position just after the last element. It does not correspond to an element, but it is allowed as a boundary with which to compare the other pointers.
 
-If `p` corresponds to index $i$ and `q` to index $j$ in the same array, including the one-past position, `q - p` is $j-i$ when the difference is representable in `ptrdiff_t`. This signed integer type is declared in `<stddef.h>`. The difference is measured in elements. In the contiguous layout model, the signed distance in bytes is obtained by multiplying the difference by `sizeof(T)` as a mathematical quantity.
+The difference between two pointers into the same array gives the number of elements that separate them. If `p` points to the element with index $i$ and `q` to the one with index $j$, `q - p` is $j-i$. The result has type `ptrdiff_t`, a signed integer type declared in `<stddef.h>`. The distance in bytes is the difference multiplied by the size of one element.
 :::
 
 :::esempio{titolo="Reading a signed distance"}
@@ -96,23 +96,23 @@ Let `a` be the array `{10, 20, 30, 40}`. Take `p = a + 1`, `q = a + 3` and `end 
 
 ![Array a has values 10, 20, 30, 40, with p at index 1, q at index 3 and end at boundary 4.](/immagini/informatica/puntatori-e-memoria/schema-teoria-en.png)
 
-Since `q` is at index $3$ and `p` at index $1$, `q - p` is $3-1=2$. The opposite difference `p - q` is $-2$. On a machine where an element occupies four bytes, two elements correspond to an eight-byte distance. The value of `end - p` is $4-1=3$. This is the number of elements starting with the one designated by `p` and continuing to the end of the array.
+The pointer `q` corresponds to index $3$ and `p` to index $1$, so `q - p` is $2$ and `p - q` is $-2$. With four-byte elements the two addresses are eight bytes apart. The difference `end - p` is $4-1=3$, and it is the number of elements from the one `p` points to up to the end of the array.
 :::
 
 :::attenzione
-Pointer arithmetic stays within the same array extended by its one-past position. For a four-element array, `a + 4` is a valid boundary, while evaluating `a + 5` has undefined behaviour. Reading or writing through `a + 4` has undefined behaviour because there is no object at that position. Subtracting pointers to elements of distinct arrays also has undefined behaviour. Addresses appearing close together in a particular execution do not meet the same-array requirement.
+Sums and differences of pointers are defined only within one and the same array, including the position just after the last element. For an array of four elements `a + 4` is a valid boundary, but `*(a + 4)` is an access outside the array, and even just computing `a + 5` has undefined behavior. The difference between pointers into two different arrays is undefined, even if in a given execution the two arrays happen to be close in memory.
 :::
 
 ## Traversing a range with an excluded endpoint
 
 :::definizione{#intervallo-di-puntatori titolo="Half-open pointer range"}
-A half-open range `[first, last)` in an array contains the elements from `first` through the position before `last`. Both endpoints belong to the allowed positions of the same array and the index of `first` is less than or equal to the index of `last`. The case `first == last` is the empty range. In the special case where a contract allows both endpoints to be null for an empty range, equality must end the loop before any arithmetic.
+A part of an array can be specified by two pointers instead of two indices. The interval `[first, last)` comprises the elements from the one `first` points to up to the one that precedes `last`; `last` is the excluded boundary. The two pointers must belong to the same array, with `first` not after `last`. If `first == last` the interval is empty.
 
-Traversing a range by address lets the same algorithm process the entire array or an internal section. The final position remains the loop boundary. The body accesses only the element immediately before that boundary or an earlier element.
+A loop over an interval of pointers starts from `first`, advances with `++p` and stops when `p` equals `last`. The same loop works for the whole array, with `first = a` and `last = a + n`, and for a part of it.
 :::
 
 ::::teorema{titolo="Exact counting during traversal"}
-Let `first` and `last` be ordered endpoints of a valid range of initialized integers, with length representable in `size_t`. The following fragment counts the elements equal to `key`. The declarations for `size_t` from `<stddef.h>` are visible.
+Let `first` and `last` be the boundaries of a valid interval of integers that have a value. The following fragment counts in `hits` the elements of the interval equal to `key`. The pointer is declared `const int *` because the elements are only read, and `size_t` is declared in `<stddef.h>`.
 
 ```c
 size_t hits = 0;
@@ -124,30 +124,30 @@ for (const int *p = first; p != last; ++p) {
 ```
 
 :::dimostrazione
-At the start of each iteration, `hits` is the number of occurrences in the visited range `[first, p)`. When `p = first`, that range is empty and the counter is zero. If `p != last`, the current position denotes an element in the range. The conditional statement adds one exactly when the element equals the key. Advancing `p` then extends the visited range by one element and preserves the invariant.
+The invariant is “at the start of every iteration `hits` is the number of elements equal to `key` in the stretch `[first, p)`”. At the start `p` equals `first`, the stretch is empty and `hits` is zero. If `p != last`, `p` points to an element of the interval; the body increases `hits` exactly when that element equals `key`, and `++p` lengthens the stretch by one element, so the invariant is preserved.
 
-The pointer advances by one element per iteration and the endpoints enclose a finite number of positions. At termination `p == last`, so the invariant applies to the whole range. The counter never exceeds its length, so every increment is representable.
+At each iteration `p` advances by one element and the positions up to `last` are finite in number, so the loop terminates with `p == last`. At that moment the stretch `[first, p)` is the whole interval.
 :::
 ::::
 
 :::esempio{titolo="Counting without including the endpoint"}
-In the array `{4, 8, 4, 1, 4}`, take `first = a + 1`, `last = a + 4` and `key = 4`. The traversal visits indices $1$, $2$ and $3$, whose values are $8$, $4$ and $1$, respectively. Only index $2$ contributes to the count. The element at index $4$ also has value $4$, but it is the excluded endpoint, so the result is $1$.
+In the array `{4, 8, 4, 1, 4}` one sets `first = a + 1`, `last = a + 4` and `key = 4`. The loop examines the elements with indices $1$, $2$ and $3$, which are $8$, $4$ and $1$, and only the one with index $2$ equals `key`. The element with index $4$ is $4$, but it is the excluded boundary, so the result is $1$.
 :::
 
 ## Lifetimes and validity of access
 
 :::definizione{#durata-degli-oggetti-puntati titolo="Storage duration"}
-**Storage duration** determines the period for which an object’s storage is available. Three cases apply to the examples in this chapter.
+A pointer is usable only as long as the variable it points to exists. The period in which a variable exists is its **storage duration**, and there are three cases.
 
-- An ordinary local object, such as `int x = 12;` in a function, has automatic storage duration. For an automatic object without a variably sized type, the lifetime extends from entry into the associated block until the block ends. A call or an inner block suspends execution of the outer block while the object’s lifetime continues.
-- An object declared `static` inside a block has static storage duration. It exists throughout the execution of the program, although its name is usable only within the scope of its declaration.
-- An object obtained through a successful allocation has allocated storage duration, from allocation until the corresponding release.
+- **Automatic duration.** A variable declared inside a function, such as `int x = 12;`, exists from when execution enters the block in which it is declared until it leaves it. On return from the function it no longer exists.
+- **Static duration.** A variable declared with `static` exists for the whole execution of the program, even though its name is visible only inside the function.
+- **Allocated duration.** A block of memory obtained with `malloc` exists from when it is obtained until the program releases it with `free`.
 
-The scope of a name concerns the part of the source in which the name can be used. The lifetime concerns the object during execution. A pointer parameter and the object it points to can have different lifetimes.
+Duration is distinct from scope, which is the part of the source in which a name can be used. A variable may still exist in memory at a point of the program where its name is not visible, and be reached through a pointer.
 :::
 
 :::esempio{titolo="Obtaining an address that remains valid"}
-This function returns the address of an object with static storage duration.
+The function returns the address of a static variable, which remains valid after the return.
 
 ```c
 const int *limit_address(void)
@@ -157,27 +157,27 @@ const int *limit_address(void)
 }
 ```
 
-The name `limit` is local to the function block. The object remains available after the return, and the caller can read its value through the returned address. Two calls return the address of the same object. The function block ends on the first return, while the static lifetime of `limit` continues.
+The name `limit` is visible only inside the function, but the variable exists for the whole execution, so the caller can read its value through the address received. Two calls return the same address, because there is only one variable.
 :::
 
 :::attenzione
-When an object’s lifetime ends, the value of a pointer that designated it becomes indeterminate. For example, after leaving the block that declares an automatic integer, accessing it through an address saved before leaving the block has undefined behaviour. The same rule applies to pointers that designated a block that has been released. A trace first reconstructs the object’s lifetime and then checks whether the access falls within it.
+When a variable ceases to exist, the pointers that pointed to it are no longer usable; a pointer in this state is called a **dangling pointer**. The typical error is a function that returns the address of one of its own automatic variables, as in `int x = 5; return &x;`. On return `x` no longer exists, and using that address has undefined behavior. The same holds for a pointer to a block already released with `free`.
 :::
 
 ## Requesting space in bytes and initializing it
 
 :::definizione{#dimensione-allocazione titolo="Sizing a block before requesting it"}
-`malloc`, declared in `<stdlib.h>`, takes a byte count of type `size_t`. If a positive request succeeds, it returns a pointer to the block obtained. On failure it returns a null pointer. Its result has type `void *`. Assignment to an `int *` converts the value to the destination pointer type. The initial contents of a block obtained with `malloc` are indeterminate.
+So far the amount of memory was fixed when writing the program. With **dynamic allocation** the program asks for memory during execution, in the amount needed at that moment, for example for an array whose length is known only after reading the data. The function `malloc`, declared in `<stdlib.h>`, receives the number of bytes requested and returns the address of the start of the block obtained, or `NULL` if the memory is not available. The result has type `void *`, that is, “pointer to an unspecified type”, and is assigned directly to a pointer of the desired type. The contents of the block just obtained are unpredictable.
 
-For $n$ elements of size $s$, where $s>0$, the mathematical request is $n s$ bytes. The product is representable in `size_t` if and only if
+For $n$ elements of $s>0$ bytes each, $ns$ bytes are needed, and the request is written `malloc(n * sizeof *p)`. The product is computed in the type `size_t` and must not exceed its maximum `SIZE_MAX`, defined in `<stdint.h>`. This happens if and only if
 $$
 n \leq \left\lfloor \dfrac{\mathrm{SIZE\_MAX}}{s}\right\rfloor .
 $$
-`SIZE_MAX`, declared in `<stdint.h>`, is the maximum value of `size_t`. Integer division of `SIZE_MAX` by the positive element size gives the bound to check before multiplication.
+The limit is computed with the integer division `SIZE_MAX / s`, and the comparison must be made before the multiplication.
 :::
 
 :::esempio{titolo="Allocating an array with an explicit bound"}
-The following function takes an element count and returns a block of integers to be initialized. The contract also chooses `NULL` for $n=0$, so every actual call to `malloc` uses a positive size.
+The function receives the number of elements and returns a block for `n` integers, or `NULL` if `n` is zero, if the product would exceed `SIZE_MAX` or if `malloc` fails.
 
 ```c
 #include <stdint.h>
@@ -194,27 +194,27 @@ int *allocate_ints(size_t n)
 }
 ```
 
-Here `sizeof *p` uses the fixed type `int`, and its operand is not evaluated. The value of `p` is therefore irrelevant to the size computation. If `sizeof(int)` is four bytes and $n=6$, the checked request is twenty-four bytes. A representable request can still fail if storage is unavailable, so the caller checks the returned pointer in all cases.
+The expression `sizeof *p` is the size of the type `p` points to, that is, `int`. The compiler derives it from the type without reading `p`, so it can be used even when `p` does not have a value yet. With a four-byte `int` and $n=6$ the request is for twenty-four bytes. Whoever calls the function must check that the result is different from `NULL` before using it.
 :::
 
 :::definizione{#inizializzazione-allocata titolo="Contents before the first access"}
-With `malloc`, a program obtains storage and then writes the value of each element it will read. With `calloc(n, s)`, when $n>0$, $s>0$ and the result is non-null, the storage obtained holds $n$ elements of $s$ bytes each, with all bits initially zero. For `unsigned char`, these bits represent numerical zero. An all-zero representation is not required for a null pointer value or for floating-point zero.
+Memory obtained with `malloc` must be filled before it is read, by assigning a value to each element. The function `calloc(n, s)` asks for memory for $n$ elements of $s$ bytes and in addition zeroes it, setting all the bits to zero. For integer types this means that every element is $0$. The standard does not guarantee that all bits zero represent the null pointer or floating-point zero, although on common computers this is the case.
 :::
 
 :::esempio{titolo="Distinguishing allocation from initialization"}
-With `<stdlib.h>` included and `unsigned char *p = calloc(4, sizeof *p);`, the four elements initially have value zero if `p` is non-null. After the assignments `p[1] = 7;` and `p[3] = 2;`, the sequence is $(0,7,0,2)$. Its sum is $9$. The same sequence can be obtained with `malloc` by explicitly initializing the elements at indices $0$ and $2$ as well. A check of the pointer comes before either procedure.
+With `<stdlib.h>` included, after `unsigned char *p = calloc(4, sizeof *p);` one checks that `p` is different from `NULL`. The four elements are zero. After `p[1] = 7;` and `p[3] = 2;` the contents are $(0,7,0,2)$, with sum $9$. With `malloc` in place of `calloc` one would have to assign `p[0]` and `p[2]` explicitly as well.
 :::
 
 ## Responsibility for blocks and release
 
 :::definizione{#proprieta-del-blocco titolo="Owners and borrowed references"}
-**Ownership** of a block is the responsibility for releasing it when its use is finished. It is a program convention documented in function contracts. An owning pointer retains the reference used to call `free`. A borrowed reference accesses the block during the period permitted by the owner. Copying the address creates another pointer value to the same block and leaves the number of allocations unchanged.
+Every block obtained with `malloc` must be given back to the system with `free` when it is no longer needed; a block that is never released stays occupied to no purpose, and the error is called a **memory leak**. To avoid forgetting a release or making two, for each block one establishes which part of the program is its **owner**, that is, has the task of calling `free`. Ownership is a convention, written in the contract of the functions, and the compiler does not check it. Copying the address of a block into another pointer does not create a second block; the two pointers refer to the same memory, and only one of them is the owner.
 
-A function can transfer ownership by returning a pointer to a newly obtained block. The caller keeps the result if it is non-null and arranges for its release on each later exit path. To check a branch, list the live blocks and identify who is responsible for each one.
+A function that allocates a block and returns its address transfers ownership to its caller, which will have to release it on every execution path, including those that leave early because of an error.
 :::
 
 :::esempio{titolo="Completing two successive requests"}
-With `<stdlib.h>` included, the function uses two allocated integers for which it retains responsibility. Its return value indicates whether it could perform both writes.
+The function allocates two integers, uses them and releases them before returning, so it is their owner from beginning to end. It returns $1$ if both allocations succeed and $0$ otherwise.
 
 ```c
 int record_pair(int x, int y)
@@ -236,26 +236,26 @@ int record_pair(int x, int y)
 }
 ```
 
-If the first allocation fails, the function has no blocks to release. If only the first allocation succeeds, `left` retains responsibility for the single block obtained. On success there are two distinct blocks, and the releases end their respective lifetimes. The final live-block count is zero on each of the three paths.
+There are three possible paths. If the first allocation fails there is nothing to release. If the first succeeds and the second fails, the function releases `left` before returning. If both succeed, the function uses the two blocks and releases both of them. On every path, on return all the blocks obtained have been released.
 :::
 
 :::attenzione{#rilascio-e-alias titolo="Effects of free on references"}
-`free` accepts a null pointer with no effect, or a value matching the starting address returned for a block that is still live. After release, the owner variable can be assigned `NULL`, because direct assignment to the pointer does not read its previous contents. The write affects that variable alone. A copy of the address stored elsewhere remains indeterminate and does not permit reading, comparing or releasing the object again. An interior pointer away from the start of the block is also invalid as an argument to `free`.
+To `free` one passes the address returned by `malloc`, `calloc` or `realloc` for a block not yet released, or `NULL`, in which case nothing happens. Releasing the same block twice, passing an address inside the block such as `p + 1`, and using the block after its release are errors with undefined behavior. After `free(p);` it is advisable to write `p = NULL;`, so that a later use by mistake can be recognized. Any other copies of the address, however, remain dangling pointers.
 :::
 
 ## Resizing and preserving contents
 
 :::definizione{#ridimensionamento-con-realloc titolo="Outcomes of realloc for a positive size"}
-Let `p` be the owning pointer to a live allocated block. Let `bytes` be a strictly positive new size representable in `size_t`. The call `realloc(p, bytes)` has two relevant outcomes.
+The function `realloc(p, bytes)` changes the size of a block already allocated, for example to lengthen an array. Here `p` is the address of the block and `bytes` the new size, greater than zero. There are two possible outcomes.
 
-- On failure it returns `NULL`. The previous block is still available and its contents are unchanged.
-- On success it returns a pointer to the new block. The contents are preserved up to the smaller of the previous size and the requested size. Any added portion has indeterminate contents. The lifetime of the previous object ends and pointers that designated it become indeterminate even if the returned storage is at the same location.
+- If the memory is not available, `realloc` returns `NULL` and the old block remains valid, with its contents unchanged.
+- If it succeeds, it returns the address of the block with the new size, which may be at a different point in memory. The contents are preserved up to the smaller of the old and the new size, and the added part has unpredictable contents. The old address is no longer usable, and neither are the pointers that pointed inside the old block.
 
-The call result is stored in a new variable. The success branch replaces the owning reference, rebuilds any needed interior pointers from the new pointer, and initializes the added elements that will be read. A zero-size request follows implementation-defined rules in C17, so the contracts in this chapter handle it before calling `realloc`.
+For this reason the result must be put into a variable different from `p`. Writing `p = realloc(p, bytes);`, in case of failure `p` would become `NULL` and the address of the old block, still allocated, would be lost. Only after checking that the result is different from `NULL` is it copied into `p`.
 :::
 
 :::esempio{titolo="Growing capacity while preserving three integers"}
-With `<stdlib.h>` included, suppose `p` owns a block of three integers initialized to $7$, $11$ and $18$, and the byte count for five integers is representable. The fragment runs inside a function.
+With `<stdlib.h>` included, `p` points to a block of three integers worth $7$, $11$ and $18$. The fragment brings the block to five integers.
 
 ```c
 int *next = realloc(p, 5 * sizeof *p);
@@ -266,9 +266,9 @@ if (next != NULL) {
 }
 ```
 
-On success the first three integers keep their values, and the two writes complete initialization. The sequence becomes $(7,11,18,0,0)$. On failure the assignment to `p` is skipped and the block of three elements remains valid. A capacity stored in a separate variable is updated in the success branch. In both cases the reference held in `p` identifies the block that will need to be released.
+If `realloc` succeeds, the first three integers keep their values and the two assignments give a value to the added elements, so the contents are $(7,11,18,0,0)$. If it fails, `p` is not modified and still points to the block of three integers. In both cases `p` contains the address of the block to release at the end.
 :::
 
 :::osservazione
-With a null pointer `p` and a positive size, `realloc(p, bytes)` behaves like `malloc(bytes)`. This lets a program represent an initially empty array with zero capacity and a null owning reference, then obtain the first block with the same checks used for growth. To preserve the position of an element across a resize, save its index. If the index is within the new capacity, its pointer can be reconstructed from the successful result without reusing an address from the previous block.
+If `p` is `NULL`, `realloc(p, bytes)` behaves like `malloc(bytes)`. A growing array can therefore be handled with a single scheme, starting from a null pointer and a capacity of zero and using `realloc` both for the first block and for the extensions. Since the block may change position, to remember an element across a resize one keeps its index and not its address.
 :::

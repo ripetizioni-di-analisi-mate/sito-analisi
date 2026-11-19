@@ -6,13 +6,13 @@ sommario: Indirizzi, array e durata degli oggetti permettono di seguire la memor
 ## Indirizzo, valore e accesso a un oggetto
 
 :::definizione{#indirizzo-e-accesso titolo="Oggetto puntato e dereferenziazione"}
-Un oggetto in C è una regione di memoria il cui contenuto rappresenta un valore. Dato un oggetto `x` di tipo `int`, l’espressione `&x` ne fornisce l’indirizzo e ha tipo `int *`. Si può conservare questo valore in una variabile `p` di tipo `int *`. In tal caso, `p` è a sua volta un oggetto. Il valore contenuto in `p` individua `x`, mentre `&p` individua il puntatore stesso e ha tipo `int **`.
+Ogni variabile occupa una posizione in memoria, e il numero di quella posizione è il suo **indirizzo**. L’operatore `&` dà l’indirizzo di una variabile, quindi se `x` è un `int`, `&x` è l’indirizzo di `x`. Un **puntatore** è una variabile che contiene un indirizzo. La dichiarazione `int *p = &x;` crea un puntatore `p` che contiene l’indirizzo di `x`; si dice che `p` **punta** a `x`. Il tipo `int *` si legge «puntatore a `int`». Anche `p` è una variabile e ha a sua volta un indirizzo, `&p`, di tipo `int **`.
 
-Se `p` punta a un oggetto `int` in corso di durata, la **dereferenziazione** `*p` dà un’espressione che designa quell’oggetto. Quando l’espressione è letta, si ottiene il valore memorizzato. Quando è a sinistra di un assegnamento, in assenza di qualifiche che impediscono la modifica, indica dove scrivere. Durante una traccia si registrano quindi la destinazione del puntatore e il contenuto dell’oggetto in due colonne separate.
+L’operatore `*` applicato a un puntatore dà la variabile a cui il puntatore punta; l’operazione si chiama **dereferenziazione**. Se `p` punta a `x`, scrivere `*p` equivale a scrivere `x`. In lettura, `*p` dà il valore di `x`; a sinistra di un assegnamento, `*p = 14;` mette $14$ in `x`. Per seguire un programma con puntatori si tengono distinte due informazioni, cioè a quale variabile punta ciascun puntatore e quanto vale ciascuna variabile.
 :::
 
 :::esempio{titolo="Copiare un valore e scrivere attraverso un indirizzo"}
-Il frammento è nel corpo di una funzione. I tre oggetti `x`, `p` e `copy` hanno ciascuno la propria memoria.
+Il frammento si trova nel corpo di una funzione e usa tre variabili, l’intero `x`, il puntatore `p` e l’intero `copy`.
 
 ```c
 int x = 7;
@@ -21,41 +21,41 @@ int copy = *p;
 *p = 14;
 ```
 
-Al momento dell’inizializzazione di `copy`, la dereferenziazione legge $7$ da `x`. L’ultima istruzione sceglie ancora `x` come destinazione e vi scrive $14$. A quel punto `x` vale $14$ e `copy` vale $7$, perché il suo valore era stato copiato prima della scrittura.
+La terza riga legge `x` attraverso `p` e mette $7$ in `copy`. La quarta scrive $14$ in `x` attraverso `p`. Alla fine `x` vale $14$ e `copy` vale ancora $7$, perché `copy` è una variabile distinta che aveva ricevuto una copia del valore prima della modifica.
 
-| Istruzione completata | Destinazione di `p` | `x` | `copy` |
+| Istruzione eseguita | `p` punta a | `x` | `copy` |
 |---|---|---:|---:|
-| `int *p = &x;` | `x` | 7 | da dichiarare |
+| `int *p = &x;` | `x` | 7 | non esiste ancora |
 | `int copy = *p;` | `x` | 7 | 7 |
 | `*p = 14;` | `x` | 14 | 7 |
 :::
 
 :::osservazione{#puntatore-nullo titolo="Indicazione esplicita di assenza"}
-La macro `NULL`, disponibile per esempio in `<stddef.h>`, si espande in una costante di puntatore nullo. Assegnata a un puntatore, produce il valore nullo di quel tipo. Il valore nullo si confronta diverso da un puntatore a un oggetto o a una funzione. Una funzione che cerca un oggetto può quindi restituire `NULL` per indicarne l’assenza. Il chiamante confronta il risultato con `NULL` prima di un eventuale accesso.
+Un puntatore può anche non puntare a nulla. Questo stato si indica con il valore speciale `NULL`, definito per esempio in `<stddef.h>`, e il puntatore si dice **nullo**. `NULL` è diverso dall’indirizzo di qualsiasi variabile. Una funzione che cerca un elemento e restituisce il suo indirizzo usa `NULL` per segnalare che l’elemento non c’è, e chi la chiama confronta il risultato con `NULL` prima di usarlo.
 :::
 
 :::attenzione
-Un puntatore automatico dichiarato come `int *p;` ha un valore indeterminato finché non viene inizializzato o assegnato. Il test `p != NULL` richiede un valore già determinato. Se il puntatore deve rappresentare inizialmente un’assenza, si usa `int *p = NULL;`. Una dereferenziazione del valore nullo ha comportamento indefinito.
+Un puntatore dichiarato senza valore iniziale, come `int *p;` dentro una funzione, contiene un indirizzo imprevedibile, e nemmeno il confronto con `NULL` dà un’informazione affidabile. Un puntatore che all’inizio non punta a nulla si dichiara con `int *p = NULL;`. Dereferenziare un puntatore nullo, cioè scrivere `*p` quando `p` vale `NULL`, ha comportamento indefinito, e di solito il programma si interrompe.
 :::
 
 ## Effetti delle copie e significato di const
 
 :::definizione{#alias-e-const titolo="Alias e accesso qualificato"}
-Due puntatori sono **alias** di un oggetto quando entrambi lo designano. L’inizializzazione `int *q = p;` copia il valore di un `int *` già inizializzato. Se `p` punta a `x`, la copia fa puntare anche `q` a `x`. L’assegnamento successivo `p = &y;` cambia soltanto il valore memorizzato in `p`. Nel disegno della traccia si sposta una freccia, mentre l’altra conserva la destinazione.
+Assegnare un puntatore a un altro copia l’indirizzo. Dopo `int *q = p;`, se `p` punta a `x` anche `q` punta a `x`. Due puntatori che puntano alla stessa variabile si chiamano **alias**, e una modifica fatta attraverso uno dei due si vede anche attraverso l’altro. Un assegnamento successivo `p = &y;` cambia soltanto `p`, mentre `q` continua a puntare a `x`.
 
-Nella dichiarazione `const int *p`, la qualifica riguarda l’intero accessibile attraverso `p`. L’espressione `*p` designa un `const int` e l’assegnamento attraverso quell’espressione viola il vincolo che richiede un lvalue modificabile. Nella dichiarazione `int *const p`, la qualifica riguarda invece il puntatore. In questo caso l’oggetto puntato può essere un intero modificabile, mentre la destinazione iniziale è fissata per la durata di `p`.
+La parola `const` in una dichiarazione di puntatore ha due significati diversi secondo la posizione. In `const int *p` è costante l’intero puntato, quindi attraverso `p` lo si può leggere ma non modificare, e `*p = 5;` è un errore di compilazione; `p` stesso può essere fatto puntare altrove. In `int *const p` è costante il puntatore, che punta sempre alla stessa variabile, mentre l’intero puntato si può modificare.
 :::
 
 ::::teorema{titolo="Propagazione di una scrittura fra alias"}
-Siano `p` e `q` due puntatori validi allo stesso oggetto `int` modificabile. Se un assegnamento `*p = v;` scrive un valore rappresentabile e una lettura successiva di `*q` è effettuata prima di altre scritture, la lettura restituisce il valore assegnato. Il criterio riguarda l’identità dell’oggetto designato.
+Siano `p` e `q` due puntatori che puntano alla stessa variabile `int`. Dopo l’assegnamento `*p = v;`, una lettura di `*q` dà il valore `v`, se nel frattempo la variabile non è stata modificata di nuovo. Conta quindi a quale variabile i puntatori puntano, e non con quale nome la si raggiunge.
 
 :::dimostrazione
-La destinazione dell’assegnamento è l’oggetto designato dall’espressione `*p`. Per ipotesi lo stesso oggetto è designato da `*q`. La lettura successiva ne accede al contenuto dopo l’assegnamento. Poiché fra le due operazioni il contenuto resta invariato, il risultato della lettura è quello memorizzato.
+L’assegnamento scrive `v` nella variabile a cui punta `p`. Per ipotesi è la stessa a cui punta `q`, quindi `*q` legge quella variabile, che contiene `v`.
 :::
 ::::
 
 :::esempio{titolo="Spostare un alias"}
-Nel corpo di una funzione si parta da due interi distinti.
+Il frammento, nel corpo di una funzione, usa due interi e due puntatori.
 
 ```c
 int x = 4;
@@ -67,11 +67,11 @@ q = &y;
 *q = *p + 3;
 ```
 
-Prima di aggiornare `q`, entrambi i puntatori designano `x` e l’assegnamento porta quell’oggetto a $9$. Dopo `q = &y`, la scrittura attraverso `q` va in `y`, mentre la lettura attraverso `p` prende $9$ da `x`. La coppia finale dei valori è $(9,12)$.
+Dopo la quarta riga `p` e `q` puntano entrambi a `x`, e `*p = 9;` porta `x` a $9$. La riga `q = &y;` fa puntare `q` a `y`. L’ultima riga legge `x` attraverso `p`, ottiene $9$, e scrive $9+3=12$ in `y` attraverso `q`. Alla fine `x` vale $9$ e `y` vale $12$.
 :::
 
 :::osservazione
-Una funzione riceve ciascun argomento **per valore**, anche quando riceve un indirizzo. Per esempio, nella definizione seguente il parametro `out` è una copia dell’indirizzo passato. La scrittura attraverso la copia modifica l’oggetto del chiamante, purché l’argomento punti a un `int` scrivibile e in corso di durata.
+I puntatori permettono a una funzione di modificare una variabile di chi la chiama. La regola del passaggio per valore resta valida, ma ciò che viene copiato nel parametro è un indirizzo, e attraverso l’indirizzo la funzione raggiunge la variabile originale.
 
 ```c
 void store(int *out, int value)
@@ -80,15 +80,15 @@ void store(int *out, int value)
 }
 ```
 
-La chiamata `store(&x, 18)` scrive $18$ in `x`. Un assegnamento al solo parametro `out` avrebbe effetto sul parametro locale. Per aggiornare una variabile puntatore del chiamante si passa invece il suo indirizzo, che ha un livello di indirezione in più.
+La chiamata `store(&x, 18)` copia l’indirizzo di `x` nel parametro `out`, e `*out = value;` scrive $18$ in `x`. È lo stesso meccanismo di `scanf("%d", &n)`. Un assegnamento a `out` stesso, come `out = NULL;`, modificherebbe soltanto la copia locale dell’indirizzo.
 :::
 
 ## Posizioni ammesse in uno stesso array
 
 :::definizione{#passi-nello-stesso-array titolo="Spostamenti e differenze in elementi"}
-Sia `a` un array di $n\geq1$ elementi dello stesso tipo `T`. In `a + i`, il nome `a` si converte in un puntatore al primo elemento. Per un indice $i$ con $0\leq i<n$, `a + i` punta all’elemento `a[i]`. Il valore `a + n` è il puntatore **alla posizione successiva** all’ultimo elemento. Esso rappresenta un confine e può essere confrontato con puntatori dello stesso array.
+Il nome di un vettore, usato in un’espressione, vale l’indirizzo del suo primo elemento, quindi `a` equivale a `&a[0]`. A un puntatore si può sommare un intero. Se `a` è un vettore di $n\geq 1$ elementi, `a + i` è l’indirizzo dell’elemento di indice $i$, cioè `&a[i]`, e `*(a + i)` equivale ad `a[i]`. La somma conta in elementi e non in byte, perché il compilatore tiene conto della dimensione del tipo. Il valore `a + n` è l’indirizzo della posizione subito dopo l’ultimo elemento. Non corrisponde a un elemento, ma è ammesso come confine con cui confrontare gli altri puntatori.
 
-Se `p` corrisponde all’indice $i$ e `q` all’indice $j$ dello stesso array, includendo la posizione successiva, `q - p` vale $j-i$ quando la differenza è rappresentabile in `ptrdiff_t`. Questo tipo intero con segno è dichiarato in `<stddef.h>`. La differenza esprime un numero di elementi. La distanza in byte di quelle posizioni nel modello contiguo si ottiene moltiplicando la differenza per `sizeof(T)`, intesa come grandezza matematica.
+La differenza fra due puntatori allo stesso vettore dà il numero di elementi che li separa. Se `p` punta all’elemento di indice $i$ e `q` a quello di indice $j$, `q - p` vale $j-i$. Il risultato ha tipo `ptrdiff_t`, un tipo intero con segno dichiarato in `<stddef.h>`. La distanza in byte è la differenza moltiplicata per la dimensione di un elemento.
 :::
 
 :::esempio{titolo="Leggere una distanza orientata"}
@@ -96,23 +96,23 @@ Sia `a` l’array `{10, 20, 30, 40}`. Si prendano `p = a + 1`, `q = a + 3` ed `e
 
 ![Array a con valori 10, 20, 30, 40, p all’indice 1, q all’indice 3 ed end al confine 4.](/immagini/informatica/puntatori-e-memoria/schema-teoria-it.png)
 
-Poiché `q` è all’indice $3$ e `p` all’indice $1$, `q - p` vale $3-1=2$. La differenza opposta `p - q` vale $-2$. Su una macchina in cui un elemento occupa quattro byte, due elementi corrispondono a otto byte di distanza. Il valore di `end - p` è $4-1=3$. Questo è il numero degli elementi a partire da quello designato da `p` e fino al termine dell’array.
+Il puntatore `q` corrisponde all’indice $3$ e `p` all’indice $1$, quindi `q - p` vale $2$ e `p - q` vale $-2$. Con elementi di quattro byte i due indirizzi distano otto byte. La differenza `end - p` vale $4-1=3$, ed è il numero di elementi da quello puntato da `p` fino alla fine del vettore.
 :::
 
 :::attenzione
-L’aritmetica dei puntatori si svolge entro lo stesso array, esteso alla sola posizione successiva. Per un array di quattro elementi, `a + 4` è un confine valido, mentre calcolare `a + 5` ha comportamento indefinito. L’accesso in lettura o scrittura attraverso `a + 4` ha comportamento indefinito perché manca un oggetto in quella posizione. Anche la sottrazione fra puntatori a elementi di due array distinti è indefinita. Una vicinanza apparente degli indirizzi in una particolare esecuzione non soddisfa la condizione sullo stesso array.
+Somme e differenze di puntatori sono definite soltanto all’interno di uno stesso vettore, compresa la posizione subito dopo l’ultimo elemento. Per un vettore di quattro elementi `a + 4` è un confine valido, ma `*(a + 4)` è un accesso fuori dal vettore, e anche il solo calcolo di `a + 5` ha comportamento indefinito. La differenza fra puntatori a due vettori diversi è indefinita, anche se in una certa esecuzione i due vettori risultano vicini in memoria.
 :::
 
 ## Scansione con un confine escluso
 
 :::definizione{#intervallo-di-puntatori titolo="Intervallo semichiuso di puntatori"}
-Un intervallo semichiuso `[first, last)` di un array comprende gli elementi da `first` fino alla posizione che precede `last`. I due estremi appartengono alle posizioni ammesse dello stesso array e l’indice di `first` è minore o uguale all’indice di `last`. Il caso `first == last` è l’intervallo vuoto. Nel caso particolare in cui un contratto ammette entrambi gli estremi nulli per l’intervallo vuoto, il ciclo deve concludersi per uguaglianza prima di qualsiasi aritmetica.
+Una parte di un vettore si può indicare con due puntatori invece che con due indici. L’intervallo `[first, last)` comprende gli elementi da quello puntato da `first` fino a quello che precede `last`; `last` è il confine escluso. I due puntatori devono appartenere allo stesso vettore, con `first` non successivo a `last`. Se `first == last` l’intervallo è vuoto.
 
-Percorrere un intervallo per indirizzi consente di riusare il medesimo algoritmo per l’array intero e per una parte interna. La posizione finale resta il limite del ciclo. Nel corpo si accede soltanto all’elemento che precede quel limite o a un elemento anteriore.
+Un ciclo su un intervallo di puntatori parte da `first`, avanza con `++p` e si ferma quando `p` è uguale a `last`. Lo stesso ciclo funziona per il vettore intero, con `first = a` e `last = a + n`, e per una sua parte.
 :::
 
 ::::teorema{titolo="Conteggio esatto durante una scansione"}
-Siano `first` e `last` i confini ordinati di un intervallo valido di interi inizializzati, con lunghezza rappresentabile in `size_t`. Il frammento seguente conta gli elementi uguali a `key`. Le dichiarazioni di `size_t` in `<stddef.h>` sono visibili.
+Siano `first` e `last` i confini di un intervallo valido di interi che hanno un valore. Il frammento seguente conta in `hits` gli elementi dell’intervallo uguali a `key`. Il puntatore è dichiarato `const int *` perché gli elementi vengono soltanto letti, e `size_t` è dichiarato in `<stddef.h>`.
 
 ```c
 size_t hits = 0;
@@ -124,30 +124,30 @@ for (const int *p = first; p != last; ++p) {
 ```
 
 :::dimostrazione
-All’inizio di ogni iterazione `hits` è il numero di occorrenze nel tratto già visitato `[first, p)`. Quando `p = first` quel tratto è vuoto e il contatore è zero. Se `p != last`, la posizione corrente denota un elemento dell’intervallo. L’istruzione condizionale aggiunge uno esattamente quando l’elemento è uguale alla chiave. La successiva avanzata di `p` estende il tratto visitato di un elemento e conserva l’invariante.
+L’invariante è «all’inizio di ogni iterazione `hits` è il numero di elementi uguali a `key` nel tratto `[first, p)`». All’inizio `p` è uguale a `first`, il tratto è vuoto e `hits` vale zero. Se `p != last`, `p` punta a un elemento dell’intervallo; il corpo aumenta `hits` esattamente quando quell’elemento è uguale a `key`, e `++p` allunga il tratto di un elemento, quindi l’invariante si conserva.
 
-La posizione del puntatore avanza di un elemento ad ogni iterazione e i confini delimitano un numero finito di posizioni. Alla terminazione `p == last`, quindi l’invariante riguarda l’intero intervallo. Il contatore è sempre al più pari alla lunghezza, perciò gli incrementi sono rappresentabili.
+A ogni iterazione `p` avanza di un elemento e le posizioni fino a `last` sono in numero finito, quindi il ciclo termina con `p == last`. In quel momento il tratto `[first, p)` è l’intero intervallo.
 :::
 ::::
 
 :::esempio{titolo="Contare senza includere il confine"}
-Nell’array `{4, 8, 4, 1, 4}` si pongano `first = a + 1`, `last = a + 4` e `key = 4`. Gli indici visitati sono $1$, $2$ e $3$, con valori rispettivamente $8$, $4$ e $1$. Solo l’indice $2$ contribuisce al contatore. L’elemento di indice $4$ vale ancora $4$, ma si trova al confine e viene escluso, quindi il risultato è $1$.
+Nel vettore `{4, 8, 4, 1, 4}` si pongono `first = a + 1`, `last = a + 4` e `key = 4`. Il ciclo esamina gli elementi di indice $1$, $2$ e $3$, che valgono $8$, $4$ e $1$, e soltanto quello di indice $2$ è uguale a `key`. L’elemento di indice $4$ vale $4$, ma è il confine escluso, quindi il risultato è $1$.
 :::
 
 ## Intervalli di durata e validità degli accessi
 
 :::definizione{#durata-degli-oggetti-puntati titolo="Durata di memorizzazione"}
-La **durata di memorizzazione** determina per quale periodo è disponibile la memoria di un oggetto. Per gli esempi del capitolo si distinguono tre casi.
+Un puntatore è utilizzabile soltanto finché esiste la variabile a cui punta. Il periodo in cui una variabile esiste è la sua **durata**, e i casi sono tre.
 
-- Un oggetto locale ordinario, per esempio `int x = 12;` in una funzione, ha durata automatica. Per un oggetto automatico con tipo privo di dimensioni variabili, la durata si estende dall’ingresso nel blocco associato fino alla sua fine. Una chiamata o un blocco interno sospendono l’esecuzione del blocco esterno, mentre la durata dell’oggetto continua.
-- Un oggetto dichiarato `static` in un blocco ha durata statica. Esiste per l’intera esecuzione del programma, anche se il suo nome si usa soltanto entro l’ambito della dichiarazione.
-- Un oggetto ottenuto da un’allocazione riuscita ha durata allocata, dall’allocazione fino al rilascio corrispondente.
+- **Durata automatica.** Una variabile dichiarata dentro una funzione, come `int x = 12;`, esiste da quando l’esecuzione entra nel blocco in cui è dichiarata fino a quando ne esce. Al ritorno dalla funzione non esiste più.
+- **Durata statica.** Una variabile dichiarata con `static` esiste per tutta l’esecuzione del programma, anche se il suo nome è visibile soltanto dentro la funzione.
+- **Durata allocata.** Un blocco di memoria ottenuto con `malloc` esiste da quando viene ottenuto fino a quando il programma lo rilascia con `free`.
 
-La visibilità di un nome riguarda la parte di testo nella quale lo si può usare. La durata riguarda l’oggetto durante l’esecuzione. Un parametro puntatore e l’oggetto cui punta possono avere durate diverse.
+La durata è distinta dalla visibilità, che è la parte del sorgente in cui un nome si può usare. Una variabile può esistere ancora in memoria in un punto del programma in cui il suo nome non è visibile, ed essere raggiunta con un puntatore.
 :::
 
 :::esempio{titolo="Ottenere un indirizzo che resta valido"}
-La funzione restituisce un indirizzo preso da un oggetto con durata statica.
+La funzione restituisce l’indirizzo di una variabile statica, che resta valido dopo il ritorno.
 
 ```c
 const int *limit_address(void)
@@ -157,27 +157,27 @@ const int *limit_address(void)
 }
 ```
 
-Il nome `limit` è locale al blocco della funzione. L’oggetto resta disponibile dopo il ritorno e il chiamante può accedere al suo valore attraverso l’indirizzo ottenuto. Due chiamate alla funzione restituiscono l’indirizzo dello stesso oggetto. Al termine della prima chiamata termina l’esecuzione del blocco, mentre la durata statica di `limit` prosegue.
+Il nome `limit` è visibile soltanto dentro la funzione, ma la variabile esiste per tutta l’esecuzione, quindi chi chiama può leggerne il valore attraverso l’indirizzo ricevuto. Due chiamate restituiscono lo stesso indirizzo, perché la variabile è una sola.
 :::
 
 :::attenzione
-Quando termina la durata di un oggetto, il valore di un puntatore che lo designava diventa indeterminato. Per esempio, dopo l’uscita dal blocco in cui è dichiarato un intero automatico, un accesso all’intero attraverso un indirizzo salvato prima dell’uscita ha comportamento indefinito. La stessa regola si applica ai puntatori che designavano un blocco rilasciato. Per documentare lo stato di un programma si ricostruisce prima la durata dell’oggetto, poi si verifica se l’accesso ricade in quella durata.
+Quando una variabile smette di esistere, i puntatori che puntavano a essa non sono più utilizzabili; un puntatore in questo stato si chiama **puntatore pendente** (*dangling pointer*). L’errore tipico è una funzione che restituisce l’indirizzo di una propria variabile automatica, come in `int x = 5; return &x;`. Al ritorno `x` non esiste più, e usare quell’indirizzo ha comportamento indefinito. Lo stesso vale per un puntatore a un blocco già rilasciato con `free`.
 :::
 
 ## Richiesta in byte e inizializzazione
 
 :::definizione{#dimensione-allocazione titolo="Dimensionare un blocco prima della richiesta"}
-`malloc`, dichiarata in `<stdlib.h>`, riceve una quantità espressa in byte di tipo `size_t`. Se la richiesta positiva è soddisfatta, restituisce un puntatore al blocco ottenuto. In caso di fallimento restituisce un puntatore nullo. Il risultato ha tipo `void *`. L’assegnamento a un `int *` converte il valore nel tipo del puntatore destinatario. Il contenuto iniziale del blocco ottenuto con `malloc` è indeterminato.
+Finora la quantità di memoria era fissata scrivendo il programma. Con l’**allocazione dinamica** il programma chiede memoria durante l’esecuzione, nella quantità che serve in quel momento, per esempio per un vettore la cui lunghezza si conosce solo dopo aver letto i dati. La funzione `malloc`, dichiarata in `<stdlib.h>`, riceve il numero di byte richiesti e restituisce l’indirizzo dell’inizio del blocco ottenuto, oppure `NULL` se la memoria non è disponibile. Il risultato ha tipo `void *`, cioè «puntatore a un tipo non precisato», e si assegna direttamente a un puntatore del tipo voluto. Il contenuto del blocco appena ottenuto è imprevedibile.
 
-Per $n$ elementi ciascuno di dimensione $s$, con $s>0$, la richiesta matematica è $n s$ byte. Il prodotto è rappresentabile in `size_t` se e solo se
+Per $n$ elementi di $s>0$ byte ciascuno servono $ns$ byte, e la richiesta si scrive `malloc(n * sizeof *p)`. Il prodotto è calcolato nel tipo `size_t` e non deve superare il suo massimo `SIZE_MAX`, definito in `<stdint.h>`. Questo accade se e solo se
 $$
 n \leq \left\lfloor \dfrac{\mathrm{SIZE\_MAX}}{s}\right\rfloor .
 $$
-`SIZE_MAX`, dichiarato in `<stdint.h>`, è il massimo valore di `size_t`. La divisione intera applicata a `SIZE_MAX` e alla dimensione positiva fornisce direttamente il limite da verificare prima della moltiplicazione.
+Il limite si calcola con la divisione intera `SIZE_MAX / s`, e il confronto va fatto prima della moltiplicazione.
 :::
 
 :::esempio{titolo="Allocare un vettore con limite esplicito"}
-La funzione seguente riceve un numero di elementi e restituisce un blocco di interi da inizializzare. Il contratto sceglie `NULL` anche per $n=0$, così ogni chiamata effettiva a `malloc` ha dimensione positiva.
+La funzione riceve il numero di elementi e restituisce un blocco per `n` interi, oppure `NULL` se `n` è zero, se il prodotto supererebbe `SIZE_MAX` o se `malloc` fallisce.
 
 ```c
 #include <stdint.h>
@@ -194,27 +194,27 @@ int *allocate_ints(size_t n)
 }
 ```
 
-`sizeof *p` qui usa il tipo fisso `int` e il suo operando non viene valutato. Perciò, durante il calcolo della dimensione, il valore di `p` è irrilevante. Se `sizeof(int)` vale quattro byte e $n=6$, la richiesta, dopo la verifica, è di ventiquattro byte. Una richiesta rappresentabile può ancora fallire per indisponibilità di memoria, quindi il chiamante controlla comunque il puntatore restituito.
+L’espressione `sizeof *p` è la dimensione del tipo a cui `p` punta, cioè `int`. Il compilatore la ricava dal tipo senza leggere `p`, quindi si può usare anche quando `p` non ha ancora un valore. Con `int` di quattro byte e $n=6$ la richiesta è di ventiquattro byte. Chi chiama la funzione deve controllare che il risultato sia diverso da `NULL` prima di usarlo.
 :::
 
 :::definizione{#inizializzazione-allocata titolo="Contenuto prima del primo accesso"}
-Con `malloc` si ottiene memoria, poi si scrive il valore di ogni elemento che sarà letto. Con `calloc(n, s)`, per $n>0$, $s>0$ e risultato non nullo, si ottiene memoria per $n$ elementi di $s$ byte ciascuno con tutti i bit iniziali a zero. Per `unsigned char` questi bit rappresentano il valore numerico zero. La rappresentazione tutta a zero non è richiesta per il valore nullo di un tipo puntatore o per lo zero in virgola mobile.
+La memoria ottenuta con `malloc` va riempita prima di essere letta, assegnando un valore a ogni elemento. La funzione `calloc(n, s)` chiede memoria per $n$ elementi di $s$ byte e in più la azzera, mettendo a zero tutti i bit. Per i tipi interi questo significa che ogni elemento vale $0$. Lo standard non garantisce che tutti i bit a zero rappresentino il puntatore nullo o lo zero in virgola mobile, anche se sui calcolatori comuni è così.
 :::
 
 :::esempio{titolo="Distinguere ottenimento e inizializzazione"}
-Con `<stdlib.h>` incluso e `unsigned char *p = calloc(4, sizeof *p);`, se `p` è non nullo i quattro elementi valgono inizialmente zero. Dopo le assegnazioni `p[1] = 7;` e `p[3] = 2;`, la sequenza è $(0,7,0,2)$. La somma è $9$. La stessa sequenza si può ottenere con `malloc`, inizializzando esplicitamente anche gli elementi agli indici $0$ e $2$. Il controllo del puntatore precede entrambe le procedure.
+Con `<stdlib.h>` incluso, dopo `unsigned char *p = calloc(4, sizeof *p);` si controlla che `p` sia diverso da `NULL`. I quattro elementi valgono zero. Dopo `p[1] = 7;` e `p[3] = 2;` il contenuto è $(0,7,0,2)$, con somma $9$. Con `malloc` al posto di `calloc` si dovrebbero assegnare esplicitamente anche `p[0]` e `p[2]`.
 :::
 
 ## Responsabilità del blocco e rilascio
 
 :::definizione{#proprieta-del-blocco titolo="Proprietario e riferimenti temporanei"}
-La **proprietà** di un blocco è la responsabilità di rilasciarlo quando termina l’uso. È una convenzione del programma documentata nei contratti delle funzioni. Un puntatore proprietario conserva il riferimento che consente `free`. Un riferimento temporaneo accede al blocco durante la validità concessa dal proprietario. Copiare l’indirizzo crea un altro valore puntatore al medesimo blocco e lascia invariato il numero delle allocazioni.
+Ogni blocco ottenuto con `malloc` va restituito al sistema con `free` quando non serve più; un blocco mai rilasciato resta occupato inutilmente, e l’errore si chiama **memory leak**. Per non dimenticare un rilascio e non farne due, per ogni blocco si stabilisce quale parte del programma ne è **proprietaria**, cioè ha il compito di chiamare `free`. La proprietà è una convenzione, scritta nel contratto delle funzioni, e il compilatore non la controlla. Copiare l’indirizzo di un blocco in un altro puntatore non crea un secondo blocco; i due puntatori indicano la stessa memoria, e uno solo ne è proprietario.
 
-Una funzione può trasferire la responsabilità restituendo il puntatore a un blocco appena ottenuto. Il chiamante lo conserva se è non nullo e organizza il rilascio in ogni uscita successiva. Per controllare le diramazioni si tiene un elenco dei blocchi in corso di durata e si associa a ciascuno un responsabile.
+Una funzione che alloca un blocco e ne restituisce l’indirizzo trasferisce la proprietà a chi la chiama, che dovrà rilasciarlo in ogni percorso di esecuzione, compresi quelli in cui si esce prima per un errore.
 :::
 
 :::esempio{titolo="Completare due richieste consecutive"}
-Con `<stdlib.h>` incluso, la funzione usa due interi allocati che restano locali quanto alla responsabilità del rilascio. Il valore di ritorno indica se ha potuto eseguire entrambe le scritture.
+La funzione alloca due interi, li usa e li rilascia prima di tornare, quindi ne è proprietaria dall’inizio alla fine. Restituisce $1$ se entrambe le allocazioni riescono e $0$ altrimenti.
 
 ```c
 int record_pair(int x, int y)
@@ -236,26 +236,26 @@ int record_pair(int x, int y)
 }
 ```
 
-Se fallisce la prima allocazione, la funzione non ha blocchi da rilasciare. Se riesce soltanto la prima, `left` conserva la responsabilità dell’unico blocco ottenuto. Nel percorso di successo ci sono due blocchi distinti e i due rilasci terminano le rispettive durate. Il conteggio finale dei blocchi in corso di durata è zero in ciascuno dei tre percorsi.
+I percorsi possibili sono tre. Se fallisce la prima allocazione non c’è nulla da rilasciare. Se riesce la prima e fallisce la seconda, la funzione rilascia `left` prima di tornare. Se riescono entrambe, la funzione usa i due blocchi e li rilascia tutti e due. In ogni percorso, al ritorno tutti i blocchi ottenuti sono stati rilasciati.
 :::
 
 :::attenzione{#rilascio-e-alias titolo="Effetti di free sui riferimenti"}
-`free` accetta il puntatore nullo senza effetti, oppure un valore che corrisponde all’indirizzo iniziale restituito per un blocco ancora in corso di durata. Dopo il rilascio si può assegnare `NULL` alla variabile proprietaria, perché un assegnamento diretto al puntatore non legge il contenuto precedente. La scrittura riguarda soltanto quella variabile. Una copia dell’indirizzo conservata altrove resta un valore indeterminato e non consente di leggere, confrontare o rilasciare nuovamente l’oggetto appena liberato. Anche un puntatore interno al blocco, diverso dal suo inizio, non è un argomento valido per il rilascio.
+A `free` si passa l’indirizzo restituito da `malloc`, `calloc` o `realloc` per un blocco non ancora rilasciato, oppure `NULL`, nel qual caso non accade nulla. Sono errori con comportamento indefinito rilasciare due volte lo stesso blocco, passare un indirizzo interno al blocco come `p + 1`, e usare il blocco dopo il rilascio. Dopo `free(p);` conviene scrivere `p = NULL;`, così un uso successivo per errore è riconoscibile. Le eventuali altre copie dell’indirizzo restano però puntatori pendenti.
 :::
 
 ## Ridimensionamento e contenuto conservato
 
 :::definizione{#ridimensionamento-con-realloc titolo="Esiti di realloc con una dimensione positiva"}
-Sia `p` il puntatore proprietario di un blocco in corso di durata ottenuto mediante allocazione. Sia `bytes` una nuova dimensione strettamente positiva e rappresentabile in `size_t`. La chiamata `realloc(p, bytes)` ha due esiti rilevanti.
+La funzione `realloc(p, bytes)` cambia la dimensione di un blocco già allocato, per esempio per allungare un vettore. Qui `p` è l’indirizzo del blocco e `bytes` la nuova dimensione, maggiore di zero. Gli esiti possibili sono due.
 
-- In caso di fallimento restituisce `NULL`. Il blocco precedente resta disponibile e il suo contenuto è invariato.
-- In caso di successo restituisce un puntatore al nuovo blocco. Il contenuto è conservato fino al minore tra la dimensione precedente e quella richiesta. La parte aggiunta, se presente, ha contenuto indeterminato. La durata dell’oggetto precedente termina e i puntatori che lo designavano diventano indeterminati, anche se l’area restituita occupa la stessa posizione.
+- Se la memoria non è disponibile, `realloc` restituisce `NULL` e il vecchio blocco resta valido, con il contenuto invariato.
+- Se riesce, restituisce l’indirizzo del blocco con la nuova dimensione, che può trovarsi in un punto diverso della memoria. Il contenuto viene conservato fino alla più piccola fra la vecchia e la nuova dimensione, e la parte aggiunta ha contenuto imprevedibile. Il vecchio indirizzo non è più utilizzabile, e nemmeno i puntatori che puntavano dentro il vecchio blocco.
 
-Il risultato della chiamata si registra in una nuova variabile. Nel ramo di successo si sostituisce il riferimento proprietario, si ricostruiscono gli eventuali riferimenti interni a partire dal nuovo puntatore e si inizializzano gli elementi aggiunti che dovranno essere letti. Il caso di richiesta zero segue regole dipendenti dall’implementazione in C17, quindi i contratti di questo capitolo lo gestiscono prima di chiamare `realloc`.
+Per questo il risultato va messo in una variabile diversa da `p`. Scrivendo `p = realloc(p, bytes);`, in caso di fallimento `p` diventerebbe `NULL` e l’indirizzo del vecchio blocco, ancora allocato, andrebbe perduto. Solo dopo aver controllato che il risultato è diverso da `NULL` lo si copia in `p`.
 :::
 
 :::esempio{titolo="Aumentare la capacità conservando tre interi"}
-Con `<stdlib.h>` incluso, si supponga che `p` sia proprietario di un blocco di tre interi inizializzati ai valori $7$, $11$ e $18$, e che la dimensione per cinque sia rappresentabile. Si esegue il frammento nel corpo di una funzione.
+Con `<stdlib.h>` incluso, `p` punta a un blocco di tre interi che valgono $7$, $11$ e $18$. Il frammento porta il blocco a cinque interi.
 
 ```c
 int *next = realloc(p, 5 * sizeof *p);
@@ -266,9 +266,9 @@ if (next != NULL) {
 }
 ```
 
-Nel ramo di successo i primi tre interi mantengono i loro valori e le due scritture completano l’inizializzazione. La sequenza diventa $(7,11,18,0,0)$. Nel ramo di fallimento l’assegnamento a `p` viene saltato e rimane valido il blocco da tre elementi. Una capacità memorizzata in una variabile separata va aggiornata nel ramo di successo. In entrambi i casi il riferimento conservato in `p` identifica il blocco che dovrà essere rilasciato.
+Se `realloc` riesce, i primi tre interi conservano i loro valori e le due assegnazioni danno un valore agli elementi aggiunti, quindi il contenuto è $(7,11,18,0,0)$. Se fallisce, `p` non viene modificato e punta ancora al blocco di tre interi. In entrambi i casi `p` contiene l’indirizzo del blocco da rilasciare alla fine.
 :::
 
 :::osservazione
-Con `p` nullo e dimensione positiva, `realloc(p, bytes)` si comporta come `malloc(bytes)`. Questo caso consente di rappresentare un vettore inizialmente vuoto con capacità zero e riferimento proprietario nullo, per poi ottenere il primo blocco con lo stesso schema di controllo usato per la crescita. Per conservare la posizione di un elemento durante un ridimensionamento si salva il suo indice. Se l’indice resta entro la nuova capacità, il relativo puntatore si ricostruisce dal risultato riuscito, senza riutilizzare un indirizzo del blocco precedente.
+Se `p` è `NULL`, `realloc(p, bytes)` si comporta come `malloc(bytes)`. Un vettore che cresce si può quindi gestire con un solo schema, partendo da un puntatore nullo e da una capacità zero e usando `realloc` sia per il primo blocco sia per gli allungamenti. Poiché il blocco può cambiare posizione, per ricordare un elemento attraverso un ridimensionamento si conserva il suo indice e non il suo indirizzo.
 :::
