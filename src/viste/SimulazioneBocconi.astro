@@ -15,7 +15,7 @@ const descrizione = en
   ? 'Free diagnostic and four timed Bocconi Test mocks, with worked solutions and links to the course.'
   : 'Diagnostico gratuito e quattro simulazioni a tempo del Test Bocconi, con correzione ragionata e rimandi alle lezioni.';
 ---
-<Base titolo={titolo} descrizione={descrizione} percorso={[{ titolo }]} materia={BOCCONI.slug} sezione="simulazione" lingua={lingua} seo={{ noindex: true }}>
+<Base titolo={titolo} descrizione={descrizione} percorso={[{ titolo }]} materia={BOCCONI.slug} sezione="simulazione" lingua={lingua} seo={{ titolo: en ? 'Bocconi Test practice · Free diagnostic and timed mock tests' : 'Simulazione Test Bocconi e diagnostico gratuito' }}>
   <div class="bocconi" data-bocconi data-lingua={lingua} data-capitoli={JSON.stringify(capitoli)}>
     <h1>{titolo}</h1>
     <section id="boc-inizio" class="boc-inizio">

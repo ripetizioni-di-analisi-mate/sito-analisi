@@ -25,6 +25,7 @@ const svolti = defineCollection({
   loader: senzaHtml('./src/content/svolti'),
   schema: z.object({
     titolo: z.string(),
+    sommario: z.string().optional(),
     gratis: z.boolean().default(false),
     teoria: z.array(z.string()).default([]), // ancore della pagina di teoria
     parole: z.array(z.string()).default([]), // parole chiave per la ricerca

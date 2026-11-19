@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { link, materiaL } from '../i18n';
+import { raccolteSvolti } from '../lib/raccolte-svolti';
+import { assoluto } from '../lib/seo';
+
+interface Props { materia: string; lingua: 'it' | 'en' }
+const { materia, lingua } = Astro.props;
+const en = lingua === 'en';
+const m = materiaL(lingua, materia);
+const capitoli = (await raccolteSvolti(lingua)).get(materia)!;
+const bilingue = en || (await raccolteSvolti('en')).has(materia);
+const schede = capitoli.flatMap((c) => c.schede);
+const titolo = en ? m.titolo + ' · Free worked examples' : 'Esercizi svolti gratuiti di ' + m.titolo;
+const descrizione = en
+  ? `${schede.length} free worksheets for ${m.titolo}, grouped by topic. Read the problems and follow the worked solutions without signing in.`
+  : `${schede.length} schede gratuite di ${m.titolo} divise per argomento. Ogni scheda contiene le tracce e lo svolgimento completo, consultabili senza account.`;
+const schema = {
+  '@type': 'ItemList', name: titolo, numberOfItems: schede.length,
+  itemListElement: schede.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: s.titolo, url: assoluto(link(lingua, s.percorso)) })),
+};
+---
+<Base lingua={lingua} materia={materia} titolo={titolo} descrizione={descrizione}
+  percorso={[{ titolo: en ? 'Free worked examples' : 'Esercizi svolti gratuiti' }]}
+  seo={{ titolo, soloQuestaLingua: !bilingue, schema: [schema] }}>
+  <h1>{titolo}</h1>
+  <p class="sommario">{descrizione}</p>
+  <nav class="indice-analitico-salti" aria-label={en ? 'Jump to a topic' : 'Vai a un argomento'}>
+    {capitoli.map((c) => <a href={'#' + c.slug}>{c.titolo}</a>)}
+  </nav>
+  {capitoli.map((c) => (
+    <section class="indice-analitico" id={c.slug}>
+      <h2>{c.titolo}</h2>
+      <ul>
+        {c.schede.map((s) => <li><a href={link(lingua, s.percorso)}>{s.titolo}</a></li>)}
+      </ul>
+    </section>
+  ))}
+  <p><a href={link(lingua, '/' + materia)}>{en ? 'Full course outline' : 'Programma completo di ' + m.titolo}</a></p>
+</Base>

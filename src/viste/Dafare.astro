@@ -4,7 +4,8 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
 import { dataContenuto } from '../lib/date';
-import { titoliAncore } from '../lib/ancore';
+import TeoriaEsercizio from '../components/TeoriaEsercizio.astro';
+import { titoloRipetuto } from '../lib/titoli-esercizi';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { numero, perArgomento, vicini, disponibilitaStudio } from '../lib/nav';
@@ -25,10 +26,9 @@ const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'dafare',
 const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i + 1])];
 const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'dafare', id)).tradotta;
 const arg = argomentoL(lingua, materia, argomento);
-const titoloRipetuto = eserciziMateria.filter((v) => v.data.titolo === voce.data.titolo).length > 1;
-const titoloSeo = SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve, arg.breve, titoloRipetuto ? n : undefined);
+const ripetuto = await titoloRipetuto(tradotta ? lingua : 'it', 'dafare', materia, voce.data.titolo);
+const titoloSeo = SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve, arg.breve, ripetuto ? n : undefined);
 const { Content } = await render(voce);
-const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomento}`)).voce?.body);
 const base = `/${materia}/${argomento}`;
 const lista = link(lingua, `${base}/esercizi`);
 const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${t.esercizio} ${numero(v.id)}`, sotto: tt, href: link(lingua, `${base}/esercizi/${numero(v.id)}`) };
@@ -59,9 +59,7 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
 >
   <p class="sopratitolo">{t.esercizioDaFare} {n}</p>
   <h1>{voce.data.titolo}</h1>
-  {voce.data.teoria.length > 0 && (
-    <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={link(lingua, `${base}/teoria#${x}`)}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
-  )}
+  <TeoriaEsercizio {lingua} {materia} {argomento} riferimenti={voce.data.teoria} />
   <div class="testo-studio"><Content /></div>
   <VerificaRisposta id={id} tipo={risultato?.tipo} primitiva={risultato?.primitiva} unita={risultato?.u} campi={risultato?.tipo === 'multi' ? chiavePubblica(risultato) : undefined} lingua={lingua} />
 </Base>

@@ -9,7 +9,7 @@ const { materie, gruppi, totale } = await elencoDomande();
 ---
 <Base titolo="Domande a tempo per materia e argomento" descrizione={`Quiz a risposta multipla su ${materie.length} materie, con due minuti per domanda e una spiegazione dopo ogni risposta. Anteprime gratuite.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]} seo={{ titolo: 'Domande a tempo per materia e argomento' }}>
   <h1>Domande a tempo</h1>
-  <p class="sommario">{totale} domande a risposta multipla, con due minuti per domanda e la spiegazione dopo la conferma. Puoi provare le anteprime senza account.</p>
+  <p class="sommario">{totale} domande a risposta multipla, con due minuti per domanda e la spiegazione dopo la conferma. Puoi provare le anteprime senza account. Con un account puoi anche <a href="/livelli-e-punti">guadagnare punti esperienza con i quiz</a>.</p>
   {gruppi.map((g) => (
     <>
       <p class="dta-gruppo">{g}</p>

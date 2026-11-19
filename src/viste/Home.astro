@@ -4,6 +4,7 @@ import { linguaCatalogo, paginaLocalizzata } from '../lib/lingue-sito';
 import { GRUPPI_DE } from '../data/materie-de';
 import { GRUPPI_ES } from '../data/materie-es';
 import { GRUPPI_FR } from '../data/materie-fr';
+import { percorsoRaccolta, raccolteSvolti } from '../lib/raccolte-svolti';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, elencoCorsi } from '../lib/seo';
 import Base from '../layouts/Base.astro';
@@ -33,6 +34,7 @@ const fr = lingua === 'fr';
 const localizzato = linguaCatalogo(lingua);
 const MATERIE = usa ? materieUsa : materieL(lingua).filter((m) => !localizzato || !m.attiva || paginaLocalizzata(lingua, `/${m.slug}`));
 const notaLingue = fr ? 'Le catalogue est en français. Chaque chapitre indique les langues dans lesquelles les supports sont disponibles.' : es ? 'El catálogo está en español. Cada tema indica en qué idiomas está disponible el material.' : 'Der Kurskatalog ist auf Deutsch. Die Sprache der Lernmaterialien steht beim jeweiligen Thema.';
+const raccoltaAnalisi = !usa && (lingua === 'it' || lingua === 'en') && (await raccolteSvolti(lingua)).has('analisi-1');
 const schedeDettagliate = lingua === 'it' || usa;
 // Nastro «Best seller» sull'angolo della scheda (versione C scelta da Carmine il 17/11/2026), solo nella home italiana.
 const bestSeller = (slug: string) => lingua === 'it' && !usa && BEST_SELLER.has(slug);
@@ -77,17 +79,23 @@ const icona = {
   <div class="home-intro solo-ospiti">
     {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
     <h1 class="solo-lettori">{localizzato ? t.homeTitolo : lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. High School and University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
-    <p class="sommario">{localizzato ? t.homeSommario : lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
+    <p class="sommario">{localizzato ? t.homeSommario : usa ? 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'
+      : lingua === 'it' ? 'Teoria ed esercizi svolti per l’università, le superiori e i test d’ingresso.'
+      : 'Theory and worked examples for university, high school and entrance exams.'}
+      {raccoltaAnalisi && (lingua === 'it'
+        ? <> Inizia dagli <a href={link(lingua, percorsoRaccolta('analisi-1'))}>esercizi gratuiti di Analisi 1</a> o scegli una materia dal catalogo.</>
+        : <> Start with the <a href={link(lingua, percorsoRaccolta('analisi-1'))}>free Calculus 1 worksheets</a> or choose a subject below.</>)}
+    </p>
     {localizzato && <p class="nota-accesso">{notaLingue}</p>}
   </div>
   <div class="solo-ospiti">
     <Presentazione lingua={lingua} motto={fr ? 'Ce que tu comprends aujourd’hui t’aide à progresser demain.' : es ? 'Lo que entiendes hoy te ayuda a avanzar mañana.' : de ? 'Was du heute verstehst, hilft dir morgen weiter.' : lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'} />
   </div>
-  <h2 class="home-personale solo-collegati solo-lettori">{fr ? 'Ton espace de travail' : es ? 'Tu espacio de estudio' : de ? 'Dein Lernbereich' : lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h2>
+  <h2 data-solo-sessione class="home-personale solo-collegati solo-lettori">{fr ? 'Ton espace de travail' : es ? 'Tu espacio de estudio' : de ? 'Dein Lernbereich' : lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h2>
   {localizzato && <p class="solo-collegati nota-accesso"><a href={link(lingua, "/account")}>{fr ? "Ouvrir ton espace de travail" : es ? "Ir a tu espacio de estudio" : "Zu deinem Lernbereich"}</a>. {notaLingue}</p>}
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   {!localizzato && <><SpazioStudente lingua={lingua} /><MaterialiStudente lingua={lingua} /></>}
-  {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
+  {lingua === 'it' && <div data-solo-sessione class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <form class="cerca-home" id="ricerca-principale" action={usa ? url('/us') : link(lingua, '/cerca')} data-us-search={usa || undefined} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
@@ -99,7 +107,7 @@ const icona = {
   ) : lingua === 'it' ? (
     <ul class="legenda-home">
       <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
-      <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: lezioni di Carmine, con video e PDF.</span></li>
+      <li><Fragment set:html={icona.video} /><span><a href={url('/videocorsi')}>Videocorsi</a> con video e PDF. Per una lezione in diretta, <a href={url('/ripetizioni-analisi')}>ripetizioni online di Analisi 1 e 2</a>.</span></li>
     </ul>
     <p class="gratis-home solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span><b>Prova gratis</b>: anteprime di teoria ed esercizi, senza account.</span></p>
   ) : (
@@ -109,7 +117,7 @@ const icona = {
   {lingua === 'it' && <div class="solo-ospiti"><PacchettiHome /></div>}
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {usa && <p class="esito-ricerca-usa" role="status" data-esito-usa hidden></p>}
-  {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
+  {regoleSbloccato && <style is:inline data-solo-sessione set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
     <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school', GRUPPI_DE['Università'], GRUPPI_DE.Superiori, GRUPPI_ES.Università, GRUPPI_ES.Superiori, GRUPPI_FR.Università, GRUPPI_FR.Superiori].includes(g) }]} open={i === 0} id={id} data-catalogo-usa={usa || undefined}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (fr ? 'En préparation' : es ? 'En preparación' : de ? 'In Vorbereitung' : lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
@@ -139,7 +147,7 @@ const icona = {
                     <>
                       {bestSeller(m.slug) && <span class="nastro-bs"><span>Best seller</span></span>}
                       <div class="scheda-materia">
-                        <h3>{nome}</h3>
+                        <h3><a class="link-materia" href={hrefMateria(m.slug)}>{nome}</a></h3>
                         <p>{m.descrizione}</p>
                         <span class="conti-materia">{conti(m)}</span>
                       </div>
@@ -195,6 +203,7 @@ const icona = {
   :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-color:#e8e2d7;border-left:3px solid var(--azione);box-shadow:none;background:#fffdf9}
   .scheda-materia{display:flex;flex-direction:column;gap:.55rem;padding:1rem 1.1rem .75rem;flex:1}
   .scheda-materia h3{margin:0;color:var(--inchiostro);font:600 1.05rem/1.35 var(--ui)}
+  .scheda-materia h3 .link-materia{display:inline;height:auto;padding:0;color:inherit;text-decoration:none}.scheda-materia h3 .link-materia:hover,.scheda-materia h3 .link-materia:focus-visible{text-decoration:underline}
   .scheda-materia p{margin:0;font-size:.95rem;line-height:1.5;color:var(--inchiostro-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .conti-materia{font:400 .76rem/1.4 var(--ui);color:var(--inchiostro-2);margin-top:auto}
   :global(.home-chiarezza .pulsanti-scheda){justify-content:flex-start;flex-wrap:wrap;padding:.2rem 1.1rem .3rem;gap:.6rem;border:0;background:none}

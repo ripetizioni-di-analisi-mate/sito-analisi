@@ -10,8 +10,8 @@ const regole = [
   ...video.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] .materiali-studente{display:block}html[data-materie~="${chiaveVideo(v.slug)}"] .ms-video-${v.slug}{display:flex}`),
 ].join('');
 ---
-<style is:inline set:html={regole}></style>
-<section class="materiali-studente" aria-labelledby="ms-titolo">
+<style is:inline data-solo-sessione set:html={regole}></style>
+<section class="materiali-studente" data-solo-sessione data-nosnippet aria-labelledby="ms-titolo">
   <div class="ms-testa"><h2 id="ms-titolo">{en ? 'Your study materials' : 'I tuoi materiali'}</h2><a href="#materie-home">{en ? 'All subjects' : 'Tutte le materie'} <span aria-hidden="true">→</span></a></div>
   <ul>
     {materie.map((m) => <li class={`ms-materia-${m.slug}`} style={`--materia: ${m.colore}`}>

@@ -1,56 +1,64 @@
-// Data dell'ultima modifica vera di ogni contenuto (teoria, schede, esercizi, domande), per la mappa del sito.
-// Prima tutte le pagine avevano come data il giorno della build: i motori di ricerca imparano a ignorarla.
-// - Con la cronologia git completa: data dell'ultimo commit che ha toccato il file.
-// - Con una copia senza cronologia (clone poco profondo): si tiene la data salvata se il file non è cambiato
-//   (impronta uguale), altrimenti la data di oggi.
-// Il risultato è src/data/date-pagine.json (file → { data, impronta }); va incluso nei commit.
-import { execSync } from 'node:child_process';
+// Data dell'ultima modifica del materiale didattico, condivisa da HTML e sitemap.
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const RADICE = new URL('..', import.meta.url).pathname;
-const USCITA = join(RADICE, 'src/data/date-pagine.json');
-const CARTELLE = ['src/content', 'src/content-en', 'src/content-us'];
+const cartelle = ['src/content', 'src/content-en', 'src/content-es', 'src/content-fr', 'src/content-de', 'src/content-us'];
+const percorsiGit = [...cartelle, 'src/contenuti-integrativi', ':(exclude,glob)**/domande/**'];
 
-function file(cartella) {
-  const assoluta = join(RADICE, cartella);
-  if (!existsSync(assoluta)) return [];
-  return readdirSync(assoluta, { recursive: true })
-    .map((f) => join(assoluta, String(f)))
-    .filter((f) => /\.mdx?$/.test(f) && !/[\/]domande[\/]/.test(f) && statSync(f).isFile())
-    .map((f) => relative(RADICE, f));
+// I capitoli condivisi sono generati prima di Astro. Per loro conta la revisione
+// del materiale di origine, compresa la teoria aggiuntiva sui sistemi di Analisi 2.
+function sorgenti(file) {
+  const condiviso = file.match(/^(src\/content(?:-en)?)\/(teoria|svolti|dafare)\/(analisi-2|analisi-3|algebra-lineare)\/([^/.]+)(.*)$/);
+  if (!condiviso) return [file];
+  const [, base, tipo, materia, argomento, coda] = condiviso;
+  if (materia === 'analisi-3' && ['successioni-e-serie-di-funzioni', 'serie-di-potenze', 'serie-di-fourier'].includes(argomento))
+    return [file.replace('/analisi-3/', '/analisi-2/')];
+  if (materia === 'algebra-lineare' && argomento === 'numeri-complessi')
+    return [file.replace('/algebra-lineare/', '/analisi-1/')];
+  if (materia !== 'analisi-2' || argomento !== 'equazioni-differenziali') return [file];
+  const origine = file.replace('/analisi-2/', '/analisi-1/');
+  const extra = 'src/contenuti-integrativi/analisi-2/' + (base.endsWith('-en') ? 'en' : 'it');
+  return tipo === 'teoria' ? [origine, extra + '/teoria.md'] : [origine, extra + '/' + tipo + coda];
 }
 
-const vecchio = existsSync(USCITA) ? JSON.parse(readFileSync(USCITA, 'utf8')) : {};
-const oggi = new Date().toISOString().slice(0, 10);
-let completa = false;
-try { completa = execSync('git rev-parse --is-shallow-repository', { cwd: RADICE }).toString().trim() === 'false'; } catch { /* niente git */ }
-
-// Data dell'ultimo commit di ogni file, letta con un solo comando dalla cronologia (dal più recente).
-const daGit = {};
-if (completa) {
-  const log = execSync(`git log --format=@%cs --name-only -- ${CARTELLE.join(' ')}`, { cwd: RADICE, maxBuffer: 256 * 1024 * 1024 }).toString();
-  let data = null;
-  for (const riga of log.split('\n')) {
-    if (riga.startsWith('@')) data = riga.slice(1);
-    else if (riga && data && !daGit[riga]) daGit[riga] = data;
+export function generaDate(radice) {
+  const uscita = join(radice, 'src/data/date-pagine.json');
+  const vecchio = existsSync(uscita) ? JSON.parse(readFileSync(uscita, 'utf8')) : {};
+  const git = (...args) => execFileSync('git', args, { cwd: radice, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
+  let completa = false;
+  try { completa = git('rev-parse', '--is-shallow-repository').trim() === 'false'; } catch { /* Copia senza Git. */ }
+  const date = new Map();
+  const modificati = new Set();
+  if (completa) {
+    let giorno;
+    for (const riga of git('log', '--format=@%cs', '--name-only', '--', ...percorsiGit).split('\n')) {
+      if (riga.startsWith('@')) giorno = riga.slice(1);
+      else if (riga && giorno && !date.has(riga)) date.set(riga, giorno);
+    }
+    for (const file of git('diff', '--name-only', 'HEAD', '--', ...percorsiGit).trim().split('\n')) modificati.add(file);
   }
+
+  const nuovo = {};
+  for (const base of cartelle) {
+    if (!existsSync(join(radice, base))) continue;
+    const files = readdirSync(join(radice, base), { recursive: true }).filter((f) => /\.mdx?$/.test(f) && !f.split('/').includes('domande')).sort();
+    for (const relativo of files) {
+      const file = base + '/' + relativo;
+      const impronta = createHash('sha1').update(readFileSync(join(radice, file))).digest('hex').slice(0, 12);
+      const fonti = sorgenti(file).filter((fonte) => existsSync(join(radice, fonte)));
+      const note = fonti.map((fonte) => modificati.has(fonte) ? undefined : date.get(fonte));
+      // Senza storia completa si conserva solo una data già associata allo stesso contenuto.
+      const salvata = vecchio[file]?.impronta === impronta ? vecchio[file].data : undefined;
+      const data = note.length && note.every(Boolean) ? note.sort().at(-1) : salvata;
+      if (data) nuovo[file] = { data, impronta };
+    }
+  }
+  writeFileSync(uscita, JSON.stringify(nuovo).replace(/\},"/g, '},\n"') + '\n');
+  console.log(`date-pagine: ${Object.keys(nuovo).length} contenuti con data verificabile`);
 }
 
-const nuovo = {};
-let cambiati = 0;
-for (const f of CARTELLE.flatMap(file).sort()) {
-  const impronta = createHash('sha1').update(readFileSync(join(RADICE, f))).digest('hex').slice(0, 12);
-  const prima = vecchio[f];
-  // file modificato e non ancora nel commit: data di oggi anche con la cronologia completa
-  const modificatoOra = completa && prima && prima.impronta !== impronta && daGit[f] && daGit[f] <= prima.data;
-  let data;
-  if (completa && daGit[f] && !modificatoOra) data = daGit[f];
-  else if (prima && prima.impronta === impronta) data = prima.data;
-  else data = oggi;
-  if (!prima || prima.data !== data) cambiati++;
-  nuovo[f] = { data, impronta };
-}
-writeFileSync(USCITA, `${JSON.stringify(nuovo, null, 0).replace(/\},"/g, '},\n"')}\n`);
-console.log(`date-pagine: ${Object.keys(nuovo).length} contenuti, ${cambiati} date nuove o cambiate (${completa ? 'cronologia git' : 'impronte'})`);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
+  generaDate(fileURLToPath(new URL('..', import.meta.url)));

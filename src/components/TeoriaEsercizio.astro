@@ -1,0 +1,27 @@
+---
+import { argomentoL, link, T, voceL, type Lingua } from '../i18n';
+import { titoliAncore } from '../lib/ancore';
+import { tutteLeVoci } from '../lib/voci-teoria';
+
+interface Props { lingua: Lingua; materia: string; argomento: string; riferimenti: string[] }
+const { lingua, materia, argomento, riferimenti } = Astro.props;
+const id = materia + '/' + argomento;
+const teoria = riferimenti.length ? await voceL(lingua, 'teoria', id) : undefined;
+const linguaTeoria = lingua === 'en' && !teoria?.tradotta ? 'it' : lingua;
+const base = '/' + id + '/teoria';
+const blocchi = titoliAncore(teoria?.voce?.body);
+// La stessa raccolta genera le pagine singole in italiano e in inglese.
+// I capitoli spagnoli hanno soltanto i rimandi interni alla teoria.
+const voci = teoria?.voce && (linguaTeoria === 'it' || linguaTeoria === 'en')
+  ? (await tutteLeVoci(linguaTeoria)).get(id) ?? [] : [];
+const collegamenti = new Map<string, string>();
+for (const ancora of teoria?.voce ? riferimenti : []) {
+  const voce = voci.find((v) => v.ancora === ancora);
+  if (voce) collegamenti.set(base + '/' + ancora, voce.titolo);
+  else if (blocchi[ancora]) collegamenti.set(base + '#' + ancora, blocchi[ancora]);
+  else collegamenti.set(base, argomentoL(linguaTeoria, materia, argomento).titolo);
+}
+---
+{collegamenti.size > 0 && <p class="collegamenti">{T(lingua).teoriaUsata}{linguaTeoria !== lingua ? ' (in Italian)' : ''}:
+  {[...collegamenti].map(([percorso, titolo]) => <a href={link(linguaTeoria, percorso)} hreflang={linguaTeoria}>{titolo}</a>)}
+</p>}

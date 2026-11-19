@@ -7,7 +7,7 @@ const DATA = DATE as Record<string, { data: string }>;
 
 // Data del file di un contenuto: `dataContenuto('it', 'teoria', 'analisi-1/limiti')`.
 export function dataContenuto(lingua: Lingua, sezione: string, id: string): string | undefined {
-  return DATA[`src/${lingua === 'en' ? 'content-en' : 'content'}/${sezione}/${id}.md`]?.data;
+  return DATA[`src/${lingua === 'it' ? 'content' : 'content-' + lingua}/${sezione}/${id}.md`]?.data;
 }
 
 // La più recente fra più date (per gli elenchi e le pagine delle materie).

@@ -1924,6 +1924,15 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
+    // I vecchi link inglesi alle definizioni possono precedere la traduzione.
+    // Riapri la stessa voce italiana solo se esiste, finché quella inglese non è pronta.
+    if (risposta.status === 404 && info?.tipo === 'voce' && info.pref === '/en' && (req.method === 'GET' || req.method === 'HEAD')) {
+      const originale = new URL(req.url);
+      originale.pathname = `/${info.materia}/${info.argomento}/teoria/${info.ancora}`;
+      const verifica = await env.ASSETS.fetch(new Request(originale, { method: 'HEAD' }));
+      if (verifica.status === 200 && verifica.headers.get('content-type')?.includes('text/html'))
+        return new Response(null, { status: 302, headers: { location: originale.pathname + originale.search, 'cache-control': 'no-store' } });
+    }
     if (orientamentoRiservato) risposta = rispostaPrivataOrientamento(risposta);
     // Indirizzi tecnici di Cloudflare (*.workers.dev, anteprime dei rami): mai negli indici, la pagina vera è su ripetizionidianalisi.com.
     if (url.hostname.endsWith('.workers.dev')) {
@@ -1950,9 +1959,12 @@ export default {
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
       if (io?.gm !== true) {
-        risposta = new HTMLRewriter().on('[data-orientamento-gm]', {
-          element(element) { element.remove(); },
-        }).transform(risposta);
+        const rimuovi = { element(element) { element.remove(); } };
+        const filtro = new HTMLRewriter().on('[data-orientamento-gm]', rimuovi);
+        // Gli ospiti ricevono solo il catalogo pubblico. Dati di ripresa, spunte
+        // e materiali personali servono dopo l'accesso, anche per i non GM.
+        if (!io) filtro.on('[data-solo-sessione]', rimuovi);
+        risposta = filtro.transform(risposta);
       }
       if (primo === BOCCONI.slug && percorsoNormalizzato.endsWith('/simulazione') && accessoBocconi(env, io)) {
         risposta = new HTMLRewriter().on('[data-bocconi]', {

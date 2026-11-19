@@ -35,6 +35,9 @@ const datiArgomenti = usa ? usSimulationTopics(materia, tracceUs) : m.argomenti.
 const argomenti = datiArgomenti.filter(a => a.n > 0).map(a => ({ ...a, href: usa
   ? linkArgomentoUsa(materia, a.slug, 'esercizi') : link(lingua, `/${materia}/${a.slug}/esercizi`),
 }));
+// Gli esercizi selezionabili devono esistere anche nella lingua della simulazione.
+const tradotte = en && !usa ? new Set((await getCollection('dafare_en', (v) => v.id.startsWith(materia + '/'))).map((v) => v.id)) : undefined;
+const pronta = !usa && argomenti.length > 0 && (!tradotte || dafare.filter((v) => v.id.startsWith(materia + '/')).every((v) => tradotte.has(v.id)));
 const hrefMateria = (section: string) => usa ? url(courseUrl(materia) + '/' + section) : link(lingua, `/${materia}/${section}`);
 const T = en ? {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
@@ -72,7 +75,7 @@ if (semestreFiltro) {
 }
 ---
 <Base titolo={`${T.titolo}`} descrizione={T.sommario} percorso={[{ titolo: T.sopra }, { titolo: T.titolo }]}
-  materia={materia} sezione="simulazione" lingua={lingua} usa={usa} seo={{ noindex: true, senzaInglese }}>
+  materia={materia} sezione="simulazione" lingua={lingua} usa={usa} seo={{ titolo: T.titolo + ' · ' + m.titolo, noindex: !pronta, senzaInglese }}>
   <div class="simulazione" data-materia={materia} data-sblocca={hrefMateria('sblocca')} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
@@ -115,6 +118,10 @@ if (semestreFiltro) {
     </div>
   </div>
   <slot />
+  {pronta && <details>
+    <summary>{en ? 'Practice by topic before the mock exam' : 'Esercizi per preparare la simulazione'}</summary>
+    <ul>{argomenti.map((a) => <li><a href={a.href}>{a.titolo}</a> · {a.n} {en ? 'exercises' : 'esercizi'}</li>)}</ul>
+  </details>}
 </Base>
 
 <script>

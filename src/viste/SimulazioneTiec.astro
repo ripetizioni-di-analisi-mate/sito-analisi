@@ -8,7 +8,7 @@ const materia = 'tiec';
 const conf = TOLC[materia];
 const prezzo = materiaIt(materia).prezzo;
 ---
-<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Simulazione del TIEC dell'Università Cattolica: ${conf.quesiti} quesiti a quattro risposte in ${conf.minuti} minuti, 12 per area, con le soglie minime di ogni area e le spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
+<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Simulazione del TIEC dell'Università Cattolica: ${conf.quesiti} quesiti a quattro risposte in ${conf.minuti} minuti, 12 per area, con le soglie minime di ogni area e le spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true }}>
   <div class="tiec-simulazione" data-materia={materia} data-minuti={conf.minuti}>
     <p class="sopratitolo">Preparati a {conf.area}</p>
     <h1>Simulazione TIEC</h1>

@@ -19,7 +19,7 @@ const sommario = materia
 const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo: 'Concorsi', href: '/concorsi' }, { titolo }];
 ---
 <Base titolo={titolo} descrizione={sommario} percorso={percorso} materia={materia} sezione={materia ? 'simulazione' : undefined}
-  lingua="it" seo={materia ? { noindex: true } : { soloQuestaLingua: true, senzaInglese: true }}>
+  lingua="it" seo={{ canonico: materia ? '/concorsi/simulazione' : undefined, noindex: !materie.length, soloQuestaLingua: true, senzaInglese: true }}>
   <div class="simulazione simulazione-quiz" data-materie={JSON.stringify(materie)}>
     <p class="sopratitolo">{materia ? "Prove d'esame" : 'Concorsi'}</p>
     <h1>{titolo}</h1>

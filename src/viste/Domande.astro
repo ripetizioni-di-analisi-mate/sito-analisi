@@ -4,6 +4,9 @@
 import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
+import { originale } from '../lib/canonici';
+import { tutteLeVoci } from '../lib/voci-teoria';
+import { raccolteSvolti } from '../lib/raccolte-svolti';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { BOCCONI } from '../data/bocconi.mjs';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
@@ -79,6 +82,16 @@ const T = es ? {
   inizia: 'Inizia', avvio: 'Il tempo parte quando premi «Inizia».',
   anteprima: 'Anteprima gratuita', bloccata: 'Questa domanda è riservata a chi ha acquistato l’accesso completo alla materia.', sblocca: 'Sblocca la materia',
 };
+// La pagina pubblica descrive il quiz e collega il materiale dello stesso argomento.
+const pubblica = !usa && !personale && totale > 0;
+const titoloQuiz = ripasso ? T.titolo + ' · ' + m.titolo : arg.titolo + ' · ' + T.titolo;
+const numeroPerArgomento = pubblica && ripasso && (lingua === 'it' || en) ? (await conteggiDomande(en ? 'en' : 'it'))[materia] ?? {} : {};
+const capitoli = m.argomenti.filter((a) => numeroPerArgomento[a.slug] > 0);
+const esempi = pubblica && !ripasso && (lingua === 'it' || lingua === 'en')
+  ? (await raccolteSvolti(lingua)).get(materia)?.find((c) => c.slug === argomento)?.schede.slice(0, 3) ?? [] : [];
+const voci = pubblica && !ripasso && (lingua === 'it' || lingua === 'en')
+  ? ((await tutteLeVoci(lingua)).get(materia + '/' + argomento) ?? []).filter((v) => v.titolo).slice(0, 4) : [];
+const canonicoQuiz = pubblica && !ripasso ? originale(materia, argomento, 'domande') : undefined;
 // Testi usati dallo script nel browser.
 const JS = es ? {
   caricamento: T.caricamento, errore: 'No se han podido cargar las preguntas. Recarga la página.', bonus: 'Quedan § segundos para conseguir puntos extra por rapidez',
@@ -117,13 +130,13 @@ const JS = es ? {
   descrizione={T.descr}
   percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: hrefSezione('teoria') }, { titolo: T.titolo }]}
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua} usa={usa}
-  seo={{ noindex: true, senzaInglese, soloQuestaLingua: (materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && senzaInglese }}
+  seo={{ titolo: ripasso ? titoloQuiz : titoloQuiz + ' | ' + m.breve, noindex: !pubblica, canonico: canonicoQuiz, senzaInglese, soloQuestaLingua: (materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && senzaInglese }}
 >
   <div class="domande" data-materia={materia} data-bocconi-quiz={bocconi || undefined} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
       <div>
-        <p class="sopratitolo">{T.titolo}</p>
-        <h1>{arg.titolo}</h1>
+        <p class="sopratitolo">{pubblica ? m.titolo : T.titolo}</p>
+        <h1>{pubblica ? titoloQuiz : arg.titolo}</h1>
       </div>
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
@@ -131,7 +144,7 @@ const JS = es ? {
     {(anteprimaScienza || anteprimaUsa) && <p class="nota nota-anteprima-scienza" data-usa-preview={anteprimaUsa || undefined}>
       {notaAnteprima} <a href={hrefSblocca}>{T.sblocca} · {m.prezzo} €</a>
     </p>}
-    {['tolc-i', 'tolc-s'].includes(materia) && <p class="nota">{en ? 'Ten sample questions are available before unlocking TOLC-I. Full access includes all questions and the section-timed simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso {materia.toUpperCase()}</a> comprende tutti i quiz e la simulazione con tempi per sezione.</>}</p>}
+    {['tolc-i', 'tolc-s'].includes(materia) && <p class="nota">{en ? 'Ten sample questions are available before unlocking ' + materia.toUpperCase() + '. Full access includes all questions and the section-timed simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso {materia.toUpperCase()}</a> comprende tutti i quiz e la simulazione con tempi per sezione.</>}</p>}
     {materia === 'tiec' && <p class="nota">{en ? 'Ten sample questions are available before unlocking the TIEC course. Full access includes all questions and the full 48-question simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso TIEC</a> comprende tutti i quiz e la simulazione completa da 48 quesiti in 60 minuti.</>}</p>}
     {materia === 'statistica' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all {quizStatistica} questions with explanations. Materials are in Italian.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Statistica e probabilità</a> comprende tutti i {quizStatistica} quiz con spiegazione.</>}</p>}
     {materia === 'biologia-semestre-filtro' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all 315 questions with explanations.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Biologia</a> comprende tutti i 315 quiz con spiegazione.</>}</p>}
@@ -186,6 +199,20 @@ const JS = es ? {
 
     <section class="riepilogo-sessione" hidden></section>
   </div>
+  {voci.length > 0 && <nav aria-label={en ? 'Theory for this quiz' : 'Teoria per questo quiz'}>
+    <h2>{en ? 'What to review' : 'Cosa ripassare'}</h2>
+    <ul>{voci.map((v) => <li><a href={link(lingua, base + '/teoria/' + v.ancora)}>{v.titolo}</a></li>)}</ul>
+  </nav>}
+  {pubblica && (capitoli.length > 0 || esempi.length > 0) && (
+    <details class="quiz-argomenti">
+      <summary>{ripasso ? (en ? 'Topics covered in this review' : 'Argomenti del ripasso')
+        : (en ? 'Worked examples for this quiz' : 'Esercizi svolti per preparare il quiz')}</summary>
+      <ul>
+        {ripasso ? capitoli.map((a) => <li><a href={link(lingua, '/' + materia + '/' + a.slug + '/domande')}>{a.titolo}</a> · {numeroPerArgomento[a.slug]} {en ? 'questions' : 'domande'}</li>)
+          : esempi.map((s) => <li><a href={link(lingua, s.percorso)}>{s.titolo}</a></li>)}
+      </ul>
+    </details>
+  )}
 </Base>
 
 <style>

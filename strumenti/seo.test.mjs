@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { generaDate } from '../scripts/date-pagine.mjs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { stripTypeScriptTypes } from 'node:module';
@@ -72,3 +76,93 @@ test('una pagina senza canonical interrompe la generazione', async () => {
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test('le date SEO seguono i file originali, anche per capitoli generati e copie senza cronologia', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'seo-date-'));
+  const git = (cwd, ...args) => execFileSync('git', args, {
+    cwd, stdio: 'pipe',
+    env: { ...process.env, GIT_AUTHOR_DATE: '2025-03-15T12:00:00Z', GIT_COMMITTER_DATE: '2025-03-15T12:00:00Z' },
+  });
+  try {
+    const source = join(directory, 'origine'), breve = join(directory, 'breve');
+    const rel = 'src/content/teoria/analisi-1/numeri-complessi.md';
+    const copia = rel.replace('/analisi-1/', '/algebra-lineare/');
+    const cache = 'src/data/date-pagine.json';
+    await mkdir(join(source, 'src/content/teoria/analisi-1'), { recursive: true });
+    await mkdir(join(source, 'src/content/teoria/algebra-lineare'), { recursive: true });
+    await mkdir(join(source, 'src/data'));
+    await writeFile(join(source, rel), 'Prima edizione');
+    git(source, 'init', '-q');
+    git(source, 'add', rel);
+    git(source, '-c', 'user.name=Test', '-c', 'user.email=test@example.org', 'commit', '-qm', 'Teoria');
+    await writeFile(join(source, copia), 'Prima edizione');
+    generaDate(source);
+    const leggi = async (root) => JSON.parse(await readFile(join(root, cache), 'utf8'));
+    assert.equal((await leggi(source))[rel].data, '2025-03-15');
+    assert.equal((await leggi(source))[copia].data, '2025-03-15');
+    git(source, 'add', cache);
+    git(source, '-c', 'user.name=Test', '-c', 'user.email=test@example.org', 'commit', '-qm', 'Date');
+    git(directory, 'clone', '--depth', '1', pathToFileURL(source).href, breve);
+    generaDate(breve);
+    assert.equal((await leggi(breve))[rel].data, '2025-03-15');
+    await writeFile(join(breve, rel), 'Contenuto diverso');
+    generaDate(breve);
+    assert.equal((await leggi(breve))[rel], undefined);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('gli indici gratuiti di Analisi 1 collegano schede complete disponibili in ciascuna lingua',
+  { skip: !existsSync('dist/analisi-1.html') }, async () => {
+    for (const pre of ['', '/en']) {
+      const percorso = pre + '/analisi-1/esercizi-svolti-gratuiti';
+      const html = await readFile('dist' + percorso + '.html', 'utf8');
+      const htmlMateria = await readFile('dist' + pre + '/analisi-1.html', 'utf8');
+      assert.ok(htmlMateria.includes('href="' + percorso + '"'));
+      assert.ok(html.includes('rel="canonical" href="' + sito + percorso + '"'));
+      const voce = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1]);
+      const elenco = voce['@graph'].find((item) => item['@type'] === 'ItemList');
+      assert.ok(elenco.numberOfItems > 0);
+      assert.equal(elenco.itemListElement.length, elenco.numberOfItems);
+      for (const item of elenco.itemListElement) {
+        const path = new URL(item.url).pathname;
+        assert.ok(path.startsWith(pre + '/analisi-1/'));
+        assert.match(path, /\/esercizi-svolti\/[123]$/);
+        assert.ok(html.includes('href="' + path + '"'));
+        assert.ok(existsSync('dist' + path + '.html'), path);
+      }
+      const capitolo = pre + '/analisi-1/limiti';
+      const scheda = await readFile('dist' + capitolo + '/esercizi-svolti/1.html', 'utf8');
+      assert.ok(scheda.includes('href="' + capitolo + '/teoria/limite-finito"'));
+      assert.ok(existsSync('dist' + capitolo + '/teoria/limite-finito.html'));
+    }
+  });
+
+test('quiz, ripasso generale e simulazioni pubblici restano distinti dal ripasso personale e dalle copie',
+  { skip: !existsSync('dist/analisi-1/limiti/domande.html') }, async () => {
+    const xml = await readFile('dist/sitemap.xml', 'utf8');
+    for (const pre of ['', '/en']) {
+      const radice = pre + '/analisi-1';
+      for (const fine of ['/limiti/domande', '/prove-d-esame/domande', '/simulazione']) {
+        const percorso = radice + fine;
+        const pagina = await readFile('dist' + percorso + '.html', 'utf8');
+        assert.ok(pagina.includes('rel="canonical" href="' + sito + percorso + '"'), percorso);
+        assert.doesNotMatch(pagina, /<meta name="robots" content="noindex/);
+        assert.ok(xml.includes('<loc>' + sito + percorso + '</loc>'), percorso);
+        const destinazione = fine.startsWith('/prove-') ? '/limiti/domande'
+          : fine === '/simulazione' ? '/limiti/esercizi' : '/limiti/teoria/';
+        assert.ok(pagina.includes('href="' + radice + destinazione), destinazione);
+      }
+      const personale = radice + '/ripasso-di-oggi/domande';
+      assert.match(await readFile('dist' + personale + '.html', 'utf8'), /<meta name="robots" content="noindex/);
+      assert.ok(!xml.includes('<loc>' + sito + personale + '</loc>'));
+      const copia = pre + '/algebra-lineare/numeri-complessi/domande';
+      if (existsSync('dist' + copia + '.html')) {
+        assert.ok((await readFile('dist' + copia + '.html', 'utf8')).includes('rel="canonical" href="' + sito + radice + '/numeri-complessi/domande"'));
+        assert.ok(!xml.includes('<loc>' + sito + copia + '</loc>'));
+      }
+      const bocconi = pre + '/test-bocconi/simulazione';
+      if (existsSync('dist' + bocconi + '.html')) assert.ok(xml.includes('<loc>' + sito + bocconi + '</loc>'));
+    }
+  });
