@@ -6,144 +6,186 @@ sommario: "From chromosome counts to nucleosomes: genome organisation, accessibi
 ## Chromosomes, chromatids and DNA content
 
 :::definizione{#cromosomi titolo="A chromosome before and after replication"}
-A cell must preserve its DNA, make selected regions accessible and distribute a copy to its daughter cells. A **eukaryotic chromosome** is a unit of DNA organisation involving associated proteins. Before replication it contains one linear, double-stranded DNA molecule; after replication it contains two sister chromatids, each with its own DNA molecule. The two complementary strands of a double helix therefore belong to the same chromatid.
+A eukaryotic **chromosome** is a long, linear, double-helical DNA molecule wrapped around proteins. The number of chromosomes is fixed for each species, and a human cell has 46. The appearance of a chromosome changes with DNA replication.
 
-Maternal and paternal homologous chromosomes carry the same types of genes at corresponding loci, but may carry different alleles. Sister chromatids arise from replication of the same chromosome. A diploid organism has two sets of homologues. We use $n$ for the chromosome number in one set and $C$ for the nuclear DNA content of one unreplicated haploid set.
+- **Before** replication the chromosome contains a single DNA molecule.
+- **After** replication it contains two identical DNA molecules, called **sister chromatids**, joined together at a region called the centromere. This is the X shape seen in photographs. It still counts as one chromosome, as long as the two chromatids stay joined.
 
-A normal human somatic cell in G1 contains 46 chromosomes, 46 DNA molecules and a DNA content of $2C$. After S phase and before sister separation it still contains 46 chromosomes, each duplicated, and 92 DNA molecules; its DNA content is $4C$. Ploidy remains $2n$, because replication copies the molecules without adding a new set of homologues. When sisters separate at anaphase, each becomes an independent chromosome. A count must therefore specify whether it refers to the whole cell or to one future daughter nucleus.
+The two strands of the double helix are not the two chromatids. Each chromatid is a complete double helix.
+
+The cells of the body are **diploid**, that is, they have two copies of each chromosome, one received from the mother and one from the father. The two copies are called **homologous chromosomes**. Two homologues carry the same genes at the same positions, called **loci** (singular locus). The versions of a gene, called **alleles**, are however often different on the two homologues. Two sister chromatids, by contrast, are identical copies of each other.
+
+Two symbols are used for counting. The symbol $n$ denotes the number of chromosomes in one set, that is, a complete series with one copy of each type. In humans $n=23$, and a diploid cell has $2n=46$ chromosomes. The symbol $C$ denotes the amount of DNA in one unreplicated set. Over the life of a cell the counts are as follows.
+
+| Moment | Chromosomes | DNA molecules | Amount of DNA |
+|---|---|---|---|
+| Before replication (G1 phase) | 46 | 46 | $2C$ |
+| After replication (G2 phase) | 46 | 92 | $4C$ |
+
+Replication therefore doubles the DNA molecules and leaves the number of chromosomes unchanged. The cell remains diploid, because there are still 23 pairs of homologues. During division the sister chromatids separate, and from that moment each counts as a chromosome.
 
 ![An unreplicated chromosome and the same chromosome after duplication](/figure/biologia-semestre-filtro/genoma-cromatina/cromosoma-en.svg)
 :::
 
 :::esempio{titolo="Interpreting a DNA measurement"}
-In a species with $2n=8$, a G1 cell has 8 chromosomes and 8 DNA molecules. After complete replication it has 8 chromosomes and 16 molecules. If a dye binds DNA in proportion to its amount, the signal ideally rises from 100 to 200 units. This doubling indicates increased DNA content; inferring a change in ploidy requires information about the chromosome sets. The same measurement may be consistent with different cellular states.
+A species has $2n=8$. Before replication one of its cells has 8 chromosomes, each with one DNA molecule, so 8 molecules. After replication it still has 8 chromosomes, each with two chromatids, so $8\cdot 2=16$ molecules. A dye that binds DNA gives a signal proportional to the amount of DNA. If the signal before replication is 100, afterwards it is 200. The doubling of the signal shows that the DNA has doubled and not that the chromosomes have become 16. To know the number of chromosomes, the chromosomes must be counted under the microscope.
 :::
 
 ## Centromeres and telomeres
 
 :::definizione{#centromeri-telomeri titolo="Regions that allow chromosomes to be maintained"}
-To be maintained through cell divisions, a linear chromosome must be replicated, segregated and protected at its ends. **Replication origins** are regions where DNA synthesis starts; eukaryotic chromosomes have many of them. The **centromere** is the region where the kinetochore assembles, the protein complex that interacts with spindle microtubules. A fragment lacking a functional centromere may replicate yet be distributed irregularly, because it lacks the normal attachment site for the spindle.
+A chromosome is preserved from one division to the next thanks to three types of region, each with a task.
 
-Alpha-satellite repeats are common in human centromeres. The histone variant CENP-A replaces H3 in some centromeric nucleosomes and contributes to the identity of the site. Repetitive sequence and centromere function must be distinguished: functional centromeric regions called neocentromeres can form at positions lacking the usual alpha-satellite block. Chromatin organisation therefore contributes to function alongside the DNA sequence.
+- **Origins of replication** are the points where DNA copying begins. Each eukaryotic chromosome has many.
+- The **centromere** is the region on which the **kinetochore** assembles, a protein complex to which the spindle microtubules attach. During division the microtubules pull the chromosomes towards the two daughter cells. A chromosome fragment without a centromere is copied, but it is not distributed correctly and is usually lost.
+- **Telomeres** are the two ends of the chromosome.
 
-**Telomeres** contain repeated sequences and proteins that protect chromosome ends. In humans the characteristic repeat is TTAGGG; the shelterin complex helps prevent a natural chromosome end from being treated as a break that should be joined to another end. Loss of protection can trigger damage responses and chromosome fusions even when telomeric sequence is still present.
+In human centromeres the DNA consists of short sequences repeated a great many times, called alpha-satellite. What identifies the centromere, however, is a protein. In centromeric nucleosomes histone H3 is replaced by a variant, **CENP-A**, and the kinetochore assembles where CENP-A is present. There are in fact working centromeres, called neocentromeres, in regions without alpha-satellite sequences.
 
-Telomerase contains a protein component with reverse transcriptase activity and an RNA used as a template. It extends telomeric DNA, contributing to its maintenance in cells where it is active. Protection and elongation are related but distinguishable functions: shelterin protects the end, whereas telomerase adds sequence. The end-replication problem is developed in the chapter on the flow of genetic information.
+In **telomeres** the DNA is a short sequence repeated thousands of times, which in humans is TTAGGG. A group of proteins called **shelterin** binds these repeats. The cell repairs DNA breaks by joining free ends together. Shelterin covers the natural end of the chromosome and prevents it from being treated as a break. Without this protection two chromosomes are joined to each other end to end.
+
+At each replication telomeres shorten a little, for a reason explained in the unit on replication. **Telomerase** is the enzyme that lengthens them again. It contains an RNA molecule that it uses as a template to add new TTAGGG repeats, so it is a reverse transcriptase. It is active in germ cells and stem cells, and little or not at all in most other cells. Shelterin and telomerase therefore have different tasks: the first protects the end, the second lengthens it.
 :::
 
 :::esempio{titolo="Two alterations with different consequences"}
-A chromosome with protected telomeres but a defective kinetochore primarily has a segregation problem. A chromosome with a functioning kinetochore but unprotected telomeres may instead activate a damage response or fuse with another chromosome. The fact that both alterations destabilise the genome does not make the two structures interchangeable.
+Two defective chromosomes are compared. The first has normal telomeres and a kinetochore that does not work. Microtubules cannot attach, so during division the chromosome is not distributed correctly and one daughter cell is left without it. The second has a normal kinetochore and telomeres without shelterin. It is distributed correctly, but its ends are treated as breaks, so the cell stops or joins the chromosome to another. In both cases the genome is altered, for two different reasons. The centromere serves distribution and the telomere serves protection of the ends.
 :::
 
 ## DNA associated with histones
 
 :::definizione{#nucleosomi titolo="Nucleosome, octamer and linker DNA"}
-Nuclear DNA associates with proteins to form **chromatin**. In a nucleosome, about 147 base pairs of DNA wrap around an octamer, a complex of eight histone proteins. There are two copies each of H2A, H2B, H3 and H4. DNA phosphate groups carry negative charges; many histone lysines and arginines carry positive charges, contributing to interactions that stabilise the association.
+The DNA of a human cell, stretched out, is about two metres long, and the nucleus has a diameter of a few thousandths of a millimetre. The DNA fits in the nucleus because it is wrapped around proteins called **histones**. DNA and proteins together are called **chromatin**.
 
-The DNA connecting two nucleosome core particles is called *linker DNA*. Histone H1 associates near the DNA entry and exit sites of the nucleosome and with the linker. H1 contributes to stabilisation and compaction, but does not belong to the octamer. Histone tails are protein regions that extend from the nucleosome and can undergo covalent modification.
+The unit of chromatin is the **nucleosome**. It consists of a core of eight histones, called an **octamer**, around which the DNA makes almost two turns, for a length of about 147 base pairs. The octamer contains two copies of each of the four histones H2A, H2B, H3 and H4. DNA is negatively charged, because of its phosphate groups, and histones are rich in positively charged amino acids (lysine and arginine), so the two molecules attract each other.
 
-The **nucleosome repeat length** includes the wrapped DNA and the average linker. If a model uses 147 wrapped base pairs and a 53-base-pair linker, one repeat contains $147+53=200$ base pairs. In 2,000 base pairs ideally organised into complete repeats, the estimated number of nucleosomes is $\dfrac{2000}{200}=10$. Assuming complete repeats avoids ambiguity at the ends of the segment. In real chromatin, linker length and nucleosome occupancy vary along the genome.
+The stretch of DNA joining one nucleosome to the next is called the **linker**. Under the electron microscope extended chromatin looks like a string of beads, in which the beads are the nucleosomes and the string is the linker. A fifth histone, **H1**, is not part of the octamer. It binds where the DNA enters and leaves the nucleosome and brings nucleosomes closer together. From each histone of the octamer a flexible end protrudes, called a **tail**, to which the cell adds chemical groups.
+
+These numbers give an estimate of how many nucleosomes there are in a stretch of DNA. If the wrapped DNA measures 147 base pairs and the linker measures 53 on average, each nucleosome with its linker occupies $147+53=200$ base pairs. A stretch of 2000 base pairs therefore contains $\dfrac{2000}{200}=10$ nucleosomes. The value of 200 is an average, because linker length changes from one region to another.
 
 ![Histone octamer, wrapped DNA and linker with H1](/figure/biologia-semestre-filtro/genoma-cromatina/nucleosoma-en.svg)
 :::
 
 :::esempio{titolo="Why nuclease digestion produces a ladder"}
-A nuclease cuts accessible DNA between particles more readily. Partial digestion can therefore produce fragments corresponding to one, two or three nucleosome repeats. If the bands are approximately 200, 400 and 600 base pairs, the average spacing is about 200. More extensive digestion may leave the protected core of about 147 base pairs. The two values therefore describe different measurements, both consistent with the same model.
+A **nuclease** is an enzyme that cuts DNA. In chromatin it easily cuts the linker, which is exposed, and cuts the DNA wrapped on the octamer, which is protected, with difficulty. Chromatin is treated with a nuclease for a short time, so that only some linkers are cut. The fragments obtained contain one, two or three nucleosomes, so they measure about 200, 400 and 600 base pairs. Separated by length on a gel they form bands at regular distances, like the rungs of a ladder. The distance between two bands, 200 base pairs, is the length of one nucleosome with its linker. If the treatment lasts a long time the nuclease consumes all the linkers and only the protected DNA remains, about 147 base pairs.
 :::
 
 :::osservazione{titolo="An average retains local variability"}
-An average repeat length of 200 bp does not mean that every linker in the sample measures 53 bp. Some particles may have shorter linkers and others longer ones; the average summarises the sample without describing every location. Regions temporarily lacking nucleosomes also contribute to the distribution of accessibility. Determining a particle's position near a promoter therefore requires a local measurement, whereas a fragment ladder mainly provides information about average periodic organisation. This distinction allows numerical models to be used without assigning absolute uniformity to real chromatin.
+The value of 200 base pairs is the average over all the nucleosomes in the sample. In some regions the linker is shorter than 53 base pairs, in others it is longer, and some stretches have no nucleosomes. The ladder of bands therefore describes the average spacing and not the position of each nucleosome. To know whether a nucleosome covers a precise point of the DNA, for example the start of a gene, a measurement made at that point is needed.
 :::
 
 ## Three-dimensional organisation and accessibility
 
 :::osservazione{#compattazione titolo="Loops and dynamic organisation"}
-Wrapping around nucleosomes is an initial level of organisation. Chromatin also forms contacts and loops, bringing together regions that are far apart along the sequence. Interphase chromosomes occupy partially distinct nuclear territories and have organisations that vary over time. A short distance in space may therefore correspond to a much greater distance along the DNA.
+Nucleosomes are the first level of DNA folding. Above this level chromatin forms **loops**, that is, folded stretches that bring into contact two points far apart along the sequence. A loop, for example, brings a regulatory sequence thousands of base pairs away close to a gene. In the nucleus of a cell that is not dividing each chromosome occupies its own region, called a chromosome territory.
 
-**Cohesins** participate in sister-chromatid cohesion and in organising interphase chromatin contacts. **Condensins** contribute to the formation and organisation of mitotic chromosomes. These SMC-family complexes have partly different functions. Increased compaction in mitosis facilitates distribution of the replicated material and does not require the removal of DNA segments.
+Two ring-shaped protein complexes, of the **SMC** family, organise the loops.
 
-The regular 30-nm fibre belongs to classical models of nucleosome folding and can be observed under certain conditions. Studies of chromatin within cells also reveal irregular, heterogeneous structures. An obligatory succession of progressively thicker fibres therefore does not universally describe every genomic region. A compaction diagram is useful when it distinguishes a simplified model from observed structures.
+- **Cohesins** form the loops in the non-dividing cell. After replication they also hold the two sister chromatids together.
+- **Condensins** compact the chromosomes at the start of division and give them the shape visible under the microscope.
+
+During division the chromosome is much more compact and contains exactly the same DNA. Many books show an intermediate stage, the **30 nm fibre**, in which nucleosomes are stacked regularly. This fibre is observed in the test tube. In cells chromatin mostly has an irregular folding, so the scheme of successive levels is a simplified model.
 :::
 
 :::definizione{#eucromatina-eterocromatina titolo="Local chromatin states"}
-**Euchromatin** is generally more accessible and less condensed; **heterochromatin** is more compact and often associated with reduced transcription. These properties describe trends. An accessible promoter still requires appropriate transcription factors and signals to produce RNA.
+The chromatin of a nucleus is found in two states.
 
-Constitutive heterochromatin affects stably compact regions, often rich in repeats, such as many pericentromeric regions. Facultative heterochromatin changes with cell type or development; much of the inactive X chromosome is an example. Some genes on the inactive X escape silencing, so its condensation does not imply that every gene is inactive.
+- **Euchromatin** is loosely packed. Its DNA is accessible to proteins, and most active genes are found here.
+- **Heterochromatin** is tightly packed. Its DNA is poorly accessible and the genes it contains are generally switched off.
+
+The state of chromatin is a condition that makes transcription possible and does not by itself start it. A gene in euchromatin is transcribed only if the proteins that activate it, the transcription factors, are present.
+
+Heterochromatin is of two types. **Constitutive** heterochromatin is compact in all cells and at all times. It is found in regions rich in repeated sequences, such as those around centromeres. **Facultative** heterochromatin is compact only in some cell types or at some stages of development. The main example is the inactive X chromosome. Female mammals have two X chromosomes, and in each cell one of the two is compacted and almost completely switched off. Some genes on this chromosome nevertheless remain active.
 
 ![The same sequence with different nucleosome positions and promoter accessibility](/figure/biologia-semestre-filtro/genoma-cromatina/accessibilita-en.svg)
 :::
 
 :::definizione{#rimodellamento titolo="Moving a nucleosome using ATP"}
-**ATP-dependent chromatin-remodelling complexes** use ATP hydrolysis to change interactions between DNA and histones. They can reposition nucleosomes, remove them or promote exchanges of histone components. The outcome depends on the site and the complex: a regulatory site may become more accessible or may become covered.
+A nucleosome covering a sequence prevents other proteins from binding to it. The cell moves nucleosomes with **chromatin remodelling complexes**, enzymes that consume ATP. A remodelling complex slides the nucleosome along the DNA, removes it or replaces one of its histones. Depending on the case, a regulatory sequence is uncovered or covered.
 
-If a nucleosome occupies a site recognised by a factor, repositioning may allow that factor to bind. To attribute the effect to remodelling, one might compare an active protein with a variant lacking ATPase activity. A change in position with an unchanged DNA sequence demonstrates chromatin reorganisation. The sequence alone therefore does not describe every condition determining access.
+A transcription factor, for example, has to bind a sequence covered by a nucleosome. The remodelling complex moves the nucleosome by a few tens of base pairs, the sequence is left uncovered and the factor binds. In this process the DNA sequence does not change. Only the position of the nucleosome changes. To show that the movement depends on the complex, a version of the complex unable to hydrolyse ATP is used in the laboratory. With this version the nucleosome stays in place.
 :::
 
 ## Modifications and epigenetic memory
 
 :::definizione{#epigenetica titolo="Regulatory states without a sequence change"}
-**Epigenetics** studies regulatory states of the genome that can be maintained through cell divisions without depending on a change in DNA sequence. The presence of a chemical modification at a single time point does not by itself demonstrate heritable memory. Stability is investigated by following the state in descendant cells, distinguishing maintenance from continuous external induction.
+All the cells of a person have the same DNA, yet a liver cell and a neuron use different genes. When a liver cell divides, moreover, the daughter cells are still liver cells. **Epigenetics** studies the information that determines which genes are active and that passes to daughter cells without the DNA sequence changing. This information consists of chemical groups added to DNA or to histones, called **epigenetic modifications**.
 
-In humans, DNA methylation mainly affects cytosines in CpG dinucleotides. Methylation of many CpG-rich promoters is associated with repression, partly through proteins that recognise methylated cytosines. Its meaning depends on context: methylation in other regions, such as a gene body, is not automatically interpreted in the same way.
+The first modification is **DNA methylation**, that is, the addition of a methyl group ($\mathrm{CH_3}$) to the base cytosine. In humans it concerns cytosines followed by a guanine, in the pairs called **CpG**. The sequence stays the same, because a methylated cytosine still pairs with guanine. When the CpGs of the **promoter** of a gene, that is, the region where transcription starts, are methylated, the gene is generally switched off. Specific proteins recognise methylated cytosines and compact the chromatin.
 
-After replication, a site previously methylated on both strands initially has one methylated parental strand and one new, unmodified strand. Maintenance systems involving DNMT1 and associated proteins allow the pattern to be restored. This relationship between old and new strands explains how regulatory information can persist while the base sequence is copied.
+Methylation passes to daughter cells by the following mechanism. In a CpG both strands carry a methylated C, because opposite CG there is GC. With replication each new double helix receives one old strand, methylated, and one new strand, unmethylated. The enzyme **DNMT1** recognises sites methylated on only one strand and adds the methyl to the new strand. The two daughter cells therefore have the same methylated CpGs as the mother cell.
 
 ![Maintenance methylation after replication: parental site, hemimethylation and restoration](/figure/biologia-semestre-filtro/genoma-cromatina/metilazione-en.svg)
 
-Acetylation of histone lysines reduces their positive charge and creates sites recognised by proteins with specific domains. It is often associated with accessible chromatin. Acetyltransferases add acetyl groups and deacetylases remove them. A deacetylase inhibitor may increase acetylation without guaranteeing activation of every gene, because expression requires additional conditions.
+The second class of modifications concerns histone tails. The two main ones are acetylation and methylation.
 
-Histone methylation can be associated with activation or repression depending on the residue and its methylation state. H3K4me3 denotes trimethylation of lysine 4 on histone H3 and is often present near active promoters. H3K9me3 is frequently associated with heterochromatin. These names specify a position: the word “methylation” alone identifies neither the substrate nor the effect.
+**Acetylation** is the addition of an acetyl group to the amino acid lysine. Lysine is positively charged and the acetyl cancels the charge, so the acetylated histone attracts DNA less and the chromatin is more open. Acetylation is associated with active genes. **HAT** enzymes (histone acetyltransferases) add the acetyl and **HDAC** enzymes (histone deacetylases) remove it. A drug that inhibits HDACs therefore increases acetylation.
+
+**Histone methylation** has different effects depending on which lysine is methylated. It is written with an abbreviation read from left to right: histone, amino acid, position and number of methyls. **H3K4me3** is histone H3 with three methyls on the lysine (K) at position 4, and it is found on the promoters of active genes. **H3K9me3** is histone H3 with three methyls on the lysine at position 9, and it is found in heterochromatin. The word "methylation" alone therefore does not say whether a gene is active or switched off.
 :::
 
 :::esempio{titolo="Separating association from causation"}
-In two cultures with the same gene, culture A has an accessible promoter and abundant RNA; B has a methylated promoter and little RNA. The data support an association, but do not by themselves establish which event happened first. A targeted intervention that changes methylation, with controls for sequence changes and indirect effects, can strengthen a causal hypothesis. Measuring nascent RNA also helps distinguish transcription from differences in the stability of RNA already produced.
+The same gene is studied in two cell cultures. In culture A the promoter is not methylated and the gene produces a lot of RNA. In culture B the promoter is methylated and the gene produces little RNA. The two data show that methylation and low expression appear together. They do not show which of the two is the cause. It is possible that methylation switches the gene off, and it is possible that the gene switches off for another reason and is methylated afterwards. To distinguish the two cases, the hypothesised cause is acted upon. Methylation is removed from the promoter in culture B, without changing anything else, and the RNA is measured. If the RNA increases, methylation was the cause of the low expression.
 :::
 
 
 :::esempio{titolo="Accessibility data and histone abundance"}
-Two samples have histone-acetylation signals of 120 and 60 units. However, the second sample also contains half as many histones as the first. Before concluding that each nucleosome is less acetylated, the signal is related to substrate abundance. If both signals halve, the ratio may remain constant. A global measurement therefore combines particle abundance and modification frequency. Normalisation requires an appropriate reference and comparable measurement conditions.
+Histone acetylation is measured in two samples. The signal is 120 in the first sample and 60 in the second. The second sample, however, contains half the histones of the first. The signal is therefore divided by the amount of histones. Taking the amount in the first sample as 2 and that in the second as 1 gives $\dfrac{120}{2}=60$ and $\dfrac{60}{1}=60$. Each histone is therefore acetylated to the same extent in the two samples, and the lower signal depends only on the smaller number of histones. A signal must always be referred to the amount of material on which it is measured. This operation is called normalisation.
 
-Similar reasoning applies to accessibility. Greater nuclease sensitivity may reflect DNA exposure, but differences in enzyme-recognised sequence or sample abundance must be controlled. The experiment thus connects an observable measurement to a chromatin property through stated assumptions.
+The same holds for accessibility measured with a nuclease. A sample that is cut more generally has more open chromatin. Before concluding this, it is checked that the two samples contain the same amount of DNA.
 :::
 
 ## Genes, families and non-coding DNA
 
 :::definizione{#sequenze-genoma titolo="Genome composition"}
-The **genome** comprises the genetic DNA; in humans, nuclear and mitochondrial genomes are distinguished. Within the nuclear genome, protein-coding sequences coexist with introns, regulatory regions, genes for non-coding RNAs and several classes of repeats. The fraction directly encoding protein sequences is small compared with the total. “Not protein-coding” does not imply “without function”: a promoter or an rRNA gene provides a specific counterexample.
+The **genome** is all the DNA of an organism. In humans it comprises the nuclear genome, about 3 billion base pairs distributed over 23 chromosomes, and the small mitochondrial genome. A **gene** is a stretch of DNA containing the instructions for a product, that is, a protein or an RNA. There are about 20,000 protein-coding genes. The parts of these genes actually translated into protein are only 1–2% of the genome. The rest comprises four types of sequence.
 
-A **single-copy sequence** occupies one locus per reference haploid set, unlike repeated sequences. A diploid cell can therefore contain two allelic copies on homologous chromosomes: “single” does not mean one molecule in the whole cell and does not necessarily imply protein coding.
+- **Introns**, stretches inside genes that are transcribed and then removed from the RNA.
+- **Regulatory sequences**, such as promoters, which determine when a gene is active.
+- Genes for **non-coding RNAs**, such as rRNA and tRNA.
+- **Repeated sequences**, which occupy about half the genome.
 
-A **gene family** contains evolutionarily related genes, often produced by duplication followed by divergence. Copies may retain similar activities or acquire different expression patterns and functions. Globin genes show different regulation during development. Genes related through duplication are called **paralogues**. Two genes in the same family occupy distinct loci; two alleles are variants of the same locus.
+A sequence that does not code for protein therefore often has a function. A promoter and an rRNA gene, for example, do not code for proteins and are indispensable.
 
-Genes for the major rRNAs occur in repeated units that support high ribosomal RNA production. A pseudogene derives from a gene-like sequence but has lost the ability to produce the original functional product; some pseudogenes may nevertheless be transcribed or have regulatory roles. Evolutionary classification and current function therefore require distinct criteria.
+A **single-copy sequence** appears at only one locus in the genome. A diploid cell nevertheless has two copies of it, one on each homologous chromosome.
+
+A **gene family** is a group of similar genes that derive from a single ancestral gene. In the course of evolution the gene was copied several times (duplication), and the copies then accumulated differences. Genes of the same species that derive from a duplication are called **paralogues**. The classic example is the globin genes, the proteins of haemoglobin. Humans have several, active at different times: some in the embryo, others in the fetus, others in the adult. Two paralogues occupy two different loci. Two alleles, by contrast, are variants of the same locus.
+
+The genes for rRNAs are present in hundreds of identical copies, arranged one after another, because the cell needs large amounts of ribosomes. A **pseudogene** is a copy of a gene that has accumulated mutations and no longer produces the original protein. Some pseudogenes are nevertheless transcribed into RNA.
 :::
 
 :::esempio{titolo="Duplication followed by divergence"}
-A duplication produces two initially similar loci. If one copy retains the original expression profile while the other accumulates regulatory changes, their products may be present in different tissues. This outcome explains how functional diversity can increase without requiring every new gene to emerge from an entirely unrelated sequence. Similarity suggests relatedness, to be tested by sequence comparisons and evolutionary reconstruction.
+A gene active in the liver is duplicated, and the genome now contains two identical copies at two different loci. The first copy continues to perform the original function. The second is no longer indispensable, so the mutations that accumulate in it do not harm the organism. A mutation in its regulatory region makes it active in the kidney and no longer in the liver. After many generations the species has two similar genes, one active in the liver and one in the kidney, with slightly different proteins. By this route new genes arise from existing genes. The relatedness of two genes is recognised from the similarity of their sequences.
 :::
 
 ## Repeats and mobile elements
 
 :::definizione{#ripetizioni titolo="Tandem arrays and dispersed copies"}
-In **tandem repeats**, units are adjacent. The sequence CACACACA contains four consecutive CA units. Microsatellites and minisatellites differ mainly in repeat-unit length, with thresholds that may vary between classifications. The number of units can differ between alleles; fragments of different lengths may therefore be measured in one individual's genotype.
+Repeated sequences fall into two groups according to how the copies are arranged.
 
-**Interspersed repeats** occur at distant loci. Many derive from mobile elements, including LINEs, SINEs and endogenous retroviruses. “Tandem” describes the relative positions of copies; “mobile” describes the capacity for, or origin from, an insertion mechanism. A repeated sequence is therefore not necessarily able to move today.
+In **tandem** repeats the copies follow one another. The sequence CACACACA, for example, contains four consecutive copies of the unit CA. If the unit is very short, from 1 to 6 bases, the repeat is called a **microsatellite**. If it is longer, a few tens of bases, it is called a **minisatellite**. The number of copies at a given locus changes from person to person. One person has, for example, 12 copies on one chromosome and 15 on the homologue. Measuring the length of many microsatellites gives a profile that differs for each individual, and this is the principle of the DNA tests used to identify people.
+
+In **interspersed** repeats the copies are scattered at distant points of the genome. Almost all derive from **mobile elements**, that is, sequences able to insert a copy of themselves at another point of the genome. The main classes are **LINEs**, **SINEs** and endogenous retroviruses. Most of the copies present today in the human genome have accumulated mutations and are no longer able to move.
 
 ![Adjacent repeats and copies separated by unrelated DNA](/figure/biologia-semestre-filtro/genoma-cromatina/ripetizioni-en.svg)
 :::
 
 :::definizione{#elementi-mobili titolo="DNA intermediates and RNA intermediates"}
-**Transposable elements** can generate new insertions. DNA transposons use a DNA intermediate; some families operate through excision and insertion. Retrotransposons are instead transcribed into RNA, which is reverse-transcribed into DNA. A new copy can insert while the original sequence remains at its original site. Copy number can therefore increase.
+A **transposable element** (or transposon) is a DNA sequence that moves or copies itself to another point of the genome. There are two mechanisms.
 
-An element is autonomous if it encodes the activities required for its own mobilisation in an appropriate cellular context. Some full-length LINE-1 copies are autonomous; many genomic copies are instead truncated or inactive. SINEs, such as Alu, do not encode a complete apparatus and can use proteins produced by other elements, particularly LINE-1. A non-autonomous element can therefore be mobile when supplied with the missing activities.
+- **DNA transposons** move by the mechanism called "cut and paste". An enzyme cuts the element out of its position and inserts it elsewhere. The number of copies stays the same.
+- **Retrotransposons** multiply by the mechanism called "copy and paste", in three steps. The element is transcribed into RNA, a reverse transcriptase copies the RNA into DNA, and the new DNA inserts at another point. The original element stays in place, so the copies increase with each cycle. For this reason retrotransposons occupy such a large part of the genome today.
 
-Endogenous retroviruses derive from germline integrations transmitted to descendants; many copies have lost the capacity to produce infectious particles. An insertion into an exon may disrupt a coding sequence, whereas a regulatory insertion may alter expression. The effect depends on the site, orientation and context; the presence of a new insertion does not automatically establish disease.
+An element is **autonomous** if it encodes the enzymes needed for its own movement. Complete **LINE-1** elements are autonomous, because they encode their own reverse transcriptase. The human genome contains about 500,000 copies, almost all incomplete and inactive. SINEs, including **Alu** sequences, are short and encode no enzymes, so they are **non-autonomous**. They multiply by using the enzymes produced by LINE-1 elements.
+
+**Endogenous retroviruses** are remnants of retroviruses that in the past infected the germ cells of an ancestor and were then passed on to descendants as part of the genome. Almost all have lost the ability to produce viruses.
+
+The effect of a new insertion depends on where it lands. If it lands in an exon, that is, in a coding part of a gene, it interrupts the protein sequence. If it lands in a regulatory region it changes the amount of protein produced. If it lands in a region with no function it has no effect, and this is the most frequent case.
 
 ![Retrotransposition with the original DNA copy retained and a new insertion](/figure/biologia-semestre-filtro/genoma-cromatina/retrotrasposizione-en.svg)
 :::
 
 :::esempio{titolo="Element expression and a new insertion"}
-An increase in LINE-1 RNA indicates that more transcripts are present in the sample, but does not demonstrate completed retrotransposition. The pathway also requires functional protein production, formation of a DNA copy and insertion. To document a new insertion, one searches for junctions between the element and sequences at the new locus that were absent from the initial sample. This measurement distinguishes increased expression alone from a stable change in genomic sequence.
+In a sample of cells LINE-1 RNA has increased. The datum shows that the element is transcribed more. It does not show that new copies have appeared in the genome, because transcription is only the first of the three steps. Copying of the RNA into DNA and insertion are still needed. To demonstrate a new insertion, the DNA is searched for the junction between the element and the sequence next to it. If that junction did not exist in the starting cells, the copy is new.
 
-If the event affects a somatic cell, its descendants may form a clone differing from other cells in the organism. Transmission through gametes instead requires germline involvement. Mobility, mosaicism and inheritance between generations therefore describe related but separable aspects.
+A new insertion that occurred in a cell of the body (somatic cell) passes only to the cells derived from that cell. The organism then contains cells with slightly different genomes, and this condition is called **mosaicism**. The insertion passes to the offspring only if it occurred in a germ cell, that is, a cell that gives rise to gametes.
 :::
