@@ -205,31 +205,21 @@
 .pagina-account .contenuto-video-dettagli { display: none; }
 .pagina-account #esame-etichetta a { display: inline; color: inherit; text-decoration: none; }
 .pagina-account #esame-etichetta a:hover { text-decoration: underline; }
-/* «Invita un amico», versione «due metà» (scelta il 19/11/2026): scheda bianca nei toni bronzo, link personale con «Copia» e WhatsApp. */
-.invita-c { margin: 1.7rem 0 0; padding: 1.2rem 1.4rem 1.3rem; border-radius: 16px; background: #fff; box-shadow: 0 1px 0 #efe2cd, 0 14px 28px -22px rgba(35, 48, 46, 0.35), inset 0 0 0 1px #efe2cd; color: var(--inchiostro); }
-.invita-c .invita-su { margin: 0 0 0.3rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.085em; text-transform: uppercase; color: var(--bronzo); }
-.invita-c .invita-titolo { margin: 0; font: 600 1.3rem/1.2 var(--titoli); }
-.invita-c .invita-due { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 1rem; margin: 0.9rem 0 1rem; }
-.invita-c .invita-meta { margin: 0; padding: 0.75rem 0.9rem; border-radius: 12px; background: var(--bronzo-fondo); }
-.invita-c .invita-meta b { display: block; font: 600 1.5rem/1.1 var(--titoli); color: var(--bronzo-scuro); }
-.invita-c .invita-meta span { font-size: 0.84rem; line-height: 1.35; color: var(--inchiostro-2); }
-.invita-c .invita-piu { font: 600 1.2rem var(--titoli); color: var(--bronzo-dettaglio); }
-.invita-c .invita-azioni { display: flex; align-items: center; gap: 0.5rem; }
-.invita-c .invita-link { flex: 1; display: flex; align-items: center; gap: 0.6rem; min-width: 0; padding: 0.3rem 0.3rem 0.3rem 0.95rem; border-radius: 999px; background: var(--carta); box-shadow: inset 0 0 0 1px var(--bronzo-bordo); font-size: 0.86rem; color: var(--inchiostro-2); }
-.invita-c .invita-link > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.invita-c .invita-link button { flex: none; display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.25rem; padding: 0.4rem 0.9rem; border: 0; border-radius: 999px; background: var(--bronzo); color: #fff; font: 600 0.84rem var(--ui); cursor: pointer; }
-.invita-c .invita-link button:hover { background: var(--bronzo-scuro); }
-.invita-c .invita-link button svg { width: 1rem; height: 1rem; }
-.invita-c .invita-wa { flex: none; display: grid; place-items: center; width: 2.85rem; height: 2.85rem; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--bronzo-bordo); color: var(--bronzo); }
-.invita-c .invita-wa:hover { background: var(--bronzo-fondo); }
-.invita-c .invita-wa svg { width: 1.25rem; height: 1.25rem; }
-.invita-c .invita-link button:focus-visible, .invita-c .invita-wa:focus-visible { outline: 2px solid var(--bronzo); outline-offset: 3px; }
-.invita-c .invita-numeri { margin: 0.8rem 0 0; }
+/* «Invita un amico», versione «riga» (scelta il 19/11/2026): una riga sottile come quelle dei contenuti, nei toni bronzo. */
+.invita-riga { display: flex; align-items: center; gap: 0.9rem; margin: 1.7rem 0 0; padding: 0.95rem 0; border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); color: var(--inchiostro); }
+.invita-riga .invita-icona { flex: none; display: grid; }
+.invita-riga .invita-icona svg { width: 1.25rem; height: 1.25rem; color: var(--bronzo-icona); }
+.invita-riga .invita-testo { flex: 1; min-width: 0; margin: 0; font-size: 0.98rem; }
+.invita-riga .invita-testo b { font-weight: 600; }
+.invita-riga .invita-testo > span { color: var(--inchiostro-2); }
+.invita-riga .invita-numeri { display: block; margin: 0.15rem 0 0; font-size: 0.84rem; }
+.invita-riga .invita-copia { flex: none; padding: 0.3rem 0; border: 0; background: none; color: var(--bronzo); font: 600 0.9rem var(--ui); text-decoration: underline; text-underline-offset: 0.2em; white-space: nowrap; cursor: pointer; }
+.invita-riga .invita-copia:hover, .invita-riga .invita-wa:hover { color: var(--bronzo-scuro); }
+.invita-riga .invita-wa { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; color: var(--bronzo); }
+.invita-riga .invita-wa svg { width: 1.25rem; height: 1.25rem; }
+.invita-riga .invita-copia:focus-visible, .invita-riga .invita-wa:focus-visible { outline: 2px solid var(--bronzo); outline-offset: 3px; }
 @media (max-width: 35rem) {
-  .invita-c { padding: 1.05rem 1rem 1.1rem; }
-  .invita-c .invita-titolo { font-size: 1.15rem; }
-  .invita-c .invita-due { gap: 0.45rem; }
-  .invita-c .invita-meta { padding: 0.65rem 0.7rem; }
-  .invita-c .invita-meta b { font-size: 1.3rem; }
-  .invita-c .invita-meta span { display: block; font-size: 0.8rem; }
+  .invita-riga { gap: 0.65rem; }
+  .invita-riga .invita-testo > span { display: block; font-size: 0.88rem; }
 }
+@media (pointer: coarse) { .invita-riga .invita-copia { min-height: 44px; } .invita-riga .invita-wa { width: 2.75rem; height: 2.75rem; } }
