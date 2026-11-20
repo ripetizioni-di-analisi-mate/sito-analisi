@@ -1,0 +1,19 @@
+---
+import '../styles/programma-raccolte.css';
+interface Props { titolo: string; descrizione: string }
+const { titolo, descrizione } = Astro.props;
+---
+<header class="introduzione-analisi">
+  <h1>{titolo.slice(0, -1)}<em>1</em></h1>
+  <p class="sommario">{descrizione}</p>
+</header>
+
+<style>
+  h1 { margin: 0; font: 570 clamp(2.2rem, 3.6vw, 2.85rem)/1.1 var(--titoli); letter-spacing: -.04em }
+  h1 em { color: #934b35; font-weight: 490 }
+  .sommario { margin: .55rem 0 0; max-width: 42rem; font: 400 clamp(1.09rem, 1.55vw, 1.22rem)/1.44 var(--ui); text-wrap: pretty }
+  @media (max-width: 42rem) {
+    h1 { font-size: clamp(1.9rem, 7.1vw, 2.12rem); }
+    .sommario { margin-top: .45rem; font-size: 1.09rem; }
+  }
+</style>

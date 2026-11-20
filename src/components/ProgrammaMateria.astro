@@ -11,6 +11,8 @@
 // Versione E (16/11/2026, scelta di Carmine fra sei varianti): riquadro dell'anteprima gratuita in cima (azione principale,
 // con «Sblocca tutto» e «Copre il tuo esame?»), Studio guidato sotto; nei capitoli la Teoria è la prima delle quattro voci.
 // Vale anche per le pagine inglesi (prop lingua); lo Studio guidato e la compatibilità restano in italiano.
+import AnteprimaCapitoli from './AnteprimaCapitoli.astro';
+import ComandoAttivita from './ComandoAttivita.astro';
 import NotaBocconi from './NotaBocconi.astro';
 import { BOCCONI } from '../data/bocconi.mjs';
 
@@ -33,6 +35,7 @@ interface Props {
 }
 const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, studioGuidato, incluso, ripasso, teoremi, lingua = 'it', linguaDomande = lingua } = Astro.props;
 const en = lingua === 'en';
+const raccolte = materia === 'analisi-1';
 // Testi della pagina nelle due lingue (16/11/2026: la versione E vale anche in inglese).
 const L = en ? {
   sg: 'Guided study', sgInfo: 'How Guided study works', sgInfoBreve: 'How it works', sgFrase: 'The level of the questions adapts to your answers. The test is in Italian.',
@@ -77,13 +80,20 @@ const I = {
 };
 const pre = en ? '/en' : '';
 const href = (slug: string, sezione: string) => `${sezione === 'domande' && linguaDomande === 'it' ? '' : pre}/${materia}/${slug}/${sezione}`;
+const capitoliAnteprima = raccolte ? argomenti.filter((a) => a.pronto).map((a) => ({
+  titolo: a.titolo, teoria: href(a.slug, 'teoria'), svolti: a.svolti ? href(a.slug, 'esercizi-svolti') : undefined,
+})) : [];
 ---
-<div class:list={['pm', { 'pm-en': en }]} data-programma-materia={materia} data-lingua={lingua}>
+<div class:list={['pm', { 'pm-en': en, 'pm-raccolte': raccolte }]} data-programma-materia={materia} data-lingua={lingua}>
   {/* Versione E (16/11/2026, scelta di Carmine): l'anteprima gratuita è l'azione principale e raccoglie anche
       «Sblocca tutto» e «Copre il tuo esame?». Chi ha la materia vede al suo posto «Accesso completo attivo». */}
   {prezzo && (
     <div class="pm-acc" data-materia={materia}>
-      <section class="pm-ap stato-bloccata">
+      {raccolte ? <div class="pm-accesso-breve stato-bloccata">
+        <a class="pm-gratis" href={anteprima} data-apri-capitoli aria-haspopup="dialog"><span set:html={I.occhio} />{L.apTitolo}</a>
+        <a class="pm-sblocca" href={sblocca} data-pm-apri>{L.sblocca} · {prezzo} €</a>
+        {compatibilita && <a class="pm-ap-compat" href={compatibilita}><span class="pm-lungo">{L.copre}</span><span class="pm-corto">Copre l’esame?</span></a>}
+      </div> : <section class="pm-ap stato-bloccata">
         <span class="pm-ap-ic" set:html={I.occhio} />
         <h2>{L.apTitolo}</h2>
         <p>{L.apTesto}</p>
@@ -94,12 +104,12 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
             {compatibilita && <a class="pm-ap-compat" href={compatibilita}><span set:html={I.foglio} /><span class="pm-lungo">{L.copre}</span><span class="pm-corto">{en ? 'Covers your exam?' : 'Copre l’esame?'}</span></a>}
           </span>
         </div>
-      </section>
+      </section>}
       <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{L.attivo}</span>
     </div>
   )}
 
-  {materia === BOCCONI.slug ? <NotaBocconi lingua={lingua} /> : <section class="pm-sg">
+  {materia === BOCCONI.slug ? <NotaBocconi lingua={lingua} /> : !raccolte && <section class="pm-sg">
     <span class="pm-sg-ic" set:html={I.mirino} />
     <h2>{L.sg}</h2>
     <button type="button" class="pm-info" aria-expanded="false" aria-controls="pm-sg-info" aria-label={L.sgInfo} title={L.sgInfoBreve} data-pm-info set:html={I.info}></button>
@@ -118,6 +128,7 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
 
   <div class="pm-ph-riga">
     <h2 class="pm-ph" id="programma">{L.programma}</h2>
+    {raccolte && studioGuidato && <a class="pm-guidato" href={`/studio-guidato/${materia}`} title={en ? 'Adaptive study in Italian' : L.sgFrase}><span set:html={I.mirino} />{L.sg}</a>}
     <span class="pm-esame" data-pm-esame></span>
   </div>
   <ol class="pm-perc">
@@ -128,9 +139,10 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
           <h3>{a.pronto ? <a href={href(a.slug, 'teoria')}>{a.titolo}<span set:html={I.avanti} /></a> : a.titolo}</h3>
           {a.riassunto && <p>{a.riassunto}</p>}
         </div>
+        {raccolte && a.pronto && <ComandoAttivita pannello={`attivita-${a.slug}`} titolo={a.titolo} en={en} progressi />}
         {a.pronto ? (
-          <div class="pm-voci">
-            <em class="pm-stato" hidden></em>
+          <div class="pm-voci" id={raccolte ? `attivita-${a.slug}` : undefined}>
+            {!raccolte && <em class="pm-stato" hidden></em>}
             <a class="pm-v" href={href(a.slug, 'teoria')} data-voce="teoria"><span class="pm-vr"><span set:html={I.libro} /><span class="pm-vn">{L.teoria}</span><span class="pm-vc"></span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>
             {a.svolti > 0 && <a class="pm-v" href={href(a.slug, 'esercizi-svolti')} data-voce="schede"><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn"><span class="pm-lungo">{L.svolti[0]}</span><span class="pm-corto">{L.svolti[1]}</span></span><span class="pm-vc">{a.svolti}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
             {a.dafare > 0 && <a class="pm-v" href={href(a.slug, 'esercizi')} data-voce="esercizi"><span class="pm-vr"><span set:html={I.dafare} /><span class="pm-vn"><span class="pm-lungo">{L.dafare[0]}</span><span class="pm-corto">{L.dafare[1]}</span></span><span class="pm-vc">{a.dafare}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
@@ -146,7 +158,8 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
           <h3><a href={ripasso.href}>{ripasso.titolo}<span set:html={I.avanti} /></a></h3>
           <p>{L.ripassoN(ripasso.domande)}</p>
         </div>
-        <div class="pm-voci">
+        {raccolte && <ComandoAttivita pannello="attivita-ripasso" titolo={ripasso.titolo} en={en} />}
+        <div class="pm-voci" id={raccolte ? 'attivita-ripasso' : undefined}>
           <a class="pm-v" href={ripasso.href}><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn">{L.ripassoV}</span><span class="pm-vc">{ripasso.domande}</span><span set:html={I.avanti} /></span></a>
           {ripasso.simulazione && <a class="pm-v" href={ripasso.simulazione.href}><span class="pm-vr"><span set:html={I.foglio} /><span class="pm-vn">{ripasso.simulazione.titolo}</span><span set:html={I.avanti} /></span></a>}
           <a class="pm-v solo-collegati" href={ripasso.oggi} hidden><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn">{L.oggi}</span><span set:html={I.avanti} /></span></a>
@@ -156,8 +169,9 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
   </ol>
   {teoremi && <p class="pm-dopo"><a href={teoremi.href}>{L.indice}</a><span>{L.indiceN(teoremi.teoremi, teoremi.definizioni)}</span></p>}
 
+  {prezzo && capitoliAnteprima.length > 0 && <AnteprimaCapitoli capitoli={capitoliAnteprima} en={en} materia={materia} descrizione={L.apTesto} />}
   {prezzo && (
-    <dialog class="pm-dlg" aria-labelledby={`pm-dlg-${materia}`}>
+    <dialog class="pm-dlg" data-accesso-completo aria-labelledby={`pm-dlg-${materia}`}>
       <div class="pm-dlg-testa">
         <div><span>{L.accesso}</span><h2 id={`pm-dlg-${materia}`}>{titolo}</h2></div>
         <button type="button" class="pm-dlg-x" aria-label={L.chiudi} data-pm-chiudi set:html={I.chiudi} />
@@ -364,8 +378,24 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
   for (const box of document.querySelectorAll<HTMLElement>('[data-programma-materia]')) {
     const materia = box.dataset.programmaMateria!;
     const en = box.dataset.lingua === 'en';
+    const comandi = [...box.querySelectorAll<HTMLButtonElement>('[data-pm-attivita]')];
+    const impostaAttivita = (comando: HTMLButtonElement, aperto: boolean) => {
+      const pannello = document.getElementById(comando.getAttribute('aria-controls')!);
+      if (!pannello) return;
+      pannello.hidden = !aperto;
+      comando.setAttribute('aria-expanded', String(aperto));
+      comando.hidden = false;
+    };
+    const richiesto = new URLSearchParams(location.search).get('apri');
+    for (const comando of comandi) {
+      impostaAttivita(comando, comando.getAttribute('aria-controls') === `attivita-${richiesto}`);
+      comando.addEventListener('click', () => {
+        const apri = comando.getAttribute('aria-expanded') === 'false';
+        for (const altro of comandi) impostaAttivita(altro, altro === comando && apri);
+      });
+    }
     // «Sblocca tutto» apre il riquadro dell'accesso completo; senza <dialog> il link porta alla pagina Sblocca.
-    const dlg = box.querySelector<HTMLDialogElement>('.pm-dlg');
+    const dlg = box.querySelector<HTMLDialogElement>('[data-accesso-completo]');
     if (dlg && typeof dlg.showModal === 'function') {
       box.querySelector('[data-pm-apri]')?.addEventListener('click', (e) => { e.preventDefault(); dlg.showModal(); });
       dlg.querySelector('[data-pm-chiudi]')?.addEventListener('click', () => dlg.close());
