@@ -12,7 +12,6 @@ import FreeCourseAccess from '../components/FreeCourseAccess.astro';
 import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
-import IntestazioneAnalisiUno from '../components/IntestazioneAnalisiUno.astro';
 import ProgrammaMateria from '../components/ProgrammaMateria.astro';
 import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
@@ -96,7 +95,7 @@ const video = lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sbloc
 const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(video.slug)).map((p) => p.slug)]
   .map((s) => `html[data-materie~="${chiaveVideo(s)}"] .rimando-videocorso{display:none}`).join('') : '';
 ---
-<Base programmaDisciplina titolo={sopra} descrizione={descrizione} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, data: piuRecente(...m.argomenti.map((a) => dataContenuto(lingua, 'teoria', `${materia}/${a.slug}`))), schema: [{
+<Base titolo={sopra} descrizione={descrizione} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, data: piuRecente(...m.argomenti.map((a) => dataContenuto(lingua, 'teoria', `${materia}/${a.slug}`))), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livelloDi(m.titolo),
   provider: { '@id': `${SITO}/#organizzazione` },
@@ -105,9 +104,9 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
 }] }}>
   {giaVideo && <style is:inline set:html={giaVideo}></style>}
   <p class:list={['sopratitolo', { 'vista-classica': nuova }]}>{sopra}</p>
-  {materia === 'analisi-1' && nuova
-    ? <IntestazioneAnalisiUno titolo={m.titolo} descrizione={m.descrizione} />
-    : <><h1>{m.titolo}</h1><p class="sommario">{m.descrizione}</p></>}
+  <h1>{m.titolo}</h1>
+  {/* L'introduzione resta anche nella pagina nuova dei GM (richiesta di Carmine del 14/11 sera). */}
+  <p class="sommario">{m.descrizione}</p>
   {materia === 'analisi-3' && (lingua === 'it' || lingua === 'en') && <NotaAnalisi3 lingua={lingua} />}
   {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
   {gruppo === 'Superiori' && <div class:list={{ 'vista-classica': nuova }}><NotaSuperiori lingua={lingua} /></div>}

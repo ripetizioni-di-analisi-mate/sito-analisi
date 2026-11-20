@@ -50,12 +50,11 @@ interface Props {
   lingua?: Lingua;
   nonTradotta?: boolean; // pagina inglese non ancora tradotta: si mostra l'italiano con un avviso
   ricercaPrincipale?: boolean;
-  programmaDisciplina?: boolean;
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
   seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string; canonico?: string };
 }
-const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', usa = false, nonTradotta = false, ricercaPrincipale = false, programmaDisciplina = false, seo = {} } = Astro.props;
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', usa = false, nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
 const t = T(lingua);
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const versioneIt = senzaLingua(Astro.url.pathname);
@@ -173,7 +172,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
 }).join('');
 ---
 <!doctype html>
-<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto, 'indice-disciplina': Boolean(m), 'pagina-disciplina': programmaDisciplina, 'home-chiarezza': sezione === 'home' }} data-studio-materia={contenuto || sezione === 'domande' || sezione === 'simulazione' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
+<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto, 'home-chiarezza': sezione === 'home' }} data-studio-materia={contenuto || sezione === 'domande' || sezione === 'simulazione' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -253,7 +252,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     }, true);
   </script>
   <script is:inline>
-    try { if (!document.documentElement.classList.contains('indice-disciplina') && localStorage.getItem('indice') === 'chiuso') document.documentElement.classList.add('indice-chiuso'); } catch (e) {}
+    try { if (localStorage.getItem('indice') === 'chiuso') document.documentElement.classList.add('indice-chiuso'); } catch (e) {}
     // Chi sceglie una lingua nel menu la ritrova in tutto il sito (il Worker legge il cookie «lingua»).
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest ? e.target.closest('a[data-lingua]') : null;

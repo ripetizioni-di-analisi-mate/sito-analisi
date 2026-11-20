@@ -59,7 +59,7 @@ const capitoli = m.argomenti.map((a) => {
   return { ...a, locali, altre, traduzione };
 });
 ---
-<Base programmaDisciplina titolo={m.titolo} descrizione={m.descrizione} lingua={lingua} sezione="catalogo" materia={m.slug} seo={{ titolo: `${m.titolo} | ${t.nomeSito}` }}>
+<Base titolo={m.titolo} descrizione={m.descrizione} lingua={lingua} sezione="catalogo" materia={m.slug} seo={{ titolo: `${m.titolo} | ${t.nomeSito}` }}>
   <p class="sopratitolo">{m.gruppo}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
