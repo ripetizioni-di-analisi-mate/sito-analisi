@@ -6,146 +6,164 @@ sommario: Stati e gas ideali, calorimetria, trasferimento di calore, lavoro, tra
 ## Sistemi, equilibrio e temperatura
 
 :::definizione{#stato-termico titolo="Sistema e variabili di stato"}
-Un gas in un cilindro e l'acqua in un calorimetro richiedono prima di tutto di fissare un confine. Il **sistema** è la materia o la regione scelta per il bilancio; l'**ambiente** è ciò che resta all'esterno. Un sistema aperto può scambiare materia ed energia; un sistema chiuso scambia energia conservando la materia; un sistema isolato non scambia né materia né energia. Una parete adiabatica impedisce il calore, ma un pistone adiabatico può ancora trasmettere lavoro.
+La termodinamica studia gli scambi di energia di un corpo con ciò che lo circonda. Il corpo che si studia, per esempio un gas chiuso in un cilindro, si chiama **sistema**. Tutto il resto è l'**ambiente**. Un sistema è di tre tipi, secondo ciò che scambia con l'ambiente.
 
-Uno stato di equilibrio è descritto da grandezze macroscopiche, come pressione $p$, volume $V$, temperatura $T$ e quantità di sostanza $n$. L'equilibrio termico richiede assenza di differenze di temperatura capaci di produrre un flusso netto di calore. L'equilibrio meccanico richiede un bilancio delle forze sulla frontiera. Durante un'espansione rapida il gas può presentare pressioni locali differenti: attribuirgli un'unica pressione intermedia richiede un'ulteriore approssimazione.
+- Un sistema **aperto** scambia materia ed energia. Un organismo vivente è un sistema aperto.
+- Un sistema **chiuso** scambia energia e non materia. Ne è un esempio un gas in un cilindro chiuso da un pistone.
+- Un sistema **isolato** non scambia né materia né energia. Ne è un esempio, in modo approssimato, il contenuto di un thermos.
 
-Una **funzione di stato**, come energia interna $U$ o entropia $S$, ha una variazione determinata dagli stati iniziale e finale. Calore e lavoro descrivono energia trasferita durante un processo e dipendono dal percorso. La pressione e la temperatura sono intensive; volume, quantità di sostanza, energia interna ed entropia sono estensive per sistemi macroscopici additivi.
+Una parete che non lascia passare il calore si dice **adiabatica**.
+
+Lo **stato** di un sistema è descritto da poche grandezze misurabili, dette **variabili di stato**: la pressione $p$, il volume $V$, la temperatura $T$ e la quantità di sostanza $n$, misurata in moli. Queste grandezze hanno un valore definito solo se il sistema è in **equilibrio**, cioè se pressione e temperatura sono le stesse in tutti i suoi punti e non cambiano nel tempo.
+
+Una **funzione di stato** è una grandezza il cui valore dipende solo dallo stato in cui il sistema si trova, e non dal modo in cui ci è arrivato. L'energia interna $U$ e l'entropia $S$ sono funzioni di stato. Il calore e il lavoro non lo sono: sono quantità di energia scambiate durante una trasformazione, e il loro valore dipende da come la trasformazione avviene.
 :::
 
 :::osservazione{titolo="Scale di temperatura e termometro"}
-Se due corpi sono separatamente in equilibrio termico con un terzo, sono in equilibrio termico fra loro: è il principio zero, che consente il confronto mediante un termometro. La conversione fra scala Celsius e kelvin è
+Due corpi a contatto si scambiano energia finché raggiungono la stessa temperatura. A quel punto sono in **equilibrio termico**. Il **principio zero** della termodinamica afferma che, se due corpi sono ciascuno in equilibrio termico con un terzo corpo, sono in equilibrio termico fra loro. Su questo si basa il termometro, che è il terzo corpo. La temperatura si misura in gradi Celsius oppure in kelvin, l'unità del Sistema Internazionale. La temperatura in kelvin si chiama anche temperatura assoluta. La conversione è:
 $$
 T\,(\mathrm K)=t\,({}^\circ\mathrm C)+273{,}15.
 $$
-Un aumento di $15\,{}^\circ\mathrm C$ corrisponde a $15\,\mathrm K$, mentre $15\,{}^\circ\mathrm C$ come temperatura corrisponde a $288{,}15\,\mathrm K$. La stessa differenza fra due letture si conserva perché la costante additiva si cancella. Nei rapporti, nei logaritmi di temperature e nelle leggi dei gas si usano invece temperature assolute. Un termometro immerso modifica leggermente il bilancio: la perturbazione è piccola quando la sua capacità termica è piccola rispetto a quella del campione.
+Una temperatura di $15\,{}^\circ\mathrm C$ corrisponde a $288{,}15\,\mathrm K$. Le due scale hanno gradi della stessa ampiezza, quindi una differenza di temperatura ha lo stesso valore nelle due unità: un aumento di $15\,{}^\circ\mathrm C$ è un aumento di $15\,\mathrm K$. Nelle formule che contengono una differenza $\Delta T$ si usano indifferentemente le due scale. Nelle formule che contengono la temperatura $T$ da sola, come le leggi dei gas, o un rapporto fra temperature, si usano sempre i kelvin.
 :::
 
 ## Gas ideali e capacità termiche
 
 :::teorema{#gas-ideale titolo="Equazione di stato del gas ideale"}
-Il **gas ideale** descrive particelle con volume proprio trascurabile e interazioni trascurabili salvo gli urti. È un'approssimazione utile per gas sufficientemente diluiti e lontani dalla condensazione. Per $n$ moli in equilibrio,
+Un **gas ideale** è un modello in cui le molecole sono punti senza volume, che non si attraggono e interagiscono solo urtandosi. I gas reali si comportano così quando sono poco densi e lontani dalla temperatura a cui diventano liquidi. L'aria a temperatura ambiente è con buona approssimazione un gas ideale. Pressione, volume e temperatura di $n$ moli di gas ideale sono legati dall'**equazione di stato**:
 $$
 pV=nRT,\qquad R\simeq8{,}314\,\mathrm{J\,mol^{-1}K^{-1}}.
 $$
-Con questo valore di $R$, $p$ è la pressione assoluta in pascal e $V$ il volume in metri cubi. Vale $1\,\mathrm L=10^{-3}\,\mathrm{m^3}$ e il prodotto $pV$ ha dimensioni di energia. Un manometro relativo richiede $p=p_{\mathrm{rel}}+p_{\mathrm{atm}}$ prima dell'applicazione della legge.
+La costante $R$ è la stessa per tutti i gas. Nella formula la pressione è quella assoluta, in pascal, il volume è in metri cubi e la temperatura in kelvin. Una mole di gas a $0\,{}^\circ\mathrm C$ ($273{,}15\,\mathrm K$) e a pressione atmosferica ($1{,}013\cdot10^5\,\mathrm{Pa}$) occupa $V=\dfrac{nRT}{p}=\dfrac{1\cdot8{,}314\cdot273{,}15}{1{,}013\cdot10^5}\simeq0{,}0224\,\mathrm{m^3}=22{,}4\,\mathrm L$.
 
-Per una quantità fissata, $\dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$. A temperatura costante segue la proporzionalità inversa fra pressione e volume; a volume costante $p$ è proporzionale a $T$; a pressione costante $V$ è proporzionale a $T$. Una valvola aperta può cambiare $n$: la rigidità del recipiente, da sola, non permette allora di imporre $\dfrac{p}{T}$ costante. L'equazione di stato collega gli stati e non determina il calore o il lavoro scambiati lungo il percorso.
+Se la quantità di gas resta la stessa, fra due stati vale $\dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$. Ne seguono tre leggi, una per ogni grandezza tenuta costante.
+
+- A temperatura costante la pressione è inversamente proporzionale al volume (**legge di Boyle**). Se il volume si dimezza, la pressione raddoppia.
+- A pressione costante il volume è proporzionale alla temperatura assoluta (**prima legge di Gay-Lussac**, o di Charles).
+- A volume costante la pressione è proporzionale alla temperatura assoluta (**seconda legge di Gay-Lussac**).
 :::
 
 :::definizione{titolo="Energia interna e gradi di libertà"}
-L'energia interna comprende le energie microscopiche, distinguendole dall'energia cinetica del centro di massa e dall'energia potenziale macroscopica. Per un gas ideale a quantità e composizione fissate dipende soltanto dalla temperatura. Indicando con $C_V$ la capacità termica *molare* a volume costante,
+L'**energia interna** $U$ di un sistema è la somma delle energie di tutte le sue molecole, cioè dell'energia cinetica del loro moto disordinato e dell'energia potenziale delle loro interazioni. In un gas ideale le molecole non interagiscono, quindi l'energia interna è solo energia cinetica e dipende soltanto dalla temperatura. Se la temperatura passa da $T_i$ a $T_f$, l'energia interna varia di:
 $$
 \Delta U=nC_V(T_f-T_i)
 $$
-quando $C_V$ è costante nell'intervallo. Per un gas monoatomico classico, le tre componenti della traslazione danno $C_V=\dfrac32R$. Per un biatomico con rotazioni attive e vibrazioni trascurabili, $C_V\simeq\dfrac52R$. Queste condizioni delimitano l'uso dei valori: a temperature che attivano altri modi il modello a capacità costante può perdere precisione.
+La grandezza $C_V$ è il **calore specifico molare a volume costante**, cioè l'energia necessaria per aumentare di un kelvin la temperatura di una mole di gas tenuta a volume fisso. Il suo valore dipende dal tipo di molecola. Per un gas **monoatomico**, come l'elio, $C_V=\dfrac32R$. Per un gas **biatomico**, come l'azoto e l'ossigeno, $C_V=\dfrac52R$, perché le molecole oltre a spostarsi ruotano.
 
-A pressione costante parte del calore produce espansione. Perciò la capacità molare $C_p$ supera $C_V$; per un gas ideale vale $C_p-C_V=R$. Nel caso monoatomico $C_p=\dfrac52R$ e $\gamma=\dfrac{C_p}{C_V}=\dfrac53$. Nel biatomico descritto $C_p=\dfrac72R$ e $\gamma=\dfrac75$. Il rapporto $\gamma$ determinerà la pendenza delle adiabatiche reversibili.
+Se il gas viene scaldato a pressione costante si espande e compie lavoro sull'ambiente. Serve quindi più energia per ottenere lo stesso aumento di temperatura. Il **calore specifico molare a pressione costante** $C_p$ è perciò maggiore di $C_V$, e per un gas ideale $C_p=C_V+R$ (relazione di Mayer). Il rapporto $\gamma=\dfrac{C_p}{C_V}$ vale $\dfrac53$ per un gas monoatomico e $\dfrac75$ per un gas biatomico.
 :::
 
 ## Calore e bilanci calorimetrici
 
 :::definizione{#calorimetria titolo="Capacità termica e calore specifico"}
-Il **calore** $Q$ è energia trasferita per una differenza di temperatura. È positivo quando entra nel sistema scelto. Un corpo può ricevere la stessa energia anche attraverso lavoro, per esempio mediante un agitatore: il modo del trasferimento va identificato dal processo.
+Il **calore** $Q$ è l'energia che passa da un corpo più caldo a uno più freddo per effetto della differenza di temperatura. Si misura in joule. Per convenzione è positivo quando entra nel sistema e negativo quando ne esce. Calore e temperatura sono grandezze diverse: la temperatura descrive lo stato di un corpo, il calore è energia in transito.
 
-Per una variazione senza passaggi di fase, con calore specifico $c$ costante e nelle condizioni a cui quel valore si riferisce,
+Il calore necessario per variare di $\Delta T$ la temperatura di un corpo di massa $m$, senza che cambi stato, è:
 $$
 Q=mc\Delta T=C\Delta T.
 $$
-La massa è $m$, la capacità termica del corpo è $C=mc$, in $\mathrm{J\,K^{-1}}$, e $c$ si misura in $\mathrm{J\,kg^{-1}K^{-1}}$. Per solidi e liquidi le differenze fra i comuni vincoli meccanici sono spesso trascurate negli esercizi; per i gas la distinzione fra $C_p$ e $C_V$ è invece necessaria. Se il calore specifico varia sensibilmente, il prodotto va sostituito da $Q=m\int c(T)\,dT$ lungo il processo specificato.
+Il **calore specifico** $c$ è l'energia necessaria per aumentare di un kelvin la temperatura di un chilogrammo di sostanza. Si misura in $\mathrm{J\,kg^{-1}K^{-1}}$. L'acqua ha un calore specifico molto alto, $4186\,\mathrm{J\,kg^{-1}K^{-1}}$, quindi si scalda e si raffredda lentamente. La **capacità termica** $C=mc$ è la stessa grandezza riferita all'intero corpo. Per scaldare $2\,\mathrm{kg}$ d'acqua da $20\,{}^\circ\mathrm C$ a $50\,{}^\circ\mathrm C$ servono $Q=2\cdot4186\cdot30\simeq2{,}5\cdot10^5\,\mathrm J$.
 
-In un calorimetro complessivamente adiabatico, senza lavoro esterno apprezzabile, si impone il bilancio fra i corpi. Nel modello di calori specifici costanti e senza reazioni o transizioni, $\sum_i C_i(T_f-T_i)=0$. Il recipiente e il termometro vanno inclusi quando la loro capacità termica è fornita. Ogni contributo ha già il segno corretto: il corpo caldo ha $T_f-T_i<0$.
+Quando più corpi a temperature diverse sono messi a contatto in un recipiente isolato, detto **calorimetro**, il calore ceduto dai corpi caldi è uguale a quello assorbito dai corpi freddi. La somma dei calori scambiati, ciascuno con il proprio segno, è quindi nulla: $\sum_i m_ic_i(T_f-T_i)=0$. Tutti i corpi arrivano alla stessa temperatura finale $T_f$, che è l'incognita. Per un corpo caldo $T_f-T_i$ è negativo e per un corpo freddo è positivo.
 :::
 
 :::esempio{titolo="La temperatura finale è una media pesata"}
-Si mescolano $0{,}20\,\mathrm{kg}$ d'acqua a $60\,{}^\circ\mathrm C$ e $0{,}30\,\mathrm{kg}$ a $20\,{}^\circ\mathrm C$, con uguale $c$ costante, recipiente trascurabile e nessuna dispersione. Il bilancio dà
+Si mescolano $0{,}20\,\mathrm{kg}$ d'acqua a $60\,{}^\circ\mathrm C$ e $0{,}30\,\mathrm{kg}$ d'acqua a $20\,{}^\circ\mathrm C$ in un recipiente isolato. La somma dei calori scambiati è nulla, e il calore specifico $c$ è lo stesso per le due masse:
 $$
 0{,}20c(t_f-60)+0{,}30c(t_f-20)=0,
 $$
 $$
 t_f=\dfrac{0{,}20\cdot60+0{,}30\cdot20}{0{,}50}=36\,{}^\circ\mathrm C.
 $$
-Il risultato è più vicino alla temperatura iniziale della massa maggiore. Con sostanze diverse si pesano le temperature mediante $mc$, perché masse uguali possono immagazzinare energie diverse per lo stesso aumento di temperatura. La media aritmetica semplice vale soltanto quando le capacità termiche complessive dei due corpi sono uguali.
+Si divide per $c$ e si isola $t_f$. La temperatura finale, $36\,{}^\circ\mathrm C$, è più vicina a quella della massa maggiore. Non è la media delle due temperature, che sarebbe $40\,{}^\circ\mathrm C$. Se le due sostanze sono diverse, ogni temperatura va pesata con il prodotto $mc$ del corpo corrispondente.
 :::
 
 ## Cambiamenti di stato ed evaporazione
 
 :::definizione{#calore-latente titolo="Energia durante la coesistenza delle fasi"}
-Durante una transizione di equilibrio di una sostanza pura a pressione fissata, l'energia assorbita può cambiare le quantità delle fasi mantenendo la temperatura di coesistenza. Indicando con $\ell$ il calore latente specifico positivo,
+Una sostanza passa da solido a liquido (fusione) e da liquido a gas (vaporizzazione) assorbendo calore. Durante il passaggio la temperatura resta costante: tutta l'energia assorbita serve a separare le molecole, e non ad aumentarne la velocità. Il ghiaccio che fonde resta a $0\,{}^\circ\mathrm C$ finché è tutto fuso. Il calore necessario per far cambiare stato a una massa $m$ è:
 $$
 Q=m\ell
 $$
-per fusione o vaporizzazione della massa $m$; per la trasformazione inversa il calore del sistema ha segno negativo. Il valore di $\ell$ dipende dalla sostanza e dalle condizioni, quindi va usato quello dichiarato.
+La grandezza $\ell$ è il **calore latente**, cioè l'energia necessaria per far cambiare stato a un chilogrammo di sostanza. Per l'acqua il calore latente di fusione è $3{,}34\cdot10^5\,\mathrm{J/kg}$ e quello di vaporizzazione è $2{,}26\cdot10^6\,\mathrm{J/kg}$. Nei passaggi inversi, solidificazione e condensazione, la sostanza cede la stessa quantità di calore.
 
-Per trasformare ghiaccio freddo in acqua calda si distinguono riscaldamento del ghiaccio, fusione e riscaldamento dell'acqua. La curva della temperatura in funzione del calore ha due tratti inclinati e un tratto orizzontale. La pendenza dei tratti inclinati vale $\dfrac{1}{mc}$, mentre la lunghezza orizzontale del plateau misura $m\ell_f$.
+Per portare del ghiaccio a $-30\,{}^\circ\mathrm C$ fino ad acqua a $40\,{}^\circ\mathrm C$ servono tre quantità di calore, che si sommano.
+
+1. Il calore per scaldare il ghiaccio da $-30\,{}^\circ\mathrm C$ a $0\,{}^\circ\mathrm C$, $mc_{\mathrm{ghiaccio}}\Delta T$.
+2. Il calore per fondere il ghiaccio a $0\,{}^\circ\mathrm C$, $m\ell_f$.
+3. Il calore per scaldare l'acqua da $0\,{}^\circ\mathrm C$ a $40\,{}^\circ\mathrm C$, $mc_{\mathrm{acqua}}\Delta T$.
+
+Nel grafico della temperatura in funzione del calore fornito, le fasi 1 e 3 sono tratti inclinati e la fase 2 è un tratto orizzontale.
 
 ![Curva di riscaldamento per 0,200 kg di ghiaccio da meno 30 gradi a acqua a 40 gradi, con plateau di fusione](/figure/fisica-semestre-filtro/termodinamica/riscaldamento-it.svg)
 
-Nel mescolamento di acqua e ghiaccio si confronta prima l'energia che l'acqua può cedere raffreddandosi fino alla fusione con quella necessaria a fondere tutto il ghiaccio. Se l'energia è insufficiente, restano entrambe le fasi alla temperatura di fusione. La formula che presuppone acqua interamente liquida produrrebbe in questo caso una temperatura finale incompatibile con l'ipotesi.
+Quando si mette del ghiaccio in acqua tiepida, prima di scrivere il bilancio si confrontano due energie: quella che l'acqua cede raffreddandosi fino a $0\,{}^\circ\mathrm C$ e quella necessaria per fondere tutto il ghiaccio. Se la prima è maggiore, tutto il ghiaccio fonde e la temperatura finale è superiore a $0\,{}^\circ\mathrm C$. Se è minore, fonde solo una parte del ghiaccio e la miscela resta a $0\,{}^\circ\mathrm C$.
 :::
 
 :::osservazione{titolo="Evaporazione e bilancio del corpo"}
-L'evaporazione avviene alla superficie anche sotto la temperatura di ebollizione; l'ebollizione coinvolge la formazione di bolle nel liquido quando la pressione di vapore raggiunge quella esterna. Per il raffreddamento evaporativo conta la massa effettivamente evaporata. Nel modello in cui l'energia proviene tutta dal corpo, evaporare $10\,\mathrm g$ con $\ell_v=2{,}4\,\mathrm{kJ\,g^{-1}}$ sottrae $24\,\mathrm{kJ}$. L'acqua che cola non produce quel contributo latente. Umidità, movimento dell'aria e temperatura modificano il processo reale; il calcolo isola il solo bilancio energetico dichiarato.
+L'**evaporazione** è il passaggio da liquido a gas che avviene alla superficie del liquido, a qualunque temperatura. L'**ebollizione** avviene in tutto il liquido, con formazione di bolle, a una temperatura precisa. L'evaporazione sottrae calore al liquido che resta e alla superficie su cui si trova. Il corpo umano si raffredda in questo modo con il sudore. A temperatura corporea il calore latente di vaporizzazione dell'acqua è circa $2{,}4\,\mathrm{kJ/g}$, quindi l'evaporazione di $10\,\mathrm g$ di sudore sottrae al corpo $10\cdot2{,}4=24\,\mathrm{kJ}$. Conta solo il sudore che evapora. Quello che cola non raffredda. Con aria molto umida il sudore evapora lentamente, e per questo motivo il caldo umido si sopporta peggio.
 :::
 
 ## Trasferimento del calore
 
 :::definizione{#trasmissione-calore titolo="Conduzione, convezione e irraggiamento"}
-Nella **conduzione** l'energia si trasferisce attraverso interazioni microscopiche nella materia, senza un trasporto macroscopico del materiale. Per una lastra piana omogenea in regime stazionario, con facce a $T_h>T_c$, lati isolati e conducibilità $\kappa$ costante, la potenza diretta dalla faccia calda alla fredda è
+Il calore si trasmette in tre modi: conduzione, convezione e irraggiamento.
+
+Nella **conduzione** il calore passa attraverso un materiale senza che il materiale si sposti. Le molecole della parte calda, più veloci, urtano le vicine e cedono loro energia. È il modo tipico dei solidi. La potenza $P$ che attraversa una lastra di area $A$ e spessore $L$, con le due facce a temperature $T_h$ e $T_c$, è data dalla **legge di Fourier**:
 $$
 P=\kappa A\dfrac{T_h-T_c}{L}.
 $$
-Qui $A$ è l'area attraversata e $L$ lo spessore. La potenza è energia per unità di tempo; in un intervallo con $P$ costante si ha $Q=P\Delta t$. La **resistenza termica** $R_{\mathrm{th}}=\dfrac{L}{\kappa A}$ si misura in $\mathrm{K\,W^{-1}}$ e permette di scrivere $P=\dfrac{T_h-T_c}{R_{\mathrm{th}}}$.
+La potenza è il calore che passa in un secondo, in watt, quindi in un tempo $\Delta t$ passa il calore $Q=P\,\Delta t$. La costante $\kappa$ è la **conducibilità termica** del materiale. È alta nei metalli, che sono buoni conduttori, e bassa nell'aria, nel legno e nel grasso, che sono isolanti. Il calore che passa aumenta con l'area e con la differenza di temperatura e diminuisce con lo spessore. Attraverso un vetro di area $1{,}0\,\mathrm{m^2}$ e spessore $5{,}0\,\mathrm{mm}$, con $\kappa=0{,}80\,\mathrm{W\,m^{-1}K^{-1}}$ e una differenza di $10\,\mathrm K$ fra le facce, passano $0{,}80\cdot1{,}0\cdot\dfrac{10}{0{,}0050}=1600\,\mathrm W$.
 
-In strati in serie, con contatto ideale e senza accumulo energetico all'interfaccia, passa la stessa potenza. Le resistenze si sommano e lo strato con maggiore resistenza presenta il maggiore salto di temperatura. In ciascun materiale omogeneo la temperatura varia linearmente con la posizione; la pendenza cambia quando cambia $\kappa$.
+La legge si scrive anche come $P=\dfrac{T_h-T_c}{R_{\mathrm{th}}}$, dove $R_{\mathrm{th}}=\dfrac{L}{\kappa A}$ è la **resistenza termica** della lastra. Se il calore attraversa più strati uno dopo l'altro, come un muro con un pannello isolante, le resistenze termiche si sommano. La differenza di temperatura maggiore si trova ai capi dello strato con resistenza maggiore, cioè dello strato più isolante.
 
 ![Profilo stazionario della temperatura attraverso due strati in serie, con maggiore caduta nello strato più resistente](/figure/fisica-semestre-filtro/termodinamica/conduzione-it.svg)
 
-Nella **convezione** il movimento del fluido trasporta energia. Il moto può derivare dalla spinta di galleggiamento dovuta a differenze di densità, oppure essere imposto da una pompa o un ventilatore. Nel modello empirico $P=hA(T_s-T_f)$, il coefficiente $h$ dipende dal flusso e dalla geometria: non coincide con la conducibilità del materiale. Il raffreddamento di una superficie esposta all'aria può combinare convezione ed evaporazione.
+Nella **convezione** il calore è trasportato da un fluido che si muove. L'aria a contatto con un termosifone si scalda, diventa meno densa e sale, e al suo posto arriva aria fredda. Il movimento è spontaneo, come in questo caso, oppure forzato da una pompa o da un ventilatore. Il sangue trasporta il calore dall'interno del corpo alla pelle per convezione forzata. La potenza scambiata fra una superficie a temperatura $T_s$ e un fluido a temperatura $T_f$ è $P=hA(T_s-T_f)$. Il coefficiente $h$ dipende dal fluido e dalla sua velocità, ed è per questo che il vento raffredda.
 :::
 
 :::teorema{titolo="Scambio radiativo netto"}
-L'**irraggiamento** trasferisce energia mediante onde elettromagnetiche e può avvenire nel vuoto. Una superficie grigia di area $A$, emissività $\varepsilon$ e temperatura uniforme $T$, circondata da un grande ambiente isotermo a $T_a$, con fattore di vista unitario, ha potenza netta uscente
+Nell'**irraggiamento** il calore è trasportato da onde elettromagnetiche, che si propagano anche nel vuoto. È il modo in cui il calore del Sole raggiunge la Terra. Ogni corpo emette radiazione, in misura tanto maggiore quanto più è caldo, e assorbe quella emessa dai corpi che lo circondano. Un corpo di area $A$ a temperatura $T$, in un ambiente a temperatura $T_a$, perde per irraggiamento la potenza netta data dalla **legge di Stefan-Boltzmann**:
 $$
 P_{\mathrm{net}}=\varepsilon\sigma A(T^4-T_a^4),
 $$
-con $\sigma\simeq5{,}67\cdot10^{-8}\,\mathrm{W\,m^{-2}K^{-4}}$ e temperature in kelvin. Si assume che la stessa emissività descriva l'assorbimento nel modello grigio. Il corpo emette anche quando $T=T_a$, ma l'assorbimento compensa l'emissione e lo scambio netto è nullo. Se $T<T_a$, il segno negativo indica energia netta entrante.
+Nella formula $\sigma\simeq5{,}67\cdot10^{-8}\,\mathrm{W\,m^{-2}K^{-4}}$ è una costante universale e le temperature sono in kelvin. L'**emissività** $\varepsilon$ è un numero fra 0 e 1 che dipende dalla superficie. Vale quasi 1 per una superficie scura e opaca, e anche per la pelle umana, e quasi 0 per una superficie lucida. Il termine $T^4$ è la radiazione emessa e il termine $T_a^4$ è quella assorbita. Se il corpo è più caldo dell'ambiente la potenza netta è positiva e il corpo perde energia. Se ha la stessa temperatura la potenza netta è nulla.
 
 ![Potenza radiativa netta di una superficie di un metro quadrato ed emissività 0,90 in un ambiente a 293,15 kelvin](/figure/fisica-semestre-filtro/termodinamica/irraggiamento-it.svg)
 
-Raddoppiare la temperatura assoluta moltiplica per sedici la potenza *emessa* a emissività invariata. La potenza netta richiede anche il termine dell'ambiente. In un bilancio corporeo i contributi radiativo, convettivo, conduttivo ed evaporativo vanno distinti per evitare di contare due volte la stessa energia.
+La potenza emessa dipende dalla quarta potenza della temperatura assoluta. A temperatura assoluta doppia è $2^4=16$ volte maggiore. Una persona a riposo, in una stanza, cede calore all'ambiente in tutti i modi insieme: irraggiamento, convezione, conduzione ed evaporazione del sudore. In un bilancio ogni contributo si calcola separatamente.
 :::
 
 ## Lavoro, percorsi e primo principio
 
 :::teorema{#primo-principio titolo="Convenzione dei segni e bilancio energetico"}
-Si assume $Q>0$ per il calore assorbito e $W>0$ per il lavoro **compiuto dal sistema** sull'ambiente. Per un sistema chiuso, trascurando variazioni macroscopiche di energia cinetica e potenziale,
+Un sistema scambia energia con l'ambiente in due modi, come calore $Q$ e come lavoro $W$. Il **primo principio della termodinamica** è la conservazione dell'energia: la variazione dell'energia interna è uguale all'energia entrata meno quella uscita. Con la convenzione usata qui, $Q$ è positivo se il calore entra nel sistema e $W$ è positivo se il lavoro è compiuto dal sistema sull'ambiente. Allora:
 $$
 \Delta U=Q-W.
 $$
-Un sistema che assorbe $500\,\mathrm J$ e compie $200\,\mathrm J$ aumenta $U$ di $300\,\mathrm J$. In una compressione il lavoro compiuto dal gas è negativo: con $Q=0$ e $W=-200\,\mathrm J$ si ottiene $\Delta U=+200\,\mathrm J$. Usando invece lavoro ricevuto positivo, si porrebbe $w=-W$ e si scriverebbe $\Delta U=Q+w$; i due bilanci esprimono la stessa conservazione.
+Un gas che assorbe $500\,\mathrm J$ di calore e compie $200\,\mathrm J$ di lavoro espandendosi aumenta la propria energia interna di $500-200=300\,\mathrm J$. Un gas che viene compresso senza scambiare calore riceve lavoro, quindi $W$ è negativo. Con $Q=0$ e $W=-200\,\mathrm J$ si ha $\Delta U=0-(-200)=+200\,\mathrm J$: il gas si scalda. Alcuni testi usano la convenzione opposta per il lavoro e scrivono $\Delta U=Q+W$, con $W$ positivo se ricevuto dal sistema.
 
-Per il lavoro di volume contro una pressione esterna definita,
+Un gas compie lavoro quando cambia volume. Se si espande spinge il pistone e il lavoro è positivo, se viene compresso il lavoro è negativo. A pressione costante $W=p\,\Delta V$. Se la pressione cambia, il lavoro è l'integrale:
 $$
 W=\int_{V_i}^{V_f}p_{\mathrm{ext}}\,dV.
 $$
-In un processo meccanicamente reversibile la pressione esterna differisce infinitesimamente da quella del gas e si può usare $W=\int p\,dV$. Il risultato è l'area con segno sotto il percorso nel piano $p,V$: positiva nell'espansione, negativa nella compressione. Il prodotto $1\,\mathrm{kPa}\cdot1\,\mathrm L$ equivale a $1\,\mathrm J$.
+Se la trasformazione è lenta, la pressione esterna è in ogni istante uguale a quella del gas. In un grafico con il volume in ascissa e la pressione in ordinata, detto piano $p$-$V$, il lavoro è l'area sotto la curva che rappresenta la trasformazione. Con la pressione in kPa e il volume in litri il prodotto dà direttamente joule, perché $1\,\mathrm{kPa}\cdot1\,\mathrm L=10^3\,\mathrm{Pa}\cdot10^{-3}\,\mathrm{m^3}=1\,\mathrm J$.
 
 ![Due percorsi meccanicamente reversibili fra gli stessi stati: espansione a pressione alta o bassa e aree di lavoro differenti](/figure/fisica-semestre-filtro/termodinamica/lavoro-it.svg)
 
-Nella figura, partire da $A$ e arrivare a $B$ comporta $600\,\mathrm J$ di lavoro compiuto lungo il percorso con espansione a $300\,\mathrm{kPa}$ e $200\,\mathrm J$ lungo quello a $100\,\mathrm{kPa}$. La variazione di energia interna è la stessa, quindi anche i calori differiscono di $400\,\mathrm J$. Nei sistemi aperti l'energia trasportata dalla materia richiede termini aggiuntivi: il bilancio chiuso non si trasferisce direttamente all'intero organismo.
+La figura mostra che il lavoro dipende dal percorso. Il gas passa dallo stato A allo stato B, con un aumento di volume di $2\,\mathrm L$, in due modi. Se si espande alla pressione di $300\,\mathrm{kPa}$ compie $300\cdot2=600\,\mathrm J$. Se si espande a $100\,\mathrm{kPa}$ compie $100\cdot2=200\,\mathrm J$. L'energia interna è una funzione di stato, quindi $\Delta U$ è la stessa nei due casi. Per il primo principio, $Q=\Delta U+W$, anche il calore è diverso nei due percorsi, di $400\,\mathrm J$.
 :::
 
 ## Trasformazioni canoniche e reversibilità
 
 :::definizione{titolo="Quasistatico e reversibile"}
-Un processo **quasistatico** attraversa stati arbitrariamente vicini all'equilibrio, permettendo di assegnare variabili di stato durante il percorso. La **reversibilità** richiede inoltre che sia possibile invertire il processo ripristinando sia sistema sia ambiente senza effetti residui. Attrito e scambi di calore attraverso differenze finite di temperatura rendono un processo irreversibile anche quando parte dell'evoluzione è lenta.
+Una trasformazione è **reversibile** se avviene così lentamente che il sistema resta in ogni istante in equilibrio, senza attriti, e si può ripercorrere all'indietro riportando sistema e ambiente esattamente allo stato iniziale. È un caso limite ideale. Le trasformazioni reali sono **irreversibili**: avvengono in un tempo finito, con attriti o con passaggi di calore fra corpi a temperature diverse. Solo una trasformazione reversibile si rappresenta con una curva nel piano $p$-$V$, perché solo in essa pressione e volume sono definiti in ogni istante.
 
-Un gas che si espande nel vuoto dentro un recipiente rigido isolato compie lavoro esterno nullo e riceve calore nullo. Per un gas ideale $\Delta U=0$ implica temperature iniziale e finale uguali. Il processo resta irreversibile e non è rappresentato da una successione di stati di equilibrio con pressione uniforme. Questo caso distingue l'isolamento termico dall'adiabatica reversibile.
+L'**espansione libera** è un esempio di trasformazione irreversibile. Un gas ideale occupa metà di un recipiente isolato, e l'altra metà è vuota. Si toglie la parete di separazione e il gas occupa tutto il recipiente. Il gas non spinge nulla, quindi $W=0$. Il recipiente è isolato, quindi $Q=0$. Per il primo principio $\Delta U=0$, e in un gas ideale ciò significa che la temperatura non cambia. Il gas non torna da solo nella metà iniziale.
 :::
 
 :::osservazione{#trasformazioni titolo="Quattro trasformazioni del gas ideale"}
-Le relazioni seguenti riguardano quantità e composizione fisse, con solo lavoro di volume e capacità termiche molari costanti dove usate.
+Le trasformazioni più semplici di un gas ideale sono quattro. In ciascuna una grandezza resta costante, oppure non c'è scambio di calore. Il nome indica che cosa resta costante: il volume nell'**isocora**, la pressione nell'**isobara**, la temperatura nell'**isoterma**. Nell'**adiabatica** il calore scambiato è nullo.
 
 | Processo | Vincolo | Bilancio e relazione |
 | --- | --- | --- |
@@ -154,13 +172,18 @@ Le relazioni seguenti riguardano quantità e composizione fisse, con solo lavoro
 | isotermo reversibile | temperatura costante | $\Delta U=0$, $W=Q=nRT\ln\dfrac{V_f}{V_i}$ |
 | adiabatico | calore nullo | $Q=0$, $\Delta U=-W$ |
 
-Nell'isoterma l'integrale di $p=\dfrac{nRT}{V}$ produce il logaritmo. Il rapporto dei volumi è adimensionale, perciò si possono usare litri in entrambi i termini. Un'espansione isoterma reversibile assorbe il calore necessario a compensare esattamente il lavoro compiuto.
+La tabella si legge riga per riga con il primo principio.
 
-Per l'adiabatica *reversibile*, usando $dU=-p\,dV$, si ricava $nC_VdT=-nRT\,\dfrac{dV}{V}$. L'integrazione dà
+- Nell'isocora il volume non cambia, quindi il lavoro è nullo e tutto il calore assorbito aumenta l'energia interna.
+- Nell'isobara il gas scambia sia lavoro sia calore.
+- Nell'isoterma la temperatura non cambia, quindi $\Delta U=0$ e tutto il calore assorbito diventa lavoro. Il logaritmo viene dall'integrale di $p=\dfrac{nRT}{V}$.
+- Nell'adiabatica non c'è calore, quindi il lavoro è compiuto a spese dell'energia interna. Un gas che si espande in modo adiabatico si raffredda, e uno che viene compresso si scalda.
+
+Per un'adiabatica reversibile valgono inoltre le relazioni seguenti, in cui compare il rapporto $\gamma=\dfrac{C_p}{C_V}$:
 $$
 TV^{\gamma-1}=\text{costante},\qquad pV^\gamma=\text{costante}.
 $$
-Il lavoro vale $W=\dfrac{p_iV_i-p_fV_f}{\gamma-1}$. Nell'espansione la temperatura diminuisce, poiché il lavoro proviene dall'energia interna. A partire dallo stesso stato, la pressione scende più rapidamente lungo l'adiabatica reversibile che lungo l'isoterma. Le leggi con $\gamma$ richiedono reversibilità e non descrivono l'espansione libera appena discussa.
+Il lavoro in un'adiabatica reversibile è $W=\dfrac{p_iV_i-p_fV_f}{\gamma-1}$. Nel piano $p$-$V$ l'adiabatica scende più ripida dell'isoterma che parte dallo stesso punto. In un'espansione adiabatica, infatti, oltre al volume che aumenta c'è la temperatura che diminuisce, e la pressione cala per entrambi i motivi. Queste formule valgono per le adiabatiche reversibili. Non valgono per l'espansione libera, che è adiabatica e irreversibile.
 
 ![Isobara, isoterma e adiabatica reversibile monoatomica passanti per lo stesso stato iniziale](/figure/fisica-semestre-filtro/termodinamica/trasformazioni-it.svg)
 :::
@@ -168,57 +191,68 @@ Il lavoro vale $W=\dfrac{p_iV_i-p_fV_f}{\gamma-1}$. Nell'espansione la temperatu
 ## Secondo principio, cicli e macchine
 
 :::teorema{#secondo-principio titolo="Direzione dei processi e macchine cicliche"}
-Il primo principio ammette bilanci energetici che il secondo principio esclude. L'enunciato di **Kelvin–Planck** impedisce una macchina ciclica il cui unico risultato sia trasformare integralmente in lavoro il calore ricevuto da un solo serbatoio. L'enunciato di **Clausius** impedisce un processo il cui unico risultato sia trasferire calore dal freddo al caldo. Un frigorifero realizza questo trasferimento ricevendo lavoro, quindi il trasferimento non è il suo unico effetto.
+Il primo principio dice che l'energia si conserva. Non dice in quale verso avvengono le trasformazioni. Un caffè caldo in una stanza si raffredda e non si scalda da solo, anche se in entrambi i casi l'energia si conserverebbe. Il **secondo principio della termodinamica** stabilisce il verso. Ha due enunciati equivalenti.
 
-In un ciclo lo stato finale coincide con quello iniziale, perciò $\Delta U=0$ e $W_{\mathrm{ciclo}}=Q_{\mathrm{ciclo}}$. Per un ciclo meccanicamente reversibile con solo lavoro di volume, nel piano $p,V$ il lavoro netto è l'area racchiusa, positiva se il ciclo è percorso in senso orario. Una curva chiusa non implica lavoro nullo: è la variazione delle funzioni di stato a essere nulla.
+- **Enunciato di Clausius.** Il calore non passa spontaneamente da un corpo freddo a uno caldo. Per farlo passare serve lavoro, ed è ciò che fa un frigorifero.
+- **Enunciato di Kelvin-Planck.** Nessuna macchina che lavora in modo ciclico trasforma in lavoro tutto il calore che preleva da una sola sorgente. Una parte del calore viene sempre ceduta a una sorgente più fredda.
 
-Per una macchina che assorbe la quantità positiva $Q_h$ dal serbatoio caldo e cede la quantità positiva $Q_c$ a quello freddo,
+Una **macchina termica** è un dispositivo che trasforma calore in lavoro ripetendo un **ciclo**, cioè una serie di trasformazioni che riporta il sistema allo stato iniziale. Un motore a scoppio è una macchina termica. Alla fine di ogni ciclo l'energia interna è tornata al valore iniziale, quindi $\Delta U=0$ e il lavoro compiuto è uguale al calore netto assorbito. Nel piano $p$-$V$ un ciclo è una curva chiusa e il lavoro è l'area racchiusa, positiva se il ciclo è percorso in senso orario.
+
+In ogni ciclo la macchina assorbe il calore $Q_h$ da una sorgente calda, ne trasforma una parte in lavoro $W$ e cede il resto, $Q_c$, a una sorgente fredda. Il **rendimento** $\eta$ è la frazione del calore assorbito che diventa lavoro:
 $$
 W=Q_h-Q_c,\qquad \eta=\dfrac{W}{Q_h}=1-\dfrac{Q_c}{Q_h}.
 $$
-$Q_c$ qui è il modulo del calore ceduto; il calore con segno ricevuto dalla macchina in quello scambio è $-Q_c$. A frequenza $f$ cicli al secondo la potenza meccanica è $P=fW$. Il rendimento confronta energie o potenze omogenee e non ha unità di misura.
+Nelle formule $Q_h$ e $Q_c$ sono presi entrambi come numeri positivi. Una macchina che in ogni ciclo assorbe $1000\,\mathrm J$ e ne cede $700\,\mathrm J$ compie un lavoro di $300\,\mathrm J$ e ha rendimento $\dfrac{300}{1000}=0{,}30$, cioè il 30%. Per il secondo principio $Q_c$ non è mai nullo, quindi il rendimento è sempre minore di 1.
 :::
 
 :::teorema{titolo="Carnot e prestazioni dei frigoriferi"}
-Il ciclo di **Carnot** comprende espansione isoterma a $T_h$, espansione adiabatica reversibile fino a $T_c$, compressione isoterma a $T_c$ e compressione adiabatica reversibile fino allo stato iniziale. Tutti i tratti sono reversibili e i due serbatoi mantengono temperature assolute $T_h>T_c>0$.
+Il **ciclo di Carnot** è il ciclo ideale che dà il rendimento massimo possibile fra due sorgenti a temperature $T_h$ e $T_c$. È formato da quattro trasformazioni reversibili di un gas.
+
+1. Un'espansione isoterma alla temperatura $T_h$, in cui il gas assorbe il calore $Q_h$.
+2. Un'espansione adiabatica, in cui il gas si raffredda da $T_h$ a $T_c$.
+3. Una compressione isoterma alla temperatura $T_c$, in cui il gas cede il calore $Q_c$.
+4. Una compressione adiabatica, in cui il gas si scalda da $T_c$ a $T_h$ e torna allo stato iniziale.
 
 ![Ciclo di Carnot di un gas monoatomico con due isoterme a temperature nel rapporto due a uno e due adiabatiche reversibili](/figure/fisica-semestre-filtro/termodinamica/carnot-it.svg)
 
-Per questo ciclo $\dfrac{Q_c}{Q_h}=\dfrac{T_c}{T_h}$, dunque
+In questo ciclo i calori scambiati stanno fra loro come le temperature assolute delle sorgenti, $\dfrac{Q_c}{Q_h}=\dfrac{T_c}{T_h}$. Il rendimento è quindi:
 $$
 \eta_C=1-\dfrac{T_c}{T_h}.
 $$
-Fra le stesse due sorgenti nessuna macchina può superare questo rendimento; l'uguaglianza è raggiunta nel limite reversibile. Aumentare $T_h$ o diminuire $T_c$ aumenta il limite, ma il risultato dipende dal rapporto in kelvin. Il valore teorico non stabilisce la potenza: il limite quasistatico può comportare tempi molto lunghi.
+Le temperature sono in kelvin. Il **teorema di Carnot** afferma che nessuna macchina che lavora fra le stesse due temperature ha un rendimento maggiore. Fra una sorgente a $500\,\mathrm K$ e una a $300\,\mathrm K$ il rendimento massimo è $1-\dfrac{300}{500}=0{,}40$. Una macchina reale fra le stesse temperature rende meno, a causa degli attriti e delle altre irreversibilità. Il rendimento massimo aumenta se la differenza fra le due temperature aumenta.
 
-Per un frigorifero si usa il lavoro entrante positivo $W_{\mathrm{in}}=Q_h-Q_c$. Il coefficiente di prestazione è $\mathrm{COP}_R=\dfrac{Q_c}{W_{\mathrm{in}}}$; per una pompa di calore il risultato utile è $Q_h$, quindi $\mathrm{COP}_H=\dfrac{Q_h}{W_{\mathrm{in}}}=\mathrm{COP}_R+1$. Un COP maggiore di uno è compatibile con il bilancio perché il dispositivo trasferisce calore già presente. Nel limite reversibile $\mathrm{COP}_{R,C}=\dfrac{T_c}{T_h-T_c}$.
+Un **frigorifero** è una macchina termica che funziona al contrario. Riceve il lavoro $W_{\mathrm{in}}$, toglie il calore $Q_c$ alla sorgente fredda, cioè all'interno del frigorifero, e cede il calore $Q_h=Q_c+W_{\mathrm{in}}$ alla sorgente calda, cioè alla stanza. La sua efficacia si misura con il **coefficiente di prestazione**, $\mathrm{COP}_R=\dfrac{Q_c}{W_{\mathrm{in}}}$, che è il calore tolto per ogni joule di lavoro speso. Una **pompa di calore** è la stessa macchina usata per scaldare, e il suo coefficiente è $\mathrm{COP}_H=\dfrac{Q_h}{W_{\mathrm{in}}}=\mathrm{COP}_R+1$. Questi coefficienti sono in genere maggiori di 1, perché la macchina sposta calore che esiste già e non lo produce. Il valore massimo per un frigorifero, raggiunto con un ciclo di Carnot, è $\dfrac{T_c}{T_h-T_c}$.
 :::
 
 ## Entropia e irreversibilità
 
 :::definizione{#entropia titolo="Variazione di entropia tra due stati"}
-Per confrontare processi che rispettano lo stesso bilancio energetico si introduce l'**entropia**, funzione di stato con unità $\mathrm{J\,K^{-1}}$. La variazione si calcola lungo un cammino reversibile fra gli stati assegnati:
+L'**entropia** $S$ è la grandezza che permette di esprimere il secondo principio con un numero. È una funzione di stato e si misura in $\mathrm{J\,K^{-1}}$. Quando un sistema a temperatura $T$ assorbe una piccola quantità di calore in modo reversibile, la sua entropia aumenta di quel calore diviso per la temperatura. Per una trasformazione fra due stati la variazione è:
 $$
 \Delta S=\int_i^f\dfrac{\delta Q_{\mathrm{rev}}}{T}.
 $$
-Il cammino usato nel calcolo può essere diverso dal processo reale. Un serbatoio ideale a temperatura costante che assorbe $Q$ ha $\Delta S=\dfrac{Q}{T}$. Per un corpo di capacità termica $C=mc$ costante, senza transizioni e alle condizioni considerate, $\Delta S=C\ln(\dfrac{T_f}{T_i})$. Il logaritmo deriva dall'integrazione di $\dfrac{C\,dT}{T}$; usare un'unica temperatura finale nel rapporto $\dfrac{Q}{T_f}$ perderebbe la variazione durante il riscaldamento.
+L'entropia è una funzione di stato, quindi la sua variazione dipende solo dagli stati iniziale e finale. Per una trasformazione irreversibile la si calcola lungo una trasformazione reversibile qualsiasi fra gli stessi due stati. I casi più frequenti sono quattro.
 
-Per una transizione reversibile alla temperatura di coesistenza $T_0$, la fusione dà $\Delta S=\dfrac{m\ell_f}{T_0}$. Per un gas ideale con $C_V$ costante,
+- **Scambio di calore a temperatura costante.** Un corpo che assorbe il calore $Q$ restando alla temperatura $T$ ha $\Delta S=\dfrac{Q}{T}$. Se cede calore, $Q$ è negativo e l'entropia diminuisce.
+- **Cambiamento di stato.** La temperatura è costante, quindi per la fusione $\Delta S=\dfrac{m\ell_f}{T_0}$. Un chilogrammo di ghiaccio che fonde a $273\,\mathrm K$ aumenta la propria entropia di $\dfrac{3{,}34\cdot10^5}{273}\simeq1220\,\mathrm{J\,K^{-1}}$.
+- **Riscaldamento di un corpo.** La temperatura cambia durante lo scambio, quindi si integra $\dfrac{mc\,dT}{T}$ e si ottiene $\Delta S=mc\ln\left(\dfrac{T_f}{T_i}\right)$.
+- **Gas ideale.** L'entropia cambia sia con la temperatura sia con il volume:
 $$
 \Delta S=nC_V\ln\dfrac{T_f}{T_i}+nR\ln\dfrac{V_f}{V_i}.
 $$
-Tutti i rapporti di temperatura sono in kelvin. La formula del gas vale fra gli stati di equilibrio anche quando il percorso reale è irreversibile. Nell'espansione libera ideale $T_f=T_i$, ma $V_f>V_i$, perciò $\Delta S=nR\ln(\dfrac{V_f}{V_i})>0$ malgrado il calore reale sia nullo.
+In tutte le formule le temperature sono in kelvin. Nell'espansione libera di un gas ideale la temperatura non cambia e il volume aumenta, quindi $\Delta S=nR\ln\left(\dfrac{V_f}{V_i}\right)>0$. L'entropia del gas aumenta anche se il gas non ha scambiato calore, perché la trasformazione è irreversibile.
 :::
 
 :::teorema{titolo="Entropia totale e interpretazione statistica"}
-Per sistema e ambiente considerati insieme come complesso isolato,
+Il secondo principio si enuncia con l'entropia nel modo seguente. In ogni trasformazione l'entropia totale, cioè la somma dell'entropia del sistema e di quella dell'ambiente, non diminuisce:
 $$
 \Delta S_{\mathrm{tot}}=\Delta S_{\mathrm{sist}}+\Delta S_{\mathrm{amb}}\ge0.
 $$
-L'uguaglianza caratterizza il limite reversibile; un processo irreversibile produce entropia. Una singola parte può diminuire la propria entropia purché gli altri contributi compensino la diminuzione. Per un dispositivo ciclico $\Delta S$ del fluido di lavoro è zero anche se il ciclo è irreversibile; l'aumento totale include i serbatoi.
+L'entropia totale resta costante nelle trasformazioni reversibili e aumenta in quelle irreversibili, cioè in tutte le trasformazioni reali. L'entropia di una singola parte può diminuire, purché quella del resto aumenti di più. L'acqua che gela in un congelatore perde entropia, e la stanza, che riceve calore dal congelatore, ne acquista di più.
 
-Il trasferimento di $2000\,\mathrm J$ da un serbatoio a $400\,\mathrm K$ a uno a $250\,\mathrm K$ dà $\Delta S_h=-5\,\mathrm{J\,K^{-1}}$ e $\Delta S_c=+8\,\mathrm{J\,K^{-1}}$. La somma è positiva. Il verso opposto, come unico effetto, darebbe una somma negativa e sarebbe escluso.
+Un esempio mostra il legame con l'enunciato di Clausius. Un calore di $2000\,\mathrm J$ passa da un corpo a $400\,\mathrm K$ a un corpo a $250\,\mathrm K$. Il corpo caldo perde entropia, $\Delta S_h=\dfrac{-2000}{400}=-5\,\mathrm{J\,K^{-1}}$. Il corpo freddo ne acquista, $\Delta S_c=\dfrac{+2000}{250}=+8\,\mathrm{J\,K^{-1}}$. Il totale è $+3\,\mathrm{J\,K^{-1}}$, positivo, quindi il passaggio avviene spontaneamente. Il passaggio opposto, dal corpo freddo a quello caldo, darebbe $-3\,\mathrm{J\,K^{-1}}$ e non avviene da solo.
 
 ![Variazioni di entropia dei serbatoi caldo e freddo e aumento totale per 2000 joule trasferiti da 400 a 250 kelvin](/figure/fisica-semestre-filtro/termodinamica/entropia-it.svg)
 
-Nell'interpretazione statistica di Boltzmann, $S=k_B\ln\Omega$, dove $k_B=1{,}380649\cdot10^{-23}\,\mathrm{J\,K^{-1}}$ e $\Omega$ conta i microstati equiprobabili compatibili con il macrostato. Se il numero aumenta di un fattore $r$, $\Delta S=k_B\ln r$. Per un sistema macroscopico isolato i macrostati con maggiore molteplicità sono enormemente più probabili. L'interpretazione riguarda probabilità e vincoli fisici; il termine generico disordine non sostituisce il conteggio o il bilancio.
+L'entropia ha anche un significato microscopico. Uno stesso stato del gas, con una data pressione e una data temperatura, corrisponde a moltissime disposizioni diverse delle singole molecole, dette **microstati**. La **formula di Boltzmann** lega l'entropia al numero $\Omega$ di microstati: $S=k_B\ln\Omega$, con $k_B=1{,}38\cdot10^{-23}\,\mathrm{J\,K^{-1}}$. Uno stato con più microstati è più probabile e ha entropia maggiore. Un gas libero di occupare tutto un recipiente ha molti più modi di disporsi di un gas raccolto in una metà, e per questo motivo si espande e non si raccoglie da solo. L'aumento dell'entropia è quindi il passaggio verso gli stati più probabili.
 :::
