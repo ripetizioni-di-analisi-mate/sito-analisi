@@ -100,18 +100,18 @@ const icona = {
     </div>
     <button type="submit">{t.cerca}</button>
   </form>
-  {/* 20/11/2026, scelta di Carmine fra più anteprime (stile «allineato», testo B): quattro righe con la stessa forma, etichetta e descrizione in colonna.
+  {/* 20/11/2026, scelta di Carmine fra più anteprime (testo B; prima stile «allineato» in due colonne, poi dal 20/11 mattina stile «uniforme»): quattro righe con la stessa forma, icona, etichetta in neretto e descrizione di seguito.
         «Gratis» è una frase generica al posto dell'elenco di link (GratisHome resta per le altre lingue); «Prova gratis» è confluita in «Gratis»;
         tolto il link alle ripetizioni dopo «Videocorsi»; la riga «Con l'iscrizione» si vede solo senza accesso. */}
   {usa ? (
     <ul class="legenda-home"><li><Fragment set:html={icona.teoria} /><span><b>Theory and exercises</b> · worked examples and exam practice.</span></li></ul>
   ) : lingua === 'it' ? (
-    <dl class="legenda-home-2">
-      <dt><Fragment set:html={icona.teoria} /><span>Teoria ed esercizi</span></dt><dd>Spiegazioni, svolgimenti e soluzioni</dd>
-      <dt><Fragment set:html={icona.videoFilo} /><a href={url('/videocorsi')}>Videocorsi</a></dt><dd>Video e PDF</dd>
-      <dt><Fragment set:html={icona.gratis} /><span>Gratis</span></dt><dd>Anteprime, quiz, formulari e corsi da zero</dd>
-      <dt class="solo-ospiti"><Fragment set:html={icona.account} /><a href={url('/accedi?nuovo=1')}>Con l’iscrizione</a></dt><dd class="solo-ospiti">Livelli e punti, lega settimanale, Studio guidato e progressi verso l’esame</dd>
-    </dl>
+    <ul class="legenda-home-2">
+      <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
+      <li><Fragment set:html={icona.videoFilo} /><span><b><a href={url('/videocorsi')}>Videocorsi</a></b> con video e PDF.</span></li>
+      <li><Fragment set:html={icona.gratis} /><span><b>Gratis</b>: anteprime, quiz, formulari e corsi da zero.</span></li>
+      <li class="solo-ospiti"><Fragment set:html={icona.account} /><span><b><a href={url('/accedi?nuovo=1')}>Con l’iscrizione</a></b>: livelli e punti, lega settimanale, Studio guidato e progressi verso l’esame.</span></li>
+    </ul>
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
