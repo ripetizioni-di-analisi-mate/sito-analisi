@@ -6,11 +6,11 @@ export const FACOLTA = [
     titoloDe: 'Ingenieurwissenschaften',
     titoloEs: 'Ingeniería',
     titoloFr: 'Ingénierie',
-    materie: ['analisi-1', 'analisi-2', 'algebra-lineare', 'informatica', 'fisica-1', 'fisica-2', 'statica', 'meccanica-razionale', 'scienza-delle-costruzioni', 'idraulica', 'statistica', 'precorso'],
+    materie: ['analisi-1', 'analisi-2', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statica', 'meccanica-razionale', 'scienza-delle-costruzioni', 'idraulica', 'statistica', 'precorso', 'informatica'],
     // Solo nell'indice laterale l'elenco è diviso in due parti (richiesta di Carmine del 18/11/2026: elenchi più corti; la home resta un elenco unico).
     parti: [
       { titolo: 'Materie di base', titoloEn: 'Core subjects', titoloDe: 'Grundlagenfächer', titoloEs: 'Asignaturas básicas', titoloFr: 'Matières fondamentales', materie: ['analisi-1', 'analisi-2', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statistica', 'precorso'] },
-      { titolo: 'Materie di indirizzo', titoloEn: 'Specialist subjects', titoloDe: 'Vertiefungsfächer', titoloEs: 'Asignaturas de especialidad', titoloFr: 'Matières de spécialité', materie: ['informatica', 'statica', 'meccanica-razionale', 'scienza-delle-costruzioni', 'idraulica'] },
+      { titolo: 'Materie di indirizzo', titoloEn: 'Specialist subjects', titoloDe: 'Vertiefungsfächer', titoloEs: 'Asignaturas de especialidad', titoloFr: 'Matières de spécialité', materie: ['statica', 'meccanica-razionale', 'scienza-delle-costruzioni', 'idraulica', 'informatica'] },
     ],
   },
   {
