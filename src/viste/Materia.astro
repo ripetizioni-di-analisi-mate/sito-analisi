@@ -106,7 +106,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   {giaVideo && <style is:inline set:html={giaVideo}></style>}
   <p class:list={['sopratitolo', { 'vista-classica': nuova }]}>{sopra}</p>
   {materia === 'analisi-1' && nuova
-    ? <IntestazioneAnalisiUno titolo={m.titolo} descrizione={m.descrizione} en={en} />
+    ? <IntestazioneAnalisiUno titolo={m.titolo} descrizione={m.descrizione} />
     : <><h1>{m.titolo}</h1><p class="sommario">{m.descrizione}</p></>}
   {materia === 'analisi-3' && (lingua === 'it' || lingua === 'en') && <NotaAnalisi3 lingua={lingua} />}
   {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
