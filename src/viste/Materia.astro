@@ -21,8 +21,6 @@ import { BOCCONI } from '../data/bocconi.mjs';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
-import { percorsoRaccolta, raccolteSvolti } from '../lib/raccolte-svolti';
-import GuidaMateria from '../components/GuidaMateria.astro';
 import { BOCCONI_SEO_EN, GUIDE_DISCIPLINE, GUIDE_DISCIPLINE_EN } from '../data/seo-discipline';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
@@ -56,7 +54,6 @@ import { risultatoDi } from '../lib/risposte';
 // Progressi (con l'account): esercizi da fare con la verifica della risposta, per argomento.
 const verificabili = (a: string) => dafare.filter((v) => v.id.startsWith(`${materia}/${a}/`) && risultatoDi(v)).length;
 const en = lingua === 'en';
-const haRaccolta = (lingua === 'it' || lingua === 'en') && (await raccolteSvolti(lingua)).has(materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
 const anteprimaScienza = scienza && m.prezzo;
 const anteprimaTesto = anteprimaScienza
@@ -190,10 +187,6 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
       </li>
     )}
   </ol>
-  {haRaccolta && <p><a href={link(lingua, percorsoRaccolta(materia))}>{en
-    ? 'Free worked examples in ' + m.titolo : 'Esercizi svolti gratuiti di ' + m.titolo}</a></p>}
-  {guida && (lingua === 'it' || lingua === 'en') && <GuidaMateria materia={m} guida={guida} lingua={lingua}
-    schede={lingua === 'en' ? await getCollection('svolti_en', (s) => s.id.startsWith(materia + '/')) : svolti} />}
 </Base>
 
 <script is:inline define:vars={{ en }}>
