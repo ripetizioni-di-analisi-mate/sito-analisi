@@ -6,15 +6,15 @@ sommario: "Struttura, proprietà acido-base e reazioni delle biomolecole, dai gr
 ## Gli amminoacidi proteici
 
 :::definizione{#amminoacidi titolo="Struttura degli amminoacidi"}
-Un **α-amminoacido** possiede un gruppo amminico e un gruppo carbossilico legati allo stesso carbonio, detto carbonio α. Per un amminoacido con ammina primaria, la formula della forma con gruppi non ionizzati è $\mathrm{H_2N{-}CH(R){-}COOH}$; $R$ indica la catena laterale, che distingue i diversi amminoacidi. La prolina possiede una catena laterale che si richiude sull'azoto, formando un'ammina secondaria.
+Le proteine sono formate da **amminoacidi**. Un α-amminoacido è una molecola in cui un gruppo amminico $\mathrm{NH_2}$ e un gruppo carbossilico COOH sono legati allo stesso carbonio, detto **carbonio α**. Al carbonio α sono legati anche un idrogeno e un quarto gruppo, la **catena laterale**, indicata con R. La formula generale è $\mathrm{H_2N{-}CH(R){-}COOH}$. La parte comune a tutti gli amminoacidi è lo scheletro; la catena laterale è diversa in ciascuno e ne determina le proprietà. Nella prolina la catena laterale si richiude sull'azoto e forma un anello, quindi il gruppo amminico è un'ammina secondaria.
 
-In acqua la protonazione dipende dal pH. Per un amminoacido con ammina primaria e catena laterale priva di gruppi ionizzabili, vicino alla neutralità prevale la forma $\mathrm{{}^{+}H_3N{-}CH(R){-}COO^{-}}$. Nella prolina protonata, invece, l’azoto porta due idrogeni e carica positiva. Riconoscere separatamente scheletro e catena laterale consente di prevedere carica, polarità e interazioni. Per esempio alanina e serina differiscono per la sostituzione di un idrogeno della catena laterale con un gruppo ossidrilico.
+In acqua i due gruppi dello scheletro sono ionizzati. A pH vicino a 7 il gruppo carbossilico ha ceduto il protone ed è $\mathrm{COO^-}$, mentre il gruppo amminico lo ha acquistato ed è $\mathrm{NH_3^+}$. La forma prevalente è quindi $\mathrm{{}^{+}H_3N{-}CH(R){-}COO^{-}}$, con una carica positiva e una negativa. Le proprietà di un amminoacido si ricavano osservando la catena laterale: se è apolare, polare o carica. Per esempio, l'alanina ha come catena laterale un gruppo $\mathrm{CH_3}$, apolare; la serina ha un gruppo $\mathrm{CH_2OH}$, polare perché contiene un OH.
 
 ![Catene laterali di aspartato, asparagina, cisteina e metionina, con gruppi funzionali distinti.](/figure/chimica-semestre-filtro/biomolecole/sidechains-it.svg)
 :::
 
 :::osservazione{#venti-amminoacidi titolo="Nomi, sigle e catene laterali dei venti amminoacidi"}
-Le sigle a tre lettere e a una lettera identificano un residuo nella sequenza di una proteina. La tabella descrive le catene laterali dei venti amminoacidi standard; le cariche riportate sono quelle prevalenti intorno a pH 7 per l'amminoacido libero. Il gruppo amminico e quello carbossilico dello scheletro si aggiungono alle catene indicate.
+Gli amminoacidi che formano le proteine sono venti. Ciascuno ha una sigla a tre lettere e una a una lettera, usate per scrivere la sequenza di una proteina. La tabella riporta per ciascuno la catena laterale e la sua proprietà principale. Le cariche indicate sono quelle a pH 7. In base alla catena laterale gli amminoacidi si dividono in quattro gruppi: apolari, polari senza carica, con carica negativa (acidi) e con carica positiva (basici).
 
 | Amminoacido | Sigle | Catena laterale $R$ | Proprietà della catena |
 | --- | --- | --- | --- |
@@ -39,27 +39,27 @@ Le sigle a tre lettere e a una lettera identificano un residuo nella sequenza di
 | Arginina | Arg, R | $\mathrm{(CH_2)_3NH{-}C(=NH_2^{+})NH_2}$ | Guanidinio con carica delocalizzata |
 | Istidina | His, H | $\mathrm{CH_2}$ legato a un imidazolo | Base debole, prevalentemente neutra a pH 7 |
 
-Aspartato e asparagina hanno catene diverse, rispettivamente carbossilato e ammide. Quindi il passaggio da Asp ad Asn elimina una carica negativa della catena laterale nelle condizioni considerate.
+Alcune coppie hanno catene simili ma proprietà diverse. L'acido aspartico ha nella catena laterale un gruppo carbossilico, che a pH 7 è carico negativamente; l'asparagina ha al suo posto un'ammide, che è polare ma senza carica. La stessa differenza c'è fra acido glutammico e glutammina. Se in una proteina un aspartato è sostituito da un'asparagina, la proteina perde quindi una carica negativa.
 :::
 
 :::definizione{#essenziali titolo="Amminoacidi essenziali e sintesi endogena"}
-Nell'adulto sano, un **amminoacido essenziale** deve essere fornito con l'alimentazione perché la sintesi endogena è assente o insufficiente al fabbisogno. I nove amminoacidi essenziali sono istidina, isoleucina, leucina, lisina, metionina, fenilalanina, treonina, triptofano e valina.
+Un **amminoacido essenziale** è un amminoacido che l'organismo umano non è in grado di produrre, o produce in quantità insufficiente, e che deve quindi essere introdotto con il cibo. Nell'adulto sono nove: istidina, isoleucina, leucina, lisina, metionina, fenilalanina, treonina, triptofano e valina.
 
-Gli altri possono essere sintetizzati dall'organismo in condizioni ordinarie; alcuni diventano *condizionatamente essenziali* in particolari fasi o condizioni metaboliche. Per esempio la tirosina deriva dalla fenilalanina. Questa classificazione riguarda il fabbisogno, mentre polare e apolare descrivono la struttura chimica.
+Gli altri undici sono prodotti dall'organismo a partire da altre molecole. Per esempio la tirosina si ottiene dalla fenilalanina. Alcuni di essi diventano necessari nella dieta in situazioni particolari, come la crescita o una malattia, e si dicono *condizionatamente essenziali*. La distinzione fra essenziali e non essenziali riguarda l'alimentazione e non ha relazione con la classificazione chimica in polari e apolari.
 :::
 
 ## Stereochimica, cariche e punto isoelettrico
 
 :::definizione{#stereochimica-amminoacidi titolo="Configurazione L e rappresentazione di Fischer"}
-Gli amminoacidi standard diversi dalla glicina hanno un carbonio α stereogenico. Nella **proiezione di Fischer**, con carbossile in alto e catena laterale in basso, il gruppo amminico a sinistra identifica la configurazione L; a destra identifica la configurazione D. I legami orizzontali sono diretti verso l'osservatore e quelli verticali dalla parte opposta.
+In tutti gli amminoacidi tranne la glicina il carbonio α è legato a quattro gruppi diversi, quindi è un centro stereogenico ed esistono due enantiomeri, indicati con L e D. Si distinguono con la **proiezione di Fischer**: si disegna il gruppo carbossilico in alto e la catena laterale in basso; se il gruppo amminico è a sinistra l'amminoacido è L, se è a destra è D. In questo disegno i legami orizzontali vengono verso chi guarda e quelli verticali si allontanano.
 
-Le proteine sintetizzate dai ribosomi utilizzano normalmente amminoacidi della serie L. La designazione L descrive una configurazione relativa e il segno della rotazione ottica si determina sperimentalmente. La maggior parte degli L-amminoacidi ha configurazione α S; la L-cisteina ha configurazione α R perché lo zolfo modifica l'ordine di priorità della catena laterale. Glicina, con due idrogeni sul carbonio α, è achirale. Isoleucina e treonina possiedono anche un secondo stereocentro nella catena laterale.
+Le proteine contengono soltanto L-amminoacidi. La lettera L indica la disposizione dei gruppi e non il verso in cui la sostanza ruota la luce polarizzata, che si ricava solo dalla misura. Nel sistema R/S quasi tutti gli L-amminoacidi hanno configurazione S. Fa eccezione la L-cisteina, che è R: la disposizione nello spazio è la stessa, ma lo zolfo della catena laterale ne cambia la priorità nelle regole CIP. La glicina ha due idrogeni sul carbonio α e non è chirale. L'isoleucina e la treonina hanno un secondo centro stereogenico nella catena laterale.
 
 ![Fischer di L-alanina e L-cisteina: stessa serie L, diversa configurazione assoluta.](/figure/chimica-semestre-filtro/biomolecole/fischer-aa-it.svg)
 :::
 
 :::definizione{#acido-base-pi titolo="Zwitterioni e punto isoelettrico"}
-Uno **zwitterione** contiene contemporaneamente gruppi con carica positiva e negativa. Per la glicina le forme prevalenti al crescere del pH sono
+Uno **zwitterione** è una molecola che porta insieme una carica positiva e una negativa, ed è nel complesso neutra. Un amminoacido ha due gruppi che cedono o acquistano protoni, quindi la sua carica dipende dal pH. Per la glicina, passando da pH acido a pH basico, si succedono tre forme.
 $$
 \mathrm{{}^{+}H_3NCH_2COOH}
 \rightleftharpoons
@@ -67,13 +67,13 @@ $$
 \rightleftharpoons
 \mathrm{H_2NCH_2COO^{-}}.
 $$
-Le cariche nette sono rispettivamente $+1$, $0$ e $-1$. Il **punto isoelettrico**, indicato con $pI$, è il pH al quale la carica media della molecola è nulla. Nel modello di una soluzione diluita, per un amminoacido con ammina primaria e senza catena ionizzabile,
+A pH molto acido entrambi i gruppi hanno il protone e la carica è $+1$. A pH intermedio il gruppo carbossilico ha perso il protone: è lo zwitterione, con carica 0. A pH basico anche il gruppo amminico ha perso il protone e la carica è $-1$. Il **punto isoelettrico** $pI$ è il pH al quale la carica media della molecola è zero. Per un amminoacido senza gruppi ionizzabili nella catena laterale è la media dei due $pK_a$.
 $$
 pI=\dfrac{pK_{a,\mathrm{COOH}}+pK_{a,\mathrm{NH_3^+}}}{2}.
 $$
-Con $pK_a=2{,}30$ e $9{,}60$ si ottiene $pI=5{,}95$. Per un amminoacido con catena ionizzabile si approssima il risultato mediante i due $pK_a$ che delimitano la forma di carica netta zero. Per esempio per l'aspartato con valori $2{,}10$, $3{,}90$ e $9{,}80$ si ha $pI=3{,}00$.
+Per esempio, per la glicina con $pK_a=2{,}30$ e $9{,}60$ si ottiene $pI=\dfrac{2{,}30+9{,}60}{2}=5{,}95$. Se anche la catena laterale ha un gruppo ionizzabile, i $pK_a$ sono tre, e si fa la media dei due che stanno ai lati della forma con carica zero. Per l'acido aspartico i valori sono $2{,}10$ (carbossile dello scheletro), $3{,}90$ (carbossile della catena laterale) e $9{,}80$ (gruppo amminico). La forma con carica zero si trova fra i primi due, quindi $pI=\dfrac{2{,}10+3{,}90}{2}=3{,}00$. Gli amminoacidi acidi hanno un $pI$ basso e quelli basici, come la lisina, un $pI$ alto.
 
-Un pH inferiore al $pI$ corrisponde a una carica media positiva; un pH superiore corrisponde a una carica media negativa. Questa proprietà permette di interpretare una separazione elettroforetica. La forma a carica netta zero mantiene i gruppi carichi interni e può interagire con l'acqua.
+Il confronto fra il pH e il $pI$ indica la carica della molecola. Se il pH è minore del $pI$ la molecola ha carica positiva; se è maggiore ha carica negativa; se è uguale la carica è zero. Su questa proprietà si basa l'**elettroforesi**, una tecnica che separa amminoacidi e proteine in un campo elettrico: le molecole positive migrano verso il polo negativo, quelle negative verso il polo positivo e quelle al punto isoelettrico restano ferme. Lo zwitterione ha carica totale zero ma contiene due gruppi carichi, quindi è molto solubile in acqua.
 
 ![Carica media della glicina in funzione del pH e punto isoelettrico tra i due pKa.](/figure/chimica-semestre-filtro/biomolecole/pi-it.svg)
 :::
@@ -81,7 +81,7 @@ Un pH inferiore al $pI$ corrisponde a una carica media positiva; un pH superiore
 ## Legame peptidico e struttura delle proteine
 
 :::definizione{#legame-peptidico titolo="Formazione e orientazione del legame peptidico"}
-Il **legame peptidico** è un legame ammidico tra il carbonio carbossilico di un residuo e l'azoto del residuo successivo. Per mostrare una formazione per sostituzione acilica, si considerano un amminoacido esterificato e il gruppo amminico libero di un secondo amminoacido; lo schema riporta i gruppi coinvolti nella trasformazione e omette le eventuali protezioni degli altri gruppi reattivi:
+Gli amminoacidi si uniscono fra loro con il **legame peptidico**, che è un legame ammidico fra il gruppo carbossilico di un amminoacido e il gruppo amminico del successivo. La formazione del legame è una sostituzione nucleofila acilica. Un gruppo carbossilico come tale reagisce male, quindi deve essere prima attivato. Lo schema seguente mostra la reazione con il primo amminoacido in forma di estere metilico: il gruppo amminico del secondo amminoacido attacca il carbonile dell'estere e prende il posto del gruppo $\mathrm{OCH_3}$.
 $$
 \begin{aligned}
 &\mathrm{H_2N{-}CH(R_1){-}COOCH_3}
@@ -91,45 +91,60 @@ $$
 +\mathrm{CH_3OH}.
 \end{aligned}
 $$
-L'ammina attacca il carbonile dell'estere e, dopo i trasferimenti protonici, viene sostituito il gruppo metossilico. Questo schema illustra la reattività; nella sintesi ribosomiale il gruppo acilico è attivato come estere con il tRNA.
+Si ottiene un **dipeptide** e si libera metanolo. Nelle cellule il principio è lo stesso: durante la sintesi delle proteine sul ribosoma ogni amminoacido è legato come estere a una molecola di tRNA, che fa da gruppo uscente.
 
-La sequenza si scrive dall'estremità **N-terminale** a quella C-terminale. Per esempio Gly-Ala indica *glicilalanina*, poiché la glicina fornisce il primo residuo e l'alanina conserva il carbossile terminale. Una catena lineare con $n$ residui possiede $n-1$ legami peptidici. Il bilancio formale a partire dagli amminoacidi liberi sottrae una molecola d'acqua per ciascun legame, indipendentemente dal meccanismo di attivazione usato.
+Una catena di amminoacidi ha due estremità diverse: l'estremità **N-terminale**, con il gruppo amminico libero, e l'estremità **C-terminale**, con il gruppo carbossilico libero. La sequenza si scrive sempre dall'N-terminale al C-terminale. Per esempio Gly-Ala è il dipeptide in cui la glicina ha il gruppo amminico libero e l'alanina il gruppo carbossilico libero; Ala-Gly è un dipeptide diverso. Gli amminoacidi inseriti in una catena si chiamano *residui*. Una catena di $n$ residui contiene $n-1$ legami peptidici, e per ogni legame formato si perde una molecola d'acqua. Una catena corta si chiama peptide; una catena lunga, polipeptide o proteina.
 :::
 
 :::osservazione{#geometria-peptidica titolo="Risonanza e planarità"}
-La coppia elettronica dell'azoto ammidico è delocalizzata verso il carbonile; il legame C–N presenta quindi carattere parziale di doppio legame. I sei atomi dell'unità peptidica sono approssimativamente complanari e la rotazione intorno a quel C–N è limitata. Le rotazioni intorno ai legami adiacenti al carbonio α permettono invece il ripiegamento della catena. La configurazione trans del legame peptidico è di solito favorita perché riduce gli ingombri tra i residui; i legami che precedono una prolina mostrano una quota cis maggiore rispetto agli altri.
+Il legame peptidico ha una geometria particolare. Il doppietto dell'azoto è distribuito per risonanza verso il carbonile, quindi il legame C–N ha in parte il carattere di un doppio legame. Ne derivano due conseguenze. I sei atomi del gruppo peptidico (il carbonio e l'ossigeno del carbonile, l'azoto con il suo idrogeno e i due carboni α vicini) stanno nello stesso piano. Inoltre attorno al legame C–N non c'è rotazione. La catena può ruotare solo attorno ai due legami del carbonio α, e questo limita le forme che una proteina può assumere. I due carboni α si trovano quasi sempre da parti opposte del legame peptidico (configurazione *trans*), perché così le catene laterali sono più lontane; la configurazione cis si trova a volte prima di una prolina.
 
 ![Sei atomi del piano peptidico e carattere parziale di doppio legame C–N.](/figure/chimica-semestre-filtro/biomolecole/peptide-it.svg)
 :::
 
 :::definizione{#struttura-proteine titolo="Livelli strutturali delle proteine"}
-La **struttura primaria** è la sequenza degli amminoacidi. La struttura secondaria descrive disposizioni locali del tratto principale, come α-elica e foglietto β, stabilizzate da legami a idrogeno tra carbonili e gruppi N–H dello scheletro peptidico. Nell'α-elica il carbonile del residuo $i$ interagisce tipicamente con N–H del residuo $i+4$.
+La struttura di una proteina si descrive su quattro livelli.
 
-La struttura terziaria è l'organizzazione tridimensionale complessiva di una catena. Vi contribuiscono effetto idrofobico, legami a idrogeno, interazioni ioniche, forze di van der Waals e, quando presenti, ponti disolfuro. La struttura quaternaria descrive l'associazione di più catene in un complesso; una proteina con una sola catena possiede già una struttura terziaria.
+La **struttura primaria** è la sequenza degli amminoacidi, cioè l'ordine in cui sono uniti dai legami peptidici.
 
-Due cisteine possono ossidarsi formando un **ponte disolfuro**:
+La **struttura secondaria** è la forma regolare che assumono tratti della catena. È tenuta insieme da legami a idrogeno fra il gruppo C=O di un legame peptidico e il gruppo N–H di un altro. Le due forme principali sono l'**α-elica**, in cui la catena si avvolge a spirale e ogni C=O è legato all'N–H del residuo che si trova quattro posizioni più avanti, e il **foglietto β**, in cui tratti distesi della catena si affiancano.
+
+La **struttura terziaria** è la forma tridimensionale completa di una catena. È tenuta insieme da interazioni fra le catene laterali: l'effetto idrofobico, che porta le catene apolari all'interno della proteina lontano dall'acqua; i legami a idrogeno; le attrazioni fra cariche opposte; le forze di van der Waals; i ponti disolfuro.
+
+La **struttura quaternaria** esiste solo nelle proteine formate da più catene ed è il modo in cui le catene si associano. L'emoglobina, per esempio, è formata da quattro catene.
+
+Il **ponte disolfuro** è l'unico legame covalente fra catene laterali. Si forma per ossidazione dei gruppi SH di due cisteine.
 $$
 2\,\mathrm{RSH}\longrightarrow\mathrm{RSSR}+2\,\mathrm{H^+}+2\,e^-.
 $$
-La semireazione mostra la perdita di due elettroni; una reazione completa richiede un accettore. Questo legame è covalente e può connettere parti della stessa catena o catene diverse. Una denaturazione altera l'organizzazione spaziale; in condizioni che lasciano integri i legami peptidici la sequenza resta conservata.
+Ogni cisteina perde un elettrone e un protone, quindi la reazione richiede un ossidante che riceva i due elettroni. Il ponte può unire due punti della stessa catena oppure due catene diverse. La **denaturazione** è la perdita della struttura secondaria, terziaria e quaternaria, causata per esempio dal calore o da un pH estremo. La proteina denaturata perde la sua funzione. I legami peptidici non si rompono, quindi la struttura primaria resta intatta.
 :::
 
 ## Monosaccaridi e stereoisomeria
 
 :::definizione{#monosaccaridi titolo="Aldosi, chetosi e serie D/L"}
-Un **monosaccaride** è un carboidrato che non si idrolizza in zuccheri più semplici. Nella forma aperta possiede un gruppo carbonilico e più gruppi ossidrilici. Un aldoso contiene un'aldeide, un chetoso un chetone. Il glucosio è un aldoesoso; il fruttosio è un chetoesoso; il ribosio è un aldopentoso.
+I **carboidrati**, o zuccheri, sono composti con un gruppo carbonilico e più gruppi OH. Un **monosaccaride** è uno zucchero semplice, che non si può scindere in zuccheri più piccoli. I monosaccaridi si classificano in due modi.
 
-Nella proiezione di Fischer, con il carbonile verso l'alto, il gruppo OH dello stereocentro più lontano dal carbonile a destra identifica la serie D. Due enantiomeri hanno configurazione opposta in tutti gli stereocentri; due diastereoisomeri differiscono in alcuni ma non in tutti. Gli **epimeri** differiscono in un solo stereocentro. Per esempio D-glucosio e D-mannosio sono epimeri al C2; D-glucosio e D-galattosio al C4. Le forme aperte di glucosio e fruttosio sono isomeri costituzionali, poiché la posizione e la natura del carbonile cambiano.
+- In base al gruppo carbonilico: un **aldoso** contiene un gruppo aldeidico e un **chetoso** un gruppo chetonico.
+- In base al numero di carboni: un pentoso ne ha cinque e un esoso sei.
+
+Il glucosio è un aldoso con sei carboni (aldoesoso); il fruttosio è un chetoso con sei carboni (chetoesoso); il ribosio è un aldoso con cinque carboni (aldopentoso).
+
+I monosaccaridi hanno più centri stereogenici e si disegnano in proiezione di Fischer, con il gruppo carbonilico in alto. Appartengono alla serie D se l'OH del centro stereogenico più lontano dal carbonile, cioè il penultimo carbonio, è a destra; alla serie L se è a sinistra. Gli zuccheri naturali sono quasi tutti della serie D. Fra due zuccheri con la stessa formula sono possibili tre relazioni.
+
+- Sono **enantiomeri** se tutti i centri stereogenici hanno configurazione opposta, come D-glucosio e L-glucosio.
+- Sono **diastereoisomeri** se differiscono solo in alcuni centri. Se differiscono in un solo centro si chiamano **epimeri**: il D-glucosio e il D-mannosio sono epimeri al carbonio 2, il D-glucosio e il D-galattosio al carbonio 4.
+- Sono **isomeri costituzionali** se hanno gruppi diversi, come glucosio e fruttosio, che hanno entrambi formula $\mathrm{C_6H_{12}O_6}$ ma uno è un aldoso e l'altro un chetoso.
 
 ![Fischer di D-glucosio e D-mannosio: cambia soltanto il centro C2.](/figure/chimica-semestre-filtro/biomolecole/fischer-sugar-it.svg)
 :::
 
 :::definizione{#anomeri titolo="Ciclizzazione e anomeri"}
-Il carbonile di un monosaccaride può reagire con un suo ossidrile. Un aldoso forma un emiacetale ciclico; un chetoso un emichetale ciclico. Nel glucosio l'attacco dell'OH al C5 sul carbonile al C1 produce una struttura a sei atomi nell'anello, il glucopiranosio. Nel fruttosio l'attacco dell'OH al C5 sul C2 può produrre il fruttofuranosio a cinque atomi nell'anello; sono possibili anche altre forme cicliche.
+In acqua i monosaccaridi con cinque o sei carboni si trovano quasi tutti in forma di anello. Un gruppo OH della molecola attacca il carbonile della stessa molecola e forma un emiacetale ciclico (un emichetale, se lo zucchero è un chetoso). Nel glucosio l'OH del carbonio 5 attacca il carbonio 1 e si forma un anello a sei atomi, detto **piranosio**. Nel fruttosio l'OH del carbonio 5 attacca il carbonio 2 e si forma un anello a cinque atomi, detto **furanosio**.
 
-La ciclizzazione genera un nuovo centro stereogenico sul carbonio che era carbonilico, detto **carbonio anomerico**. Gli anomeri α e β differiscono in quel centro. Nella consueta proiezione di Haworth del D-glucopiranosio, l'OH anomerico è dal lato opposto rispetto al gruppo $\mathrm{CH_2OH}$ nell'anomero α e dallo stesso lato nell'anomero β. Il criterio è relativo e non coincide in generale con dire semplicemente alto o basso.
+Il carbonio che era carbonilico diventa un nuovo centro stereogenico e si chiama **carbonio anomerico**. Il suo OH può trovarsi in due posizioni, quindi esistono due forme cicliche, gli **anomeri** α e β. Gli anelli si disegnano con la **proiezione di Haworth**, in cui l'anello è visto di scorcio e i gruppi stanno sopra o sotto. Per il D-glucosio, nell'anomero α l'OH del carbonio anomerico è dalla parte opposta rispetto al gruppo $\mathrm{CH_2OH}$ (in basso nel disegno abituale); nell'anomero β è dalla stessa parte (in alto).
 
-La **mutarotazione** è la variazione della rotazione ottica mentre una soluzione raggiunge l'equilibrio tra anomeri mediante apertura e richiusura dell'anello. Per il glucosio l'emiacetale libero consente l'apertura. Un glicoside con carbonio anomerico impegnato come acetale richiede invece l'idrolisi del legame per tornare alla forma carbonilica.
+In soluzione l'anello si apre e si richiude continuamente, e i due anomeri si trasformano l'uno nell'altro attraverso la forma aperta fino a raggiungere un equilibrio. I due anomeri ruotano la luce polarizzata in misura diversa, quindi durante questo processo il potere rotatorio della soluzione cambia: il fenomeno si chiama **mutarotazione**. Avviene solo se il carbonio anomerico ha un OH libero. Se il carbonio anomerico è impegnato in un legame glicosidico, descritto nel paragrafo seguente, l'anello non può aprirsi.
 
 ![Anomeri α e β del D-glucopiranosio con OH anomerico opposto o concorde a CH2OH.](/figure/chimica-semestre-filtro/biomolecole/haworth-it.svg)
 :::
@@ -137,15 +152,18 @@ La **mutarotazione** è la variazione della rotazione ottica mentre una soluzion
 ## Reazioni dei monosaccaridi e legame glicosidico
 
 :::osservazione{#reazioni-carboidrati titolo="Ossidazione, riduzione e condensazione"}
-L'ossidazione selettiva del gruppo aldeidico del glucosio produce acido gluconico; l'ossidazione dell'alcol primario al C6 produce acido glucuronico. Ossidare entrambe le estremità produce un acido aldarico. La riduzione del carbonile del glucosio dà il poliolo sorbitolo; la riduzione del fruttosio può formare sorbitolo e mannitolo perché genera un nuovo stereocentro al C2.
+I monosaccaridi danno le reazioni dei loro gruppi funzionali.
 
-Uno zucchero con carbonio anomerico libero può formare una specie carbonilica e agire come zucchero **riducente** nelle opportune condizioni di saggio. Anche il fruttosio dà saggi riducenti in ambiente alcalino perché può isomerizzare ad aldosi attraverso intermedi enediolici. La tautomeria aldoso-chetoso comporta il trasferimento di protoni e lo spostamento del doppio legame, mentre l'anomeria riguarda la configurazione del carbonio anomerico nella forma ciclica.
+- **Ossidazione**. Se si ossida il gruppo aldeidico del glucosio a gruppo carbossilico si ottiene l'acido gluconico. Se si ossida l'alcol primario del carbonio 6 si ottiene l'acido glucuronico. Se si ossidano entrambe le estremità si ottiene un acido aldarico.
+- **Riduzione**. Se si riduce il gruppo carbonilico ad alcol si ottiene un poliolo. Dal glucosio si ottiene il sorbitolo. Dal fruttosio si ottengono sorbitolo e mannitolo, perché la riduzione crea un nuovo centro stereogenico al carbonio 2.
 
-Il carbonio anomerico può reagire con un OH di un'altra molecola formando un acetale o chetale con un **legame O-glicosidico**. Il bilancio formale di condensazione elimina acqua. Per esempio il legame α$(1\to4)$ unisce il C1 α di una unità di glucosio all'ossigeno dell'OH al C4 dell'altra. L'idrolisi compie il bilancio inverso consumando acqua.
+Uno **zucchero riducente** è uno zucchero che può ossidarsi, riducendo un altro reagente; lo si riconosce con saggi come quello di Fehling. È riducente ogni zucchero che ha il carbonio anomerico libero, perché l'anello può aprirsi e liberare il gruppo aldeidico. Anche il fruttosio, che è un chetoso, risulta riducente: in ambiente basico si trasforma in parte in glucosio e mannosio attraverso un intermedio chiamato enediolo. Questa trasformazione fra un aldoso e un chetoso è una tautomeria, in cui un idrogeno e un doppio legame cambiano posizione.
+
+Il carbonio anomerico di uno zucchero può reagire con un gruppo OH di un'altra molecola. Si elimina una molecola d'acqua e l'emiacetale diventa un acetale: il legame che si forma si chiama **legame O-glicosidico**. Con questo legame i monosaccaridi si uniscono fra loro. Il nome del legame indica l'anomero e i carboni coinvolti. Per esempio, nel legame α$(1\to4)$ il carbonio 1 di un glucosio, in configurazione α, è legato all'ossigeno del carbonio 4 di un altro glucosio. L'idrolisi, cioè la reazione con acqua, rompe il legame e ridà i due zuccheri.
 :::
 
 :::definizione{#oligosaccaridi titolo="Disaccaridi e amminozuccheri"}
-Un **oligosaccaride** contiene poche unità monosaccaridiche unite da legami glicosidici; un disaccaride ne contiene due. Le proprietà dipendono dall'identità delle unità, dalle posizioni collegate e dalla configurazione anomerica.
+Un **disaccaride** è formato da due monosaccaridi uniti da un legame glicosidico; un **oligosaccaride** ne contiene da tre a una decina. I tre disaccaridi più importanti sono riportati nella tabella.
 
 | Disaccaride | Unità e legame | Carattere riducente |
 | --- | --- | --- |
@@ -153,15 +171,15 @@ Un **oligosaccaride** contiene poche unità monosaccaridiche unite da legami gli
 | Lattosio | Galattosio β$(1\to4)$ glucosio | Riducente, un centro anomerico libero |
 | Saccarosio | Glucosio α$(1\leftrightarrow2)$β fruttosio | Non riducente, entrambi i centri anomerici impegnati |
 
-L'idrolisi del lattosio produce un glucosio e un galattosio per molecola; quella del saccarosio un glucosio e un fruttosio. Il solo conteggio degli ossidrili liberi non determina il carattere riducente: conta lo stato del carbonio anomerico.
+Con l'idrolisi il maltosio dà due molecole di glucosio, il lattosio un glucosio e un galattosio, il saccarosio un glucosio e un fruttosio. Il maltosio e il lattosio sono riducenti, perché una delle due unità ha ancora il carbonio anomerico libero. Nel saccarosio, lo zucchero da tavola, il legame unisce i carboni anomerici di entrambe le unità: nessun anello può aprirsi e lo zucchero non è riducente.
 
-Negli **amminozuccheri** un gruppo OH è sostituito da un gruppo amminico; nella glucosammina ciò avviene al C2. L'acetilazione del gruppo amminico forma N-acetilglucosammina. Residui di questo tipo partecipano a oligosaccaridi di superficie e a polisaccaridi della matrice extracellulare, perciò la modifica del gruppo funzionale cambia le possibilità di legame della molecola.
+Un **amminozucchero** è uno zucchero in cui un gruppo OH è sostituito da un gruppo amminico. Nella glucosammina il gruppo $\mathrm{NH_2}$ è sul carbonio 2 del glucosio. Se il gruppo amminico è legato a un gruppo acetile si ha la N-acetilglucosammina. Gli amminozuccheri si trovano negli zuccheri legati alle proteine della superficie cellulare e nei polisaccaridi del tessuto connettivo.
 :::
 
 ## Polisaccaridi e matrice extracellulare
 
 :::definizione{#polisaccaridi titolo="Amido, glicogeno e cellulosa"}
-Un **omopolisaccaride** contiene un solo tipo di unità monosaccaridica; un eteropolisaccaride contiene più tipi. Amido, glicogeno e cellulosa sono omopolimeri del glucosio, ma differiscono per i legami e per le ramificazioni.
+Un **polisaccaride** è formato da centinaia o migliaia di monosaccaridi. Si chiama **omopolisaccaride** se contiene un solo tipo di monosaccaride ed **eteropolisaccaride** se ne contiene più tipi. L'amido, il glicogeno e la cellulosa sono tutti formati soltanto da glucosio. Differiscono per il tipo di legame glicosidico e per la presenza di ramificazioni, e questo basta a dare loro proprietà e funzioni molto diverse.
 
 | Polimero | Legami principali | Organizzazione e funzione |
 | --- | --- | --- |
@@ -170,88 +188,101 @@ Un **omopolisaccaride** contiene un solo tipo di unità monosaccaridica; un eter
 | Glicogeno | α$(1\to4)$ e ramificazioni α$(1\to6)$ | Più ramificato dell'amilopectina; riserva animale |
 | Cellulosa | β$(1\to4)$ | Catene lineari associate in fibre; funzione strutturale vegetale |
 
-La diversa stereochimica del legame cambia la forma delle catene e il riconoscimento da parte degli enzimi. Gli enzimi digestivi umani idrolizzano i legami dell'amido, mentre l'uomo non produce una cellulasi che scinda il β$(1\to4)$ della cellulosa.
+Il legame α$(1\to4)$ fa avvolgere la catena a elica; il legame β$(1\to4)$ dà catene diritte, che si affiancano e si legano fra loro con legami a idrogeno formando fibre resistenti. Le ramificazioni α$(1\to6)$ del glicogeno creano molte estremità, da cui gli enzimi staccano rapidamente il glucosio quando serve. Gli enzimi digestivi dell'uomo, le amilasi, idrolizzano i legami α dell'amido ma non i legami β della cellulosa. Per questo l'amido è un alimento e la cellulosa è una fibra non digeribile.
 
 ![Collegamenti α(1→4) nella catena e α(1→6) in una ramificazione del glicogeno.](/figure/chimica-semestre-filtro/biomolecole/branch-it.svg)
 :::
 
 :::definizione{#glicosamminoglicani titolo="Glicosamminoglicani"}
-I **glicosamminoglicani**, abbreviati GAG, sono eteropolisaccaridi con unità disaccaridiche ripetute che contengono in genere un amminozucchero e un acido uronico. Il cheratan solfato presenta galattosio al posto dell'acido uronico. Gruppi carbossilato e, per molti GAG, solfato conferiscono cariche negative che favoriscono l'idratazione e l'interazione con cationi e proteine.
+I **glicosamminoglicani** (GAG) sono eteropolisaccaridi lunghi e non ramificati, formati dalla ripetizione di una stessa unità di due zuccheri. Di solito uno dei due è un amminozucchero e l'altro un acido uronico, cioè uno zucchero con un gruppo carbossilico. Hanno molte cariche negative, dovute ai gruppi carbossilato e, in molti GAG, a gruppi solfato. Le cariche si respingono e attirano molta acqua, quindi i GAG formano gel che occupano un grande volume e resistono alla compressione. Si trovano nel tessuto connettivo, nella cartilagine e nel liquido delle articolazioni.
 
-L'acido ialuronico alterna acido glucuronico e N-acetilglucosammina ed è privo di solfati. Il condroitin solfato contiene invece gruppi solfato. La diversa sostituzione permette di distinguere la composizione chimica pur mantenendo la struttura ripetitiva tipica dei GAG. Molti GAG sono legati a proteine formando proteoglicani; l'ialuronato costituisce una rilevante eccezione al legame covalente con una proteina centrale.
+L'**acido ialuronico** è formato da acido glucuronico e N-acetilglucosammina alternati, e non contiene solfato. Il **condroitin solfato**, abbondante nella cartilagine, contiene gruppi solfato. Nel cheratan solfato al posto dell'acido uronico c'è il galattosio. Quasi tutti i GAG sono legati con legame covalente a una proteina e formano i **proteoglicani**; fa eccezione l'acido ialuronico, che non è legato a una proteina.
 :::
 
 ## Acidi grassi e triacilgliceroli
 
 :::definizione{#acidi-grassi titolo="Catene sature e insature"}
-Un **acido grasso** è un acido carbossilico con una catena idrocarburica. La notazione $18{:}1\,\Delta^9$ indica diciotto carboni e un doppio legame tra C9 e C10 contando dal carbossile. Il termine ω-9 conta il primo doppio legame dall'estremità metilica. L'acido oleico è cis-$18{:}1\,\Delta^9$, mentre l'acido stearico è $18{:}0$.
+I **lipidi** sono molecole biologiche insolubili in acqua. I più semplici sono gli **acidi grassi**, acidi carbossilici con una lunga catena di idrocarburo, di solito da 12 a 20 carboni. Un acido grasso è **saturo** se la catena ha solo legami singoli e **insaturo** se ha uno o più doppi legami.
 
-Le catene sature si dispongono più regolarmente. Un doppio legame cis introduce una deviazione nella catena, quindi, a parità delle altre caratteristiche, rende meno efficiente l'impacchettamento e tende ad abbassare la temperatura di fusione. Una catena più lunga aumenta in genere le interazioni dispersive. La configurazione trans permette un impacchettamento più regolare rispetto alla corrispondente cis.
+Un acido grasso si indica con due numeri: il numero di carboni e il numero di doppi legami. L'acido stearico è $18{:}0$, con 18 carboni e nessun doppio legame. L'acido oleico è $18{:}1\,\Delta^9$: il simbolo $\Delta^9$ indica che il doppio legame si trova fra i carboni 9 e 10, contando dal carbonio del gruppo carbossilico. Nella notazione ω (omega) si conta invece dall'altra estremità, dal gruppo $\mathrm{CH_3}$: l'acido oleico è un ω-9.
 
-Gli acidi grassi formano sali per deprotonazione e esteri reagendo attraverso il carbossile. L'acido linoleico $18{:}2\,\Delta^{9,12}$ appartiene alla serie ω-6; l'α-linolenico $18{:}3\,\Delta^{9,12,15}$ alla serie ω-3. Il primo doppio legame dal metile si ricava sottraendo al numero di carboni la posizione Δ più alta. Entrambi sono essenziali nella dieta umana, poiché l'organismo non introduce quei doppi legami nelle posizioni necessarie.
+La forma della catena determina la temperatura di fusione. Le catene sature sono diritte, si dispongono ordinatamente l'una accanto all'altra e si attraggono con forza: i grassi saturi, come il burro, sono solidi a temperatura ambiente. Negli acidi grassi insaturi naturali i doppi legami sono quasi sempre cis. Un doppio legame cis fa piegare la catena, le molecole si dispongono in modo meno ordinato e la temperatura di fusione si abbassa: gli oli sono liquidi. Un doppio legame trans lascia la catena quasi diritta, e gli acidi grassi trans si comportano in modo simile ai saturi. A parità di doppi legami, la temperatura di fusione aumenta con la lunghezza della catena.
 
-L'idrogenazione riduce i doppi legami; l'ossidazione può interessare le catene insature. Queste reazioni permettono di collegare il grado di insaturazione alle proprietà dei lipidi.
+L'acido linoleico, $18{:}2\,\Delta^{9,12}$, è un ω-6; l'acido α-linolenico, $18{:}3\,\Delta^{9,12,15}$, è un ω-3. Il numero ω si ottiene sottraendo dal numero di carboni la posizione Δ più alta: $18-12=6$ e $18-15=3$. Questi due acidi grassi sono **essenziali**: l'organismo umano non sa inserire doppi legami in quelle posizioni, quindi devono essere introdotti con il cibo.
+
+Gli acidi grassi danno le reazioni del gruppo carbossilico: formano sali con le basi ed esteri con gli alcoli. I doppi legami danno due reazioni. L'**idrogenazione** aggiunge idrogeno e li trasforma in legami singoli; così un olio liquido diventa un grasso solido, come nella produzione della margarina. L'**ossidazione** da parte dell'ossigeno dell'aria altera i grassi insaturi e ne causa l'irrancidimento.
 
 ![Geometria cis e trans intorno al doppio legame C9=C10 di un acido grasso.](/figure/chimica-semestre-filtro/biomolecole/cis-trans-it.svg)
 :::
 
 :::definizione{#triacilgliceroli titolo="Esteri del glicerolo e saponificazione"}
-Un **triacilglicerolo**, o trigliceride, è il triestere del glicerolo con tre acidi grassi. I tre residui acilici possono essere uguali o diversi. I triacilgliceroli sono prevalentemente idrofobici e costituiscono una riserva energetica; grassi e oli sono miscele con diversa composizione e diversa consistenza alla temperatura considerata.
+Un **triacilglicerolo**, o trigliceride, è formato da una molecola di glicerolo legata a tre acidi grassi. Il glicerolo ha tre gruppi OH, e ciascuno forma un legame estere con il gruppo carbossilico di un acido grasso. I tre acidi grassi possono essere uguali o diversi. I trigliceridi sono del tutto apolari e insolubili in acqua. Sono la principale riserva di energia dell'organismo e si accumulano nel tessuto adiposo. I grassi e gli oli degli alimenti sono miscele di trigliceridi.
 
-L'idrolisi basica, detta **saponificazione**, produce glicerolo e tre carbossilati:
+L'idrolisi di un trigliceride con una base forte si chiama **saponificazione**. I tre legami estere si rompono e si ottengono glicerolo e tre sali di acidi grassi. Per tre acidi grassi uguali la reazione è
 $$
 \mathrm{C_3H_5(OCOR)_3}+3\,\mathrm{OH^-}
 \longrightarrow\mathrm{C_3H_5(OH)_3}+3\,\mathrm{RCOO^-},
 $$
-nel caso di tre catene identiche. Per esempio una mole di tripalmitina consuma tre moli di NaOH e forma tre moli di palmitato di sodio. Il carbossilato possiede una testa ionica e una catena idrofobica, quindi in acqua può contribuire alla formazione di aggregati.
+dove R indica la catena dell'acido grasso. Per esempio una mole di tripalmitina consuma tre moli di NaOH e forma una mole di glicerolo e tre moli di palmitato di sodio. I sali degli acidi grassi sono i **saponi**. Hanno una testa carica, affine all'acqua, e una lunga coda apolare, quindi sono anfipatici. In acqua formano micelle: le code si riuniscono all'interno e inglobano le sostanze grasse, e questo spiega l'azione detergente.
 :::
 
 ## Lipidi complessi e colesterolo
 
 :::definizione{#lipidi-complessi titolo="Glicerofosfolipidi, sfingolipidi e glicolipidi"}
-Un **glicerofosfolipide** contiene uno scheletro di glicerolo, in genere due residui acilici e un gruppo fosfato legato a un gruppo polare. Nella fosfatidilcolina la testa comprende colina; nel fosfatidato il fosfato costituisce la testa più semplice. Le catene idrofobiche e la regione polare rendono queste molecole anfipatiche e favoriscono la formazione di doppi strati.
+I lipidi delle membrane cellulari sono anfipatici: hanno una **testa polare** e due **code apolari**. In acqua si dispongono spontaneamente in un doppio strato, con le code all'interno e le teste verso l'acqua, che è la struttura di base di ogni membrana.
 
-Gli **sfingolipidi** derivano dalla sfingosina, un amminoalcol a lunga catena. Un acido grasso legato per ammide alla sua funzione amminica forma una ceramide. La sfingomielina contiene una testa fosfocolina e appartiene sia agli sfingolipidi sia ai fosfolipidi. Un glicosfingolipide lega invece uno o più zuccheri alla ceramide; cerebrosidi e gangliosidi ne sono esempi, e questi ultimi contengono acido sialico.
+I **glicerofosfolipidi** sono i più abbondanti. Sono formati da una molecola di glicerolo a cui sono legati due acidi grassi, con legami estere, e un gruppo fosfato. Al fosfato è legato di solito un altro gruppo polare. Se questo gruppo è la colina si ha la fosfatidilcolina (lecitina). Il più semplice è l'acido fosfatidico, in cui al fosfato non è legato nulla.
 
-Il termine **glicolipide** indica un lipide con una porzione glucidica. Le classi si riconoscono quindi identificando prima lo scheletro, poi il tipo di legame dell'acido grasso e infine la testa polare. Un acido grasso legato per ammide alla sfingosina identifica una ceramide, mentre tre esteri sul glicerolo identificano un triacilglicerolo.
+Gli **sfingolipidi** hanno come base la sfingosina al posto del glicerolo. La sfingosina è una molecola con una lunga catena di idrocarburo, un gruppo amminico e due gruppi OH. Un acido grasso si lega al gruppo amminico con un legame ammidico e si ottiene una **ceramide**, che ha quindi due code apolari. Alla ceramide si lega poi una testa polare, di due tipi.
+
+- Se la testa è fosfato e colina si ha la **sfingomielina**, abbondante nella guaina mielinica dei nervi. È insieme uno sfingolipide e un fosfolipide.
+- Se la testa è formata da uno o più zuccheri si ha un **glicosfingolipide**. I cerebrosidi hanno un solo zucchero; i gangliosidi hanno una catena di zuccheri che contiene acido sialico.
+
+Si chiama **glicolipide** qualsiasi lipide che contiene zuccheri. Per riconoscere un lipide si osservano tre elementi in ordine: la molecola di base (glicerolo o sfingosina), il legame con cui sono uniti gli acidi grassi (estere sul glicerolo, ammide sulla sfingosina) e la testa polare. Tre acidi grassi legati al glicerolo indicano un trigliceride; due acidi grassi e un fosfato sul glicerolo indicano un glicerofosfolipide; un acido grasso legato alla sfingosina con un'ammide indica una ceramide.
 
 ![Esteri del glicerolo e ammide della ceramide: confronto di scheletri e legami.](/figure/chimica-semestre-filtro/biomolecole/lipids-it.svg)
 :::
 
 :::osservazione{#colesterolo titolo="Struttura steroidea e derivati"}
-Il **colesterolo** possiede quattro anelli fusi, una piccola regione polare con OH al C3 e una parte idrocarburica estesa. Si inserisce nelle membrane con l'OH vicino alle teste polari e gli anelli tra le catene; modifica ordine e permeabilità della membrana. Il suo effetto sulla fluidità dipende dalla temperatura e dalla composizione lipidica.
+Il **colesterolo** appartiene agli steroidi, lipidi la cui struttura è formata da quattro anelli di carbonio uniti fra loro. Ha un solo gruppo polare, un OH sul carbonio 3, e una coda di idrocarburo; il resto della molecola è apolare e rigido. Si inserisce nelle membrane con l'OH vicino alle teste polari dei fosfolipidi e gli anelli fra le code. La sua presenza regola la fluidità della membrana: a temperatura alta ostacola il movimento delle code e rende la membrana meno fluida; a temperatura bassa impedisce alle code di disporsi in modo compatto e la mantiene fluida.
 
-Dal colesterolo derivano ormoni steroidei, come cortisolo e testosterone, e acidi biliari, che possiedono gruppi polari aggiuntivi. La vitamina D deriva da un precursore sterolico, il 7-deidrocolesterolo, attraverso l'apertura fotochimica di un anello e trasformazioni successive. Riconoscere lo scheletro steroideo consente di collegare molecole con gruppi funzionali e funzioni differenti.
+Dal colesterolo l'organismo produce altre molecole che conservano i quattro anelli: gli **ormoni steroidei**, come il cortisolo, il testosterone e gli estrogeni; gli **acidi biliari**, che hanno più gruppi polari e servono a emulsionare i grassi nell'intestino; la **vitamina D**, che si forma nella pelle da un derivato del colesterolo, il 7-deidrocolesterolo, quando la luce ultravioletta apre uno degli anelli.
 :::
 
 ## Nucleotidi, coenzimi e acidi nucleici
 
 :::definizione{#nucleotidi titolo="Basi azotate, nucleosidi e nucleotidi"}
-Adenina e guanina sono basi **puriniche**, con due anelli condensati; citosina, timina e uracile sono basi pirimidiniche, con un anello. Un **nucleoside** unisce una base a un pentoso mediante legame N-glicosidico tra C1′ dello zucchero e N9 di una purina oppure N1 di una pirimidina. Un nucleotide è un nucleoside con uno o più fosfati.
+Gli acidi nucleici, DNA e RNA, sono formati da **nucleotidi**. Un nucleotide ha tre componenti: una base azotata, uno zucchero a cinque carboni e uno o più gruppi fosfato.
 
-Il ribosio ha un OH al C2′; il 2-deossiribosio ha un H nella stessa posizione. Adenosina è il nucleoside di adenina e ribosio; AMP è un nucleotide con un fosfato. Nell'ATP il fosfato più vicino al ribosio forma un fosfoestere, mentre tra i fosfati si trovano due legami fosfoanidridici.
+Le **basi azotate** sono di due tipi. Le **purine**, adenina (A) e guanina (G), hanno due anelli uniti. Le **pirimidine**, citosina (C), timina (T) e uracile (U), hanno un solo anello.
 
-L'idrolisi di ATP ad ADP e fosfato inorganico può accoppiarsi a processi con variazione positiva di energia libera, purché la somma delle variazioni sia negativa e un meccanismo comune colleghi le trasformazioni, per esempio mediante il trasferimento di un gruppo fosforico o un intermedio condiviso. La sola compresenza di due reazioni non ne realizza l’accoppiamento. La spontaneità riguarda il bilancio della reazione completa; la sola rottura di un legame richiede energia. La concentrazione di ATP, ADP e fosfato e le condizioni del mezzo determinano il valore effettivo di $\Delta G$.
+Un **nucleoside** è formato da una base e dallo zucchero, senza fosfato. La base è legata al carbonio 1′ dello zucchero con un legame N-glicosidico, attraverso l'azoto 9 nelle purine e l'azoto 1 nelle pirimidine. I carboni dello zucchero si indicano con un apice (1′, 2′ e così via) per distinguerli dagli atomi della base. Un **nucleotide** è un nucleoside con uno o più fosfati legati al carbonio 5′.
+
+Lo zucchero dell'RNA è il **ribosio**, che ha un gruppo OH sul carbonio 2′. Lo zucchero del DNA è il **2-deossiribosio**, che in quella posizione ha un idrogeno. Per esempio, l'adenosina è il nucleoside formato da adenina e ribosio. Aggiungendo un fosfato si ottiene l'AMP (adenosina monofosfato), con due l'ADP e con tre l'ATP. Nell'ATP il primo fosfato è legato al ribosio con un legame estere; i tre fosfati sono uniti fra loro da due legami fosfoanidridici, che sono i legami da cui la cellula ricava energia.
+
+L'**ATP** è la molecola con cui la cellula trasferisce energia. La sua idrolisi ad ADP e fosfato ha un $\Delta G$ molto negativo. Le cellule usano questa reazione per far avvenire reazioni che da sole avrebbero $\Delta G$ positivo: le due reazioni vengono *accoppiate*, e il processo complessivo avviene se la somma dei due $\Delta G$ è negativa. L'accoppiamento richiede che le due reazioni abbiano un intermedio in comune. Di solito un enzima trasferisce un gruppo fosfato dall'ATP a un reagente, che diventa così più reattivo. L'energia non proviene dalla rottura del legame in sé, che anzi richiede energia: proviene dal fatto che i prodotti, ADP e fosfato, sono più stabili dell'ATP. Il valore effettivo di $\Delta G$ dipende dalle concentrazioni di ATP, ADP e fosfato nella cellula.
 :::
 
 :::definizione{#coenzimi-redox titolo="NAD e FAD nei trasferimenti di elettroni"}
-Il NAD è un dinucleotide che comprende una porzione nicotinammidica e una adeninica. La coppia **NAD⁺/NADH** trasferisce due elettroni e un protone al coenzima, con un secondo protone eventualmente rilasciato dal substrato al mezzo. La semireazione di riduzione è
+Nelle reazioni redox del metabolismo gli elettroni sono trasportati da due coenzimi, anch'essi derivati da nucleotidi.
+
+Il **NAD** è formato da due nucleotidi uniti: uno contiene adenina e l'altro nicotinammide, che deriva dalla vitamina B3 (niacina). La nicotinammide è la parte che riceve gli elettroni. La forma ossidata è $\mathrm{NAD^+}$ e la forma ridotta è NADH. Quando un substrato viene ossidato perde due elettroni e due protoni: il $\mathrm{NAD^+}$ riceve i due elettroni e un protone, cioè uno ione idruro $\mathrm{H^-}$, e il secondo protone passa nella soluzione.
 $$
 \mathrm{NAD^+}+\mathrm{H^+}+2e^-\longrightarrow\mathrm{NADH}.
 $$
-Il FAD comprende una porzione flavinica legata a una porzione adeninica. La coppia **FAD/FADH₂** può acquisire due elettroni e due protoni:
+Il **FAD** contiene una flavina, che deriva dalla vitamina B2 (riboflavina), legata a un nucleotide con adenina. La forma ossidata è FAD e la forma ridotta è $\mathrm{FADH_2}$. Il FAD riceve due elettroni e due protoni, cioè due atomi di idrogeno.
 $$
 \mathrm{FAD}+2\,\mathrm{H^+}+2e^-\longrightarrow\mathrm{FADH_2}.
 $$
-Il centro flavinico ammette anche stati intermedi a un elettrone. Queste scritture permettono di confrontare i bilanci redox senza confondere il trasporto di elettroni con il trasferimento di gruppi fosforici dell'ATP.
+A differenza del NAD, la flavina può ricevere anche un solo elettrone alla volta. Il NADH e il $\mathrm{FADH_2}$ cedono poi gli elettroni alla catena respiratoria dei mitocondri. I due tipi di coenzima hanno compiti diversi: NAD e FAD trasportano elettroni, mentre l'ATP trasporta gruppi fosfato.
 :::
 
 :::definizione{#acidi-nucleici titolo="Legami fosfodiestere e orientazione dei filamenti"}
-Nei polinucleotidi un **legame fosfodiestere 3′–5′** unisce l'ossigeno del gruppo al C3′ di un residuo al fosfato legato al C5′ del successivo. Il filamento possiede un verso e la sequenza si scrive da 5′ a 3′. Un filamento lineare di $n$ nucleotidi contiene $n-1$ collegamenti fosfodiestere tra residui adiacenti; ciascun collegamento comprende due legami esterei del medesimo fosfato.
+Negli acidi nucleici i nucleotidi sono uniti in una catena dal **legame fosfodiestere**. Il gruppo fosfato, legato al carbonio 5′ di un nucleotide, si lega anche all'OH del carbonio 3′ del nucleotide precedente. Il fosfato forma quindi due legami estere, da cui il nome. La catena ha due estremità diverse: l'estremità 5′, con un fosfato libero, e l'estremità 3′, con un OH libero. La sequenza delle basi si scrive sempre dall'estremità 5′ all'estremità 3′. Una catena di $n$ nucleotidi contiene $n-1$ legami fosfodiestere. Ogni fosfato porta una carica negativa, quindi gli acidi nucleici sono molecole fortemente cariche.
 
-Il DNA contiene deossiribosio e, normalmente, le basi A, G, C e T. Nella doppia elica i filamenti sono antiparalleli; A si appaia a T mediante due legami a idrogeno e G a C mediante tre. Lo stacking delle basi contribuisce alla stabilità. Per esempio alla sequenza 5′-AGTC-3′ corrisponde il filamento complementare 3′-TCAG-5′, che scritto da 5′ a 3′ diventa 5′-GACT-3′.
+Il **DNA** contiene deossiribosio e le basi A, G, C e T. È formato da due catene avvolte l'una sull'altra a **doppia elica**. Le due catene sono *antiparallele*, cioè orientate in versi opposti: una va da 5′ a 3′ e l'altra da 3′ a 5′. Gli zuccheri e i fosfati stanno all'esterno e le basi all'interno, dove ogni base di una catena è appaiata a una base dell'altra con legami a idrogeno. L'appaiamento è sempre lo stesso: A con T, con due legami a idrogeno, e G con C, con tre. Le due catene sono perciò *complementari*: la sequenza di una determina quella dell'altra. La doppia elica è stabilizzata anche dall'attrazione fra le basi impilate l'una sull'altra. Per esempio, alla sequenza 5′-AGTC-3′ corrisponde sull'altra catena 3′-TCAG-5′, che letta da 5′ a 3′ è 5′-GACT-3′.
 
-L'RNA contiene ribosio e normalmente U al posto di T. È spesso costituito da una singola catena che può ripiegarsi formando tratti appaiati. L'OH al C2′ favorisce l'idrolisi dello scheletro in ambiente alcalino, poiché può attaccare un fosfato vicino. Questa differenza collega una modifica dello zucchero alla stabilità chimica del polimero.
+L'**RNA** contiene ribosio e ha l'uracile (U) al posto della timina. È formato di solito da una sola catena, che può ripiegarsi su se stessa e formare brevi tratti appaiati. L'RNA è meno stabile del DNA: l'OH sul carbonio 2′ del ribosio può attaccare il fosfato vicino e rompere la catena, soprattutto in ambiente basico. Il DNA non ha questo OH, e anche per questo è adatto a conservare l'informazione genetica.
 
 ![Ponte fosfodiestere 3′–5′ con carica negativa e differenza al C2′ tra DNA e RNA.](/figure/chimica-semestre-filtro/biomolecole/nucleotide-it.svg)
 :::
@@ -259,24 +290,42 @@ L'RNA contiene ribosio e normalmente U al posto di T. È spesso costituito da un
 ## Modificazioni non enzimatiche e protezione dall'ossidazione
 
 :::osservazione{#modificazioni-non-enzimatiche titolo="Glicazione e deaminazione"}
-La **glicazione** è la reazione non enzimatica tra un carbonile, per esempio la forma aperta di uno zucchero riducente, e un gruppo amminico. La condensazione forma inizialmente una base di Schiff; quando lo zucchero è un aldoso questa può riarrangiarsi in un prodotto di Amadori, una chetoammina. Trasformazioni successive possono produrre composti di glicazione avanzata. L'insieme di queste trasformazioni rientra nella reazione di Maillard. La glicosilazione enzimatica lega invece residui glucidici attraverso reazioni controllate da enzimi.
+Alcune reazioni modificano le biomolecole senza l'intervento di enzimi, e con il tempo ne alterano la funzione.
 
-La **deaminazione** della citosina sostituisce il gruppo amminico con un gruppo carbonilico e forma uracile. Nel DNA una citosina appaiata a guanina diventa quindi un uracile appaiato in modo anomalo a guanina; se la lesione resta non riparata prima della replicazione, può dare origine a una sostituzione della coppia G–C con A–T. La deaminazione della 5-metilcitosina forma invece timina. L'identità della base di partenza determina perciò il prodotto della modificazione.
+La **glicazione** è la reazione fra il gruppo carbonilico di uno zucchero riducente, nella forma aperta, e un gruppo amminico di una proteina. Procede in tre fasi.
+
+1. Il gruppo amminico si addiziona al carbonile e si forma un'immina, o base di Schiff.
+2. Se lo zucchero è un aldoso, la base di Schiff si trasforma in un composto più stabile, il **prodotto di Amadori**, in cui il carbonile si è spostato sul carbonio 2.
+3. Con il tempo si formano i prodotti finali di glicazione avanzata (AGE), che legano fra loro le proteine in modo permanente. L'insieme di queste reazioni è noto come reazione di Maillard.
+
+La glicazione aumenta quando la concentrazione di glucosio nel sangue è alta. L'emoglobina glicata, misurata nelle analisi, indica il livello medio di glucosio dei mesi precedenti. La *glicosilazione* è invece l'aggiunta di zuccheri a una proteina da parte di enzimi, in posizioni precise, ed è un processo normale.
+
+La **deaminazione** è la perdita di un gruppo amminico. Nella citosina il gruppo $\mathrm{NH_2}$ viene sostituito da un gruppo C=O, e la citosina diventa uracile. Nel DNA questo è un danno: la citosina era appaiata a una guanina, mentre l'uracile si appaia con l'adenina. Se il danno non viene riparato prima della replicazione, la coppia G–C diventa una coppia A–T, cioè una mutazione. Poiché l'uracile non è una base normale del DNA, gli enzimi di riparazione lo riconoscono e lo rimuovono. Se la citosina porta un gruppo metile (5-metilcitosina), la deaminazione produce timina, che è una base normale del DNA e viene riconosciuta con più difficoltà.
 
 ![Da aldoso e ammina alla base di Schiff e al prodotto di Amadori: carbonile spostato al C2.](/figure/chimica-semestre-filtro/biomolecole/glycation-it.svg)
 :::
 
 :::osservazione{#radicali-antiossidanti titolo="Radicale ossidrilico, glutatione e tocoferolo"}
-Il radicale ossidrilico $\mathrm{{}^{\bullet}OH}$ è molto reattivo. Può sottrarre idrogeni o addizionarsi a doppi legami, modificando catene laterali proteiche, zuccheri e basi degli acidi nucleici. Nei lipidi insaturi può avviare una perossidazione a catena; i prodotti della reazione possono a loro volta alterare altre biomolecole.
+Il **radicale ossidrile** $\mathrm{{}^{\bullet}OH}$ è la più reattiva fra le specie reattive dell'ossigeno. Reagisce con quasi ogni molecola che incontra: toglie un atomo di idrogeno oppure si addiziona a un doppio legame. Danneggia così le catene laterali delle proteine, gli zuccheri e le basi del DNA. Negli acidi grassi insaturi delle membrane avvia la **perossidazione lipidica**, una reazione a catena. La cellula si difende con molecole **antiossidanti**, che reagiscono con i radicali e li neutralizzano.
 
-Il **glutatione ridotto**, GSH, è il tripeptide γ-glutammil-cisteinil-glicina. Il legame tra glutammato e cisteina coinvolge il carbossile della catena laterale del glutammato. Il tiolo della cisteina partecipa ai processi redox; due molecole di GSH possono formare il disolfuro GSSG. Un bilancio complessivo della riduzione di un perossido è
+Il **glutatione** (GSH) è l'antiossidante più abbondante all'interno delle cellule. È un tripeptide formato da glutammato, cisteina e glicina. Ha una particolarità: il glutammato è legato alla cisteina con il gruppo carbossilico della catena laterale (legame γ) invece che con quello dello scheletro. La parte attiva è il gruppo SH della cisteina. Due molecole di glutatione cedono ciascuna un atomo di idrogeno e si uniscono con un ponte disolfuro, formando il glutatione ossidato (GSSG). In questo modo riducono un perossido ROOH ad alcol.
 $$
 2\,\mathrm{GSH}+\mathrm{ROOH}
 \longrightarrow\mathrm{GSSG}+\mathrm{ROH}+\mathrm{H_2O}.
 $$
-Nei sistemi biologici questa trasformazione è spesso catalizzata da enzimi. Il tiolo è il gruppo della molecola che rende possibile il trasferimento riducente. GSH può anche partecipare direttamente a reazioni non enzimatiche con specie ossidanti. La velocità dipende dall'ossidante e dal mezzo: la presenza di un tiolo non implica che ogni reazione sia rapida. La forma tiolato $\mathrm{GS^-}$ è più nucleofila della forma protonata; durante l'ossidazione possono comparire intermedi radicalici e altri prodotti, oltre al disolfuro del bilancio semplificato.
+Nelle cellule la reazione è catalizzata dall'enzima glutatione perossidasi. Un altro enzima, la glutatione reduttasi, riporta poi il GSSG a GSH usando NADPH, così il glutatione è di nuovo disponibile. Il glutatione reagisce anche direttamente con alcune specie ossidanti, senza enzimi; la forma che reagisce più in fretta è lo ione tiolato $\mathrm{GS^-}$.
 
-Il **tocoferolo** contiene una porzione fenolica e una parte idrofobica che lo localizza nelle regioni lipidiche. Può donare un idrogeno a un radicale perossilico, formando un radicale tocoferossile stabilizzato per delocalizzazione. In questo modo interrompe una fase della propagazione della perossidazione lipidica. I **carotenoidi**, come β-carotene e licopene, possiedono un sistema esteso di doppi legami coniugati. Possono dissipare l'energia dell'ossigeno singoletto mediante trasferimento di energia e partecipare alla cattura di radicali; l'effetto dipende da concentrazione, ossigenazione e ambiente. Il tocoferolo stabilizza il proprio radicale attraverso il sistema aromatico, mentre i carotenoidi possiedono una catena polienica coniugata.
+Nelle membrane, che sono apolari, agiscono antiossidanti liposolubili.
 
-Per la perossidazione si può separare l'innesco dalla propagazione. Un radicale sottrae H a un lipide $\mathrm{LH}$ formando $\mathrm{L^\bullet}$; l'addizione di ossigeno produce $\mathrm{LOO^\bullet}$. Questo radicale può sottrarre H a un'altra molecola $\mathrm{LH}$, formando $\mathrm{LOOH}$ e un nuovo $\mathrm{L^\bullet}$. La reazione continua perché rigenera un radicale: l'idroperossido prodotto e il radicale perossilico sono specie distinte.
+Il **tocoferolo** (vitamina E) ha un anello fenolico e una lunga coda di idrocarburo, che lo mantiene nella membrana. Cede l'idrogeno del suo OH a un radicale perossile e lo neutralizza. Il tocoferolo diventa a sua volta un radicale, ma l'elettrone spaiato è distribuito per risonanza sull'anello aromatico: questo radicale è poco reattivo e non prosegue la catena.
+
+I **carotenoidi**, come il β-carotene e il licopene, hanno una lunga catena di doppi legami coniugati. Neutralizzano i radicali e l'ossigeno singoletto, una forma dell'ossigeno molto reattiva, di cui assorbono l'energia in eccesso.
+
+La perossidazione lipidica procede in tre passaggi, in cui LH indica un acido grasso insaturo.
+
+1. **Innesco**. Un radicale toglie un atomo di idrogeno a LH e forma un radicale lipidico $\mathrm{L^\bullet}$.
+2. **Propagazione**. Il radicale $\mathrm{L^\bullet}$ reagisce con l'ossigeno e forma un radicale perossile $\mathrm{LOO^\bullet}$. Questo toglie un idrogeno a un'altra molecola LH: si formano un idroperossido LOOH e un nuovo radicale $\mathrm{L^\bullet}$, che ripete il ciclo.
+3. **Terminazione**. La catena si ferma quando due radicali si uniscono oppure quando un antiossidante, come il tocoferolo, cede un idrogeno al radicale perossile.
+
+Poiché ogni ciclo rigenera un radicale, un solo radicale iniziale danneggia molte molecole di lipide.
 :::
