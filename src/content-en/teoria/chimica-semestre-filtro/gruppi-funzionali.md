@@ -6,145 +6,178 @@ sommario: Structures, acidity and mechanisms of alcohols, amines, carbonyl compo
 ## Alcohols, phenols and thiols: read the group's surroundings
 
 :::definizione{#alcoli-fenoli titolo="The same OH in different environments"}
-Ethanol and phenol both contain a hydroxyl group, yet they do not respond identically to a base. Predicting a reaction therefore requires identifying the atom to which the group is attached. In an **alcohol**, OH is bonded to a saturated carbon; in a **phenol**, it is bonded directly to an aromatic carbon. Benzyl alcohol, with a CH2 group between the ring and OH, remains an alcohol.
+A **functional group** is an atom or a group of atoms that gives an organic molecule its chemical properties. Different molecules with the same functional group react in a similar way. The first group is the hydroxyl OH, which is found in two classes of compounds.
 
-Suffixes help reconstruct structures: ethanol, propan-2-ol and propane-1,2,3-triol indicate one, one and three hydroxyl groups respectively. The last compound is glycerol. An alcohol is primary, secondary or tertiary according to how many carbons are directly bonded to the carbon bearing OH; neither hydroxyl groups nor all the molecule's carbons are counted.
+- In an **alcohol** the OH is bonded to an $sp^3$ carbon. Example: ethanol $\mathrm{CH_3CH_2OH}$.
+- In a **phenol** the OH is bonded directly to a carbon of an aromatic ring.
+
+The distinction depends on the atom the OH is bonded to. Benzyl alcohol $\mathrm{C_6H_5CH_2OH}$ has an aromatic ring, but the OH is bonded to a $\mathrm{CH_2}$ group, so it is an alcohol.
+
+The name of an alcohol ends in *-ol*, preceded by the number of the carbon carrying the OH: ethanol, propan-2-ol. With several hydroxyls *-diol* and *-triol* are used: propane-1,2,3-triol, with three OH groups, is glycerol. Alcohols are classified according to the carbon carrying the OH: an alcohol is **primary** if that carbon is bonded to only one other carbon, **secondary** if it is bonded to two, **tertiary** if it is bonded to three. Ethanol is primary and propan-2-ol is secondary.
 
 ![Primary, secondary and tertiary alcohols distinguished by the carbons directly bonded to the hydroxyl-bearing carbon](/figure/chimica-semestre-filtro/gruppi-funzionali/alcoli-en.svg)
 
-Oxygen can accept hydrogen bonds and the O–H bond can donate them. This intermolecular association generally raises boiling points relative to compounds of similar mass lacking donors. In water, however, it competes with the hydrocarbon portion: lengthening an alkyl chain tends to reduce solubility, whereas adding OH groups increases opportunities to interact with the solvent. Finding one hydroxyl group does not establish that any molecule is completely miscible.
+The OH group forms hydrogen bonds: the hydrogen donates them and the oxygen accepts them. Two properties follow. Alcohols boil at much higher temperatures than hydrocarbons of similar mass, because their molecules are bound to each other: ethanol boils at $78\,^\circ\mathrm C$ and propane at $-42\,^\circ\mathrm C$. In addition, small alcohols mix with water in any proportion. Solubility decreases as the carbon chain gets longer, because the hydrocarbon part is non-polar, and increases with the number of OH groups.
 
-To compare acidity, compare the conjugate bases. Phenoxide delocalizes charge into the ring; an aliphatic alkoxide lacks the same stabilization. In water at room temperature, indicative values are $pK_a\approx10$ for phenol and $pK_a\approx16$ for ethanol. Substituents modify these values. Tyrosine contains a phenolic hydroxyl, whereas serine and threonine contain alcoholic hydroxyls.
+Alcohols and phenols are very weak acids: they can give up the hydrogen of the OH. Phenol is about a million times more acidic than ethanol ($pK_a\approx10$ against $pK_a\approx16$). The reason lies in the conjugate base. In the phenoxide ion the negative charge of the oxygen is also spread over the aromatic ring by resonance, and this makes it more stable. In the alkoxide ion the charge stays entirely on the oxygen. Among the amino acids, tyrosine has a phenolic OH, whereas serine and threonine have an alcoholic OH.
 :::
 
 :::osservazione{#reazioni-alcoli titolo="Oxidize, eliminate or substitute"}
-Ordinary oxidation of an alcohol to a carbonyl requires a hydrogen on the hydroxyl-bearing carbon. A primary alcohol can give an aldehyde; a secondary alcohol gives a ketone. A tertiary alcohol cannot simply form a ketone while preserving every C–C bond: it lacks that hydrogen. Harsh oxidations that cleave the skeleton are a different problem.
+Alcohols give three kinds of reaction: oxidation, dehydration and substitution.
 
-The product from a primary alcohol depends on conditions. A suitable oxidant under anhydrous conditions, such as PCC under customary conditions, allows formation of the aldehyde; a strong oxidant in aqueous medium can continue to the carboxylic acid. The following notation indicates successive oxidation levels, rather than a single protocol:
+**Oxidation** turns the C–OH group into a carbonyl group C=O. The result depends on the kind of alcohol.
+
+- A primary alcohol is oxidised to an aldehyde, and the aldehyde can be oxidised further to a carboxylic acid.
+- A secondary alcohol is oxidised to a ketone.
+- A tertiary alcohol is not oxidised, because the carbon carrying the OH has no hydrogen to lose.
+
+For a primary alcohol the product depends on the reagent used. A mild oxidant in the absence of water, such as PCC, stops at the aldehyde. A strong oxidant in water goes on to the carboxylic acid. For ethanol the two steps are the following: first ethanal (acetaldehyde) and then ethanoic acid (acetic acid) are obtained.
 
 $$
 \mathrm{CH_3CH_2OH}\longrightarrow\mathrm{CH_3CHO}\longrightarrow\mathrm{CH_3COOH}.
 $$
 
-Dehydration, with acid catalysis and appropriate heating, eliminates water and forms an alkene when a hydrogen is available on an adjacent carbon, called beta. Several alkenes may form; carbocation intermediates can allow rearrangements. In substitution of a primary alcohol with HBr, protonation converts the poor leaving group OH into water, and bromide can attack carbon. Substitution and elimination depend on substrate, nucleophile, solvent and temperature.
+**Dehydration** removes a molecule of water from an alcohol and forms an alkene. It requires an acid as catalyst and heating. The OH and a hydrogen of the neighbouring carbon ($\beta$ carbon) are lost. If the available hydrogens are on different carbons several alkenes are obtained, and since the reaction goes through a carbocation rearrangements are possible.
 
-In ethanol metabolism, distinct enzymes catalyze formation of acetaldehyde and then acetate, coupling these oxidations to reduction of NAD+. The biological connection concerns the redox balance; it does not imply cellular use of laboratory oxidants.
+In **substitution** the OH is replaced by another group, for example a halogen. The $\mathrm{OH^-}$ ion is a poor leaving group, so the reaction takes place in an acidic environment: the acid adds an $\mathrm{H^+}$ to the oxygen and turns the OH into $\mathrm{OH_2^+}$, which leaves as water. With HBr, the bromide ion takes its place and an alkyl bromide forms.
+
+In the body ethanol is oxidised in the liver in two steps, each catalysed by an enzyme: alcohol dehydrogenase turns it into acetaldehyde and aldehyde dehydrogenase turns acetaldehyde into acetate. In both steps the oxidant is the coenzyme $\mathrm{NAD^+}$, which is reduced to NADH.
 :::
 
 :::definizione{#tioli-disolfuri titolo="Nucleophilic sulfur and disulfide bridges"}
-A thiol contains SH: ethanethiol is $\mathrm{CH_3CH_2SH}$. Aliphatic thiols are generally more acidic than the corresponding alcohols; the larger, more polarizable sulfur stabilizes the thiolate. The local environment modifies cysteine acidity in proteins. Thiolate $\mathrm{RS^-}$ can attack an electrophilic carbon: nucleophilicity and basicity are not synonyms, because the former concerns a reaction rate and the latter an equilibrium with a proton.
+A **thiol** contains the SH group, analogous to OH with sulfur in place of oxygen. An example is ethanethiol $\mathrm{CH_3CH_2SH}$. Thiols are more acidic than alcohols, because sulfur is a larger atom and spreads the negative charge of the thiolate ion $\mathrm{RS^-}$ better. The thiolate ion is an excellent nucleophile. The amino acid cysteine has an SH group in its side chain.
 
-Two thiols can be oxidized to a disulfide. The half-reaction makes electron transfer explicit:
+Two thiols are easily oxidised and join into a **disulfide**, with an S–S bond. Each thiol loses one hydrogen and one electron.
 
 $$
 2\,\mathrm{RSH}\longrightarrow\mathrm{RSSR}+2\,\mathrm{H^+}+2\,e^-.
 $$
 
-The reverse reduction regenerates two SH groups. A bridge between two cysteines can stabilize a protein structure; it is not a thioether, which instead has a single sulfur between two carbon groups.
+The reaction is reversible: reduction of the disulfide gives back the two thiols. In proteins two cysteines, even far apart in the chain, can join through a **disulfide bridge**, which keeps the protein in its shape. A disulfide (R–S–S–R) is different from a thioether (R–S–R), which has a single sulfur atom between two carbons.
 :::
 
 ## Ethers and epoxides: the effect of ring strain
 
 :::definizione{#eteri-epossidi titolo="An oxygen between two carbons"}
-An ether is $\mathrm{R{-}O{-}R'}$; methoxyethane is $\mathrm{CH_3OCH_2CH_3}$. A thioether replaces O with S, as in methionine's side chain. An ether without other OH or NH groups accepts hydrogen bonds from water but does not donate them. An ordinary ether resists the usual basic hydrolysis that cleaves an ester: it lacks an electrophilic carbonyl, and an alkoxide would be a poor leaving group.
+An **ether** has an oxygen bonded to two carbons: $\mathrm{R{-}O{-}R'}$. An example is methoxyethane $\mathrm{CH_3OCH_2CH_3}$. A **thioether** has a sulfur in place of the oxygen; it is found in the side chain of the amino acid methionine. An ether has no hydrogens bonded to the oxygen, so it can accept hydrogen bonds from water but not donate them. This is why it boils at a lower temperature than the alcohol of the same formula. Ethers are not very reactive: they have no electrophilic carbon like that of a carbonyl, and the alkoxide ion would be a poor leaving group. Unlike esters, they are not cleaved by a base in water.
 
-In **epoxides**, or oxiranes, oxygen belongs to a three-membered ring. Opening relieves strain and enables nucleophilic attack that would not occur as readily in an acyclic ether. Under basic conditions, a strong nucleophile attacks from the side opposite the C–O bond, generally at the less hindered carbon. The ring oxygen remains attached to the other carbon; final protonation gives an OH group.
+An **epoxide** (or oxirane) is a cyclic ether with a three-membered ring: two carbons and one oxygen. The angles of the ring are about $60^\circ$, much smaller than $109.5^\circ$, and the strong ring strain makes epoxides much more reactive than other ethers. A nucleophile opens the ring by attacking one of the two carbons.
+
+In a basic environment the nucleophile attacks the less hindered carbon, from the side opposite the oxygen, with an SN2 mechanism. The bond between that carbon and the oxygen breaks; the oxygen stays bonded to the other carbon with a negative charge and then gains an $\mathrm{H^+}$, becoming an OH group.
 
 ![Opening of 1,2-epoxypropane by methoxide at the less substituted carbon followed by protonation](/figure/chimica-semestre-filtro/gruppi-funzionali/epossido-en.svg)
 
-Under acidic conditions, oxygen is protonated first. Regioselectivity depends on structure, nucleophile and solvent: always prescribing attack at the more substituted carbon is incorrect. When one carbon is tertiary, greater carbocation character can favor that site. Backside attack remains important, with inversion at the attacked carbon when it is stereogenic; a free carbocation need not be postulated for every opening. Water in acidic medium gives vicinal diols, whereas an alcohol can introduce an ether group.
+In an acidic environment the oxygen of the epoxide first gains an $\mathrm{H^+}$, and the ring becomes even more reactive. In this case the nucleophile preferentially attacks the more substituted carbon, especially if it is tertiary, because the positive charge is concentrated on it. Here too the attack takes place from the side opposite the oxygen, with inversion of configuration. With water as the nucleophile a **diol** is obtained, that is, a molecule with two OH groups on neighbouring carbons; with an alcohol a product with one OH and one ether group is obtained.
 :::
 
 ## Amines: one electron pair with two roles
 
 :::definizione{#ammine titolo="Structure, names and basicity"}
-In primary, secondary and tertiary amines, nitrogen is bonded to one, two and three carbon groups respectively: $\mathrm{RNH_2}$, $\mathrm{R_2NH}$ and $\mathrm{R_3N}$. Ethanamine and N-methylethanamine show how the N prefix identifies a substituent on nitrogen. The classification concerns nitrogen, rather than the degree of the neighboring carbon.
+An **amine** is a derivative of ammonia $\mathrm{NH_3}$ in which one or more hydrogens are replaced by carbon groups. It is classified according to the number of groups bonded to the nitrogen: an amine is **primary** with one group ($\mathrm{RNH_2}$), **secondary** with two ($\mathrm{R_2NH}$), **tertiary** with three ($\mathrm{R_3N}$). The classification concerns the nitrogen; in alcohols, on the other hand, it concerns the carbon carrying the OH. In the name, the letter N marks a group bonded to the nitrogen: in N-methylethanamine $\mathrm{CH_3CH_2NHCH_3}$ the methyl is on the nitrogen.
 
-A lone pair allows the amine to bind H+ or attack a carbon electrophile. A neutral tertiary amine can accept hydrogen bonds but, without other donors, cannot donate them; a primary or secondary amine instead has N–H bonds. Protonation changes charge, interactions with water and distribution between polar and nonpolar environments.
+The nitrogen of an amine has an unshared pair of electrons. With this lone pair the amine can do two things: bind an $\mathrm{H^+}$ ion, behaving as a base, or attack an electrophilic carbon, behaving as a nucleophile. Primary and secondary amines have N–H bonds, so they donate and accept hydrogen bonds. Tertiary amines have no N–H bonds and can only accept them. When an amine binds an $\mathrm{H^+}$ it becomes an ammonium ion, with a positive charge, much more soluble in water.
 
-Bases under the same conditions can be compared using the $pK_a$ of conjugate acid BH+: the higher this value, the stronger B is as a base. In aniline, the pair interacts with the aromatic ring; in an amide, it interacts directly with C=O. The N pairs are less available to bind a proton than in an ordinary aliphatic amine. For ordinary amides, when protonation occurs in sufficiently acidic medium, carbonyl oxygen is generally favored: ordinary amine-like protonation at N should not be inferred. Amine basicity in water also depends on solvation: the number of alkyl groups alone does not provide a universal order.
+The strength of an amine as a base is expressed by the $pK_a$ of its conjugate acid $\mathrm{BH^+}$: the higher the $pK_a$, the stronger the base. Aliphatic amines have a $pK_a$ around 10-11. Basicity decreases when the lone pair of the nitrogen is engaged in resonance, because it is less available to bind a proton.
+
+- In **aniline** the nitrogen is bonded to an aromatic ring and the lone pair is partly spread over the ring. The $pK_a$ of the conjugate acid falls to about $4.6$.
+- In an **amide** the nitrogen is bonded to a C=O group and the lone pair is spread towards the oxygen. Amides are not basic; in a strong acid the proton binds to the oxygen of the carbonyl and not to the nitrogen.
+
+In water basicity also depends on how well water surrounds the ammonium ion that forms, so it does not increase regularly with the number of alkyl groups.
 
 ![An amine's lone pair and delocalization of the nitrogen lone pair in an amide](/figure/chimica-semestre-filtro/gruppi-funzionali/azoto-en.svg)
 :::
 
 :::osservazione{#reazioni-ammine titolo="Salts, alkylation and nitrosation"}
-Methylamine and HCl form methylammonium chloride, $\mathrm{CH_3NH_3^+Cl^-}$. In a dilute aqueous solution, approximating activities by concentrations,
+An amine reacts with an acid and forms an ammonium salt. For example, methylamine with HCl gives methylammonium chloride, $\mathrm{CH_3NH_3^+Cl^-}$. In solution the amine B and its protonated form $\mathrm{BH^+}$ are in equilibrium, and their ratio depends on the pH according to the relation below, which derives from the Henderson-Hasselbalch equation.
 
 $$
 \dfrac{[\mathrm B]}{[\mathrm{BH^+}]}=10^{pH-pK_a}.
 $$
 
-If pH is two units below the $pK_a$ of BH+, the B/BH+ ratio is 1/100: the protonated species predominates and is less available as a nucleophile. The salt can be converted back to the base by suitably raising pH.
+For example, if the pH is two units below the $pK_a$ of $\mathrm{BH^+}$, the ratio is $10^{-2}$: there is one molecule of free amine for every hundred ammonium ions. The protonated form no longer has the lone pair, so it cannot act as a nucleophile. At pH 7 an amine with $pK_a=10$ is almost entirely in the protonated form. Adding a base turns the salt back into the free amine.
 
-With a suitable alkyl halide, the amine can form a new C–N bond. The product can react again, ultimately giving $\mathrm{R_4N^+}$: controlling monoalkylation requires a specific strategy. Quaternary ammonium has neither a lone pair nor an N–H proton whose removal would simply yield a neutral amine. **Choline**, $\mathrm{HOCH_2CH_2N^+(CH_3)_3}$, combines quaternary ammonium and an alcohol and occurs in the structures of phospholipids and acetylcholine.
+An amine reacts as a nucleophile with an alkyl halide and forms a new C–N bond (**alkylation**). The product is still an amine and can react again, so the reaction tends to go on to the **quaternary ammonium** ion $\mathrm{R_4N^+}$, with four groups on the nitrogen. This ion has a permanent positive charge, which does not depend on the pH, because the nitrogen has no hydrogens to give up. A biological example is **choline**, $\mathrm{HOCH_2CH_2N^+(CH_3)_3}$, which contains a quaternary ammonium and an alcohol group. Choline is part of many membrane phospholipids and of the neurotransmitter acetylcholine.
 
-Nitrosation of a secondary amine, using nitrosating species generated for example from nitrite in acidic medium, can give an **N-nitrosamine**, $\mathrm{R_2N{-}N{=}O}$. A new N–N bond forms: this is not merely protonation. After metabolic activation, some nitrosamines produce intermediates capable of covalently modifying DNA; structure and metabolism determine the behavior of individual compounds.
+A secondary amine reacts with nitrous acid, which forms from nitrites in an acidic environment, and gives an **N-nitrosamine**, $\mathrm{R_2N{-}N{=}O}$, in which the nitrogen of the amine is bonded to an N=O group. Some nitrosamines are carcinogenic: in the body they are converted into substances that bind to DNA. The reaction can also take place in the stomach, which is acidic, starting from the nitrites present in some foods.
 :::
 
 ## Aldehydes and ketones: attacking the carbonyl carbon
 
 :::definizione{#carbonili titolo="Geometry, properties and redox reactions"}
-The C=O carbonyl occurs in different classes. In an aldehyde, the carbonyl carbon bears at least one H; in a ketone, it bears two carbon groups. The suffixes -al and -one distinguish ethanal and propanone. Carbonyl carbon is approximately trigonal planar; oxygen polarizes the bond and leaves carbon partially positive.
+The **carbonyl group** C=O consists of a carbon bonded to an oxygen by a double bond. It is found in two classes of compounds.
 
-Aldehydes and ketones can accept hydrogen bonds, but the carbonyl alone cannot donate them. Small members interact well with water; a large hydrocarbon portion can limit solubility. Aldehydes are relatively readily oxidized to carboxylic acids, whereas ketones cannot give the same outcome without changing the skeleton. Reducing an aldehyde gives a primary alcohol; reducing a ketone gives a secondary one. NaBH4, under customary mild conditions, reduces aldehydes and ketones but should not be presented as a universal reducing agent for every carbonyl derivative.
+- In an **aldehyde** the carbonyl carbon is bonded to at least one hydrogen, so the group is at the end of the chain. The name ends in *-al*: ethanal $\mathrm{CH_3CHO}$.
+- In a **ketone** the carbonyl carbon is bonded to two carbons, so the group is inside the chain. The name ends in *-one*: propanone $\mathrm{CH_3COCH_3}$ (acetone).
+
+The carbonyl carbon is $sp^2$ and the three atoms bonded to it lie in the same plane. Oxygen is more electronegative and attracts the electrons of the double bond, so the oxygen is partially negative and the carbon partially positive. The carbonyl carbon is therefore an electrophile.
+
+The oxygen of the carbonyl accepts hydrogen bonds from water, so small aldehydes and ketones are soluble in water. Having no O–H bond, they do not form hydrogen bonds with each other and boil at lower temperatures than the corresponding alcohols.
+
+Aldehydes and ketones differ in oxidation. An aldehyde is easily oxidised to a carboxylic acid, because it has a hydrogen on the carbonyl carbon. A ketone is not oxidised under the same conditions. In reduction, on the other hand, both react: an aldehyde gives a primary alcohol and a ketone a secondary alcohol. A common reducing agent is sodium borohydride $\mathrm{NaBH_4}$, which reduces aldehydes and ketones and does not reduce esters and amides.
 :::
 
 :::osservazione{#addizione-carbonile titolo="From planar geometry to a tetrahedral intermediate"}
-The nucleophile directs a pair toward carbon, while the pi-bond electrons move to oxygen. A tetrahedral center therefore forms without exceeding carbon's octet. An anionic nucleophile often produces an alkoxide, which is then protonated. The figure represents this scheme; Nu must be replaced by a nucleophile compatible with the substrate and conditions.
+The typical reaction of aldehydes and ketones is **nucleophilic addition**. A nucleophile attacks the carbonyl carbon and forms a new bond. At the same time the two electrons of the $\pi$ bond move onto the oxygen, which becomes negative. The carbon goes from three to four bonds, that is, from planar $sp^2$ to tetrahedral $sp^3$. The product is an alkoxide ion, which then gains an $\mathrm{H^+}$ and becomes an OH group. In the figure Nu stands for any nucleophile.
 
 ![Nucleophilic addition to an aldehyde, formation of a tetrahedral alkoxide and protonation](/figure/chimica-semestre-filtro/gruppi-funzionali/carbonile-en.svg)
 
-Aliphatic aldehydes are generally more accessible and less electron-enriched than comparable ketones. Greater reactivity does not, however, mean complete conversion: water addition forms a geminal diol in equilibrium, and the equilibrium position depends on substituents. Electron-withdrawing groups can favor hydration.
+Aldehydes are more reactive than ketones, for two reasons: the carbonyl carbon is less hindered, because it has only one carbon group, and it is poorer in electrons, because alkyl groups donate electrons and a ketone has two of them. An example of addition is that of water, which gives a **geminal diol** (or hydrate), with two OH groups on the same carbon. The reaction is an equilibrium, usually shifted towards the carbonyl; it is shifted towards the hydrate in formaldehyde and when the carbonyl is near groups that attract electrons.
 
-In hydride reduction, a C–H bond forms and, after protonation, an O–H bond. In enzymatic reactions, NADH or NADPH transfer reducing equivalents; the pyruvate/lactate conversion illustrates ketone/alcohol interconversion. Transferring only a proton does not constitute the same reduction.
+Reduction is an addition in which the nucleophile is a hydride ion $\mathrm{H^-}$: a C–H bond forms and, after the addition of $\mathrm{H^+}$, an O–H bond. In cells the hydride is supplied by the coenzymes NADH and NADPH. An example is the reduction of pyruvate, a ketone, to lactate, a secondary alcohol, which takes place in muscle during exertion.
 :::
 
 ## Alcohols and amines reacting with a carbonyl
 
 :::definizione{#acetali-immine titolo="Hemiacetal, acetal and imine"}
-Adding an alcohol to an aldehyde gives a **hemiacetal**: the same carbon bears OH and OR. The corresponding ketone product is a hemiketal. In acidic medium, another equivalent of alcohol can replace OH through protonation, water loss and subsequent attack: an acetal with two OR groups on the same carbon results. The term ketal is also used for the product of a ketone.
+An alcohol is a nucleophile and adds to the carbonyl of an aldehyde. The product is a **hemiacetal**: a carbon carrying both an OH group and an OR group. If one starts from a ketone the product is also called a hemiketal. In an acidic environment the hemiacetal reacts with a second molecule of alcohol: the OH leaves as water and a second OR group enters in its place. The product is an **acetal** (ketal, if it derives from a ketone): a carbon carrying two OR groups.
 
 ![Comparison of a hemiacetal carbon bearing OH and OR with an acetal carbon bearing two OR groups](/figure/chimica-semestre-filtro/gruppi-funzionali/acetali-en.svg)
 
-Acid facilitates the steps but does not change the equilibrium constant. Excess alcohol or water removal favors the acetal; excess water and acid catalysis favor hydrolysis. Acetals are relatively stable to bases because the pathway would require unfavorable alkoxide departure. This difference allows temporary protection of a carbonyl.
+All the steps are reversible. The acid acts as a catalyst and does not change the position of the equilibrium. To obtain the acetal an excess of alcohol is used or the water that forms is removed; to go back to the carbonyl water is added in an acidic environment (hydrolysis). Acetals are stable in a basic environment. This is why they are used as *protecting groups*: the carbonyl is turned into an acetal, a reaction is carried out on another part of the molecule and then the carbonyl is regenerated with water and acid.
 
-In open-chain glucose, the C5 OH can attack the C1 aldehyde. The resulting ring contains five carbons and one oxygen, giving six members. C1 becomes the hemiacetal's anomeric carbon: its two configurations are the alpha and beta anomers. Stereochemistry cannot be inferred from atom counting alone.
+The formation of a hemiacetal explains the ring structure of sugars. Glucose in its open form has an aldehyde group on carbon 1 and several OH groups. The OH of carbon 5 attacks the carbonyl of carbon 1 of the same molecule and forms a cyclic hemiacetal. The ring has six atoms: five carbons and one oxygen. Carbon 1, which was planar before, becomes a stereogenic centre and is called the **anomeric carbon**. The new OH can lie on one side of the ring or the other, and the two stereoisomers are called the $\alpha$ and $\beta$ **anomers**.
 
-A primary amine instead reacts through an intermediate with OH and N on the same carbon, followed by dehydration to an **imine**, C=N. Moderate acid catalysis facilitates water departure; excessively acidic conditions protonate nearly all the amine and reduce nucleophilic attack. Water removal and pH therefore both require control. Schiff bases occur in pyridoxal phosphate reactions. A secondary amine can give an enamine if the carbonyl compound has alpha hydrogens: it should not automatically be assigned the same neutral imine as a primary amine.
+A primary amine also adds to the carbonyl. The first product has an OH and an NHR group on the same carbon; it then loses a molecule of water and forms an **imine** (or Schiff base), which contains a C=N double bond. The reaction requires a slightly acidic environment, at a pH of about 4-5. The acid is needed to make the water leave; with too much acid, however, the amine is entirely in the protonated form and can no longer attack the carbonyl. Imines are intermediates in many enzymatic reactions, for example those of pyridoxal phosphate (vitamin B6) in amino acid metabolism. A secondary amine cannot form a neutral imine, because the nitrogen has no second hydrogen to lose, and gives an **enamine** instead, with the double bond between two carbons.
 :::
 
 ## Tautomerism and aldol reactions: moving protons, building bonds
 
 :::osservazione{#tautomeria-aldolica titolo="Enols, enolates and biological tautomers"}
-An **alpha** hydrogen is bonded to a carbon adjacent to the carbonyl. A suitable base can remove it, forming an enolate with charge delocalized between carbon and oxygen. Enolate resonance contributors are not molecules interconverting by moving atoms: nuclei remain fixed in resonance.
+The carbon next to the carbonyl is called the **$\alpha$ carbon** and its hydrogens are the **$\alpha$ hydrogens**. These hydrogens are weakly acidic: a base can remove one of them. The ion that forms is called an **enolate**. It is stable because the negative charge is spread by resonance between the $\alpha$ carbon and the oxygen of the carbonyl. The enolate is a nucleophile and reacts through the $\alpha$ carbon.
 
-An enol instead contains a C=C–OH group. Carbonyl and enol forms are **tautomers**, constitutional isomers differing in a proton's position and the distribution of double bonds. Acid or base catalysis can accelerate interconversion without changing equilibrium at the same temperature. The carbonyl often predominates, but conjugation, aromaticity and hydrogen bonding can particularly stabilize certain enols.
+An **enol** is a molecule with an OH group bonded to a carbon of a double bond: C=C–OH. A carbonyl compound with an $\alpha$ hydrogen is in equilibrium with its enol: the hydrogen moves from the $\alpha$ carbon to the oxygen and the double bond shifts from C=O to C=C. The two forms are called **tautomers** and the equilibrium **keto-enol tautomerism**. Tautomers are true isomers, because a hydrogen atom changes position; resonance structures, on the other hand, differ only in the position of the electrons. Acids and bases speed up the transformation. The carbonyl form usually prevails by far; the enol is favoured when its double bond is conjugated or is part of an aromatic ring, as in phenol.
 
-In phosphoenolpyruvate, phosphate is attached to the enol oxygen. After phosphoryl-group transfer or hydrolysis, the system can reach the more stable keto form of pyruvate. Product stabilization contributes to the overall free-energy change; attributing energy solely to bond breaking is incorrect.
+In **phosphoenolpyruvate** a phosphate group is bonded to the oxygen of an enol and locks it in this rather unstable form. When the phosphate is transferred to ADP, the enol released turns at once into pyruvate, which is the keto form, much more stable. This transformation makes the reaction strongly favoured, and in glycolysis the cell uses it to produce ATP.
 
-In cytosine, rare amino/imino and keto/enol forms can modify hydrogen-bond donors and acceptors. For example, local conversion of C=O to C–OH requires proton transfer and redistribution of bonds within the heterocycle, rather than addition of an oxygen. Uric acid and urate can exhibit equilibria between tautomers; the lactam/lactim motif can be represented locally as
+Tautomerism also concerns the nitrogenous bases of DNA. Each base almost always exists in a single form, but can pass briefly into a rare tautomer: a C=O group becomes C–OH (enol form) or an $\mathrm{NH_2}$ group becomes =NH (imino form). The rare tautomer forms different hydrogen bonds and can pair with the wrong base, causing a mutation. In a ring containing nitrogen, the group O=C–NH is called a *lactam* and its tautomer HO–C=N is called a *lactim*.
 
 $$
 \mathrm{O{=}C{-}NH}\rightleftharpoons\mathrm{HO{-}C{=}N}.
 $$
 
-Deprotonating uric acid to urate instead changes the total number of protons and the charge. Acidity, tautomerism and resonance are therefore three different descriptions that should not be conflated.
+Uric acid shows this equilibrium. When instead uric acid gives up a proton and becomes urate, the number of hydrogens and the charge change: this is an acid-base reaction and not a tautomerism. The three concepts remain distinct: in resonance only electrons move; in tautomerism a hydrogen changes position within the molecule; in an acid-base reaction a proton leaves the molecule.
 :::
 
 :::osservazione{#aldolica titolo="Addition first, possible dehydration afterwards"}
-In an aldol addition, one molecule's enolate attacks another molecule's carbonyl: a C–C bond forms between the donor's alpha carbon and the acceptor's carbonyl carbon. Protonation produces a beta-hydroxy carbonyl compound. A leaving group need not be eliminated from the acceptor carbonyl.
+The **aldol addition** is a reaction that joins two molecules of aldehyde or ketone with a new carbon-carbon bond. It takes place in three steps.
 
-Two ethanal molecules, with dilute base and conditions allowing the reaction to stop at addition, give 3-hydroxybutanal. Heating and suitable conditions can favor water loss and conjugated but-2-enal: addition plus dehydration constitute aldol condensation.
+1. A base removes an $\alpha$ hydrogen from one molecule and forms an enolate.
+2. The enolate, which is a nucleophile, attacks the carbonyl carbon of a second molecule. The bond between the $\alpha$ carbon of the first and the carbonyl carbon of the second forms.
+3. The alkoxide obtained gains an $\mathrm{H^+}$.
+
+The product contains a carbonyl group and an OH group on the carbon in the $\beta$ position, that is, two carbons further along: it is a $\beta$-hydroxy aldehyde (or a $\beta$-hydroxy ketone), called an *aldol*.
+
+For example, two molecules of ethanal $\mathrm{CH_3CHO}$ with a dilute base give 3-hydroxybutanal. On heating, the aldol loses a molecule of water and forms a double bond conjugated with the carbonyl: but-2-enal is obtained. Addition followed by dehydration is called **aldol condensation**.
 
 ![Two ethanal units form a four-carbon beta-hydroxyaldehyde and then an unsaturated aldehyde by water loss](/figure/chimica-semestre-filtro/gruppi-funzionali/aldolica-en.svg)
 
-The donor must be able to form an enol or enolate. Formaldehyde and benzaldehyde lack alpha hydrogens and are not donors in the usual enolate-based aldol reaction, although they can be acceptors. Mixing two enolizable carbonyl compounds can give several products: selectivity requires additional conditions. When donor and acceptor belong to the same molecule, an intramolecular aldol can close a ring: count atoms along the bond path between the two centers, including the new C–C bond.
+The molecule that forms the enolate must have at least one $\alpha$ hydrogen. Formaldehyde and benzaldehyde have none: they cannot form the enolate, but they can be attacked by that of another molecule. If two different carbonyl compounds are mixed, both with $\alpha$ hydrogens, a mixture of four products is obtained. If the two carbonyl groups are in the same molecule, the reaction closes a ring (*intramolecular* aldol); rings of five or six atoms form preferentially.
 :::
 
 ## Quinones: the transformation is a reduction
 
 :::definizione{#chinoni titolo="A ring that carries electrons"}
-A quinone has conjugated carbonyl groups in a cyclic skeleton. Para-benzoquinone can be reduced to hydroquinone; bonds, oxidation state and hydrogen content change. This is not simple tautomerism. The reduction balance is
+A **quinone** is a six-carbon ring with two C=O groups and two conjugated C=C double bonds. The simplest is para-benzoquinone. A quinone is easily reduced: it gains two electrons and two protons and becomes a **hydroquinone**, that is, an aromatic ring with two OH groups. The reaction is reversible. It is a redox reaction and not a tautomerism, because the number of hydrogens of the molecule changes.
 
 $$
 \mathrm Q+2\,e^-+2\,\mathrm{H^+}\rightleftharpoons\mathrm{QH_2}.
@@ -152,74 +185,93 @@ $$
 
 ![Structures of para-benzoquinone and hydroquinone with a balance of two electrons and two protons](/figure/chimica-semestre-filtro/gruppi-funzionali/chinoni-en.svg)
 
-Ubiquinone, or coenzyme Q, has a quinone portion and a long lipophilic isoprenoid chain. The chain favors retention within the mitochondrial membrane; the ring participates in electron and proton transfer. One-electron semiquinone states are possible, with protonation depending on the environment. A two-electron overall balance does not require every individual step to transfer a pair simultaneously.
+Because of this property quinones carry electrons in cells. **Ubiquinone**, or coenzyme Q, consists of a quinone ring and a long hydrocarbon chain. The chain is non-polar and keeps the molecule inside the membrane of the mitochondria. The ring receives two electrons and two protons from a complex of the respiratory chain, becomes ubiquinol, moves within the membrane and passes them to the next complex. The transfer can take place one electron at a time: the intermediate form, with only one extra electron, is a radical called a *semiquinone*.
 :::
 
 ## Carboxylic acids and families of derivatives
 
 :::definizione{#carbossilici titolo="Acidity and carboxylate charge"}
-In a carboxyl group, C=O and OH are attached to the same carbon. Ethanoic acid and propanoic acid illustrate the suffix; the carboxyl carbon belongs to the chain and is counted. Deprotonation forms a carboxylate, with charge distributed over both oxygens and equivalent C–O bonds in the resonance model. This stabilization explains why a simple carboxylic acid is more acidic than a typical alcohol.
+A **carboxylic acid** contains the carboxyl group COOH, made of a C=O and an OH bonded to the same carbon. The name ends in *-oic*: ethanoic acid $\mathrm{CH_3COOH}$ (acetic acid), propanoic acid $\mathrm{CH_3CH_2COOH}$. The carbon of the COOH group is part of the chain and is number 1.
 
-Nearby electron-withdrawing groups tend to increase acidity through an inductive effect; moving them farther away weakens that effect. In dilute water, using concentrations as approximations to activities, acid and carboxylate are equimolar when pH equals $pK_a$. Salts interact strongly with water, but actual solubility also depends on counterion and hydrocarbon portion.
+Carboxylic acids are weak acids, with a $pK_a$ around 4-5, but much more acidic than alcohols. When they give up the proton they form the **carboxylate** ion $\mathrm{RCOO^-}$, in which the negative charge is shared equally between the two oxygens by resonance, and the two C–O bonds are the same. This spreading of the charge makes the carboxylate stable.
 
-Salt formation with hydroxide is not esterification:
+Acidity increases if there are atoms that attract electrons near the COOH group, such as chlorine, because they stabilise the carboxylate further: chloroacetic acid ($pK_a\approx2.9$) is stronger than acetic acid ($pK_a\approx4.8$). The effect decreases with distance. When the pH equals the $pK_a$, half of the molecules are in the acid form and half in the carboxylate form. At pH 7 a carboxylic acid is therefore almost entirely in the carboxylate form, with a negative charge. Salts of carboxylic acids are generally soluble in water; if the carbon chain is long the solubility decreases.
+
+With a strong base a carboxylic acid forms a salt. This is an acid-base reaction, different from the esterification described in the following sections.
 
 $$
 \mathrm{CH_3COOH}+\mathrm{OH^-}\longrightarrow\mathrm{CH_3COO^-}+\mathrm{H_2O}.
 $$
 
-Likewise, mixing a carboxylic acid and an amine can quickly produce an ammonium carboxylate salt; efficient amide formation requires activation or appropriate condensation conditions.
+With an amine too the acid-base reaction takes place first, and a salt of ammonium and carboxylate forms. The amide does not form simply by mixing the two reagents: the acid must first be turned into a more reactive derivative.
 :::
 
 :::definizione{#derivati-acilici titolo="Identify what is attached to the acyl group"}
-An acyl group is $\mathrm{R{-}C(=O){-}}$. In esters it is bonded to OR', in thioesters to SR', and in amides to nitrogen. An anhydride contains two acyl groups connected by oxygen; an acyl phosphate is a mixed anhydride of a carboxylic acid and phosphoric acid, with a C(=O)–O–P linkage rather than C–P.
+The **acyl group** is $\mathrm{R{-}C(=O){-}}$, that is, a carbonyl bonded to a carbon group. **Carboxylic acid derivatives** are the compounds in which the acyl is bonded to an atom other than carbon and hydrogen. They are recognised by the group bonded to the acyl.
+
+- **Ester**: the acyl is bonded to an OR' group.
+- **Thioester**: the acyl is bonded to an SR' group.
+- **Amide**: the acyl is bonded to a nitrogen.
+- **Anhydride**: two acyls are joined by an oxygen.
+- **Acyl phosphate**: the acyl is bonded to a phosphate group through an oxygen, C(=O)–O–P. It is a mixed anhydride between a carboxylic acid and phosphoric acid.
 
 ![Esters, thioesters, amides and acyl phosphates distinguished by the group bonded to the acyl carbon](/figure/chimica-semestre-filtro/gruppi-funzionali/acili-en.svg)
 
-Ethyl ethanoate indicates an ethanoyl group and an ethyl group bonded to oxygen; ethanamide indicates the NH2 derivative. Acetyl-CoA is a thioester, the peptide linkage is an amide, and 1,3-bisphosphoglycerate contains an acyl phosphate. The amide nitrogen's pair contributes to delocalization: the C–N bond has partial double-bond character, hindering rotation. An amide should not be treated as a simple amine attached to an arbitrary carbon.
+The name of an ester has two parts: the group bonded to the oxygen and the acid it derives from, with the ending *-ate*. Ethyl ethanoate $\mathrm{CH_3COOCH_2CH_3}$ derives from ethanoic acid and ethanol. The name of an amide ends in *-amide*: ethanamide $\mathrm{CH_3CONH_2}$.
+
+These groups are very common in biological molecules: acetyl-CoA is a thioester, the peptide bond that joins amino acids in proteins is an amide and the 1,3-bisphosphoglycerate of glycolysis contains an acyl phosphate. In an amide the lone pair of the nitrogen is spread towards the carbonyl by resonance. This is why the C–N bond has partly the character of a double bond, does not rotate freely, and the nitrogen is not basic.
 :::
 
 ## Acyl substitution, esterification and hydrolysis
 
 :::osservazione{#esterificazione-idrolisi titolo="Addition and elimination within one mechanism"}
-In nucleophilic acyl substitution, the nucleophile attacks C=O, forms a tetrahedral intermediate and, when this collapses, a group is expelled and the carbonyl is restored. Leaving group, electronic effects and conditions determine reactivity. Resonance makes amides relatively resistant; thioesters are generally more reactive than comparable oxygen esters, partly because sulfur donates less effectively to the carbonyl. Enzymes control these transfers without removing the need for favorable or coupled energetics.
+The typical reaction of carboxylic acid derivatives is **nucleophilic acyl substitution**: a nucleophile takes the place of the group bonded to the acyl. It takes place in two steps.
 
-In Fischer esterification, a carboxylic acid and an alcohol react with acid catalysis:
+1. **Addition**. The nucleophile attacks the carbonyl carbon and a tetrahedral intermediate forms, with the oxygen negative.
+2. **Elimination**. The C=O double bond re-forms and the group bonded to the acyl leaves as the leaving group.
+
+In aldehydes and ketones the reaction stops at the first step, because there is no group that can leave. The reactivity of the derivatives depends on the leaving group, and the order is: acyl phosphates and anhydrides > thioesters > esters > amides. Amides are the least reactive, because resonance with the nitrogen stabilises the carbonyl. Thioesters are more reactive than esters, because sulfur donates fewer electrons to the carbonyl; this is why the cell uses a thioester, acetyl-CoA, to transfer acyl groups.
+
+**Fischer esterification** is the reaction between a carboxylic acid and an alcohol, with a strong acid as catalyst. An ester and water form.
 
 $$
 \mathrm{CH_3COOH}+\mathrm{CH_3CH_2OH}
 \rightleftharpoons\mathrm{CH_3COOCH_2CH_3}+\mathrm{H_2O}.
 $$
 
-Protonation activates the carbonyl, the alcohol adds, and proton transfers allow water elimination. Alcohol oxygen remains bonded to its alkyl group and becomes the ester oxygen: an isotope label can track it, provided secondary exchange is excluded. Water removal or excess alcohol shifts equilibrium; increasing catalyst changes the rate, not the constant at the same temperature. Acid hydrolysis follows the reverse transformation with water available in abundance.
+The acid catalyst adds an $\mathrm{H^+}$ to the oxygen of the carbonyl and makes it more electrophilic; the alcohol attacks the carbon; at the end a molecule of water leaves. The oxygen that joins the two parts of the ester comes from the alcohol, whereas the OH of the acid ends up in the water; this is shown by using an alcohol labelled with an isotope of oxygen. The reaction is an equilibrium. To obtain more ester an excess of alcohol is used or the water is removed. Adding more catalyst speeds up the reaction but does not change the amount of ester at equilibrium. The reverse reaction, with a lot of water and an acid, is the **acid hydrolysis** of the ester.
 
-In **saponification**, OH− is consumed and a carboxylate and an alcohol form. Final proton transfer stabilizes the carboxylate and disfavors simple reversal to the ester under usual conditions. Any subsequent acid work-up converts the salt into the acid: these two stages must be distinguished.
+The hydrolysis of an ester with a strong base is called **saponification**. The $\mathrm{OH^-}$ ion attacks the carbonyl and an alcohol and the carboxylate ion are obtained. Unlike acid hydrolysis the reaction goes to completion, because the carboxylate, negatively charged, is no longer attacked by the alcohol. The $\mathrm{OH^-}$ ion is consumed, so it is a reagent and not a catalyst. To obtain the carboxylic acid a strong acid is added at the end. The name comes from soap, which is prepared by treating fats, which are esters, with a base: the salts of fatty acids obtained are soaps.
 
-Transesterification exchanges an ester's OR group using another alcohol, with acid catalysis or a suitable alkoxide. Using water and hydroxide can instead favor hydrolysis: solvent and reagents are not interchangeable details. In amide hydrolysis, generally slower and requiring harsher conditions or enzymatic catalysis, the medium determines the final forms. Acidic conditions give a carboxylic acid and ammonium or the corresponding protonated amine, according to N substitution; basic conditions give a carboxylate and ammonia or an amine according to nitrogen substitution.
+Two other reactions follow the same mechanism.
+
+In **transesterification** an ester reacts with a different alcohol and exchanges its OR group. An acid catalyst or the alkoxide ion of the alcohol is needed.
+
+The **hydrolysis of an amide** breaks the bond between the carbonyl and the nitrogen. It is much slower than that of an ester and requires a strong acid or base and heating; in cells it is catalysed by enzymes, the proteases, which break peptide bonds. The products depend on the environment: in an acidic environment the carboxylic acid and the ammonium ion are obtained; in a basic environment the carboxylate ion and ammonia or the amine are obtained.
 :::
 
 ## Claisen condensation, lactones and decarboxylation
 
 :::osservazione{#claisen titolo="An enolate attacks an ester"}
-In a Claisen condensation, an ester enolate attacks another ester. Collapse of the intermediate expels an alkoxide and produces a beta-keto ester: compared with the aldol reaction, the tetrahedral intermediate has a different fate. Classical self-condensation of ethyl ethanoate uses ethoxide and a final acid work-up.
+The **Claisen condensation** is the reaction between two molecules of ester, analogous to the aldol addition. A base removes an $\alpha$ hydrogen from one molecule of ester and forms an enolate. The enolate attacks the carbonyl of a second molecule. Unlike the aldol, the tetrahedral intermediate loses the OR group, because the ester has a leaving group, and the carbonyl re-forms. The product is a **$\beta$-keto ester**, with a ketone and an ester separated by one carbon. For example, two molecules of ethyl ethanoate, with the ethoxide ion as base, give ethyl 3-oxobutanoate (ethyl acetoacetate) and ethanol.
 
 ![Two ethyl ethanoate molecules give a beta-keto ester in the Claisen reaction, with overall ethanol elimination](/figure/chimica-semestre-filtro/gruppi-funzionali/claisen-en.svg)
 
-An alkoxide matching the ester's OR group limits unwanted transesterification. In the classical pathway driven by product deprotonation, the donor substrate requires at least two alpha hydrogens: one allows initial enolate formation, and another remains in the beta-dicarbonyl and is removed to shift equilibrium. The base is not merely catalytic; final acid work-up restores the neutral product.
+The base used is the alkoxide ion corresponding to the OR group of the ester, for example ethoxide for an ethyl ester: in this way, even if the base attacks the carbonyl, the ester stays the same. The reaction is an unfavourable equilibrium. It is driven to completion by the fact that the $\beta$-keto ester has, between the two carbonyls, a very acidic hydrogen, which the base removes at once. This is why the starting ester must have at least two $\alpha$ hydrogens and the base is used in an amount equal to that of the ester, not in traces. At the end an acid is added to recover the neutral $\beta$-keto ester.
 
-Thioesters also participate in condensations that build C–C bonds. Enzymatic condensation of two acetyl-CoA molecules to acetoacetyl-CoA releases CoA-SH. The net direction depends on concentrations and coupling to other reactions; the enzyme accelerates the transformation without changing its equilibrium constant. The laboratory ethoxide protocol should not automatically be transferred to metabolism.
+Cells use the same reaction with thioesters. Two molecules of acetyl-CoA join and form acetoacetyl-CoA, releasing a molecule of coenzyme A. With reactions of this kind the cell builds the carbon chains of fatty acids and cholesterol. The reaction is catalysed by an enzyme, which increases its rate; the direction in which it proceeds depends on the concentrations and on the other reactions it is coupled to.
 :::
 
 :::osservazione{#lattoni-decarbossilazione titolo="Count the ring and identify the lost carbon"}
-A lactone is a cyclic ester. 4-Hydroxybutanoic acid can undergo internal esterification: its terminal OH reacts with the carboxyl group to form a five-membered ring. The count includes three methylene carbons, the carbonyl carbon and the alcohol oxygen; the carbonyl oxygen remains outside. Cyclization is an equilibrium influenced by catalysis, water, concentration and ring size.
+A **lactone** is a cyclic ester. It forms when a molecule contains both a COOH group and an OH group, and the two groups react with each other. For example, in 4-hydroxybutanoic acid $\mathrm{HOCH_2CH_2CH_2COOH}$ the OH of carbon 4 reacts with the carboxyl group and a five-membered ring forms: the four carbons of the chain and the oxygen of the OH. The oxygen of the C=O stays outside the ring. Lactones with five- and six-membered rings form easily. The cyclic analogue of an amide is called a *lactam*.
 
 ![Formation of a five-membered lactone from 4-hydroxybutanoic acid, with the carbonyl oxygen outside the ring](/figure/chimica-semestre-filtro/gruppi-funzionali/lattone-en.svg)
 
-A beta-keto acid can decarboxylate on heating through a pathway that facilitates proton transfer and initially gives an enol. Acetoacetic acid loses its carboxyl carbon as CO2; the remaining enol tautomerizes to propanone:
+**Decarboxylation** is the loss of the carboxyl group in the form of $\mathrm{CO_2}$. It takes place easily, with moderate heating, in **$\beta$-keto acids**, that is, in acids that have a ketone group on the $\beta$ carbon, two carbons away from the COOH. The carbonyl in that position accepts the hydrogen of the carboxyl group while the $\mathrm{CO_2}$ leaves; an enol forms, which turns at once into the ketone. For example, acetoacetic acid gives propanone (acetone) and $\mathrm{CO_2}$.
 
 $$
 \mathrm{CH_3COCH_2COOH}\xrightarrow{\Delta}\mathrm{CH_3COCH_3}+\mathrm{CO_2}.
 $$
 
-The balance conserves four carbons overall: three in the ketone and one in CO2. Pyruvate is instead an alpha-keto acid. Its oxidative decarboxylation to acetyl-CoA in metabolism requires an enzyme complex and cofactors, including CoA and NAD+; it cannot be inferred from the heating conditions used for a beta-keto acid.
+Of the four carbons of the acid, three stay in the ketone and one leaves as $\mathrm{CO_2}$. In the body this reaction produces the acetone found in the blood and on the breath during prolonged fasting or in uncontrolled diabetes. Pyruvate is instead an $\alpha$-keto acid, with the ketone on the carbon next to the COOH, and does not decarboxylate on heating alone. In cells its conversion into acetyl-CoA and $\mathrm{CO_2}$ requires a large enzyme complex, pyruvate dehydrogenase, and several coenzymes, including coenzyme A and $\mathrm{NAD^+}$.
 :::
