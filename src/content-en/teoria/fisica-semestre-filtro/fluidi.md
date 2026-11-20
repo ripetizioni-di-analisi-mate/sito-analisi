@@ -3,33 +3,39 @@ titolo: Fluid mechanics and models of circulation
 sommario: Gauge and absolute pressures, equilibrium and buoyancy, conservation of mass and energy, viscosity and hydraulic networks, interfaces and capillarity.
 ---
 :::osservazione{titolo="Three balances for fluids"}
-A liquid in a manometer, a jet passing through a narrowing and a nearly spherical drop require different balances. The first involves equilibrium of forces; the second follows mass and energy; in the third the energy cost of the interface also matters. The first decision is therefore to identify the system and the regime before choosing a formula.
+A **fluid** is a substance that flows, that is, a liquid or a gas. The chapter has three parts. The first concerns fluids at rest, in which pressure depends on depth. The second concerns moving fluids, described by conservation of mass and energy and by internal friction, called viscosity. The third concerns the surface of liquids, which behaves like a stretched film. Most examples come from blood circulation and breathing.
 :::
 
 ## States of matter, density and pressure
 
 :::osservazione{titolo="Solids, liquids and gases"}
-A solid rubber object can deform under a tangential force and reach equilibrium; an ordinary fluid keeps flowing while that stress acts. Liquids and gases are both fluids, but a liquid approximately retains its volume, whereas a gas fills the available space. Incompressibility is an approximation concerning changes in density: it does not mean absence of motion or viscosity.
+A solid has its own shape and volume. A fluid has no shape of its own and takes that of its container. Fluids are of two types.
+
+- A **liquid** has its own volume. It is almost **incompressible**, that is, its density stays practically the same even if the pressure increases greatly.
+- A **gas** has no volume of its own and occupies all the available space. It is compressible, that is, its density changes with pressure.
 :::
 
 :::definizione{#pressione-densita titolo="Density and pressure"}
-The average density of a homogeneous body and the uniform pressure on a surface are
+Two quantities describe a fluid. **Density** $\rho$ is the mass contained in a unit of volume. **Pressure** $p$ is the force acting perpendicularly on a surface, divided by the area of the surface.
 $$
 \rho=\dfrac{m}{V},\qquad p=\dfrac{F_\perp}{A}.
 $$
-Locally, pressure describes normal force per unit area. In a fluid at rest it is a scalar: the direction of the force depends on the normal to the surface on which it acts. The SI units are $\mathrm{kg/m^3}$ for density and $\mathrm{Pa}=\mathrm{N/m^2}$ for pressure.
+Density is measured in $\mathrm{kg/m^3}$. Water has a density of $1000\,\mathrm{kg/m^3}$ and blood about $1060\,\mathrm{kg/m^3}$. Pressure is measured in pascals, $\mathrm{Pa}=\mathrm{N/m^2}$. In a fluid at rest the pressure at a point is the same in all directions, so it is a scalar. The force the fluid exerts on a wall is always perpendicular to the wall.
 :::
 
 :::osservazione{titolo="Force, reference and conversions"}
-Pressure is not force. Doubling the area at uniform pressure doubles the force; if force is fixed instead, doubling the area halves the pressure. When pressure varies across a surface, the force is found by adding contributions from small areas, rather than multiplying the entire area by an arbitrarily chosen value.
+From the definition it follows that $F=pA$. The same force on a smaller area produces a larger pressure. A person weighing $700\,\mathrm{N}$ standing on two shoes of total area $350\,\mathrm{cm^2}=0.035\,\mathrm{m^2}$ exerts on the floor a pressure of $\dfrac{700}{0.035}=2.0\cdot10^4\,\mathrm{Pa}$. On stiletto heels of total area $2\,\mathrm{cm^2}$ the pressure is 175 times greater.
 
-**Absolute pressure** is referenced to a vacuum; **gauge pressure** is referenced to a specified external pressure, often atmospheric pressure:
+Pressure is expressed in two ways, according to the value taken as zero.
+
+- **Absolute pressure** is measured from vacuum. It is always positive.
+- **Gauge pressure** is the difference between absolute pressure and atmospheric pressure. It is the one shown by almost all instruments, including the sphygmomanometer used to measure blood pressure.
 $$
 p_{\mathrm{rel}}=p_{\mathrm{ass}}-p_{\mathrm{atm}}.
 $$
-A gauge can indicate negative gauge pressure without indicating negative absolute pressure. For example, $p_{\mathrm{atm}}=101\,\mathrm{kPa}$ and $p_{\mathrm{rel}}=-20\,\mathrm{kPa}$ correspond to $p_{\mathrm{ass}}=81\,\mathrm{kPa}$. The same reference cancels in differences between two pressures.
+A negative gauge pressure indicates an absolute pressure below atmospheric. With $p_{\mathrm{atm}}=101\,\mathrm{kPa}$, a gauge pressure of $-20\,\mathrm{kPa}$ corresponds to an absolute pressure of $101-20=81\,\mathrm{kPa}$, as in the figure. In the difference between two pressures atmospheric pressure cancels, so the difference is the same in both ways.
 
-For conversions, $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$, $1\,\mathrm{mL}=10^{-6}\,\mathrm{m^3}$ and $1\,\mathrm{cm^2}=10^{-4}\,\mathrm{m^2}$. The conventional millimetre of mercury is about $133.3\,\mathrm{Pa}$; the standard atmosphere is exactly $101325\,\mathrm{Pa}$ and does not necessarily equal local atmospheric pressure.
+In medicine pressure is measured in millimetres of mercury, with $1\,\mathrm{mmHg}\simeq133.3\,\mathrm{Pa}$. The standard atmosphere is $1\,\mathrm{atm}=101325\,\mathrm{Pa}=760\,\mathrm{mmHg}$. A blood pressure of $120\,\mathrm{mmHg}$ is a gauge pressure and corresponds to $120\cdot133.3\simeq1.6\cdot10^4\,\mathrm{Pa}$. For volumes and areas the conversions $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$, $1\,\mathrm{mL}=10^{-6}\,\mathrm{m^3}$ and $1\,\mathrm{cm^2}=10^{-4}\,\mathrm{m^2}$ are needed.
 
 ![Scale showing an absolute pressure of 81 kPa, atmospheric pressure of 101 kPa and a gauge difference of minus 20 kPa.](/figure/fisica-semestre-filtro/fluidi/pressure-en.svg)
 :::
@@ -37,36 +43,36 @@ For conversions, $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$, $1\,\mathrm{mL}=10^{-6}\
 ## Hydrostatic equilibrium and manometers
 
 :::osservazione{titolo="Balance for a stationary column"}
-Consider a vertical column of liquid at rest, with area $A$ and height $h$. The upward force on the base must balance the column's weight and the downward force on the upper face. Thus $(p-p_0)A=\rho Ahg$: area cancels. Pressure depends on depth, not on the width or shape of the vessel.
+In a liquid at rest pressure increases with depth, because each layer supports the weight of the liquid above it. Consider a vertical column of liquid, of base area $A$ and height $h$. On the top face the pressure is $p_0$ and on the base it is $p$. The column is at rest, so the upward force on the base, $pA$, balances the downward force on the top face, $p_0A$, plus the weight of the column, $\rho Ahg$. From $pA=p_0A+\rho Ahg$, dividing by $A$, the following law is obtained.
 :::
 
 :::teorema{#stevino titolo="Hydrostatic law"}
-With constant density and gravitational acceleration, at depth $h$ below a level at pressure $p_0$,
+In a liquid at rest of density $\rho$, the pressure at depth $h$ below a level where the pressure is $p_0$ is:
 $$
 p=p_0+\rho gh.
 $$
-Using instead an upward coordinate $z$, $\dfrac{dp}{dz}=-\rho g$. Two points at the same height in the same connected liquid at rest have the same pressure.
+The area $A$ does not appear. Pressure therefore depends only on depth and not on the shape or width of the container. It follows that two points at the same height, in the same liquid at rest with no interruption between them, have the same pressure. In water pressure increases by about $1\,\mathrm{atm}$ every $10\,\mathrm{m}$, because $1000\cdot9.81\cdot10\simeq9.8\cdot10^4\,\mathrm{Pa}$.
 :::
 
 :::osservazione{titolo="Vessels and manometer columns"}
-This last conclusion requires the stated conditions: it does not automatically apply to different liquids separated by a wall, or to a flowing conduit. In a vessel that widens upwards, force on the base can differ from the liquid's weight: inclined walls also exert vertical force components.
+Stevin's law is the working principle of instruments that measure pressure with a column of liquid.
 
-In a U-tube manometer, start from a known pressure and follow the columns: add $\rho g\Delta h$ when moving down and subtract it when moving up. Pressure is continuous across a flat interface at equilibrium when capillary effects are neglected. With different liquids, change the density at the interface. For a gas of negligible density connected to one arm, with the other open to air, a lower liquid level on the gas side indicates gas pressure above atmospheric pressure.
+The **U-tube manometer** is a U-shaped tube containing a liquid. One arm is connected to the gas whose pressure is to be measured and the other is open to the air. If the gas has a pressure above atmospheric, it pushes the liquid down in its own arm and makes it rise in the other. The difference in level $\Delta h$ between the two arms gives the gauge pressure of the gas, $p_{\mathrm{gas}}-p_{\mathrm{atm}}=\rho g\Delta h$. In general, along a tube containing liquids at rest, pressure increases by $\rho gh$ when one goes down by $h$ and decreases by the same amount when one goes up. If there is more than one liquid, in each stretch the density of the liquid present is used.
 
-In a **Torricelli barometer**, atmospheric pressure supports the column against the pressure above it:
+The **Torricelli barometer** measures atmospheric pressure. It is a tube full of mercury, closed at the top and inverted in a dish of mercury. The mercury falls until the column is about $760\,\mathrm{mm}$ high, and an almost empty space is left above it. Atmospheric pressure, acting on the dish, supports the column:
 $$
 p_{\mathrm{atm}}-p_{\mathrm{top}}=\rho_{\mathrm{Hg}}gh.
 $$
-Neglecting $p_{\mathrm{top}}$ gives the usual formula; if vapour or residual gas is significant, this term must be retained. The height difference is vertical even when the tube is tilted.
+The pressure $p_{\mathrm{top}}$ above the column is almost zero, so $p_{\mathrm{atm}}=\rho_{\mathrm{Hg}}gh$. With $\rho_{\mathrm{Hg}}=13600\,\mathrm{kg/m^3}$ and $h=0.760\,\mathrm{m}$ one obtains $13600\cdot9.81\cdot0.760\simeq1.01\cdot10^5\,\mathrm{Pa}$. The unit millimetre of mercury comes from this instrument. The height $h$ is measured vertically, even if the tube is tilted.
 :::
 
 :::esempio{titolo="A difference in height"}
-For a liquid of density $1060\,\mathrm{kg/m^3}$, two points separated vertically by $0.40\,\mathrm{m}$ at rest have
+In a standing person the heart and a point on the lowered arm are about $0.40\,\mathrm{m}$ apart vertically. Blood has a density of $1060\,\mathrm{kg/m^3}$. If the blood were at rest, the pressure difference between the two points would be:
 $$
 \Delta p=1060\cdot9.81\cdot0.40\,\mathrm{Pa}
 \simeq4.16\cdot10^3\,\mathrm{Pa}\simeq31.2\,\mathrm{mmHg}.
 $$
-The lower point has higher pressure. This hydrostatic contribution can be significant in models of circulation, but does not by itself determine flow around the circuit.
+Pressure is greater at the lower point. For this reason blood pressure is measured on the arm held at the height of the heart: at a different height the instrument would show a value higher or lower by some tens of mmHg.
 :::
 
 :::osservazione{titolo="Reading the hydrostatic graph"}
@@ -76,31 +82,38 @@ The lower point has higher pressure. This hydrostatic contribution can be signif
 ## Pascal's principle and buoyancy
 
 :::osservazione{titolo="Pressure increments in a hydraulic press"}
-Additional pressure applied to a confined liquid changes pressures far from the point of application. It does not eliminate the hydrostatic difference between different heights. In a hydraulic press, the forces considered are additional to the common external pressure, and piston friction and weight are neglected.
+A liquid enclosed in a container transmits changes in pressure. If a piston is pressed, pressure increases by the same amount at all points of the liquid. This is the basis of the **hydraulic press**, made of two connected cylinders of different area, full of liquid, each closed by a piston.
 :::
 
 :::teorema{#pascal-archimede titolo="Pressure transmission and buoyant force"}
-According to **Pascal's principle**, a pressure change applied to a confined incompressible fluid is transmitted through the fluid at equilibrium. With pistons at the same height,
+**Pascal's principle** states that a change in pressure applied to an enclosed liquid is transmitted unchanged to all points of the liquid. In the hydraulic press the pressure under the two pistons is the same, so:
 $$
 \dfrac{F_1}{A_1}=\dfrac{F_2}{A_2}.
 $$
-According to **Archimedes' principle**, the resultant of pressure forces on a body immersed in a fluid at rest acts upwards and equals the weight of the displaced fluid:
+A small force on the small piston produces a large force on the large piston. With $A_2=10A_1$ the force is ten times greater.
+
+**Archimedes' principle** states that a body immersed in a fluid receives an upward force, called **buoyancy**, equal to the weight of the fluid the body displaces:
 $$
 F_A=\rho_f gV_{\mathrm{sub}}.
 $$
-The formula with a single density assumes a homogeneous fluid and a submerged volume $V_{\mathrm{sub}}$ entirely surrounded by the fluid, apart from the free surface.
+In the formula $\rho_f$ is the density of the fluid, not that of the body, and $V_{\mathrm{sub}}$ is the volume of the immersed part. A body of volume $2\,\mathrm{L}=2\cdot10^{-3}\,\mathrm{m^3}$ fully immersed in water receives a buoyant force of $1000\cdot9.81\cdot2\cdot10^{-3}\simeq19.6\,\mathrm{N}$, whatever material it is made of.
 :::
 
 :::osservazione{titolo="Floating and constraint forces"}
-Buoyancy arises because pressure increases downwards: forces on the lower part outweigh those on the upper part. A body can sink despite receiving an upward buoyant force if its weight is greater. A body sealed against the bottom requires a specific balance: water does not act on the sealed face.
+Buoyancy exists because pressure increases with depth. The lower face of the body is deeper than the upper one, so the fluid pushes it upwards with a force greater than the one with which it pushes the upper face downwards. Two forces act on the body, weight downwards and buoyancy upwards, and the comparison between them determines what happens.
 
-For a homogeneous floating body with no supports, neglecting air and surface tension, equilibrium $mg=F_A$ gives
+- If the density of the body is greater than that of the fluid, weight exceeds buoyancy and the body sinks.
+- If it is smaller, buoyancy exceeds weight and the body rises until it floats, with part of it out of the fluid.
+
+A floating body is in equilibrium, so the buoyancy on the immersed part equals the weight, $\rho_fgV_{\mathrm{sub}}=\rho_cgV$. The immersed fraction of the volume follows:
 $$
 \dfrac{V_{\mathrm{sub}}}{V}=\dfrac{\rho_c}{\rho_f}.
 $$
-The fraction above the surface is one minus this value. For a rigid body fully submerged in an incompressible liquid, buoyancy does not increase further with depth: pressures increase, but their resultant stays the same. A support from above measures tension $T=mg-F_A$ only when this is non-negative; if buoyancy exceeds weight, a downward force is needed to hold the body stationary.
+Ice has a density of $917\,\mathrm{kg/m^3}$. In sea water, of density $1025\,\mathrm{kg/m^3}$, the immersed fraction is $\dfrac{917}{1025}\simeq0.89$. About 11% of an iceberg therefore emerges.
 
-The press also conserves transferred volume: $A_1s_1=A_2s_2$. In the ideal model with negligible height differences, $F_1s_1=F_2s_2$: gaining force requires a longer stroke. A hydraulic machine does not produce energy for free.
+For a fully immersed body buoyancy does not depend on depth, because the displaced volume stays the same. A body denser than the fluid, hanging from a string and immersed, pulls the string with a force $T=mg-F_A$, less than its weight. Weighing a body in air and in water therefore gives its volume.
+
+In the hydraulic press the liquid leaving one cylinder enters the other, so the volumes moved are equal, $A_1s_1=A_2s_2$, where $s$ is the displacement of each piston. The large piston moves less than the small one. The work is the same on both sides, $F_1s_1=F_2s_2$: the press multiplies force and not energy.
 
 ![Forces on a floating cube: equal weight and buoyancy, with 60 per cent of its volume submerged.](/figure/fisica-semestre-filtro/fluidi/buoyancy-en.svg)
 :::
@@ -108,25 +121,27 @@ The press also conserves transferred volume: $A_1s_1=A_2s_2$. In the ideal model
 ## Flow rate and the continuity equation
 
 :::osservazione{titolo="Speed and flow rate"}
-Velocity concerns local motion; flow rate quantifies how much fluid crosses a section. A large collection of small vessels can have a large total cross-sectional area and low mean speed while carrying the same flow rate as a larger vessel.
+For a fluid flowing in a pipe two quantities are used. **Velocity** $v$ indicates how fast the fluid moves. **Flow rate** $Q$ indicates how much volume of fluid crosses a section of the pipe in one second. The heart of an adult at rest, for example, has a flow rate of about $5\,\mathrm{L/min}$.
 :::
 
 :::teorema{#continuita titolo="Conservation of mass"}
-The average volumetric flow rate over an interval is $Q=\dfrac{\Delta V}{\Delta t}$. For a section crossed normally by the flow,
+The **volume flow rate** is the volume crossing a section divided by the time, $Q=\dfrac{\Delta V}{\Delta t}$, and is measured in $\mathrm{m^3/s}$. It equals the area $A$ of the section multiplied by the mean velocity $\bar v$ of the fluid. In one second, in fact, a cylinder of fluid of base $A$ and height $\bar v$ crosses the section. The **mass flow rate** $\dot m$ is the mass crossing the section in one second.
 $$
 Q=A\bar v,\qquad \dot m=\rho Q.
 $$
-$\bar v$ is the cross-sectional mean, not necessarily the speed on the axis. For steady flow through a conduit without leaks or branches,
+In a pipe without leaks or branches, in which the motion does not change over time (**steady** flow), the mass entering in one second equals the mass leaving. This is the **continuity equation**:
 $$
 \rho_1A_1\bar v_1=\rho_2A_2\bar v_2.
 $$
-If density is constant, $A_1\bar v_1=A_2\bar v_2$.
+For a liquid the density is constant and cancels, so $A_1\bar v_1=A_2\bar v_2$: the flow rate is the same at every section. Where the pipe narrows the liquid flows faster, and where it widens it flows more slowly.
 :::
 
 :::osservazione{titolo="Conservation, accumulation and areas"}
-Mass conservation remains valid for viscous fluids: it is not exclusive to the ideal model. A gas with changing density can instead have different volumetric flow rates at the two sections while retaining the same mass flow rate. If a conduit stores fluid by expanding, inflow and outflow can differ during the transient.
+For a pipe of circular section $A=\pi r^2$, so the area depends on the square of the radius. If the radius halves the area becomes one quarter and the velocity quadruples.
 
-For circular sections $A=\pi r^2$. Halving the radius along a steady incompressible conduit halves a length but reduces the area to one quarter: mean speed quadruples. At a junction without accumulation, flow rates are added with their directions; two outlets do not necessarily receive half the flow each, because that depends on the branch resistances.
+The equation also holds when the pipe divides into several branches. At a junction the flow rate entering equals the sum of the flow rates leaving. In the circulation the aorta has a section of about $3\,\mathrm{cm^2}$ and blood flows in it at about $30\,\mathrm{cm/s}$. Capillaries are extremely thin but there are billions of them, and their total area is about $3000\,\mathrm{cm^2}$, a thousand times that of the aorta. The flow rate is the same, so in the capillaries the velocity is a thousand times smaller, about $0.3\,\mathrm{mm/s}$. This slowness gives the time needed for exchanges with the tissues.
+
+The continuity equation expresses conservation of mass, so it also holds for viscous fluids. For a gas, whose density changes along the pipe, the mass flow rate is conserved and not the volume flow rate.
 
 ![Two circular sections with diameters in a two-to-one ratio: areas in a four-to-one ratio and speeds in a one-to-four ratio.](/figure/fisica-semestre-filtro/fluidi/continuity-en.svg)
 :::
@@ -134,29 +149,29 @@ For circular sections $A=\pi r^2$. Halving the radius along a steady incompressi
 ## Bernoulli's equation and changes in cross section
 
 :::osservazione{titolo="Pressure work"}
-Upstream pressure does work to push a fluid volume; downstream the fluid does work on its surroundings. The difference can become kinetic or gravitational potential energy. Dividing the energy balance by volume yields terms with pressure units.
+Bernoulli's equation is conservation of energy applied to a flowing fluid. A volume of fluid has kinetic energy, because it moves, and potential energy, because it lies at a certain height. In addition the fluid behind it pushes it and does work on it, in proportion to the pressure. If there is no friction the sum of these three contributions stays constant along the pipe.
 :::
 
 :::teorema{#bernoulli titolo="Energy balance for an ideal fluid"}
-Along the same streamline, for steady incompressible flow with negligible viscosity and no pumps or turbines between the points,
+For an **ideal fluid**, that is, incompressible and without viscosity, in steady flow, along the pipe:
 $$
 p+\dfrac12\rho v^2+\rho gz=\text{constant}.
 $$
-Here $p$ is static pressure, $v$ local speed and $z$ height measured upwards. Simple conduit models assume uniform speed across each section. Automatically substituting the mean of a non-uniform viscous profile would require energy corrections.
+The three terms are energies per unit volume and have the unit of a pressure. The term $p$ is the pressure of the fluid. The term $\dfrac12\rho v^2$ is the kinetic energy per unit volume. The term $\rho gz$ is the potential energy per unit volume, with $z$ the height measured upwards. If one of the three increases, the sum of the other two decreases by the same amount.
 :::
 
 :::osservazione{titolo="Applications and limits of Bernoulli"}
-At the same height, within the same ideal flow, increasing speed corresponds to decreasing static pressure. It does not follow that any faster point always has lower pressure: height, streamline or energy conditions may differ. Even in steady flow a particle can accelerate through a narrowing; it is the quantities at each fixed point that do not change with time.
+In a horizontal pipe the height is constant and the equation reduces to $p+\dfrac12\rho v^2=\text{constant}$. Where the fluid is faster the pressure is lower. Together with the continuity equation it follows that in a constriction velocity increases and pressure decreases. In the figure further on, water goes from $1\,\mathrm{m/s}$ to $3\,\mathrm{m/s}$ and the pressure falls by $\dfrac12\cdot1000\cdot(3^2-1^2)=4000\,\mathrm{Pa}$.
 
-For a large open reservoir with an outlet much smaller than its free surface, the downward speed of the surface is negligible. If the surface and jet have the same external pressure, Bernoulli gives Torricelli's outflow law
+A second case is the emptying of an open tank through a small hole, at a depth $\Delta h$ below the surface. At the surface and at the exit of the hole the pressure is atmospheric, and the surface falls so slowly that its velocity is neglected. Bernoulli's equation then gives $\rho g\Delta h=\dfrac12\rho v^2$, hence **Torricelli's law**:
 $$
 v=\sqrt{2g\Delta h}.
 $$
-This is an ideal, quasi-steady estimate; jet contraction and dissipation can alter the actual flow rate. It should not be confused with Torricelli's barometer experiment.
+It is the same speed as that of a body falling from rest from a height $\Delta h$. From a hole $0.80\,\mathrm{m}$ below the surface water comes out at $\sqrt{2\cdot9.81\cdot0.80}\simeq4.0\,\mathrm{m/s}$. The value is ideal, and in a real tank friction reduces it slightly.
 :::
 
 :::osservazione{#circolazione titolo="Stenosis, aneurysm and pressure recovery"}
-At fixed flow rate a narrowing increases speed; in the horizontal ideal model it lowers static pressure. A widening slows the flow. If the original height and area are restored after a narrowing, the ideal model restores the original pressure. In a real vessel some mechanical energy is dissipated: recovery is incomplete and the heart supplies work to the circuit. Elasticity, pulsations, complex geometry and the behaviour of blood limit the model.
+The two equations describe two alterations of blood vessels. In a **stenosis**, that is, a narrowing of an artery, the section decreases. Blood flows faster there and its pressure on the wall is lower. In an **aneurysm**, that is, a dilation, the section increases. Blood slows down and the pressure on the wall is higher, which tends to widen the dilation further. The ideal model is a first approximation. In real blood friction dissipates energy, so downstream of a stenosis the pressure stays lower than upstream, and vessel walls are elastic.
 :::
 
 :::osservazione{titolo="Comparing energy terms"}
@@ -166,65 +181,72 @@ At fixed flow rate a narrowing increases speed; in the horizontal ideal model it
 ## Viscosity and flow regimes
 
 :::osservazione{titolo="Origin of viscous stress"}
-Between two plates, one stationary and one moving, fluid layers drag one another. A tangential force is required to sustain the motion: the mechanical energy supplied is dissipated. Viscosity concerns the velocity gradient, rather than simply the presence of high speed.
+Real fluids have internal friction, called **viscosity**. Honey is more viscous than water. The fluid is thought of as divided into thin layers sliding over one another. The layer in contact with a stationary wall is at rest, and layers further away are progressively faster. Each layer slows the faster one sliding next to it. A force is therefore needed to maintain the motion, and the energy spent becomes heat.
 :::
 
 :::definizione{#viscosita titolo="Newtonian fluids and flow regimes"}
-For a Newtonian fluid in plane flow, the magnitude of shear stress is
+The friction force between two layers, divided by the contact area, is called the **shear stress** $\tau$. In a **Newtonian fluid** it is proportional to how fast the velocity changes from one layer to the next, that is, to the velocity gradient $\dfrac{dv}{dy}$:
 $$
 \tau=\eta\left|\dfrac{dv}{dy}\right|,
 $$
-where $\eta$ is dynamic viscosity, measured in $\mathrm{Pa\,s}$. The gradient has units of $\mathrm{s^{-1}}$. If stress and gradient are not linearly related with constant viscosity, the Newtonian model is insufficient.
+The constant $\eta$ is the **viscosity** of the fluid and is measured in $\mathrm{Pa\,s}$. Water at $20\,^\circ\mathrm{C}$ has a viscosity of $1.0\cdot10^{-3}\,\mathrm{Pa\,s}$ and blood about $3.5\cdot10^{-3}\,\mathrm{Pa\,s}$. Water is a Newtonian fluid. Blood is one only approximately, because it contains cells and its viscosity changes with velocity and with vessel diameter.
 :::
 
 :::osservazione{titolo="Flow regimes and Reynolds number"}
-**Steady** means that quantities at each fixed point do not change with time. **Laminar** means ordered motion without the irregular fluctuations and eddies of turbulent flow. These classifications are not opposites: laminar flow can be pulsating and therefore unsteady; turbulent flow can have a constant mean flow rate while fluctuating instantaneously. Molecular diffusion can still mix substances in laminar flow.
+A viscous fluid flows in two regimes.
 
-For a pipe of diameter $D$,
+- In the **laminar regime** the layers slide in order over one another without mixing. The flow is silent.
+- In the **turbulent regime** irregular vortices form and the layers mix. The flow dissipates more energy and produces noise.
+
+Laminar and steady are different properties. Steady means that at every point the velocity does not change over time. Blood flow in arteries is laminar and not steady, because it pulses with each beat.
+
+The regime is predicted with the **Reynolds number**. For a pipe of diameter $D$:
 $$
 \mathrm{Re}=\dfrac{\rho\bar vD}{\eta}
 $$
-is a dimensionless number comparing inertial and viscous effects. Small values favour laminar flow. Transition depends on geometry, inlet conditions and disturbances: an experimental threshold for a straight pipe is not a universal law for circulation. Blood contains cells and can have an apparent viscosity that depends on flow and vessel size.
+It is a pure number. In a straight pipe the flow is laminar if $\mathrm{Re}$ is less than about 2000 and becomes turbulent for much larger values. The threshold value depends on the shape of the duct. In the aorta, with $\rho=1060\,\mathrm{kg/m^3}$, $\bar v=0.30\,\mathrm{m/s}$, $D=0.020\,\mathrm{m}$ and $\eta=3.5\cdot10^{-3}\,\mathrm{Pa\,s}$, one obtains $\mathrm{Re}\simeq1800$. The flow is laminar, close to the limit. In a stenosis the velocity increases, the flow becomes turbulent and produces a noise, called a murmur, which is heard with a stethoscope.
 
 ![Normalised laminar parabolic profile: zero speed at the walls, maximum on the axis and mean speed equal to half the maximum.](/figure/fisica-semestre-filtro/fluidi/profile-en.svg)
 
-In the graph, $x$ is the signed coordinate along a diameter, with its origin on the axis; radial distance is $s=|x|$.
+In laminar flow in a pipe the velocity is zero at the wall and greatest on the axis, and its profile is a parabola. In the graph $x$ is the position along a diameter, with the origin on the axis of the pipe.
 :::
 
 ## Poiseuille's law and hydraulic resistance
 :::teorema{#poiseuille titolo="Laminar flow in a cylindrical pipe"}
-For an incompressible Newtonian fluid in steady, fully developed laminar flow through a rigid horizontal cylindrical pipe of radius $r$ and length $L$, with no slip at the wall,
+To make a viscous fluid flow in a pipe a pressure difference between the two ends is needed, which compensates for friction. **Poiseuille's law** gives the flow rate of a Newtonian fluid in laminar flow in a rigid cylindrical pipe of radius $r$ and length $L$:
 $$
 Q=\dfrac{\pi r^4}{8\eta L}\Delta p,\qquad
 R_h=\dfrac{8\eta L}{\pi r^4},\qquad \Delta p=R_hQ.
 $$
-Set $\Delta p=p_{\mathrm{in}}-p_{\mathrm{out}}>0$ in the flow direction. If heights differ, the driving difference also includes the gravitational contribution: static pressure difference alone cannot automatically be used.
+In the formula $\Delta p$ is the inlet pressure minus the outlet pressure. The quantity $R_h$ is the **hydraulic resistance** of the pipe. With it the law takes the form $\Delta p=R_hQ$, similar to Ohm's law of electric circuits: the pressure difference corresponds to voltage, the flow rate to current. Resistance increases with viscosity and with length, and depends on the fourth power of the radius.
 :::
 
 :::osservazione{titolo="Developed profile and pressure losses"}
-The developed profile does not change shape along the pipe; this assumption can fail near the inlet. At distance $s$ from the axis,
+The velocity of the fluid at distance $s$ from the axis of the pipe is:
 $$
 v(s)=\dfrac{\Delta p}{4\eta L}(r^2-s^2),\qquad
 v_{\max}=2\bar v.
 $$
-Speed is zero at the stationary wall because of no slip. The gradient is zero on the axis and greatest in magnitude at the wall: maximum speed does not mean maximum shear stress. Integrating the profile across the section gives Poiseuille's flow rate.
+The velocity is zero at the wall, where $s=r$, and greatest on the axis, where $s=0$. The maximum velocity is twice the mean velocity.
 
-Resistance is measured in $\mathrm{Pa\,s/m^3}$ and depends on the system, whereas viscosity is a fluid property under the conditions considered. Halving the radius multiplies resistance by $16$. At fixed pressure difference, flow rate becomes one sixteenth; at fixed flow rate, a sixteenfold pressure difference is required. Both conditions cannot be imposed simultaneously without changing something else.
+The dependence on the fourth power of the radius is the most important result. If the radius halves, the resistance becomes $2^4=16$ times larger. For the same pressure difference the flow rate falls to one sixteenth. To maintain the same flow rate a pressure difference 16 times larger is needed. A 16% reduction in radius is enough to halve the flow rate, because $0.84^4\simeq0.50$. The body regulates the distribution of blood in this way: small arteries change their radius slightly and the flow rate changes greatly.
 :::
 
 :::teorema{#resistenze-idrauliche titolo="Series and parallel connections"}
-In a steady network of linear elements, with no accumulation and with gravitational contributions absent or already included, elements in series carry the same flow rate and their pressure drops add:
+Several connected pipes are equivalent to a single pipe, with an equivalent resistance $R_{\mathrm{eq}}$. There are two types of connection. Pipes **in series** are connected one after another. The same flow rate passes through them and the pressure differences add, so the resistances add:
 $$
 R_{\mathrm{eq}}=\sum_iR_i.
 $$
-Parallel branches share the two end nodes and therefore the same pressure difference; their flow rates add:
+Pipes **in parallel** start from the same point and arrive at the same point. They have the same pressure difference and their flow rates add, so the reciprocals of the resistances add:
 $$
 \dfrac1{R_{\mathrm{eq}}}=\sum_i\dfrac1{R_i}.
 $$
 :::
 
 :::osservazione{titolo="Networks and pump constraints"}
-Two identical parallel branches halve the equivalent resistance. Closing one increases resistance: total flow decreases if pressure difference is held fixed, whereas more pressure is required if a pump maintains flow rate. For a horizontal dissipative element, mechanical power loss is $\mathcal P=\Delta p\,Q=R_hQ^2$, positive in the flow direction. These relationships allow comparisons with electrical circuits without equating the biological system to a set of perfectly rigid tubes.
+In series the equivalent resistance is larger than each resistance. In parallel it is smaller than the smallest. Two equal pipes in parallel, for example, have an equivalent resistance equal to half that of one alone. Capillaries are billions of vessels in parallel, and for this reason their overall resistance is moderate, even though each one has an enormous resistance.
+
+The power dissipated by friction in a pipe is $\mathcal P=\Delta p\,Q=R_hQ^2$. The heart of an adult at rest pushes $Q=5\,\mathrm{L/min}\simeq8.3\cdot10^{-5}\,\mathrm{m^3/s}$ with a mean pressure difference of about $100\,\mathrm{mmHg}\simeq1.3\cdot10^4\,\mathrm{Pa}$, so it supplies the blood with a power of about $1.1\,\mathrm{W}$.
 
 ![Series network with equal flow rate and parallel network with equal pressure difference; the combination laws are shown separately.](/figure/fisica-semestre-filtro/fluidi/network-en.svg)
 :::
@@ -232,27 +254,30 @@ Two identical parallel branches halve the equivalent resistance. Closing one inc
 ## Surface tension and Laplace's law
 
 :::osservazione{titolo="Interface energy"}
-Creating new surface requires energy. At fixed volume and when gravity is unimportant, surface tension therefore favours a shape with a small area: a free drop tends towards a sphere. Along a line bounding an interface, the force is tangent to the surface and perpendicular to the line. The number of surfaces also matters in the work balance.
+The surface of a liquid behaves like a stretched elastic film. Molecules inside the liquid are attracted by their neighbours in all directions. Those at the surface are attracted only inwards and sideways, so the surface tends to shrink as much as possible. For this reason a free drop is spherical, since the sphere is the shape with the smallest surface for a given volume, and some insects walk on water.
 :::
 
 :::definizione{#laplace titolo="Flat and curved interfaces"}
-Surface tension $\gamma$ is force per unit length, equivalently energy per unit area:
+**Surface tension** $\gamma$ measures this effect. It is the force with which the surface pulls along one of its edges, divided by the length of the edge. It is also the energy needed to increase the surface by one unit of area. For water at $20\,^\circ\mathrm{C}$ it is $0.073\,\mathrm{N/m}$.
 $$
 [\gamma]=\mathrm{N/m}=\mathrm{J/m^2}.
 $$
-For a single interface at equilibrium, with uniform tension, the Young-Laplace equation gives
+A curved surface, precisely because it is under tension, presses on the fluid it encloses. The pressure on the concave side is therefore greater than on the convex side. **Laplace's law** gives this pressure difference as a function of the two radii of curvature $R_1$ and $R_2$ of the surface, measured in two perpendicular directions:
 $$
 \Delta p=\gamma\left(\dfrac1{R_1}+\dfrac1{R_2}\right).
 $$
-The principal radii are oriented according to a consistent convention. For a convex surface viewed from outside, we choose internal pressure minus external pressure as positive and take the radii as positive.
+The more curved the surface, that is, the smaller the radii, the larger the pressure difference.
 :::
 
 :::osservazione{titolo="Curvatures and interface count"}
-For a sphere both radii equal $r$: $\Delta p=\dfrac{2\gamma}{r}$. For a cylindrical interface one equals $r$ and the other is infinite: $\Delta p=\dfrac\gamma r$. For a flat interface both are infinite and the curvature pressure jump is zero. This does not prevent pressure from varying with height within the phases.
+There are four special cases.
 
-A gas bubble inside a liquid has a single interface. A thin soap bubble instead separates gas and liquid film at two surfaces of nearly the same radius; the jumps add and the difference between internal and external gas pressure is approximately $\dfrac{4\gamma}{r}$. Film thickness must be negligible compared with radius for this simple form.
+- **Sphere** of radius $r$, for example a drop or an air bubble in a liquid. Both radii equal $r$, so $\Delta p=\dfrac{2\gamma}{r}$.
+- **Cylinder** of radius $r$. One radius is $r$ and the other is infinite, so $\Delta p=\dfrac{\gamma}{r}$.
+- **Flat surface**. Both radii are infinite, so $\Delta p=0$.
+- **Soap bubble**. The wall is a film with two surfaces, an inner and an outer one, so the effect is double: $\Delta p=\dfrac{4\gamma}{r}$.
 
-In a spherical model of an alveolus, a smaller radius requires greater excess pressure at fixed tension. Surfactant changes tension and its relationship with area; walls and interactions between alveoli matter. Comparing two isolated spheres with identical tension does not by itself describe lung stability.
+The **alveoli** of the lungs are small, almost spherical cavities, lined inside with a film of liquid. By Laplace's law a smaller alveolus requires a higher pressure to stay open. With the surface tension of water the small alveoli would collapse. The liquid, however, contains a substance, **surfactant**, which reduces surface tension, especially when the alveolus is small. Premature babies, who do not yet produce surfactant, have severe breathing difficulties for this reason.
 
 ![Comparison of curvatures: plane, cylinder, sphere with one interface and soap bubble with two interfaces.](/figure/fisica-semestre-filtro/fluidi/laplace-en.svg)
 :::
@@ -260,22 +285,26 @@ In a spherical model of an alveolus, a smaller radius requires greater excess pr
 ## Capillarity
 
 :::osservazione{titolo="Meniscus geometry"}
-In a capillary connected to a large reservoir, the meniscus can raise or lower the level relative to the external surface. Contact angle $\theta$ is measured **through the liquid**. The vertical component of tension around the contact circumference depends on $\cos\theta$ and can therefore change sign.
+**Capillarity** is the rise, or fall, of a liquid in a very thin tube, called a capillary. It depends on the attraction between the liquid and the wall. Where the liquid surface touches the wall it forms an angle with it, called the **contact angle** $\theta$, measured on the liquid side. If the liquid is attracted to the wall more than to itself, like water on glass, the angle is less than $90^\circ$ and the surface in the tube, called the meniscus, is concave. The liquid is said to wet the wall. If the opposite happens, as for mercury on glass, the angle is greater than $90^\circ$ and the meniscus is convex.
 :::
 
 :::teorema{#capillarita titolo="Capillary rise and depression"}
-For a vertical circular tube of internal radius $r$ at equilibrium, with negligible gas density, equal gas pressure above the surfaces and negligible contribution from meniscus volume,
+In a vertical tube of radius $r$ dipped in a liquid, surface tension pulls the liquid upwards all along the contact circumference, of length $2\pi r$. The vertical component of this force is $2\pi r\gamma\cos\theta$. The liquid rises until this force equals the weight of the raised column, of volume $\pi r^2h$. The equality gives the height $h$, known as **Jurin's law**:
 $$
 2\pi r\gamma\cos\theta=\rho g\pi r^2h,
 \qquad h=\dfrac{2\gamma\cos\theta}{\rho gr}.
 $$
-$h$ is positive above the reservoir level. The usual approximation treats the raised liquid as a cylindrical column and requires a meniscus small relative to the height considered.
+The height is inversely proportional to the radius: in a tube of half the radius the liquid rises twice as high. For water in a glass tube, with $\theta\simeq0$ and $r=0.50\,\mathrm{mm}$, one obtains $h=\dfrac{2\cdot0.072}{1000\cdot9.81\cdot5.0\cdot10^{-4}}\simeq2.9\,\mathrm{cm}$, as in the figure further on.
 :::
 
 :::osservazione{titolo="Rise, depression and model limitations"}
-A wetting liquid with $\theta<90^\circ$ rises; $\theta>90^\circ$ produces depression, whereas at $\theta=90^\circ$ the vertical capillary contribution is zero. Doubling radius halves the height magnitude only if tension, density and angle remain unchanged. If the wall surface also changes, the entire effect cannot be attributed to radius.
+The sign of $h$ depends on $\cos\theta$.
 
-The same law can be read as a balance between the meniscus pressure jump and the column's hydrostatic pressure. At a concave wetting meniscus, liquid pressure just beneath the interface is lower than gas pressure. The rise stops at equilibrium: a passive capillary cannot maintain flow indefinitely without an energy source or a process changing the conditions, such as evaporation.
+- If $\theta<90^\circ$ the cosine is positive and the liquid rises in the tube. This is the case for water in glass.
+- If $\theta>90^\circ$ the cosine is negative and the liquid in the tube falls below the outside level. This is the case for mercury in glass.
+- If $\theta=90^\circ$ the level does not change.
+
+The same law is obtained from Laplace's law. Under a concave meniscus the pressure of the liquid is lower than that of the air, by an amount $\dfrac{2\gamma\cos\theta}{r}$. The liquid rises until the pressure $\rho gh$ of the column compensates for this difference. Once equilibrium is reached the liquid stays at rest.
 
 ![Capillary height versus radius for water with zero contact angle: 5.87 cm at 0.25 mm, 2.94 cm at 0.50 mm and 1.47 cm at 1.00 mm.](/figure/fisica-semestre-filtro/fluidi/capillary-en.svg)
 :::

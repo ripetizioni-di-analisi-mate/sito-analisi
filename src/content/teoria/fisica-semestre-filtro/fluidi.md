@@ -3,33 +3,39 @@ titolo: Meccanica dei fluidi e modelli della circolazione
 sommario: Pressioni misurate e assolute, equilibrio e galleggiamento, conservazione della massa e dell'energia, viscosità e reti idrauliche, interfacce e capillarità.
 ---
 :::osservazione{titolo="Tre bilanci per i fluidi"}
-Un liquido in un manometro, un getto che attraversa un restringimento e una goccia quasi sferica richiedono bilanci diversi. Nel primo caso si equilibrano forze; nel secondo si seguono massa ed energia; nel terzo conta anche il costo energetico dell'interfaccia. La prima decisione consiste quindi nell'identificare il sistema e il regime, prima di scegliere una formula.
+Un **fluido** è una sostanza che scorre, cioè un liquido o un gas. Il capitolo ha tre parti. La prima riguarda i fluidi fermi, in cui la pressione dipende dalla profondità. La seconda riguarda i fluidi in movimento, descritti dalla conservazione della massa e dell'energia e dall'attrito interno, detto viscosità. La terza riguarda la superficie dei liquidi, che si comporta come una pellicola tesa. Gli esempi vengono in gran parte dalla circolazione del sangue e dalla respirazione.
 :::
 
 ## Stati della materia, densità e pressione
 
 :::osservazione{titolo="Solidi, liquidi e gas"}
-Una gomma solida può deformarsi sotto una forza tangenziale e raggiungere un equilibrio; un fluido ordinario continua a scorrere finché quello sforzo agisce. Liquidi e gas sono entrambi fluidi, ma un liquido conserva approssimativamente il proprio volume, mentre un gas riempie lo spazio disponibile. L'incomprimibilità è un'approssimazione sulla variazione della densità: non significa assenza di moto o di viscosità.
+Un solido ha forma e volume propri. Un fluido non ha forma propria e prende quella del recipiente. I fluidi sono di due tipi.
+
+- Un **liquido** ha un volume proprio. È quasi **incomprimibile**, cioè la sua densità resta praticamente la stessa anche se la pressione aumenta molto.
+- Un **gas** non ha volume proprio e occupa tutto lo spazio disponibile. È comprimibile, cioè la sua densità cambia con la pressione.
 :::
 
 :::definizione{#pressione-densita titolo="Densità e pressione"}
-La densità media di un corpo omogeneo e la pressione uniforme su una superficie sono
+Due grandezze descrivono un fluido. La **densità** $\rho$ è la massa contenuta in un'unità di volume. La **pressione** $p$ è la forza che agisce perpendicolarmente su una superficie, divisa per l'area della superficie.
 $$
 \rho=\dfrac{m}{V},\qquad p=\dfrac{F_\perp}{A}.
 $$
-Localmente la pressione descrive la forza normale per unità di area. In un fluido in quiete è una grandezza scalare: la direzione della forza dipende dalla normale alla superficie su cui agisce. Le unità SI sono $\mathrm{kg/m^3}$ per la densità e $\mathrm{Pa}=\mathrm{N/m^2}$ per la pressione.
+La densità si misura in $\mathrm{kg/m^3}$. L'acqua ha densità $1000\,\mathrm{kg/m^3}$ e il sangue circa $1060\,\mathrm{kg/m^3}$. La pressione si misura in pascal, $\mathrm{Pa}=\mathrm{N/m^2}$. In un fluido fermo la pressione in un punto è la stessa in tutte le direzioni, quindi è uno scalare. La forza che il fluido esercita su una parete è sempre perpendicolare alla parete.
 :::
 
 :::osservazione{titolo="Forza, riferimento e conversioni"}
-Una pressione non è una forza. Raddoppiare l'area a pressione uniforme raddoppia la forza; se invece è fissata la forza, raddoppiare l'area dimezza la pressione. Quando la pressione varia sulla superficie, la forza si ricava sommando i contributi delle piccole aree, non moltiplicando tutta l'area per un valore scelto arbitrariamente.
+Dalla definizione segue $F=pA$. La stessa forza su un'area più piccola produce una pressione maggiore. Una persona di peso $700\,\mathrm{N}$ in piedi su due scarpe di area totale $350\,\mathrm{cm^2}=0{,}035\,\mathrm{m^2}$ esercita sul pavimento una pressione di $\dfrac{700}{0{,}035}=2{,}0\cdot10^4\,\mathrm{Pa}$. Su tacchi a spillo di area totale $2\,\mathrm{cm^2}$ la pressione è 175 volte maggiore.
 
-La **pressione assoluta** ha come riferimento il vuoto; quella **relativa** ha come riferimento una pressione esterna dichiarata, spesso quella atmosferica:
+La pressione si esprime in due modi, secondo il valore preso come zero.
+
+- La **pressione assoluta** è misurata a partire dal vuoto. È sempre positiva.
+- La **pressione relativa** è la differenza fra la pressione assoluta e la pressione atmosferica. È quella indicata da quasi tutti gli strumenti, compreso lo sfigmomanometro con cui si misura la pressione del sangue.
 $$
 p_{\mathrm{rel}}=p_{\mathrm{ass}}-p_{\mathrm{atm}}.
 $$
-Un manometro può indicare una pressione relativa negativa senza indicare una pressione assoluta negativa. Per esempio, $p_{\mathrm{atm}}=101\,\mathrm{kPa}$ e $p_{\mathrm{rel}}=-20\,\mathrm{kPa}$ corrispondono a $p_{\mathrm{ass}}=81\,\mathrm{kPa}$. Nelle differenze fra due pressioni lo stesso riferimento si cancella.
+Una pressione relativa negativa indica una pressione assoluta minore di quella atmosferica. Con $p_{\mathrm{atm}}=101\,\mathrm{kPa}$, una pressione relativa di $-20\,\mathrm{kPa}$ corrisponde a una pressione assoluta di $101-20=81\,\mathrm{kPa}$, come nella figura. Nella differenza fra due pressioni la pressione atmosferica si elimina, quindi la differenza è la stessa con i due modi.
 
-Per le conversioni, $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$, $1\,\mathrm{mL}=10^{-6}\,\mathrm{m^3}$ e $1\,\mathrm{cm^2}=10^{-4}\,\mathrm{m^2}$. Il millimetro di mercurio convenzionale vale circa $133{,}3\,\mathrm{Pa}$; l'atmosfera standard vale esattamente $101325\,\mathrm{Pa}$ e non coincide necessariamente con la pressione atmosferica locale.
+In medicina la pressione si misura in millimetri di mercurio, con $1\,\mathrm{mmHg}\simeq133{,}3\,\mathrm{Pa}$. L'atmosfera standard vale $1\,\mathrm{atm}=101325\,\mathrm{Pa}=760\,\mathrm{mmHg}$. Una pressione sanguigna di $120\,\mathrm{mmHg}$ è una pressione relativa e corrisponde a $120\cdot133{,}3\simeq1{,}6\cdot10^4\,\mathrm{Pa}$. Per i volumi e le aree servono le conversioni $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$, $1\,\mathrm{mL}=10^{-6}\,\mathrm{m^3}$ e $1\,\mathrm{cm^2}=10^{-4}\,\mathrm{m^2}$.
 
 ![Scala con pressione assoluta di 81 kPa, pressione atmosferica di 101 kPa e differenza relativa di meno 20 kPa.](/figure/fisica-semestre-filtro/fluidi/pressure-it.svg)
 :::
@@ -37,36 +43,36 @@ Per le conversioni, $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$, $1\,\mathrm{mL}=10^{-
 ## Equilibrio idrostatico e manometri
 
 :::osservazione{titolo="Bilancio di una colonna in quiete"}
-Consideriamo una colonna verticale di liquido in quiete, di area $A$ e altezza $h$. La forza verso l'alto sulla base deve equilibrare il peso della colonna e la forza verso il basso sulla faccia superiore. Quindi $(p-p_0)A=\rho Ahg$: l'area si semplifica. La pressione dipende dalla profondità, non dalla larghezza o dalla forma del recipiente.
+In un liquido fermo la pressione aumenta con la profondità, perché ogni strato sostiene il peso del liquido che gli sta sopra. Si considera una colonna verticale di liquido, di area di base $A$ e altezza $h$. Sulla faccia superiore la pressione è $p_0$ e sulla base è $p$. La colonna è ferma, quindi la forza verso l'alto sulla base, $pA$, equilibra la forza verso il basso sulla faccia superiore, $p_0A$, più il peso della colonna, $\rho Ahg$. Da $pA=p_0A+\rho Ahg$, dividendo per $A$, si ottiene la legge seguente.
 :::
 
 :::teorema{#stevino titolo="Legge di Stevino"}
-Con densità e accelerazione di gravità costanti, alla profondità $h$ sotto un livello alla pressione $p_0$,
+In un liquido fermo di densità $\rho$, la pressione a profondità $h$ sotto un livello in cui la pressione è $p_0$ vale:
 $$
 p=p_0+\rho gh.
 $$
-Usando invece una coordinata $z$ crescente verso l'alto, $\dfrac{dp}{dz}=-\rho g$. Due punti alla stessa quota nello stesso liquido connesso in quiete hanno la stessa pressione.
+L'area $A$ non compare. La pressione dipende quindi solo dalla profondità e non dalla forma o dalla larghezza del recipiente. Ne segue che due punti alla stessa quota, nello stesso liquido fermo e senza interruzioni fra loro, hanno la stessa pressione. In acqua la pressione aumenta di circa $1\,\mathrm{atm}$ ogni $10\,\mathrm{m}$, perché $1000\cdot9{,}81\cdot10\simeq9{,}8\cdot10^4\,\mathrm{Pa}$.
 :::
 
 :::osservazione{titolo="Recipienti e colonne manometriche"}
-Quest'ultima conclusione richiede le condizioni indicate: non si applica automaticamente a liquidi diversi separati da una parete, né a un condotto in moto. In un recipiente che si allarga verso l'alto la forza sulla base può differire dal peso del liquido: anche le pareti inclinate esercitano componenti verticali di forza.
+La legge di Stevino è il principio di funzionamento degli strumenti che misurano la pressione con una colonna di liquido.
 
-Nel manometro a U si parte da una pressione nota e si percorrono le colonne: scendendo si aggiunge $\rho g\Delta h$, salendo si sottrae. Attraversando un'interfaccia piana all'equilibrio la pressione è continua, trascurando effetti capillari. Se sono presenti liquidi diversi si cambia densità al passaggio. Per un gas di densità trascurabile collegato a un ramo, l'altro aperto all'aria, un livello più basso dal lato del gas indica pressione del gas maggiore di quella atmosferica.
+Il **manometro a U** è un tubo a forma di U che contiene un liquido. Un ramo è collegato al gas di cui si vuole misurare la pressione e l'altro è aperto all'aria. Se il gas ha pressione maggiore di quella atmosferica, spinge il liquido verso il basso nel proprio ramo e lo fa salire nell'altro. Il dislivello $\Delta h$ fra i due rami dà la pressione relativa del gas, $p_{\mathrm{gas}}-p_{\mathrm{atm}}=\rho g\Delta h$. In generale, lungo un tubo che contiene liquidi fermi, la pressione aumenta di $\rho gh$ quando si scende di $h$ e diminuisce della stessa quantità quando si sale. Se i liquidi sono più d'uno, in ogni tratto si usa la densità del liquido presente.
 
-Nel **barometro di Torricelli** la pressione atmosferica sostiene la colonna rispetto alla pressione sopra di essa:
+Il **barometro di Torricelli** misura la pressione atmosferica. È un tubo pieno di mercurio, chiuso in alto e capovolto in una vaschetta di mercurio. Il mercurio scende finché la colonna è alta circa $760\,\mathrm{mm}$, e sopra di essa resta uno spazio quasi vuoto. La pressione atmosferica, che agisce sulla vaschetta, sostiene la colonna:
 $$
 p_{\mathrm{atm}}-p_{\mathrm{top}}=\rho_{\mathrm{Hg}}gh.
 $$
-Trascurare $p_{\mathrm{top}}$ dà la formula consueta; se vapore o gas residuo non sono trascurabili, occorre conservarlo. Il dislivello è verticale, anche quando il tubo è inclinato.
+La pressione $p_{\mathrm{top}}$ sopra la colonna è quasi nulla, quindi $p_{\mathrm{atm}}=\rho_{\mathrm{Hg}}gh$. Con $\rho_{\mathrm{Hg}}=13600\,\mathrm{kg/m^3}$ e $h=0{,}760\,\mathrm{m}$ si ottiene $13600\cdot9{,}81\cdot0{,}760\simeq1{,}01\cdot10^5\,\mathrm{Pa}$. Da questo strumento viene l'unità millimetro di mercurio. L'altezza $h$ si misura in verticale, anche se il tubo è inclinato.
 :::
 
 :::esempio{titolo="Una differenza di quota"}
-Un liquido di densità $1060\,\mathrm{kg/m^3}$ presenta fra due punti separati verticalmente di $0{,}40\,\mathrm{m}$, in quiete,
+In una persona in piedi il cuore e un punto del braccio abbassato distano in verticale circa $0{,}40\,\mathrm{m}$. Il sangue ha densità $1060\,\mathrm{kg/m^3}$. Se il sangue fosse fermo, la differenza di pressione fra i due punti sarebbe:
 $$
 \Delta p=1060\cdot9{,}81\cdot0{,}40\,\mathrm{Pa}
 \simeq4{,}16\cdot10^3\,\mathrm{Pa}\simeq31{,}2\,\mathrm{mmHg}.
 $$
-Il punto più basso ha pressione maggiore. Questo contributo idrostatico può essere significativo nei modelli della circolazione, ma non determina da solo il flusso nel circuito.
+La pressione è maggiore nel punto più basso. Per questo motivo la pressione del sangue si misura sul braccio tenuto all'altezza del cuore: a un'altezza diversa lo strumento indicherebbe un valore più alto o più basso di alcune decine di mmHg.
 :::
 
 :::osservazione{titolo="Leggere il grafico idrostatico"}
@@ -76,31 +82,38 @@ Il punto più basso ha pressione maggiore. Questo contributo idrostatico può es
 ## Pascal e Archimede
 
 :::osservazione{titolo="Incrementi di pressione nel torchio"}
-Una pressione aggiuntiva applicata al liquido confinato modifica le pressioni anche lontano dal punto di applicazione. Non elimina però la differenza idrostatica fra quote diverse. Nel torchio le forze considerate sono quelle aggiuntive rispetto alla pressione esterna comune, e si trascurano attrito e peso dei pistoni.
+Un liquido chiuso in un recipiente trasmette le variazioni di pressione. Se si preme su un pistone, la pressione aumenta della stessa quantità in tutti i punti del liquido. Su questo si basa il **torchio idraulico**, formato da due cilindri di area diversa collegati fra loro e pieni di liquido, ciascuno chiuso da un pistone.
 :::
 
 :::teorema{#pascal-archimede titolo="Trasmissione della pressione e spinta"}
-Per il **principio di Pascal**, una variazione di pressione applicata a un fluido incomprimibile confinato si trasmette al fluido in equilibrio. Con pistoni alla stessa quota,
+Il **principio di Pascal** afferma che una variazione di pressione applicata a un liquido chiuso si trasmette invariata a tutti i punti del liquido. Nel torchio idraulico la pressione sotto i due pistoni è la stessa, quindi:
 $$
 \dfrac{F_1}{A_1}=\dfrac{F_2}{A_2}.
 $$
-Per il **principio di Archimede**, la risultante delle pressioni su un corpo immerso in un fluido in quiete è diretta verso l'alto e vale il peso del fluido spostato:
+Una forza piccola sul pistone piccolo produce una forza grande sul pistone grande. Con $A_2=10A_1$ la forza è dieci volte maggiore.
+
+Il **principio di Archimede** afferma che un corpo immerso in un fluido riceve una forza diretta verso l'alto, detta **spinta di Archimede**, uguale al peso del fluido che il corpo sposta:
 $$
 F_A=\rho_f gV_{\mathrm{sub}}.
 $$
-La formula con una sola densità presuppone un fluido omogeneo e un volume immerso $V_{\mathrm{sub}}$ interamente circondato dal fluido, salvo la superficie libera.
+Nella formula $\rho_f$ è la densità del fluido, non quella del corpo, e $V_{\mathrm{sub}}$ è il volume della parte immersa. Un corpo di volume $2\,\mathrm{L}=2\cdot10^{-3}\,\mathrm{m^3}$ tutto immerso in acqua riceve una spinta di $1000\cdot9{,}81\cdot2\cdot10^{-3}\simeq19{,}6\,\mathrm{N}$, qualunque sia il materiale di cui è fatto.
 :::
 
 :::osservazione{titolo="Galleggiamento e forze di vincolo"}
-La spinta nasce perché la pressione cresce verso il basso: le forze sulla parte inferiore prevalgono su quelle sulla parte superiore. Il corpo può anche affondare pur ricevendo una spinta verso l'alto, se il suo peso è maggiore. Un corpo a contatto ermetico con il fondo richiede un bilancio specifico: l'acqua non agisce sulla faccia sigillata.
+La spinta esiste perché la pressione aumenta con la profondità. La faccia inferiore del corpo è più in basso di quella superiore, quindi il fluido la spinge verso l'alto con una forza maggiore di quella con cui spinge verso il basso la faccia superiore. Sul corpo agiscono due forze, il peso verso il basso e la spinta verso l'alto, e il confronto fra le due stabilisce che cosa accade.
 
-Per un corpo omogeneo galleggiante, senza sostegni, trascurando aria e tensione superficiale, l'equilibrio $mg=F_A$ fornisce
+- Se la densità del corpo è maggiore di quella del fluido, il peso supera la spinta e il corpo affonda.
+- Se è minore, la spinta supera il peso e il corpo sale fino a galleggiare, con una parte fuori dal fluido.
+
+Un corpo che galleggia è in equilibrio, quindi la spinta sulla parte immersa è uguale al peso, $\rho_fgV_{\mathrm{sub}}=\rho_cgV$. Ne segue la frazione di volume immersa:
 $$
 \dfrac{V_{\mathrm{sub}}}{V}=\dfrac{\rho_c}{\rho_f}.
 $$
-La frazione emersa è il complemento a uno. Per un corpo rigido completamente immerso in un liquido incomprimibile la spinta non aumenta ulteriormente con la profondità: aumentano le pressioni, ma la loro risultante resta la stessa. Un sostegno dall'alto misura la tensione $T=mg-F_A$ soltanto quando questa è non negativa; se la spinta supera il peso, serve una forza verso il basso per tenerlo fermo.
+Il ghiaccio ha densità $917\,\mathrm{kg/m^3}$. In acqua di mare, di densità $1025\,\mathrm{kg/m^3}$, la frazione immersa è $\dfrac{917}{1025}\simeq0{,}89$. Di un iceberg emerge quindi circa l'11%.
 
-Il torchio conserva anche il volume trasferito: $A_1s_1=A_2s_2$. Nel modello ideale con differenze di quota trascurabili, $F_1s_1=F_2s_2$: guadagnare forza richiede maggiore corsa. Una macchina idraulica non produce energia gratuitamente.
+Per un corpo tutto immerso la spinta non dipende dalla profondità, perché il volume spostato resta lo stesso. Un corpo più denso del fluido, appeso a un filo e immerso, tira il filo con una forza $T=mg-F_A$, minore del suo peso. Pesando un corpo in aria e in acqua si ricava così il suo volume.
+
+Nel torchio idraulico il liquido che esce da un cilindro entra nell'altro, quindi i volumi spostati sono uguali, $A_1s_1=A_2s_2$, dove $s$ è lo spostamento di ciascun pistone. Il pistone grande si sposta meno di quello piccolo. Il lavoro è lo stesso dai due lati, $F_1s_1=F_2s_2$: il torchio moltiplica la forza e non l'energia.
 
 ![Forze su un cubo galleggiante: peso e spinta uguali, con il 60 per cento del volume immerso.](/figure/fisica-semestre-filtro/fluidi/buoyancy-it.svg)
 :::
@@ -108,25 +121,27 @@ Il torchio conserva anche il volume trasferito: $A_1s_1=A_2s_2$. Nel modello ide
 ## Portata ed equazione di continuità
 
 :::osservazione{titolo="Velocità e portata"}
-La velocità riguarda il moto locale; la portata quantifica quanto fluido attraversa una sezione. Un grande insieme di piccoli vasi può avere area totale elevata e velocità media bassa pur trasportando la stessa portata di un vaso più grande.
+Per un fluido che scorre in un tubo si usano due grandezze. La **velocità** $v$ indica quanto rapidamente si sposta il fluido. La **portata** $Q$ indica quanto volume di fluido attraversa una sezione del tubo in un secondo. Il cuore di un adulto a riposo, per esempio, ha una portata di circa $5\,\mathrm{L/min}$.
 :::
 
 :::teorema{#continuita titolo="Conservazione della massa"}
-La portata volumetrica media in un intervallo è $Q=\dfrac{\Delta V}{\Delta t}$. Per una sezione attraversata normalmente dal moto,
+La **portata volumetrica** è il volume che attraversa una sezione diviso per il tempo, $Q=\dfrac{\Delta V}{\Delta t}$, e si misura in $\mathrm{m^3/s}$. È uguale all'area $A$ della sezione moltiplicata per la velocità media $\bar v$ del fluido. In un secondo, infatti, attraversa la sezione un cilindro di fluido di base $A$ e altezza $\bar v$. La **portata in massa** $\dot m$ è la massa che attraversa la sezione in un secondo.
 $$
 Q=A\bar v,\qquad \dot m=\rho Q.
 $$
-$\bar v$ è la media sulla sezione, non necessariamente la velocità sull'asse. In un condotto percorso in regime stazionario, senza perdite né diramazioni,
+In un tubo senza perdite e senza diramazioni, in cui il moto non cambia nel tempo (moto **stazionario**), la massa che entra in un secondo è uguale a quella che esce. Questa è l'**equazione di continuità**:
 $$
 \rho_1A_1\bar v_1=\rho_2A_2\bar v_2.
 $$
-Se la densità è costante, $A_1\bar v_1=A_2\bar v_2$.
+Per un liquido la densità è costante e si semplifica, quindi $A_1\bar v_1=A_2\bar v_2$: la portata è la stessa in ogni sezione. Dove il tubo si restringe il liquido scorre più veloce, e dove si allarga scorre più lento.
 :::
 
 :::osservazione{titolo="Conservazione, accumulo e aree"}
-La conservazione della massa resta valida anche per un fluido viscoso: non è una proprietà esclusiva del modello ideale. Un gas che cambia densità può invece avere portate volumetriche diverse alle due sezioni, pur conservando la portata massica. Se il condotto accumula fluido perché si dilata, ingresso e uscita possono differire durante il transitorio.
+Per un tubo a sezione circolare $A=\pi r^2$, quindi l'area dipende dal quadrato del raggio. Se il raggio si dimezza l'area diventa un quarto e la velocità quadruplica.
 
-Per sezioni circolari $A=\pi r^2$. Dimezzare il raggio lungo un condotto incomprimibile stazionario dimezza una lunghezza, ma riduce l'area a un quarto: la velocità media quadruplica. A un nodo privo di accumulo si sommano le portate con il loro verso; due uscite non ricevono necessariamente metà portata ciascuna, perché ciò dipende dalle resistenze dei rami.
+L'equazione vale anche quando il tubo si divide in più rami. In una diramazione la portata che entra è uguale alla somma delle portate che escono. Nella circolazione l'aorta ha una sezione di circa $3\,\mathrm{cm^2}$ e il sangue vi scorre a circa $30\,\mathrm{cm/s}$. I capillari sono sottilissimi ma sono miliardi, e la loro area totale è circa $3000\,\mathrm{cm^2}$, mille volte quella dell'aorta. La portata è la stessa, quindi nei capillari la velocità è mille volte minore, circa $0{,}3\,\mathrm{mm/s}$. Questa lentezza dà il tempo necessario agli scambi con i tessuti.
+
+L'equazione di continuità esprime la conservazione della massa, quindi vale anche per i fluidi viscosi. Per un gas, la cui densità cambia lungo il tubo, si conserva la portata in massa e non quella volumetrica.
 
 ![Due sezioni circolari di diametri nel rapporto due a uno: aree nel rapporto quattro a uno e velocità nel rapporto uno a quattro.](/figure/fisica-semestre-filtro/fluidi/continuity-it.svg)
 :::
@@ -134,29 +149,29 @@ Per sezioni circolari $A=\pi r^2$. Dimezzare il raggio lungo un condotto incompr
 ## Bernoulli e variazioni di sezione
 
 :::osservazione{titolo="Il lavoro delle pressioni"}
-La pressione a monte compie lavoro per spingere un volume di fluido; a valle il fluido compie lavoro sull'ambiente. La differenza può diventare energia cinetica o potenziale gravitazionale. Dividere il bilancio energetico per il volume porta a termini con unità di pressione.
+L'equazione di Bernoulli è la conservazione dell'energia applicata a un fluido che scorre. Un volume di fluido possiede energia cinetica, perché si muove, ed energia potenziale, perché si trova a una certa quota. Inoltre il fluido che sta dietro lo spinge e compie lavoro su di esso, in misura proporzionale alla pressione. Se non c'è attrito la somma di questi tre contributi resta costante lungo il tubo.
 :::
 
 :::teorema{#bernoulli titolo="Bilancio energetico di un fluido ideale"}
-Lungo una stessa linea di corrente, per moto stazionario incomprimibile con viscosità trascurabile, senza pompe o turbine fra i punti,
+Per un **fluido ideale**, cioè incomprimibile e senza viscosità, in moto stazionario, lungo il tubo vale:
 $$
 p+\dfrac12\rho v^2+\rho gz=\text{costante}.
 $$
-Qui $p$ è la pressione statica, $v$ la velocità locale e $z$ la quota crescente verso l'alto. Nei semplici modelli di condotto si assume velocità uniforme su ciascuna sezione. La sostituzione automatica con la media di un profilo viscoso non uniforme richiederebbe correzioni energetiche.
+I tre termini sono energie per unità di volume e hanno l'unità di una pressione. Il termine $p$ è la pressione del fluido. Il termine $\dfrac12\rho v^2$ è l'energia cinetica per unità di volume. Il termine $\rho gz$ è l'energia potenziale per unità di volume, con $z$ quota misurata verso l'alto. Se uno dei tre aumenta, la somma degli altri due diminuisce della stessa quantità.
 :::
 
 :::osservazione{titolo="Applicazioni e limiti di Bernoulli"}
-In orizzontale, nello stesso flusso ideale, un aumento di velocità corrisponde a una diminuzione di pressione statica. Non segue che qualsiasi punto più veloce abbia sempre pressione minore: possono cambiare quota, linea di corrente o condizioni energetiche. Anche in un moto stazionario una particella può accelerare attraversando un restringimento; sono le grandezze in ciascun punto fisso a non cambiare nel tempo.
+In un tubo orizzontale la quota è costante e l'equazione si riduce a $p+\dfrac12\rho v^2=\text{costante}$. Dove il fluido è più veloce la pressione è minore. Insieme all'equazione di continuità ne segue che in una strozzatura la velocità aumenta e la pressione diminuisce. Nella figura più avanti, l'acqua passa da $1\,\mathrm{m/s}$ a $3\,\mathrm{m/s}$ e la pressione diminuisce di $\dfrac12\cdot1000\cdot(3^2-1^2)=4000\,\mathrm{Pa}$.
 
-Per un grande serbatoio aperto, con foro molto più piccolo della superficie libera, la velocità di abbassamento della superficie è trascurabile. Se superficie e getto sono alla stessa pressione esterna, Bernoulli dà la legge di efflusso di Torricelli
+Un secondo caso è lo svuotamento di un serbatoio aperto attraverso un piccolo foro, posto a una profondità $\Delta h$ sotto la superficie. Alla superficie e all'uscita del foro la pressione è quella atmosferica, e la superficie scende così lentamente che la sua velocità si trascura. L'equazione di Bernoulli dà allora $\rho g\Delta h=\dfrac12\rho v^2$, da cui la **legge di Torricelli**:
 $$
 v=\sqrt{2g\Delta h}.
 $$
-È una valutazione ideale e quasi stazionaria; contrazione del getto e dissipazione possono modificare la portata reale. Non va confusa con l'esperimento barometrico di Torricelli.
+È la stessa velocità di un corpo che cade da fermo da un'altezza $\Delta h$. Da un foro posto $0{,}80\,\mathrm{m}$ sotto la superficie l'acqua esce a $\sqrt{2\cdot9{,}81\cdot0{,}80}\simeq4{,}0\,\mathrm{m/s}$. Il valore è ideale, e in un serbatoio reale l'attrito lo riduce un poco.
 :::
 
 :::osservazione{#circolazione titolo="Stenosi, aneurisma e pressione recuperata"}
-A portata fissata un restringimento aumenta la velocità; nel modello ideale orizzontale riduce la pressione statica. Un allargamento la rallenta. Se dopo il restringimento si recuperano quota e sezione iniziali, il modello ideale recupera la pressione iniziale. In un vaso reale parte dell'energia meccanica si dissipa: il recupero non è completo e il cuore fornisce lavoro al circuito. Elasticità, pulsazioni, geometria complessa e comportamento del sangue limitano il modello.
+Le due equazioni descrivono due alterazioni dei vasi sanguigni. In una **stenosi**, cioè un restringimento di un'arteria, la sezione diminuisce. Il sangue vi scorre più veloce e la sua pressione sulla parete è minore. In un **aneurisma**, cioè una dilatazione, la sezione aumenta. Il sangue rallenta e la pressione sulla parete è maggiore, il che tende ad allargare ancora la dilatazione. Il modello ideale è una prima approssimazione. Nel sangue reale l'attrito dissipa energia, quindi a valle di una stenosi la pressione resta più bassa di quella a monte, e le pareti dei vasi sono elastiche.
 :::
 
 :::osservazione{titolo="Confrontare i termini energetici"}
@@ -166,65 +181,72 @@ A portata fissata un restringimento aumenta la velocità; nel modello ideale ori
 ## Viscosità e regimi di moto
 
 :::osservazione{titolo="Origine dello sforzo viscoso"}
-Fra due piastre, una ferma e una in moto, gli strati di fluido si trascinano. Per mantenere il moto occorre una forza tangenziale: l'energia meccanica fornita viene dissipata. La viscosità riguarda il gradiente di velocità, non semplicemente la presenza di una velocità elevata.
+I fluidi reali hanno un attrito interno, detto **viscosità**. Il miele è più viscoso dell'acqua. Si pensa il fluido diviso in strati sottili che scorrono l'uno sull'altro. Lo strato a contatto con una parete ferma è fermo, e gli strati più lontani sono via via più veloci. Ogni strato frena quello più veloce che gli scorre accanto. Per mantenere il moto serve quindi una forza, e l'energia spesa diventa calore.
 :::
 
 :::definizione{#viscosita titolo="Fluidi newtoniani e regimi"}
-Per un fluido newtoniano in moto piano, il modulo dello sforzo tangenziale è
+La forza di attrito fra due strati, divisa per l'area di contatto, si chiama **sforzo tangenziale** $\tau$. In un **fluido newtoniano** è proporzionale alla rapidità con cui la velocità cambia da uno strato all'altro, cioè al gradiente di velocità $\dfrac{dv}{dy}$:
 $$
 \tau=\eta\left|\dfrac{dv}{dy}\right|,
 $$
-dove $\eta$ è la viscosità dinamica, misurata in $\mathrm{Pa\,s}$. Il gradiente ha unità $\mathrm{s^{-1}}$. Se la relazione fra sforzo e gradiente non è lineare con viscosità costante, il modello newtoniano non basta.
+La costante $\eta$ è la **viscosità** del fluido e si misura in $\mathrm{Pa\,s}$. L'acqua a $20\,^\circ\mathrm{C}$ ha viscosità $1{,}0\cdot10^{-3}\,\mathrm{Pa\,s}$ e il sangue circa $3{,}5\cdot10^{-3}\,\mathrm{Pa\,s}$. L'acqua è un fluido newtoniano. Il sangue lo è solo in modo approssimato, perché contiene cellule e la sua viscosità cambia con la velocità e con il diametro del vaso.
 :::
 
 :::osservazione{titolo="Regimi di moto e numero di Reynolds"}
-**Stazionario** significa che le grandezze in ogni punto fisso non variano nel tempo. **Laminare** significa moto ordinato senza le fluttuazioni irregolari e i vortici del moto turbolento. Le due classificazioni non sono opposte: un flusso laminare può essere pulsante e quindi non stazionario; un flusso turbolento può avere una portata media costante pur fluttuando istantaneamente. La diffusione molecolare può comunque mescolare sostanze anche in moto laminare.
+Un fluido viscoso scorre in due regimi.
 
-Per un tubo di diametro $D$,
+- Nel **regime laminare** gli strati scorrono ordinati l'uno sull'altro senza mescolarsi. Il moto è silenzioso.
+- Nel **regime turbolento** si formano vortici irregolari e gli strati si mescolano. Il moto dissipa più energia e produce rumore.
+
+Laminare e stazionario sono proprietà diverse. Stazionario significa che in ogni punto la velocità non cambia nel tempo. Il flusso del sangue nelle arterie è laminare e non stazionario, perché pulsa a ogni battito.
+
+Il regime si prevede con il **numero di Reynolds**. Per un tubo di diametro $D$:
 $$
 \mathrm{Re}=\dfrac{\rho\bar vD}{\eta}
 $$
-è un numero adimensionale che confronta effetti inerziali e viscosi. Valori piccoli favoriscono il regime laminare. La transizione dipende da geometria, ingresso e perturbazioni: una soglia sperimentale per un tubo rettilineo non è una legge universale per la circolazione. Il sangue contiene cellule e può avere viscosità apparente dipendente dal flusso e dal calibro del vaso.
+È un numero puro. In un tubo diritto il moto è laminare se $\mathrm{Re}$ è minore di circa 2000 e diventa turbolento per valori molto maggiori. Il valore di soglia dipende dalla forma del condotto. Nell'aorta, con $\rho=1060\,\mathrm{kg/m^3}$, $\bar v=0{,}30\,\mathrm{m/s}$, $D=0{,}020\,\mathrm{m}$ e $\eta=3{,}5\cdot10^{-3}\,\mathrm{Pa\,s}$, si ottiene $\mathrm{Re}\simeq1800$. Il moto è laminare, vicino al limite. In una stenosi la velocità aumenta, il moto diventa turbolento e produce un rumore, detto soffio, che si sente con lo stetoscopio.
 
 ![Profilo laminare parabolico normalizzato: velocità nulla alle pareti, massima sull'asse, velocità media pari alla metà del massimo.](/figure/fisica-semestre-filtro/fluidi/profile-it.svg)
 
-Nel grafico $x$ è la coordinata con segno lungo un diametro, con origine sull’asse; la distanza radiale è $s=|x|$.
+Nel moto laminare in un tubo la velocità è nulla alla parete e massima sull'asse, e il suo andamento è una parabola. Nel grafico $x$ è la posizione lungo un diametro, con origine sull'asse del tubo.
 :::
 
 ## Poiseuille e resistenze idrauliche
 :::teorema{#poiseuille titolo="Flusso laminare in un tubo cilindrico"}
-Per un fluido newtoniano incomprimibile in moto laminare stazionario completamente sviluppato, entro un tubo cilindrico rigido orizzontale di raggio $r$ e lunghezza $L$, con aderenza alla parete,
+Per far scorrere un fluido viscoso in un tubo serve una differenza di pressione fra i due estremi, che compensa l'attrito. La **legge di Poiseuille** dà la portata di un fluido newtoniano in moto laminare in un tubo cilindrico rigido di raggio $r$ e lunghezza $L$:
 $$
 Q=\dfrac{\pi r^4}{8\eta L}\Delta p,\qquad
 R_h=\dfrac{8\eta L}{\pi r^4},\qquad \Delta p=R_hQ.
 $$
-Si pone $\Delta p=p_{\mathrm{in}}-p_{\mathrm{out}}>0$ nel verso del flusso. Se le quote differiscono, la differenza motrice comprende anche il contributo gravitazionale: non si usa automaticamente la sola differenza di pressione statica.
+Nella formula $\Delta p$ è la pressione all'ingresso meno quella all'uscita. La grandezza $R_h$ è la **resistenza idraulica** del tubo. Con essa la legge prende la forma $\Delta p=R_hQ$, simile alla legge di Ohm dei circuiti elettrici: la differenza di pressione corrisponde alla tensione, la portata alla corrente. La resistenza aumenta con la viscosità e con la lunghezza, e dipende dalla quarta potenza del raggio.
 :::
 
 :::osservazione{titolo="Profilo sviluppato e perdite di pressione"}
-Il profilo sviluppato non cambia forma lungo il tubo; vicino all'ingresso questa ipotesi può fallire. Con distanza $s$ dall'asse,
+La velocità del fluido a distanza $s$ dall'asse del tubo è:
 $$
 v(s)=\dfrac{\Delta p}{4\eta L}(r^2-s^2),\qquad
 v_{\max}=2\bar v.
 $$
-La velocità si annulla sulla parete fissa per l'aderenza. Il gradiente è nullo sull'asse e massimo in modulo alla parete: velocità massima non significa sforzo tangenziale massimo. L'integrazione del profilo sulla sezione dà la portata di Poiseuille.
+La velocità è nulla alla parete, dove $s=r$, ed è massima sull'asse, dove $s=0$. La velocità massima è il doppio della velocità media.
 
-La resistenza si misura in $\mathrm{Pa\,s/m^3}$ e dipende dal sistema, mentre la viscosità è una proprietà del fluido nelle condizioni considerate. Dimezzare il raggio moltiplica la resistenza per $16$. A differenza di pressione fissata la portata diventa un sedicesimo; a portata fissata occorre una differenza di pressione sedici volte maggiore. Non si possono imporre contemporaneamente entrambe le condizioni senza cambiare altro.
+La dipendenza dalla quarta potenza del raggio è il risultato più importante. Se il raggio si dimezza, la resistenza diventa $2^4=16$ volte maggiore. A parità di differenza di pressione la portata si riduce a un sedicesimo. Per mantenere la stessa portata serve una differenza di pressione 16 volte maggiore. Una riduzione del raggio del 16% è sufficiente a dimezzare la portata, perché $0{,}84^4\simeq0{,}50$. L'organismo regola in questo modo la distribuzione del sangue: le piccole arterie cambiano di poco il proprio raggio e la portata cambia di molto.
 :::
 
 :::teorema{#resistenze-idrauliche titolo="Serie e parallelo"}
-In una rete stazionaria di elementi lineari, senza accumulo e con contributi gravitazionali assenti o già inclusi, in serie passa la stessa portata e le cadute si sommano:
+Più tubi collegati fra loro equivalgono a un solo tubo, con una resistenza equivalente $R_{\mathrm{eq}}$. I collegamenti sono di due tipi. Tubi **in serie** sono collegati uno dopo l'altro. Li attraversa la stessa portata e le differenze di pressione si sommano, quindi si sommano le resistenze:
 $$
 R_{\mathrm{eq}}=\sum_iR_i.
 $$
-In parallelo i rami condividono i due nodi estremi, dunque la stessa differenza di pressione; le portate si sommano:
+Tubi **in parallelo** partono dallo stesso punto e arrivano allo stesso punto. Hanno la stessa differenza di pressione e le loro portate si sommano, quindi si sommano gli inversi delle resistenze:
 $$
 \dfrac1{R_{\mathrm{eq}}}=\sum_i\dfrac1{R_i}.
 $$
 :::
 
 :::osservazione{titolo="Reti e vincoli della pompa"}
-Due rami identici in parallelo dimezzano la resistenza equivalente. Chiuderne uno aumenta la resistenza: la portata totale diminuisce se la differenza di pressione resta fissata, mentre richiede maggiore pressione se una pompa mantiene la portata. Per un elemento orizzontale dissipativo la potenza meccanica persa è $\mathcal P=\Delta p\,Q=R_hQ^2$, positiva nel verso del flusso. Queste relazioni permettono confronti con i circuiti elettrici, senza identificare il sistema biologico con un insieme di tubi rigidi perfetti.
+In serie la resistenza equivalente è maggiore di ciascuna resistenza. In parallelo è minore della più piccola. Due tubi uguali in parallelo, per esempio, hanno resistenza equivalente pari a metà di quella di uno solo. I capillari sono miliardi di vasi in parallelo, e per questo la loro resistenza complessiva è moderata, anche se ciascuno ha una resistenza enorme.
+
+La potenza dissipata dall'attrito in un tubo è $\mathcal P=\Delta p\,Q=R_hQ^2$. Il cuore di un adulto a riposo spinge $Q=5\,\mathrm{L/min}\simeq8{,}3\cdot10^{-5}\,\mathrm{m^3/s}$ con una differenza di pressione media di circa $100\,\mathrm{mmHg}\simeq1{,}3\cdot10^4\,\mathrm{Pa}$, quindi fornisce al sangue una potenza di circa $1{,}1\,\mathrm{W}$.
 
 ![Rete in serie con la stessa portata e rete in parallelo con la stessa differenza di pressione; le leggi di combinazione sono indicate separatamente.](/figure/fisica-semestre-filtro/fluidi/network-it.svg)
 :::
@@ -232,27 +254,30 @@ Due rami identici in parallelo dimezzano la resistenza equivalente. Chiuderne un
 ## Tensione superficiale e legge di Laplace
 
 :::osservazione{titolo="Energia delle interfacce"}
-Creare nuova superficie richiede energia. La tensione superficiale favorisce perciò, a volume fissato e quando la gravità è poco importante, una forma con area piccola: una goccia libera tende alla sfera. Su una linea che delimita un'interfaccia la forza è tangente alla superficie e perpendicolare alla linea. Il numero di superfici conta anche nel bilancio del lavoro.
+La superficie di un liquido si comporta come una pellicola elastica tesa. Le molecole all'interno del liquido sono attratte dalle vicine in tutte le direzioni. Quelle sulla superficie sono attratte solo verso l'interno e di lato, quindi la superficie tende a ridursi il più possibile. Per questo motivo una goccia libera è sferica, dato che la sfera è la forma con la superficie minore a parità di volume, e alcuni insetti camminano sull'acqua.
 :::
 
 :::definizione{#laplace titolo="Interfacce piane e curve"}
-La tensione superficiale $\gamma$ è forza per unità di lunghezza, equivalentemente energia per unità di area:
+La **tensione superficiale** $\gamma$ misura questo effetto. È la forza con cui la superficie tira lungo un suo bordo, divisa per la lunghezza del bordo. È anche l'energia necessaria per aumentare la superficie di un'unità di area. Per l'acqua a $20\,^\circ\mathrm{C}$ vale $0{,}073\,\mathrm{N/m}$.
 $$
 [\gamma]=\mathrm{N/m}=\mathrm{J/m^2}.
 $$
-Per una singola interfaccia all'equilibrio, con tensione uniforme, la legge di Young-Laplace dà
+Una superficie curva, proprio perché è tesa, preme sul fluido che racchiude. La pressione dalla parte concava è quindi maggiore di quella dalla parte convessa. La **legge di Laplace** dà questa differenza di pressione in funzione dei due raggi di curvatura $R_1$ e $R_2$ della superficie, misurati in due direzioni perpendicolari:
 $$
 \Delta p=\gamma\left(\dfrac1{R_1}+\dfrac1{R_2}\right).
 $$
-I raggi principali sono orientati secondo una convenzione coerente. Per una superficie convessa vista dall'esterno, scegliamo positiva la pressione interna meno quella esterna e positivi i raggi.
+Più la superficie è curva, cioè più i raggi sono piccoli, più la differenza di pressione è grande.
 :::
 
 :::osservazione{titolo="Curvature e numero di interfacce"}
-Per una sfera entrambi i raggi valgono $r$: $\Delta p=\dfrac{2\gamma}{r}$. Per un'interfaccia cilindrica uno vale $r$ e l'altro è infinito: $\Delta p=\dfrac\gamma r$. Per un'interfaccia piana entrambi sono infiniti e il salto dovuto alla curvatura è nullo. Ciò non impedisce alla pressione di variare con la quota all'interno delle fasi.
+I casi particolari sono quattro.
 
-Una bolla di gas dentro un liquido ha una sola interfaccia. Una bolla di sapone sottile, invece, separa gas e film liquido su due superfici quasi dello stesso raggio; i salti si sommano e la differenza fra gas interno ed esterno è circa $\dfrac{4\gamma}{r}$. Lo spessore deve essere trascurabile rispetto al raggio per questa forma semplice.
+- **Sfera** di raggio $r$, per esempio una goccia o una bolla d'aria in un liquido. I due raggi sono uguali a $r$, quindi $\Delta p=\dfrac{2\gamma}{r}$.
+- **Cilindro** di raggio $r$. Un raggio è $r$ e l'altro è infinito, quindi $\Delta p=\dfrac{\gamma}{r}$.
+- **Superficie piana**. I due raggi sono infiniti, quindi $\Delta p=0$.
+- **Bolla di sapone**. La parete è una pellicola con due superfici, una interna e una esterna, quindi l'effetto è doppio: $\Delta p=\dfrac{4\gamma}{r}$.
 
-Nel modello sferico di un alveolo, a tensione fissata un raggio minore richiede maggiore sovrapressione. Il surfattante modifica la tensione e il suo rapporto con l'area; pareti e interazioni fra alveoli contano. Il confronto fra due sfere isolate con identica tensione non descrive da solo la stabilità del polmone.
+Gli **alveoli** dei polmoni sono piccole cavità quasi sferiche, rivestite all'interno da un velo di liquido. Per la legge di Laplace un alveolo più piccolo richiede una pressione maggiore per restare aperto. Con la tensione superficiale dell'acqua gli alveoli piccoli si chiuderebbero. Il liquido contiene però una sostanza, il **surfattante**, che riduce la tensione superficiale, soprattutto quando l'alveolo è piccolo. I neonati prematuri, che non producono ancora surfattante, hanno per questo motivo gravi difficoltà a respirare.
 
 ![Confronto delle curvature: piano, cilindro, sfera con una interfaccia e bolla di sapone con due interfacce.](/figure/fisica-semestre-filtro/fluidi/laplace-it.svg)
 :::
@@ -260,22 +285,26 @@ Nel modello sferico di un alveolo, a tensione fissata un raggio minore richiede 
 ## Capillarità
 
 :::osservazione{titolo="Geometria del menisco"}
-In un capillare collegato a un grande serbatoio, il menisco può sollevare o deprimere il livello rispetto alla superficie esterna. L'angolo di contatto $\theta$ si misura **attraverso il liquido**. La componente verticale della tensione lungo la circonferenza di contatto dipende da $\cos\theta$, quindi può cambiare segno.
+La **capillarità** è la salita, o la discesa, di un liquido in un tubo molto sottile, detto capillare. Dipende dall'attrazione fra il liquido e la parete. Dove la superficie del liquido tocca la parete forma con essa un angolo, detto **angolo di contatto** $\theta$, misurato dalla parte del liquido. Se il liquido è attratto dalla parete più che da sé stesso, come l'acqua sul vetro, l'angolo è minore di $90^\circ$ e la superficie nel tubo, detta menisco, è concava. Si dice che il liquido bagna la parete. Se accade il contrario, come per il mercurio sul vetro, l'angolo è maggiore di $90^\circ$ e il menisco è convesso.
 :::
 
 :::teorema{#capillarita titolo="Risalita e depressione capillare"}
-Per un tubo verticale circolare di raggio interno $r$, in equilibrio, con densità del gas trascurabile, stessa pressione del gas sopra le superfici e contributo del volume del menisco trascurabile,
+In un tubo verticale di raggio $r$ immerso in un liquido, la tensione superficiale tira il liquido verso l'alto lungo tutta la circonferenza di contatto, lunga $2\pi r$. La componente verticale di questa forza è $2\pi r\gamma\cos\theta$. Il liquido sale finché questa forza è uguale al peso della colonna sollevata, di volume $\pi r^2h$. Dall'uguaglianza si ricava l'altezza $h$, detta **legge di Jurin**:
 $$
 2\pi r\gamma\cos\theta=\rho g\pi r^2h,
 \qquad h=\dfrac{2\gamma\cos\theta}{\rho gr}.
 $$
-$h$ è positivo sopra il livello del serbatoio. L'approssimazione usuale tratta il liquido sollevato come una colonna cilindrica; richiede un menisco piccolo rispetto all'altezza considerata.
+L'altezza è inversamente proporzionale al raggio: in un tubo di raggio dimezzato il liquido sale del doppio. Per l'acqua in un tubo di vetro, con $\theta\simeq0$ e $r=0{,}50\,\mathrm{mm}$, si ottiene $h=\dfrac{2\cdot0{,}072}{1000\cdot9{,}81\cdot5{,}0\cdot10^{-4}}\simeq2{,}9\,\mathrm{cm}$, come nella figura più avanti.
 :::
 
 :::osservazione{titolo="Risalita, depressione e limiti del modello"}
-Un liquido bagnante con $\theta<90^\circ$ risale; per $\theta>90^\circ$ si ha depressione, mentre per $\theta=90^\circ$ il contributo capillare verticale è nullo. Raddoppiare il raggio dimezza il modulo dell'altezza soltanto se tensione, densità e angolo restano uguali. Se cambia anche la superficie della parete, non è lecito attribuire tutto al raggio.
+Il segno di $h$ dipende da $\cos\theta$.
 
-La stessa legge si legge come equilibrio fra salto di pressione del menisco e pressione idrostatica della colonna. Nel menisco concavo bagnante la pressione del liquido appena sotto l'interfaccia è minore di quella del gas. La risalita si arresta all'equilibrio: un capillare passivo non mantiene indefinitamente un flusso senza una sorgente di energia o un processo che modifichi le condizioni, come l'evaporazione.
+- Se $\theta<90^\circ$ il coseno è positivo e il liquido sale nel tubo. È il caso dell'acqua nel vetro.
+- Se $\theta>90^\circ$ il coseno è negativo e il liquido nel tubo scende sotto il livello esterno. È il caso del mercurio nel vetro.
+- Se $\theta=90^\circ$ il livello non cambia.
+
+La stessa legge si ottiene dalla legge di Laplace. Sotto un menisco concavo la pressione del liquido è minore di quella dell'aria, di una quantità $\dfrac{2\gamma\cos\theta}{r}$. Il liquido sale finché la pressione $\rho gh$ della colonna compensa questa differenza. Raggiunto l'equilibrio il liquido resta fermo.
 
 ![Altezza capillare in funzione del raggio per acqua con angolo nullo: 5,87 cm a 0,25 mm, 2,94 cm a 0,50 mm e 1,47 cm a 1,00 mm.](/figure/fisica-semestre-filtro/fluidi/capillary-it.svg)
 :::
