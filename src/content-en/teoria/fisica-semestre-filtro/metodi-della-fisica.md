@@ -74,7 +74,7 @@ In the second calculation $3\cdot10^{-6}$ was rewritten as $0.3\cdot10^{-5}$, an
 
 The **order of magnitude** of a number is the power of ten closest to it. To find it the number is written as $a\cdot10^n$. If $a$ is less than $\sqrt{10}\simeq3.16$ the order of magnitude is $10^n$, otherwise it is $10^{n+1}$. The threshold is $\sqrt{10}$ because it is the number lying halfway between 1 and 10 when one proceeds by multiplication: $1\cdot\sqrt{10}=\sqrt{10}$ and $\sqrt{10}\cdot\sqrt{10}=10$. Some texts use 5 as the threshold, so in exercises the criterion is stated.
 :::
-![The boundary between consecutive orders of magnitude is their geometric mean rather than their arithmetic mean.](/figure/fisica-semestre-filtro/metodi-della-fisica/orders-en.svg)
+![On the scale from 10⁻⁶ to 10⁻⁵ metres, the point at 2 · 10⁻⁶ lies to the left of the threshold and the point at 6 · 10⁻⁶ lies to its right.](/figure/fisica-semestre-filtro/metodi-della-fisica/orders-en.svg "On a logarithmic scale, equal distances correspond to equal ratios. The threshold, expressed in metres, is the geometric mean $\sqrt{10^{-6}\cdot10^{-5}}=\sqrt{10}\cdot10^{-6}$.")
 
 :::osservazione{titolo="Estimates and significant figures"}
 The length $6\cdot10^{-6}\,\mathrm{m}$ has order of magnitude $10^{-5}\,\mathrm{m}$, because $6>3.16$. The length $2\cdot10^{-6}\,\mathrm{m}$ has order of magnitude $10^{-6}\,\mathrm{m}$, because $2<3.16$. Estimating the order of magnitude of a result before calculating makes it possible to spot an error of a factor of a thousand, such as a forgotten conversion.

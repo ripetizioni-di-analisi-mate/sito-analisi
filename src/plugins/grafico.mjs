@@ -27,8 +27,8 @@ import { disegnaSvg, lista, esc } from './grafico-svg.mjs';
 
 let contatore = 0;
 // Didascalia: testo semplice con formule $…$ rese da KaTeX (frazioni in colonna, radici, esponenti).
-const didascalia = (t) => String(t).split(/(\$[^$]+\$)/g).map((p) => (/^\$[^$]+\$$/.test(p)
-  ? katex.renderToString(p.slice(1, -1), { throwOnError: false, output: 'html' })
+export const didascalia = (t, output = 'html') => String(t).split(/(\$[^$]+\$)/g).map((p) => (/^\$[^$]+\$$/.test(p)
+  ? katex.renderToString(p.slice(1, -1), { throwOnError: false, output })
   : esc(p))).join('');
 
 // opzioni (usate da cursore.mjs, non dalla direttiva): classe in più della figura, attributi in più
