@@ -168,7 +168,7 @@ In una reazione chimica alcuni legami si rompono e altri si formano. Rompere un 
 ## Geometria, polarità e interazioni tra molecole
 
 :::definizione{#geometria-ibridazione titolo="Domini elettronici e ibridazione"}
-La forma di una molecola si prevede con il modello **VSEPR**. L'idea è che le coppie di elettroni attorno a un atomo si respingono, perché hanno tutte carica negativa, e si dispongono quindi il più lontano possibile l'una dall'altra.
+La forma di una molecola si prevede con il modello **VSEPR** (repulsione delle coppie di elettroni del guscio di valenza). L'idea è che le coppie di elettroni attorno a un atomo si respingono, perché hanno tutte carica negativa, e si dispongono quindi il più lontano possibile l'una dall'altra.
 
 Si contano i **domini elettronici** dell'atomo centrale. Ogni legame vale un dominio, anche se è doppio o triplo, e ogni doppietto non condiviso vale un dominio. Il numero dei domini determina la loro disposizione nello spazio, riportata nella tabella. La forma della molecola è data dalle posizioni dei soli atomi, quindi è diversa dalla disposizione dei domini quando sono presenti doppietti.
 
@@ -386,7 +386,7 @@ Una trasformazione spontanea può essere molto lenta, perché $\Delta G$ non dà
 
 Il valore di $\Delta G$ di una reazione dipende dalle concentrazioni di reagenti e prodotti presenti in quel momento, quindi cambia mentre la reazione procede e diventa zero all'equilibrio.
 
-Nelle cellule molte reazioni necessarie hanno $\Delta G>0$. Avvengono perché sono **accoppiate** a una reazione con $\Delta G$ molto negativo, di solito l'idrolisi dell'ATP. La somma delle due variazioni è negativa e il processo complessivo è spontaneo. L'accoppiamento richiede un meccanismo che leghi le due reazioni, in genere un enzima che le fa avvenire insieme. Due reazioni che avvengono separatamente nella stessa soluzione non si influenzano in questo modo.
+Nelle cellule molte reazioni necessarie hanno $\Delta G>0$. Avvengono perché sono **accoppiate** a una reazione con $\Delta G$ molto negativo, di solito l'idrolisi dell'ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari). La somma delle due variazioni è negativa e il processo complessivo è spontaneo. L'accoppiamento richiede un meccanismo che leghi le due reazioni, in genere un enzima che le fa avvenire insieme. Due reazioni che avvengono separatamente nella stessa soluzione non si influenzano in questo modo.
 
 Un organismo è un sistema aperto: riceve continuamente materia ed energia con il cibo ed elimina prodotti di scarto. In questo modo mantiene le concentrazioni costanti, a valori lontani dall'equilibrio. Questa condizione si chiama **stato stazionario**. All'equilibrio, invece, nessuna reazione procede in un verso più che nell'altro.
 :::

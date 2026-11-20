@@ -18,7 +18,7 @@ Il modello a **mosaico fluido** descrive la membrana come un liquido a due dimen
 
 Alcune proteine non si spostano liberamente, perché sono ancorate al citoscheletro o a giunzioni fra cellule.
 
-Le due metà del doppio strato si chiamano **foglietti** e hanno composizione diversa. Questa differenza si chiama asimmetria. Enzimi detti **flippasi** la mantengono spostando lipidi specifici da un foglietto all'altro con consumo di ATP. Le **scramblasi**, quando sono attivate, li ridistribuiscono fra i due foglietti. La fosfatidilserina, per esempio, sta normalmente sul foglietto rivolto verso il citosol. Quando una cellula muore per apoptosi la fosfatidilserina compare sul foglietto esterno, e i macrofagi la riconoscono come segnale per eliminare la cellula. Gli zuccheri legati a proteine (glicoproteine) e a lipidi (glicolipidi) sono rivolti solo verso l'esterno della cellula. Il loro insieme forma il **glicocalice**, uno strato che protegge la superficie e partecipa al riconoscimento e all'adesione fra cellule.
+Le due metà del doppio strato si chiamano **foglietti** e hanno composizione diversa. Questa differenza si chiama asimmetria. Enzimi detti **flippasi** la mantengono spostando lipidi specifici da un foglietto all'altro con consumo di ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari). Le **scramblasi**, quando sono attivate, li ridistribuiscono fra i due foglietti. La fosfatidilserina, per esempio, sta normalmente sul foglietto rivolto verso il citosol. Quando una cellula muore per apoptosi la fosfatidilserina compare sul foglietto esterno, e i macrofagi la riconoscono come segnale per eliminare la cellula. Gli zuccheri legati a proteine (glicoproteine) e a lipidi (glicolipidi) sono rivolti solo verso l'esterno della cellula. Il loro insieme forma il **glicocalice**, uno strato che protegge la superficie e partecipa al riconoscimento e all'adesione fra cellule.
 
 ![Teste polari, code idrofobe e proteina transmembrana](/figure/biologia-semestre-filtro/strutture-cellulari/membrana-it.svg)
 :::
@@ -75,11 +75,11 @@ Le variazioni rapide dipendono quindi dai canali. La pompa lavora lentamente e m
 ## Nucleo e indirizzamento
 
 :::definizione{#nucleo-ran titolo="Pori nucleari e direzionalità di Ran"}
-Il **nucleo** contiene il DNA della cellula. È delimitato dall'**involucro nucleare**, formato da due membrane. La membrana esterna è in continuità con il reticolo endoplasmatico. Le due membrane si uniscono intorno ai **pori nucleari**, grandi complessi di proteine dette nucleoporine, che sono i soli passaggi fra nucleo e citosol. Le molecole piccole attraversano il poro per diffusione. Le molecole grandi, come proteine e RNA, lo attraversano solo se accompagnate da un recettore di trasporto.
+Il **nucleo** contiene il DNA (acido desossiribonucleico) della cellula. È delimitato dall'**involucro nucleare**, formato da due membrane. La membrana esterna è in continuità con il reticolo endoplasmatico. Le due membrane si uniscono intorno ai **pori nucleari**, grandi complessi di proteine dette nucleoporine, che sono i soli passaggi fra nucleo e citosol. Le molecole piccole attraversano il poro per diffusione. Le molecole grandi, come le proteine e l'RNA (acido ribonucleico), lo attraversano solo se accompagnate da un recettore di trasporto.
 
 All'interno del nucleo si trova il **nucleolo**, una regione senza membrana in cui la cellula produce gli RNA ribosomiali e comincia a montare le subunità dei ribosomi.
 
-Una proteina entra nel nucleo se nella sua sequenza possiede un **segnale di localizzazione nucleare (NLS)**, cioè un breve tratto di amminoacidi. Il recettore che riconosce l'NLS si chiama **importina**. Il verso del trasporto è stabilito da una piccola proteina, **Ran**, che esiste in due forme: legata a GTP (Ran-GTP) oppure a GDP (Ran-GDP). Nel nucleo c'è l'enzima RanGEF, che carica Ran con GTP, quindi nel nucleo prevale Ran-GTP. Nel citosol c'è l'enzima RanGAP, che fa idrolizzare il GTP, quindi nel citosol prevale Ran-GDP. L'importazione avviene in tre passaggi.
+Una proteina entra nel nucleo se nella sua sequenza possiede un **segnale di localizzazione nucleare (NLS)**, cioè un breve tratto di amminoacidi. Il recettore che riconosce l'NLS si chiama **importina**. Il verso del trasporto è stabilito da una piccola proteina, **Ran**, che esiste in due forme: legata a GTP (Ran-GTP) oppure a GDP (Ran-GDP). Il GTP (guanosina trifosfato) è una molecola simile all'ATP, e il GDP (guanosina difosfato) è il GTP che ha perso un gruppo fosfato. Nel nucleo c'è l'enzima RanGEF, che carica Ran con GTP, quindi nel nucleo prevale Ran-GTP. Nel citosol c'è l'enzima RanGAP, che fa idrolizzare il GTP, quindi nel citosol prevale Ran-GDP. L'importazione avviene in tre passaggi.
 
 1. Nel citosol l'importina lega la proteina con l'NLS.
 2. Il complesso attraversa il poro.
@@ -87,7 +87,7 @@ Una proteina entra nel nucleo se nella sua sequenza possiede un **segnale di loc
 
 L'esportazione funziona in modo speculare. La proteina da esportare ha un **segnale di esportazione nucleare (NES)**, riconosciuto da un recettore detto **esportina**. Nel nucleo l'esportina lega la proteina solo insieme a Ran-GTP. Il complesso attraversa il poro e nel citosol il GTP viene idrolizzato, quindi il complesso si separa e la proteina è rilasciata. Importine ed esportine tornano poi indietro e vengono riusate. L'NLS non viene tagliato dopo l'ingresso. Alla fine della divisione cellulare, quando il nucleo si riforma, la stessa proteina rientra grazie allo stesso segnale.
 
-La cellula regola l'ingresso nel nucleo nascondendo o scoprendo il segnale. Il fattore di trascrizione NF-κB, per esempio, resta nel citosol perché è legato a un inibitore, IκB, che copre il suo NLS. Uno stimolo fa degradare IκB, l'NLS diventa accessibile e NF-κB entra nel nucleo. La maggior parte degli mRNA esce dal nucleo con un recettore diverso (NXF1-NXT1), che non dipende da Ran.
+La cellula regola l'ingresso nel nucleo nascondendo o scoprendo il segnale. Il fattore di trascrizione NF-κB, per esempio, resta nel citosol perché è legato a un inibitore, IκB, che copre il suo NLS. Uno stimolo fa degradare IκB, l'NLS diventa accessibile e NF-κB entra nel nucleo. La maggior parte degli mRNA (RNA messaggeri) esce dal nucleo con un recettore diverso (NXF1-NXT1), che non dipende da Ran.
 
 ![Importazione ed esportazione nucleare dipendenti da Ran](/figure/biologia-semestre-filtro/strutture-cellulari/ran-it.svg)
 :::
@@ -106,19 +106,19 @@ Il **mitocondrio** è l'organello che produce la maggior parte dell'ATP della ce
 - La **membrana interna** è ripiegata in **creste** ed è impermeabile agli ioni, compresi i protoni (H⁺).
 - La **matrice** è lo spazio più interno.
 
-La demolizione del glucosio comincia nel citosol con la **glicolisi**, che trasforma una molecola di glucosio in due di piruvato e produce due ATP. Il piruvato entra nella matrice ed è trasformato in acetil-CoA, che entra nel **ciclo di Krebs** (ciclo degli acidi tricarbossilici). Il ciclo completa la demolizione fino ad anidride carbonica. In queste tappe gli elettroni tolti al glucosio sono caricati su due molecole trasportatrici, NADH e FADH₂.
+La demolizione del glucosio comincia nel citosol con la **glicolisi**, che trasforma una molecola di glucosio in due di piruvato e produce due ATP. Il piruvato entra nella matrice ed è trasformato in acetil-CoA, che entra nel **ciclo di Krebs** (ciclo degli acidi tricarbossilici). Il ciclo completa la demolizione fino ad anidride carbonica. In queste tappe gli elettroni tolti al glucosio sono caricati su due molecole trasportatrici di elettroni, il NADH (nicotinammide adenina dinucleotide) e il FADH₂ (flavina adenina dinucleotide).
 
 L'ATP si forma poi nella membrana interna, in due passaggi.
 
 1. NADH e FADH₂ cedono gli elettroni alla **catena respiratoria**, una serie di quattro complessi proteici numerati da I a IV. Gli elettroni passano da un complesso all'altro e alla fine si legano all'ossigeno, che diventa acqua. L'energia liberata serve ai complessi I, III e IV per spostare protoni dalla matrice allo spazio intermembrana. Il complesso II trasferisce elettroni senza spostare protoni.
-2. I protoni si accumulano nello spazio intermembrana e formano un **gradiente protonico**. Tornano nella matrice attraverso l'**ATP sintasi**, un enzima della membrana interna che usa questo flusso per unire ADP e fosfato in ATP.
+2. I protoni si accumulano nello spazio intermembrana e formano un **gradiente protonico**. Tornano nella matrice attraverso l'**ATP sintasi**, un enzima della membrana interna che usa questo flusso per unire ADP (adenosina difosfato, cioè l'ATP con un gruppo fosfato in meno) e fosfato in ATP.
 
 L'insieme dei due passaggi si chiama **fosforilazione ossidativa**. Due tipi di sostanze la alterano in modi diversi.
 
 - Un **disaccoppiante** rende la membrana interna permeabile ai protoni. I protoni rientrano senza passare dall'ATP sintasi, quindi si produce meno ATP. La catena respiratoria continua a lavorare, anzi accelera, e il consumo di ossigeno aumenta.
 - Un **inibitore della catena**, come il cianuro, blocca il passaggio degli elettroni. Il consumo di ossigeno e la produzione di ATP diminuiscono insieme.
 
-Dalla demolizione completa di una molecola di glucosio in presenza di ossigeno si ottengono circa 30–32 molecole di ATP. Senza ossigeno resta la sola glicolisi, con due ATP. In questo caso il piruvato è trasformato in lattato. La reazione non produce ATP e serve a rigenerare il NAD⁺ di cui la glicolisi ha bisogno per continuare.
+Dalla demolizione completa di una molecola di glucosio in presenza di ossigeno si ottengono circa 30–32 molecole di ATP. Senza ossigeno resta la sola glicolisi, con due ATP. In questo caso il piruvato è trasformato in lattato. La reazione non produce ATP e serve a rigenerare il NAD⁺, cioè il NADH che ha ceduto gli elettroni, di cui la glicolisi ha bisogno per continuare.
 
 Il mitocondrio possiede un proprio DNA. Nell'uomo codifica 13 proteine della fosforilazione ossidativa e gli RNA necessari a sintetizzarle nel mitocondrio. Tutte le altre proteine mitocondriali sono codificate da geni del nucleo.
 
@@ -179,7 +179,7 @@ Una proteina di membrana contiene altri tratti idrofobi, che fermano il passaggi
 
 Questo orientamento si conserva fino alla destinazione. Una proteina viaggia dal reticolo al Golgi, e dal Golgi alla membrana plasmatica, dentro vescicole. Quando una vescicola si fonde con la membrana plasmatica il suo interno si apre verso l'esterno della cellula. La parte di una proteina che nel reticolo era rivolta verso il lume si trova quindi rivolta verso l'esterno. Per questo motivo gli zuccheri delle glicoproteine, aggiunti nel lume, stanno sulla faccia esterna della membrana plasmatica.
 
-Nel lume del reticolo la proteina si ripiega e viene modificata. Si formano i ponti disolfuro, cioè legami fra due amminoacidi cisteina, e comincia la **N-glicosilazione**, cioè l'aggiunta di catene di zuccheri. Il reticolo esegue anche un **controllo di qualità**. I chaperon calnexina e calreticulina trattengono le glicoproteine finché non sono ripiegate correttamente. Una proteina che non riesce a ripiegarsi viene riportata nel citosol e degradata dal proteasoma. Questo percorso si chiama **ERAD** (degradazione associata al reticolo). Se le proteine mal ripiegate si accumulano, la cellula attiva una risposta detta **UPR**, che riduce la sintesi di nuove proteine e aumenta la produzione di chaperon.
+Nel lume del reticolo la proteina si ripiega e viene modificata. Si formano i ponti disolfuro, cioè legami fra due amminoacidi cisteina, e comincia la **N-glicosilazione**, cioè l'aggiunta di catene di zuccheri. Il reticolo esegue anche un **controllo di qualità**. I chaperon calnexina e calreticulina trattengono le glicoproteine finché non sono ripiegate correttamente. Una proteina che non riesce a ripiegarsi viene riportata nel citosol e degradata dal proteasoma. Questo percorso si chiama **ERAD** (degradazione associata al reticolo). Se le proteine mal ripiegate si accumulano, la cellula attiva una risposta detta **UPR** (risposta alle proteine non ripiegate), che riduce la sintesi di nuove proteine e aumenta la produzione di chaperon.
 
 La fibrosi cistica mostra l'effetto di questo controllo. La mutazione più comune, ΔF508, toglie un amminoacido al canale CFTR. Il canale mutato si ripiega male, viene trattenuto nel reticolo e degradato, quindi sulla membrana plasmatica ne arriva pochissimo.
 
@@ -210,9 +210,9 @@ Le proteine che lavorano nel lume del reticolo hanno alla fine della catena un s
 :::definizione{#endocitosi-autofagia titolo="Riciclo, lisosomi e autofagia"}
 Nell'**endocitosi** la cellula porta al suo interno materiale esterno, racchiudendolo in vescicole che si formano dalla membrana plasmatica. Nell'endocitosi **mediata da recettore** una proteina della membrana, il recettore, lega una sostanza specifica e la concentra nella vescicola. Le vescicole si fondono con l'**endosoma precoce**, un compartimento il cui interno è leggermente acido. L'acidità stacca molte sostanze dal loro recettore. Da qui recettore e sostanza seguono strade diverse, come mostrano tre esempi.
 
-- Le **LDL**, particelle che trasportano colesterolo nel sangue, si staccano dal recettore. Il recettore torna sulla membrana plasmatica (riciclo) e le LDL proseguono fino ai lisosomi, dove sono demolite.
+- Le **LDL** (lipoproteine a bassa densità), particelle che trasportano colesterolo nel sangue, si staccano dal recettore. Il recettore torna sulla membrana plasmatica (riciclo) e le LDL proseguono fino ai lisosomi, dove sono demolite.
 - La **transferrina**, proteina che trasporta ferro, rilascia il ferro nell'endosoma e torna in superficie insieme al suo recettore.
-- Il **recettore dell'EGF**, un fattore di crescita, una volta attivato viene inviato ai lisosomi e degradato insieme all'EGF. In questo modo la cellula riduce il numero di recettori e quindi il segnale.
+- Il **recettore dell'EGF** (fattore di crescita dell'epidermide), una volta attivato viene inviato ai lisosomi e degradato insieme all'EGF. In questo modo la cellula riduce il numero di recettori e quindi il segnale.
 
 I **lisosomi** sono gli organelli della degradazione. Contengono enzimi detti idrolasi, attivi a pH acido. Una pompa della loro membrana, la **V-ATPasi**, porta protoni all'interno e mantiene il pH vicino a 5. Le idrolasi sono prodotte nel reticolo. Nel Golgi ricevono un'etichetta, il **mannosio-6-fosfato**, e un recettore che riconosce questa etichetta le invia agli endosomi e da lì ai lisosomi. Se un'idrolasi manca, o non riceve l'etichetta, la sostanza che dovrebbe degradare si accumula nei lisosomi. Questa è l'origine delle malattie da accumulo lisosomiale.
 

@@ -53,7 +53,7 @@ The other eleven are produced by the body from other molecules. For example, tyr
 :::definizione{#stereochimica-amminoacidi titolo="L configuration and Fischer projections"}
 In all amino acids except glycine the α carbon is bonded to four different groups, so it is a stereogenic centre and there are two enantiomers, called L and D. They are distinguished with the **Fischer projection**: the carboxyl group is drawn at the top and the side chain at the bottom; if the amino group is on the left the amino acid is L, if it is on the right it is D. In this drawing the horizontal bonds come towards the viewer and the vertical ones go away.
 
-Proteins contain only L-amino acids. The letter L shows the arrangement of the groups and not the direction in which the substance rotates polarised light, which is obtained only by measurement. In the R/S system almost all L-amino acids have the S configuration. L-Cysteine is an exception and is R: the arrangement in space is the same, but the sulfur of the side chain changes its priority in the CIP rules. Glycine has two hydrogens on the α carbon and is not chiral. Isoleucine and threonine have a second stereogenic centre in the side chain.
+Proteins contain only L-amino acids. The letter L shows the arrangement of the groups and not the direction in which the substance rotates polarised light, which is obtained only by measurement. In the R/S system almost all L-amino acids have the S configuration. L-Cysteine is an exception and is R: the arrangement in space is the same, but the sulfur of the side chain changes its priority in the CIP rules (the priority rules of Cahn, Ingold and Prelog). Glycine has two hydrogens on the α carbon and is not chiral. Isoleucine and threonine have a second stereogenic centre in the side chain.
 
 ![Fischer projections of L-alanine and L-cysteine: the same L series, different absolute configurations.](/figure/chimica-semestre-filtro/biomolecole/fischer-aa-en.svg)
 :::
@@ -91,7 +91,7 @@ $$
 +\mathrm{CH_3OH}.
 \end{aligned}
 $$
-A **dipeptide** is obtained and methanol is released. In cells the principle is the same: during protein synthesis on the ribosome each amino acid is bound as an ester to a tRNA molecule, which acts as the leaving group.
+A **dipeptide** is obtained and methanol is released. In cells the principle is the same: during protein synthesis on the ribosome each amino acid is bound as an ester to a molecule of tRNA (transfer RNA, a type of ribonucleic acid), which acts as the leaving group.
 
 A chain of amino acids has two different ends: the **N-terminal** end, with the free amino group, and the **C-terminal** end, with the free carboxyl group. The sequence is always written from the N-terminus to the C-terminus. For example, Gly-Ala is the dipeptide in which glycine has the free amino group and alanine the free carboxyl group; Ala-Gly is a different dipeptide. The amino acids inserted in a chain are called *residues*. A chain of $n$ residues contains $n-1$ peptide bonds, and for each bond formed one molecule of water is lost. A short chain is called a peptide; a long chain, a polypeptide or protein.
 :::
@@ -252,13 +252,13 @@ From cholesterol the body produces other molecules that keep the four rings: **s
 ## Nucleotides, coenzymes and nucleic acids
 
 :::definizione{#nucleotidi titolo="Nitrogenous bases, nucleosides and nucleotides"}
-Nucleic acids, DNA and RNA, are made of **nucleotides**. A nucleotide has three components: a nitrogenous base, a five-carbon sugar and one or more phosphate groups.
+Nucleic acids, DNA (deoxyribonucleic acid) and RNA (ribonucleic acid), are made of **nucleotides**. A nucleotide has three components: a nitrogenous base, a five-carbon sugar and one or more phosphate groups.
 
 The **nitrogenous bases** are of two kinds. The **purines**, adenine (A) and guanine (G), have two fused rings. The **pyrimidines**, cytosine (C), thymine (T) and uracil (U), have a single ring.
 
 A **nucleoside** consists of a base and the sugar, without phosphate. The base is bonded to carbon 1′ of the sugar by an N-glycosidic bond, through nitrogen 9 in purines and nitrogen 1 in pyrimidines. The carbons of the sugar are marked with a prime (1′, 2′ and so on) to distinguish them from the atoms of the base. A **nucleotide** is a nucleoside with one or more phosphates bonded to carbon 5′.
 
-The sugar of RNA is **ribose**, which has an OH group on carbon 2′. The sugar of DNA is **2-deoxyribose**, which has a hydrogen in that position. For example, adenosine is the nucleoside made of adenine and ribose. Adding one phosphate gives AMP (adenosine monophosphate), with two ADP and with three ATP. In ATP the first phosphate is bonded to ribose by an ester bond; the three phosphates are joined to each other by two phosphoanhydride bonds, which are the bonds from which the cell obtains energy.
+The sugar of RNA is **ribose**, which has an OH group on carbon 2′. The sugar of DNA is **2-deoxyribose**, which has a hydrogen in that position. For example, adenosine is the nucleoside made of adenine and ribose. Adding one phosphate gives AMP (adenosine monophosphate), with two ADP (adenosine diphosphate) and with three ATP (adenosine triphosphate). In ATP the first phosphate is bonded to ribose by an ester bond; the three phosphates are joined to each other by two phosphoanhydride bonds, which are the bonds from which the cell obtains energy.
 
 **ATP** is the molecule with which the cell transfers energy. Its hydrolysis to ADP and phosphate has a very negative $\Delta G$. Cells use this reaction to drive reactions that on their own would have a positive $\Delta G$: the two reactions are *coupled*, and the overall process takes place if the sum of the two $\Delta G$ values is negative. Coupling requires the two reactions to have an intermediate in common. Usually an enzyme transfers a phosphate group from ATP to a reactant, which thus becomes more reactive. The energy does not come from the breaking of the bond in itself, which actually requires energy: it comes from the fact that the products, ADP and phosphate, are more stable than ATP. The actual value of $\Delta G$ depends on the concentrations of ATP, ADP and phosphate in the cell.
 :::
@@ -266,11 +266,11 @@ The sugar of RNA is **ribose**, which has an OH group on carbon 2′. The sugar 
 :::definizione{#coenzimi-redox titolo="NAD and FAD in electron transfer"}
 In the redox reactions of metabolism electrons are carried by two coenzymes, which are also derived from nucleotides.
 
-**NAD** consists of two joined nucleotides: one contains adenine and the other nicotinamide, which derives from vitamin B3 (niacin). Nicotinamide is the part that receives the electrons. The oxidised form is $\mathrm{NAD^+}$ and the reduced form is NADH. When a substrate is oxidised it loses two electrons and two protons: $\mathrm{NAD^+}$ receives the two electrons and one proton, that is, a hydride ion $\mathrm{H^-}$, and the second proton passes into the solution.
+**NAD** (nicotinamide adenine dinucleotide) consists of two joined nucleotides: one contains adenine and the other nicotinamide, which derives from vitamin B3 (niacin). Nicotinamide is the part that receives the electrons. The oxidised form is $\mathrm{NAD^+}$ and the reduced form is NADH. When a substrate is oxidised it loses two electrons and two protons: $\mathrm{NAD^+}$ receives the two electrons and one proton, that is, a hydride ion $\mathrm{H^-}$, and the second proton passes into the solution.
 $$
 \mathrm{NAD^+}+\mathrm{H^+}+2e^-\longrightarrow\mathrm{NADH}.
 $$
-**FAD** contains a flavin, which derives from vitamin B2 (riboflavin), bonded to a nucleotide with adenine. The oxidised form is FAD and the reduced form is $\mathrm{FADH_2}$. FAD receives two electrons and two protons, that is, two hydrogen atoms.
+**FAD** (flavin adenine dinucleotide) contains a flavin, which derives from vitamin B2 (riboflavin), bonded to a nucleotide with adenine. The oxidised form is FAD and the reduced form is $\mathrm{FADH_2}$. FAD receives two electrons and two protons, that is, two hydrogen atoms.
 $$
 \mathrm{FAD}+2\,\mathrm{H^+}+2e^-\longrightarrow\mathrm{FADH_2}.
 $$
@@ -313,7 +313,7 @@ $$
 2\,\mathrm{GSH}+\mathrm{ROOH}
 \longrightarrow\mathrm{GSSG}+\mathrm{ROH}+\mathrm{H_2O}.
 $$
-In cells the reaction is catalysed by the enzyme glutathione peroxidase. Another enzyme, glutathione reductase, then brings GSSG back to GSH using NADPH, so glutathione is available again. Glutathione also reacts directly with some oxidising species, without enzymes; the form that reacts fastest is the thiolate ion $\mathrm{GS^-}$.
+In cells the reaction is catalysed by the enzyme glutathione peroxidase. Another enzyme, glutathione reductase, then brings GSSG back to GSH using NADPH (NADH with one more phosphate group), so glutathione is available again. Glutathione also reacts directly with some oxidising species, without enzymes; the form that reacts fastest is the thiolate ion $\mathrm{GS^-}$.
 
 In membranes, which are non-polar, fat-soluble antioxidants act.
 

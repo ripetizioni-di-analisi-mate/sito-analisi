@@ -93,7 +93,7 @@ The proteins of a pathway are often held close together by a **scaffold protein*
 Every pathway also has a **switch-off** system, which stops the response when the signal ends.
 
 - **Phosphatases** remove the phosphate groups added by kinases.
-- **Phosphodiesterases** degrade the second messengers cAMP and cGMP.
+- **Phosphodiesterases** degrade the second messengers cAMP (cyclic AMP) and cGMP (cyclic GMP).
 - Pumps and exchangers move calcium ions back out of the cytosol.
 
 A phosphorylation activates some proteins and inactivates others. To predict the effect of a drug on a pathway it is therefore necessary to know, for each step, whether it is an activation or an inhibition.
@@ -110,9 +110,9 @@ In a pathway three proteins act in a row: A activates B and B activates C. The o
 :::definizione{#recettori-intracellulari titolo="Gene regulation and the NO–cGMP pathway"}
 Receptors are found in two locations. Most lie on the plasma membrane and receive signals that do not cross it. Some lie inside the cell and receive small hydrophobic signals, which cross the bilayer.
 
-**Steroid hormones**, such as cortisol and oestrogens, derive from cholesterol and cross the membrane. In the cell they bind an **intracellular receptor**. The receptor with the hormone bound enters the nucleus, or is already there, and binds specific DNA sequences, where it activates or represses the transcription of particular genes. The receptor is therefore a transcription factor activated by the hormone. The response requires the production of new RNA and new proteins, so it appears after tens of minutes or hours.
+**Steroid hormones**, such as cortisol and oestrogens, derive from cholesterol and cross the membrane. In the cell they bind an **intracellular receptor**. The receptor with the hormone bound enters the nucleus, or is already there, and binds specific sequences of DNA (deoxyribonucleic acid), where it activates or represses the transcription of particular genes. The receptor is therefore a transcription factor activated by the hormone. The response requires the production of new RNA (ribonucleic acid) and new proteins, so it appears after tens of minutes or hours.
 
-**Nitric oxide** (NO) is a gas that crosses membranes. Its receptor is a cytosolic enzyme, **soluble guanylate cyclase**. NO binds the enzyme and activates it, and the enzyme converts GTP into **cGMP**, a second messenger. In the muscle cells of the blood vessel wall cGMP activates the kinase PKG, which makes the muscle relax, so the vessel dilates. NO is destroyed within seconds, so it acts only on cells near the one that produces it. This example shows that an intracellular receptor does not always act on genes.
+**Nitric oxide** (NO) is a gas that crosses membranes. Its receptor is a cytosolic enzyme, **soluble guanylate cyclase**. NO binds the enzyme and activates it, and the enzyme converts GTP (guanosine triphosphate) into **cGMP** (cyclic GMP), a second messenger. In the muscle cells of the blood vessel wall cGMP activates the kinase PKG (protein kinase G), which makes the muscle relax, so the vessel dilates. NO is destroyed within seconds, so it acts only on cells near the one that produces it. This example shows that an intracellular receptor does not always act on genes.
 :::
 
 :::definizione{#recettori-canale titolo="Ligand binding and electrical change"}
@@ -124,10 +124,10 @@ In a ligand-gated channel the binding of the ligand opens the channel directly, 
 ## G proteins and second messengers
 
 :::definizione{#proteine-g titolo="The GDP–GTP cycle and coupling to GPCRs"}
-A **G protein** is a protein that works as a switch. It binds a guanine nucleotide and has two states: it is **off** when it binds GDP and **on** when it binds GTP. Two types of protein move it from one state to the other.
+A **G protein** is a protein that works as a switch. It binds a guanine nucleotide and has two states: it is **off** when it binds GDP (guanosine diphosphate) and **on** when it binds GTP (guanosine triphosphate), which has one more phosphate group. Two types of protein move it from one state to the other.
 
-- A **GEF** switches it on. It makes GDP come off, and a GTP, which is abundant in the cytosol, binds in its place. GDP is therefore replaced by a whole GTP and does not receive an extra phosphate.
-- A **GAP** switches it off. It speeds up the hydrolysis of the bound GTP, which becomes GDP.
+- A **GEF** (guanine nucleotide exchange factor) switches it on. It makes GDP come off, and a GTP, which is abundant in the cytosol, binds in its place. GDP is therefore replaced by a whole GTP and does not receive an extra phosphate.
+- A **GAP** (GTPase-activating protein) switches it off. It speeds up the hydrolysis of the bound GTP, which becomes GDP.
 
 G proteins are of two types. **Monomeric** ones consist of a single chain. Examples are Ras, described below, and Ran, which regulates transport into the nucleus. **Heterotrimeric** ones consist of three different subunits, α, β and γ, and the α subunit is the one that binds the nucleotide.
 
@@ -140,7 +140,7 @@ Heterotrimeric G proteins work with **GPCRs** (G protein-coupled receptors), mem
 
 There are three main families of α subunit, which act on different enzymes.
 
-- **Gs** activates **adenylyl cyclase**, an enzyme that converts ATP into **cAMP**. cAMP is a second messenger and activates the kinase **PKA**. PKA consists of regulatory subunits and catalytic subunits. cAMP binds the regulatory ones, which release the active catalytic ones.
+- **Gs** activates **adenylyl cyclase**, an enzyme that converts ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions) into **cAMP** (cyclic AMP). cAMP is a second messenger and activates the kinase **PKA** (protein kinase A). PKA consists of regulatory subunits and catalytic subunits. cAMP binds the regulatory ones, which release the active catalytic ones.
 - **Gi** inhibits adenylyl cyclase, so it lowers cAMP.
 - **Gq** activates **phospholipase C**, which produces the second messengers IP3 and DAG described in the next box.
 

@@ -46,7 +46,7 @@ Gli **idrocarburi** sono i composti formati soltanto da carbonio e idrogeno. Si 
 
 Un **eterociclo** è un anello in cui almeno un atomo è diverso dal carbonio, per esempio azoto o ossigeno. L'atomo deve far parte dell'anello: un anello di soli carboni con un ossigeno legato all'esterno non è un eterociclo.
 
-Il nome IUPAC di un alcano ramificato si costruisce in quattro passi.
+Il nome IUPAC di un alcano ramificato, cioè il nome assegnato con le regole dell'Unione internazionale di chimica pura e applicata, si costruisce in quattro passi.
 
 1. Si cerca la catena di carboni più lunga, detta catena principale. Il suo numero di carboni dà il nome di base: met- (1), et- (2), prop- (3), but- (4), pent- (5), es- (6), con la desinenza *-ano*.
 2. Si numerano i carboni della catena partendo dall'estremità più vicina alla prima ramificazione.
@@ -87,7 +87,7 @@ Una molecola con $n$ centri stereogenici ha al massimo $2^n$ stereoisomeri. Il n
 :::definizione{#isomeria-ez titolo="Priorità sui due carboni dell'alchene"}
 Attorno a un doppio legame non c'è rotazione, quindi i gruppi legati ai due carboni restano da un lato o dall'altro. Se ciascuno dei due carboni porta due gruppi diversi, esistono due stereoisomeri, che si distinguono con i simboli $E$ e $Z$. L'assegnazione si fa in due passi.
 
-1. Su ciascun carbonio del doppio legame si stabilisce quale dei due gruppi ha la priorità, secondo le regole CIP: ha priorità l'atomo con numero atomico maggiore.
+1. Su ciascun carbonio del doppio legame si stabilisce quale dei due gruppi ha la priorità, secondo le regole CIP (dai nomi dei chimici Cahn, Ingold e Prelog): ha priorità l'atomo con numero atomico maggiore.
 2. Se i due gruppi prioritari stanno dalla stessa parte del doppio legame, l'isomero è $Z$ (dal tedesco *zusammen*, insieme). Se stanno da parti opposte, è $E$ (*entgegen*, opposto).
 
 Nel but-2-ene $\mathrm{CH_3CH{=}CHCH_3}$ ogni carbonio del doppio legame porta un metile e un idrogeno, e il metile ha la priorità. Nell'isomero $Z$ i due metili sono dalla stessa parte; nell'isomero $E$ sono da parti opposte.
@@ -175,7 +175,7 @@ I meccanismi si disegnano con **frecce curve**. Ogni freccia rappresenta lo spos
 :::osservazione{#sostituzioni titolo="SN2 e SN1: cinetica e stereochimica"}
 Un **alogenuro alchilico** è un composto in cui un atomo di alogeno (F, Cl, Br, I), indicato con X, è legato a un carbonio $sp^3$. Il carbonio è parzialmente positivo, quindi è un elettrofilo. Gli alogenuri alchilici danno due tipi di reazione: la **sostituzione**, in cui un nucleofilo prende il posto dell'alogeno, e l'**eliminazione**, in cui si forma un doppio legame. L'alogeno che si stacca è il **gruppo uscente**. Queste reazioni non valgono per gli alogeni legati a un carbonio di un doppio legame o di un anello aromatico.
 
-La sostituzione nucleofila avviene con due meccanismi, chiamati SN2 e SN1.
+La sostituzione nucleofila avviene con due meccanismi, chiamati SN2 e SN1. Nelle due sigle S indica la sostituzione e N il nucleofilo.
 
 Nella **SN2** tutto avviene in un solo stadio. Il nucleofilo attacca il carbonio dal lato opposto a quello dell'alogeno, e mentre si forma il nuovo legame si rompe quello con l'alogeno. Allo stadio partecipano due specie, quindi la velocità dipende da entrambe: $v=k[\mathrm{RX}][\mathrm{Nu^-}]$. Il numero 2 nel nome indica che lo stadio è bimolecolare. La reazione è tanto più veloce quanto meno il carbonio è ingombrato: è rapida con gli alogenuri metilici e primari, più lenta con i secondari, e non avviene con i terziari. È favorita da un nucleofilo forte e da un solvente polare aprotico, come l'acetone, che non forma legami a idrogeno con il nucleofilo e lo lascia più reattivo.
 
@@ -255,7 +255,7 @@ Un anello planare e completamente coniugato con $4n$ elettroni $\pi$ (4, 8, 12) 
 
 ![Anelli del benzene e della pirimidina, con sei elettroni pi e azoti della pirimidina in posizione 1,3](/figure/chimica-semestre-filtro/carbonio-idrocarburi-stereochimica/aromatici-it.svg)
 
-Anche molti eterocicli sono aromatici. La **pirimidina** è un anello a sei atomi con due azoti nelle posizioni 1 e 3, e ha 6 elettroni $\pi$ come il benzene. Il doppietto di ciascun azoto si trova in un orbitale nel piano dell'anello, diretto verso l'esterno, e non fa parte dei 6 elettroni $\pi$. La **purina** è formata da due anelli uniti, uno a sei e uno a cinque atomi, con quattro azoti e 10 elettroni $\pi$ in tutto. Da questi due anelli derivano le basi azotate del DNA e dell'RNA: citosina, timina e uracile sono pirimidine; adenina e guanina sono purine.
+Anche molti eterocicli sono aromatici. La **pirimidina** è un anello a sei atomi con due azoti nelle posizioni 1 e 3, e ha 6 elettroni $\pi$ come il benzene. Il doppietto di ciascun azoto si trova in un orbitale nel piano dell'anello, diretto verso l'esterno, e non fa parte dei 6 elettroni $\pi$. La **purina** è formata da due anelli uniti, uno a sei e uno a cinque atomi, con quattro azoti e 10 elettroni $\pi$ in tutto. Da questi due anelli derivano le basi azotate del DNA (acido desossiribonucleico) e dell'RNA (acido ribonucleico): citosina, timina e uracile sono pirimidine; adenina e guanina sono purine.
 :::
 
 :::osservazione{#sostituzione-aromatica titolo="Orientamento, velocità e contesto biologico"}

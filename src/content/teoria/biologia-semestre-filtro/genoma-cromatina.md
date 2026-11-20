@@ -6,7 +6,7 @@ sommario: "Dal conteggio dei cromosomi ai nucleosomi: organizzazione del genoma,
 ## Cromosomi, cromatidi e quantità di DNA
 
 :::definizione{#cromosomi titolo="Un cromosoma prima e dopo la replicazione"}
-Un **cromosoma** eucariotico è una lunga molecola di DNA a doppia elica, lineare, avvolta intorno a proteine. Il numero dei cromosomi è fisso per ogni specie, e una cellula umana ne ha 46. L'aspetto di un cromosoma cambia con la replicazione del DNA.
+Un **cromosoma** eucariotico è una lunga molecola di DNA (acido desossiribonucleico) a doppia elica, lineare, avvolta intorno a proteine. Il numero dei cromosomi è fisso per ogni specie, e una cellula umana ne ha 46. L'aspetto di un cromosoma cambia con la replicazione del DNA.
 
 - **Prima** della replicazione il cromosoma contiene una sola molecola di DNA.
 - **Dopo** la replicazione contiene due molecole di DNA identiche, dette **cromatidi fratelli**, unite fra loro in una regione detta centromero. È la forma a X delle fotografie. Si conta ancora come un solo cromosoma, finché i due cromatidi restano uniti.
@@ -44,7 +44,7 @@ Nei centromeri umani il DNA è formato da brevi sequenze ripetute moltissime vol
 
 Nei **telomeri** il DNA è una sequenza breve ripetuta migliaia di volte, che nell'uomo è TTAGGG. Su queste ripetizioni si lega un gruppo di proteine detto **shelterin**. La cellula ripara le rotture del DNA saldando fra loro le estremità libere. Shelterin copre l'estremità naturale del cromosoma e impedisce che venga trattata come una rottura. Senza questa protezione due cromosomi si saldano l'uno all'altro per le estremità.
 
-A ogni replicazione i telomeri si accorciano un poco, per un motivo spiegato nell'unità sulla replicazione. La **telomerasi** è l'enzima che li riallunga. Contiene una molecola di RNA che usa come stampo per aggiungere nuove ripetizioni TTAGGG, quindi è una trascrittasi inversa. È attiva nelle cellule germinali e nelle cellule staminali, e poco o per nulla nella maggior parte delle altre cellule. Shelterin e telomerasi hanno dunque compiti diversi: la prima protegge l'estremità, la seconda la allunga.
+A ogni replicazione i telomeri si accorciano un poco, per un motivo spiegato nell'unità sulla replicazione. La **telomerasi** è l'enzima che li riallunga. Contiene una molecola di RNA (acido ribonucleico) che usa come stampo per aggiungere nuove ripetizioni TTAGGG, quindi è una trascrittasi inversa. È attiva nelle cellule germinali e nelle cellule staminali, e poco o per nulla nella maggior parte delle altre cellule. Shelterin e telomerasi hanno dunque compiti diversi: la prima protegge l'estremità, la seconda la allunga.
 :::
 
 :::esempio{titolo="Due alterazioni, due conseguenze"}
@@ -100,7 +100,7 @@ L'eterocromatina è di due tipi. Quella **costitutiva** è compatta in tutte le 
 :::
 
 :::definizione{#rimodellamento titolo="Spostare un nucleosoma consumando ATP"}
-Un nucleosoma che copre una sequenza impedisce alle altre proteine di legarsi a essa. La cellula sposta i nucleosomi con i **complessi di rimodellamento della cromatina**, enzimi che consumano ATP. Un complesso di rimodellamento fa scorrere il nucleosoma lungo il DNA, lo rimuove oppure sostituisce uno dei suoi istoni. Secondo il caso, una sequenza regolatrice viene scoperta oppure coperta.
+Un nucleosoma che copre una sequenza impedisce alle altre proteine di legarsi a essa. La cellula sposta i nucleosomi con i **complessi di rimodellamento della cromatina**, enzimi che consumano ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari). Un complesso di rimodellamento fa scorrere il nucleosoma lungo il DNA, lo rimuove oppure sostituisce uno dei suoi istoni. Secondo il caso, una sequenza regolatrice viene scoperta oppure coperta.
 
 Un fattore di trascrizione, per esempio, deve legarsi a una sequenza coperta da un nucleosoma. Il complesso di rimodellamento sposta il nucleosoma di qualche decina di coppie di basi, la sequenza resta scoperta e il fattore si lega. In questo processo la sequenza del DNA non cambia. Cambia solo la posizione del nucleosoma. Per dimostrare che lo spostamento dipende dal complesso, in laboratorio si usa una versione del complesso incapace di idrolizzare ATP. Con questa versione il nucleosoma resta al suo posto.
 :::
@@ -110,9 +110,9 @@ Un fattore di trascrizione, per esempio, deve legarsi a una sequenza coperta da 
 :::definizione{#epigenetica titolo="Stati regolativi senza cambiamento di sequenza"}
 Tutte le cellule di una persona hanno lo stesso DNA, eppure una cellula del fegato e un neurone usano geni diversi. Quando una cellula del fegato si divide, inoltre, le cellule figlie sono ancora cellule del fegato. L'**epigenetica** studia le informazioni che stabiliscono quali geni sono attivi e che passano alle cellule figlie senza che la sequenza del DNA cambi. Queste informazioni sono gruppi chimici aggiunti al DNA o agli istoni, detti **modificazioni epigenetiche**.
 
-La prima modificazione è la **metilazione del DNA**, cioè l'aggiunta di un gruppo metile ($\mathrm{CH_3}$) alla base citosina. Nell'uomo riguarda le citosine seguite da una guanina, nelle coppie dette **CpG**. La sequenza resta la stessa, perché una citosina metilata si appaia ancora con la guanina. Quando le CpG del **promotore** di un gene, cioè della regione da cui parte la trascrizione, sono metilate, il gene è in genere spento. Proteine specifiche riconoscono le citosine metilate e compattano la cromatina.
+La prima modificazione è la **metilazione del DNA**, cioè l'aggiunta di un gruppo metile ($\mathrm{CH_3}$) alla base citosina. Nell'uomo riguarda le citosine seguite da una guanina, nelle coppie dette **CpG**, dove C e G indicano la citosina e la guanina e p indica il gruppo fosfato che le unisce. La sequenza resta la stessa, perché una citosina metilata si appaia ancora con la guanina. Quando le CpG del **promotore** di un gene, cioè della regione da cui parte la trascrizione, sono metilate, il gene è in genere spento. Proteine specifiche riconoscono le citosine metilate e compattano la cromatina.
 
-La metilazione passa alle cellule figlie con il seguente meccanismo. In una CpG i due filamenti portano entrambi una C metilata, perché di fronte a CG c'è GC. Con la replicazione ogni nuova doppia elica riceve un filamento vecchio, metilato, e uno nuovo, non metilato. L'enzima **DNMT1** riconosce i siti metilati su un solo filamento e aggiunge il metile sul filamento nuovo. Le due cellule figlie hanno quindi le stesse CpG metilate della cellula madre.
+La metilazione passa alle cellule figlie con il seguente meccanismo. In una CpG i due filamenti portano entrambi una C metilata, perché di fronte a CG c'è GC. Con la replicazione ogni nuova doppia elica riceve un filamento vecchio, metilato, e uno nuovo, non metilato. L'enzima **DNMT1** (DNA metiltransferasi 1) riconosce i siti metilati su un solo filamento e aggiunge il metile sul filamento nuovo. Le due cellule figlie hanno quindi le stesse CpG metilate della cellula madre.
 
 ![Mantenimento della metilazione dopo replicazione: sito parentale, emimetilazione e ripristino](/figure/biologia-semestre-filtro/genoma-cromatina/metilazione-it.svg)
 
@@ -141,7 +141,7 @@ Il **genoma** è tutto il DNA di un organismo. Nell'uomo comprende il genoma nuc
 
 - Gli **introni**, tratti interni ai geni che vengono trascritti e poi eliminati dall'RNA.
 - Le **sequenze regolatrici**, come i promotori, che stabiliscono quando un gene è attivo.
-- I geni per **RNA non codificanti**, come rRNA e tRNA.
+- I geni per **RNA non codificanti**, come rRNA (RNA ribosomiale) e tRNA (RNA di trasporto).
 - Le **sequenze ripetute**, che occupano circa metà del genoma.
 
 Una sequenza che non codifica proteine ha quindi spesso una funzione. Un promotore e un gene per rRNA, per esempio, non codificano proteine e sono indispensabili.
@@ -164,7 +164,7 @@ Le sequenze ripetute si dividono in due gruppi secondo la disposizione delle cop
 
 Nelle ripetizioni **in tandem** le copie sono una di seguito all'altra. La sequenza CACACACA, per esempio, contiene quattro copie consecutive dell'unità CA. Se l'unità è molto corta, da 1 a 6 basi, la ripetizione si chiama **microsatellite**. Se è più lunga, di alcune decine di basi, si chiama **minisatellite**. Il numero di copie in un dato locus cambia da persona a persona. Una persona ha, per esempio, 12 copie su un cromosoma e 15 sull'omologo. Misurando la lunghezza di molti microsatelliti si ottiene un profilo diverso per ogni individuo, ed è il principio dei test del DNA usati per identificare le persone.
 
-Nelle ripetizioni **intersperse** le copie sono sparse in punti lontani del genoma. Quasi tutte derivano da **elementi mobili**, cioè sequenze capaci di inserire una propria copia in un altro punto del genoma. Le classi principali sono le **LINE**, le **SINE** e i retrovirus endogeni. La maggior parte delle copie presenti oggi nel genoma umano ha accumulato mutazioni e non è più in grado di spostarsi.
+Nelle ripetizioni **intersperse** le copie sono sparse in punti lontani del genoma. Quasi tutte derivano da **elementi mobili**, cioè sequenze capaci di inserire una propria copia in un altro punto del genoma. Le classi principali sono le **LINE** (elementi lunghi intersparsi), le **SINE** (elementi corti intersparsi) e i retrovirus endogeni. La maggior parte delle copie presenti oggi nel genoma umano ha accumulato mutazioni e non è più in grado di spostarsi.
 
 ![Ripetizioni adiacenti e copie separate da DNA diverso](/figure/biologia-semestre-filtro/genoma-cromatina/ripetizioni-it.svg)
 :::

@@ -31,7 +31,7 @@ L'**ossidazione** trasforma il gruppo C–OH in un gruppo carbonilico C=O. Il ri
 - Un alcol secondario si ossida a chetone.
 - Un alcol terziario non si ossida, perché il carbonio che porta l'OH non ha un idrogeno da perdere.
 
-Per un alcol primario il prodotto dipende dal reagente usato. Un ossidante blando in assenza di acqua, come il PCC, si ferma all'aldeide. Un ossidante forte in acqua prosegue fino all'acido carbossilico. Per l'etanolo i due passaggi sono i seguenti: si ottengono prima l'etanale (acetaldeide) e poi l'acido etanoico (acido acetico).
+Per un alcol primario il prodotto dipende dal reagente usato. Un ossidante blando in assenza di acqua, come il PCC (clorocromato di piridinio), si ferma all'aldeide. Un ossidante forte in acqua prosegue fino all'acido carbossilico. Per l'etanolo i due passaggi sono i seguenti: si ottengono prima l'etanale (acetaldeide) e poi l'acido etanoico (acido acetico).
 
 $$
 \mathrm{CH_3CH_2OH}\longrightarrow\mathrm{CH_3CHO}\longrightarrow\mathrm{CH_3COOH}.
@@ -41,7 +41,7 @@ La **disidratazione** elimina una molecola d'acqua da un alcol e forma un alchen
 
 Nella **sostituzione** l'OH è sostituito da un altro gruppo, per esempio un alogeno. Lo ione $\mathrm{OH^-}$ è un cattivo gruppo uscente, quindi la reazione avviene in ambiente acido: l'acido aggiunge un $\mathrm{H^+}$ all'ossigeno e trasforma l'OH in $\mathrm{OH_2^+}$, che si stacca come acqua. Con HBr, lo ione bromuro prende il suo posto e si forma un bromuro alchilico.
 
-Nell'organismo l'etanolo viene ossidato nel fegato in due passaggi, ciascuno catalizzato da un enzima: l'alcol deidrogenasi lo trasforma in acetaldeide e l'aldeide deidrogenasi trasforma l'acetaldeide in acetato. In entrambi i passaggi l'ossidante è il coenzima $\mathrm{NAD^+}$, che si riduce a NADH.
+Nell'organismo l'etanolo viene ossidato nel fegato in due passaggi, ciascuno catalizzato da un enzima: l'alcol deidrogenasi lo trasforma in acetaldeide e l'aldeide deidrogenasi trasforma l'acetaldeide in acetato. In entrambi i passaggi l'ossidante è il coenzima $\mathrm{NAD^+}$ (nicotinammide adenina dinucleotide, un trasportatore di elettroni delle cellule), che si riduce a NADH.
 :::
 
 :::definizione{#tioli-disolfuri titolo="Zolfo nucleofilo e ponti disolfuro"}
@@ -98,7 +98,7 @@ Per esempio, se il pH è due unità sotto il $pK_a$ di $\mathrm{BH^+}$, il rappo
 
 Un'ammina reagisce da nucleofilo con un alogenuro alchilico e forma un nuovo legame C–N (**alchilazione**). Il prodotto è ancora un'ammina e può reagire di nuovo, quindi la reazione tende a proseguire fino allo ione **ammonio quaternario** $\mathrm{R_4N^+}$, con quattro gruppi sull'azoto. Questo ione ha una carica positiva permanente, che non dipende dal pH, perché l'azoto non ha idrogeni da cedere. Un esempio biologico è la **colina**, $\mathrm{HOCH_2CH_2N^+(CH_3)_3}$, che contiene un ammonio quaternario e un gruppo alcolico. La colina fa parte di molti fosfolipidi di membrana e del neurotrasmettitore acetilcolina.
 
-Un'ammina secondaria reagisce con l'acido nitroso, che si forma dai nitriti in ambiente acido, e dà una **N-nitrosammina**, $\mathrm{R_2N{-}N{=}O}$, in cui l'azoto dell'ammina è legato a un gruppo N=O. Alcune nitrosammine sono cancerogene: nell'organismo vengono trasformate in sostanze che si legano al DNA. La reazione può avvenire anche nello stomaco, che è acido, a partire dai nitriti presenti in alcuni alimenti.
+Un'ammina secondaria reagisce con l'acido nitroso, che si forma dai nitriti in ambiente acido, e dà una **N-nitrosammina**, $\mathrm{R_2N{-}N{=}O}$, in cui l'azoto dell'ammina è legato a un gruppo N=O. Alcune nitrosammine sono cancerogene: nell'organismo vengono trasformate in sostanze che si legano al DNA (acido desossiribonucleico). La reazione può avvenire anche nello stomaco, che è acido, a partire dai nitriti presenti in alcuni alimenti.
 :::
 
 ## Aldeidi e chetoni: attaccare il carbonio carbonilico
@@ -123,7 +123,7 @@ La reazione tipica di aldeidi e chetoni è l'**addizione nucleofila**. Un nucleo
 
 Le aldeidi sono più reattive dei chetoni, per due ragioni: il carbonio carbonilico è meno ingombrato, perché ha un solo gruppo di carbonio, ed è più povero di elettroni, perché i gruppi alchilici cedono elettroni e un chetone ne ha due. Un esempio di addizione è quella dell'acqua, che dà un **diolo geminale** (o idrato), con due OH sullo stesso carbonio. La reazione è un equilibrio, di solito spostato verso il carbonile; è spostato verso l'idrato nella formaldeide e quando il carbonile è vicino a gruppi che attirano elettroni.
 
-La riduzione è un'addizione in cui il nucleofilo è uno ione idruro $\mathrm{H^-}$: si forma un legame C–H e, dopo l'aggiunta di $\mathrm{H^+}$, un legame O–H. Nelle cellule l'idruro è fornito dai coenzimi NADH e NADPH. Un esempio è la riduzione del piruvato, un chetone, a lattato, un alcol secondario, che avviene nel muscolo sotto sforzo.
+La riduzione è un'addizione in cui il nucleofilo è uno ione idruro $\mathrm{H^-}$: si forma un legame C–H e, dopo l'aggiunta di $\mathrm{H^+}$, un legame O–H. Nelle cellule l'idruro è fornito dai coenzimi NADH e NADPH, che è un NADH con un gruppo fosfato in più. Un esempio è la riduzione del piruvato, un chetone, a lattato, un alcol secondario, che avviene nel muscolo sotto sforzo.
 :::
 
 ## Alcoli e ammine che reagiscono con un carbonile
@@ -147,7 +147,7 @@ Il carbonio accanto al carbonile si chiama **carbonio $\alpha$** e i suoi idroge
 
 Un **enolo** è una molecola con un gruppo OH legato a un carbonio di un doppio legame: C=C–OH. Un composto carbonilico con un idrogeno $\alpha$ è in equilibrio con il suo enolo: l'idrogeno passa dal carbonio $\alpha$ all'ossigeno e il doppio legame si sposta da C=O a C=C. Le due forme si chiamano **tautomeri** e l'equilibrio **tautomeria cheto-enolica**. I tautomeri sono isomeri veri, perché un atomo di idrogeno cambia posizione; le forme limite di risonanza, invece, differiscono solo per la posizione degli elettroni. Acidi e basi accelerano la trasformazione. Di solito prevale nettamente la forma carbonilica; l'enolo è favorito quando il suo doppio legame è coniugato o fa parte di un anello aromatico, come nel fenolo.
 
-Nel **fosfoenolpiruvato** un gruppo fosfato è legato all'ossigeno di un enolo e lo blocca in questa forma poco stabile. Quando il fosfato viene trasferito all'ADP, l'enolo che si libera si trasforma subito nel piruvato, che è la forma chetonica, molto più stabile. Questa trasformazione rende la reazione fortemente favorita, e nella glicolisi la cellula la usa per produrre ATP.
+Nel **fosfoenolpiruvato** un gruppo fosfato è legato all'ossigeno di un enolo e lo blocca in questa forma poco stabile. Quando il fosfato viene trasferito all'ADP (adenosina difosfato), l'enolo che si libera si trasforma subito nel piruvato, che è la forma chetonica, molto più stabile. Questa trasformazione rende la reazione fortemente favorita, e nella glicolisi la cellula la usa per produrre ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari).
 
 La tautomeria riguarda anche le basi azotate del DNA. Ogni base esiste quasi sempre in una sola forma, ma può passare per breve tempo a un tautomero raro: un gruppo C=O diventa C–OH (forma enolica) oppure un gruppo $\mathrm{NH_2}$ diventa =NH (forma imminica). Il tautomero raro forma legami a idrogeno diversi e può appaiarsi con la base sbagliata, causando una mutazione. In un anello che contiene azoto, il gruppo O=C–NH si chiama *lattame* e il suo tautomero HO–C=N si chiama *lattime*.
 

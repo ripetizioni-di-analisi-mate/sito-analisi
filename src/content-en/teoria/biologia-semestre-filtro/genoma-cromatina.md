@@ -6,7 +6,7 @@ sommario: "From chromosome counts to nucleosomes: genome organisation, accessibi
 ## Chromosomes, chromatids and DNA content
 
 :::definizione{#cromosomi titolo="A chromosome before and after replication"}
-A eukaryotic **chromosome** is a long, linear, double-helical DNA molecule wrapped around proteins. The number of chromosomes is fixed for each species, and a human cell has 46. The appearance of a chromosome changes with DNA replication.
+A eukaryotic **chromosome** is a long, linear, double-helical molecule of DNA (deoxyribonucleic acid) wrapped around proteins. The number of chromosomes is fixed for each species, and a human cell has 46. The appearance of a chromosome changes with DNA replication.
 
 - **Before** replication the chromosome contains a single DNA molecule.
 - **After** replication it contains two identical DNA molecules, called **sister chromatids**, joined together at a region called the centromere. This is the X shape seen in photographs. It still counts as one chromosome, as long as the two chromatids stay joined.
@@ -44,7 +44,7 @@ In human centromeres the DNA consists of short sequences repeated a great many t
 
 In **telomeres** the DNA is a short sequence repeated thousands of times, which in humans is TTAGGG. A group of proteins called **shelterin** binds these repeats. The cell repairs DNA breaks by joining free ends together. Shelterin covers the natural end of the chromosome and prevents it from being treated as a break. Without this protection two chromosomes are joined to each other end to end.
 
-At each replication telomeres shorten a little, for a reason explained in the unit on replication. **Telomerase** is the enzyme that lengthens them again. It contains an RNA molecule that it uses as a template to add new TTAGGG repeats, so it is a reverse transcriptase. It is active in germ cells and stem cells, and little or not at all in most other cells. Shelterin and telomerase therefore have different tasks: the first protects the end, the second lengthens it.
+At each replication telomeres shorten a little, for a reason explained in the unit on replication. **Telomerase** is the enzyme that lengthens them again. It contains a molecule of RNA (ribonucleic acid) that it uses as a template to add new TTAGGG repeats, so it is a reverse transcriptase. It is active in germ cells and stem cells, and little or not at all in most other cells. Shelterin and telomerase therefore have different tasks: the first protects the end, the second lengthens it.
 :::
 
 :::esempio{titolo="Two alterations with different consequences"}
@@ -100,7 +100,7 @@ Heterochromatin is of two types. **Constitutive** heterochromatin is compact in 
 :::
 
 :::definizione{#rimodellamento titolo="Moving a nucleosome using ATP"}
-A nucleosome covering a sequence prevents other proteins from binding to it. The cell moves nucleosomes with **chromatin remodelling complexes**, enzymes that consume ATP. A remodelling complex slides the nucleosome along the DNA, removes it or replaces one of its histones. Depending on the case, a regulatory sequence is uncovered or covered.
+A nucleosome covering a sequence prevents other proteins from binding to it. The cell moves nucleosomes with **chromatin remodelling complexes**, enzymes that consume ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions). A remodelling complex slides the nucleosome along the DNA, removes it or replaces one of its histones. Depending on the case, a regulatory sequence is uncovered or covered.
 
 A transcription factor, for example, has to bind a sequence covered by a nucleosome. The remodelling complex moves the nucleosome by a few tens of base pairs, the sequence is left uncovered and the factor binds. In this process the DNA sequence does not change. Only the position of the nucleosome changes. To show that the movement depends on the complex, a version of the complex unable to hydrolyse ATP is used in the laboratory. With this version the nucleosome stays in place.
 :::
@@ -110,9 +110,9 @@ A transcription factor, for example, has to bind a sequence covered by a nucleos
 :::definizione{#epigenetica titolo="Regulatory states without a sequence change"}
 All the cells of a person have the same DNA, yet a liver cell and a neuron use different genes. When a liver cell divides, moreover, the daughter cells are still liver cells. **Epigenetics** studies the information that determines which genes are active and that passes to daughter cells without the DNA sequence changing. This information consists of chemical groups added to DNA or to histones, called **epigenetic modifications**.
 
-The first modification is **DNA methylation**, that is, the addition of a methyl group ($\mathrm{CH_3}$) to the base cytosine. In humans it concerns cytosines followed by a guanine, in the pairs called **CpG**. The sequence stays the same, because a methylated cytosine still pairs with guanine. When the CpGs of the **promoter** of a gene, that is, the region where transcription starts, are methylated, the gene is generally switched off. Specific proteins recognise methylated cytosines and compact the chromatin.
+The first modification is **DNA methylation**, that is, the addition of a methyl group ($\mathrm{CH_3}$) to the base cytosine. In humans it concerns cytosines followed by a guanine, in the pairs called **CpG**, where C and G stand for cytosine and guanine and p stands for the phosphate group that joins them. The sequence stays the same, because a methylated cytosine still pairs with guanine. When the CpGs of the **promoter** of a gene, that is, the region where transcription starts, are methylated, the gene is generally switched off. Specific proteins recognise methylated cytosines and compact the chromatin.
 
-Methylation passes to daughter cells by the following mechanism. In a CpG both strands carry a methylated C, because opposite CG there is GC. With replication each new double helix receives one old strand, methylated, and one new strand, unmethylated. The enzyme **DNMT1** recognises sites methylated on only one strand and adds the methyl to the new strand. The two daughter cells therefore have the same methylated CpGs as the mother cell.
+Methylation passes to daughter cells by the following mechanism. In a CpG both strands carry a methylated C, because opposite CG there is GC. With replication each new double helix receives one old strand, methylated, and one new strand, unmethylated. The enzyme **DNMT1** (DNA methyltransferase 1) recognises sites methylated on only one strand and adds the methyl to the new strand. The two daughter cells therefore have the same methylated CpGs as the mother cell.
 
 ![Maintenance methylation after replication: parental site, hemimethylation and restoration](/figure/biologia-semestre-filtro/genoma-cromatina/metilazione-en.svg)
 
@@ -141,7 +141,7 @@ The **genome** is all the DNA of an organism. In humans it comprises the nuclear
 
 - **Introns**, stretches inside genes that are transcribed and then removed from the RNA.
 - **Regulatory sequences**, such as promoters, which determine when a gene is active.
-- Genes for **non-coding RNAs**, such as rRNA and tRNA.
+- Genes for **non-coding RNAs**, such as rRNA (ribosomal RNA) and tRNA (transfer RNA).
 - **Repeated sequences**, which occupy about half the genome.
 
 A sequence that does not code for protein therefore often has a function. A promoter and an rRNA gene, for example, do not code for proteins and are indispensable.
@@ -164,7 +164,7 @@ Repeated sequences fall into two groups according to how the copies are arranged
 
 In **tandem** repeats the copies follow one another. The sequence CACACACA, for example, contains four consecutive copies of the unit CA. If the unit is very short, from 1 to 6 bases, the repeat is called a **microsatellite**. If it is longer, a few tens of bases, it is called a **minisatellite**. The number of copies at a given locus changes from person to person. One person has, for example, 12 copies on one chromosome and 15 on the homologue. Measuring the length of many microsatellites gives a profile that differs for each individual, and this is the principle of the DNA tests used to identify people.
 
-In **interspersed** repeats the copies are scattered at distant points of the genome. Almost all derive from **mobile elements**, that is, sequences able to insert a copy of themselves at another point of the genome. The main classes are **LINEs**, **SINEs** and endogenous retroviruses. Most of the copies present today in the human genome have accumulated mutations and are no longer able to move.
+In **interspersed** repeats the copies are scattered at distant points of the genome. Almost all derive from **mobile elements**, that is, sequences able to insert a copy of themselves at another point of the genome. The main classes are **LINEs** (long interspersed elements), **SINEs** (short interspersed elements) and endogenous retroviruses. Most of the copies present today in the human genome have accumulated mutations and are no longer able to move.
 
 ![Adjacent repeats and copies separated by unrelated DNA](/figure/biologia-semestre-filtro/genoma-cromatina/ripetizioni-en.svg)
 :::

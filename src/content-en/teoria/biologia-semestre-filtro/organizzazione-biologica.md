@@ -19,7 +19,7 @@ All cells have four components in common.
 
 - The **plasma membrane** separates the inside of the cell from the outside and controls what enters and what leaves.
 - The **cytoplasm** is the content of the cell enclosed by the membrane.
-- **DNA** is the molecule that contains the hereditary instructions.
+- **DNA** (deoxyribonucleic acid) is the molecule that contains the hereditary instructions. The cell uses these instructions by copying stretches of them into a similar molecule, **RNA** (ribonucleic acid).
 - **Ribosomes** are the structures that build proteins by following those instructions.
 
 The set of chemical reactions that take place in a cell is called **metabolism**. Some cells lose part of these components as they mature. The mature human red blood cell (erythrocyte), for example, no longer has a nucleus or ribosomes. It is still a cell, because it derives from a precursor cell that had them.
@@ -36,7 +36,7 @@ A **phylogenetic tree** is a diagram that shows which groups of organisms descen
 
 Relatedness is read only from the nodes. The order in which the tips are drawn carries no information, because two branches can swap places around their node without changing the common ancestors. The length of a branch indicates elapsed time or amount of change only if the figure includes a scale.
 
-Comparing molecules found in all organisms, in particular ribosomal RNA, divides living things into three large groups called **domains**: Bacteria, Archaea and Eukarya. Bacteria and archaea are **prokaryotes**, that is, cells without a nucleus. **Eukaryotes** have cells with a nucleus and include animals, plants, fungi and protists. Bacteria and archaea look alike under the microscope, but they differ in membrane composition, in the cell wall and in the enzymes that copy and read DNA. In these enzymes archaea are closer to eukaryotes than to bacteria. The three domains are branches of the same tree and none of them is more evolved than the others.
+Comparing molecules found in all organisms, in particular the RNA that is part of ribosomes, divides living things into three large groups called **domains**: Bacteria, Archaea and Eukarya. Bacteria and archaea are **prokaryotes**, that is, cells without a nucleus. **Eukaryotes** have cells with a nucleus and include animals, plants, fungi and protists. Bacteria and archaea look alike under the microscope, but they differ in membrane composition, in the cell wall and in the enzymes that copy and read DNA. In these enzymes archaea are closer to eukaryotes than to bacteria. The three domains are branches of the same tree and none of them is more evolved than the others.
 
 **Evolution** is the change, from one generation to the next, in the hereditary characteristics of a population. A population is the set of individuals of the same species living in the same place. Evolution requires individuals to differ from one another in characteristics passed on to their descendants. **Natural selection** acts on these differences. Individuals with a characteristic that helps survival and reproduction in that environment leave more descendants, so that characteristic becomes more frequent in later generations.
 
@@ -48,15 +48,15 @@ In a population of bacteria, for example, a few individuals have a variant that 
 ## Viruses and the production of new virions
 
 :::definizione{#virus titolo="Genome, capsid and dependence on the host"}
-A **virus** is an infectious agent much smaller than a cell, made of a nucleic acid enclosed in a protein coat. Outside the cell the virus is an inert particle, called a **virion**, which has up to three components.
+A **virus** is an infectious agent much smaller than a cell, made of a nucleic acid, that is, DNA or RNA, enclosed in a protein coat. Outside the cell the virus is an inert particle, called a **virion**, which has up to three components.
 
 - The **genome** is the nucleic acid carrying the instructions of the virus. It is either DNA or RNA.
 - The **capsid** is the protein shell that encloses and protects the genome.
 - The **envelope** is a lipid layer surrounding the capsid. Only some viruses have one; they take it from a membrane of the infected cell and insert their own proteins into it.
 
-A virus enters a cell only if a protein on its surface binds a specific molecule of the cell membrane, called a **receptor**. For this reason each virus infects only certain cell types, and this preference is called **tropism**. HIV, for example, binds the protein CD4 and therefore infects the lymphocytes that display it. Binding to the receptor is necessary but may not be enough, because after entry the virus also needs molecules inside the cell.
+A virus enters a cell only if a protein on its surface binds a specific molecule of the cell membrane, called a **receptor**. For this reason each virus infects only certain cell types, and this preference is called **tropism**. HIV (human immunodeficiency virus), for example, binds the protein CD4 and therefore infects the lymphocytes that display it. Binding to the receptor is necessary but may not be enough, because after entry the virus also needs molecules inside the cell.
 
-Viruses are **obligate intracellular parasites**, that is, they multiply only inside a cell. A virion has no ribosomes and produces no energy. To make its proteins it therefore uses the ribosomes, the amino acids and the ATP (the molecule that supplies energy to cellular reactions) of the infected cell, called the **host**. Some viruses carry one or more enzymes in the virion, for example a polymerase, which is an enzyme able to copy a nucleic acid. These viruses too depend on the host for everything else. Viruses have a genome that mutates and are subject to selection, so they evolve as organisms do.
+Viruses are **obligate intracellular parasites**, that is, they multiply only inside a cell. A virion has no ribosomes and produces no energy. To make its proteins it therefore uses the ribosomes, the amino acids and the ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions) of the infected cell, called the **host**. Some viruses carry one or more enzymes in the virion, for example a polymerase, which is an enzyme able to copy a nucleic acid. These viruses too depend on the host for everything else. Viruses have a genome that mutates and are subject to selection, so they evolve as organisms do.
 
 The envelope is made of lipids, so substances that dissolve fats, such as alcohol and soaps, damage it. A virus with a damaged envelope loses the proteins it uses to bind the receptor and is generally no longer infectious.
 :::
@@ -238,7 +238,7 @@ Phosphate carries negative charges, so it changes the shape of the protein and w
 ## DNA, RNA and chain direction
 
 :::definizione{#acidi-nucleici titolo="Nucleotides and complementarity"}
-The **nucleic acids** are DNA and RNA. They are chains of units called **nucleotides**. A nucleotide has three parts.
+The **nucleic acids** are DNA (deoxyribonucleic acid) and RNA (ribonucleic acid). They are chains of units called **nucleotides**. A nucleotide has three parts.
 
 - A **sugar** with five carbon atoms. In DNA it is deoxyribose, in RNA it is ribose.
 - A **nitrogenous base**. There are five bases: adenine (A), guanine (G), cytosine (C), thymine (T) and uracil (U). DNA contains A, G, C and T. RNA contains A, G, C and U.
@@ -262,8 +262,8 @@ RNA is usually single-stranded. The cell contains several types of RNA, with dif
 - **mRNA** (messenger RNA) carries to the ribosomes the sequence to be translated into protein. It is the only type that is translated.
 - **tRNA** (transfer RNA) carries amino acids to the ribosome and recognises the base triplets of the mRNA, called codons.
 - **rRNA** (ribosomal RNA) forms ribosomes together with proteins and catalyses the formation of the peptide bond.
-- **snRNAs** take part in splicing, that is, the removal of stretches from newly transcribed RNA.
-- **miRNAs** are very short RNAs that reduce the production of protein from particular mRNAs.
+- **snRNAs** (small nuclear RNAs) take part in splicing, that is, the removal of stretches from newly transcribed RNA.
+- **miRNAs** (microRNAs) are very short RNAs that reduce the production of protein from particular mRNAs.
 
 An RNA strand folds back on itself where it contains complementary stretches, and forms short double-helical regions.
 
@@ -278,7 +278,7 @@ An RNA strand folds back on itself where it contains complementary stretches, an
 - **Catabolism** breaks large molecules down into smaller ones and releases energy. The breakdown of glucose into carbon dioxide and water is an example.
 - **Anabolism** builds large molecules from small ones and consumes energy. The synthesis of a protein from amino acids is an example.
 
-The two parts are linked by **ATP**. Catabolism produces ATP and anabolism consumes it. Synthesis reactions often also require electrons, supplied by carrier molecules such as NADPH. This availability of electrons is called reducing power. In addition, the intermediate products of catabolism serve as starting material for anabolism.
+The two parts are linked by **ATP**. Catabolism produces ATP and anabolism consumes it. Synthesis reactions often also require electrons, supplied by carrier molecules such as NADPH (nicotinamide adenine dinucleotide phosphate). This availability of electrons is called reducing power. In addition, the intermediate products of catabolism serve as starting material for anabolism.
 
 The **free energy change**, $\Delta G$, indicates whether a reaction occurs spontaneously under the conditions considered.
 
@@ -303,5 +303,5 @@ $$
 \end{aligned}
 $$
 
-The sum is negative, so the coupled reaction occurs spontaneously. The result does not indicate the rate, which depends on the enzyme. The two values are data of the exercise. In the cell the $\Delta G$ of ATP hydrolysis depends on the concentrations of ATP, ADP and phosphate.
+The sum is negative, so the coupled reaction occurs spontaneously. The result does not indicate the rate, which depends on the enzyme. The two values are data of the exercise. In the cell the $\Delta G$ of ATP hydrolysis depends on the concentrations of ATP, of ADP (adenosine diphosphate, that is, ATP that has lost one phosphate group) and of phosphate.
 :::

@@ -93,7 +93,7 @@ Le proteine di una via spesso sono tenute vicine da una **proteina di impalcatur
 Ogni via ha anche un sistema di **spegnimento**, che interrompe la risposta quando il segnale cessa.
 
 - Le **fosfatasi** tolgono i gruppi fosfato aggiunti dalle chinasi.
-- Le **fosfodiesterasi** degradano i secondi messaggeri cAMP e cGMP.
+- Le **fosfodiesterasi** degradano i secondi messaggeri cAMP (AMP ciclico) e cGMP (GMP ciclico).
 - Pompe e scambiatori riportano gli ioni calcio fuori dal citosol.
 
 Una fosforilazione attiva alcune proteine e ne inattiva altre. Per prevedere l'effetto di un farmaco su una via è quindi necessario sapere, per ogni passaggio, se è un'attivazione o un'inibizione.
@@ -110,9 +110,9 @@ In una via tre proteine agiscono in fila: A attiva B e B attiva C. L'ordine si v
 :::definizione{#recettori-intracellulari titolo="Regolazione genica e via NO–cGMP"}
 I recettori si trovano in due posizioni. La maggior parte sta sulla membrana plasmatica e riceve segnali che non la attraversano. Alcuni stanno dentro la cellula e ricevono segnali piccoli e idrofobi, che attraversano il doppio strato.
 
-Gli **ormoni steroidei**, come il cortisolo e gli estrogeni, derivano dal colesterolo e attraversano la membrana. Nella cellula si legano a un **recettore intracellulare**. Il recettore con l'ormone legato entra nel nucleo, o vi si trova già, e si lega a sequenze specifiche del DNA, dove attiva o reprime la trascrizione di determinati geni. Il recettore è quindi un fattore di trascrizione attivato dall'ormone. La risposta richiede la produzione di nuovo RNA e nuove proteine, perciò compare dopo decine di minuti o ore.
+Gli **ormoni steroidei**, come il cortisolo e gli estrogeni, derivano dal colesterolo e attraversano la membrana. Nella cellula si legano a un **recettore intracellulare**. Il recettore con l'ormone legato entra nel nucleo, o vi si trova già, e si lega a sequenze specifiche del DNA (acido desossiribonucleico), dove attiva o reprime la trascrizione di determinati geni. Il recettore è quindi un fattore di trascrizione attivato dall'ormone. La risposta richiede la produzione di nuovo RNA (acido ribonucleico) e di nuove proteine, perciò compare dopo decine di minuti o ore.
 
-L'**ossido nitrico** (NO) è un gas che attraversa le membrane. Il suo recettore è un enzima del citosol, la **guanilato ciclasi solubile**. NO si lega all'enzima e lo attiva, e l'enzima trasforma il GTP in **cGMP**, un secondo messaggero. Nelle cellule muscolari della parete dei vasi sanguigni il cGMP attiva la chinasi PKG, che fa rilassare il muscolo, quindi il vaso si dilata. NO viene distrutto in pochi secondi, perciò agisce solo sulle cellule vicine a quella che lo produce. Questo esempio mostra che un recettore intracellulare non agisce sempre sui geni.
+L'**ossido nitrico** (NO) è un gas che attraversa le membrane. Il suo recettore è un enzima del citosol, la **guanilato ciclasi solubile**. NO si lega all'enzima e lo attiva, e l'enzima trasforma il GTP (guanosina trifosfato) in **cGMP** (GMP ciclico), un secondo messaggero. Nelle cellule muscolari della parete dei vasi sanguigni il cGMP attiva la chinasi PKG (proteina chinasi G), che fa rilassare il muscolo, quindi il vaso si dilata. NO viene distrutto in pochi secondi, perciò agisce solo sulle cellule vicine a quella che lo produce. Questo esempio mostra che un recettore intracellulare non agisce sempre sui geni.
 :::
 
 :::definizione{#recettori-canale titolo="Legame del ligando e variazione elettrica"}
@@ -124,10 +124,10 @@ Nel recettore-canale il legame del ligando apre direttamente il canale, senza pa
 ## Proteine G e secondi messaggeri
 
 :::definizione{#proteine-g titolo="Ciclo GDP–GTP e accoppiamento ai GPCR"}
-Una **proteina G** è una proteina che funziona da interruttore. Lega un nucleotide della guanina e ha due stati: è **spenta** quando lega GDP ed è **accesa** quando lega GTP. Due tipi di proteine la fanno passare da uno stato all'altro.
+Una **proteina G** è una proteina che funziona da interruttore. Lega un nucleotide della guanina e ha due stati: è **spenta** quando lega GDP (guanosina difosfato) ed è **accesa** quando lega GTP (guanosina trifosfato), che ha un gruppo fosfato in più. Due tipi di proteine la fanno passare da uno stato all'altro.
 
-- Una **GEF** la accende. Fa staccare il GDP, e al suo posto si lega un GTP, che nel citosol è abbondante. Il GDP viene quindi sostituito con un GTP intero e non riceve un fosfato in più.
-- Una **GAP** la spegne. Accelera l'idrolisi del GTP legato, che diventa GDP.
+- Una **GEF** (fattore di scambio del nucleotide) la accende. Fa staccare il GDP, e al suo posto si lega un GTP, che nel citosol è abbondante. Il GDP viene quindi sostituito con un GTP intero e non riceve un fosfato in più.
+- Una **GAP** (proteina che attiva l'idrolisi del GTP) la spegne. Accelera l'idrolisi del GTP legato, che diventa GDP.
 
 Le proteine G sono di due tipi. Quelle **monomeriche** sono formate da una sola catena. Ne sono esempi Ras, descritta più avanti, e Ran, che regola il trasporto nel nucleo. Quelle **eterotrimeriche** sono formate da tre subunità diverse, α, β e γ, e la subunità α è quella che lega il nucleotide.
 
@@ -140,7 +140,7 @@ Le proteine G eterotrimeriche lavorano con i **GPCR** (recettori accoppiati a pr
 
 Esistono tre famiglie principali di subunità α, che agiscono su enzimi diversi.
 
-- **Gs** attiva l'**adenilato ciclasi**, un enzima che trasforma l'ATP in **cAMP**. Il cAMP è un secondo messaggero e attiva la chinasi **PKA**. La PKA è formata da subunità regolatrici e subunità catalitiche. Il cAMP si lega alle regolatrici, che rilasciano le catalitiche attive.
+- **Gs** attiva l'**adenilato ciclasi**, un enzima che trasforma l'ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari) in **cAMP** (AMP ciclico). Il cAMP è un secondo messaggero e attiva la chinasi **PKA** (proteina chinasi A). La PKA è formata da subunità regolatrici e subunità catalitiche. Il cAMP si lega alle regolatrici, che rilasciano le catalitiche attive.
 - **Gi** inibisce l'adenilato ciclasi, quindi abbassa il cAMP.
 - **Gq** attiva la **fosfolipasi C**, che produce i secondi messaggeri IP3 e DAG descritti nel prossimo riquadro.
 

@@ -53,7 +53,7 @@ Gli altri undici sono prodotti dall'organismo a partire da altre molecole. Per e
 :::definizione{#stereochimica-amminoacidi titolo="Configurazione L e rappresentazione di Fischer"}
 In tutti gli amminoacidi tranne la glicina il carbonio α è legato a quattro gruppi diversi, quindi è un centro stereogenico ed esistono due enantiomeri, indicati con L e D. Si distinguono con la **proiezione di Fischer**: si disegna il gruppo carbossilico in alto e la catena laterale in basso; se il gruppo amminico è a sinistra l'amminoacido è L, se è a destra è D. In questo disegno i legami orizzontali vengono verso chi guarda e quelli verticali si allontanano.
 
-Le proteine contengono soltanto L-amminoacidi. La lettera L indica la disposizione dei gruppi e non il verso in cui la sostanza ruota la luce polarizzata, che si ricava solo dalla misura. Nel sistema R/S quasi tutti gli L-amminoacidi hanno configurazione S. Fa eccezione la L-cisteina, che è R: la disposizione nello spazio è la stessa, ma lo zolfo della catena laterale ne cambia la priorità nelle regole CIP. La glicina ha due idrogeni sul carbonio α e non è chirale. L'isoleucina e la treonina hanno un secondo centro stereogenico nella catena laterale.
+Le proteine contengono soltanto L-amminoacidi. La lettera L indica la disposizione dei gruppi e non il verso in cui la sostanza ruota la luce polarizzata, che si ricava solo dalla misura. Nel sistema R/S quasi tutti gli L-amminoacidi hanno configurazione S. Fa eccezione la L-cisteina, che è R: la disposizione nello spazio è la stessa, ma lo zolfo della catena laterale ne cambia la priorità nelle regole CIP (le regole di priorità di Cahn, Ingold e Prelog). La glicina ha due idrogeni sul carbonio α e non è chirale. L'isoleucina e la treonina hanno un secondo centro stereogenico nella catena laterale.
 
 ![Fischer di L-alanina e L-cisteina: stessa serie L, diversa configurazione assoluta.](/figure/chimica-semestre-filtro/biomolecole/fischer-aa-it.svg)
 :::
@@ -91,7 +91,7 @@ $$
 +\mathrm{CH_3OH}.
 \end{aligned}
 $$
-Si ottiene un **dipeptide** e si libera metanolo. Nelle cellule il principio è lo stesso: durante la sintesi delle proteine sul ribosoma ogni amminoacido è legato come estere a una molecola di tRNA, che fa da gruppo uscente.
+Si ottiene un **dipeptide** e si libera metanolo. Nelle cellule il principio è lo stesso: durante la sintesi delle proteine sul ribosoma ogni amminoacido è legato come estere a una molecola di tRNA (RNA di trasporto, un tipo di acido ribonucleico), che fa da gruppo uscente.
 
 Una catena di amminoacidi ha due estremità diverse: l'estremità **N-terminale**, con il gruppo amminico libero, e l'estremità **C-terminale**, con il gruppo carbossilico libero. La sequenza si scrive sempre dall'N-terminale al C-terminale. Per esempio Gly-Ala è il dipeptide in cui la glicina ha il gruppo amminico libero e l'alanina il gruppo carbossilico libero; Ala-Gly è un dipeptide diverso. Gli amminoacidi inseriti in una catena si chiamano *residui*. Una catena di $n$ residui contiene $n-1$ legami peptidici, e per ogni legame formato si perde una molecola d'acqua. Una catena corta si chiama peptide; una catena lunga, polipeptide o proteina.
 :::
@@ -252,13 +252,13 @@ Dal colesterolo l'organismo produce altre molecole che conservano i quattro anel
 ## Nucleotidi, coenzimi e acidi nucleici
 
 :::definizione{#nucleotidi titolo="Basi azotate, nucleosidi e nucleotidi"}
-Gli acidi nucleici, DNA e RNA, sono formati da **nucleotidi**. Un nucleotide ha tre componenti: una base azotata, uno zucchero a cinque carboni e uno o più gruppi fosfato.
+Gli acidi nucleici, DNA (acido desossiribonucleico) e RNA (acido ribonucleico), sono formati da **nucleotidi**. Un nucleotide ha tre componenti: una base azotata, uno zucchero a cinque carboni e uno o più gruppi fosfato.
 
 Le **basi azotate** sono di due tipi. Le **purine**, adenina (A) e guanina (G), hanno due anelli uniti. Le **pirimidine**, citosina (C), timina (T) e uracile (U), hanno un solo anello.
 
 Un **nucleoside** è formato da una base e dallo zucchero, senza fosfato. La base è legata al carbonio 1′ dello zucchero con un legame N-glicosidico, attraverso l'azoto 9 nelle purine e l'azoto 1 nelle pirimidine. I carboni dello zucchero si indicano con un apice (1′, 2′ e così via) per distinguerli dagli atomi della base. Un **nucleotide** è un nucleoside con uno o più fosfati legati al carbonio 5′.
 
-Lo zucchero dell'RNA è il **ribosio**, che ha un gruppo OH sul carbonio 2′. Lo zucchero del DNA è il **2-deossiribosio**, che in quella posizione ha un idrogeno. Per esempio, l'adenosina è il nucleoside formato da adenina e ribosio. Aggiungendo un fosfato si ottiene l'AMP (adenosina monofosfato), con due l'ADP e con tre l'ATP. Nell'ATP il primo fosfato è legato al ribosio con un legame estere; i tre fosfati sono uniti fra loro da due legami fosfoanidridici, che sono i legami da cui la cellula ricava energia.
+Lo zucchero dell'RNA è il **ribosio**, che ha un gruppo OH sul carbonio 2′. Lo zucchero del DNA è il **2-deossiribosio**, che in quella posizione ha un idrogeno. Per esempio, l'adenosina è il nucleoside formato da adenina e ribosio. Aggiungendo un fosfato si ottiene l'AMP (adenosina monofosfato), con due l'ADP (adenosina difosfato) e con tre l'ATP (adenosina trifosfato). Nell'ATP il primo fosfato è legato al ribosio con un legame estere; i tre fosfati sono uniti fra loro da due legami fosfoanidridici, che sono i legami da cui la cellula ricava energia.
 
 L'**ATP** è la molecola con cui la cellula trasferisce energia. La sua idrolisi ad ADP e fosfato ha un $\Delta G$ molto negativo. Le cellule usano questa reazione per far avvenire reazioni che da sole avrebbero $\Delta G$ positivo: le due reazioni vengono *accoppiate*, e il processo complessivo avviene se la somma dei due $\Delta G$ è negativa. L'accoppiamento richiede che le due reazioni abbiano un intermedio in comune. Di solito un enzima trasferisce un gruppo fosfato dall'ATP a un reagente, che diventa così più reattivo. L'energia non proviene dalla rottura del legame in sé, che anzi richiede energia: proviene dal fatto che i prodotti, ADP e fosfato, sono più stabili dell'ATP. Il valore effettivo di $\Delta G$ dipende dalle concentrazioni di ATP, ADP e fosfato nella cellula.
 :::
@@ -266,11 +266,11 @@ L'**ATP** è la molecola con cui la cellula trasferisce energia. La sua idrolisi
 :::definizione{#coenzimi-redox titolo="NAD e FAD nei trasferimenti di elettroni"}
 Nelle reazioni redox del metabolismo gli elettroni sono trasportati da due coenzimi, anch'essi derivati da nucleotidi.
 
-Il **NAD** è formato da due nucleotidi uniti: uno contiene adenina e l'altro nicotinammide, che deriva dalla vitamina B3 (niacina). La nicotinammide è la parte che riceve gli elettroni. La forma ossidata è $\mathrm{NAD^+}$ e la forma ridotta è NADH. Quando un substrato viene ossidato perde due elettroni e due protoni: il $\mathrm{NAD^+}$ riceve i due elettroni e un protone, cioè uno ione idruro $\mathrm{H^-}$, e il secondo protone passa nella soluzione.
+Il **NAD** (nicotinammide adenina dinucleotide) è formato da due nucleotidi uniti: uno contiene adenina e l'altro nicotinammide, che deriva dalla vitamina B3 (niacina). La nicotinammide è la parte che riceve gli elettroni. La forma ossidata è $\mathrm{NAD^+}$ e la forma ridotta è NADH. Quando un substrato viene ossidato perde due elettroni e due protoni: il $\mathrm{NAD^+}$ riceve i due elettroni e un protone, cioè uno ione idruro $\mathrm{H^-}$, e il secondo protone passa nella soluzione.
 $$
 \mathrm{NAD^+}+\mathrm{H^+}+2e^-\longrightarrow\mathrm{NADH}.
 $$
-Il **FAD** contiene una flavina, che deriva dalla vitamina B2 (riboflavina), legata a un nucleotide con adenina. La forma ossidata è FAD e la forma ridotta è $\mathrm{FADH_2}$. Il FAD riceve due elettroni e due protoni, cioè due atomi di idrogeno.
+Il **FAD** (flavina adenina dinucleotide) contiene una flavina, che deriva dalla vitamina B2 (riboflavina), legata a un nucleotide con adenina. La forma ossidata è FAD e la forma ridotta è $\mathrm{FADH_2}$. Il FAD riceve due elettroni e due protoni, cioè due atomi di idrogeno.
 $$
 \mathrm{FAD}+2\,\mathrm{H^+}+2e^-\longrightarrow\mathrm{FADH_2}.
 $$
@@ -313,7 +313,7 @@ $$
 2\,\mathrm{GSH}+\mathrm{ROOH}
 \longrightarrow\mathrm{GSSG}+\mathrm{ROH}+\mathrm{H_2O}.
 $$
-Nelle cellule la reazione è catalizzata dall'enzima glutatione perossidasi. Un altro enzima, la glutatione reduttasi, riporta poi il GSSG a GSH usando NADPH, così il glutatione è di nuovo disponibile. Il glutatione reagisce anche direttamente con alcune specie ossidanti, senza enzimi; la forma che reagisce più in fretta è lo ione tiolato $\mathrm{GS^-}$.
+Nelle cellule la reazione è catalizzata dall'enzima glutatione perossidasi. Un altro enzima, la glutatione reduttasi, riporta poi il GSSG a GSH usando NADPH (un NADH con un gruppo fosfato in più), così il glutatione è di nuovo disponibile. Il glutatione reagisce anche direttamente con alcune specie ossidanti, senza enzimi; la forma che reagisce più in fretta è lo ione tiolato $\mathrm{GS^-}$.
 
 Nelle membrane, che sono apolari, agiscono antiossidanti liposolubili.
 

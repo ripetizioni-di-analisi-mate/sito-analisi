@@ -6,7 +6,7 @@ sommario: "How DNA is copied and used to produce RNA and proteins, with error co
 ## Copying DNA while preserving information
 
 :::definizione{#replicazione titolo="Complementarity and semiconservative replication"}
-**Replication** is the copying of DNA. It takes place before every cell division, so that each of the two daughter cells receives a complete genome. It is based on the complementarity of the bases. Opposite an A there is always a T and opposite a G there is always a C, so the sequence of one strand determines that of the other. The two strands of the double helix separate, and each acts as a **template** for building a new strand. Two double helices are obtained, each made of one old strand and one new strand. For this reason replication is called **semiconservative**: half of each daughter molecule is conserved.
+**Replication** is the copying of DNA (deoxyribonucleic acid). It takes place before every cell division, so that each of the two daughter cells receives a complete genome. It is based on the complementarity of the bases. Opposite an A there is always a T and opposite a G there is always a C, so the sequence of one strand determines that of the other. The two strands of the double helix separate, and each acts as a **template** for building a new strand. Two double helices are obtained, each made of one old strand and one new strand. For this reason replication is called **semiconservative**: half of each daughter molecule is conserved.
 
 The enzyme that builds the new strand is **DNA polymerase**. Its operation follows three rules.
 
@@ -16,7 +16,7 @@ The enzyme that builds the new strand is **DNA polymerase**. Its operation follo
 
 Nucleotides enter the reaction with three phosphate groups (dATP, dGTP, dCTP, dTTP). When a nucleotide joins the chain it loses two phosphates, and this reaction supplies the energy to form the bond.
 
-Since DNA polymerase cannot start a chain, a **primer** is needed. This is a short stretch of RNA complementary to the template, built by an enzyme called **primase**. The polymerase starts from the 3′ end of the primer and continues with DNA.
+Since DNA polymerase cannot start a chain, a **primer** is needed. This is a short stretch of RNA (ribonucleic acid) complementary to the template, built by an enzyme called **primase**. The polymerase starts from the 3′ end of the primer and continues with DNA.
 
 Replication begins at precise points on the DNA, the **origins of replication**. At each origin the double helix opens and two **replication forks** form, which advance in opposite directions. For this reason replication is called bidirectional. The circular chromosome of the bacterium *Escherichia coli* has a single origin. Eukaryotic chromosomes are much longer and have thousands, so many regions are copied at the same time.
 
@@ -75,7 +75,7 @@ Telomerase is active in germ cells and stem cells. In most cells of the body it 
 ## Organisation of a gene
 
 :::definizione{#gene titolo="Functional products, exons and regulatory regions"}
-A **gene** is a stretch of DNA containing the instructions for building a product. The product is a protein or an RNA that functions as such, for example a tRNA. The information of a protein-coding gene is used in two stages. In **transcription** the gene is copied into a molecule of messenger RNA (mRNA). In **translation** ribosomes read the mRNA and build the protein. The two stages together are called **gene expression**.
+A **gene** is a stretch of DNA containing the instructions for building a product. The product is a protein or an RNA that functions as such, for example a tRNA (transfer RNA). The information of a protein-coding gene is used in two stages. In **transcription** the gene is copied into a molecule of messenger RNA (mRNA). In **translation** ribosomes read the mRNA and build the protein. The two stages together are called **gene expression**.
 
 A gene does not consist only of the part that is copied. In front of it lies the **promoter**, the sequence to which the enzyme of transcription binds. The promoter determines where transcription starts and in which direction it proceeds. Other regulatory sequences, near or far, determine how often the gene is transcribed.
 
@@ -112,7 +112,7 @@ In bacteria RNA polymerase recognises the promoter with the help of a protein, t
 The **lac operon** of *Escherichia coli* is the classic example of transcriptional regulation. An **operon** is a group of neighbouring genes transcribed together into a single mRNA from one promoter. The lac operon contains the genes of the enzymes needed to use the sugar lactose. Producing them costs energy, so the bacterium produces them only when lactose is present and glucose, the sugar it prefers, is absent. Two proteins control the operon.
 
 - The **LacI repressor** responds to lactose. Without lactose it binds a sequence next to the promoter, the **operator**, and blocks RNA polymerase. When lactose is present, a molecule derived from it, allolactose, binds the repressor and detaches it from the operator. Allolactose is called the **inducer**.
-- The **CAP activator** responds to glucose. When glucose is scarce, cAMP rises in the cell and binds CAP. The CAP-cAMP complex binds near the promoter and helps RNA polymerase attach.
+- The **CAP activator** (catabolite activator protein) responds to glucose. When glucose is scarce, the cell contains more cAMP (cyclic AMP), a small molecule that the cell uses as a signal. cAMP binds CAP. The CAP-cAMP complex binds near the promoter and helps RNA polymerase attach.
 
 Transcription is high only if the repressor is off and the activator is bound. The four cases are as follows.
 
@@ -134,7 +134,7 @@ Mutations of the operon are interpreted by identifying which binding is altered.
 :::definizione{#trascrizione-eucariotica titolo="Nuclear polymerases and transcription factors"}
 Eukaryotes have three RNA polymerases in the nucleus, each for one class of RNA.
 
-- **RNA polymerase I** transcribes the genes of the major rRNAs.
+- **RNA polymerase I** transcribes the genes of the major rRNAs (ribosomal RNAs).
 - **RNA polymerase II** transcribes all protein-coding genes, so it produces mRNAs.
 - **RNA polymerase III** transcribes the genes of tRNAs and of the smallest rRNA, 5S.
 
@@ -145,7 +145,7 @@ RNA polymerase II does not recognise the promoter on its own. It needs proteins 
 
 An enhancer often lies thousands of base pairs from the gene it regulates. It acts because the DNA folds into a loop and brings the enhancer, with its bound proteins, into contact with the promoter. All this requires chromatin to be open at those points, as described in the unit on genome and chromatin.
 
-After initiation polymerase II travels along the gene and extends the RNA. The polymerase has a long tail, called the **CTD**, which is phosphorylated along the way. The enzymes that modify the RNA while it is being produced bind the phosphorylated tail. At the end of the gene the RNA is cut at a precise point, the polyadenylation site. The polymerase continues for a further stretch and then detaches from the DNA. The end of the mRNA is therefore set by the cut and not by the point where the polymerase stops.
+After initiation polymerase II travels along the gene and extends the RNA. The polymerase has a long tail, called the **CTD** (carboxy-terminal domain), which is phosphorylated along the way. The enzymes that modify the RNA while it is being produced bind the phosphorylated tail. At the end of the gene the RNA is cut at a precise point, the polyadenylation site. The polymerase continues for a further stretch and then detaches from the DNA. The end of the mRNA is therefore set by the cut and not by the point where the polymerase stops.
 
 The amount of a protein in a cell does not depend only on the transcription of its gene. It also depends on how long the mRNA lasts, on how many times it is translated and on the rate at which the protein is degraded. If the amount of a protein increases, to attribute the increase to transcription the newly produced RNA is measured, and not only the protein.
 :::
@@ -177,7 +177,7 @@ The degradation of an mRNA starts from its two protections. The poly-A tail is s
 
 **miRNAs** (microRNAs) regulate the lifetime and translation of mRNAs. They are RNAs of about 22 nucleotides, produced by the cell. A miRNA associates with a protein, **Argonaute**, and guides the complex to mRNAs containing a sequence complementary to its own, usually in the 3′ UTR. In animals the pairing is generally partial. The target mRNA is translated less and degraded faster, so the corresponding protein decreases. A single miRNA regulates many different mRNAs.
 
-**RNA interference** (RNAi) uses the same mechanism. A double-stranded RNA is cut by the enzyme **Dicer** into short fragments, called **siRNAs**. One strand of the siRNA binds Argonaute and guides it to the mRNA with a perfectly complementary sequence. In this case Argonaute cuts the mRNA, which is then destroyed. In the laboratory a siRNA is introduced into the cell to switch off a chosen gene.
+**RNA interference** (RNAi) uses the same mechanism. A double-stranded RNA is cut by the enzyme **Dicer** into short fragments, called **siRNAs** (small interfering RNAs). One strand of the siRNA binds Argonaute and guides it to the mRNA with a perfectly complementary sequence. In this case Argonaute cuts the mRNA, which is then destroyed. In the laboratory a siRNA is introduced into the cell to switch off a chosen gene.
 
 The other RNAs are processed too. rRNA precursors are cut and modified in the nucleolus, where they are also joined to proteins to form the two ribosomal subunits. tRNA precursors are trimmed at their ends and some of their bases are modified. Every tRNA ends at its 3′ end with the sequence **CCA**, to which the amino acid attaches. Ribosomal subunits are built in the nucleolus, while translation takes place in the cytoplasm.
 :::
@@ -195,7 +195,7 @@ Reading starts from the start codon and proceeds three by three. The way the seq
 
 The match between codon and amino acid is made by **tRNAs**. A tRNA carries an amino acid at one end and has, in another region, three bases called the **anticodon**. The anticodon pairs with the complementary codon of the mRNA, in antiparallel orientation. The anticodon 3′-UAC-5′ pairs with the codon 5′-AUG-3′. There are fewer than 61 tRNAs, because the third base of the codon allows a less strict pairing, called **wobble**. One tRNA therefore recognises several codons that differ only in the third base and specify the same amino acid.
 
-Each tRNA receives its amino acid from an enzyme, the **aminoacyl-tRNA synthetase**. There is one for each amino acid. It recognises both the amino acid and the tRNAs corresponding to it and joins them with consumption of ATP. The accuracy of translation depends on this step, because the ribosome checks only the pairing between codon and anticodon and not the amino acid carried. If the wrong amino acid is attached to a tRNA in the laboratory, the ribosome inserts it into the protein anyway.
+Each tRNA receives its amino acid from an enzyme, the **aminoacyl-tRNA synthetase**. There is one for each amino acid. It recognises both the amino acid and the tRNAs corresponding to it and joins them with consumption of ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions). The accuracy of translation depends on this step, because the ribosome checks only the pairing between codon and anticodon and not the amino acid carried. If the wrong amino acid is attached to a tRNA in the laboratory, the ribosome inserts it into the protein anyway.
 :::
 
 ## Building the polypeptide chain
@@ -215,7 +215,7 @@ In **elongation** a cycle of three steps is repeated, once for each amino acid.
 2. The chain attached to the tRNA in the P site is transferred onto the amino acid in the A site, with the formation of a **peptide bond**. This reaction is catalysed by the rRNA of the large subunit.
 3. The ribosome advances by one codon (translocation). The tRNA with the chain moves from the A site to the P site, and the empty tRNA moves from the P site to the E site and leaves. The A site is free again.
 
-Entry of the tRNA and translocation require proteins called elongation factors and consume GTP.
+Entry of the tRNA and translocation require proteins called elongation factors and consume GTP (guanosine triphosphate), a molecule similar to ATP that supplies energy in the same way.
 
 ![E, P and A sites during elongation](/figure/biologia-semestre-filtro/flusso-informazione/ribosoma-en.svg)
 

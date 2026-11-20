@@ -46,7 +46,7 @@ Three kinds of stroke are used to show the arrangement in space. A plain line is
 
 A **heterocycle** is a ring in which at least one atom is different from carbon, for example nitrogen or oxygen. The atom must be part of the ring: a ring of carbons only with an oxygen attached outside is not a heterocycle.
 
-The IUPAC name of a branched alkane is built in four steps.
+The IUPAC name of a branched alkane, that is, the name assigned with the rules of the International Union of Pure and Applied Chemistry, is built in four steps.
 
 1. The longest chain of carbons is found, called the main chain. Its number of carbons gives the base name: meth- (1), eth- (2), prop- (3), but- (4), pent- (5), hex- (6), with the ending *-ane*.
 2. The carbons of the chain are numbered starting from the end nearest to the first branch.
@@ -87,7 +87,7 @@ A molecule with $n$ stereogenic centres has at most $2^n$ stereoisomers. The num
 :::definizione{#isomeria-ez titolo="Priorities at the two alkene carbons"}
 There is no rotation around a double bond, so the groups attached to the two carbons stay on one side or the other. If each of the two carbons carries two different groups, there are two stereoisomers, distinguished by the symbols $E$ and $Z$. The assignment is made in two steps.
 
-1. On each carbon of the double bond one establishes which of the two groups has priority, according to the CIP rules: the atom with the higher atomic number has priority.
+1. On each carbon of the double bond one establishes which of the two groups has priority, according to the CIP rules (named after the chemists Cahn, Ingold and Prelog): the atom with the higher atomic number has priority.
 2. If the two priority groups are on the same side of the double bond, the isomer is $Z$ (from the German *zusammen*, together). If they are on opposite sides, it is $E$ (*entgegen*, opposite).
 
 In but-2-ene $\mathrm{CH_3CH{=}CHCH_3}$ each carbon of the double bond carries a methyl and a hydrogen, and the methyl has priority. In the $Z$ isomer the two methyls are on the same side; in the $E$ isomer they are on opposite sides.
@@ -175,7 +175,7 @@ Mechanisms are drawn with **curved arrows**. Each arrow represents the movement 
 :::osservazione{#sostituzioni titolo="SN2 and SN1: kinetics and stereochemistry"}
 An **alkyl halide** is a compound in which a halogen atom (F, Cl, Br, I), written X, is bonded to an $sp^3$ carbon. The carbon is partially positive, so it is an electrophile. Alkyl halides give two kinds of reaction: **substitution**, in which a nucleophile takes the place of the halogen, and **elimination**, in which a double bond forms. The halogen that leaves is the **leaving group**. These reactions do not apply to halogens bonded to a carbon of a double bond or of an aromatic ring.
 
-Nucleophilic substitution takes place by two mechanisms, called SN2 and SN1.
+Nucleophilic substitution takes place by two mechanisms, called SN2 and SN1. In the two abbreviations S stands for substitution and N for nucleophilic.
 
 In **SN2** everything happens in a single step. The nucleophile attacks the carbon from the side opposite the halogen, and while the new bond forms the bond to the halogen breaks. Two species take part in the step, so the rate depends on both: $v=k[\mathrm{RX}][\mathrm{Nu^-}]$. The number 2 in the name shows that the step is bimolecular. The reaction is faster the less hindered the carbon is: it is fast with methyl and primary halides, slower with secondary ones, and does not take place with tertiary ones. It is favoured by a strong nucleophile and by a polar aprotic solvent, such as acetone, which does not form hydrogen bonds with the nucleophile and leaves it more reactive.
 
@@ -255,7 +255,7 @@ A planar and fully conjugated ring with $4n$ $\pi$ electrons (4, 8, 12) is **ant
 
 ![Benzene and pyrimidine rings, each with six pi electrons and pyrimidine nitrogens at positions 1 and 3](/figure/chimica-semestre-filtro/carbonio-idrocarburi-stereochimica/aromatici-en.svg)
 
-Many heterocycles are also aromatic. **Pyrimidine** is a six-membered ring with two nitrogens in positions 1 and 3, and has 6 $\pi$ electrons like benzene. The lone pair of each nitrogen is in an orbital in the plane of the ring, pointing outwards, and is not part of the 6 $\pi$ electrons. **Purine** consists of two fused rings, one six-membered and one five-membered, with four nitrogens and 10 $\pi$ electrons in all. The nitrogenous bases of DNA and RNA derive from these two rings: cytosine, thymine and uracil are pyrimidines; adenine and guanine are purines.
+Many heterocycles are also aromatic. **Pyrimidine** is a six-membered ring with two nitrogens in positions 1 and 3, and has 6 $\pi$ electrons like benzene. The lone pair of each nitrogen is in an orbital in the plane of the ring, pointing outwards, and is not part of the 6 $\pi$ electrons. **Purine** consists of two fused rings, one six-membered and one five-membered, with four nitrogens and 10 $\pi$ electrons in all. The nitrogenous bases of DNA (deoxyribonucleic acid) and RNA (ribonucleic acid) derive from these two rings: cytosine, thymine and uracil are pyrimidines; adenine and guanine are purines.
 :::
 
 :::osservazione{#sostituzione-aromatica titolo="Orientation, rate and biological context"}

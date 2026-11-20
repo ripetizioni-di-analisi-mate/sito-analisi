@@ -9,7 +9,7 @@ sommario: "Punti di controllo, cicline e CDK, Rb e p53, mitosi, meiosi, cellule 
 Il **ciclo cellulare** è la serie di eventi che va dalla nascita di una cellula alla sua divisione in due cellule figlie. Ha quattro fasi, sempre nello stesso ordine.
 
 1. **G1**. La cellula cresce e, in base ai segnali che riceve, stabilisce se dividersi.
-2. **S** (sintesi). La cellula replica il DNA.
+2. **S** (sintesi). La cellula replica il DNA (acido desossiribonucleico).
 3. **G2**. La cellula controlla che il DNA sia stato copiato tutto e si prepara alla divisione.
 4. **M**. La cellula si divide. Questa fase comprende la **mitosi**, cioè la divisione del nucleo, e la **citodieresi**, cioè la divisione del citoplasma.
 
@@ -274,12 +274,12 @@ La **via intrinseca** (mitocondriale) parte dall'interno della cellula, in rispo
 
 La via prosegue in quattro passaggi.
 
-1. BAX e BAK formano pori nella membrana esterna del mitocondrio. Questo evento si indica con la sigla **MOMP**.
+1. BAX e BAK formano pori nella membrana esterna del mitocondrio. Questo evento si indica con la sigla **MOMP** (permeabilizzazione della membrana esterna del mitocondrio).
 2. Attraverso i pori esce nel citosol il **citocromo c**, una proteina che di norma sta nello spazio intermembrana e partecipa alla catena respiratoria.
 3. Nel citosol il citocromo c si lega alla proteina APAF1. Più copie di questo complesso si uniscono in una struttura a ruota, l'**apoptosoma**.
 4. L'apoptosoma attiva la caspasi 9, che attiva le caspasi esecutrici.
 
-Il citocromo c ha quindi due funzioni, secondo il luogo in cui si trova: nel mitocondrio serve alla respirazione, nel citosol avvia l'apoptosi. I pori riguardano la membrana esterna del mitocondrio. La membrana interna, dove si produce l'ATP, non viene forata.
+Il citocromo c ha quindi due funzioni, secondo il luogo in cui si trova: nel mitocondrio serve alla respirazione, nel citosol avvia l'apoptosi. I pori riguardano la membrana esterna del mitocondrio. La membrana interna, dove si produce l'ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari), non viene forata.
 
 La **via estrinseca** parte dall'esterno della cellula. Un'altra cellula, per esempio un linfocita, espone un segnale di morte che si lega a un **recettore di morte** sulla cellula bersaglio. La coppia più nota è formata dal recettore Fas e dal suo ligando.
 

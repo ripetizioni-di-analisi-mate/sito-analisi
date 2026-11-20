@@ -18,7 +18,7 @@ The **fluid mosaic** model describes the membrane as a two-dimensional liquid. L
 
 Some proteins do not move freely, because they are anchored to the cytoskeleton or to junctions between cells.
 
-The two halves of the bilayer are called **leaflets** and have different compositions. This difference is called asymmetry. Enzymes called **flippases** maintain it by moving specific lipids from one leaflet to the other with consumption of ATP. **Scramblases**, when activated, redistribute them between the two leaflets. Phosphatidylserine, for example, normally lies on the leaflet facing the cytosol. When a cell dies by apoptosis, phosphatidylserine appears on the outer leaflet, and macrophages recognise it as a signal to remove the cell. Sugars attached to proteins (glycoproteins) and to lipids (glycolipids) face only the outside of the cell. Together they form the **glycocalyx**, a layer that protects the surface and takes part in recognition and adhesion between cells.
+The two halves of the bilayer are called **leaflets** and have different compositions. This difference is called asymmetry. Enzymes called **flippases** maintain it by moving specific lipids from one leaflet to the other with consumption of ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions). **Scramblases**, when activated, redistribute them between the two leaflets. Phosphatidylserine, for example, normally lies on the leaflet facing the cytosol. When a cell dies by apoptosis, phosphatidylserine appears on the outer leaflet, and macrophages recognise it as a signal to remove the cell. Sugars attached to proteins (glycoproteins) and to lipids (glycolipids) face only the outside of the cell. Together they form the **glycocalyx**, a layer that protects the surface and takes part in recognition and adhesion between cells.
 
 ![Polar heads, hydrophobic tails and a transmembrane protein](/figure/biologia-semestre-filtro/strutture-cellulari/membrana-en.svg)
 :::
@@ -75,11 +75,11 @@ The rapid changes therefore depend on channels. The pump works slowly and mainta
 ## Nucleus and targeting
 
 :::definizione{#nucleo-ran titolo="Nuclear pores and Ran directionality"}
-The **nucleus** contains the DNA of the cell. It is bounded by the **nuclear envelope**, made of two membranes. The outer membrane is continuous with the endoplasmic reticulum. The two membranes join around the **nuclear pores**, large complexes of proteins called nucleoporins, which are the only passages between nucleus and cytosol. Small molecules cross the pore by diffusion. Large molecules, such as proteins and RNA, cross it only when accompanied by a transport receptor.
+The **nucleus** contains the DNA (deoxyribonucleic acid) of the cell. It is bounded by the **nuclear envelope**, made of two membranes. The outer membrane is continuous with the endoplasmic reticulum. The two membranes join around the **nuclear pores**, large complexes of proteins called nucleoporins, which are the only passages between nucleus and cytosol. Small molecules cross the pore by diffusion. Large molecules, such as proteins and RNA (ribonucleic acid), cross it only when accompanied by a transport receptor.
 
 Inside the nucleus lies the **nucleolus**, a region without a membrane where the cell produces ribosomal RNAs and begins to assemble the ribosomal subunits.
 
-A protein enters the nucleus if its sequence contains a **nuclear localisation signal (NLS)**, that is, a short stretch of amino acids. The receptor that recognises the NLS is called an **importin**. The direction of transport is set by a small protein, **Ran**, which exists in two forms: bound to GTP (Ran-GTP) or to GDP (Ran-GDP). The nucleus contains the enzyme RanGEF, which loads Ran with GTP, so Ran-GTP prevails in the nucleus. The cytosol contains the enzyme RanGAP, which makes Ran hydrolyse GTP, so Ran-GDP prevails in the cytosol. Import takes place in three steps.
+A protein enters the nucleus if its sequence contains a **nuclear localisation signal (NLS)**, that is, a short stretch of amino acids. The receptor that recognises the NLS is called an **importin**. The direction of transport is set by a small protein, **Ran**, which exists in two forms: bound to GTP (Ran-GTP) or to GDP (Ran-GDP). GTP (guanosine triphosphate) is a molecule similar to ATP, and GDP (guanosine diphosphate) is GTP that has lost one phosphate group. The nucleus contains the enzyme RanGEF, which loads Ran with GTP, so Ran-GTP prevails in the nucleus. The cytosol contains the enzyme RanGAP, which makes Ran hydrolyse GTP, so Ran-GDP prevails in the cytosol. Import takes place in three steps.
 
 1. In the cytosol the importin binds the protein carrying the NLS.
 2. The complex crosses the pore.
@@ -87,7 +87,7 @@ A protein enters the nucleus if its sequence contains a **nuclear localisation s
 
 Export works as a mirror image. The protein to be exported has a **nuclear export signal (NES)**, recognised by a receptor called an **exportin**. In the nucleus the exportin binds the protein only together with Ran-GTP. The complex crosses the pore and in the cytosol GTP is hydrolysed, so the complex comes apart and the protein is released. Importins and exportins then return and are reused. The NLS is not cut off after entry. At the end of cell division, when the nucleus re-forms, the same protein re-enters thanks to the same signal.
 
-The cell regulates entry into the nucleus by hiding or exposing the signal. The transcription factor NF-κB, for example, stays in the cytosol because it is bound to an inhibitor, IκB, which covers its NLS. A stimulus causes IκB to be degraded, the NLS becomes accessible and NF-κB enters the nucleus. Most mRNAs leave the nucleus with a different receptor (NXF1-NXT1), which does not depend on Ran.
+The cell regulates entry into the nucleus by hiding or exposing the signal. The transcription factor NF-κB, for example, stays in the cytosol because it is bound to an inhibitor, IκB, which covers its NLS. A stimulus causes IκB to be degraded, the NLS becomes accessible and NF-κB enters the nucleus. Most mRNAs (messenger RNAs) leave the nucleus with a different receptor (NXF1-NXT1), which does not depend on Ran.
 
 ![Ran-dependent nuclear import and export](/figure/biologia-semestre-filtro/strutture-cellulari/ran-en.svg)
 :::
@@ -106,19 +106,19 @@ The **mitochondrion** is the organelle that produces most of the cell's ATP. It 
 - The **inner membrane** is folded into **cristae** and is impermeable to ions, including protons (H⁺).
 - The **matrix** is the innermost space.
 
-The breakdown of glucose begins in the cytosol with **glycolysis**, which converts one molecule of glucose into two of pyruvate and produces two ATP. Pyruvate enters the matrix and is converted into acetyl-CoA, which enters the **Krebs cycle** (tricarboxylic acid cycle). The cycle completes the breakdown to carbon dioxide. In these stages the electrons removed from glucose are loaded onto two carrier molecules, NADH and FADH₂.
+The breakdown of glucose begins in the cytosol with **glycolysis**, which converts one molecule of glucose into two of pyruvate and produces two ATP. Pyruvate enters the matrix and is converted into acetyl-CoA, which enters the **Krebs cycle** (tricarboxylic acid cycle). The cycle completes the breakdown to carbon dioxide. In these stages the electrons removed from glucose are loaded onto two electron carrier molecules, NADH (nicotinamide adenine dinucleotide) and FADH₂ (flavin adenine dinucleotide).
 
 ATP is then formed in the inner membrane, in two steps.
 
 1. NADH and FADH₂ give their electrons to the **respiratory chain**, a series of four protein complexes numbered I to IV. The electrons pass from one complex to the next and finally bind oxygen, which becomes water. The energy released is used by complexes I, III and IV to move protons from the matrix to the intermembrane space. Complex II transfers electrons without moving protons.
-2. Protons accumulate in the intermembrane space and form a **proton gradient**. They return to the matrix through **ATP synthase**, an enzyme of the inner membrane that uses this flow to join ADP and phosphate into ATP.
+2. Protons accumulate in the intermembrane space and form a **proton gradient**. They return to the matrix through **ATP synthase**, an enzyme of the inner membrane that uses this flow to join ADP (adenosine diphosphate, that is, ATP with one phosphate group fewer) and phosphate into ATP.
 
 The two steps together are called **oxidative phosphorylation**. Two types of substance alter it in different ways.
 
 - An **uncoupler** makes the inner membrane permeable to protons. Protons return without passing through ATP synthase, so less ATP is produced. The respiratory chain keeps working, and in fact speeds up, and oxygen consumption increases.
 - A **chain inhibitor**, such as cyanide, blocks the passage of electrons. Oxygen consumption and ATP production fall together.
 
-The complete breakdown of one glucose molecule in the presence of oxygen yields about 30–32 molecules of ATP. Without oxygen only glycolysis remains, with two ATP. In this case pyruvate is converted into lactate. The reaction produces no ATP and serves to regenerate the NAD⁺ that glycolysis needs in order to continue.
+The complete breakdown of one glucose molecule in the presence of oxygen yields about 30–32 molecules of ATP. Without oxygen only glycolysis remains, with two ATP. In this case pyruvate is converted into lactate. The reaction produces no ATP and serves to regenerate NAD⁺, that is, NADH that has given up its electrons, which glycolysis needs in order to continue.
 
 The mitochondrion has its own DNA. In humans it encodes 13 proteins of oxidative phosphorylation and the RNAs needed to synthesise them in the mitochondrion. All other mitochondrial proteins are encoded by nuclear genes.
 
@@ -179,7 +179,7 @@ A membrane protein contains other hydrophobic stretches, which stop the passage 
 
 This orientation is preserved all the way to the destination. A protein travels from the reticulum to the Golgi, and from the Golgi to the plasma membrane, inside vesicles. When a vesicle fuses with the plasma membrane its interior opens to the outside of the cell. The part of a protein that faced the lumen in the reticulum therefore ends up facing the outside. For this reason the sugars of glycoproteins, added in the lumen, lie on the outer face of the plasma membrane.
 
-In the lumen of the reticulum the protein folds and is modified. Disulfide bridges form, that is, bonds between two cysteine amino acids, and **N-glycosylation** begins, that is, the addition of sugar chains. The reticulum also performs **quality control**. The chaperones calnexin and calreticulin retain glycoproteins until they are correctly folded. A protein that fails to fold is returned to the cytosol and degraded by the proteasome. This route is called **ERAD** (ER-associated degradation). If misfolded proteins accumulate, the cell activates a response called the **UPR**, which reduces the synthesis of new proteins and increases the production of chaperones.
+In the lumen of the reticulum the protein folds and is modified. Disulfide bridges form, that is, bonds between two cysteine amino acids, and **N-glycosylation** begins, that is, the addition of sugar chains. The reticulum also performs **quality control**. The chaperones calnexin and calreticulin retain glycoproteins until they are correctly folded. A protein that fails to fold is returned to the cytosol and degraded by the proteasome. This route is called **ERAD** (ER-associated degradation). If misfolded proteins accumulate, the cell activates a response called the **UPR** (unfolded protein response), which reduces the synthesis of new proteins and increases the production of chaperones.
 
 Cystic fibrosis shows the effect of this control. The most common mutation, ΔF508, removes one amino acid from the CFTR channel. The mutant channel folds badly, is retained in the reticulum and degraded, so very little of it reaches the plasma membrane.
 
@@ -210,9 +210,9 @@ Proteins that work in the lumen of the reticulum have a four-amino-acid signal, 
 :::definizione{#endocitosi-autofagia titolo="Recycling, lysosomes and autophagy"}
 In **endocytosis** the cell brings external material inside, enclosing it in vesicles that form from the plasma membrane. In **receptor-mediated** endocytosis a membrane protein, the receptor, binds a specific substance and concentrates it in the vesicle. The vesicles fuse with the **early endosome**, a compartment whose interior is slightly acidic. The acidity detaches many substances from their receptor. From here receptor and substance follow different routes, as three examples show.
 
-- **LDL**, particles that carry cholesterol in the blood, detach from the receptor. The receptor returns to the plasma membrane (recycling) and the LDL continue to the lysosomes, where they are broken down.
+- **LDL** (low-density lipoproteins), particles that carry cholesterol in the blood, detach from the receptor. The receptor returns to the plasma membrane (recycling) and the LDL continue to the lysosomes, where they are broken down.
 - **Transferrin**, a protein that carries iron, releases the iron in the endosome and returns to the surface together with its receptor.
-- The **EGF receptor**, the receptor of a growth factor, once activated is sent to the lysosomes and degraded together with EGF. In this way the cell reduces the number of receptors and therefore the signal.
+- The **EGF receptor** (EGF is the epidermal growth factor), once activated is sent to the lysosomes and degraded together with EGF. In this way the cell reduces the number of receptors and therefore the signal.
 
 **Lysosomes** are the organelles of degradation. They contain enzymes called hydrolases, active at acidic pH. A pump in their membrane, the **V-ATPase**, moves protons inside and keeps the pH close to 5. Hydrolases are produced in the reticulum. In the Golgi they receive a tag, **mannose-6-phosphate**, and a receptor that recognises this tag sends them to the endosomes and from there to the lysosomes. If a hydrolase is missing, or does not receive the tag, the substance it should degrade accumulates in the lysosomes. This is the origin of lysosomal storage diseases.
 

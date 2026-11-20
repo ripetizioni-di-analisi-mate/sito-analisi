@@ -31,7 +31,7 @@ Alcohols give three kinds of reaction: oxidation, dehydration and substitution.
 - A secondary alcohol is oxidised to a ketone.
 - A tertiary alcohol is not oxidised, because the carbon carrying the OH has no hydrogen to lose.
 
-For a primary alcohol the product depends on the reagent used. A mild oxidant in the absence of water, such as PCC, stops at the aldehyde. A strong oxidant in water goes on to the carboxylic acid. For ethanol the two steps are the following: first ethanal (acetaldehyde) and then ethanoic acid (acetic acid) are obtained.
+For a primary alcohol the product depends on the reagent used. A mild oxidant in the absence of water, such as PCC (pyridinium chlorochromate), stops at the aldehyde. A strong oxidant in water goes on to the carboxylic acid. For ethanol the two steps are the following: first ethanal (acetaldehyde) and then ethanoic acid (acetic acid) are obtained.
 
 $$
 \mathrm{CH_3CH_2OH}\longrightarrow\mathrm{CH_3CHO}\longrightarrow\mathrm{CH_3COOH}.
@@ -41,7 +41,7 @@ $$
 
 In **substitution** the OH is replaced by another group, for example a halogen. The $\mathrm{OH^-}$ ion is a poor leaving group, so the reaction takes place in an acidic environment: the acid adds an $\mathrm{H^+}$ to the oxygen and turns the OH into $\mathrm{OH_2^+}$, which leaves as water. With HBr, the bromide ion takes its place and an alkyl bromide forms.
 
-In the body ethanol is oxidised in the liver in two steps, each catalysed by an enzyme: alcohol dehydrogenase turns it into acetaldehyde and aldehyde dehydrogenase turns acetaldehyde into acetate. In both steps the oxidant is the coenzyme $\mathrm{NAD^+}$, which is reduced to NADH.
+In the body ethanol is oxidised in the liver in two steps, each catalysed by an enzyme: alcohol dehydrogenase turns it into acetaldehyde and aldehyde dehydrogenase turns acetaldehyde into acetate. In both steps the oxidant is the coenzyme $\mathrm{NAD^+}$ (nicotinamide adenine dinucleotide, an electron carrier of cells), which is reduced to NADH.
 :::
 
 :::definizione{#tioli-disolfuri titolo="Nucleophilic sulfur and disulfide bridges"}
@@ -98,7 +98,7 @@ For example, if the pH is two units below the $pK_a$ of $\mathrm{BH^+}$, the rat
 
 An amine reacts as a nucleophile with an alkyl halide and forms a new C–N bond (**alkylation**). The product is still an amine and can react again, so the reaction tends to go on to the **quaternary ammonium** ion $\mathrm{R_4N^+}$, with four groups on the nitrogen. This ion has a permanent positive charge, which does not depend on the pH, because the nitrogen has no hydrogens to give up. A biological example is **choline**, $\mathrm{HOCH_2CH_2N^+(CH_3)_3}$, which contains a quaternary ammonium and an alcohol group. Choline is part of many membrane phospholipids and of the neurotransmitter acetylcholine.
 
-A secondary amine reacts with nitrous acid, which forms from nitrites in an acidic environment, and gives an **N-nitrosamine**, $\mathrm{R_2N{-}N{=}O}$, in which the nitrogen of the amine is bonded to an N=O group. Some nitrosamines are carcinogenic: in the body they are converted into substances that bind to DNA. The reaction can also take place in the stomach, which is acidic, starting from the nitrites present in some foods.
+A secondary amine reacts with nitrous acid, which forms from nitrites in an acidic environment, and gives an **N-nitrosamine**, $\mathrm{R_2N{-}N{=}O}$, in which the nitrogen of the amine is bonded to an N=O group. Some nitrosamines are carcinogenic: in the body they are converted into substances that bind to DNA (deoxyribonucleic acid). The reaction can also take place in the stomach, which is acidic, starting from the nitrites present in some foods.
 :::
 
 ## Aldehydes and ketones: attacking the carbonyl carbon
@@ -123,7 +123,7 @@ The typical reaction of aldehydes and ketones is **nucleophilic addition**. A nu
 
 Aldehydes are more reactive than ketones, for two reasons: the carbonyl carbon is less hindered, because it has only one carbon group, and it is poorer in electrons, because alkyl groups donate electrons and a ketone has two of them. An example of addition is that of water, which gives a **geminal diol** (or hydrate), with two OH groups on the same carbon. The reaction is an equilibrium, usually shifted towards the carbonyl; it is shifted towards the hydrate in formaldehyde and when the carbonyl is near groups that attract electrons.
 
-Reduction is an addition in which the nucleophile is a hydride ion $\mathrm{H^-}$: a C–H bond forms and, after the addition of $\mathrm{H^+}$, an O–H bond. In cells the hydride is supplied by the coenzymes NADH and NADPH. An example is the reduction of pyruvate, a ketone, to lactate, a secondary alcohol, which takes place in muscle during exertion.
+Reduction is an addition in which the nucleophile is a hydride ion $\mathrm{H^-}$: a C–H bond forms and, after the addition of $\mathrm{H^+}$, an O–H bond. In cells the hydride is supplied by the coenzymes NADH and NADPH, which is NADH with one more phosphate group. An example is the reduction of pyruvate, a ketone, to lactate, a secondary alcohol, which takes place in muscle during exertion.
 :::
 
 ## Alcohols and amines reacting with a carbonyl
@@ -147,7 +147,7 @@ The carbon next to the carbonyl is called the **$\alpha$ carbon** and its hydrog
 
 An **enol** is a molecule with an OH group bonded to a carbon of a double bond: C=C–OH. A carbonyl compound with an $\alpha$ hydrogen is in equilibrium with its enol: the hydrogen moves from the $\alpha$ carbon to the oxygen and the double bond shifts from C=O to C=C. The two forms are called **tautomers** and the equilibrium **keto-enol tautomerism**. Tautomers are true isomers, because a hydrogen atom changes position; resonance structures, on the other hand, differ only in the position of the electrons. Acids and bases speed up the transformation. The carbonyl form usually prevails by far; the enol is favoured when its double bond is conjugated or is part of an aromatic ring, as in phenol.
 
-In **phosphoenolpyruvate** a phosphate group is bonded to the oxygen of an enol and locks it in this rather unstable form. When the phosphate is transferred to ADP, the enol released turns at once into pyruvate, which is the keto form, much more stable. This transformation makes the reaction strongly favoured, and in glycolysis the cell uses it to produce ATP.
+In **phosphoenolpyruvate** a phosphate group is bonded to the oxygen of an enol and locks it in this rather unstable form. When the phosphate is transferred to ADP (adenosine diphosphate), the enol released turns at once into pyruvate, which is the keto form, much more stable. This transformation makes the reaction strongly favoured, and in glycolysis the cell uses it to produce ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions).
 
 Tautomerism also concerns the nitrogenous bases of DNA. Each base almost always exists in a single form, but can pass briefly into a rare tautomer: a C=O group becomes C–OH (enol form) or an $\mathrm{NH_2}$ group becomes =NH (imino form). The rare tautomer forms different hydrogen bonds and can pair with the wrong base, causing a mutation. In a ring containing nitrogen, the group O=C–NH is called a *lactam* and its tautomer HO–C=N is called a *lactim*.
 

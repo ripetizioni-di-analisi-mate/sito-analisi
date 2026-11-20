@@ -329,7 +329,7 @@ Nella **respirazione cellulare** gli elettroni tolti alle molecole del cibo pass
 $$
 \mathrm{O_2+4H^++4e^-\rightarrow2H_2O}.
 $$
-La reazione complessiva dell'ossidazione del glucosio è $\mathrm{C_6H_{12}O_6+6O_2\rightarrow6CO_2+6H_2O}$. Il carbonio del glucosio si ossida a $\mathrm{CO_2}$ e l'ossigeno si riduce ad acqua. È la stessa reazione della combustione del glucosio, ma nella cellula avviene in molti passaggi, e una parte dell'energia liberata viene usata per produrre ATP invece di disperdersi tutta come calore.
+La reazione complessiva dell'ossidazione del glucosio è $\mathrm{C_6H_{12}O_6+6O_2\rightarrow6CO_2+6H_2O}$. Il carbonio del glucosio si ossida a $\mathrm{CO_2}$ e l'ossigeno si riduce ad acqua. È la stessa reazione della combustione del glucosio, ma nella cellula avviene in molti passaggi, e una parte dell'energia liberata viene usata per produrre ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari) invece di disperdersi tutta come calore.
 
 Il potenziale della coppia ossigeno/acqua dipende dal pH, perché nella semireazione compaiono ioni $\mathrm{H^+}$. In condizioni standard, cioè a pH 0, vale $E^\circ=1{,}229\,\mathrm V$ a $25\,^\circ\mathrm C$. Applicando l'equazione di Nernst si ottiene $E=1{,}229-0{,}05916\,\mathrm{pH}$ in volt. A pH 7 il potenziale è circa $0{,}815\,\mathrm V$. È un valore alto, quindi l'ossigeno è un forte ossidante anche alle condizioni della cellula.
 :::
@@ -339,7 +339,7 @@ L'ossigeno si riduce ad acqua acquistando quattro elettroni. Se ne acquista meno
 $$
 \mathrm{Fe^{2+}+H_2O_2\rightarrow Fe^{3+}+OH^-+{}^\bullet OH}.
 $$
-Il ferro(II) cede un elettrone e diventa ferro(III). Il perossido si divide in uno ione idrossido $\mathrm{OH^-}$ e in un **radicale ossidrile** ${}^\bullet\mathrm{OH}$, che è una delle sostanze più reattive presenti nelle cellule e danneggia DNA, proteine e lipidi. Il superossido riporta poi il ferro(III) a ferro(II).
+Il ferro(II) cede un elettrone e diventa ferro(III). Il perossido si divide in uno ione idrossido $\mathrm{OH^-}$ e in un **radicale ossidrile** ${}^\bullet\mathrm{OH}$, che è una delle sostanze più reattive presenti nelle cellule e danneggia il DNA (acido desossiribonucleico), le proteine e i lipidi. Il superossido riporta poi il ferro(III) a ferro(II).
 $$
 \mathrm{Fe^{3+}+O_2^{\bullet-}\rightarrow Fe^{2+}+O_2}.
 $$

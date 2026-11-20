@@ -329,7 +329,7 @@ In **cellular respiration** the electrons removed from food molecules pass from 
 $$
 \mathrm{O_2+4H^++4e^-\rightarrow2H_2O}.
 $$
-The overall reaction of the oxidation of glucose is $\mathrm{C_6H_{12}O_6+6O_2\rightarrow6CO_2+6H_2O}$. The carbon of glucose is oxidised to $\mathrm{CO_2}$ and oxygen is reduced to water. It is the same reaction as the combustion of glucose, but in the cell it takes place in many steps, and part of the energy released is used to produce ATP instead of all being lost as heat.
+The overall reaction of the oxidation of glucose is $\mathrm{C_6H_{12}O_6+6O_2\rightarrow6CO_2+6H_2O}$. The carbon of glucose is oxidised to $\mathrm{CO_2}$ and oxygen is reduced to water. It is the same reaction as the combustion of glucose, but in the cell it takes place in many steps, and part of the energy released is used to produce ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions) instead of all being lost as heat.
 
 The potential of the oxygen/water pair depends on the pH, because $\mathrm{H^+}$ ions appear in the half-reaction. Under standard conditions, that is, at pH 0, it is $E^\circ=1.229\,\mathrm V$ at $25\,^\circ\mathrm C$. Applying the Nernst equation gives $E=1.229-0.05916\,\mathrm{pH}$ in volts. At pH 7 the potential is about $0.815\,\mathrm V$. This is a high value, so oxygen is a strong oxidising agent even under the conditions of the cell.
 :::
@@ -339,7 +339,7 @@ Oxygen is reduced to water by gaining four electrons. If it gains fewer, very re
 $$
 \mathrm{Fe^{2+}+H_2O_2\rightarrow Fe^{3+}+OH^-+{}^\bullet OH}.
 $$
-Iron(II) gives up one electron and becomes iron(III). The peroxide splits into a hydroxide ion $\mathrm{OH^-}$ and a **hydroxyl radical** ${}^\bullet\mathrm{OH}$, which is one of the most reactive substances present in cells and damages DNA, proteins and lipids. Superoxide then brings iron(III) back to iron(II).
+Iron(II) gives up one electron and becomes iron(III). The peroxide splits into a hydroxide ion $\mathrm{OH^-}$ and a **hydroxyl radical** ${}^\bullet\mathrm{OH}$, which is one of the most reactive substances present in cells and damages DNA (deoxyribonucleic acid), proteins and lipids. Superoxide then brings iron(III) back to iron(II).
 $$
 \mathrm{Fe^{3+}+O_2^{\bullet-}\rightarrow Fe^{2+}+O_2}.
 $$

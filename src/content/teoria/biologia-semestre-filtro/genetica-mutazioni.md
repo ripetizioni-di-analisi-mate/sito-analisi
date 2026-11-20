@@ -6,7 +6,7 @@ sommario: "Dal cambiamento del DNA al fenotipo: riparazione, incroci, probabilit
 ## Cambiamenti del DNA e loro conseguenze
 
 :::definizione{#mutazioni titolo="Sequenza, prodotto e linea cellulare"}
-Una **mutazione** è un cambiamento permanente della sequenza del DNA. Una volta avvenuta, viene copiata a ogni replicazione e passa a tutte le cellule figlie. Secondo ciò che accade alla sequenza si distinguono tre tipi.
+Una **mutazione** è un cambiamento permanente della sequenza del DNA (acido desossiribonucleico). Una volta avvenuta, viene copiata a ogni replicazione e passa a tutte le cellule figlie. Secondo ciò che accade alla sequenza si distinguono tre tipi.
 
 - Una **sostituzione** cambia una base con un'altra.
 - Un'**inserzione** aggiunge uno o più nucleotidi.
@@ -20,7 +20,7 @@ Una sostituzione nella parte codificante di un gene cambia un codone. Secondo il
 - Mutazione **missenso**. Il nuovo codone indica un amminoacido diverso. GAA diventa GUA, che indica valina. La proteina ha un amminoacido cambiato.
 - Mutazione **nonsenso**. Il nuovo codone è un codone di stop. GAA diventa UAA. La traduzione si ferma in quel punto e la proteina è più corta.
 
-Una mutazione sinonima lascia invariata la proteina, ma in alcuni casi altera lo splicing o la durata dell'mRNA. Per questo motivo la classificazione descrive la sequenza e non garantisce l'assenza di effetti.
+Una mutazione sinonima lascia invariata la proteina, ma in alcuni casi altera lo splicing o la durata dell'mRNA (RNA messaggero, la molecola di acido ribonucleico in cui il gene viene copiato). Per questo motivo la classificazione descrive la sequenza e non garantisce l'assenza di effetti.
 
 Inserzioni e delezioni hanno un effetto che dipende dal numero di nucleotidi. Il ribosoma legge l'mRNA a gruppi di tre, a partire dal codone d'inizio. Se si aggiunge o si toglie un numero di nucleotidi che non è multiplo di 3, tutti i gruppi successivi risultano spostati. Questa mutazione si chiama **frameshift** (slittamento della cornice di lettura). Tutti gli amminoacidi dopo quel punto cambiano, e di solito compare presto un codone di stop. Nella sequenza AUG GCA UUC, per esempio, la delezione della G del secondo codone dà AUG CAU UC…, quindi il secondo codone diventa CAU e i successivi cambiano tutti. Una delezione di tre nucleotidi toglie invece un solo amminoacido e lascia invariati i codoni successivi.
 

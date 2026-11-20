@@ -9,7 +9,7 @@ sommario: "Checkpoints, cyclins and CDKs, Rb and p53, mitosis, meiosis, stem cel
 The **cell cycle** is the series of events from the birth of a cell to its division into two daughter cells. It has four phases, always in the same order.
 
 1. **G1**. The cell grows and, according to the signals it receives, determines whether to divide.
-2. **S** (synthesis). The cell replicates its DNA.
+2. **S** (synthesis). The cell replicates its DNA (deoxyribonucleic acid).
 3. **G2**. The cell checks that all the DNA has been copied and prepares for division.
 4. **M**. The cell divides. This phase includes **mitosis**, that is, division of the nucleus, and **cytokinesis**, that is, division of the cytoplasm.
 
@@ -274,12 +274,12 @@ The **intrinsic** (mitochondrial) pathway starts from inside the cell, in respon
 
 The pathway continues in four steps.
 
-1. BAX and BAK form pores in the outer membrane of the mitochondrion. This event is denoted by the abbreviation **MOMP**.
+1. BAX and BAK form pores in the outer membrane of the mitochondrion. This event is denoted by the abbreviation **MOMP** (mitochondrial outer membrane permeabilisation).
 2. Through the pores **cytochrome c**, a protein that normally lies in the intermembrane space and takes part in the respiratory chain, leaves for the cytosol.
 3. In the cytosol cytochrome c binds the protein APAF1. Several copies of this complex join into a wheel-shaped structure, the **apoptosome**.
 4. The apoptosome activates caspase 9, which activates the executioner caspases.
 
-Cytochrome c therefore has two functions, according to where it is: in the mitochondrion it serves respiration, in the cytosol it starts apoptosis. The pores concern the outer membrane of the mitochondrion. The inner membrane, where ATP is produced, is not perforated.
+Cytochrome c therefore has two functions, according to where it is: in the mitochondrion it serves respiration, in the cytosol it starts apoptosis. The pores concern the outer membrane of the mitochondrion. The inner membrane, where ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions) is produced, is not perforated.
 
 The **extrinsic** pathway starts from outside the cell. Another cell, for example a lymphocyte, displays a death signal that binds a **death receptor** on the target cell. The best-known pair consists of the Fas receptor and its ligand.
 

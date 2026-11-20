@@ -6,7 +6,7 @@ sommario: "From a change in DNA to phenotype: repair, crosses, probability, gene
 ## Changes in DNA and their consequences
 
 :::definizione{#mutazioni titolo="Sequence, product and cell lineage"}
-A **mutation** is a permanent change in the DNA sequence. Once it has occurred, it is copied at every replication and passes to all daughter cells. Three types are distinguished according to what happens to the sequence.
+A **mutation** is a permanent change in the sequence of DNA (deoxyribonucleic acid). Once it has occurred, it is copied at every replication and passes to all daughter cells. Three types are distinguished according to what happens to the sequence.
 
 - A **substitution** changes one base into another.
 - An **insertion** adds one or more nucleotides.
@@ -20,7 +20,7 @@ A substitution in the coding part of a gene changes one codon. Depending on the 
 - **Missense** mutation. The new codon specifies a different amino acid. GAA becomes GUA, which specifies valine. The protein has one amino acid changed.
 - **Nonsense** mutation. The new codon is a stop codon. GAA becomes UAA. Translation stops at that point and the protein is shorter.
 
-A synonymous mutation leaves the protein unchanged, but in some cases it alters splicing or the lifetime of the mRNA. For this reason the classification describes the sequence and does not guarantee the absence of effects.
+A synonymous mutation leaves the protein unchanged, but in some cases it alters splicing or the lifetime of the mRNA (messenger RNA, the molecule of ribonucleic acid into which the gene is copied). For this reason the classification describes the sequence and does not guarantee the absence of effects.
 
 Insertions and deletions have an effect that depends on the number of nucleotides. The ribosome reads the mRNA in groups of three, starting from the start codon. If a number of nucleotides that is not a multiple of 3 is added or removed, all the following groups are shifted. This mutation is called a **frameshift**. All the amino acids after that point change, and a stop codon usually appears soon. In the sequence AUG GCA UUC, for example, deletion of the G of the second codon gives AUG CAU UC…, so the second codon becomes CAU and all the following ones change. A deletion of three nucleotides, by contrast, removes a single amino acid and leaves the following codons unchanged.
 

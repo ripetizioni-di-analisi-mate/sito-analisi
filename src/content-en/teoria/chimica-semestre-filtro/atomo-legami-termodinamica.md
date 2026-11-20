@@ -168,7 +168,7 @@ In a chemical reaction some bonds break and others form. Breaking a bond require
 ## Geometry, polarity and intermolecular interactions
 
 :::definizione{#geometria-ibridazione titolo="Electron domains and hybridisation"}
-The shape of a molecule is predicted with the **VSEPR** model. The idea is that the electron pairs around an atom repel each other, because they all have negative charge, and therefore arrange themselves as far apart as possible.
+The shape of a molecule is predicted with the **VSEPR** model (valence shell electron pair repulsion). The idea is that the electron pairs around an atom repel each other, because they all have negative charge, and therefore arrange themselves as far apart as possible.
 
 The **electron domains** of the central atom are counted. Each bond counts as one domain, even if it is double or triple, and each lone pair counts as one domain. The number of domains determines their arrangement in space, shown in the table. The shape of the molecule is given by the positions of the atoms only, so it differs from the arrangement of the domains when lone pairs are present.
 
@@ -386,7 +386,7 @@ A spontaneous process can be very slow, because $\Delta G$ gives no information 
 
 The value of $\Delta G$ of a reaction depends on the concentrations of reactants and products present at that moment, so it changes as the reaction proceeds and becomes zero at equilibrium.
 
-In cells many necessary reactions have $\Delta G>0$. They take place because they are **coupled** to a reaction with a very negative $\Delta G$, usually the hydrolysis of ATP. The sum of the two changes is negative and the overall process is spontaneous. Coupling requires a mechanism that links the two reactions, generally an enzyme that makes them occur together. Two reactions that take place separately in the same solution do not influence each other in this way.
+In cells many necessary reactions have $\Delta G>0$. They take place because they are **coupled** to a reaction with a very negative $\Delta G$, usually the hydrolysis of ATP (adenosine triphosphate, the molecule that supplies energy to cellular reactions). The sum of the two changes is negative and the overall process is spontaneous. Coupling requires a mechanism that links the two reactions, generally an enzyme that makes them occur together. Two reactions that take place separately in the same solution do not influence each other in this way.
 
 An organism is an open system: it continuously receives matter and energy with food and eliminates waste products. In this way it keeps concentrations constant, at values far from equilibrium. This condition is called a **steady state**. At equilibrium, on the other hand, no reaction proceeds in one direction more than in the other.
 :::

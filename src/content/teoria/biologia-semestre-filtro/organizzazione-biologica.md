@@ -19,7 +19,7 @@ Tutte le cellule hanno quattro componenti in comune.
 
 - La **membrana plasmatica** separa l'interno della cellula dall'esterno e regola ciò che entra e ciò che esce.
 - Il **citoplasma** è il contenuto della cellula racchiuso dalla membrana.
-- Il **DNA** è la molecola che contiene le istruzioni ereditarie.
+- Il **DNA** (acido desossiribonucleico) è la molecola che contiene le istruzioni ereditarie. La cellula usa queste istruzioni copiandone dei tratti in una molecola simile, l'**RNA** (acido ribonucleico).
 - I **ribosomi** sono le strutture che costruiscono le proteine seguendo quelle istruzioni.
 
 L'insieme delle reazioni chimiche che avvengono in una cellula si chiama **metabolismo**. Alcune cellule perdono una parte di queste componenti quando maturano. Il globulo rosso umano maturo (eritrocita), per esempio, non ha più il nucleo né i ribosomi. È comunque una cellula, perché deriva da una cellula precursore che li possedeva.
@@ -36,7 +36,7 @@ Un **albero filogenetico** è uno schema che mostra quali gruppi di organismi di
 
 La parentela si legge soltanto dai nodi. L'ordine in cui sono disegnate le punte non dà informazioni, perché due rami si possono scambiare di posto intorno al loro nodo senza cambiare gli antenati comuni. La lunghezza di un ramo indica il tempo trascorso o la quantità di cambiamento solo se nella figura è riportata una scala.
 
-Il confronto di molecole presenti in tutti gli organismi, in particolare l'RNA dei ribosomi, divide i viventi in tre grandi gruppi, detti **domini**: Bacteria (batteri), Archaea (archei) ed Eukarya (eucarioti). Batteri e archei sono **procarioti**, cioè cellule senza nucleo. Gli **eucarioti** hanno cellule con il nucleo e comprendono animali, piante, funghi e protisti. Batteri e archei si somigliano al microscopio, però differiscono nella composizione della membrana, nella parete e negli enzimi che copiano e leggono il DNA. Per questi enzimi gli archei sono più vicini agli eucarioti che ai batteri. I tre domini sono rami dello stesso albero e nessuno dei tre è più evoluto degli altri.
+Il confronto di molecole presenti in tutti gli organismi, in particolare l'RNA che fa parte dei ribosomi, divide i viventi in tre grandi gruppi, detti **domini**: Bacteria (batteri), Archaea (archei) ed Eukarya (eucarioti). Batteri e archei sono **procarioti**, cioè cellule senza nucleo. Gli **eucarioti** hanno cellule con il nucleo e comprendono animali, piante, funghi e protisti. Batteri e archei si somigliano al microscopio, però differiscono nella composizione della membrana, nella parete e negli enzimi che copiano e leggono il DNA. Per questi enzimi gli archei sono più vicini agli eucarioti che ai batteri. I tre domini sono rami dello stesso albero e nessuno dei tre è più evoluto degli altri.
 
 L'**evoluzione** è il cambiamento, da una generazione all'altra, delle caratteristiche ereditarie di una popolazione. Una popolazione è l'insieme degli individui della stessa specie che vivono nello stesso luogo. L'evoluzione richiede che gli individui differiscano fra loro per caratteristiche trasmesse ai discendenti. Su queste differenze agisce la **selezione naturale**. Gli individui con una caratteristica che in quell'ambiente aiuta a sopravvivere e a riprodursi lasciano più discendenti, quindi quella caratteristica diventa più frequente nelle generazioni successive.
 
@@ -48,15 +48,15 @@ In una popolazione di batteri, per esempio, pochi individui possiedono una varia
 ## Virus e produzione di nuovi virioni
 
 :::definizione{#virus titolo="Genoma, capside e dipendenza dall'ospite"}
-Un **virus** è un agente infettivo molto più piccolo di una cellula, formato da un acido nucleico racchiuso in un rivestimento di proteine. Fuori dalla cellula il virus è una particella inerte, detta **virione**, che ha fino a tre componenti.
+Un **virus** è un agente infettivo molto più piccolo di una cellula, formato da un acido nucleico, cioè da DNA oppure da RNA, racchiuso in un rivestimento di proteine. Fuori dalla cellula il virus è una particella inerte, detta **virione**, che ha fino a tre componenti.
 
 - Il **genoma** è l'acido nucleico con le istruzioni del virus. È DNA oppure RNA.
 - Il **capside** è il guscio di proteine che racchiude e protegge il genoma.
 - L'**envelope** (pericapside) è un involucro di lipidi che circonda il capside. Lo possiedono solo alcuni virus, che lo ricavano da una membrana della cellula infettata e vi inseriscono le proprie proteine.
 
-Un virus entra in una cellula solo se una proteina della sua superficie si lega a una molecola specifica della membrana cellulare, detta **recettore**. Per questo motivo ogni virus infetta soltanto alcuni tipi di cellule, e questa preferenza si chiama **tropismo**. Il virus HIV, per esempio, si lega alla proteina CD4 e quindi infetta i linfociti che la espongono. Il legame al recettore è necessario ma può non bastare, perché dopo l'ingresso il virus ha bisogno anche di molecole interne alla cellula.
+Un virus entra in una cellula solo se una proteina della sua superficie si lega a una molecola specifica della membrana cellulare, detta **recettore**. Per questo motivo ogni virus infetta soltanto alcuni tipi di cellule, e questa preferenza si chiama **tropismo**. Il virus HIV (virus dell'immunodeficienza umana), per esempio, si lega alla proteina CD4 e quindi infetta i linfociti che la espongono. Il legame al recettore è necessario ma può non bastare, perché dopo l'ingresso il virus ha bisogno anche di molecole interne alla cellula.
 
-I virus sono **parassiti intracellulari obbligati**, cioè si moltiplicano soltanto dentro una cellula. Un virione non ha ribosomi e non produce energia. Per fabbricare le proprie proteine usa quindi i ribosomi, gli amminoacidi e l'ATP (la molecola che fornisce energia alle reazioni cellulari) della cellula infettata, detta **ospite**. Alcuni virus portano nel virione uno o più enzimi, per esempio una polimerasi, che è un enzima capace di copiare un acido nucleico. Anche questi virus dipendono dall'ospite per tutto il resto. I virus possiedono un genoma che muta e sono soggetti a selezione, quindi evolvono come gli organismi.
+I virus sono **parassiti intracellulari obbligati**, cioè si moltiplicano soltanto dentro una cellula. Un virione non ha ribosomi e non produce energia. Per fabbricare le proprie proteine usa quindi i ribosomi, gli amminoacidi e l'ATP (adenosina trifosfato, la molecola che fornisce energia alle reazioni cellulari) della cellula infettata, detta **ospite**. Alcuni virus portano nel virione uno o più enzimi, per esempio una polimerasi, che è un enzima capace di copiare un acido nucleico. Anche questi virus dipendono dall'ospite per tutto il resto. I virus possiedono un genoma che muta e sono soggetti a selezione, quindi evolvono come gli organismi.
 
 L'envelope è fatto di lipidi, perciò le sostanze che sciolgono i grassi, come alcol e saponi, lo danneggiano. Un virus con l'envelope danneggiato perde le proteine con cui si lega al recettore e in genere non è più infettivo.
 :::
@@ -238,7 +238,7 @@ L'**ubiquitina** è una piccola proteina che la cellula lega ad altre proteine c
 ## DNA, RNA e direzione delle catene
 
 :::definizione{#acidi-nucleici titolo="Nucleotidi e complementarità"}
-Gli **acidi nucleici** sono il DNA e l'RNA. Sono catene di unità dette **nucleotidi**. Un nucleotide ha tre parti.
+Gli **acidi nucleici** sono il DNA (acido desossiribonucleico) e l'RNA (acido ribonucleico). Sono catene di unità dette **nucleotidi**. Un nucleotide ha tre parti.
 
 - Uno **zucchero** a cinque atomi di carbonio. Nel DNA è il desossiribosio, nell'RNA è il ribosio.
 - Una **base azotata**. Le basi sono cinque: adenina (A), guanina (G), citosina (C), timina (T) e uracile (U). Il DNA contiene A, G, C e T. L'RNA contiene A, G, C e U.
@@ -262,8 +262,8 @@ L'RNA è di solito a filamento singolo. Nella cellula esistono diversi tipi di R
 - L'**mRNA** (RNA messaggero) porta ai ribosomi la sequenza da tradurre in proteina. È il solo tipo che viene tradotto.
 - Il **tRNA** (RNA di trasporto) porta gli amminoacidi al ribosoma e riconosce le triplette di basi dell'mRNA, dette codoni.
 - L'**rRNA** (RNA ribosomiale) forma i ribosomi insieme a proteine e catalizza la formazione del legame peptidico.
-- Gli **snRNA** partecipano allo splicing, cioè alla rimozione di tratti dell'RNA appena trascritto.
-- I **miRNA** sono RNA molto corti che riducono la produzione di proteine a partire da determinati mRNA.
+- Gli **snRNA** (piccoli RNA nucleari) partecipano allo splicing, cioè alla rimozione di tratti dell'RNA appena trascritto.
+- I **miRNA** (microRNA) sono RNA molto corti che riducono la produzione di proteine a partire da determinati mRNA.
 
 Un filamento di RNA si ripiega su sé stesso dove contiene tratti complementari, e forma brevi regioni a doppia elica.
 
@@ -278,7 +278,7 @@ Il **metabolismo** è l'insieme delle reazioni chimiche della cellula. Si divide
 - Il **catabolismo** demolisce molecole grandi in molecole più piccole e libera energia. La demolizione del glucosio in anidride carbonica e acqua ne è un esempio.
 - L'**anabolismo** costruisce molecole grandi a partire da molecole piccole e consuma energia. La sintesi di una proteina a partire dagli amminoacidi ne è un esempio.
 
-Le due parti sono collegate dall'**ATP**. Il catabolismo produce ATP e l'anabolismo lo consuma. Le reazioni di sintesi richiedono spesso anche elettroni, forniti da molecole trasportatrici come il NADPH. Questa disponibilità di elettroni si chiama potere riducente. Inoltre i prodotti intermedi del catabolismo servono da materiale di partenza per l'anabolismo.
+Le due parti sono collegate dall'**ATP**. Il catabolismo produce ATP e l'anabolismo lo consuma. Le reazioni di sintesi richiedono spesso anche elettroni, forniti da molecole trasportatrici come il NADPH (nicotinammide adenina dinucleotide fosfato). Questa disponibilità di elettroni si chiama potere riducente. Inoltre i prodotti intermedi del catabolismo servono da materiale di partenza per l'anabolismo.
 
 La **variazione di energia libera**, $\Delta G$, indica se una reazione avviene spontaneamente nelle condizioni considerate.
 
@@ -303,5 +303,5 @@ $$
 \end{aligned}
 $$
 
-La somma è negativa, quindi la reazione accoppiata avviene spontaneamente. Il risultato non indica la velocità, che dipende dall'enzima. I due valori sono dati dell'esercizio. Nella cellula il $\Delta G$ dell'idrolisi dell'ATP dipende dalle concentrazioni di ATP, ADP e fosfato.
+La somma è negativa, quindi la reazione accoppiata avviene spontaneamente. Il risultato non indica la velocità, che dipende dall'enzima. I due valori sono dati dell'esercizio. Nella cellula il $\Delta G$ dell'idrolisi dell'ATP dipende dalle concentrazioni di ATP, di ADP (adenosina difosfato, cioè l'ATP che ha perso un gruppo fosfato) e di fosfato.
 :::
