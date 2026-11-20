@@ -6,13 +6,17 @@ sommario: "From oscillation to propagation: phase, interference, energy, intensi
 ## From an oscillator to a wave source
 
 :::osservazione{titolo="Local motion and propagation"}
-A vibrating tip on a string first moves a small segment and then neighbouring segments. To understand the process, separate two questions: how each point moves and how the disturbance passes from one point to another. Harmonic motion describes the first aspect; wave speed describes the second. These two speeds generally differ.
+One end of a stretched string is made to vibrate. The first stretch of string moves up and down and drags the neighbouring stretch, which drags the next. A deformation, called a **wave**, thus advances along the string. There are two distinct motions in the phenomenon. Each point of the string oscillates about its rest position and does not move along the string. The wave, by contrast, advances along the string with its own speed. The chapter first describes the oscillation of a point and then the advance of the wave.
 :::
 
 :::definizione{#armonico titolo="Period, frequency and harmonic motion"}
-Periodic motion returns to the same state after one **period** $T$. Returning to the same position is insufficient: an oscillator can pass through it in opposite directions. **Frequency** $f=\dfrac1T$ counts complete cycles per second and is measured in hertz, $1\,\mathrm{Hz}=1\,\mathrm{s^{-1}}$. Angular frequency $\omega=2\pi f$ instead measures the rate of phase advance in radians per second.
+A motion is **periodic** if it repeats identically at regular time intervals. Three quantities describe it.
 
-For harmonic motion along an axis,
+- The **period** $T$ is the duration of one complete oscillation. It is measured in seconds.
+- The **frequency** $f=\dfrac1T$ is the number of oscillations in one second. It is measured in hertz, $1\,\mathrm{Hz}=1\,\mathrm{s^{-1}}$. A heart beating 60 times a minute has $T=1\,\mathrm{s}$ and $f=1\,\mathrm{Hz}$.
+- The **angular frequency** $\omega=2\pi f$ is the frequency expressed in radians per second.
+
+The simplest periodic motion is **simple harmonic motion**, in which position varies in time like a cosine. It is the motion of a mass attached to a spring. Position, velocity and acceleration are:
 $$
 x(t)=A\cos(\omega t+\varphi),\qquad
 v_x(t)=-A\omega\sin(\omega t+\varphi),
@@ -20,150 +24,185 @@ $$
 $$
 a_x(t)=-\omega^2x(t).
 $$
-Amplitude $A$ is nonnegative and gives the greatest distance from equilibrium; initial phase $\varphi$ specifies position and direction of motion at $t=0$. A trigonometric function’s argument is an angle: when writing a numerical law, the coefficient of time must have units consistent with angular frequency.
+The **amplitude** $A$ is the maximum distance from the equilibrium position. The **initial phase** $\varphi$ determines where the body is at time $t=0$. The last formula says that the acceleration is proportional to the displacement and opposite in sense, so it always points towards the equilibrium position.
 
-Acceleration is opposite to displacement, whereas velocity does not always have that direction. At the turning points the body momentarily stops, but acceleration magnitude is greatest; at equilibrium acceleration vanishes and speed is greatest. Thus $v_{\max}=A\omega$ and $a_{\max}=A\omega^2$. The graph also distinguishes times when the body returns towards the centre from times when it moves away.
+During an oscillation the body passes through two extreme situations.
+
+- At the **extremes** ($x=\pm A$) the body is at rest for an instant. The velocity is zero and the acceleration has its maximum value, $a_{\max}=A\omega^2$.
+- At the **equilibrium position** ($x=0$) the velocity has its maximum value, $v_{\max}=A\omega$, and the acceleration is zero.
 
 ![Normalised position, velocity and acceleration over one period, showing their different phases.](/figure/fisica-semestre-filtro/onde-meccaniche/oscillator-en.svg)
 :::
 
 :::teorema{titolo="Mass–spring oscillator"}
-For a mass $m$ and an ideal spring with stiffness $K$, the resultant force $-Kx$ gives $m\ddot x=-Kx$ and hence
+A mass $m$ is attached to a spring of spring constant $K$. The spring exerts the force $-Kx$, so by Newton’s second law $ma=-Kx$, that is, $a=-\dfrac Km x$. Comparing with $a=-\omega^2x$ gives $\omega^2=\dfrac Km$. The motion is therefore harmonic, with:
 $$
 \omega=\sqrt{\dfrac{K}{m}},\qquad
 T=2\pi\sqrt{\dfrac{m}{K}},\qquad
 E=\dfrac12KA^2.
 $$
-Here $K$ denotes spring stiffness, reserving $k$ for wave number. Natural frequency depends on mass and stiffness, whereas energy also depends on amplitude. Doubling $A$ quadruples energy without changing the period in the linear model. This requires negligible friction and deformation within the elastic range: it does not imply that every real oscillator maintains its amplitude indefinitely.
+The period increases with mass and decreases with the stiffness of the spring. It does not depend on amplitude: a wide oscillation and a small one last the same time. A mass of $0.50\,\mathrm{kg}$ on a spring with $K=200\,\mathrm{N/m}$ has $T=2\pi\sqrt{\dfrac{0.50}{200}}\simeq0.31\,\mathrm{s}$. The energy $E$ of the oscillator, by contrast, depends on the square of the amplitude, so with double the amplitude it is four times larger. In this chapter the spring constant is written with a capital $K$, because lower-case $k$ later denotes the wavenumber. The model neglects friction, which in a real oscillator gradually reduces the amplitude.
 
-For a vertical spring, measure $x$ from the loaded equilibrium, not the natural length. Weight shifts equilibrium by $\dfrac{mg}{K}$; subtracting the static balance leaves resultant force $-Kx$ for an additional displacement. This explains why the same period formula still applies.
+If the spring is vertical, the weight of the mass stretches it by $\dfrac{mg}{K}$ and shifts the equilibrium position. Oscillations about the new equilibrium position have the same period.
 :::
 
 ## Propagation and motion of the medium
 
 :::definizione{#onda titolo="What propagates in a mechanical wave"}
-A **mechanical wave** transfers a disturbance through interactions between parts of a material medium. A stretched string exerts forces on neighbouring segments; a compressed fluid exerts pressure on adjacent regions. Elasticity and inertia allow the disturbance to continue even after the source has changed position.
+A **mechanical wave** is a disturbance that propagates in a material medium, such as a string, water or air. Each part of the medium, displaced from its rest position, displaces the neighbouring part and is pulled back by elastic forces.
 
-In the small-amplitude model, particles oscillate about equilibrium and do not travel with a crest. Propagation transfers energy; it does not require net transport of matter from emitter to receiver. Any mean currents or permanent deformation belong to additional phenomena and do not follow from a simple sinusoid.
+A wave carries energy and not matter. The particles of the medium oscillate about their own position and return to it. A cork on a lake, as a wave passes, rises and falls and stays where it is.
 
-In a **transverse** wave, displacement is perpendicular to propagation; in a **longitudinal** wave it is parallel. These words compare two directions, rather than describing the visible shape of a graph. A sound-pressure graph can be sinusoidal while representing a longitudinal wave. In a fluid, compressions and rarefactions travel along the acoustic direction; shear deformation lacks the same restoring force it would have in a solid.
+Waves are distinguished according to the direction in which the particles oscillate relative to the direction in which the wave advances.
+
+- In a **transverse** wave the particles oscillate perpendicular to the direction of propagation. An example is the wave on a string.
+- In a **longitudinal** wave the particles oscillate along the direction of propagation. An example is sound, in which zones where the air is more compressed alternate with zones where it is more rarefied.
+
+Only longitudinal waves propagate in liquids and gases. Both types propagate in solids.
 
 ![Comparison between transverse string oscillation and longitudinal displacements of medium particles.](/figure/fisica-semestre-filtro/onde-meccaniche/modes-en.svg)
 
-A vacuum lacks the medium required by sound and other mechanical waves. A pulse, instead of a periodic vibration, produces a localised disturbance: it has duration and shape but need not have a single frequency. The harmonic model is useful both for simple tones and as a component in descriptions of more complex signals.
+Mechanical waves need a medium, so sound does not propagate in a vacuum. A short isolated disturbance, such as a flick given to the string, is called a **pulse**. A disturbance that repeats regularly is a periodic wave, and the simplest is the harmonic wave, in which each point of the medium performs simple harmonic motion.
 :::
 
 ## Reading space, time and phase
 
 :::teorema{#parametri-onda titolo="Relating speed, wavelength and frequency"}
-**Wavelength** $\lambda$ is the spatial period: the distance between successive crests or successive compressions at the same instant. During one period, an identifiable phase advances by one wavelength, so
+A periodic wave repeats in time and also in space. The **wavelength** $\lambda$ is the distance between two consecutive crests, that is, between two consecutive points of the medium in the same condition. In one period $T$ each point completes one oscillation and the wave advances by one wavelength. The speed of the wave is therefore:
 $$
 v=\dfrac{\lambda}{T}=\lambda f.
 $$
-Speed $v$ refers to the disturbance’s phase in the medium under consideration. For an ideal stretched string,
+The speed $v$ depends only on the medium. On a stretched string it is:
 $$
 v=\sqrt{\dfrac{F_T}{\mu_\ell}},
 $$
-where tension $F_T$ is in newtons and linear density $\mu_\ell$ in kilograms per metre. Greater tension increases the restoring force; greater linear density increases inertia. Their ratio has the dimensions of speed squared. Total string mass cannot replace $\mu_\ell$ unless divided by length.
+In the formula $F_T$ is the tension of the string, in newtons, and $\mu_\ell$ is its mass per unit length, in $\mathrm{kg/m}$, obtained by dividing the mass of the string by its length. The wave is faster on a tighter string and slower on a heavier one. On a string with $F_T=100\,\mathrm{N}$ and $\mu_\ell=0.010\,\mathrm{kg/m}$ the speed is $\sqrt{\dfrac{100}{0.010}}=100\,\mathrm{m/s}$.
 
-At a fixed interface, with linear media and a steady periodic source, transmitted frequency remains equal to incident frequency. Changing medium can change $v$ and $\lambda$: wavelength adjusts through $\lambda=\dfrac{v}{f}$. A source doubling its frequency on the same ideal string instead halves $\lambda$ without doubling wave speed.
+The three quantities depend on different things. Frequency is set by the source. Speed is set by the medium. Wavelength follows from the other two, $\lambda=\dfrac vf$. Two rules follow.
+
+- If the source doubles the frequency, in the same medium the speed stays the same and the wavelength halves.
+- If the wave passes from one medium to another, the frequency stays the same. The speed changes and, in the same proportion, so does the wavelength.
 :::
 
 :::definizione{#equazione-onda titolo="Equation of a travelling wave"}
-A harmonic disturbance travelling towards $+x$ can be represented by
+A harmonic wave advancing in the positive sense of the $x$ axis is described by a function of position $x$ and time $t$, which gives the displacement $y$ of each point of the medium at each instant:
 $$
 y(x,t)=A\cos(kx-\omega t+\varphi),\qquad
 k=\dfrac{2\pi}{\lambda},\qquad v=\dfrac{\omega}{k}.
 $$
-Wave number $k$ measures phase change per unit length. To follow a crest, hold the argument constant: $kx-\omega t+\varphi=C$, hence $x(t)=\dfrac{\omega}{k}t+\text{constant}$. This reasoning, rather than the sign of $y$, determines direction. With $k,\omega>0$, a plus sign between $kx$ and $\omega t$ instead gives negative phase velocity.
+The **wavenumber** $k$ is for space what the angular frequency $\omega$ is for time. The argument of the cosine, $kx-\omega t+\varphi$, is called the **phase**. The sign between $kx$ and $\omega t$ indicates the direction of propagation. With the minus sign the wave advances towards positive $x$, because as $t$ increases the same phase is found at a point with larger $x$. With the plus sign the wave advances towards negative $x$.
 
-A photograph of the medium at fixed $t$ gives a spatial profile from which $A$ and $\lambda$ can be read. A sensor signal at fixed $x$ gives a temporal graph from which $A$ and $T$ can be read. A single photograph does not determine frequency without wave speed or some time information. The slope of a profile $y(x)$ is not particle velocity: that requires a derivative with respect to time at a fixed position.
+The function is read in two ways.
+
+- Fixing the instant $t$ gives a snapshot of the wave, that is, the displacement as a function of position. Amplitude and wavelength are read from it.
+- Fixing the position $x$ gives the motion of a single point over time. Amplitude and period are read from it.
+
+Frequency cannot be obtained from the snapshot alone. The speed of the wave is also needed, and then $f=\dfrac{v}{\lambda}$.
 
 ![Two profiles one quarter-period apart and the time record of a fixed point.](/figure/fisica-semestre-filtro/onde-meccaniche/profiles-en.svg)
 :::
 
 :::esempio{titolo="Ultrasound wavelength"}
-For example, a homogeneous model with $v=1540\,\mathrm{m/s}$ and $f=2.0\,\mathrm{MHz}$ gives $\lambda=0.77\,\mathrm{mm}$. The medium’s value is given, not universal. A frequency of millions of cycles per second requires converting megahertz before dividing: using the number $2$ directly would produce a wavelength one million times too large.
+Ultrasound scanning uses ultrasound of frequency $f=2.0\,\mathrm{MHz}$. In soft tissue sound travels at about $v=1540\,\mathrm{m/s}$. The frequency is converted, $2.0\,\mathrm{MHz}=2.0\cdot10^6\,\mathrm{Hz}$, and one calculates $\lambda=\dfrac{v}{f}=\dfrac{1540}{2.0\cdot10^6}=7.7\cdot10^{-4}\,\mathrm{m}=0.77\,\mathrm{mm}$. The wavelength indicates the size of the smallest details the image can distinguish. For this reason a higher frequency gives a more detailed image.
 :::
 
 ## Superposition, phase and interference
 
 :::teorema{#interferenza titolo="Adding disturbances in a linear medium"}
-In the linear regime, the total disturbance is the algebraic sum of contributions at the same position and time. In a medium that is also nondispersive, two pulses can pass through each other and continue with their original shapes afterwards. Cancellation during overlap does not mean the two pulses have been permanently destroyed.
+When two waves meet at the same point, the resulting displacement is the sum of the two displacements. This is the **superposition principle**. After meeting, each wave continues unchanged, as if the other had not been there. The effect of the sum is called **interference**.
 
-For two harmonic contributions with the same frequency and a stable phase difference $\Delta\varphi$, the resulting amplitude satisfies
+For two harmonic waves of the same frequency the result depends on the **phase difference** $\Delta\varphi$, that is, on how far one wave is shifted relative to the other. The resulting amplitude $A_R$ is given by:
 $$
 A_R^2=A_1^2+A_2^2+2A_1A_2\cos\Delta\varphi.
 $$
-In phase, $A_R=A_1+A_2$; in antiphase, $A_R=|A_1-A_2|$. Cancellation therefore also requires equal amplitudes. With a quarter-cycle phase difference and equal amplitudes $A$, the result is $\sqrt2A$: amplitudes cannot always be added as positive numbers.
+The two extreme cases are as follows.
+
+- **Constructive interference.** The waves are in phase ($\Delta\varphi=0$): the crests of one coincide with the crests of the other. The amplitudes add, $A_R=A_1+A_2$.
+- **Destructive interference.** The waves are in antiphase ($\Delta\varphi=\pi$): the crests of one coincide with the troughs of the other. The amplitudes subtract, $A_R=|A_1-A_2|$. If the two amplitudes are equal the result is zero.
+
+For intermediate values the formula is used. With equal amplitudes $A$ and $\Delta\varphi=\dfrac{\pi}{2}$ the cosine is zero and $A_R=\sqrt{A^2+A^2}=\sqrt2\,A$.
 
 ![Sum of two equal-amplitude sinusoids for three phase differences: zero, pi over two and pi.](/figure/fisica-semestre-filtro/onde-meccaniche/interference-en.svg)
 
-If two sources are initially in phase and their path lengths differ by $\Delta\ell$, the propagation phase difference has magnitude $\dfrac{2\pi\Delta\ell}{\lambda}$. Integer multiples of $\lambda$ give a maximum; odd multiples of $\dfrac{\lambda}{2}$ give a minimum. These conditions must be adjusted when sources already have a phase difference or reflection introduces phase reversals. Equal paths do not guarantee a maximum if emitters vibrate in antiphase.
+The phase difference often arises from a path difference. Two identical sources, vibrating in phase, emit waves that reach a point after travelling different distances. If $\Delta\ell$ is the difference between the two distances, two rules hold.
 
-**Coherence** requires the phase relation to remain sufficiently stable over the observation. For incoherent sources the cross term averages to zero: under appropriate conditions, mean intensities add. Coherent sources require adding disturbances first. Comparisons of local intensities assume travelling contributions in the same direction and medium; the net intensity of a standing field cannot automatically be obtained by squaring local displacement.
+- If $\Delta\ell$ is a whole multiple of the wavelength ($0$, $\lambda$, $2\lambda$, …) the waves arrive in phase and interference is constructive.
+- If $\Delta\ell$ is an odd multiple of half a wavelength ($\dfrac{\lambda}{2}$, $\dfrac{3\lambda}{2}$, …) the waves arrive in antiphase and interference is destructive.
+
+Interference is observed only if the two sources are **coherent**, that is, if their phase difference stays constant over time. Two independent sources, such as two people talking, are not coherent. In that case the intensities of the two waves add and not the amplitudes.
 :::
 
 :::osservazione{titolo="Nodes of a standing wave"}
-Two equal waves travelling in opposite directions can form a standing wave, $y=2A\cos(kx)\cos(\omega t)$. Its nodes remain fixed and are $\dfrac{\lambda}{2}$ apart: the pattern oscillates without translating. This comparison helps distinguish actual propagation from a merely sinusoidal time dependence. It applies superposition rather than introducing a new kind of particle motion.
+Two identical waves travelling in opposite directions, such as a wave on a string and its reflection at the fixed end, superpose and form a **standing wave**, $y=2A\cos(kx)\cos(\omega t)$. In a standing wave the shape does not advance. Some points, called **nodes**, always stay at rest. Halfway between two nodes are the points oscillating with maximum amplitude, called **antinodes**. Two consecutive nodes are half a wavelength apart. This is what happens in the strings of a guitar.
 :::
 
 ## Energy, power and spatial distribution
 
 :::definizione{#intensita titolo="From energy transfer to intensity"}
-A medium particle gains kinetic energy and the deformed medium stores potential energy. Interactions with neighbours transfer energy through a section. If $\Delta E$ crosses it in $\Delta t$, mean power is $P=\dfrac{\Delta E}{\Delta t}$. For uniform flow across area $S$ perpendicular to propagation,
+A wave carries energy. The **power** $P$ of the wave is the energy crossing a surface in one second, $P=\dfrac{\Delta E}{\Delta t}$, and is measured in watts. The **intensity** $I$ is the power crossing a surface perpendicular to the direction of propagation, divided by the area $S$ of the surface:
 $$
 I=\dfrac{P}{S}.
 $$
-Intensity is measured in $\mathrm{W/m^2}$, power in watts and energy in joules. Specifying area is essential: the same power concentrated over a smaller section produces greater intensity. An inclined surface requires its area projected perpendicular to the flow; a nonuniform beam requires integrating intensity over area.
+Intensity is measured in $\mathrm{W/m^2}$. The same power concentrated on a smaller area gives a larger intensity. An ultrasound beam of power $0.10\,\mathrm{W}$ over an area of $2.0\,\mathrm{cm^2}=2.0\cdot10^{-4}\,\mathrm{m^2}$ has intensity $\dfrac{0.10}{2.0\cdot10^{-4}}=500\,\mathrm{W/m^2}$.
 
-For a transverse sinusoid on an ideal string,
+For a harmonic wave on a string the mean power is:
 $$
 P_{\mathrm m}=\dfrac12\mu_\ell v\omega^2A^2.
 $$
-The factor $\dfrac{1}{2}$ comes from the time average of a squared sinusoidal function. At fixed medium and frequency, power is proportional to $A^2$; at fixed medium and displacement amplitude, it is proportional to $f^2$. Amplitude ratios alone are insufficient if frequency or medium also changes. The string formula gives power: it should not be called intensity without an area appropriate to the problem.
+The important result is that power, and therefore intensity, is proportional to the square of the amplitude. This holds for all waves. A wave with double the amplitude carries four times as much energy. For equal amplitude the power is also proportional to the square of the frequency.
 :::
 
 :::teorema{#inverso-quadrato titolo="Spherical propagation without absorption"}
-An isotropic point source distributes power equally in all directions. In steady operation, without absorption, obstacles or other sources, the same power crosses concentric spheres:
+A small source emitting equally in all directions produces a spherical wave. At distance $r$ from the source the power $P$ is spread over a sphere of area $4\pi r^2$. If the medium absorbs no energy, the intensity is:
 $$
 I(r)=\dfrac{P}{4\pi r^2},\qquad
 \dfrac{I_2}{I_1}=\left(\dfrac{r_1}{r_2}\right)^2.
 $$
-Doubling $r$ quadruples area and reduces intensity to one quarter. Total power has not decreased: the surface over which it is distributed has changed. In the same medium, pressure amplitude of a travelling component then varies as $\dfrac{1}{r}$, whereas intensity varies as $\dfrac{1}{r^2}$.
+This is the **inverse-square law**. At double the distance the area of the sphere is four times larger, so the intensity is one quarter. At three times the distance it is one ninth. The total power is the same: it is spread over a larger surface. Since intensity is proportional to the square of the amplitude, the amplitude decreases as $\dfrac1r$.
 
 ![Relative intensity versus relative distance for an ideal spherical source.](/figure/fisica-semestre-filtro/onde-meccaniche/spreading-en.svg)
 
-A collimated beam does not automatically occupy entire spheres; an extended source viewed at close range is not equivalent to a point. A decrease faster than $\dfrac{1}{r^2}$ may involve absorption or geometry, rather than a failure of energy conservation. Absorbed energy can become the medium’s internal energy. Experimental comparisons therefore require stating assumptions before applying the distance law.
+The law holds for a source small compared with the distance, emitting in all directions, in a medium that does not absorb. A narrow beam, such as that of an ultrasound probe, does not spread over a sphere, so its intensity decreases more slowly with distance. In an absorbing medium, such as tissue, intensity decreases faster, and the absorbed energy heats the medium.
 :::
 
 ## Sound, pressure and echoes
 
 :::definizione{#suono titolo="Acoustic propagation in material media"}
-In a fluid, sound consists of small pressure and density variations accompanied by longitudinal particle motion. Acoustic pressure $p'$ is the departure from equilibrium pressure: a rarefaction has $p'<0$ without requiring negative absolute pressure. Compressibility supplies the elastic response and density supplies inertia. For an ideal fluid,
+**Sound** is a longitudinal wave propagating in a gas, a liquid or a solid. In air it is a succession of zones where pressure is slightly above normal (compressions) and zones where it is slightly below (rarefactions). The difference between the pressure at a point and normal pressure is called the **acoustic pressure** $p'$. It is positive in compressions and negative in rarefactions, and is tiny compared with atmospheric pressure. The speed of sound in a fluid is:
 $$
 v=\sqrt{\dfrac{B}{\rho}},
 $$
-where $B$ is the bulk modulus appropriate to the process. Ordinary sound in a gas uses the adiabatic modulus: rapid compressions cannot thermally equilibrate with their surroundings. Density alone does not determine speed because elastic response also changes.
+In the formula $\rho$ is the density and $B$ is the **bulk modulus**, which measures how much the medium resists compression. Sound is faster in media that are hard to compress. For this reason it is faster in liquids and solids than in gases, even though they are denser.
 
-In air near $20\,{}^\circ\mathrm C$, $343\,\mathrm{m/s}$ is often used; soft-tissue models frequently use $1540\,\mathrm{m/s}$. Temperature, composition and the medium’s state matter. Solids can support longitudinal and transverse modes with different speeds: no single value applies to every material and mode.
+| Medium | Speed of sound |
+| --- | --- |
+| Air at $20\,^\circ\mathrm{C}$ | $343\,\mathrm{m/s}$ |
+| Water | about $1480\,\mathrm{m/s}$ |
+| Soft tissue | about $1540\,\mathrm{m/s}$ |
 
-For a sinusoidal plane travelling wave, longitudinal displacement and pressure differ in spatial phase. If $\xi=A\cos(kx-\omega t)$, compression is related to the displacement gradient:
+In air the speed increases with temperature.
+
+In a sound wave each air particle oscillates back and forth along the direction of propagation. If the displacement of the particles is $\xi=A\cos(kx-\omega t)$, the acoustic pressure is:
 $$
 p'=-B\dfrac{\partial\xi}{\partial x}
 =BkA\sin(kx-\omega t).
 $$
-A region is compressed when neighbouring particles approach one another, not when each particle reaches maximum displacement. Particle velocity $u=\dfrac{\partial\xi}{\partial t}$ is instead in phase with pressure for a wave travelling towards $+x$.
+The displacement is a cosine and the pressure is a sine, so the two are shifted by a quarter of a wavelength. Pressure is greatest at the points where displacement is zero. The reason is that the air is compressed where the particles on either side have moved closer, and at that point the central particle has not moved.
 
 ![Normalised displacement and pressure at the same instant: pressure maxima do not coincide with displacement maxima.](/figure/fisica-semestre-filtro/onde-meccaniche/sound-phase-en.svg)
 
-Frequency contributes to perceived pitch; intensity, spectrum and ear response contribute to perceived loudness. Two sounds with equal intensity but different frequencies need not sound equally loud. Conventional boundaries near $20\,\mathrm{Hz}$ and $20\,\mathrm{kHz}$ define the nominal audible range: infrasound and ultrasound are classified by frequency, not intensity.
+The physical characteristics of sound correspond to what is perceived.
 
-An echo travels twice the distance to the reflector. For a straight path, homogeneous medium and stationary reflector,
+- **Frequency** determines the pitch of the sound. A high-frequency sound is high-pitched, a low-frequency one is low-pitched.
+- **Intensity** determines loudness. The sensation also depends on frequency, because the ear is most sensitive between 1000 and 4000 Hz.
+
+The human ear perceives sounds of frequency between about $20\,\mathrm{Hz}$ and $20\,\mathrm{kHz}$. Below $20\,\mathrm{Hz}$ one speaks of **infrasound** and above $20\,\mathrm{kHz}$ of **ultrasound**.
+
+An **echo** is a sound that returns to the source after being reflected by an obstacle. The sound travels the distance $d$ between source and obstacle twice, out and back, so $2d=v\,\Delta t$, where $\Delta t$ is the time between emission and return:
 $$
 d=\dfrac{v\Delta t}{2}.
 $$
-Any instrumental delays are subtracted before using time of flight. With $v=1540\,\mathrm{m/s}$ and $\Delta t=40\,\mu\mathrm s$, the result is $d=30.8\,\mathrm{mm}$. The method links a time measurement to distance; using an inappropriate speed produces a proportional error in estimated distance.
+Ultrasound scanning works this way. The probe emits a pulse of ultrasound and measures how long the echo of each structure takes to return. With $v=1540\,\mathrm{m/s}$, an echo returning after $\Delta t=40\,\mu\mathrm{s}=40\cdot10^{-6}\,\mathrm{s}$ comes from a depth $d=\dfrac{1540\cdot40\cdot10^{-6}}{2}=0.0308\,\mathrm{m}=30.8\,\mathrm{mm}$.
 
 ![Outward and return paths between transducer and reflector, with two pulses separated in time.](/figure/fisica-semestre-filtro/onde-meccaniche/echo-en.svg)
 :::
@@ -171,44 +210,50 @@ Any instrumental delays are subtracted before using time of flight. With $v=1540
 ## Sound levels and a logarithmic scale
 
 :::definizione{#decibel titolo="Sound intensity level"}
-To compare intensities spanning many orders of magnitude, use
+The ear perceives very different intensities. The faintest audible sound has an intensity of about $10^{-12}\,\mathrm{W/m^2}$ and the one causing pain about $1\,\mathrm{W/m^2}$, a million million times larger. To express such different values with convenient numbers a logarithmic scale is used, the **sound intensity level** $L_I$, measured in **decibels** (dB):
 $$
 L_I=10\log_{10}\left(\dfrac{I}{I_0}\right)\,\mathrm{dB},
 \qquad I_0=10^{-12}\,\mathrm{W/m^2}.
 $$
-The logarithm acts on a dimensionless ratio. A level of $0\,\mathrm{dB}$ means $I=I_0$, not absence of sound; negative levels correspond to intensities below the reference. The reference is not a universal hearing threshold for every frequency and person.
+The reference intensity $I_0$ is that of the faintest audible sound. A sound with $I=I_0$ has level $10\log_{10}1=0\,\mathrm{dB}$, so $0\,\mathrm{dB}$ does not mean absence of sound. A sound with $I=10^{-6}\,\mathrm{W/m^2}$, such as a conversation, has level $10\log_{10}\dfrac{10^{-6}}{10^{-12}}=10\cdot6=60\,\mathrm{dB}$. Pain appears at around $120\,\mathrm{dB}$.
 
 ![Equal increases in level correspond to equal multiplicative factors in intensity.](/figure/fisica-semestre-filtro/onde-meccaniche/decibels-en.svg)
 
-Let $\ell=\dfrac{L_I}{\mathrm{dB}}$ be the numerical level in decibels. Inverting the formula gives
+The intensity is obtained from the level with the inverse formula. Writing $\ell$ for the number of decibels:
 $$
 I=I_0\,10^{\dfrac{\ell}{10}},\qquad
 \Delta\ell=10\log_{10}\left(\dfrac{I_2}{I_1}\right).
 $$
-An increase of $10\,\mathrm{dB}$ multiplies intensity by ten, whereas doubling gives approximately $3.01\,\mathrm{dB}$. For ideal spherical propagation, doubling distance gives $10\log_{10}(\dfrac{1}{4})\simeq-6.02$: the level falls by approximately six decibels.
+The second formula gives the difference in level between two sounds. On a logarithmic scale a multiplication of the intensity corresponds to an addition to the level.
 
-For incoherent travelling contributions in the same medium and direction, intensities are added first. Two contributions of $60\,\mathrm{dB}$ give approximately $63.01\,\mathrm{dB}$, not $120\,\mathrm{dB}$. If contributions are coherent, equal, in phase and travelling in the same direction in the same medium, doubled amplitude can instead quadruple local intensity and add $6.02\,\mathrm{dB}$ in level. Phase relation and geometry must be specified before choosing how to add them.
+- An intensity 10 times larger gives $10\log_{10}10=10\,\mathrm{dB}$ more. An intensity 100 times larger gives $20\,\mathrm{dB}$ more.
+- Double the intensity gives $10\log_{10}2\simeq3\,\mathrm{dB}$ more.
+- Doubling the distance from a spherical source makes the intensity one quarter, and the level falls by $10\log_{10}4\simeq6\,\mathrm{dB}$.
 
-For a single plane travelling wave, one can also use $I=\dfrac{p_{\mathrm{rms}}^2}{\rho v}$, with $p_{\mathrm{rms}}=\dfrac{p_{\max}}{\sqrt2}$ for a sinusoid. In the same medium this gives $\Delta\ell=20\log_{10}(\dfrac{p_{\mathrm{rms},2}}{p_{\mathrm{rms},1}})$. The factor twenty comes from squared pressure. It must not be applied directly to an intensity ratio or an arbitrary standing field.
+The levels of two sources do not add. The intensities add. Two instruments each producing $60\,\mathrm{dB}$ give together double the intensity, so a level of $60+3=63\,\mathrm{dB}$, and not $120\,\mathrm{dB}$.
+
+The intensity of a sound wave is proportional to the square of the acoustic pressure, $I=\dfrac{p_{\mathrm{rms}}^2}{\rho v}$, where $p_{\mathrm{rms}}=\dfrac{p_{\max}}{\sqrt2}$ is the effective (root-mean-square) value of the pressure. If two pressures are compared, the factor 20 therefore appears in the level formula in place of 10: $\Delta\ell=20\log_{10}\left(\dfrac{p_{\mathrm{rms},2}}{p_{\mathrm{rms},1}}\right)$. An acoustic pressure 10 times larger corresponds to $20\,\mathrm{dB}$ more.
 :::
 
 ## Doppler effect and the role of the medium
 
 :::osservazione{#doppler titolo="Counting encountered wavefronts"}
-The Doppler effect concerns recorded frequency when source or receiver moves relative to the medium. Its explanation starts with the number of fronts encountered per second. For a stationary source, crest spacing in the medium remains $\lambda=\dfrac{v}{f}$. An observer moving towards the source at speed $u$ meets crests at relative speed $v+u$, so
+The **Doppler effect** is the change in perceived frequency when the source of the sound and the listener move relative to each other. An ambulance siren sounds higher-pitched while approaching and lower-pitched while receding. The general rule is that the perceived frequency increases when source and observer approach and decreases when they move apart.
+
+Consider first an observer moving with speed $u$ towards a stationary source. The wave crests are $\lambda=\dfrac vf$ apart and travel at speed $v$. The observer moves towards them, so meets them at speed $v+u$ and receives more of them each second:
 $$
 f_{\mathrm{oss}}=f\dfrac{v+u}{v}.
 $$
-For a receding observer, use $v-u$. These expressions assume a stationary medium, motion along the line joining source and observer, and $u<v$. Propagation speed in the medium has not become $v+u$: the rate at which the receiver crosses wavefronts has changed.
+If the observer moves away, $v-u$ is used and the frequency decreases. The speed of sound in air is always $v$.
 
-A moving source instead produces crests from different positions. When it approaches a stationary receiver at speed $u_s<v$, it advances by $u_sT$ during one period, leaving ahead of itself
+Consider next a source moving with speed $u_s$ towards a stationary observer. Between the emission of one crest and the next a period $T$ passes, during which the source advances by $u_sT$. In front of the source the crests are therefore closer together, that is, the wavelength is shorter, and the perceived frequency is higher:
 $$
 \lambda_{\mathrm{front}}=(v-u_s)T,
 \qquad f_{\mathrm{oss}}=f\dfrac{v}{v-u_s}.
 $$
-Behind the source, spacing is $(v+u_s)T$. Each front still travels at sound speed relative to the medium. Moving source and moving observer are not exactly interchangeable: at the same approach speed their formulas differ, although they agree to first order when speeds are very small compared with $v$.
+Behind the source the crests are further apart, the wavelength is $(v+u_s)T$ and the perceived frequency is $f\dfrac{v}{v+u_s}$. An ambulance with a $1000\,\mathrm{Hz}$ siren approaching at $30\,\mathrm{m/s}$, with $v=343\,\mathrm{m/s}$, is perceived at $1000\cdot\dfrac{343}{343-30}\simeq1096\,\mathrm{Hz}$. After it has passed it is perceived at $1000\cdot\dfrac{343}{343+30}\simeq920\,\mathrm{Hz}$. The formulas for the two cases, moving observer and moving source, are different, and give almost equal results when the speeds are much lower than the speed of sound.
 
 ![Circular fronts emitted at equal time intervals by an advancing source: closer together ahead and further apart behind.](/figure/fisica-semestre-filtro/onde-meccaniche/doppler-en.svg)
 
-Reflection from moving structures combines two stages: the structure receives the wave as a moving observer and returns it as a moving source. For small $\dfrac{u}{v}$ and known geometry, the shift is related to the velocity component along the beam; perpendicular motion does not produce the same effect as longitudinal motion. This is the qualitative basis of ultrasound Doppler. Frequency alone, without medium speed and geometry, does not identify a complete velocity vector.
+In medicine the Doppler effect is used to measure blood velocity (**Doppler ultrasound**). The probe sends ultrasound, which is reflected by moving red blood cells and returns to the probe with a different frequency. The effect occurs twice: the cell receives the wave as a moving observer and sends it back as a moving source. From the change in frequency the instrument calculates the blood velocity. Only the component of the velocity along the beam direction is measured, so a vessel perpendicular to the beam gives no change in frequency.
 :::
