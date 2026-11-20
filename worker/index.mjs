@@ -29,6 +29,7 @@ import { anteprimaStatistica } from '../src/data/statistica.mjs';
 import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
+import { ANTEPRIMA_ATTIVITA_ANALISI_1 } from '../src/data/anteprima-attivita.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti, cookieCampagna, campagnaIscrizione, riepilogoCampagne } from './provenienza.mjs';
 import { speseMeta } from './meta-ads.mjs';
@@ -1893,6 +1894,13 @@ export default {
     const pagina = !/\.[a-z0-9]+$/i.test(url.pathname) || /\.(html|pdf)$/i.test(url.pathname);
     const corsoUsa = usaCoursePath(url.pathname);
     const io = pagina || corsoUsa ? await utenteCollegato(env, req).catch(() => null) : null;
+    const anteprimaAttivita = percorsoOrientamento === ANTEPRIMA_ATTIVITA_ANALISI_1 || percorsoNormalizzato === ANTEPRIMA_ATTIVITA_ANALISI_1;
+    if (anteprimaAttivita) {
+      const headers = { 'cache-control': 'private, no-store', 'x-robots-tag': 'noindex', vary: 'Cookie' };
+      if (req.method !== 'GET' && req.method !== 'HEAD') return new Response(null, { status: 405, headers: { ...headers, allow: 'GET, HEAD' } });
+      if (!io) return new Response(null, { status: 302, headers: { ...headers, location: '/accedi?dopo=' + encodeURIComponent(ANTEPRIMA_ATTIVITA_ANALISI_1) } });
+      if (!io.gm) return new Response(req.method === 'HEAD' ? null : 'Questa anteprima è riservata agli account GM.', { status: 403, headers: { ...headers, 'content-type': 'text/plain; charset=utf-8' } });
+    }
     const usaBloccato = corsoUsa && corsoUsaRiservato(corsoUsa.slug, io);
     const usaAnteprima = corsoUsa && usStudyPreviewPage(corsoUsa.slug, corsoUsa.section);
     if (usaBloccato && corsoUsa.section && corsoUsa.section !== 'sblocca' && !usaAnteprima) {
@@ -1940,7 +1948,7 @@ export default {
           return new Response(null, { status: alternativa.stato, headers: { location: destinazione.pathname + url.search, 'cache-control': 'no-store' } });
       }
     }
-    if (orientamentoRiservato) risposta = rispostaPrivataOrientamento(risposta);
+    if (orientamentoRiservato || anteprimaAttivita) risposta = rispostaPrivataOrientamento(risposta);
     // Indirizzi tecnici di Cloudflare (*.workers.dev, anteprime dei rami): mai negli indici, la pagina vera è su ripetizionidianalisi.com.
     if (url.hostname.endsWith('.workers.dev')) {
       risposta = new Response(risposta.body, risposta);
