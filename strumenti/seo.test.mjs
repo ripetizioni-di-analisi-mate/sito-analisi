@@ -118,8 +118,7 @@ test('gli indici gratuiti di Analisi 1 collegano schede complete disponibili in 
     for (const pre of ['', '/en']) {
       const percorso = pre + '/analisi-1/esercizi-svolti-gratuiti';
       const html = await readFile('dist' + percorso + '.html', 'utf8');
-      const htmlMateria = await readFile('dist' + pre + '/analisi-1.html', 'utf8');
-      assert.ok(htmlMateria.includes('href="' + percorso + '"'));
+      // Dal 20/11/2026 la pagina della materia finisce con l'indice dei teoremi (richiesta di Carmine): la raccolta resta nella mappa del sito.
       assert.ok(html.includes('rel="canonical" href="' + sito + percorso + '"'));
       const voce = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1]);
       const elenco = voce['@graph'].find((item) => item['@type'] === 'ItemList');
