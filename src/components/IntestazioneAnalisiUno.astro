@@ -1,0 +1,61 @@
+---
+import '../styles/programma-raccolte.css';
+interface Props { titolo: string; descrizione: string; en: boolean }
+const { titolo, descrizione, en } = Astro.props;
+---
+<header class="introduzione-analisi">
+  <div>
+    <h1>{titolo.slice(0, -1)}<em>1</em></h1>
+    <p class="sommario">{descrizione}</p>
+  </div>
+  <figure>
+    <svg viewBox="0 0 430 219" role="img" aria-labelledby="parabola-titolo parabola-descrizione">
+      <title id="parabola-titolo">{en ? 'The parabola and its tangent at T' : 'La parabola e la sua tangente in T'}</title>
+      <desc id="parabola-descrizione">{en ? 'The curve y = x² and the line y = 2x − 1 touch at T(1, 1). The dashed guides locate the point on the axes. The tangent has slope 2.' : 'La curva y = x² e la retta y = 2x − 1 si toccano in T(1, 1). Le proiezioni tratteggiate indicano le coordinate del punto. La tangente ha pendenza 2.'}</desc>
+      <!-- Una unità misura 70 sull’asse x e 36 sull’asse y. Il vertice è in (155, 163). -->
+      <g fill="none" stroke="#dfdcd1" stroke-width=".9">
+        <path d="M36 55H310 M36 91H310 M36 127H310 M85 48V178 M225 48V178 M295 48V178" />
+      </g>
+      <g fill="none" stroke="#918d7f" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 163H409m-6-3.5 6 3.5-6 3.5 M155 204V13m-3.5 6 3.5-6 3.5 6"/>
+        <path d="M85 160v6m140-6v6m70-6v6 M152 127h6m-6-36h6m-6-36h6"/>
+      </g>
+      <path d="M155 127H225V163" fill="none" stroke="#a87c5c" stroke-width="1.45" stroke-dasharray="3.4 4.2"/>
+      <path d="M22 33.04Q160.6 303.904 299.2 10.2304" fill="none" stroke="#376054" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M142.4 211.96L323 26.2" fill="none" stroke="#ae6748" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="225" cy="127" r="4.3" fill="#934b35" stroke="#fffcf6" stroke-width="1.8"/>
+      <g class="valori" fill="#68665c">
+        <text x="85" y="182" text-anchor="middle">−1</text><text x="149" y="181" text-anchor="end">0</text>
+        <text x="225" y="182" text-anchor="middle">1</text><text x="295" y="182" text-anchor="middle">2</text>
+        <text x="144" y="131" text-anchor="end">1</text><text x="144" y="95" text-anchor="end">2</text><text x="144" y="59" text-anchor="end">3</text>
+      </g>
+      <g class="formule">
+        <text x="410" y="156" fill="#635f54">x</text><text x="166" y="22" fill="#635f54">y</text>
+        <text x="311" y="19" fill="#31594e">f(x) = x²</text>
+        <text x="324" y="54" fill="#8a4934">y = 2x − 1</text>
+        <text x="236" y="145" class="etichetta-punto" fill="#773f2d">T(1, 1)</text>
+      </g>
+    </svg>
+    <figcaption>{en ? 'Slope at T' : 'Pendenza in T'} <span aria-hidden="true">·</span> <i>f′(1) = 2</i></figcaption>
+  </figure>
+</header>
+
+<style>
+  .introduzione-analisi { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; gap: clamp(1rem, 3vw, 2.5rem); }
+  h1 { margin: 0; font: 570 clamp(2.2rem, 3.6vw, 2.85rem)/1.1 var(--titoli); letter-spacing: -.04em; }
+  h1 em { color: #934b35; font-weight: 490; }
+  .sommario { margin: .55rem 0 0; max-width: 42rem; font: 400 clamp(1.09rem, 1.55vw, 1.22rem)/1.44 var(--ui); text-wrap: pretty; }
+  figure { width: min(100%, 24rem); margin: 0; justify-self: end; }
+  figure svg { display: block; width: 100%; height: auto; }
+  .valori { font: 15px var(--ui); }
+  .formule { font: italic 20px var(--titoli); }
+  .etichetta-punto { font-size: 18px; }
+  figcaption { display: flex; align-items: baseline; justify-content: end; gap: .43em; margin: -.28rem .35rem 0 0; font: .84rem/1.25 var(--ui); color: #716353; }
+  figcaption i { font: italic 1rem/1.25 var(--titoli); color: #81503b; }
+  @media (max-width: 42rem) {
+    .introduzione-analisi { grid-template-columns: 1fr; gap: .8rem; }
+    h1 { font-size: clamp(1.9rem, 7.1vw, 2.12rem); }
+    .sommario { margin-top: .45rem; font-size: 1.09rem; }
+    figure { width: min(100%, 19.5rem); justify-self: center; }
+  }
+</style>
