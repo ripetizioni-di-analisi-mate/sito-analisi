@@ -4,200 +4,230 @@ sommario: "Equilibri acido-base, calcolo del pH, tamponi biologici, bilanciament
 ---
 
 :::osservazione{titolo="Composizione e trasformazioni"}
-Aggiungere poche gocce di acido a due soluzioni inizialmente allo stesso pH può produrre variazioni molto diverse. Una contiene soltanto acqua e una piccola quantità di soluto; l'altra contiene una coppia tampone. Il pH iniziale descrive l'attività dell'idronio, ma non indica quanta sostanza possa ancora reagire. Per risolvere il problema servono anche composizione, quantità e condizioni del sistema.
+Gli acidi e le basi sono fra le sostanze più comuni: il succo gastrico è acido, il sangue è leggermente basico e ogni cellula funziona solo in un intervallo ristretto di acidità. Questo capitolo tratta due tipi di reazione. Nelle reazioni **acido-base** una sostanza cede uno ione $\mathrm{H^+}$ (un protone) a un'altra. Nelle reazioni di **ossidoriduzione** (o redox) una sostanza cede elettroni a un'altra.
 
-In questo capitolo si distinguono due tipi di trasformazione: trasferimento di protoni negli equilibri acido-base e trasferimento di elettroni nelle ossidoriduzioni. Alcune reazioni coinvolgono entrambi, ma i due bilanci restano distinti. Nei problemi si parte dalle specie presenti, si esegue l'eventuale reazione stechiometrica e soltanto dopo si sceglie l'equilibrio da risolvere. Il risultato va confrontato con la direzione del cambiamento prevista: una base forte aggiunta a un tampone non deve farne diminuire il pH nel modello chiuso considerato.
+La prima parte spiega che cosa sono acidi e basi, come si misura l'acidità con il pH e come funzionano i **tamponi**, cioè le soluzioni che mantengono il pH quasi costante anche quando si aggiunge un acido o una base. La seconda parte spiega come si riconosce e si bilancia una reazione redox e come una reazione redox produce corrente elettrica in una pila. Nei problemi di questo capitolo il procedimento è sempre lo stesso: si individuano le sostanze presenti, si fa avvenire l'eventuale reazione completa fra acido e base, e solo dopo si calcola l'equilibrio.
 :::
 
 ## Le definizioni di acido e di base
 
 :::definizione{#acidi-basi titolo="Arrhenius e Brønsted-Lowry"}
-In acqua, un **acido di Arrhenius** aumenta la concentrazione degli ioni idronio $\mathrm{H_3O^+}$ e una base aumenta quella degli ioni idrossido $\mathrm{OH^-}$. Per esempio, l'acido cloridrico trasferisce un protone all'acqua, mentre l'idrossido di sodio disciolto libera ioni idrossido.
+Esistono tre definizioni di acido e di base, via via più generali.
 
-Nella teoria di **Brønsted-Lowry** un acido cede un protone e una base lo acquista. La reazione coinvolge quindi due coppie acido-base coniugate:
+Secondo **Arrhenius** un acido è una sostanza che in acqua libera ioni $\mathrm{H^+}$ e una base è una sostanza che in acqua libera ioni idrossido $\mathrm{OH^-}$. L'acido cloridrico HCl è un acido e l'idrossido di sodio NaOH è una base. In acqua lo ione $\mathrm{H^+}$ non resta libero: si lega subito a una molecola d'acqua e forma lo ione **idronio** $\mathrm{H_3O^+}$. Le scritture $\mathrm{H^+}$ e $\mathrm{H_3O^+}$ indicano quindi la stessa cosa.
+
+Secondo **Brønsted e Lowry** un acido è una sostanza che cede un protone e una base è una sostanza che lo acquista. Questa definizione vale anche fuori dall'acqua e spiega perché l'ammoniaca è una base pur non contenendo OH. In ogni reazione acido-base un acido cede il protone a una base.
 $$
 \mathrm{HA+B\rightleftharpoons A^-+BH^+}.
 $$
-$\mathrm{HA}$ e $\mathrm{A^-}$ differiscono per un protone; lo stesso vale per $\mathrm{BH^+}$ e $\mathrm B$. Nella reazione $\mathrm{NH_3+H_2O\rightleftharpoons NH_4^++OH^-}$, l'ammoniaca è la base e l'acqua è l'acido.
+Quando l'acido $\mathrm{HA}$ cede il protone diventa $\mathrm{A^-}$, che a sua volta può riacquistarlo ed è quindi una base. $\mathrm{HA}$ e $\mathrm{A^-}$ formano una **coppia coniugata**, cioè due sostanze che differiscono per un solo protone. Allo stesso modo $\mathrm{BH^+}$ e $\mathrm B$ formano la seconda coppia. Per esempio, nella reazione $\mathrm{NH_3+H_2O\rightleftharpoons NH_4^++OH^-}$ l'ammoniaca acquista un protone ed è la base; l'acqua lo cede ed è l'acido. Le coppie coniugate sono $\mathrm{NH_4^+/NH_3}$ e $\mathrm{H_2O/OH^-}$.
 :::
 
 :::definizione{#lewis-anfoliti titolo="Lewis e specie anfiprotiche"}
-Un **acido di Lewis** accetta una coppia di elettroni per formare un legame; una base di Lewis mette a disposizione la coppia. In $\mathrm{BF_3+NH_3\rightarrow F_3B\!\leftarrow\!NH_3}$, il boro accetta la coppia libera dell'azoto. Questa definizione comprende reazioni senza trasferimento di protoni.
+Secondo **Lewis** un acido è una sostanza che accetta una coppia di elettroni e una base è una sostanza che la dona. Fra le due si forma un legame. Per esempio, in $\mathrm{BF_3+NH_3\rightarrow F_3B\!\leftarrow\!NH_3}$ l'azoto dell'ammoniaca dona il suo doppietto al boro, che ha solo sei elettroni. L'ammoniaca è la base di Lewis e $\mathrm{BF_3}$ è l'acido di Lewis. Questa definizione comprende anche reazioni in cui non si sposta alcun protone.
 
-Una specie **anfiprotica** può sia cedere sia acquistare un protone. Lo ione $\mathrm{H_2PO_4^-}$ può diventare $\mathrm{HPO_4^{2-}}$ cedendo un protone, oppure $\mathrm{H_3PO_4}$ acquistandolo. L'acqua presenta entrambe le possibilità.
+Una sostanza **anfiprotica** (o anfotera) può comportarsi sia da acido sia da base, secondo la sostanza con cui reagisce. Lo ione $\mathrm{H_2PO_4^-}$ può cedere un protone e diventare $\mathrm{HPO_4^{2-}}$, oppure acquistarne uno e diventare $\mathrm{H_3PO_4}$. Anche l'acqua è anfiprotica: cede un protone all'ammoniaca e ne acquista uno da HCl.
 :::
 
 :::esempio{titolo="Riconoscere le coppie coniugate"}
-Per riconoscere una coppia coniugata conviene confrontare formule e cariche. Togliere $\mathrm{H^+}$ rimuove un idrogeno e diminuisce la carica di una unità; togliere un atomo di idrogeno neutro sarebbe una trasformazione diversa. Una coppia coniugata non è una coppia di specie che semplicemente compaiono ai due lati della freccia. Nel trasferimento tra ammoniaca e acqua, $\mathrm{NH_3}$ e $\mathrm{OH^-}$ sono due basi, non una coppia coniugata.
+Per trovare la base coniugata di un acido si toglie un $\mathrm{H^+}$ dalla formula: scompare un atomo di idrogeno e la carica diminuisce di una unità. Da $\mathrm{H_2PO_4^-}$ si ottiene $\mathrm{HPO_4^{2-}}$. Per trovare l'acido coniugato di una base si aggiunge un $\mathrm{H^+}$: da $\mathrm{NH_3}$ si ottiene $\mathrm{NH_4^+}$. Le due sostanze di una coppia coniugata differiscono sempre e soltanto per un protone. Nella reazione fra ammoniaca e acqua, $\mathrm{NH_3}$ e $\mathrm{OH^-}$ non formano una coppia coniugata, perché sono le due basi delle due coppie.
 
 ![Trasferimenti di un protone fra le quattro forme del fosfato](/figure/chimica-semestre-filtro/acidi-basi-redox/coppie-it.svg)
 
-La sequenza mostra cambiamenti possibili della composizione, senza affermare che le quattro specie abbiano la stessa abbondanza a un dato pH.
+La figura mostra le quattro forme del fosfato, da $\mathrm{H_3PO_4}$ a $\mathrm{PO_4^{3-}}$. Ogni passaggio corrisponde alla perdita o all'acquisto di un protone. Quale forma prevale in una soluzione dipende dal pH.
 :::
 
 ## Autoprotolisi dell'acqua e pH
 
 :::definizione{#kw-ph titolo="Prodotto ionico dell'acqua e scala del pH"}
-Due molecole d'acqua possono scambiarsi un protone:
+L'acqua pura contiene una piccolissima quantità di ioni, perché ogni tanto una molecola d'acqua cede un protone a un'altra. Questa reazione si chiama **autoprotolisi** (o autoionizzazione) dell'acqua.
 $$
 \mathrm{2H_2O\rightleftharpoons H_3O^++OH^-}.
 $$
-Il prodotto ionico è $K_w=a_{\mathrm{H_3O^+}}a_{\mathrm{OH^-}}$, dove $a$ indica l'attività, una grandezza adimensionale che descrive la concentrazione efficace. Nelle soluzioni diluite si approssima $a_i$ con $\dfrac{[i]}{c^\circ}$, dove $c^\circ=1\,\mathrm{mol\,L^{-1}}$.
+La costante di questo equilibrio è il **prodotto ionico dell'acqua**, $K_w=a_{\mathrm{H_3O^+}}a_{\mathrm{OH^-}}$. Il simbolo $a$ indica l'attività, che nelle soluzioni diluite coincide con il valore numerico della concentrazione in $\mathrm{mol\,L^{-1}}$: $a_i\simeq\dfrac{[i]}{c^\circ}$, con $c^\circ=1\,\mathrm{mol\,L^{-1}}$. In pratica $K_w=[\mathrm{H_3O^+}][\mathrm{OH^-}]$. A $25\,^\circ\mathrm C$ vale $10^{-14}$. In ogni soluzione acquosa il prodotto delle due concentrazioni ha questo valore, quindi se una aumenta l'altra diminuisce.
 
-Il **pH** è $-\log_{10}a_{\mathrm{H_3O^+}}$; il pOH si definisce allo stesso modo per $\mathrm{OH^-}$. Quindi
+Le concentrazioni di $\mathrm{H_3O^+}$ sono numeri molto piccoli, scomodi da usare. Per questo si usa il **pH**, definito come $-\log_{10}a_{\mathrm{H_3O^+}}$, cioè in pratica $\mathrm{pH}=-\log_{10}[\mathrm{H_3O^+}]$. Allo stesso modo $\mathrm{pOH}=-\log_{10}[\mathrm{OH^-}]$ e $pK_w=-\log_{10}K_w$. Dal prodotto ionico segue che
 $$
 \mathrm{pH+pOH}=pK_w.
 $$
-A $25\,^\circ\mathrm C$, $K_w\simeq10^{-14}$ e $pK_w\simeq14$. Nel modello ideale diluito adottato, una soluzione neutra ha uguali attività di idronio e idrossido, perciò il suo pH è $\dfrac{pK_w}{2}$. Il valore $7$ per la neutralità si riferisce a questa temperatura. Una concentrazione di idronio di $10^{-3}\,\mathrm{mol\,L^{-1}}$ dà, nell'approssimazione diluita, $\mathrm{pH}=3$.
+A $25\,^\circ\mathrm C$ si ha $pK_w=14$, quindi $\mathrm{pH}+\mathrm{pOH}=14$. Si distinguono tre casi.
+
+- Soluzione **neutra**: $[\mathrm{H_3O^+}]=[\mathrm{OH^-}]=10^{-7}\,\mathrm{mol\,L^{-1}}$ e $\mathrm{pH}=7$.
+- Soluzione **acida**: $[\mathrm{H_3O^+}]>10^{-7}\,\mathrm{mol\,L^{-1}}$ e $\mathrm{pH}<7$.
+- Soluzione **basica**: $[\mathrm{H_3O^+}]<10^{-7}\,\mathrm{mol\,L^{-1}}$ e $\mathrm{pH}>7$.
+
+Per esempio, una soluzione con $[\mathrm{H_3O^+}]=10^{-3}\,\mathrm{mol\,L^{-1}}$ ha $\mathrm{pH}=3$ e $\mathrm{pOH}=11$. Il valore 7 per la neutralità vale a $25\,^\circ\mathrm C$; a temperature diverse $K_w$ cambia e il pH di una soluzione neutra è $\dfrac{pK_w}{2}$.
 :::
 
 :::osservazione{#indicatori titolo="Indicatori acido-base"}
-Un indicatore è una coppia coniugata le cui due forme hanno colori diversi. Per $\mathrm{HIn\rightleftharpoons H^++In^-}$, il rapporto tra le forme dipende dal pH e dal $pK_a$ dell'indicatore. Il cambiamento di colore è normalmente distribuito su un intervallo di circa due unità di pH centrato sul $pK_a$. L'indicatore usato in una titolazione deve cambiare colore nel tratto ripido della curva vicino all'equivalenza.
+Un **indicatore** è una sostanza che cambia colore secondo il pH. È un acido debole, indicato con HIn, la cui base coniugata $\mathrm{In^-}$ ha un colore diverso: $\mathrm{HIn\rightleftharpoons H^++In^-}$. In ambiente acido prevale HIn e si vede il suo colore; in ambiente basico prevale $\mathrm{In^-}$. Il passaggio da un colore all'altro avviene in un intervallo di circa due unità di pH attorno al $pK_a$ dell'indicatore, detto intervallo di viraggio. In una titolazione si sceglie un indicatore il cui intervallo di viraggio comprende il pH del punto di equivalenza.
 :::
 
 :::osservazione{titolo="Leggere la scala del pH"}
-La scala è logaritmica: passare da pH $4$ a pH $3$ significa aumentare di dieci volte l'attività protonica, non aggiungere una quantità fissa di acido. In particolare non si possono mediare i pH per trovare il pH di una miscela. Si devono prima combinare le quantità delle specie e considerare le reazioni che avvengono. Anche l'intervallo $0$–$14$ è familiare, non un limite matematico universale della definizione di pH.
+La scala del pH è logaritmica, quindi a ogni unità di pH corrisponde un fattore 10 nella concentrazione di $\mathrm{H_3O^+}$. Una soluzione a pH 3 è dieci volte più acida di una a pH 4 e cento volte più acida di una a pH 5. Per la stessa ragione il pH di una miscela di due soluzioni non è la media dei due pH: si calcolano prima le moli totali di $\mathrm{H_3O^+}$, tenendo conto delle eventuali reazioni, e poi il pH. I valori di pH più comuni sono compresi fra 0 e 14; soluzioni molto concentrate di acidi o basi forti hanno valori fuori da questo intervallo.
 
 ![pH di un acido forte molto diluito, includendo l'autoprotolisi dell'acqua](/figure/chimica-semestre-filtro/acidi-basi-redox/diluizione-it.svg)
 
-Il grafico assume soluzione ideale e $25\,^\circ\mathrm C$. Quando l'acido diventa estremamente diluito, il pH si avvicina a $7$ dal lato acido; la previsione $-\log C$ da sola diventa inadeguata.
+La figura mostra il pH di un acido forte sempre più diluito, a $25\,^\circ\mathrm C$. Finché l'acido è abbastanza concentrato il pH è $-\log_{10}C$, dove $C$ è la concentrazione dell'acido. Quando l'acido è molto diluito contano anche gli ioni $\mathrm{H_3O^+}$ prodotti dall'acqua, e il pH si avvicina a 7 restando minore di 7. Una soluzione $10^{-8}\,\mathrm{mol\,L^{-1}}$ di HCl ha quindi pH poco minore di 7, e non 8.
 :::
 
 ## Acidi e basi forti o deboli
 
 :::definizione{#ka-kb titolo="Costanti di dissociazione e forza acido-base"}
-Per un acido monoprotico $\mathrm{HA}$ in acqua si scrive
+La **forza** di un acido indica quanto l'acido si dissocia in acqua, cioè quale frazione delle sue molecole cede il protone. Si misura con la **costante di dissociazione acida** $K_a$, che è la costante di equilibrio della reazione fra l'acido e l'acqua. Per un acido HA con un solo protone (monoprotico) si scrive
 $$
 \mathrm{HA+H_2O\rightleftharpoons H_3O^++A^-},
 \qquad K_a=\dfrac{a_{\mathrm{H_3O^+}}a_{\mathrm{A^-}}}{a_{\mathrm{HA}}}.
 $$
-Per una base $\mathrm B$, $K_b=\dfrac{a_{\mathrm{BH^+}}a_{\mathrm{OH^-}}}{a_{\mathrm B}}$. Si definiscono $pK_a=-\log_{10}K_a$ e $pK_b=-\log_{10}K_b$. A parità di condizioni, un $K_a$ maggiore corrisponde a una dissociazione acida più estesa. Per una coppia coniugata vale $K_aK_b=K_w$, quindi $pK_a+pK_b=pK_w$.
+Più grande è $K_a$, più l'acido è dissociato e più è forte. Per comodità si usa $pK_a=-\log_{10}K_a$: a un acido più forte corrisponde un $pK_a$ più piccolo. Per una base B, che reagisce con l'acqua secondo $\mathrm{B+H_2O\rightleftharpoons BH^++OH^-}$, si definiscono allo stesso modo $K_b=\dfrac{a_{\mathrm{BH^+}}a_{\mathrm{OH^-}}}{a_{\mathrm B}}$ e $pK_b=-\log_{10}K_b$. Per un acido e la sua base coniugata vale $K_aK_b=K_w$, cioè $pK_a+pK_b=14$ a $25\,^\circ\mathrm C$. Di conseguenza a un acido più forte corrisponde una base coniugata più debole.
 
-Un acido forte, come HCl in una soluzione acquosa diluita, reagisce praticamente del tutto con l'acqua. Un acido debole, come l'acido acetico, raggiunge un equilibrio con una frazione ancora indissociata. La forza riguarda l'equilibrio; la concentrazione riguarda quanta sostanza è presente per unità di volume.
+Un **acido forte** in acqua è dissociato completamente: tutte le sue molecole cedono il protone. Sono acidi forti HCl, $\mathrm{HNO_3}$ e $\mathrm{H_2SO_4}$. Un **acido debole** è dissociato solo in parte e la maggior parte delle sue molecole resta intera. L'acido acetico, con $K_a=1{,}8\cdot10^{-5}$, è un acido debole. Lo stesso vale per le basi: NaOH è una base forte e l'ammoniaca è una base debole. La forza è una proprietà diversa dalla concentrazione, che indica quanta sostanza è sciolta in un litro: una soluzione può contenere un acido forte molto diluito oppure un acido debole molto concentrato.
 :::
 
 :::osservazione{#calcolo-ph titolo="Calcolo del pH e controllo delle approssimazioni"}
-Per un acido forte monoprotico di concentrazione analitica $C$ sufficientemente maggiore di $10^{-7}\,\mathrm{mol\,L^{-1}}$, a $25\,^\circ\mathrm C$ si usa $[\mathrm{H_3O^+}]\simeq C$. Per una base forte si conta il numero di idrossidi liberati per formula; per esempio $\mathrm{Ca(OH)_2}$ fornisce due ioni $\mathrm{OH^-}$.
+Il calcolo del pH dipende dal tipo di acido o di base.
 
-Per un acido debole monoprotico, trascurando l'autoprotolisi e approssimando le attività con le concentrazioni ridotte, si pone $x=[\mathrm{H_3O^+}]$ e si ottiene, usando le concentrazioni in $\mathrm{mol\,L^{-1}}$,
+**Acido forte**. È dissociato completamente, quindi la concentrazione di $\mathrm{H_3O^+}$ è uguale alla concentrazione $C$ dell'acido: $[\mathrm{H_3O^+}]\simeq C$ e $\mathrm{pH}=-\log_{10}C$. Una soluzione $0{,}010\,\mathrm{mol\,L^{-1}}$ di HCl ha $\mathrm{pH}=2$.
+
+**Base forte**. La concentrazione di $\mathrm{OH^-}$ è uguale alla concentrazione della base moltiplicata per il numero di ioni idrossido della formula; $\mathrm{Ca(OH)_2}$ ne libera due. Si calcola il pOH e poi $\mathrm{pH}=14-\mathrm{pOH}$. Una soluzione $0{,}010\,\mathrm{mol\,L^{-1}}$ di NaOH ha $\mathrm{pOH}=2$ e $\mathrm{pH}=12$.
+
+**Acido debole**. È dissociato solo in parte, quindi si usa l'equilibrio. Si indica con $x$ la concentrazione di acido che si dissocia. All'equilibrio $[\mathrm{H_3O^+}]=[\mathrm{A^-}]=x$ e $[\mathrm{HA}]=C-x$. Sostituendo nell'espressione di $K_a$, con le concentrazioni in $\mathrm{mol\,L^{-1}}$, si ottiene
 $$
 K_a=\dfrac{x^2}{C-x},
 \qquad x=\dfrac{-K_a+\sqrt{K_a^2+4K_aC}}{2}.
 $$
-Qui la consueta scrittura numerica sottintende la concentrazione standard. Se $x$ è piccolo rispetto a $C$, si può usare $x\simeq\sqrt{K_aC}$. Per $C=0{,}010$ e $K_a=1{,}8\cdot10^{-5}$, l'equazione dà $x=4{,}15\cdot10^{-4}$ e $\mathrm{pH}=3{,}38$. Per una base debole si applica la stessa equazione a $x=[\mathrm{OH^-}]$, poi si ricava il pH dal pOH.
+La seconda formula è la soluzione dell'equazione di secondo grado. Se l'acido è poco dissociato, $x$ è molto più piccolo di $C$, si può scrivere $C-x\simeq C$ e la formula diventa $x\simeq\sqrt{K_aC}$. Per esempio, per l'acido acetico con $C=0{,}010$ e $K_a=1{,}8\cdot10^{-5}$ la formula approssimata dà $x=\sqrt{1{,}8\cdot10^{-7}}=4{,}2\cdot10^{-4}$ e quella esatta dà $x=4{,}15\cdot10^{-4}$, quindi $\mathrm{pH}=3{,}38$.
 
-Se la concentrazione dell'acido forte è confrontabile con quella dell'idronio dell'acqua, l'autoprotolisi va inclusa. Per esempio un acido forte monoprotico a concentrazione $C$ soddisfa $h=C+\dfrac{K_w}{h}$ nel modello ideale, dove $h$ è la concentrazione numerica dell'idronio.
+**Base debole**. Si procede allo stesso modo con $K_b$ al posto di $K_a$: $x$ è la concentrazione di $\mathrm{OH^-}$, da cui si ricavano il pOH e poi il pH.
+
+Queste formule trascurano gli ioni prodotti dall'autoprotolisi dell'acqua, e sono valide quando la concentrazione dell'acido è molto maggiore di $10^{-7}\,\mathrm{mol\,L^{-1}}$. Per un acido forte molto diluito si tiene conto anche dell'acqua risolvendo l'equazione $h=C+\dfrac{K_w}{h}$, dove $h$ è la concentrazione di $\mathrm{H_3O^+}$.
 :::
 
 :::osservazione{titolo="Controllare la dissociazione trascurata"}
-Le approssimazioni si controllano dopo il calcolo. Per l'acido acetico dell'esempio, $\dfrac{x}{C}\simeq0{,}0415$: la dissociazione è circa il $4{,}15\%$. La radice quadrata fornisce una buona stima, mentre l'equazione quadratica mantiene il consumo di acido nel denominatore. Se invece $K_a=10^{-3}$ e $C=0{,}010$, la frazione dissociata è circa il $27\%$: sostituire $C-x$ con $C$ non è giustificato. Dire "acido debole" non basta per scegliere una formula.
+L'approssimazione $x\simeq\sqrt{K_aC}$ è valida se la frazione di acido dissociata, $\dfrac{x}{C}$, è piccola; di solito si accetta un valore inferiore al 5%. Il controllo si fa dopo il calcolo. Per l'acido acetico dell'esempio $\dfrac{x}{C}\simeq0{,}0415$, cioè circa il 4%, quindi l'approssimazione è accettabile. Per un acido con $K_a=10^{-3}$ alla stessa concentrazione $C=0{,}010$ la frazione dissociata è circa il 27%, quindi si usa l'equazione di secondo grado.
 
-Per concentrazioni molto basse o quando più specie reagiscono contemporaneamente, la via generale combina bilancio di materia, elettroneutralità e costanti di equilibrio. Le formule semplificate sono conseguenze di questi vincoli, non regole alternative che possano violare la conservazione della carica.
+Nei casi più complessi, per esempio con concentrazioni molto basse o con più acidi e basi insieme, il pH si calcola mettendo a sistema tre tipi di equazioni: le costanti di equilibrio, il bilancio di materia (la quantità totale di ogni sostanza si conserva) e l'elettroneutralità (la somma delle cariche positive è uguale a quella delle cariche negative). Le formule usate finora sono casi particolari di questo sistema.
 :::
 
 ## Acidi poliprotici, neutralizzazione e sali
 
 :::definizione{#poliprotici titolo="Dissociazioni successive e specie anfiprotiche"}
-Un **acido poliprotico** può cedere più protoni in stadi distinti. Per un acido diprotico,
+Un **acido poliprotico** ha più di un protone da cedere. L'acido carbonico $\mathrm{H_2CO_3}$ ne ha due (diprotico) e l'acido fosforico $\mathrm{H_3PO_4}$ ne ha tre (triprotico). I protoni vengono ceduti uno alla volta, in stadi successivi, ciascuno con la propria costante. Per un acido diprotico $\mathrm{H_2A}$ gli stadi sono
 $$
 \mathrm{H_2A\rightleftharpoons H^++HA^-},\qquad
 \mathrm{HA^-\rightleftharpoons H^++A^{2-}},
 $$
-con costanti $K_{a1}$ e $K_{a2}$. Gli stadi hanno costanti diverse e vanno considerati separatamente. Se $K_{a1}\gg K_{a2}$, in una soluzione del solo acido il primo stadio può dominare il calcolo del pH; la piccola concentrazione prevista per il secondo stadio controlla questa ipotesi. Le basi poliprotiche acquistano invece protoni in più stadi; $\mathrm{CO_3^{2-}}$ può formare $\mathrm{HCO_3^-}$ e poi $\mathrm{H_2CO_3}$.
+Le costanti dei due stadi si indicano con $K_{a1}$ e $K_{a2}$. La seconda è sempre molto più piccola della prima, perché è più difficile togliere un protone a uno ione già negativo. Per questo, nel calcolo del pH di una soluzione dell'acido, di solito basta considerare il primo stadio. Una base poliprotica acquista i protoni in più stadi: lo ione carbonato $\mathrm{CO_3^{2-}}$ diventa prima $\mathrm{HCO_3^-}$ e poi $\mathrm{H_2CO_3}$.
 
-Per un sale della specie anfiprotica $\mathrm{HA^-}$, quando la concentrazione è abbastanza elevata da rendere trascurabile l'acqua e gli stadi adiacenti sono ben separati, vale
+La forma intermedia $\mathrm{HA^-}$ è anfiprotica, perché può cedere un protone oppure acquistarne uno. Il pH di una soluzione di un suo sale, per esempio il bicarbonato di sodio, è circa la media dei due $pK_a$ e dipende poco dalla concentrazione.
 $$
 \mathrm{pH}\simeq\dfrac{pK_{a1}+pK_{a2}}{2}.
 $$
-Per bicarbonato con $pK_{a1}=6{,}37$ e $pK_{a2}=10{,}33$ si stima quindi $\mathrm{pH}\simeq8{,}35$. La prima costante è qui apparente: la componente acida comprende $\mathrm{CO_2(aq)}$ e $\mathrm{H_2CO_3}$, non soltanto la seconda specie.
+Per esempio, per il bicarbonato $pK_{a1}=6{,}37$ e $pK_{a2}=10{,}33$, quindi $\mathrm{pH}\simeq\dfrac{6{,}37+10{,}33}{2}=8{,}35$, e una soluzione di bicarbonato di sodio è leggermente basica. Il valore di $pK_{a1}$ usato qui tiene conto del fatto che in acqua l'acido carbonico è in equilibrio con la $\mathrm{CO_2}$ disciolta.
 :::
 
 :::osservazione{#neutralizzazione-sali titolo="Neutralizzazione, equivalenza e idrolisi"}
-Nella neutralizzazione, $\mathrm{H_3O^++OH^-\rightarrow2H_2O}$. Prima si confrontano le moli reagenti, poi si calcola la concentrazione dell'eventuale eccesso nel volume totale. L'equivalenza corrisponde al rapporto stechiometrico tra acido e base.
+La **neutralizzazione** è la reazione fra un acido e una base. Gli ioni $\mathrm{H_3O^+}$ dell'acido e gli ioni $\mathrm{OH^-}$ della base si uniscono e formano acqua: $\mathrm{H_3O^++OH^-\rightarrow2H_2O}$. Il calcolo si svolge in due passi. Si confrontano le moli di acido e di base per stabilire quale delle due è in eccesso; poi si divide l'eccesso per il volume totale e si calcola il pH. Per esempio, mescolando $50\,\mathrm{mL}$ di HCl $0{,}10\,\mathrm{mol\,L^{-1}}$ ($5{,}0\,\mathrm{mmol}$) con $30\,\mathrm{mL}$ di NaOH $0{,}10\,\mathrm{mol\,L^{-1}}$ ($3{,}0\,\mathrm{mmol}$) restano $2{,}0\,\mathrm{mmol}$ di acido in $80\,\mathrm{mL}$, cioè $0{,}025\,\mathrm{mol\,L^{-1}}$, e $\mathrm{pH}=1{,}6$. Il **punto di equivalenza** si raggiunge quando le moli di base aggiunte sono esattamente quelle richieste dall'acido.
 
-I sali liberano ioni che possono reagire con l'acqua. L'acetato, base coniugata di un acido debole, dà $\mathrm{CH_3COO^-+H_2O\rightleftharpoons CH_3COOH+OH^-}$; la sua costante basica è $\dfrac{K_w}{K_a}$. Lo ione ammonio è invece un acido con $K_a=\dfrac{K_w}{K_b(\mathrm{NH_3})}$. Perciò una soluzione di acetato di sodio è basica e una di cloruro di ammonio è acida. NaCl è pressoché neutro nel modello diluito perché gli ioni hanno idrolisi trascurabile.
+Dalla neutralizzazione si ottiene un sale. Una soluzione di un sale non è sempre neutra, perché i suoi ioni possono reagire con l'acqua; questa reazione si chiama **idrolisi**. Si distinguono tre casi.
 
-All'equivalenza di un acido debole titolato con una base forte rimane il sale della base coniugata; il pH è quindi basico a $25\,^\circ\mathrm C$. Se entrambi gli ioni del sale reagiscono con l'acqua, l'esito dipende dalle costanti dei due equilibri.
+- L'anione di un acido debole è una base. Lo ione acetato reagisce con l'acqua secondo $\mathrm{CH_3COO^-+H_2O\rightleftharpoons CH_3COOH+OH^-}$, con costante $K_b=\dfrac{K_w}{K_a}$. Una soluzione di acetato di sodio è quindi basica.
+- Il catione di una base debole è un acido. Lo ione ammonio ha $K_a=\dfrac{K_w}{K_b(\mathrm{NH_3})}$. Una soluzione di cloruro di ammonio è quindi acida.
+- Gli ioni che derivano da acidi e basi forti, come $\mathrm{Na^+}$ e $\mathrm{Cl^-}$, non reagiscono con l'acqua. Una soluzione di NaCl è neutra.
+
+Di conseguenza il pH al punto di equivalenza dipende dall'acido e dalla base usati. Se un acido forte è neutralizzato da una base forte, il pH all'equivalenza è 7. Se un acido debole è neutralizzato da una base forte, all'equivalenza la soluzione contiene la base coniugata dell'acido e il pH è maggiore di 7. Se entrambi gli ioni del sale reagiscono con l'acqua, come nell'acetato di ammonio, il pH dipende da quale dei due equilibri ha la costante maggiore.
 :::
 
 :::esempio{titolo="Seguire una titolazione"}
-Durante la titolazione di HA con una base forte si attraversano situazioni chimiche diverse. All'inizio è presente soprattutto l'acido debole; prima dell'equivalenza coesistono HA e la base coniugata; all'equivalenza prevale il sale; oltre l'equivalenza domina l'idrossido aggiunto in eccesso. Applicare Henderson-Hasselbalch quando una delle componenti è esaurita produce un rapporto privo di significato. Alla semiequivalenza le quantità stechiometriche di HA e $\mathrm{A^-}$ coincidono, mentre all'equivalenza coincidono le moli di acido iniziali e di base forte aggiunta.
+Una **titolazione** è una misura in cui a una soluzione di un acido si aggiunge poco per volta una base di concentrazione nota (o viceversa), fino al punto di equivalenza. Dal volume di base usato si ricava la quantità di acido. Durante la titolazione di un acido debole HA con una base forte la soluzione attraversa quattro situazioni, e in ciascuna il pH si calcola in modo diverso.
+
+1. **All'inizio** è presente solo l'acido debole. Il pH si calcola con $K_a$.
+2. **Prima dell'equivalenza** una parte di HA è stata trasformata in $\mathrm{A^-}$. La soluzione contiene entrambe le sostanze ed è un tampone; il pH si calcola con l'equazione di Henderson-Hasselbalch, esposta nel paragrafo seguente. A metà strada (*semiequivalenza*) le quantità di HA e $\mathrm{A^-}$ sono uguali e $\mathrm{pH}=pK_a$.
+3. **All'equivalenza** tutto HA è diventato $\mathrm{A^-}$. Il pH si calcola con l'idrolisi di $\mathrm{A^-}$ ed è basico.
+4. **Dopo l'equivalenza** il pH è determinato dalla base forte in eccesso.
 
 ![Curva di titolazione di un acido debole con semiequivalenza ed equivalenza distinte](/figure/chimica-semestre-filtro/acidi-basi-redox/titolazione-it.svg)
 
-Il grafico risolve i bilanci di un modello ideale a $25\,^\circ\mathrm C$: $25\,\mathrm{mL}$ di HA $0{,}10\,\mathrm{mol\,L^{-1}}$, $pK_a=4{,}76$, titolati con NaOH della stessa concentrazione. L'equivalenza a $25\,\mathrm{mL}$ è basica per l'idrolisi di $\mathrm{A^-}$.
+La figura mostra la curva di titolazione di $25\,\mathrm{mL}$ di un acido debole $0{,}10\,\mathrm{mol\,L^{-1}}$ con $pK_a=4{,}76$, titolato con NaOH della stessa concentrazione, a $25\,^\circ\mathrm C$. Il punto di equivalenza si trova a $25\,\mathrm{mL}$ di base aggiunta e la semiequivalenza a $12{,}5\,\mathrm{mL}$. Attorno alla semiequivalenza il pH cambia poco; vicino all'equivalenza sale bruscamente.
 :::
 
 ## Tamponi e capacità tamponante
 
 :::definizione{#tamponi titolo="Coppia tampone e Henderson-Hasselbalch"}
-Una **soluzione tampone** contiene quantità apprezzabili di un acido debole e della sua base coniugata, oppure di una base debole e del suo acido coniugato. La base coniugata consuma una piccola aggiunta di acido forte; l'acido debole consuma una piccola aggiunta di base forte.
+Una **soluzione tampone** è una soluzione il cui pH cambia poco quando si aggiunge una piccola quantità di acido o di base. Contiene un acido debole e la sua base coniugata in quantità simili, per esempio acido acetico e acetato di sodio, oppure una base debole e il suo acido coniugato, per esempio ammoniaca e cloruro di ammonio. Il tampone funziona perché contiene una sostanza per ciascun tipo di aggiunta.
 
-Dalla definizione di $K_a$ si ricava
+- Se si aggiunge un acido forte, la base coniugata $\mathrm{A^-}$ ne acquista i protoni e diventa HA.
+- Se si aggiunge una base forte, l'acido debole HA le cede protoni e diventa $\mathrm{A^-}$.
+
+In entrambi i casi l'acido o la base forte vengono sostituiti da una sostanza debole, e il pH cambia di poco.
+
+Il pH di un tampone si calcola con l'**equazione di Henderson-Hasselbalch**, che si ottiene dall'espressione di $K_a$ passando ai logaritmi.
 $$
 \mathrm{pH}=pK_a+\log_{10}\dfrac{a_{\mathrm{A^-}}}{a_{\mathrm{HA}}}
 \simeq pK_a+\log_{10}\dfrac{[\mathrm{A^-}]}{[\mathrm{HA}]}.
 $$
-La forma con le concentrazioni di equilibrio richiede attività approssimabili con le concentrazioni ridotte. Per sostituire a queste le quantità ricavate dal bilancio stechiometrico occorre inoltre che il successivo riequilibrio le modifichi poco. Per componenti nella stessa soluzione il volume si semplifica e si può usare il rapporto tra le moli, aggiornate dopo l'eventuale reazione con l'acido o la base aggiunti. Con $0{,}030\,\mathrm{mol}$ di acetato e $0{,}020\,\mathrm{mol}$ di acido acetico, assumendo $pK_a=4{,}76$, si ottiene $\mathrm{pH}=4{,}94$.
+In questa formula $[\mathrm{A^-}]$ è la concentrazione della base coniugata e $[\mathrm{HA}]$ quella dell'acido. Il pH dipende dal *rapporto* fra le due. Se le concentrazioni sono uguali il logaritmo vale zero e $\mathrm{pH}=pK_a$. Poiché acido e base si trovano nella stessa soluzione, al posto delle concentrazioni si può usare il rapporto fra le moli. Per esempio, un tampone con $0{,}030\,\mathrm{mol}$ di acetato e $0{,}020\,\mathrm{mol}$ di acido acetico ($pK_a=4{,}76$) ha $\mathrm{pH}=4{,}76+\log_{10}\dfrac{0{,}030}{0{,}020}=4{,}94$.
+
+Se al tampone si aggiunge un acido o una base forte, si aggiornano prima le moli e poi si applica la formula. Aggiungendo $0{,}005\,\mathrm{mol}$ di HCl al tampone dell'esempio, l'acetato scende a $0{,}025\,\mathrm{mol}$ e l'acido acetico sale a $0{,}025\,\mathrm{mol}$, quindi $\mathrm{pH}=4{,}76$. La stessa quantità di HCl in un litro di acqua pura porterebbe il pH da 7 a $2{,}3$.
 :::
 
 :::esempio{titolo="Tampone ammoniaca e ammonio"}
-Una coppia tampone può essere descritta anche partendo da una base debole. Per ammoniaca e ammonio, a $25\,^\circ\mathrm C$ con $K_b=1{,}80\cdot10^{-5}$, si usa
+Un tampone si può preparare anche con una base debole e il suo acido coniugato. Per la coppia ammoniaca/ammonio conviene usare la costante $K_b$ dell'ammoniaca, che a $25\,^\circ\mathrm C$ vale $1{,}80\cdot10^{-5}$, e calcolare prima il pOH con la formula seguente.
 $$
 \mathrm{pOH}=pK_b+\log_{10}\dfrac{[\mathrm{NH_4^+}]}{[\mathrm{NH_3}]}.
 $$
-Se nel modello ideale le concentrazioni della coppia sono approssimativamente $0{,}020\,\mathrm{mol\,L^{-1}}$ di ammonio e $0{,}010\,\mathrm{mol\,L^{-1}}$ di ammoniaca, si ottengono $\mathrm{pOH}\simeq4{,}745+\log_{10}2=5{,}046$ e $\mathrm{pH}\simeq8{,}95$, usando $pK_w=14{,}00$. Il rapporto nella formula del pOH è acido coniugato/base. L'ammoniaca consuma acido aggiunto, mentre l'ammonio può neutralizzare base aggiunta.
+In questa formula al numeratore c'è l'acido coniugato $\mathrm{NH_4^+}$ e al denominatore la base $\mathrm{NH_3}$. Per esempio, con $0{,}020\,\mathrm{mol\,L^{-1}}$ di ammonio e $0{,}010\,\mathrm{mol\,L^{-1}}$ di ammoniaca si ha $pK_b=4{,}745$ e $\mathrm{pOH}=4{,}745+\log_{10}2=5{,}046$, quindi $\mathrm{pH}=14{,}00-5{,}046\simeq8{,}95$. In questo tampone l'ammoniaca neutralizza un acido aggiunto e lo ione ammonio neutralizza una base aggiunta.
 :::
 
 :::osservazione{#capacita-tampone titolo="Efficienza del tampone"}
-Il rapporto tra base e acido determina il pH, mentre la loro quantità totale determina quanta aggiunta può essere assorbita. La **capacità tamponante** misura le moli di acido o base forte, per litro, necessarie per una variazione unitaria di pH nelle condizioni considerate.
+In un tampone il rapporto fra base e acido determina il pH, mentre la quantità totale delle due sostanze determina quanto acido o quanta base il tampone può neutralizzare. La **capacità tamponante** è il numero di moli di acido o di base forte che si devono aggiungere a un litro di tampone per far variare il pH di una unità.
 
-Per una coppia monoprotica chiusa, a concentrazione totale fissata, la capacità dovuta alla coppia è massima vicino a $\mathrm{pH}=pK_a$. L'intervallo $pK_a\pm1$ corrisponde a un rapporto base/acido tra $0{,}1$ e $10$. Due tamponi con identico rapporto ma concentrazioni totali $0{,}10$ e $0{,}010\,\mathrm{mol\,L^{-1}}$ hanno circa lo stesso pH; quello più concentrato sopporta una maggiore aggiunta prima di subire una grande variazione.
+La capacità è massima quando acido e base coniugata hanno la stessa concentrazione, cioè a $\mathrm{pH}=pK_a$. Un tampone è efficace nell'intervallo $pK_a\pm1$, in cui il rapporto fra base e acido è compreso fra $0{,}1$ e $10$. Per preparare un tampone a un certo pH si sceglie quindi una coppia con $pK_a$ vicino a quel valore. A parità di rapporto, un tampone più concentrato ha lo stesso pH e una capacità maggiore: un tampone $0{,}10\,\mathrm{mol\,L^{-1}}$ neutralizza dieci volte più acido di uno $0{,}010\,\mathrm{mol\,L^{-1}}$.
 :::
 
 :::osservazione{titolo="Diluizione e capacità tampone"}
-Una diluizione moderata mantiene approssimativamente il rapporto base/acido e quindi il pH, ma riduce la capacità per litro. Il numero di moli totali presenti nello stesso recipiente resta invece invariato se si aggiunge solo solvente: è necessario distinguere una proprietà riferita al volume dalla quantità complessiva. Diluizioni estreme, modifiche dei coefficienti di attività e contributo dell'acqua possono rendere insufficiente la semplice invarianza del rapporto.
+Se si diluisce un tampone con acqua, le concentrazioni di acido e base diminuiscono nella stessa proporzione. Il loro rapporto resta lo stesso, quindi il pH non cambia; la capacità per litro, invece, diminuisce. Le moli totali contenute nel recipiente restano le stesse. Con diluizioni molto spinte anche il pH comincia a spostarsi verso 7.
 
 ![Bilancio delle moli di acido e base coniugata prima e dopo aggiunta di acido forte](/figure/chimica-semestre-filtro/acidi-basi-redox/tampone-it.svg)
 
-Nel caso illustrato $5\,\mathrm{mmol}$ di HCl trasformano acetato in acido acetico. Il totale della coppia resta $50\,\mathrm{mmol}$, mentre il rapporto che determina il pH cambia.
+La figura mostra un tampone con $50\,\mathrm{mmol}$ totali fra acido acetico e acetato a cui si aggiungono $5\,\mathrm{mmol}$ di HCl. L'acido aggiunto trasforma $5\,\mathrm{mmol}$ di acetato in acido acetico. Il totale resta $50\,\mathrm{mmol}$, mentre il rapporto fra le due sostanze cambia, e con esso il pH.
 :::
 
 ## I sistemi tampone nei fluidi biologici
 
 :::osservazione{#tamponi-biologici titolo="Bicarbonato, fosfati e proteine"}
-Nel sistema bicarbonato, gli equilibri collegano $\mathrm{CO_2}$ disciolta, $\mathrm{H_2CO_3}$ e $\mathrm{HCO_3^-}$. Il sangue è un sistema aperto, poiché scambia $\mathrm{CO_2}$ con i polmoni e il bilancio di bicarbonato e protoni coinvolge i reni. Un modello a $37\,^\circ\mathrm C$ usa
+Il pH del sangue è mantenuto fra $7{,}35$ e $7{,}45$ da più tamponi. Il più importante è il **sistema bicarbonato**. L'anidride carbonica prodotta dalle cellule si scioglie nel sangue e reagisce con l'acqua: $\mathrm{CO_2+H_2O\rightleftharpoons H_2CO_3\rightleftharpoons H^++HCO_3^-}$. L'acido della coppia è la $\mathrm{CO_2}$ disciolta e la base è lo ione bicarbonato. Questo tampone è particolarmente efficace perché il sangue è un sistema aperto: i polmoni eliminano la $\mathrm{CO_2}$ e i reni regolano il bicarbonato, quindi le due sostanze vengono continuamente riportate ai valori normali. Il pH si calcola con l'equazione di Henderson-Hasselbalch scritta per questa coppia, a $37\,^\circ\mathrm C$.
 $$
 \mathrm{pH}\simeq6{,}1+\log_{10}
 \dfrac{[\mathrm{HCO_3^-}]}{\alpha p_{\mathrm{CO_2}}},
 \qquad \alpha\simeq0{,}030\,\dfrac{\mathrm{mmol}}{\mathrm{L\,mmHg}}.
 $$
-La concentrazione di bicarbonato è espressa in $\mathrm{mmol\,L^{-1}}$ e la pressione in $\mathrm{mmHg}$. Il $pK$ apparente comprende l'equilibrio con la $\mathrm{CO_2}$ disciolta. Con $24\,\mathrm{mmol\,L^{-1}}$ e $40\,\mathrm{mmHg}$, il modello restituisce $\mathrm{pH}\simeq7{,}40$.
+In questa formula $[\mathrm{HCO_3^-}]$ è la concentrazione del bicarbonato in $\mathrm{mmol\,L^{-1}}$ e $p_{\mathrm{CO_2}}$ è la pressione parziale della $\mathrm{CO_2}$ in $\mathrm{mmHg}$. Il prodotto $\alpha\,p_{\mathrm{CO_2}}$ è la concentrazione della $\mathrm{CO_2}$ disciolta, ricavata dalla legge di Henry. Il numero $6{,}1$ è il $pK_a$ della coppia in queste condizioni. Con i valori normali, $24\,\mathrm{mmol\,L^{-1}}$ e $40\,\mathrm{mmHg}$, si ottiene $\mathrm{pH}=6{,}1+\log_{10}\dfrac{24}{0{,}030\cdot40}=6{,}1+\log_{10}20\simeq7{,}40$.
 
-La coppia fosfato $\mathrm{H_2PO_4^-/HPO_4^{2-}}$ scambia un protone ed è presente soprattutto nei compartimenti intracellulari e nelle urine. Le proteine contengono gruppi ionizzabili, compresi i gruppi delle catene laterali; l'emoglobina contribuisce al tamponamento del sangue. L'effetto tampone è una reazione chimica distinta dai processi fisiologici che ripristinano le quantità delle componenti.
+Gli altri tamponi dell'organismo sono due. Il **tampone fosfato** è formato dalla coppia $\mathrm{H_2PO_4^-/HPO_4^{2-}}$, con $pK_a$ vicino a 7, ed è importante all'interno delle cellule e nelle urine. Le **proteine** contengono gruppi che possono cedere o acquistare protoni, soprattutto nelle catene laterali degli amminoacidi; nel sangue la proteina tampone più importante è l'emoglobina. Un tampone limita la variazione del pH al momento dell'aggiunta. Il ritorno delle quantità ai valori normali è opera dei polmoni e dei reni.
 
-L'acidosi descrive un processo che tende ad abbassare il pH; l'alcalosi descrive un processo che tende ad aumentarlo. La direzione di questi processi si interpreta con gli equilibri e con gli scambi del sistema.
+L'**acidosi** è una condizione in cui il pH del sangue scende sotto $7{,}35$ e l'**alcalosi** una condizione in cui sale sopra $7{,}45$. Si dicono *respiratorie* se la causa è una variazione della $\mathrm{CO_2}$ e *metaboliche* se la causa è una variazione del bicarbonato.
 :::
 
 :::esempio{titolo="Variabili nel modello bicarbonato"}
-Nel modello bicarbonato, raddoppiare la pressione della $\mathrm{CO_2}$ mantenendo fisso il bicarbonato raddoppia il denominatore e riduce il pH di $\log_{10}2\simeq0{,}30$. Questo confronto serve a leggere il ruolo delle variabili; non descrive automaticamente la risposta di un organismo, nel quale altri processi possono cambiare contemporaneamente le concentrazioni. Un tampone chimico e la regolazione fisiologica del bilancio acido-base sono livelli di descrizione diversi.
+La formula permette di prevedere l'effetto di una variazione. Se la $p_{\mathrm{CO_2}}$ raddoppia e il bicarbonato resta costante, il denominatore raddoppia e il pH diminuisce di $\log_{10}2\simeq0{,}30$: da $7{,}40$ scende a $7{,}10$. È ciò che accade quando la respirazione è insufficiente e la $\mathrm{CO_2}$ si accumula (acidosi respiratoria). Nell'organismo i reni rispondono trattenendo bicarbonato, e nel tempo il pH risale in parte; la formula descrive l'effetto chimico immediato.
 :::
 
 ## Solubilità ed equilibrio acido-base
 
 :::osservazione{#solubilita-ph titolo="Protonazione e dissoluzione dei sali"}
-La dissoluzione di un sale poco solubile e la protonazione dei suoi anioni sono equilibri accoppiati. Per l'ossalato di calcio,
+La solubilità di molti sali poco solubili dipende dal pH. Accade quando l'anione del sale è la base coniugata di un acido debole, perché in ambiente acido l'anione acquista un protone. Un esempio è l'ossalato di calcio, il cui equilibrio di solubilità è
 $$
 \mathrm{CaC_2O_4(s)\rightleftharpoons Ca^{2+}+C_2O_4^{2-}},
 \qquad K_{ps}=a_{\mathrm{Ca^{2+}}}a_{\mathrm{C_2O_4^{2-}}}.
 $$
-Aggiungere acido favorisce $\mathrm{C_2O_4^{2-}+H^+\rightleftharpoons HC_2O_4^-}$. Poiché diminuisce l'attività dell'ossalato libero, altra fase solida può dissolversi. Anche i fosfati di calcio sono sensibili alla protonazione del fosfato.
+Se si aggiunge un acido, lo ione ossalato acquista un protone: $\mathrm{C_2O_4^{2-}+H^+\rightleftharpoons HC_2O_4^-}$. La concentrazione di ossalato libero diminuisce e, per il principio di Le Chatelier, altro solido si scioglie. L'ossalato di calcio è quindi più solubile in ambiente acido. Lo stesso vale per i fosfati di calcio, che formano le ossa e lo smalto dei denti: gli acidi prodotti dai batteri della bocca sciolgono lo smalto e causano la carie.
 
-Nel sistema acido urico/urato, diminuire il pH aumenta la frazione di acido urico neutro; la bassa solubilità di questa forma può favorirne la precipitazione. Il comportamento dell'urato di sodio dipende inoltre da temperatura, attività ioniche e composizione della soluzione. Perciò il solo nome del sale non permette di stabilire l'andamento della solubilità al variare del pH. Questi equilibri sono esempi della chimica dei depositi e dei calcoli.
+L'acido urico si comporta in modo opposto. La sua forma neutra, che prevale a pH acido, è poco solubile, mentre l'anione urato, che prevale a pH più alto, lo è di più. Un pH basso favorisce quindi la precipitazione dell'acido urico. In generale un ambiente acido aumenta la solubilità dei sali il cui anione è una base, e diminuisce la solubilità degli acidi deboli che sono poco solubili nella forma neutra.
 :::
 
 :::osservazione{titolo="Specie libere e concentrazione totale"}
-Il prodotto di solubilità non contiene tutte le forme analitiche dell'ossalato sommate insieme: contiene lo ione libero nella specifica reazione di dissoluzione. Se una misura fornisce "ossalato totale", occorre distinguere la frazione protonata da quella libera prima di calcolare il prodotto ionico. La temperatura e la fase solida devono essere definite; una diversa forma cristallina o la presenza di complessanti introduce ulteriori equilibri.
+Nel prodotto di solubilità compare solo lo ione ossalato libero $\mathrm{C_2O_4^{2-}}$, e non la forma protonata $\mathrm{HC_2O_4^-}$. Un'analisi di laboratorio misura di solito l'ossalato totale, cioè la somma delle due forme. Per calcolare il prodotto ionico si ricava prima, dal pH, quale frazione del totale è nella forma libera.
 
 ![Equilibrio di dissoluzione accoppiato alla protonazione dell'ossalato libero](/figure/chimica-semestre-filtro/acidi-basi-redox/solubilita-it.svg)
 :::
@@ -205,16 +235,30 @@ Il prodotto di solubilità non contiene tutte le forme analitiche dell'ossalato 
 ## Ossidazione, riduzione e bilanciamento
 
 :::definizione{#redox titolo="Trasferimento di elettroni e agenti redox"}
-L'**ossidazione** corrisponde a una perdita di elettroni e a un aumento del numero di ossidazione; la riduzione corrisponde all'acquisto di elettroni. Il riducente cede elettroni e si ossida; l'ossidante li acquista e si riduce.
+Una reazione di **ossidoriduzione** (o redox) è una reazione in cui alcuni elettroni passano da una sostanza a un'altra. Vi avvengono insieme due processi.
+
+- L'**ossidazione** è la perdita di elettroni. Il numero di ossidazione dell'atomo aumenta.
+- La **riduzione** è l'acquisto di elettroni. Il numero di ossidazione dell'atomo diminuisce.
+
+La sostanza che cede elettroni si ossida e si chiama **riducente**, perché fa ridurre l'altra. La sostanza che acquista elettroni si riduce e si chiama **ossidante**. Ogni reazione redox si può scomporre in due **semireazioni**, una di ossidazione e una di riduzione. Le due seguenti descrivono la reazione fra lo zinco metallico e gli ioni rame.
 $$
 \mathrm{Zn\rightarrow Zn^{2+}+2e^-},\qquad
 \mathrm{Cu^{2+}+2e^-\rightarrow Cu}.
 $$
-Nella reazione tra zinco e rame(II), quindi, lo zinco è il riducente e lo ione rame(II) è l'ossidante. Il numero totale di elettroni ceduti coincide con quello acquistato.
+Lo zinco cede due elettroni e passa da numero di ossidazione 0 a $+2$: si ossida ed è il riducente. Lo ione rame(II) acquista due elettroni e passa da $+2$ a 0: si riduce ed è l'ossidante. Sommando le due semireazioni si ottiene $\mathrm{Zn+Cu^{2+}\rightarrow Zn^{2+}+Cu}$. Gli elettroni ceduti in un'ossidazione sono sempre tanti quanti quelli acquistati nella riduzione.
 :::
 
 :::osservazione{#bilanciamento-redox titolo="Metodo delle semireazioni"}
-In ambiente acido si bilanciano gli atomi diversi da idrogeno e ossigeno, poi l'ossigeno con acqua, l'idrogeno con protoni e la carica con elettroni. Si moltiplicano le semireazioni fino a ottenere lo stesso numero di elettroni e si sommano. Per il permanganato e il ferro(II),
+Una reazione redox si bilancia con il **metodo delle semireazioni**. In ambiente acido i passi sono sei.
+
+1. Si scrivono separatamente le due semireazioni.
+2. In ciascuna si bilanciano gli atomi diversi da idrogeno e ossigeno.
+3. Si bilancia l'ossigeno aggiungendo molecole di $\mathrm{H_2O}$.
+4. Si bilancia l'idrogeno aggiungendo ioni $\mathrm{H^+}$.
+5. Si bilancia la carica aggiungendo elettroni.
+6. Si moltiplicano le semireazioni in modo che gli elettroni ceduti siano uguali a quelli acquistati, e si sommano.
+
+Per esempio, lo ione permanganato $\mathrm{MnO_4^-}$ ossida il ferro(II). Il manganese acquista 5 elettroni e ogni ione ferro ne cede 1, quindi la semireazione del ferro va moltiplicata per 5.
 $$
 \begin{aligned}
 \mathrm{MnO_4^-+8H^++5e^-}&\mathrm{\rightarrow Mn^{2+}+4H_2O},\\
@@ -222,11 +266,11 @@ $$
 \mathrm{MnO_4^-+8H^++5Fe^{2+}}&\mathrm{\rightarrow Mn^{2+}+4H_2O+5Fe^{3+}}.
 \end{aligned}
 $$
-La carica totale vale $+17$ da entrambi i lati. In ambiente basico si può completare il bilanciamento acido, poi aggiungere a entrambi i membri tanti idrossidi quanti sono i protoni. I protoni e gli idrossidi diventano acqua, che si semplifica quando compare nei due membri.
+Nell'equazione finale gli elettroni non compaiono più, perché i 5 ceduti dal ferro sono i 5 acquistati dal manganese. Come controllo si verifica la carica: a sinistra $-1+8+5\cdot2=+17$ e a destra $+2+5\cdot3=+17$. In ambiente basico si bilancia prima come in ambiente acido; poi si aggiungono ai due membri tanti ioni $\mathrm{OH^-}$ quanti sono gli $\mathrm{H^+}$. Gli $\mathrm{H^+}$ e gli $\mathrm{OH^-}$ dallo stesso lato formano acqua, e le molecole d'acqua presenti in entrambi i membri si semplificano.
 :::
 
 :::osservazione{titolo="Controllare atomi e carica"}
-Gli elettroni delle semireazioni sono strumenti di contabilità: nella reazione globale devono cancellarsi completamente. Una reazione può avere tutti gli atomi bilanciati e una carica totale diversa nei due membri; in quel caso il bilanciamento è ancora incompleto. L'ambiente acido o basico determina quali specie utilizzare per compensare idrogeno e ossigeno e può influenzare anche il prodotto effettivamente ottenuto dal reagente.
+Un'equazione redox è bilanciata quando sono uguali nei due membri sia gli atomi di ogni elemento sia la carica totale. Può accadere che gli atomi siano bilanciati e la carica no; in questo caso gli elettroni scambiati non sono stati pareggiati. La scelta fra ambiente acido e basico stabilisce se usare $\mathrm{H^+}$ oppure $\mathrm{OH^-}$ nel bilanciamento, e può cambiare anche i prodotti: il permanganato si riduce a $\mathrm{Mn^{2+}}$ in ambiente acido e a $\mathrm{MnO_2}$ in ambiente neutro o basico.
 
 ![Cinque ossidazioni del ferro bilanciano la riduzione di uno ione permanganato](/figure/chimica-semestre-filtro/acidi-basi-redox/redox-it.svg)
 :::
@@ -234,37 +278,46 @@ Gli elettroni delle semireazioni sono strumenti di contabilità: nella reazione 
 ## Celle elettrochimiche, energia e potenziale
 
 :::definizione{#celle-potenziali titolo="Anodo, catodo e potenziali standard"}
-Una **cella galvanica** realizza una reazione redox spontanea separando le due semireazioni in compartimenti collegati da un circuito esterno e da un contatto ionico. All'anodo avviene l'ossidazione; al catodo avviene la riduzione. In una cella galvanica l'anodo è negativo e il catodo positivo. Gli elettroni scorrono esternamente dall'anodo al catodo, mentre il ponte salino mantiene l'elettroneutralità.
+Una **cella galvanica**, o pila, è un dispositivo che ricava corrente elettrica da una reazione redox spontanea. Le due semireazioni avvengono in due recipienti separati, così gli elettroni sono costretti a passare da uno all'altro attraverso un filo esterno. In ciascun recipiente è immersa una lamina metallica, l'**elettrodo**.
 
-I potenziali tabulati sono scritti come potenziali di riduzione rispetto a un elettrodo di riferimento. Il potenziale standard $E^\circ$ si riferisce ad attività unitarie, gas alla pressione standard e temperatura dichiarata; per un solido puro l'attività è unitaria. Per la reazione completa,
+- L'**anodo** è l'elettrodo in cui avviene l'ossidazione. Qui si liberano elettroni, quindi in una pila è il polo negativo.
+- Il **catodo** è l'elettrodo in cui avviene la riduzione. Qui arrivano gli elettroni, quindi in una pila è il polo positivo.
+
+Gli elettroni passano nel filo dall'anodo al catodo. I due recipienti sono collegati anche da un **ponte salino**, un tubo che contiene una soluzione di un sale: i suoi ioni passano nei due recipienti e compensano le cariche che vi si formano.
+
+Ogni semireazione ha un **potenziale standard di riduzione** $E^\circ$, misurato in volt, che indica quanto facilmente la sostanza acquista elettroni. È misurato rispetto all'elettrodo a idrogeno, al quale si assegna il valore zero, in condizioni standard: concentrazioni $1\,\mathrm{mol\,L^{-1}}$ e gas alla pressione di $1\,\mathrm{bar}$. Fra due coppie, quella con il potenziale più alto si riduce e fa da catodo; l'altra si ossida e fa da anodo. La differenza di potenziale della pila è
 $$
 E^\circ=E^\circ_{\mathrm{red,c}}-E^\circ_{\mathrm{red,a}}.
 $$
-I pedici $c$ e $a$ indicano catodo e anodo; entrambi i valori sono potenziali di riduzione. Per $E^\circ(\mathrm{Cu^{2+}/Cu})=0{,}34\,\mathrm V$ ed $E^\circ(\mathrm{Zn^{2+}/Zn})=-0{,}76\,\mathrm V$, si ottiene $1{,}10\,\mathrm V$. Moltiplicare una semireazione per bilanciare gli elettroni lascia invariato il suo potenziale.
+I pedici $c$ e $a$ indicano il catodo e l'anodo, e si usano i potenziali di riduzione di entrambi, così come sono in tabella. Per esempio, $E^\circ(\mathrm{Cu^{2+}/Cu})=0{,}34\,\mathrm V$ ed $E^\circ(\mathrm{Zn^{2+}/Zn})=-0{,}76\,\mathrm V$. Il rame ha il potenziale più alto, quindi è il catodo, e la pila ha $E^\circ=0{,}34-(-0{,}76)=1{,}10\,\mathrm V$. Se una semireazione viene moltiplicata per un numero per pareggiare gli elettroni, il suo potenziale non cambia.
 :::
 
 :::esempio{titolo="Elettrodi e conduzione nella pila"}
-Il nome dell'elettrodo dipende dalla reazione, non dal segno elettrico: ossidazione all'anodo e riduzione al catodo valgono anche in una cella elettrolitica, dove un generatore esterno forza la trasformazione e i segni sono differenti. Nella pila zinco-rame, il ponte salino non è una strada per gli elettroni: fornisce conduzione ionica. L'accumulo di carica arresterebbe rapidamente il processo se i compartimenti fossero collegati soltanto dal filo.
+Nella pila zinco-rame (pila Daniell) lo zinco è l'anodo: la lamina si consuma e libera ioni $\mathrm{Zn^{2+}}$. Il rame è il catodo: gli ioni $\mathrm{Cu^{2+}}$ della soluzione si depositano sulla lamina come rame metallico. Nel filo passano elettroni e nel ponte salino passano ioni. Senza il ponte la pila si fermerebbe subito, perché nel recipiente dello zinco si accumulerebbero cariche positive e in quello del rame cariche negative.
+
+In una **cella elettrolitica** avviene il contrario: un generatore esterno fornisce energia e fa avvenire una reazione non spontanea (elettrolisi). Anche qui l'ossidazione avviene all'anodo e la riduzione al catodo, ma i segni dei poli sono invertiti: l'anodo è positivo e il catodo è negativo.
 
 ![Pila zinco-rame: elettroni nel filo e ioni nel ponte salino](/figure/chimica-semestre-filtro/acidi-basi-redox/pila-it.svg)
 :::
 
 :::osservazione{#nernst-gibbs titolo="Equazione di Nernst e lavoro elettrico"}
-Nelle condizioni effettive, il potenziale dipende dal quoziente di reazione adimensionale $Q$:
+I potenziali standard valgono quando tutte le concentrazioni sono $1\,\mathrm{mol\,L^{-1}}$. Con concentrazioni diverse il potenziale della pila cambia. L'**equazione di Nernst** dà il potenziale $E$ in funzione del quoziente di reazione $Q$.
 $$
 E=E^\circ-\dfrac{RT}{nF}\ln Q.
 $$
-$R$ è la costante dei gas, $T$ la temperatura assoluta, $n$ il numero di elettroni trasferiti per reazione e $F\simeq96485\,\mathrm{C\,mol^{-1}}$ la costante di Faraday. A $25\,^\circ\mathrm C$,
+In questa formula $R$ è la costante dei gas, $T$ la temperatura assoluta, $n$ il numero di elettroni scambiati nella reazione e $F\simeq96485\,\mathrm{C\,mol^{-1}}$ la **costante di Faraday**, cioè la carica di una mole di elettroni. A $25\,^\circ\mathrm C$, passando al logaritmo in base 10, la formula diventa
 $$
 E=E^\circ-\dfrac{0{,}05916\,\mathrm V}{n}\log_{10}Q.
 $$
-Per $\mathrm{Zn+Cu^{2+}\rightarrow Zn^{2+}+Cu}$, $Q=\dfrac{a_{\mathrm{Zn^{2+}}}}{a_{\mathrm{Cu^{2+}}}}$. Se $Q=100$, il potenziale vale $1{,}041\,\mathrm V$.
+Per esempio, nella pila $\mathrm{Zn+Cu^{2+}\rightarrow Zn^{2+}+Cu}$ si scambiano $n=2$ elettroni e $Q=\dfrac{a_{\mathrm{Zn^{2+}}}}{a_{\mathrm{Cu^{2+}}}}$, cioè il rapporto fra le concentrazioni dei due ioni; i metalli solidi non compaiono. Se $Q=100$, il potenziale è $E=1{,}10-\dfrac{0{,}05916}{2}\cdot2=1{,}041\,\mathrm V$. Mentre la pila funziona, gli ioni zinco aumentano e gli ioni rame diminuiscono, quindi $Q$ cresce e il potenziale scende.
 
-La variazione di energia libera per la reazione è $\Delta_rG=-nFE$, e in condizioni standard $\Delta_rG^\circ=-nFE^\circ$. Quindi $E>0$ corrisponde a una reazione spontanea nel verso scritto. A temperatura e pressione costanti, se l'unico lavoro diverso da quello di espansione è elettrico, il massimo lavoro elettrico erogabile reversibilmente per mole di reazione è $-\Delta_rG$. All'equilibrio $E=0$ e $Q=K$, perciò $\ln K=\dfrac{nFE^\circ}{RT}$. Un potenziale biochimico standard trasformato, indicato spesso con un apice primo, si riferisce a condizioni specificate, per esempio pH fissato a $7$; va distinto dal potenziale standard chimico con attività protonica unitaria.
+Il potenziale è legato all'energia libera della reazione da $\Delta_rG=-nFE$, e in condizioni standard da $\Delta_rG^\circ=-nFE^\circ$. Se $E>0$ allora $\Delta_rG<0$ e la reazione è spontanea nel verso scritto. Il valore $-\Delta_rG$ è il massimo lavoro elettrico che la pila può fornire per ogni mole di reazione. Quando la pila è scarica la reazione ha raggiunto l'equilibrio: $E=0$ e $Q=K$. Dall'equazione di Nernst si ricava allora la costante di equilibrio, $\ln K=\dfrac{nFE^\circ}{RT}$.
+
+In biochimica si usa il potenziale standard $E^{\circ\prime}$, riferito a pH 7 invece che a una concentrazione di $\mathrm{H^+}$ pari a $1\,\mathrm{mol\,L^{-1}}$, perché nelle cellule il pH è vicino a 7.
 :::
 
 :::osservazione{titolo="Potenziale e condizioni effettive"}
-Il potenziale è una grandezza intensiva. Raddoppiare l'equazione raddoppia il numero di elettroni e la variazione di energia libera, ma lascia invariato il rapporto $-\dfrac{\Delta_rG}{nF}$. Per questo i potenziali non si moltiplicano per i coefficienti stechiometrici. Inoltre $E^\circ>0$ descrive le condizioni standard: in una composizione diversa un quoziente abbastanza grande può rendere $E$ negativo. Il verso favorito dipende dalle condizioni effettive.
+Il potenziale non dipende dalla quantità di sostanza che reagisce. Se si moltiplica l'equazione per 2, raddoppiano gli elettroni $n$ e raddoppia $\Delta_rG$, ma il rapporto $-\dfrac{\Delta_rG}{nF}$ resta lo stesso. Per questo i potenziali non si moltiplicano per i coefficienti. Un valore $E^\circ>0$ indica che la reazione è spontanea in condizioni standard. In condizioni diverse conta il valore di $E$ dato dall'equazione di Nernst, che per $Q$ molto grande può diventare negativo; in quel caso è spontanea la reazione inversa.
 
 ![Dipendenza del potenziale della pila zinco-rame dal logaritmo del quoziente di reazione](/figure/chimica-semestre-filtro/acidi-basi-redox/nernst-it.svg)
 :::
@@ -272,33 +325,33 @@ Il potenziale è una grandezza intensiva. Raddoppiare l'equazione raddoppia il n
 ## Ossigeno, respirazione e specie radicaliche
 
 :::osservazione{#ossigeno-respirazione titolo="Ossigeno come accettore di elettroni"}
-Nella respirazione cellulare, l'ossigeno accetta elettroni alla fine della catena di trasporto e viene ridotto ad acqua. La semireazione scritta in ambiente acido è
+Nella **respirazione cellulare** gli elettroni tolti alle molecole del cibo passano da una molecola all'altra lungo la catena di trasporto degli elettroni, nei mitocondri. L'ultima sostanza che li riceve è l'ossigeno, che si riduce ad acqua.
 $$
 \mathrm{O_2+4H^++4e^-\rightarrow2H_2O}.
 $$
-Il bilancio complessivo idealizzato dell'ossidazione del glucosio è $\mathrm{C_6H_{12}O_6+6O_2\rightarrow6CO_2+6H_2O}$. Il carbonio viene ossidato e l'ossigeno viene ridotto. L'energia libera resa disponibile è in parte conservata mediante accoppiamento alla sintesi di ATP; la quota dipende dalle condizioni e dai processi accoppiati.
+La reazione complessiva dell'ossidazione del glucosio è $\mathrm{C_6H_{12}O_6+6O_2\rightarrow6CO_2+6H_2O}$. Il carbonio del glucosio si ossida a $\mathrm{CO_2}$ e l'ossigeno si riduce ad acqua. È la stessa reazione della combustione del glucosio, ma nella cellula avviene in molti passaggi, e una parte dell'energia liberata viene usata per produrre ATP invece di disperdersi tutta come calore.
 
-Il potenziale della coppia ossigeno/acqua dipende anche dal pH. Se si usa $E^\circ=1{,}229\,\mathrm V$ a $25\,^\circ\mathrm C$, attività dell'acqua unitaria e pressione dell'ossigeno pari a quella standard, Nernst fornisce $E=1{,}229-0{,}05916\,\mathrm{pH}$ in volt. A pH $7$ risulta quindi circa $0{,}815\,\mathrm V$.
+Il potenziale della coppia ossigeno/acqua dipende dal pH, perché nella semireazione compaiono ioni $\mathrm{H^+}$. In condizioni standard, cioè a pH 0, vale $E^\circ=1{,}229\,\mathrm V$ a $25\,^\circ\mathrm C$. Applicando l'equazione di Nernst si ottiene $E=1{,}229-0{,}05916\,\mathrm{pH}$ in volt. A pH 7 il potenziale è circa $0{,}815\,\mathrm V$. È un valore alto, quindi l'ossigeno è un forte ossidante anche alle condizioni della cellula.
 :::
 
 :::osservazione{#fenton-haber-weiss titolo="Fenton e bilancio di Haber-Weiss"}
-La riduzione parziale dell'ossigeno può produrre superossido $\mathrm{O_2^{\bullet-}}$ e perossido di idrogeno $\mathrm{H_2O_2}$. Nel modello radicalico della reazione di Fenton,
+L'ossigeno si riduce ad acqua acquistando quattro elettroni. Se ne acquista meno, si formano sostanze molto reattive, dette **specie reattive dell'ossigeno**. Con un elettrone si forma lo ione superossido $\mathrm{O_2^{\bullet-}}$ e con due il perossido di idrogeno $\mathrm{H_2O_2}$. Un **radicale** è una sostanza con un elettrone spaiato, indicato con un punto nella formula. Nella **reazione di Fenton** il ferro(II) reagisce con il perossido di idrogeno.
 $$
 \mathrm{Fe^{2+}+H_2O_2\rightarrow Fe^{3+}+OH^-+{}^\bullet OH}.
 $$
-Il ferro(II) si ossida e il perossido partecipa alla formazione del radicale ossidrile, una specie molto reattiva. Il superossido può ridurre ferro(III) a ferro(II):
+Il ferro(II) cede un elettrone e diventa ferro(III). Il perossido si divide in uno ione idrossido $\mathrm{OH^-}$ e in un **radicale ossidrile** ${}^\bullet\mathrm{OH}$, che è una delle sostanze più reattive presenti nelle cellule e danneggia DNA, proteine e lipidi. Il superossido riporta poi il ferro(III) a ferro(II).
 $$
 \mathrm{Fe^{3+}+O_2^{\bullet-}\rightarrow Fe^{2+}+O_2}.
 $$
-La somma delle due reazioni dà il bilancio usualmente chiamato **Haber-Weiss**,
+Il ferro(II) è di nuovo disponibile per un'altra reazione di Fenton, quindi il ferro agisce da catalizzatore. Sommando le due reazioni il ferro si semplifica e si ottiene la reazione complessiva, detta di **Haber-Weiss**.
 $$
 \mathrm{O_2^{\bullet-}+H_2O_2\rightarrow O_2+OH^-+{}^\bullet OH}.
 $$
-Questo bilancio descrive un ciclo mediato dal metallo; la reazione diretta tra superossido e perossido è lenta. La speciazione del ferro e l'ambiente chimico influenzano gli intermedi e la velocità. Il modello spiega perché una trasformazione globalmente possibile richieda anche un percorso cineticamente accessibile.
+Senza il ferro la reazione diretta fra superossido e perossido è molto lenta. Per questo nelle cellule il ferro libero è mantenuto a concentrazioni bassissime, legato a proteine come la ferritina e la transferrina. È un altro caso in cui una reazione favorita avviene a velocità apprezzabile solo in presenza di un catalizzatore.
 :::
 
 :::osservazione{titolo="Distinguere radicali e ioni"}
-Il punto vicino a un simbolo indica un elettrone spaiato. $\mathrm{OH^-}$ e ${}^\bullet\mathrm{OH}$ non sono intercambiabili: differiscono per carica e struttura elettronica. Anche il perossido di idrogeno è una specie reattiva dell'ossigeno, ma non è esso stesso un radicale nella struttura usuale. Una prova in cui un chelante riduce l'ossidazione di una molecola suggerisce un ruolo della disponibilità del metallo; da sola non identifica ogni intermedio né dimostra che tutti i chelanti abbiano lo stesso effetto.
+Il punto nella formula indica un elettrone spaiato. Lo ione idrossido $\mathrm{OH^-}$ e il radicale ossidrile ${}^\bullet\mathrm{OH}$ sono due sostanze diverse: il primo ha una carica negativa e tutti gli elettroni accoppiati, il secondo è neutro e ha un elettrone spaiato. Il perossido di idrogeno è una specie reattiva dell'ossigeno senza essere un radicale, perché non ha elettroni spaiati. Un **chelante** è una molecola che lega uno ione metallico. Se in un esperimento l'aggiunta di un chelante del ferro riduce il danno ossidativo, il risultato indica che il ferro libero partecipa alla reazione.
 
 ![Riciclo del ferro nel modello radicalico di Fenton e nel bilancio catalizzato di Haber-Weiss](/figure/chimica-semestre-filtro/acidi-basi-redox/fenton-it.svg)
 :::
