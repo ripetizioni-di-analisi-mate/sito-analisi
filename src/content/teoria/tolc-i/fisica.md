@@ -6,75 +6,115 @@ sommario: "Misure, moti, forze, energia, fluidi, calore, onde, ottica ed elettro
 ## Misure, unità e vettori
 
 :::definizione{#misure titolo="Grandezza e unità di misura"}
-Una **grandezza fisica** si esprime mediante un valore numerico e un'unità. Nella misura $2\,\mathrm{m}$, il numero indica quante volte la lunghezza contiene l'unità metro. Una conversione cambia il numero e l'unità insieme, lasciando invariata la grandezza. Le unità di base usate in questo capitolo sono metro, chilogrammo, secondo, kelvin e ampere.
+Una **grandezza fisica** è una proprietà che si misura, come una lunghezza, una massa o una durata. Misurarla significa confrontarla con un campione, l'**unità di misura**: la misura $2\,\mathrm{m}$ indica che la lunghezza contiene due volte il metro. Le unità usate in fisica sono quelle del **Sistema Internazionale** (SI). Qui servono il metro ($\mathrm{m}$) per la lunghezza, il chilogrammo ($\mathrm{kg}$) per la massa, il secondo ($\mathrm{s}$) per il tempo, il kelvin ($\mathrm{K}$) per la temperatura e l'ampere ($\mathrm{A}$) per la corrente elettrica. Le altre unità sono loro prodotti e rapporti, come il metro al secondo per la velocità.
 
-Un prefisso rappresenta una potenza di dieci. Poiché $1\,\mathrm{cm}=10^{-2}\,\mathrm{m}$, un centimetro quadrato vale $10^{-4}\,\mathrm{m^2}$ e un centimetro cubo vale $10^{-6}\,\mathrm{m^3}$. L'esponente riguarda anche il fattore di conversione. Inoltre $1\,\mathrm{L}=10^{-3}\,\mathrm{m^3}$; quindi mezzo litro occupa $5\cdot10^{-4}\,\mathrm{m^3}$.
+Un **prefisso** moltiplica l'unità per una potenza di dieci: chilo ($\mathrm{k}$) per $10^{3}$, centi ($\mathrm{c}$) per $10^{-2}$, milli ($\mathrm{m}$) per $10^{-3}$. Una **conversione** cambia insieme il numero e l'unità e lascia invariata la grandezza, come in $1{,}5\,\mathrm{km}=1500\,\mathrm{m}$. In un'area o in un volume l'unità è elevata al quadrato o al cubo, e così il fattore di conversione:
+$$
+1\,\mathrm{cm^2}=(10^{-2}\,\mathrm{m})^2=10^{-4}\,\mathrm{m^2},\qquad
+1\,\mathrm{cm^3}=(10^{-2}\,\mathrm{m})^3=10^{-6}\,\mathrm{m^3}.
+$$
+Un litro è $1\,\mathrm{L}=1000\,\mathrm{cm^3}=10^{-3}\,\mathrm{m^3}$, quindi mezzo litro occupa $5\cdot10^{-4}\,\mathrm{m^3}$.
 :::
 
 :::esempio{titolo="Una conversione di velocità"}
-La velocità $72\,\mathrm{km/h}$ equivale a
+Un'automobile viaggia a $72\,\mathrm{km/h}$. Un chilometro è $1000\,\mathrm{m}$ e un'ora è $3600\,\mathrm{s}$, quindi
 $$
 72\,\frac{\mathrm{km}}{\mathrm{h}}
 =72\,\frac{1000\,\mathrm{m}}{3600\,\mathrm{s}}
 =20\,\mathrm{m/s}.
 $$
-Il rapporto fra lunghezza e tempo conserva la dimensione di una velocità. Una formula che sommasse una velocità a una distanza sarebbe dimensionalmente incoerente, perché le due grandezze hanno unità diverse.
+Il rapporto fra una lunghezza e un tempo ha l'unità di una velocità. Una formula corretta è **dimensionalmente coerente**, cioè somma e uguaglia soltanto grandezze con la stessa unità: una velocità e una distanza non si sommano.
 :::
 
 :::definizione{#vettori titolo="Scalari e vettori"}
-Massa, temperatura ed energia sono **scalari**. Spostamento, velocità e forza sono vettori, descritti da modulo, direzione e verso. Lungo un asse orientato una componente positiva indica il verso dell'asse; una componente negativa indica quello opposto. Due forze opposte si sommano algebricamente; due componenti perpendicolari $F_x,F_y$ danno modulo $\sqrt{F_x^2+F_y^2}$. Il prodotto scalare $\vec F\cdot\vec s=Fs\cos\theta$ misura quanto la forza agisce nella direzione dello spostamento e servirà nel lavoro.
+Una grandezza **scalare** è descritta per intero da un numero con la sua unità: sono scalari la massa, la temperatura e l'energia. Un **vettore**, come lo spostamento, la velocità o la forza, ha tre elementi.
+
+- Il **modulo** è il valore con l'unità, positivo o nullo.
+- La **direzione** è la retta lungo cui il vettore è disposto.
+- Il **verso** è uno dei due sensi di percorrenza di quella retta.
+
+Un vettore si disegna come una freccia e si scrive $\vec F$; la lettera senza freccia, $F$, indica il modulo.
+
+Un **asse orientato** è una retta con un verso positivo. La **componente** lungo l'asse di un vettore parallelo all'asse è il modulo con il segno $+$ se il vettore ha il verso dell'asse, con il segno $-$ se ha il verso opposto. Vettori sulla stessa retta si sommano sommando le componenti: uno spostamento di $10\,\mathrm{m}$ verso est e uno di $4\,\mathrm{m}$ verso ovest equivalgono a $10\,\mathrm{m}-4\,\mathrm{m}=6\,\mathrm{m}$ verso est. Due vettori perpendicolari di moduli $F_x$ e $F_y$ sono i cateti di un triangolo rettangolo e la loro somma è l'ipotenusa, di modulo $\sqrt{F_x^2+F_y^2}$: $3\,\mathrm{m}$ verso est e $4\,\mathrm{m}$ verso nord portano a $\sqrt{3^2+4^2}\,\mathrm{m}=5\,\mathrm{m}$ dalla partenza.
+
+Il **prodotto scalare** è il numero $\vec F\cdot\vec s=Fs\cos\theta$, dove $\theta$ (theta) è l'angolo fra i due vettori e $F\cos\theta$ è la componente di $\vec F$ lungo $\vec s$. Serve a definire il lavoro.
 :::
 
 :::osservazione
-Una misura ripetuta presenta in genere una dispersione. La media riduce l'effetto delle fluttuazioni casuali, mentre un errore di taratura può spostare tutte le letture nello stesso verso. Un valore $L=(12{,}0\pm0{,}2)\,\mathrm{cm}$ ha incertezza relativa $\dfrac{0{,}2}{12{,}0}$, circa $1{,}7\%$. Le cifre decimali esprimono la precisione della misura; aggiungere zeri senza una nuova informazione sperimentale non la aumenta.
+Ogni misura ha un'**incertezza**. La scrittura $L=(12{,}0\pm0{,}2)\,\mathrm{cm}$, dove $\pm$ si legge «più o meno», indica una lunghezza fra $11{,}8\,\mathrm{cm}$ e $12{,}2\,\mathrm{cm}$. L'**incertezza relativa** è il rapporto fra l'incertezza e il valore misurato, $\dfrac{0{,}2\,\mathrm{cm}}{12{,}0\,\mathrm{cm}}\approx0{,}017$, cioè circa l'$1{,}7\%$; $\approx$ si legge «circa uguale a». Le cifre scritte indicano la precisione: $12{,}0\,\mathrm{cm}$ è una lettura al decimo di centimetro, e scrivere $12{,}00\,\mathrm{cm}$ dichiarerebbe una precisione al centesimo che la misura non ha.
+
+Gli **errori casuali** spostano le letture ripetute a volte in più e a volte in meno, quindi la media ne riduce l'effetto. Un **errore sistematico**, come quello di una bilancia tarata male, sposta tutte le letture dalla stessa parte e resta nella media.
 :::
 
 ## Posizione, velocità e accelerazione
 
 :::definizione{#cinematica titolo="Spostamento e velocità media"}
-Scelti un'origine e un asse, $x(t)$ indica la posizione all'istante $t$. Fra due istanti lo **spostamento** è $\Delta x=x_f-x_i$ e la velocità media è $v_m=\dfrac{\Delta x}{\Delta t}$. La distanza percorsa somma invece le lunghezze dei tratti, indipendentemente dal verso. Chi compie un giro e torna alla partenza ha spostamento nullo, anche se ha percorso una distanza positiva.
+Un moto lungo una retta si descrive fissando sulla retta un asse orientato e un'**origine**. La **posizione** $x$ è la distanza del corpo dall'origine, in metri, con il segno $+$ dalla parte verso cui punta l'asse e $-$ dall'altra; $x(t)$ è la posizione all'istante $t$.
 
-Nel grafico posizione-tempo, la pendenza del segmento che unisce due punti dà la velocità media. Una retta crescente descrive velocità positiva costante; una retta orizzontale descrive un corpo fermo. Un'intersezione fra due grafici di posizione indica che i corpi occupano lo stesso punto nello stesso istante.
+La lettera $\Delta$ (delta) davanti a una grandezza ne indica la variazione, cioè il valore finale meno quello iniziale. Lo **spostamento** è $\Delta x=x_f-x_i$, positivo se il corpo si è mosso nel verso dell'asse e negativo nel caso contrario. La **distanza percorsa** è la lunghezza di tutto il tragitto ed è positiva o nulla. La **velocità media** è lo spostamento diviso per l'intervallo di tempo $\Delta t$ in cui avviene,
+$$
+v_m=\frac{\Delta x}{\Delta t},
+$$
+e si misura in metri al secondo. La velocità a un istante è la velocità media su un intervallo brevissimo attorno a quell'istante.
+
+Un corpo che parte da $2\,\mathrm{m}$, arriva a $10\,\mathrm{m}$ e torna a $6\,\mathrm{m}$ in $4\,\mathrm{s}$ ha spostamento $6\,\mathrm{m}-2\,\mathrm{m}=4\,\mathrm{m}$, distanza percorsa $8\,\mathrm{m}+4\,\mathrm{m}=12\,\mathrm{m}$ e velocità media $\dfrac{4\,\mathrm{m}}{4\,\mathrm{s}}=1\,\mathrm{m/s}$. Chi compie un giro e torna alla partenza ha spostamento nullo, anche se ha percorso una distanza positiva.
+
+Nel **grafico posizione-tempo**, con $t$ in orizzontale e $x$ in verticale, la velocità media fra due istanti è la pendenza del segmento che unisce i due punti. Una retta in salita rappresenta una velocità costante e positiva, cioè un **moto rettilineo uniforme**; una retta orizzontale rappresenta un corpo fermo. Dove i grafici di due corpi si incontrano, i corpi hanno la stessa posizione nello stesso istante.
 :::
 
 :::teorema{#moto-uniformemente-accelerato titolo="Moto con accelerazione costante"}
-L'accelerazione media misura la variazione di velocità nell'unità di tempo. Se l'accelerazione $a$ è costante e $t=0$ è l'istante iniziale, allora
+L'**accelerazione** è la variazione della velocità divisa per l'intervallo di tempo in cui avviene, $a=\dfrac{\Delta v}{\Delta t}$. Si misura in $\mathrm{m/s^2}$: con $a=2\,\mathrm{m/s^2}$ la velocità aumenta di $2\,\mathrm{m/s}$ a ogni secondo. Se $a$ è costante e $x_0$, $v_0$ sono posizione e velocità all'istante $t=0$, allora
 $$
 v=v_0+at,\qquad x=x_0+v_0t+\frac12at^2.
 $$
-Eliminando il tempo si ottiene $v^2-v_0^2=2a(x-x_0)$. Le grandezze sono componenti lungo lo stesso asse, quindi i segni hanno significato fisico. Una velocità positiva con accelerazione negativa descrive inizialmente un rallentamento; dopo l'eventuale arresto il corpo può muoversi nel verso negativo.
+Eliminando il tempo fra le due leggi si ottiene $v^2-v_0^2=2a(x-x_0)$. Le grandezze sono componenti lungo lo stesso asse, quindi hanno un segno. Se velocità e accelerazione hanno lo stesso segno il corpo diventa più veloce; se hanno segni opposti rallenta fino a fermarsi e poi, se l'accelerazione continua ad agire, riparte nel verso opposto.
+
+Un'automobile che viaggia a $v_0=20\,\mathrm{m/s}$ e frena con $a=-4\,\mathrm{m/s^2}$ si ferma, cioè raggiunge $v=0$, dopo $t=\dfrac{20\,\mathrm{m/s}}{4\,\mathrm{m/s^2}}=5\,\mathrm{s}$. Nella frenata percorre $x-x_0=\dfrac{0-(20\,\mathrm{m/s})^2}{2\cdot(-4\,\mathrm{m/s^2})}=50\,\mathrm{m}$.
 :::
 
 :::esempio{titolo="Dal grafico velocità-tempo alla distanza"}
-Un corpo parte da fermo e ha accelerazione $2\,\mathrm{m/s^2}$ per $3\,\mathrm{s}$. La velocità finale è $6\,\mathrm{m/s}$. Lo spostamento è l'area del triangolo sotto il grafico, quindi $\dfrac12\cdot3\cdot6=9\,\mathrm{m}$. La velocità finale moltiplicata per tutto il tempo darebbe il doppio, perché il corpo raggiunge quel valore soltanto alla fine.
+Un corpo parte da fermo, quindi $v_0=0$, e ha accelerazione $2\,\mathrm{m/s^2}$ per $3\,\mathrm{s}$. La velocità finale è $2\,\mathrm{m/s^2}\cdot3\,\mathrm{s}=6\,\mathrm{m/s}$ e lo spostamento è $\dfrac12\cdot2\,\mathrm{m/s^2}\cdot(3\,\mathrm{s})^2=9\,\mathrm{m}$. Nel grafico velocità-tempo lo spostamento è l'area fra il grafico e l'asse dei tempi, qui un triangolo di base $3\,\mathrm{s}$ e altezza $6\,\mathrm{m/s}$, di area $\dfrac12\cdot3\,\mathrm{s}\cdot6\,\mathrm{m/s}=9\,\mathrm{m}$. Il prodotto della velocità finale per il tempo, $18\,\mathrm{m}$, è il doppio dello spostamento, perché il corpo raggiunge $6\,\mathrm{m/s}$ soltanto alla fine.
 
 ::grafico{f="2*x" xmin=0 xmax=3.5 ymin=0 ymax=7 nomi="t,v" area="2*x;0;0;3" punti="3,6,pieno" legenda="v=2t" titolo="Tempo in secondi, velocità in m/s: l’area è lo spostamento di 9 m"}
 :::
 
 :::osservazione
-Nella caduta libera vicino alla superficie terrestre, trascurando l'aria, l'accelerazione ha modulo $g$ ed è diretta verso il basso. Con asse positivo verso l'alto si scrive $a=-g$. Nel punto più alto di un lancio verticale la velocità è zero per un istante, mentre l'accelerazione resta $-g$. L'annullarsi della velocità e l'annullarsi dell'accelerazione descrivono perciò condizioni diverse.
+Vicino alla superficie terrestre, se la resistenza dell'aria è trascurabile, tutti i corpi cadono con la stessa accelerazione, diretta verso il basso. È l'**accelerazione di gravità** $g\approx9{,}8\,\mathrm{m/s^2}$; nei conti rapidi si usa $10\,\mathrm{m/s^2}$. Con l'asse verticale orientato verso l'alto si ha $a=-g$, sia mentre il corpo sale sia mentre scende.
+
+Un sasso lanciato verso l'alto a $20\,\mathrm{m/s}$ ha $v=20\,\mathrm{m/s}-10\,\mathrm{m/s^2}\cdot t$, quindi si ferma dopo $2\,\mathrm{s}$, alla quota $20\,\mathrm{m/s}\cdot2\,\mathrm{s}-\dfrac12\cdot10\,\mathrm{m/s^2}\cdot(2\,\mathrm{s})^2=20\,\mathrm{m}$. Nel punto più alto la velocità è nulla per un istante, mentre l'accelerazione vale ancora $-g$.
 :::
 
 ## Forze, equilibrio e moto circolare
 
 :::teorema{#dinamica titolo="Le leggi di Newton"}
-In un riferimento inerziale, una risultante nulla mantiene costante la velocità del corpo. Per una massa $m$ costante, la **seconda legge di Newton** è $\sum\vec F=m\vec a$. Si sommano tutte le forze che agiscono sul corpo scelto, quindi si risolve lungo ciascun asse. Una cassa tirata con $18\,\mathrm{N}$ e frenata da $6\,\mathrm{N}$ di attrito riceve una risultante di $12\,\mathrm{N}$, non di $18\,\mathrm{N}$.
+Una **forza** è un'azione, come una spinta o una trazione, che un corpo esercita su un altro e che ne cambia la velocità o lo deforma. È un vettore e si misura in newton ($\mathrm{N}$). La **massa** $m$, in chilogrammi, misura quanto un corpo si oppone alle variazioni di velocità. La **risultante** $\sum\vec F$ è la somma vettoriale di tutte le forze applicate a un corpo; $\sum$ si legge «somma di». Le leggi di Newton valgono per un osservatore che non accelera, detto **riferimento inerziale**; con buona approssimazione lo è un osservatore fermo rispetto al suolo.
 
-Le forze di azione e reazione hanno uguale modulo e versi opposti, ma agiscono su corpi diversi. Il peso di un libro e la forza del tavolo sul libro possono equilibrarsi; la reazione al peso è invece la forza gravitazionale del libro sulla Terra.
+- **Prima legge.** Se la risultante è nulla, la velocità del corpo resta costante, cioè il corpo resta fermo oppure prosegue in linea retta con la stessa velocità.
+- **Seconda legge.** Per un corpo di massa costante vale $\sum\vec F=m\vec a$, quindi l'accelerazione ha la direzione e il verso della risultante. La legge si scrive separatamente lungo ciascun asse. Ne segue che $1\,\mathrm{N}=1\,\mathrm{kg\,m/s^2}$.
+- **Terza legge.** Se un corpo A esercita una forza su un corpo B, allora B esercita su A una forza di uguale modulo e verso opposto. Le due forze, dette azione e reazione, agiscono su corpi diversi.
+
+Una cassa di $4\,\mathrm{kg}$ tirata verso destra con $18\,\mathrm{N}$ e frenata da una forza di attrito di $6\,\mathrm{N}$, opposta al moto, ha risultante $18\,\mathrm{N}-6\,\mathrm{N}=12\,\mathrm{N}$, non $18\,\mathrm{N}$, e accelerazione $\dfrac{12\,\mathrm{N}}{4\,\mathrm{kg}}=3\,\mathrm{m/s^2}$ verso destra. Su un libro fermo su un tavolo agiscono il peso e la forza del tavolo, che si equilibrano; la reazione al peso è invece la forza con cui il libro attira la Terra.
 :::
 
 :::definizione{#forze-usuali titolo="Peso, elasticità e attrito"}
-Il peso vicino alla superficie terrestre è $P=mg$; la massa resta la stessa se cambia $g$. Una molla ideale allungata di $x$ esercita forza di richiamo di modulo $k|x|$, dove $k$ è la costante elastica. La reazione normale $N$ è perpendicolare alla superficie di contatto.
+- Il **peso** è la forza con cui la Terra attira un corpo, diretta verso il basso e di modulo $P=mg$. Un corpo di $2\,\mathrm{kg}$ pesa $2\,\mathrm{kg}\cdot10\,\mathrm{m/s^2}=20\,\mathrm{N}$ sulla Terra; sulla Luna, dove $g\approx1{,}6\,\mathrm{m/s^2}$, ha la stessa massa e pesa $3{,}2\,\mathrm{N}$.
+- La **forza elastica** di una molla allungata o accorciata di $x$ è diretta verso la posizione di riposo e ha modulo $k|x|$. Le barre indicano il valore assoluto e $k$ è la **costante elastica**, in $\mathrm{N/m}$: con $k=200\,\mathrm{N/m}$ e $x=0{,}05\,\mathrm{m}$ la forza è $200\,\mathrm{N/m}\cdot0{,}05\,\mathrm{m}=10\,\mathrm{N}$.
+- La **reazione normale** $N$ è la forza, perpendicolare alla superficie, con cui un piano sostiene il corpo appoggiato. Su un piano orizzontale, senza altre forze verticali, $N=mg$.
+- L'**attrito** è la forza parallela alla superficie di contatto che si oppone allo scorrimento. Su un corpo fermo l'attrito statico è uguale alla forza che tende a muoverlo, fino al valore massimo $\mu_sN$, cioè $F_s\leq\mu_sN$. Su un corpo che scorre l'attrito dinamico vale $F_d=\mu_dN$ ed è opposto alla velocità. I coefficienti $\mu_s$ e $\mu_d$ (mu) sono numeri senza unità.
 
-L'attrito statico si adatta fino al limite $F_s\leq\mu_sN$. Se una spinta di $8\,\mathrm{N}$ lascia il corpo fermo, l'attrito vale $8\,\mathrm{N}$ anche quando il limite è maggiore. Durante lo scorrimento il modello di attrito dinamico dà $F_d=\mu_dN$, opposto alla velocità relativa. Un corpo esteso è in equilibrio quando sono nulle sia la risultante sia la somma dei momenti. Il momento di una forza rispetto a un punto ha modulo $Fb$, con $b$ distanza perpendicolare della retta d'azione.
+Una cassa di $5\,\mathrm{kg}$ su un pavimento con $\mu_s=0{,}4$ ha $N=5\,\mathrm{kg}\cdot10\,\mathrm{m/s^2}=50\,\mathrm{N}$ e attrito statico massimo $0{,}4\cdot50\,\mathrm{N}=20\,\mathrm{N}$. Spinta con $8\,\mathrm{N}$ resta ferma, e l'attrito vale $8\,\mathrm{N}$.
+
+Il **momento** di una forza rispetto a un punto misura il suo effetto di rotazione e ha modulo $Fb$, dove il braccio $b$ è la distanza del punto dalla retta lungo cui la forza agisce. Un corpo esteso è in equilibrio se sono nulle la risultante e la somma dei momenti, presi con segni opposti se producono rotazioni opposte. Su un'altalena, $300\,\mathrm{N}$ a $2\,\mathrm{m}$ dal perno equilibrano $400\,\mathrm{N}$ a $1{,}5\,\mathrm{m}$ dall'altra parte, perché $300\,\mathrm{N}\cdot2\,\mathrm{m}=400\,\mathrm{N}\cdot1{,}5\,\mathrm{m}=600\,\mathrm{N\,m}$.
 :::
 
 :::definizione{#moto-circolare titolo="Accelerazione centripeta"}
-Un corpo in moto circolare uniforme mantiene la rapidità $v$, mentre cambia continuamente la direzione della velocità. Per raggio $r$ e periodo $T$, cioè tempo di un giro,
+Nel **moto circolare uniforme** un corpo percorre una circonferenza di raggio $r$ con velocità di modulo costante $v$. Il **periodo** $T$ è il tempo di un giro; la **frequenza** $f$ è il numero di giri al secondo, in hertz ($1\,\mathrm{Hz}=1\,\mathrm{s^{-1}}$). La velocità è tangente alla circonferenza e cambia direzione continuamente, quindi il corpo ha un'accelerazione, diretta verso il centro e detta **accelerazione centripeta** $a_c$. Valgono
 $$
 v=\frac{2\pi r}{T},\qquad f=\frac1T,\qquad a_c=\frac{v^2}{r}.
 $$
-L'accelerazione è diretta verso il centro. La forza centripeta è il nome della risultante radiale richiesta dal moto, pari a $\dfrac{mv^2}{r}$; può essere fornita dalla tensione di un filo, dall'attrito o dalla gravitazione. Nel grafico seguente velocità e accelerazione sono perpendicolari.
+Per la seconda legge di Newton la risultante è diretta verso il centro e vale $\dfrac{mv^2}{r}$: è la **forza centripeta**, fornita per esempio dalla tensione di un filo, dall'attrito in una curva o dalla gravitazione. Un sasso di $0{,}5\,\mathrm{kg}$ che percorre in $4\,\mathrm{s}$ una circonferenza di raggio $2\,\mathrm{m}$ ha $f=\dfrac1{4\,\mathrm{s}}=0{,}25\,\mathrm{Hz}$, $v=\dfrac{2\pi\cdot2\,\mathrm{m}}{4\,\mathrm{s}}\approx3{,}14\,\mathrm{m/s}$ e $a_c=\dfrac{(3{,}14\,\mathrm{m/s})^2}{2\,\mathrm{m}}\approx4{,}9\,\mathrm{m/s^2}$; il filo esercita la forza $0{,}5\,\mathrm{kg}\cdot4{,}9\,\mathrm{m/s^2}\approx2{,}5\,\mathrm{N}$.
+
+Nel grafico, nel punto P, la velocità $v$ e l'accelerazione $a$ sono perpendicolari.
 
 ::grafico{curve="2*cos(t),2*sin(t),0,6.283185" xmin=-3 xmax=4 ymin=-3 ymax=4 uguale=1 vettori="2,0,2,2,v;2,0,0.5,0,a" punti="2,0,pieno,P" legenda="x^2+y^2=4" titolo="Nel punto P la velocità v è tangente e l'accelerazione a è centripeta"}
 :::
@@ -82,149 +122,242 @@ L'accelerazione è diretta verso il centro. La forza centripeta è il nome della
 ## Lavoro, energia e quantità di moto
 
 :::definizione{#energia titolo="Lavoro ed energia cinetica"}
-Per una forza costante, il **lavoro** sullo spostamento $s$ è $W=Fs\cos\theta$. Se forza e spostamento sono concordi il lavoro è positivo; se sono opposti è negativo; se sono perpendicolari è nullo. Il joule equivale a un newton moltiplicato per un metro, $1\,\mathrm{J}=1\,\mathrm{N}\,\mathrm{m}$. Una forza di $10\,\mathrm{N}$ inclinata di $60^\circ$ rispetto a uno spostamento di $4\,\mathrm{m}$ compie $20\,\mathrm{J}$, perché la componente utile è $5\,\mathrm{N}$.
+Il **lavoro** di una forza costante $\vec F$ su un corpo che si sposta di $\vec s$ è
+$$
+W=Fs\cos\theta,
+$$
+dove $\theta$ è l'angolo fra la forza e lo spostamento. È il prodotto dello spostamento per la componente $F\cos\theta$ della forza lungo di esso, e si misura in joule, $1\,\mathrm{J}=1\,\mathrm{N\,m}$. Il lavoro è positivo se la forza è concorde con lo spostamento ($\cos0^\circ=1$), nullo se è perpendicolare ($\cos90^\circ=0$), negativo se è opposta ($\cos180^\circ=-1$), come per l'attrito. Una forza di $10\,\mathrm{N}$ a $60^\circ$ da uno spostamento di $4\,\mathrm{m}$ compie $10\,\mathrm{N}\cdot4\,\mathrm{m}\cdot\cos60^\circ=40\,\mathrm{J}\cdot\dfrac12=20\,\mathrm{J}$, perché la componente lungo lo spostamento è $5\,\mathrm{N}$.
 
-L'energia cinetica di un corpo di massa $m$ e rapidità $v$ è $K=\dfrac12mv^2$. Il lavoro della risultante soddisfa $W_{\mathrm{tot}}=K_f-K_i$. Un lavoro totale negativo riduce l'energia cinetica, ma il suo valore finale resta non negativo. La potenza media è $P=\dfrac W{\Delta t}$ e si misura in watt, cioè joule al secondo.
+L'**energia** è la capacità di compiere lavoro e si misura in joule. L'**energia cinetica** è l'energia di un corpo in moto, $K=\dfrac12mv^2$: un corpo di $2\,\mathrm{kg}$ a $3\,\mathrm{m/s}$ ha $K=\dfrac12\cdot2\,\mathrm{kg}\cdot(3\,\mathrm{m/s})^2=9\,\mathrm{J}$. Il lavoro totale, cioè quello della risultante, è uguale alla variazione dell'energia cinetica, $W_{\mathrm{tot}}=K_f-K_i$. Un lavoro totale negativo riduce l'energia cinetica, che resta comunque positiva o nulla. Se sul corpo precedente, a partire da fermo, la risultante compie $16\,\mathrm{J}$, la velocità finale è $\sqrt{\dfrac{2\cdot16\,\mathrm{J}}{2\,\mathrm{kg}}}=4\,\mathrm{m/s}$. La **potenza** è il lavoro nell'unità di tempo, $P=\dfrac W{\Delta t}$, in watt ($1\,\mathrm{W}=1\,\mathrm{J/s}$): un motore che compie $600\,\mathrm{J}$ in $3\,\mathrm{s}$ ha potenza $\dfrac{600\,\mathrm{J}}{3\,\mathrm{s}}=200\,\mathrm{W}$.
 :::
 
 :::teorema{#conservazione-energia titolo="Energia meccanica"}
-Vicino alla superficie terrestre, l'energia potenziale gravitazionale rispetto a una quota di riferimento è $U_g=mgh$. Per una molla ideale vale $U_e=\dfrac12kx^2$. Se le forze non conservative compiono lavoro nullo, l'energia meccanica $K+U$ si conserva. Un corpo che parte da fermo e scende senza attrito di $h$ soddisfa
+L'**energia potenziale** è l'energia che un corpo possiede per la sua posizione. Un corpo di massa $m$ a quota $h$ sopra un livello di riferimento ha energia potenziale gravitazionale $U_g=mgh$; una molla di costante $k$ deformata di $x$ ha energia potenziale elastica $U_e=\dfrac12kx^2$. L'**energia meccanica** è la somma $K+U$ dell'energia cinetica e di quella potenziale. Il peso e la forza elastica sono forze **conservative**, cioè forze il cui lavoro dipende soltanto dalle posizioni iniziale e finale e vale $-\Delta U$; l'attrito è una forza non conservativa. Se le forze non conservative compiono lavoro nullo, l'energia meccanica si conserva. Per un corpo che parte da fermo e scende senza attrito di un dislivello $h$ vale quindi
 $$
 mgh=\frac12mv^2,\qquad v=\sqrt{2gh}.
 $$
-La massa si semplifica; il risultato dipende dal dislivello, non dalla lunghezza della guida. Con attrito, la variazione di energia meccanica coincide con il lavoro delle forze non conservative, generalmente negativo nel caso dello scorrimento.
+La massa si semplifica e la velocità dipende dal dislivello, non dalla lunghezza della discesa. Con attrito, la variazione dell'energia meccanica è uguale al lavoro delle forze non conservative, che per l'attrito è negativo.
+
+Da uno scivolo alto $1{,}8\,\mathrm{m}$, con $g=10\,\mathrm{m/s^2}$, si arriva in fondo a $\sqrt{2\cdot10\,\mathrm{m/s^2}\cdot1{,}8\,\mathrm{m}}=6\,\mathrm{m/s}$. Per un bambino di $30\,\mathrm{kg}$ l'energia iniziale è $30\,\mathrm{kg}\cdot10\,\mathrm{m/s^2}\cdot1{,}8\,\mathrm{m}=540\,\mathrm{J}$. Se l'attrito compie $-300\,\mathrm{J}$, in fondo restano $240\,\mathrm{J}$ di energia cinetica e la velocità è $\sqrt{\dfrac{2\cdot240\,\mathrm{J}}{30\,\mathrm{kg}}}=4\,\mathrm{m/s}$.
 :::
 
 :::definizione{#quantita-di-moto titolo="Impulso e urti"}
-La **quantità di moto** è $\vec p=m\vec v$. L'impulso della forza risultante è la variazione di quantità di moto; per una forza costante vale $\vec J=\vec F\Delta t$. Per un sistema con impulso esterno trascurabile si conserva la somma vettoriale delle quantità di moto.
+La **quantità di moto** è il vettore $\vec p=m\vec v$, in $\mathrm{kg\,m/s}$. L'**impulso** di una forza costante è $\vec J=\vec F\Delta t$, in $\mathrm{N\,s}$; l'impulso della risultante è uguale alla variazione della quantità di moto. Una forza di $10\,\mathrm{N}$ che agisce per $0{,}5\,\mathrm{s}$ su un corpo fermo di $2\,\mathrm{kg}$ gli dà $p=10\,\mathrm{N}\cdot0{,}5\,\mathrm{s}=5\,\mathrm{kg\,m/s}$, cioè la velocità $\dfrac{5\,\mathrm{kg\,m/s}}{2\,\mathrm{kg}}=2{,}5\,\mathrm{m/s}$.
 
-Se due carrelli si agganciano, la velocità comune soddisfa $m_1v_1+m_2v_2=(m_1+m_2)v_f$, con velocità dotate di segno. L'urto è completamente anelastico: una parte dell'energia cinetica si trasforma in altre forme. Conservare la quantità di moto resta corretto anche quando l'energia cinetica diminuisce. Nell'urto elastico si conservano entrambe.
+Un **sistema** è l'insieme dei corpi che si studiano. Se l'impulso delle forze esterne al sistema è trascurabile, la somma vettoriale delle quantità di moto si conserva. È il caso di un **urto**: i due corpi si scambiano forze uguali e opposte per la terza legge, quindi la quantità di moto persa da uno è acquistata dall'altro. Nell'urto **elastico** si conserva anche l'energia cinetica; nell'urto **anelastico** una parte di essa si trasforma in deformazione e calore. Se i corpi restano uniti, l'urto è completamente anelastico e la velocità comune $v_f$ soddisfa $m_1v_1+m_2v_2=(m_1+m_2)v_f$, con velocità dotate di segno.
+
+Un carrello di $2\,\mathrm{kg}$ a $3\,\mathrm{m/s}$ aggancia un carrello fermo di $1\,\mathrm{kg}$, quindi $v_f=\dfrac{2\,\mathrm{kg}\cdot3\,\mathrm{m/s}+0}{3\,\mathrm{kg}}=2\,\mathrm{m/s}$. L'energia cinetica passa da $\dfrac12\cdot2\,\mathrm{kg}\cdot(3\,\mathrm{m/s})^2=9\,\mathrm{J}$ a $\dfrac12\cdot3\,\mathrm{kg}\cdot(2\,\mathrm{m/s})^2=6\,\mathrm{J}$, mentre la quantità di moto resta $6\,\mathrm{kg\,m/s}$.
 :::
 
 ## Fluidi in quiete e in moto
 
 :::definizione{#fluidi titolo="Densità e pressione"}
-La densità media è $\rho=\dfrac mV$, con unità $\mathrm{kg/m^3}$. La pressione media su una superficie è $p=\dfrac{F_\perp}{A}$, dove conta la componente normale della forza. Il pascal equivale a $\mathrm{N/m^2}$. A parità di forza, una superficie più piccola riceve pressione maggiore; per questo una punta concentra l'azione meccanica.
+Un **fluido** è una sostanza senza forma propria, cioè un liquido o un gas. La **densità** è il rapporto fra la massa e il volume, $\rho=\dfrac mV$ ($\rho$ si legge rho), in $\mathrm{kg/m^3}$. L'acqua ha $\rho=1000\,\mathrm{kg/m^3}$, cioè un litro d'acqua ha massa $1\,\mathrm{kg}$. La **pressione** è il rapporto fra la forza che preme perpendicolarmente su una superficie e l'area della superficie, $p=\dfrac{F_\perp}{A}$, in pascal ($1\,\mathrm{Pa}=1\,\mathrm{N/m^2}$); $\perp$ si legge «perpendicolare». A parità di forza la pressione è maggiore su un'area minore: $600\,\mathrm{N}$ su $0{,}03\,\mathrm{m^2}$ danno $\dfrac{600\,\mathrm{N}}{0{,}03\,\mathrm{m^2}}=20000\,\mathrm{Pa}$. Per questo una punta, che ha un'area piccolissima, penetra con una forza modesta.
 
-In un liquido in quiete, con densità uniforme e accelerazione gravitazionale costante, la **legge di Stevino** dà $p=p_0+\rho gh$, dove $h$ è la profondità sotto la superficie. A parità di pressione sulla superficie, densità e gravità, alla stessa profondità la pressione è uguale anche in recipienti di forma diversa. Nei vasi comunicanti aperti alla stessa pressione, le superfici dello stesso liquido si trovano alla stessa quota.
+In un liquido fermo di densità uniforme la pressione aumenta con la profondità, perché ogni strato sostiene il peso del liquido soprastante. La **legge di Stevino** dà la pressione alla profondità $h$ sotto la superficie:
+$$
+p=p_0+\rho gh,
+$$
+dove $p_0$ è la pressione sulla superficie. Per un liquido all'aperto $p_0$ è la pressione atmosferica, cioè quella esercitata dall'aria, circa $10^5\,\mathrm{Pa}$. A parità di liquido e di $p_0$ la pressione dipende dalla profondità e non dalla forma del recipiente. Per questo nei vasi comunicanti, recipienti collegati in basso e aperti alla stessa pressione, uno stesso liquido raggiunge la stessa quota.
 :::
 
 :::esempio{titolo="Pressione assoluta e aumento di pressione"}
-In acqua con $\rho=1000\,\mathrm{kg/m^3}$, a $2\,\mathrm{m}$ sotto la superficie, usando $g=10\,\mathrm{m/s^2}$, l'aumento è $\rho gh=20000\,\mathrm{Pa}$. Con $p_0=100000\,\mathrm{Pa}$, la pressione assoluta è $120000\,\mathrm{Pa}$. Le due risposte riguardano grandezze diverse.
+In acqua, con $g=10\,\mathrm{m/s^2}$, a $2\,\mathrm{m}$ di profondità l'aumento di pressione rispetto alla superficie è
+$$
+\rho gh=1000\,\mathrm{kg/m^3}\cdot10\,\mathrm{m/s^2}\cdot2\,\mathrm{m}=20000\,\mathrm{Pa}=20\,\mathrm{kPa}.
+$$
+Con $p_0=100000\,\mathrm{Pa}$ la pressione complessiva, detta **assoluta**, è $100000\,\mathrm{Pa}+20000\,\mathrm{Pa}=120000\,\mathrm{Pa}$. Il grafico riporta l'aumento $\Delta p=p-p_0$ in funzione di $h$: è una retta per l'origine, che sale di $10\,\mathrm{kPa}$ a ogni metro; il punto segnato corrisponde a $2\,\mathrm{m}$ e $20\,\mathrm{kPa}$.
 
 ::grafico{f="10*x" xmin=0 xmax=4 ymin=0 ymax=45 nomi="h,Δp" punti="2,20,pieno" legenda="p-p_0=10h" titolo="Profondità h in metri e aumento di pressione Δp in kPa: Δp indica la differenza rispetto alla superficie"}
 :::
 
 :::teorema{#archimede titolo="Spinta idrostatica"}
-Un corpo immerso riceve una spinta verso l'alto pari al peso del fluido spostato, $F_A=\rho_f gV_{\mathrm{imm}}$. Per un corpo galleggiante in equilibrio, senza altre forze verticali, $F_A=mg$. Se il corpo ha volume $V$ e densità media $\rho_c$, allora $\dfrac{V_{\mathrm{imm}}}{V}=\dfrac{\rho_c}{\rho_f}$. Un corpo con densità pari a metà di quella del liquido galleggia con metà volume immerso. La spinta dipende dal volume immerso, non necessariamente dal volume totale.
+Un corpo immerso in un fluido riceve una spinta verso l'alto, perché la pressione è maggiore sulla sua faccia inferiore, più profonda. Il **principio di Archimede** afferma che la spinta è uguale al peso del fluido spostato:
+$$
+F_A=\rho_fgV_{\mathrm{imm}},
+$$
+dove $\rho_f$ è la densità del fluido e $V_{\mathrm{imm}}$ è il volume della parte immersa. Un sasso di $2\cdot10^{-3}\,\mathrm{m^3}$ immerso in acqua riceve $1000\,\mathrm{kg/m^3}\cdot10\,\mathrm{m/s^2}\cdot2\cdot10^{-3}\,\mathrm{m^3}=20\,\mathrm{N}$.
+
+Un corpo di volume $V$ e densità media $\rho_c$ maggiore di $\rho_f$ affonda; se $\rho_c$ è minore di $\rho_f$ galleggia. Per un corpo che galleggia in equilibrio, senza altre forze verticali, la spinta è uguale al peso, $\rho_fgV_{\mathrm{imm}}=\rho_cgV$, quindi $\dfrac{V_{\mathrm{imm}}}{V}=\dfrac{\rho_c}{\rho_f}$. Il ghiaccio, di densità circa $920\,\mathrm{kg/m^3}$, galleggia in acqua con la frazione $\dfrac{920\,\mathrm{kg/m^3}}{1000\,\mathrm{kg/m^3}}=0{,}92$ del volume immersa, cioè il $92\%$; un corpo con densità pari a metà di quella del liquido galleggia immerso per metà.
 :::
 
 :::definizione{#continuita titolo="Portata e continuità"}
-La portata volumetrica è $q_v=\dfrac{\Delta V}{\Delta t}=Av$, con $v$ velocità media sulla sezione. Per un liquido incomprimibile in moto stazionario, in una condotta senza perdite di fluido né ramificazioni, $A_1v_1=A_2v_2$. Un restringimento aumenta quindi la velocità media. Un flusso laminare presenta strati ordinati; un flusso turbolento presenta fluttuazioni e mescolamento. La continuità esprime la conservazione della massa e resta distinta dalle relazioni che collegano pressione ed energia del flusso. Un incremento di pressione applicato a un liquido confinato si trasmette al suo interno: è il principio di Pascal. In un torchio ideale con pistoni alla stessa quota vale $\dfrac{F_1}{A_1}=\dfrac{F_2}{A_2}$.
+La **portata** è il volume di fluido che attraversa una sezione di un condotto nell'unità di tempo, $q_v=\dfrac{\Delta V}{\Delta t}$, in $\mathrm{m^3/s}$. Se la sezione ha area $A$ e il fluido ha velocità media $v$, allora $q_v=Av$: con $A=4\cdot10^{-4}\,\mathrm{m^2}$ e $v=2\,\mathrm{m/s}$ la portata è $8\cdot10^{-4}\,\mathrm{m^3/s}$. Un liquido è **incomprimibile**, cioè conserva il proprio volume. In un tubo senza perdite né diramazioni, percorso in moto **stazionario**, cioè costante nel tempo, la portata è quindi la stessa in ogni sezione. È l'**equazione di continuità** $A_1v_1=A_2v_2$, che esprime la conservazione della massa e non contiene la pressione. Dove il tubo si restringe il liquido è più veloce: se la sezione passa da $4\,\mathrm{cm^2}$ a $1\,\mathrm{cm^2}$, la velocità passa da $2\,\mathrm{m/s}$ a $2\,\mathrm{m/s}\cdot\dfrac{4\,\mathrm{cm^2}}{1\,\mathrm{cm^2}}=8\,\mathrm{m/s}$. Il moto è **laminare** se il fluido scorre in strati ordinati, **turbolento** se si formano vortici e gli strati si mescolano.
+
+Il **principio di Pascal** afferma che un aumento di pressione prodotto in un punto di un liquido chiuso in un recipiente si trasmette a tutti i punti del liquido. Nel torchio idraulico due pistoni di aree $A_1$ e $A_2$, alla stessa quota, chiudono lo stesso liquido, quindi $\dfrac{F_1}{A_1}=\dfrac{F_2}{A_2}$. Con $A_2=10A_1$, una forza di $50\,\mathrm{N}$ sul pistone piccolo equilibra $10\cdot50\,\mathrm{N}=500\,\mathrm{N}$ sul pistone grande.
 :::
 
 ## Temperatura, calore e gas
 
 :::definizione{#calore titolo="Temperatura e trasferimento di energia"}
-La temperatura descrive lo stato termico; il **calore** è energia trasferita a causa di una differenza di temperatura. Due corpi in contatto raggiungono l'equilibrio termico quando hanno la stessa temperatura. Lo scambio spontaneo avviene dal corpo più caldo a quello più freddo. Conduzione, convezione e irraggiamento sono tre meccanismi di trasferimento; l'irraggiamento può avvenire anche nel vuoto.
+La **temperatura** è la grandezza che indica quanto un corpo è caldo. La scala kelvin ha gradi della stessa ampiezza della scala Celsius e parte dallo zero assoluto, la temperatura più bassa possibile, pari a $-273{,}15\,{}^\circ\mathrm{C}$. La **temperatura assoluta** è quindi $T=t_C+273{,}15$, con $T$ in kelvin e $t_C$ in gradi Celsius: $20\,{}^\circ\mathrm{C}$ corrispondono a $(20+273{,}15)\,\mathrm{K}=293{,}15\,\mathrm{K}$. Una differenza di temperatura ha lo stesso valore nelle due scale, perché la costante si elimina nella sottrazione: un aumento di $20\,{}^\circ\mathrm{C}$ è un aumento di $20\,\mathrm{K}$. Nei rapporti fra temperature, che compaiono nelle leggi dei gas, si usa la temperatura assoluta.
 
-La temperatura assoluta è $T=t_C+273{,}15$, con $T$ in kelvin e $t_C$ in gradi Celsius. Un aumento di $20\,{}^\circ\mathrm{C}$ corrisponde a un aumento di $20\,\mathrm{K}$, perché la costante si elimina nella differenza. Nei rapporti fra temperature dei gas si usano invece i valori assoluti.
+Il **calore** è l'energia che passa da un corpo a un altro per effetto di una differenza di temperatura, e si misura in joule. Passa spontaneamente dal corpo più caldo al più freddo, finché i due hanno la stessa temperatura: è l'**equilibrio termico**. Il calore si trasmette in tre modi.
+
+- Per **conduzione** attraversa un materiale senza spostamento di materia.
+- Per **convezione** è trasportato da un fluido in movimento.
+- Per **irraggiamento** è trasportato da onde elettromagnetiche, come la luce, anche nel vuoto.
 :::
 
 :::teorema{#calorimetria titolo="Calore specifico e cambiamenti di stato"}
-Senza passaggi di stato, con calore specifico $c$ approssimativamente costante, il calore assorbito è $Q=mc\Delta T$. Il calore specifico indica l'energia necessaria per aumentare di un kelvin la temperatura di un chilogrammo di sostanza. Per $m=0{,}5\,\mathrm{kg}$, $c=4000\,\mathrm{J/(kg\,K)}$ e $\Delta T=3\,\mathrm{K}$, si ottiene $Q=6000\,\mathrm{J}$.
+Il **calore specifico** $c$ di una sostanza è l'energia necessaria per aumentare di un kelvin la temperatura di un chilogrammo di quella sostanza, in $\mathrm{J/(kg\,K)}$; per l'acqua vale circa $4200\,\mathrm{J/(kg\,K)}$. Se non avvengono cambiamenti di stato e $c$ è costante, il calore scambiato da una massa $m$ la cui temperatura varia di $\Delta T$ è
+$$
+Q=mc\Delta T,
+$$
+positivo se il corpo assorbe calore e negativo se lo cede. Per scaldare $0{,}5\,\mathrm{kg}$ d'acqua di $3\,\mathrm{K}$ servono $0{,}5\,\mathrm{kg}\cdot4200\,\mathrm{J/(kg\,K)}\cdot3\,\mathrm{K}=6300\,\mathrm{J}$.
 
-Durante un passaggio di stato in equilibrio a pressione costante, il calore è $Q=mL$, dove $L$ è il calore latente specifico. Finché coesistono acqua e ghiaccio alla pressione atmosferica, il calore di fusione cambia le quantità delle due fasi mantenendo la temperatura circa a $0\,{}^\circ\mathrm{C}$. La dilatazione lineare di un solido, per piccoli intervalli termici, è $\Delta\ell=\alpha\ell_0\Delta T$.
+Un **cambiamento di stato** è il passaggio fra gli stati solido, liquido e gassoso, come la fusione. Mentre avviene, a pressione costante, la temperatura resta costante e il calore scambiato è $Q=mL$, dove il **calore latente specifico** $L$ è l'energia necessaria per un chilogrammo, in $\mathrm{J/kg}$. Per il ghiaccio $L\approx334000\,\mathrm{J/kg}$, quindi fondere $0{,}2\,\mathrm{kg}$ richiede $0{,}2\,\mathrm{kg}\cdot334000\,\mathrm{J/kg}=66800\,\mathrm{J}$. Durante la fusione, alla pressione atmosferica, il calore assorbito cambia le quantità di acqua e di ghiaccio, che restano a $0\,{}^\circ\mathrm{C}$.
+
+Per piccole variazioni di temperatura una sbarra solida lunga $\ell_0$, scaldata di $\Delta T$, si allunga di $\Delta\ell=\alpha\ell_0\Delta T$, dove $\alpha$ (alfa) è il coefficiente di dilatazione lineare, in $\mathrm{K^{-1}}$. Per l'acciaio $\alpha\approx1{,}2\cdot10^{-5}\,\mathrm{K^{-1}}$: una rotaia di $10\,\mathrm{m}$ scaldata di $30\,\mathrm{K}$ si allunga di $1{,}2\cdot10^{-5}\,\mathrm{K^{-1}}\cdot10\,\mathrm{m}\cdot30\,\mathrm{K}=3{,}6\cdot10^{-3}\,\mathrm{m}$, cioè $3{,}6\,\mathrm{mm}$.
 :::
 
 :::teorema{#gas-ideali titolo="Equazione del gas ideale"}
-Per una quantità $n$ di gas ideale vale $pV=nRT$, con pressione assoluta e temperatura assoluta. A quantità di gas fissata, due stati soddisfano $\dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$. Nell'isoterma $pV$ è costante; nell'isocora è costante $\dfrac pT$; nell'isobara è costante $\dfrac VT$. Queste leggi dipendono quindi dalla grandezza mantenuta costante. Un recipiente rigido impedisce la variazione di volume, mentre un pistone mobile può permetterla.
+Lo stato di un gas è descritto dalla pressione assoluta $p$, dal volume $V$ e dalla temperatura assoluta $T$. La quantità di gas si misura in moli: una mole contiene circa $6{,}02\cdot10^{23}$ particelle, e $n$ è il numero di moli. Un **gas ideale** è un gas le cui particelle hanno dimensioni trascurabili e interagiscono soltanto negli urti; l'aria ha queste proprietà con buona approssimazione. Per un gas ideale vale
+$$
+pV=nRT,
+$$
+con $R=8{,}31\,\mathrm{J/(mol\,K)}$. Per una quantità fissata di gas il rapporto $\dfrac{pV}{T}$ è costante, quindi due stati soddisfano $\dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$. In tre **trasformazioni**, cioè passaggi da uno stato a un altro, una grandezza resta costante.
+
+- **Isoterma**, a temperatura costante: $p_1V_1=p_2V_2$.
+- **Isocora**, a volume costante, come in un recipiente rigido: $\dfrac{p_1}{T_1}=\dfrac{p_2}{T_2}$.
+- **Isobara**, a pressione costante, come sotto un pistone libero di muoversi: $\dfrac{V_1}{T_1}=\dfrac{V_2}{T_2}$.
+:::
+
+:::esempio{titolo="Una bombola scaldata"}
+Una bombola rigida contiene gas a $2\cdot10^5\,\mathrm{Pa}$ e $27\,{}^\circ\mathrm{C}$, e viene scaldata fino a $177\,{}^\circ\mathrm{C}$. Il volume è costante, quindi la trasformazione è isocora. Le temperature assolute sono $T_1=(27+273)\,\mathrm{K}=300\,\mathrm{K}$ e $T_2=(177+273)\,\mathrm{K}=450\,\mathrm{K}$, perciò
+$$
+p_2=p_1\frac{T_2}{T_1}=2\cdot10^5\,\mathrm{Pa}\cdot\frac{450\,\mathrm{K}}{300\,\mathrm{K}}=3\cdot10^5\,\mathrm{Pa}.
+$$
+:::
+
+:::attenzione
+Nelle leggi dei gas la temperatura è in kelvin. Nell'esempio il rapporto fra le temperature in gradi Celsius, $\dfrac{177}{27}\approx6{,}6$, darebbe una pressione più di quattro volte quella corretta.
 :::
 
 ## Bilanci termodinamici
 
 :::teorema{#termodinamica titolo="Primo principio"}
-L'energia interna $U$ comprende l'energia microscopica del sistema. Con $Q$ positivo quando il sistema assorbe calore e $W$ positivo quando compie lavoro sull'esterno, il **primo principio** si scrive
+Qui il sistema è un corpo, per esempio un gas in un cilindro con un pistone; tutto il resto è l'**ambiente**. L'**energia interna** $U$ è la somma delle energie delle particelle del sistema, in joule. Il sistema scambia energia con l'ambiente come calore $Q$ e come lavoro $W$. Il calore $Q$ è positivo se il sistema lo assorbe. Il lavoro $W$ è positivo se il sistema lo compie sull'ambiente, come un gas che si espande, ed è negativo se il sistema lo riceve, come un gas che viene compresso. Il **primo principio** afferma che
 $$
-\Delta U=Q-W.
+\Delta U=Q-W,
 $$
-Una compressione riceve lavoro dall'esterno e ha $W<0$. Un gas che assorbe $500\,\mathrm{J}$ e compie $200\,\mathrm{J}$ di lavoro aumenta perciò la propria energia interna di $300\,\mathrm{J}$. Il calore e il lavoro descrivono scambi di energia; l'energia interna descrive invece una proprietà dello stato.
+cioè che l'energia entrata come calore e non uscita come lavoro resta nel sistema. Un gas che assorbe $500\,\mathrm{J}$ e compie $200\,\mathrm{J}$ di lavoro ha $\Delta U=500\,\mathrm{J}-200\,\mathrm{J}=300\,\mathrm{J}$. Un gas compresso con $200\,\mathrm{J}$ di lavoro, senza scambi di calore, ha $W=-200\,\mathrm{J}$ e $\Delta U=0-(-200\,\mathrm{J})=200\,\mathrm{J}$. L'energia interna è una proprietà dello stato del sistema; calore e lavoro sono energie scambiate durante una trasformazione.
 :::
 
 :::esempio{titolo="Trasformazioni riconosciute dai vincoli"}
-In un recipiente rigido il lavoro di espansione è nullo, quindi $\Delta U=Q$. In una trasformazione adiabatica il calore scambiato è nullo, quindi $\Delta U=-W$. Durante un'espansione isoterma di un gas ideale l'energia interna resta costante, perché dipende soltanto dalla temperatura; pertanto $Q=W$.
+- In un recipiente rigido il gas non si espande, quindi $W=0$ e $\Delta U=Q$.
+- In una trasformazione **adiabatica**, cioè senza scambio di calore, $Q=0$ e $\Delta U=-W$.
+- In una isoterma di un gas ideale l'energia interna, che dipende soltanto dalla temperatura, resta costante, quindi $\Delta U=0$ e $Q=W$.
 
-In un'espansione contro pressione esterna costante, il lavoro è $W=p_{\mathrm{est}}\Delta V$. Con $p_{\mathrm{est}}=2\cdot10^5\,\mathrm{Pa}$ e aumento di volume $10^{-3}\,\mathrm{m^3}$, il gas compie $200\,\mathrm{J}$. Nel grafico pressione-volume il lavoro corrisponde all'area sottesa alla trasformazione quasi statica. Il verso di percorrenza distingue espansione e compressione.
+Un gas che si espande di $\Delta V$ contro una pressione esterna costante compie il lavoro $W=p_{\mathrm{est}}\Delta V$. Con $p_{\mathrm{est}}=2\cdot10^5\,\mathrm{Pa}$ e $\Delta V=10^{-3}\,\mathrm{m^3}$ si ha $W=2\cdot10^5\,\mathrm{Pa}\cdot10^{-3}\,\mathrm{m^3}=200\,\mathrm{J}$. Nel grafico pressione-volume il lavoro è l'area sotto la curva di una trasformazione quasi statica, cioè tanto lenta che il gas ha in ogni istante una pressione definita. L'area si conta positiva se la curva è percorsa verso i volumi crescenti (espansione) e negativa nel verso opposto (compressione).
 :::
 
 :::definizione{#rendimento titolo="Macchine termiche e rendimento"}
-In un ciclo il sistema ritorna allo stato iniziale, quindi $\Delta U=0$. Una macchina assorbe calore $Q_h>0$, cede una quantità di calore di modulo $Q_c>0$ e produce lavoro $W=Q_h-Q_c$. Il rendimento è
+Una **macchina termica**, come un motore, trasforma calore in lavoro ripetendo un **ciclo**, cioè una successione di trasformazioni che riporta il sistema allo stato iniziale. A ogni ciclo assorbe il calore $Q_h$ da una sorgente calda, compie il lavoro $W$ e cede il calore $Q_c$ a una sorgente fredda; $Q_h$ e $Q_c$ sono qui quantità positive. In un ciclo $\Delta U=0$, quindi per il primo principio $W=Q_h-Q_c$. Il **rendimento** $\eta$ (eta) è la frazione del calore assorbito che diventa lavoro:
 $$
 \eta=\frac W{Q_h}=1-\frac{Q_c}{Q_h}.
 $$
-Con $Q_h=500\,\mathrm{J}$ e $Q_c=350\,\mathrm{J}$, il lavoro è $150\,\mathrm{J}$ e il rendimento è $30\%$. Il denominatore è il calore assorbito dalla sorgente calda. Il secondo principio esclude una macchina ciclica che trasformi integralmente in lavoro il calore preso da un'unica sorgente. Un frigorifero trasferisce calore dal freddo al caldo grazie al lavoro fornito dall'esterno.
+Con $Q_h=500\,\mathrm{J}$ e $Q_c=350\,\mathrm{J}$ il lavoro è $500\,\mathrm{J}-350\,\mathrm{J}=150\,\mathrm{J}$ e il rendimento è $\dfrac{150\,\mathrm{J}}{500\,\mathrm{J}}=0{,}30$, cioè il $30\%$. Il **secondo principio** afferma che nessuna macchina ciclica trasforma in lavoro tutto il calore assorbito da una sola sorgente, quindi $Q_c>0$ e $\eta<1$. Un frigorifero trasferisce calore da un ambiente freddo a uno caldo consumando lavoro fornito dall'esterno.
 :::
 
 ## Oscillazioni, onde e suono
 
 :::definizione{#onde titolo="Periodo, frequenza e lunghezza d'onda"}
-Il periodo $T$ è il tempo di un'oscillazione completa; la frequenza $f=\dfrac1T$ è il numero di oscillazioni al secondo, espresso in hertz. L'ampiezza è il massimo scostamento dalla posizione di equilibrio. Nel moto armonico $x=A\cos(\omega t+\varphi)$, con pulsazione $\omega=2\pi f$, la fase iniziale $\varphi$ stabilisce da quale punto dell'oscillazione si parte.
+Un'**oscillazione** è un moto che si ripete avanti e indietro attorno a una posizione di equilibrio, come quello di un pendolo. Il **periodo** $T$ è il tempo di un'oscillazione completa; la **frequenza** $f=\dfrac1T$ è il numero di oscillazioni al secondo, in hertz; l'**ampiezza** $A$ è la massima distanza dalla posizione di equilibrio. Un pendolo che compie $10$ oscillazioni in $20\,\mathrm{s}$ ha $T=2\,\mathrm{s}$ e $f=0{,}5\,\mathrm{Hz}$.
 
-Un'onda trasporta energia attraverso una perturbazione. La lunghezza d'onda $\lambda$ è la distanza fra due creste successive e la velocità di propagazione è $v=\lambda f$. Nel suono in aria le particelle oscillano prevalentemente lungo la direzione di propagazione, quindi l'onda è longitudinale. Un suono richiede un mezzo materiale; un'onda elettromagnetica può propagarsi nel vuoto. Per piccole oscillazioni di un pendolo semplice di lunghezza $\ell$, il periodo è $T=2\pi\sqrt{\dfrac{\ell}{g}}$. Una forzante periodica vicina alla frequenza propria può trasferire energia in modo efficace e aumentare l’ampiezza: questo fenomeno è la risonanza.
+Nel **moto armonico**, che è quello di una massa attaccata a una molla, la posizione è $x=A\cos(\omega t+\varphi)$ e varia fra $-A$ e $A$. La pulsazione $\omega$ (omega) vale $2\pi f$, in radianti al secondo, e la fase iniziale $\varphi$ (fi) fissa la posizione all'istante $t=0$: con $\varphi=0$ il corpo parte da $x=A$. Un pendolo semplice di lunghezza $\ell$, per piccole oscillazioni, ha periodo $T=2\pi\sqrt{\dfrac{\ell}{g}}$, indipendente dalla massa; con $\ell=1\,\mathrm{m}$ si ottiene $T=2\pi\sqrt{\dfrac{1\,\mathrm{m}}{9{,}8\,\mathrm{m/s^2}}}\approx2{,}0\,\mathrm{s}$. Una forza periodica con frequenza vicina a quella propria di un sistema gli cede energia a ogni ciclo e ne aumenta l'ampiezza: è la **risonanza**, come in un'altalena spinta al ritmo delle sue oscillazioni.
+
+Un'**onda** è una perturbazione che si propaga e trasporta energia senza trasportare materia. È **trasversale** se i punti del mezzo, cioè del materiale in cui si propaga, oscillano perpendicolarmente alla direzione di propagazione, come in una corda, e **longitudinale** se oscillano lungo di essa. La **lunghezza d'onda** $\lambda$ (lambda) è la distanza fra due creste successive, cioè fra due punti di massimo spostamento. In un periodo l'onda avanza di una lunghezza d'onda, quindi la velocità di propagazione è
+$$
+v=\frac{\lambda}{T}=\lambda f.
+$$
+Il **suono** è un'onda longitudinale. Si propaga in un mezzo materiale e non nel vuoto, e in aria ha velocità di circa $340\,\mathrm{m/s}$. La luce è un'onda elettromagnetica e si propaga anche nel vuoto.
 :::
 
 :::esempio{titolo="Leggere un profilo d'onda"}
-Il grafico mostra il profilo a un istante fissato. Le creste si ripetono ogni $4\,\mathrm{m}$, quindi $\lambda=4\,\mathrm{m}$. Se un punto del mezzo oscilla con frequenza $3\,\mathrm{Hz}$, la perturbazione si propaga a $12\,\mathrm{m/s}$. Il profilo spaziale da solo non fornisce la frequenza; occorre anche un'informazione temporale.
+Il grafico mostra un'onda a un istante fissato: in orizzontale c'è la posizione in metri, in verticale lo spostamento dei punti del mezzo in centimetri. Due creste successive si trovano in $x=1\,\mathrm{m}$ e in $x=5\,\mathrm{m}$, quindi $\lambda=5\,\mathrm{m}-1\,\mathrm{m}=4\,\mathrm{m}$; lo spostamento massimo, $1\,\mathrm{cm}$, è l'ampiezza. Il profilo non contiene informazioni sul tempo, quindi la frequenza è un dato in più. Con $f=3\,\mathrm{Hz}$ la velocità è $v=\lambda f=4\,\mathrm{m}\cdot3\,\mathrm{Hz}=12\,\mathrm{m/s}$.
 
 ::grafico{f="sin(pi*x/2)" xmin=0 xmax=8 ymin=-1.5 ymax=1.5 nomi="x,y" legenda="y=\sin(\pi x/2)" punti="1,1,pieno;5,1,pieno" titolo="Ascisse in metri e ordinate in cm: le creste distano 4 m e l’ampiezza è 1 cm"}
 :::
 
 :::osservazione
-Quando un'onda passa fra due mezzi fermi, la frequenza resta imposta dalla sorgente. Se cambia la velocità, cambia quindi la lunghezza d'onda. La sovrapposizione somma gli spostamenti delle perturbazioni: due onde in fase si rafforzano, mentre in opposizione di fase possono cancellarsi se hanno uguale ampiezza. La diffrazione descrive l'allargamento della propagazione presso un'apertura o un ostacolo, particolarmente evidente quando le dimensioni sono confrontabili con la lunghezza d'onda.
-
-Per una sorgente sonora che si avvicina a un osservatore fermo, i fronti arrivano più ravvicinati e la frequenza percepita aumenta. Questo è l'effetto Doppler. L'eco richiede invece un percorso di andata e ritorno; con velocità del suono $v$ e ritardo $\Delta t$, la distanza dalla parete è $\dfrac{v\Delta t}{2}$.
+- Un'onda che passa da un mezzo a un altro conserva la frequenza, fissata dalla sorgente. Se la velocità cambia, cambia in proporzione $\lambda=\dfrac vf$: un suono di $340\,\mathrm{Hz}$ ha $\lambda=\dfrac{340\,\mathrm{m/s}}{340\,\mathrm{Hz}}=1\,\mathrm{m}$ in aria e, a circa $1500\,\mathrm{m/s}$, $\lambda=\dfrac{1500\,\mathrm{m/s}}{340\,\mathrm{Hz}}\approx4{,}4\,\mathrm{m}$ in acqua.
+- Dove due onde si incontrano gli spostamenti si sommano: è la **sovrapposizione**. Onde in fase, con le creste sulle creste, si rafforzano; onde in opposizione di fase, con le creste sulle valli, si indeboliscono e, a pari ampiezza, si annullano.
+- La **diffrazione** è l'allargamento di un'onda oltre un'apertura o un ostacolo; è marcata se le dimensioni dell'apertura sono vicine alla lunghezza d'onda.
+- Per l'**effetto Doppler**, se una sorgente sonora si avvicina a un osservatore fermo le creste gli arrivano più ravvicinate e la frequenza percepita è maggiore di quella emessa; se si allontana è minore.
+- L'**eco** è il suono riflesso da una parete. Per una parete a distanza $d$ il suono percorre $2d$, quindi con velocità $v$ e ritardo $\Delta t$ si ha $d=\dfrac{v\Delta t}{2}$.
 :::
 
 ## Riflessione, rifrazione e lenti
 
 :::teorema{#ottica titolo="Riflessione e legge di Snell"}
-Nella riflessione l'angolo riflesso è uguale a quello incidente; entrambi sono misurati rispetto alla normale alla superficie. Uno specchio piano forma un'immagine virtuale dietro il piano, alla stessa distanza dell'oggetto davanti. La distanza fra oggetto e immagine è quindi doppia rispetto alla distanza dallo specchio.
+Un **raggio** è il percorso rettilineo della luce in un mezzo omogeneo, cioè con le stesse proprietà in ogni punto. Sulla superficie fra due mezzi la luce in parte torna indietro, ed è la **riflessione**, e in parte passa cambiando direzione, ed è la **rifrazione**. Gli angoli si misurano dalla **normale**, cioè dalla perpendicolare alla superficie nel punto di incidenza. Nella riflessione l'angolo riflesso è uguale a quello incidente. Uno specchio piano forma dietro di sé, alla stessa distanza dell'oggetto, un'immagine **virtuale**, dalla quale i raggi sembrano provenire senza passarvi. Chi sta a $1{,}5\,\mathrm{m}$ dallo specchio vede la propria immagine a $1{,}5\,\mathrm{m}+1{,}5\,\mathrm{m}=3\,\mathrm{m}$ da sé.
 
-L'indice di rifrazione è $n=\dfrac cv$, con $c$ velocità della luce nel vuoto e $v$ nel mezzo. Fra due mezzi vale $n_1\sin\theta_1=n_2\sin\theta_2$. Entrando in un mezzo con indice maggiore, un raggio obliquo si avvicina alla normale. La frequenza rimane invariata nel passaggio, mentre cambiano velocità e lunghezza d'onda.
+L'**indice di rifrazione** di un mezzo è $n=\dfrac cv$, rapporto fra la velocità della luce nel vuoto, $c=3{,}0\cdot10^8\,\mathrm{m/s}$, e quella nel mezzo; vale circa $1$ per l'aria, $1{,}33$ per l'acqua e $1{,}5$ per il vetro, in cui la luce ha velocità $\dfrac{3{,}0\cdot10^8\,\mathrm{m/s}}{1{,}5}=2{,}0\cdot10^8\,\mathrm{m/s}$. La **legge di Snell** lega l'angolo di incidenza $\theta_1$ e l'angolo di rifrazione $\theta_2$:
+$$
+n_1\sin\theta_1=n_2\sin\theta_2.
+$$
+Entrando in un mezzo di indice maggiore un raggio obliquo si avvicina alla normale. Dall'aria, con $n_1=1$, a un liquido con $n_2=1{,}41$, per $\theta_1=45^\circ$ si ha $\sin\theta_2=\dfrac{1\cdot\sin45^\circ}{1{,}41}=\dfrac{0{,}707}{1{,}41}\approx0{,}50$, quindi $\theta_2\approx30^\circ$. Nel passaggio la frequenza resta invariata, mentre cambiano la velocità e la lunghezza d'onda.
 :::
 
 :::definizione{#riflessione-totale titolo="Angolo critico e dispersione"}
-La riflessione totale può avvenire passando da indice maggiore $n_1$ a indice minore $n_2$. L'angolo critico soddisfa $\sin\theta_c=\dfrac{n_2}{n_1}$; oltre tale angolo manca il raggio rifratto propagante. Da un mezzo di indice $2$ all'aria di indice $1$, si ha $\theta_c=30^\circ$. La dipendenza dell'indice dalla lunghezza d'onda si chiama dispersione; perciò un prisma può deviare diversamente le componenti della luce bianca.
+Quando la luce passa a un mezzo di indice minore, cioè $n_2<n_1$, il raggio rifratto si allontana dalla normale. Aumentando l'angolo di incidenza, l'angolo di rifrazione arriva a $90^\circ$. L'angolo di incidenza per cui questo accade è l'**angolo critico** $\theta_c$; poiché $\sin90^\circ=1$, la legge di Snell dà
+$$
+\sin\theta_c=\frac{n_2}{n_1}.
+$$
+Per angoli di incidenza maggiori di $\theta_c$ il raggio rifratto non esiste e tutta la luce è riflessa: è la **riflessione totale**. Da un mezzo di indice $2$ all'aria si ha $\sin\theta_c=\dfrac12$, quindi $\theta_c=30^\circ$.
+
+La **dispersione** è la dipendenza dell'indice di rifrazione dalla lunghezza d'onda, cioè dal colore. Per questo un prisma devia i colori di angoli diversi e separa la luce bianca.
 :::
 
 :::teorema{#lenti titolo="Lenti sottili"}
-Per una lente sottile, in approssimazione paraassiale,
+Una **lente** devia i raggi di luce per rifrazione. Una lente **convergente** fa incontrare in un punto, il **fuoco**, i raggi che arrivano paralleli al suo asse, la retta perpendicolare alla lente che passa per il suo centro; una lente **divergente** li allarga. La **distanza focale** $f$ è la distanza del fuoco dalla lente, presa positiva per le lenti convergenti e negativa per le divergenti. Siano $p$ la distanza dell'oggetto dalla lente e $q$ quella dell'immagine. Per una lente sottile, cioè di spessore trascurabile rispetto a $f$, e per raggi poco inclinati rispetto all'asse (approssimazione parassiale) valgono
 $$
 \frac1f=\frac1p+\frac1q,\qquad M=-\frac qp.
 $$
-Si assumono $p>0$ per un oggetto reale, $q>0$ per un'immagine reale e $f>0$ per una lente convergente. Un valore $q<0$ indica un'immagine virtuale sul lato dell'oggetto. L'ingrandimento $M$ confronta le altezze: il segno negativo indica un'immagine capovolta.
+L'**ingrandimento** $M$ è il rapporto fra l'altezza dell'immagine e quella dell'oggetto. Per un oggetto posto davanti alla lente $p$ è positiva, e i segni di $q$ e di $M$ descrivono l'immagine.
 
-Con $f=10\,\mathrm{cm}$ e $p=30\,\mathrm{cm}$ si ottiene $\dfrac1q=\dfrac1{10}-\dfrac1{30}=\dfrac1{15}$, quindi $q=15\,\mathrm{cm}$ e $M=-\dfrac12$. Una lente convergente con oggetto fra lente e fuoco produce invece un'immagine virtuale e diritta. Una lente divergente ha $f<0$ e, per un oggetto reale, produce un'immagine virtuale ridotta.
+- Se $q>0$ l'immagine è **reale**: si forma oltre la lente e si raccoglie su uno schermo. Se $q<0$ è **virtuale** e si trova dalla parte dell'oggetto.
+- Se $M<0$ l'immagine è capovolta; se $M>0$ è diritta.
+
+Con $f=10\,\mathrm{cm}$ e $p=30\,\mathrm{cm}$ si ha $\dfrac1q=\dfrac1{10\,\mathrm{cm}}-\dfrac1{30\,\mathrm{cm}}=\dfrac{3-1}{30\,\mathrm{cm}}=\dfrac1{15\,\mathrm{cm}}$, quindi $q=15\,\mathrm{cm}$ e $M=-\dfrac{15\,\mathrm{cm}}{30\,\mathrm{cm}}=-\dfrac12$; l'immagine è quindi reale, capovolta e alta la metà dell'oggetto. Con l'oggetto fra il fuoco e la lente, a $p=5\,\mathrm{cm}$, si ha $\dfrac1q=\dfrac1{10\,\mathrm{cm}}-\dfrac1{5\,\mathrm{cm}}=-\dfrac1{10\,\mathrm{cm}}$, quindi $q=-10\,\mathrm{cm}$ e $M=-\dfrac{-10\,\mathrm{cm}}{5\,\mathrm{cm}}=2$; l'immagine è quindi virtuale, diritta e alta il doppio. Una lente divergente dà di un oggetto un'immagine virtuale, diritta e ridotta.
 :::
 
 ## Cariche, circuiti e magnetismo
 
 :::teorema{#campo-elettrico titolo="Forza elettrica e potenziale"}
-Due cariche puntiformi ferme nel vuoto interagiscono con forza di modulo $F=k\dfrac{|q_1q_2|}{r^2}$. Cariche dello stesso segno si respingono; cariche di segno opposto si attraggono. Il campo elettrico è la forza per unità di carica positiva di prova, $\vec E=\dfrac{\vec F}{q}$. Per una carica negativa la forza è opposta al campo. I campi di più sorgenti si sommano vettorialmente.
+La **carica elettrica** è una proprietà della materia, positiva o negativa, che si misura in coulomb ($\mathrm{C}$). Negli atomi i protoni hanno carica positiva e gli elettroni negativa, con lo stesso valore assoluto $1{,}6\cdot10^{-19}\,\mathrm{C}$, detto carica elementare. Cariche dello stesso segno si respingono, cariche di segno opposto si attraggono. Nei **conduttori**, come i metalli, una parte degli elettroni è libera di muoversi; negli **isolanti** gli elettroni restano legati agli atomi. Strofinio e contatto trasferiscono elettroni da un corpo all'altro, e in un sistema isolato la carica totale si conserva. Due sfere conduttrici identiche con cariche $6\cdot10^{-6}\,\mathrm{C}$ e $-2\cdot10^{-6}\,\mathrm{C}$, messe a contatto lontano da altri corpi, si dividono in parti uguali, per simmetria, la carica totale $4\cdot10^{-6}\,\mathrm{C}$, quindi ciascuna ha $2\cdot10^{-6}\,\mathrm{C}$.
 
-Nei conduttori sono presenti cariche libere di spostarsi; negli isolanti la loro mobilità è molto limitata. Strofinio e contatto possono trasferire elettroni, conservando la carica totale del sistema isolato.
+Per la **legge di Coulomb**, due cariche $q_1$ e $q_2$ puntiformi, cioè di dimensioni trascurabili rispetto alla loro distanza $r$, ferme nel vuoto, si scambiano una forza diretta lungo la retta che le unisce, di modulo
+$$
+F=k\frac{|q_1q_2|}{r^2},
+$$
+con $k=9{,}0\cdot10^9\,\mathrm{N\,m^2/C^2}$. Due cariche di $2\cdot10^{-6}\,\mathrm{C}$ a $0{,}3\,\mathrm{m}$ si respingono con $9{,}0\cdot10^9\,\mathrm{N\,m^2/C^2}\cdot\dfrac{(2\cdot10^{-6}\,\mathrm{C})^2}{(0{,}3\,\mathrm{m})^2}=0{,}4\,\mathrm{N}$.
 
-La differenza di potenziale soddisfa $\Delta U=q\Delta V$. Il lavoro del campo elettrico è $-\Delta U$. In un sistema isolato la carica totale si conserva. Due sfere conduttrici identiche, messe in contatto lontano da altri corpi, si ripartiscono la carica totale in parti uguali per simmetria. Un conduttore in equilibrio elettrostatico ha campo nullo nel materiale; un condensatore di capacità $C$ conserva cariche opposte di modulo $Q=C\Delta V$ sulle armature.
+Il **campo elettrico** in un punto è la forza che agisce su una carica positiva $q$ posta in quel punto, divisa per $q$: $\vec E=\dfrac{\vec F}{q}$, in $\mathrm{N/C}$. Una carica nel campo subisce la forza $q\vec E$, concorde con il campo se è positiva e opposta se è negativa: in un campo di $500\,\mathrm{N/C}$ una carica di $2\cdot10^{-6}\,\mathrm{C}$ subisce $2\cdot10^{-6}\,\mathrm{C}\cdot500\,\mathrm{N/C}=10^{-3}\,\mathrm{N}$. I campi di più cariche si sommano come vettori. Dentro un conduttore con le cariche ferme, cioè in equilibrio elettrostatico, il campo è nullo.
+
+Il **potenziale elettrico** $V$ in un punto è l'energia potenziale per unità di carica, in volt ($1\,\mathrm{V}=1\,\mathrm{J/C}$). La **differenza di potenziale** $\Delta V$ fra due punti, detta anche **tensione**, dà la variazione di energia potenziale di una carica $q$ che passa dall'uno all'altro, $\Delta U=q\Delta V$; il lavoro del campo è $-\Delta U$. Una carica di $2\,\mathrm{C}$ che attraversa $1{,}5\,\mathrm{V}$ varia la propria energia di $2\,\mathrm{C}\cdot1{,}5\,\mathrm{V}=3\,\mathrm{J}$. Un **condensatore** è formato da due lastre conduttrici, le armature, con cariche opposte di modulo $Q=C\Delta V$; la **capacità** $C$ si misura in farad ($1\,\mathrm{F}=1\,\mathrm{C/V}$). Con $C=2\cdot10^{-6}\,\mathrm{F}$ e $\Delta V=10\,\mathrm{V}$ si ha $Q=2\cdot10^{-5}\,\mathrm{C}$.
 :::
 
 :::definizione{#circuiti titolo="Corrente e resistenza"}
-La corrente media è $I=\dfrac{\Delta Q}{\Delta t}$. Il verso convenzionale è quello del moto di cariche positive. Un resistore ohmico a temperatura costante soddisfa $V=RI$. La potenza dissipata è $P=VI=I^2R=\dfrac{V^2}{R}$ e l'energia in un intervallo è $P\Delta t$ quando la potenza è costante.
+La **corrente elettrica** è un moto ordinato di cariche. L'**intensità di corrente** è la carica che attraversa una sezione del conduttore nell'unità di tempo, $I=\dfrac{\Delta Q}{\Delta t}$, in ampere ($1\,\mathrm{A}=1\,\mathrm{C/s}$): se in $10\,\mathrm{s}$ passano $5\,\mathrm{C}$, la corrente è $\dfrac{5\,\mathrm{C}}{10\,\mathrm{s}}=0{,}5\,\mathrm{A}$. Il verso convenzionale della corrente è quello del moto di cariche positive. Un **generatore**, come una pila, mantiene fra i suoi poli una tensione $V$; un **circuito** è un percorso chiuso di conduttori che collega i due poli. La **resistenza** $R$ di un conduttore è il rapporto fra la tensione ai suoi capi e la corrente che lo attraversa, in ohm ($1\,\Omega=1\,\mathrm{V/A}$). Per un conduttore metallico a temperatura costante $R$ non dipende dalla corrente, e vale la **legge di Ohm** $V=RI$. Un resistore, cioè un componente di resistenza fissata, di $20\,\Omega$ a $10\,\mathrm{V}$ è percorso da $\dfrac{10\,\mathrm{V}}{20\,\Omega}=0{,}5\,\mathrm{A}$.
 
-In serie tutti i resistori hanno la stessa corrente e $R_{\mathrm{eq}}=R_1+R_2$. In parallelo hanno la stessa tensione e $\dfrac1{R_{\mathrm{eq}}}=\dfrac1{R_1}+\dfrac1{R_2}$. Ai nodi la somma delle correnti entranti uguaglia quella delle correnti uscenti, perché la carica si conserva. Un interruttore aperto interrompe la corrente nel proprio ramo; gli altri rami di un parallelo alimentato da un generatore ideale restano alla stessa tensione. Un voltmetro ideale si collega in parallelo e ha resistenza infinita, mentre un amperometro ideale si collega in serie e ha resistenza nulla. Per un generatore con forza elettromotrice $\mathcal E$ e resistenza interna $r$, la tensione erogata ai morsetti è $V=\mathcal E-Ir$.
+La **potenza** assorbita è $P=VI=I^2R=\dfrac{V^2}{R}$, in watt, e in un resistore diventa calore; a potenza costante l'energia nel tempo $\Delta t$ è $P\Delta t$. Il resistore precedente assorbe $10\,\mathrm{V}\cdot0{,}5\,\mathrm{A}=5\,\mathrm{W}$, cioè $5\,\mathrm{W}\cdot60\,\mathrm{s}=300\,\mathrm{J}$ in un minuto.
+
+- **In serie** i resistori sono percorsi dalla stessa corrente e $R_{\mathrm{eq}}=R_1+R_2$.
+- **In parallelo** hanno la stessa tensione e $\dfrac1{R_{\mathrm{eq}}}=\dfrac1{R_1}+\dfrac1{R_2}$.
+
+La resistenza equivalente $R_{\mathrm{eq}}$ è quella di un solo resistore che sostituisce i due lasciando la stessa corrente nel generatore. Con $20\,\Omega$ e $30\,\Omega$ si ottiene $50\,\Omega$ in serie e, poiché $\dfrac1{20\,\Omega}+\dfrac1{30\,\Omega}=\dfrac{3+2}{60\,\Omega}=\dfrac1{12\,\Omega}$, $12\,\Omega$ in parallelo. In un nodo, cioè in un punto in cui si uniscono tre o più fili, la somma delle correnti entranti è uguale a quella delle uscenti, perché la carica si conserva. Un interruttore aperto annulla la corrente nel proprio ramo, cioè nel tratto di circuito in cui è inserito. Un generatore ideale mantiene la stessa tensione qualunque corrente eroghi, quindi gli altri rami di un parallelo alimentato da un generatore ideale restano alla stessa tensione.
+
+L'amperometro misura la corrente, si collega in serie e idealmente ha resistenza nulla. Il voltmetro misura la tensione, si collega in parallelo e idealmente ha resistenza infinita. La **forza elettromotrice** $\mathcal E$ è la tensione di un generatore che non eroga corrente. Se il generatore ha resistenza interna $r$ ed eroga la corrente $I$, la tensione ai poli è $V=\mathcal E-Ir$: con $9\,\mathrm{V}$, $1\,\Omega$ e $0{,}5\,\mathrm{A}$ vale $9\,\mathrm{V}-0{,}5\,\mathrm{A}\cdot1\,\Omega=8{,}5\,\mathrm{V}$.
 :::
 
 :::definizione{#magnetismo titolo="Campo magnetico e forza di Lorentz"}
-Un filo rettilineo percorso da corrente genera linee di campo circolari attorno al filo. Un magnete mantiene due poli anche quando viene diviso in pezzi magnetizzati. I materiali ferromagnetici, come il ferro, possono magnetizzarsi fortemente grazie all’orientamento dei domini magnetici. Una carica in moto subisce forza magnetica di modulo $|q|vB\sin\theta$, perpendicolare a velocità e campo. Per velocità parallela al campo la forza è nulla. Per velocità perpendicolare e campo uniforme, in assenza di altre forze, il moto è circolare uniforme: la forza magnetica cambia la direzione della velocità e compie lavoro nullo.
+Un **magnete** ha due poli, nord e sud: poli uguali si respingono e poli diversi si attraggono. Ogni pezzo di un magnete spezzato ha di nuovo due poli. Attorno a un magnete c'è un **campo magnetico** $\vec B$, un vettore che si misura in tesla ($\mathrm{T}$) e che in ogni punto ha la direzione dell'ago di una bussola. Nei materiali ferromagnetici, come il ferro, piccole regioni magnetizzate dette domini si orientano nello stesso verso e il materiale diventa un magnete. Anche una corrente genera un campo magnetico: attorno a un filo rettilineo le linee del campo, che in ogni punto hanno la direzione del campo, sono circonferenze con il centro sul filo.
 
-Una variazione del flusso magnetico concatenato a un circuito induce una forza elettromotrice. Il verso della corrente indotta si oppone alla variazione che la produce. Le onde elettromagnetiche uniscono campi elettrici e magnetici variabili e nel vuoto soddisfano $c=\lambda f$. Lo spettro, a frequenza crescente, comprende onde radio, microonde, infrarosso, visibile, ultravioletto, raggi X e gamma; la lunghezza d’onda diminuisce nello stesso ordine.
+Su una carica $q$ in moto con velocità $v$ agisce la **forza di Lorentz**, perpendicolare alla velocità e al campo, di modulo $F=|q|vB\sin\theta$, dove $\theta$ è l'angolo fra la velocità e il campo. È nulla se la velocità è parallela al campo e massima se è perpendicolare. Un protone, di carica $1{,}6\cdot10^{-19}\,\mathrm{C}$, che si muove a $2\cdot10^5\,\mathrm{m/s}$ perpendicolarmente a un campo di $0{,}5\,\mathrm{T}$ subisce $1{,}6\cdot10^{-19}\,\mathrm{C}\cdot2\cdot10^5\,\mathrm{m/s}\cdot0{,}5\,\mathrm{T}=1{,}6\cdot10^{-14}\,\mathrm{N}$. Poiché è perpendicolare alla velocità, la forza compie lavoro nullo e cambia soltanto la direzione del moto. In un campo uniforme, con velocità perpendicolare al campo e senza altre forze, il moto è circolare uniforme.
+
+Il **flusso magnetico** attraverso un circuito misura quanto campo attraversa la superficie delimitata dal circuito; per un campo uniforme perpendicolare a una superficie di area $A$ vale $BA$. Quando il flusso varia, nel circuito si genera una forza elettromotrice: è l'**induzione elettromagnetica**. Per la legge di Lenz la corrente indotta genera un campo che si oppone alla variazione del flusso che l'ha prodotta.
+
+Campi elettrici e magnetici variabili si generano a vicenda e si propagano insieme come **onde elettromagnetiche**. Nel vuoto hanno tutte la velocità $c$, quindi $c=\lambda f$: a $10^8\,\mathrm{Hz}$ la lunghezza d'onda è $\dfrac{3{,}0\cdot10^8\,\mathrm{m/s}}{10^8\,\mathrm{Hz}}=3\,\mathrm{m}$. In ordine di frequenza crescente, e di lunghezza d'onda decrescente, lo spettro, cioè l'insieme di queste onde, comprende onde radio, microonde, infrarosso, luce visibile, ultravioletto, raggi X e raggi gamma.
 :::
