@@ -80,7 +80,7 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
       </svg>
       {conTitolo && <p class="sl-titolo" data-sl="t">{nomiFasce[0]}</p>}
       {scene.length > 0 && <div class="sl-sotto">
-        <p class="sl-scorri">Scorri e guarda il livello salire<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></p>
+        <svg class="sl-scorri" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         <div class="sl-nav">
           <ol class="sl-indice">{scene.map(([breve], i) => <li><a href={`#sl-${i}`}><i>0{i + 1}</i>{breve}</a></li>)}</ol>
           <a class="bottone-primario sl-cta" href="#cima" data-sl-iscriviti>Iscriviti gratis</a>
@@ -576,8 +576,7 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 .sl-hero .acc-note, .sl-hero .nota-accesso { margin-top: 0; }
 .sl-sotto { display: grid; margin-top: 1.6rem; }
 .sl-sotto > * { grid-area: 1 / 1; transition: opacity .45s ease, transform .45s ease; }
-.sl-scorri { margin: 0; text-align: center; font: 400 .88rem/1.4 var(--ui); color: #8b938d; }
-.sl-scorri svg { display: block; width: 1.1rem; height: 1.1rem; margin: .4rem auto 0; animation: sl-giu 1.8s ease-in-out infinite; }
+.sl-scorri { display: block; width: 1.1rem; height: 1.1rem; margin: 0 auto; color: #8b938d; animation: sl-giu 1.8s ease-in-out infinite; }
 .sl-nav { opacity: 0; transform: translateY(8px); pointer-events: none; }
 .sl-indice { margin: 0; }
 .sl.giu .sl-nav { opacity: 1; transform: none; pointer-events: auto; }
@@ -592,7 +591,7 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
   .sl-hero-b { order: 1; margin-top: 1.6rem; }
   .sl-hero .acc-vantaggi { order: 2; margin-top: 1.8rem; }
 }
-@media (prefers-reduced-motion: reduce) { .sl-scorri svg { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .sl-scorri { animation: none; } }
 
 @keyframes sl-giu { 50% { transform: translateY(4px); } }
 @media (prefers-reduced-motion: no-preference) { html:has(.sl) { scroll-behavior: smooth; } }
