@@ -6,171 +6,351 @@ sommario: "Spazi campionari, conteggi, eventi, estrazioni, frequenze e interpret
 ## Insiemi ed esiti
 
 :::definizione{#insiemi-ed-esiti titolo="Esperimento, esito ed evento"}
-Un esperimento aleatorio ha un risultato che non è conosciuto prima dell'esecuzione. Lo **spazio campionario** $\Omega$ raccoglie gli esiti possibili, descritti con il dettaglio necessario alla domanda. Un **evento** è un sottoinsieme di $\Omega$: si verifica quando l'esito osservato appartiene a quel sottoinsieme. Nel lancio di un dado, $\Omega=\{1,2,3,4,5,6\}$; l'evento «numero pari» è $\{2,4,6\}$. L'evento impossibile è l'insieme vuoto, mentre l'evento certo coincide con tutto lo spazio.
+Un **esperimento aleatorio** è un'azione il cui risultato non si conosce prima di eseguirla, come il lancio di un dado. Ogni risultato possibile si chiama **esito**. L'insieme di tutti gli esiti è lo **spazio campionario**, o spazio degli esiti, e si indica con la lettera greca $\Omega$ («omega»). Nel lancio di un dado a sei facce
+$$
+\Omega=\{1,2,3,4,5,6\}.
+$$
 
-La probabilità assegna a ogni evento un numero fra zero e uno. Vale $P(\Omega)=1$ e $P(\varnothing)=0$. Un valore maggiore di uno non rappresenta una probabilità: può derivare, per esempio, dal conteggio ripetuto di esiti sovrapposti. Dire che un risultato è possibile non implica che sia probabile quanto gli altri.
+Un **evento** è un insieme formato da alcuni esiti, cioè un sottoinsieme di $\Omega$, e si indica con una lettera maiuscola. L'evento «esce un numero pari» è $A=\{2,4,6\}$. Un evento *si verifica* quando l'esito dell'esperimento è uno dei suoi elementi: se esce 4, l'evento $A$ si verifica; se esce 3, non si verifica.
+
+L'**evento certo** contiene tutti gli esiti, quindi coincide con $\Omega$; per il dado è certo l'evento «esce un numero minore di 7». L'**evento impossibile** non contiene esiti ed è l'insieme vuoto, indicato con $\varnothing$; per il dado è impossibile l'evento «esce 7».
+
+La **probabilità** di un evento $A$ è un numero compreso fra 0 e 1 che misura quanto ci si aspetta che $A$ si verifichi. Si indica con $P(A)$, «probabilità di $A$». L'evento certo ha probabilità $P(\Omega)=1$ e l'evento impossibile ha probabilità $P(\varnothing)=0$. Un risultato negativo o maggiore di 1 segnala quindi un errore nel calcolo.
 :::
 
 :::teorema{#equiprobabilita titolo="Quando si possono contare gli esiti"}
-Se lo spazio contiene un numero finito di esiti **equiprobabili**, allora
+Gli esiti di un esperimento sono **equiprobabili** quando hanno tutti la stessa probabilità. In un dado **regolare**, cioè non truccato, ciascuna delle sei facce ha probabilità $\dfrac{1}{6}$.
+
+Se $\Omega$ è formato da un numero finito di esiti equiprobabili, la probabilità di un evento $A$ è
 $$
 P(A)=\frac{|A|}{|\Omega|}.
 $$
-Il simbolo $|A|$ indica il numero degli esiti appartenenti ad $A$. Per un dado regolare la probabilità di un numero pari è $\dfrac36=\dfrac12$. L'ipotesi di regolarità giustifica l'equiprobabilità delle facce; senza questa informazione il solo numero delle facce favorevoli non basta.
+Il simbolo $|A|$ indica il numero degli esiti che formano $A$, chiamati *casi favorevoli*. Il simbolo $|\Omega|$ indica il numero di tutti gli esiti, chiamati *casi possibili*. Per un dado regolare l'evento «esce un numero pari», $A=\{2,4,6\}$, ha 3 casi favorevoli su 6 casi possibili, quindi
+$$
+P(A)=\frac{3}{6}=\frac{1}{2}.
+$$
+La formula richiede esiti equiprobabili. In un dado truccato lo stesso evento contiene ancora 3 facce su 6, ma la sua probabilità è la somma delle probabilità delle tre facce e dipende da come il dado è truccato.
 
-Anche la scelta degli esiti conta. Con due monete regolari indipendenti gli esiti ordinati sono $HH,HT,TH,TT$, dove $H$ significa testa e $T$ croce. Le quattro sequenze sono equiprobabili. I tre possibili numeri di teste, zero, uno e due, hanno invece probabilità $\dfrac14,\dfrac12,\dfrac14$: raggruppare esiti può produrre categorie con pesi differenti.
+Si lanciano due monete regolari. La lettera $H$ indica testa (dall'inglese *head*) e la lettera $T$ indica croce (*tail*). Ogni esito è una coppia ordinata di lettere, una per moneta, quindi $HT$ e $TH$ sono esiti diversi. Gli esiti sono quattro,
+$$
+\Omega=\{HH,HT,TH,TT\},
+$$
+e sono equiprobabili, quindi ciascuno ha probabilità $\dfrac{1}{4}$. L'evento «esce esattamente una testa» è $\{HT,TH\}$. Ha 2 casi favorevoli su 4, quindi la sua probabilità è $\dfrac{2}{4}=\dfrac{1}{2}$.
+:::
+
+:::attenzione
+Nel lancio di due monete, «nessuna testa», «una testa» e «due teste» sono tre risultati possibili ma non equiprobabili, perché hanno probabilità $\dfrac{1}{4}$, $\dfrac{1}{2}$ e $\dfrac{1}{4}$. Contandoli come 3 casi equiprobabili si otterrebbe per «una testa» il valore errato $\dfrac{1}{3}$.
 :::
 
 ## Conteggi ordinati
 
 :::teorema{#conteggi titolo="Scelte successive e principio del prodotto"}
-Se una scelta si compie in due fasi, con $m$ possibilità nella prima e $n$ nella seconda per ciascuna scelta iniziale, il numero complessivo è $mn$. Tre magliette e due pantaloni formano sei abbinamenti. Se le fasi sono più di due, si moltiplicano tutti i numeri di possibilità. Il principio conta oggetti o sequenze; non richiede che le scelte siano casuali.
+Il **principio del prodotto** serve a contare i casi senza elencarli, anche in problemi in cui nulla è scelto a caso. Se una scelta si compie in due fasi, con $m$ possibilità nella prima e $n$ possibilità nella seconda qualunque sia stata la prima scelta, le scelte complessive sono $m\cdot n$. Con 3 magliette e 2 pantaloni, ogni maglietta si abbina a ciascuno dei 2 pantaloni, quindi gli abbinamenti sono $3\cdot2=6$. Con più di due fasi si moltiplicano le possibilità di tutte le fasi.
 
-Occorre controllare se una scelta modifica quelle successive. Un codice di tre lettere distinte scelte fra quattro lettere ha $4\cdot3\cdot2=24$ possibilità. Se le ripetizioni sono consentite, diventano $4^3=64$. In un numero di tre cifre, inoltre, la prima cifra non può essere zero: quel vincolo riguarda la prima posizione e va applicato prima della moltiplicazione.
+Si forma un codice di 3 lettere scelte fra le 4 lettere $A,B,C,D$. L'ordine conta, perché $ABC$ e $CBA$ sono codici diversi.
+
+- **Lettere tutte diverse.** La prima posizione ha 4 possibilità. Una lettera è stata usata, quindi la seconda ne ha 3 e la terza ne ha 2. I codici sono $4\cdot3\cdot2=24$. Le sequenze ordinate di $k$ oggetti diversi scelti fra $n$ si chiamano **disposizioni semplici**.
+- **Lettere ripetibili.** Ogni posizione ha 4 possibilità, quindi i codici sono $4\cdot4\cdot4=4^3=64$. Le sequenze ordinate con oggetti ripetibili si chiamano **disposizioni con ripetizione**; con $n$ oggetti e $k$ posizioni sono $n^k$.
+
+Un vincolo su una posizione ne riduce le possibilità. In un numero di tre cifre la prima cifra è diversa da 0, quindi ha 9 possibilità, e le altre due ne hanno 10 ciascuna. I numeri di tre cifre sono $9\cdot10\cdot10=900$.
 :::
 
 :::definizione{#permutazioni titolo="Ordine e permutazioni"}
-Il fattoriale $n!$ è il prodotto degli interi positivi fino a $n$; per convenzione $0!=1$. Disporre in fila $n$ oggetti distinti dà $n!$ ordini. Se alcuni oggetti sono indistinguibili, le permutazioni interne fra copie identiche non generano disposizioni nuove. La parola MAMMA contiene tre M e due A: le sequenze diverse sono $\dfrac{5!}{3!2!}=10$.
+Una **permutazione** di $n$ oggetti distinti è un modo di metterli tutti in fila. Tre libri $A,B,C$ si dispongono su uno scaffale in 6 modi:
+$$
+ABC,\quad ACB,\quad BAC,\quad BCA,\quad CAB,\quad CBA.
+$$
+Il primo posto ha infatti 3 possibilità, il secondo ne ha 2 e il terzo ne ha 1, e $3\cdot2\cdot1=6$.
 
-Un vincolo di vicinanza può suggerire di trattare due persone come un blocco. Cinque persone in fila, con Ada e Bruno vicini, si ordinano disponendo quattro oggetti, il blocco e le altre tre persone. Gli ordini interni del blocco sono due, quindi si ottengono $2\cdot4!=48$ file. Il fattore due è necessario perché Ada può precedere oppure seguire Bruno.
+Il prodotto di tutti gli interi da 1 a $n$ si chiama **fattoriale** di $n$. Si scrive $n!$ e si legge «$n$ fattoriale»:
+$$
+n!=n\cdot(n-1)\cdot(n-2)\cdots2\cdot1.
+$$
+Per esempio $4!=4\cdot3\cdot2\cdot1=24$ e $5!=5\cdot4!=120$; per convenzione $0!=1$. Le permutazioni di $n$ oggetti distinti sono $n!$.
 
-Quando le possibilità appartengono a casi alternativi disgiunti, i conteggi si sommano. Un menu offre due primi e quattro secondi: scegliendo un solo piatto ci sono sei possibilità; scegliendo un primo e un secondo ce ne sono otto. Se è consentito scegliere un solo piatto oppure una coppia di piatti, le possibilità complessive sono quattordici. Prima di sommare si controlla che nessuna scelta appartenga a entrambi i casi. Prima di moltiplicare si controlla invece che siano necessarie tutte le fasi della scelta.
+Se alcuni oggetti sono uguali fra loro, gli ordini che si distinguono sono meno di $n!$. La parola «mamma» ha 3 lettere $M$ e 2 lettere $A$. Se le 5 lettere fossero tutte diverse, i loro ordini sarebbero $5!=120$. Scambiando fra loro le 3 lettere $M$, in $3!=6$ modi, la parola non cambia, e lo stesso vale per i $2!=2$ scambi delle lettere $A$. Ogni parola è quindi contata $6\cdot2=12$ volte, e gli anagrammi, cioè le sequenze diverse delle 5 lettere, sono
+$$
+\frac{5!}{3!\cdot2!}=\frac{120}{12}=10.
+$$
+
+Per il **principio della somma**, se una scelta avviene in uno di due modi senza casi in comune, le possibilità dei due modi si sommano. Un menu offre 2 primi e 4 secondi. Chi ordina un solo piatto sceglie un primo *oppure* un secondo, quindi ha $2+4=6$ possibilità. Chi ordina un primo *e* un secondo compie due scelte successive, quindi ha $2\cdot4=8$ possibilità. Se sono ammessi sia il piatto unico sia la coppia di piatti, i due casi non hanno scelte in comune e le possibilità sono $6+8=14$.
+:::
+
+:::esempio{titolo="Due persone vicine in una fila"}
+Cinque persone si mettono in fila, e Ada e Bruno stanno vicini. La coppia si considera come un solo blocco. Gli oggetti da ordinare sono allora 4, cioè il blocco e le altre 3 persone, e i loro ordini sono $4!=24$. Dentro il blocco gli ordini sono 2, perché Ada sta davanti a Bruno oppure dietro. Per il principio del prodotto le file sono $2\cdot24=48$.
 :::
 
 ## Scelte senza ordine
 
 :::definizione{#combinazioni titolo="Combinazioni e sovraconteggio"}
-Scegliere $k$ oggetti distinti fra $n$, senza assegnare ruoli e senza considerare l'ordine, dà
+Una **combinazione** è un gruppo di $k$ oggetti scelti fra $n$ oggetti distinti, nel quale l'ordine non conta.
+
+Fra 4 persone $A,B,C,D$ si scelgono 2 rappresentanti. Le coppie ordinate sono $4\cdot3=12$. In questo elenco ogni coppia compare 2 volte, per esempio come $AB$ e come $BA$, quindi le coppie senza ordine sono $\dfrac{12}{2}=6$:
+$$
+AB,\quad AC,\quad AD,\quad BC,\quad BD,\quad CD.
+$$
+Contare più volte lo stesso gruppo si chiama **sovraconteggio**, e la divisione per 2 lo elimina. In generale ogni gruppo di $k$ oggetti compare $k!$ volte fra le sequenze ordinate, perché $k!$ sono gli ordini dei suoi elementi. Il numero dei gruppi si indica con il **coefficiente binomiale** $\dbinom{n}{k}$, che si legge «$n$ su $k$», e vale
 $$
 \binom nk=\frac{n!}{k!(n-k)!},\qquad 0\le k\le n.
 $$
-Per scegliere due campioni fra sette, il conteggio ordinato $7\cdot6$ conta ogni coppia due volte. Dividendo per $2!$ si ottiene $\binom72=21$. Il denominatore $k!$ elimina in generale le diverse disposizioni dello stesso gruppo. Una commissione è normalmente un gruppo senza ordine; presidente e segretario sono invece ruoli distinti.
+Una commissione di 2 persone scelte fra 7 è un gruppo senza ordine, quindi le commissioni sono
+$$
+\binom72=\frac{7!}{2!\cdot5!}=\frac{7\cdot6\cdot5!}{2\cdot5!}=\frac{42}{2}=21.
+$$
+Un presidente e un segretario scelti fra 7 persone hanno ruoli diversi, quindi l'ordine conta e le scelte sono $7\cdot6=42$.
 
-Le combinazioni servono anche a scegliere posizioni. Un percorso con tre passi verso destra e due verso l'alto ha cinque passi: scegliere le due posizioni dei passi verso l'alto determina tutto il percorso. I percorsi sono quindi $\binom52=10$. La rappresentazione tramite posizioni rende possibile il conteggio senza disegnare ogni itinerario.
+Con le combinazioni si contano anche le scelte di posizioni. Un percorso su una griglia formato da 3 passi verso destra e 2 verso l'alto è determinato dalle 2 posizioni, fra le 5, dei passi verso l'alto. I percorsi sono quindi $\dbinom{5}{2}=\dfrac{5!}{2!\cdot3!}=\dfrac{120}{12}=10$.
 :::
 
 :::esempio{titolo="Esattamente due elementi di una categoria"}
-Da tre oggetti rossi e tre blu, tutti distinti, si scelgono tre oggetti senza ordine. Per ottenerne esattamente due rossi si scelgono due dei tre rossi e uno dei tre blu:
+Un'urna, cioè un contenitore da cui si estrae senza guardare, contiene 3 palline rosse e 3 blu, numerate in modo che siano tutte distinguibili. Si estraggono 3 palline insieme, quindi l'ordine non conta e i gruppi di 3 palline sono equiprobabili. Si cerca la probabilità di ottenere esattamente 2 rosse.
+
+I casi possibili sono i gruppi di 3 palline scelte fra 6, cioè $\dbinom{6}{3}=\dfrac{6!}{3!\cdot3!}=\dfrac{720}{36}=20$. Un gruppo con esattamente 2 rosse si forma scegliendo 2 rosse fra 3, in $\dbinom{3}{2}=3$ modi, e 1 blu fra 3, in $\dbinom{3}{1}=3$ modi. Per il principio del prodotto i casi favorevoli sono
 $$
 N=\binom32\binom31=3\cdot3=9.
 $$
-Il numero totale dei gruppi è $\binom63=20$. Se tutti i gruppi sono equiprobabili, la probabilità richiesta è $\dfrac9{20}$. La parola «esattamente» esclude sia un solo rosso sia tre rossi. In un conteggio con «almeno due» si dovrebbe aggiungere anche il gruppo formato da tutti i rossi.
+La probabilità richiesta è $\dfrac{9}{20}$.
 
-Per quattro prove indipendenti con probabilità di successo $p$, ogni sequenza con tre successi e un insuccesso ha probabilità $p^3(1-p)$. Le posizioni possibili dell'insuccesso sono quattro, quindi la probabilità di esattamente tre successi è $4p^3(1-p)$. Se $p=\dfrac12$, diventa $\dfrac14$. Il conteggio delle posizioni non sostituisce il peso del singolo percorso: con una moneta non regolare le sequenze con numeri diversi di teste non hanno tutte la stessa probabilità.
+La parola «esattamente» esclude i gruppi con 1 rossa e il gruppo con 3 rosse. Con «almeno 2 rosse» si aggiunge l'unico gruppo formato dalle 3 rosse, quindi i casi favorevoli diventano $9+1=10$ e la probabilità diventa $\dfrac{10}{20}=\dfrac{1}{2}$.
 :::
 
 ## Unione e complemento
 
 :::definizione{#unione-e-complemento titolo="Operazioni tra eventi"}
-L'unione $A\cup B$ comprende gli esiti che appartengono ad almeno uno dei due eventi. L'intersezione $A\cap B$ comprende quelli appartenenti a entrambi. Il complemento $A^c$ comprende gli esiti dello spazio campionario che non appartengono ad $A$. Nel linguaggio dei problemi, «A oppure B» è normalmente inclusivo: comprende anche il caso in cui accadono entrambi. «Uno solo dei due» esclude invece l'intersezione.
+Si lancia un dado e si considerano due eventi: $A=\{2,4,6\}$, «esce un numero pari», e $B=\{4,5,6\}$, «esce un numero maggiore di 3». Da due eventi se ne costruiscono altri con tre operazioni.
 
-Due eventi sono **disgiunti** quando $A\cap B=\varnothing$. Nel lancio singolo di un dado, ottenere uno e ottenere due sono disgiunti; ottenere un numero pari e ottenere un numero maggiore di tre non lo sono, perché quattro e sei appartengono a entrambi.
+- L'**unione** $A\cup B$, che si legge «$A$ unito $B$», è formata dagli esiti che appartengono ad almeno uno dei due eventi. Corrisponde a «$A$ oppure $B$». Qui $A\cup B=\{2,4,5,6\}$.
+- L'**intersezione** $A\cap B$, che si legge «$A$ intersecato $B$», è formata dagli esiti che appartengono a entrambi gli eventi. Corrisponde a «$A$ e $B$». Qui $A\cap B=\{4,6\}$.
+- Il **complementare** di $A$, detto anche complemento, si indica con $A^c$ e si legge «$A$ complementare». È formato dagli esiti di $\Omega$ che non appartengono ad $A$. Corrisponde a «non $A$». Qui $A^c=\{1,3,5\}$, cioè «esce un numero dispari».
+
+Nei quesiti «$A$ oppure $B$» comprende anche il caso in cui si verificano entrambi. L'espressione «uno solo dei due» indica invece l'unione privata dell'intersezione, cioè $\{2,5\}$.
+
+Due eventi sono **disgiunti**, o incompatibili, quando non hanno esiti in comune, cioè quando $A\cap B=\varnothing$. Gli eventi «esce 1» e «esce 2» sono disgiunti; $A$ e $B$ non lo sono, perché hanno in comune gli esiti 4 e 6.
+
+Nella figura i due cerchi rappresentano $A$ e $B$, e la zona evidenziata è l'intersezione $A\cap B$.
 
 ::venn{tipo="due" zone="ab" titolo="L’intersezione contiene soltanto gli esiti comuni ai due eventi"}
 :::
 
 :::teorema{#regole-eventi titolo="Somma e complemento delle probabilità"}
-Per ogni coppia di eventi valgono
+Per ogni coppia di eventi $A$ e $B$ valgono due regole:
 $$
 P(A^c)=1-P(A),\qquad
 P(A\cup B)=P(A)+P(B)-P(A\cap B).
 $$
-Nella somma $P(A)+P(B)$ l'intersezione è contata due volte; sottrarla una volta restituisce il peso corretto. Per eventi disgiunti il termine sottratto è zero. La probabilità di «uno solo dei due» è invece $P(A)+P(B)-2P(A\cap B)$, perché bisogna eliminare completamente la parte comune.
+**Regola del complementare.** Gli eventi $A$ e $A^c$ non hanno esiti in comune e insieme formano tutto $\Omega$, quindi le loro probabilità hanno somma 1. Per un dado regolare «esce 6» ha probabilità $\dfrac{1}{6}$, perciò «non esce 6» ha probabilità $1-\dfrac{1}{6}=\dfrac{5}{6}$.
 
-Se $A\subseteq B$, la parte $B\setminus A$ ha probabilità non negativa, quindi $P(A)\le P(B)$. L’inclusione fra eventi impone così un confronto fra le loro probabilità.
+Il complementare di «almeno uno» è «nessuno». Per due monete regolari «nessuna testa» è il solo esito $TT$, che ha probabilità $\dfrac{1}{4}$, quindi «almeno una testa» ha probabilità $1-\dfrac{1}{4}=\dfrac{3}{4}$.
 
-Il complemento è utile per «almeno uno». Con due monete regolari indipendenti, l'unica sequenza senza teste è $TT$, con probabilità $\dfrac14$. La probabilità di almeno una testa è quindi $1-\dfrac14=\dfrac34$. Questo metodo considera insieme una e due teste senza duplicarle.
+**Regola dell'unione.** Nella somma $P(A)+P(B)$ gli esiti comuni sono contati due volte, e la sottrazione di $P(A\cap B)$ li riporta a una volta sola. Per $A=\{2,4,6\}$ e $B=\{4,5,6\}$ si ha $P(A)=\dfrac{3}{6}$, $P(B)=\dfrac{3}{6}$ e $P(A\cap B)=\dfrac{2}{6}$, quindi
+$$
+P(A\cup B)=\frac{3}{6}+\frac{3}{6}-\frac{2}{6}=\frac{4}{6}=\frac{2}{3}.
+$$
+Infatti $A\cup B=\{2,4,5,6\}$ ha 4 esiti su 6. Senza la sottrazione, gli eventi «esce un numero maggiore di 1» e «esce un numero pari» darebbero $\dfrac{5}{6}+\dfrac{3}{6}=\dfrac{8}{6}$, un valore maggiore di 1. Se $A$ e $B$ sono disgiunti, allora $P(A\cap B)=0$ e la regola si riduce a $P(A\cup B)=P(A)+P(B)$.
+
+Per «uno solo dei due» l'intersezione si toglie da entrambi gli eventi, quindi si sottrae due volte: $P(A)+P(B)-2P(A\cap B)=\dfrac{3}{6}+\dfrac{3}{6}-\dfrac{4}{6}=\dfrac{1}{3}$, cioè 2 esiti su 6.
+
+La scrittura $A\subseteq B$ si legge «$A$ è contenuto in $B$» e significa che ogni esito di $A$ appartiene anche a $B$. In questo caso $P(A)\le P(B)$, perché $B$ contiene tutti gli esiti di $A$. Per esempio «esce 6» è contenuto in «esce un numero pari», e infatti $\dfrac{1}{6}\le\dfrac{3}{6}$.
 :::
 
 ## Indipendenza e condizionamento
 
 :::definizione{#indipendenza-e-condizionamento titolo="Ridurre la popolazione di riferimento"}
-La probabilità condizionata $P(A\mid B)$ risponde alla domanda: quanto è probabile $A$, sapendo che $B$ si è verificato? Se $P(B)>0$,
+Si lancia un dado regolare e si viene a sapere che è uscito un numero pari, senza sapere quale. Gli esiti ancora possibili sono 2, 4 e 6, tutti con la stessa probabilità. La probabilità che sia uscito 6 è quindi $\dfrac{1}{3}$, mentre prima dell'informazione era $\dfrac{1}{6}$.
+
+La **probabilità condizionata** di $A$ dato $B$ è la probabilità di $A$ calcolata sapendo che $B$ si è verificato. Si indica con $P(A\mid B)$ e si legge «probabilità di $A$ dato $B$». A sinistra della barra verticale sta l'evento di cui si cerca la probabilità, a destra sta l'informazione nota. Se $P(B)>0$, si definisce
 $$
 P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
 $$
-Si conserva soltanto la parte dello spazio appartenente a $B$ e si ridimensionano i suoi pesi fino a un totale di uno. Sapendo che il risultato di un dado regolare è pari, restano $2,4,6$, ancora equiprobabili. La probabilità condizionata di sei è dunque $\dfrac13$. Il denominatore non è più il numero complessivo di facce.
+L'informazione riduce lo spazio degli esiti al solo evento $B$, e per questo $P(B)$ sta al denominatore. Di $A$ resta la parte contenuta in $B$, cioè $A\cap B$, che sta al numeratore. La condizione $P(B)>0$ evita la divisione per zero.
 
-Se $P(B)=0$, questa formula non definisce la probabilità condizionata: non si può dividere per zero. Inoltre $P(A\mid B)$ e $P(B\mid A)$ hanno denominatori diversi e non sono generalmente uguali. Leggere con precisione l'informazione introdotta da «sapendo che» determina quale evento va al denominatore.
+Per il dado, con $A=\{6\}$ e $B=\{2,4,6\}$, si ha $A\cap B=\{6\}$, $P(A\cap B)=\dfrac{1}{6}$ e $P(B)=\dfrac{3}{6}=\dfrac{1}{2}$. La formula dà
+$$
+P(A\mid B)=\frac{\frac{1}{6}}{\frac{1}{2}}=\frac{1}{6}\cdot2=\frac{2}{6}=\frac{1}{3},
+$$
+lo stesso valore trovato contando gli esiti rimasti. Nei quesiti la probabilità condizionata è introdotta da «sapendo che», «dato che», «fra quelli che».
+:::
+
+:::attenzione
+$P(A\mid B)$ e $P(B\mid A)$ sono due probabilità diverse, perché l'informazione nota è diversa. La probabilità che sia uscito 6 sapendo che il numero è pari è $\dfrac{1}{3}$. La probabilità che il numero sia pari sapendo che è uscito 6 è 1, perché 6 è pari.
 :::
 
 :::definizione{#indipendenza titolo="Indipendenza e incompatibilità"}
-Gli eventi $A$ e $B$ sono indipendenti quando
+Si lancia due volte una moneta regolare. Sapere che al primo lancio è uscita testa non cambia la probabilità di testa al secondo lancio, che resta $\dfrac{1}{2}$.
+
+Due eventi $A$ e $B$ sono **indipendenti** quando la probabilità che si verifichino entrambi è il prodotto delle due probabilità:
 $$
 P(A\cap B)=P(A)P(B).
 $$
-Se $P(B)>0$, ciò equivale a $P(A\mid B)=P(A)$: conoscere $B$ non cambia la probabilità di $A$. L'indipendenza va data dal modello oppure verificata attraverso i dati. Avere la stessa probabilità non rende due eventi indipendenti.
+Se $P(B)>0$, dividendo i due membri per $P(B)$ si ottiene $\dfrac{P(A\cap B)}{P(B)}=P(A)$, cioè $P(A\mid B)=P(A)$. Sapere che $B$ si è verificato non cambia quindi la probabilità di $A$.
 
-Eventi disgiunti con probabilità positive non sono indipendenti. La loro intersezione ha probabilità zero, mentre il prodotto delle probabilità è positivo. Sapere che uno è accaduto esclude l'altro. Per due lanci indipendenti di una moneta, invece, il risultato del primo non cambia la distribuzione del secondo. Anche dopo molte teste consecutive la probabilità della prossima testa resta un mezzo nel modello di moneta regolare e lanci indipendenti.
+Per i due lanci della moneta, l'evento $A$, «testa al primo lancio», è $\{HH,HT\}$ e ha probabilità $\dfrac{2}{4}=\dfrac{1}{2}$. L'evento $B$, «testa al secondo lancio», è $\{HH,TH\}$ e ha probabilità $\dfrac{1}{2}$. L'intersezione è $\{HH\}$, con probabilità $\dfrac{1}{4}$. Poiché $\dfrac{1}{2}\cdot\dfrac{1}{2}=\dfrac{1}{4}$, l'uguaglianza è verificata e i due eventi sono **indipendenti**. Per questo, anche dopo molte teste consecutive, la probabilità di testa al lancio seguente resta $\dfrac{1}{2}$.
 
-Condizionare su un terzo evento può invece modificare l’indipendenza: nei lanci di due monete, selezionare soltanto i casi con almeno una testa elimina TT e cambia le relazioni fra i risultati delle due posizioni.
+Avere la stessa probabilità non rende due eventi indipendenti. Per un dado regolare gli eventi $A=\{2,4,6\}$ e $B=\{4,5,6\}$ hanno entrambi probabilità $\dfrac{1}{2}$, con prodotto $\dfrac{1}{4}$, mentre l'intersezione $\{4,6\}$ ha probabilità $\dfrac{2}{6}=\dfrac{1}{3}$, quindi **non sono indipendenti**.
 
-L'indipendenza si conserva passando ai complementi. Se due dispositivi funzionano indipendentemente con probabilità $\dfrac45$ e $\dfrac34$, la probabilità che entrambi non funzionino è $\dfrac15\cdot\dfrac14=\dfrac1{20}$. La probabilità che almeno uno funzioni è perciò $\dfrac{19}{20}$. Se invece i dispositivi condividono una causa di guasto e non è data l'indipendenza, moltiplicare le due probabilità di guasto non è giustificato. Il calcolo dipende dalle relazioni fra gli eventi, oltre che dalle loro singole probabilità.
+Due eventi **incompatibili**, cioè disgiunti, con probabilità positive non sono indipendenti, perché la loro intersezione ha probabilità 0 mentre il prodotto $P(A)P(B)$ è positivo. Per un dado regolare «esce 1» e «esce 2» sono incompatibili, e il prodotto delle loro probabilità è $\dfrac{1}{6}\cdot\dfrac{1}{6}=\dfrac{1}{36}$, diverso da 0. Sapere che è uscito 1 esclude infatti che sia uscito 2.
+
+Un'informazione aggiuntiva può far perdere l'indipendenza a due eventi. Nei due lanci della moneta, sapendo che è uscita almeno una testa restano i tre esiti $HH,HT,TH$, equiprobabili. Fra questi, $A$ e $B$ hanno ciascuno probabilità $\dfrac{2}{3}$ e l'intersezione $\{HH\}$ ha probabilità $\dfrac{1}{3}$. Poiché $\dfrac{2}{3}\cdot\dfrac{2}{3}=\dfrac{4}{9}\ne\dfrac{1}{3}$, con questa informazione $A$ e $B$ non sono più indipendenti.
+
+Nei quesiti l'indipendenza è dichiarata dal testo («lanci indipendenti», «estrazioni con reinserimento», nelle quali l'oggetto estratto è rimesso al suo posto prima dell'estrazione successiva) oppure si verifica con l'uguaglianza del prodotto. Se $A$ e $B$ sono indipendenti, lo sono anche i complementari $A^c$ e $B^c$.
+:::
+
+:::esempio{titolo="Almeno uno di due dispositivi"}
+Due dispositivi funzionano in modo indipendente, il primo con probabilità $\dfrac{4}{5}$ e il secondo con probabilità $\dfrac{3}{4}$. Si cerca la probabilità che almeno uno funzioni, il cui complementare è «nessuno dei due funziona». Il primo non funziona con probabilità $1-\dfrac{4}{5}=\dfrac{1}{5}$ e il secondo con probabilità $1-\dfrac{3}{4}=\dfrac{1}{4}$. Anche i complementari sono indipendenti, quindi nessuno dei due funziona con probabilità $\dfrac{1}{5}\cdot\dfrac{1}{4}=\dfrac{1}{20}$. La probabilità cercata è $1-\dfrac{1}{20}=\dfrac{19}{20}$. Se i due dispositivi avessero una causa di guasto comune, come la stessa alimentazione, i guasti non sarebbero indipendenti e il prodotto non si applicherebbe.
+:::
+
+:::esempio{titolo="Esattamente tre teste in quattro lanci"}
+Si lancia 4 volte una moneta regolare, con lanci indipendenti. Ogni sequenza di 4 risultati ha probabilità $\dfrac{1}{2}\cdot\dfrac{1}{2}\cdot\dfrac{1}{2}\cdot\dfrac{1}{2}=\dfrac{1}{16}$. Le sequenze con esattamente 3 teste sono 4, una per ogni posizione dell'unica croce: $HHHT,HHTH,HTHH,THHH$. La probabilità di esattamente 3 teste è quindi $4\cdot\dfrac{1}{16}=\dfrac{1}{4}$.
+
+Se la moneta è truccata e dà testa con probabilità $p$ a ogni lancio, le sequenze con un numero diverso di teste non sono più equiprobabili. Ogni sequenza con 3 teste e 1 croce ha probabilità $p\cdot p\cdot p\cdot(1-p)=p^3(1-p)$, e la probabilità di esattamente 3 teste è $4p^3(1-p)$. Lo stesso vale per 4 prove indipendenti qualsiasi con probabilità di successo $p$.
 :::
 
 ## Estrazioni e diagrammi ad albero
 
 :::teorema{#estrazioni-e-diagrammi-ad-albero titolo="Probabilità lungo un percorso"}
-Dalla definizione di condizionamento segue
+Dalla definizione $P(B\mid A)=\dfrac{P(A\cap B)}{P(A)}$, moltiplicando i due membri per $P(A)$, si ottiene la **regola del prodotto**, che vale quando $P(A)>0$:
 $$
-P(A\cap B)=P(A)P(B\mid A),
+P(A\cap B)=P(A)P(B\mid A).
 $$
-quando $P(A)>0$. Il prodotto descrive il verificarsi di entrambe le condizioni, anche senza un ordine temporale fra esse. Un diagramma ad albero organizza queste possibilità: ogni nodo rappresenta ciò che è già noto e i rami successivi riportano probabilità condizionate a quella storia. Le probabilità dei rami uscenti da uno stesso nodo sommano a uno. Si moltiplica lungo ciascun percorso e si sommano percorsi alternativi disgiunti che realizzano l'evento richiesto.
+La probabilità che si verifichino sia $A$ sia $B$ è la probabilità di $A$ per la probabilità di $B$ sapendo $A$. La regola vale anche quando $A$ e $B$ non si succedono nel tempo.
 
-Con tre palline rosse e due blu, estrarre due rosse senza reinserimento ha probabilità $\dfrac35\cdot\dfrac24=\dfrac3{10}$. La prima pallina rossa lascia due rosse fra quattro palline. Reinserendo e mescolando ogni volta, con estrazioni indipendenti uniformi, la probabilità diventa $\dfrac35\cdot\dfrac35=\dfrac9{25}$. Il reinserimento modifica il modello, quindi cambia il secondo fattore.
+Da un'urna con 3 palline rosse e 2 blu se ne estraggono due, una dopo l'altra. Si cerca la probabilità che siano entrambe rosse. L'evento $A$ è «la prima è rossa» e l'evento $B$ è «la seconda è rossa».
+
+- **Senza reinserimento**, cioè senza rimettere nell'urna la prima pallina estratta. Le rosse sono 3 su 5, quindi $P(A)=\dfrac{3}{5}$. Dopo una rossa restano 4 palline, di cui 2 rosse, quindi $P(B\mid A)=\dfrac{2}{4}$. La probabilità cercata è $\dfrac{3}{5}\cdot\dfrac{2}{4}=\dfrac{6}{20}=\dfrac{3}{10}$.
+- **Con reinserimento**, cioè rimettendo nell'urna la prima pallina. L'urna torna com'era, quindi $P(B\mid A)=\dfrac{3}{5}$ e le due estrazioni sono indipendenti. La probabilità cercata è $\dfrac{3}{5}\cdot\dfrac{3}{5}=\dfrac{9}{25}$.
+
+Un **diagramma ad albero** rappresenta un esperimento in più fasi. Da un punto iniziale parte un ramo per ogni risultato della prima fase, e dalla fine di ogni ramo partono i rami della seconda fase. Su ogni ramo si scrive la probabilità di quel risultato, condizionata ai rami che lo precedono. Un **percorso** è una successione di rami dal punto iniziale all'ultima fase.
+
+- Le probabilità dei rami che partono dallo stesso punto hanno somma 1.
+- La probabilità di un percorso è il prodotto delle probabilità dei suoi rami, per la regola del prodotto.
+- La probabilità di un evento è la somma delle probabilità dei percorsi che lo realizzano, perché percorsi diversi sono eventi disgiunti.
+:::
+
+:::esempio{titolo="L'albero di due estrazioni senza reinserimento"}
+L'albero delle due estrazioni senza reinserimento dall'urna con 3 rosse e 2 blu ha quattro percorsi.
+
+| Percorso | Prodotto dei due rami |
+| --- | :---: |
+| rossa, rossa | $\dfrac{3}{5}\cdot\dfrac{2}{4}=\dfrac{6}{20}$ |
+| rossa, blu | $\dfrac{3}{5}\cdot\dfrac{2}{4}=\dfrac{6}{20}$ |
+| blu, rossa | $\dfrac{2}{5}\cdot\dfrac{3}{4}=\dfrac{6}{20}$ |
+| blu, blu | $\dfrac{2}{5}\cdot\dfrac{1}{4}=\dfrac{2}{20}$ |
+
+Dopo una rossa restano 2 rosse e 2 blu; dopo una blu restano 3 rosse e 1 blu. La probabilità di una rossa alla seconda estrazione è quindi $\dfrac{2}{4}$ oppure $\dfrac{3}{4}$ secondo il colore della prima, e per questo senza reinserimento le due estrazioni non sono indipendenti. L'evento «due palline di colore diverso» è realizzato dai percorsi «rossa, blu» e «blu, rossa», quindi ha probabilità $\dfrac{6}{20}+\dfrac{6}{20}=\dfrac{12}{20}=\dfrac{3}{5}$.
 :::
 
 :::esempio{#probabilita-totale titolo="Somma di percorsi e informazione inversa"}
-Si sceglie con uguale probabilità una di due urne: la prima contiene tre rosse e una blu, la seconda una rossa e tre blu. Poi si estrae uniformemente una pallina dall'urna scelta. I due percorsi che producono il rosso hanno probabilità
+Si sceglie una di due urne con il lancio di una moneta regolare, quindi ciascuna urna ha probabilità $\dfrac{1}{2}$. L'urna $U_1$ contiene 3 palline rosse e 1 blu, l'urna $U_2$ contiene 1 rossa e 3 blu. Dall'urna scelta si estrae una pallina, e $R$ è l'evento «la pallina è rossa».
+
+**Probabilità di una pallina rossa.** L'albero ha due percorsi che terminano con una rossa, uno per urna:
 $$
 P(U_1\cap R)=\frac12\cdot\frac34=\frac38,\qquad
 P(U_2\cap R)=\frac12\cdot\frac14=\frac18.
 $$
-Quindi $P(R)=\dfrac38+\dfrac18=\dfrac12$. Se si osserva una pallina rossa, la probabilità che provenga dalla prima urna è $\dfrac{\frac38}{\frac12}=\dfrac34$. Il rosso è compatibile con entrambe le urne, ma rende più probabile la prima. La divisione confronta il percorso desiderato con tutti i percorsi che producono l'osservazione.
+La loro somma è $P(R)=\dfrac{3}{8}+\dfrac{1}{8}=\dfrac{4}{8}=\dfrac{1}{2}$.
+
+**Informazione inversa.** La pallina estratta è rossa e si cerca la probabilità che provenga da $U_1$, cioè $P(U_1\mid R)$. Per la definizione di probabilità condizionata
+$$
+P(U_1\mid R)=\frac{P(U_1\cap R)}{P(R)}=\frac{\frac{3}{8}}{\frac{1}{2}}=\frac{3}{8}\cdot2=\frac{6}{8}=\frac{3}{4}.
+$$
+Il numeratore è la probabilità del percorso che passa per $U_1$, e il denominatore è la somma delle probabilità dei percorsi che terminano con una rossa. Una pallina rossa esce da entrambe le urne, ma la sua estrazione porta la probabilità di $U_1$ da $\dfrac{1}{2}$ a $\dfrac{3}{4}$, perché $U_1$ contiene più rosse di $U_2$.
 :::
 
 ## Variabili e frequenze
 
 :::definizione{#variabili titolo="Che cosa viene osservato"}
-Una variabile qualitativa descrive una categoria, come il colore o la specie. Una variabile quantitativa descrive una quantità. È discreta quando i valori derivano da un conteggio, come il numero di libri presi in prestito; è continua nel modello di una misura, come massa o durata. Lo strumento può arrotondare una misura senza trasformare la grandezza fisica in un conteggio.
+Un'indagine statistica raccoglie dati su persone o oggetti, chiamati **unità**.
 
-Un codice numerico assegnato a una specie resta un’etichetta qualitativa. Per categorie ordinate, come basso, medio e alto, si può individuare una mediana; una media aritmetica richiede invece valori quantitativi, non codici arbitrari.
+- La **popolazione** è l'insieme di tutte le unità che interessano l'indagine, per esempio gli studenti di una scuola.
+- Il **campione** è la parte della popolazione effettivamente osservata, per esempio i 50 studenti intervistati.
+- Una **variabile** è la caratteristica rilevata su ogni unità, per esempio il colore degli occhi o l'altezza.
 
-La popolazione è l'insieme delle unità a cui si riferisce l'indagine; il campione è il gruppo effettivamente osservato. Ogni frequenza va associata a questa base. «Dodici studenti» è un conteggio, mentre «il quaranta per cento» è una proporzione che richiede di conoscere quanti studenti siano stati considerati.
+Le variabili sono di due tipi.
+
+- Una variabile **qualitativa** ha per valori delle categorie, come il colore degli occhi o la specie di una pianta.
+- Una variabile **quantitativa** ha per valori dei numeri. È **discreta** quando i valori nascono da un conteggio, come il numero di libri presi in prestito. È **continua** quando i valori nascono da una misura e sono numeri qualsiasi di un intervallo, come una massa o una durata.
+
+Una massa resta continua anche quando la bilancia la mostra arrotondata a $2{,}3\,\mathrm{kg}$. Una variabile qualitativa resta tale anche quando le categorie hanno codici numerici: se tre specie sono indicate con 1, 2 e 3, la media dei codici non ha significato, perché la media si calcola soltanto per le variabili quantitative.
 :::
 
 :::definizione{#frequenze titolo="Frequenze assolute, relative e cumulate"}
-La frequenza assoluta $n_i$ conta quante volte compare un valore o una categoria. Se il totale è $N>0$, la frequenza relativa è $f_i=\dfrac{n_i}{N}$. Per categorie disgiunte che coprono tutte le osservazioni, le frequenze assolute sommano a $N$ e quelle relative a uno. Con risposte multiple allo stesso questionario, una persona può appartenere a più categorie: la somma dei conteggi può allora superare il numero dei rispondenti.
+Si chiede a 16 studenti quanti libri hanno preso in prestito in un mese. La tabella riassume le risposte, e $N=16$ è il numero totale dei dati.
 
-Per dati ordinati, la frequenza cumulata fino a un valore conta tutte le osservazioni non superiori a quel valore. Se i cumulati fino a due e fino a tre sono rispettivamente undici e diciannove, la frequenza del valore tre è $19-11=8$. Un cumulato non può diminuire quando la soglia aumenta. L'ultimo cumulato coincide con il totale, se comprende tutti i valori osservati.
+| Libri | Frequenza assoluta | Frequenza relativa | Frequenza cumulata |
+| :---: | :---: | :---: | :---: |
+| 0 | 5 | $\dfrac{5}{16}$ | 5 |
+| 1 | 7 | $\dfrac{7}{16}$ | 12 |
+| 2 | 3 | $\dfrac{3}{16}$ | 15 |
+| 3 | 1 | $\dfrac{1}{16}$ | 16 |
 
-Le frequenze permettono di individuare posizioni senza espandere tutta la lista. Con frequenze cinque, sette, tre e uno per i valori zero, uno, due e tre, ci sono sedici osservazioni. Le posizioni ottava e nona determinano la mediana. Le prime cinque osservazioni valgono zero e quelle dalla sesta alla dodicesima valgono uno, quindi entrambe le posizioni centrali contengono uno. La mediana è uno, benché la media non coincida necessariamente con questo valore. Le frequenze cumulate indicano precisamente in quale gruppo cade ogni posizione.
+- La **frequenza assoluta** di un valore è il numero di volte in cui il valore compare. Si indica con $n_i$, dove il pedice $i$ numera i valori: $n_1=5$, $n_2=7$ e così via. Le frequenze assolute hanno somma $N$, infatti $5+7+3+1=16$.
+- La **frequenza relativa** di un valore è la frazione dei dati che hanno quel valore, cioè $f_i=\dfrac{n_i}{N}$. Il valore 1 ha frequenza relativa $\dfrac{7}{16}=0{,}4375$, cioè il $43{,}75\%$ dei dati. Le frequenze relative hanno somma 1.
+- La **frequenza cumulata** fino a un valore è il numero dei dati minori o uguali a quel valore. Si ottiene sommando le frequenze assolute dalla prima riga fino alla riga del valore: $5$, poi $5+7=12$, poi $12+3=15$, poi $15+1=16$. Passando a un valore più grande la cumulata non diminuisce mai, e l'ultima è uguale a $N$.
+
+La differenza fra due frequenze cumulate consecutive è una frequenza assoluta. Le cumulate fino a 2 e fino a 1 sono 15 e 12, quindi il valore 2 compare $15-12=3$ volte.
+
+Le frequenze cumulate indicano quale valore occupa ogni posto dell'elenco dei dati in ordine crescente. Per la cumulata 5, i posti dal primo al quinto contengono il valore 0. Per la cumulata 12, i posti dal sesto al dodicesimo contengono il valore 1. I due posti centrali fra 16, l'ottavo e il nono, contengono quindi entrambi 1. Il valore del posto centrale si chiama mediana, e qui è 1.
+
+Una frequenza assoluta si interpreta insieme al totale a cui si riferisce: 12 studenti su 30 sono il $40\%$, mentre 12 studenti su 60 sono il $20\%$.
+
+Se un questionario ammette più risposte, la stessa persona è contata in più categorie e la somma delle frequenze supera il numero delle persone. Fra 10 persone, 7 indicano il cinema e 6 lo sport, con somma $7+6=13$.
 :::
 
 ## Media, mediana e variabili
 
 :::definizione{#media-mediana-e-variabili titolo="Media e pesi"}
-La media aritmetica di $N$ dati è la loro somma divisa per $N$. Se i valori $x_i$ hanno frequenze $n_i$,
+La **media aritmetica** di $N$ dati numerici è la loro somma divisa per $N$. Si indica con $\bar x$, che si legge «$x$ medio». I quattro voti $6,7,8,7$ hanno media
+$$
+\bar x=\frac{6+7+8+7}{4}=\frac{28}{4}=7.
+$$
+Quando i dati sono riassunti in una tabella di frequenze, il valore $x_i$ compare $n_i$ volte, quindi contribuisce alla somma con il prodotto $n_ix_i$. La media è allora
 $$
 \bar x=\frac{\sum_i n_ix_i}{\sum_i n_i}.
 $$
-La frequenza indica quante volte ciascun valore contribuisce alla somma. Per unire due gruppi si pesano quindi le medie con le dimensioni dei gruppi: dieci risultati di media diciotto e trenta di media ventisei danno $\dfrac{10\cdot18+30\cdot26}{40}=24$. La media semplice delle due medie è garantita corretta per gruppi della stessa numerosità. Lo è anche, indipendentemente dalle numerosità, se le due medie coincidono.
+Il simbolo $\sum$, la lettera greca sigma maiuscola, si legge «somma». Il numeratore è la somma dei prodotti $n_ix_i$ per tutti i valori, e il denominatore è la somma delle frequenze, cioè $N$. Per i libri dei 16 studenti, con valori $0,1,2,3$ e frequenze $5,7,3,1$, si ottiene
+$$
+\bar x=\frac{5\cdot0+7\cdot1+3\cdot2+1\cdot3}{16}=\frac{0+7+6+3}{16}=\frac{16}{16}=1.
+$$
+In questa formula le frequenze si chiamano anche **pesi**, e la media si chiama **media pesata**.
 
-La media conserva l'unità dei dati e deve stare fra il minimo e il massimo. Conoscere la media e il numero dei dati permette di ricostruire la somma, ma non i singoli valori né, in generale, la mediana. Distribuzioni differenti possono avere la stessa media.
+La media ha la stessa unità di misura dei dati ed è compresa fra il dato minimo e il dato massimo. Dalla media e dal numero dei dati si ricava la somma dei dati, $N\cdot\bar x$: quattro voti di media 7 hanno somma $4\cdot7=28$. I singoli dati e la mediana, cioè il valore centrale dei dati ordinati, non si ricavano. Anche i dati $4,4,4,16$ hanno somma 28 e media 7, ma il loro valore centrale è 4, mentre quello dei voti ordinati $6,7,7,8$ è 7.
+:::
+
+:::esempio{titolo="La media di due gruppi riuniti"}
+Un gruppo di 10 studenti ha media 18 e un gruppo di 30 studenti ha media 26. La somma dei punteggi del primo gruppo è $10\cdot18=180$ e quella del secondo è $30\cdot26=780$. La media dei 40 studenti è
+$$
+\bar x=\frac{180+780}{40}=\frac{960}{40}=24.
+$$
+Il risultato è più vicino a 26 che a 18, perché il secondo gruppo è più numeroso. La media delle due medie, $\dfrac{18+26}{2}=22$, è diversa da 24. I due valori coincidono soltanto per gruppi con lo stesso numero di dati, oppure con medie uguali.
 :::
 
 :::definizione{#mediana-moda titolo="Posizione centrale e dispersione"}
-Per trovare la mediana si ordinano tutti i dati, comprese le ripetizioni. Se $N$ è dispari, si prende il dato in posizione $\dfrac{N+1}{2}$; se è pari, si fa la media dei dati in posizione $\dfrac N2$ e $\dfrac N2+1$. La moda è un valore con frequenza massima e può non essere unica. Il campo di variazione è la differenza fra massimo e minimo e descrive una semplice misura di dispersione.
+La **mediana** è il valore che occupa il posto centrale quando i dati sono scritti in ordine crescente, ripetizioni comprese.
 
-Almeno metà delle osservazioni ha valore non superiore alla mediana e almeno metà ha valore non inferiore. Le mediane dei singoli gruppi non determinano, in generale, la mediana della loro unione.
+- Se il numero $N$ dei dati è dispari, il posto centrale è il numero $\dfrac{N+1}{2}$. Per i 5 dati $3,5,5,8,9$ è il posto $\dfrac{5+1}{2}=3$, e la mediana è il terzo dato, cioè 5.
+- Se $N$ è pari, i posti centrali sono $\dfrac{N}{2}$ e $\dfrac{N}{2}+1$, e la mediana è la media dei due dati che li occupano. Per i 4 dati $3,5,6,8$ sono il secondo e il terzo posto, e la mediana è $\dfrac{5+6}{2}=5{,}5$.
 
-Nei dati $1,2,3,4,100$, la mediana è tre e la media è ventidue. Sostituendo cento con duecento, la mediana resta tre mentre la media aumenta di venti. Un valore estremo modifica fortemente la somma, ma può lasciare immutata la posizione centrale. Aggiungere una costante a ogni dato aumenta media e mediana della stessa costante, lasciando invariato il campo di variazione.
+Almeno metà dei dati è minore o uguale alla mediana e almeno metà è maggiore o uguale. La mediana richiede soltanto che i dati si possano ordinare, quindi esiste anche per categorie ordinate come «basso», «medio», «alto».
+
+Per i libri dei 16 studenti i posti centrali sono $\dfrac{16}{2}=8$ e $\dfrac{16}{2}+1=9$. Per le frequenze cumulate 5 e 12, entrambi contengono il valore 1, quindi la mediana è $\dfrac{1+1}{2}=1$.
+
+La mediana di due gruppi riuniti si calcola sull'elenco completo dei dati, perché le due mediane non bastano a determinarla. I gruppi $1,2,9$ e $3,4,5$ hanno mediane 2 e 4, e riuniti hanno mediana $\dfrac{3+4}{2}=3{,}5$. Anche i gruppi $2,2,2$ e $4,4,4$ hanno mediane 2 e 4, ma riuniti hanno mediana $\dfrac{2+4}{2}=3$.
+
+La **moda** è il valore con la frequenza più alta. Nei dati $3,5,5,8,9$ la moda è 5. Se più valori hanno la stessa frequenza massima, le mode sono più di una: nei dati $1,1,2,2,3$ sono 1 e 2.
+
+Il **campo di variazione** è la differenza fra il dato massimo e il dato minimo e misura la **dispersione**, cioè quanto i dati sono lontani fra loro. Per i dati $3,5,5,8,9$ vale $9-3=6$.
+:::
+
+:::esempio{titolo="Un dato molto lontano dagli altri"}
+I dati $1,2,3,4,100$ hanno mediana 3 e media $\dfrac{1+2+3+4+100}{5}=\dfrac{110}{5}=22$. Sostituendo 100 con 200, la mediana resta 3 e la media diventa $\dfrac{210}{5}=42$. Un dato molto lontano dagli altri sposta la media e lascia invariata la mediana, perché la media dipende dalla somma di tutti i dati e la mediana soltanto dal dato centrale.
+
+Aggiungendo 10 a ogni dato si ottengono $11,12,13,14,110$. La mediana passa da 3 a 13 e la media da 22 a 32, cioè aumentano entrambe di 10, mentre il campo di variazione resta $110-11=99$.
 :::
 
 ## Tabelle e percentuali
 
 :::esempio{#tabelle-e-percentuali titolo="Cella, margine e denominatore"}
-Una tabella registra quaranta iscritti a due corsi.
+Una **tabella a doppia entrata** classifica le stesse unità secondo due variabili, una sulle righe e una sulle colonne. Qui i 40 iscritti a due corsi, A e B, sono classificati secondo la presenza a una lezione.
 
 | Corso | Presenti | Assenti | Totale |
 | --- | ---: | ---: | ---: |
@@ -178,29 +358,64 @@ Una tabella registra quaranta iscritti a due corsi.
 | B | 9 | 11 | 20 |
 | Totale | 21 | 19 | 40 |
 
-Scegliendo uniformemente un iscritto, la probabilità di essere presente e appartenere a B è $\dfrac9{40}$. Sapendo che è presente, la probabilità di B è $\dfrac9{21}=\dfrac37$. Sapendo invece che appartiene a B, la probabilità di essere presente è $\dfrac9{20}$. Il numeratore resta nove, mentre il riferimento cambia con la domanda. I totali marginali riuniscono una riga o una colonna senza imporre l'altra caratteristica.
+Ogni **cella** interna conta le unità che hanno insieme la caratteristica della riga e quella della colonna: i presenti del corso B sono 9. I **totali marginali**, nell'ultima riga e nell'ultima colonna, contano le unità con una sola caratteristica: i presenti sono 21 e gli iscritti al corso B sono 20.
+
+Si sceglie a caso un iscritto, con la stessa probabilità per tutti. Tre domande usano la stessa cella con tre denominatori diversi.
+
+- La probabilità che l'iscritto sia del corso B *e* sia presente è $\dfrac{9}{40}$. Il denominatore è il totale generale, perché non si ha alcuna informazione.
+- La probabilità che sia del corso B *sapendo che* è presente è $\dfrac{9}{21}=\dfrac{3}{7}$. Il denominatore è il totale dei presenti, perché l'informazione restringe la scelta ai 21 presenti.
+- La probabilità che sia presente *sapendo che* è del corso B è $\dfrac{9}{20}$. Il denominatore è il totale dei 20 iscritti al corso B.
 :::
 
 :::osservazione{#percentuali-dati titolo="Percentuali, punti e arrotondamenti"}
-Una frequenza relativa si trasforma in percentuale moltiplicandola per cento. Passare dal venti al venticinque per cento significa aumentare di cinque **punti percentuali**; l'aumento relativo è invece $\dfrac{25-20}{20}=25\%$. Le due misure rispondono a domande differenti.
+Una **percentuale** è una frequenza relativa moltiplicata per 100. Il simbolo $\%$ si legge «per cento» e indica i centesimi. Nove presenti su 20 iscritti sono $\dfrac{9}{20}=0{,}45$, cioè il $45\%$.
 
-Se si riuniscono gruppi di diversa dimensione, si sommano prima i conteggi e poi si divide per il totale complessivo. Inoltre una percentuale pubblicata può essere arrotondata. Dieci persone su trenta sono il $33{,}\overline3\%$, che arrotondato all'intero diventa $33\%$: non occorre che il prodotto $30\cdot0{,}33$ sia intero. La precisione dichiarata determina quali conteggi siano compatibili con il dato.
+La variazione di una percentuale si esprime in due modi. Si supponga che una quota passi dal $20\%$ al $25\%$.
+
+- La differenza $25-20=5$ si misura in **punti percentuali**: la quota è aumentata di 5 punti percentuali.
+- La **variazione relativa** confronta la differenza con il valore di partenza. Vale $\dfrac{25-20}{20}=\dfrac{5}{20}=0{,}25$, quindi la quota è aumentata del $25\%$.
+
+Per riunire due gruppi si sommano i conteggi e poi si divide per il totale complessivo. Con 18 promossi su 20 in una classe ($90\%$) e 15 su 30 in un'altra ($50\%$), i promossi delle due classi sono $18+15=33$ su 50, cioè il $66\%$, e non il $70\%$ che si ottiene come media delle due percentuali.
+
+Le percentuali pubblicate sono arrotondate, per esempio all'intero. Dieci persone su 30 sono $\dfrac{10}{30}=0{,}333\ldots$, cioè il $33{,}\overline3\%$, dove il trattino sopra la cifra 3 indica che la cifra si ripete senza fine. Arrotondata, la percentuale diventa $33\%$. Per questo $30\cdot0{,}33=9{,}9$ non è intero. Il conteggio è 10, l'unico intero che su 30 persone dà $33\%$ dopo l'arrotondamento.
 :::
 
 ## Grafici e interpretazione
 
 :::definizione{#grafici titolo="Barre, settori e istogrammi"}
-In un grafico a barre le altezze rappresentano frequenze o altre quantità indicate sull'asse verticale. La scala e l'origine dell'asse vanno lette prima di confrontare visivamente le barre. Un diagramma a settori rappresenta parti di un totale: un settore di ampiezza $\theta$ gradi corrisponde alla frazione $\dfrac{\theta}{360}$ del totale.
+Un grafico statistico rappresenta le frequenze con altezze, angoli o aree.
 
-In un istogramma con classi di ampiezza diversa, la frequenza è rappresentata dall'area del rettangolo. L'altezza è una densità: occorre moltiplicarla per l'ampiezza della classe. Due rettangoli con basi due e tre e altezze sei e quattro hanno entrambi area dodici e quindi la stessa frequenza. Confrontare soltanto le altezze darebbe una conclusione errata.
+- Un **grafico a barre** ha una barra per ogni categoria o valore, con altezza uguale alla frequenza, che si legge sull'asse verticale. Le altezze sono proporzionali alle frequenze quando l'asse verticale parte da 0. Se l'asse parte da 40, due barre di frequenze 50 e 60 sono disegnate con altezze 10 e 20, quindi la seconda appare doppia della prima, mentre il rapporto fra le frequenze è $\dfrac{60}{50}=1{,}2$.
+- Un **diagramma a settori**, o grafico a torta, divide un cerchio in settori, uno per categoria, con l'angolo proporzionale alla frequenza. L'intero cerchio misura $360^\circ$, quindi un settore di $\theta$ gradi (la lettera greca $\theta$ si legge «theta») rappresenta la frazione $\dfrac{\theta}{360}$ del totale. Un settore di $90^\circ$ rappresenta $\dfrac{90}{360}=\dfrac{1}{4}$ del totale, cioè il $25\%$.
+- Un **istogramma** rappresenta una variabile quantitativa i cui valori sono raggruppati in intervalli, chiamati **classi**. Ogni classe è un rettangolo che ha per base l'intervallo della classe, e la frequenza della classe è l'**area** del rettangolo.
 
-Le classi devono anche specificare l'inclusione degli estremi. Negli intervalli $[0,2)$ e $[2,5)$, il valore due appartiene soltanto alla seconda classe: ogni osservazione viene contata una volta. Se le aree rappresentano frequenze relative, la loro somma è uno; se rappresentano frequenze assolute, la somma è il numero delle osservazioni. Un grafico che raggruppa i dati in intervalli perde il dettaglio dei valori interni: può permettere di contare quante osservazioni cadono in una classe, senza determinare la loro media esatta.
+L'altezza di un rettangolo dell'istogramma si chiama **densità di frequenza** ed è la frequenza divisa per l'ampiezza della classe, cioè per la lunghezza del suo intervallo. Se tutte le classi hanno la stessa ampiezza, le altezze sono proporzionali alle frequenze.
+
+Ogni dato appartiene a una sola classe. Nella scrittura $[0,2)$ il simbolo $[$ indica che l'estremo 0 appartiene alla classe e il simbolo $)$ indica che l'estremo 2 ne è escluso. Con le classi $[0,2)$ e $[2,5)$ il valore 2 appartiene soltanto alla seconda.
+
+Nella figura l'asse orizzontale riporta la variabile $x$ e l'asse verticale la densità $d$. La classe da 0 a 2 ha ampiezza 2 e altezza 6, quindi frequenza $2\cdot6=12$. La classe da 2 a 5 ha ampiezza 3 e altezza 4, quindi frequenza $3\cdot4=12$. Le due classi contengono lo stesso numero di dati, anche se il primo rettangolo è più alto. La somma delle aree è il numero totale dei dati, $12+12=24$; se le aree rappresentano frequenze relative, la somma è 1. Un istogramma riporta quanti dati cadono in ogni classe e non conserva i singoli valori, quindi la loro media esatta richiede l'elenco dei dati.
 
 ::grafico{poligoni="0,0 2,0 2,6 0,6;2,0 5,0 5,4 2,4" xmin=-0.5 xmax=5.5 ymin=-0.5 ymax=7 nomi="x,d" titolo="Classi di ampiezza due e tre: aree uguali nonostante le altezze diverse"}
 :::
 
 :::osservazione{#campioni titolo="Che cosa permettono di concludere i dati"}
-Una frequenza osservata descrive il campione raccolto. Non coincide necessariamente con la probabilità teorica del modello e non garantisce la frequenza della prossima prova. Sette teste in dieci lanci non rendono la probabilità della prossima testa uguale a sette decimi se il modello specifica lanci regolari indipendenti.
+I calcoli su una tabella o su un grafico descrivono i dati raccolti. Le conclusioni che vanno oltre dipendono da come i dati sono stati ottenuti.
 
-Per estendere un risultato alla popolazione serve considerare come è stato scelto il campione. Un sondaggio a partecipazione volontaria può attirare soprattutto persone già interessate all'argomento; aumentare il numero di risposte non elimina automaticamente questo sbilanciamento. Se mancano alcune risposte, la quota sull’intera popolazione può avere soltanto limiti: si considerano i casi estremi in cui tutti i non rispondenti sono contrari oppure favorevoli. Inoltre un confronto fra tassi può invertirsi aggregando sottogruppi di dimensioni molto diverse; il totale incorpora anche questi pesi. Infine una relazione osservata tra due variabili non dimostra da sola che una causi l'altra: potrebbero intervenire altre caratteristiche comuni. Questi limiti riguardano l'interpretazione dei dati, anche quando i calcoli numerici sono corretti.
+- **Frequenza osservata e probabilità.** Si supponga che una moneta regolare, lanciata 10 volte, dia 7 teste. La frequenza relativa osservata di testa è $\dfrac{7}{10}$. La probabilità di testa al lancio successivo resta $\dfrac{1}{2}$, perché la moneta è regolare e i lanci sono indipendenti. La frequenza osservata descrive i 10 lanci eseguiti.
+- **Scelta del campione.** Il risultato di un campione si usa come stima per la popolazione quando il campione è scelto a caso, cioè quando ogni unità ha la stessa probabilità di farne parte. A un sondaggio sullo sport al quale risponde chi vuole partecipano soprattutto le persone interessate, quindi la quota di sportivi nel campione è più alta che nella popolazione, anche con molte risposte.
+- **Risposte mancanti.** Si supponga che su 100 persone interpellate rispondano in 80 e che 50 siano favorevoli. Se le 20 che non hanno risposto fossero tutte contrarie, i favorevoli sarebbero 50 su 100. Se fossero tutte favorevoli, sarebbero $50+20=70$ su 100. La quota dei favorevoli fra le 100 persone è quindi compresa fra il $50\%$ e il $70\%$.
+- **Relazione e causa.** Si supponga che nei mesi in cui si vendono più gelati si registrino più scottature solari. Le due variabili crescono insieme perché dipendono entrambe da una terza, il numero di giornate di sole. Una relazione fra due variabili, da sola, non prova che una sia la causa dell'altra.
+- **Totali e sottogruppi.** Un confronto fra due percentuali può invertirsi quando si riuniscono sottogruppi di dimensioni molto diverse, perché il totale dipende anche dalle loro dimensioni.
+:::
+
+:::esempio{titolo="Un confronto che si inverte nel totale"}
+Due metodi di studio, A e B, sono provati su quesiti facili e difficili. Ogni cella riporta i quesiti risolti su quelli affrontati (dati d'esercizio).
+
+| Quesiti | Metodo A | Metodo B |
+| --- | :---: | :---: |
+| Facili | 9 su 10 ($90\%$) | 80 su 100 ($80\%$) |
+| Difficili | 30 su 100 ($30\%$) | 2 su 10 ($20\%$) |
+| Totale | 39 su 110 (circa $35\%$) | 82 su 110 (circa $75\%$) |
+
+Il metodo A ha la percentuale più alta sia nei quesiti facili sia nei difficili, mentre nel totale prevale B. Il confronto si inverte perché con B sono stati affrontati quasi soltanto quesiti facili e con A quasi soltanto quesiti difficili.
 :::
