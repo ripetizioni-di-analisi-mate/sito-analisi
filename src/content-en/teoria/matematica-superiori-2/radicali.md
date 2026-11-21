@@ -1,6 +1,6 @@
 ---
 titolo: "Real Numbers and Radicals"
-sommario: "Real roots, domains, taking out factors, rationalizing denominators and rational exponents, with exact checks and comparisons of signs."
+sommario: "Real roots, domains, taking out factors, rationalising denominators and rational exponents, with exact checks and comparisons of signs."
 ---
 
 ## Rational and irrational numbers
@@ -141,7 +141,7 @@ By definition, $\sqrt{k^2a}$ is the unique nonnegative number whose square is $k
 - It is nonnegative, because it is the product of two nonnegative numbers.
 - Its square is $(|k|\sqrt a)^2=|k|^2(\sqrt a)^2=k^2a$, because $|k|^2=k^2$ and $(\sqrt a)^2=a$.
 
-Therefore $|k|\sqrt a$ has both properties that characterize the square root of $k^2a$, so it equals that root.
+Therefore $|k|\sqrt a$ has both properties that characterise the square root of $k^2a$, so it equals that root.
 :::
 ::::
 
@@ -246,10 +246,10 @@ $$
 On its own, the final radical would be defined for $x\ge-1$. The original quotient, however, is not defined for $x\le1$; for example, at $x=1$ the denominator $\sqrt{x-1}$ equals zero. Therefore the values of the final form can be used only while keeping the restriction $x>1$.
 :::
 
-## Rationalizing a single radical
+## Rationalising a single radical
 
 :::definizione{#razionalizzazione titolo="A factor that completes the power"}
-To **rationalize** a fraction is to remove the radicals from its denominator. With a numerical denominator, the goal is an equivalent fraction, that is, one with the same value, that has a rational denominator. The numerator and denominator are multiplied by the same nonzero factor, so the value of the quotient is preserved. For example, multiplying by $\sqrt3$,
+To **rationalise** a fraction is to remove the radicals from its denominator. With a numerical denominator, the goal is an equivalent fraction, that is, one with the same value, that has a rational denominator. The numerator and denominator are multiplied by the same nonzero factor, so the value of the quotient is preserved. For example, multiplying by $\sqrt3$,
 $$
 \frac4{\sqrt3}=\frac{4\sqrt3}{\sqrt3\cdot\sqrt3}=\frac{4\sqrt3}{3}.
 $$
@@ -261,7 +261,7 @@ $$
 because the exponents add and their sum is $n$. Therefore the new denominator is the rational number $b$.
 :::
 
-:::esempio{titolo="Rationalizing a denominator with a cube root"}
+:::esempio{titolo="Rationalising a denominator with a cube root"}
 The denominator is $\sqrt[3]9=\sqrt[3]{3^2}$. Under the cube root there are two factors of $3$, while the third power $3^3$ needs three. The missing factor is therefore $\sqrt[3]3$, which is positive. The numerator and denominator are both multiplied by that factor.
 $$
 \begin{aligned}
@@ -288,7 +288,7 @@ The chosen factor is positive, so the result has the same sign as the original q
 ## The conjugate
 
 ::::teorema{#coniugato titolo="Multiplying a sum by its difference"}
-Let $u$ and $v$ be real expressions. The sum $u+v$ and the difference $u-v$ are called **conjugates** when rationalizing a denominator. For example, $\sqrt5+\sqrt2$ and $\sqrt5-\sqrt2$ are conjugates. Their product is
+Let $u$ and $v$ be real expressions. The sum $u+v$ and the difference $u-v$ are called **conjugates** when rationalising a denominator. For example, $\sqrt5+\sqrt2$ and $\sqrt5-\sqrt2$ are conjugates. Their product is
 $$
 (u+v)(u-v)=u^2-v^2.
 $$

@@ -39,7 +39,7 @@ Outcomes are called **equally likely** when they all have the same probability. 
 
 If $\Omega$ contains $N>0$ equally likely outcomes and the event $E$ contains $n$ of them, the probability of $E$ is
 $$
-P(E)=\frac{n}{N}=\frac{\text{number of favorable outcomes}}{\text{number of possible outcomes}}.
+P(E)=\frac{n}{N}=\frac{\text{number of favourable outcomes}}{\text{number of possible outcomes}}.
 $$
 For example, with a **fair** die, meaning a die whose six faces are equally likely, the event “even” contains $3$ outcomes out of $6$, so $P(\text{even})=\dfrac36=\dfrac12$. The number of elements of an event is also written $|E|$ or $\#E$, so $P(E)=\dfrac{|E|}{|\Omega|}$.
 
@@ -55,14 +55,14 @@ $$
 :::
 ::::
 
-:::esempio{titolo="Different colors, equally likely individual tiles"}
+:::esempio{titolo="Different colours, equally likely individual tiles"}
 A bag holds four orange tiles and two purple tiles, identical to the touch. The equally likely outcomes are the individual tiles. Numbering the tiles from $1$ to $6$ shows the six elementary outcomes. Four are orange and two are purple, so
 $$
 P(\text{orange})=\frac46=\frac23,\qquad P(\text{purple})=\frac26=\frac13.
 $$
-There are only two color names. If the two colors were taken as the possible outcomes, each would have probability $\dfrac12$, that is, the same weight to categories containing different numbers of tiles.
+There are only two colour names. If the two colours were taken as the possible outcomes, each would have probability $\dfrac12$, that is, the same weight to categories containing different numbers of tiles.
 
-::grafico{assi=0 xmin=-0.1 xmax=3.55 ymin=-0.8 ymax=4.8 poligoni="0.48,0 1.34,0 1.34,4 0.48,4;2,0 2.86,0 2.86,2 2,2" linee="0.15,0 3.21,0" etichette="0.4,-0.42,Orange;2.05,-0.42,Purple;0.83,4.37,4;2.35,2.37,2" titolo="The bar heights count the elementary outcomes of each color"}
+::grafico{assi=0 xmin=-0.1 xmax=3.55 ymin=-0.8 ymax=4.8 poligoni="0.48,0 1.34,0 1.34,4 0.48,4;2,0 2.86,0 2.86,2 2,2" linee="0.15,0 3.21,0" etichette="0.4,-0.42,Orange;2.05,-0.42,Purple;0.83,4.37,4;2.35,2.37,2" titolo="The bar heights count the elementary outcomes of each colour"}
 :::
 
 :::esempio{titolo="One die and two probability models"}
@@ -233,7 +233,7 @@ $$
 ## Drawing without replacement
 
 :::esempio{#dipendenza titolo="Updating the bag after the first draw"}
-When drawing **without replacement**, the ball drawn stays out of the bag. After each draw both the total number of balls and the number of balls of the color drawn change.
+When drawing **without replacement**, the ball drawn stays out of the bag. After each draw both the total number of balls and the number of balls of the colour drawn change.
 
 A bag contains three red balls $R$ and two blue balls $B$. Two uniform draws are made without replacement.
 
@@ -253,13 +253,13 @@ The probability of each path is the product of its two branches.
 | $BR$ | $\dfrac25$ | $\dfrac34$ | $\dfrac3{10}$ |
 | $BB$ | $\dfrac25$ | $\dfrac14$ | $\dfrac1{10}$ |
 
-The event “two different colors” consists of the paths $RB$ and $BR$, so it has probability $\dfrac3{10}+\dfrac3{10}=\dfrac35$.
+The event “two different colours” consists of the paths $RB$ and $BR$, so it has probability $\dfrac3{10}+\dfrac3{10}=\dfrac35$.
 
-A direct count gives the same value. Labeling the five balls, the first draw has $5$ choices and the second $4$, so there are $5\cdot4=20$ ordered pairs. The pairs with different colors are $3\cdot2=6$ with red first and $2\cdot3=6$ with blue first, $12$ in all, and $\dfrac{12}{20}=\dfrac35$. The four probabilities in the table add to $1$, because the paths cover all the possibilities.
+A direct count gives the same value. Labelling the five balls, the first draw has $5$ choices and the second $4$, so there are $5\cdot4=20$ ordered pairs. The pairs with different colours are $3\cdot2=6$ with red first and $2\cdot3=6$ with blue first, $12$ in all, and $\dfrac{12}{20}=\dfrac35$. The four probabilities in the table add to $1$, because the paths cover all the possibilities.
 :::
 
-:::esempio{titolo="The second color when the first is still unknown"}
-A bag has $r$ red balls and $b$ blue balls, with at least one of each color, and $n=r+b$ balls in total. Two draws are made without replacement and the first is not looked at. The second is red along two paths.
+:::esempio{titolo="The second colour when the first is still unknown"}
+A bag has $r$ red balls and $b$ blue balls, with at least one of each colour, and $n=r+b$ balls in total. Two draws are made without replacement and the first is not looked at. The second is red along two paths.
 
 - Red first and then red: after the first draw, $r-1$ reds are left out of $n-1$ balls.
 - Blue first and then red: after the first draw, still $r$ reds are left out of $n-1$ balls.
@@ -289,7 +289,7 @@ P(\{6\}\mid\text{even})=\frac{\frac16}{\frac36}=\frac13.
 $$
 
 :::dimostrazione
-Consider a finite model with equally likely outcomes. Let $N$ be the total number of outcomes, $n_B$ the number of outcomes in $B$, and $n_{AB}$ the number of outcomes in $A\cap B$. Knowing that $B$ occurred, the possible outcomes are the $n_B$ outcomes of $B$ and the favorable ones are the $n_{AB}$ outcomes that are also in $A$, so $P(A\mid B)=\dfrac{n_{AB}}{n_B}$. Dividing numerator and denominator by $N$ gives
+Consider a finite model with equally likely outcomes. Let $N$ be the total number of outcomes, $n_B$ the number of outcomes in $B$, and $n_{AB}$ the number of outcomes in $A\cap B$. Knowing that $B$ occurred, the possible outcomes are the $n_B$ outcomes of $B$ and the favourable ones are the $n_{AB}$ outcomes that are also in $A$, so $P(A\mid B)=\dfrac{n_{AB}}{n_B}$. Dividing numerator and denominator by $N$ gives
 $$
 \frac{n_{AB}}{n_B}=\frac{\frac{n_{AB}}{N}}{\frac{n_B}{N}}=\frac{P(A\cap B)}{P(B)}.
 $$

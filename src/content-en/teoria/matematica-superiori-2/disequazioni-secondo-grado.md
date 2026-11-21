@@ -41,7 +41,7 @@ Moving everything to the left-hand side gives the difference
 $$
 x^2-3x-4=(x+1)(x-4).
 $$
-The factorization is checked by expanding the product: $(x+1)(x-4)=x^2-4x+x-4=x^2-3x-4$. The product equals zero for $x=-1$ and for $x=4$, so the two graphs meet at the points with horizontal coordinates $-1$ and $4$. At $x=0$ the parabola is at $0$ and the line is at $4$. Since $0\le4$, the origin belongs to the solution set. Between $-1$ and $4$ the factor $x+1$ is positive and $x-4$ is negative, so the product is negative; outside that stretch the two factors have the same sign and the product is positive. The solution set is therefore $[-1,4]$, as the figure shows.
+The factorisation is checked by expanding the product: $(x+1)(x-4)=x^2-4x+x-4=x^2-3x-4$. The product equals zero for $x=-1$ and for $x=4$, so the two graphs meet at the points with horizontal coordinates $-1$ and $4$. At $x=0$ the parabola is at $0$ and the line is at $4$. Since $0\le4$, the origin belongs to the solution set. Between $-1$ and $4$ the factor $x+1$ is positive and $x-4$ is negative, so the product is negative; outside that stretch the two factors have the same sign and the product is positive. The solution set is therefore $[-1,4]$, as the figure shows.
 
 ::grafico{f="x^2;3*x+4" xmin=-2.2 xmax=5.3 ymin=-2.3 ymax=26.6 nomi="x,y" legenda="y=x^2;y=3x+4" punti="-1,1,pieno;4,16,pieno;0,0,pieno;0,4,pieno" segmenti="-1,0,-1,1;4,0,4,16" titolo="The horizontal coordinates of the intersections give the boundaries of the inequality"}
 :::
@@ -191,7 +191,7 @@ In the inequality $\dfrac{x+1}{(x-2)^2}\ge0$ the domain is $x\ne2$. The denomina
 ## Products and multiplicity
 
 :::teorema{#prodotti titolo="The parity of the exponent tells whether the sign changes"}
-The **multiplicity** of a root $r$ is the number of times the factor $x-r$ appears in the factorization. In $(x-1)^2(x+2)$ the root $1$ has multiplicity $2$ and the root $-2$ has multiplicity $1$.
+The **multiplicity** of a root $r$ is the number of times the factor $x-r$ appears in the factorisation. In $(x-1)^2(x+2)$ the root $1$ has multiplicity $2$ and the root $-2$ has multiplicity $1$.
 
 If the factor $x-r$ occurs exactly $m$ times, the polynomial can be written as $(x-r)^mG(x)$ with $G(r)\ne0$. The value $G(r)$ is nonzero and, by continuity of the polynomial, the sign of $G$ stays the same near $r$, that is, the values of $G$ at points near $r$ are close to $G(r)$ and therefore have its sign. If $m$ is odd, $x-r$ and $(x-r)^m$ have the same sign, as with $(-2)^3=-8$. If $m$ is even, $(x-r)^m$ is positive on both sides of $r$, as with $(-2)^2=4$ and $2^2=4$. A root of odd multiplicity therefore makes the sign of the polynomial change, and a root of even multiplicity does not. For this reason a root of even multiplicity splits the solution set of a strict comparison while leaving the sign unchanged.
 :::

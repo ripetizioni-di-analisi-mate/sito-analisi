@@ -93,7 +93,7 @@ The two lines intersect at the point $P$ with coordinates $(3,7)$. The horizonta
 ::grafico{f="3*x-2;x+4" xmin=-1 xmax=6 ymin=-4 ymax=15 punti="3,7,pieno,P" segmenti="3,0,3,7;0,7,3,7" titolo="At P the horizontal coordinate is the solution and the vertical coordinate is the common value"}
 :::
 
-## Parentheses and signs
+## Brackets and signs
 
 :::esempio{#parentesi titolo="Expanding the side with a negative multiplier"}
 By the distributive property, a number that multiplies a sum multiplies each term of the sum: $2(x+1)=2\cdot x+2\cdot1=2x+2$.

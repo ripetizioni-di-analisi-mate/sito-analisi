@@ -1,6 +1,6 @@
 ---
 titolo: "Factoring polynomials"
-sommario: "Common factors, product identities in reverse, trinomials, zeros, and checks for factorizations."
+sommario: "Common factors, product identities in reverse, trinomials, zeros, and checks for factorisations."
 ---
 
 ## Taking out a common factor
@@ -43,7 +43,7 @@ If $x>0$, the two terms are the areas of two rectangles of height $3x$, with bas
 :::
 
 :::attenzione
-In an equality, the **left-hand side** is the expression before the equals sign and the **right-hand side** is the one after it. The identity $-4x^2-8x=-4x(x+2)$ is obtained by recognizing the products $-4x^2=-4x\cdot x$ and $-8x=-4x\cdot2$. Only multiplications appear, so the identity holds for all values of $x$. At $x=0$ both sides equal $0$.
+In an equality, the **left-hand side** is the expression before the equals sign and the **right-hand side** is the one after it. The identity $-4x^2-8x=-4x(x+2)$ is obtained by recognising the products $-4x^2=-4x\cdot x$ and $-8x=-4x\cdot2$. Only multiplications appear, so the identity holds for all values of $x$. At $x=0$ both sides equal $0$.
 
 The fraction $\dfrac{-4x^2-8x}{-4x}$ requires $x\ne0$ instead, because at $x=0$ the denominator equals zero and division by zero is not defined.
 
@@ -276,7 +276,7 @@ $$
 The required product is $ac$, that is, the leading coefficient times the constant term. Once a pair is found, the first-degree term is written as a sum of two terms, $bx=mx+nx$, and the four terms obtained are factored by grouping.
 
 :::dimostrazione
-A factorization always provides a pair $m$, $n$. Indeed, expanding a product of two linear factors with integer coefficients gives
+A factorisation always provides a pair $m$, $n$. Indeed, expanding a product of two linear factors with integer coefficients gives
 
 $$
 (ux+v)(wx+z)=uw\,x^2+(uz+vw)x+vz.
@@ -284,7 +284,7 @@ $$
 
 Comparing the coefficients with those of $ax^2+bx+c$ gives $a=uw$, $b=uz+vw$ and $c=vz$. The numbers $m=uz$ and $n=vw$ have sum $b$ and product $uz\cdot vw=uw\cdot vz=ac$.
 
-Conversely, a pair $m$, $n$ with $m+n=b$ and $mn=ac$ gives a factorization. Each step is followed on the case $2x^2+7x+3$, with $m=6$ and $n=1$.
+Conversely, a pair $m$, $n$ with $m+n=b$ and $mn=ac$ gives a factorisation. Each step is followed on the case $2x^2+7x+3$, with $m=6$ and $n=1$.
 
 1. Let $d$ be the GCD of $|a|$ and $|m|$, where the bars denote the absolute value. Write $a=d\,a_1$ and $m=d\,m_1$. The integers $a_1$ and $m_1$ are **coprime**, that is, their GCD is $1$, because the common divisors are already contained in $d$. In the numerical case $d=2$, $a_1=1$ and $m_1=3$.
 2. From $mn=ac$ it follows that $d\,m_1n=d\,a_1c$. Dividing both sides by $d$ gives $m_1n=a_1c$.
@@ -336,7 +336,7 @@ $$
 The minus sign taken out at the start multiplies the entire product, so it stays in the result. At $x=0$ the result equals $-(0+3)(0-2)=-3\cdot(-2)=6$, which coincides with the constant term of the original trinomial. The term of highest degree in the result is $-(4x\cdot x)=-4x^2$, with the negative sign of the original trinomial.
 :::
 
-## Multi-step factorizations
+## Multi-step factorisations
 
 :::esempio{#completa titolo="Taking out the monomial and examining the remaining factor"}
 Factoring a polynomial *completely* means continuing until no factor can be factored further. In $3x^3-3x$, the common monomial $3x$ is taken out first. The remaining factor, $x^2-1$, has two terms separated by a minus sign, and the number $1$ is a square, because $1=1^2$. It is therefore a difference of squares with bases $x$ and $1$.
@@ -369,7 +369,7 @@ The same check applies to a trinomial with a first-degree term after writing it 
 
 The polynomial $x^4-5x^2+4$ also contains the square of $x^2$. Setting $u=x^2$ gives the trinomial $u^2-5u+4=(u-1)(u-4)$. Going back to $x$, we have $x^4-5x^2+4=(x^2-1)(x^2-4)=(x-1)(x+1)(x-2)(x+2)$.
 
-Where a factorization ends therefore depends on the set in which the coefficients are sought and on the degree of the remaining factors.
+Where a factorisation ends therefore depends on the set in which the coefficients are sought and on the degree of the remaining factors.
 :::
 
 ## Zeros and signs of products
@@ -454,20 +454,20 @@ $$
 The identity also holds when a letter appears in only one of the two monomials. In that case its smaller exponent is zero and the larger one is the exponent with which the letter appears, so the entire power goes to the LCM.
 :::
 
-## Checking a factorization
+## Checking a factorisation
 
 :::osservazione{#controlli titolo="Checking every coefficient"}
-**Expanding** a product means carrying out the multiplications and adding the terms with the same power of $x$. A factorization is correct when the expansion of the product has the same coefficients as the given polynomial. The leading coefficient, the intermediate terms and the constant term are compared. For example,
+**Expanding** a product means carrying out the multiplications and adding the terms with the same power of $x$. A factorisation is correct when the expansion of the product has the same coefficients as the given polynomial. The leading coefficient, the intermediate terms and the constant term are compared. For example,
 
 $$
 (2x-1)(x+4)=2x^2+8x-x-4=2x^2+7x-4.
 $$
 
-The leading coefficient is $2$, the linear term is $8x-x=7x$ and the constant term is $-4$. The product $(2x-1)(x+4)$ is therefore a factorization of $2x^2+7x-4$.
+The leading coefficient is $2$, the linear term is $8x-x=7x$ and the constant term is $-4$. The product $(2x-1)(x+4)$ is therefore a factorisation of $2x^2+7x-4$.
 :::
 
 :::attenzione
-Substituting a number for $x$ is a partial check. If the two expressions give different values, the factorization contains an error. If they give the same value for one or two numbers, the expansion still has to be compared.
+Substituting a number for $x$ is a partial check. If the two expressions give different values, the factorisation contains an error. If they give the same value for one or two numbers, the expansion still has to be compared.
 
 The expressions $x^2-1$ and $x-1$ both equal $-1$ at $x=0$ and both equal zero at $x=1$. At $x=2$ they equal $3$ and $1$ instead. The first two checks were therefore insufficient to conclude that the expressions are equal for every $x$. In the graph the two curves share the points above $x=0$ and $x=1$ and have different heights above $x=2$.
 

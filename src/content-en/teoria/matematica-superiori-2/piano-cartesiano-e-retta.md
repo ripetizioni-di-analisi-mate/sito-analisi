@@ -13,7 +13,7 @@ The Cartesian plane is formed by two perpendicular lines, that is, lines that me
 
 The $x$-coordinate is read along the horizontal axis, with positive values to the right and negative values to the left. The $y$-coordinate is read along the vertical axis, with positive values upwards and negative values downwards. To locate $A(-3;2)$, start at the origin and move three units left and two up.
 
-The two axes divide the plane into four **quadrants**, numbered counterclockwise starting from the top right one.
+The two axes divide the plane into four **quadrants**, numbered anticlockwise starting from the top right one.
 
 - In the first quadrant $x>0$ and $y>0$.
 - In the second quadrant $x<0$ and $y>0$.
@@ -201,7 +201,7 @@ To find the parallel to $y=3x-2$ through $(1;5)$, keep the slope $3$ and use the
 For two nonvertical perpendicular lines, the slopes satisfy $m_1m_2=-1$. This relationship gives the slope of the perpendicular before the point is imposed.
 
 :::dimostrazione
-The proof compares a displacement along the first line with the same displacement rotated by a quarter-turn ($90^\circ$). A displacement is written as a pair $(u;v)$, with $u$ units horizontally and $v$ vertically. Rotating it by $90^\circ$ counterclockwise, that is, in the direction opposite to the hands of a clock, gives the displacement $(-v;u)$. For example, $(2;1)$ becomes $(-1;2)$.
+The proof compares a displacement along the first line with the same displacement rotated by a quarter-turn ($90^\circ$). A displacement is written as a pair $(u;v)$, with $u$ units horizontally and $v$ vertically. Rotating it by $90^\circ$ anticlockwise, that is, in the direction opposite to the hands of a clock, gives the displacement $(-v;u)$. For example, $(2;1)$ becomes $(-1;2)$.
 
 Along the first line one can move $1$ unit horizontally, and then the $y$-coordinate changes by $m_1$. The displacement is therefore $(1;m_1)$, which after the rotation becomes $(-m_1;1)$. This rotated displacement is perpendicular to the first one, so it is a displacement along the second line.
 
@@ -301,7 +301,7 @@ In general form, the coefficients of $x$ and $y$ must first be made equal, so th
 :::osservazione{#applicazioni titolo="From data to a graph"}
 In a triangle with a horizontal base, the base is the distance between the two vertices with the same $y$-coordinate, and the height is the vertical distance of the third vertex from the line of the base. For $A(0;0)$, $B(6;0)$ and $C(2;4)$ the base $AB$ is $6$ and the height is the $y$-coordinate $4$ of $C$, so the area is $\dfrac{6\cdot4}{2}=12$.
 
-A plan with a fixed initial fee $q$ and a cost $m$ per unit is described by $C(x)=mx+q$. The notation $C(x)$ is read "C of x" and indicates the cost for the quantity $x$. Its graph is a line with slope $m$ and intercept $q$. The **domain**, that is, the set of allowed values of $x$, depends on the meaning of $x$: for example, $x\ge0$ if $x$ is a distance traveled.
+A plan with a fixed initial fee $q$ and a cost $m$ per unit is described by $C(x)=mx+q$. The notation $C(x)$ is read "C of x" and indicates the cost for the quantity $x$. Its graph is a line with slope $m$ and intercept $q$. The **domain**, that is, the set of allowed values of $x$, depends on the meaning of $x$: for example, $x\ge0$ if $x$ is a distance travelled.
 
 The intersection of two cost lines gives the quantity at which the plans cost the same; the sign of the difference of the costs shows which one is cheaper before and after it.
 :::
@@ -330,7 +330,7 @@ The difference is zero when $2n-6=0$, that is, for $n=3$, and indeed both plans 
 :::
 
 :::osservazione
-If the fixed fee for B becomes $12$ euros, that is, $C_B(n)=12+n$, the lines meet where $5+3n=12+n$, so $2n=7$ and $n=\dfrac72$. This value is not a whole number, so the two neighboring whole numbers are compared.
+If the fixed fee for B becomes $12$ euros, that is, $C_B(n)=12+n$, the lines meet where $5+3n=12+n$, so $2n=7$ and $n=\dfrac72$. This value is not a whole number, so the two neighbouring whole numbers are compared.
 
 - For three hours A costs $5+9=14$ euros and B costs $12+3=15$.
 - For four hours A costs $5+12=17$ euros and B costs $12+4=16$.

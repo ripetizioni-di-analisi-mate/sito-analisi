@@ -8,7 +8,7 @@ sommario: Systems of two and three equations, substitution, comparison, eliminat
 :::definizione{#soluzione titolo="Solution of a System"}
 A **linear equation** in $x$ and $y$ is an equation such as $3x-2y=1$, in which the **unknowns** $x$ and $y$ (the letters whose values are sought) appear only to the first degree, that is, without exponents and without products of one another. The numbers that multiply the unknowns are called **coefficients** ($3$ and $-2$); the number without letters is called the **constant term** ($1$). The part to the left of the equals sign is the **left-hand side**, the part to the right is the **right-hand side**.
 
-A **system** is a group of equations to be solved together, and it is written with a brace on the left. A **solution of a system** of two equations in $x$ and $y$ is an ordered pair that satisfies both equations. The pair is written in parentheses with a semicolon, as in $(4;3)$. The first coordinate always replaces $x$, and the second always replaces $y$. The brace indicates that both conditions must hold at the same time.
+A **system** is a group of equations to be solved together, and it is written with a brace on the left. A **solution of a system** of two equations in $x$ and $y$ is an ordered pair that satisfies both equations. The pair is written in round brackets with a semicolon, as in $(4;3)$. The first coordinate always replaces $x$, and the second always replaces $y$. The brace indicates that both conditions must hold at the same time.
 
 In the system
 $$
@@ -280,7 +280,7 @@ $$
 - If $k\ne2$, we divide by $k-2$, so $x=-\dfrac2{k-2}$ and then $y=1-kx$. The system is uniquely solvable.
 - If $k=2$, the first equation is $2x+y=1$. The two equations would have the same left-hand side $2x+y$ and different constant terms, $1$ and $3$, so the system has no solution.
 
-Division by $k-2$ was used only when that factor was nonzero. The excluded case is analyzed in the original equations. The set of reals except $2$ is written $\mathbb R\setminus\{2\}$.
+Division by $k-2$ was used only when that factor was nonzero. The excluded case is analysed in the original equations. The set of reals except $2$ is written $\mathbb R\setminus\{2\}$.
 :::
 
 :::esempio{titolo="A Family of Solutions in the Singular Case"}
@@ -372,7 +372,7 @@ i&=9,
 $$
 and then $r=23-18=5$. The full-price ticket costs $9$ euros and the discounted ticket $5$ euros. Substitution recovers both totals, $18+5=23$ and $9+10=19$.
 
-A number of people or objects is a nonnegative integer; a length is positive. An algebraic solution that violates these conditions does not solve the original problem. The units of measurement must also be the same in all the equations, for example all lengths in centimeters, before the system is written.
+A number of people or objects is a nonnegative integer; a length is positive. An algebraic solution that violates these conditions does not solve the original problem. The units of measurement must also be the same in all the equations, for example all lengths in centimetres, before the system is written.
 :::
 
 :::esempio{titolo="Two Pricing Plans with the Same Cost"}

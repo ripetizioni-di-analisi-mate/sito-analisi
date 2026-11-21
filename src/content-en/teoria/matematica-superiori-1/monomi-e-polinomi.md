@@ -355,7 +355,7 @@ $$
 
 In the perimeter $P$ the base and the height each appear twice, because opposite sides of a rectangle are equal. Their sum is $(3x+2)+x=4x+2$ and $2(4x+2)=8x+4$.
 
-The perimeter is calculated along the four outside edges. The line dividing the two regions is used to calculate the area and is not part of the perimeter. If the lengths are expressed in centimeters, the perimeter is in centimeters and the area is in square centimeters, because it is the product of two lengths.
+The perimeter is calculated along the four outside edges. The line dividing the two regions is used to calculate the area and is not part of the perimeter. If the lengths are expressed in centimetres, the perimeter is in centimetres and the area is in square centimetres, because it is the product of two lengths.
 :::
 
 :::esempio{titolo="A difference of areas with a common height"}

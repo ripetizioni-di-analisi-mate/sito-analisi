@@ -120,7 +120,7 @@ We count the union by starting with $A$ and adding only the elements of $B\setmi
 ::::
 
 :::esempio{titolo="From the outside region to the intersection"}
-Out of $30$ students, $17$ attend theater and $14$ attend music. Five students attend neither workshop. Write $T$ for the set of students who attend theater and $M$ for the set of students who attend music. The five students with no workshop are outside the union $T\cup M$, so the number who attend at least one is $30-5=25$. The union formula gives
+Out of $30$ students, $17$ attend theatre and $14$ attend music. Five students attend neither workshop. Write $T$ for the set of students who attend theatre and $M$ for the set of students who attend music. The five students with no workshop are outside the union $T\cup M$, so the number who attend at least one is $30-5=25$. The union formula gives
 $$
 \begin{aligned}
 |T\cap M|&=|T|+|M|-|T\cup M|\\[6pt]
@@ -128,7 +128,7 @@ $$
 &=6.
 \end{aligned}
 $$
-Six students attend both workshops. The theater-only region has $17-6=11$ students, and the music-only region has $14-6=8$. A student who attends exactly one workshop lies in one of these two regions, so the total requested in that case would be $11+8=19$. The four regions reconstruct the whole class, since $11+6+8+5=30$.
+Six students attend both workshops. The theatre-only region has $17-6=11$ students, and the music-only region has $14-6=8$. A student who attends exactly one workshop lies in one of these two regions, so the total requested in that case would be $11+8=19$. The four regions reconstruct the whole class, since $11+6+8+5=30$.
 
 In the figure each number is the cardinality of a region.
 
@@ -171,7 +171,7 @@ The same set is obtained by computing the complements first and then the union. 
 :::
 
 ::::teorema{#distributiva titolo="Intersection distributes over union"}
-In an expression with several operations, the operation written in parentheses is carried out first. For three subsets $A,B,C$ of $U$,
+In an expression with several operations, the operation written in brackets is carried out first. For three subsets $A,B,C$ of $U$,
 $$
 A\cap(B\cup C)=(A\cap B)\cup(A\cap C).
 $$

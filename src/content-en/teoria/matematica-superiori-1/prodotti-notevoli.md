@@ -1,6 +1,6 @@
 ---
 titolo: "Special products"
-sommario: "Identities, proofs, and applications of squares and cubes for recognizing and rewriting expressions."
+sommario: "Identities, proofs, and applications of squares and cubes for recognising and rewriting expressions."
 ---
 
 ## Identities and particular equalities
@@ -331,7 +331,7 @@ The result is checked by setting $y=x$. The left side gives $(x-x+2)^2=2^2=4$. O
 
 :::
 
-## Recognizing and completing a square
+## Recognising and completing a square
 
 :::osservazione{#riconoscimento titolo="Checking twice the product"}
 
@@ -467,7 +467,7 @@ The four products are $200\cdot200=40000$, $200\cdot(-2)=-400$, $1\cdot200=200$,
 
 The **perimeter** of a rectangle is the sum of the lengths of its four sides, that is, twice the sum of two adjacent sides. A rectangle of perimeter $80\,\mathrm{cm}$ therefore has two adjacent sides that add to $\dfrac{80}{2}=40\,\mathrm{cm}$. The mean of the two sides is $20\,\mathrm{cm}$.
 
-Let $d$ be the distance of each side from the mean. The sides measure $20+d$ and $20-d$ centimeters. Both lengths are positive when $d$ is between $0$ and $20$, with $20$ excluded (in symbols $0\le d<20$). The area of the rectangle is the product of the sides.
+Let $d$ be the distance of each side from the mean. The sides measure $20+d$ and $20-d$ centimetres. Both lengths are positive when $d$ is between $0$ and $20$, with $20$ excluded (in symbols $0\le d<20$). The area of the rectangle is the product of the sides.
 
 $$
 (20+d)(20-d)=20^2-d^2=400-d^2.

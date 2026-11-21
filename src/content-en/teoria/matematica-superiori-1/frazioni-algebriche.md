@@ -51,7 +51,7 @@ x\ne2\\
 x\ne-2
 \end{cases}
 $$
-The restrictions are read from the original expression, one for each denominator, before any calculation. If a factor of the denominator is canceled during the calculation, the value at which it vanishes remains excluded, because at that point the original expression would divide by zero.
+The restrictions are read from the original expression, one for each denominator, before any calculation. If a factor of the denominator is cancelled during the calculation, the value at which it vanishes remains excluded, because at that point the original expression would divide by zero.
 :::
 
 :::esempio{titolo="A coefficient that can vanish"}
@@ -74,7 +74,7 @@ The case $a=1$ is handled separately because the formula for the excluded value 
 
 ## Simplification and equality on the original domain
 
-::::teorema{#semplificare titolo="Canceling a common factor"}
+::::teorema{#semplificare titolo="Cancelling a common factor"}
 A numerical fraction is simplified by dividing the numerator and the denominator by a common factor:
 $$
 \frac{6}{10}=\frac{3\cdot2}{5\cdot2}=\frac35.
@@ -110,11 +110,11 @@ A **term** is one of the parts of a sum, while a factor is one of the parts of a
 $$
 \frac{x+3}{x}=\frac xx+\frac3x=1+\frac3x.
 $$
-At $x=2$ the fraction equals $\dfrac{2+3}{2}=\dfrac52$, and $1+\dfrac32$ also equals $\dfrac52$. Canceling only the term $x$ in the numerator against the $x$ in the denominator would leave $3$, which is different from $\dfrac52$. The numerical check thus distinguishes the valid transformation from the cancellation of a term.
+At $x=2$ the fraction equals $\dfrac{2+3}{2}=\dfrac52$, and $1+\dfrac32$ also equals $\dfrac52$. Cancelling only the term $x$ in the numerator against the $x$ in the denominator would leave $3$, which is different from $\dfrac52$. The numerical check thus distinguishes the valid transformation from the cancellation of a term.
 :::
 
 :::esempio{titolo="A factor that cancels and one that remains"}
-In the fraction $\dfrac{(x+4)(x-1)}{(x+4)(x+2)}$ the denominator vanishes for $x=-4$ and for $x=-2$, so the domain excludes $-4$ and $-2$. At admissible values, canceling the common factor $x+4$ gives $\dfrac{x-1}{x+2}$.
+In the fraction $\dfrac{(x+4)(x-1)}{(x+4)(x+2)}$ the denominator vanishes for $x=-4$ and for $x=-2$, so the domain excludes $-4$ and $-2$. At admissible values, cancelling the common factor $x+4$ gives $\dfrac{x-1}{x+2}$.
 
 The two exclusions have different effects.
 
@@ -123,7 +123,7 @@ The two exclusions have different effects.
 
 A dashed line on the graph is an **asymptote**, that is, a line that the curve approaches without touching it. The horizontal asymptote $y=1$ shows the value that the fraction approaches when $x$ is very large, positive or negative: for example, at $x=100$ the fraction equals $\dfrac{99}{102}$, almost $1$. The exclusion of $-4$, marked by the open circle, is retained only in the domain written alongside the formula.
 
-::grafico{f="(x-1)/(x+2)" xmin=-7 xmax=6 ymin=-4 ymax=6 asintoti="x=-2;y=1" punti="-4,2.5,vuoto" titolo="The canceled factor leaves an open circle at x = −4"}
+::grafico{f="(x-1)/(x+2)" xmin=-7 xmax=6 ymin=-4 ymax=6 asintoti="x=-2;y=1" punti="-4,2.5,vuoto" titolo="The cancelled factor leaves an open circle at x = −4"}
 :::
 
 ## Adding and subtracting algebraic fractions
@@ -206,7 +206,7 @@ $$
 \frac{P(x)}{Q(x)}\cdot\frac{R(x)}{S(x)}
 =\frac{P(x)R(x)}{Q(x)S(x)}.
 $$
-**Expanding** a product of polynomials means carrying out the multiplications, for example going from $(x-2)(x+2)$ to $x^2-4$. The factors shared by a numerator and a denominator can be recognized when the polynomials are factored. For this reason the polynomials are factored and the fraction is simplified before expanding.
+**Expanding** a product of polynomials means carrying out the multiplications, for example going from $(x-2)(x+2)$ to $x^2-4$. The factors shared by a numerator and a denominator can be recognised when the polynomials are factored. For this reason the polynomials are factored and the fraction is simplified before expanding.
 
 :::dimostrazione
 Fix an admissible value of $x$. The **inverse** of a nonzero number $n$, also called its **reciprocal**, is the number $\dfrac1n$, which multiplied by $n$ gives $1$. Dividing by $n$ is the same as multiplying by $\dfrac1n$. The two quotients are therefore the products $P(x)\cdot\dfrac1{Q(x)}$ and $R(x)\cdot\dfrac1{S(x)}$.
@@ -216,7 +216,7 @@ By the commutative and associative properties of multiplication the four factors
 ::::
 
 :::esempio{titolo="A constant product with two excluded points"}
-In the product $\dfrac{x-2}{x+2}\cdot\dfrac{x+2}{x-2}$, the first fraction excludes $-2$ and the second excludes $2$. Once the domain is set, the product is $\dfrac{(x-2)(x+2)}{(x+2)(x-2)}$. Both factors $x-2$ and $x+2$ can be canceled, so the product equals $1$ at every admissible point. A result that does not depend on $x$ is called *constant*.
+In the product $\dfrac{x-2}{x+2}\cdot\dfrac{x+2}{x-2}$, the first fraction excludes $-2$ and the second excludes $2$. Once the domain is set, the product is $\dfrac{(x-2)(x+2)}{(x+2)(x-2)}$. Both factors $x-2$ and $x+2$ can be cancelled, so the product equals $1$ at every admissible point. A result that does not depend on $x$ is called *constant*.
 
 The two excluded points come from different fractions and both remain excluded in the product. The graph is the horizontal line of height $1$ with two open circles, at the points $(-2,1)$ and $(2,1)$.
 
@@ -232,13 +232,13 @@ $$
 &=\frac{x(x-1)}{3}.
 \end{aligned}
 $$
-The denominator contains only one copy of $x$, so one copy of $x$ is canceled from the factor $x^2$ and the other remains in the numerator. Likewise, one copy of $x-1$ remains in the numerator.
+The denominator contains only one copy of $x$, so one copy of $x$ is cancelled from the factor $x^2$ and the other remains in the numerator. Likewise, one copy of $x-1$ remains in the numerator.
 
-At $x=3$, the original product is $\dfrac92\cdot\dfrac49=2$ and the result equals $\dfrac{3\cdot2}{3}=2$. The calculation can therefore also be checked without canceling first.
+At $x=3$, the original product is $\dfrac92\cdot\dfrac49=2$ and the result equals $\dfrac{3\cdot2}{3}=2$. The calculation can therefore also be checked without cancelling first.
 :::
 
 :::esempio{titolo="The sign of a factor written in reverse order"}
-The fraction $\dfrac{-3(x-2)^2}{6(2-x)(x+4)}$ excludes $2$ and $-4$, at which the denominator vanishes. The factor $2-x$ is the opposite of $x-2$ and is rewritten as $-(x-2)$. The minus sign thus passes to the coefficient of the denominator, which changes from $6$ to $-6$. One copy of $x-2$ is then canceled. The ratio of the coefficients is $\dfrac{-3}{-6}=\dfrac12$.
+The fraction $\dfrac{-3(x-2)^2}{6(2-x)(x+4)}$ excludes $2$ and $-4$, at which the denominator vanishes. The factor $2-x$ is the opposite of $x-2$ and is rewritten as $-(x-2)$. The minus sign thus passes to the coefficient of the denominator, which changes from $6$ to $-6$. One copy of $x-2$ is then cancelled. The ratio of the coefficients is $\dfrac{-3}{-6}=\dfrac12$.
 $$
 \begin{aligned}
 \frac{-3(x-2)^2}{6(2-x)(x+4)}
@@ -270,7 +270,7 @@ On the domain $R(x)$ and $S(x)$ are different from zero, so the fractions $\dfra
 ::::
 
 :::esempio{titolo="Two different reasons for excluding values"}
-In the quotient $\dfrac1{x+3}:\dfrac{x-1}{x+3}$, the denominators exclude $-3$. At $x=1$ the two fractions are defined, but the divisor equals $\dfrac{0}{4}=0$, so $1$ is excluded as well. The domain is $\mathbb R\setminus\{-3,1\}$. On the domain, the dividend is multiplied by the reciprocal of the divisor and $x+3$ is canceled:
+In the quotient $\dfrac1{x+3}:\dfrac{x-1}{x+3}$, the denominators exclude $-3$. At $x=1$ the two fractions are defined, but the divisor equals $\dfrac{0}{4}=0$, so $1$ is excluded as well. The domain is $\mathbb R\setminus\{-3,1\}$. On the domain, the dividend is multiplied by the reciprocal of the divisor and $x+3$ is cancelled:
 $$
 \frac1{x+3}:\frac{x-1}{x+3}=\frac1{x+3}\cdot\frac{x+3}{x-1}=\frac1{x-1}.
 $$
@@ -326,7 +326,7 @@ The quotient of two numbers with the same sign is positive, and the quotient of 
 At the endpoints of the intervals the original conditions are used. At $x=-2$, the denominator is zero, so the value is excluded and the quotient is undefined. At $x=1$, only the numerator vanishes, so the quotient equals zero.
 :::
 
-## Recognizing equivalent fractions
+## Recognising equivalent fractions
 
 ::::teorema{#equivalenza titolo="Comparison by cross-multiplication"}
 Two numerical fractions are equal when their **cross-products** are equal, that is, the products of the numerator of each by the denominator of the other. For example $\dfrac23=\dfrac46$, and indeed $2\cdot6=12$ and $4\cdot3=12$.
@@ -384,11 +384,11 @@ $$
 &=\frac{x-1}{x+1}.
 \end{aligned}
 $$
-The domain is checked before canceling $x$. At $x=2$, the original quotient is $\dfrac{\frac12}{\frac32}$, which is $\dfrac12\cdot\dfrac23=\dfrac13$, and the final fraction gives the same value.
+The domain is checked before cancelling $x$. At $x=2$, the original quotient is $\dfrac{\frac12}{\frac32}$, which is $\dfrac12\cdot\dfrac23=\dfrac13$, and the final fraction gives the same value.
 :::
 
 :::esempio{#modello titolo="A formula with a domain restricted by the problem"}
-A cyclist travels $18\,\mathrm{km}$ at a constant speed $v$, measured in kilometers per hour ($\mathrm{km/h}$). The duration of a trip is obtained by dividing the distance by the speed, so the trip lasts $t=\dfrac{18}{v}$ hours. The quotient is algebraically defined for $v\ne0$. In this problem, $v$ represents a positive speed, so only the part with $v>0$ is relevant.
+A cyclist travels $18\,\mathrm{km}$ at a constant speed $v$, measured in kilometres per hour ($\mathrm{km/h}$). The duration of a trip is obtained by dividing the distance by the speed, so the trip lasts $t=\dfrac{18}{v}$ hours. The quotient is algebraically defined for $v\ne0$. In this problem, $v$ represents a positive speed, so only the part with $v>0$ is relevant.
 
 For $v=9$ the result is $t=\dfrac{18}{9}=2$, while for $v=18$ it is $t=\dfrac{18}{18}=1$. Doubling the speed halves the time, because $\dfrac{18}{2v}$ is half of $\dfrac{18}{v}$. On the graph the horizontal axis shows $v$, the vertical axis shows $t$, and the two filled points are $(9,2)$ and $(18,1)$.
 
@@ -396,7 +396,7 @@ For $v=9$ the result is $t=\dfrac{18}{9}=2$, while for $v=18$ it is $t=\dfrac{18
 :::
 
 :::esempio{titolo="Finding a side length from an area"}
-A rectangular garden bed has an area of $24\,\mathrm{m^2}$, that is, $24$ square meters. One side has length $x-1$ meters, while $b$ denotes the length of the other in meters. The area of a rectangle is the product of its two sides, so $(x-1)b=24$. Dividing both sides by $x-1$ gives $b=\dfrac{24}{x-1}$. The algebraic restriction is $x\ne1$.
+A rectangular garden bed has an area of $24\,\mathrm{m^2}$, that is, $24$ square metres. One side has length $x-1$ metres, while $b$ denotes the length of the other in metres. The area of a rectangle is the product of its two sides, so $(x-1)b=24$. Dividing both sides by $x-1$ gives $b=\dfrac{24}{x-1}$. The algebraic restriction is $x\ne1$.
 
-Since $x-1$ is a side length, which is a positive number, the problem requires $x>1$. The value $x=0$ would give $x-1=-1$ and $b=-24$. The original equation would be satisfied, because $(-1)\cdot(-24)=24$, but the two lengths would be negative. At $x=5$, the sides measure $4$ and $6$ meters and their product gives the stated area.
+Since $x-1$ is a side length, which is a positive number, the problem requires $x>1$. The value $x=0$ would give $x-1=-1$ and $b=-24$. The original equation would be satisfied, because $(-1)\cdot(-24)=24$, but the two lengths would be negative. At $x=5$, the sides measure $4$ and $6$ metres and their product gives the stated area.
 :::

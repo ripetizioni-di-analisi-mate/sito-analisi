@@ -55,7 +55,7 @@ For two positive corresponding lengths, the reverse ratio is the reciprocal of t
 
 ## Triangle similarity criteria
 
-:::teorema{#criteri titolo="Three ways to recognize similarity"}
+:::teorema{#criteri titolo="Three ways to recognise similarity"}
 For triangles, fewer conditions than those in the definition are enough. Two triangles are similar if one of the following three conditions holds.
 - **First criterion (angle-angle).** Two pairs of corresponding angles are congruent. Then the third pair is congruent as well, because the angles of each triangle add up to $180^\circ$.
 - **Second criterion (SAS, two sides and the included angle).** Two pairs of corresponding sides are proportional and the *included* angles, that is, the angles formed by those two sides, are congruent.

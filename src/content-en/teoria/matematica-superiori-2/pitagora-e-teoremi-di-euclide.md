@@ -302,7 +302,7 @@ A square is never negative, so $h^2\le\left(\dfrac c2\right)^2$ and $h\le\dfrac 
 
 :::
 
-::::teorema{#euclide-inverso titolo="A test for recognizing the right angle"}
+::::teorema{#euclide-inverso titolo="A test for recognising the right angle"}
 
 The second theorem can also be reversed. In any triangle $ABC$ draw the altitude $AH$ to $BC$, even without knowing the measure of the angle at $A$. If $H$ lies inside $BC$ and $AH^2=BH\cdot HC$, then the triangle is right at $A$.
 

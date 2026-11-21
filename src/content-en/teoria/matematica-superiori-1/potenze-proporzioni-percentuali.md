@@ -151,14 +151,14 @@ For a negative number, a minus sign is written in front of the scientific notati
 The condition $1\le c<10$ makes the representation unique. Indeed, multiplying the three terms of the condition by $10^n$ gives $10^n\le c\cdot10^n<10^{n+1}$, so the number lies between two consecutive powers of ten and the exponent $n$ is that of the smaller one. For example, $0.0032$ lies between $10^{-3}=0.001$ and $10^{-2}=0.01$, so its exponent is $-3$ and it is written $3.2\cdot10^{-3}$.
 :::
 
-:::esempio{titolo="Normalizing the coefficient after multiplication"}
+:::esempio{titolo="Normalising the coefficient after multiplication"}
 In the product $(3\cdot10^4)(4\cdot10^2)$, the coefficients are multiplied together and the powers of ten are multiplied together.
 
 $$
 (3\cdot10^4)(4\cdot10^2)=(3\cdot4)\cdot(10^4\cdot10^2)=12\cdot10^{4+2}=12\cdot10^6.
 $$
 
-The coefficient $12$ is greater than $10$, so $12\cdot10^6$ is not yet in scientific notation. To **normalize** means to bring the coefficient back between $1$ and $10$ without changing the number. Since $12=1.2\cdot10$, we have
+The coefficient $12$ is greater than $10$, so $12\cdot10^6$ is not yet in scientific notation. To **normalise** means to bring the coefficient back between $1$ and $10$ without changing the number. Since $12=1.2\cdot10$, we have
 
 $$
 12\cdot10^6=1.2\cdot10\cdot10^6=1.2\cdot10^7.
@@ -218,11 +218,11 @@ The ratio of the amounts is $\dfrac{24}{36}=\dfrac23$. Compared with the total, 
 :::
 
 :::osservazione
-A **quantity** is a property that is measured, such as a length, a time, or a cost. The **unit of measurement** is the amount chosen as a reference, for example the meter (symbol $\mathrm m$) or the centimeter (symbol $\mathrm{cm}$).
+A **quantity** is a property that is measured, such as a length, a time, or a cost. The **unit of measurement** is the amount chosen as a reference, for example the metre (symbol $\mathrm m$) or the centimetre (symbol $\mathrm{cm}$).
 
-For the ratio of two lengths, both measures are written in the same unit. Since $1\,\mathrm m=100\,\mathrm{cm}$, the ratio of one meter to $25\,\mathrm{cm}$ is $\dfrac{100}{25}=4$. The result is a number without a unit.
+For the ratio of two lengths, both measures are written in the same unit. Since $1\,\mathrm m=100\,\mathrm{cm}$, the ratio of one metre to $25\,\mathrm{cm}$ is $\dfrac{100}{25}=4$. The result is a number without a unit.
 
-In the ratio of quantities of different kinds, the units remain in the result. A distance of $180\,\mathrm{km}$ (kilometers) traveled in $3\,\mathrm h$ (hours) gives the average speed $\dfrac{180}{3}=60$ kilometers per hour, which is written $60\,\mathrm{km/h}$. The value is the number of kilometers covered on average in one hour.
+In the ratio of quantities of different kinds, the units remain in the result. A distance of $180\,\mathrm{km}$ (kilometres) travelled in $3\,\mathrm h$ (hours) gives the average speed $\dfrac{180}{3}=60$ kilometres per hour, which is written $60\,\mathrm{km/h}$. The value is the number of kilometres covered on average in one hour.
 :::
 
 ## Direct proportionality and fixed fees
@@ -268,7 +268,7 @@ Two positive quantities $x$ and $y$ are **inversely proportional** if their prod
 
 If $x$ doubles, $y$ is halved. With any factor, denoted by the Greek letter $\lambda$ (read "lambda") and greater than zero, multiplying $x$ by $\lambda$ divides $y$ by $\lambda$. Indeed, the product $(\lambda x)\cdot\dfrac{y}{\lambda}$ is still $xy=k$.
 
-In the graph of $y=\dfrac kx$, with $x$ and $y$ positive, $y$ decreases as $x$ increases. In a table, inverse proportionality is recognized by multiplying the two values of each pair, because the products are all equal to $k$.
+In the graph of $y=\dfrac kx$, with $x$ and $y$ positive, $y$ decreases as $x$ increases. In a table, inverse proportionality is recognised by multiplying the two values of each pair, because the products are all equal to $k$.
 :::
 
 :::esempio{titolo="Identical machines sharing the same job"}
@@ -371,19 +371,19 @@ A decrease of $100\%$ has factor $1-\dfrac{100}{100}=0$. Every initial value bec
 :::definizione{#scale titolo="The ratio of the drawing measurement to the actual measurement"}
 The **scale** of a map or a drawing is the ratio of a length on the drawing to the corresponding actual length, measured in the same unit. In a scale of $1:k$, with $k>0$, one unit on the drawing corresponds to $k$ units of the same kind in reality.
 
-At scale $1:50000$, one centimeter on the map corresponds to $50000\,\mathrm{cm}$ in reality. A meter contains $100$ centimeters and a kilometer contains $1000$ meters, so
+At scale $1:50000$, one centimetre on the map corresponds to $50000\,\mathrm{cm}$ in reality. A metre contains $100$ centimetres and a kilometre contains $1000$ metres, so
 
 $$
 50000\,\mathrm{cm}=\frac{50000}{100}\,\mathrm m=500\,\mathrm m=0.5\,\mathrm{km}.
 $$
 
-Six centimeters on the map therefore correspond to $6\cdot0.5\,\mathrm{km}=3\,\mathrm{km}$.
+Six centimetres on the map therefore correspond to $6\cdot0.5\,\mathrm{km}=3\,\mathrm{km}$.
 
-In the other direction, to find how long an actual distance of $2\,\mathrm{km}$ is on the map, it is first written in centimeters. This gives $2\,\mathrm{km}=2000\,\mathrm m=200000\,\mathrm{cm}$. Dividing by $50000$ gives $\dfrac{200000}{50000}=4$, that is, $4\,\mathrm{cm}$ on the map.
+In the other direction, to find how long an actual distance of $2\,\mathrm{km}$ is on the map, it is first written in centimetres. This gives $2\,\mathrm{km}=2000\,\mathrm m=200000\,\mathrm{cm}$. Dividing by $50000$ gives $\dfrac{200000}{50000}=4$, that is, $4\,\mathrm{cm}$ on the map.
 
-In the figure, $c$ is the length on the map in centimeters and $d$ is the actual distance in kilometers. The two quantities are directly proportional, with $d=0.5\,c$. The two marked points are the ones already calculated.
+In the figure, $c$ is the length on the map in centimetres and $d$ is the actual distance in kilometres. The two quantities are directly proportional, with $d=0.5\,c$. The two marked points are the ones already calculated.
 
-::grafico{f="0.5*x" xmin=-0.35 xmax=7.2 ymin=-0.35 ymax=4.1 nomi="c,d" legenda="d=0.5c" punti="4,2,pieno;6,3,pieno" segmenti="4,0,4,2;0,2,4,2;6,0,6,3;0,3,6,3" titolo="At scale $1:50000$, each centimeter $c$ on the map corresponds to half a kilometer of actual distance $d$"}
+::grafico{f="0.5*x" xmin=-0.35 xmax=7.2 ymin=-0.35 ymax=4.1 nomi="c,d" legenda="d=0.5c" punti="4,2,pieno;6,3,pieno" segmenti="4,0,4,2;0,2,4,2;6,0,6,3;0,3,6,3" titolo="At scale $1:50000$, each centimetre $c$ on the map corresponds to half a kilometre of actual distance $d$"}
 :::
 
 :::esempio{titolo="From the length factor to the area factor"}
@@ -394,13 +394,13 @@ $$
 5\,\mathrm{cm}\cdot200=1000\,\mathrm{cm}=10\,\mathrm m.
 $$
 
-The area of a rectangle is the product of its two sides. The actual area is $6\,\mathrm m\cdot10\,\mathrm m=60\,\mathrm{m}^2$ (square meters).
+The area of a rectangle is the product of its two sides. The actual area is $6\,\mathrm m\cdot10\,\mathrm m=60\,\mathrm{m}^2$ (square metres).
 
-The same result is obtained starting from the area on the drawing, which is $3\,\mathrm{cm}\cdot5\,\mathrm{cm}=15\,\mathrm{cm}^2$ (square centimeters). Both sides are multiplied by $200$, so the area is multiplied by $200\cdot200=200^2=40000$.
+The same result is obtained starting from the area on the drawing, which is $3\,\mathrm{cm}\cdot5\,\mathrm{cm}=15\,\mathrm{cm}^2$ (square centimetres). Both sides are multiplied by $200$, so the area is multiplied by $200\cdot200=200^2=40000$.
 
 $$
 15\,\mathrm{cm}^2\cdot200^2=15\,\mathrm{cm}^2\cdot40000=600000\,\mathrm{cm}^2.
 $$
 
-A square meter is a square with a side of $100\,\mathrm{cm}$, so it contains $100\cdot100=10000$ square centimeters. Dividing gives $\dfrac{600000}{10000}=60$, that is, $60\,\mathrm{m}^2$ again.
+A square metre is a square with a side of $100\,\mathrm{cm}$, so it contains $100\cdot100=10000$ square centimetres. Dividing gives $\dfrac{600000}{10000}=60$, that is, $60\,\mathrm{m}^2$ again.
 :::

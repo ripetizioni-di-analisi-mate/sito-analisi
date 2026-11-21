@@ -5,7 +5,7 @@ sommario: Angles made by parallel lines and a transversal, and properties of par
 
 ## Parallel lines cut by a transversal
 
-:::definizione{#concetti titolo="Recognizing angle positions"}
+:::definizione{#concetti titolo="Recognising angle positions"}
 In the Euclidean plane, that is, the plane of the geometry studied at school, two distinct lines are **parallel** if they do not meet at any point. To state that lines $r$ and $s$ are parallel we write $r\parallel s$, which is read "$r$ is parallel to $s$".
 
 A **transversal** is a third line that cuts both lines. The point where the transversal cuts one of the two lines is called an intersection. At each intersection four angles are formed, so there are eight angles in all.
@@ -26,9 +26,9 @@ In the figure the Greek letters $\alpha$ (alpha) and $\beta$ (beta) denote two a
 :::esempio{titolo="One transversal, two different pairs"}
 An angle is **acute** if it measures less than $90^\circ$, **right** if it measures $90^\circ$, and **obtuse** if it measures more than $90^\circ$ and less than $180^\circ$. In the two figures the horizontal lines are parallel and the transversal meets them at $A$ and at $B$ with a slope of $45^\circ$.
 
-The first figure marks the acute interior angle at $A$, to the right of the transversal, and the acute interior angle at $B$, to the left. The two angles lie between the lines and on opposite sides of the transversal, so they are alternate interior angles. Both measure $45^\circ$ and are labeled $\alpha$.
+The first figure marks the acute interior angle at $A$, to the right of the transversal, and the acute interior angle at $B$, to the left. The two angles lie between the lines and on opposite sides of the transversal, so they are alternate interior angles. Both measure $45^\circ$ and are labelled $\alpha$.
 
-In the second figure the angle at $A$ stays the same. To find its same-side interior angle, at $B$ we choose the sector, that is, the region of the plane between the two sides of the angle, that lies between the lines and to the right of the transversal like the angle at $A$. This sector is obtuse and is labeled $\beta$. Its measure is $180^\circ-45^\circ=135^\circ$.
+In the second figure the angle at $A$ stays the same. To find its same-side interior angle, at $B$ we choose the sector, that is, the region of the plane between the two sides of the angle, that lies between the lines and to the right of the transversal like the angle at $A$. This sector is obtuse and is labelled $\beta$. Its measure is $180^\circ-45^\circ=135^\circ$.
 
 ::grafico{assi=0 uguale=1 legenda=0 xmin=-1.7 xmax=4.8 ymin=-0.8 ymax=3.1 linee="-1.5,0 4.5,0;-1.5,2 4.5,2;-0.7,-0.7 3,3" curve="0.62*cos(t),0.62*sin(t),0,0.7853981634;2+0.62*cos(t),2+0.62*sin(t),3.1415926536,3.9269908170" punti="0,0;2,2" etichette="-0.22,-0.29,A;2.2,2.3,B;0.96,0.45,α;1.2,1.58,α" titolo="Alternate interior angles occupy equal sectors on opposite sides of the transversal"}
 
@@ -173,7 +173,7 @@ $$
 The opposite angles at $A$ and at $C$ are both supplementary to the angle at $B$, and for this reason they are congruent.
 :::
 
-## Recognizing a parallelogram
+## Recognising a parallelogram
 
 :::teorema{#problemi titolo="Sufficient conditions"}
 A condition is **sufficient** when, if it is satisfied, the conclusion is guaranteed. A convex quadrilateral is a parallelogram if it satisfies one of the following conditions.
@@ -223,7 +223,7 @@ Rectangles, rhombuses, and squares are parallelograms, so their diagonals bisect
 
 In the figure, on the left there is a rectangle with sides $3$ and $2$. Its diagonals are congruent and meet at an angle other than $90^\circ$, as in every rectangle that is not a square. In a rhombus that is not a square the diagonals have different lengths. On the right there is a square with one vertex at the top. Its diagonals, one horizontal and one vertical, both measure $3$.
 
-The same properties are used to recognize the shapes. If a quadrilateral is already known to be a parallelogram:
+The same properties are used to recognise the shapes. If a quadrilateral is already known to be a parallelogram:
 
 - congruent diagonals guarantee that it is a rectangle;
 - perpendicular diagonals guarantee that it is a rhombus.
@@ -339,7 +339,7 @@ The two triangles are therefore congruent by SAS, which gives $AC=BD$. The trape
 :::attenzione{titolo="Perpendicular diagonals with only one midpoint"}
 In the quadrilateral in the figure, diagonals $AC$ and $BD$ are perpendicular and meet at $O$. The horizontal diagonal $AC$ cuts $BD$ at its midpoint, since $BO=OD=3$. On diagonal $AC$, however, $AO=4$ and $OC=2$, so $O$ is not the midpoint of $AC$. In a parallelogram the meeting point is the midpoint of both diagonals, so this shape is not a parallelogram.
 
-The shape is not a rhombus either, because by the Pythagorean theorem $AB^2=4^2+3^2=25$ and $BC^2=2^2+3^2=13$. For this reason perpendicular diagonals are sufficient to recognize a rhombus only after the shape has been proved to be a parallelogram.
+The shape is not a rhombus either, because by the Pythagorean theorem $AB^2=4^2+3^2=25$ and $BC^2=2^2+3^2=13$. For this reason perpendicular diagonals are sufficient to recognise a rhombus only after the shape has been proved to be a parallelogram.
 
 ::grafico{assi=0 uguale=1 xmin=-4.8 xmax=2.8 ymin=-3.6 ymax=3.7 linee="-4,0 0,3 2,0 0,-3 -4,0;0.25,0 0.25,0.25 0,0.25" segmenti="-4,0,2,0;0,-3,0,3" etichette="-4.26,0.28,A;0,3.3,B;2.28,0.3,C;0,-3.25,D;0.3,-0.27,O" titolo="O is the midpoint of BD. The two segments on AC have different lengths"}
 :::

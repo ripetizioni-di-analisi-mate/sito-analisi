@@ -60,7 +60,7 @@ Let $a$ and $b$ be the coordinates of the two points, called endpoints, with $a\
 
 The distance between $a$ and $b$ is written $|b-a|$, because this expression is unchanged when the endpoints are interchanged. For example, $|5-2|=|3|=3$ and $|2-5|=|-3|=3$.
 :::dimostrazione
-The required point is obtained by starting at $a$ and moving toward $b$ by half of the distance $b-a$. Its coordinate is
+The required point is obtained by starting at $a$ and moving towards $b$ by half of the distance $b-a$. Its coordinate is
 
 $$
 m=a+\frac{b-a}{2}=\frac{2a}{2}+\frac{b-a}{2}=\frac{2a+b-a}{2}=\frac{a+b}{2}.
@@ -75,7 +75,7 @@ The distance of the point from $a$ is $m-a=\dfrac{b-a}{2}$. The distance from $b
 :::esempio{titolo="Equal distances at different coordinates"}
 Points $A$ and $B$ have coordinates $-3$ and $5$. Their distance is $5-(-3)=5+3=8$. Half of the distance is $4$, so midpoint $M$ lies four units to the right of $A$ and has coordinate $m=-3+4=1$. The midpoint lies to the right of zero because the right endpoint $5$ is farther from the origin than the left endpoint $-3$.
 
-The points at distance $d>0$ from a point with coordinate $m$, called the center, have coordinates $m-d$ and $m+d$.
+The points at distance $d>0$ from a point with coordinate $m$, called the centre, have coordinates $m-d$ and $m+d$.
 
 ::grafico{xmin=-5 xmax=7 ymin=-1 ymax=1 uguale=1 assi=0 vettori="-4.6,0,6.5,0" punti="-3,0,pieno,A;1,0,pieno,M;5,0,pieno,B" linee="0,-0.08 0,0.08" segmenti="-3,0.09,-3,0.45;-3,0.45,1,0.45;1,0.09,1,0.45;1,0.45,5,0.45;5,0.09,5,0.45" etichette="-3.12,-0.28,−3;-0.11,-0.28,0;0.89,-0.28,1;4.89,-0.28,5;-1.05,0.59,4;2.95,0.59,4;6.63,0.08,x" titolo="Midpoint M divides the distance between A and B into two lengths of 4 units"}
 :::
@@ -110,7 +110,7 @@ The numbers that are added are called addends and those that are multiplied are 
 
 The **difference** between $a$ and $b$ is the number that, when added to $b$, gives $a$. Subtracting $b$ is equivalent to adding its opposite, that is, $a-b=a+(-b)$. Indeed $(a+(-b))+b=a$. For example, $5-(-3)=5+3=8$.
 
-An expression is a piece of writing that contains several operations. Parentheses form a **grouping**, that is, they mark a part of the expression to be calculated together and first. Within a grouping, and then in the whole expression, the calculations follow this order.
+An expression is a piece of writing that contains several operations. Brackets form a **grouping**, that is, they mark a part of the expression to be calculated together and first. Within a grouping, and then in the whole expression, the calculations follow this order.
 
 1. Powers. A **power** is a product of equal factors, for example $2^3=2\cdot2\cdot2=8$. The number written at the top, $3$, is the exponent and counts the factors.
 2. Multiplications and divisions, from left to right.
@@ -123,7 +123,7 @@ For example, $20-2\cdot3^2=20-2\cdot9=20-18=2$. The dot $\cdot$ stands for multi
 Three properties change the form of a calculation and leave the result the same.
 
 - **Commutative** property. Swapping the addends of a sum or the factors of a product leaves the result unchanged. For example, $3+5=5+3$ and $3\cdot5=5\cdot3$. With letters, $a+b=b+a$ and $ab=ba$.
-- **Associative** property. In a sum of three addends, or in a product of three factors, the result is the same whichever pair of neighboring terms is calculated first. For example, $(2+3)+4=2+(3+4)=9$. With letters, $(a+b)+c=a+(b+c)$ and $(ab)c=a(bc)$.
+- **Associative** property. In a sum of three addends, or in a product of three factors, the result is the same whichever pair of neighbouring terms is calculated first. For example, $(2+3)+4=2+(3+4)=9$. With letters, $(a+b)+c=a+(b+c)$ and $(ab)c=a(bc)$.
 - **Distributive** property. Multiplying a number by a sum is equivalent to multiplying it by each addend and adding the two products. For example, $2\cdot(3+4)=2\cdot3+2\cdot4=14$. With letters, $a(b+c)=ab+ac$. The same equality, read from right to left, is used to factor out a common factor, as in $6+8=2\cdot3+2\cdot4=2\cdot(3+4)$.
 
 Subtraction does not allow the same swaps or groupings. For instance, $(9-5)-2=4-2=2$, whereas $9-(5-2)=9-3=6$. To calculate a difference using the properties of addition, each subtraction is first written as the addition of the opposite. For example, $9-5-2=(9+(-5))+(-2)$ and, by the associative property, $9+((-5)+(-2))=9+(-7)=2$. With letters, this takes $(a+(-b))+(-c)$ to $a+((-b)+(-c))$.
@@ -200,13 +200,13 @@ For $8$ and $12$, the common divisors are $1,2,4$, so $\gcd(8,12)=4$. The multip
 
 If the greatest common divisor is $1$, the two numbers are coprime, or relatively prime. For example, $9$ and $10$ are coprime, because the divisors of $9$ are $1,3,9$ and those of $10$ are $1,2,5,10$. They are coprime even though each has proper divisors, that is, divisors different from $1$ and from the number itself.
 
-A prime number is an integer greater than $1$ whose only divisors are $1$ and itself, such as $2,3,5,7,11$. Every integer greater than $1$ can be written as a product of prime numbers, and this way of writing it is its prime factorization. For $72$, the number is divided by the smallest prime as long as the division gives an integer, and then by the next prime.
+A prime number is an integer greater than $1$ whose only divisors are $1$ and itself, such as $2,3,5,7,11$. Every integer greater than $1$ can be written as a product of prime numbers, and this way of writing it is its prime factorisation. For $72$, the number is divided by the smallest prime as long as the division gives an integer, and then by the next prime.
 
 $$
 72=2\cdot36=2\cdot2\cdot18=2\cdot2\cdot2\cdot9=2\cdot2\cdot2\cdot3\cdot3=2^3\cdot3^2.
 $$
 
-In the same way, $120=2^3\cdot3\cdot5$. The GCD and the LCM are read from the factorizations.
+In the same way, $120=2^3\cdot3\cdot5$. The GCD and the LCM are read from the factorisations.
 
 - A common divisor takes each prime only up to the smaller exponent, because it must divide both numbers. The GCD is therefore the product of the common primes with the smaller exponent.
 - A common multiple contains each prime at least to the larger exponent, because it must be divisible by both numbers. The LCM is therefore the product of all the primes that occur with the larger exponent.
@@ -222,7 +222,7 @@ The quotients $72:24=3$ and $120:24=5$ are coprime, because dividing by the GCD 
 :::
 
 ::::teorema{titolo="The Euclidean algorithm"}
-An **algorithm** is a procedure made of steps that are repeated until the result is reached. The Euclidean algorithm finds the GCD through a series of divisions, without prime factorization.
+An **algorithm** is a procedure made of steps that are repeated until the result is reached. The Euclidean algorithm finds the GCD through a series of divisions, without prime factorisation.
 
 The **division with remainder** of $a$ by $b$ finds the quotient $q$, that is, how many times $b$ goes into $a$, and the **remainder** $r$, that is, how much is left over. As a formula, $a=bq+r$ with $0\le r<b$. For example, $17=5\cdot3+2$.
 
@@ -330,14 +330,14 @@ Take three fourths of two thirds of a unit rectangle, that is, of area $1$. Taki
 ::grafico{xmin=-0.45 xmax=3.45 ymin=-0.35 ymax=4.65 uguale=1 assi=0 poligoni="0,0 2,0 2,3 0,3" linee="0,0 3,0 3,4 0,4 0,0;1,0 1,4;2,0 2,4;0,1 3,1;0,2 3,2;0,3 3,3" titolo="Two columns and three rows give six of the twelve cells"}
 :::
 
-:::attenzione{titolo="Canceling a factor common to all terms"}
-In a fraction, a number is canceled only when it is a factor of the entire numerator and of the entire denominator. In the fraction $\dfrac{6+9}{3}$ the numerator is a sum. The number $3$ is a factor of both addends, so it is taken out of the entire sum, $6+9=3(2+3)$, and cancels with the denominator.
+:::attenzione{titolo="Cancelling a factor common to all terms"}
+In a fraction, a number is cancelled only when it is a factor of the entire numerator and of the entire denominator. In the fraction $\dfrac{6+9}{3}$ the numerator is a sum. The number $3$ is a factor of both addends, so it is taken out of the entire sum, $6+9=3(2+3)$, and cancels with the denominator.
 
 $$
 \frac{6+9}{3}=\frac{3(2+3)}3=2+3=5.
 $$
 
-The calculation $\dfrac{6+9}{6}=1+9$ is incorrect, because the $6$ in the denominator has been canceled with the first addend only. Dividing by six means dividing each addend by six, so the value is $\dfrac{15}{6}=\dfrac52$, whereas $1+9=10$.
+The calculation $\dfrac{6+9}{6}=1+9$ is incorrect, because the $6$ in the denominator has been cancelled with the first addend only. Dividing by six means dividing each addend by six, so the value is $\dfrac{15}{6}=\dfrac52$, whereas $1+9=10$.
 :::
 
 ## Terminating and repeating decimals
@@ -350,7 +350,7 @@ The decimal representation of a fraction is obtained by dividing the numerator b
 
 A rational number has a terminating or repeating decimal representation.
 
-For a reduced fraction with positive denominator, the representation terminates exactly when the prime factorization of the denominator contains only the primes $2$ and $5$. As a formula, the denominator has the form $2^u5^v$, where $u,v$ are nonnegative integers, that is, greater than or equal to zero. A power with exponent zero equals $1$, so the denominator $1=2^0\cdot5^0$ also satisfies the condition.
+For a reduced fraction with positive denominator, the representation terminates exactly when the prime factorisation of the denominator contains only the primes $2$ and $5$. As a formula, the denominator has the form $2^u5^v$, where $u,v$ are nonnegative integers, that is, greater than or equal to zero. A power with exponent zero equals $1$, so the denominator $1=2^0\cdot5^0$ also satisfies the condition.
 
 For example, $\dfrac7{40}$ has a terminating representation because $40=2^3\cdot5$, whereas $\dfrac7{24}$ has a repeating representation because $24=2^3\cdot3$ contains the prime $3$.
 :::dimostrazione
