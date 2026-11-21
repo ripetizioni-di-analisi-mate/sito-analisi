@@ -3,7 +3,7 @@ titolo: "Earth science for TOLC-S"
 sommario: "Earth in space, Earth systems, plates, rocks, surface and internal processes, geological time, resources, and risks."
 ---
 
-Earth science studies the planet: what it is made of, how it moves in space and which processes change its interior and its surface. In TOLC-S the questions ask you to recognise a process from a description, to put past events in order and to do short calculations with balances and percentages. Each section presents a topic, the terms it needs and a concrete case.
+Earth science studies the planet: what it is made of, how it moves in space and which processes change its interior and its surface. In TOLC-S the questions ask you to recognize a process from a description, to put past events in order and to do short calculations with balances and percentages. Each section presents a topic, the terms it needs and a concrete case.
 
 ## Earth in space
 
@@ -27,8 +27,8 @@ The seasons depend on the tilt of the axis and not on the distance between Earth
 :::osservazione{#distanze titolo="Distances, light, and alignments"}
 Astronomical distances are measured with two units.
 
-- The **astronomical unit** is the mean distance between Earth and the Sun, about 150 million kilometres. It is used for distances inside the Solar System.
-- The **light-year** is the distance that light travels in a vacuum in one year, about 9500 billion kilometres. It is used for distances between stars. It is a length, even though its name contains the word "year".
+- The **astronomical unit** is the mean distance between Earth and the Sun, about 150 million kilometers. It is used for distances inside the Solar System.
+- The **light-year** is the distance that light travels in a vacuum in one year, about 9500 billion kilometers. It is used for distances between stars. It is a length, even though its name contains the word "year".
 
 Light takes time to arrive, so a distant object is seen as it was when the light left it. A star 4 light-years away is seen as it was 4 years ago.
 
@@ -45,7 +45,7 @@ The Moon's orbit is tilted by about $5^\circ$ with respect to Earth's. In almost
 :::
 
 :::esempio{titolo="The time sunlight takes to arrive"}
-The distance between the Sun and Earth is $d = 150$ million kilometres, that is, $1.5 \cdot 10^{8}\,\mathrm{km}$. Light travels in a vacuum at the speed $c = 3.0 \cdot 10^{5}\,\mathrm{km/s}$. The time is the ratio of the distance to the speed:
+The distance between the Sun and Earth is $d = 150$ million kilometers, that is, $1.5 \cdot 10^{8}\,\mathrm{km}$. Light travels in a vacuum at the speed $c = 3.0 \cdot 10^{5}\,\mathrm{km/s}$. The time is the ratio of the distance to the speed:
 $$
 t = \frac{d}{c} = \frac{1.5 \cdot 10^{8}\,\mathrm{km}}{3.0 \cdot 10^{5}\,\mathrm{km/s}} = 500\,\mathrm{s} .
 $$
@@ -54,14 +54,14 @@ Since $500\,\mathrm{s}$ is 8 minutes and 20 seconds, the Sun is seen from Earth 
 
 ## The spheres of the Earth system
 
-:::definizione{#struttura titolo="Composition and mechanical behaviour"}
+:::definizione{#struttura titolo="Composition and mechanical behavior"}
 The interior of Earth is divided into concentric layers. The layers are described in two ways, according to the property considered.
 
 The first way considers the material the layer is made of.
 
 - The **crust** is the outer layer, thin and rocky. Under the continents it is on average $35\,\mathrm{km}$ thick (continental crust), under the oceans about $7\,\mathrm{km}$ (oceanic crust). Oceanic crust is thinner and denser than continental crust.
 - The **mantle** extends below the crust to a depth of about $2900\,\mathrm{km}$. It is made of rocks rich in silicon, oxygen, iron and magnesium.
-- The **core** occupies the centre of Earth and is made mostly of iron. The outer core is liquid, the inner core is solid.
+- The **core** occupies the center of Earth and is made mostly of iron. The outer core is liquid, the inner core is solid.
 
 The second way considers how the layer behaves when a force acts on it.
 
@@ -70,26 +70,26 @@ The second way considers how the layer behaves when a force acts on it.
 
 The two subdivisions have different boundaries, because the lithosphere contains the crust and also part of the mantle.
 
-The inner core is hotter than the outer core, and yet it is solid. The state of a material depends on temperature and also on pressure: at the centre of Earth the pressure is so high that it keeps iron in the solid state.
+The inner core is hotter than the outer core, and yet it is solid. The state of a material depends on temperature and also on pressure: at the center of Earth the pressure is so high that it keeps iron in the solid state.
 :::
 
 :::esempio{titolo="The uplift of Scandinavia"}
-During the last glaciation Scandinavia was covered by a layer of ice up to $3\,\mathrm{km}$ thick. The weight of the ice made the lithosphere sink into the asthenosphere, as a loaded boat sinks deeper into water. The ice melted about 10,000 years ago, and since then the region has been rising slowly: in some areas the ground still rises by about one centimetre per year. The uplift shows that the asthenosphere, although solid, flows slowly. The floating equilibrium of the lithosphere on the asthenosphere is called **isostasy**.
+During the last glaciation Scandinavia was covered by a layer of ice up to $3\,\mathrm{km}$ thick. The weight of the ice made the lithosphere sink into the asthenosphere, as a loaded boat sinks deeper into water. The ice melted about 10,000 years ago, and since then the region has been rising slowly: in some areas the ground still rises by about one centimeter per year. The uplift shows that the asthenosphere, although solid, flows slowly. The floating equilibrium of the lithosphere on the asthenosphere is called **isostasy**.
 :::
 
 :::definizione{#acqua titolo="Water reservoirs and fluxes"}
-The **hydrosphere** is all the water of Earth: oceans, rivers, lakes, groundwater, ice and vapour. About $97\%$ of the water is salty and lies in the oceans. The frozen part is also called the **cryosphere**.
+The **hydrosphere** is all the water of Earth: oceans, rivers, lakes, groundwater, ice and vapor. About $97\%$ of the water is salty and lies in the oceans. The frozen part is also called the **cryosphere**.
 
 Water passes continuously from one reservoir to another, along a path called the **water cycle**. It has four stages.
 
-1. **Evaporation**. The heat of the Sun turns the liquid water of seas and lakes into vapour, which rises into the air. Plants also release vapour from their leaves, by **transpiration**.
-2. **Condensation**. As it rises, the air cools and the vapour becomes liquid again as tiny droplets, which form clouds.
+1. **Evaporation**. The heat of the Sun turns the liquid water of seas and lakes into vapor, which rises into the air. Plants also release vapor from their leaves, by **transpiration**.
+2. **Condensation**. As it rises, the air cools and the vapor becomes liquid again as tiny droplets, which form clouds.
 3. **Precipitation**. The enlarged drops fall as rain, snow or hail.
 4. **Runoff and infiltration**. Part of the fallen water flows over the surface towards rivers and the sea. Another part enters the ground and feeds the groundwater.
 
 Groundwater fills the empty spaces between the grains of rocks. Two quantities describe a rock from this point of view.
 
-- **Porosity** is the fraction of the volume of the rock occupied by empty spaces, called pores. A sand with a porosity of $30\%$ contains 300 litres of pores in every cubic metre.
+- **Porosity** is the fraction of the volume of the rock occupied by empty spaces, called pores. A sand with a porosity of $30\%$ contains 300 liters of pores in every cubic meter.
 - **Permeability** is the ability of the rock to let water pass through it. It depends on how well the pores are connected to one another.
 
 The two quantities are independent. Clay has high porosity, but its pores are very small and poorly connected, so it is almost impermeable. Gravel is porous and also very permeable.
@@ -102,11 +102,11 @@ The main input is the rainwater that infiltrates, called recharge. The outputs a
 :::
 
 :::definizione{#atmosfera titolo="Atmosphere and energy balance"}
-The **atmosphere** is the envelope of gases that surrounds Earth. Dry air near the ground is $78\%$ nitrogen and $21\%$ oxygen; the remaining $1\%$ includes argon, carbon dioxide and other gases. To these is added water vapour, in an amount that varies from place to place.
+The **atmosphere** is the envelope of gases that surrounds Earth. Dry air near the ground is $78\%$ nitrogen and $21\%$ oxygen; the remaining $1\%$ includes argon, carbon dioxide and other gases. To these is added water vapor, in an amount that varies from place to place.
 
 The atmosphere is divided into layers. The two lowest are the following.
 
-- The **troposphere** extends from the ground to an altitude of about $12\,\mathrm{km}$. It contains almost all the water vapour, and clouds, winds and rain form in it. Temperature decreases with height.
+- The **troposphere** extends from the ground to an altitude of about $12\,\mathrm{km}$. It contains almost all the water vapor, and clouds, winds and rain form in it. Temperature decreases with height.
 - The **stratosphere** lies above the troposphere and reaches about $50\,\mathrm{km}$. It contains the **ozone layer**, a gas that absorbs most of the Sun's ultraviolet rays, which are harmful to organisms.
 
 **Atmospheric pressure** is the weight of the column of air above a surface, divided by the area of the surface. At higher altitude the column of air above is shorter, so the pressure decreases: at $5500\,\mathrm{m}$ it is about half of the pressure at sea level.
@@ -118,9 +118,9 @@ The Sun heats the regions near the equator more, where the rays arrive almost ve
 Two quantities regulate the temperature of the surface.
 
 - **Albedo** is the fraction of sunlight that a surface reflects. Fresh snow has an albedo of about $0.8$, that is, it reflects $80\%$ of the light and absorbs $20\%$. The sea has an albedo of about $0.06$ and absorbs almost all the light. A surface with low albedo heats up more.
-- The **greenhouse effect** is the warming caused by some gases of the atmosphere, called greenhouse gases: water vapour, carbon dioxide, methane. Earth's surface, heated by the Sun, emits infrared radiation. Greenhouse gases absorb part of it and re-emit it also downwards, so the surface stays warmer. Without the greenhouse effect the mean temperature of Earth would be about $-18\,^\circ\mathrm{C}$ instead of about $+15\,^\circ\mathrm{C}$.
+- The **greenhouse effect** is the warming caused by some gases of the atmosphere, called greenhouse gases: water vapor, carbon dioxide, methane. Earth's surface, heated by the Sun, emits infrared radiation. Greenhouse gases absorb part of it and re-emit it also downwards, so the surface stays warmer. Without the greenhouse effect the mean temperature of Earth would be about $-18\,^\circ\mathrm{C}$ instead of about $+15\,^\circ\mathrm{C}$.
 
-Air holds vapour up to a maximum amount, which is smaller when the air is colder. Air that holds the maximum amount of vapour is said to be **saturated**. If moist air cools until it is saturated, the excess vapour condenses into droplets: this is how fog, dew and clouds form.
+Air holds vapor up to a maximum amount, which is smaller when the air is colder. Air that holds the maximum amount of vapor is said to be **saturated**. If moist air cools until it is saturated, the excess vapor condenses into droplets: this is how fog, dew and clouds form.
 
 The atmosphere, water, rocks and organisms also exchange matter. In photosynthesis, for example, plants take carbon dioxide from the air and use its carbon to build their own substances.
 :::
@@ -138,7 +138,7 @@ For the same light received the asphalt absorbs 4.5 times as much energy, so it 
 ## Plates and mountain building
 
 :::definizione{#placche titolo="Three types of boundary"}
-The lithosphere is divided into about a dozen major **plates** and many minor ones, which move relative to one another by a few centimetres per year. A single plate carries both continents and ocean floor: the African plate, for example, includes Africa and part of the floor of the Atlantic Ocean. The edge of a plate often lies in the middle of an ocean, far from the coasts.
+The lithosphere is divided into about a dozen major **plates** and many minor ones, which move relative to one another by a few centimeters per year. A single plate carries both continents and ocean floor: the African plate, for example, includes Africa and part of the floor of the Atlantic Ocean. The edge of a plate often lies in the middle of an ocean, far from the coasts.
 
 The border between two plates is called a **boundary**. There are three types, according to the motion of one plate relative to the other.
 
@@ -148,11 +148,11 @@ The border between two plates is called a **boundary**. There are three types, a
 :::
 
 :::esempio{titolo="Opening rate of the Atlantic"}
-South America and Africa began to separate about 130 million years ago, and today they are about $5000\,\mathrm{km}$ apart. The mean rate of separation is the ratio of the distance to the time. The distance is expressed in centimetres: $5000\,\mathrm{km} = 5 \cdot 10^{8}\,\mathrm{cm}$.
+South America and Africa began to separate about 130 million years ago, and today they are about $5000\,\mathrm{km}$ apart. The mean rate of separation is the ratio of the distance to the time. The distance is expressed in centimeters: $5000\,\mathrm{km} = 5 \cdot 10^{8}\,\mathrm{cm}$.
 $$
 v = \frac{5 \cdot 10^{8}\,\mathrm{cm}}{1.3 \cdot 10^{8}\,\text{years}} \approx 3.8\,\frac{\mathrm{cm}}{\text{year}} .
 $$
-The result, a few centimetres per year, is the typical speed of plate motion.
+The result, a few centimeters per year, is the typical speed of plate motion.
 :::
 
 :::osservazione{#prove-placche titolo="From observations to a model"}
@@ -169,10 +169,10 @@ Some volcanoes lie inside a plate, far from the boundaries. They are explained b
 
 ## Minerals and the rock cycle
 
-:::definizione{#rocce titolo="Recognising a rock's origin"}
+:::definizione{#rocce titolo="Recognizing a rock's origin"}
 A **mineral** is a natural solid substance with a definite chemical composition and with its atoms arranged in an ordered, repeating way, that is, in a crystal lattice. Quartz, for example, is a mineral made of silicon and oxygen. A **rock** is a natural aggregate of one or more minerals. Granite is a rock made of quartz, feldspars and micas.
 
-A mineral is recognised by some properties: **hardness**, that is, resistance to being scratched; **cleavage**, that is, the tendency to break along flat surfaces; density; reaction with acids. Colour alone is not enough, because the same mineral occurs in different colours. Hardness is expressed with the **Mohs scale**, which ranks ten reference minerals from 1 (talc) to 10 (diamond): each mineral scratches those with a lower number. The scale gives only an order. The number 10 of diamond, therefore, does not mean a hardness ten times that of talc.
+A mineral is recognized by some properties: **hardness**, that is, resistance to being scratched; **cleavage**, that is, the tendency to break along flat surfaces; density; reaction with acids. Color alone is not enough, because the same mineral occurs in different colors. Hardness is expressed with the **Mohs scale**, which ranks ten reference minerals from 1 (talc) to 10 (diamond): each mineral scratches those with a lower number. The scale gives only an order. The number 10 of diamond, therefore, does not mean a hardness ten times that of talc.
 
 Rocks are divided into three families, according to the way they formed.
 
@@ -181,8 +181,8 @@ Rocks are divided into three families, according to the way they formed.
 - **Metamorphic rocks** form when an existing rock is subjected to high temperatures and pressures, and its minerals change while remaining solid. Limestone becomes marble; mudstone becomes slate. A pressure that is stronger in one direction arranges the minerals in parallel planes, and this sheet-like structure is called **foliation**. If the rock goes as far as melting, the melt is a magma, and the rock that derives from it is igneous.
 :::
 
-:::esempio{titolo="Recognising three rocks from a description"}
-- A light-coloured rock is made of crystals a few millimetres across, all clearly visible and interlocked. Large crystals indicate slow cooling at depth, so the rock is **igneous**. It is a granite.
+:::esempio{titolo="Recognizing three rocks from a description"}
+- A light-colored rock is made of crystals a few millimeters across, all clearly visible and interlocked. Large crystals indicate slow cooling at depth, so the rock is **igneous**. It is a granite.
 - A rock is made of cemented sand grains, is arranged in layers and contains imprints of shells. Grains, layers and fossils indicate a deposit of sediments, so the rock is **sedimentary**. It is a sandstone.
 - A rock has its minerals aligned in thin sheets and splits into slabs. Foliation indicates a transformation under pressure, so the rock is **metamorphic**. It is a slate.
 :::
@@ -225,7 +225,7 @@ Surface processes receive energy from two sources. The **Sun** evaporates water 
 
 Organisms take part too. Roots widen the fractures of rocks and, together with the remains of plants and animals, help to form **soil**, the surface layer in which plants grow. Roots also hold the ground: a slope covered by a forest is eroded much less than a deforested slope.
 
-A **drainage basin** is the land from which all rainwater flows towards the same river. The line that separates two neighbouring basins, usually a ridge, is called a **watershed**. A drop that falls on one side of the ridge ends up in one river, a drop that falls on the other side ends up in a different river.
+A **drainage basin** is the land from which all rainwater flows towards the same river. The line that separates two neighboring basins, usually a ridge, is called a **watershed**. A drop that falls on one side of the ridge ends up in one river, a drop that falls on the other side ends up in a different river.
 
 A surface covered with asphalt or concrete is impermeable. Rainwater does not infiltrate and all of it flows over the surface, so it reaches watercourses faster and in larger amounts.
 :::
@@ -243,9 +243,9 @@ The runoff from the yard is 4 times that from the meadow. For this reason, for t
 ## Internal heat, earthquakes, and volcanoes
 
 :::definizione{#calore titolo="Heat sources and transfer"}
-The interior of Earth is hot. In the crust the temperature increases on average by about $30\,^\circ\mathrm{C}$ for every kilometre of depth, and at the centre of the planet it exceeds $5000\,^\circ\mathrm{C}$. This heat has two origins.
+The interior of Earth is hot. In the crust the temperature increases on average by about $30\,^\circ\mathrm{C}$ for every kilometer of depth, and at the center of the planet it exceeds $5000\,^\circ\mathrm{C}$. This heat has two origins.
 
-- **Primordial heat** dates back to the formation of the planet, about 4.5 billion years ago. The impacts between the bodies that were clumping together and the sinking of iron towards the centre released energy, and part of it is still stored in the interior.
+- **Primordial heat** dates back to the formation of the planet, about 4.5 billion years ago. The impacts between the bodies that were clumping together and the sinking of iron towards the center released energy, and part of it is still stored in the interior.
 - **Radiogenic heat** is produced continuously by the decay of radioactive elements contained in rocks, such as uranium, thorium and potassium.
 
 Internal heat is independent of the heat that the surface receives from the Sun.
@@ -253,7 +253,7 @@ Internal heat is independent of the heat that the surface receives from the Sun.
 Heat is transferred in three ways.
 
 - **Conduction**. Heat passes through a material at rest, from the hot zone to the cold one. This is how the handle of a spoon dipped in tea warms up. It takes place in the lithosphere, which is rigid.
-- **Convection**. Heat is carried by material that moves. Hot material, less dense, rises; cold material, denser, sinks, and a circulation forms. This is what happens to water in a pan on the stove. It takes place in the mantle, where solid rock flows by a few centimetres per year, and in the outer core, which is liquid.
+- **Convection**. Heat is carried by material that moves. Hot material, less dense, rises; cold material, denser, sinks, and a circulation forms. This is what happens to water in a pan on the stove. It takes place in the mantle, where solid rock flows by a few centimeters per year, and in the outer core, which is liquid.
 - **Radiation**. Heat is emitted as electromagnetic radiation, which travels even through a vacuum. This is how the Sun heats Earth and how Earth loses heat to space.
 
 When heat is carried by a fluid moving in one direction, such as a rising magma, the term **advection** is also used.
@@ -262,28 +262,28 @@ When heat is carried by a fluid moving in one direction, such as a rising magma,
 :::definizione{#sismi titolo="Source, waves, and effects"}
 A **fault** is a fracture of the crust along which two blocks of rock slide relative to each other. Plate motion deforms the rocks on the two sides of the fault, which store energy like a compressed spring. When the deformation exceeds the strength of the rock, the two blocks slip suddenly and the energy is released in the form of waves. This event is an **earthquake**.
 
-- The **hypocentre** is the point at depth where the rupture begins.
-- The **epicentre** is the point of the surface vertically above the hypocentre.
+- The **hypocenter** is the point at depth where the rupture begins.
+- The **epicenter** is the point of the surface vertically above the hypocenter.
 
 An earthquake is measured with two different quantities.
 
 - **Magnitude** measures the energy released at the source. Each earthquake has a single magnitude. One more unit of magnitude corresponds to about 30 times as much energy.
-- **Intensity** describes the effects on people and buildings in a place, and is expressed with the Mercalli scale. The same earthquake has different intensities in different places: it is higher near the epicentre and where the ground and the buildings are less resistant.
+- **Intensity** describes the effects on people and buildings in a place, and is expressed with the Mercalli scale. The same earthquake has different intensities in different places: it is higher near the epicenter and where the ground and the buildings are less resistant.
 
-The waves that leave the hypocentre are of two main types.
+The waves that leave the hypocenter are of two main types.
 
 - **P waves** (primary) compress and stretch the rock in the direction in which they advance. They are the fastest, about $6\,\mathrm{km/s}$ in the crust, and pass through both solids and liquids.
 - **S waves** (secondary) make the rock oscillate perpendicular to the direction in which they advance. They are slower, about $3.5\,\mathrm{km/s}$ in the crust, and pass only through solids.
 
-P waves reach a measuring station before S waves. The delay between the two arrivals grows with the distance of the epicentre, so it allows that distance to be calculated.
+P waves reach a measuring station before S waves. The delay between the two arrivals grows with the distance of the epicenter, so it allows that distance to be calculated.
 
 S waves stop at the boundary of the outer core. Since they pass only through solids, from this observation it was deduced that the outer core is liquid.
 
 A **tsunami** is a series of sea waves produced by a sudden vertical displacement of the sea floor, for example during a strong undersea earthquake.
 :::
 
-:::esempio{titolo="Distance of the epicentre from the delay between the waves"}
-A station records the S waves $10\,\mathrm{s}$ after the P waves. The speeds are $6\,\mathrm{km/s}$ for P waves and $3.5\,\mathrm{km/s}$ for S waves. Let $d$ be the distance of the epicentre in kilometres. Each type of wave takes a time equal to the distance divided by the speed, so the delay is
+:::esempio{titolo="Distance of the epicenter from the delay between the waves"}
+A station records the S waves $10\,\mathrm{s}$ after the P waves. The speeds are $6\,\mathrm{km/s}$ for P waves and $3.5\,\mathrm{km/s}$ for S waves. Let $d$ be the distance of the epicenter in kilometers. Each type of wave takes a time equal to the distance divided by the speed, so the delay is
 $$
 \begin{aligned}
 \frac{d}{3.5} - \frac{d}{6} &= 10 \\[6pt]
@@ -292,7 +292,7 @@ $$
 d &= \frac{210}{2.5} = 84 .
 \end{aligned}
 $$
-The epicentre is $84\,\mathrm{km}$ away. Check: P waves take $\dfrac{84}{6} = 14\,\mathrm{s}$ and S waves take $\dfrac{84}{3.5} = 24\,\mathrm{s}$, a difference of $10\,\mathrm{s}$.
+The epicenter is $84\,\mathrm{km}$ away. Check: P waves take $\dfrac{84}{6} = 14\,\mathrm{s}$ and S waves take $\dfrac{84}{3.5} = 24\,\mathrm{s}$, a difference of $10\,\mathrm{s}$.
 :::
 
 :::osservazione{#vulcani titolo="Magma, gases, and eruptive products"}
@@ -301,7 +301,7 @@ A **volcano** is an opening in the crust from which magma and gases come out. Th
 - A fluid magma lets gases escape easily. The eruption is **effusive**: lava comes out and flows down the sides in streams. This is the case of the Hawaiian volcanoes.
 - A viscous magma traps the gases, whose pressure increases until the magma is shattered and thrown into the air. The eruption is **explosive**. This is the case of the eruption of Vesuvius in AD 79, which destroyed Pompeii.
 
-An explosive eruption produces ash and fragments, called **pyroclasts**. A **pyroclastic flow** is a mixture of very hot gases and pyroclasts that runs down the sides of the volcano at hundreds of kilometres per hour. It is the most dangerous volcanic phenomenon.
+An explosive eruption produces ash and fragments, called **pyroclasts**. A **pyroclastic flow** is a mixture of very hot gases and pyroclasts that runs down the sides of the volcano at hundreds of kilometers per hour. It is the most dangerous volcanic phenomenon.
 
 In subduction zones the descending plate carries water with it. At depth the water is released and passes into the mantle above, whose melting temperature it lowers. Part of the mantle melts, and the magma that forms rises and feeds the volcanoes.
 :::
@@ -348,7 +348,7 @@ N(t)=N_0\left(\frac{1}{2}\right)^{\frac{t}{T}} .
 $$
 By measuring in a mineral the fraction of parent atoms remaining, the number of half-lives that have passed is obtained, and hence the age of the mineral.
 
-The age is correct if, since the moment it formed, the mineral has not exchanged atoms with its surroundings, that is, it has neither lost nor gained parent or daughter atoms. The age measured is that of the moment at which the mineral crystallised.
+The age is correct if, since the moment it formed, the mineral has not exchanged atoms with its surroundings, that is, it has neither lost nor gained parent or daughter atoms. The age measured is that of the moment at which the mineral crystallized.
 
 ::grafico{f="100*2^(-x/20)" xmin="0" xmax="60" ymin="0" ymax="100" nomi="t,p" punti="0,100;20,50;40,25;60,12.5" titolo="Remaining fraction p as a percentage; time t in millions of years, with a half-life of 20 million years"}
 :::
@@ -401,13 +401,13 @@ From $100\,\mathrm{t}$ of rock, $1.6\,\mathrm{t}$ of copper is obtained. The rem
 :::osservazione{#bilanci titolo="Sustainable withdrawal depends on fluxes"}
 A withdrawal is sustainable if the stored amount does not decrease over time. To establish this, the balance between inputs and outputs is written.
 
-An aquifer receives 4 million cubic metres of water each year from infiltrating rain, and wells withdraw 6 million. The annual balance is
+An aquifer receives 4 million cubic meters of water each year from infiltrating rain, and wells withdraw 6 million. The annual balance is
 $$
-4 - 6 = -2 \ \text{million cubic metres} .
+4 - 6 = -2 \ \text{million cubic meters} .
 $$
-The negative sign shows that the aquifer loses 2 million cubic metres per year. If it contains 50 million cubic metres, with these withdrawals it is exhausted in $\dfrac{50}{2} = 25$ years.
+The negative sign shows that the aquifer loses 2 million cubic meters per year. If it contains 50 million cubic meters, with these withdrawals it is exhausted in $\dfrac{50}{2} = 25$ years.
 
-The withdrawal becomes sustainable if it falls below the recharge of 4 million cubic metres. Part of the recharge also feeds the springs and rivers connected to the aquifer, so the sustainable withdrawal is less than 4 million cubic metres per year.
+The withdrawal becomes sustainable if it falls below the recharge of 4 million cubic meters. Part of the recharge also feeds the springs and rivers connected to the aquifer, so the sustainable withdrawal is less than 4 million cubic meters per year.
 :::
 
 ## Natural hazards and land use

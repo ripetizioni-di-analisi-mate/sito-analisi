@@ -113,11 +113,11 @@ The equality $-26=7\cdot(-3)-5$ is also true, but $-5$ is negative and does not 
 :::osservazione{#stime titolo="Estimates and precision"}
 **Rounding to the nearest tenth** means replacing a number with the nearest multiple of $0.1$, that is, the nearest number with one decimal digit. **Truncating to tenths** towards zero means deleting the digits after the first decimal digit. The number $-2.76$ lies between $-2.8$ and $-2.7$; it is $0.04$ from the first and $0.06$ from the second, so rounding to the nearest tenth gives $-2.8$. Truncation deletes the digit $6$ and gives $-2.7$.
 
-Suppose that the side of a square measures between $4.9$ and $5.1$ centimetres. Of two positive numbers, the larger one has the larger square, so the area lies between
+Suppose that the side of a square measures between $4.9$ and $5.1$ centimeters. Of two positive numbers, the larger one has the larger square, so the area lies between
 $$
 4.9^2=24.01\qquad\text{and}\qquad5.1^2=26.01
 $$
-square centimetres. In this way a result is bounded without knowing every digit of the data.
+square centimeters. In this way a result is bounded without knowing every digit of the data.
 :::
 
 ## Ratios, proportions and percentages
@@ -363,7 +363,7 @@ It follows that $x-c$ is a factor of $P(x)$ exactly when $P(c)=0$. For $P(x)=x^3
 :::
 
 :::attenzione{#frazioni-algebriche titolo="Simplification and domain"}
-A fraction is simplified by dividing the numerator and the denominator by a common **factor**, that is, an expression multiplying the whole numerator and the whole denominator. Summands, that is, the terms of a sum, are not cancelled. With numbers, $\dfrac{6\cdot5}{6\cdot7}=\dfrac57$, whereas $\dfrac{6+5}{6+7}=\dfrac{11}{13}$.
+A fraction is simplified by dividing the numerator and the denominator by a common **factor**, that is, an expression multiplying the whole numerator and the whole denominator. Summands, that is, the terms of a sum, are not canceled. With numbers, $\dfrac{6\cdot5}{6\cdot7}=\dfrac57$, whereas $\dfrac{6+5}{6+7}=\dfrac{11}{13}$.
 
 In the fraction
 $$
@@ -371,7 +371,7 @@ $$
 $$
 the common factor is $x-3$. For $x=3$ the original denominator is zero and the fraction is undefined, so the equality holds for $x\ne3$ and this condition is written next to the result. The expression $x+3$ can be calculated for $x=3$ too, giving $6$, whereas the original fraction is undefined there.
 
-In the fraction $\dfrac{x+3}x$ the letter $x$ in the numerator is a summand, so it is not cancelled. For $x=3$ the fraction equals $\dfrac{3+3}3=2$; cancelling the two letters $x$ would instead give $3$.
+In the fraction $\dfrac{x+3}x$ the letter $x$ in the numerator is a summand, so it is not canceled. For $x=3$ the fraction equals $\dfrac{3+3}3=2$; canceling the two letters $x$ would instead give $3$.
 :::
 
 ## Linear equations and systems
@@ -432,7 +432,7 @@ A linear equation in $x$ and $y$ represents a line in the plane, and the solutio
 - The lines coincide and there are infinitely many solutions, as for $x+y=7$ and $2x+2y=14$, where the constant term is doubled as well.
 :::
 
-:::esempio{titolo="Modelling a purchase"}
+:::esempio{titolo="Modeling a purchase"}
 Eighteen items of two types are bought, some costing $2$ euros and the others $4$ euros, for $54$ euros in all. Let $x$ be the number of items costing $4$ euros. The items costing $2$ euros are then $18-x$. The cost is $4x$ euros for the former and $2(18-x)$ euros for the latter, so
 $$
 \begin{aligned}

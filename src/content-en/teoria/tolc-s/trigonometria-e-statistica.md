@@ -6,7 +6,7 @@ sommario: Angles and triangles, trigonometric identities and equations, frequenc
 ## Angles, radians and the circle
 
 :::definizione{#radianti titolo="Measuring an angle in radians"}
-The **radian** is a unit for measuring angles, like the degree. A **central angle** has its vertex at the centre of a circle and its sides cut off an arc of the circle. The measure of the angle in radians is the arc length divided by the radius. On a circle of radius $5\,\mathrm{cm}$, an angle that cuts off an arc $10\,\mathrm{cm}$ long measures $\dfrac{10}{5}=2$ radians.
+The **radian** is a unit for measuring angles, like the degree. A **central angle** has its vertex at the center of a circle and its sides cut off an arc of the circle. The measure of the angle in radians is the arc length divided by the radius. On a circle of radius $5\,\mathrm{cm}$, an angle that cuts off an arc $10\,\mathrm{cm}$ long measures $\dfrac{10}{5}=2$ radians.
 
 If the arc has length $s$ and the radius is $r>0$, the measure of the angle, denoted by the Greek letter $\theta$ (theta), is $\theta=\dfrac sr$, with both lengths in the same unit.
 
@@ -28,7 +28,7 @@ The symbol $\approx$ is read “approximately equal to”.
 
 A **sector** is the part of a disc bounded by two radii and the arc. An angle $\theta$, with $0\le\theta\le2\pi$, is the fraction $\dfrac{\theta}{2\pi}$ of a full turn, so the sector takes up the same fraction of the area $\pi r^2$ of the disc: $\mathcal A=\dfrac{\theta}{2\pi}\cdot\pi r^2=\dfrac12r^2\theta$. With the previous data, $\mathcal A=\dfrac12\cdot36\cdot\dfrac{2\pi}{3}=12\pi\,\mathrm{cm^2}$. The area has squared units, unlike the arc length.
 
-A **directed angle** is positive if the rotation is anticlockwise and negative if it is clockwise. Two angles that differ by a whole number of turns, that is, by a multiple of $2\pi$, lead to the same final position. This is the case for $-\dfrac{5\pi}{4}$ and $\dfrac{3\pi}{4}$, because $-\dfrac{5\pi}{4}+2\pi=\dfrac{3\pi}{4}$. The rotation performed is different: clockwise in the first case, anticlockwise in the second.
+A **directed angle** is positive if the rotation is counterclockwise and negative if it is clockwise. Two angles that differ by a whole number of turns, that is, by a multiple of $2\pi$, lead to the same final position. This is the case for $-\dfrac{5\pi}{4}$ and $\dfrac{3\pi}{4}$, because $-\dfrac{5\pi}{4}+2\pi=\dfrac{3\pi}{4}$. The rotation performed is different: clockwise in the first case, counterclockwise in the second.
 :::
 
 :::attenzione
@@ -36,7 +36,7 @@ The formulas $s=r\theta$ and $\mathcal A=\dfrac12r^2\theta$ hold with the angle 
 :::
 
 :::definizione{#circonferenza-goniometrica titolo="Coordinates on the unit circle"}
-The **unit circle** has its centre at the origin $O$ of the coordinate axes and radius $1$. An angle $\theta$ is placed on it starting from the radius that ends at the point $(1,0)$, on the positive horizontal half-axis. The radius rotates through $\theta$ about $O$, anticlockwise if $\theta$ is positive and clockwise if it is negative, and ends at a point $P$ of the circle. The **cosine** of $\theta$, written $\cos\theta$, is the horizontal coordinate of $P$. The **sine** of $\theta$, written $\sin\theta$, is the vertical coordinate of $P$. In symbols, $P=(\cos\theta,\sin\theta)$.
+The **unit circle** has its center at the origin $O$ of the coordinate axes and radius $1$. An angle $\theta$ is placed on it starting from the radius that ends at the point $(1,0)$, on the positive horizontal half-axis. The radius rotates through $\theta$ about $O$, counterclockwise if $\theta$ is positive and clockwise if it is negative, and ends at a point $P$ of the circle. The **cosine** of $\theta$, written $\cos\theta$, is the horizontal coordinate of $P$. The **sine** of $\theta$, written $\sin\theta$, is the vertical coordinate of $P$. In symbols, $P=(\cos\theta,\sin\theta)$.
 
 In the figure the angle is $60^\circ$ and the segments drawn from $P$ to the two axes reach the horizontal coordinate $0.5$ and the vertical coordinate $0.87$, approximately, so $\cos60^\circ=0.5$ and $\sin60^\circ\approx0.87$. Sine and cosine always lie between $-1$ and $1$, because $P$ is at distance $1$ from the origin.
 
@@ -68,7 +68,7 @@ The **tangent** of an angle $\theta$ is the ratio of its sine to its cosine, $\t
 
 The ratio exists when $\cos\theta\ne0$. The cosine is $0$ when $P$ lies on the vertical axis, that is, for $\theta=\dfrac\pi2+k\pi$ with $k\in\mathbb Z$. The notation $k\in\mathbb Z$ is read “$k$ belongs to the set of integers”: $k$ takes the values $0,1,-1,2,-2$ and so on.
 
-The axes divide the plane into four **quadrants**, numbered anticlockwise starting from the one where both coordinates are positive. The cosine has the sign of the horizontal coordinate of $P$ and the sine that of the vertical coordinate. The tangent is positive where the two signs are equal.
+The axes divide the plane into four **quadrants**, numbered counterclockwise starting from the one where both coordinates are positive. The cosine has the sign of the horizontal coordinate of $P$ and the sine that of the vertical coordinate. The tangent is positive where the two signs are equal.
 
 | Quadrant | Cosine | Sine | Tangent |
 | --- | --- | --- | --- |
@@ -225,7 +225,7 @@ A statistical survey records a **variable**, that is, a characteristic, on a gro
 
 The **absolute frequency** $n_i$ of the value $i$ is the number of observations equal to that value. Denoting by $N$ the total number of observations, the **relative frequency** is $f_i=\dfrac{n_i}{N}$ and the percentage frequency is $100\cdot f_i$. Suppose that, out of $80$ items inspected, $12$ are defective and $68$ are not. The relative frequency of the defective items is $\dfrac{12}{80}=0.15$ and the percentage is $15\%$. For the non-defective items we get $\dfrac{68}{80}=0.85$, that is, $85\%$. Each item belongs to exactly one of the two categories, so the absolute frequencies add up to $N=80$ and the relative frequencies add up to $1$.
 
-The denominator is the size of the group considered. If $3$ of the $12$ defective items have a colour defect, they are $\dfrac3{12}=0.25$, that is, $25\%$ of the defective items, and $\dfrac3{80}=0.0375$, that is, $3.75\%$ of all the items.
+The denominator is the size of the group considered. If $3$ of the $12$ defective items have a color defect, they are $\dfrac3{12}=0.25$, that is, $25\%$ of the defective items, and $\dfrac3{80}=0.0375$, that is, $3.75\%$ of all the items.
 :::
 
 :::definizione{#frequenze-cumulative titolo="Cumulative frequencies"}
@@ -366,10 +366,10 @@ The **factorial** of an integer $n\ge1$, written $n!$, is the product of the int
 
 A request of the type “at least one” is counted by subtracting the opposite cases from the total. The codes of $3$ digits with no $7$ use $9$ digits per place and are $9^3=729$, so the codes with at least one $7$ are $1000-729=271$.
 
-A count describes possibilities. It becomes a probability, as the ratio of favourable to possible cases, only under the assumption that the counted cases are equally likely.
+A count describes possibilities. It becomes a probability, as the ratio of favorable to possible cases, only under the assumption that the counted cases are equally likely.
 :::
 
-:::esempio{titolo="Restrictions on the first position and neighbouring positions"}
+:::esempio{titolo="Restrictions on the first position and neighboring positions"}
 Using the digits $0,1,2,3,4$, we count the three-digit numbers with all digits different. The first digit has $4$ possibilities, because a three-digit number does not start with $0$. The second has $4$, because it excludes the first and allows $0$. The third has $3$, because it excludes the first two. By the product rule there are $4\cdot4\cdot3=48$ numbers.
 
 Five people stand in a row and two of them, Anna and Bruno, stand next to each other. The two people are treated as a single block, so there are $4$ objects to order, the block and the other three people, with $4!=24$ orderings. Inside the block there are $2$ orders, Anna–Bruno and Bruno–Anna. Hence there are $2\cdot24=48$ rows, twice the $4!$ orderings, because the order inside the block also counts.

@@ -152,11 +152,11 @@ In the function $y=\dfrac1{x-h}+k$ the vertical asymptote is the line $x=h$, whe
 :::
 
 :::esempio{titolo="Data and choice of model"}
-The type of function is recognised from how the question describes the change in the quantity.
+The type of function is recognized from how the question describes the change in the quantity.
 
 - A quantity starts at $6$ and increases by $4$ units every minute. The increase is the same every minute, so the function is affine with slope $4$. After $t$ minutes the quantity equals $6+4t$, and after $3$ minutes it equals $18$.
 - A quantity starts at $6$ and doubles every minute. Every minute it is multiplied by $2$, so after $n$ minutes it equals $6\cdot2^n$, and after $3$ minutes it equals $6\cdot8=48$. The variable $n$ is in the exponent, so the function is of exponential type.
-- A route is $12$ kilometres long. Time is the ratio of distance to speed, so at a speed of $v$ kilometres per hour, with $v>0$, the time in hours is $\dfrac{12}{v}$. Time and speed are in inverse proportionality, and at $4$ kilometres per hour the journey takes $3$ hours.
+- A route is $12$ kilometers long. Time is the ratio of distance to speed, so at a speed of $v$ kilometers per hour, with $v>0$, the time in hours is $\dfrac{12}{v}$. Time and speed are in inverse proportionality, and at $4$ kilometers per hour the journey takes $3$ hours.
 :::
 
 ## Transformations and symmetries
@@ -222,7 +222,7 @@ The extrema depend on the domain. The same function on the interval $[3,5]$ is i
 :::definizione{#estremi-relativi titolo="Relative extrema and local comparison"}
 A **relative maximum** is a value $f(x_0)$ greater than or equal to the values the function takes at the inputs of the domain close to $x_0$. A **relative minimum** is a value less than or equal to those taken at the nearby inputs. For a relative extremum the comparison concerns only a region around $x_0$; for an absolute extremum it concerns the whole domain.
 
-For example, let the graph of a function be the broken line, that is, the line made of consecutive segments, joining in order the points $(-2,5)$, $(0,2)$, $(1,4)$ and $(3,1)$. The value $4$, attained at $x=1$, is a relative maximum, because the graph rises up to $x=1$ and falls immediately afterwards; the absolute maximum is instead $5$, attained at $x=-2$. The value $2$, attained at $x=0$, is a relative minimum, because the graph falls down to $x=0$ and rises immediately afterwards; the absolute minimum is instead $1$, attained at $x=3$. A relative extremum inside the domain is recognised by comparing the nearby values on both sides; the sign of the vertical coordinate plays no part.
+For example, let the graph of a function be the broken line, that is, the line made of consecutive segments, joining in order the points $(-2,5)$, $(0,2)$, $(1,4)$ and $(3,1)$. The value $4$, attained at $x=1$, is a relative maximum, because the graph rises up to $x=1$ and falls immediately afterwards; the absolute maximum is instead $5$, attained at $x=-2$. The value $2$, attained at $x=0$, is a relative minimum, because the graph falls down to $x=0$ and rises immediately afterwards; the absolute minimum is instead $1$, attained at $x=3$. A relative extremum inside the domain is recognized by comparing the nearby values on both sides; the sign of the vertical coordinate plays no part.
 :::
 
 :::esempio{titolo="Range and number of solutions"}

@@ -25,7 +25,7 @@ If $\Omega$ consists of finitely many equally likely outcomes, the probability o
 $$
 P(A)=\frac{|A|}{|\Omega|}.
 $$
-The symbol $|A|$ is the number of outcomes in $A$, the *favourable cases*. The symbol $|\Omega|$ is the number of all the outcomes, the *possible cases*. For a fair die the event "an even number comes up", $A=\{2,4,6\}$, has 3 favourable cases out of 6 possible cases, so
+The symbol $|A|$ is the number of outcomes in $A$, the *favorable cases*. The symbol $|\Omega|$ is the number of all the outcomes, the *possible cases*. For a fair die the event "an even number comes up", $A=\{2,4,6\}$, has 3 favorable cases out of 6 possible cases, so
 $$
 P(A)=\frac{3}{6}=\frac{1}{2}.
 $$
@@ -35,7 +35,7 @@ Two fair coins are tossed. The letter $H$ stands for heads and the letter $T$ fo
 $$
 \Omega=\{HH,HT,TH,TT\},
 $$
-and they are equally likely, so each has probability $\dfrac{1}{4}$. The event "exactly one head comes up" is $\{HT,TH\}$. It has 2 favourable cases out of 4, so its probability is $\dfrac{2}{4}=\dfrac{1}{2}$.
+and they are equally likely, so each has probability $\dfrac{1}{4}$. The event "exactly one head comes up" is $\{HT,TH\}$. It has 2 favorable cases out of 4, so its probability is $\dfrac{2}{4}=\dfrac{1}{2}$.
 :::
 
 :::attenzione
@@ -105,13 +105,13 @@ Combinations are also used to count choices of positions. A grid path of 3 steps
 :::esempio{titolo="Exactly two elements of one category"}
 An urn, that is, a container from which one draws without looking, holds 3 red and 3 blue balls, numbered so that all can be told apart. Three balls are drawn together, so order does not matter and the groups of 3 balls are equally likely. We want the probability of exactly 2 red balls.
 
-The possible cases are the groups of 3 balls chosen from 6, that is, $\dbinom{6}{3}=\dfrac{6!}{3!\cdot3!}=\dfrac{720}{36}=20$. A group with exactly 2 red balls is formed by choosing 2 red from 3, in $\dbinom{3}{2}=3$ ways, and 1 blue from 3, in $\dbinom{3}{1}=3$ ways. By the product rule the number of favourable cases is
+The possible cases are the groups of 3 balls chosen from 6, that is, $\dbinom{6}{3}=\dfrac{6!}{3!\cdot3!}=\dfrac{720}{36}=20$. A group with exactly 2 red balls is formed by choosing 2 red from 3, in $\dbinom{3}{2}=3$ ways, and 1 blue from 3, in $\dbinom{3}{1}=3$ ways. By the product rule the number of favorable cases is
 $$
 N=\binom32\binom31=3\cdot3=9.
 $$
 The required probability is $\dfrac{9}{20}$.
 
-The word "exactly" excludes the groups with 1 red ball and the group with 3 red balls. With "at least 2 red balls" the single group of 3 red balls is added, so the favourable cases become $9+1=10$ and the probability becomes $\dfrac{10}{20}=\dfrac{1}{2}$.
+The word "exactly" excludes the groups with 1 red ball and the group with 3 red balls. With "at least 2 red balls" the single group of 3 red balls is added, so the favorable cases become $9+1=10$ and the probability becomes $\dfrac{10}{20}=\dfrac{1}{2}$.
 :::
 
 ## Union and complement
@@ -236,7 +236,7 @@ The tree of the two draws without replacement from the urn with 3 red and 2 blue
 | blue, red | $\dfrac{2}{5}\cdot\dfrac{3}{4}=\dfrac{6}{20}$ |
 | blue, blue | $\dfrac{2}{5}\cdot\dfrac{1}{4}=\dfrac{2}{20}$ |
 
-After a red ball 2 red and 2 blue remain; after a blue ball 3 red and 1 blue remain. The probability of a red ball on the second draw is therefore $\dfrac{2}{4}$ or $\dfrac{3}{4}$ depending on the colour of the first, and for this reason without replacement the two draws are not independent. The event "two balls of different colours" is produced by the paths "red, blue" and "blue, red", so it has probability $\dfrac{6}{20}+\dfrac{6}{20}=\dfrac{12}{20}=\dfrac{3}{5}$.
+After a red ball 2 red and 2 blue remain; after a blue ball 3 red and 1 blue remain. The probability of a red ball on the second draw is therefore $\dfrac{2}{4}$ or $\dfrac{3}{4}$ depending on the color of the first, and for this reason without replacement the two draws are not independent. The event "two balls of different colors" is produced by the paths "red, blue" and "blue, red", so it has probability $\dfrac{6}{20}+\dfrac{6}{20}=\dfrac{12}{20}=\dfrac{3}{5}$.
 :::
 
 :::esempio{#probabilita-totale titolo="Adding paths and reversing information"}
@@ -263,18 +263,18 @@ A statistical survey collects data on people or objects, called **units**.
 
 - The **population** is the set of all the units the survey is concerned with, for example the students of a school.
 - The **sample** is the part of the population actually observed, for example the 50 students interviewed.
-- A **variable** is the characteristic recorded for each unit, for example eye colour or height.
+- A **variable** is the characteristic recorded for each unit, for example eye color or height.
 
 There are two types of variable.
 
-- A **qualitative** variable has categories as its values, such as eye colour or the species of a plant.
+- A **qualitative** variable has categories as its values, such as eye color or the species of a plant.
 - A **quantitative** variable has numbers as its values. It is **discrete** when the values come from counting, such as the number of books borrowed. It is **continuous** when the values come from measuring and are any numbers in an interval, such as a mass or a duration.
 
-A mass remains continuous even when the scales show it rounded to $2.3\,\mathrm{kg}$. A qualitative variable remains qualitative even when the categories have numerical codes: if three species are labelled 1, 2 and 3, the mean of the codes is meaningless, because the mean is calculated only for quantitative variables.
+A mass remains continuous even when the scales show it rounded to $2.3\,\mathrm{kg}$. A qualitative variable remains qualitative even when the categories have numerical codes: if three species are labeled 1, 2 and 3, the mean of the codes is meaningless, because the mean is calculated only for quantitative variables.
 :::
 
 :::definizione{#frequenze titolo="Absolute, relative, and cumulative frequencies"}
-Sixteen students are asked how many books they borrowed in a month. The table summarises the answers, and $N=16$ is the total number of observations.
+Sixteen students are asked how many books they borrowed in a month. The table summarizes the answers, and $N=16$ is the total number of observations.
 
 | Books | Absolute frequency | Relative frequency | Cumulative frequency |
 | :---: | :---: | :---: | :---: |
@@ -303,7 +303,7 @@ The **arithmetic mean** of $N$ numerical data is their sum divided by $N$. It is
 $$
 \bar x=\frac{6+7+8+7}{4}=\frac{28}{4}=7.
 $$
-When the data are summarised in a frequency table, the value $x_i$ occurs $n_i$ times, so it contributes the product $n_ix_i$ to the sum. The mean is then
+When the data are summarized in a frequency table, the value $x_i$ occurs $n_i$ times, so it contributes the product $n_ix_i$ to the sum. The mean is then
 $$
 \bar x=\frac{\sum_i n_ix_i}{\sum_i n_i}.
 $$
@@ -403,7 +403,7 @@ Calculations on a table or a graph describe the data collected. Conclusions that
 
 - **Observed frequency and probability.** Suppose that a fair coin, tossed 10 times, gives 7 heads. The observed relative frequency of heads is $\dfrac{7}{10}$. The probability of heads on the next toss is still $\dfrac{1}{2}$, because the coin is fair and the tosses are independent. The observed frequency describes the 10 tosses performed.
 - **Choice of the sample.** The result of a sample is used as an estimate for the population when the sample is chosen at random, that is, when every unit has the same probability of being in it. A sports survey open to anyone is answered mostly by interested people, so the share of people who do sport is higher in the sample than in the population, even with many answers.
-- **Missing answers.** Suppose that out of 100 people asked, 80 answer and 50 are in favour. If the 20 who did not answer were all against, those in favour would be 50 out of 100. If they were all in favour, there would be $50+20=70$ out of 100. The share of those in favour among the 100 people is therefore between $50\%$ and $70\%$.
+- **Missing answers.** Suppose that out of 100 people asked, 80 answer and 50 are in favor. If the 20 who did not answer were all against, those in favor would be 50 out of 100. If they were all in favor, there would be $50+20=70$ out of 100. The share of those in favor among the 100 people is therefore between $50\%$ and $70\%$.
 - **Relationship and cause.** Suppose that in months with higher ice-cream sales more cases of sunburn are recorded. The two variables increase together because both depend on a third one, the number of sunny days. A relationship between two variables does not by itself prove that one causes the other.
 - **Totals and subgroups.** A comparison between two percentages can reverse when subgroups of very different sizes are combined, because the total also depends on their sizes.
 :::

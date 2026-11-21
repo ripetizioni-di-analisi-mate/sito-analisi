@@ -6,18 +6,18 @@ sommario: "Measurements, motion, forces, energy, fluids, heat, waves, optics and
 ## Measurements, units and vectors
 
 :::definizione{#misure titolo="Physical quantity and measurement unit"}
-A **physical quantity** is a property that can be measured, such as a length, a mass or a duration. Measuring it means comparing it with a standard, the **unit of measurement**: the measurement $2\,\mathrm{m}$ states that the length contains the metre twice. The units used in physics are those of the **International System** (SI). Needed here are the metre ($\mathrm{m}$) for length, the kilogram ($\mathrm{kg}$) for mass, the second ($\mathrm{s}$) for time, the kelvin ($\mathrm{K}$) for temperature and the ampere ($\mathrm{A}$) for electric current. The other units are products and ratios of these, such as the metre per second for velocity.
+A **physical quantity** is a property that can be measured, such as a length, a mass or a duration. Measuring it means comparing it with a standard, the **unit of measurement**: the measurement $2\,\mathrm{m}$ states that the length contains the meter twice. The units used in physics are those of the **International System** (SI). Needed here are the meter ($\mathrm{m}$) for length, the kilogram ($\mathrm{kg}$) for mass, the second ($\mathrm{s}$) for time, the kelvin ($\mathrm{K}$) for temperature and the ampere ($\mathrm{A}$) for electric current. The other units are products and ratios of these, such as the meter per second for velocity.
 
 A **prefix** multiplies the unit by a power of ten: kilo ($\mathrm{k}$) by $10^{3}$, centi ($\mathrm{c}$) by $10^{-2}$, milli ($\mathrm{m}$) by $10^{-3}$. A **conversion** changes the number and the unit together and leaves the quantity unchanged, as in $1.5\,\mathrm{km}=1500\,\mathrm{m}$. In an area or a volume the unit is squared or cubed, and so is the conversion factor:
 $$
 1\,\mathrm{cm^2}=(10^{-2}\,\mathrm{m})^2=10^{-4}\,\mathrm{m^2},\qquad
 1\,\mathrm{cm^3}=(10^{-2}\,\mathrm{m})^3=10^{-6}\,\mathrm{m^3}.
 $$
-One litre is $1\,\mathrm{L}=1000\,\mathrm{cm^3}=10^{-3}\,\mathrm{m^3}$, so half a litre occupies $5\cdot10^{-4}\,\mathrm{m^3}$.
+One liter is $1\,\mathrm{L}=1000\,\mathrm{cm^3}=10^{-3}\,\mathrm{m^3}$, so half a liter occupies $5\cdot10^{-4}\,\mathrm{m^3}$.
 :::
 
 :::esempio{titolo="A speed conversion"}
-A car travels at $72\,\mathrm{km/h}$. One kilometre is $1000\,\mathrm{m}$ and one hour is $3600\,\mathrm{s}$, so
+A car travels at $72\,\mathrm{km/h}$. One kilometer is $1000\,\mathrm{m}$ and one hour is $3600\,\mathrm{s}$, so
 $$
 72\,\frac{\mathrm{km}}{\mathrm{h}}
 =72\,\frac{1000\,\mathrm{m}}{3600\,\mathrm{s}}
@@ -31,7 +31,7 @@ A **scalar** quantity is fully described by a number with its unit: mass, temper
 
 - The **magnitude** is the value with its unit, positive or zero.
 - The **direction** is the straight line along which the vector lies.
-- The **sense** is one of the two ways of travelling along that line.
+- The **sense** is one of the two ways of traveling along that line.
 
 A vector is drawn as an arrow and written $\vec F$; the letter without the arrow, $F$, denotes the magnitude.
 
@@ -41,7 +41,7 @@ The **dot product** is the number $\vec F\cdot\vec s=Fs\cos\theta$, where $\thet
 :::
 
 :::osservazione
-Every measurement has an **uncertainty**. The notation $L=(12.0\pm0.2)\,\mathrm{cm}$, where $\pm$ is read "plus or minus", denotes a length between $11.8\,\mathrm{cm}$ and $12.2\,\mathrm{cm}$. The **relative uncertainty** is the ratio of the uncertainty to the measured value, $\dfrac{0.2\,\mathrm{cm}}{12.0\,\mathrm{cm}}\approx0.017$, about $1.7\%$; $\approx$ is read "approximately equal to". The digits written show the precision: $12.0\,\mathrm{cm}$ is a reading to the tenth of a centimetre, and writing $12.00\,\mathrm{cm}$ would claim a precision to the hundredth that the measurement does not have.
+Every measurement has an **uncertainty**. The notation $L=(12.0\pm0.2)\,\mathrm{cm}$, where $\pm$ is read "plus or minus", denotes a length between $11.8\,\mathrm{cm}$ and $12.2\,\mathrm{cm}$. The **relative uncertainty** is the ratio of the uncertainty to the measured value, $\dfrac{0.2\,\mathrm{cm}}{12.0\,\mathrm{cm}}\approx0.017$, about $1.7\%$; $\approx$ is read "approximately equal to". The digits written show the precision: $12.0\,\mathrm{cm}$ is a reading to the tenth of a centimeter, and writing $12.00\,\mathrm{cm}$ would claim a precision to the hundredth that the measurement does not have.
 
 **Random errors** shift repeated readings sometimes upwards and sometimes downwards, so averaging reduces their effect. A **systematic error**, such as that of a badly calibrated balance, shifts all readings the same way and remains in the average.
 :::
@@ -49,15 +49,15 @@ Every measurement has an **uncertainty**. The notation $L=(12.0\pm0.2)\,\mathrm{
 ## Position, velocity and acceleration
 
 :::definizione{#cinematica titolo="Displacement and average velocity"}
-Motion along a straight line is described by fixing an oriented axis and an **origin** on it. The **position** $x$ is the distance of the body from the origin, in metres, with the sign $+$ on the side towards which the axis points and $-$ on the other; $x(t)$ is the position at time $t$.
+Motion along a straight line is described by fixing an oriented axis and an **origin** on it. The **position** $x$ is the distance of the body from the origin, in meters, with the sign $+$ on the side towards which the axis points and $-$ on the other; $x(t)$ is the position at time $t$.
 
-The letter $\Delta$ (delta) in front of a quantity denotes its change: final value minus initial value. The **displacement** is $\Delta x=x_f-x_i$, positive if the body has moved in the sense of the axis and negative otherwise. The **distance travelled** is the length of the whole path and is positive or zero. The **average velocity** is the displacement divided by the time interval $\Delta t$ in which it occurs,
+The letter $\Delta$ (delta) in front of a quantity denotes its change: final value minus initial value. The **displacement** is $\Delta x=x_f-x_i$, positive if the body has moved in the sense of the axis and negative otherwise. The **distance traveled** is the length of the whole path and is positive or zero. The **average velocity** is the displacement divided by the time interval $\Delta t$ in which it occurs,
 $$
 v_m=\frac{\Delta x}{\Delta t},
 $$
-and is measured in metres per second. The velocity at an instant is the average velocity over a very short interval around that instant.
+and is measured in meters per second. The velocity at an instant is the average velocity over a very short interval around that instant.
 
-A body that starts from $2\,\mathrm{m}$, reaches $10\,\mathrm{m}$ and returns to $6\,\mathrm{m}$ in $4\,\mathrm{s}$ has displacement $6\,\mathrm{m}-2\,\mathrm{m}=4\,\mathrm{m}$, distance travelled $8\,\mathrm{m}+4\,\mathrm{m}=12\,\mathrm{m}$ and average velocity $\dfrac{4\,\mathrm{m}}{4\,\mathrm{s}}=1\,\mathrm{m/s}$. A full lap back to the start gives zero displacement, though the distance travelled is positive.
+A body that starts from $2\,\mathrm{m}$, reaches $10\,\mathrm{m}$ and returns to $6\,\mathrm{m}$ in $4\,\mathrm{s}$ has displacement $6\,\mathrm{m}-2\,\mathrm{m}=4\,\mathrm{m}$, distance traveled $8\,\mathrm{m}+4\,\mathrm{m}=12\,\mathrm{m}$ and average velocity $\dfrac{4\,\mathrm{m}}{4\,\mathrm{s}}=1\,\mathrm{m/s}$. A full lap back to the start gives zero displacement, though the distance traveled is positive.
 
 On a **position-time graph**, with $t$ horizontal and $x$ vertical, the average velocity between two instants is the slope of the segment joining the two points. A rising line represents a constant positive velocity (**uniform rectilinear motion**); a horizontal line represents a body at rest. Where the graphs of two bodies meet, the bodies have the same position at the same instant.
 :::
@@ -69,7 +69,7 @@ v=v_0+at,\qquad x=x_0+v_0t+\frac12at^2.
 $$
 Eliminating time between the two laws gives $v^2-v_0^2=2a(x-x_0)$. The quantities are components along the same axis, so they have a sign. If velocity and acceleration have the same sign the body speeds up; if they have opposite signs it slows down until it stops and then, if the acceleration persists, moves off in the opposite sense.
 
-A car travelling at $v_0=20\,\mathrm{m/s}$ and braking with $a=-4\,\mathrm{m/s^2}$ stops ($v=0$) after $t=\dfrac{20\,\mathrm{m/s}}{4\,\mathrm{m/s^2}}=5\,\mathrm{s}$. While braking it covers $x-x_0=\dfrac{0-(20\,\mathrm{m/s})^2}{2\cdot(-4\,\mathrm{m/s^2})}=50\,\mathrm{m}$.
+A car traveling at $v_0=20\,\mathrm{m/s}$ and braking with $a=-4\,\mathrm{m/s^2}$ stops ($v=0$) after $t=\dfrac{20\,\mathrm{m/s}}{4\,\mathrm{m/s^2}}=5\,\mathrm{s}$. While braking it covers $x-x_0=\dfrac{0-(20\,\mathrm{m/s})^2}{2\cdot(-4\,\mathrm{m/s^2})}=50\,\mathrm{m}$.
 :::
 
 :::esempio{titolo="From a velocity-time graph to distance"}
@@ -108,11 +108,11 @@ The **moment** of a force about a point measures its turning effect and has magn
 :::
 
 :::definizione{#moto-circolare titolo="Centripetal acceleration"}
-In **uniform circular motion** a body moves round a circle of radius $r$ at constant speed $v$. The **period** $T$ is the time for one revolution; the **frequency** $f$ is the number of revolutions per second, in hertz ($1\,\mathrm{Hz}=1\,\mathrm{s^{-1}}$). The velocity is tangent to the circle and changes direction continuously, so the body has an acceleration, directed towards the centre and called **centripetal acceleration** $a_c$. Then
+In **uniform circular motion** a body moves round a circle of radius $r$ at constant speed $v$. The **period** $T$ is the time for one revolution; the **frequency** $f$ is the number of revolutions per second, in hertz ($1\,\mathrm{Hz}=1\,\mathrm{s^{-1}}$). The velocity is tangent to the circle and changes direction continuously, so the body has an acceleration, directed towards the center and called **centripetal acceleration** $a_c$. Then
 $$
 v=\frac{2\pi r}{T},\qquad f=\frac1T,\qquad a_c=\frac{v^2}{r}.
 $$
-By Newton's second law the resultant points towards the centre and equals $\dfrac{mv^2}{r}$: it is the **centripetal force**, supplied, for example, by string tension, friction on a bend or gravitation. A $0.5\,\mathrm{kg}$ stone travelling in $4\,\mathrm{s}$ round a circle of radius $2\,\mathrm{m}$ has $f=\dfrac1{4\,\mathrm{s}}=0.25\,\mathrm{Hz}$, $v=\dfrac{2\pi\cdot2\,\mathrm{m}}{4\,\mathrm{s}}\approx3.14\,\mathrm{m/s}$ and $a_c=\dfrac{(3.14\,\mathrm{m/s})^2}{2\,\mathrm{m}}\approx4.9\,\mathrm{m/s^2}$; the string exerts the force $0.5\,\mathrm{kg}\cdot4.9\,\mathrm{m/s^2}\approx2.5\,\mathrm{N}$.
+By Newton's second law the resultant points towards the center and equals $\dfrac{mv^2}{r}$: it is the **centripetal force**, supplied, for example, by string tension, friction on a bend or gravitation. A $0.5\,\mathrm{kg}$ stone traveling in $4\,\mathrm{s}$ round a circle of radius $2\,\mathrm{m}$ has $f=\dfrac1{4\,\mathrm{s}}=0.25\,\mathrm{Hz}$, $v=\dfrac{2\pi\cdot2\,\mathrm{m}}{4\,\mathrm{s}}\approx3.14\,\mathrm{m/s}$ and $a_c=\dfrac{(3.14\,\mathrm{m/s})^2}{2\,\mathrm{m}}\approx4.9\,\mathrm{m/s^2}$; the string exerts the force $0.5\,\mathrm{kg}\cdot4.9\,\mathrm{m/s^2}\approx2.5\,\mathrm{N}$.
 
 On the graph, at point P, the velocity $v$ and the acceleration $a$ are perpendicular.
 
@@ -152,7 +152,7 @@ A $2\,\mathrm{kg}$ trolley at $3\,\mathrm{m/s}$ couples to a $1\,\mathrm{kg}$ tr
 ## Fluids at rest and in motion
 
 :::definizione{#fluidi titolo="Density and pressure"}
-A **fluid** is a substance with no shape of its own: a liquid or a gas. **Density** is the ratio of mass to volume, $\rho=\dfrac mV$ ($\rho$ is read rho), in $\mathrm{kg/m^3}$. Water has $\rho=1000\,\mathrm{kg/m^3}$, so one litre of water has mass $1\,\mathrm{kg}$. **Pressure** is the ratio of the force pressing perpendicularly on a surface to its area, $p=\dfrac{F_\perp}{A}$, in pascals ($1\,\mathrm{Pa}=1\,\mathrm{N/m^2}$); $\perp$ is read "perpendicular". For the same force the pressure is greater on a smaller area: $600\,\mathrm{N}$ on $0.03\,\mathrm{m^2}$ give $\dfrac{600\,\mathrm{N}}{0.03\,\mathrm{m^2}}=20000\,\mathrm{Pa}$. This is why a sharp point, which has a very small area, penetrates with a modest force.
+A **fluid** is a substance with no shape of its own: a liquid or a gas. **Density** is the ratio of mass to volume, $\rho=\dfrac mV$ ($\rho$ is read rho), in $\mathrm{kg/m^3}$. Water has $\rho=1000\,\mathrm{kg/m^3}$, so one liter of water has mass $1\,\mathrm{kg}$. **Pressure** is the ratio of the force pressing perpendicularly on a surface to its area, $p=\dfrac{F_\perp}{A}$, in pascals ($1\,\mathrm{Pa}=1\,\mathrm{N/m^2}$); $\perp$ is read "perpendicular". For the same force the pressure is greater on a smaller area: $600\,\mathrm{N}$ on $0.03\,\mathrm{m^2}$ give $\dfrac{600\,\mathrm{N}}{0.03\,\mathrm{m^2}}=20000\,\mathrm{Pa}$. This is why a sharp point, which has a very small area, penetrates with a modest force.
 
 In a liquid at rest of uniform density the pressure increases with depth, because each layer supports the weight of the liquid above it. The **hydrostatic pressure law** (Stevin's law) gives the pressure at depth $h$ below the surface:
 $$
@@ -166,7 +166,7 @@ In water, with $g=10\,\mathrm{m/s^2}$, at a depth of $2\,\mathrm{m}$ the pressur
 $$
 \rho gh=1000\,\mathrm{kg/m^3}\cdot10\,\mathrm{m/s^2}\cdot2\,\mathrm{m}=20000\,\mathrm{Pa}=20\,\mathrm{kPa}.
 $$
-With $p_0=100000\,\mathrm{Pa}$ the overall pressure, called **absolute**, is $100000\,\mathrm{Pa}+20000\,\mathrm{Pa}=120000\,\mathrm{Pa}$. The graph shows the increase $\Delta p=p-p_0$ as a function of $h$: it is a straight line through the origin, rising by $10\,\mathrm{kPa}$ every metre; the marked point corresponds to $2\,\mathrm{m}$ and $20\,\mathrm{kPa}$.
+With $p_0=100000\,\mathrm{Pa}$ the overall pressure, called **absolute**, is $100000\,\mathrm{Pa}+20000\,\mathrm{Pa}=120000\,\mathrm{Pa}$. The graph shows the increase $\Delta p=p-p_0$ as a function of $h$: it is a straight line through the origin, rising by $10\,\mathrm{kPa}$ every meter; the marked point corresponds to $2\,\mathrm{m}$ and $20\,\mathrm{kPa}$.
 
 ::grafico{f="10*x" xmin=0 xmax=4 ymin=0 ymax=45 nomi="h,Δp" punti="2,20,pieno" legenda="p-p_0=10h" titolo="Depth h in meters and pressure increase Δp in kPa: Δp is the difference from surface pressure"}
 :::
@@ -244,7 +244,7 @@ $$
 that is, energy that entered as heat and did not leave as work stays in the system. A gas that absorbs $500\,\mathrm{J}$ and does $200\,\mathrm{J}$ of work has $\Delta U=500\,\mathrm{J}-200\,\mathrm{J}=300\,\mathrm{J}$. A gas compressed with $200\,\mathrm{J}$ of work, with no heat exchange, has $W=-200\,\mathrm{J}$ and $\Delta U=0-(-200\,\mathrm{J})=200\,\mathrm{J}$. Internal energy is a property of the system's state; heat and work are energies exchanged during a process.
 :::
 
-:::esempio{titolo="Recognising processes from constraints"}
+:::esempio{titolo="Recognizing processes from constraints"}
 - In a rigid container the gas does not expand, so $W=0$ and $\Delta U=Q$.
 - In an **adiabatic** process (no heat exchange) $Q=0$ and $\Delta U=-W$.
 - In an isothermal process of an ideal gas the internal energy, which depends only on temperature, stays constant, so $\Delta U=0$ and $Q=W$.
@@ -275,7 +275,7 @@ $$
 :::
 
 :::esempio{titolo="Reading a wave profile"}
-The graph shows a wave at a fixed instant: horizontally the position in metres, vertically the displacement of the points of the medium in centimetres. Two successive crests are at $x=1\,\mathrm{m}$ and at $x=5\,\mathrm{m}$, so $\lambda=5\,\mathrm{m}-1\,\mathrm{m}=4\,\mathrm{m}$; the maximum displacement, $1\,\mathrm{cm}$, is the amplitude. The profile contains no information about time, so the frequency is an additional datum. With $f=3\,\mathrm{Hz}$ the speed is $v=\lambda f=4\,\mathrm{m}\cdot3\,\mathrm{Hz}=12\,\mathrm{m/s}$.
+The graph shows a wave at a fixed instant: horizontally the position in meters, vertically the displacement of the points of the medium in centimeters. Two successive crests are at $x=1\,\mathrm{m}$ and at $x=5\,\mathrm{m}$, so $\lambda=5\,\mathrm{m}-1\,\mathrm{m}=4\,\mathrm{m}$; the maximum displacement, $1\,\mathrm{cm}$, is the amplitude. The profile contains no information about time, so the frequency is an additional datum. With $f=3\,\mathrm{Hz}$ the speed is $v=\lambda f=4\,\mathrm{m}\cdot3\,\mathrm{Hz}=12\,\mathrm{m/s}$.
 
 ::grafico{f="sin(pi*x/2)" xmin=0 xmax=8 ymin=-1.5 ymax=1.5 nomi="x,y" legenda="y=\sin(\pi x/2)" punti="1,1,pieno;5,1,pieno" titolo="Horizontal coordinates in meters and vertical coordinates in cm: crests are 4 m apart and amplitude is 1 cm"}
 :::
@@ -307,11 +307,11 @@ $$
 $$
 For angles of incidence greater than $\theta_c$ there is no refracted ray and all the light is reflected: this is **total internal reflection**. From a medium of index $2$ into air $\sin\theta_c=\dfrac12$, so $\theta_c=30^\circ$.
 
-**Dispersion** is the dependence of the refractive index on wavelength, hence on colour. This is why a prism deflects colours by different angles and separates white light.
+**Dispersion** is the dependence of the refractive index on wavelength, hence on color. This is why a prism deflects colors by different angles and separates white light.
 :::
 
 :::teorema{#lenti titolo="Thin lenses"}
-A **lens** deflects light rays by refraction. A **converging** lens brings together at one point, the **focus**, rays arriving parallel to its axis, the line perpendicular to the lens through its centre; a **diverging** lens spreads them out. The **focal length** $f$ is the distance of the focus from the lens, taken as positive for converging lenses and negative for diverging ones. Let $p$ be the distance of the object from the lens and $q$ that of the image. For a thin lens (thickness negligible compared with $f$) and rays only slightly inclined to the axis (paraxial approximation),
+A **lens** deflects light rays by refraction. A **converging** lens brings together at one point, the **focus**, rays arriving parallel to its axis, the line perpendicular to the lens through its center; a **diverging** lens spreads them out. The **focal length** $f$ is the distance of the focus from the lens, taken as positive for converging lenses and negative for diverging ones. Let $p$ be the distance of the object from the lens and $q$ that of the image. For a thin lens (thickness negligible compared with $f$) and rays only slightly inclined to the axis (paraxial approximation),
 $$
 \frac1f=\frac1p+\frac1q,\qquad M=-\frac qp.
 $$
@@ -353,7 +353,7 @@ An ammeter measures current, is connected in series and ideally has zero resista
 :::
 
 :::definizione{#magnetismo titolo="Magnetic field and Lorentz force"}
-A **magnet** has two poles, north and south: like poles repel and unlike poles attract. Each piece of a broken magnet again has two poles. Around a magnet there is a **magnetic field** $\vec B$, a vector measured in teslas ($\mathrm{T}$) which at every point has the direction of a compass needle. In ferromagnetic materials, such as iron, small magnetised regions called domains line up in the same sense and the material becomes a magnet. A current also generates a magnetic field: around a straight wire the field lines, which at every point have the direction of the field, are circles centred on the wire.
+A **magnet** has two poles, north and south: like poles repel and unlike poles attract. Each piece of a broken magnet again has two poles. Around a magnet there is a **magnetic field** $\vec B$, a vector measured in teslas ($\mathrm{T}$) which at every point has the direction of a compass needle. In ferromagnetic materials, such as iron, small magnetized regions called domains line up in the same sense and the material becomes a magnet. A current also generates a magnetic field: around a straight wire the field lines, which at every point have the direction of the field, are circles centered on the wire.
 
 A charge $q$ moving with velocity $v$ is acted on by the **Lorentz force**, perpendicular to the velocity and to the field, of magnitude $F=|q|vB\sin\theta$, where $\theta$ is the angle between the velocity and the field. It is zero if the velocity is parallel to the field and greatest if it is perpendicular. A proton, of charge $1.6\cdot10^{-19}\,\mathrm{C}$, moving at $2\cdot10^5\,\mathrm{m/s}$ perpendicularly to a field of $0.5\,\mathrm{T}$ experiences $1.6\cdot10^{-19}\,\mathrm{C}\cdot2\cdot10^5\,\mathrm{m/s}\cdot0.5\,\mathrm{T}=1.6\cdot10^{-14}\,\mathrm{N}$. Since it is perpendicular to the velocity, the force does zero work and changes only the direction of motion. In a uniform field, with the velocity perpendicular to the field and no other forces, the motion is uniform circular motion.
 

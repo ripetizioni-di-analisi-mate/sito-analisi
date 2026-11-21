@@ -26,12 +26,12 @@ Lipids are not polymers, because they are not chains of one repeated monomer.
 :::
 
 :::definizione{#proteine titolo="From sequence to function"}
-A **protein** is a chain of **amino acids**, small molecules of twenty types, joined by **peptide bonds**. Proteins speed up reactions, transport substances, recognise other molecules and produce movement. The task of each protein depends on its shape, described at four levels.
+A **protein** is a chain of **amino acids**, small molecules of twenty types, joined by **peptide bonds**. Proteins speed up reactions, transport substances, recognize other molecules and produce movement. The task of each protein depends on its shape, described at four levels.
 
 - **Primary structure** is the sequence of amino acids.
 - **Secondary structure** is the shape of short stretches, coiled into a helix or lying side by side in sheets.
 - **Tertiary structure** is the folding of the whole chain.
-- **Quaternary structure** is the union of several chains, in proteins that have more than one. Haemoglobin, the protein that carries oxygen in the blood, has four.
+- **Quaternary structure** is the union of several chains, in proteins that have more than one. Hemoglobin, the protein that carries oxygen in the blood, has four.
 
 **Denaturation** is the loss of folding, caused for example by heat, as in egg white when it cooks. The sequence stays intact, but without its shape the protein no longer carries out its task.
 
@@ -49,7 +49,7 @@ The **nucleic acids** are two polymers. **DNA** (deoxyribonucleic acid) stores h
 ## Membranes and exchange
 
 :::definizione{#membrane titolo="Selective permeability"}
-The **plasma membrane** is the covering that separates the inside of every cell from the outside. It is a phospholipid bilayer, with the heads towards the water on both sides and the tails in the middle. The proteins embedded in it transport substances, receive signals and join neighbouring cells. The membrane has **selective permeability**, that is, it lets some substances through and not others. Small non-polar molecules, such as oxygen, cross the lipids. **Ions** (atoms with an electric charge, such as sodium) and large polar molecules, such as glucose, pass only through the proteins.
+The **plasma membrane** is the covering that separates the inside of every cell from the outside. It is a phospholipid bilayer, with the heads towards the water on both sides and the tails in the middle. The proteins embedded in it transport substances, receive signals and join neighboring cells. The membrane has **selective permeability**, that is, it lets some substances through and not others. Small non-polar molecules, such as oxygen, cross the lipids. **Ions** (atoms with an electric charge, such as sodium) and large polar molecules, such as glucose, pass only through the proteins.
 
 The concentration of a substance is its amount in a given volume. The difference in concentration between two regions is the **concentration gradient**. A substance moves spontaneously from the region where it is more concentrated to the one where it is less concentrated, and this movement is called **diffusion**.
 
@@ -110,7 +110,7 @@ Mitochondria and chloroplasts have their own DNA and ribosomes, similar to those
 :::osservazione{#metabolismo titolo="Usable energy"}
 **Metabolism** is the set of chemical reactions of a cell. Breakdown reactions split large molecules and release energy; synthesis reactions build large molecules and require it. ATP carries energy from the former to the latter. When it loses one of its three phosphate groups it releases energy and becomes **ADP** (adenosine diphosphate); breakdown reactions supply the energy to attach it again.
 
-**Cellular respiration** is the process by which the cell obtains ATP from glucose using oxygen, and for this reason it is called aerobic. It begins in the cytosol with **glycolysis**, which splits glucose into two smaller molecules and produces little ATP. It continues in the mitochondria, where most of the ATP is formed: the two molecules are broken down to carbon dioxide and the electrons removed from glucose, which is thereby oxidised, pass to oxygen, the final acceptor, which forms water.
+**Cellular respiration** is the process by which the cell obtains ATP from glucose using oxygen, and for this reason it is called aerobic. It begins in the cytosol with **glycolysis**, which splits glucose into two smaller molecules and produces little ATP. It continues in the mitochondria, where most of the ATP is formed: the two molecules are broken down to carbon dioxide and the electrons removed from glucose, which is thereby oxidized, pass to oxygen, the final acceptor, which forms water.
 
 The cells of plants also have mitochondria, because chloroplasts produce the sugars and it is the mitochondria that obtain ATP from them. Plants therefore respire in the dark too, consuming their reserves.
 :::
@@ -155,7 +155,7 @@ A **mutation** is a change in the DNA sequence. The effect on the protein depend
 ## Inheritance and crosses
 
 :::definizione{#genetica-mendeliana titolo="Genes, alleles and segregation"}
-- An **allele** is a variant of a gene. In the pea the gene for seed colour has the allele $A$ for yellow and the allele $a$ for green. The place of a gene on the chromosome is called its **locus** (plural loci).
+- An **allele** is a variant of a gene. In the pea the gene for seed color has the allele $A$ for yellow and the allele $a$ for green. The place of a gene on the chromosome is called its **locus** (plural loci).
 - A **diploid** organism has two copies of each chromosome, one maternal and one paternal, so it has two alleles for each gene.
 - An individual is **homozygous** if the two alleles are the same ($AA$ or $aa$) and **heterozygous** if they are different ($Aa$).
 - The **genotype** is the pair of alleles. The **phenotype** is the trait that is observed.
@@ -198,11 +198,11 @@ After the S phase each chromosome is made of two identical DNA molecules, the **
 
 In a diploid cell the chromosomes form pairs of **homologues**, one maternal and one paternal, with the same genes. A **haploid** cell has only one chromosome per pair. The number of chromosomes is written $2n$ in a diploid cell and $n$ in a haploid one: in humans $2n=46$ and $n=23$. After the S phase the pairs are the same, so the cell is still diploid.
 
-**Mitosis** is the division of the nucleus into two nuclei with the same chromosomes. It serves growth and the replacement of lost cells. In prophase the chromosomes shorten and become visible; in metaphase they line up at the centre; in anaphase the sister chromatids separate, move to opposite sides and from that moment count as chromosomes; in telophase a nucleus forms around each group. **Cytokinesis** then divides the cytoplasm; if it is missing, one cell with two nuclei remains. Bacteria, which have no nucleus, divide by **binary fission**: they copy the chromosome and divide in two.
+**Mitosis** is the division of the nucleus into two nuclei with the same chromosomes. It serves growth and the replacement of lost cells. In prophase the chromosomes shorten and become visible; in metaphase they line up at the center; in anaphase the sister chromatids separate, move to opposite sides and from that moment count as chromosomes; in telophase a nucleus forms around each group. **Cytokinesis** then divides the cytoplasm; if it is missing, one cell with two nuclei remains. Bacteria, which have no nucleus, divide by **binary fission**: they copy the chromosome and divide in two.
 :::
 
 :::definizione{#meiosi titolo="Two divisions and one replication"}
-**Meiosis** is the division that produces four haploid cells from one diploid cell. In animals it serves to form the gametes. In **fertilisation** two gametes with $n$ chromosomes unite, and the cell obtained, the **zygote**, has $2n$ again.
+**Meiosis** is the division that produces four haploid cells from one diploid cell. In animals it serves to form the gametes. In **fertilization** two gametes with $n$ chromosomes unite, and the cell obtained, the **zygote**, has $2n$ again.
 
 Meiosis comprises two divisions, preceded by a single replication of DNA.
 
@@ -239,7 +239,7 @@ The skin protects the body and regulates its temperature. Skeleton, joints and m
 :::definizione{#apparati titolo="Exchange, transport and excretion"}
 **Digestion** is the splitting of the molecules of food into small molecules, for example of starch into glucose. **Absorption** is their passage to the blood across the epithelium of the intestine. The wall of the intestine is folded into **villi** and the membrane of its cells into **microvilli**, which increase the absorbing surface.
 
-The **alveoli** of the lungs are small thin-walled sacs, surrounded by **capillaries**, the thinnest blood vessels. The **partial pressure** of a gas is the part of the pressure due to that gas in a mixture, and a gas diffuses from where it is higher to where it is lower. That of oxygen is higher in the alveoli than in the incoming blood, so oxygen passes into the blood, where most of it binds to the haemoglobin of red blood cells. That of carbon dioxide is higher in the blood, so the gas passes into the air.
+The **alveoli** of the lungs are small thin-walled sacs, surrounded by **capillaries**, the thinnest blood vessels. The **partial pressure** of a gas is the part of the pressure due to that gas in a mixture, and a gas diffuses from where it is higher to where it is lower. That of oxygen is higher in the alveoli than in the incoming blood, so oxygen passes into the blood, where most of it binds to the hemoglobin of red blood cells. That of carbon dioxide is higher in the blood, so the gas passes into the air.
 
 An **artery** is a vessel that carries blood from the heart to the organs. A **vein** carries it back to the heart. In the capillaries, between the two, blood exchanges substances with the tissues. The **pulmonary** circulation goes from the heart to the lungs and back; the **systemic** circulation goes from the heart to the other organs and back. Arteries and veins are distinguished by the direction of the blood: the pulmonary arteries carry oxygen-poor blood to the lungs.
 
@@ -256,13 +256,13 @@ The kidneys remove from the blood the waste products of metabolism, such as urea
 - The **root** anchors the plant to the soil and absorbs water and mineral salts. **Root hairs**, thin extensions of the surface cells, increase the absorbing surface.
 - The **stem** supports leaves and flowers and contains the transport vessels.
 - The **leaf** is the organ of photosynthesis. It has small adjustable openings, the **stomata**, through which gases pass.
-- The **flower** is the reproductive organ of **angiosperms**, the flowering plants. After fertilisation the ovule, where the egg cell is found, becomes the **seed**, which contains the embryo, the reserves and a protective coat, and the ovary that encloses it becomes the **fruit**.
+- The **flower** is the reproductive organ of **angiosperms**, the flowering plants. After fertilization the ovule, where the egg cell is found, becomes the **seed**, which contains the embryo, the reserves and a protective coat, and the ovary that encloses it becomes the **fruit**.
 
 Growth in length takes place in two stages. **Apical meristems**, groups of cells at the tips of roots and shoots, produce new cells by mitosis. The cells produced then elongate by absorbing water.
 
 **Xylem** is the set of vessels that carry water and salts from the roots to the leaves. **Phloem** carries sugars from the organs that supply them, the sources, to those that consume or store them. In summer the source is the leaf, which produces them; in spring it is a root that gives up its reserves.
 
-**Transpiration** is the loss of water vapour through the stomata. The water that evaporates draws more water from the xylem and makes it rise from the roots. With little water in the soil the stomata close, so the plant loses less water, but receives less carbon dioxide and photosynthesis slows down.
+**Transpiration** is the loss of water vapor through the stomata. The water that evaporates draws more water from the xylem and makes it rise from the roots. With little water in the soil the stomata close, so the plant loses less water, but receives less carbon dioxide and photosynthesis slows down.
 :::
 
 :::definizione{#fotosintesi titolo="Light and carbon"}
@@ -271,14 +271,14 @@ $$
 6\,\mathrm{CO_2}+6\,\mathrm{H_2O}+\text{light}
 \longrightarrow \mathrm{C_6H_{12}O_6}+6\,\mathrm{O_2}.
 $$
-The balance summarises two groups of reactions of the chloroplast, which contains flattened sacs, the **thylakoids**, immersed in a liquid, the **stroma**.
+The balance summarizes two groups of reactions of the chloroplast, which contains flattened sacs, the **thylakoids**, immersed in a liquid, the **stroma**.
 
 1. The **light reactions** take place on the thylakoid membranes. Chlorophyll absorbs light, and the energy is used to split water molecules, releasing oxygen, and to produce ATP.
 2. **Carbon fixation** takes place in the stroma. With the energy of ATP, carbon dioxide is turned into sugars.
 
 The oxygen released therefore comes from water, and the carbon of the sugars from carbon dioxide.
 
-The rate of photosynthesis depends on three factors: light, carbon dioxide and temperature. It is set by the factor furthest from its favourable value, called the **limiting factor**: with little light an increase in carbon dioxide does not speed it up.
+The rate of photosynthesis depends on three factors: light, carbon dioxide and temperature. It is set by the factor furthest from its favorable value, called the **limiting factor**: with little light an increase in carbon dioxide does not speed it up.
 
 The plant respires all the time and carries out photosynthesis only in the light, so the gas exchange measured in the light is the difference between the two processes. Suppose that in one hour, in weak light, a leaf releases 2 milligrams of carbon dioxide by respiring and absorbs 2 by photosynthesis: the net exchange is $2-2=0$. This is the **compensation point**, at which the two processes continue and their exchanges cancel out.
 :::
@@ -352,5 +352,5 @@ An interaction between two species is classified according to its effect on each
 - **Mutualism** ($+$ and $+$). The bee receives nectar and transports pollen.
 - **Commensalism** ($+$ and $0$). The remora is carried by the shark.
 
-The interaction is recognised by its effects on the two species, and not by the fact that they live close together.
+The interaction is recognized by its effects on the two species, and not by the fact that they live close together.
 :::

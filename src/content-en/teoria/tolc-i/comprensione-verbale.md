@@ -49,11 +49,11 @@ Consider the passage "The museum is open from Tuesday to Sunday and is closed on
 :::
 
 :::esempio{titolo="A deduction joining two facts"}
-> The archive has digitised all the maps published after 1950 and some maps published earlier.
+> The archive has digitized all the maps published after 1950 and some maps published earlier.
 
-One map in the catalogue is from 1962. Since 1962 comes after 1950, the map belongs to the group of which the passage says "all". The map has therefore been digitised, and the information is implicit.
+One map in the catalogue is from 1962. Since 1962 comes after 1950, the map belongs to the group of which the passage says "all". The map has therefore been digitized, and the information is implicit.
 
-Another map is from 1930. The passage says that "some" maps earlier than 1950 have been digitised, without saying which. For the 1930 map the correct answer is "the passage does not allow this to be established", and the information is absent.
+Another map is from 1930. The passage says that "some" maps earlier than 1950 have been digitized, without saying which. For the 1930 map the correct answer is "the passage does not allow this to be established", and the information is absent.
 :::
 
 :::attenzione
@@ -71,7 +71,7 @@ A passage is built in parts, and each part has a function. There are three commo
 - The passage describes a phenomenon and then states within which limits the description holds.
 - The passage tells an episode and uses it as an example of a more general change.
 
-Recognising the pattern is useful in questions that ask for the thesis, a title or a summary: the correct answer takes account of all the parts of the passage and not of one only.
+Recognizing the pattern is useful in questions that ask for the thesis, a title or a summary: the correct answer takes account of all the parts of the passage and not of one only.
 :::
 
 :::definizione{#esempi titolo="The function of examples"}
@@ -90,8 +90,8 @@ The thesis is in the first sentence. The second sentence is the example: it show
 Three titles are compared.
 
 - "The pipes of the district" concerns a detail of the second sentence. It is too narrow.
-- "Maps are always incomplete and useless" contains a judgement that the passage does not express. It is too general.
-- "Maps change with their purpose" summarises all three sentences. It is the adequate title.
+- "Maps are always incomplete and useless" contains a judgment that the passage does not express. It is too general.
+- "Maps change with their purpose" summarizes all three sentences. It is the adequate title.
 
 An adequate title says as much as the thesis says, without removing a part of it and without adding claims.
 :::
@@ -107,7 +107,7 @@ A **connective** is a word or expression that links two sentences and says how t
 | Consequence | so, therefore, hence | There is a fault, *so* the train is late. |
 | Contrast | but, however, yet | The train is late; *however*, the connection waits. |
 | Addition | moreover, also | The train is late; *moreover*, it is full. |
-| Explanation | that is, namely | The train is cancelled, *that is*, it does not leave. |
+| Explanation | that is, namely | The train is canceled, *that is*, it does not leave. |
 
 Changing the connective changes the meaning. In the sentence "The project arrived on time; however, a signature is missing", the connective "however" presents the missing signature as an obstacle that remains in spite of the punctuality. With "therefore" in place of "however" the sentence would say that the signature is missing because of the punctuality, which is something else.
 :::
@@ -122,7 +122,7 @@ The word "while" has two meanings, and the sentence shows which of the two appli
 :::
 
 :::definizione{#condizioni titolo="Conditions and exceptions"}
-A **condition** is a fact on which another fact depends. It is introduced by "if", "provided that", "as long as", "only if". In the notice "Access to the courtyard is allowed provided that the side passage is used", access depends on the use of the side passage: anyone who enters another way is not authorised.
+A **condition** is a fact on which another fact depends. It is introduced by "if", "provided that", "as long as", "only if". In the notice "Access to the courtyard is allowed provided that the side passage is used", access depends on the use of the side passage: anyone who enters another way is not authorized.
 
 An **exception** removes some cases from a general rule. It is introduced by "except", "apart from", "with the exception of". In the sentence "The plaster copies stay in the room, except those sent for restoration", the rule holds for all the copies minus those under restoration.
 
@@ -141,12 +141,12 @@ To avoid repeating a word, a passage recalls it with another expression: a prono
 
 The referent is found in two steps. First, the elements that agree with the reference in number and, where it applies, in gender are sought in the preceding sentences. Then each candidate is substituted for the reference, and the one with which the sentence makes sense is kept.
 
-- "The tower houses two bells and three clocks; the latter have been synchronised." The expression "the latter" indicates the last element named, so the referent is "three clocks".
-- "The original code is kept in a separate field; in this way the starting image can be recognised." The expression "in this way" recalls the whole action of keeping the code in a separate field.
+- "The tower houses two bells and three clocks; the latter have been synchronized." The expression "the latter" indicates the last element named, so the referent is "three clocks".
+- "The original code is kept in a separate field; in this way the starting image can be recognized." The expression "in this way" recalls the whole action of keeping the code in a separate field.
 :::
 
 :::definizione{#lessico titolo="Meaning in context"}
-Many words have several meanings. The **contextual meaning** is the one the word has in the sentence in which it occurs. It is recognised by substituting each of its meanings for the word and keeping the one with which the sentence stays coherent with the rest of the passage.
+Many words have several meanings. The **contextual meaning** is the one the word has in the sentence in which it occurs. It is recognized by substituting each of its meanings for the word and keeping the one with which the sentence stays coherent with the rest of the passage.
 
 In the sentence "The exhibition shows an unpublished photograph from 1950", the word "unpublished" means "never published before". It concerns publication and not the date of the shot: the photograph is decades old and is being shown for the first time.
 
@@ -296,7 +296,7 @@ The answer is obtained from the structure of the comparison and requires no know
 :::osservazione
 A **mean** describes a group as a whole and not each of its members. When the mean decreases, the value of some members may increase.
 
-Three users each waited 10 minutes at the counter, so the mean wait was 10 minutes. After a reorganisation they wait 2, 9 and 13 minutes, and the mean wait is
+Three users each waited 10 minutes at the counter, so the mean wait was 10 minutes. After a reorganization they wait 2, 9 and 13 minutes, and the mean wait is
 $$
 \frac{2 + 9 + 13}{3} = \frac{24}{3} = 8 \ \text{minutes} .
 $$
@@ -312,7 +312,7 @@ A **paraphrase** repeats the content of a sentence in different words. A **summa
 
 A paraphrase or a summary is faithful if it keeps five elements of the passage: who performs the action, the quantity, the time, the conditions and the degree of certainty.
 
-> The mobile library will be trialled for three months starting in spring; the final decision will depend on the number of visits and on costs.
+> The mobile library will be trialed for three months starting in spring; the final decision will depend on the number of visits and on costs.
 
 - "The service will be tested for a quarter and then assessed on visits and costs" is a faithful summary, because it keeps the trial, the duration and the criteria.
 - "The mobile library will become a permanent service" turns a trial into a decision already taken, so it changes the degree of certainty.
@@ -324,7 +324,7 @@ The four wrong answers of a question are called **distractors**. They are built 
 
 1. **Contradiction**. The answer says the opposite of the passage.
 2. **Addition**. The answer contains a piece of information that the passage does not give.
-3. **Generalisation**. The answer extends to all what the passage says of some.
+3. **Generalization**. The answer extends to all what the passage says of some.
 4. **Reversal of a condition**. The answer swaps "only if" with "if".
 5. **Swap of cause and effect**. The answer presents the consequence as the cause.
 6. **Detail in place of the thesis**. The answer reports a true detail when the question asks for the main idea.
@@ -340,6 +340,6 @@ The question is "What follows from the passage?"
 The start depends on two conditions that must hold together. The first is satisfied, because the material arrived by May. On the second, the availability of the room, the passage says nothing. Three answers are assessed.
 
 - "The workshop will start in June." It takes the second condition as satisfied too, so it is an addition.
-- "The workshop has been cancelled." It treats the lack of information as a negative outcome, so it is an addition in the opposite direction.
+- "The workshop has been canceled." It treats the lack of information as a negative outcome, so it is an addition in the opposite direction.
 - "For the start, confirmation that the room is available is still missing." It reports what the passage allows one to say. It is the correct answer.
 :::

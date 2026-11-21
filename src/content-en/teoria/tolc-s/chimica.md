@@ -26,12 +26,12 @@ The three **states of matter** differ in how their particles are arranged.
 - In a liquid they stay close and slide past one another, so the liquid takes the shape of its container.
 - In a gas they are far apart and move freely, so the gas fills the whole container.
 
-A **physical change** rearranges the particles and leaves them unchanged. Melting, from solid to liquid, and evaporation, from liquid to gas, are physical changes: the vapour from boiling water is still made of $\mathrm{H_2O}$ molecules. A **chemical change**, or reaction, produces substances different from the initial ones. In electrolysis an electric current turns water into two gases, hydrogen $\mathrm{H_2}$ and oxygen $\mathrm{O_2}$, so it is a chemical change.
+A **physical change** rearranges the particles and leaves them unchanged. Melting, from solid to liquid, and evaporation, from liquid to gas, are physical changes: the vapor from boiling water is still made of $\mathrm{H_2O}$ molecules. A **chemical change**, or reaction, produces substances different from the initial ones. In electrolysis an electric current turns water into two gases, hydrogen $\mathrm{H_2}$ and oxygen $\mathrm{O_2}$, so it is a chemical change.
 
 Substances in a mixture are separated by physical methods.
 
 - **Filtration** separates an undissolved solid from a liquid, like sand from water, because the filter's holes are smaller than the grains. Dissolved salt is divided into particles much smaller than the holes, so it passes through with the water.
-- **Distillation** separates substances of different volatility, i.e. different tendency to become vapour. When salt water is heated, the water becomes vapour, which is cooled and collected, while the salt stays in the container. With two liquids of similar volatility the collected liquid is richer in the more volatile one, but still contains some of the other.
+- **Distillation** separates substances of different volatility, i.e. different tendency to become vapor. When salt water is heated, the water becomes vapor, which is cooled and collected, while the salt stays in the container. With two liquids of similar volatility the collected liquid is richer in the more volatile one, but still contains some of the other.
 :::
 
 :::teorema{#conservazione-massa titolo="Conservation of mass"}
@@ -43,7 +43,7 @@ If $12\,\mathrm g$ of carbon react completely with $32\,\mathrm g$ of oxygen and
 ## Atoms, isotopes and the periodic table
 
 :::definizione{#atomi-isotopi titolo="Atomic number and mass number"}
-At the centre of an atom is the **nucleus**, made of positively charged protons and uncharged neutrons. Negatively charged electrons move around it. An electron's mass is about $1800$ times smaller than that of a proton or neutron, so almost all the atom's mass is in the nucleus.
+At the center of an atom is the **nucleus**, made of positively charged protons and uncharged neutrons. Negatively charged electrons move around it. An electron's mass is about $1800$ times smaller than that of a proton or neutron, so almost all the atom's mass is in the nucleus.
 
 The **atomic number** $Z$ is the number of protons and identifies the element: every atom with $Z=8$ is an oxygen atom. The **mass number** $A$ is the sum of protons and neutrons, so the number of neutrons is $A-Z$. A neutral atom has as many electrons as protons, namely $Z$. The two numbers are written left of the symbol, $A$ above and $Z$ below: $^{A}_{Z}\mathrm X$.
 
@@ -73,7 +73,7 @@ Three properties change in a regular way across the table.
 - **Ionization energy** is the energy needed to remove an electron from an isolated gaseous atom.
 - **Electronegativity** is an atom's tendency to attract the electrons of a bond.
 
-The last two increase where the radius decreases, i.e. from left to right across a period and from bottom to top in a group, because in a smaller atom the outer electrons are closer to the nucleus. These are general trends, with some exceptions between neighbouring elements.
+The last two increase where the radius decreases, i.e. from left to right across a period and from bottom to top in a group, because in a smaller atom the outer electrons are closer to the nucleus. These are general trends, with some exceptions between neighboring elements.
 :::
 
 ## Bonds and molecular shape
@@ -81,7 +81,7 @@ The last two increase where the radius decreases, i.e. from left to right across
 :::definizione{#legami titolo="Ionic, covalent and metallic bonding"}
 A **chemical bond** is the attraction that holds two atoms together.
 
-An **ionic bond** is the attraction between oppositely charged ions. It forms between a metal, which loses electrons, and a non-metal, which gains them; in the periodic table metals are on the left and in the centre, non-metals on the right. In table salt, sodium chloride $\mathrm{NaCl}$, each sodium atom gives one electron to a chlorine atom, and the ions $\mathrm{Na^+}$ and $\mathrm{Cl^-}$ alternate in an ordered structure, the **crystal lattice**. The formula states the one-to-one ion ratio, because the solid is a single extended lattice, with no separate molecules. An electric current is a movement of charges. In solid salt the ions are fixed, so the solid conducts poorly; in molten or dissolved salt the ions move, so the liquid conducts.
+An **ionic bond** is the attraction between oppositely charged ions. It forms between a metal, which loses electrons, and a non-metal, which gains them; in the periodic table metals are on the left and in the center, non-metals on the right. In table salt, sodium chloride $\mathrm{NaCl}$, each sodium atom gives one electron to a chlorine atom, and the ions $\mathrm{Na^+}$ and $\mathrm{Cl^-}$ alternate in an ordered structure, the **crystal lattice**. The formula states the one-to-one ion ratio, because the solid is a single extended lattice, with no separate molecules. An electric current is a movement of charges. In solid salt the ions are fixed, so the solid conducts poorly; in molten or dissolved salt the ions move, so the liquid conducts.
 
 A **covalent bond** is the sharing of one or more electron pairs between two atoms, usually non-metals. The shared electrons are attracted by both nuclei. The bond is single with one shared pair, double with two, triple with three, as in the molecules $\mathrm{H_2}$, $\mathrm{O_2}$ and $\mathrm{N_2}$.
 
@@ -96,7 +96,7 @@ In a covalent bond between different atoms, the more electronegative atom attrac
 
 ::grafico{assi=0 xmin=-2.5 xmax=2.5 ymin=-1 ymax=1.5 punti="-1.5,0,pieno,O;0,0,pieno,C;1.5,0,pieno,O" vettori="0,0,-1.1,0;0,0,1.1,0" uguale=1 legenda=0 titolo="Linear CO2: the two opposite contributions to polarity cancel."}
 
-**Intermolecular forces** are attractions between neighbouring molecules, much weaker than covalent bonds. **Dispersion forces** act between all molecules, **dipole forces** only between polar molecules. The **hydrogen bond**, the strongest, forms between a hydrogen bonded to nitrogen, oxygen or fluorine and an unshared electron pair on an N, O or F atom of another molecule.
+**Intermolecular forces** are attractions between neighboring molecules, much weaker than covalent bonds. **Dispersion forces** act between all molecules, **dipole forces** only between polar molecules. The **hydrogen bond**, the strongest, forms between a hydrogen bonded to nitrogen, oxygen or fluorine and an unshared electron pair on an N, O or F atom of another molecule.
 
 Boiling moves the molecules apart, so it overcomes intermolecular forces and leaves the bonds inside the molecules intact. Because of hydrogen bonds water boils at $100\,{}^\circ\mathrm C$, whereas methane $\mathrm{CH_4}$, of similar mass and with dispersion forces only, boils at $-162\,{}^\circ\mathrm C$.
 :::
@@ -115,7 +115,7 @@ Two kinds of numbers appear in a formula.
 
 In $3\,\mathrm{Ca(NO_3)_2}$, three units of calcium nitrate, one unit contains $1$ calcium atom, $1\cdot2=2$ nitrogen atoms and $3\cdot2=6$ oxygen atoms. The three units therefore contain $3$ calcium atoms, $3\cdot2=6$ nitrogen atoms and $3\cdot6=18$ oxygen atoms.
 
-An ionic compound is neutral, so in its formula the charges add up to zero. With the ions $\mathrm{Al^{3+}}$ and $\mathrm{O^{2-}}$ the least common multiple of $3$ and $2$ is $6$. Two aluminium ions carry $2\cdot(+3)=+6$ and three oxide ions carry $3\cdot(-2)=-6$, so the formula is $\mathrm{Al_2O_3}$.
+An ionic compound is neutral, so in its formula the charges add up to zero. With the ions $\mathrm{Al^{3+}}$ and $\mathrm{O^{2-}}$ the least common multiple of $3$ and $2$ is $6$. Two aluminum ions carry $2\cdot(+3)=+6$ and three oxide ions carry $3\cdot(-2)=-6$, so the formula is $\mathrm{Al_2O_3}$.
 
 The **molecular formula** gives the actual number of atoms in the molecule; the **empirical formula** gives their ratio in the smallest whole numbers. Glucose has molecular formula $\mathrm{C_6H_{12}O_6}$, and dividing the subscripts by $6$ gives the empirical formula $\mathrm{CH_2O}$. An ionic compound's formula is an empirical formula, because it expresses the proportion between the lattice ions.
 :::
@@ -202,11 +202,11 @@ A **solution** is a homogeneous mixture. The **solvent** is the substance presen
 $$
 c=\frac nV.
 $$
-With $V$ in litres its unit is moles per litre, $\mathrm{mol/L}$, equal to $\mathrm{mol/dm^3}$ because one litre is one cubic decimetre. The volume is that of the final solution: with $0.50\,\mathrm{mol}$ of solute in $2.0\,\mathrm L$ of solution, $c=\dfrac{0.50\,\mathrm{mol}}{2.0\,\mathrm L}=0.25\,\mathrm{mol/L}$.
+With $V$ in liters its unit is moles per liter, $\mathrm{mol/L}$, equal to $\mathrm{mol/dm^3}$ because one liter is one cubic decimeter. The volume is that of the final solution: with $0.50\,\mathrm{mol}$ of solute in $2.0\,\mathrm L$ of solution, $c=\dfrac{0.50\,\mathrm{mol}}{2.0\,\mathrm L}=0.25\,\mathrm{mol/L}$.
 
 Other measures use masses.
 
-- The concentration in $\mathrm{g/L}$ is the mass of solute per litre of solution.
+- The concentration in $\mathrm{g/L}$ is the mass of solute per liter of solution.
 - The **mass percentage** is $\dfrac{m_{\mathrm{solute}}}{m_{\mathrm{solution}}}\cdot100\%$, where the solution mass is the sum of solute and solvent. Dissolving $4\,\mathrm g$ of salt in $96\,\mathrm g$ of water gives $100\,\mathrm g$ of solution, and the percentage is $\dfrac{4}{100}\cdot100\%=4\%$.
 - **Molality** is the ratio of the moles of solute to the solvent mass in kilograms, in $\mathrm{mol/kg}$. Its denominator is the mass of the solvent alone, whereas in molarity it is the solution volume.
 
@@ -218,7 +218,7 @@ A volume percentage uses volumes instead of masses, so a label states which of t
 $$
 c_1V_1=c_2V_2.
 $$
-$100\,\mathrm{mL}$ (millilitres, thousandths of a litre) of a $1.0\,\mathrm{mol/L}$ solution are brought to a final volume of $500\,\mathrm{mL}$ by adding $400\,\mathrm{mL}$ of water. The moles of solute are $1.0\,\mathrm{mol/L}\cdot0.100\,\mathrm L=0.10\,\mathrm{mol}$, so
+$100\,\mathrm{mL}$ (milliliters, thousandths of a liter) of a $1.0\,\mathrm{mol/L}$ solution are brought to a final volume of $500\,\mathrm{mL}$ by adding $400\,\mathrm{mL}$ of water. The moles of solute are $1.0\,\mathrm{mol/L}\cdot0.100\,\mathrm L=0.10\,\mathrm{mol}$, so
 $$
 c_2=\frac{c_1V_1}{V_2}=\frac{0.10\,\mathrm{mol}}{0.500\,\mathrm L}=0.20\,\mathrm{mol/L}.
 $$
@@ -258,7 +258,7 @@ Ammonia accepts $\mathrm{H^+}$ and becomes the ammonium ion $\mathrm{NH_4^+}$, s
 
 A **conjugate pair** consists of an acid and a base that differ by a single $\mathrm{H^+}$, like $\mathrm{NH_4^+}$ and $\mathrm{NH_3}$. On donating $\mathrm{H^+}$ the charge drops by one unit, here from $+1$ to $0$.
 
-A **strong acid** donates $\mathrm{H^+}$ to water with all its molecules, like $\mathrm{HCl}$. A **weak acid** donates it with only part of its molecules and stays in equilibrium with the non-ionized part: in a $0.1\,\mathrm{mol/L}$ solution of acetic acid $\mathrm{CH_3COOH}$ about one molecule in a hundred is ionized. Strength and concentration are distinct properties: strength is the acid's tendency to donate $\mathrm{H^+}$, concentration states how much acid is dissolved per litre.
+A **strong acid** donates $\mathrm{H^+}$ to water with all its molecules, like $\mathrm{HCl}$. A **weak acid** donates it with only part of its molecules and stays in equilibrium with the non-ionized part: in a $0.1\,\mathrm{mol/L}$ solution of acetic acid $\mathrm{CH_3COOH}$ about one molecule in a hundred is ionized. Strength and concentration are distinct properties: strength is the acid's tendency to donate $\mathrm{H^+}$, concentration states how much acid is dissolved per liter.
 :::
 
 :::definizione{#ph titolo="The logarithmic pH scale"}
@@ -407,7 +407,7 @@ A disturbed equilibrium shifts in the direction that reduces the disturbance. In
 :::definizione{#tamponi-colligative titolo="Buffers and colligative properties"}
 A **buffer solution** keeps the pH almost constant when a little acid or base is added. It contains, in appreciable amounts, a weak acid and its conjugate base, like acetic acid $\mathrm{CH_3COOH}$ and the acetate ion $\mathrm{CH_3COO^-}$. The acetate ion reacts with added hydronium and acetic acid with added hydroxide, so the added ions are consumed. The buffer's capacity is limited by the amounts of the pair.
 
-An **indicator** is a substance that changes colour over a characteristic pH range, so it gives the pH approximately: phenolphthalein is colourless below pH $8.2$ and pink above pH $10$. Some salts change the pH of water, because one of their ions reacts with it: the ammonium ion $\mathrm{NH_4^+}$ donates $\mathrm{H^+}$ and makes the solution acidic, the acetate ion accepts it and makes the solution basic.
+An **indicator** is a substance that changes color over a characteristic pH range, so it gives the pH approximately: phenolphthalein is colourless below pH $8.2$ and pink above pH $10$. Some salts change the pH of water, because one of their ions reacts with it: the ammonium ion $\mathrm{NH_4^+}$ donates $\mathrm{H^+}$ and makes the solution acidic, the acetate ion accepts it and makes the solution basic.
 
 A solution's **colligative properties** depend on the number of solute particles and not on their kind. **Osmotic pressure** $\pi$ is the pressure that stops solvent passing into the solution through a membrane permeable only to the solvent. For ideal dilute solutions $\pi=icRT$, where $c$ is the molarity and $i$ the number of particles formed by each unit of solute: $i=1$ for glucose, which stays as molecules, and $i=2$ for $\mathrm{NaCl}$ completely dissociated into two ions. At equal molarity sodium chloride therefore gives twice the osmotic pressure and lowers water's freezing point more.
 :::

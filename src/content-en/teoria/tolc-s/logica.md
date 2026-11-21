@@ -10,7 +10,7 @@ A **statement**, also called a proposition, is a sentence that can be said to be
 
 Each statement is denoted by a capital letter, for example $P$ = “the code contains four digits”. Within one argument the same letter always denotes the same statement.
 
-The **premises** are the information that the question gives as true. A conclusion **follows** from the premises when it is true in every situation where the premises are true. Only the premises written in the question count. If the text states that all the electric vehicles in the depot are red, in that question they are, even though electric vehicles of other colours exist elsewhere.
+The **premises** are the information that the question gives as true. A conclusion **follows** from the premises when it is true in every situation where the premises are true. Only the premises written in the question count. If the text states that all the electric vehicles in the depot are red, in that question they are, even though electric vehicles of other colors exist elsewhere.
 :::
 
 :::esempio{titolo="A possible conclusion and a necessary one"}
@@ -277,7 +277,7 @@ With the single constraint “A precedes C” several orders are allowed, among 
 :::
 
 :::definizione{#reti titolo="Connections and paths"}
-A **network** consists of points, called **vertices**, and **connections** between pairs of vertices. The vertices represent places, for example the stops of a bus, and the connection between A and B is written A–B. In a *directed* network each connection has a direction, like a one-way street, while in an *undirected* network it can be travelled both ways.
+A **network** consists of points, called **vertices**, and **connections** between pairs of vertices. The vertices represent places, for example the stops of a bus, and the connection between A and B is written A–B. In a *directed* network each connection has a direction, like a one-way street, while in an *undirected* network it can be traveled both ways.
 
 A **path** is a sequence of connections where each one starts from the vertex where the previous one ends. A vertex can be reached from another when there is a path joining them, and this is settled from the list of connections, not from how close the vertices are in the drawing.
 
@@ -310,12 +310,12 @@ If each group contained at most $r$ objects, there would be at most $kr$ objects
 :::
 ::::
 
-:::esempio{titolo="Guaranteeing a colour or a repetition"}
+:::esempio{titolo="Guaranteeing a color or a repetition"}
 A bag contains $4$ red tokens and $6$ blue ones, which are drawn without looking and without putting them back. A number of draws guarantees a result when the result is obtained even in the worst case.
 
 To guarantee at least one red token, the worst case is that all $6$ blue tokens come out first. After them only red tokens remain in the bag, so $6+1=7$ draws are needed.
 
-To guarantee two tokens of the same colour, the worst case is that the first two tokens have different colours. The third token has the colour of one of the first two, so $3$ draws are enough. This is the pigeonhole principle with $k=2$ colours and $r=1$.
+To guarantee two tokens of the same color, the worst case is that the first two tokens have different colors. The third token has the color of one of the first two, so $3$ draws are enough. This is the pigeonhole principle with $k=2$ colors and $r=1$.
 :::
 
 ## Arguments and checking conclusions

@@ -140,21 +140,21 @@ The diagonals drawn from a single vertex divide a convex polygon with $n\ge3$ si
 
 In a regular polygon each interior angle measures $\dfrac{(n-2)\cdot180^\circ}{n}$ and each exterior angle, which is its supplement, measures $\dfrac{360^\circ}{n}$. In a regular hexagon they measure $\dfrac{720^\circ}{6}=120^\circ$ and $\dfrac{360^\circ}{6}=60^\circ$.
 
-From each vertex there are $n-3$ diagonals, because the vertex itself and its two neighbours are excluded. In the product $n(n-3)$ every diagonal is counted twice, once for each endpoint, so the number of diagonals is $\dfrac{n(n-3)}{2}$. A hexagon has $\dfrac{6\cdot3}{2}=9$.
+From each vertex there are $n-3$ diagonals, because the vertex itself and its two neighbors are excluded. In the product $n(n-3)$ every diagonal is counted twice, once for each endpoint, so the number of diagonals is $\dfrac{n(n-3)}{2}$. A hexagon has $\dfrac{6\cdot3}{2}=9$.
 :::
 
 ## Circles, arcs, and chords
 
 :::definizione{#cerchio titolo="Circle and disk"}
-A **circle** is the line formed by the points at the same distance $r>0$, called the radius, from a point $O$, called the centre. The **disk** also includes the interior points. A diameter is a segment that joins two points of the circle through the centre and measures $2r$. The length of the circle, or circumference, is $2\pi r$ and the area of the disk is $\pi r^2$, where $\pi$ (pi) is about $3.14$. With $r=5\,\mathrm{cm}$ the circumference is $10\pi\approx31.4\,\mathrm{cm}$ and the area is $25\pi\approx78.5\,\mathrm{cm^2}$; the symbol $\approx$ reads "approximately equal to". The radius appears to the first power in the length, which is measured in $\mathrm{cm}$, and squared in the area, which is measured in $\mathrm{cm^2}$.
+A **circle** is the line formed by the points at the same distance $r>0$, called the radius, from a point $O$, called the center. The **disk** also includes the interior points. A diameter is a segment that joins two points of the circle through the center and measures $2r$. The length of the circle, or circumference, is $2\pi r$ and the area of the disk is $\pi r^2$, where $\pi$ (pi) is about $3.14$. With $r=5\,\mathrm{cm}$ the circumference is $10\pi\approx31.4\,\mathrm{cm}$ and the area is $25\pi\approx78.5\,\mathrm{cm^2}$; the symbol $\approx$ reads "approximately equal to". The radius appears to the first power in the length, which is measured in $\mathrm{cm}$, and squared in the area, which is measured in $\mathrm{cm^2}$.
 
-A **chord** is a segment joining two points of the circle. The perpendicular from the centre to a chord divides it in half. If the chord is at distance $d<r$ from the centre, the distance $d$, half the chord and a radius form a right triangle with hypotenuse $r$, so half the chord measures $\sqrt{r^2-d^2}$.
+A **chord** is a segment joining two points of the circle. The perpendicular from the center to a chord divides it in half. If the chord is at distance $d<r$ from the center, the distance $d$, half the chord and a radius form a right triangle with hypotenuse $r$, so half the chord measures $\sqrt{r^2-d^2}$.
 
 A **tangent** line has only one point in common with the circle, the point of contact, and at that point it is perpendicular to the radius. If $T$ is the point of contact of a tangent drawn from a point $P$, triangle $OTP$ is therefore right-angled at $T$.
 :::
 
 :::definizione{#settori titolo="Arc and circular sector"}
-A central angle has its vertex at the centre of the disk. Its sides bound an **arc**, a stretch of the circle, and a **circular sector**, the part of the disk between the two radii and the arc. A sector with central angle $\alpha$ in degrees is the fraction $\dfrac{\alpha}{360^\circ}$ of the disk. Therefore the length $\ell$ of the arc and the area $A$ of the sector are
+A central angle has its vertex at the center of the disk. Its sides bound an **arc**, a stretch of the circle, and a **circular sector**, the part of the disk between the two radii and the arc. A sector with central angle $\alpha$ in degrees is the fraction $\dfrac{\alpha}{360^\circ}$ of the disk. Therefore the length $\ell$ of the arc and the area $A$ of the sector are
 $$
 \ell=\frac{\alpha}{360^\circ}2\pi r,
 \qquad A=\frac{\alpha}{360^\circ}\pi r^2.
@@ -165,7 +165,7 @@ An inscribed angle has its vertex on the circle and its sides pass through the t
 :::
 
 :::esempio{titolo="Chord and distance from the center"}
-A chord $AB$ of a circle with centre $O$ and radius $5\,\mathrm{cm}$ is at distance $3\,\mathrm{cm}$ from the centre. In the figure $OM$ is the perpendicular from the centre to the chord, so it measures $3\,\mathrm{cm}$ and $M$ is the midpoint of $AB$. Triangle $OMA$ is right-angled at $M$ and has hypotenuse $OA=5\,\mathrm{cm}$, so
+A chord $AB$ of a circle with center $O$ and radius $5\,\mathrm{cm}$ is at distance $3\,\mathrm{cm}$ from the center. In the figure $OM$ is the perpendicular from the center to the chord, so it measures $3\,\mathrm{cm}$ and $M$ is the midpoint of $AB$. Triangle $OMA$ is right-angled at $M$ and has hypotenuse $OA=5\,\mathrm{cm}$, so
 $$
 MA=\sqrt{5^2-3^2}=\sqrt{16}=4\,\mathrm{cm}.
 $$
@@ -193,7 +193,7 @@ The factor $\dfrac13$ concerns only the volumes of pyramids and cones. The surfa
 
 - The sphere has surface area $4\pi r^2$.
 - The lateral surface of a cylinder, laid flat on a plane, is a rectangle with sides $2\pi r$ and $h$. With the two bases the total surface area is $2\pi rh+2\pi r^2$, which for $r=3$ and $h=10$ is $60\pi+18\pi=78\pi\approx245.0$. A cylinder open at the top has only one base.
-- In a right cone, with the vertex above the centre of the base, the **slant height** $s$ is the distance from the vertex to the circle of the base. Height, radius and slant height form a right triangle, so $s=\sqrt{r^2+h^2}$, and the lateral area is $\pi rs$. With $r=3$ and $h=4$, $s=5$ and the lateral area is $15\pi\approx47.1$.
+- In a right cone, with the vertex above the center of the base, the **slant height** $s$ is the distance from the vertex to the circle of the base. Height, radius and slant height form a right triangle, so $s=\sqrt{r^2+h^2}$, and the lateral area is $\pi rs$. With $r=3$ and $h=4$, $s=5$ and the lateral area is $15\pi\approx47.1$.
 :::
 
 :::esempio{titolo="Space diagonal of a box"}
@@ -207,7 +207,7 @@ The Pythagorean theorem is applied twice and, for edges $a,b,c$, the two steps t
 :::osservazione{#unita-geometriche titolo="Area and volume conversions"}
 Since $1\,\mathrm{m}=100\,\mathrm{cm}$, a square of side $1\,\mathrm{m}$ contains $100$ rows of $100$ squares of side $1\,\mathrm{cm}$. Thus $1\,\mathrm{m^2}=100^2\,\mathrm{cm^2}=10000\,\mathrm{cm^2}$. Likewise $1\,\mathrm{m^3}=100^3\,\mathrm{cm^3}=1000000\,\mathrm{cm^3}$.
 
-The capacity of a container is measured in litres, with symbol $\mathrm{L}$. A litre is the volume of a cube with an edge of one decimetre ($10\,\mathrm{cm}$), so $1\,\mathrm{L}=1\,\mathrm{dm^3}=1000\,\mathrm{cm^3}$.
+The capacity of a container is measured in liters, with symbol $\mathrm{L}$. A liter is the volume of a cube with an edge of one decimeter ($10\,\mathrm{cm}$), so $1\,\mathrm{L}=1\,\mathrm{dm^3}=1000\,\mathrm{cm^3}$.
 
 A tank shaped like a rectangular box has an internal base of $40\,\mathrm{cm}$ by $30\,\mathrm{cm}$ and contains $6\,\mathrm{L}=6000\,\mathrm{cm^3}$ of water. The water occupies a rectangular box with the same base and height $h$, so $40\cdot30\cdot h=6000$ and $h=\dfrac{6000}{1200}=5\,\mathrm{cm}$. The check gives $1200\cdot5=6000\,\mathrm{cm^3}$. The value found is the height of the water; the height of the tank is another quantity, greater than or equal to $5\,\mathrm{cm}$.
 :::
@@ -233,7 +233,7 @@ The distance of $(x,y)$ from the $x$-axis is $|y|$ and its distance from the $y$
 :::
 
 :::definizione{#luoghi titolo="Geometric loci"}
-A **locus** is the set of all the points that have a given property. The circle, for example, is the locus of the points at distance $r$ from the centre.
+A **locus** is the set of all the points that have a given property. The circle, for example, is the locus of the points at distance $r$ from the center.
 
 The **perpendicular bisector** of a segment $AB$ is the line perpendicular to the segment at its midpoint, and it is the locus of the points equidistant from $A$ and $B$. In coordinates the condition $PA=PB$ is written $PA^2=PB^2$, which contains no roots. With $A(0,0)$, $B(4,2)$ and $P(x,y)$ this gives $x^2+y^2=(x-4)^2+(y-2)^2$. When the squares are expanded, the terms $x^2$ and $y^2$ cancel and $0=-8x-4y+20$ remains: the line $2x+y=5$, which passes through the midpoint $(2,1)$.
 
@@ -241,12 +241,12 @@ In a triangle the lines of each of the following four triples meet at one point.
 
 | Lines | What they are | Meeting point |
 |---|---|---|
-| Perpendicular bisectors of the sides | perpendicular to the sides at their midpoints | **circumcentre**, equidistant from the three vertices |
-| Angle bisectors | divide each interior angle into two equal angles | **incentre**, equidistant from the three sides |
+| Perpendicular bisectors of the sides | perpendicular to the sides at their midpoints | **circumcenter**, equidistant from the three vertices |
+| Angle bisectors | divide each interior angle into two equal angles | **incenter**, equidistant from the three sides |
 | Medians | join each vertex to the midpoint of the opposite side | **centroid** |
-| Altitudes | perpendiculars drawn from each vertex to the line of the opposite side | **orthocentre** |
+| Altitudes | perpendiculars drawn from each vertex to the line of the opposite side | **orthocenter** |
 
-The centroid divides each median into two parts, and the part towards the vertex is twice the other (ratio $2:1$): on a median $9\,\mathrm{cm}$ long it is $6\,\mathrm{cm}$ from the vertex and $3\,\mathrm{cm}$ from the midpoint of the side. The orthocentre is inside acute triangles, is the vertex of the right angle in right triangles and is outside obtuse triangles. The four points are defined by different properties and occupy different positions; they coincide only in an equilateral triangle, which has three equal sides.
+The centroid divides each median into two parts, and the part towards the vertex is twice the other (ratio $2:1$): on a median $9\,\mathrm{cm}$ long it is $6\,\mathrm{cm}$ from the vertex and $3\,\mathrm{cm}$ from the midpoint of the side. The orthocenter is inside acute triangles, is the vertex of the right angle in right triangles and is outside obtuse triangles. The four points are defined by different properties and occupy different positions; they coincide only in an equilateral triangle, which has three equal sides.
 :::
 
 :::osservazione{titolo="Coordinates and transformations"}
@@ -254,11 +254,11 @@ A **transformation** of the plane assigns to each point $(x,y)$ another point an
 
 - A **translation** moves all points by the same vector $(u,v)$, $u$ units horizontally and $v$ vertically, so $(x,y)$ becomes $(x+u,y+v)$. With the vector $(2,-4)$ the point $P$ becomes $(5,-3)$.
 - A **reflection** in a line sends each point to the other side of the line, at the same distance, along the perpendicular. In the $x$-axis the sign of $y$ changes and $P$ becomes $(3,-1)$; in the $y$-axis the sign of $x$ changes and $P$ becomes $(-3,1)$; in the line $y=x$ the coordinates are exchanged and $P$ becomes $(1,3)$.
-- A **dilation** with centre $C$ and factor $k>0$ leaves $C$ fixed and multiplies by $k$ the distance from $C$ of every other point, in the same direction. If the centre is the origin, $(x,y)$ becomes $(kx,ky)$ and, with $k=2$, $P$ becomes $(6,2)$.
+- A **dilation** with center $C$ and factor $k>0$ leaves $C$ fixed and multiplies by $k$ the distance from $C$ of every other point, in the same direction. If the center is the origin, $(x,y)$ becomes $(kx,ky)$ and, with $k=2$, $P$ becomes $(6,2)$.
 
 Translations and reflections preserve distances. A dilation transforms every figure into a similar figure, with scale factor $k$.
 
-If the centre $C$ is not the origin, the displacement from $C$ to $P$ is multiplied by $k$ and applied starting from $C$. With $C(1,2)$ and $k=2$ the displacement is $(3-1,1-2)=(2,-1)$ and its double is $(4,-2)$, so $P$ goes to $(1+4,2-2)=(5,0)$. The centre stays fixed and the distance of $P$ from $C$ doubles, from $\sqrt5$ to $2\sqrt5$. Multiplying the coordinates of $P$ directly by $2$ gives $(6,2)$, which is the result of the dilation centred at the origin.
+If the center $C$ is not the origin, the displacement from $C$ to $P$ is multiplied by $k$ and applied starting from $C$. With $C(1,2)$ and $k=2$ the displacement is $(3-1,1-2)=(2,-1)$ and its double is $(4,-2)$, so $P$ goes to $(1+4,2-2)=(5,0)$. The center stays fixed and the distance of $P$ from $C$ doubles, from $\sqrt5$ to $2\sqrt5$. Multiplying the coordinates of $P$ directly by $2$ gives $(6,2)$, which is the result of the dilation centered at the origin.
 :::
 
 ## Lines and intersections
@@ -276,7 +276,7 @@ A horizontal line has equation $y=k$ and slope zero. A vertical line has equatio
 :::
 
 :::teorema{#parallelismo titolo="Parallelism, perpendicularity, and distance"}
-Two distinct non-vertical lines, with slopes $m_1$ and $m_2$, are parallel if $m_1=m_2$ and perpendicular if $m_1m_2=-1$. The lines $y=2x+1$ and $y=-\dfrac12x+4$ are perpendicular, because $2\cdot\left(-\dfrac12\right)=-1$. A vertical line $x=k$ and a horizontal line $y=h$ are always perpendicular; this case is recognised from the equations, because a vertical line has no slope.
+Two distinct non-vertical lines, with slopes $m_1$ and $m_2$, are parallel if $m_1=m_2$ and perpendicular if $m_1m_2=-1$. The lines $y=2x+1$ and $y=-\dfrac12x+4$ are perpendicular, because $2\cdot\left(-\dfrac12\right)=-1$. A vertical line $x=k$ and a horizontal line $y=h$ are always perpendicular; this case is recognized from the equations, because a vertical line has no slope.
 
 The intersection point of two lines satisfies both equations, so it is found by solving the system they form.
 
@@ -306,34 +306,34 @@ In the graph the rising line is $y=2x+1$, the falling line is $y=-x+7$ and the m
 ## The circle in Cartesian coordinates
 
 :::definizione{#circonferenza-cartesiana titolo="Center and radius from an equation"}
-A point $P(x,y)$ belongs to the circle with centre $(a,b)$ and radius $r>0$ if its distance from the centre is $r$. Squaring the distance formula gives the equation
+A point $P(x,y)$ belongs to the circle with center $(a,b)$ and radius $r>0$ if its distance from the center is $r$. Squaring the distance formula gives the equation
 $$
 (x-a)^2+(y-b)^2=r^2.
 $$
-The circle with centre $(2,-3)$ and radius $5$ has equation $(x-2)^2+(y+3)^2=25$, where $y+3$ comes from $y-(-3)$.
+The circle with center $(2,-3)$ and radius $5$ has equation $(x-2)^2+(y+3)^2=25$, where $y+3$ comes from $y-(-3)$.
 
-The left side is the square of the distance from the centre, and comparing it with $r^2$ establishes the position of a point.
+The left side is the square of the distance from the center, and comparing it with $r^2$ establishes the position of a point.
 
 - The point $(5,1)$ gives $3^2+4^2=25$, so it lies on the circle.
 - The origin gives $4+9=13<25$, so it is inside.
 - The point $(8,0)$ gives $36+9=45>25$, so it is outside.
 
-Expanding the squares turns the equation into $x^2+y^2-4x+6y-12=0$, and in this form the centre and the radius cannot be read directly. They are recovered by **completing the squares**.
+Expanding the squares turns the equation into $x^2+y^2-4x+6y-12=0$, and in this form the center and the radius cannot be read directly. They are recovered by **completing the squares**.
 
 1. The terms are grouped and the number is moved to the right side: $(x^2-4x)+(y^2+6y)=12$.
 2. The expression $x^2-4x$ becomes a square by adding $4$, the square of half the coefficient of $x$: $x^2-4x+4=(x-2)^2$.
 3. Likewise $y^2+6y+9=(y+3)^2$.
 4. The numbers $4$ and $9$ are added to both sides: $(x-2)^2+(y+3)^2=12+4+9=25$.
 
-The centre is $(2,-3)$ and the radius is $\sqrt{25}=5$. A sum of squares is positive or zero. Therefore, if the right side turns out negative, no point satisfies the equation; if it is zero, only the centre satisfies it.
+The center is $(2,-3)$ and the radius is $\sqrt{25}=5$. A sum of squares is positive or zero. Therefore, if the right side turns out negative, no point satisfies the equation; if it is zero, only the center satisfies it.
 :::
 
 :::osservazione{#intersezioni-circonferenza titolo="Relative positions of lines and circles"}
-A line at distance $d$ from the centre of a circle of radius $r$ is a **secant** if $d<r$, with two common points, a tangent if $d=r$, with only one common point, and an exterior line if $d>r$, with no common points.
+A line at distance $d$ from the center of a circle of radius $r$ is a **secant** if $d<r$, with two common points, a tangent if $d=r$, with only one common point, and an exterior line if $d>r$, with no common points.
 
-Substituting the equation of the line into that of the circle gives a quadratic equation, which in the three cases has two, one or no solutions. For the circle $x^2+y^2=25$, with centre the origin and radius $5$, the line $y=3$ is at distance $3$ from the centre and is a secant. The substitution gives $x^2+9=25$, that is, $x^2=16$, and the common points are $(4,3)$ and $(-4,3)$.
+Substituting the equation of the line into that of the circle gives a quadratic equation, which in the three cases has two, one or no solutions. For the circle $x^2+y^2=25$, with center the origin and radius $5$, the line $y=3$ is at distance $3$ from the center and is a secant. The substitution gives $x^2+9=25$, that is, $x^2=16$, and the common points are $(4,3)$ and $(-4,3)$.
 
-For two distinct circles, with radii $r_1$ and $r_2$ and centres at distance $d$, $d$ is compared with the sum and with the difference of the radii. In the examples the radii are $5$ and $3$.
+For two distinct circles, with radii $r_1$ and $r_2$ and centers at distance $d$, $d$ is compared with the sum and with the difference of the radii. In the examples the radii are $5$ and $3$.
 
 | Condition | Position and common points | Example |
 |---|---|---|
@@ -343,7 +343,7 @@ For two distinct circles, with radii $r_1$ and $r_2$ and centres at distance $d$
 | $d=\lvert r_1-r_2\rvert$ | internally tangent, one point | $d=2$ |
 | $d<\lvert r_1-r_2\rvert$ | one inside the other, no points | $d=1$ |
 
-Two circles with the same centre and the same radius coincide and have infinitely many common points. This case is distinct from internal tangency, although here too $d=\lvert r_1-r_2\rvert=0$.
+Two circles with the same center and the same radius coincide and have infinitely many common points. This case is distinct from internal tangency, although here too $d=\lvert r_1-r_2\rvert=0$.
 :::
 
 ## Parabolas, ellipses, and hyperbolas
@@ -351,11 +351,11 @@ Two circles with the same centre and the same radius coincide and have infinitel
 :::definizione{#coniche titolo="Recognizing a conic"}
 The parabola, the ellipse and the hyperbola are curves called **conics**. The **parabola** is the locus of the points equidistant from a point, the focus, and from a line, the directrix, that does not pass through the focus. With a vertical axis it has equation $y=ax^2+bx+c$, with $a\ne0$; the symbol $\ne$ reads "not equal to". The vertex is the lowest point of the curve if $a>0$ and the highest if $a<0$. Its abscissa is $x_V=-\dfrac{b}{2a}$ and its ordinate is found by substituting $x_V$ into the equation. For $y=x^2-4x+3$, $x_V=\dfrac42=2$ and $y_V=4-8+3=-1$. Completing the square gives $y=(x^2-4x+4)-1=(x-2)^2-1$. The square is zero for $x=2$, so the minimum of $y$ is $-1$, the vertex is $(2,-1)$ and the axis of symmetry is the line $x=2$.
 
-The **ellipse** is the locus of the points for which the sum of the distances from two fixed points, the foci, is constant. With its centre at the origin and its axes of symmetry on the coordinate axes it has equation $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$, with $a,b>0$. It meets the axes at the points $(\pm a,0)$ and $(0,\pm b)$, where $\pm a$ denotes the two values $a$ and $-a$. If $a>b$, the foci are the points $(\pm c,0)$ with $c=\sqrt{a^2-b^2}$ and the sum of the distances is $2a$. For $\dfrac{x^2}{25}+\dfrac{y^2}{9}=1$, $a=5$, $b=3$ and $c=\sqrt{25-9}=4$. The point $(0,3)$ is at distance $\sqrt{4^2+3^2}=5$ from each focus, and $5+5=10=2a$.
+The **ellipse** is the locus of the points for which the sum of the distances from two fixed points, the foci, is constant. With its center at the origin and its axes of symmetry on the coordinate axes it has equation $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$, with $a,b>0$. It meets the axes at the points $(\pm a,0)$ and $(0,\pm b)$, where $\pm a$ denotes the two values $a$ and $-a$. If $a>b$, the foci are the points $(\pm c,0)$ with $c=\sqrt{a^2-b^2}$ and the sum of the distances is $2a$. For $\dfrac{x^2}{25}+\dfrac{y^2}{9}=1$, $a=5$, $b=3$ and $c=\sqrt{25-9}=4$. The point $(0,3)$ is at distance $\sqrt{4^2+3^2}=5$ from each focus, and $5+5=10=2a$.
 
-The **hyperbola** $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$ has the two signs opposite and consists of two branches. The vertices are the points $(\pm a,0)$. The asymptotes are the lines $y=\pm\dfrac ba x$, which the branches approach as they move away from the centre. The foci are the points $(\pm c,0)$ with $c^2=a^2+b^2$. For $\dfrac{x^2}{9}-\dfrac{y^2}{16}=1$, $a=3$ and $b=4$, the asymptotes are $y=\pm\dfrac43x$ and $c=\sqrt{9+16}=5$.
+The **hyperbola** $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$ has the two signs opposite and consists of two branches. The vertices are the points $(\pm a,0)$. The asymptotes are the lines $y=\pm\dfrac ba x$, which the branches approach as they move away from the center. The foci are the points $(\pm c,0)$ with $c^2=a^2+b^2$. For $\dfrac{x^2}{9}-\dfrac{y^2}{16}=1$, $a=3$ and $b=4$, the asymptotes are $y=\pm\dfrac43x$ and $c=\sqrt{9+16}=5$.
 
-To recognise the conic, the equation is divided so that the right side is $1$, and then the signs and the denominators are read. The equation $4x^2+9y^2=36$, divided by $36$, becomes $\dfrac{x^2}{9}+\dfrac{y^2}{4}=1$. The two signs are positive, so it is an ellipse with $a=3$ and $b=2$.
+To recognize the conic, the equation is divided so that the right side is $1$, and then the signs and the denominators are read. The equation $4x^2+9y^2=36$, divided by $36$, becomes $\dfrac{x^2}{9}+\dfrac{y^2}{4}=1$. The two signs are positive, so it is an ellipse with $a=3$ and $b=2$.
 :::
 
 :::esempio{titolo="Intersection and tangency to a parabola"}
