@@ -79,7 +79,7 @@ Una matrice simmetrica $H$ di ordine $2$ si dice
 Per una matrice di ordine $2$ il segno si legge dal determinante e dal primo elemento, *senza* calcolare gli autovalori: poiché $\det H$ è il prodotto degli autovalori, $\det H > 0$ significa autovalori concordi, con il segno comune dato dal segno di $f_{xx}$, mentre $\det H < 0$ significa autovalori discordi. In $n$ variabili lo stesso criterio usa i minori principali di nord-ovest (criterio di Sylvester) e si rimanda al corso di algebra lineare.
 :::
 
-:::teorema{#criterio-della-hessiana titolo="Classificazione con la matrice Hessiana"}
+::::teorema{#criterio-della-hessiana titolo="Classificazione con la matrice Hessiana"}
 Sia $f$ di classe $C^2$ e sia $(x_0, y_0)$ un punto critico con Hessiana $H = H_f(x_0, y_0)$.
 
 - Se $\det H > 0$ e $f_{xx}(x_0, y_0) > 0$, allora $(x_0, y_0)$ è un **punto di minimo locale**.
@@ -87,8 +87,28 @@ Sia $f$ di classe $C^2$ e sia $(x_0, y_0)$ un punto critico con Hessiana $H = H_
 - Se $\det H < 0$, allora $(x_0, y_0)$ è un **punto di sella**.
 - Se $\det H = 0$, il criterio *non* decide e il punto va studiato direttamente.
 
-La dimostrazione usa la formula di Taylor al secondo ordine: vicino al punto critico la differenza $f(x, y) - f(x_0, y_0)$ ha il segno della forma quadratica associata alla Hessiana, e si rimanda al capitolo sul calcolo differenziale in più variabili. Nei calcoli il criterio si applica così: si trova ogni punto critico risolvendo il sistema $\nabla f = (0, 0)$, si calcolano le tre derivate seconde nel punto e si guardano $\det H$ e $f_{xx}$.
+Nei calcoli il criterio si applica così: si trova ogni punto critico risolvendo il sistema $\nabla f = (0, 0)$, si calcolano le tre derivate seconde nel punto e si guardano $\det H$ e $f_{xx}$.
+
+:::dimostrazione
+Vicino al punto critico la differenza $f(x_0 + h, y_0 + k) - f(x_0, y_0)$ ha il segno della forma quadratica associata alla Hessiana. Sia
+$$
+q(h, k) = f_{xx}(x_0, y_0)\, h^2 + 2 f_{xy}(x_0, y_0)\, h k + f_{yy}(x_0, y_0)\, k^2 .
+$$
+Nel punto critico le derivate prime sono nulle, quindi la **formula di Taylor al secondo ordine** dà
+$$
+f(x_0 + h, y_0 + k) - f(x_0, y_0) = \frac{1}{2}\, q(h, k) + o\bigl(h^2 + k^2\bigr) \qquad \text{per } (h, k) \to (0, 0) .
+$$
+Siano $\lambda_1 \leq \lambda_2$ gli autovalori di $H$. Dall'algebra lineare, una forma quadratica soddisfa $\lambda_1 (h^2 + k^2) \leq q(h, k) \leq \lambda_2 (h^2 + k^2)$. Se $H$ è definita positiva, allora $\lambda_1 > 0$ e
+$$
+f(x_0 + h, y_0 + k) - f(x_0, y_0) \geq \bigl(h^2 + k^2\bigr) \left( \frac{\lambda_1}{2} + \frac{o\bigl(h^2 + k^2\bigr)}{h^2 + k^2} \right) .
+$$
+Il secondo fattore tende a $\dfrac{\lambda_1}{2} > 0$, perciò per la **permanenza del segno** è positivo in un intorno di $(0, 0)$: la differenza è positiva per $(h, k) \neq (0, 0)$ abbastanza piccolo e il punto è di minimo locale. Se $H$ è definita negativa si applica il risultato a $-f$. Se $H$ è indefinita, siano $v_1$ e $v_2$ autovettori di norma $1$ relativi a $\lambda_1 < 0$ e $\lambda_2 > 0$. Lungo le rette per $(x_0, y_0)$ dirette come $v_1$ e $v_2$ si ha $q(t v_i) = \lambda_i t^2$, quindi
+$$
+f\bigl((x_0, y_0) + t\, v_i\bigr) - f(x_0, y_0) = t^2 \left( \frac{\lambda_i}{2} + \frac{o(t^2)}{t^2} \right) ,
+$$
+che per $t$ piccolo e diverso da $0$ è negativa per $i = 1$ e positiva per $i = 2$. In ogni intorno del punto la funzione assume valori sia minori sia maggiori di $f(x_0, y_0)$, perciò il punto è di sella.
 :::
+::::
 
 :::esempio{titolo="Applicazione del criterio"}
 $f(x, y) = x^2 + 3y^2 - 6y$. Il sistema $f_x = 2x = 0$, $f_y = 6y - 6 = 0$ ha l'unica soluzione $(0, 1)$. Le derivate seconde sono $f_{xx} = 2$, $f_{yy} = 6$, $f_{xy} = 0$, quindi $\det H = 12 > 0$ e $f_{xx} = 2 > 0$: il punto $(0, 1)$ è **di minimo locale**, con $f(0, 1) = -3$.

@@ -15,6 +15,7 @@ export interface Materia {
   eserciziDaFare?: false; // esercitazione autonoma con i quiz, senza tracce aperte
   attiva: boolean;     // false = in preparazione, compare in home senza link
   argomenti: Argomento[];
+  inArrivo?: string[]; // capitoli annunciati e non ancora scritti: solo titoli, mostrati come «In preparazione» nella pagina della materia
 }
 
 // Palette ravvicinata: 65% della base petrolio #2f6f68 e 35% del colore originario.
@@ -106,6 +107,8 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'serie-di-fourier', titolo: 'Serie di Fourier', breve: 'Serie di Fourier' },
       { slug: 'equazioni-differenziali', titolo: 'Equazioni differenziali e sistemi lineari', breve: 'Equazioni differenziali' },
     ],
+    // Capitoli annunciati: compaiono in fondo al programma come «In preparazione», senza entrare nei conteggi.
+    inArrivo: ['Spazi metrici e teorema delle contrazioni', 'Teorema di Cauchy: esistenza, unicità e dipendenza continua'],
   },
   {
     slug: 'analisi-3',

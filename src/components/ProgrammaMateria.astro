@@ -27,11 +27,12 @@ interface Props {
   incluso: string[];
   ripasso?: { titolo: string; domande: number; href: string; simulazione?: { href: string; titolo: string }; oggi: string };
   teoremi?: { href: string; teoremi: number; definizioni: number };
+  inArrivo?: string[];
   lingua?: 'it' | 'en';
   /** Lingua delle pagine delle domande a tempo (alcune materie inglesi le hanno solo in italiano). */
   linguaDomande?: 'it' | 'en';
 }
-const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, studioGuidato, incluso, ripasso, teoremi, lingua = 'it', linguaDomande = lingua } = Astro.props;
+const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, studioGuidato, incluso, ripasso, teoremi, inArrivo = [], lingua = 'it', linguaDomande = lingua } = Astro.props;
 const en = lingua === 'en';
 // Testi della pagina nelle due lingue (16/11/2026: la versione E vale anche in inglese).
 const L = en ? {
@@ -137,6 +138,13 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
             {a.domande > 0 && <a class="pm-v" href={href(a.slug, 'domande')} data-voce="domande"><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn"><span class="pm-lungo">{L.domande[0]}</span><span class="pm-corto">{L.domande[1]}</span></span><span class="pm-vc">{a.domande}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
           </div>
         ) : <em class="pm-stato pm-stato-prep">{L.prep}</em>}
+      </li>
+    ))}
+    {inArrivo.map((titoloArrivo, i) => (
+      <li class="pm-prep">
+        <span class="pm-num">{String(argomenti.length + i + 1).padStart(2, '0')}</span>
+        <div class="pm-cp"><h3>{titoloArrivo}</h3></div>
+        <em class="pm-stato pm-stato-prep">{L.prep}</em>
       </li>
     ))}
     {ripasso && (

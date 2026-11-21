@@ -212,6 +212,46 @@ $$
 La **verifica diretta** conferma il risultato: $F(t) = t^2 \cdot 9t^2 = 9t^4$, quindi $F'(t) = 36 t^3$.
 :::
 
+::::teorema{#teorema-del-valor-medio titolo="Teorema del valor medio"}
+Sia $f$ differenziabile nell'aperto $A \subseteq \mathbb{R}^2$ e siano $P$, $Q$ due punti tali che il segmento di estremi $P$ e $Q$ sia contenuto in $A$. Allora esiste un punto $C$ del segmento, diverso dagli estremi, tale che
+$$
+f(Q) - f(P) = \nabla f(C) \cdot (Q - P) .
+$$
+Di conseguenza, se $\|\nabla f\| \leq M$ in tutti i punti del segmento, vale la disuguaglianza
+$$
+|f(Q) - f(P)| \leq M\, \|Q - P\| ,
+$$
+detta **teorema degli accrescimenti finiti**. Il teorema estende alle funzioni di più variabili il teorema di Lagrange di Analisi 1 e stima la variazione di $f$ tra due punti con il gradiente.
+
+:::dimostrazione
+Si riconduce il problema a una funzione di una variabile, restringendo $f$ al segmento. Sia $F(t) = f\bigl(P + t\,(Q - P)\bigr)$ per $t \in [0, 1]$, così che $F(0) = f(P)$ e $F(1) = f(Q)$. Per la **regola della catena** $F$ è derivabile e
+$$
+F'(t) = \nabla f\bigl(P + t\,(Q - P)\bigr) \cdot (Q - P) .
+$$
+Per il **teorema di Lagrange** applicato a $F$ su $[0, 1]$ esiste $t_0 \in (0, 1)$ con $F(1) - F(0) = F'(t_0)$. Posto $C = P + t_0\,(Q - P)$ si ottiene l'uguaglianza dell'enunciato. La disuguaglianza segue dalla **disuguaglianza di Cauchy-Schwarz**: $|\nabla f(C) \cdot (Q - P)| \leq \|\nabla f(C)\|\, \|Q - P\| \leq M\, \|Q - P\|$.
+:::
+::::
+
+:::attenzione
+Per le funzioni a valori vettoriali l'uguaglianza del teorema del valor medio non vale. La funzione $\gamma(t) = (\cos t, \sin t)$ soddisfa $\gamma(2\pi) - \gamma(0) = (0, 0)$, mentre $\gamma'(t) = (-\sin t, \cos t)$ ha norma $1$ per ogni $t$ e quindi non si annulla in alcun punto: non esiste $t_0$ con $\gamma(2\pi) - \gamma(0) = 2\pi\, \gamma'(t_0)$. Per queste funzioni resta valida la *sola* disuguaglianza degli accrescimenti finiti.
+:::
+
+::::teorema{#gradiente-nullo titolo="Funzioni con gradiente nullo"}
+Sia $f$ differenziabile in un aperto **connesso** $A \subseteq \mathbb{R}^2$. Se $\nabla f(x, y) = (0, 0)$ per ogni $(x, y) \in A$, allora $f$ è **costante** in $A$. Il teorema estende il risultato di Analisi 1 sulle funzioni con derivata nulla in un intervallo, e viene usato per stabilire che due potenziali dello stesso campo vettoriale differiscono per una costante.
+
+:::dimostrazione
+Si applica il teorema del valor medio lungo una spezzata che congiunge due punti. In un aperto connesso due punti qualsiasi $P$ e $Q$ si possono congiungere con una spezzata contenuta in $A$, di vertici $P = P_0, P_1, \dots, P_m = Q$; questa proprietà degli aperti connessi non viene dimostrata. Su ciascun segmento di estremi $P_{i-1}$ e $P_i$ il **teorema del valor medio** dà
+$$
+f(P_i) - f(P_{i-1}) = \nabla f(C_i) \cdot (P_i - P_{i-1}) = 0 ,
+$$
+perché il gradiente è nullo in ogni punto. Quindi $f(P_0) = f(P_1) = \dots = f(P_m)$, cioè $f(P) = f(Q)$.
+:::
+::::
+
+:::attenzione
+Senza la connessione la conclusione può non valere. Sull'aperto $A = \{ (x, y) : x \neq 0 \}$, formato da due semipiani disgiunti, la funzione che vale $1$ per $x > 0$ e $-1$ per $x < 0$ ha gradiente nullo in ogni punto e non è costante.
+:::
+
 ## Derivate seconde e matrice hessiana
 
 :::definizione{#derivate-parziali-seconde titolo="Derivate parziali seconde"}
@@ -225,13 +265,33 @@ $$
 Nel simbolo $f_{xy}$ si deriva prima rispetto a $x$ e poi rispetto a $y$; $f_{xy}$ e $f_{yx}$ si chiamano **derivate seconde miste**. $f$ è **di classe** $C^2(A)$ se *tutte* le derivate seconde esistono e sono continue in $A$. Le derivate seconde descrivono la curvatura del grafico e compaiono nella formula di Taylor e nello studio dei massimi e minimi.
 :::
 
-:::teorema{#teorema-di-schwarz titolo="Teorema di Schwarz"}
+::::teorema{#teorema-di-schwarz titolo="Teorema di Schwarz"}
 Se le derivate seconde miste $f_{xy}$ e $f_{yx}$ esistono in un intorno di $(x_0, y_0)$ e sono continue in $(x_0, y_0)$, allora
 $$
 f_{xy}(x_0, y_0) = f_{yx}(x_0, y_0).
 $$
-In particolare per una funzione di classe $C^2$ l'**ordine di derivazione** *non* conta. Negli esercizi il teorema dimezza i calcoli, poiché delle quattro derivate seconde ne bastano tre, e negli esercizi con funzioni regolari il confronto fra $f_{xy}$ e $f_{yx}$ serve da **controllo dei conti**. La dimostrazione applica due volte il teorema di Lagrange all'incremento doppio $f(x_0 + h, y_0 + k) - f(x_0 + h, y_0) - f(x_0, y_0 + k) + f(x_0, y_0)$ e si rimanda ai testi di riferimento.
+In particolare per una funzione di classe $C^2$ l'**ordine di derivazione** *non* conta. Negli esercizi il teorema dimezza i calcoli, poiché delle quattro derivate seconde ne bastano tre, e negli esercizi con funzioni regolari il confronto fra $f_{xy}$ e $f_{yx}$ serve da **controllo dei conti**.
+
+:::dimostrazione
+Si scrive in due modi diversi lo stesso incremento doppio, applicando ogni volta due volte il teorema di Lagrange. Per $h \neq 0$ e $k \neq 0$ abbastanza piccoli sia
+$$
+\Delta(h, k) = f(x_0 + h, y_0 + k) - f(x_0 + h, y_0) - f(x_0, y_0 + k) + f(x_0, y_0) .
+$$
+Posto $\varphi(x) = f(x, y_0 + k) - f(x, y_0)$, si ha $\Delta(h, k) = \varphi(x_0 + h) - \varphi(x_0)$. Per il **teorema di Lagrange** esiste $\xi$ compreso tra $x_0$ e $x_0 + h$ tale che
+$$
+\Delta(h, k) = h\, \varphi'(\xi) = h \bigl[ f_x(\xi, y_0 + k) - f_x(\xi, y_0) \bigr] .
+$$
+Applicando di nuovo il teorema di Lagrange alla funzione $y \mapsto f_x(\xi, y)$ si trova $\eta$ compreso tra $y_0$ e $y_0 + k$ con
+$$
+\Delta(h, k) = h\, k\, f_{xy}(\xi, \eta) .
+$$
+Si ripete il ragionamento scambiando i ruoli delle variabili. Posto $\psi(y) = f(x_0 + h, y) - f(x_0, y)$, si ha $\Delta(h, k) = \psi(y_0 + k) - \psi(y_0)$, e due applicazioni del teorema di Lagrange forniscono un punto $(\xi', \eta')$, con $\xi'$ tra $x_0$ e $x_0 + h$ ed $\eta'$ tra $y_0$ e $y_0 + k$, tale che
+$$
+\Delta(h, k) = h\, k\, f_{yx}(\xi', \eta') .
+$$
+Poiché $h k \neq 0$, dal confronto delle due espressioni segue $f_{xy}(\xi, \eta) = f_{yx}(\xi', \eta')$. Per $(h, k) \to (0, 0)$ i punti $(\xi, \eta)$ e $(\xi', \eta')$ tendono a $(x_0, y_0)$; le derivate miste sono continue in $(x_0, y_0)$, quindi passando al limite si ottiene $f_{xy}(x_0, y_0) = f_{yx}(x_0, y_0)$.
 :::
+::::
 
 :::definizione{#matrice-hessiana titolo="Matrice hessiana"}
 Se $f$ ha tutte le derivate seconde in $(x_0, y_0)$, la **matrice hessiana** di $f$ in $(x_0, y_0)$ è

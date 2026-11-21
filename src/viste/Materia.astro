@@ -112,7 +112,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   {gruppo === 'Superiori' && <div class:list={{ 'vista-classica': nuova }}><NotaSuperiori lingua={lingua} /></div>}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
-  {nuova && <ProgrammaMateria materia={materia} titolo={m.titolo} prezzo={m.prezzo} studioGuidato={guidata} incluso={incluso} lingua={linguaPm} linguaDomande={linguaDomande === 'en' ? 'en' : 'it'}
+  {nuova && <ProgrammaMateria materia={materia} titolo={m.titolo} prezzo={m.prezzo} inArrivo={lingua === 'it' ? m.inArrivo : undefined} studioGuidato={guidata} incluso={incluso} lingua={linguaPm} linguaDomande={linguaDomande === 'en' ? 'en' : 'it'}
     anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}
     compatibilita={lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}
     argomenti={m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo, riassunto: riassunti[materia + '/' + a.slug], pronto: teorie.has(`${materia}/${a.slug}`), svolti: conta(svolti, a.slug), dafare: quizPerEsercitarsi ? 0 : conta(dafare, a.slug), verificabili: quizPerEsercitarsi ? 0 : verificabili(a.slug), domande: conta(domande, a.slug) }))}

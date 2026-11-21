@@ -83,6 +83,30 @@ La stessa successione può convergere uniformemente su un insieme e non su un al
 Lo studio di una successione di funzioni segue uno schema in due tempi. Prima si calcola il limite puntuale $f$, punto per punto, distinguendo i casi quando l'espressione lo richiede. Poi si studia $M_n = \sup |f_n - f|$ sull'insieme assegnato e sugli eventuali sottoinsiemi su cui la convergenza migliora, come negli esempi $[0, a] \subset [0, 1)$ oppure $[\delta, +\infty) \subset (0, +\infty)$.
 :::
 
+::::teorema{#condizione-di-cauchy-uniforme titolo="Condizione di Cauchy per la convergenza uniforme"}
+La successione $(f_n)$ converge uniformemente su $A$ *se e solo se* per ogni $\varepsilon > 0$ esiste $N$ tale che
+$$
+|f_n(x) - f_m(x)| < \varepsilon \qquad \text{per ogni } n, m \geq N \text{ e per ogni } x \in A .
+$$
+La condizione coinvolge soltanto i termini della successione e non la funzione limite: permette di dimostrare la convergenza uniforme quando il limite non è noto.
+
+:::dimostrazione
+Se $(f_n)$ converge uniformemente a $f$, fissato $\varepsilon > 0$ esiste $N$ tale che $|f_n(x) - f(x)| < \dfrac{\varepsilon}{2}$ per ogni $n \geq N$ e ogni $x \in A$. Per $n, m \geq N$ la disuguaglianza triangolare dà
+$$
+|f_n(x) - f_m(x)| \leq |f_n(x) - f(x)| + |f(x) - f_m(x)| < \varepsilon .
+$$
+Viceversa, valga la condizione. Per ogni $x \in A$ fissato la successione numerica $\bigl(f_n(x)\bigr)$ soddisfa la condizione di Cauchy, quindi converge; si indica con $f(x)$ il suo limite. Fissato $\varepsilon > 0$ e il corrispondente $N$, nella disuguaglianza $|f_n(x) - f_m(x)| < \varepsilon$ si tiene fermo $n \geq N$ e si fa tendere $m$ a $+\infty$. Si ottiene
+$$
+|f_n(x) - f(x)| \leq \varepsilon \qquad \text{per ogni } n \geq N \text{ e per ogni } x \in A ,
+$$
+con lo stesso $N$ per tutti i punti, cioè la convergenza uniforme.
+:::
+::::
+
+:::richiamo{titolo="Criterio di Cauchy per le successioni numeriche"}
+Una successione di numeri reali $(a_n)$ è convergente se e solo se per ogni $\varepsilon > 0$ esiste $N$ tale che $|a_n - a_m| < \varepsilon$ per ogni $n, m \geq N$.
+:::
+
 ## Continuità del limite uniforme
 
 ::::teorema{#continuita-del-limite-uniforme titolo="Continuità del limite uniforme"}
