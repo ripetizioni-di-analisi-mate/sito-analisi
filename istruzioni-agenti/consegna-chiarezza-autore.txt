@@ -1,0 +1,22 @@
+Sei l'autore della revisione di chiarezza di UN capitolo di teoria del sito ripetizionidianalisi.com.
+
+Materia: MATERIA
+Capitolo: CAPITOLO
+File tuoi (gli unici che puoi modificare): /home/claude/sito-analisi/src/content/teoria/MATERIA/CAPITOLO.md e /home/claude/sito-analisi/src/content-en/teoria/MATERIA/CAPITOLO.md
+
+Leggi per intero e segui alla lettera il brief /home/claude/sito-analisi/istruzioni-agenti/brief-chiarezza-primo-anno.md. Il brief è scritto per il 1° anno: vale identico per la tua materia, con queste sole differenze.
+- Chi legge: per fisica-superiori-2 e matematica-superiori-2 uno studente di 15-16 anni, al secondo anno delle superiori; per fisica-superiori-3 uno studente di 16-17 anni, al terzo anno di liceo scientifico. Ha fatto gli anni precedenti ma con lacune: i termini e i simboli degli anni precedenti che il capitolo usa (proporzionalità, vettore, componente, seno e coseno, pendenza, radice, equazione di secondo grado, newton, joule, lettere greche…) vanno richiamati in una riga alla prima comparsa.
+- Controllo: cd /home/claude/sito-analisi && python3 strumenti/controlla_capitolo.py MATERIA CAPITOLO
+- Rapporto: /home/claude/lavoro/rapporti/MATERIA__CAPITOLO.md
+- LUNGHEZZA, vincolo rigido: il capitolo finale deve stare entro 1,7 volte l'originale in italiano (e l'inglese entro 1,8). Nella tappa precedente gli autori hanno consegnato a 2 volte e il lavoro è stato tagliato. Quindi: niente verifiche doppie dello stesso risultato; niente frasi che ripetono a parole ciò che la riga di calcolo o la figura già mostra; niente esempi aggiunti dove l'originale ne ha già uno adatto; una definizione si dà una volta sola, in una riga. Lo spazio va speso solo per: definizione dei termini alla prima comparsa, passaggi di calcolo mancanti, motivo di un «quindi», righe che servono a schede, esercizi e domande.
+
+Leggi anche /home/claude/sito-analisi/GUIDA-CONTENUTI.md. Se è disponibile la skill "anthropic-skills:scrittura-umana-carmine", caricala prima di scrivere. Leggi TUTTE le schede svolte, gli esercizi da fare e le domande del capitolo (non a campione) per la copertura. Usa Python per ricalcolare ogni numero (se sympy manca: pip install --break-system-packages sympy).
+
+Punti su cui il titolare è più severo:
+- ogni sigla e ogni termine tecnico spiegato alla PRIMA comparsa;
+- titoli ##, ancore, titoli dei blocchi con ancora e righe delle figure identici; nessun contenuto tolto; numeri degli esempi invariati;
+- frasi aggiunte solo se sono definizioni, motivi o passaggi di calcolo; niente tono prescrittivo, niente frasi a effetto, frazioni in colonna, i due punti non sostituiscono un connettivo;
+- inglese: traduzione integrale del testo italiano finale, stessa grafia del file inglese esistente;
+- nessun comando git che modifichi; non toccare file di altri capitoli (altri agenti lavorano in parallelo). Se noti errori negli esercizi o nelle domande del capitolo, NON correggerli: elencali nel rapporto.
+
+Alla fine: controllo senza ERRORE, rilettura completa dell'italiano, rapporto con un esempio «Com'era / Com'è ora» preso da un punto in cui lo studente si perdeva davvero. Lavora in italiano. Risposta finale di poche righe: esito del controllo, rapporto parole dopo/prima, percorso del rapporto.

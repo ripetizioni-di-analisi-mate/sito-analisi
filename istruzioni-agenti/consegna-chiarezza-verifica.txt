@@ -1,0 +1,14 @@
+Sei il verificatore indipendente della revisione di chiarezza di UN capitolo di teoria del sito ripetizionidianalisi.com. Non hai visto il lavoro dell'autore.
+
+Materia: MATERIA
+Capitolo: CAPITOLO
+File da verificare e correggere (gli unici che puoi modificare): /home/claude/sito-analisi/src/content/teoria/MATERIA/CAPITOLO.md e /home/claude/sito-analisi/src/content-en/teoria/MATERIA/CAPITOLO.md
+
+Leggi per intero /home/claude/lavoro/prompt-autore-2.txt (la consegna data all'autore, con chi legge e il vincolo di lunghezza) e segui alla lettera /home/claude/sito-analisi/istruzioni-agenti/brief-verifica-chiarezza-primo-anno.md e il brief /home/claude/sito-analisi/istruzioni-agenti/brief-chiarezza-primo-anno.md (al posto di /home/claude/lavoro/controlla_capitolo.py usa: cd /home/claude/sito-analisi && python3 strumenti/controlla_capitolo.py MATERIA CAPITOLO). Rapporto dell'autore: /home/claude/lavoro/rapporti/MATERIA__CAPITOLO.md. Originale: git -C /home/claude/sito-analisi show HEAD:<percorso>.
+
+Rifai ogni conto con Python/sympy. Controlla blocco per blocco che nulla dell'originale sia stato tolto o spostato, che ogni sigla e ogni termine sia spiegato alla prima comparsa, che la voce rispetti le regole, che l'inglese sia la traduzione completa del testo italiano finale. Correggi direttamente (italiano e inglese insieme). Nessun comando git che modifichi; non toccare file di altri capitoli.
+
+Alla fine: controllo senza ERRORE, rapporto in /home/claude/lavoro/rapporti/MATERIA__CAPITOLO__verifica.md. Risposta finale di poche righe: esito e percorso del rapporto.
+
+Nota del coordinatore sulla lunghezza. Quasi tutti gli autori hanno consegnato capitoli fra 1,8 e 2,2 volte l'originale, mentre l'atteso era 1,2-1,7. Il titolare in passato ha bocciato riscritture gonfiate. Dopo i controlli di correttezza e completezza, alleggerisci il testo (italiano e inglese insieme) puntando a restare entro circa 1,8 volte e in ogni caso sotto 2,0 in entrambe le lingue, togliendo solo: frasi che ripetono a parole ciò che la riga di calcolo o la figura già mostra; verifiche doppie dello stesso risultato; definizioni ripetute una seconda volta; esempi aggiunti dall'autore dove l'originale ne aveva già uno adatto; incisi e precisazioni che un quattordicenne non userà; frasi di raccordo. NON togliere: contenuti dell'originale, la definizione di un termine alla sua prima comparsa, passaggi di calcolo, le righe aggiunte perché servono a schede, esercizi o domande. Se per scendere sotto 1,8 bisognasse togliere queste cose, fermati prima e scrivilo nel rapporto. Nel rapporto indica le parole prima e dopo il tuo intervento.
+Usa Python per i conti (se sympy manca: pip install --break-system-packages sympy).
