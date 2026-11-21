@@ -33,6 +33,8 @@ A **protein** is a chain of **amino acids**, small molecules of twenty types, jo
 - **Tertiary structure** is the folding of the whole chain.
 - **Quaternary structure** is the union of several chains, in proteins that have more than one. Hemoglobin, the protein that carries oxygen in the blood, has four.
 
+Each peptide bond joins two neighboring amino acids in the chain, so a linear chain of $n$ amino acids has $n-1$ peptide bonds. A chain of $10$ amino acids has $9$. Each bond forms by releasing one water molecule and breaks by consuming one, so separating the $10$ amino acids requires $9$ water molecules.
+
 **Denaturation** is the loss of folding, caused for example by heat, as in egg white when it cooks. The sequence stays intact, but without its shape the protein no longer carries out its task.
 
 An **enzyme** is a protein that speeds up a chemical reaction. The molecule it acts on is called the **substrate**. A reaction takes place only if the molecules receive a certain initial energy, the **activation energy**. The enzyme lowers it, so more molecules react in the same time. At the end the enzyme is intact, and the final amounts of the substances, that is, the equilibrium of the reaction, are the same as without the enzyme. Lactase splits lactose into glucose and galactose.
@@ -150,6 +152,8 @@ A **mutation** is a change in the DNA sequence. The effect on the protein depend
 - Another substitution changes the amino acid: from GAG to GUG glutamic acid becomes valine.
 - A substitution that creates a stop codon, such as from UGG to UGA, shortens the protein.
 - The insertion of one base in a stretch that codes for the protein shifts the **reading frame**, that is, the division into codons, from that point onwards: with a U inserted after AUG, the mRNA of the example is read AUG, UCC, AUG, GUA.
+
+The cells of the body of an organism have, with few exceptions, the same DNA and therefore the same genes. Each type of cell, however, expresses only part of them, and the **regulation of expression** determines which genes are transcribed and in what amount. A muscle cell and a neuron, the cell of the nervous system, both have the gene for myosin, the protein that makes muscle contract, but only the muscle cell transcribes it in large amounts. Two cells with the same DNA therefore have different proteins and different tasks. The resulting specialization of cells is called **differentiation**.
 :::
 
 ## Inheritance and crosses
@@ -199,6 +203,8 @@ After the S phase each chromosome is made of two identical DNA molecules, the **
 In a diploid cell the chromosomes form pairs of **homologues**, one maternal and one paternal, with the same genes. A **haploid** cell has only one chromosome per pair. The number of chromosomes is written $2n$ in a diploid cell and $n$ in a haploid one: in humans $2n=46$ and $n=23$. After the S phase the pairs are the same, so the cell is still diploid.
 
 **Mitosis** is the division of the nucleus into two nuclei with the same chromosomes. It serves growth and the replacement of lost cells. In prophase the chromosomes shorten and become visible; in metaphase they line up at the center; in anaphase the sister chromatids separate, move to opposite sides and from that moment count as chromosomes; in telophase a nucleus forms around each group. **Cytokinesis** then divides the cytoplasm; if it is missing, one cell with two nuclei remains. Bacteria, which have no nucleus, divide by **binary fission**: they copy the chromosome and divide in two.
+
+The **mitotic spindle** is the set of **microtubules**, thin protein filaments, that attach to the chromosomes during mitosis and move them. In metaphase the spindle lines them up at the center and in anaphase it pulls the sister chromatids toward opposite sides. In animal cells the microtubules start from two **centrosomes**, one on each side, each with a pair of small cylinders, the **centrioles**. If the spindle does not form, the sister chromatids are not separated, so the $92$ chromatids of a human cell are not distributed between two nuclei.
 :::
 
 :::definizione{#meiosi titolo="Two divisions and one replication"}
@@ -219,6 +225,8 @@ The table gives the counts for $2n=4$, in each cell once division is complete. *
 | After meiosis II | 2 | 2 | haploid |
 
 The four cells are genetically different. During pairing two non-sister chromatids, one from each homologue, exchange corresponding stretches (**crossing over**). In addition, each pair orients itself at random before separating, so with $n$ pairs the combinations are $2^n$, that is, about 8.4 million for $n=23$.
+
+**Nondisjunction** is the failure of two homologous chromosomes to separate in meiosis I, or of two sister chromatids in meiosis II. If one pair of homologues goes entirely to the same side in meiosis I and meiosis II is regular, two of the four cells have one extra chromosome, that is, $n+1$, and two have one fewer, that is, $n-1$. In humans these are gametes with $24$ and with $22$ chromosomes. On joining a normal gamete with $23$ chromosomes, the first gives a zygote with $47$, in which one chromosome is present in three copies (**trisomy**), and the second a zygote with $45$ (**monosomy**). Down syndrome is trisomy of chromosome $21$.
 
 In males one meiosis produces four sperm cells. In females the cytoplasm divides into unequal parts and a single egg cell forms. In plants meiosis produces **spores**, haploid cells from which the generation that forms the gametes arises.
 :::

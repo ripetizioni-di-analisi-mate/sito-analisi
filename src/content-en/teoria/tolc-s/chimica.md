@@ -193,6 +193,8 @@ The equation gives $V=\dfrac{nRT}{p}$. At fixed temperature and pressure the fac
 A **hydrated salt** is a solid containing water molecules in its lattice, a fixed number per formula unit. In the formula this water, called water of crystallization, is written after a dot: copper sulfate pentahydrate $\mathrm{CuSO_4\cdot5H_2O}$ has $5$ water molecules for each $\mathrm{CuSO_4}$ unit. On heating the hydrate the water evaporates and the **anhydrous** salt, i.e. the salt without water, is left. If heating does not decompose the salt, the loss of mass is the mass of the water.
 
 With the rounded values $64$, $32$, $16$ and $1\,\mathrm{g/mol}$ for copper, sulfur, oxygen and hydrogen, one mole of $\mathrm{CuSO_4\cdot5H_2O}$ contains $64+32+4\cdot16=160\,\mathrm g$ of anhydrous salt and $5\cdot18=90\,\mathrm g$ of water, so its mass is $250\,\mathrm g$. Water is $\dfrac{90}{250}\cdot100\%=36\%$ of the mass. $5.0\,\mathrm g$ of hydrate therefore lose $5.0\,\mathrm g\cdot0.36=1.8\,\mathrm g$ of water and leave $5.0\,\mathrm g-1.8\,\mathrm g=3.2\,\mathrm g$ of anhydrous salt.
+
+To find the index $x$ of a hydrate $\mathrm{MX\cdot xH_2O}$ the moles are compared, because the formula counts molecules and not grams. From $2.50\,\mathrm g$ of hydrated copper sulfate, $1.60\,\mathrm g$ of anhydrous salt are left after heating, so the water lost is $2.50\,\mathrm g-1.60\,\mathrm g=0.90\,\mathrm g$. The moles are $\dfrac{1.60\,\mathrm g}{160\,\mathrm{g/mol}}=0.010\,\mathrm{mol}$ of $\mathrm{CuSO_4}$ and $\dfrac{0.90\,\mathrm g}{18\,\mathrm{g/mol}}=0.050\,\mathrm{mol}$ of water. The ratio $\dfrac{0.050}{0.010}=5$ is the index, so the formula is $\mathrm{CuSO_4\cdot5H_2O}$.
 :::
 
 ## Solutions and concentration

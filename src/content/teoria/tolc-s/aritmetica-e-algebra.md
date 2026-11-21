@@ -104,6 +104,8 @@ $$
 dove $q$ e $r$ sono interi e il simbolo $\le$ si legge «minore o uguale». Il resto è dunque positivo o nullo ed è minore del divisore; con questa condizione quoziente e resto sono determinati in un solo modo.
 
 Per dividere $-26$ per $7$ si cerca il più grande multiplo di $7$ che non supera $-26$, cioè $-28=7\cdot(-4)$. Poiché $-26=-28+2$, il quoziente è $-4$ e il resto è $2$.
+
+Il resto di un prodotto è uguale al resto del prodotto dei resti dei fattori. Nella divisione per $7$ i numeri $9$ e $10$ hanno resto $2$ e $3$, e il loro prodotto $90=7\cdot12+6$ ha resto $6=2\cdot3$. Con questa proprietà si trova il **resto di una potenza** senza calcolarla. Per il resto di $3^6$ nella divisione per $7$ si parte da $3^2=9$, che ha resto $2$. Poiché $3^6=(3^2)^3$, il resto di $3^6$ è quello di $2^3=8$, cioè $1$. Il calcolo diretto lo conferma, perché $3^6=729=7\cdot104+1$.
 :::
 
 :::attenzione
@@ -135,6 +137,12 @@ $$
 x=250\cdot7{,}2\,\mathrm{cm}=1800\,\mathrm{cm}=18\,\mathrm{m}.
 $$
 In un problema di scala le due lunghezze si esprimono nella stessa unità.
+
+Due grandezze sono **direttamente proporzionali** quando il loro rapporto resta costante, come la lunghezza sul disegno e quella reale in una scala. Sono **inversamente proporzionali** quando resta costante il loro prodotto: se una raddoppia, l'altra si dimezza. Tre rubinetti uguali riempiono una vasca in $8$ ore, quindi il lavoro totale è $3\cdot8=24$ ore di rubinetto. Con quattro rubinetti il tempo $t$ soddisfa $4\cdot t=24$, quindi
+$$
+t=\frac{24}{4}=6\ \text{ore}.
+$$
+Il numero dei rubinetti è aumentato e il tempo è diminuito.
 :::
 
 :::teorema{#percentuali titolo="Variazioni percentuali"}
@@ -278,6 +286,10 @@ Il simbolo $\Longleftrightarrow$ si legge «se e solo se» e indica che le due s
 - La disuguaglianza $|x-a|>r$ vale per i punti a distanza maggiore di $r$, cioè per $x<a-r$ oppure $x>a+r$.
 
 Con $\le$ e $\ge$ al posto di $<$ e $>$ si includono anche gli estremi $a-r$ e $a+r$. Per $r=0$ l'uguaglianza $|x-a|=0$ è vera soltanto per $x=a$.
+
+Il **punto medio** fra due punti $a$ e $b$ della retta è il punto che ha la stessa distanza da entrambi, e si calcola con la media $\dfrac{a+b}{2}$. Fra $1$ e $5$ il punto medio è $\dfrac{1+5}{2}=3$, che dista $2$ da entrambi, perché $|3-1|=2$ e $|5-3|=2$.
+
+Una **disuguaglianza doppia** come $1\le|x-3|<2$ contiene due condizioni da soddisfare insieme: la distanza di $x$ da $3$ è almeno $1$ ed è minore di $2$. La condizione $|x-3|<2$ dà $1<x<5$. La condizione $|x-3|\ge1$ dà $x\le2$ oppure $x\ge4$. I numeri che le soddisfano entrambe sono quelli con $1<x\le2$ oppure $4\le x<5$.
 :::
 
 :::esempio{titolo="Distanza da tre"}
@@ -562,6 +574,12 @@ Il quoziente è negativo fra $-1$ e $4$. In $x=-1$ vale zero, e il simbolo $\le$
 
 Un insieme senza un estremo si scrive con il simbolo $\infty$ (infinito) e una parentesi tonda: $x\ge2$ corrisponde a $[2,+\infty)$ e $x<-3$ a $(-\infty,-3)$. Il simbolo $\in$ si legge «appartiene a» e $\cup$ indica l'**unione** di due insiemi. Le soluzioni $x<-3$ oppure $x>1$ dell'esempio precedente si scrivono $x\in(-\infty,-3)\cup(1,+\infty)$. L'**insieme vuoto**, senza elementi, si indica con $\varnothing$.
 
+Quando il secondo membro è diverso da zero, come in $\dfrac{x+1}{x-4}\le2$, lo si porta al primo membro e si scrive un'unica frazione, perché la tabella dei segni confronta un quoziente con lo zero:
+$$
+\frac{x+1}{x-4}-2\le0,\qquad \frac{x+1-2(x-4)}{x-4}\le0,\qquad \frac{9-x}{x-4}\le0.
+$$
+Il numeratore $9-x$ è positivo per $x<9$ e il denominatore $x-4$ è positivo per $x>4$. Il quoziente è quindi negativo per $x<4$ oppure $x>9$, vale zero in $x=9$ e non è definito in $x=4$. Le soluzioni sono $x<4$ oppure $x\ge9$, cioè $x\in(-\infty,4)\cup[9,+\infty)$. Moltiplicando i due membri per $x-4$ si otterrebbe un insieme diverso, perché $x-4$ è negativo per $x<4$ e la moltiplicazione per un numero negativo inverte il verso della disuguaglianza.
+
 Quando più condizioni devono valere insieme, le soluzioni sono i numeri che le soddisfano tutte, cioè l'**intersezione** degli insiemi di soluzioni, indicata con $\cap$. Il prodotto $(x-1)(x+3)$ è negativo fra $-3$ e $1$ e vale zero agli estremi, quindi $(x-1)(x+3)\le0$ ha per soluzioni l'intervallo $[-3,1]$. Con la condizione $x>0$ restano i numeri con $0<x\le1$, cioè $[-3,1]\cap(0,+\infty)=(0,1]$. Lo zero non soddisfa $x>0$, mentre $1$ soddisfa entrambe le condizioni.
 :::
 
@@ -600,6 +618,8 @@ Si sviluppa il quadrato, si sottrae $x+1$ ai due membri e si raccoglie $x$. Per 
 Nella figura la curva è il grafico di $y=\sqrt{x+1}$ e la retta è $y=x-1$. Si incontrano soltanto nel punto di ascissa $3$.
 
 ::grafico{f="sqrt(x+1);x-1" xmin=-1 xmax=5 ymin=-1 ymax=4 punti="3,2,pieno" titolo="La radice e la retta si incontrano soltanto nel punto di ascissa tre"}
+
+Una **disequazione irrazionale** ha l'incognita sotto il segno di radice e un segno di disuguaglianza, come $\sqrt{x-1}<2$. Il radicando è positivo o nullo, quindi $x\ge1$. I due membri sono entrambi positivi o nulli e fra numeri di questo tipo il quadrato conserva l'ordine, quindi elevando al quadrato si ottiene $x-1<4$, cioè $x<5$. Le soluzioni sono i numeri con $1\le x<5$, cioè l'intervallo $[1,5)$. Per $\sqrt{x-1}>2$ lo stesso passaggio dà $x-1>4$, cioè $x>5$, e la condizione $x\ge1$ è già soddisfatta. Con un secondo membro negativo il confronto si decide senza calcoli, perché una radice quadrata è positiva o nulla. La disequazione $\sqrt{x-1}>-2$ è vera in tutto il dominio $x\ge1$, mentre $\sqrt{x-1}<-2$ non ha soluzioni.
 :::
 
 :::attenzione{titolo="Divisione per l'incognita"}

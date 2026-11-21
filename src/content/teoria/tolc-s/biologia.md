@@ -33,6 +33,8 @@ Una **proteina** è una catena di **amminoacidi**, piccole molecole di venti tip
 - La **struttura terziaria** è il ripiegamento dell'intera catena.
 - La **struttura quaternaria** è l'unione di più catene, nelle proteine che ne hanno più di una. L'emoglobina, la proteina che trasporta l'ossigeno nel sangue, ne ha quattro.
 
+Ogni legame peptidico unisce due amminoacidi vicini nella catena, quindi una catena lineare di $n$ amminoacidi ha $n-1$ legami peptidici. Una catena di $10$ amminoacidi ne ha $9$. Ogni legame si forma liberando una molecola d'acqua e si rompe consumandone una, quindi per separare i $10$ amminoacidi servono $9$ molecole d'acqua.
+
 La **denaturazione** è la perdita del ripiegamento, causata per esempio dal calore, come nell'albume dell'uovo che cuoce. La sequenza resta intatta, ma senza la sua forma la proteina non svolge più il suo compito.
 
 Un **enzima** è una proteina che accelera una reazione chimica. La molecola su cui agisce si chiama **substrato**. Una reazione avviene solo se le molecole ricevono una certa energia iniziale, l'**energia di attivazione**. L'enzima la abbassa, quindi nello stesso tempo reagiscono più molecole. Alla fine l'enzima è intatto, e le quantità finali delle sostanze, cioè l'equilibrio della reazione, sono le stesse che senza enzima. La lattasi divide il lattosio in glucosio e galattosio.
@@ -150,6 +152,8 @@ Una **mutazione** è un cambiamento della sequenza del DNA. L'effetto sulla prot
 - Un'altra sostituzione cambia l'amminoacido: da GAG a GUG l'acido glutammico diventa valina.
 - Una sostituzione che crea un codone di arresto, come da UGG a UGA, accorcia la proteina.
 - L'inserzione di una base in un tratto che codifica la proteina sposta la **cornice di lettura**, cioè la divisione in codoni, da quel punto in poi: con una U inserita dopo AUG, l'mRNA dell'esempio si legge AUG, UCC, AUG, GUA.
+
+Le cellule del corpo di un organismo hanno, salvo poche eccezioni, lo stesso DNA e quindi gli stessi geni. Ogni tipo di cellula ne esprime però solo una parte, e la **regolazione dell'espressione** stabilisce quali geni sono trascritti e in quale quantità. Una cellula muscolare e un neurone, la cellula del sistema nervoso, hanno entrambi il gene della miosina, la proteina che fa contrarre il muscolo, ma solo la cellula muscolare lo trascrive in grande quantità. Due cellule con lo stesso DNA hanno perciò proteine diverse e compiti diversi. La specializzazione delle cellule che ne risulta si chiama **differenziamento**.
 :::
 
 ## Ereditarietà e incroci
@@ -199,6 +203,8 @@ Dopo la fase S ogni cromosoma è formato da due molecole di DNA identiche, i **c
 In una cellula diploide i cromosomi formano coppie di **omologhi**, uno materno e uno paterno, con gli stessi geni. Una cellula **aploide** ha un solo cromosoma per coppia. Il numero dei cromosomi si indica con $2n$ nella cellula diploide e con $n$ in quella aploide: nell'uomo $2n=46$ e $n=23$. Dopo la fase S le coppie sono le stesse, quindi la cellula è ancora diploide.
 
 La **mitosi** è la divisione del nucleo in due nuclei con gli stessi cromosomi. Serve alla crescita e a sostituire le cellule perdute. Nella profase i cromosomi si accorciano e diventano visibili; nella metafase si allineano al centro; nell'anafase i cromatidi fratelli si separano, vanno ai lati opposti e da quel momento si contano come cromosomi; nella telofase attorno a ciascun gruppo si forma un nucleo. La **citodieresi** divide poi il citoplasma; se manca, resta una cellula con due nuclei. I batteri, privi di nucleo, si dividono per **scissione binaria**: copiano il cromosoma e si dividono in due.
+
+Il **fuso mitotico** è l'insieme dei **microtubuli**, sottili filamenti di proteine, che durante la mitosi si attaccano ai cromosomi e li muovono. Nella metafase il fuso li allinea al centro e nell'anafase tira i cromatidi fratelli verso i lati opposti. Nelle cellule animali i microtubuli partono da due **centrosomi**, uno per lato, ciascuno con una coppia di piccoli cilindri, i **centrioli**. Se il fuso non si forma, i cromatidi fratelli non vengono separati, quindi i $92$ cromatidi di una cellula umana non si distribuiscono fra due nuclei.
 :::
 
 :::definizione{#meiosi titolo="Due divisioni e una replicazione"}
@@ -219,6 +225,8 @@ La tabella riporta i conteggi per $2n=4$, in ciascuna cellula a divisione conclu
 | Dopo meiosi II | 2 | 2 | aploide |
 
 Le quattro cellule sono geneticamente diverse. Durante l'appaiamento due cromatidi non fratelli, uno per ciascun omologo, si scambiano tratti corrispondenti (**crossing-over**). Inoltre ogni coppia si orienta a caso prima di separarsi, quindi con $n$ coppie le combinazioni sono $2^n$, cioè circa 8,4 milioni per $n=23$.
+
+La **non-disgiunzione** è la mancata separazione di due cromosomi omologhi nella meiosi I, oppure di due cromatidi fratelli nella meiosi II. Se una coppia di omologhi va tutta dalla stessa parte nella meiosi I e la meiosi II è regolare, due delle quattro cellule hanno un cromosoma in più, cioè $n+1$, e due ne hanno uno in meno, cioè $n-1$. Nell'uomo sono gameti con $24$ e con $22$ cromosomi. Unendosi a un gamete normale con $23$ cromosomi, il primo dà uno zigote con $47$, in cui un cromosoma è presente in tre copie (**trisomia**), e il secondo uno zigote con $45$ (**monosomia**). La sindrome di Down è la trisomia del cromosoma $21$.
 
 Nei maschi una meiosi produce quattro spermatozoi. Nelle femmine il citoplasma si divide in parti diseguali e si forma una sola cellula uovo. Nelle piante la meiosi produce **spore**, cellule aploidi da cui nasce la generazione che forma i gameti.
 :::

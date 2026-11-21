@@ -104,6 +104,8 @@ $$
 where $q$ and $r$ are integers and the symbol $\le$ is read "less than or equal to". The remainder is therefore positive or zero and is less than the divisor; with this condition the quotient and the remainder are uniquely determined.
 
 To divide $-26$ by $7$, one takes the largest multiple of $7$ not exceeding $-26$, namely $-28=7\cdot(-4)$. Since $-26=-28+2$, the quotient is $-4$ and the remainder is $2$.
+
+The remainder of a product equals the remainder of the product of the remainders of the factors. On division by $7$ the numbers $9$ and $10$ have remainders $2$ and $3$, and their product $90=7\cdot12+6$ has remainder $6=2\cdot3$. This property gives the **remainder of a power** without computing the power. For the remainder of $3^6$ on division by $7$, one starts from $3^2=9$, which has remainder $2$. Since $3^6=(3^2)^3$, the remainder of $3^6$ is that of $2^3=8$, namely $1$. The direct computation confirms it, because $3^6=729=7\cdot104+1$.
 :::
 
 :::attenzione
@@ -135,6 +137,12 @@ $$
 x=250\cdot7.2\,\mathrm{cm}=1800\,\mathrm{cm}=18\,\mathrm{m}.
 $$
 In a scale problem the two lengths are expressed in the same unit.
+
+Two quantities are **directly proportional** when their ratio stays constant, like the length on the drawing and the real length in a scale. They are **inversely proportional** when their product stays constant: if one doubles, the other is halved. Three identical taps fill a tank in $8$ hours, so the total work is $3\cdot8=24$ tap-hours. With four taps the time $t$ satisfies $4\cdot t=24$, so
+$$
+t=\frac{24}{4}=6\ \text{hours}.
+$$
+The number of taps has increased and the time has decreased.
 :::
 
 :::teorema{#percentuali titolo="Percentage changes"}
@@ -278,6 +286,10 @@ The symbol $\Longleftrightarrow$ is read "if and only if" and means that the two
 - The inequality $|x-a|>r$ holds for the points at distance greater than $r$, that is, for $x<a-r$ or $x>a+r$.
 
 With $\le$ and $\ge$ in place of $<$ and $>$ the endpoints $a-r$ and $a+r$ are also included. For $r=0$ the equality $|x-a|=0$ is true only for $x=a$.
+
+The **midpoint** between two points $a$ and $b$ of the line is the point at the same distance from both, and it is computed as the average $\dfrac{a+b}{2}$. Between $1$ and $5$ the midpoint is $\dfrac{1+5}{2}=3$, which is at distance $2$ from both, because $|3-1|=2$ and $|5-3|=2$.
+
+A **double inequality** such as $1\le|x-3|<2$ contains two conditions to be satisfied together: the distance of $x$ from $3$ is at least $1$ and is less than $2$. The condition $|x-3|<2$ gives $1<x<5$. The condition $|x-3|\ge1$ gives $x\le2$ or $x\ge4$. The numbers that satisfy both are those with $1<x\le2$ or $4\le x<5$.
 :::
 
 :::esempio{titolo="Distance from three"}
@@ -562,6 +574,12 @@ The quotient is negative between $-1$ and $4$. At $x=-1$ it equals zero, and the
 
 A set with no endpoint on one side is written with the symbol $\infty$ (infinity) and a round bracket: $x\ge2$ corresponds to $[2,+\infty)$ and $x<-3$ to $(-\infty,-3)$. The symbol $\in$ is read "belongs to" and $\cup$ denotes the **union** of two sets. The solutions $x<-3$ or $x>1$ of the previous example are written $x\in(-\infty,-3)\cup(1,+\infty)$. The **empty set**, with no elements, is denoted by $\varnothing$.
 
+When the right-hand side is not zero, as in $\dfrac{x+1}{x-4}\le2$, it is moved to the left-hand side and a single fraction is written, because the sign table compares a quotient with zero:
+$$
+\frac{x+1}{x-4}-2\le0,\qquad \frac{x+1-2(x-4)}{x-4}\le0,\qquad \frac{9-x}{x-4}\le0.
+$$
+The numerator $9-x$ is positive for $x<9$ and the denominator $x-4$ is positive for $x>4$. The quotient is therefore negative for $x<4$ or $x>9$, equals zero at $x=9$ and is undefined at $x=4$. The solutions are $x<4$ or $x\ge9$, that is, $x\in(-\infty,4)\cup[9,+\infty)$. Multiplying both sides by $x-4$ would give a different set, because $x-4$ is negative for $x<4$ and multiplication by a negative number reverses the direction of the inequality.
+
 When several conditions must hold together, the solutions are the numbers that satisfy all of them, that is, the **intersection** of the solution sets, denoted by $\cap$. The product $(x-1)(x+3)$ is negative between $-3$ and $1$ and equals zero at the endpoints, so the solutions of $(x-1)(x+3)\le0$ form the interval $[-3,1]$. With the condition $x>0$ the numbers with $0<x\le1$ remain, that is, $[-3,1]\cap(0,+\infty)=(0,1]$. Zero does not satisfy $x>0$, whereas $1$ satisfies both conditions.
 :::
 
@@ -600,6 +618,8 @@ The square is expanded, $x+1$ is subtracted from both sides and $x$ is taken out
 In the figure the curve is the graph of $y=\sqrt{x+1}$ and the line is $y=x-1$. They meet only at the point with horizontal coordinate $3$.
 
 ::grafico{f="sqrt(x+1);x-1" xmin=-1 xmax=5 ymin=-1 ymax=4 punti="3,2,pieno" titolo="The square root and the line meet only at the point with horizontal coordinate three"}
+
+An **irrational inequality** has the unknown under a root sign and an inequality sign, as in $\sqrt{x-1}<2$. The radicand is positive or zero, so $x\ge1$. Both sides are positive or zero and between numbers of this kind squaring preserves the order, so squaring gives $x-1<4$, that is, $x<5$. The solutions are the numbers with $1\le x<5$, that is, the interval $[1,5)$. For $\sqrt{x-1}>2$ the same step gives $x-1>4$, that is, $x>5$, and the condition $x\ge1$ is already satisfied. With a negative right-hand side the comparison is decided without calculations, because a square root is positive or zero. The inequality $\sqrt{x-1}>-2$ is true on the whole domain $x\ge1$, whereas $\sqrt{x-1}<-2$ has no solutions.
 :::
 
 :::attenzione{titolo="Division by the unknown"}

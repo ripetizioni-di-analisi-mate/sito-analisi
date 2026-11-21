@@ -193,6 +193,8 @@ Dall'equazione si ricava $V=\dfrac{nRT}{p}$. A temperatura e pressione fissate i
 Un **sale idrato** è un solido che contiene nel reticolo molecole d'acqua, in numero fisso per ogni unità di formula. Nella formula quest'acqua, detta di cristallizzazione, si scrive dopo un punto: il solfato di rame pentaidrato $\mathrm{CuSO_4\cdot5H_2O}$ ha $5$ molecole d'acqua per ogni unità $\mathrm{CuSO_4}$. Scaldando l'idrato l'acqua evapora e resta il sale **anidro**, cioè privo d'acqua. Se il riscaldamento non decompone il sale, la diminuzione di massa è la massa dell'acqua.
 
 Con i valori arrotondati $64$, $32$, $16$ e $1\,\mathrm{g/mol}$ per rame, zolfo, ossigeno e idrogeno, una mole di $\mathrm{CuSO_4\cdot5H_2O}$ contiene $64+32+4\cdot16=160\,\mathrm g$ di sale anidro e $5\cdot18=90\,\mathrm g$ d'acqua, quindi ha massa $250\,\mathrm g$. L'acqua è $\dfrac{90}{250}\cdot100\%=36\%$ della massa. Da $5{,}0\,\mathrm g$ di idrato si allontanano perciò $5{,}0\,\mathrm g\cdot0{,}36=1{,}8\,\mathrm g$ d'acqua e restano $5{,}0\,\mathrm g-1{,}8\,\mathrm g=3{,}2\,\mathrm g$ di sale anidro.
+
+Per trovare l'indice $x$ di un idrato $\mathrm{MX\cdot xH_2O}$ si confrontano le moli, perché la formula conta le molecole e non i grammi. Da $2{,}50\,\mathrm g$ di solfato di rame idrato restano, dopo il riscaldamento, $1{,}60\,\mathrm g$ di sale anidro, quindi l'acqua persa è $2{,}50\,\mathrm g-1{,}60\,\mathrm g=0{,}90\,\mathrm g$. Le moli sono $\dfrac{1{,}60\,\mathrm g}{160\,\mathrm{g/mol}}=0{,}010\,\mathrm{mol}$ di $\mathrm{CuSO_4}$ e $\dfrac{0{,}90\,\mathrm g}{18\,\mathrm{g/mol}}=0{,}050\,\mathrm{mol}$ d'acqua. Il rapporto $\dfrac{0{,}050}{0{,}010}=5$ è l'indice, quindi la formula è $\mathrm{CuSO_4\cdot5H_2O}$.
 :::
 
 ## Soluzioni e concentrazione
