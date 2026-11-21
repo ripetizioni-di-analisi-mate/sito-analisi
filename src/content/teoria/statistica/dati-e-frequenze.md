@@ -3,6 +3,10 @@ titolo: "Dati, frequenze e grafici"
 sommario: "Dalla rilevazione delle unità statistiche alla lettura di frequenze, tabelle, distribuzioni empiriche e istogrammi."
 ---
 
+La statistica serve a conoscere un gruppo grande partendo dai dati raccolti su una sua parte. La durata media del tragitto degli studenti per arrivare a lezione, o la quota di studenti che usa l'autobus, riguardano migliaia di persone, mentre di solito si conoscono le risposte di qualche centinaio. Prima di qualsiasi calcolo occorre quindi sapere di chi si parla, che cosa si è misurato e come si leggono i numeri raccolti.
+
+Questo capitolo tratta questi tre punti. Si definiscono la popolazione e il campione, poi i tipi di dati e i conti che hanno senso su ciascun tipo, infine le frequenze, le tabelle e i grafici con cui si riassumono i dati. Sono gli strumenti usati in tutto il corso. Gli indici del capitolo 2, come la media e la varianza, si calcolano a partire dalle frequenze; le tabelle a doppia entrata tornano nella probabilità condizionata del capitolo 4; il passaggio dal campione alla popolazione è l'argomento dei capitoli dall'8 all'11.
+
 ## Popolazione, unità e campione
 
 :::definizione{#popolazione titolo="Popolazione e campione"}
@@ -27,6 +31,8 @@ Nel lotto di 300 piastrelle alcune hanno uno spessore fuori dai limiti ammessi d
 La quota di piastrelle fuori tolleranza fra le 25 scelte si calcola invece dai soli dati del campione. Un numero calcolato a partire dalle osservazioni del campione si chiama **statistica campionaria**; in termini matematici è una funzione delle osservazioni campionarie.
 
 Se si sceglie un altro gruppo di 25 piastrelle dallo stesso lotto, il parametro resta lo stesso, perché il lotto non è cambiato. La statistica può invece dare un valore diverso, perché le piastrelle scelte sono altre. Per esempio, se le piastrelle fuori tolleranza sono 3 nel primo campione e 1 nel secondo, la statistica vale $\dfrac{3}{25}=0{,}12$ nel primo caso e $\dfrac{1}{25}=0{,}04$ nel secondo.
+
+Il parametro è di solito il numero che interessa, ma non si conosce; la statistica si conosce, perché si calcola dai dati raccolti. Gran parte del corso studia come usare una statistica campionaria per dire qualcosa di affidabile sul parametro: è l'argomento dei capitoli sulla stima, sugli intervalli di confidenza e sui test.
 :::
 
 :::osservazione
