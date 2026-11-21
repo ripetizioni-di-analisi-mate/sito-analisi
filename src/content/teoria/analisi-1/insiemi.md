@@ -101,6 +101,19 @@ Non esiste alcun numero razionale $x$ tale che $x^2 = 2$: il numero $\sqrt{2}$ �
 :::
 ::::
 
+:::definizione{#assiomi-dei-reali titolo="Assiomi dei numeri reali"}
+Le proprietà di $\mathbb{R}$ si deducono tutte da tre gruppi di **assiomi**, che si assumono senza dimostrazione.
+
+- **Assiomi delle operazioni.** In $\mathbb{R}$ sono definite la somma e il prodotto. Le due operazioni sono associative e commutative, e vale la proprietà distributiva $a\,(b + c) = a\,b + a\,c$. Esistono gli elementi neutri $0$ e $1$, con $0 \neq 1$, tali che $a + 0 = a$ e $a \cdot 1 = a$. Ogni $a$ ha un opposto $-a$, con $a + (-a) = 0$, e ogni $a \neq 0$ ha un reciproco $a^{-1}$, con $a \cdot a^{-1} = 1$.
+- **Assiomi dell'ordinamento.** In $\mathbb{R}$ è definita la relazione $\leq$. Per ogni coppia di numeri vale $a \leq b$ oppure $b \leq a$, e se valgono entrambe allora $a = b$; da $a \leq b$ e $b \leq c$ segue $a \leq c$. L'ordinamento è compatibile con le operazioni: da $a \leq b$ segue $a + c \leq b + c$ per ogni $c$, e da $0 \leq a$ e $0 \leq b$ segue $0 \leq a\,b$.
+- **Assioma di completezza.** Siano $A$ e $B$ due sottoinsiemi non vuoti di $\mathbb{R}$ tali che $a \leq b$ per ogni $a \in A$ e ogni $b \in B$. Allora esiste almeno un numero reale $c$, detto **elemento separatore**, tale che
+$$
+a \leq c \leq b \qquad \text{per ogni } a \in A \text{ e ogni } b \in B .
+$$
+
+Dai primi due gruppi seguono le regole del calcolo letterale e delle disuguaglianze: per esempio $a \cdot 0 = 0$, la regola dei segni e il cambio di verso di una disuguaglianza moltiplicata per un numero negativo. Anche $\mathbb{Q}$ soddisfa gli assiomi delle operazioni e dell'ordinamento, mentre *non* soddisfa l'assioma di completezza: gli insiemi $A = \{x \in \mathbb{Q} : x > 0,\ x^2 < 2\}$ e $B = \{x \in \mathbb{Q} : x > 0,\ x^2 > 2\}$ verificano l'ipotesi, e il loro unico elemento separatore è $\sqrt{2}$, che non è razionale. Dall'assioma di completezza si dimostra l'esistenza dell'estremo superiore.
+:::
+
 ## Intervalli
 
 :::definizione{#intervalli titolo="Intervalli e loro notazione"}
@@ -176,8 +189,16 @@ $A = \left\{ \dfrac{1}{n} : n \in \mathbb{N},\ n \geq 1 \right\}$. L'estremo sup
 
 ## La completezza di R
 
-:::teorema{#completezza titolo="Completezza di R"}
-Ogni sottoinsieme di $\mathbb{R}$ non vuoto e limitato superiormente ammette **estremo superiore** in $\mathbb{R}$; ogni sottoinsieme non vuoto e limitato inferiormente ammette estremo inferiore. Questa proprietà si chiama **completezza** e si *assume* come assioma dei numeri reali. Distingue $\mathbb{R}$ da $\mathbb{Q}$ ed è l'ipotesi da cui dipendono i teoremi di esistenza dell'analisi: la dimostrazione del teorema degli zeri, nel capitolo sui limiti e sulla continuità, costruisce lo zero proprio come estremo superiore di un insieme.
+::::teorema{#completezza titolo="Completezza di R"}
+Ogni sottoinsieme di $\mathbb{R}$ non vuoto e limitato superiormente ammette **estremo superiore** in $\mathbb{R}$; ogni sottoinsieme non vuoto e limitato inferiormente ammette estremo inferiore. Questa proprietà si chiama **completezza** e si deduce dall'assioma di completezza dei numeri reali. Distingue $\mathbb{R}$ da $\mathbb{Q}$ ed è l'ipotesi da cui dipendono i teoremi di esistenza dell'analisi: la dimostrazione del teorema degli zeri, nel capitolo sui limiti e sulla continuità, costruisce lo zero proprio come estremo superiore di un insieme.
+
+:::dimostrazione
+Sia $A$ non vuoto e limitato superiormente, e sia $B$ l'insieme dei maggioranti di $A$, che per ipotesi è non vuoto. Per la definizione di maggiorante si ha $a \leq b$ per ogni $a \in A$ e ogni $b \in B$, quindi per l'**assioma di completezza** esiste un numero reale $c$ tale che $a \leq c \leq b$ per ogni $a \in A$ e ogni $b \in B$. La prima disuguaglianza dice che $c$ è un maggiorante di $A$, cioè $c \in B$. La seconda dice che $c$ è minore o uguale di ogni elemento di $B$. Perciò $c$ è il **minimo dei maggioranti** di $A$, cioè $c = \sup A$. Se $A$ è non vuoto e limitato inferiormente, lo stesso ragionamento, applicato all'insieme dei minoranti di $A$ e all'insieme $A$, fornisce un elemento separatore che è il massimo dei minoranti, cioè $\inf A$.
+:::
+::::
+
+:::richiamo{titolo="Assioma di completezza"}
+Se $A$ e $B$ sono sottoinsiemi non vuoti di $\mathbb{R}$ con $a \leq b$ per ogni $a \in A$ e ogni $b \in B$, esiste $c \in \mathbb{R}$ tale che $a \leq c \leq b$ per ogni $a \in A$ e ogni $b \in B$.
 :::
 
 :::osservazione

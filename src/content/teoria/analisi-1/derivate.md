@@ -53,6 +53,14 @@ Per $h \to 0$ il punto $(x_0 + h, f(x_0 + h))$ si avvicina a $(x_0, f(x_0))$ e l
 
 :::
 
+:::esempio{titolo="Significato fisico: la velocità istantanea"}
+Un punto si muove lungo una retta e $s(t)$ è la sua posizione all'istante $t$. Tra gli istanti $t_0$ e $t_0 + h$ lo spostamento è $s(t_0 + h) - s(t_0)$, quindi la **velocità media** in quell'intervallo di tempo è il rapporto incrementale
+$$
+\frac{s(t_0 + h) - s(t_0)}{h} .
+$$
+La **velocità istantanea** all'istante $t_0$ è il limite della velocità media per $h \to 0$, cioè la derivata $v(t_0) = s'(t_0)$. Allo stesso modo l'**accelerazione** è la derivata della velocità, $a(t_0) = v'(t_0)$. Per un corpo in caduta libera che parte da fermo la legge del moto è $s(t) = \dfrac{1}{2}\, g\, t^2$, con $g$ costante; poiché la derivata di $t^2$ è $2t$, la velocità è $v(t) = g\,t$ e l'accelerazione è $a(t) = g$. In generale, se una grandezza $y$ dipende da una grandezza $x$, la derivata $y'(x_0)$ è il **tasso di variazione** di $y$ rispetto a $x$ in $x_0$. Per esempio la potenza è la derivata dell'energia rispetto al tempo, e l'intensità di corrente è la derivata della carica rispetto al tempo.
+:::
+
 ## Derivabilità e continuità
 
 ::::teorema{#derivabile-implica-continua titolo="Derivabile implica continua"}
@@ -113,13 +121,29 @@ Per $h \to 0$ il rapporto incrementale di $f$ tende a $f'(x)$ e quello di $g$ a 
 Se $f$ è derivabile in $x_0$, allora $f$ è continua in $x_0$.
 :::
 
-:::teorema{#derivata-della-composta titolo="Derivata della funzione composta"}
+::::teorema{#derivata-della-composta titolo="Derivata della funzione composta"}
 Se $g$ è derivabile in $x$ e $f$ è derivabile in $g(x)$, allora $f \circ g$ è derivabile in $x$ e
 $$
 (f \circ g)'(x) = f'(g(x)) \cdot g'(x) .
 $$
 Si deriva la **funzione esterna** lasciando intatto l'argomento, poi si moltiplica per la **derivata dell'argomento**: la derivata di $e^{x^2}$ è $e^{x^2} \cdot 2x$. Con composizioni ripetute la regola si applica **a catena**, dall'esterno verso l'interno.
+
+:::dimostrazione
+Si pone $y_0 = g(x)$. L'idea è scrivere l'incremento di $f$ come prodotto dell'incremento dell'argomento per una funzione che tende a $f'(y_0)$, così da non dividere per $g(x + h) - g(x)$, che può annullarsi. Si definisce
+$$
+\varphi(y) =
+\begin{cases}
+\dfrac{f(y) - f(y_0)}{y - y_0} & \text{se } y \neq y_0 \\[10pt]
+f'(y_0) & \text{se } y = y_0
+\end{cases}
+$$
+Poiché $f$ è derivabile in $y_0$, si ha $\varphi(y) \to f'(y_0) = \varphi(y_0)$ per $y \to y_0$, quindi $\varphi$ è **continua** in $y_0$. Inoltre per ogni $y$ vale $f(y) - f(y_0) = \varphi(y)\,(y - y_0)$. Infatti per $y \neq y_0$ questa uguaglianza è la definizione di $\varphi$, mentre per $y = y_0$ i due membri sono nulli. Scegliendo $y = g(x + h)$ e dividendo per $h \neq 0$ si ottiene
+$$
+\frac{f(g(x + h)) - f(g(x))}{h} = \varphi(g(x + h)) \cdot \frac{g(x + h) - g(x)}{h} .
+$$
+La funzione $g$ è derivabile in $x$, quindi è continua in $x$, perciò $g(x + h) \to y_0$ per $h \to 0$. Poiché $\varphi$ è continua in $y_0$, ne segue $\varphi(g(x + h)) \to \varphi(y_0) = f'(g(x))$. Il secondo fattore tende a $g'(x)$. Per l'**algebra dei limiti** il rapporto incrementale di $f \circ g$ tende a $f'(g(x)) \cdot g'(x)$.
 :::
+::::
 
 :::teorema{#derivata-dell-inversa titolo="Derivata della funzione inversa"}
 Sia $f$ invertibile e derivabile in $x_0$ con $f'(x_0) \neq 0$, con inversa $f^{-1}$ continua in $y_0 = f(x_0)$. Allora $f^{-1}$ è **derivabile** in $y_0$ e
@@ -214,7 +238,7 @@ da $g'(c) = 0$ segue $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
 Se $f$ è continua in $[a, b]$, derivabile in $(a, b)$ e $f(a) = f(b)$, allora esiste $c \in (a, b)$ con $f'(c) = 0$.
 :::
 
-:::teorema{#teorema-di-cauchy titolo="Teorema di Cauchy"}
+::::teorema{#teorema-di-cauchy titolo="Teorema di Cauchy"}
 Siano $f$ e $g$ continue in $[a, b]$ e derivabili in $(a, b)$. Allora esiste $c \in (a, b)$ tale che
 $$
 \bigl( f(b) - f(a) \bigr)\, g'(c) = \bigl( g(b) - g(a) \bigr)\, f'(c) .
@@ -223,8 +247,24 @@ Se inoltre $g'(x) \neq 0$ in $(a, b)$, allora $g(b) \neq g(a)$ per il **teorema 
 $$
 \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)} .
 $$
-Per $g(x) = x$ si riottiene il **teorema di Lagrange**. La dimostrazione applica il teorema di Rolle alla funzione $h(x) = \bigl( f(b) - f(a) \bigr) g(x) - \bigl( g(b) - g(a) \bigr) f(x)$. Il teorema di Cauchy è il passo con cui si dimostra il teorema di de l'Hôpital.
+Per $g(x) = x$ si riottiene il **teorema di Lagrange**. Il teorema di Cauchy è il passo con cui si dimostra il teorema di de l'Hôpital.
+
+:::dimostrazione
+La funzione
+$$
+h(x) = \bigl( f(b) - f(a) \bigr)\, g(x) - \bigl( g(b) - g(a) \bigr)\, f(x)
+$$
+è continua in $[a, b]$ e derivabile in $(a, b)$, perché è combinazione lineare di $f$ e di $g$. Sviluppando i prodotti si trova che agli estremi assume lo stesso valore:
+$$
+h(a) = f(b)\, g(a) - g(b)\, f(a) = h(b) .
+$$
+Le ipotesi del **teorema di Rolle** sono quindi soddisfatte ed esiste $c \in (a, b)$ con $h'(c) = 0$, cioè
+$$
+\bigl( f(b) - f(a) \bigr)\, g'(c) - \bigl( g(b) - g(a) \bigr)\, f'(c) = 0 ,
+$$
+che è la prima uguaglianza. Sia ora $g'(x) \neq 0$ in $(a, b)$. Se fosse $g(b) = g(a)$, il teorema di Rolle applicato a $g$ darebbe un punto di $(a, b)$ in cui $g'$ si annulla, contro l'ipotesi; perciò $g(b) \neq g(a)$. Dividendo per $g'(c)\, \bigl( g(b) - g(a) \bigr)$ si ottiene la seconda uguaglianza.
 :::
+::::
 
 ## Conseguenze del teorema di Lagrange
 
@@ -265,9 +305,41 @@ L'ipotesi che il dominio sia un intervallo *non* si può togliere: $f(x) = \dfra
 Sia $f$ continua in $x_0$ e derivabile in un intorno di $x_0$, tranne al più $x_0$. Se $f'(x) \to L \in \mathbb{R}$ per $x \to x_0$, allora $f$ è **derivabile** in $x_0$ e $f'(x_0) = L$; la versione con i limiti laterali dà le derivate laterali. Si dimostra applicando il **teorema di Lagrange** sull'intervallo di estremi $x_0$ e $x$. Con questo criterio si studia la derivabilità delle funzioni a tratti: si deriva ciascuna espressione e si calcolano i limiti laterali della derivata nei punti di raccordo. Se il limite di $f'$ non esiste, il criterio **non dà informazioni** e si torna al rapporto incrementale.
 :::
 
+:::definizione{#funzione-lipschitziana titolo="Funzione lipschitziana"}
+Una funzione $f : I \to \mathbb{R}$, con $I$ intervallo, è **lipschitziana** su $I$ se esiste una costante $K \geq 0$ tale che
+$$
+|f(x_1) - f(x_2)| \leq K\,|x_1 - x_2| \qquad \text{per ogni } x_1, x_2 \in I .
+$$
+Ogni $K$ con questa proprietà è una **costante di Lipschitz** di $f$. Per $x_1 \neq x_2$ la condizione si scrive $\left| \dfrac{f(x_1) - f(x_2)}{x_1 - x_2} \right| \leq K$, quindi le pendenze delle rette secanti il grafico sono limitate, in valore assoluto, da $K$. Una funzione lipschitziana è **continua**, perché da $|f(x) - f(x_0)| \leq K\,|x - x_0|$ segue $f(x) \to f(x_0)$ per $x \to x_0$. Una funzione lipschitziana può non essere derivabile. Per esempio $|x|$ è lipschitziana su $\mathbb{R}$ con $K = 1$, per la disuguaglianza $\bigl|\, |x_1| - |x_2| \,\bigr| \leq |x_1 - x_2|$, e non è derivabile in $0$. La lipschitzianità è l'ipotesi con cui si enuncia il teorema di esistenza e unicità per il problema di Cauchy delle equazioni differenziali.
+:::
+
+::::teorema{#lipschitzianita-e-derivata titolo="Derivata limitata e lipschitzianità"}
+Sia $f$ derivabile su un intervallo $I$ e sia $K \geq 0$. Allora $f$ è lipschitziana su $I$ con costante $K$ *se e solo se*
+$$
+|f'(x)| \leq K \qquad \text{per ogni } x \in I .
+$$
+Il criterio riduce la verifica a una stima della derivata. Poiché $|\cos x| \leq 1$, la funzione $\sin x$ è lipschitziana su $\mathbb{R}$ con $K = 1$, cioè $|\sin x_1 - \sin x_2| \leq |x_1 - x_2|$. La funzione $x^2$ ha derivata $2x$, che in valore assoluto è limitata da $2$ su $[-1, 1]$ e non è limitata su $\mathbb{R}$; quindi $x^2$ è lipschitziana su $[-1, 1]$ con $K = 2$ e **non è lipschitziana** su $\mathbb{R}$.
+
+:::dimostrazione
+Sia $|f'(x)| \leq K$ su $I$ e siano $x_1 < x_2$ in $I$. Per il **teorema di Lagrange** su $[x_1, x_2]$ esiste $c \in (x_1, x_2)$ con $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1)$, quindi
+$$
+|f(x_2) - f(x_1)| = |f'(c)|\,|x_2 - x_1| \leq K\,|x_2 - x_1| .
+$$
+Viceversa, sia $f$ lipschitziana con costante $K$ e sia $x_0 \in I$. Per ogni $x \in I$ con $x \neq x_0$ il rapporto incrementale soddisfa $\left| \dfrac{f(x) - f(x_0)}{x - x_0} \right| \leq K$. Per $x \to x_0$ il rapporto tende a $f'(x_0)$ e il suo valore assoluto tende a $|f'(x_0)|$; poiché una disuguaglianza non stretta si conserva al limite, risulta $|f'(x_0)| \leq K$.
+:::
+::::
+
+:::attenzione
+Una funzione continua su un intervallo chiuso e limitato *può* non essere lipschitziana. Per $f(x) = \sqrt{x}$ su $[0, 1]$ il rapporto incrementale relativo ai punti $0$ e $x > 0$ vale
+$$
+\frac{\sqrt{x} - \sqrt{0}}{x - 0} = \frac{1}{\sqrt{x}} ,
+$$
+e tende a $+\infty$ per $x \to 0^{+}$, quindi nessuna costante $K$ soddisfa la definizione. In accordo con il criterio, la derivata $\dfrac{1}{2\sqrt{x}}$ non è limitata in $(0, 1]$.
+:::
+
 ## Il teorema di de l'Hôpital
 
-:::teorema{#de-l-hopital titolo="Teorema di de l'Hôpital"}
+::::teorema{#de-l-hopital titolo="Teorema di de l'Hôpital"}
 Siano $x_0 \in \mathbb{R} \cup \{\pm\infty\}$ e $U$ un intorno di $x_0$. Se
 $$
 \begin{cases}
@@ -280,7 +352,23 @@ allora
 $$
 \lim_{x \to x_0} \frac{f(x)}{g(x)} = L .
 $$
-Lo stesso vale per i limiti laterali. Il teorema si usa sulle **forme indeterminate** $\dfrac{0}{0}$ e $\dfrac{\infty}{\infty}$; le forme $0 \cdot \infty$ e $\infty - \infty$ vi si riconducono con trasformazioni algebriche, le forme esponenziali $1^{\infty}$, $0^{0}$, $\infty^{0}$ con la scrittura $f(x)^{g(x)} = e^{g(x) \ln f(x)}$. La dimostrazione usa il teorema di Cauchy e si omette. Con questo teorema si dimostra la **gerarchia degli infiniti** enunciata nel capitolo sui limiti.
+Lo stesso vale per i limiti laterali. Il teorema si usa sulle **forme indeterminate** $\dfrac{0}{0}$ e $\dfrac{\infty}{\infty}$; le forme $0 \cdot \infty$ e $\infty - \infty$ vi si riconducono con trasformazioni algebriche, le forme esponenziali $1^{\infty}$, $0^{0}$, $\infty^{0}$ con la scrittura $f(x)^{g(x)} = e^{g(x) \ln f(x)}$. La dimostrazione usa il teorema di Cauchy ed è svolta per la forma $\dfrac{0}{0}$ con $x_0$ reale. Con questo teorema si dimostra la **gerarchia degli infiniti** enunciata nel capitolo sui limiti.
+
+:::dimostrazione
+Sia $x_0 \in \mathbb{R}$, con $f(x) \to 0$ e $g(x) \to 0$ per $x \to x_0$. Il limite del rapporto non dipende dai valori delle funzioni in $x_0$, quindi si può porre $f(x_0) = g(x_0) = 0$; con questa scelta $f$ e $g$ sono **continue** in $x_0$. Sia $x \in U$ con $x > x_0$. Nell'intervallo $[x_0, x]$ le due funzioni sono continue, sono derivabili in $(x_0, x)$ e $g'$ non si annulla, quindi per il **teorema di Cauchy** esiste un punto $c_x \in (x_0, x)$ tale che
+$$
+\frac{f(x)}{g(x)} = \frac{f(x) - f(x_0)}{g(x) - g(x_0)} = \frac{f'(c_x)}{g'(c_x)} .
+$$
+Sia $V$ un intorno di $L$, cioè un intervallo $(L - \varepsilon, L + \varepsilon)$ se $L$ è finito e una semiretta se $L = \pm\infty$. Per l'ipotesi sul limite di $\dfrac{f'}{g'}$ esiste $\delta > 0$ tale che $\dfrac{f'(t)}{g'(t)} \in V$ per ogni $t$ con $0 < |t - x_0| < \delta$. Se $x_0 < x < x_0 + \delta$, anche il punto $c_x$ soddisfa $x_0 < c_x < x_0 + \delta$, quindi
+$$
+\frac{f(x)}{g(x)} = \frac{f'(c_x)}{g'(c_x)} \in V .
+$$
+Per la definizione di limite questo significa che $\dfrac{f(x)}{g(x)} \to L$ per $x \to x_0^{+}$. Per $x < x_0$ si ragiona allo stesso modo sull'intervallo $[x, x_0]$ e si ottiene lo stesso limite da sinistra, perciò il limite per $x \to x_0$ esiste e vale $L$. Il caso $x_0 = \pm\infty$ si riconduce a quello dimostrato con la sostituzione $x = \dfrac{1}{t}$. Il caso $\dfrac{\infty}{\infty}$ si dimostra ancora con il teorema di Cauchy, con una stima più lunga che si omette.
+:::
+::::
+
+:::richiamo{titolo="Teorema di Cauchy"}
+Se $f$ e $g$ sono continue in $[a, b]$ e derivabili in $(a, b)$, con $g'(x) \neq 0$ in $(a, b)$, esiste $c \in (a, b)$ con $\dfrac{f'(c)}{g'(c)} = \dfrac{f(b) - f(a)}{g(b) - g(a)}$.
 :::
 
 :::esempio

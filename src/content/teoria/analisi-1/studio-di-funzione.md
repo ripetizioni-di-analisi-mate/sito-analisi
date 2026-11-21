@@ -162,6 +162,46 @@ $f(x) = e^x$ e la tangente in $0$. Il grafico tocca la retta $y = 1 + x$ *solo* 
 
 :::
 
+::::teorema{#metodo-di-newton titolo="Metodo di Newton"}
+Sia $f$ derivabile due volte in $[a, b]$ e valgano le condizioni
+$$
+\begin{cases}
+f(a) < 0 < f(b) \\[4pt]
+f'(x) > 0 \quad \text{per ogni } x \in [a, b] \\[4pt]
+f''(x) \geq 0 \quad \text{per ogni } x \in [a, b]
+\end{cases}
+$$
+Allora $f$ ha un *unico* zero $\xi$ in $(a, b)$, e la successione definita da
+$$
+x_0 = b , \qquad x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+$$
+è decrescente e converge a $\xi$. Il punto $x_{n+1}$ è l'intersezione con l'asse $x$ della retta tangente al grafico nel punto $(x_n, f(x_n))$, e per questo il procedimento si chiama anche **metodo delle tangenti**. Negli altri casi in cui $f'$ e $f''$ hanno segno costante vale lo stesso risultato, partendo dall'estremo in cui $f$ ha il segno di $f''$. Il metodo approssima le soluzioni delle equazioni non risolubili per via algebrica, e di solito raggiunge la stessa precisione del metodo di bisezione con un numero molto minore di passi.
+
+:::dimostrazione
+La funzione $f$ è continua e strettamente crescente in $[a, b]$, perché $f' > 0$, quindi per il **teorema degli zeri** ha uno zero $\xi \in (a, b)$, che è unico. Poiché $f'' \geq 0$, la funzione è convessa e il suo grafico sta sopra ogni retta tangente: per ogni $n$ tale che $x_n \in [a, b]$ vale
+$$
+f(x) \geq f(x_n) + f'(x_n)\,(x - x_n) \qquad \text{per ogni } x \in [a, b] .
+$$
+Si dimostra per induzione che $\xi \leq x_n \leq b$ per ogni $n$. Per $n = 0$ la proprietà è vera, perché $x_0 = b$. Sia ora $\xi \leq x_n \leq b$. Poiché $f$ è crescente, $f(x_n) \geq f(\xi) = 0$, quindi $x_{n+1} = x_n - \dfrac{f(x_n)}{f'(x_n)} \leq x_n \leq b$. Inoltre la disuguaglianza della tangente, calcolata in $x = \xi$, dà $0 = f(\xi) \geq f(x_n) + f'(x_n)\,(\xi - x_n)$; dividendo per $f'(x_n) > 0$ si ottiene $\xi \leq x_n - \dfrac{f(x_n)}{f'(x_n)} = x_{n+1}$. La successione è quindi decrescente e limitata inferiormente da $\xi$, e per il **teorema sulle successioni monotone** converge a un limite $\ell \in [\xi, b]$. Le funzioni $f$ e $f'$ sono continue e $f'(\ell) > 0$, perciò passando al limite nella relazione che definisce $x_{n+1}$ si ottiene $\ell = \ell - \dfrac{f(\ell)}{f'(\ell)}$, cioè $f(\ell) = 0$. Per l'unicità dello zero risulta $\ell = \xi$.
+:::
+::::
+
+:::richiamo{titolo="Teorema sulle successioni monotone"}
+Una successione monotona e limitata è convergente.
+:::
+
+:::esempio{titolo="Radice quadrata con il metodo di Newton"}
+Per $f(x) = x^2 - 2$ su $[1, 2]$ si ha $f(1) = -1 < 0 < 2 = f(2)$, $f'(x) = 2x > 0$ e $f''(x) = 2 > 0$, quindi le ipotesi sono soddisfatte e lo zero è $\sqrt{2}$. La formula diventa
+$$
+x_{n+1} = x_n - \frac{x_n^2 - 2}{2x_n} = \frac{1}{2} \left( x_n + \frac{2}{x_n} \right) ,
+$$
+e partendo da $x_0 = 2$ si ottiene
+$$
+x_1 = \frac{3}{2} , \qquad x_2 = \frac{17}{12} \approx 1{,}41667 , \qquad x_3 = \frac{577}{408} \approx 1{,}414216 .
+$$
+Poiché $\sqrt{2} = 1{,}414213\ldots$, il terzo termine ha già cinque cifre decimali esatte. Con $f(x) = x^2 - k$, $k > 0$, si ottiene la formula $x_{n+1} = \dfrac{1}{2} \left( x_n + \dfrac{k}{x_n} \right)$ per il calcolo approssimato di $\sqrt{k}$.
+:::
+
 ## Punti di flesso
 
 :::definizione{#punti-di-flesso titolo="Punto di flesso"}

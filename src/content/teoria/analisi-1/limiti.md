@@ -369,6 +369,47 @@ Senza continuità il teorema **non si applica**: $f(x) = -1$ per $x \in [0, 1)$ 
 
 :::
 
+::::teorema{#metodo-di-bisezione titolo="Metodo di bisezione"}
+Sia $f$ continua in $[a, b]$ con $f(a)\, f(b) < 0$. Si pone $a_0 = a$, $b_0 = b$ e, per ogni $n \geq 0$, si calcola il punto medio
+$$
+c_n = \frac{a_n + b_n}{2} .
+$$
+Se $f(c_n) = 0$, il punto $c_n$ è uno zero di $f$ e il procedimento termina. Altrimenti $f$ assume valori di segno opposto agli estremi di *uno solo* dei due intervalli $[a_n, c_n]$ e $[c_n, b_n]$, e quell'intervallo si prende come $[a_{n+1}, b_{n+1}]$. Se il procedimento non termina, le successioni $(a_n)$ e $(b_n)$ convergono allo stesso punto $\xi \in [a, b]$, risulta $f(\xi) = 0$ e
+$$
+|c_n - \xi| \leq \frac{b - a}{2^{n+1}} \qquad \text{per ogni } n .
+$$
+Il metodo calcola uno zero con l'approssimazione voluta: a ogni passo la stima dell'errore si dimezza, e il numero di passi necessari per un errore minore di $\varepsilon$ si ricava dalla disequazione $\dfrac{b - a}{2^{n+1}} < \varepsilon$. La dimostrazione è anche una seconda dimostrazione del teorema degli zeri.
+
+:::dimostrazione
+Per costruzione, per ogni $n$ valgono
+$$
+a_n \leq a_{n+1} \leq b_{n+1} \leq b_n , \qquad b_n - a_n = \frac{b - a}{2^n} , \qquad f(a_n)\, f(b_n) < 0 .
+$$
+La successione $(a_n)$ è crescente e limitata superiormente da $b$, la successione $(b_n)$ è decrescente e limitata inferiormente da $a$, quindi per il **teorema sulle successioni monotone** entrambe convergono. Siano $\xi$ e $\eta$ i loro limiti. Poiché $b_n - a_n \to 0$, si ha $\eta - \xi = 0$, quindi le due successioni hanno lo stesso limite $\xi$, che appartiene ad $[a, b]$. La funzione $f$ è continua in $\xi$, perciò $f(a_n) \to f(\xi)$ e $f(b_n) \to f(\xi)$, e il prodotto $f(a_n)\, f(b_n)$ tende a $f(\xi)^2$. I termini di questo prodotto sono tutti negativi, quindi il limite soddisfa $f(\xi)^2 \leq 0$, e ne segue $f(\xi) = 0$. Infine $\xi$ e $c_n$ appartengono entrambi ad $[a_n, b_n]$ e $c_n$ ne è il punto medio, quindi
+$$
+|c_n - \xi| \leq \frac{b_n - a_n}{2} = \frac{b - a}{2^{n+1}} .
+$$
+:::
+::::
+
+:::richiamo{titolo="Teorema sulle successioni monotone"}
+Una successione monotona e limitata è convergente.
+:::
+
+:::esempio{titolo="Calcolo approssimato di una radice quadrata"}
+Il numero $\sqrt{2}$ è lo zero positivo di $f(x) = x^2 - 2$, che è continua con $f(1) = -1 < 0$ e $f(2) = 2 > 0$. Il metodo di bisezione su $[1, 2]$ dà
+$$
+\begin{aligned}
+c_0 &= \frac{3}{2} , & f(c_0) &= \frac{1}{4} > 0 , & [a_1, b_1] &= \left[ 1, \frac{3}{2} \right] \\[8pt]
+c_1 &= \frac{5}{4} , & f(c_1) &= -\frac{7}{16} < 0 , & [a_2, b_2] &= \left[ \frac{5}{4}, \frac{3}{2} \right] \\[8pt]
+c_2 &= \frac{11}{8} , & f(c_2) &= -\frac{7}{64} < 0 , & [a_3, b_3] &= \left[ \frac{11}{8}, \frac{3}{2} \right] \\[8pt]
+c_3 &= \frac{23}{16} , & f(c_3) &= \frac{17}{256} > 0 , & [a_4, b_4] &= \left[ \frac{11}{8}, \frac{23}{16} \right] \\[8pt]
+c_4 &= \frac{45}{32} , & f(c_4) &= -\frac{23}{1024} < 0 , & [a_5, b_5] &= \left[ \frac{45}{32}, \frac{23}{16} \right]
+\end{aligned}
+$$
+Dopo cinque passi risulta $\dfrac{45}{32} \leq \sqrt{2} \leq \dfrac{23}{16}$, cioè $1{,}40625 \leq \sqrt{2} \leq 1{,}4375$, e il punto medio $c_5 = \dfrac{91}{64} \approx 1{,}4219$ approssima $\sqrt{2}$ con errore non superiore a $\dfrac{1}{64}$. Per un errore minore di $\dfrac{1}{1000}$ serve $2^{n+1} > 1000$, che è verificata a partire da $n = 9$, perché $2^{10} = 1024$. Lo stesso procedimento, applicato a $f(x) = x^2 - k$ con $k > 0$, approssima $\sqrt{k}$.
+:::
+
 ::::teorema{#teorema-di-weierstrass titolo="Teorema di Weierstrass"}
 Se $f$ è continua in $[a, b]$, ammette **massimo e minimo**: esistono $x_m, x_M \in [a, b]$ con $f(x_m) \leq f(x) \leq f(x_M)$ per ogni $x \in [a, b]$. Garantisce che il problema di massimo e minimo su un intervallo chiuso e limitato ha soluzione; con il calcolo differenziale si stabilisce dove cercarla.
 

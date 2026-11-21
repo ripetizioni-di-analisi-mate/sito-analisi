@@ -1,6 +1,6 @@
 ---
 titolo: Prodotto scalare, ortogonalità e teorema spettrale
-sommario: Il prodotto scalare standard, la norma e gli angoli, le basi ortonormali, le proiezioni ortogonali con il procedimento di Gram-Schmidt, le matrici ortogonali e la diagonalizzazione ortogonale delle matrici simmetriche.
+sommario: Il prodotto scalare standard, la norma e gli angoli, le basi ortonormali, le proiezioni ortogonali con il procedimento di Gram-Schmidt, i minimi quadrati, le matrici ortogonali, la diagonalizzazione ortogonale delle matrici simmetriche e le forme quadratiche.
 ---
 
 ## Prodotto scalare standard e norma
@@ -189,6 +189,43 @@ $$
 La differenza $v - P_W(v) = (-1, 2, 1)$ è ortogonale a entrambi i generatori, come prevede il teorema, e la distanza di $v$ da $W$ è $\|(-1, 2, 1)\| = \sqrt{6}$.
 :::
 
+::::teorema{#matrice-di-proiezione titolo="Matrice della proiezione ortogonale"}
+Sia $W \subseteq \mathbb{R}^n$ un sottospazio con base ortonormale $\{ q_1, \dots, q_k \}$ e sia $Q$ la matrice $n \times k$ che ha per colonne $q_1, \dots, q_k$. Allora, scrivendo i vettori in colonna,
+$$
+P_W(v) = Q Q^T v \qquad \text{per ogni } v \in \mathbb{R}^n ,
+$$
+cioè la proiezione ortogonale su $W$ è l'applicazione lineare che rispetto alla base canonica ha matrice $P = Q Q^T$. La matrice $P$ è simmetrica e soddisfa $P^2 = P$. I suoi autovalori sono $1$ e $0$. L'autospazio relativo a $1$ è $W$, quello relativo a $0$ è formato dai vettori ortogonali a $W$, e $P$ è diagonalizzabile. Per una retta $W = \langle u \rangle$ la formula diventa $P = \dfrac{u\, u^T}{u^T u}$. Se $W$ è il sottospazio dei vettori ortogonali a un vettore $n \neq 0$, cioè il sottospazio di equazione $\langle n, x \rangle = 0$, la proiezione si ottiene togliendo a $v$ la sua proiezione su $n$, quindi
+$$
+P = I_n - \frac{n\, n^T}{n^T n} .
+$$
+
+:::dimostrazione
+Il vettore $Q^T v$ ha per componenti i prodotti scalari $\langle q_1, v \rangle, \dots, \langle q_k, v \rangle$, quindi
+$$
+Q Q^T v = \langle v, q_1 \rangle\, q_1 + \dots + \langle v, q_k \rangle\, q_k ,
+$$
+che è la formula della proiezione su $W$ scritta con una base ortonormale, per la quale $\langle q_i, q_i \rangle = 1$. La matrice $P$ è simmetrica perché $(Q Q^T)^T = Q Q^T$. Le colonne di $Q$ sono ortonormali, quindi $Q^T Q = I_k$ e $P^2 = Q\,(Q^T Q)\,Q^T = Q Q^T = P$. Se $w \in W$, la sua proiezione su $W$ è $w$ stesso, perciò $P w = w$; se $v$ è ortogonale a $W$, allora $Q^T v = 0$ e $P v = 0$. Ogni vettore si scrive come $v = P_W(v) + \bigl( v - P_W(v) \bigr)$, somma di un vettore di $W$ e di un vettore ortogonale a $W$, quindi gli autovettori relativi a $1$ e a $0$ generano $\mathbb{R}^n$ e $P$ è diagonalizzabile. Per l'ultima formula, il vettore $v - \operatorname{pr}_n(v)$ è ortogonale a $n$, quindi appartiene a $W$, e la differenza fra $v$ e questo vettore è $\operatorname{pr}_n(v)$, che è ortogonale a $W$. Per l'unicità della proiezione risulta
+$$
+P_W(v) = v - \frac{\langle v, n \rangle}{\langle n, n \rangle}\, n = \left( I_n - \frac{n\, n^T}{n^T n} \right) v .
+$$
+:::
+::::
+
+:::esempio{titolo="Matrice della proiezione su un piano"}
+Sia $W$ il piano di $\mathbb{R}^3$ di equazione $x + y - 2z = 0$, con vettore normale $n = (1, 1, -2)$ e $n^T n = 6$. Allora
+$$
+P = I_3 - \frac{1}{6}
+\begin{pmatrix} 1 & 1 & -2 \\ 1 & 1 & -2 \\ -2 & -2 & 4 \end{pmatrix}
+= \frac{1}{6}
+\begin{pmatrix} 5 & -1 & 2 \\ -1 & 5 & 2 \\ 2 & 2 & 2 \end{pmatrix} .
+$$
+L'autovalore $1$ ha autospazio $W = \langle (1, -1, 0), (2, 0, 1) \rangle$ e l'autovalore $0$ ha autospazio $\langle (1, 1, -2) \rangle$. Una matrice che diagonalizza $P$ ha per colonne questi tre vettori:
+$$
+M = \begin{pmatrix} 1 & 2 & 1 \\ -1 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix} , \qquad
+M^{-1} P\, M = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} .
+$$
+:::
+
 ## Il procedimento di Gram-Schmidt
 
 ::::teorema{#gram-schmidt titolo="Procedimento di Gram-Schmidt"}
@@ -258,6 +295,59 @@ $$
 di dimensione $\operatorname{rk} A$. I due passaggi da forma parametrica a cartesiana e viceversa diventano così un calcolo di complementi: il piano $W = \{ x + y - z = 0 \}$ di $\mathbb{R}^3$ ha complemento $W^\perp = \langle (1, 1, -1) \rangle$, e il vettore $(1, 1, -1)$ è il vettore normale al piano.
 
 ::grafico{f="x/2;-2*x" vettori="0,0,2,1;0,0,-1,2,n" etichette="1.3,0.2,w;2.3,1.55,W;-0.7,2.7,W⊥" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="In $\mathbb{R}^2$ il complemento ortogonale della retta $W = \langle (2, 1) \rangle$ è la retta $W^\perp = \langle (-1, 2) \rangle$, di equazione $2x + y = 0$"}
+
+:::
+
+:::definizione{#minimi-quadrati titolo="Soluzione ai minimi quadrati"}
+Siano $A \in M_{m,n}(\mathbb{R})$ e $b \in \mathbb{R}^m$. Quando il sistema $Ax = b$ non ha soluzioni, si cerca il vettore $x$ per cui $Ax$ è il più vicino possibile a $b$. Un vettore $\hat{x} \in \mathbb{R}^n$ è una **soluzione ai minimi quadrati** del sistema se
+$$
+\|A\hat{x} - b\| \leq \|Ax - b\| \qquad \text{per ogni } x \in \mathbb{R}^n .
+$$
+Il nome viene dal fatto che $\|Ax - b\|^2$ è la somma dei quadrati degli scarti fra i due membri delle $m$ equazioni. Se il sistema è compatibile, le soluzioni ai minimi quadrati sono le soluzioni del sistema, perché per esse lo scarto è nullo.
+:::
+
+::::teorema{#equazioni-normali titolo="Equazioni normali"}
+Siano $A \in M_{m,n}(\mathbb{R})$ e $b \in \mathbb{R}^m$, e sia $W$ il sottospazio di $\mathbb{R}^m$ generato dalle colonne di $A$. Un vettore $\hat{x}$ è una soluzione ai minimi quadrati di $Ax = b$ *se e solo se* risolve il sistema delle **equazioni normali**
+$$
+A^T A\, \hat{x} = A^T b ,
+$$
+che è sempre compatibile; per ogni sua soluzione $A\hat{x} = P_W(b)$. Se le colonne di $A$ sono linearmente indipendenti, la matrice $A^T A$ è invertibile e la soluzione è unica:
+$$
+\hat{x} = (A^T A)^{-1} A^T b .
+$$
+Il teorema si usa per adattare un modello a dati sperimentali: i coefficienti incogniti del modello sono le componenti di $x$, ogni misura fornisce un'equazione, e le misure sono di solito più numerose dei coefficienti.
+
+:::dimostrazione
+I vettori $Ax$, al variare di $x \in \mathbb{R}^n$, sono le combinazioni lineari delle colonne di $A$, cioè i vettori di $W$. Per il teorema sulla **distanza da un sottospazio**, il vettore di $W$ più vicino a $b$ è $P_W(b)$, ed è l'unico. Quindi $\hat{x}$ è una soluzione ai minimi quadrati se e solo se $A\hat{x} = P_W(b)$, e un vettore $\hat{x}$ con questa proprietà esiste, perché $P_W(b) \in W$. Per il teorema sulla proiezione, l'uguaglianza $A\hat{x} = P_W(b)$ equivale a dire che $b - A\hat{x}$ è ortogonale a $W$, cioè a ogni colonna di $A$. I prodotti scalari delle colonne di $A$ con $b - A\hat{x}$ sono le componenti del vettore $A^T (b - A\hat{x})$, quindi la condizione si scrive $A^T (b - A\hat{x}) = 0$, cioè $A^T A\, \hat{x} = A^T b$. Siano ora le colonne di $A$ linearmente indipendenti e sia $A^T A\, x = 0$. Allora $\|Ax\|^2 = x^T A^T A\, x = 0$, quindi $Ax = 0$ e, per l'indipendenza delle colonne, $x = 0$. Il sistema omogeneo $A^T A\, x = 0$ ha solo la soluzione nulla, perciò la matrice quadrata $A^T A$ è invertibile.
+:::
+::::
+
+:::richiamo{titolo="Distanza da un sottospazio"}
+Se $W \subseteq \mathbb{R}^n$ è un sottospazio e $v \in \mathbb{R}^n$, allora $\|v - P_W(v)\| \leq \|v - w\|$ per ogni $w \in W$, con uguaglianza solo se $w = P_W(v)$.
+:::
+
+:::esempio{titolo="Retta ai minimi quadrati"}
+Si cerca la retta $y = c_0 + c_1 t$ che meglio approssima i punti $(0, 1)$, $(1, 2)$, $(2, 4)$. Imponendo il passaggio per i tre punti si ottiene un sistema incompatibile nelle incognite $c_0$, $c_1$:
+$$
+\begin{cases}
+c_0 = 1 \\
+c_0 + c_1 = 2 \\
+c_0 + 2c_1 = 4
+\end{cases}
+\qquad
+A = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix} , \quad
+b = \begin{pmatrix} 1 \\ 2 \\ 4 \end{pmatrix} .
+$$
+Si calcolano $A^T A = \begin{pmatrix} 3 & 3 \\ 3 & 5 \end{pmatrix}$ e $A^T b = \begin{pmatrix} 7 \\ 10 \end{pmatrix}$, quindi le equazioni normali sono
+$$
+\begin{cases}
+3c_0 + 3c_1 = 7 \\
+3c_0 + 5c_1 = 10
+\end{cases}
+$$
+Sottraendo la prima equazione dalla seconda si ottiene $2c_1 = 3$, quindi $c_1 = \dfrac{3}{2}$ e $c_0 = \dfrac{7}{3} - \dfrac{3}{2} = \dfrac{5}{6}$. La retta ai minimi quadrati è $y = \dfrac{5}{6} + \dfrac{3}{2}\, t$. Il vettore degli scarti $A\hat{x} - b = \left( -\dfrac{1}{6}, \dfrac{1}{3}, -\dfrac{1}{6} \right)$ è ortogonale alle due colonne di $A$, come prevede il teorema.
+
+::grafico{f="5/6+3*x/2" xmin=-0.5 xmax=2.8 ymin=-0.5 ymax=5.2 punti="0,1,pieno;1,2,pieno;2,4,pieno" titolo="La retta $y = \dfrac{5}{6} + \dfrac{3}{2}\, t$ rende minima la somma dei quadrati degli scarti verticali dai tre punti $(0, 1)$, $(1, 2)$, $(2, 4)$"}
 
 :::
 
@@ -443,4 +533,98 @@ $$
 x^T A x = \lambda_1 y_1^2 + \dots + \lambda_n y_n^2 ,
 $$
 quindi $x^T A x > 0$ per ogni $x \neq 0$ se e solo se tutti gli autovalori sono positivi. Su questo fatto si basano la classificazione dei punti critici con la matrice Hessiana e la riduzione a forma canonica, per la quale si rimanda all'argomento sulle coniche e quadriche.
+:::
+
+## Forme bilineari e forme quadratiche
+
+Il prodotto scalare è un caso particolare di forma bilineare simmetrica. Le forme quadratiche associate descrivono la parte di secondo grado delle equazioni di coniche e quadriche.
+
+:::definizione{#forma-bilineare titolo="Forma bilineare e matrice associata"}
+Una **forma bilineare** su $\mathbb{R}^n$ è una funzione $\varphi : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}$ lineare in ciascuno dei due argomenti:
+$$
+\begin{gathered}
+\varphi(\alpha u + \beta w, v) = \alpha\, \varphi(u, v) + \beta\, \varphi(w, v) , \\[6pt]
+\varphi(u, \alpha v + \beta w) = \alpha\, \varphi(u, v) + \beta\, \varphi(u, w) .
+\end{gathered}
+$$
+La forma è **simmetrica** se $\varphi(u, v) = \varphi(v, u)$ per ogni $u, v$. La **matrice associata** a $\varphi$ rispetto alla base canonica $\{ e_1, \dots, e_n \}$ è la matrice $A$ di elementi $a_{ij} = \varphi(e_i, e_j)$. Sviluppando $x = x_1 e_1 + \dots + x_n e_n$ e $y = y_1 e_1 + \dots + y_n e_n$ con la bilinearità si ottiene
+$$
+\varphi(x, y) = \sum_{i, j = 1}^{n} a_{ij}\, x_i\, y_j = x^T A\, y ,
+$$
+quindi la forma è determinata dalla sua matrice, ed è simmetrica *se e solo se* $A$ è simmetrica. Il prodotto scalare standard è la forma bilineare simmetrica di matrice $I_n$. La forma $\varphi(x, y) = x_1 y_1 + 2 x_1 y_2 + 2 x_2 y_1 - 3 x_2 y_2$ su $\mathbb{R}^2$ ha matrice $\begin{pmatrix} 1 & 2 \\ 2 & -3 \end{pmatrix}$ ed è simmetrica.
+:::
+
+::::teorema{#cambio-di-base-forma-bilineare titolo="Cambiamento di base per una forma bilineare"}
+Sia $\varphi$ una forma bilineare su $\mathbb{R}^n$ con matrice $A$ rispetto alla base canonica, e sia $\mathcal{B} = \{ v_1, \dots, v_n \}$ un'altra base. La matrice di $\varphi$ rispetto a $\mathcal{B}$, cioè la matrice di elementi $\varphi(v_i, v_j)$, è
+$$
+A' = P^T A\, P ,
+$$
+dove $P$ è la matrice invertibile che ha per colonne $v_1, \dots, v_n$. Due matrici legate da questa relazione si dicono **congruenti**. La regola è diversa da quella delle applicazioni lineari, per le quali la matrice diventa $P^{-1} A\, P$; le due regole coincidono quando $P$ è ortogonale, perché allora $P^T = P^{-1}$. Per questo motivo il teorema spettrale, che fornisce una matrice $P$ ortogonale, diagonalizza una matrice simmetrica sia come applicazione lineare sia come forma bilineare.
+
+:::dimostrazione
+Se $x'$ e $y'$ sono le colonne delle coordinate di due vettori rispetto a $\mathcal{B}$, le loro coordinate rispetto alla base canonica sono $x = P x'$ e $y = P y'$. Sostituendo si ottiene
+$$
+\varphi(x, y) = (P x')^T A\, (P y') = x'^T \left( P^T A\, P \right) y' ,
+$$
+quindi nelle coordinate rispetto a $\mathcal{B}$ la forma ha matrice $P^T A\, P$. Per $x' = e_i$ e $y' = e_j$ si ha $x = v_i$ e $y = v_j$, perciò l'elemento di posto $(i, j)$ di $P^T A\, P$ è $\varphi(v_i, v_j)$.
+:::
+::::
+
+:::definizione{#forma-quadratica titolo="Forma quadratica"}
+La **forma quadratica** associata a una forma bilineare simmetrica $\varphi$ di matrice $A$ è la funzione
+$$
+q(x) = \varphi(x, x) = x^T A\, x = \sum_{i = 1}^{n} a_{ii}\, x_i^2 + 2 \sum_{i < j} a_{ij}\, x_i\, x_j .
+$$
+È un polinomio omogeneo di secondo grado nelle componenti di $x$. Viceversa ogni polinomio omogeneo di secondo grado è una forma quadratica, e la sua matrice simmetrica si scrive mettendo sulla diagonale i coefficienti dei quadrati e, fuori dalla diagonale, la *metà* dei coefficienti dei prodotti misti:
+$$
+q(x, y) = 2x^2 + 6xy + y^2 \qquad \text{ha matrice} \qquad A = \begin{pmatrix} 2 & 3 \\ 3 & 1 \end{pmatrix} .
+$$
+La forma bilineare si ricostruisce dalla forma quadratica con la formula $\varphi(x, y) = \dfrac{1}{2} \bigl( q(x + y) - q(x) - q(y) \bigr)$. La parte di secondo grado dell'equazione di una conica o di una quadrica è una forma quadratica, e su questo si basa la loro classificazione, per la quale si rimanda all'argomento sulle coniche e quadriche.
+:::
+
+:::definizione{#segno-forma-quadratica titolo="Segno di una forma quadratica"}
+Una forma quadratica $q$ su $\mathbb{R}^n$, e la matrice simmetrica $A$ che la rappresenta, si dicono:
+
+- **definita positiva** se $q(x) > 0$ per ogni $x \neq 0$;
+- **semidefinita positiva** se $q(x) \geq 0$ per ogni $x$;
+- **definita negativa** se $q(x) < 0$ per ogni $x \neq 0$;
+- **semidefinita negativa** se $q(x) \leq 0$ per ogni $x$;
+- **indefinita** se assume sia valori positivi sia valori negativi.
+
+Una forma bilineare simmetrica è un **prodotto scalare** *se e solo se* la sua forma quadratica è definita positiva. Su $\mathbb{R}^2$ la forma $x^2 + y^2$ è definita positiva; la forma $x^2$ è semidefinita positiva e non definita, perché si annulla sui vettori $(0, y)$; la forma $x^2 - y^2$ è indefinita.
+:::
+
+::::teorema{#segno-e-autovalori titolo="Segno e autovalori"}
+Sia $A$ una matrice simmetrica reale di ordine $n$ con autovalori $\lambda_1, \dots, \lambda_n$, e sia $q(x) = x^T A\, x$. Allora $q$ è:
+
+- definita positiva *se e solo se* tutti gli autovalori sono positivi;
+- semidefinita positiva se e solo se tutti gli autovalori sono $\geq 0$;
+- definita negativa se e solo se tutti gli autovalori sono negativi, e semidefinita negativa se e solo se sono tutti $\leq 0$;
+- indefinita se e solo se $A$ ha un autovalore positivo e un autovalore negativo.
+
+Il segno si legge quindi dalle radici del polinomio caratteristico, senza calcolare gli autovettori. Per una matrice di ordine $2$ basta il determinante, che è il prodotto dei due autovalori. Se $\det A < 0$ gli autovalori hanno segno opposto e la forma è indefinita. Se $\det A > 0$ gli autovalori hanno lo stesso segno e da $a_{11}\, a_{22} > a_{12}^2 \geq 0$ segue che $a_{11}$ e $a_{22}$ hanno lo stesso segno, che è quello della traccia $\lambda_1 + \lambda_2$; perciò la forma è definita positiva se $a_{11} > 0$ e definita negativa se $a_{11} < 0$. In generale vale il **criterio dei minori principali**, che si enuncia senza dimostrazione. Sia $D_k$ il determinante della sottomatrice formata dalle prime $k$ righe e dalle prime $k$ colonne di $A$. La matrice $A$ è definita positiva se e solo se $D_1, \dots, D_n$ sono tutti positivi, ed è definita negativa se e solo se i segni si alternano a partire da $D_1 < 0$, cioè $D_1 < 0$, $D_2 > 0$, $D_3 < 0$ e così via.
+
+:::dimostrazione
+Per il **teorema spettrale** esiste una matrice ortogonale $P$ con $P^T A\, P = D$, dove $D$ è la matrice diagonale degli autovalori. Con il cambio di variabili $x = P y$ si ottiene
+$$
+q(x) = y^T P^T A\, P\, y = \lambda_1 y_1^2 + \dots + \lambda_n y_n^2 ,
+$$
+e $x \neq 0$ se e solo se $y \neq 0$, perché $P$ è invertibile. Se tutti gli autovalori sono positivi, la somma è positiva per ogni $y \neq 0$, quindi $q$ è definita positiva. Viceversa, se un autovalore $\lambda_i$ è $\leq 0$, il vettore $x = P e_i$ è non nullo e per esso $y = e_i$, quindi $q(x) = \lambda_i \leq 0$ e $q$ non è definita positiva. Gli altri casi si dimostrano allo stesso modo, scegliendo $y = e_i$ con $\lambda_i$ del segno voluto.
+:::
+::::
+
+:::richiamo{titolo="Teorema spettrale reale"}
+Se $A$ è una matrice simmetrica reale, esiste una matrice ortogonale $P$ tale che $P^T A\, P$ è diagonale, con gli autovalori di $A$ sulla diagonale.
+:::
+
+:::teorema{#segnatura titolo="Segnatura e teorema di Sylvester"}
+Sia $q$ una forma quadratica su $\mathbb{R}^n$ con matrice simmetrica $A$. In tutte le basi rispetto alle quali la matrice di $q$ è diagonale, il numero $p$ degli elementi diagonali positivi, il numero $r$ di quelli negativi e il numero di quelli nulli sono gli stessi (**teorema di Sylvester**, o legge di inerzia). La coppia $(p, r)$ è la **segnatura** di $q$, e $p + r = \operatorname{rk} A$. La diagonalizzazione ortogonale fornisce una di queste basi, quindi $p$ e $r$ sono il numero degli autovalori positivi e il numero degli autovalori negativi di $A$, contati con la loro molteplicità. La dimostrazione si omette. Due forme quadratiche si trasformano l'una nell'altra con un cambiamento di base se e solo se hanno la stessa segnatura. Una forma è definita positiva quando la segnatura è $(n, 0)$, ed è indefinita quando $p \geq 1$ e $r \geq 1$.
+:::
+
+:::esempio{titolo="Segno, segnatura e prodotto scalare non standard"}
+La forma $q(x, y, z) = x^2 + 2y^2 + 5z^2$ ha matrice diagonale con elementi $1$, $2$, $5$, tutti positivi, quindi è definita positiva e ha segnatura $(3, 0)$. La forma bilineare associata
+$$
+\langle u, v \rangle_{A} = u_1 v_1 + 2 u_2 v_2 + 5 u_3 v_3
+$$
+è perciò un prodotto scalare su $\mathbb{R}^3$, diverso da quello standard. Rispetto a questo prodotto scalare i vettori $(2, 1, 0)$ e $(1, -1, 0)$ sono ortogonali, perché $2 \cdot 1 + 2 \cdot 1 \cdot (-1) + 0 = 0$, mentre il loro prodotto scalare standard vale $1$. La forma $q(x, y) = 2x^2 + 6xy + y^2$ ha matrice $\begin{pmatrix} 2 & 3 \\ 3 & 1 \end{pmatrix}$ con determinante $2 - 9 = -7 < 0$, quindi i due autovalori hanno segno opposto e la forma è **indefinita**, con segnatura $(1, 1)$.
 :::
