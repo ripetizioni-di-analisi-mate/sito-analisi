@@ -74,7 +74,7 @@ Nel secondo conto $3\cdot10^{-6}$ è stato riscritto come $0{,}3\cdot10^{-5}$, e
 
 L'**ordine di grandezza** di un numero è la potenza di dieci più vicina a esso. Per trovarlo si scrive il numero come $a\cdot10^n$. Se $a$ è minore di $\sqrt{10}\simeq3{,}16$ l’ordine di grandezza è $10^n$, altrimenti è $10^{n+1}$. La soglia è $\sqrt{10}$ perché è il numero che sta a metà strada fra 1 e 10 quando si procede per moltiplicazioni: $1\cdot\sqrt{10}=\sqrt{10}$ e $\sqrt{10}\cdot\sqrt{10}=10$. Alcuni testi usano come soglia 5, quindi negli esercizi il criterio viene indicato.
 :::
-![La soglia fra due ordini di grandezza è la loro media geometrica, non la media aritmetica.](/figure/fisica-semestre-filtro/metodi-della-fisica/orders-it.svg)
+![Sulla scala da 10⁻⁶ a 10⁻⁵ metri, il punto 2 · 10⁻⁶ è a sinistra della soglia e il punto 6 · 10⁻⁶ è a destra.](/figure/fisica-semestre-filtro/metodi-della-fisica/orders-it.svg "Su una scala logaritmica, a distanze uguali corrispondono rapporti uguali. La soglia, espressa in metri, è la media geometrica $\sqrt{10^{-6}\cdot10^{-5}}=\sqrt{10}\cdot10^{-6}$.")
 
 :::osservazione{titolo="Stime e cifre significative"}
 La lunghezza $6\cdot10^{-6}\,\mathrm{m}$ ha ordine di grandezza $10^{-5}\,\mathrm{m}$, perché $6>3{,}16$. La lunghezza $2\cdot10^{-6}\,\mathrm{m}$ ha ordine di grandezza $10^{-6}\,\mathrm{m}$, perché $2<3{,}16$. Stimare l’ordine di grandezza di un risultato prima del calcolo permette di accorgersi di un errore di un fattore mille, come una conversione dimenticata.

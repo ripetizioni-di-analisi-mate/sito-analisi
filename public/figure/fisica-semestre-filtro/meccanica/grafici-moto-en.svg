@@ -1,33 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="en">
+<svg id="disegno" xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="en">
 <title id="title">Velocity, displacement and distance</title><desc id="desc">Velocity v=4−2t; positive area 4 m and negative area −1 m.</desc>
 <defs><marker id="a-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#17324d"/></marker><marker id="a-blue" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#1767a5"/></marker><marker id="a-green" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#087f75"/></marker><marker id="a-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#b35112"/></marker><marker id="a-grid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#dce5eb"/></marker><marker id="a-muted" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#526574"/></marker></defs>
-<rect width="780" height="520" fill="#fff"/>
-<g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
-<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="#17324d" font-weight="bold">Velocity, displacement and distance</text>
+
+<g fill="#17324d">
+<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="currentColor" font-weight="bold">Velocity, displacement and distance</text>
 <line x1="100.000" y1="100.000" x2="100.000" y2="400.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="100.00" y="430.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">0</text>
+<text x="100.00" y="430.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">0</text>
 <line x1="281.818" y1="100.000" x2="281.818" y2="400.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="281.82" y="430.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">1</text>
+<text x="281.82" y="430.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">1</text>
 <line x1="463.636" y1="100.000" x2="463.636" y2="400.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="463.64" y="430.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">2</text>
+<text x="463.64" y="430.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">2</text>
 <line x1="645.455" y1="100.000" x2="645.455" y2="400.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="645.45" y="430.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">3</text>
+<text x="645.45" y="430.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">3</text>
 <line x1="100.000" y1="379.452" x2="700.000" y2="379.452" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="386.45" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">-2</text>
+<text x="85.00" y="386.45" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">-2</text>
 <line x1="100.000" y1="297.260" x2="700.000" y2="297.260" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="304.26" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">0</text>
+<text x="85.00" y="304.26" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">0</text>
 <line x1="100.000" y1="215.068" x2="700.000" y2="215.068" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="222.07" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">2</text>
+<text x="85.00" y="222.07" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">2</text>
 <line x1="100.000" y1="132.877" x2="700.000" y2="132.877" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="139.88" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">4</text>
+<text x="85.00" y="139.88" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">4</text>
 <line x1="100.000" y1="297.260" x2="720.000" y2="297.260" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
 <line x1="100.000" y1="405.000" x2="100.000" y2="85.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
-<text x="728.00" y="430.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">t (s)</text>
-<text x="90.00" y="72.00" font-size="22" text-anchor="start" fill="#17324d" font-weight="normal">vₓ (m/s)</text>
+<text x="728.00" y="430.00" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">t (s)</text>
+<text x="90.00" y="72.00" font-size="22" text-anchor="start" fill="currentColor" font-weight="normal">vₓ (m/s)</text>
 <polygon points="100.000,297.260 100.000,132.877 463.636,297.260" stroke="#087f75" stroke-width="1" fill="#d8f0e8" stroke-linejoin="round"/>
 <polygon points="463.636,297.260 645.455,379.452 645.455,297.260" stroke="#b35112" stroke-width="1" fill="#fbe4ce" stroke-linejoin="round"/>
 <line x1="100.000" y1="132.877" x2="645.455" y2="379.452" stroke="#1767a5" stroke-width="4"/>
 <text x="227.27" y="256.16" font-size="26" text-anchor="middle" fill="#087f75" font-weight="normal">+4 m</text>
 <text x="600.00" y="338.36" font-size="24" text-anchor="middle" fill="#b35112" font-weight="normal">−1 m</text>
-<text x="390.00" y="485.00" font-size="25" text-anchor="middle" fill="#17324d" font-weight="normal">Δx = 3 m     •     distance = 5 m</text>
+<text x="390.00" y="485.00" font-size="25" text-anchor="middle" fill="currentColor" font-weight="normal">Δx = 3 m     •     distance = 5 m</text>
 </g></svg>

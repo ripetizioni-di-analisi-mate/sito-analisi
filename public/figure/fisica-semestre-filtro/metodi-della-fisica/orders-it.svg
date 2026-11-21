@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="390" height="385" viewBox="0 0 390 385" role="img" aria-labelledby="title"><title id="title">Scegliere una potenza di dieci</title><defs><marker id="a" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#183e58"/></marker></defs><rect width="390" height="385" fill="white"/><g font-family="DejaVu Sans,sans-serif"><text x="195" y="30" text-anchor="middle" font-size="19" fill="#183e58" font-weight="bold">Scegliere una potenza di dieci</text><text x="195" y="65" text-anchor="middle" font-size="14" fill="#183e58">Scala logaritmica; lunghezza in m</text><line x1="50" y1="156" x2="350" y2="156" stroke="#183e58" stroke-width="2" marker-end="url(#a)"/><line x1="50.0" y1="144" x2="50.0" y2="168" stroke="#183e58" stroke-width="2"/><text x="50.0" y="193" text-anchor="middle" font-size="14" fill="#183e58">10⁻⁶</text><line x1="200.0" y1="144" x2="200.0" y2="168" stroke="#183e58" stroke-width="2"/><text x="200.0" y="193" text-anchor="middle" font-size="14" fill="#183e58">√10 ×10⁻⁶</text><line x1="350.0" y1="144" x2="350.0" y2="168" stroke="#183e58" stroke-width="2"/><text x="350.0" y="193" text-anchor="middle" font-size="14" fill="#183e58">10⁻⁵</text><circle cx="140.30899869919438" cy="156" r="4" fill="#c5532e"/><text x="140.30899869919438" y="125" text-anchor="middle" font-size="14" fill="#c5532e">2 ×10⁻⁶</text><circle cx="283.4453751150931" cy="156" r="4" fill="#c5532e"/><text x="283.4453751150931" y="125" text-anchor="middle" font-size="14" fill="#c5532e">6 ×10⁻⁶</text><text x="195" y="255" text-anchor="middle" font-size="16" fill="#183e58">Soglia: media geometrica</text><text x="195" y="292" text-anchor="middle" font-size="16" fill="#183e58">√(10⁻⁶ ×10⁻⁵)=√10 ×10⁻⁶</text><text x="195" y="333" text-anchor="middle" font-size="14" fill="#183e58">Distanze uguali sul grafico,</text><text x="195" y="355" text-anchor="middle" font-size="14" fill="#183e58">uguali rapporti fra i valori.</text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" id="disegno" width="390" height="108" viewBox="0 0 390 108" role="img" aria-labelledby="title desc">
+  <title id="title">Scegliere una potenza di dieci</title>
+  <desc id="desc">La soglia fra 10⁻⁶ m e 10⁻⁵ m è la loro media geometrica. A distanze uguali sulla scala corrispondono rapporti uguali.</desc>
+  <text x="27" y="19" font-size="18" fill="var(--inchiostro-2, #59645f)">Lunghezza (m)</text>
+  <g stroke="currentColor" stroke-width="1.65" fill="none">
+    <path d="M50 58 H368 M363 55 L368 58 L363 61"/>
+    <path d="M50 52 V64 M200 50 V66 M350 52 V64"/>
+  </g>
+  <g fill="var(--c-definizione, #2f6f68)">
+    <circle cx="140.308999" cy="58" r="4"/>
+    <circle cx="283.445375" cy="58" r="4"/>
+    <g font-size="20" text-anchor="middle">
+      <text x="140.308999" y="43">2 · 10⁻⁶</text>
+      <text x="283.445375" y="43">6 · 10⁻⁶</text>
+    </g>
+  </g>
+  <g fill="currentColor" font-size="20" text-anchor="middle">
+    <text x="50" y="87">10⁻⁶</text>
+    <text x="200" y="87">√10 · 10⁻⁶</text>
+    <text x="350" y="87">10⁻⁵</text>
+  </g>
+</svg>

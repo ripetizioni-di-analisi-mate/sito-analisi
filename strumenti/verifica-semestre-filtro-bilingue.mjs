@@ -41,7 +41,7 @@ async function rendi(p, corpo) {
   const html = (await processore.render(corpo, { fileURL: pathToFileURL(resolve(p)) })).code;
   assert.ok(!html.includes('katex-error'), `${p}: errore KaTeX`);
   assert.ok(!/(?:^|\n)\s*:{2,3}(?:definizione|teorema|dimostrazione|esempio|soluzione|grafico|struttura)\b/.test(html), `${p}: direttiva non resa`);
-  for (const m of html.matchAll(/<img\b[^>]*src="([^"]+)"/g)) {
+  for (const m of html.matchAll(/<(?:img\b[^>]*?\bsrc|use\b[^>]*?\bhref)="([^"]+)"/g)) {
     const src = m[1];
     if (src.startsWith('/')) assert.ok(existsSync(join('public', src.split(/[?#]/)[0])), `${p}: immagine assente ${src}`);
   }
@@ -73,7 +73,7 @@ for (const slug of nomi.filter(s => !capitolo || s === capitolo)) {
       if (lingua === 'it') traduzioni.set('ancore', ancore(teoria.corpo));
       else assert.deepEqual(ancore(teoria.corpo), traduzioni.get('ancore'), `${slug}: ancore IT/EN diverse`);
       // Gli SVG prodotti da KaTeX (radicali e frecce) non sono figure didattiche.
-      const dati = { teoria: 1, svolti: 0, dafare: 0, domande: 0, esercizi: 0, paroleTeoria: parole(teoria.corpo), figureTeoria: (teoriaHtml.match(/<img\b/g) ?? []).length + (teoria.corpo.match(/<svg\b/g) ?? []).length, distribuzione: [0,0,0,0], spiegazioniQuiz: [], paroleSvolti: [] };
+      const dati = { teoria: 1, svolti: 0, dafare: 0, domande: 0, esercizi: 0, paroleTeoria: parole(teoria.corpo), figureTeoria: (teoriaHtml.match(/<img\b|<use\b[^>]*\bhref="\/figure\//g) ?? []).length + (teoria.corpo.match(/<svg\b/g) ?? []).length, distribuzione: [0,0,0,0], spiegazioniQuiz: [], paroleSvolti: [] };
       const testiQuiz = new Set(), sequenzaCorretta = [];
       for (const [tipo, quanti] of [['svolti',10], ['dafare',14], ['domande',90]]) {
         const cartella = join(root, tipo, materia, slug);

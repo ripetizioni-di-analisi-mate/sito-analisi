@@ -22,6 +22,7 @@ import { visit } from 'unist-util-visit';
 import { h } from 'hastscript';
 import { grafico } from './grafico.mjs';
 import { venn } from './venn.mjs';
+import { integraDiagramma } from './diagrammi-lezione.mjs';
 import { cursore } from './cursore.mjs';
 import { figura } from './figura.mjs';
 import { struttura } from './struttura.mjs';
@@ -85,6 +86,7 @@ export default function remarkBlocchi() {
   return (tree, file) => {
     const percorso = String(file?.path || file?.history?.[0] || '');
     const E = /content-fr[\\/]/.test(percorso) ? FR : /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-(en|us)[\\/]/.test(percorso) ? EN : IT;
+    const inTeoria = /[\\/]teoria[\\/]/.test(percorso);
     const traduciAssi = E === EN && /[\\/](analisi-3|statistica|matematica-finanziaria)[\\/]/.test(percorso);
     const schemaInglese = E === EN && /[\\/](statica|scienza-delle-costruzioni|idraulica)[\\/]/.test(percorso);
     // Numerazione: dentro ogni sezione (##), se ci sono almeno due definizioni/teoremi/proposizioni,
@@ -102,6 +104,10 @@ export default function remarkBlocchi() {
     }
     chiudi();
     visit(tree, (node) => {
+      if (node.type === 'paragraph') {
+        integraDiagramma(node, inTeoria);
+        return;
+      }
       if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura' || node.name === 'schema')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };

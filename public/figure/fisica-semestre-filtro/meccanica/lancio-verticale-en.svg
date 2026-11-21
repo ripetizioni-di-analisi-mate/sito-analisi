@@ -1,38 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="en">
+<svg id="disegno" xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="en">
 <title id="title">Vertical throw: height over time</title><desc id="desc">y=19.6t−4.9t², maximum19.6m at2s, height15m at1.03and2.97s.</desc>
 <defs><marker id="a-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#17324d"/></marker><marker id="a-blue" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#1767a5"/></marker><marker id="a-green" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#087f75"/></marker><marker id="a-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#b35112"/></marker><marker id="a-grid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#dce5eb"/></marker><marker id="a-muted" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#526574"/></marker></defs>
-<rect width="780" height="520" fill="#fff"/>
-<g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
-<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="#17324d" font-weight="bold">Vertical throw: height over time</text>
+
+<g fill="#17324d">
+<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="currentColor" font-weight="bold">Vertical throw: height over time</text>
 <line x1="100.000" y1="90.000" x2="100.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="100.00" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">0</text>
+<text x="100.00" y="450.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">0</text>
 <line x1="379.070" y1="90.000" x2="379.070" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="379.07" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">2</text>
+<text x="379.07" y="450.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">2</text>
 <line x1="658.140" y1="90.000" x2="658.140" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="658.14" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">4</text>
+<text x="658.14" y="450.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">4</text>
 <line x1="100.000" y1="420.000" x2="700.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="427.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">0</text>
+<text x="85.00" y="427.00" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">0</text>
 <line x1="100.000" y1="348.261" x2="700.000" y2="348.261" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="355.26" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">5</text>
+<text x="85.00" y="355.26" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">5</text>
 <line x1="100.000" y1="276.522" x2="700.000" y2="276.522" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="283.52" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">10</text>
+<text x="85.00" y="283.52" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">10</text>
 <line x1="100.000" y1="204.783" x2="700.000" y2="204.783" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="211.78" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">15</text>
+<text x="85.00" y="211.78" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">15</text>
 <line x1="100.000" y1="133.043" x2="700.000" y2="133.043" stroke="#dce5eb" stroke-width="1"/>
-<text x="85.00" y="140.04" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">20</text>
+<text x="85.00" y="140.04" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">20</text>
 <line x1="100.000" y1="420.000" x2="720.000" y2="420.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
 <line x1="100.000" y1="425.000" x2="100.000" y2="75.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
-<text x="728.00" y="450.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">t (s)</text>
-<text x="90.00" y="62.00" font-size="22" text-anchor="start" fill="#17324d" font-weight="normal">y (m)</text>
+<text x="728.00" y="450.00" font-size="22" text-anchor="end" fill="currentColor" font-weight="normal">t (s)</text>
+<text x="90.00" y="62.00" font-size="22" text-anchor="start" fill="currentColor" font-weight="normal">y (m)</text>
 <polyline points="100.000,420.000 103.488,413.014 106.977,406.115 110.465,399.304 113.953,392.581 117.442,385.946 120.930,379.399 124.419,372.940 127.907,366.569 131.395,360.285 134.884,354.090 138.372,347.982 141.860,341.962 145.349,336.030 148.837,330.186 152.326,324.430 155.814,318.762 159.302,313.181 162.791,307.689 166.279,302.284 169.767,296.967 173.256,291.739 176.744,286.597 180.233,281.544 183.721,276.579 187.209,271.702 190.698,266.912 194.186,262.211 197.674,257.597 201.163,253.071 204.651,248.633 208.140,244.283 211.628,240.021 215.116,235.847 218.605,231.760 222.093,227.762 225.581,223.851 229.070,220.028 232.558,216.293 236.047,212.646 239.535,209.087 243.023,205.616 246.512,202.232 250.000,198.937 253.488,195.729 256.977,192.609 260.465,189.577 263.953,186.634 267.442,183.777 270.930,181.009 274.419,178.329 277.907,175.736 281.395,173.232 284.884,170.815 288.372,168.486 291.860,166.245 295.349,164.092 298.837,162.027 302.326,160.050 305.814,158.160 309.302,156.359 312.791,154.645 316.279,153.019 319.767,151.481 323.256,150.031 326.744,148.669 330.233,147.395 333.721,146.209 337.209,145.110 340.698,144.099 344.186,143.177 347.674,142.342 351.163,141.595 354.651,140.936 358.140,140.364 361.628,139.881 365.116,139.486 368.605,139.178 372.093,138.958 375.581,138.827 379.070,138.783 382.558,138.827 386.047,138.958 389.535,139.178 393.023,139.486 396.512,139.881 400.000,140.364 403.488,140.936 406.977,141.595 410.465,142.342 413.953,143.177 417.442,144.099 420.930,145.110 424.419,146.209 427.907,147.395 431.395,148.669 434.884,150.031 438.372,151.481 441.860,153.019 445.349,154.645 448.837,156.359 452.326,158.160 455.814,160.050 459.302,162.027 462.791,164.092 466.279,166.245 469.767,168.486 473.256,170.815 476.744,173.232 480.233,175.736 483.721,178.329 487.209,181.009 490.698,183.777 494.186,186.634 497.674,189.578 501.163,192.609 504.651,195.729 508.140,198.937 511.628,202.232 515.116,205.616 518.605,209.087 522.093,212.646 525.581,216.293 529.070,220.028 532.558,223.851 536.047,227.762 539.535,231.760 543.023,235.847 546.512,240.021 550.000,244.283 553.488,248.633 556.977,253.071 560.465,257.597 563.953,262.211 567.442,266.912 570.930,271.702 574.419,276.579 577.907,281.544 581.395,286.598 584.884,291.739 588.372,296.967 591.860,302.284 595.349,307.689 598.837,313.181 602.326,318.762 605.814,324.430 609.302,330.186 612.791,336.030 616.279,341.962 619.767,347.982 623.256,354.090 626.744,360.285 630.233,366.569 633.721,372.940 637.209,379.399 640.698,385.946 644.186,392.581 647.674,399.304 651.163,406.115 654.651,413.014 658.140,420.000" stroke="#1767a5" stroke-width="4" fill="none" stroke-linejoin="round"/>
 <line x1="100.000" y1="204.783" x2="672.093" y2="204.783" stroke="#b35112" stroke-width="2" stroke-dasharray="7 5"/>
 <line x1="243.874" y1="420.000" x2="243.874" y2="204.783" stroke="#526574" stroke-width="2" stroke-dasharray="6 5"/>
 <circle cx="243.874" cy="204.783" r="5.000" fill="#b35112" stroke="#b35112" stroke-width="2"/>
-<text x="243.87" y="455.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">1.03</text>
+<text x="243.87" y="455.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">1.03</text>
 <line x1="514.266" y1="420.000" x2="514.266" y2="204.783" stroke="#526574" stroke-width="2" stroke-dasharray="6 5"/>
 <circle cx="514.266" cy="204.783" r="5.000" fill="#b35112" stroke="#b35112" stroke-width="2"/>
-<text x="514.27" y="455.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">2.97</text>
+<text x="514.27" y="455.00" font-size="22" text-anchor="middle" fill="currentColor" font-weight="normal">2.97</text>
 <circle cx="379.070" cy="138.783" r="5.000" fill="#1767a5" stroke="#1767a5" stroke-width="2"/>
-<text x="379.07" y="113.78" font-size="25" text-anchor="middle" fill="#17324d" font-weight="normal">19.6 m</text>
-<text x="390.00" y="495.00" font-size="24" text-anchor="middle" fill="#17324d" font-weight="normal">Same height: ascent and descent</text>
+<text x="379.07" y="113.78" font-size="25" text-anchor="middle" fill="currentColor" font-weight="normal">19.6 m</text>
+<text x="390.00" y="495.00" font-size="24" text-anchor="middle" fill="currentColor" font-weight="normal">Same height: ascent and descent</text>
 </g></svg>

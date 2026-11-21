@@ -331,6 +331,11 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .grafico .punto { fill: var(--accento); stroke: var(--carta); stroke-width: 1.5; }
 .grafico .punto.vuoto { fill: var(--carta); stroke: var(--accento); stroke-width: 2.2; }
 .grafico figcaption { font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); text-align: center; margin-top: 0.35rem; }
+.diagramma-lezione > svg { color: var(--inchiostro); font-family: var(--testo); }
+.diagramma-lezione > img,
+.testo-studio p > img[src^="/immagini/informatica/"] { display: block; width: min(100%, 40rem); height: auto; margin-inline: auto; }
+.testo-studio p > img[src^="/immagini/informatica/"] { margin-block: 0.75rem; }
+.diagramma-lezione figcaption { max-width: 36rem; margin-inline: auto; text-wrap: pretty; }
 .foto-tecnica > img { display: block; max-width: 100%; max-height: 30rem; width: auto; height: auto; margin: 0 auto; border-radius: var(--raggio); }
 
 /* ---------- esercizi ---------- */

@@ -4,6 +4,7 @@ import rehypeKatex from './src/plugins/rehype-katex-tex.mjs';
 import remarkDirective from 'remark-directive';
 import remarkBlocchi from './src/plugins/remark-blocchi.mjs';
 import remarkTracce from './src/plugins/remark-tracce.mjs';
+import { geometriaDiagramma } from './src/plugins/diagrammi-lezione.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { CATALOGO_USA_PUBBLICO, percorsoCatalogoUsa } from './src/data/cataloghi-studio.mjs';
@@ -14,8 +15,12 @@ const frammento = frammentoDaAmbiente();
 
 // Astro conserva in cache le pagine già rese e non si accorge se cambiano i plugin (figure, legende, blocchi):
 // se il codice dei plugin è cambiato dall'ultima build, la cache dei contenuti si svuota.
+// Le pagine incorporano anche le dimensioni degli SVG richiamati con <use>.
+const geometrie = fs.globSync('public/figure/**/*.svg').sort()
+  .map((file) => [file, ...(geometriaDiagramma(file) || [])].join(' '));
 const impronta = crypto.createHash('sha1')
   .update(fs.readdirSync('./src/plugins').sort().map((f) => fs.readFileSync(`./src/plugins/${f}`, 'utf8')).join('\n'))
+  .update(geometrie.join('\n'))
   .digest('hex');
 const fileImpronta = './node_modules/.astro/impronta-plugin';
 if ((fs.existsSync(fileImpronta) ? fs.readFileSync(fileImpronta, 'utf8') : '') !== impronta) {
