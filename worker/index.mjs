@@ -50,6 +50,7 @@ import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, av
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria, scontoInvito } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
+import { gestisciProvaSemrush } from './prova-semrush.mjs';
 import { creaTabellePacchetti, archivioPacchetti, completaPacchetto } from './pacchetti.mjs';
 import { creaTabelleStripeDigitale, archivioStripeDigitale, gestisciAcquisti, eventoDigitale, recuperaOrdiniDigitali } from './stripe-digitale.mjs';
 import { creaTabellePostvendita, archivioPostvendita, gestisciPostvendita, webhookPostvendita, sincronizzaPostvendita } from './stripe-postvendita.mjs';
@@ -1074,6 +1075,12 @@ export default {
     // ===== sconto di benvenuto: riga nella pagina Sblocca, elenco per Carmine (worker/benvenuto.mjs) =====
     if (p === '/api/benvenuto' || p === '/admin/benvenuto' || p === '/admin/benvenuto.csv') {
       const r = await gestisciBenvenuto(req, env, ctx, p, { aDO, json, leggiCookie, leggiToken, utenteCollegato });
+      if (r) return r;
+    }
+
+    // ===== prova di Semrush: pagina per Carmine (worker/prova-semrush.mjs) =====
+    if (p === '/admin/semrush') {
+      const r = await gestisciProvaSemrush(req, env, ctx, p, { leggiCookie, leggiToken });
       if (r) return r;
     }
 
