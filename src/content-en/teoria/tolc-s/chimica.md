@@ -6,223 +6,416 @@ sommario: "The structure of matter, reactions, amount of substance, solutions, a
 ## Matter, substances and changes
 
 :::definizione{#materia-e-miscele titolo="Pure substances and mixtures"}
-A **pure substance** has a definite chemical composition. An element contains atoms with the same number of protons; a compound contains different elements combined in definite ratios. Molecular oxygen $\mathrm{O_2}$ is an elemental substance, whereas water $\mathrm{H_2O}$ is a compound. The number of atoms in a molecule does not determine how many elements are present.
+Matter is made of **atoms**. Each kind of atom is an **element** and has a symbol of one or two letters, such as H for hydrogen, O for oxygen, Na for sodium. A **molecule** is a group of atoms bonded together. In its formula the number at the lower right of a symbol counts that element's atoms: the water molecule $\mathrm{H_2O}$ has two hydrogen atoms and one oxygen atom.
 
-A **mixture** contains several substances in variable proportions. A phase is a macroscopically homogeneous portion of a system. Water and completely dissolved salt form a one-phase solution; separated water and oil form two phases. Ice and liquid water also form two phases, although they are the same substance. Therefore, the number of components and the number of phases describe different properties.
+A **pure substance** has a fixed composition. It is an **elemental substance** if it contains one element only, like oxygen $\mathrm{O_2}$, with two identical atoms in its molecule. It is a **compound** if it contains different elements always combined in the same ratio, like water.
+
+A **mixture** contains several substances in variable proportions, like salt water. A **phase** is a portion of matter with the same properties at every point, and the number of phases is independent of the number of substances.
+
+- Water and dissolved salt are two substances in one phase.
+- Water and oil are two substances in two phases.
+- Liquid water and ice are one substance in two phases.
+
+A single-phase mixture is called homogeneous, or a **solution**; with several phases it is heterogeneous.
 :::
 
 :::osservazione{titolo="From particles to observable properties"}
-In a solid, particles vibrate about relatively stable positions; in a liquid they can move past one another while remaining close; in a gas they occupy a much larger volume and move freely between collisions. Melting and evaporation change the arrangement of particles. Electrolysis of water instead produces different substances, hydrogen and oxygen, and is therefore a chemical change. During boiling of pure water, the molecules remain predominantly $\mathrm{H_2O}$.
+The three **states of matter** differ in how their particles are arranged.
 
-Filtration separates an insoluble solid from a liquid because the filter retains solid particles. Distillation uses differences in volatility and can, for example, recover water from a salt solution. Dissolved salt passes through an ordinary filter along with the water. In a mixture of liquids, distillation may enrich one component without necessarily producing a perfectly pure substance.
+- In a solid the particles vibrate about fixed positions, so the solid has its own shape.
+- In a liquid they stay close and slide past one another, so the liquid takes the shape of its container.
+- In a gas they are far apart and move freely, so the gas fills the whole container.
+
+A **physical change** rearranges the particles and leaves them unchanged. Melting, from solid to liquid, and evaporation, from liquid to gas, are physical changes: the vapour from boiling water is still made of $\mathrm{H_2O}$ molecules. A **chemical change**, or reaction, produces substances different from the initial ones. In electrolysis an electric current turns water into two gases, hydrogen $\mathrm{H_2}$ and oxygen $\mathrm{O_2}$, so it is a chemical change.
+
+Substances in a mixture are separated by physical methods.
+
+- **Filtration** separates an undissolved solid from a liquid, like sand from water, because the filter's holes are smaller than the grains. Dissolved salt is divided into particles much smaller than the holes, so it passes through with the water.
+- **Distillation** separates substances of different volatility, i.e. different tendency to become vapour. When salt water is heated, the water becomes vapour, which is cooled and collected, while the salt stays in the container. With two liquids of similar volatility the collected liquid is richer in the more volatile one, but still contains some of the other.
 :::
 
 :::teorema{#conservazione-massa titolo="Conservation of mass"}
-In an ordinary chemical change, the total mass of a closed system is conserved. Atoms rearrange, and the number of atoms of each element remains unchanged. If $12\,\mathrm g$ of carbon react completely with $32\,\mathrm g$ of oxygen to form a single product, the product has a mass of $44\,\mathrm g$. Gas can escape from an open container: a decrease in measured mass concerns the part left in the container, not the whole system including the escaped gas.
+In a chemical reaction the atoms of each element stay the same, in the same number, and the bonds between them change. The initial substances are called **reactants**, those formed **products**. Since the atoms are the same before and after, the total mass of the products equals the total mass of the reactants consumed. The law holds in a closed system, i.e. a container that matter does not leave.
+
+If $12\,\mathrm g$ of carbon react completely with $32\,\mathrm g$ of oxygen and form only carbon dioxide $\mathrm{CO_2}$, the mass obtained is $12\,\mathrm g+32\,\mathrm g=44\,\mathrm g$. In an open container a gas produced by the reaction escapes, and the balance then shows a smaller mass; the difference is the mass of escaped gas.
 :::
 
 ## Atoms, isotopes and the periodic table
 
 :::definizione{#atomi-isotopi titolo="Atomic number and mass number"}
-The nucleus contains positively charged protons and electrically neutral neutrons; electrons have negative charge and much smaller mass. The **atomic number** $Z$ counts protons and identifies the element. The **mass number** $A$ counts protons and neutrons, so the number of neutrons is $A-Z$. A neutral atom contains $Z$ electrons.
+At the centre of an atom is the **nucleus**, made of positively charged protons and uncharged neutrons. Negatively charged electrons move around it. An electron's mass is about $1800$ times smaller than that of a proton or neutron, so almost all the atom's mass is in the nucleus.
 
-In the notation $^{A}_{Z}\mathrm X$, isotopes of the same element have the same $Z$ and different $A$. For example, $^{16}_{8}\mathrm O$ contains eight neutrons and $^{18}_{8}\mathrm O$ contains ten. An ion forms by gaining or losing electrons. The ion $^{35}_{17}\mathrm{Cl^-}$ contains seventeen protons, eighteen neutrons and eighteen electrons; its negative charge indicates one extra electron compared with the neutral atom.
+The **atomic number** $Z$ is the number of protons and identifies the element: every atom with $Z=8$ is an oxygen atom. The **mass number** $A$ is the sum of protons and neutrons, so the number of neutrons is $A-Z$. A neutral atom has as many electrons as protons, namely $Z$. The two numbers are written left of the symbol, $A$ above and $Z$ below: $^{A}_{Z}\mathrm X$.
+
+**Isotopes** are atoms of the same element with different numbers of neutrons, i.e. the same $Z$ and different $A$. Oxygen $^{16}_{8}\mathrm O$ has $16-8=8$ neutrons, oxygen $^{18}_{8}\mathrm O$ has $18-8=10$.
+
+An **ion** is an atom, or group of atoms, that has gained or lost electrons and so has a charge, written at the upper right of the symbol. It is a **cation** if positive, an **anion** if negative. The chloride ion $^{35}_{17}\mathrm{Cl^-}$ has $17$ protons and $35-17=18$ neutrons; the charge $-1$ means one electron more than the protons, so there are $17+1=18$ electrons.
 :::
 
 :::esempio{titolo="Average mass of an element"}
-An element has two isotopes with approximate masses $20\,\mathrm u$ and $22\,\mathrm u$, with abundances of $75\%$ and $25\%$. The average atomic mass accounts for these abundances:
+Atomic masses are measured in **atomic mass units**, symbol $\mathrm u$: $1\,\mathrm u$ is one twelfth of the mass of a carbon atom $^{12}_{6}\mathrm C$, about the mass of a proton or neutron. In nature an element is a mixture of its isotopes, each in a fixed percentage called its abundance, and its **atomic mass** is the abundance-weighted average of the isotope masses.
+
+Suppose an element has two isotopes of mass $20\,\mathrm u$ and $22\,\mathrm u$, with abundances $75\%$ and $25\%$. Out of $100$ atoms, $75$ have mass $20\,\mathrm u$ and $25$ have mass $22\,\mathrm u$, so the average mass is
 $$
-\overline m=20\cdot0.75+22\cdot0.25=20.5\,\mathrm u.
+\overline m=\frac{75\cdot20\,\mathrm u+25\cdot22\,\mathrm u}{100}=\frac{1500\,\mathrm u+550\,\mathrm u}{100}=20.5\,\mathrm u.
 $$
-The result is closer to $20\,\mathrm u$ because this isotope is more abundant. The mass number of an individual atom is an integer; the average mass of a collection of isotopes can be noninteger. Relative atomic mass is the ratio to the atomic mass unit and is therefore dimensionless.
+The result is closer to $20\,\mathrm u$ because the lighter isotope is the more abundant. An atom's mass number is a whole number, whereas the average mass is generally a decimal. Relative atomic mass is the ratio of the average mass to $1\,\mathrm u$, so it is the same number, $20.5$, with no unit.
 :::
 
 :::definizione{#periodicita titolo="Valence electrons and periodicity"}
-The outermost electrons participate in bond formation and are called **valence electrons**. In the main groups, elements in the same column have similar outer electron configurations. Sodium and potassium tend to lose one electron and form cations with charge $+1$. For main-group elements, the period indicates the outermost occupied principal shell in the ground state.
+An atom's electrons occupy **shells** lying further and further from the nucleus: the first holds at most $2$ electrons, the second $8$. The **valence electrons** are those of the outermost shell and form bonds with other atoms. Sodium, with $Z=11$, has its electrons distributed as $2$, $8$, $1$, so it has one valence electron.
 
-Atomic radius tends to increase down a group because more distant shells become occupied. Across a period it tends to decrease, while ionization energy and electronegativity generally increase. Ionization energy concerns removing an electron from an isolated gaseous atom; electronegativity concerns attracting bonding electrons. These are general trends with exceptions, rather than absolute rules for every pair of elements.
+In the **periodic table** the elements are in order of atomic number; the rows are called **periods**, the columns **groups**. The period number is the number of occupied shells, so sodium is in the third period. In the main groups (1, 2 and 13 to 18) elements of the same group have the same number of valence electrons, helium being the only exception, and hence similar chemical properties. Sodium and potassium, in group 1, tend to lose their valence electron and form the cations $\mathrm{Na^+}$ and $\mathrm{K^+}$.
+
+Three properties change in a regular way across the table.
+
+- The **atomic radius** increases down a group, because a shell is added at each period. It decreases from left to right across a period, because the protons increase and attract the same shell's electrons more strongly.
+- **Ionization energy** is the energy needed to remove an electron from an isolated gaseous atom.
+- **Electronegativity** is an atom's tendency to attract the electrons of a bond.
+
+The last two increase where the radius decreases, i.e. from left to right across a period and from bottom to top in a group, because in a smaller atom the outer electrons are closer to the nucleus. These are general trends, with some exceptions between neighbouring elements.
 :::
 
 ## Bonds and molecular shape
 
 :::definizione{#legami titolo="Ionic, covalent and metallic bonding"}
-In **ionic bonding**, electrostatic attraction holds oppositely charged ions together. Solid sodium chloride is an extended lattice: $\mathrm{NaCl}$ states the ratio between ions, not a collection of isolated molecules. An ionic crystal conducts poorly because the ions are constrained; when molten or dissolved, if its ions are mobile, it can conduct electric current.
+A **chemical bond** is the attraction that holds two atoms together.
 
-In **covalent bonding**, two atoms share one or more electron pairs. Single, double and triple bonds involve one, two and three shared pairs, respectively. In $\mathrm{H_2}$, electrons are attracted by both nuclei. In metals, delocalized electrons can move through the material and explain conductivity even in the solid state.
+An **ionic bond** is the attraction between oppositely charged ions. It forms between a metal, which loses electrons, and a non-metal, which gains them; in the periodic table metals are on the left and in the centre, non-metals on the right. In table salt, sodium chloride $\mathrm{NaCl}$, each sodium atom gives one electron to a chlorine atom, and the ions $\mathrm{Na^+}$ and $\mathrm{Cl^-}$ alternate in an ordered structure, the **crystal lattice**. The formula states the one-to-one ion ratio, because the solid is a single extended lattice, with no separate molecules. An electric current is a movement of charges. In solid salt the ions are fixed, so the solid conducts poorly; in molten or dissolved salt the ions move, so the liquid conducts.
+
+A **covalent bond** is the sharing of one or more electron pairs between two atoms, usually non-metals. The shared electrons are attracted by both nuclei. The bond is single with one shared pair, double with two, triple with three, as in the molecules $\mathrm{H_2}$, $\mathrm{O_2}$ and $\mathrm{N_2}$.
+
+In a **metallic bond** the valence electrons move freely through the whole piece of metal and are called delocalized, so a copper wire conducts electricity even when solid.
 :::
 
 :::definizione{#polarita titolo="Polarity and intermolecular forces"}
-A bond is polar when its shared electrons are distributed asymmetrically. A molecule's overall polarity also depends on geometry. In $\mathrm{CO_2}$, the two polar bonds are aligned and their dipoles cancel; in water, the bent shape prevents cancellation. The arrows in the diagram show only the directions of the contributions to polarity, not electron paths.
+In a covalent bond between different atoms, the more electronegative atom attracts the shared electrons more strongly and acquires a small negative charge, while the other acquires a positive one. The bond is then called **polar**. The pair of opposite charges is a **dipole** and is represented by an arrow pointing towards the more electronegative atom. A molecule is **polar** when its bond arrows, added with their directions, have a non-zero sum.
+
+- Carbon dioxide is linear, with the carbon between the two oxygen atoms. In the figure each arrow goes from the carbon towards an oxygen, which is more electronegative. The two arrows are equal and opposite, so their sum is zero and the molecule is non-polar.
+- Water is bent: the two bonds between oxygen and hydrogen form an angle of about $105^\circ$. The two arrows have different directions, so their sum is non-zero and the molecule is polar.
 
 ::grafico{assi=0 xmin=-2.5 xmax=2.5 ymin=-1 ymax=1.5 punti="-1.5,0,pieno,O;0,0,pieno,C;1.5,0,pieno,O" vettori="0,0,-1.1,0;0,0,1.1,0" uguale=1 legenda=0 titolo="Linear CO2: the two opposite contributions to polarity cancel."}
 
-Dispersion forces act between molecules, along with dipole interactions in polar molecules. A hydrogen bond forms when hydrogen bonded to a strongly electronegative atom, typically N, O or F, interacts with an available electron pair. These attractions contribute to water's high boiling point. Vaporizing water separates molecules by overcoming intermolecular attractions; breaking O–H bonds requires a different change.
+**Intermolecular forces** are attractions between neighbouring molecules, much weaker than covalent bonds. **Dispersion forces** act between all molecules, **dipole forces** only between polar molecules. The **hydrogen bond**, the strongest, forms between a hydrogen bonded to nitrogen, oxygen or fluorine and an unshared electron pair on an N, O or F atom of another molecule.
+
+Boiling moves the molecules apart, so it overcomes intermolecular forces and leaves the bonds inside the molecules intact. Because of hydrogen bonds water boils at $100\,{}^\circ\mathrm C$, whereas methane $\mathrm{CH_4}$, of similar mass and with dispersion forces only, boils at $-162\,{}^\circ\mathrm C$.
 :::
 
 :::osservazione{titolo="Structure and allotropy"}
-Diamond and graphite show that one element can form different structures, called allotropes. Diamond bonds form a three-dimensional network; graphite is organized in layers. Properties also depend on this structure, without any change in atomic number.
+**Allotropes** are different elemental substances of the same element, like diamond and graphite for carbon. In diamond each atom is bonded to four others in a three-dimensional network, and the material is extremely hard. In graphite each atom is bonded to three others in layers that slide over one another, and the material is soft. The atoms are the same, so the difference depends only on the structure.
 :::
 
 ## Formulas, nomenclature and reactions
 
 :::definizione{#formule titolo="Subscripts, coefficients and neutrality"}
-Subscripts state how many atoms of each element make up a molecule or formula unit. A coefficient multiplies the whole formula: $3\mathrm{Ca(NO_3)_2}$ represents three units containing, in total, three calcium atoms, six nitrogen atoms and eighteen oxygen atoms. The outer subscript multiplies every atom in the enclosed group.
+Two kinds of numbers appear in a formula.
 
-The formula of a neutral ionic compound must balance charges. With $\mathrm{Al^{3+}}$ and $\mathrm{O^{2-}}$, two cations supply $+6$ and three anions supply $-6$, so the empirical formula is $\mathrm{Al_2O_3}$. The smallest integers express the lattice ratio. For a molecular compound, the empirical formula may differ from the molecular formula: $\mathrm{CH_2O}$ is the empirical formula of $\mathrm{C_6H_{12}O_6}$.
+- The **subscript**, at the lower right of a symbol, states how many atoms of that element there are. After a group of atoms in round brackets, it multiplies every atom in the group.
+- The **coefficient**, in front of the formula, states how many molecules are considered and multiplies every atom. For an ionic compound, which has no molecules, it counts the **formula units**, i.e. the groups of ions written in the formula.
+
+In $3\,\mathrm{Ca(NO_3)_2}$, three units of calcium nitrate, one unit contains $1$ calcium atom, $1\cdot2=2$ nitrogen atoms and $3\cdot2=6$ oxygen atoms. The three units therefore contain $3$ calcium atoms, $3\cdot2=6$ nitrogen atoms and $3\cdot6=18$ oxygen atoms.
+
+An ionic compound is neutral, so in its formula the charges add up to zero. With the ions $\mathrm{Al^{3+}}$ and $\mathrm{O^{2-}}$ the least common multiple of $3$ and $2$ is $6$. Two aluminium ions carry $2\cdot(+3)=+6$ and three oxide ions carry $3\cdot(-2)=-6$, so the formula is $\mathrm{Al_2O_3}$.
+
+The **molecular formula** gives the actual number of atoms in the molecule; the **empirical formula** gives their ratio in the smallest whole numbers. Glucose has molecular formula $\mathrm{C_6H_{12}O_6}$, and dividing the subscripts by $6$ gives the empirical formula $\mathrm{CH_2O}$. An ionic compound's formula is an empirical formula, because it expresses the proportion between the lattice ions.
 :::
 
 :::osservazione{titolo="Names and composition"}
-Names describe a compound's composition or class. $\mathrm{CO}$ is carbon monoxide and $\mathrm{CO_2}$ is carbon dioxide. $\mathrm{NaOH}$ is sodium hydroxide, $\mathrm{NaCl}$ sodium chloride and $\mathrm{CaCO_3}$ calcium carbonate. When a metal has several oxidation states, a Roman numeral prevents ambiguity: $\mathrm{FeCl_2}$ is iron(II) chloride and $\mathrm{FeCl_3}$ iron(III) chloride. In traditional nomenclature, these compounds are ferrous chloride and ferric chloride.
+The name of a compound describes its composition.
+
+- $\mathrm{CO}$ is carbon monoxide and $\mathrm{CO_2}$ is carbon dioxide: the prefixes mono- and di- count the oxygen atoms.
+- $\mathrm{NaCl}$ is sodium chloride, from the name of the chloride ion $\mathrm{Cl^-}$.
+- $\mathrm{NaOH}$ is sodium hydroxide, from the name of the hydroxide ion $\mathrm{OH^-}$.
+- $\mathrm{CaCO_3}$ is calcium carbonate, from the name of the carbonate ion $\mathrm{CO_3^{2-}}$.
+
+Iron forms two cations, $\mathrm{Fe^{2+}}$ and $\mathrm{Fe^{3+}}$, and a Roman numeral states the charge: $\mathrm{FeCl_2}$ is iron(II) chloride, $\mathrm{FeCl_3}$ is iron(III) chloride. The traditional names are ferrous chloride and ferric chloride, with -ous for the lower charge and -ic for the higher.
 :::
 
 :::teorema{#bilanciamento titolo="Stoichiometric coefficients"}
-A balanced equation conserves atoms of each element and total electric charge. For complete combustion of methane:
+A **chemical equation** has the reactants' formulas left of the arrow and the products' formulas on the right. Since atoms are conserved, each element has the same number of atoms on the two sides, and the total charge is also the same. **Balancing** the equation means choosing the coefficients, called **stoichiometric**, that make these numbers equal. The subscripts stay fixed, because changing a subscript changes the substance: $\mathrm{H_2O}$ is water, $\mathrm{H_2O_2}$ is hydrogen peroxide.
+
+Methane $\mathrm{CH_4}$ burns with oxygen and forms carbon dioxide and water: $\mathrm{CH_4+O_2\to CO_2+H_2O}$. One element is balanced at a time.
+
+1. Carbon: there is $1$ atom on each side, so $\mathrm{CH_4}$ and $\mathrm{CO_2}$ have coefficient $1$.
+2. Hydrogen: there are $4$ atoms on the left and $2$ in each $\mathrm{H_2O}$, so $2$ water molecules are needed.
+3. Oxygen: on the right there are $2$ atoms in $\mathrm{CO_2}$ and $2$ in the two water molecules, that is $4$, so $2$ molecules of $\mathrm{O_2}$ are needed.
+
 $$
 \mathrm{CH_4}+2\mathrm{O_2}\longrightarrow\mathrm{CO_2}+2\mathrm{H_2O}.
 $$
-Carbon requires one carbon dioxide molecule; the four hydrogen atoms require two water molecules. There are four oxygen atoms on the right, so two $\mathrm{O_2}$ molecules are needed. Changing a subscript would change the identity of a substance. Coefficients describe ratios of particle numbers and of amounts in moles, whereas mass ratios also depend on molar masses.
 :::
 
 ## The mole and quantities in reactions
 
 :::definizione{#mole titolo="Amount of substance and molar mass"}
-The **mole** is the unit of amount of substance. One mole contains exactly $6.02214076\cdot10^{23}$ specified entities. Exercises may use a stated approximation of the Avogadro constant $N_A$. The counted entity must be specified: water molecules, hydrogen atoms and chloride ions are different counts.
+The **amount of substance** $n$ measures the number of particles in a sample, and its unit is the **mole**, symbol $\mathrm{mol}$. One mole contains exactly $6.02214076\cdot10^{23}$ particles; exercises use the rounded value $6.022\cdot10^{23}$. This number per mole is the **Avogadro constant**, $N_A=6.022\cdot10^{23}\,\mathrm{mol^{-1}}$. The number $N$ of particles in $n$ moles is
+$$
+N=nN_A.
+$$
+In $2\,\mathrm{mol}$ of water there are $2\cdot6.022\cdot10^{23}=1.204\cdot10^{24}$ molecules. Each $\mathrm{H_2O}$ molecule has two hydrogen atoms, so the same $2\,\mathrm{mol}$ of molecules contain $2\cdot2=4\,\mathrm{mol}$ of hydrogen atoms. An amount in moles therefore always refers to a stated kind of particle: molecules, atoms or ions.
 
-Molar mass $M$ is mass per mole. If $m$ is mass and $N$ is the number of entities:
+**Molar mass** $M$ is the mass of one mole, measured in grams per mole, $\mathrm{g/mol}$. Its numerical value is the mass of one particle in $\mathrm u$: a carbon atom has mass $12\,\mathrm u$ and a mole of carbon has mass $12\,\mathrm g$. For a compound the molar masses of the atoms are added. With the rounded values $1$, $12$ and $16\,\mathrm{g/mol}$ for hydrogen, carbon and oxygen:
 $$
-n=\frac mM,\qquad N=nN_A.
+M(\mathrm{H_2O})=2\cdot1+16=18\,\mathrm{g/mol},\qquad M(\mathrm{CO_2})=12+2\cdot16=44\,\mathrm{g/mol}.
 $$
-With $M(\mathrm{H_2O})=18\,\mathrm{g/mol}$, $36\,\mathrm g$ of water correspond to $2\,\mathrm{mol}$ of molecules. Each molecule contains two hydrogen atoms, so the sample contains $4\,\mathrm{mol}$ of hydrogen atoms. Adding the atomic masses in the formula determines molar mass: for $\mathrm{CO_2}$, this gives $12+2\cdot16=44\,\mathrm{g/mol}$ using the stated rounded values.
+The moles in a mass $m$ are
+$$
+n=\frac mM.
+$$
+In $36\,\mathrm g$ of water there are $n=\dfrac{36\,\mathrm g}{18\,\mathrm{g/mol}}=2\,\mathrm{mol}$ of molecules. Conversely, the mass is $m=nM$.
 :::
 
 :::teorema{#stechiometria titolo="Limiting reactant and yield"}
-For a reaction $aA+bB\to cC$, the amounts consumed or produced are proportional to the coefficients. If the reaction proceeds until the limiting reactant is fully consumed, comparing $\dfrac{n_A}{a}$ and $\dfrac{n_B}{b}$ determines which reactant runs out first.
+The coefficients of a balanced equation are also mole ratios. The equation $\mathrm{N_2}+3\mathrm{H_2}\to2\mathrm{NH_3}$ reads as follows: $1\,\mathrm{mol}$ of nitrogen reacts with $3\,\mathrm{mol}$ of hydrogen and forms $2\,\mathrm{mol}$ of ammonia. Mass ratios are different and are obtained with the molar masses: $1\,\mathrm{mol}$ of $\mathrm{N_2}$ has mass $2\cdot14=28\,\mathrm g$ and $3\,\mathrm{mol}$ of $\mathrm{H_2}$ have mass $3\cdot2=6\,\mathrm g$.
 
-In $\mathrm{N_2}+3\mathrm{H_2}\to2\mathrm{NH_3}$, with $2\,\mathrm{mol}$ of nitrogen and $3\,\mathrm{mol}$ of hydrogen, the ratios are $2$ and $1$. Hydrogen limits the reaction: $2\,\mathrm{mol}$ of ammonia form and $1\,\mathrm{mol}$ of nitrogen remains. The reactant with fewer moles is not always limiting, because the coefficients matter.
+The **limiting reactant** is the one that runs out first and stops the reaction; the other is in excess and part of it is left over. In a reaction $aA+bB\to cC$ one compares the quotients $\dfrac{n_A}{a}$ and $\dfrac{n_B}{b}$ of available moles over coefficient. The limiting reactant is the one with the smaller quotient.
 
-Percentage yield is $\dfrac{m_{\mathrm{obtained}}}{m_{\mathrm{theoretical}}}\cdot100\%$. If $15\,\mathrm g$ are isolated compared with $20\,\mathrm g$ theoretically, the yield is $75\%$. The theoretical mass must be obtained from the reaction and the limiting reactant; an isolated mass above the theoretical value may indicate, for example, impurities or a product that is still wet.
+With $2\,\mathrm{mol}$ of $\mathrm{N_2}$ and $3\,\mathrm{mol}$ of $\mathrm{H_2}$ the quotients are $\dfrac21=2$ for nitrogen and $\dfrac33=1$ for hydrogen, so hydrogen is the limiting reactant and is completely consumed. From its $3\,\mathrm{mol}$ the other amounts follow from the coefficient ratios:
+$$
+n(\mathrm{N_2})=3\,\mathrm{mol}\cdot\frac13=1\,\mathrm{mol},\qquad n(\mathrm{NH_3})=3\,\mathrm{mol}\cdot\frac23=2\,\mathrm{mol}.
+$$
+$1\,\mathrm{mol}$ of nitrogen is consumed and $2-1=1\,\mathrm{mol}$ is left over. Ammonia has molar mass $14+3\cdot1=17\,\mathrm{g/mol}$, so $2\,\mathrm{mol}\cdot17\,\mathrm{g/mol}=34\,\mathrm g$ of it form.
+
+The product mass calculated from the equation, starting from the limiting reactant, is the **theoretical mass**. The **percentage yield** is $\dfrac{m_{\mathrm{obtained}}}{m_{\mathrm{theoretical}}}\cdot100\%$: with $15\,\mathrm g$ collected out of $20\,\mathrm g$ theoretical it is $\dfrac{15}{20}\cdot100\%=75\%$. A collected mass above the theoretical one indicates an impure product, for example a still wet one.
+:::
+
+:::attenzione
+The reactant with fewer moles is not always the limiting one. In the example nitrogen has $2\,\mathrm{mol}$ against the $3\,\mathrm{mol}$ of hydrogen, but hydrogen runs out first, because the reaction consumes $3\,\mathrm{mol}$ of it for every mole of nitrogen.
 :::
 
 :::osservazione{titolo="Ratios between gas volumes"}
-For ideal gases, $pV=nRT$, where $T$ is absolute temperature in kelvin and $R$ is the gas constant, expressed in units consistent with pressure and volume. At equal temperature and pressure, volume is proportional to amount: coefficients in a gas reaction therefore also express volume ratios, provided measurement conditions match. This equivalence does not apply to masses or liquids.
+An **ideal gas** is a model gas whose particles have negligible volume and do not attract one another. It obeys the equation $pV=nRT$, where $p$ is the pressure, $V$ the volume, $n$ the amount in moles, $T$ the **absolute temperature**, measured in kelvin (K) and equal to the temperature in degrees Celsius plus $273.15$, and $R$ the gas constant, whose numerical value depends on the units chosen for pressure and volume.
+
+The equation gives $V=\dfrac{nRT}{p}$. At fixed temperature and pressure the factor $\dfrac{RT}{p}$ is the same for all gases, so the volume is proportional to the moles: at $0\,{}^\circ\mathrm C$ and atmospheric pressure one mole of ideal gas occupies $22.4\,\mathrm L$. Between gases at the same temperature and pressure the coefficients are therefore also volume ratios: $1\,\mathrm L$ of nitrogen reacts with $3\,\mathrm L$ of hydrogen and forms $2\,\mathrm L$ of ammonia. The rule holds for gas volumes; for masses and for liquids the coefficients remain mole ratios only.
 :::
 
 :::osservazione{titolo="Water of crystallization"}
-A hydrated salt contains water in a definite ratio, indicated for example by $\mathrm{CuSO_4\cdot5H_2O}$. If heating removes only water and does not decompose the salt, mass loss measures water of crystallization. From $5\,\mathrm g$ of hydrate leaving $3\,\mathrm g$ of anhydrous salt, the water mass is $2\,\mathrm g$, or $40\%$ of the initial mass.
+A **hydrated salt** is a solid containing water molecules in its lattice, a fixed number per formula unit. In the formula this water, called water of crystallization, is written after a dot: copper sulfate pentahydrate $\mathrm{CuSO_4\cdot5H_2O}$ has $5$ water molecules for each $\mathrm{CuSO_4}$ unit. On heating the hydrate the water evaporates and the **anhydrous** salt, i.e. the salt without water, is left. If heating does not decompose the salt, the loss of mass is the mass of the water.
+
+With the rounded values $64$, $32$, $16$ and $1\,\mathrm{g/mol}$ for copper, sulfur, oxygen and hydrogen, one mole of $\mathrm{CuSO_4\cdot5H_2O}$ contains $64+32+4\cdot16=160\,\mathrm g$ of anhydrous salt and $5\cdot18=90\,\mathrm g$ of water, so its mass is $250\,\mathrm g$. Water is $\dfrac{90}{250}\cdot100\%=36\%$ of the mass. $5.0\,\mathrm g$ of hydrate therefore lose $5.0\,\mathrm g\cdot0.36=1.8\,\mathrm g$ of water and leave $5.0\,\mathrm g-1.8\,\mathrm g=3.2\,\mathrm g$ of anhydrous salt.
 :::
 
 ## Solutions and concentration
 
 :::definizione{#concentrazione titolo="Molarity and percentage composition"}
-A solution is a homogeneous mixture. The solvent is the medium in which solutes are dispersed. The **molar concentration** $c$ is the amount of solute divided by the final solution volume:
+A **solution** is a homogeneous mixture. The **solvent** is the substance present in the larger amount, the **solute** the dissolved one: in salt water the water is the solvent and the salt is the solute. The **molar concentration** $c$, or molarity, is the ratio of the moles of solute $n$ to the solution volume $V$:
 $$
 c=\frac nV.
 $$
-With $n$ in moles and $V$ in liters, the unit is $\mathrm{mol/L}$, equivalent to $\mathrm{mol/dm^3}$. For $0.50\,\mathrm{mol}$ in $2.0\,\mathrm L$, the concentration is $0.25\,\mathrm{mol/L}$. A concentration in $\mathrm{g/L}$ instead gives solute mass per liter. Molality uses moles of solute per kilogram of solvent; its denominator differs from that of molarity.
+With $V$ in litres its unit is moles per litre, $\mathrm{mol/L}$, equal to $\mathrm{mol/dm^3}$ because one litre is one cubic decimetre. The volume is that of the final solution: with $0.50\,\mathrm{mol}$ of solute in $2.0\,\mathrm L$ of solution, $c=\dfrac{0.50\,\mathrm{mol}}{2.0\,\mathrm L}=0.25\,\mathrm{mol/L}$.
 
-Mass percentage is $\dfrac{m_{\mathrm{solute}}}{m_{\mathrm{solution}}}\cdot100\%$. Dissolving $4\,\mathrm g$ in $96\,\mathrm g$ of water gives $100\,\mathrm g$ of a $4\%$ solution. Therefore, the basis of a percentage, mass or volume, is part of the information needed to interpret a label.
+Other measures use masses.
+
+- The concentration in $\mathrm{g/L}$ is the mass of solute per litre of solution.
+- The **mass percentage** is $\dfrac{m_{\mathrm{solute}}}{m_{\mathrm{solution}}}\cdot100\%$, where the solution mass is the sum of solute and solvent. Dissolving $4\,\mathrm g$ of salt in $96\,\mathrm g$ of water gives $100\,\mathrm g$ of solution, and the percentage is $\dfrac{4}{100}\cdot100\%=4\%$.
+- **Molality** is the ratio of the moles of solute to the solvent mass in kilograms, in $\mathrm{mol/kg}$. Its denominator is the mass of the solvent alone, whereas in molarity it is the solution volume.
+
+A volume percentage uses volumes instead of masses, so a label states which of the two quantities the percentage refers to.
 :::
 
 :::teorema{#diluizioni titolo="Solute balance"}
-When solvent is added without loss or reaction of solute, the amount of solute remains constant. Hence $c_1V_1=c_2V_2$. Taking $100\,\mathrm{mL}$ of a $1\,\mathrm{mol/L}$ solution to a final volume of $500\,\mathrm{mL}$ gives $0.20\,\mathrm{mol/L}$. The final volume includes the initial solution and the added solvent.
+**Diluting** a solution means adding solvent. The moles of solute stay the same and the volume increases, so the concentration decreases. From the definition of molarity the moles are $n=cV$. If $c_1$ and $V_1$ are concentration and volume before dilution and $c_2$ and $V_2$ those after it, the equality of moles reads
+$$
+c_1V_1=c_2V_2.
+$$
+$100\,\mathrm{mL}$ (millilitres, thousandths of a litre) of a $1.0\,\mathrm{mol/L}$ solution are brought to a final volume of $500\,\mathrm{mL}$ by adding $400\,\mathrm{mL}$ of water. The moles of solute are $1.0\,\mathrm{mol/L}\cdot0.100\,\mathrm L=0.10\,\mathrm{mol}$, so
+$$
+c_2=\frac{c_1V_1}{V_2}=\frac{0.10\,\mathrm{mol}}{0.500\,\mathrm L}=0.20\,\mathrm{mol/L}.
+$$
+The graph shows the concentration of a solution with $0.10\,\mathrm{mol}$ of solute as the volume varies; the two points are the initial and final solutions.
 
 ::grafico{f="0.1/x" xmin=0.08 xmax=0.6 ymin=0 ymax=1.2 punti="0.1,1;0.5,0.2" nomi="V,c" legenda=0 titolo="Dilution with 0.10 mol: V in liters; c in mol/L."}
 
-When solutions of the same solute are mixed without a reaction, their amounts in moles are added first. If volumes are additive, $c_f=\dfrac{c_1V_1+c_2V_2}{V_1+V_2}$. The arithmetic mean of the concentrations applies only with equal volumes. Evaporation of solvent concentrates a nonvolatile solute until precipitation or other changes occur.
+When two solutions of the same solute are mixed, with no reaction, the moles add up. If the volumes also add up,
+$$
+c_f=\frac{c_1V_1+c_2V_2}{V_1+V_2}.
+$$
+With $100\,\mathrm{mL}$ at $1.0\,\mathrm{mol/L}$ and $300\,\mathrm{mL}$ at $0.20\,\mathrm{mol/L}$ the result is $c_f=\dfrac{0.100\,\mathrm{mol}+0.060\,\mathrm{mol}}{0.400\,\mathrm L}=0.40\,\mathrm{mol/L}$. The average of the two concentrations, $0.60\,\mathrm{mol/L}$, is correct only with equal volumes. When solvent evaporates the volume decreases, so the concentration of a non-volatile solute increases, until the solute starts to separate as a solid.
 :::
 
 :::definizione{#solubilita titolo="Saturation and conductivity"}
-At a fixed temperature, solubility specifies how much solute can dissolve at equilibrium in a stated amount of solvent. Adding solute beyond this limit can leave solid at the bottom. A concentrated solution may still be unsaturated: high concentration alone does not establish saturation.
+**Solubility** is the maximum amount of a substance that stays dissolved at equilibrium, i.e. when the dissolved amount no longer changes, in a given amount of solvent at a given temperature. At $20\,{}^\circ\mathrm C$ at most about $36\,\mathrm g$ of sodium chloride dissolve in $100\,\mathrm g$ of water. A solution containing this maximum amount is **saturated**, and any further solute stays solid at the bottom; with less solute it is unsaturated.
 
-Electrolytes produce mobile ions in solution. Glucose dissolves as molecules and, in the usual model, is a nonelectrolyte. Dissolving sodium chloride releases ions already present in the lattice; the reaction of HCl with water instead generates hydronium and chloride. These are different mechanisms that can both produce a conducting solution.
+At the same temperature sugar has a solubility of about $200\,\mathrm g$ in $100\,\mathrm g$ of water, so a solution with $100\,\mathrm g$ of sugar is very concentrated and still unsaturated.
+
+An **electrolyte** is a substance that forms mobile ions in water, so its solution conducts electricity.
+
+- Sodium chloride is an electrolyte: when it dissolves, the ions $\mathrm{Na^+}$ and $\mathrm{Cl^-}$ already present in the lattice separate and disperse in the water.
+- Hydrogen chloride $\mathrm{HCl}$ is an electrolyte made of molecules. Its ions form in the reaction with water, $\mathrm{HCl+H_2O\to H_3O^++Cl^-}$, in which $\mathrm{H_3O^+}$ is the hydronium ion.
+- Glucose is a non-electrolyte: it dissolves as whole molecules and its solution conducts very poorly.
 :::
 
 ## Acids, bases and pH
 
 :::definizione{#acidi-basi titolo="Proton transfer"}
-According to Brønsted and Lowry, an acid donates a proton and a base accepts one. In $\mathrm{NH_3+H_2O\rightleftharpoons NH_4^++OH^-}$, ammonia is the base and water is the acid. The species $\mathrm{NH_4^+}$ and $\mathrm{NH_3}$ are a conjugate pair because they differ by a single proton. When $\mathrm{H^+}$ is lost, the species' charge decreases by one unit.
+The ion $\mathrm{H^+}$ is a hydrogen atom without its electron, i.e. a proton. According to Brønsted and Lowry, an **acid** is a chemical species, i.e. a molecule or ion, that donates an $\mathrm{H^+}$ ion; a **base** is a species that accepts it.
 
-A strong acid reacts with water almost completely under usual conditions; a weak acid establishes an equilibrium with an undissociated fraction. Strength and concentration are distinct properties: the former concerns the tendency to transfer protons, while the latter states how much acid has been introduced per unit volume.
+In the reaction $\mathrm{HCl+H_2O\to H_3O^++Cl^-}$ hydrogen chloride donates $\mathrm{H^+}$ to water, so it is the acid and water is the base. With ammonia water has the opposite role:
+$$
+\mathrm{NH_3+H_2O\rightleftharpoons NH_4^++OH^-}.
+$$
+Ammonia accepts $\mathrm{H^+}$ and becomes the ammonium ion $\mathrm{NH_4^+}$, so it is the base. Water donates it and becomes the hydroxide ion $\mathrm{OH^-}$, so it is the acid. The double arrow indicates a **reversible** reaction, which proceeds in both directions up to an **equilibrium** in which reactants and products are present together.
+
+A **conjugate pair** consists of an acid and a base that differ by a single $\mathrm{H^+}$, like $\mathrm{NH_4^+}$ and $\mathrm{NH_3}$. On donating $\mathrm{H^+}$ the charge drops by one unit, here from $+1$ to $0$.
+
+A **strong acid** donates $\mathrm{H^+}$ to water with all its molecules, like $\mathrm{HCl}$. A **weak acid** donates it with only part of its molecules and stays in equilibrium with the non-ionized part: in a $0.1\,\mathrm{mol/L}$ solution of acetic acid $\mathrm{CH_3COOH}$ about one molecule in a hundred is ionized. Strength and concentration are distinct properties: strength is the acid's tendency to donate $\mathrm{H^+}$, concentration states how much acid is dissolved per litre.
 :::
 
 :::definizione{#ph titolo="The logarithmic pH scale"}
-In a sufficiently dilute solution, hydronium activity is approximated using concentration expressed relative to $1\,\mathrm{mol/L}$:
+Square brackets indicate molar concentration: $[\mathrm{H_3O^+}]$ is the concentration of the hydronium ion, on which acidity depends. Its values range from about $1$ to $10^{-14}\,\mathrm{mol/L}$, so a logarithmic scale is used. The base-$10$ logarithm of a number is the exponent to which $10$ is raised to obtain it: $\log_{10}(10^{-3})=-3$. The **pH**, short for "potential of hydrogen", is minus the logarithm of the hydronium concentration in $\mathrm{mol/L}$:
 $$
 \mathrm{pH}\simeq-\log_{10}\!\left(\frac{[\mathrm{H_3O^+}]}{1\,\mathrm{mol/L}}\right).
 $$
-With $[\mathrm{H_3O^+}]=10^{-3}\,\mathrm{mol/L}$, the pH is $3$. A decrease of one pH unit corresponds to a tenfold increase in hydronium concentration. pH is dimensionless. At $25\,{}^\circ\mathrm C$, in the dilute model, $[\mathrm{H_3O^+}][\mathrm{OH^-}]=10^{-14}\,(\mathrm{mol/L})^2$ and a neutral solution has a pH of about $7$. Neutrality requires equal concentrations of the two ions even when temperature changes.
+Dividing by $1\,\mathrm{mol/L}$ removes the unit, so pH is a pure number. The symbol $\simeq$ is read "approximately equal" and indicates that the formula is an approximation valid for dilute solutions. With $[\mathrm{H_3O^+}]=10^{-3}\,\mathrm{mol/L}$ the pH is $-(-3)=3$; with $10^{-2}\,\mathrm{mol/L}$, a concentration ten times larger, the pH is $2$. Each pH unit less therefore corresponds to a tenfold hydronium concentration.
+
+Water always contains hydronium and hydroxide ions, from the reaction $\mathrm{2H_2O\rightleftharpoons H_3O^++OH^-}$. At $25\,{}^\circ\mathrm C$ the product of the two concentrations has a fixed value, the **ionic product of water** $K_w$, where w stands for *water*:
+$$
+K_w=[\mathrm{H_3O^+}][\mathrm{OH^-}]=10^{-14}\,(\mathrm{mol/L})^2.
+$$
+A **neutral** solution has equal concentrations of the two ions, so $[\mathrm{H_3O^+}]=10^{-7}\,\mathrm{mol/L}$ and pH $7$. An **acidic** solution contains more hydronium and has pH below $7$; a **basic** solution contains more hydroxide and has pH above $7$. At other temperatures $K_w$ changes. A neutral solution still has equal concentrations of the two ions, but its pH differs from $7$.
+
+The **pOH** is the opposite of the logarithm of the hydroxide-ion concentration expressed in $\mathrm{mol/L}$, as the pH is for the hydronium ion. At $25\,{}^\circ\mathrm C$, since the product of the two concentrations equals $10^{-14}$, it follows that $\mathrm{pH}+\mathrm{pOH}=14$. A solution with $[\mathrm{OH^-}]=10^{-3}\,\mathrm{mol/L}$ therefore has pOH $3$ and pH $14-3=11$.
 :::
 
 :::esempio{titolo="Neutralization and excess reactant"}
-The net reaction between hydronium and hydroxide is $\mathrm{H_3O^++OH^-\to2H_2O}$. The ratio is one to one. Mixing $0.030\,\mathrm{mol}$ of hydronium with $0.020\,\mathrm{mol}$ of hydroxide leaves an excess of $0.010\,\mathrm{mol}$ of hydronium. To obtain the pH, this excess must be divided by the final volume, if the reactants are strong and water's contribution is negligible. The final pH cannot be obtained by averaging the initial pH values.
+**Neutralization** between a strong acid and a strong base is the reaction $\mathrm{H_3O^++OH^-\to2H_2O}$, in which the two ions react in a one-to-one ratio. $300\,\mathrm{mL}$ of $0.10\,\mathrm{mol/L}$ hydrochloric acid, the solution of $\mathrm{HCl}$ in water, are mixed with $200\,\mathrm{mL}$ of $0.10\,\mathrm{mol/L}$ sodium hydroxide $\mathrm{NaOH}$, which releases hydroxide ions in water.
+
+1. The moles of hydronium are $0.10\,\mathrm{mol/L}\cdot0.300\,\mathrm L=0.030\,\mathrm{mol}$, those of hydroxide $0.10\,\mathrm{mol/L}\cdot0.200\,\mathrm L=0.020\,\mathrm{mol}$.
+2. Hydroxide is the limiting reactant, so $0.030-0.020=0.010\,\mathrm{mol}$ of hydronium are left over.
+3. Acid and base are strong and the contribution of water is negligible, so the remaining hydronium is divided by the final volume, $0.500\,\mathrm L$: $[\mathrm{H_3O^+}]=\dfrac{0.010\,\mathrm{mol}}{0.500\,\mathrm L}=0.020\,\mathrm{mol/L}$.
+4. The pH is $-\log_{10}(0.020)\approx1.7$.
+
+The initial acid had $[\mathrm{H_3O^+}]=0.10\,\mathrm{mol/L}$ and pH $1$. The base had $[\mathrm{OH^-}]=0.10\,\mathrm{mol/L}$, so from the ionic product $[\mathrm{H_3O^+}]=\dfrac{10^{-14}}{10^{-1}}=10^{-13}\,\mathrm{mol/L}$ and pH $13$. The average of the two pH values, $7$, is far from the final pH, which follows only from the mole balance.
 :::
 
 ## Oxidation, reduction and combustion
 
 :::definizione{#redox titolo="Electrons and oxidation numbers"}
-**Oxidation** is loss of electrons; **reduction** is gain of electrons. Oxidation number increases in the former and decreases in the latter. The oxidizing agent gains electrons and is reduced, whereas the reducing agent loses them and is oxidized. In $\mathrm{Zn+Cu^{2+}\to Zn^{2+}+Cu}$, zinc loses two electrons and copper(II) ions gain them.
+An **oxidation–reduction** reaction, or redox reaction, is a reaction in which some electrons pass from one species to another. **Oxidation** is the loss of electrons, **reduction** is the gain of electrons. They always occur together, because the electrons lost by one species are gained by the other. A zinc strip in a copper ion solution gives the reaction
+$$
+\mathrm{Zn+Cu^{2+}\to Zn^{2+}+Cu}.
+$$
+Zinc loses two electrons, so it is oxidized; the ion $\mathrm{Cu^{2+}}$ gains them, so it is reduced. The species that is oxidized is the **reducing agent**, because it causes the other to be reduced; the species that is reduced is the **oxidizing agent**.
 
-Oxidation number is zero for an element in its free elemental state and equals the charge for a monatomic ion. The sum of oxidation numbers equals the species' total charge. Taking oxygen as $-2$ in sulfate, $x+4(-2)=-2$ gives $x=+6$ for sulfur. Oxygen instead has number $-1$ in peroxides: applying a rule requires accounting for the compound's class.
+An atom's **oxidation number** is the charge it would have if the electrons of each bond were assigned entirely to the more electronegative atom. It is calculated with four rules.
+
+1. In an elemental substance it is $0$, as in $\mathrm{Zn}$ and in $\mathrm{O_2}$.
+2. In an ion of a single atom it is the charge: $+2$ in $\mathrm{Cu^{2+}}$.
+3. In compounds hydrogen almost always has $+1$ and oxygen $-2$; in peroxides, such as hydrogen peroxide $\mathrm{H_2O_2}$, oxygen has $-1$.
+4. The sum of the oxidation numbers is the total charge of the species, that is, $0$ for a molecule.
+
+In the sulfate ion $\mathrm{SO_4^{2-}}$ let $x$ be sulfur's oxidation number. The four oxygen atoms give $4\cdot(-2)=-8$ and the total charge is $-2$, so $x-8=-2$ and $x=+6$.
+
+The oxidation number increases in an oxidation and decreases in a reduction: zinc goes from $0$ to $+2$, copper from $+2$ to $0$.
 :::
 
 :::esempio{titolo="Electron balance"}
-The half-reactions $\mathrm{Fe^{2+}\to Fe^{3+}+e^-}$ and $\mathrm{Cu^{2+}+2e^-\to Cu}$ exchange different numbers of electrons. Multiplying the first by two and adding eliminates the electrons:
+A redox reaction is divided into two **half-reactions**, one of oxidation and one of reduction, in which the electrons appear with the symbol $\mathrm{e^-}$. For the reaction between iron(II) ions and copper(II) ions they are $\mathrm{Fe^{2+}\to Fe^{3+}+e^-}$, with one electron lost, and $\mathrm{Cu^{2+}+2e^-\to Cu}$, with two electrons gained. The electrons lost are as many as those gained, so the first is multiplied by $2$. In the sum the two electrons appear on both sides and cancel:
 $$
 2\mathrm{Fe^{2+}}+\mathrm{Cu^{2+}}\longrightarrow2\mathrm{Fe^{3+}}+\mathrm{Cu}.
 $$
-The equation conserves atoms and charge, $+6$ on both sides. Balancing describes conservation; deciding whether the reaction occurs spontaneously in that direction requires additional information about conditions and potentials.
+The total charge is $2\cdot(+2)+(+2)=+6$ on the left and $2\cdot(+3)+0=+6$ on the right. The balanced equation gives the ratios between the species; the direction in which the reaction proceeds spontaneously is established from other data, the reduction potentials, which measure each species' tendency to gain electrons.
 :::
 
 :::osservazione{titolo="Available oxygen and products"}
-Complete combustion of a hydrocarbon in oxygen produces carbon dioxide and water. With insufficient oxygen, carbon monoxide and solid carbon may form. Oxygen availability therefore changes the products and stoichiometric ratios. Atom numbers are conserved in incomplete combustion as well. An acid–base reaction, such as neutralization of HCl with NaOH, can occur without changes in oxidation numbers.
+**Combustion** is a redox reaction between a fuel and oxygen that releases heat. The products depend on the available oxygen.
+
+- With sufficient oxygen the combustion of methane is complete and produces carbon dioxide and water: $\mathrm{CH_4+2O_2\to CO_2+2H_2O}$.
+- With little oxygen the combustion is incomplete and produces carbon monoxide, a toxic gas, or solid carbon. An example is $\mathrm{2CH_4+3O_2\to2CO+4H_2O}$, in which one mole of methane consumes $\dfrac32=1.5\,\mathrm{mol}$ of oxygen instead of $2\,\mathrm{mol}$. Here too the atoms are conserved: $2$ of carbon, $8$ of hydrogen and $6$ of oxygen on each side.
+
+In the neutralization $\mathrm{HCl+NaOH\to NaCl+H_2O}$ all the atoms keep their oxidation number, so the reaction is acid–base and not redox.
 :::
 
 :::osservazione{titolo="Standard potentials and reaction direction"}
-Standard reduction potentials compare the tendency of redox couples to gain electrons under standard conditions. For a galvanic cell, $E^\circ_{\mathrm{cell}}=E^\circ_{\mathrm{cathode}}-E^\circ_{\mathrm{anode}}$, using both values as reduction potentials. Reduction occurs at the cathode. A positive value indicates a spontaneous transformation in the written direction under standard conditions; it is not a universal rule for every concentration.
+A **redox couple** consists of the oxidized and reduced forms of a species, like $\mathrm{Cu^{2+}}$ and $\mathrm{Cu}$. A couple's **standard reduction potential** $E^\circ$ measures, in volts (V), the tendency of the oxidized form to gain electrons. The small circle indicates standard conditions, i.e. a concentration of $1\,\mathrm{mol/L}$ for dissolved species. At $25\,{}^\circ\mathrm C$ it is $+0.77\,\mathrm V$ for $\mathrm{Fe^{3+}}$ reduced to $\mathrm{Fe^{2+}}$, $+0.34\,\mathrm V$ for $\mathrm{Cu^{2+}}$ reduced to $\mathrm{Cu}$ and $-0.76\,\mathrm V$ for $\mathrm{Zn^{2+}}$ reduced to $\mathrm{Zn}$.
+
+A **galvanic cell**, or battery, obtains an electric current from a redox reaction by making the two half-reactions occur at two electrodes, i.e. two separate conductors: the **cathode**, where reduction occurs, and the **anode**, where oxidation occurs. Its voltage under standard conditions is
+$$
+E^\circ_{\mathrm{cell}}=E^\circ_{\mathrm{cathode}}-E^\circ_{\mathrm{anode}},
+$$
+both taken as reduction potentials. If the result is positive, the reaction is **spontaneous** as written, i.e. it proceeds by itself.
+
+- In $\mathrm{Zn+Cu^{2+}\to Zn^{2+}+Cu}$ copper is reduced and zinc is oxidized, so $E^\circ_{\mathrm{cell}}=0.34\,\mathrm V-(-0.76\,\mathrm V)=+1.10\,\mathrm V$ and the reaction is spontaneous.
+- In $\mathrm{2Fe^{2+}+Cu^{2+}\to2Fe^{3+}+Cu}$ copper is reduced and iron is oxidized, so $E^\circ_{\mathrm{cell}}=0.34\,\mathrm V-0.77\,\mathrm V=-0.43\,\mathrm V$ and the reverse reaction is spontaneous.
+
+The criterion holds under standard conditions; with other concentrations the voltage changes.
 :::
 
 ## Carbon compounds
 
 :::definizione{#organica titolo="Hydrocarbons and functional groups"}
-In elementary organic compounds, carbon forms a total of four covalent bonds, counting a double bond twice and a triple bond three times. Hydrocarbons contain only carbon and hydrogen. Saturated acyclic alkanes have formula $\mathrm{C_nH_{2n+2}}$; acyclic alkenes with one double bond and no other multiple bonds have formula $\mathrm{C_nH_{2n}}$; acyclic alkynes with one triple bond and no other multiple bonds have formula $\mathrm{C_nH_{2n-2}}$.
+**Organic chemistry** studies the compounds of carbon. Carbon has four valence electrons and forms four covalent bonds, counting a double bond as two and a triple bond as three; in methane $\mathrm{CH_4}$ they are four single bonds.
 
-Structural conditions are part of the general formula. A cycloalkane with one ring also has formula $\mathrm{C_nH_{2n}}$: composition alone does not establish the presence of a double bond. Benzene is an aromatic compound with formula $\mathrm{C_6H_6}$ and a system of electrons delocalized around the ring.
+**Hydrocarbons** are the compounds made only of carbon and hydrogen. Open-chain ones, i.e. those not closed into a ring, are classified by the bonds between carbon atoms; in the formulas $n$ is the number of carbon atoms.
+
+- **Alkanes** have only single bonds and formula $\mathrm{C_nH_{2n+2}}$, like ethane $\mathrm{C_2H_6}$.
+- **Alkenes** have a single double bond and formula $\mathrm{C_nH_{2n}}$, like ethene $\mathrm{C_2H_4}$.
+- **Alkynes** have a single triple bond and formula $\mathrm{C_nH_{2n-2}}$, like ethyne $\mathrm{C_2H_2}$.
+
+A carbon atom with single bonds only is said to be saturated. The three formulas hold only under these conditions on the structure.
+
+A **cycloalkane** is an alkane with its chain closed into one ring. To close the ring two carbon atoms bond to each other and lose one hydrogen atom each, so the general formula is $\mathrm{C_nH_{2n}}$, the same as for alkenes: cyclopropane and propene both have formula $\mathrm{C_3H_6}$. A formula $\mathrm{C_nH_{2n}}$ therefore indicates either a double bond or a ring.
+
+Benzene $\mathrm{C_6H_6}$ is a ring of six carbon atoms with six electrons delocalized over the whole ring; compounds with a ring of this kind are called **aromatic**.
 :::
 
 :::definizione{#gruppi-funzionali titolo="Recognizing organic families"}
-The functional group distinguishes many properties and reactions of a molecule. In ethanol $\mathrm{CH_3CH_2OH}$, the hydroxyl group is bonded to a saturated carbon; it is an alcohol. In ethanal $\mathrm{CH_3CHO}$, the terminal carbonyl group identifies an aldehyde. In propanone $\mathrm{CH_3COCH_3}$, the carbonyl lies between two carbons and identifies a ketone. In ethanoic acid $\mathrm{CH_3COOH}$, the carboxyl group combines a carbonyl and hydroxyl on the same carbon.
+A **functional group** is a group of atoms, attached to the carbon chain, on which the molecule's chemical properties depend. The **carbonyl** is a carbon atom bonded to an oxygen atom by a double bond.
 
-Structural isomers have the same molecular formula and different connectivity. Ethanol and dimethyl ether have formula $\mathrm{C_2H_6O}$, but oxygen is bonded respectively to one carbon and one hydrogen or to two carbons. Different structures may change solubility, boiling point and reactivity. Merely changing the orientation of an entire molecule in space does not create a structural isomer.
+- **Alcohols** have the hydroxyl group $\mathrm{OH}$ bonded to a saturated carbon atom, like ethanol $\mathrm{CH_3CH_2OH}$, the alcohol in wine.
+- **Aldehydes** have a carbonyl at the end of the chain, like ethanal $\mathrm{CH_3CHO}$.
+- **Ketones** have a carbonyl between two carbon atoms, like propanone $\mathrm{CH_3COCH_3}$, acetone.
+- **Carboxylic acids** have the carboxyl group $\mathrm{COOH}$, like ethanoic acid $\mathrm{CH_3COOH}$, acetic acid.
+
+In the carboxyl group the same carbon atom carries a carbonyl and a hydroxyl. The suffix of the name indicates the family: -ol, -al, -one and -oic, in that order.
+
+**Structural isomers** are compounds with the same molecular formula and with the atoms bonded in a different order. Ethanol $\mathrm{CH_3CH_2OH}$ and dimethyl ether $\mathrm{CH_3OCH_3}$ both have formula $\mathrm{C_2H_6O}$. In ethanol the oxygen is bonded to one carbon atom and one hydrogen atom; in dimethyl ether to two carbon atoms. They are two different substances: ethanol boils at $78\,{}^\circ\mathrm C$, dimethyl ether at $-25\,{}^\circ\mathrm C$, because only ethanol forms hydrogen bonds between its molecules; solubility and reactivity are also different. The same molecule drawn in another spatial orientation, by contrast, remains the same substance.
 :::
 
 ## Equilibria, energy and applications
 
 :::definizione{#configurazioni-lewis titolo="Electron configurations and geometry"}
-An orbital describes an electronic state and can hold at most two electrons with opposite spins, according to the Pauli principle. The principal quantum number $n$ identifies the shell; $l$ distinguishes subshells, with $0\leq l\leq n-1$. The s and p subshells contain one and three orbitals, respectively. In the ground state, lower-energy states are occupied first; in degenerate orbitals, electrons initially remain unpaired with parallel spins.
+An **orbital** is a region around the nucleus where an electron is very likely to be found. By the Pauli principle an orbital holds at most two electrons, with opposite **spin**, an electron property with only two values. The **principal quantum number** $n=1,2,3,\dots$ indicates the shell. The secondary quantum number $l$, from $0$ to $n-1$, indicates the subshell: $l=0$ is the s subshell, with one orbital, and $l=1$ is the p subshell, with three orbitals.
 
-Lewis structures count valence electrons and distinguish shared and lone pairs. Ammonia has three bonds and one lone pair on nitrogen. The VSEPR model places four electron regions in an approximately tetrahedral arrangement; the shape of the nuclei alone is pyramidal. For carbon, four, three and two bonding regions correspond to the $sp^3$, $sp^2$ and $sp$ hybridization models, with tetrahedral, trigonal planar and linear geometries.
+The **electron configuration** lists the occupied subshells, starting from the lowest in energy (1s, 2s, 2p, 3s), with the number of electrons as a superscript. Nitrogen, with $Z=7$, has configuration $1s^2\,2s^2\,2p^3$, and its valence electrons, in shell $2$, are $2+3=5$. In orbitals of equal energy, called degenerate, electrons first occupy one orbital each, with parallel spin, so nitrogen's three 2p electrons occupy three different orbitals.
+
+A **Lewis structure** represents a molecule's valence electrons with a dash for each shared pair and two dots for each unshared pair, called a **lone pair**. In ammonia $\mathrm{NH_3}$ the valence electrons are $5+3\cdot1=8$, i.e. four pairs: three nitrogen–hydrogen bonds and one lone pair on nitrogen.
+
+The **VSEPR** model (*Valence Shell Electron Pair Repulsion*) derives a molecule's shape from one principle: the electron regions around an atom, i.e. bonds and lone pairs, repel one another and lie as far apart as possible. Four regions point towards the vertices of a tetrahedron, the pyramid with four equal triangular faces, three form a flat triangle, two lie on a straight line. In ammonia the four regions are arranged approximately as a tetrahedron and one is a lone pair, so the four atoms form a pyramid.
+
+**Hybridization** describes the same arrangements as a mixing of carbon's s and p orbitals. With four, three and two bonding regions around carbon the hybridization is $sp^3$, $sp^2$ and $sp$, and the geometry is tetrahedral, trigonal planar and linear, as in methane, ethene and ethyne.
 :::
 
 :::definizione{#energia-equilibrio titolo="Energy, rate and equilibrium"}
-For an ideal gas, $pV=nRT$, with absolute temperature in kelvin. At a fixed temperature, a component's partial pressure is $p_i=x_i p$, where $x_i$ is its mole fraction. Equal volumes of ideal gases at the same temperature and pressure contain equal amounts of substance.
+In a gas mixture the **mole fraction** $x_i$ of a component is the ratio of its moles to the total moles, and its **partial pressure** is $p_i=x_ip$, where $p$ is the total pressure: oxygen, which is $21\%$ of the moles in air, at pressure $p=1\,\mathrm{atm}$ (one atmosphere) has $p_i=0.21\,\mathrm{atm}$. By the equation $pV=nRT$, equal volumes of different gases at the same temperature and pressure contain the same moles.
 
-With work defined as work done on the system, the first law is $\Delta U=q+w$. At constant pressure and with expansion work only, heat exchanged is $\Delta H$. An exothermic reaction has $\Delta H<0$. At constant temperature and pressure, $\Delta G=\Delta H-T\Delta S$ describes thermodynamic tendency: $\Delta G<0$ favors progress in the direction considered. Entropy $S$ concerns the number of microscopic configurations consistent with a macroscopic state. Spontaneity and rate remain distinct.
+The symbol $\Delta$ (delta) indicates the change in a quantity, final minus initial value. The **internal energy** $U$ of a system, i.e. of the portion of matter under study, changes when the system exchanges heat $q$ or work $w$ with its surroundings. By the first law of thermodynamics $\Delta U=q+w$, with $q$ and $w$ positive if they enter the system. The **enthalpy** change $\Delta H$ is the heat exchanged by a reaction at constant pressure, when the only work is expansion work, due to the change in volume. An **exothermic** reaction releases heat and has $\Delta H<0$; an **endothermic** reaction absorbs heat and has $\Delta H>0$. **Entropy** $S$ measures the number of microscopic particle arrangements corresponding to the same observed state, and is greater in a gas than in a solid. **Free energy** $G$ combines the two quantities: at constant absolute temperature $T$ and pressure
+$$
+\Delta G=\Delta H-T\Delta S,
+$$
+and a change is spontaneous if $\Delta G<0$. For the melting of ice $\Delta H=+6.0\,\mathrm{kJ/mol}$ (kilojoules per mole, a unit of energy) and, at $298\,\mathrm K$, $T\Delta S\approx+6.6\,\mathrm{kJ/mol}$, so $\Delta G\approx6.0-6.6=-0.6\,\mathrm{kJ/mol}$ and at this temperature ice melts.
 
-At dynamic equilibrium, forward and reverse rates are equal, whereas concentrations are constant and may differ from one another. For $\mathrm{A\rightleftharpoons2B}$, in the dilute model, $K_c=\dfrac{[\mathrm B]^2}{[\mathrm A]}$. The quotient $Q_c$ has the same form, evaluated with current concentrations. If $Q_c<K_c$, the net change proceeds toward products. A catalyst lowers the activation barrier through an alternative pathway and accelerates both directions without changing $K_c$ at the same temperature.
+Spontaneity indicates the direction in which a reaction proceeds, the **reaction rate** how long it takes. To react, the molecules overcome an energy barrier, the **activation energy**, and the higher the barrier, the slower the reaction. A **catalyst** speeds up the reaction without being consumed, because it provides a pathway with a lower barrier. In the graph curve $E_1$ is the pathway without a catalyst, with a barrier of $6-2=4$ units, and curve $E_2$ the pathway with the catalyst, with a barrier of $4-2=2$ units.
 
 ::grafico{f="2+4*(x-x*x/4)*(x-x*x/4);2+2*(x-x*x/4)*(x-x*x/4)" xmin=0 xmax=4 ymin=0 ymax=7 nomi="s,E" legenda="E_1;E_2" titolo="Schematic profiles: s is reaction progress and E is energy; the initial and final states coincide for both pathways."}
 
-Compression at constant temperature favors the side with fewer gas moles when the sides differ in their total numbers of gas moles. Raising temperature favors the endothermic direction. Precipitation occurs when dissolved ions form a sparingly soluble solid; an equilibrium may involve both solution and a solid phase.
+In a reversible reaction, equilibrium is the state in which forward and reverse reactions have the same rate (dynamic equilibrium), so the concentrations stay constant, generally at different values. The **equilibrium constant** $K_c$ is the ratio of product to reactant concentrations at equilibrium, each raised to its own coefficient; for $\mathrm{A\rightleftharpoons2B}$ it is $K_c=\dfrac{[\mathrm B]^2}{[\mathrm A]}$ and depends only on temperature. The **reaction quotient** $Q_c$ is the same expression calculated at any moment. With $K_c=4$ and $[\mathrm A]=[\mathrm B]=1\,\mathrm{mol/L}$, $Q_c=\dfrac{1^2}{1}=1<4$, so the reaction proceeds towards the products until $Q_c$ reaches $K_c$; with $Q_c>K_c$ it proceeds towards the reactants. A catalyst speeds up both directions equally and leaves $K_c$ unchanged, at the same temperature.
+
+A disturbed equilibrium shifts in the direction that reduces the disturbance. In the exothermic synthesis $\mathrm{N_2+3H_2\rightleftharpoons2NH_3}$ the moles of gas are $1+3=4$ on the left and $2$ on the right. Compression at constant temperature shifts the equilibrium towards the side with fewer moles of gas, i.e. towards ammonia, and has no effect if the moles of gas are equal on both sides; a temperature increase shifts it in the endothermic direction, i.e. towards the reactants. **Precipitation** is the formation of a sparingly soluble solid from dissolved ions, like silver chloride, $\mathrm{Ag^++Cl^-\to AgCl}$; the solid stays in equilibrium with its dissolved ions.
 :::
 
 :::definizione{#tamponi-colligative titolo="Buffers and colligative properties"}
-A weak acid/conjugate base pair, present in appreciable amounts, can form a buffer. The conjugate base consumes small additions of acid, while the weak acid consumes small additions of base; capacity is finite. An indicator changes color over a characteristic pH range and provides approximate information. A salt may react with water: ammonium ions produce acidity, while acetate ions produce basicity.
+A **buffer solution** keeps the pH almost constant when a little acid or base is added. It contains, in appreciable amounts, a weak acid and its conjugate base, like acetic acid $\mathrm{CH_3COOH}$ and the acetate ion $\mathrm{CH_3COO^-}$. The acetate ion reacts with added hydronium and acetic acid with added hydroxide, so the added ions are consumed. The buffer's capacity is limited by the amounts of the pair.
 
-Colligative properties depend mainly on the number of solute particles. In the dilute ideal model, osmotic pressure is $\pi=icRT$, where $i$ counts effective particles per solute unit. Undissociated glucose gives $i=1$; fully dissociated NaCl gives $i=2$. With other conditions equal, more particles also produce a greater freezing-point depression.
+An **indicator** is a substance that changes colour over a characteristic pH range, so it gives the pH approximately: phenolphthalein is colourless below pH $8.2$ and pink above pH $10$. Some salts change the pH of water, because one of their ions reacts with it: the ammonium ion $\mathrm{NH_4^+}$ donates $\mathrm{H^+}$ and makes the solution acidic, the acetate ion accepts it and makes the solution basic.
+
+A solution's **colligative properties** depend on the number of solute particles and not on their kind. **Osmotic pressure** $\pi$ is the pressure that stops solvent passing into the solution through a membrane permeable only to the solvent. For ideal dilute solutions $\pi=icRT$, where $c$ is the molarity and $i$ the number of particles formed by each unit of solute: $i=1$ for glucose, which stays as molecules, and $i=2$ for $\mathrm{NaCl}$ completely dissociated into two ions. At equal molarity sodium chloride therefore gives twice the osmotic pressure and lowers water's freezing point more.
 :::
 
 :::osservazione{#chimica-applicata titolo="Measurements, the environment and labels"}
-A measurement such as $(10.0\pm0.2)\,\mathrm{mL}$ expresses an uncertainty, here equal to $2\%$ of the central value. Systematic errors, such as a balance that has not been zeroed, may affect all measurements in the same direction; repeating measurements does not automatically remove them.
+Every measurement has an **uncertainty**: $(10.0\pm0.2)\,\mathrm{mL}$ indicates a volume between $9.8$ and $10.2\,\mathrm{mL}$, with relative uncertainty $\dfrac{0.2}{10.0}\cdot100\%=2\%$. A **systematic error** alters all measurements in the same direction: a balance reading $0.5\,\mathrm g$ when empty adds $0.5\,\mathrm g$ to every weighing and to their average, so repeating the measurement leaves the error unchanged.
 
-Sulfur and nitrogen oxides can generate acidic species in the atmosphere. Carbon dioxide absorbs some infrared radiation and contributes to the greenhouse effect; this mechanism differs from that of acid rain. On a label, concentration, hazard pictograms and directions for use convey complementary information. A pictogram identifies a type of hazard, not a safe dose. Different household products should not be mixed without explicit instructions from the manufacturer: some combinations release dangerous gases.
+**Acid rain** forms when sulfur and nitrogen oxides produced by combustion react with atmospheric water and form acids. The **greenhouse effect** is the warming due to gases, such as carbon dioxide, that absorb part of the infrared radiation emitted by Earth. The two phenomena have different mechanisms.
+
+A product label carries three complementary pieces of information: the concentration, the directions for use and the **hazard pictograms**, symbols in a red-bordered diamond. A pictogram indicates a type of hazard; the safe dose is found in the directions. Some household product mixtures release toxic gases: bleach and muriatic acid, i.e. sodium hypochlorite and hydrochloric acid, release chlorine. Hence different products are mixed only when the manufacturer's directions allow it.
 :::
