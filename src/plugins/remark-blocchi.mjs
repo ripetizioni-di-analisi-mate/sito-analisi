@@ -25,6 +25,7 @@ import { venn } from './venn.mjs';
 import { cursore } from './cursore.mjs';
 import { figura } from './figura.mjs';
 import { struttura } from './struttura.mjs';
+import { incorporaFigure } from './incorpora.mjs';
 
 const ETICHETTE = {
   definizione: 'Definizione',
@@ -83,6 +84,7 @@ const norma = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\
 
 export default function remarkBlocchi() {
   return (tree, file) => {
+    incorporaFigure(tree); // disegni SVG di /figure/ dentro la pagina (incorpora.mjs)
     const percorso = String(file?.path || file?.history?.[0] || '');
     const E = /content-fr[\\/]/.test(percorso) ? FR : /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-(en|us)[\\/]/.test(percorso) ? EN : IT;
     const traduciAssi = E === EN && /[\\/](analisi-3|statistica|matematica-finanziaria)[\\/]/.test(percorso);

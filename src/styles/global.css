@@ -1717,3 +1717,7 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 .indice-blocco-materia .indice-prove { margin-top: 0.9rem; padding-top: 0.75rem; border-top: 1px solid var(--riga); }
 .indice .indice-blocco-materia > ol > li.indice-prove > button.argomento { color: var(--verde); font-weight: 600; background: color-mix(in srgb, var(--verde) 6%, var(--carta)); }
 .indice .indice-blocco-materia > ol > li.indice-prove > button.argomento:hover { background: color-mix(in srgb, var(--verde) 11%, var(--carta)); }
+
+/* Disegni SVG incorporati nella pagina (src/plugins/incorpora.mjs): stesso fondo e stesso carattere del sito. */
+.figura-incorporata > svg { font-family: var(--ui); overflow: visible; }
+.figura-incorporata > svg text { font-family: inherit; }
