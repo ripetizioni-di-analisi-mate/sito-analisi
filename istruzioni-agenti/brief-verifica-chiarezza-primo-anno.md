@@ -28,3 +28,8 @@ e porta l'esito a zero `ERRORE`.
 ## Rapporto
 
 Scrivi `/home/claude/lavoro/rapporti/<materia>__<capitolo>__verifica.md` (in italiano, breve): conti rifatti (quanti, quanti sbagliati), errori di contenuto corretti (uno per uno, «era → è»), contenuti dell'originale rimessi, termini o sigle che mancavano di definizione, procedimenti degli esercizi aggiunti, correzioni di voce, stato dell'inglese, dubbi rimasti. Non dichiarare controlli che non hai fatto. Risposta finale di poche righe: esito e percorso del rapporto.
+
+## Lunghezza (aggiunta del 21/11/2026)
+
+Nota del coordinatore sulla lunghezza. Quasi tutti gli autori hanno consegnato capitoli fra 1,8 e 2,2 volte l'originale, mentre l'atteso era 1,2-1,7. Il titolare in passato ha bocciato riscritture gonfiate. Dopo i controlli di correttezza e completezza, alleggerisci il testo (italiano e inglese insieme) puntando a restare entro circa 1,8 volte e in ogni caso sotto 2,0 in entrambe le lingue, togliendo solo: frasi che ripetono a parole ciò che la riga di calcolo o la figura già mostra; verifiche doppie dello stesso risultato; definizioni ripetute una seconda volta; esempi aggiunti dall'autore dove l'originale ne aveva già uno adatto; incisi e precisazioni che un quattordicenne non userà; frasi di raccordo. NON togliere: contenuti dell'originale, la definizione di un termine alla sua prima comparsa, passaggi di calcolo, le righe aggiunte perché servono a schede, esercizi o domande. Se per scendere sotto 1,8 bisognasse togliere queste cose, fermati prima e scrivilo nel rapporto. Nel rapporto indica le parole prima e dopo il tuo intervento.
+Usa Python per i conti (se sympy manca: pip install --break-system-packages sympy).
