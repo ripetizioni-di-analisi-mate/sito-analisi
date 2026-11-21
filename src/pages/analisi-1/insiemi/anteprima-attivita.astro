@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Pannelli from '../../../components/anteprima-attivita/Pannelli.astro';
+import navigazione from '../../../components/anteprima-attivita/navigazione.js?raw';
+import esercizi from '../../../components/anteprima-attivita/esercizi.js?raw';
+import quiz from '../../../components/anteprima-attivita/quiz.js?raw';
+import '../../../components/anteprima-attivita/stile.css';
+---
+
+<Base
+  titolo="Anteprima attività · Analisi matematica 1"
+  materia="analisi-1"
+  sezione="anteprima-attivita"
+  percorso={[{ titolo: 'Capitolo 1' }]}
+  descrizione="Esercizi da fare, esercizi svolti e domande a tempo del primo capitolo di Analisi matematica 1."
+  seo={{ noindex: true, soloQuestaLingua: true }}
+>
+  <div id="anteprima-attivita" class="anteprima-attivita">
+    <Pannelli />
+  </div>
+  <!-- I dati degli esempi seguono la pagina riservata, compresi gli esiti del quiz. -->
+  <script is:inline set:html={navigazione}></script>
+  <script is:inline set:html={esercizi}></script>
+  <script is:inline set:html={quiz}></script>
+</Base>
