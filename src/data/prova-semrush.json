@@ -15,7 +15,7 @@
     { "voce": "Salute tecnica del sito (Site Health)", "zero": "scansione in corso", "ora": "scansione in corso" }
   ],
   "scoperte": [
-    { "giorno": "2026-11-21", "testo": "216 dei 232 siti che hanno un link verso il sito sono indirizzi .xyz creati in serie, con testi che pubblicizzano la vendita di link. Nessuno è stato comprato da Carmine. Analisi dei link avviata.", "stato": "in esame" },
+    { "giorno": "2026-11-21", "testo": "216 dei 232 siti che hanno un link verso il sito sono indirizzi .xyz creati in serie, con testi che pubblicizzano la vendita di link. Nessuno è stato comprato da Carmine. L’analisi di Semrush (Backlink Audit) giudica il rischio basso: 192 siti su 193 innocui, il 99,5% dei link ha l’attributo «nofollow», cioè Google non ne tiene conto.", "stato": "nessuna azione" },
     { "giorno": "2026-11-21", "testo": "Le ricerche «analisi 1» (1.600 al mese), «esercizi analisi 1» (720), «esame analisi 1» (590) e «formulario analisi 1» (390) hanno difficoltà bassa, da 15 a 25 su 100. Fra le prime 100 posizioni lette il sito non compare.", "stato": "da lavorare" },
     { "giorno": "2026-11-21", "testo": "Tre pagine a un passo dalla prima pagina di Google: «punti stazionari di una funzione» (posizione 18), «criterio del confronto asintotico» (21), «numero ossidazione ferro» (24).", "stato": "da lavorare" },
     { "giorno": "2026-11-21", "testo": "Più pagine del sito in gara sulla stessa ricerca, per esempio tre pagine diverse per «formula inversa pressione», tutte oltre la sessantesima posizione.", "stato": "da lavorare" }
