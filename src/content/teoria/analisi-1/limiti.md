@@ -369,11 +369,19 @@ Senza continuità il teorema **non si applica**: $f(x) = -1$ per $x \in [0, 1)$ 
 
 :::
 
-:::teorema{#teorema-di-weierstrass titolo="Teorema di Weierstrass"}
-Se $f$ è continua in $[a, b]$, ammette **massimo e minimo**: esistono $x_m, x_M \in [a, b]$ con $f(x_m) \leq f(x) \leq f(x_M)$ per ogni $x \in [a, b]$. Garantisce che il problema di massimo e minimo su un intervallo chiuso e limitato ha soluzione; con il calcolo differenziale si stabilisce dove cercarla. La dimostrazione, che usa il teorema di Bolzano-Weierstrass sulle successioni, non è riportata.
+::::teorema{#teorema-di-weierstrass titolo="Teorema di Weierstrass"}
+Se $f$ è continua in $[a, b]$, ammette **massimo e minimo**: esistono $x_m, x_M \in [a, b]$ con $f(x_m) \leq f(x) \leq f(x_M)$ per ogni $x \in [a, b]$. Garantisce che il problema di massimo e minimo su un intervallo chiuso e limitato ha soluzione; con il calcolo differenziale si stabilisce dove cercarla.
 
 - $f(x) = x$ su $(0, 1)$: continua, senza massimo né minimo, perché l'intervallo *non* è chiuso.
 - $f(x) = \dfrac{1}{x}$ su $(0, 1]$: continua, senza massimo, perché l'intervallo non è chiuso in $0$ e la funzione è illimitata.
+
+:::dimostrazione
+Si costruisce una successione di punti in cui i valori di $f$ tendono all'estremo superiore, e se ne estrae una convergente. Sia $M = \sup \{ f(x) : x \in [a, b] \}$, finito oppure $+\infty$. Per le proprietà dell'estremo superiore esiste una successione $(x_n)$ di punti di $[a, b]$ tale che $f(x_n) \to M$. La successione $(x_n)$ è limitata, quindi per il **teorema di Bolzano-Weierstrass** ammette un'estratta $(x_{n_k})$ convergente a un punto $x_M$. Da $a \leq x_{n_k} \leq b$ segue, passando al limite, $a \leq x_M \leq b$, cioè $x_M \in [a, b]$. Poiché $f$ è continua in $x_M$, si ha $f(x_{n_k}) \to f(x_M)$. D'altra parte $\left( f(x_{n_k}) \right)$ è un'estratta di $\left( f(x_n) \right)$, perciò tende a $M$. Per l'**unicità del limite** $M = f(x_M)$: l'estremo superiore è finito ed è un valore assunto dalla funzione, quindi è il massimo. Per il minimo si applica lo stesso ragionamento a $-f$.
+:::
+::::
+
+:::richiamo{titolo="Teorema di Bolzano-Weierstrass"}
+Ogni successione limitata ammette una successione estratta convergente. Il teorema è dimostrato nel capitolo sulle successioni.
 :::
 
 ::::teorema{#valori-intermedi titolo="Teorema dei valori intermedi"}

@@ -94,6 +94,7 @@ export const ARGOMENTI_DE: Record<string, string> = {
   'geometria-analitica': 'Analytische Geometrie und Kegelschnitte',
   insiemi: 'Mengen, vollständige Induktion und elementare Funktionen',
   'numeri-complessi': 'Komplexe Zahlen',
+  successioni: 'Zahlenfolgen',
   limiti: 'Grenzwerte und Stetigkeit',
   derivate: 'Differentialrechnung und Taylorentwicklung',
   'studio-di-funzione': 'Kurvendiskussion',

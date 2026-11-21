@@ -5,7 +5,7 @@ sommario: Che cosa significa sommare infiniti termini, con quali criteri si stab
 
 ## Richiamo sulle successioni
 
-Due risultati sulle successioni che vengono usati in tutto il capitolo.
+Due risultati del capitolo sulle successioni che vengono usati in tutto il capitolo.
 
 :::definizione{#successione titolo="Limite di una successione"}
 Una **successione** è una funzione $a : \mathbb{N} \to \mathbb{R}$; il valore in $n$ si scrive $a_n$. Si scrive $\displaystyle\lim_{n \to +\infty} a_n = L$, con $L \in \mathbb{R}$, se per ogni $\varepsilon > 0$ esiste $N$ tale che $|a_n - L| < \varepsilon$ per ogni $n > N$; si scrive $\displaystyle\lim_{n \to +\infty} a_n = +\infty$ se per ogni $M > 0$ esiste $N$ tale che $a_n > M$ per ogni $n > N$, e analogamente per $-\infty$. Una successione con limite finito si dice **convergente**, una con limite infinito **divergente**, una senza limite **indeterminata**. Per i limiti di successione valgono i teoremi del capitolo sui limiti: unicità, permanenza del segno, confronto, algebra dei limiti, limiti notevoli e gerarchia degli infiniti.
@@ -16,7 +16,7 @@ Una **successione** è una funzione $a : \mathbb{N} \to \mathbb{R}$; il valore i
 :::
 
 :::teorema{#successioni-monotone titolo="Successioni monotone limitate"}
-Una successione crescente e limitata superiormente **converge**, e il limite è l'**estremo superiore** dei suoi valori; una successione crescente e illimitata superiormente diverge a $+\infty$. Per le successioni decrescenti valgono gli enunciati simmetrici. Quindi una successione monotona **ammette sempre limite**, finito oppure infinito. La dimostrazione usa le proprietà dell'estremo superiore e si omette. Il teorema regge l'intera sezione sulle serie a termini non negativi, perché le loro somme parziali sono crescenti.
+Una successione crescente e limitata superiormente **converge**, e il limite è l'**estremo superiore** dei suoi valori; una successione crescente e illimitata superiormente diverge a $+\infty$. Per le successioni decrescenti valgono gli enunciati simmetrici. Quindi una successione monotona **ammette sempre limite**, finito oppure infinito. La dimostrazione si trova nel capitolo sulle successioni. Il teorema regge l'intera sezione sulle serie a termini non negativi, perché le loro somme parziali sono crescenti.
 :::
 
 ## Serie, somme parziali e carattere

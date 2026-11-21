@@ -94,6 +94,7 @@ export const ARGOMENTI_FR: Record<string, string> = {
   'geometria-analitica': 'Géométrie analytique et coniques',
   insiemi: 'Ensembles, raisonnement par récurrence et fonctions usuelles',
   'numeri-complessi': 'Nombres complexes',
+  successioni: 'Suites numériques',
   limiti: 'Limites et continuité',
   derivate: 'Calcul différentiel et formule de Taylor',
   'studio-di-funzione': 'Étude et représentation graphique de fonctions',

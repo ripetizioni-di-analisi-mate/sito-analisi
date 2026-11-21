@@ -111,6 +111,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     argomenti: {
       insiemi: { titolo: 'Sets, induction and elementary functions', breve: 'Basics' },
       'numeri-complessi': { titolo: 'Complex numbers', breve: 'Complex numbers' },
+      successioni: { titolo: 'Sequences', breve: 'Sequences' },
       limiti: { titolo: 'Limits and continuity', breve: 'Limits' },
       derivate: { titolo: 'Differential calculus and Taylor', breve: 'Derivatives' },
       'studio-di-funzione': { titolo: 'Graphing functions', breve: 'Graphing functions' },

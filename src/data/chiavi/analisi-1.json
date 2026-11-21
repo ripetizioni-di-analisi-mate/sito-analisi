@@ -2023,5 +2023,136 @@
     ]
    }
   ]
+ },
+ "successioni/1": {
+  "campi": [
+   {
+    "e": "Il più piccolo $N$",
+    "t": "numero",
+    "v": "149"
+   }
+  ]
+ },
+ "successioni/2": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "successioni/3": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni/4": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\frac{5}{2}"
+   }
+  ]
+ },
+ "successioni/5": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   }
+  ]
+ },
+ "successioni/6": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni/7": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "successioni/8": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "e^{-6}"
+   }
+  ]
+ },
+ "successioni/9": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "e^{3}"
+   }
+  ]
+ },
+ "successioni/10": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni/11": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni/12": {
+  "campi": [
+   {
+    "e": "Carattere della successione",
+    "t": "scelta",
+    "opzioni": [
+     "converge",
+     "diverge a $+\\infty$",
+     "è indeterminata"
+    ],
+    "v": "è indeterminata"
+   }
+  ]
+ },
+ "successioni/13": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "successioni/14": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
  }
 }

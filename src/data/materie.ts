@@ -74,6 +74,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     argomenti: [
       { slug: 'insiemi', titolo: 'Insiemi, induzione e funzioni elementari', breve: 'Nozioni di base' },
       { slug: 'numeri-complessi', titolo: 'Numeri complessi', breve: 'Numeri complessi' },
+      { slug: 'successioni', titolo: 'Successioni numeriche', breve: 'Successioni' },
       { slug: 'limiti', titolo: 'Limiti e continuità', breve: 'Limiti' },
       { slug: 'derivate', titolo: 'Calcolo differenziale e Taylor', breve: 'Derivate' },
       { slug: 'studio-di-funzione', titolo: 'Studio di funzione', breve: 'Studio di funzione' },
