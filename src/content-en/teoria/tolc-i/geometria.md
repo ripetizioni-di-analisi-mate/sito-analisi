@@ -6,113 +6,170 @@ sommario: "Plane and solid figures, distances, similarity, and coordinate geomet
 ## Angles, triangles, and distances
 
 :::definizione{#angoli titolo="Angles and parallel lines"}
-An **angle** measures the rotation between two rays with the same endpoint. A right angle measures $90^\circ$, a straight angle $180^\circ$, and a full turn $360^\circ$. Two angles are complementary if their sum is $90^\circ$ and supplementary if it is $180^\circ$. When two lines intersect, vertically opposite angles are equal, while adjacent angles are supplementary.
+An **angle** is the part of the plane between two rays with the same endpoint, called the vertex; a ray is the part of a line that starts at a point and continues on one side only. The size of an angle is measured in degrees, with symbol $^\circ$: a full turn measures $360^\circ$, a straight angle $180^\circ$ and a right angle $90^\circ$. An acute angle is smaller than $90^\circ$; an obtuse angle lies between $90^\circ$ and $180^\circ$.
 
-If two parallel lines are cut by a transversal, corresponding angles are equal. This property transfers an angle from one part of a figure to another. For example, if an acute angle measures $38^\circ$, the adjacent obtuse angle measures $180^\circ-38^\circ=142^\circ$. The apparent slope of a drawing does not assign an angle a value: the stated data and relationships determine it.
+Two angles are **complementary** if their sum is $90^\circ$ and **supplementary** if it is $180^\circ$. The complement of $38^\circ$ is $52^\circ$ and its supplement is $180^\circ-38^\circ=142^\circ$.
+
+Two intersecting lines form four angles. Two of them with a common side are called adjacent; together they form a straight angle, so they are supplementary. Two vertically opposite angles, which face each other, are equal, because they are supplements of the same angle. If the four angles are right angles, the two lines are perpendicular.
+
+Two **parallel** lines are lines of the same plane with no common points. A line that intersects both, called a transversal, forms eight angles with them.
+
+- **Corresponding** angles occupy the same position at the two intersections, for example both above the parallel line and to the right of the transversal, and are equal.
+- **Alternate interior** angles lie between the two parallel lines, on opposite sides of the transversal, and are equal.
+
+If the transversal forms an angle of $38^\circ$ with one parallel line, the corresponding angle on the other measures $38^\circ$ and the adjacent one $142^\circ$. In this way the measure of an angle is carried from one part of a figure to another, and it is obtained from the data and from these relations, even when the appearance of the drawing suggests a different value.
 :::
 
 ::::teorema{#triangoli titolo="Angle sum and triangle inequality"}
-In a nondegenerate triangle, the interior angles sum to $180^\circ$. Moreover, if two sides have lengths $a$ and $b$, the third side $c$ satisfies
+In a triangle, the figure whose vertices are three points not on one line, the sum of the three interior angles is $180^\circ$. If two angles measure $50^\circ$ and $60^\circ$, the third measures $180^\circ-50^\circ-60^\circ=70^\circ$.
+
+Moreover, each side is shorter than the sum of the other two (**triangle inequality**). If two sides measure $a$ and $b$, the third side $c$ satisfies
 $$
-|a-b|<c<a+b.
+|a-b|<c<a+b,
 $$
-These conditions distinguish a triangle from three segments that cannot close. With sides $4$ and $7$, for example, the third side must be greater than $3$ and less than $11$.
+where $|a-b|$ is the absolute value of the difference, the longer side minus the shorter. With sides $4$ and $7$ the third side is greater than $7-4=3$ and less than $7+4=11$. Three segments of lengths $4$, $7$ and $12$ do not form a triangle, because $12>11$.
 
 :::dimostrazione
-For the angle sum, draw a line through one vertex parallel to the opposite side. The other two angles occur at that vertex as alternate interior angles, and together with the third angle they form a straight angle. For the inequality, the path between two vertices through the third is longer than the direct segment; applying this observation to all three sides gives both the upper and lower bounds.
+For the angle sum, the line parallel to the opposite side is drawn through one vertex. With the two sides leaving that vertex it forms two angles, which are equal to the other two angles of the triangle because they are alternate interior angles. Together with the angle of the triangle at the vertex they form a straight angle, so the sum is $180^\circ$.
+
+For the inequality, a segment is the shortest path between two points, so the path between two vertices through the third is longer than the side joining them, that is, $c<a+b$. Likewise $a<b+c$ and $b<a+c$, so $c>a-b$ and $c>b-a$, which together are equivalent to $c>|a-b|$.
 :::
 ::::
 
 ::::teorema{#pitagora titolo="Pythagorean theorem"}
-In a right triangle, let $a,b$ be the legs and $c$ the hypotenuse. Then
+A **right** triangle has a right angle. The two sides that form it are the **legs**; the side opposite the right angle is the **hypotenuse**, which is the longest side. If $a,b$ are the legs and $c$ is the hypotenuse, then
 $$
 c^2=a^2+b^2.
 $$
-The hypotenuse is the side opposite the right angle. The formula gives an oblique distance from two perpendicular displacements. The converse also holds: if the square of the longest side equals the sum of the squares of the other two, the triangle is right-angled.
+The theorem gives one side when the other two are known, and therefore an oblique distance from two perpendicular displacements. With legs $6$ and $8$, $c^2=36+64=100$, so $c=10$.
+
+The converse also holds: if the square of the longest side equals the sum of the squares of the other two, the triangle is right-angled. This is the case for sides $5$, $12$ and $13$, because $25+144=169$.
 
 :::dimostrazione
-A square with side $a+b$ can be divided into four congruent right triangles and an inner square with side $c$. Comparing areas gives $(a+b)^2=4\cdot\dfrac{ab}{2}+c^2$. Expanding the square and subtracting $2ab$ leaves $a^2+b^2=c^2$.
+On each side of a square of side $a+b$ the point dividing it into a part of length $a$ and a part of length $b$ is marked, always in the same direction. Joining the four points divides the square into four equal right triangles, with legs $a$ and $b$, and an inner square of side $c$. Comparing areas gives
+$$
+(a+b)^2=4\cdot\frac{ab}{2}+c^2.
+$$
+The left side is $a^2+2ab+b^2$ and the right side is $2ab+c^2$. Subtracting $2ab$ from both leaves $a^2+b^2=c^2$.
 :::
 ::::
 
 :::esempio{titolo="An altitude in an isosceles triangle"}
-An isosceles triangle has equal sides of $13\,\mathrm{cm}$ and a base of $10\,\mathrm{cm}$. The altitude to the base divides it into two $5\,\mathrm{cm}$ segments. Each half is a right triangle, so
+An isosceles triangle has two equal sides; the third side is the base. The **altitude** to a side is the perpendicular segment drawn to that side from the opposite vertex. In an isosceles triangle the altitude to the base divides it in half.
+
+In the figure, triangle $ABC$ has equal sides of $13\,\mathrm{cm}$ and base $AB$ of $10\,\mathrm{cm}$. The altitude $CH$ divides the base into two segments of $5\,\mathrm{cm}$. Triangle $AHC$ is right-angled at $H$ and has hypotenuse $AC$, so
 $$
-h=\sqrt{13^2-5^2}=\sqrt{144}=12\,\mathrm{cm}.
+CH=\sqrt{13^2-5^2}=\sqrt{144}=12\,\mathrm{cm}.
 $$
-The area is $\dfrac{10\cdot12}{2}=60\,\mathrm{cm^2}$. The $13\,\mathrm{cm}$ side is oblique to the base, so the height used in the product is $12\,\mathrm{cm}$.
+The area of a triangle is half the product of a base and the corresponding altitude, so the area of $ABC$ is $\dfrac{10\cdot12}{2}=60\,\mathrm{cm^2}$. The side of $13\,\mathrm{cm}$ is oblique to the base, so the height used in the product is $CH=12\,\mathrm{cm}$.
 
 ::struttura{nodi="A,-5,0;B,5,0;C,0,12;H,0,0" linee="-5,0 5,0 0,12 -5,0;0,0 0,12;0,0.7 0.7,0.7 0.7,0" quote="A,H,5 cm;H,B,5 cm;A,C,13 cm,-0.8" titolo="Altitude CH divides the isosceles triangle into two right triangles"}
 :::
 
 :::osservazione{titolo="Classification from side lengths"}
-Let $a,b,c$ be the sides of a triangle, with $c$ the longest. If $c^2>a^2+b^2$, the angle opposite $c$ is obtuse; if $c^2<a^2+b^2$, all angles are acute. The distinction follows from the law of cosines, $c^2=a^2+b^2-2ab\cos\gamma$: the cosine of the largest angle is negative in the first case and positive in the second. The triangle inequality must hold before this criterion applies.
-:::
+A triangle is acute if it has three acute angles and obtuse if it has one obtuse angle. Let $a,b,c$ be the sides of a triangle, with $c$ the longest. The largest angle is the one opposite $c$.
 
+- If $c^2=a^2+b^2$, the triangle is right-angled.
+- If $c^2<a^2+b^2$, the triangle is acute. With sides $4$, $5$ and $6$, $36<16+25$.
+- If $c^2>a^2+b^2$, the triangle is obtuse. With sides $3$, $5$ and $7$, $49>9+25$.
+
+The criterion follows from the cosine rule, $c^2=a^2+b^2-2ab\cos\gamma$, where $\gamma$ (gamma) is the angle opposite $c$; the rule is stated in the trigonometry chapter. The cosine of an obtuse angle is negative, so in that case $c^2>a^2+b^2$; the cosine of an acute angle is positive, so $c^2<a^2+b^2$. The criterion applies to lengths that satisfy the triangle inequality, such as $3$, $5$ and $7$, for which $7<3+5$.
+:::
 
 ## Similarity and scale factors
 
 :::definizione{#similitudine titolo="Similar figures"}
-Two figures are **similar** if they have the same shape and corresponding lengths are multiplied by the same factor $k>0$. For triangles, two pairs of equal angles are sufficient; the third angles agree because their sum is $180^\circ$. Ratios must be written in the same order for every pair, matching sides opposite equal angles.
+Two figures are **similar** if they have the same shape: one is an enlargement or a reduction of the other. Corresponding angles are equal and every length of the second figure is the corresponding length of the first multiplied by the same number $k>0$, called the **scale factor**.
 
-If one triangle has sides $3,4,5$ and another has sides $6,8,10$, the ratio from the first to the second is $k=2$. Altitudes and perimeters also double. For areas, every product of two lengths contains two factors $k$, so the ratio is $k^2$. For volumes of similar solids, it is $k^3$ instead.
+The triangles with sides $3,4,5$ and $6,8,10$ are similar with $k=2$, because $\dfrac63=\dfrac84=\dfrac{10}{5}=2$. The ratios are all written in the same order and between corresponding sides, those opposite equal angles. Two triangles with two pairs of equal angles are similar; indeed the third angle is also equal, because in both the sum is $180^\circ$.
+
+- Sides, altitudes and perimeters are multiplied by $k$. The perimeter is the sum of the sides and in the example goes from $12$ to $24$.
+- Areas are multiplied by $k^2$, because an area is the product of two lengths. The two triangles of the example are right-angled and have areas $\dfrac{3\cdot4}{2}=6$ and $\dfrac{6\cdot8}{2}=24=6\cdot2^2$.
+- The volumes of two similar solids are multiplied by $k^3$. A cube of side $2$ has volume $8$, one of side $6$ has volume $216=8\cdot3^3$.
 :::
 
 :::esempio{titolo="From areas to lengths"}
-Two squares have areas $18\,\mathrm{cm^2}$ and $50\,\mathrm{cm^2}$. The ratio of the first side length to the second is
+Two squares have areas $18\,\mathrm{cm^2}$ and $50\,\mathrm{cm^2}$. The ratio of the areas is $k^2=\dfrac{18}{50}$, so the ratio of the side of the first to the side of the second is
 $$
 k=\sqrt{\frac{18}{50}}=\sqrt{\frac{9}{25}}=\frac35.
 $$
-The ratio of their perimeters is also $\dfrac35$. The ratio $\dfrac9{25}$ describes areas, so using it for side lengths would count the effect of scale twice. In a drawing at scale $1:200$, a $3\,\mathrm{cm}$ segment represents $600\,\mathrm{cm}=6\,\mathrm{m}$ in reality.
+The same ratio holds for the perimeters, which are lengths. The number $\dfrac{9}{25}$ is the ratio of the areas; using it for the sides would apply the scale factor twice.
+
+In a drawing at scale $1:200$ every real length is $200$ times the length in the drawing. A segment of $3\,\mathrm{cm}$ represents $3\cdot200=600\,\mathrm{cm}=6\,\mathrm{m}$.
 :::
 
 :::osservazione
-Similarity applies to shadows when the ground is horizontal, the objects are vertical, and sunlight travels in the same direction. Heights and shadows then form right triangles with the same angles. A $2\,\mathrm{m}$ pole casting a $3\,\mathrm{m}$ shadow and a tree casting a $12\,\mathrm{m}$ shadow give $h=12\cdot\dfrac23=8\,\mathrm{m}$. The geometric conditions justify the proportion.
+A vertical pole and a vertical tree, on horizontal ground, receive the Sun's rays from the same direction. The right triangles formed by each of them with its shadow therefore have the same angles and are similar. If the pole is $2\,\mathrm{m}$ tall and casts a shadow of $3\,\mathrm{m}$, and the shadow of the tree measures $12\,\mathrm{m}$, the height $h$ of the tree satisfies
+$$
+\frac{h}{12}=\frac23,\qquad h=12\cdot\frac23=8\,\mathrm{m}.
+$$
 :::
 
 ## Polygons, areas, and decompositions
 
 :::definizione{#aree titolo="Area and corresponding altitude"}
-**Area** measures the size of a plane region. For a rectangle with sides $b,h$, it is $bh$. A parallelogram with base $b$ and height $h$ has the same area: moving a triangular piece from one side produces a rectangle. The height is the perpendicular distance between the lines containing the two bases.
+**Area** measures the extent of a plane region and is expressed in square units, such as $\mathrm{cm^2}$. In the formulas $b$ is a side chosen as the base and the **height** $h$ is the perpendicular distance between the line of the base and the opposite side or, in a triangle, the opposite vertex.
 
-A triangle occupies half the parallelogram formed with a copy of itself, so $A=\dfrac{bh}{2}$. For a trapezoid with parallel bases $B,b$ and height $h$, $A=\dfrac{(B+b)h}{2}$. The perpendicular diagonals of a rhombus divide it into four right triangles, giving $A=\dfrac{d_1d_2}{2}$. Lengths are expressed in the same unit before multiplying.
+| Figure | Area | Example |
+|---|---|---|
+| Rectangle | $bh$ | $b=5$, $h=3$: $15$ |
+| Parallelogram, with opposite sides parallel | $bh$ | $b=5$, $h=3$: $15$ |
+| Triangle | $\dfrac{bh}{2}$ | $b=5$, $h=3$: $7.5$ |
+| Trapezoid, with two parallel sides $B$ and $b$ called bases | $\dfrac{(B+b)h}{2}$ | $B=7$, $b=3$, $h=4$: $20$ |
+| Rhombus, with four equal sides and perpendicular diagonals $d_1$, $d_2$ | $\dfrac{d_1d_2}{2}$ | $d_1=6$, $d_2=8$: $24$ |
+
+Moving a triangle from one side to the other turns a parallelogram into a rectangle with the same base and the same height. Two copies of a triangle form a parallelogram, so the area of the triangle is half of it; likewise two copies of a trapezoid form a parallelogram with base $B+b$. The diagonals of a rhombus, the segments joining opposite vertices, divide it into four equal right triangles, with legs $\dfrac{d_1}{2}$ and $\dfrac{d_2}{2}$; each has area $\dfrac{d_1d_2}{8}$ and the four together $\dfrac{d_1d_2}{2}$.
+
+Before multiplying, the lengths are expressed in the same unit.
 :::
 
 :::esempio{titolo="Area after removing a piece"}
-From a $10\,\mathrm{cm}$ by $6\,\mathrm{cm}$ rectangle, a $4\,\mathrm{cm}$ by $2\,\mathrm{cm}$ rectangle is removed at one corner. Since the regions do not overlap, the remaining area is
+From a rectangle of $10\,\mathrm{cm}$ by $6\,\mathrm{cm}$, a rectangle of $4\,\mathrm{cm}$ by $2\,\mathrm{cm}$ is removed at one corner. In the figure the remaining region has vertices from $A$ to $F$, and the sides $DC$ and $ED$ are the edge left by the removed part. The remaining area is the difference between the two areas:
 $$
-A=10\cdot6-4\cdot2=52\,\mathrm{cm^2}.
+A=10\cdot6-4\cdot2=60-8=52\,\mathrm{cm^2}.
 $$
-The perimeter instead requires tracing the boundary. Removing the corner rectangle replaces the deleted outer segments with segments of equal lengths, so in this case the perimeter remains $32\,\mathrm{cm}$. The area has decreased while the perimeter has stayed the same.
+The perimeter is the sum of the six sides. The two sides with no measurement in the figure are $BC=6-2=4\,\mathrm{cm}$ and $EF=10-4=6\,\mathrm{cm}$, so the perimeter is $10+4+4+2+6+6=32\,\mathrm{cm}$. The area has decreased, while the perimeter is that of the whole rectangle, $2\cdot(10+6)=32\,\mathrm{cm}$, because the two removed stretches of boundary are replaced by $DC$ and $ED$, which have the same lengths.
 
 ::struttura{poligoni="0,0 10,0 10,4 6,4 6,6 0,6" nodi="A,0,0;B,10,0;C,10,4;D,6,4;E,6,6;F,0,6" quote="A,B,10 cm;F,A,6 cm;D,C,4 cm;E,D,2 cm" titolo="The remaining region has area 52 square centimeters"}
 :::
 
 :::teorema{#poligoni titolo="Angles and diagonals of a polygon"}
-A convex polygon with $n\ge3$ sides can be divided into $n-2$ triangles by drawing diagonals from one vertex. Its interior angle sum is therefore $(n-2)180^\circ$. If the polygon is regular, each interior angle measures $\dfrac{(n-2)180^\circ}{n}$ and each adjacent exterior angle measures $\dfrac{360^\circ}{n}$.
+A **polygon** is a closed plane figure bounded by segments, called sides. It is convex if all its interior angles are smaller than $180^\circ$ and regular if all its sides are equal and all its angles are equal. A **diagonal** is a segment joining two non-consecutive vertices.
 
-There are $n-3$ diagonals from each vertex: the vertex itself and its two neighbors are excluded. Counting from all vertices counts every diagonal twice, so the total is $\dfrac{n(n-3)}2$. A hexagon has $9$ diagonals, while its interior angles sum to $720^\circ$.
+The diagonals drawn from a single vertex divide a convex polygon with $n\ge3$ sides into $n-2$ triangles; the symbol $\ge$ reads "greater than or equal to". The sum of the interior angles is therefore $(n-2)\cdot180^\circ$. For a hexagon, with $n=6$, the sum is $4\cdot180^\circ=720^\circ$.
+
+In a regular polygon each interior angle measures $\dfrac{(n-2)\cdot180^\circ}{n}$ and each exterior angle, which is its supplement, measures $\dfrac{360^\circ}{n}$. In a regular hexagon they measure $\dfrac{720^\circ}{6}=120^\circ$ and $\dfrac{360^\circ}{6}=60^\circ$.
+
+From each vertex there are $n-3$ diagonals, because the vertex itself and its two neighbours are excluded. In the product $n(n-3)$ every diagonal is counted twice, once for each endpoint, so the number of diagonals is $\dfrac{n(n-3)}{2}$. A hexagon has $\dfrac{6\cdot3}{2}=9$.
 :::
 
 ## Circles, arcs, and chords
 
 :::definizione{#cerchio titolo="Circle and disk"}
-A **circle** is the set of points at distance $r>0$ from a center $O$. The **disk** also contains the interior points. The diameter measures $2r$, the circumference is $2\pi r$, and the disk area is $\pi r^2$. The presence of $r$ or $r^2$ distinguishes a length from an area, including in the units.
+A **circle** is the line formed by the points at the same distance $r>0$, called the radius, from a point $O$, called the centre. The **disk** also includes the interior points. A diameter is a segment that joins two points of the circle through the centre and measures $2r$. The length of the circle, or circumference, is $2\pi r$ and the area of the disk is $\pi r^2$, where $\pi$ (pi) is about $3.14$. With $r=5\,\mathrm{cm}$ the circumference is $10\pi\approx31.4\,\mathrm{cm}$ and the area is $25\pi\approx78.5\,\mathrm{cm^2}$; the symbol $\approx$ reads "approximately equal to". The radius appears to the first power in the length, which is measured in $\mathrm{cm}$, and squared in the area, which is measured in $\mathrm{cm^2}$.
 
-A chord joins two points on the circle. The perpendicular from the center to the chord bisects it. If its distance from the center is $d<r$, half the chord has length $\sqrt{r^2-d^2}$. At a tangent point, the radius is perpendicular to the tangent line: this property provides a right triangle in many distance problems.
+A **chord** is a segment joining two points of the circle. The perpendicular from the centre to a chord divides it in half. If the chord is at distance $d<r$ from the centre, the distance $d$, half the chord and a radius form a right triangle with hypotenuse $r$, so half the chord measures $\sqrt{r^2-d^2}$.
+
+A **tangent** line has only one point in common with the circle, the point of contact, and at that point it is perpendicular to the radius. If $T$ is the point of contact of a tangent drawn from a point $P$, triangle $OTP$ is therefore right-angled at $T$.
 :::
 
 :::definizione{#settori titolo="Arc and circular sector"}
-A sector with central angle $\alpha$, measured in degrees, occupies the fraction $\dfrac{\alpha}{360^\circ}$ of the disk. Therefore its arc length $\ell$ and sector area are
+A central angle has its vertex at the centre of the disk. Its sides bound an **arc**, a stretch of the circle, and a **circular sector**, the part of the disk between the two radii and the arc. A sector with central angle $\alpha$ in degrees is the fraction $\dfrac{\alpha}{360^\circ}$ of the disk. Therefore the length $\ell$ of the arc and the area $A$ of the sector are
 $$
 \ell=\frac{\alpha}{360^\circ}2\pi r,
 \qquad A=\frac{\alpha}{360^\circ}\pi r^2.
 $$
-The complete sector perimeter contains the arc and both radii, so it is $\ell+2r$. An inscribed angle measures half the central angle subtending the same arc. If the arc is a semicircle, the inscribed angle is a right angle.
+With $r=6\,\mathrm{cm}$ and $\alpha=60^\circ$ the fraction is $\dfrac16$. The arc measures $\dfrac16\cdot12\pi=2\pi\approx6.28\,\mathrm{cm}$ and the area of the sector is $\dfrac16\cdot36\pi=6\pi\approx18.85\,\mathrm{cm^2}$. The boundary of the sector consists of the arc and the two radii, so the perimeter is $\ell+2r=2\pi+12\approx18.28\,\mathrm{cm}$.
+
+An inscribed angle has its vertex on the circle and its sides pass through the two endpoints of an arc. It measures half the central angle that subtends the same arc, the one whose sides pass through the same endpoints: a central angle of $80^\circ$ corresponds to an inscribed angle of $40^\circ$. If the arc is a semicircle, the central angle is a straight angle and the inscribed angle is a right angle.
 :::
 
 :::esempio{titolo="Chord and distance from the center"}
-A chord in a circle of radius $5\,\mathrm{cm}$ is $3\,\mathrm{cm}$ from the center. Let $M$ be its midpoint. Triangle $OMA$ has hypotenuse $5$ and one leg $3$, so $MA=\sqrt{25-9}=4\,\mathrm{cm}$. The entire chord measures $8\,\mathrm{cm}$.
+A chord $AB$ of a circle with centre $O$ and radius $5\,\mathrm{cm}$ is at distance $3\,\mathrm{cm}$ from the centre. In the figure $OM$ is the perpendicular from the centre to the chord, so it measures $3\,\mathrm{cm}$ and $M$ is the midpoint of $AB$. Triangle $OMA$ is right-angled at $M$ and has hypotenuse $OA=5\,\mathrm{cm}$, so
+$$
+MA=\sqrt{5^2-3^2}=\sqrt{16}=4\,\mathrm{cm}.
+$$
+The whole chord measures $AB=2\cdot4=8\,\mathrm{cm}$.
 
 ::struttura{cerchi="0,0,5" nodi="O,0,0;M,3,0;A,3,4;B,3,-4" linee="0,0 3,4;3,-4 3,4;0,0 3,0" quote="O,M,3 cm,0.5;O,A,5 cm,-0.8" titolo="Radius OA and distance OM determine half of chord AB"}
 :::
@@ -120,76 +177,128 @@ A chord in a circle of radius $5\,\mathrm{cm}$ is $3\,\mathrm{cm}$ from the cent
 ## Solids and measurement units
 
 :::definizione{#volumi titolo="Prisms, pyramids, and solids of revolution"}
-The volume of a prism is $V=A_bh$, where $A_b$ is the base area and $h$ the perpendicular distance between the bases. A cylinder follows the same rule with $A_b=\pi r^2$. A pyramid and a cone have volume $\dfrac{A_bh}{3}$. For a sphere of radius $r$,
-$$
-V=\frac43\pi r^3,\qquad S=4\pi r^2.
-$$
-The factor one third concerns the volume of pyramids and cones; surface area must be found from the actual faces. For a closed cylinder, total surface area is $2\pi rh+2\pi r^2$, the sum of the lateral area and both bases. If the cylinder is open at the top, only one base is included. In a right cone, the slant height is $s=\sqrt{r^2+h^2}$ and the lateral area is $\pi rs$.
+**Volume** measures the space occupied by a solid and is expressed in cubic units, such as $\mathrm{cm^3}$. A prism has two equal and parallel bases, which are polygons; the rectangular box is the prism with all faces rectangular. A cylinder has two disks as bases. A pyramid has a polygon as base and a cone has a disk as base; both end in a vertex. The height $h$ is the perpendicular distance between the two bases or between the vertex and the plane of the base, and $A_b$ is the area of the base.
+
+| Solid | Volume | Example |
+|---|---|---|
+| Prism | $A_bh$ | box with sides $3$, $4$, $12$: $3\cdot4\cdot12=144$ |
+| Cylinder | $\pi r^2h$ | $r=3$, $h=10$: $90\pi\approx282.7$ |
+| Pyramid | $\dfrac{A_bh}{3}$ | square base of side $6$, $h=10$: $\dfrac{36\cdot10}{3}=120$ |
+| Cone | $\dfrac{\pi r^2h}{3}$ | $r=3$, $h=10$: $30\pi\approx94.2$ |
+| Sphere of radius $r$ | $\dfrac43\pi r^3$ | $r=3$: $36\pi\approx113.1$ |
+
+The cylinder, the cone and the sphere are solids of revolution, obtained by rotating a plane figure about a line.
+
+The factor $\dfrac13$ concerns only the volumes of pyramids and cones. The surface area of a solid is the sum of the areas of the parts that bound it.
+
+- The sphere has surface area $4\pi r^2$.
+- The lateral surface of a cylinder, laid flat on a plane, is a rectangle with sides $2\pi r$ and $h$. With the two bases the total surface area is $2\pi rh+2\pi r^2$, which for $r=3$ and $h=10$ is $60\pi+18\pi=78\pi\approx245.0$. A cylinder open at the top has only one base.
+- In a right cone, with the vertex above the centre of the base, the **slant height** $s$ is the distance from the vertex to the circle of the base. Height, radius and slant height form a right triangle, so $s=\sqrt{r^2+h^2}$, and the lateral area is $\pi rs$. With $r=3$ and $h=4$, $s=5$ and the lateral area is $15\pi\approx47.1$.
 :::
 
 :::esempio{titolo="Space diagonal of a box"}
-A rectangular box has edge lengths $3,4,12\,\mathrm{cm}$. The base diagonal measures $\sqrt{3^2+4^2}=5\,\mathrm{cm}$. This diagonal and the height are perpendicular, so the space diagonal measures
+A rectangular box has edges (the sides of its faces) of $3$, $4$ and $12\,\mathrm{cm}$. The space diagonal joins two vertices that do not lie on the same face. The diagonal of the base, a rectangle with sides $3\,\mathrm{cm}$ and $4\,\mathrm{cm}$, measures $\sqrt{3^2+4^2}=5\,\mathrm{cm}$. It is perpendicular to the vertical edge of $12\,\mathrm{cm}$, so the space diagonal is the hypotenuse of a right triangle and measures
 $$
-d=\sqrt{5^2+12^2}=13\,\mathrm{cm}.
+d=\sqrt{5^2+12^2}=\sqrt{169}=13\,\mathrm{cm}.
 $$
-The procedure applies the Pythagorean theorem twice and gives the formula $d=\sqrt{a^2+b^2+c^2}$. For a cube with edge $a$, it gives $a\sqrt3$; a face diagonal instead measures $a\sqrt2$.
+The Pythagorean theorem is applied twice and, for edges $a,b,c$, the two steps together give $d=\sqrt{a^2+b^2+c^2}$. In a cube of edge $a$ the diagonal of a face measures $\sqrt{a^2+a^2}=a\sqrt2$ and the space diagonal $\sqrt{3a^2}=a\sqrt3$.
 :::
 
 :::osservazione{#unita-geometriche titolo="Area and volume conversions"}
-Since $1\,\mathrm{m}=100\,\mathrm{cm}$, a square with a one-meter side contains $100^2=10000$ squares with one-centimeter sides. Thus $1\,\mathrm{m^2}=10000\,\mathrm{cm^2}$. Similarly, $1\,\mathrm{m^3}=1000000\,\mathrm{cm^3}$. For capacity, $1\,\mathrm{L}=1\,\mathrm{dm^3}=1000\,\mathrm{cm^3}$.
+Since $1\,\mathrm{m}=100\,\mathrm{cm}$, a square of side $1\,\mathrm{m}$ contains $100$ rows of $100$ squares of side $1\,\mathrm{cm}$. Thus $1\,\mathrm{m^2}=100^2\,\mathrm{cm^2}=10000\,\mathrm{cm^2}$. Likewise $1\,\mathrm{m^3}=100^3\,\mathrm{cm^3}=1000000\,\mathrm{cm^3}$.
 
-A tank with an internal base $40\,\mathrm{cm}$ by $30\,\mathrm{cm}$ contains $6\,\mathrm{L}=6000\,\mathrm{cm^3}$ of water. The level is therefore $h=\dfrac{6000}{40\cdot30}=5\,\mathrm{cm}$. Multiplying the base area by this height recovers the given volume. This check distinguishes the water height from the total height of the container.
+The capacity of a container is measured in litres, with symbol $\mathrm{L}$. A litre is the volume of a cube with an edge of one decimetre ($10\,\mathrm{cm}$), so $1\,\mathrm{L}=1\,\mathrm{dm^3}=1000\,\mathrm{cm^3}$.
+
+A tank shaped like a rectangular box has an internal base of $40\,\mathrm{cm}$ by $30\,\mathrm{cm}$ and contains $6\,\mathrm{L}=6000\,\mathrm{cm^3}$ of water. The water occupies a rectangular box with the same base and height $h$, so $40\cdot30\cdot h=6000$ and $h=\dfrac{6000}{1200}=5\,\mathrm{cm}$. The check gives $1200\cdot5=6000\,\mathrm{cm^3}$. The value found is the height of the water; the height of the tank is another quantity, greater than or equal to $5\,\mathrm{cm}$.
 :::
 
 ## Coordinates, midpoints, and loci
 
 :::definizione{#coordinate titolo="Distance and midpoint"}
-In the Cartesian plane, a point $P(x,y)$ is specified by two coordinates. Coordinate differences between $A(x_1,y_1)$ and $B(x_2,y_2)$ give the horizontal and vertical displacements between them. By the Pythagorean theorem,
+In the **Cartesian plane** two oriented perpendicular lines are fixed, the horizontal $x$-axis and the vertical $y$-axis, which meet at the origin. A point $P(x,y)$ has two coordinates: the **abscissa** $x$ is the horizontal displacement from the origin, positive to the right; the **ordinate** $y$ is the vertical displacement, positive upwards. The point $(3,-2)$ is reached from the origin by moving $3$ units right and $2$ down.
+
+Given $A(x_1,y_1)$ and $B(x_2,y_2)$, the differences $x_2-x_1$ and $y_2-y_1$ are the horizontal and vertical displacements from $A$ to $B$, the legs of a right triangle with hypotenuse $AB$. By the Pythagorean theorem
 $$
 AB=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
 $$
-The midpoint halves both displacements, so
+For $A(1,2)$ and $B(4,6)$ the displacements are $3$ and $4$, so $AB=\sqrt{9+16}=5$.
+
+The **midpoint** of a segment is its point equidistant from the endpoints, that is, at the same distance from both, and its coordinates are the averages of their coordinates:
 $$
 M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right).
 $$
-For example, the midpoint of $(-2,5)$ and $(6,-1)$ is $(2,2)$. The distance from $(x,y)$ to the horizontal axis is $|y|$, while its distance to the vertical axis is $|x|$. Absolute values express the fact that a distance is nonnegative.
+The midpoint of $(-2,5)$ and $(6,-1)$ is $\left(\dfrac{-2+6}{2},\dfrac{5-1}{2}\right)=(2,2)$.
+
+The distance of $(x,y)$ from the $x$-axis is $|y|$ and its distance from the $y$-axis is $|x|$. The absolute value is the number without its sign, and a distance is positive or zero.
 :::
 
 :::definizione{#luoghi titolo="Geometric loci"}
-A **locus** is the set of points satisfying a property. Points equidistant from two distinct points $A,B$ form the perpendicular bisector of the segment, the line perpendicular to $AB$ through its midpoint. The property becomes $PA^2=PB^2$: equal quadratic terms cancel, leaving a linear equation.
+A **locus** is the set of all the points that have a given property. The circle, for example, is the locus of the points at distance $r$ from the centre.
 
-In a triangle, the perpendicular bisectors meet at the circumcenter, equidistant from the vertices. The internal angle bisectors meet at the incenter, equidistant from the lines containing the sides. Medians join vertices to the midpoints of the opposite sides; their intersection, the centroid, divides each median in the ratio $2:1$ starting from the vertex. These points satisfy different properties and may occupy different positions. The three altitude lines meet at the **orthocenter**: each altitude passes through a vertex and is perpendicular to the opposite side line. The orthocenter is inside an acute triangle, at the right-angle vertex of a right triangle, and outside an obtuse triangle.
+The **perpendicular bisector** of a segment $AB$ is the line perpendicular to the segment at its midpoint, and it is the locus of the points equidistant from $A$ and $B$. In coordinates the condition $PA=PB$ is written $PA^2=PB^2$, which contains no roots. With $A(0,0)$, $B(4,2)$ and $P(x,y)$ this gives $x^2+y^2=(x-4)^2+(y-2)^2$. When the squares are expanded, the terms $x^2$ and $y^2$ cancel and $0=-8x-4y+20$ remains: the line $2x+y=5$, which passes through the midpoint $(2,1)$.
+
+In a triangle the lines of each of the following four triples meet at one point.
+
+| Lines | What they are | Meeting point |
+|---|---|---|
+| Perpendicular bisectors of the sides | perpendicular to the sides at their midpoints | **circumcentre**, equidistant from the three vertices |
+| Angle bisectors | divide each interior angle into two equal angles | **incentre**, equidistant from the three sides |
+| Medians | join each vertex to the midpoint of the opposite side | **centroid** |
+| Altitudes | perpendiculars drawn from each vertex to the line of the opposite side | **orthocentre** |
+
+The centroid divides each median into two parts, and the part towards the vertex is twice the other (ratio $2:1$): on a median $9\,\mathrm{cm}$ long it is $6\,\mathrm{cm}$ from the vertex and $3\,\mathrm{cm}$ from the midpoint of the side. The orthocentre is inside acute triangles, is the vertex of the right angle in right triangles and is outside obtuse triangles. The four points are defined by different properties and occupy different positions; they coincide only in an equilateral triangle, which has three equal sides.
 :::
 
 :::osservazione{titolo="Coordinates and transformations"}
-Coordinates describe the movement of a figure point by point. A translation by vector $(u,v)$ adds the two components to the coordinates, so $(x,y)$ becomes $(x+u,y+v)$. Reflection in the $x$-axis changes the sign of $y$; reflection in the $y$-axis changes the sign of $x$; reflection in $y=x$ exchanges the coordinates. Distances are preserved in all these cases.
+A **transformation** of the plane assigns to each point $(x,y)$ another point and is described by saying how the coordinates change. The following three are applied to $P(3,1)$.
 
-If a transformation has center $C$, work with vector $P-C$ and add $C$ again at the end. For example, dilation by factor $2$ centered at $(1,2)$ sends $P=(3,1)$ to $(1,2)+2(2,-1)=(5,0)$. The center stays fixed and the distance from it doubles. Applying the factor directly to the original coordinates would instead use the origin as the center.
+- A **translation** moves all points by the same vector $(u,v)$, $u$ units horizontally and $v$ vertically, so $(x,y)$ becomes $(x+u,y+v)$. With the vector $(2,-4)$ the point $P$ becomes $(5,-3)$.
+- A **reflection** in a line sends each point to the other side of the line, at the same distance, along the perpendicular. In the $x$-axis the sign of $y$ changes and $P$ becomes $(3,-1)$; in the $y$-axis the sign of $x$ changes and $P$ becomes $(-3,1)$; in the line $y=x$ the coordinates are exchanged and $P$ becomes $(1,3)$.
+- A **dilation** with centre $C$ and factor $k>0$ leaves $C$ fixed and multiplies by $k$ the distance from $C$ of every other point, in the same direction. If the centre is the origin, $(x,y)$ becomes $(kx,ky)$ and, with $k=2$, $P$ becomes $(6,2)$.
+
+Translations and reflections preserve distances. A dilation transforms every figure into a similar figure, with scale factor $k$.
+
+If the centre $C$ is not the origin, the displacement from $C$ to $P$ is multiplied by $k$ and applied starting from $C$. With $C(1,2)$ and $k=2$ the displacement is $(3-1,1-2)=(2,-1)$ and its double is $(4,-2)$, so $P$ goes to $(1+4,2-2)=(5,0)$. The centre stays fixed and the distance of $P$ from $C$ doubles, from $\sqrt5$ to $2\sqrt5$. Multiplying the coordinates of $P$ directly by $2$ gives $(6,2)$, which is the result of the dilation centred at the origin.
 :::
-
 
 ## Lines and intersections
 
 :::definizione{#rette titolo="Slope and line equation"}
-A nonvertical line has equation $y=mx+q$. The **slope** $m$ gives the change in $y$ when $x$ increases by one unit; $q$ is the vertical coordinate where the line meets the $y$-axis. From two points with different horizontal coordinates,
+A non-vertical line is formed by the points $(x,y)$ that satisfy an equation $y=mx+q$. The **slope** $m$, also called the gradient, is the change in $y$ when $x$ increases by one unit: if $m>0$ the line rises from left to right, if $m<0$ it falls. The number $q$ is the ordinate of the point where the line meets the $y$-axis, because $x=0$ gives $y=q$. In the line $y=2x+1$, $m=2$ and $q=1$.
+
+Given two points of the line with different abscissas, $m$ is the ratio of the vertical displacement to the horizontal one:
 $$
 m=\frac{y_2-y_1}{x_2-x_1}.
 $$
-Given the slope and a point $(x_0,y_0)$, the line is $y-y_0=m(x-x_0)$. A horizontal line has equation $y=k$ and slope zero. A vertical line has equation $x=k$; in this case, the ratio defining the slope has zero denominator and is not a real number.
+The line through $(x_0,y_0)$ with slope $m$ has equation $y-y_0=m(x-x_0)$. For the points $(1,3)$ and $(3,7)$, $m=\dfrac{7-3}{3-1}=2$. The line is $y-3=2(x-1)$, or $y=2x+1$.
+
+A horizontal line has equation $y=k$ and slope zero. A vertical line has equation $x=k$: its points have the same abscissa, so in the ratio that defines $m$ the denominator is zero and the slope is not defined.
 :::
 
 :::teorema{#parallelismo titolo="Parallelism, perpendicularity, and distance"}
-Two distinct nonvertical lines are parallel if they have the same slope. Two lines with slopes $m_1,m_2$ are perpendicular if $m_1m_2=-1$. A vertical and a horizontal line are perpendicular and can be treated directly from their equations.
+Two distinct non-vertical lines, with slopes $m_1$ and $m_2$, are parallel if $m_1=m_2$ and perpendicular if $m_1m_2=-1$. The lines $y=2x+1$ and $y=-\dfrac12x+4$ are perpendicular, because $2\cdot\left(-\dfrac12\right)=-1$. A vertical line $x=k$ and a horizontal line $y=h$ are always perpendicular; this case is recognised from the equations, because a vertical line has no slope.
 
-To find the intersection of two lines, impose both equations. One solution identifies a common point; an inconsistent system means distinct parallel lines; an identity means coincident lines. The distance from $P(x_0,y_0)$ to the line $ax+by+c=0$, with $(a,b)\ne(0,0)$, is
+The intersection point of two lines satisfies both equations, so it is found by solving the system they form.
+
+- If the system has exactly one solution, the lines meet at one point.
+- If the system has no solution, the lines are parallel and distinct. For the parallel lines $y=2x+1$ and $y=2x-3$ the equality $2x+1=2x-3$ reduces to $1=-3$, which is false.
+- If the two equations have the same solutions, the lines coincide. This is the case for $y=2x+1$ and $2y=4x+2$.
+
+Every line, including a vertical one, can be written in the form $ax+by+c=0$, with $a$ and $b$ not both zero. The distance of a point $P(x_0,y_0)$ from the line is the length of the perpendicular segment drawn from $P$ to the line, and it is
 $$
 d=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}.
 $$
-The absolute value removes the sign associated with which side of the line contains the point. If the numerator is zero, the point lies on the line and the distance is zero.
+The absolute value removes the sign, which depends on the side of the line on which the point lies. For $P(1,2)$ and the line $3x+4y+4=0$,
+$$
+d=\frac{|3\cdot1+4\cdot2+4|}{\sqrt{3^2+4^2}}=\frac{15}{5}=3.
+$$
+If the numerator is zero, $P$ satisfies the equation, so it belongs to the line and the distance is zero.
 :::
 
 :::esempio{titolo="Intersection as a shared condition"}
-The lines $y=2x+1$ and $y=-x+7$ intersect when $2x+1=-x+7$. Hence $3x=6$, $x=2$, and $y=5$. Substituting $(2,5)$ into both equations gives $5=5$ and $5=5$, respectively.
+At the common point of the lines $y=2x+1$ and $y=-x+7$ the two expressions for $y$ are equal, so $2x+1=-x+7$. Moving the terms with $x$ to the left side and the numbers to the right gives $3x=6$, so $x=2$. The first equation gives $y=2\cdot2+1=5$ and the second gives the same value, $y=-2+7=5$.
+
+In the graph the rising line is $y=2x+1$, the falling line is $y=-x+7$ and the marked point is their intersection $(2,5)$.
 
 ::grafico{f="2*x+1; -x+7" xmin=-1 xmax=5 ymin=-1 ymax=9 punti="2,5,pieno" titolo="The two lines share the point (2; 5)"}
 :::
@@ -197,33 +306,62 @@ The lines $y=2x+1$ and $y=-x+7$ intersect when $2x+1=-x+7$. Hence $3x=6$, $x=2$,
 ## The circle in Cartesian coordinates
 
 :::definizione{#circonferenza-cartesiana titolo="Center and radius from an equation"}
-The circle with center $(a,b)$ and radius $r>0$ is described by
+A point $P(x,y)$ belongs to the circle with centre $(a,b)$ and radius $r>0$ if its distance from the centre is $r$. Squaring the distance formula gives the equation
 $$
 (x-a)^2+(y-b)^2=r^2.
 $$
-The left side is the square of the distance from the center. Substituting a point's coordinates gives a value below $r^2$ for a point inside the disk, equality for a point on the circle, and a value above it for an exterior point.
+The circle with centre $(2,-3)$ and radius $5$ has equation $(x-2)^2+(y+3)^2=25$, where $y+3$ comes from $y-(-3)$.
 
-To read the center and radius from an expanded equation, complete the squares. The equation $x^2+y^2-4x+6y-12=0$ becomes $(x-2)^2+(y+3)^2=25$. The center is $(2,-3)$ and the radius is $5$. The term $25$ is the square of the radius. If completing the square leaves a negative right side, there are no real points; if it is zero, the locus consists only of the center.
+The left side is the square of the distance from the centre, and comparing it with $r^2$ establishes the position of a point.
+
+- The point $(5,1)$ gives $3^2+4^2=25$, so it lies on the circle.
+- The origin gives $4+9=13<25$, so it is inside.
+- The point $(8,0)$ gives $36+9=45>25$, so it is outside.
+
+Expanding the squares turns the equation into $x^2+y^2-4x+6y-12=0$, and in this form the centre and the radius cannot be read directly. They are recovered by **completing the squares**.
+
+1. The terms are grouped and the number is moved to the right side: $(x^2-4x)+(y^2+6y)=12$.
+2. The expression $x^2-4x$ becomes a square by adding $4$, the square of half the coefficient of $x$: $x^2-4x+4=(x-2)^2$.
+3. Likewise $y^2+6y+9=(y+3)^2$.
+4. The numbers $4$ and $9$ are added to both sides: $(x-2)^2+(y+3)^2=12+4+9=25$.
+
+The centre is $(2,-3)$ and the radius is $\sqrt{25}=5$. A sum of squares is positive or zero. Therefore, if the right side turns out negative, no point satisfies the equation; if it is zero, only the centre satisfies it.
 :::
 
 :::osservazione{#intersezioni-circonferenza titolo="Relative positions of lines and circles"}
-A line at distance $d$ from the center is a secant, tangent, or exterior line according as $d<r$, $d=r$, or $d>r$. Substituting the line equation into the circle equation gives the same distinction through the solutions of a quadratic equation.
+A line at distance $d$ from the centre of a circle of radius $r$ is a **secant** if $d<r$, with two common points, a tangent if $d=r$, with only one common point, and an exterior line if $d>r$, with no common points.
 
-For two distinct circles with radii $r_1,r_2$ and center distance $d$, external tangency means $d=r_1+r_2$, while internal tangency means $d=|r_1-r_2|$. Two intersections require $|r_1-r_2|<d<r_1+r_2$. If the centers and radii agree, the circles coincide and have infinitely many common points; this case must be separated from internal tangency.
+Substituting the equation of the line into that of the circle gives a quadratic equation, which in the three cases has two, one or no solutions. For the circle $x^2+y^2=25$, with centre the origin and radius $5$, the line $y=3$ is at distance $3$ from the centre and is a secant. The substitution gives $x^2+9=25$, that is, $x^2=16$, and the common points are $(4,3)$ and $(-4,3)$.
+
+For two distinct circles, with radii $r_1$ and $r_2$ and centres at distance $d$, $d$ is compared with the sum and with the difference of the radii. In the examples the radii are $5$ and $3$.
+
+| Condition | Position and common points | Example |
+|---|---|---|
+| $d>r_1+r_2$ | exterior, no points | $d=10$ |
+| $d=r_1+r_2$ | externally tangent, one point | $d=8$ |
+| $\lvert r_1-r_2\rvert<d<r_1+r_2$ | intersecting, two points | $d=6$ |
+| $d=\lvert r_1-r_2\rvert$ | internally tangent, one point | $d=2$ |
+| $d<\lvert r_1-r_2\rvert$ | one inside the other, no points | $d=1$ |
+
+Two circles with the same centre and the same radius coincide and have infinitely many common points. This case is distinct from internal tangency, although here too $d=\lvert r_1-r_2\rvert=0$.
 :::
 
 ## Parabolas, ellipses, and hyperbolas
 
 :::definizione{#coniche titolo="Recognizing a conic"}
-A parabola is the locus of points equidistant from a point, the focus, and a line, the directrix, that does not contain it. In the form $y=ax^2+bx+c$, with $a\ne0$, the vertex has horizontal coordinate $x_V=-\dfrac{b}{2a}$ and vertical coordinate found by substituting $x_V$. Completing the square reveals the symmetry: $y=(x-2)^2-1$ has vertex $(2,-1)$, axis $x=2$, and minimum $-1$.
+The parabola, the ellipse and the hyperbola are curves called **conics**. The **parabola** is the locus of the points equidistant from a point, the focus, and from a line, the directrix, that does not pass through the focus. With a vertical axis it has equation $y=ax^2+bx+c$, with $a\ne0$; the symbol $\ne$ reads "not equal to". The vertex is the lowest point of the curve if $a>0$ and the highest if $a<0$. Its abscissa is $x_V=-\dfrac{b}{2a}$ and its ordinate is found by substituting $x_V$ into the equation. For $y=x^2-4x+3$, $x_V=\dfrac42=2$ and $y_V=4-8+3=-1$. Completing the square gives $y=(x^2-4x+4)-1=(x-2)^2-1$. The square is zero for $x=2$, so the minimum of $y$ is $-1$, the vertex is $(2,-1)$ and the axis of symmetry is the line $x=2$.
 
-An ellipse centered at the origin with coordinate axes has equation $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$, with $a,b>0$. Its intercepts are $(\pm a,0)$ and $(0,\pm b)$. If $a>b$, its foci lie on the $x$-axis at distance $c=\sqrt{a^2-b^2}$ from the center. The sum of the distances from each point to the foci is $2a$.
+The **ellipse** is the locus of the points for which the sum of the distances from two fixed points, the foci, is constant. With its centre at the origin and its axes of symmetry on the coordinate axes it has equation $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$, with $a,b>0$. It meets the axes at the points $(\pm a,0)$ and $(0,\pm b)$, where $\pm a$ denotes the two values $a$ and $-a$. If $a>b$, the foci are the points $(\pm c,0)$ with $c=\sqrt{a^2-b^2}$ and the sum of the distances is $2a$. For $\dfrac{x^2}{25}+\dfrac{y^2}{9}=1$, $a=5$, $b=3$ and $c=\sqrt{25-9}=4$. The point $(0,3)$ is at distance $\sqrt{4^2+3^2}=5$ from each focus, and $5+5=10=2a$.
 
-In the hyperbola $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$, the signs are opposite. The vertices are $(\pm a,0)$ and the asymptotes are $y=\pm\dfrac ba x$. The focal distance from the center satisfies $c^2=a^2+b^2$. To distinguish the conics, first normalize the right side to $1$, then read the signs and denominators.
+The **hyperbola** $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$ has the two signs opposite and consists of two branches. The vertices are the points $(\pm a,0)$. The asymptotes are the lines $y=\pm\dfrac ba x$, which the branches approach as they move away from the centre. The foci are the points $(\pm c,0)$ with $c^2=a^2+b^2$. For $\dfrac{x^2}{9}-\dfrac{y^2}{16}=1$, $a=3$ and $b=4$, the asymptotes are $y=\pm\dfrac43x$ and $c=\sqrt{9+16}=5$.
+
+To recognise the conic, the equation is divided so that the right side is $1$, and then the signs and the denominators are read. The equation $4x^2+9y^2=36$, divided by $36$, becomes $\dfrac{x^2}{9}+\dfrac{y^2}{4}=1$. The two signs are positive, so it is an ellipse with $a=3$ and $b=2$.
 :::
 
 :::esempio{titolo="Intersection and tangency to a parabola"}
-The line $y=2x-1$ meets $y=x^2$ at points satisfying $x^2=2x-1$, or $(x-1)^2=0$. There is one point, $(1,1)$, and the line is tangent. With $y=2x$, the equation would be $x(x-2)=0$, giving two intersections. The number of common points comes from the distinct real solutions, so a double root identifies just one point.
+The line $y=2x-1$ meets the parabola $y=x^2$ at the points where $x^2=2x-1$, that is, $x^2-2x+1=0$. The left side is $(x-1)^2$, so the only solution is $x=1$, with $y=1$. The line and the parabola have only the point $(1,1)$ in common and the line is a **tangent**. In the graph the line touches the parabola at the marked point $(1,1)$ and elsewhere lies below the curve.
+
+With the line $y=2x$ the equation is $x^2=2x$, that is, $x(x-2)=0$, and there are two common points, $(0,0)$ and $(2,4)$. There are as many common points as distinct solutions of the quadratic equation; a double solution, such as $x=1$, corresponds to tangency.
 
 ::grafico{f="x^2;2*x-1" xmin=-1 xmax=3 ymin=-2 ymax=6 punti="1,1,pieno" titolo="The line touches the parabola only at (1; 1)"}
 :::

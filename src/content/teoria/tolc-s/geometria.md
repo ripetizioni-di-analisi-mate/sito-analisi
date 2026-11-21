@@ -6,113 +6,170 @@ sommario: "Figure piane e solide, distanze, similitudine e geometria analitica, 
 ## Angoli, triangoli e distanze
 
 :::definizione{#angoli titolo="Angoli e rette parallele"}
-Un **angolo** misura la rotazione fra due semirette con la stessa origine. Un angolo retto misura $90^\circ$, un angolo piatto $180^\circ$ e un giro completo $360^\circ$. Due angoli sono complementari se la loro somma è $90^\circ$ e supplementari se è $180^\circ$. Quando due rette si intersecano, gli angoli opposti al vertice sono uguali, mentre quelli adiacenti sono supplementari.
+Un **angolo** è la parte di piano compresa fra due semirette con la stessa origine, detta vertice; una semiretta è la parte di una retta che parte da un punto e prosegue da un solo lato. L'ampiezza si misura in gradi, con simbolo $^\circ$: un giro completo misura $360^\circ$, un angolo piatto $180^\circ$ e un angolo retto $90^\circ$. Un angolo acuto è minore di $90^\circ$; un angolo ottuso è compreso fra $90^\circ$ e $180^\circ$.
 
-Se due rette parallele sono tagliate da una trasversale, gli angoli corrispondenti sono uguali. Questa proprietà permette di trasferire un angolo da una parte della figura all'altra. Per esempio, se un angolo acuto misura $38^\circ$, l'angolo ottuso adiacente misura $180^\circ-38^\circ=142^\circ$. La sola inclinazione apparente del disegno non assegna una misura: valgono i dati e le relazioni dichiarate.
+Due angoli sono **complementari** se la loro somma è $90^\circ$ e **supplementari** se è $180^\circ$. Il complementare di $38^\circ$ è $52^\circ$ e il supplementare è $180^\circ-38^\circ=142^\circ$.
+
+Due rette che si intersecano formano quattro angoli. Due di essi con un lato in comune si dicono adiacenti; insieme formano un angolo piatto, quindi sono supplementari. Due angoli opposti al vertice, cioè uno di fronte all'altro, sono uguali, perché sono supplementari dello stesso angolo. Se i quattro angoli sono retti, le due rette sono perpendicolari.
+
+Due rette **parallele** sono rette dello stesso piano senza punti in comune. Una retta che le interseca entrambe, detta trasversale, forma con esse otto angoli.
+
+- Gli angoli **corrispondenti** occupano la stessa posizione nelle due intersezioni, per esempio entrambi sopra la parallela e a destra della trasversale, e sono uguali.
+- Gli angoli **alterni interni** stanno fra le due parallele, da parti opposte della trasversale, e sono uguali.
+
+Se la trasversale forma con una parallela un angolo di $38^\circ$, l'angolo corrispondente sull'altra misura $38^\circ$ e quello adiacente $142^\circ$. La misura di un angolo si riporta così da una parte all'altra di una figura e si ricava dai dati e da queste relazioni, anche quando l'inclinazione del disegno suggerisce un valore diverso.
 :::
 
 ::::teorema{#triangoli titolo="Somma degli angoli e disuguaglianza triangolare"}
-In un triangolo non degenere gli angoli interni hanno somma $180^\circ$. Inoltre, se due lati misurano $a$ e $b$, il terzo lato $c$ soddisfa
+In un triangolo, cioè nella figura che ha per vertici tre punti non allineati, la somma dei tre angoli interni è $180^\circ$. Se due angoli misurano $50^\circ$ e $60^\circ$, il terzo misura $180^\circ-50^\circ-60^\circ=70^\circ$.
+
+Inoltre ogni lato è minore della somma degli altri due (**disuguaglianza triangolare**). Se due lati misurano $a$ e $b$, il terzo lato $c$ soddisfa
 $$
-|a-b|<c<a+b.
+|a-b|<c<a+b,
 $$
-Queste condizioni distinguono un triangolo da tre segmenti che non possono chiudersi. Con lati $4$ e $7$, per esempio, il terzo lato deve essere maggiore di $3$ e minore di $11$.
+dove $|a-b|$ è il valore assoluto della differenza, cioè il lato maggiore meno il minore. Con lati $4$ e $7$ il terzo lato è maggiore di $7-4=3$ e minore di $7+4=11$. Tre segmenti lunghi $4$, $7$ e $12$ non formano un triangolo, perché $12>11$.
 
 :::dimostrazione
-Per la somma degli angoli si traccia da un vertice la parallela al lato opposto. Gli altri due angoli si ritrovano sul vertice come angoli alterni interni, e insieme al terzo formano un angolo piatto. Per la disuguaglianza, il percorso fra due vertici attraverso il terzo è più lungo del segmento diretto; applicando questa osservazione ai tre lati si ottengono sia il limite superiore sia quello inferiore.
+Per la somma degli angoli si traccia per un vertice la parallela al lato opposto. Essa forma con i due lati uscenti dal vertice due angoli, uguali agli altri due angoli del triangolo perché alterni interni. Con l'angolo del triangolo nel vertice essi formano un angolo piatto, quindi la somma è $180^\circ$.
+
+Per la disuguaglianza, il segmento è il percorso più breve fra due punti, quindi il percorso fra due vertici che passa per il terzo è più lungo del lato che li unisce, cioè $c<a+b$. Allo stesso modo $a<b+c$ e $b<a+c$, cioè $c>a-b$ e $c>b-a$, che insieme equivalgono a $c>|a-b|$.
 :::
 ::::
 
 ::::teorema{#pitagora titolo="Teorema di Pitagora"}
-In un triangolo rettangolo, detti $a,b$ i cateti e $c$ l'ipotenusa, vale
+Un triangolo **rettangolo** ha un angolo retto. I due lati che lo formano sono i **cateti**; il lato opposto all'angolo retto è l'**ipotenusa**, che è il lato più lungo. Detti $a,b$ i cateti e $c$ l'ipotenusa, vale
 $$
 c^2=a^2+b^2.
 $$
-L'ipotenusa è il lato opposto all'angolo retto. La formula permette di ricavare una distanza obliqua da due spostamenti perpendicolari. Vale anche il criterio inverso: se il quadrato del lato maggiore è uguale alla somma dei quadrati degli altri due, il triangolo è rettangolo.
+Con il teorema si calcola un lato quando sono noti gli altri due, e quindi una distanza obliqua a partire da due spostamenti perpendicolari. Con cateti $6$ e $8$ si ha $c^2=36+64=100$, quindi $c=10$.
+
+Vale anche il teorema inverso: se il quadrato del lato maggiore è uguale alla somma dei quadrati degli altri due, il triangolo è rettangolo. È il caso dei lati $5$, $12$ e $13$, perché $25+144=169$.
 
 :::dimostrazione
-Un quadrato di lato $a+b$ può essere suddiviso in quattro triangoli rettangoli congruenti e un quadrato interno di lato $c$. Confrontando le aree si ottiene $(a+b)^2=4\cdot\dfrac{ab}{2}+c^2$. Sviluppando il quadrato e sottraendo $2ab$ resta $a^2+b^2=c^2$.
+Su ogni lato di un quadrato di lato $a+b$ si segna il punto che lo divide in un tratto lungo $a$ e in uno lungo $b$, sempre nello stesso verso. Unendo i quattro punti il quadrato risulta diviso in quattro triangoli rettangoli uguali, di cateti $a$ e $b$, e in un quadrato interno di lato $c$. Il confronto delle aree dà
+$$
+(a+b)^2=4\cdot\frac{ab}{2}+c^2.
+$$
+Il primo membro è $a^2+2ab+b^2$ e il secondo è $2ab+c^2$. Sottraendo $2ab$ da entrambi resta $a^2+b^2=c^2$.
 :::
 ::::
 
 :::esempio{titolo="Un'altezza in un triangolo isoscele"}
-Un triangolo isoscele ha lati uguali di $13\,\mathrm{cm}$ e base di $10\,\mathrm{cm}$. L'altezza relativa alla base la divide in due segmenti di $5\,\mathrm{cm}$. Ciascuna metà è un triangolo rettangolo, quindi
+Un triangolo isoscele ha due lati uguali; il terzo lato è la base. L'**altezza** relativa a un lato è il segmento perpendicolare condotto a quel lato dal vertice opposto. Nel triangolo isoscele l'altezza relativa alla base la divide a metà.
+
+Nella figura il triangolo $ABC$ ha i lati uguali di $13\,\mathrm{cm}$ e la base $AB$ di $10\,\mathrm{cm}$. L'altezza $CH$ divide la base in due segmenti di $5\,\mathrm{cm}$. Il triangolo $AHC$ è rettangolo in $H$ e ha ipotenusa $AC$, quindi
 $$
-h=\sqrt{13^2-5^2}=\sqrt{144}=12\,\mathrm{cm}.
+CH=\sqrt{13^2-5^2}=\sqrt{144}=12\,\mathrm{cm}.
 $$
-L'area è $\dfrac{10\cdot12}{2}=60\,\mathrm{cm^2}$. Il lato di $13\,\mathrm{cm}$ è obliquo rispetto alla base, perciò l'altezza usata nel prodotto è $12\,\mathrm{cm}$.
+L'area di un triangolo è la metà del prodotto fra una base e l'altezza relativa, quindi l'area di $ABC$ è $\dfrac{10\cdot12}{2}=60\,\mathrm{cm^2}$. Il lato di $13\,\mathrm{cm}$ è obliquo rispetto alla base, perciò l'altezza usata nel prodotto è $CH=12\,\mathrm{cm}$.
 
 ::struttura{nodi="A,-5,0;B,5,0;C,0,12;H,0,0" linee="-5,0 5,0 0,12 -5,0;0,0 0,12;0,0.7 0.7,0.7 0.7,0" quote="A,H,5 cm;H,B,5 cm;A,C,13 cm,-0.8" titolo="L'altezza CH divide il triangolo isoscele in due triangoli rettangoli"}
 :::
 
 :::osservazione{titolo="Classificazione mediante i lati"}
-Siano $a,b,c$ i lati di un triangolo e $c$ il maggiore. Se $c^2>a^2+b^2$, l'angolo opposto a $c$ è ottuso; se $c^2<a^2+b^2$, tutti gli angoli sono acuti. La distinzione segue dal teorema del coseno, $c^2=a^2+b^2-2ab\cos\gamma$: il coseno dell'angolo maggiore è negativo nel primo caso e positivo nel secondo. Per applicare il criterio deve prima essere soddisfatta la disuguaglianza triangolare.
-:::
+Un triangolo è acutangolo se ha tre angoli acuti e ottusangolo se ha un angolo ottuso. Siano $a,b,c$ i lati di un triangolo, con $c$ il maggiore. L'angolo più ampio è quello opposto a $c$.
 
+- Se $c^2=a^2+b^2$, il triangolo è rettangolo.
+- Se $c^2<a^2+b^2$, il triangolo è acutangolo. Con lati $4$, $5$ e $6$ si ha $36<16+25$.
+- Se $c^2>a^2+b^2$, il triangolo è ottusangolo. Con lati $3$, $5$ e $7$ si ha $49>9+25$.
+
+Il criterio segue dal teorema del coseno, $c^2=a^2+b^2-2ab\cos\gamma$, dove $\gamma$ (gamma) è l'angolo opposto a $c$; il teorema è enunciato nel capitolo di trigonometria. Il coseno di un angolo ottuso è negativo, quindi in quel caso $c^2>a^2+b^2$; il coseno di un angolo acuto è positivo, quindi $c^2<a^2+b^2$. Il criterio si applica a lunghezze che soddisfano la disuguaglianza triangolare, come $3$, $5$ e $7$, per le quali $7<3+5$.
+:::
 
 ## Similitudine e rapporti di scala
 
 :::definizione{#similitudine titolo="Figure simili"}
-Due figure sono **simili** se hanno la stessa forma e le lunghezze corrispondenti sono moltiplicate per uno stesso fattore $k>0$. Nei triangoli bastano due coppie di angoli uguali; il terzo angolo coincide perché la somma è $180^\circ$. Il rapporto va scritto nello stesso ordine per tutte le coppie, facendo corrispondere i lati opposti ad angoli uguali.
+Due figure sono **simili** se hanno la stessa forma, cioè se una è l'ingrandimento o la riduzione dell'altra. Gli angoli corrispondenti sono uguali e ogni lunghezza della seconda figura è la lunghezza corrispondente della prima moltiplicata per uno stesso numero $k>0$, detto **rapporto di similitudine**.
 
-Se un triangolo ha lati $3,4,5$ e un altro ha lati $6,8,10$, il rapporto dal primo al secondo è $k=2$. Anche le altezze e i perimetri raddoppiano. Per le aree ogni prodotto fra due lunghezze contiene due fattori $k$, quindi il rapporto è $k^2$. Per i volumi di solidi simili è invece $k^3$.
+I triangoli di lati $3,4,5$ e $6,8,10$ sono simili con $k=2$, perché $\dfrac63=\dfrac84=\dfrac{10}{5}=2$. I rapporti si scrivono tutti nello stesso ordine e fra lati corrispondenti, cioè opposti ad angoli uguali. Due triangoli con due coppie di angoli uguali sono simili; infatti anche il terzo angolo è uguale, perché in entrambi la somma è $180^\circ$.
+
+- Lati, altezze e perimetri sono moltiplicati per $k$. Il perimetro è la somma dei lati e nell'esempio passa da $12$ a $24$.
+- Le aree sono moltiplicate per $k^2$, perché un'area è il prodotto di due lunghezze. I due triangoli dell'esempio sono rettangoli e hanno aree $\dfrac{3\cdot4}{2}=6$ e $\dfrac{6\cdot8}{2}=24=6\cdot2^2$.
+- I volumi di due solidi simili sono moltiplicati per $k^3$. Un cubo di lato $2$ ha volume $8$, uno di lato $6$ ha volume $216=8\cdot3^3$.
 :::
 
 :::esempio{titolo="Dalle superfici alle lunghezze"}
-Due quadrati hanno aree $18\,\mathrm{cm^2}$ e $50\,\mathrm{cm^2}$. Il rapporto fra il lato del primo e quello del secondo è
+Due quadrati hanno aree $18\,\mathrm{cm^2}$ e $50\,\mathrm{cm^2}$. Il rapporto fra le aree è $k^2=\dfrac{18}{50}$, quindi il rapporto fra il lato del primo e quello del secondo è
 $$
 k=\sqrt{\frac{18}{50}}=\sqrt{\frac{9}{25}}=\frac35.
 $$
-Il rapporto dei perimetri è anch'esso $\dfrac35$. Il rapporto $\dfrac9{25}$ descrive le aree, quindi usarlo per i lati significherebbe contare due volte l'effetto della scala. Nei disegni in scala $1:200$, un segmento lungo $3\,\mathrm{cm}$ rappresenta $600\,\mathrm{cm}=6\,\mathrm{m}$ nella realtà.
+Lo stesso rapporto vale per i perimetri, che sono lunghezze. Il numero $\dfrac{9}{25}$ è il rapporto fra le aree; usarlo per i lati significherebbe applicare due volte il fattore di scala.
+
+In un disegno in scala $1:200$ ogni lunghezza reale è $200$ volte quella del disegno. Un segmento di $3\,\mathrm{cm}$ rappresenta $3\cdot200=600\,\mathrm{cm}=6\,\mathrm{m}$.
 :::
 
 :::osservazione
-La similitudine si applica alle ombre quando il terreno è orizzontale, gli oggetti sono verticali e i raggi solari hanno la stessa direzione. Le altezze e le ombre formano allora triangoli rettangoli con gli stessi angoli. Un palo alto $2\,\mathrm{m}$ con ombra di $3\,\mathrm{m}$ e un albero con ombra di $12\,\mathrm{m}$ danno $h=12\cdot\dfrac23=8\,\mathrm{m}$. Le condizioni geometriche giustificano la proporzione.
+Un palo e un albero verticali, su un terreno orizzontale, ricevono i raggi del Sole con la stessa direzione. I triangoli rettangoli formati da ciascuno con la propria ombra hanno quindi gli stessi angoli e sono simili. Se il palo è alto $2\,\mathrm{m}$ e ha un'ombra di $3\,\mathrm{m}$, e l'ombra dell'albero misura $12\,\mathrm{m}$, l'altezza $h$ dell'albero soddisfa
+$$
+\frac{h}{12}=\frac23,\qquad h=12\cdot\frac23=8\,\mathrm{m}.
+$$
 :::
 
 ## Poligoni, aree e scomposizioni
 
 :::definizione{#aree titolo="Area e altezza relativa"}
-L'**area** misura l'estensione di una regione piana. Per un rettangolo di lati $b,h$ è $bh$. Un parallelogramma di base $b$ e altezza $h$ ha la stessa area: spostando un triangolo laterale si ricompone un rettangolo. L'altezza è la distanza perpendicolare fra le rette che contengono le due basi.
+L'**area** misura l'estensione di una regione piana e si esprime in unità quadrate, come il $\mathrm{cm^2}$. Nelle formule $b$ è un lato scelto come base e l'**altezza** $h$ è la distanza perpendicolare fra la retta della base e il lato opposto oppure, nel triangolo, il vertice opposto.
 
-Un triangolo occupa metà del parallelogramma formato con una sua copia, quindi $A=\dfrac{bh}{2}$. Per un trapezio di basi parallele $B,b$ e altezza $h$ vale $A=\dfrac{(B+b)h}{2}$. Le diagonali perpendicolari di un rombo lo dividono in quattro triangoli rettangoli, da cui $A=\dfrac{d_1d_2}{2}$. Le lunghezze sono espresse nella stessa unità prima di eseguire il prodotto.
+| Figura | Area | Esempio |
+|---|---|---|
+| Rettangolo | $bh$ | $b=5$, $h=3$: $15$ |
+| Parallelogramma, con i lati opposti paralleli | $bh$ | $b=5$, $h=3$: $15$ |
+| Triangolo | $\dfrac{bh}{2}$ | $b=5$, $h=3$: $7{,}5$ |
+| Trapezio, con due lati paralleli $B$ e $b$ detti basi | $\dfrac{(B+b)h}{2}$ | $B=7$, $b=3$, $h=4$: $20$ |
+| Rombo, con quattro lati uguali e diagonali perpendicolari $d_1$, $d_2$ | $\dfrac{d_1d_2}{2}$ | $d_1=6$, $d_2=8$: $24$ |
+
+Spostando un triangolo da un lato all'altro, un parallelogramma diventa un rettangolo con la stessa base e la stessa altezza. Due copie di un triangolo formano un parallelogramma, quindi l'area del triangolo è la metà; allo stesso modo due copie di un trapezio formano un parallelogramma di base $B+b$. Le diagonali di un rombo, cioè i segmenti che uniscono i vertici opposti, lo dividono in quattro triangoli rettangoli uguali, di cateti $\dfrac{d_1}{2}$ e $\dfrac{d_2}{2}$; ciascuno ha area $\dfrac{d_1d_2}{8}$ e i quattro insieme $\dfrac{d_1d_2}{2}$.
+
+Prima del prodotto le lunghezze si esprimono nella stessa unità.
 :::
 
 :::esempio{titolo="Area con una parte asportata"}
-Da un rettangolo di $10\,\mathrm{cm}$ per $6\,\mathrm{cm}$ viene tolto un rettangolo di $4\,\mathrm{cm}$ per $2\,\mathrm{cm}$ in un angolo. Poiché le regioni non si sovrappongono, l'area rimasta è
+Da un rettangolo di $10\,\mathrm{cm}$ per $6\,\mathrm{cm}$ si toglie, in un angolo, un rettangolo di $4\,\mathrm{cm}$ per $2\,\mathrm{cm}$. Nella figura la regione rimasta ha i vertici da $A$ a $F$, e i lati $DC$ ed $ED$ sono il bordo lasciato dalla parte tolta. L'area rimasta è la differenza fra le due aree:
 $$
-A=10\cdot6-4\cdot2=52\,\mathrm{cm^2}.
+A=10\cdot6-4\cdot2=60-8=52\,\mathrm{cm^2}.
 $$
-Il perimetro richiede invece di seguire il bordo. Togliendo il rettangolino angolare, i tratti esterni eliminati sono sostituiti da tratti della stessa lunghezza, quindi in questo caso il perimetro resta $32\,\mathrm{cm}$. L'area è diminuita mentre il perimetro è rimasto uguale.
+Il perimetro è la somma dei sei lati. I due lati senza misura nella figura sono $BC=6-2=4\,\mathrm{cm}$ ed $EF=10-4=6\,\mathrm{cm}$, quindi il perimetro è $10+4+4+2+6+6=32\,\mathrm{cm}$. L'area è diminuita, mentre il perimetro è quello del rettangolo intero, $2\cdot(10+6)=32\,\mathrm{cm}$, perché i due tratti di contorno tolti sono sostituiti da $DC$ ed $ED$, che hanno le stesse lunghezze.
 
 ::struttura{poligoni="0,0 10,0 10,4 6,4 6,6 0,6" nodi="A,0,0;B,10,0;C,10,4;D,6,4;E,6,6;F,0,6" quote="A,B,10 cm;F,A,6 cm;D,C,4 cm;E,D,2 cm" titolo="La regione rimasta ha area 52 centimetri quadrati"}
 :::
 
 :::teorema{#poligoni titolo="Angoli e diagonali di un poligono"}
-Un poligono convesso con $n\ge3$ lati si divide in $n-2$ triangoli tracciando le diagonali da un vertice. La somma degli angoli interni è dunque $(n-2)180^\circ$. Se il poligono è regolare, ciascun angolo interno misura $\dfrac{(n-2)180^\circ}{n}$ e ciascun angolo esterno adiacente misura $\dfrac{360^\circ}{n}$.
+Un **poligono** è una figura piana chiusa delimitata da segmenti, detti lati. È convesso se tutti i suoi angoli interni sono minori di $180^\circ$ ed è regolare se ha tutti i lati uguali e tutti gli angoli uguali. Una **diagonale** è un segmento che unisce due vertici non consecutivi.
 
-Da ogni vertice partono $n-3$ diagonali: sono esclusi il vertice stesso e i due vicini. Contando da tutti i vertici ogni diagonale compare due volte, quindi il totale è $\dfrac{n(n-3)}2$. Per un esagono le diagonali sono $9$, mentre la somma degli angoli interni è $720^\circ$.
+Le diagonali tracciate da un solo vertice dividono un poligono convesso con $n\ge3$ lati in $n-2$ triangoli; il simbolo $\ge$ si legge «maggiore o uguale». La somma degli angoli interni è quindi $(n-2)\cdot180^\circ$. Per un esagono, con $n=6$, la somma è $4\cdot180^\circ=720^\circ$.
+
+In un poligono regolare ogni angolo interno misura $\dfrac{(n-2)\cdot180^\circ}{n}$ e ogni angolo esterno, che è il suo supplementare, misura $\dfrac{360^\circ}{n}$. Nell'esagono regolare essi misurano $\dfrac{720^\circ}{6}=120^\circ$ e $\dfrac{360^\circ}{6}=60^\circ$.
+
+Da ogni vertice partono $n-3$ diagonali, perché si escludono il vertice stesso e i due vicini. Nel prodotto $n(n-3)$ ogni diagonale è contata due volte, una per estremo, quindi le diagonali sono $\dfrac{n(n-3)}{2}$. Un esagono ne ha $\dfrac{6\cdot3}{2}=9$.
 :::
 
 ## Cerchi, archi e corde
 
 :::definizione{#cerchio titolo="Circonferenza e cerchio"}
-La **circonferenza** è l'insieme dei punti a distanza $r>0$ da un centro $O$. Il **cerchio** comprende anche i punti interni. Il diametro misura $2r$, la lunghezza della circonferenza è $2\pi r$ e l'area del cerchio è $\pi r^2$. La presenza di $r$ oppure $r^2$ distingue una lunghezza da un'area anche nelle unità.
+La **circonferenza** è la linea formata dai punti che hanno la stessa distanza $r>0$, detta raggio, da un punto $O$, detto centro. Il **cerchio** comprende anche i punti interni. Un diametro è un segmento che unisce due punti della circonferenza passando per il centro e misura $2r$. La lunghezza della circonferenza è $2\pi r$ e l'area del cerchio è $\pi r^2$, dove $\pi$ (pi greco) vale circa $3{,}14$. Con $r=5\,\mathrm{cm}$ la circonferenza misura $10\pi\approx31{,}4\,\mathrm{cm}$ e l'area è $25\pi\approx78{,}5\,\mathrm{cm^2}$; il simbolo $\approx$ si legge «circa uguale a». Il raggio compare alla prima potenza nella lunghezza, che si misura in $\mathrm{cm}$, e al quadrato nell'area, che si misura in $\mathrm{cm^2}$.
 
-Una corda congiunge due punti della circonferenza. La perpendicolare dal centro alla corda la divide a metà. Se la sua distanza dal centro è $d<r$, metà corda misura $\sqrt{r^2-d^2}$. Per una tangente, il raggio che raggiunge il punto di contatto è perpendicolare alla retta: questa proprietà fornisce un triangolo rettangolo in molti problemi di distanza.
+Una **corda** è un segmento che unisce due punti della circonferenza. La perpendicolare condotta dal centro a una corda la divide a metà. Se la corda dista $d<r$ dal centro, la distanza $d$, metà della corda e un raggio formano un triangolo rettangolo di ipotenusa $r$, quindi metà della corda misura $\sqrt{r^2-d^2}$.
+
+Una retta **tangente** ha in comune con la circonferenza un solo punto, il punto di contatto, e in quel punto è perpendicolare al raggio. Se $T$ è il punto di contatto di una tangente condotta da un punto $P$, il triangolo $OTP$ è quindi rettangolo in $T$.
 :::
 
 :::definizione{#settori titolo="Arco e settore circolare"}
-Un settore con angolo al centro $\alpha$, misurato in gradi, occupa la frazione $\dfrac{\alpha}{360^\circ}$ del cerchio. Perciò la lunghezza dell'arco $\ell$ e l'area del settore sono
+Un angolo al centro ha il vertice nel centro del cerchio. I suoi lati delimitano un **arco**, cioè un tratto di circonferenza, e un **settore circolare**, cioè la parte di cerchio compresa fra i due raggi e l'arco. Un settore con angolo al centro $\alpha$ in gradi è la frazione $\dfrac{\alpha}{360^\circ}$ del cerchio. Perciò la lunghezza $\ell$ dell'arco e l'area $A$ del settore sono
 $$
 \ell=\frac{\alpha}{360^\circ}2\pi r,
 \qquad A=\frac{\alpha}{360^\circ}\pi r^2.
 $$
-Il perimetro completo del settore comprende l'arco e i due raggi, quindi è $\ell+2r$. Un angolo alla circonferenza misura metà dell'angolo al centro che insiste sullo stesso arco. Se l'arco è una semicirconferenza, l'angolo alla circonferenza è retto.
+Con $r=6\,\mathrm{cm}$ e $\alpha=60^\circ$ la frazione è $\dfrac16$. L'arco misura $\dfrac16\cdot12\pi=2\pi\approx6{,}28\,\mathrm{cm}$ e l'area del settore è $\dfrac16\cdot36\pi=6\pi\approx18{,}85\,\mathrm{cm^2}$. Il contorno del settore comprende l'arco e i due raggi, quindi il perimetro è $\ell+2r=2\pi+12\approx18{,}28\,\mathrm{cm}$.
+
+Un angolo alla circonferenza ha il vertice sulla circonferenza e i lati che passano per i due estremi di un arco. Misura la metà dell'angolo al centro che insiste sullo stesso arco, cioè con i lati passanti per gli stessi estremi: a un angolo al centro di $80^\circ$ corrisponde un angolo alla circonferenza di $40^\circ$. Se l'arco è una semicirconferenza, l'angolo al centro è piatto e l'angolo alla circonferenza è retto.
 :::
 
 :::esempio{titolo="Corda e distanza dal centro"}
-Una corda in una circonferenza di raggio $5\,\mathrm{cm}$ dista $3\,\mathrm{cm}$ dal centro. Indicata con $M$ la sua metà, il triangolo $OMA$ ha ipotenusa $5$ e un cateto $3$, quindi $MA=\sqrt{25-9}=4\,\mathrm{cm}$. L'intera corda misura $8\,\mathrm{cm}$.
+Una corda $AB$ di una circonferenza di centro $O$ e raggio $5\,\mathrm{cm}$ dista $3\,\mathrm{cm}$ dal centro. Nella figura $OM$ è la perpendicolare condotta dal centro alla corda, quindi misura $3\,\mathrm{cm}$ e $M$ è il punto medio di $AB$. Il triangolo $OMA$ è rettangolo in $M$ e ha ipotenusa $OA=5\,\mathrm{cm}$, quindi
+$$
+MA=\sqrt{5^2-3^2}=\sqrt{16}=4\,\mathrm{cm}.
+$$
+La corda intera misura $AB=2\cdot4=8\,\mathrm{cm}$.
 
 ::struttura{cerchi="0,0,5" nodi="O,0,0;M,3,0;A,3,4;B,3,-4" linee="0,0 3,4;3,-4 3,4;0,0 3,0" quote="O,M,3 cm,0.5;O,A,5 cm,-0.8" titolo="Il raggio OA e la distanza OM determinano metà della corda AB"}
 :::
@@ -120,76 +177,128 @@ Una corda in una circonferenza di raggio $5\,\mathrm{cm}$ dista $3\,\mathrm{cm}$
 ## Solidi e unità di misura
 
 :::definizione{#volumi titolo="Prismi, piramidi e solidi di rotazione"}
-Il volume di un prisma è $V=A_bh$, dove $A_b$ è l'area della base e $h$ la distanza perpendicolare fra le basi. Il cilindro segue la stessa regola con $A_b=\pi r^2$. Una piramide e un cono hanno volume $\dfrac{A_bh}{3}$. Per una sfera di raggio $r$ valgono
-$$
-V=\frac43\pi r^3,\qquad S=4\pi r^2.
-$$
-Il fattore un terzo riguarda il volume di piramidi e coni; la superficie va ricavata dalle facce effettive. Per un cilindro chiuso la superficie totale è $2\pi rh+2\pi r^2$, somma della superficie laterale e delle due basi. Se il cilindro è aperto sopra, compare una sola base. In un cono retto l'apotema è $s=\sqrt{r^2+h^2}$ e l'area laterale è $\pi rs$.
+Il **volume** misura lo spazio occupato da un solido e si esprime in unità cubiche, come il $\mathrm{cm^3}$. Un prisma ha due basi uguali e parallele, che sono poligoni; il parallelepipedo rettangolo è il prisma a forma di scatola, con tutte le facce rettangolari. Un cilindro ha per basi due cerchi. Una piramide ha per base un poligono e un cono ha per base un cerchio; entrambi terminano in un vertice. L'altezza $h$ è la distanza perpendicolare fra le due basi oppure fra il vertice e il piano della base, e $A_b$ è l'area della base.
+
+| Solido | Volume | Esempio |
+|---|---|---|
+| Prisma | $A_bh$ | scatola di lati $3$, $4$, $12$: $3\cdot4\cdot12=144$ |
+| Cilindro | $\pi r^2h$ | $r=3$, $h=10$: $90\pi\approx282{,}7$ |
+| Piramide | $\dfrac{A_bh}{3}$ | base quadrata di lato $6$, $h=10$: $\dfrac{36\cdot10}{3}=120$ |
+| Cono | $\dfrac{\pi r^2h}{3}$ | $r=3$, $h=10$: $30\pi\approx94{,}2$ |
+| Sfera di raggio $r$ | $\dfrac43\pi r^3$ | $r=3$: $36\pi\approx113{,}1$ |
+
+Cilindro, cono e sfera sono solidi di rotazione, cioè ottenuti facendo ruotare una figura piana attorno a una retta.
+
+Il fattore $\dfrac13$ riguarda soltanto i volumi di piramidi e coni. La superficie di un solido è la somma delle aree delle parti che lo delimitano.
+
+- La sfera ha superficie $4\pi r^2$.
+- La superficie laterale di un cilindro, distesa su un piano, è un rettangolo di lati $2\pi r$ e $h$. Con le due basi la superficie totale è $2\pi rh+2\pi r^2$, che per $r=3$ e $h=10$ vale $60\pi+18\pi=78\pi\approx245{,}0$. Un cilindro aperto sopra ha una sola base.
+- In un cono retto, cioè con il vertice sopra il centro della base, l'**apotema** $s$ è la distanza del vertice dalla circonferenza di base. Altezza, raggio e apotema formano un triangolo rettangolo, quindi $s=\sqrt{r^2+h^2}$, e l'area laterale è $\pi rs$. Con $r=3$ e $h=4$ si ha $s=5$ e l'area laterale è $15\pi\approx47{,}1$.
 :::
 
 :::esempio{titolo="Diagonale di una scatola"}
-Un parallelepipedo rettangolo ha spigoli $3,4,12\,\mathrm{cm}$. La diagonale della base misura $\sqrt{3^2+4^2}=5\,\mathrm{cm}$. Questa diagonale e l'altezza sono perpendicolari, quindi la diagonale nello spazio misura
+Un parallelepipedo rettangolo ha spigoli, cioè lati delle facce, di $3$, $4$ e $12\,\mathrm{cm}$. La diagonale nello spazio unisce due vertici che non stanno su una stessa faccia. La diagonale della base, che è un rettangolo di lati $3\,\mathrm{cm}$ e $4\,\mathrm{cm}$, misura $\sqrt{3^2+4^2}=5\,\mathrm{cm}$. Essa è perpendicolare allo spigolo verticale di $12\,\mathrm{cm}$, quindi la diagonale nello spazio è l'ipotenusa di un triangolo rettangolo e misura
 $$
-d=\sqrt{5^2+12^2}=13\,\mathrm{cm}.
+d=\sqrt{5^2+12^2}=\sqrt{169}=13\,\mathrm{cm}.
 $$
-Il procedimento usa Pitagora due volte e produce la formula $d=\sqrt{a^2+b^2+c^2}$. Per un cubo di spigolo $a$ dà $a\sqrt3$; la diagonale di una faccia è invece $a\sqrt2$.
+Il teorema di Pitagora è applicato due volte e, per spigoli $a,b,c$, i due passaggi insieme danno $d=\sqrt{a^2+b^2+c^2}$. In un cubo di spigolo $a$ la diagonale di una faccia misura $\sqrt{a^2+a^2}=a\sqrt2$ e la diagonale nello spazio $\sqrt{3a^2}=a\sqrt3$.
 :::
 
 :::osservazione{#unita-geometriche titolo="Conversioni di area e volume"}
-Poiché $1\,\mathrm{m}=100\,\mathrm{cm}$, un quadrato di lato un metro contiene $100^2=10000$ quadrati di lato un centimetro. Dunque $1\,\mathrm{m^2}=10000\,\mathrm{cm^2}$. Analogamente $1\,\mathrm{m^3}=1000000\,\mathrm{cm^3}$. Per la capacità, $1\,\mathrm{L}=1\,\mathrm{dm^3}=1000\,\mathrm{cm^3}$.
+Poiché $1\,\mathrm{m}=100\,\mathrm{cm}$, un quadrato di lato $1\,\mathrm{m}$ contiene $100$ file di $100$ quadrati di lato $1\,\mathrm{cm}$. Dunque $1\,\mathrm{m^2}=100^2\,\mathrm{cm^2}=10000\,\mathrm{cm^2}$. Allo stesso modo $1\,\mathrm{m^3}=100^3\,\mathrm{cm^3}=1000000\,\mathrm{cm^3}$.
 
-Una vasca con base interna $40\,\mathrm{cm}$ per $30\,\mathrm{cm}$ contiene $6\,\mathrm{L}=6000\,\mathrm{cm^3}$ d'acqua. Il livello è quindi $h=\dfrac{6000}{40\cdot30}=5\,\mathrm{cm}$. L'area della base moltiplicata per l'altezza restituisce il volume assegnato. Questa verifica distingue l'altezza dell'acqua dall'altezza totale del recipiente.
+La capacità di un recipiente si misura in litri, con simbolo $\mathrm{L}$. Un litro è il volume di un cubo di spigolo un decimetro, cioè $10\,\mathrm{cm}$, quindi $1\,\mathrm{L}=1\,\mathrm{dm^3}=1000\,\mathrm{cm^3}$.
+
+Una vasca a forma di parallelepipedo ha la base interna di $40\,\mathrm{cm}$ per $30\,\mathrm{cm}$ e contiene $6\,\mathrm{L}=6000\,\mathrm{cm^3}$ d'acqua. L'acqua occupa un parallelepipedo con la stessa base e con altezza $h$, quindi $40\cdot30\cdot h=6000$ e $h=\dfrac{6000}{1200}=5\,\mathrm{cm}$. La verifica dà $1200\cdot5=6000\,\mathrm{cm^3}$. Il valore trovato è l'altezza dell'acqua; l'altezza della vasca è un'altra grandezza, maggiore o uguale a $5\,\mathrm{cm}$.
 :::
 
 ## Coordinate, punti medi e luoghi
 
 :::definizione{#coordinate titolo="Distanza e punto medio"}
-Nel piano cartesiano il punto $P(x,y)$ è individuato da due coordinate. Le differenze delle coordinate di $A(x_1,y_1)$ e $B(x_2,y_2)$ sono gli spostamenti orizzontale e verticale fra i punti. Per Pitagora,
+Nel **piano cartesiano** sono fissate due rette orientate e perpendicolari, l'asse $x$ orizzontale e l'asse $y$ verticale, che si incontrano nell'origine. Le coordinate di un punto $P(x,y)$ sono due: l'**ascissa** $x$ è lo spostamento orizzontale dall'origine, positivo verso destra; l'**ordinata** $y$ è lo spostamento verticale, positivo verso l'alto. Il punto $(3,-2)$ si raggiunge dall'origine con $3$ unità verso destra e $2$ verso il basso.
+
+Dati $A(x_1,y_1)$ e $B(x_2,y_2)$, le differenze $x_2-x_1$ e $y_2-y_1$ sono gli spostamenti orizzontale e verticale da $A$ a $B$, cioè i cateti di un triangolo rettangolo di ipotenusa $AB$. Per il teorema di Pitagora
 $$
 AB=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
 $$
-Il punto medio divide entrambi gli spostamenti a metà, quindi
+Per $A(1,2)$ e $B(4,6)$ gli spostamenti sono $3$ e $4$, quindi $AB=\sqrt{9+16}=5$.
+
+Il **punto medio** di un segmento è il suo punto equidistante, cioè alla stessa distanza, dagli estremi e ha per coordinate le medie delle loro coordinate:
 $$
 M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right).
 $$
-Per esempio, il punto medio fra $(-2,5)$ e $(6,-1)$ è $(2,2)$. La distanza di $(x,y)$ dall'asse orizzontale è $|y|$, mentre quella dall'asse verticale è $|x|$. I valori assoluti esprimono il fatto che una distanza è non negativa.
+Il punto medio fra $(-2,5)$ e $(6,-1)$ è $\left(\dfrac{-2+6}{2},\dfrac{5-1}{2}\right)=(2,2)$.
+
+La distanza di $(x,y)$ dall'asse $x$ è $|y|$ e quella dall'asse $y$ è $|x|$. Il valore assoluto è il numero privato del segno, e una distanza è positiva o nulla.
 :::
 
 :::definizione{#luoghi titolo="Luoghi geometrici"}
-Un **luogo geometrico** è l'insieme dei punti che soddisfano una proprietà. I punti equidistanti da due punti distinti $A,B$ formano l'asse del segmento, cioè la retta perpendicolare ad $AB$ nel suo punto medio. La proprietà si traduce in $PA^2=PB^2$: i termini quadratici uguali si cancellano e resta un'equazione lineare.
+Un **luogo geometrico** è l'insieme di tutti i punti che hanno una stessa proprietà. La circonferenza, per esempio, è il luogo dei punti a distanza $r$ dal centro.
 
-In un triangolo, gli assi dei lati si incontrano nel circocentro, equidistante dai vertici. Le bisettrici interne si incontrano nell'incentro, equidistante dalle rette dei lati. Le mediane congiungono i vertici ai punti medi dei lati opposti; il loro incontro, il baricentro, divide ogni mediana nel rapporto $2:1$ a partire dal vertice. Questi punti rispondono a proprietà diverse e possono occupare posizioni diverse. Le rette delle tre altezze si incontrano nell’**ortocentro**: ogni altezza passa per un vertice ed è perpendicolare alla retta del lato opposto. L’ortocentro è interno nei triangoli acutangoli, coincide con il vertice retto nei rettangoli ed è esterno negli ottusangoli.
+L'**asse** di un segmento $AB$ è la retta perpendicolare al segmento nel suo punto medio, ed è il luogo dei punti equidistanti da $A$ e da $B$. In coordinate la condizione $PA=PB$ si scrive $PA^2=PB^2$, che è priva di radici. Con $A(0,0)$, $B(4,2)$ e $P(x,y)$ si ha $x^2+y^2=(x-4)^2+(y-2)^2$. Sviluppando i quadrati, i termini $x^2$ e $y^2$ si semplificano e resta $0=-8x-4y+20$, cioè la retta $2x+y=5$, che passa per il punto medio $(2,1)$.
+
+In un triangolo le rette di ciascuna delle quattro terne seguenti si incontrano in un punto.
+
+| Rette | Che cosa sono | Punto d'incontro |
+|---|---|---|
+| Assi dei lati | perpendicolari ai lati nei punti medi | **circocentro**, equidistante dai tre vertici |
+| Bisettrici | dividono ciascun angolo interno in due angoli uguali | **incentro**, equidistante dai tre lati |
+| Mediane | uniscono ciascun vertice al punto medio del lato opposto | **baricentro** |
+| Altezze | perpendicolari condotte da ciascun vertice alla retta del lato opposto | **ortocentro** |
+
+Il baricentro divide ogni mediana in due parti, e quella verso il vertice è il doppio dell'altra (rapporto $2:1$): su una mediana lunga $9\,\mathrm{cm}$ dista $6\,\mathrm{cm}$ dal vertice e $3\,\mathrm{cm}$ dal punto medio del lato. L'ortocentro è interno nei triangoli acutangoli, è il vertice dell'angolo retto nei triangoli rettangoli ed è esterno nei triangoli ottusangoli. I quattro punti sono definiti da proprietà diverse e occupano posizioni diverse; coincidono solo nel triangolo equilatero, che ha i tre lati uguali.
 :::
 
 :::osservazione{titolo="Coordinate e trasformazioni"}
-Le coordinate permettono di descrivere lo spostamento di una figura punto per punto. Una traslazione di vettore $(u,v)$ aggiunge le due componenti alle coordinate, quindi $(x,y)$ diventa $(x+u,y+v)$. Una simmetria rispetto all'asse $x$ cambia il segno di $y$; rispetto all'asse $y$ cambia il segno di $x$; rispetto a $y=x$ scambia le coordinate. Le distanze sono conservate in tutti questi casi.
+Una **trasformazione** del piano associa a ogni punto $(x,y)$ un altro punto e si descrive dicendo come cambiano le coordinate. Le tre che seguono sono applicate a $P(3,1)$.
 
-Se una trasformazione ha centro $C$, si può lavorare con il vettore $P-C$ e sommare di nuovo $C$ alla fine. Per esempio, un'omotetia di rapporto $2$ e centro $(1,2)$ porta $P=(3,1)$ in $(1,2)+2(2,-1)=(5,0)$. Il centro resta fermo e la distanza da esso raddoppia. Applicare il fattore direttamente alle coordinate originali userebbe invece l'origine come centro.
+- La **traslazione** sposta tutti i punti di uno stesso vettore $(u,v)$, cioè di $u$ unità in orizzontale e $v$ in verticale, quindi $(x,y)$ diventa $(x+u,y+v)$. Con il vettore $(2,-4)$ il punto $P$ diventa $(5,-3)$.
+- La **simmetria** rispetto a una retta porta ogni punto dall'altra parte della retta, alla stessa distanza, lungo la perpendicolare. Rispetto all'asse $x$ cambia il segno di $y$ e $P$ diventa $(3,-1)$; rispetto all'asse $y$ cambia il segno di $x$ e $P$ diventa $(-3,1)$; rispetto alla retta $y=x$ le coordinate si scambiano e $P$ diventa $(1,3)$.
+- L'**omotetia** di centro $C$ e rapporto $k>0$ lascia fermo $C$ e moltiplica per $k$ la distanza da $C$ di ogni altro punto, nella stessa direzione. Se il centro è l'origine, $(x,y)$ diventa $(kx,ky)$ e, con $k=2$, $P$ diventa $(6,2)$.
+
+Traslazioni e simmetrie conservano le distanze. Un'omotetia trasforma ogni figura in una figura simile, con rapporto $k$.
+
+Se il centro $C$ è diverso dall'origine, lo spostamento da $C$ a $P$ si moltiplica per $k$ e si applica a partire da $C$. Con $C(1,2)$ e $k=2$ lo spostamento è $(3-1,1-2)=(2,-1)$ e il suo doppio è $(4,-2)$, quindi $P$ va in $(1+4,2-2)=(5,0)$. Il centro resta fermo e la distanza di $P$ da $C$ raddoppia, da $\sqrt5$ a $2\sqrt5$. Moltiplicando direttamente le coordinate di $P$ per $2$ si ottiene $(6,2)$, che è il risultato dell'omotetia con centro nell'origine.
 :::
-
 
 ## Rette e intersezioni
 
 :::definizione{#rette titolo="Pendenza ed equazione della retta"}
-Una retta non verticale ha equazione $y=mx+q$. Il **coefficiente angolare** $m$ indica la variazione di $y$ quando $x$ aumenta di un'unità; $q$ è l'ordinata del punto in cui la retta incontra l'asse $y$. Da due punti con ascisse diverse si ricava
+Una retta non verticale è formata dai punti $(x,y)$ che soddisfano un'equazione $y=mx+q$. Il **coefficiente angolare** $m$, detto anche pendenza, è la variazione di $y$ quando $x$ aumenta di un'unità: se $m>0$ la retta sale da sinistra verso destra, se $m<0$ scende. Il numero $q$ è l'ordinata del punto in cui la retta incontra l'asse $y$, perché per $x=0$ si ha $y=q$. Nella retta $y=2x+1$ si ha $m=2$ e $q=1$.
+
+Dati due punti della retta con ascisse diverse, $m$ è il rapporto fra lo spostamento verticale e quello orizzontale:
 $$
 m=\frac{y_2-y_1}{x_2-x_1}.
 $$
-Nota la pendenza e un punto $(x_0,y_0)$, la retta si scrive $y-y_0=m(x-x_0)$. Una retta orizzontale ha equazione $y=k$ e pendenza zero. Una verticale ha equazione $x=k$; in questo caso il rapporto che definisce la pendenza ha denominatore zero e non è un numero reale.
+La retta che passa per $(x_0,y_0)$ con coefficiente angolare $m$ ha equazione $y-y_0=m(x-x_0)$. Per i punti $(1,3)$ e $(3,7)$ si ha $m=\dfrac{7-3}{3-1}=2$. La retta è $y-3=2(x-1)$, cioè $y=2x+1$.
+
+Una retta orizzontale ha equazione $y=k$ e coefficiente angolare zero. Una retta verticale ha equazione $x=k$: i suoi punti hanno la stessa ascissa, quindi nel rapporto che definisce $m$ il denominatore è zero e il coefficiente angolare non è definito.
 :::
 
 :::teorema{#parallelismo titolo="Parallelismo, perpendicolarità e distanza"}
-Due rette non verticali distinte sono parallele se hanno lo stesso coefficiente angolare. Due rette con coefficienti $m_1,m_2$ sono perpendicolari se $m_1m_2=-1$. Una verticale e una orizzontale sono perpendicolari e si trattano direttamente dalle loro equazioni.
+Due rette non verticali e distinte, con coefficienti angolari $m_1$ e $m_2$, sono parallele se $m_1=m_2$ e sono perpendicolari se $m_1m_2=-1$. Le rette $y=2x+1$ e $y=-\dfrac12x+4$ sono perpendicolari, perché $2\cdot\left(-\dfrac12\right)=-1$. Una retta verticale $x=k$ e una orizzontale $y=h$ sono sempre perpendicolari; questo caso si riconosce dalle equazioni, perché la retta verticale è priva di coefficiente angolare.
 
-Per trovare l'intersezione di due rette si impongono entrambe le equazioni. Una soluzione individua un punto comune; un sistema impossibile corrisponde a rette parallele distinte; un'identità corrisponde a rette coincidenti. La distanza da $P(x_0,y_0)$ alla retta $ax+by+c=0$, con $(a,b)\ne(0,0)$, è
+Il punto di intersezione di due rette soddisfa entrambe le equazioni, quindi si trova risolvendo il sistema che esse formano.
+
+- Se il sistema ha una sola soluzione, le rette si incontrano in un punto.
+- Se il sistema è impossibile, le rette sono parallele e distinte. Per le rette parallele $y=2x+1$ e $y=2x-3$ l'uguaglianza $2x+1=2x-3$ si riduce a $1=-3$, che è falsa.
+- Se le due equazioni hanno le stesse soluzioni, le rette coincidono. È il caso di $y=2x+1$ e $2y=4x+2$.
+
+Ogni retta, anche verticale, si scrive nella forma $ax+by+c=0$, con $a$ e $b$ non entrambi nulli. La distanza di un punto $P(x_0,y_0)$ dalla retta è la lunghezza del segmento perpendicolare condotto da $P$ alla retta, e vale
 $$
 d=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}.
 $$
-Il valore assoluto elimina il segno legato al lato della retta in cui si trova il punto. Se il numeratore è zero, il punto appartiene alla retta e la distanza è zero.
+Il valore assoluto elimina il segno, che dipende dal lato della retta in cui si trova il punto. Per $P(1,2)$ e la retta $3x+4y+4=0$ si ha
+$$
+d=\frac{|3\cdot1+4\cdot2+4|}{\sqrt{3^2+4^2}}=\frac{15}{5}=3.
+$$
+Se il numeratore è zero, $P$ soddisfa l'equazione, quindi appartiene alla retta e la distanza è zero.
 :::
 
 :::esempio{titolo="Intersezione come condizione comune"}
-Le rette $y=2x+1$ e $y=-x+7$ si incontrano quando $2x+1=-x+7$. Quindi $3x=6$, $x=2$ e $y=5$. Sostituendo $(2,5)$ in entrambe le equazioni si ottiene rispettivamente $5=5$ e $5=5$.
+Nel punto comune alle rette $y=2x+1$ e $y=-x+7$ le due espressioni di $y$ sono uguali, quindi $2x+1=-x+7$. Portando i termini con $x$ al primo membro e i numeri al secondo si ottiene $3x=6$, quindi $x=2$. La prima equazione dà $y=2\cdot2+1=5$ e la seconda dà lo stesso valore, $y=-2+7=5$.
+
+Nel grafico la retta che sale è $y=2x+1$, quella che scende è $y=-x+7$ e il punto segnato è la loro intersezione $(2,5)$.
 
 ::grafico{f="2*x+1; -x+7" xmin=-1 xmax=5 ymin=-1 ymax=9 punti="2,5,pieno" titolo="Le due rette condividono il punto (2; 5)"}
 :::
@@ -197,37 +306,89 @@ Le rette $y=2x+1$ e $y=-x+7$ si incontrano quando $2x+1=-x+7$. Quindi $3x=6$, $x
 ## La circonferenza nel piano cartesiano
 
 :::definizione{#circonferenza-cartesiana titolo="Centro e raggio dall'equazione"}
-La circonferenza con centro $(a,b)$ e raggio $r>0$ è descritta da
+Un punto $P(x,y)$ appartiene alla circonferenza di centro $(a,b)$ e raggio $r>0$ se la sua distanza dal centro è $r$. Elevando al quadrato la formula della distanza si ottiene l'equazione
 $$
 (x-a)^2+(y-b)^2=r^2.
 $$
-Il membro sinistro è il quadrato della distanza dal centro. Sostituendo le coordinate di un punto, un valore minore di $r^2$ indica un punto interno al cerchio, l'uguaglianza un punto sulla circonferenza e un valore maggiore un punto esterno.
+La circonferenza di centro $(2,-3)$ e raggio $5$ ha equazione $(x-2)^2+(y+3)^2=25$, dove $y+3$ viene da $y-(-3)$.
 
-Per leggere centro e raggio da una forma sviluppata si completano i quadrati. Nell'equazione $x^2+y^2-4x+6y-12=0$ si ottiene $(x-2)^2+(y+3)^2=25$. Il centro è $(2,-3)$ e il raggio è $5$. Il termine $25$ è il quadrato del raggio. Se dopo il completamento il secondo membro è negativo, non esistono punti reali; se è zero, il luogo si riduce al solo centro.
+Il primo membro è il quadrato della distanza dal centro, e il confronto con $r^2$ stabilisce la posizione di un punto.
+
+- Il punto $(5,1)$ dà $3^2+4^2=25$, quindi sta sulla circonferenza.
+- L'origine dà $4+9=13<25$, quindi è interna.
+- Il punto $(8,0)$ dà $36+9=45>25$, quindi è esterno.
+
+Sviluppando i quadrati l'equazione diventa $x^2+y^2-4x+6y-12=0$, e in questa forma il centro e il raggio non si leggono direttamente. Per ritrovarli si **completano i quadrati**.
+
+1. Si raggruppano i termini e si porta il numero al secondo membro: $(x^2-4x)+(y^2+6y)=12$.
+2. L'espressione $x^2-4x$ diventa un quadrato aggiungendo $4$, cioè il quadrato della metà del coefficiente di $x$: $x^2-4x+4=(x-2)^2$.
+3. Allo stesso modo $y^2+6y+9=(y+3)^2$.
+4. I numeri $4$ e $9$ si aggiungono a entrambi i membri: $(x-2)^2+(y+3)^2=12+4+9=25$.
+
+Il centro è $(2,-3)$ e il raggio è $\sqrt{25}=5$. Una somma di quadrati è positiva o nulla. Perciò, se il secondo membro risulta negativo, nessun punto soddisfa l'equazione; se è zero, la soddisfa il solo centro.
 :::
 
 :::osservazione{#intersezioni-circonferenza titolo="Posizione reciproca di rette e circonferenze"}
-Una retta a distanza $d$ dal centro è secante, tangente o esterna secondo che $d<r$, $d=r$ oppure $d>r$. Sostituendo l'equazione della retta in quella della circonferenza si ottiene la stessa distinzione attraverso le soluzioni dell'equazione di secondo grado.
+Una retta che dista $d$ dal centro di una circonferenza di raggio $r$ è **secante** se $d<r$, con due punti in comune, tangente se $d=r$, con un solo punto in comune, ed esterna se $d>r$, senza punti in comune.
 
-Per due circonferenze distinte di raggi $r_1,r_2$ e distanza fra i centri $d$, la tangenza esterna corrisponde a $d=r_1+r_2$, quella interna a $d=|r_1-r_2|$. Due intersezioni richiedono $|r_1-r_2|<d<r_1+r_2$. Se i centri e i raggi coincidono, le circonferenze coincidono e i punti comuni sono infiniti; questo caso va separato dalla tangenza interna.
+Sostituendo l'equazione della retta in quella della circonferenza si ottiene un'equazione di secondo grado, che nei tre casi ha due, una o nessuna soluzione. Per la circonferenza $x^2+y^2=25$, di centro l'origine e raggio $5$, la retta $y=3$ dista $3$ dal centro ed è secante. La sostituzione dà $x^2+9=25$, cioè $x^2=16$, e i punti comuni sono $(4,3)$ e $(-4,3)$.
+
+Per due circonferenze distinte, di raggi $r_1$ e $r_2$ e con i centri a distanza $d$, si confronta $d$ con la somma e con la differenza dei raggi. Negli esempi i raggi sono $5$ e $3$.
+
+| Condizione | Posizione e punti comuni | Esempio |
+|---|---|---|
+| $d>r_1+r_2$ | esterne, nessun punto | $d=10$ |
+| $d=r_1+r_2$ | tangenti esternamente, un punto | $d=8$ |
+| $\lvert r_1-r_2\rvert<d<r_1+r_2$ | secanti, due punti | $d=6$ |
+| $d=\lvert r_1-r_2\rvert$ | tangenti internamente, un punto | $d=2$ |
+| $d<\lvert r_1-r_2\rvert$ | una interna all'altra, nessun punto | $d=1$ |
+
+Due circonferenze con lo stesso centro e lo stesso raggio coincidono e hanno infiniti punti comuni. Questo caso è distinto dalla tangenza interna, benché anche qui $d=\lvert r_1-r_2\rvert=0$.
 :::
 
 ## Trasformazioni e regioni del piano
 
 :::definizione{#trasformazioni titolo="Traslazioni, simmetrie e rotazioni"}
-Una traslazione di vettore $(u,v)$ porta $(x,y)$ in $(x+u,y+v)$. Sposta tutti i punti nello stesso modo, quindi conserva distanze, angoli, aree e orientamento. Nella simmetria rispetto all'asse $x$ il punto diventa $(x,-y)$, mentre rispetto all'asse $y$ diventa $(-x,y)$. Riflettere rispetto alla retta $y=x$ scambia le coordinate.
+Un'**isometria** è una trasformazione che conserva le distanze, quindi anche gli angoli e le aree. Traslazioni, simmetrie e rotazioni sono isometrie. Una **rotazione** fa girare tutti i punti dello stesso angolo attorno a un punto fisso, il centro; il verso antiorario è opposto a quello delle lancette dell'orologio.
 
-La rotazione di $90^\circ$ antioraria attorno all'origine porta $(x,y)$ in $(-y,x)$. Una rotazione di $180^\circ$ porta $(x,y)$ in $(-x,-y)$. Se il centro è $C(a,b)$, si sottraggono prima le coordinate del centro, si ruota il vettore ottenuto e poi si sommano di nuovo $(a,b)$. Per la rotazione di $180^\circ$ si ottiene direttamente $(2a-x,2b-y)$.
+| Trasformazione | $(x,y)$ diventa | $(3,2)$ diventa |
+|---|---|---|
+| Traslazione di vettore $(u,v)$ | $(x+u,y+v)$ | $(4,-2)$ con il vettore $(1,-4)$ |
+| Simmetria rispetto all'asse $x$ | $(x,-y)$ | $(3,-2)$ |
+| Simmetria rispetto all'asse $y$ | $(-x,y)$ | $(-3,2)$ |
+| Simmetria rispetto alla retta $y=x$ | $(y,x)$ | $(2,3)$ |
+| Rotazione di $90^\circ$ antioraria attorno all'origine | $(-y,x)$ | $(-2,3)$ |
+| Rotazione di $180^\circ$ attorno all'origine | $(-x,-y)$ | $(-3,-2)$ |
 
-Un'omotetia di centro nell'origine e rapporto $k>0$ porta $(x,y)$ in $(kx,ky)$. Conserva gli angoli, ma moltiplica le distanze per $k$ e le aree per $k^2$. Una circonferenza resta una circonferenza; nelle isometrie il raggio resta uguale, nell'omotetia viene moltiplicato per $k$.
+Traslazioni e rotazioni conservano anche l'orientamento, cioè il verso in cui si succedono i vertici di una figura; una simmetria lo inverte.
+
+Se il centro di rotazione è $C(a,b)$, si ruota lo spostamento da $C$ al punto e lo si applica a partire da $C$. Nella rotazione di $180^\circ$ lo spostamento $(x-a,y-b)$ diventa $(a-x,b-y)$, quindi il punto va in $(2a-x,2b-y)$. Con $C(1,1)$ il punto $(3,2)$ va in $(2-3,2-2)=(-1,0)$.
+
+L'omotetia di centro l'origine e rapporto $k>0$ porta $(x,y)$ in $(kx,ky)$. Conserva gli angoli, moltiplica le distanze per $k$ e le aree per $k^2$, quindi è un'isometria solo per $k=1$. Una circonferenza di raggio $r$ diventa una circonferenza di raggio $kr$: con $k=3$ quella di centro $(1,0)$ e raggio $2$ diventa quella di centro $(3,0)$ e raggio $6$. In un'isometria il raggio resta uguale.
 :::
 
 :::esempio{titolo="Ordine delle trasformazioni"}
-Il punto $P=(2,1)$ viene traslato di $(3,0)$ e poi riflesso rispetto all'asse $y$. Dopo la traslazione è $(5,1)$, quindi alla fine è $(-5,1)$. Se si inverte l'ordine, la simmetria dà $(-2,1)$ e la traslazione dà $(1,1)$. Le due operazioni non hanno lo stesso effetto quando si cambia l'ordine.
+Al punto $P(2,1)$ si applicano la traslazione di vettore $(3,0)$ e la simmetria rispetto all'asse $y$. Se si esegue prima la traslazione, $P$ va in $Q(5,1)$ e la simmetria porta poi $Q$ in $R(-5,1)$. Nella figura la freccia da $P$ a $Q$ è la traslazione e la freccia da $Q$ a $R$ è la simmetria; $Q$ e $R$ hanno la stessa distanza dall'asse $y$.
+
+Se si esegue prima la simmetria, $P$ va in $(-2,1)$ e la traslazione lo porta in $(-2+3,1)=(1,1)$. Il punto finale è $(-5,1)$ nel primo caso e $(1,1)$ nel secondo, quindi il risultato dipende dall'ordine delle due trasformazioni.
 
 ::struttura{punti="2,1,P;5,1,Q;-5,1,R" frecce="0,0,6,0,x;0,0,0,3,y;2,1,5,1;5,1,-5,1" riferimento=0 titolo="P viene traslato in Q e poi riflesso in R"}
 :::
 
 :::definizione{#regioni titolo="Condizioni simultanee nel piano"}
-Una disequazione lineare descrive un semipiano. La condizione $x\ge2$ comprende la retta verticale $x=2$ e i punti alla sua destra; $y<3$ comprende i punti sotto la retta $y=3$, escludendo la retta. Un sistema richiede che le condizioni siano soddisfatte insieme, quindi descrive l'intersezione delle regioni. Per verificare l'appartenenza di un punto si sostituiscono entrambe le coordinate in tutte le condizioni. Un'equazione aggiunta restringe la regione ai punti della relativa curva.
+Una retta divide il piano in due **semipiani**. Una disequazione di primo grado in $x$ e $y$, cioè una condizione scritta con $<$, $>$, $\le$ o $\ge$, è soddisfatta dai punti di uno dei due. Con $\le$ («minore o uguale») e $\ge$ i punti della retta appartengono alla regione; con $<$ e $>$ ne sono esclusi. La condizione $x\ge2$ descrive la retta verticale $x=2$ e i punti alla sua destra; $y<3$ descrive i punti sotto la retta orizzontale $y=3$, senza la retta.
+
+Un sistema richiede che le condizioni siano soddisfatte insieme, quindi descrive l'intersezione delle regioni, cioè la loro parte comune. Per stabilire se un punto appartiene alla regione del sistema
+$$
+\begin{cases}
+x\ge2\\
+y<3
+\end{cases}
+$$
+si sostituiscono le sue coordinate in entrambe le condizioni.
+
+- Il punto $(4,1)$ appartiene alla regione, perché $4\ge2$ e $1<3$.
+- Il punto $(4,3)$ è fuori dalla regione, perché $3<3$ è falsa.
+
+Un'equazione aggiunta al sistema restringe la regione ai punti della curva corrispondente. Con $y=1$ restano i punti della retta $y=1$ che hanno $x\ge2$.
 :::
