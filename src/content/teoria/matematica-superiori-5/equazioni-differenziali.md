@@ -1,6 +1,6 @@
 ---
 titolo: Equazioni differenziali
-sommario: Che cos'è un'equazione differenziale e che cosa sono l'integrale generale, gli integrali particolari e il problema di Cauchy, come si risolvono le equazioni del primo ordine a variabili separabili e lineari e le equazioni lineari del secondo ordine a coefficienti costanti, e come si usano per il decadimento radioattivo, la crescita di una popolazione, il circuito RC e il moto armonico.
+sommario: Problemi di Cauchy, metodi per le equazioni del primo e del secondo ordine e applicazioni alla crescita di popolazioni, ai circuiti e alle oscillazioni.
 ---
 
 ## Che cos'è un'equazione differenziale
@@ -48,7 +48,7 @@ y = x^3 + c_1 x + c_2 ,
 \qquad
 c_1, c_2 \in \mathbb{R} .
 $$
-Le costanti sono due, una per ogni integrazione, come accade per ogni equazione del secondo ordine. Le primitive si calcolano con i metodi dell'argomento sugli integrali indefiniti.
+In questo caso compaiono due costanti, una per ogni integrazione. Nelle equazioni lineari del secondo ordine descrivono la libertà di assegnare il valore di $y$ e di $y'$ in un punto. Le primitive si calcolano con i metodi dell'argomento sugli integrali indefiniti.
 :::
 
 ## Problema di Cauchy
@@ -74,11 +74,11 @@ Geometricamente, per il primo ordine si cerca la curva integrale che passa per i
 :::
 
 :::teorema{#esistenza-unicita titolo="Teorema di esistenza e unicità"}
-Un'equazione del primo ordine si dice in **forma normale** se è scritta come $y' = f(x, y)$, cioè se è risolta rispetto a $y'$. Sia $f(x, y)$ continua, e sia continua anche la sua derivata rispetto a $y$, calcolata considerando $x$ come una costante, in un rettangolo del piano che contiene il punto $(x_0, y_0)$. Allora esiste un intervallo $I$ contenente $x_0$ in cui il problema di Cauchy $y' = f(x, y)$, $y(x_0) = y_0$ ha *una e una sola* soluzione.
+Un'equazione del primo ordine si dice in **forma normale** se è scritta come $y' = f(x, y)$, cioè se è risolta rispetto a $y'$. Sia $f(x, y)$ continua, e sia continua anche la sua derivata rispetto a $y$, calcolata considerando $x$ come una costante, in un rettangolo aperto del piano che contiene $(x_0, y_0)$. Allora esiste un intervallo $I$ contenente $x_0$ in cui il problema di Cauchy $y' = f(x, y)$, $y(x_0) = y_0$ ha *una e una sola* soluzione.
 
-Per un problema di Cauchy del secondo ordine vale un teorema analogo. In particolare, per le equazioni lineari del secondo ordine a coefficienti costanti il problema ha una e una sola soluzione definita su tutto $\mathbb{R}$, qualunque siano $x_0$, $y_0$ e $y_1$.
+Per un problema di Cauchy del secondo ordine vale un teorema analogo. In particolare, se il termine noto è continuo su tutto $\mathbb R$, un'equazione lineare del secondo ordine a coefficienti costanti con coefficiente di $y''$ diverso da zero ha una e una sola soluzione di Cauchy su tutto $\mathbb R$.
 
-Il teorema garantisce che per ogni punto del rettangolo passa una sola curva integrale. Per $y' = 3y$ si ha $f(x, y) = 3y$, che è continua con derivata rispetto a $y$ uguale a $3$; quindi il teorema si applica in ogni punto del piano. La dimostrazione si studia all'università.
+Il teorema garantisce una sola curva integrale vicino al punto iniziale. Per sapere su quale intervallo si estende, si controllano il dominio dell'equazione e quello della soluzione trovata. Per $y' = 3y$ si ha $f(x, y) = 3y$, che è continua con derivata rispetto a $y$ uguale a $3$; quindi il teorema si applica in ogni punto del piano. La dimostrazione si studia all'università.
 :::
 
 :::esempio{titolo="Un problema di Cauchy del secondo ordine"}
@@ -101,16 +101,19 @@ Il caso più semplice è $y' = g(x)$. Le soluzioni sono le primitive di $g$, qui
 :::
 
 :::teorema{#metodo-separazione titolo="Metodo di separazione delle variabili"}
-Per risolvere $y' = g(x) \cdot h(y)$ si procede in due passi.
+Si consideri $y'=g(x)h(y)$, con $g$ e $h$ continue nei rispettivi intervalli.
 
-- Le **soluzioni costanti**: se $h(k) = 0$, la funzione costante $y = k$ è una soluzione, perché la sua derivata è $0$ e anche il secondo membro vale $g(x) \cdot 0 = 0$.
-- Le altre soluzioni: dove $h(y) \neq 0$ si scrive $y' = \dfrac{dy}{dx}$, si divide per $h(y)$ e si integra ciascun membro rispetto alla propria variabile:
-$$
-\int \frac{dy}{h(y)} = \int g(x)\,dx + c .
-$$
-Si ottiene una relazione tra $x$ e $y$, da cui si ricava $y$ quando è possibile.
+- Per ogni zero $k$ di $h$, la funzione costante $y=k$ è una soluzione, perché entrambi i membri dell'equazione valgono zero.
+- Su un intervallo in cui $h(y)\neq0$, si divide per $h(y)$. Se $H$ è una primitiva di $\dfrac{1}{h}$ nell'intervallo dei valori di $y$ e $G$ è una primitiva di $g$, la regola della derivata composta dà
+  $$
+  \big(H(y(x))\big)'=\frac{y'(x)}{h(y(x))}=g(x).
+  $$
+  Perciò $H(y(x))=G(x)+c$. La forma compatta dello stesso calcolo è
+  $$
+  \int \frac{dy}{h(y)}=\int g(x)\,dx+c.
+  $$
 
-Il metodo riduce la risoluzione dell'equazione al calcolo di due integrali indefiniti. Il primo integrale si calcola nella variabile $y$, il secondo nella variabile $x$, e la costante si scrive una volta sola.
+La relazione ottenuta permette di ricavare $y$ quando è possibile. Se anche $h'$ è continua, l'unicità di Cauchy impedisce a una soluzione non costante di attraversare il valore $k$ di una soluzione costante. Per esempio, per $y'=2xy$ il dato $y(0)>0$ seleziona una soluzione che resta positiva in tutto il suo intervallo di definizione.
 :::
 
 :::esempio{titolo="L'equazione y' = 2xy"}
@@ -144,7 +147,7 @@ y = \frac{1}{1 - x} .
 $$
 La funzione ha un asintoto verticale in $x = 1$. La soluzione del problema di Cauchy è definita nell'intervallo $(-\infty, 1)$, che è l'intervallo del dominio che contiene $x_0 = 0$, anche se l'equazione $y' = y^2$ ha senso per ogni $x$.
 
-::grafico{f="1/(1-x)" punti="0,1,pieno" asintoti="x=1" xmin=-4 xmax=2 ymin=-1 ymax=9 titolo="La soluzione di $y' = y^2$ con $y(0) = 1$ è $y = \dfrac{1}{1 - x}$, definita per $x < 1$"}
+::grafico{curve="t,1/(1-t),-4,0.99" punti="0,1,pieno" asintoti="x=1" xmin=-4 xmax=2 ymin=-1 ymax=9 legenda="y = \dfrac{1}{1-x}" titolo="La soluzione di $y' = y^2$ con $y(0) = 1$ è $y = \dfrac{1}{1 - x}$, definita per $x < 1$"}
 
 :::
 
@@ -159,7 +162,7 @@ Un'equazione del primo ordine è **lineare** se si può scrivere nella forma
 $$
 y' + a(x)\,y = b(x) ,
 $$
-con $a$ e $b$ funzioni continue in un intervallo $I$. La funzione incognita e la sua derivata compaiono al primo grado e non sono moltiplicate tra loro. L'equazione si dice **omogenea** se $b(x) = 0$ per ogni $x$, **completa** in caso contrario. Per esempio $y' + y = x$ e $y' - \dfrac{y}{x} = x^2$ sono lineari complete, mentre $y' = y^2$ non è lineare, perché contiene $y^2$.
+dove $a$ e $b$ dipendono solo da $x$. Per risolverla si lavora in un intervallo $I$ in cui entrambe sono continue. La funzione incognita e la sua derivata compaiono al primo grado e non sono moltiplicate tra loro. L'equazione si dice **omogenea** se $b(x) = 0$ per ogni $x$, **completa** in caso contrario. Per esempio $y' + y = x$ e $y' - \dfrac{y}{x} = x^2$ sono lineari complete, mentre $y' = y^2$ non è lineare, perché contiene $y^2$.
 :::
 
 :::teorema{#formula-lineare-primo-ordine titolo="Integrale generale dell'equazione lineare del primo ordine"}
@@ -169,7 +172,7 @@ y = e^{-A(x)} \left( \int b(x)\,e^{A(x)}\,dx + c \right) ,
 \qquad
 c \in \mathbb{R} .
 $$
-Per l'equazione omogenea, con $b(x) = 0$, la formula si riduce a $y = c\,e^{-A(x)}$.
+Per l'equazione omogenea, con $b(x) = 0$, la formula si riduce a $y = c\,e^{-A(x)}$. Un dato $y(x_0)=y_0$ con $x_0\in I$ fissa un unico $c$, perché $e^{-A(x_0)}>0$. La soluzione così ottenuta è definita in tutto $I$.
 
 La formula si ottiene moltiplicando l'equazione per $e^{A(x)}$. Il primo membro diventa $y'\,e^{A(x)} + a(x)\,e^{A(x)}\,y$, che è la derivata del prodotto $y\,e^{A(x)}$, quindi $y\,e^{A(x)}$ è una primitiva di $b(x)\,e^{A(x)}$; dividendo per $e^{A(x)}$ si ricava $y$. Per esempio, per $y' + 2y = 0$ si ha $A(x) = 2x$, e l'integrale generale è $y = c\,e^{-2x}$.
 :::
@@ -196,7 +199,7 @@ e^{A(x)} = e^{-\ln x} = \frac{1}{x} ,
 \qquad
 e^{-A(x)} = x .
 $$
-Poiché $\displaystyle\int x^2 \cdot \frac{1}{x}\,dx = \int x\,dx = \frac{x^2}{2}$, l'integrale generale è
+Poiché $\displaystyle\int x^2 \cdot \dfrac{1}{x}\,dx = \int x\,dx = \dfrac{x^2}{2}$, l'integrale generale è
 $$
 y = x \left( \frac{x^2}{2} + c \right) = \frac{x^3}{2} + c\,x .
 $$
@@ -227,7 +230,7 @@ Infatti la derivata di una combinazione lineare è la combinazione lineare delle
 :::
 
 :::definizione{#equazione-caratteristica titolo="Equazione caratteristica"}
-Si cercano soluzioni dell'equazione omogenea della forma $y = e^{\lambda x}$, con $\lambda$ numero da determinare. Poiché $y' = \lambda\,e^{\lambda x}$ e $y'' = \lambda^2 e^{\lambda x}$, sostituendo si ottiene
+Si cercano soluzioni dell'equazione omogenea della forma $y = e^{\lambda x}$, con $\lambda$ reale da determinare. Poiché $y' = \lambda\,e^{\lambda x}$ e $y'' = \lambda^2 e^{\lambda x}$, sostituendo si ottiene
 $$
 e^{\lambda x} \left( a\lambda^2 + b\lambda + c \right) = 0 .
 $$
@@ -292,15 +295,13 @@ Infatti, se $y$ è una soluzione qualsiasi, la differenza $y - \bar{y}$ sostitui
 :::
 
 :::teorema{#metodo-somiglianza titolo="Metodo di somiglianza"}
-Quando il termine noto $r(x)$ è un polinomio, un esponenziale o una funzione goniometrica, si cerca una soluzione particolare $\bar{y}$ dello stesso tipo, con coefficienti da determinare sostituendo nell'equazione.
+Per trovare una soluzione particolare di $ay''+by'+cy=r(x)$ si prova una funzione della stessa famiglia di $r(x)$ e se ne determinano i coefficienti per sostituzione. Se la famiglia contiene già soluzioni dell'omogenea, si modifica il tentativo prima di sostituire.
 
-| $r(x)$ | $\bar{y}$ da cercare | caso particolare |
-| --- | --- | --- |
-| polinomio di grado $n$ | polinomio di grado $n$ | se $c = 0$ e $b \neq 0$, polinomio di grado $n$ moltiplicato per $x$ |
-| $k\,e^{\mu x}$ | $A\,e^{\mu x}$ | se $\mu$ risolve l'equazione caratteristica, $A\,x\,e^{\mu x}$ ($\Delta > 0$) oppure $A\,x^2 e^{\mu x}$ ($\Delta = 0$) |
-| $p \cos \omega x + q \sin \omega x$ | $A \cos \omega x + B \sin \omega x$ | se $b = 0$ e $\omega^2 = \dfrac{c}{a}$, la stessa espressione moltiplicata per $x$ |
+- Per un **polinomio** di grado $n$, si parte da un polinomio $P_n(x)$ di grado $n$ con tutti i coefficienti da determinare. Se $c\neq0$ il tentativo è $P_n(x)$. Se $c=0$ e $b\neq0$ è $xP_n(x)$. Se $b=c=0$ è $x^2P_n(x)$. I tre casi corrispondono rispettivamente a zero che non è radice, è radice semplice o è radice doppia della caratteristica.
+- Per un **esponenziale** $ke^{\mu x}$, si parte da $Ae^{\mu x}$. Se $\mu$ è radice semplice della caratteristica si prova $Axe^{\mu x}$. Se è radice doppia si prova $Ax^2e^{\mu x}$.
+- Per un **termine goniometrico** $p\cos(\omega x)+q\sin(\omega x)$, con $\omega>0$, si parte da $A\cos(\omega x)+B\sin(\omega x)$. La derivata prima scambia seno e coseno a meno del segno, quindi nel tentativo si tengono entrambe le funzioni. Se $b=0$ e $c=a\omega^2$, si moltiplica il tentativo per $x$.
 
-Nell'ultima colonna compaiono i casi in cui la funzione da cercare risolve già l'equazione omogenea, e quindi non può dare il termine noto. Se il termine noto è una somma di termini dei tipi indicati, si cerca una soluzione particolare per ciascun termine e si sommano i risultati.
+Se il termine noto è una somma di termini di questi tipi, si trova una soluzione particolare per ciascun addendo e si sommano le funzioni trovate. Per esempio, per $y''=6x$ il tentativo è $x^2(Ax+B)$. Dalla derivata seconda $6Ax+2B=6x$ segue $A=1$, $B=0$, quindi una particolare è $y=x^3$.
 :::
 
 :::esempio{titolo="Termine noto polinomiale ed esponenziale"}
@@ -336,26 +337,26 @@ dove $k > 0$ è la **costante di decadimento**. È un'equazione lineare omogenea
 $$
 T = \frac{\ln 2}{k} .
 $$
-La stessa legge vale per la massa del campione, che è proporzionale al numero di nuclei. Per un isotopo con $T = 8$ giorni e una massa iniziale di $8\,\mathrm{g}$ si ha $k = \dfrac{\ln 2}{8}$ e $m(t) = 8\,e^{-\frac{\ln 2}{8} t} = 8 \cdot 2^{-\frac{t}{8}}$; dopo $24$ giorni, cioè tre tempi di dimezzamento, restano $8 \cdot 2^{-3} = 1\,\mathrm{g}$.
+La stessa legge vale per la massa del campione, che è proporzionale al numero di nuclei. Per un isotopo con $T = 8$ giorni e una massa iniziale di $8\,\mathrm{g}$ si ha $k = \dfrac{\ln 2}{8}$ e $m(t) = 8\,e^{-\dfrac{\ln 2}{8} t} = 8 \cdot 2^{-\dfrac{t}{8}}$; dopo $24$ giorni, cioè tre tempi di dimezzamento, restano $8 \cdot 2^{-3} = 1\,\mathrm{g}$.
 
 ::grafico{f="8*exp(-log(2)*x/8)" punti="0,8,pieno;8,4,pieno;16,2,pieno;24,1,pieno" segmenti="8,0,8,4;16,0,16,2;24,0,24,1" xmin=0 xmax=40 ymin=-1 ymax=9 nomi="t,m" legenda="m = 8 \cdot 2^{-\frac{t}{8}}" titolo="La massa di un isotopo con tempo di dimezzamento di $8$ giorni si dimezza ogni $8$ giorni"}
 
 :::
 
 :::definizione{#crescita-popolazione titolo="Crescita di una popolazione"}
-Nel **modello di Malthus** la velocità di crescita di una popolazione è proporzionale al numero $P(t)$ di individui, cioè $P'(t) = k\,P(t)$ con $k > 0$. La soluzione con $P(0) = P_0$ è $P(t) = P_0\,e^{kt}$, che cresce senza limiti. Per esempio una colonia di $500$ batteri che raddoppia ogni $2$ ore ha $k = \dfrac{\ln 2}{2}$ e $P(t) = 500 \cdot 2^{\frac{t}{2}}$.
+Nel **modello di Malthus** la velocità di crescita di una popolazione è proporzionale al numero $P(t)$ di individui, cioè $P'(t) = k\,P(t)$ con $k > 0$. La soluzione con $P(0)=P_0>0$ è $P(t)=P_0\,e^{kt}$, che cresce senza limiti. Per esempio una colonia di $500$ batteri che raddoppia ogni $2$ ore ha $k = \dfrac{\ln 2}{2}$ e $P(t) = 500 \cdot 2^{\dfrac{t}{2}}$.
 
-Nel **modello logistico** l'ambiente può sostenere al massimo $M$ individui, e la crescita si riduce quando $P$ si avvicina a $M$:
+Nel **modello logistico** il valore $M>0$, detto capacità dell'ambiente, è un equilibrio della popolazione. Si assume $k>0$ e si pone
 $$
 P'(t) = k\,P(t) \left( 1 - \frac{P(t)}{M} \right) .
 $$
-È un'equazione a variabili separabili; scomponendo $\dfrac{M}{P\,(M - P)} = \dfrac{1}{P} + \dfrac{1}{M - P}$, come negli integrali di funzioni razionali fratte, si trova la soluzione con $P(0) = P_0$, $0 < P_0 < M$:
+Se $0<P(0)=P_0<M$, l'unicità garantisce che la soluzione resta tra gli equilibri $0$ e $M$. Si separano quindi le variabili e si usa $\dfrac{M}{P(M-P)}=\dfrac{1}{P}+\dfrac{1}{M-P}$. Integrando si ottiene $\ln\dfrac{P}{M-P}=kt+\ln\dfrac{P_0}{M-P_0}$. Da questa relazione segue
 $$
 P(t) = \frac{M}{1 + \dfrac{M - P_0}{P_0}\,e^{-kt}} .
 $$
-Per $t \to +\infty$ l'esponenziale tende a $0$, quindi $P(t)$ tende a $M$. Le soluzioni costanti $P = 0$ e $P = M$ corrispondono a una popolazione assente e a una popolazione che ha già raggiunto il valore massimo.
+Per $t \to +\infty$ l'esponenziale tende a $0$, quindi $P(t)$ tende a $M$. Le soluzioni costanti sono $P=0$ e $P=M$. Per $0<P<M$ la crescita è positiva. In questo intervallo la velocità di crescita è massima in $P=\dfrac{M}{2}$, perché il secondo membro è una parabola con zeri $0$ e $M$.
 
-::grafico{f="10/(1+9*exp(-x/2))" punti="0,1,pieno" asintoti="y=10" xmin=0 xmax=20 ymin=-2 ymax=12 nomi="t,P" legenda="P = \dfrac{10}{1 + 9e^{-\frac{t}{2}}}" titolo="Soluzione logistica con $M = 10$, $P_0 = 1$ e $k = \dfrac{1}{2}$, che tende al valore massimo $M = 10$"}
+::grafico{f="10/(1+9*exp(-x/2))" punti="0,1,pieno" asintoti="y=10" xmin=0 xmax=20 ymin=-2 ymax=12 nomi="t,P" legenda="P = \dfrac{10}{1 + 9e^{-\frac{t}{2}}}" titolo="Soluzione logistica con $M = 10$, $P_0 = 1$ e $k = \dfrac{1}{2}$, che cresce e tende a $M = 10$"}
 
 :::
 
@@ -386,16 +387,16 @@ q(t) = CE \left( 1 - e^{-\frac{t}{RC}} \right) ,
 \qquad
 i(t) = \frac{E}{R}\,e^{-\frac{t}{RC}} .
 $$
-Il prodotto $\tau = RC$ si chiama **costante di tempo** del circuito. Per $R = 1000\,\Omega$, $C = 2\,\mathrm{mF}$ ed $E = 6\,\mathrm{V}$ si ha $\tau = 2\,\mathrm{s}$ e $CE = 12\,\mathrm{mC}$, quindi $q(t) = 12 \left( 1 - e^{-\frac{t}{2}} \right)$ millicoulomb. La carica tende al valore finale $12\,\mathrm{mC}$, e dopo un tempo $\tau$ ne ha raggiunto la frazione $1 - e^{-1} \approx 63\%$.
+Il prodotto $\tau = RC$ si chiama **costante di tempo** del circuito. Per $R = 1000\,\Omega$, $C = 2\,\mathrm{mF}$ ed $E = 6\,\mathrm{V}$ si ha $\tau = 2\,\mathrm{s}$ e $CE = 12\,\mathrm{mC}$, quindi $q(t) = 12 \left( 1 - e^{-\dfrac{t}{2}} \right)$ millicoulomb. La carica tende al valore finale $12\,\mathrm{mC}$, e dopo un tempo $\tau$ ne ha raggiunto la frazione $1 - e^{-1} \approx 63\%$.
 
 ::grafico{f="12*(1-exp(-x/2))" asintoti="y=12" punti="2,7.59,pieno" segmenti="2,0,2,7.59" xmin=0 xmax=10 ymin=-2 ymax=14 nomi="t,q" legenda="q = 12\left(1 - e^{-\frac{t}{2}}\right)" titolo="Carica del condensatore con $\tau = RC = 2\,\mathrm{s}$; all'istante $t = \tau$ la carica è circa il $63\%$ del valore finale $12\,\mathrm{mC}$"}
 
 :::
 
 :::osservazione{#attrito-viscoso titolo="Scarica del condensatore e caduta con attrito viscoso"}
-Se il condensatore, con carica iniziale $Q_0$, si scarica sul resistore senza generatore, l'equazione diventa $R\,q' + \dfrac{q}{C} = 0$, e la soluzione è $q(t) = Q_0\,e^{-\frac{t}{RC}}$, con la stessa legge del decadimento radioattivo.
+Se il condensatore, con carica iniziale $Q_0$, si scarica sul resistore senza generatore, l'equazione diventa $R\,q' + \dfrac{q}{C} = 0$, e la soluzione è $q(t) = Q_0\,e^{-\dfrac{t}{RC}}$, con la stessa legge del decadimento radioattivo.
 
-Un corpo di massa $m$ che cade in un fluido è soggetto al peso $mg$ e a una forza di attrito $-\gamma\,v$ proporzionale alla velocità. Per il secondo principio della dinamica $m\,v' = mg - \gamma\,v$, che è un'equazione lineare a coefficienti costanti in $v$. Per l'osservazione sulle equazioni con coefficienti costanti la velocità tende alla **velocità limite** $v_L = \dfrac{mg}{\gamma}$, e con $v(0) = 0$ si ha $v(t) = v_L \left( 1 - e^{-\frac{\gamma}{m} t} \right)$.
+Un corpo di massa $m$ che cade in un fluido è soggetto al peso $mg$ e a una forza di attrito $-\gamma\,v$ proporzionale alla velocità. Per il secondo principio della dinamica $m\,v' = mg - \gamma\,v$, che è un'equazione lineare a coefficienti costanti in $v$. Per l'osservazione sulle equazioni con coefficienti costanti la velocità tende alla **velocità limite** $v_L = \dfrac{mg}{\gamma}$, e con $v(0) = 0$ si ha $v(t) = v_L \left( 1 - e^{-\dfrac{\gamma}{m} t} \right)$.
 :::
 
 :::definizione{#moto-armonico titolo="Moto armonico"}
@@ -407,7 +408,7 @@ L'equazione caratteristica $\lambda^2 + \omega^2 = 0$ ha $\Delta = -4\omega^2 < 
 $$
 x(t) = c_1 \cos \omega t + c_2 \sin \omega t .
 $$
-È una funzione periodica di periodo $T = \dfrac{2\pi}{\omega}$, e si scrive anche nella forma $x(t) = A \cos(\omega t + \varphi)$, con **ampiezza** $A = \sqrt{c_1^2 + c_2^2}$. Le costanti si determinano con la posizione e la velocità iniziali, perché $x(0) = c_1$ e $x'(0) = \omega\,c_2$.
+Ogni soluzione non nulla ha periodo minimo $T=\dfrac{2\pi}{\omega}$, e si scrive anche nella forma $x(t) = A \cos(\omega t + \varphi)$, con **ampiezza** $A = \sqrt{c_1^2 + c_2^2}$. Le costanti si determinano con la posizione e la velocità iniziali, perché $x(0) = c_1$ e $x'(0) = \omega\,c_2$.
 
 Per esempio con $m = 0{,}5\,\mathrm{kg}$ e $k = 8\,\mathrm{N/m}$ si ha $\omega = 4\,\mathrm{rad/s}$ e $T = \dfrac{\pi}{2}\,\mathrm{s}$. Se $x(0) = 2\,\mathrm{cm}$ e $x'(0) = 8\,\mathrm{cm/s}$, allora $c_1 = 2$ e $c_2 = \dfrac{8}{4} = 2$, cioè $x(t) = 2 \cos 4t + 2 \sin 4t$, con ampiezza $A = \sqrt{8} = 2\sqrt{2}\,\mathrm{cm}$.
 
@@ -416,5 +417,5 @@ Per esempio con $m = 0{,}5\,\mathrm{kg}$ e $k = 8\,\mathrm{N/m}$ si ha $\omega =
 :::
 
 :::osservazione{#oscillatore-smorzato titolo="Oscillazioni smorzate e forzate"}
-Se sul corpo agisce anche un attrito viscoso $-\gamma\,x'$, l'equazione diventa $m\,x'' + \gamma\,x' + k\,x = 0$. Quando l'attrito è piccolo il discriminante $\gamma^2 - 4mk$ è negativo, e la soluzione ha la forma $e^{\alpha t} \left( c_1 \cos \beta t + c_2 \sin \beta t \right)$ con $\alpha = -\dfrac{\gamma}{2m} < 0$. Il corpo oscilla con ampiezza che decresce nel tempo, come la soluzione di $y'' + 2y' + 5y = 0$ vista nel caso con discriminante negativo. Se invece non c'è attrito e sul corpo agisce una forza esterna periodica $F \cos \omega t$ con la stessa pulsazione $\omega$ della molla, l'equazione completa ha soluzioni con ampiezza crescente, come nell'esempio della risonanza.
+Se sul corpo agisce anche un attrito viscoso $-\gamma\,x'$, l'equazione diventa $m\,x'' + \gamma\,x' + k\,x = 0$. Quando $0<\gamma<2\sqrt{mk}$ il discriminante $\gamma^2-4mk$ è negativo. La soluzione ha allora la forma $e^{\alpha t} \left( c_1 \cos \beta t + c_2 \sin \beta t \right)$ con $\alpha = -\dfrac{\gamma}{2m} < 0$. Il corpo oscilla con ampiezza che decresce nel tempo, come la soluzione di $y'' + 2y' + 5y = 0$ vista nel caso con discriminante negativo. Se invece non c'è attrito e sul corpo agisce una forza esterna periodica $F \cos \omega t$ con la stessa pulsazione $\omega$ della molla, l'equazione completa ha soluzioni con ampiezza crescente, come nell'esempio della risonanza.
 :::

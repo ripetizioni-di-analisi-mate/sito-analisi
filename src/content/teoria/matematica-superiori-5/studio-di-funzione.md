@@ -10,7 +10,7 @@ Sia $f$ una funzione di dominio $D$ e sia $x_0$ un punto di $D$. Il numero $f(x_
 $$
 f(x) \leq f(x_0) \qquad \text{per ogni } x \in D ,
 $$
-e allora $x_0$ si chiama punto di massimo assoluto. Con la disuguaglianza $f(x) \geq f(x_0)$ si definiscono il **minimo assoluto** e il punto di minimo assoluto. Il massimo, se esiste, è un solo numero, mentre i punti in cui la funzione lo assume possono essere più di uno. Per esempio $f(x) = \sin x$ ha massimo assoluto $1$, assunto in tutti i punti $x = \dfrac{\pi}{2} + 2k\pi$, e minimo assoluto $-1$. La funzione $f(x) = x^2$ ha minimo assoluto $0$, assunto in $x = 0$, e non ha massimo, perché assume valori grandi quanto si vuole.
+e allora $x_0$ si chiama punto di massimo assoluto. Con la disuguaglianza $f(x) \geq f(x_0)$ si definiscono il **minimo assoluto** e il punto di minimo assoluto. Il massimo, se esiste, è un solo numero, mentre i punti in cui la funzione lo assume possono essere più di uno. Per esempio $f(x) = \sin x$ ha massimo assoluto $1$, assunto nei punti $x = \dfrac{\pi}{2} + 2k\pi$ con $k \in \mathbb{Z}$, e minimo assoluto $-1$. La funzione $f(x) = x^2$ ha minimo assoluto $0$, assunto in $x = 0$, e non ha massimo, perché assume valori grandi quanto si vuole.
 :::
 
 :::definizione{#massimi-minimi-relativi titolo="Massimo e minimo relativi"}
@@ -20,7 +20,7 @@ f(x) \leq f(x_0) \qquad \text{per ogni } x \in I(x_0) \cap D .
 $$
 Allo stesso modo, con la disuguaglianza $f(x) \geq f(x_0)$, si definisce il **punto di minimo relativo**. I massimi e i minimi si chiamano insieme **estremi**. Ogni massimo assoluto è anche relativo, mentre un massimo relativo può non essere assoluto. La funzione $f(x) = x^3 - 6x^2 + 9x$ ha un massimo relativo in $x = 1$, con $f(1) = 4$, perché vicino a $1$ assume valori minori di $4$. Questo massimo non è assoluto, perché per esempio $f(5) = 20$.
 
-::grafico{f="x^3-6*x^2+9*x" punti="1,4,pieno;3,0,pieno;5,20,pieno" segmenti="1,0,1,4;5,0,5,20" xmin=-1 xmax=6 ymin=-3 ymax=21 titolo="La funzione $f(x) = x^3 - 6x^2 + 9x$ ha un massimo relativo in $(1, 4)$ e un minimo relativo in $(3, 0)$; nessuno dei due è assoluto, perché per esempio $f(5) = 20 > 4$"}
+::grafico{f="x^3-6*x^2+9*x" punti="1,4,pieno;3,0,pieno;5,20,pieno" segmenti="1,0,1,4;5,0,5,20" xmin=-1 xmax=6 ymin=-3 ymax=21 titolo="La funzione $f(x) = x^3 - 6x^2 + 9x$ ha un massimo relativo in $(1, 4)$ e un minimo relativo in $(3, 0)$; il massimo è superato da $f(5) = 20$"}
 
 :::
 
@@ -35,7 +35,7 @@ Un punto $x_0$ in cui $f'(x_0) = 0$ si chiama **punto stazionario**, perché in 
 - i punti interni in cui $f$ non è derivabile;
 - gli estremi dell'intervallo che appartengono al dominio.
 
-I tre casi si presentano tutti. Per $f(x) = x^3 - 6x^2 + 9x$ si ha $f'(x) = 3x^2 - 12x + 9 = 3\,(x - 1)(x - 3)$, quindi i punti stazionari sono $x = 1$ e $x = 3$. La funzione $|x|$ ha minimo in $0$, dove non è derivabile. La funzione $f(x) = x$ sull'intervallo $[0, 2]$ ha massimo nell'estremo $x = 2$, dove la derivata vale $1$. I punti dell'elenco sono soltanto candidati, e i criteri che seguono permettono di decidere se sono estremi.
+I tre casi si presentano tutti. Per $f(x) = x^3 - 6x^2 + 9x$ si ha $f'(x) = 3x^2 - 12x + 9 = 3\,(x - 1)(x - 3)$, quindi i punti stazionari sono $x = 1$ e $x = 3$. La funzione $|x|$ ha minimo in $0$, dove non è derivabile. La funzione $f(x) = x$ sull'intervallo $[0, 2]$ ha massimo nell'estremo $x = 2$, dove il prolungamento a $\mathbb{R}$ ha derivata $1$. I punti dell'elenco sono soltanto candidati, e i criteri che seguono permettono di decidere se sono estremi.
 :::
 
 ## Ricerca degli estremi con la derivata prima
@@ -49,14 +49,16 @@ Sia $f$ continua in un intervallo $(a, b)$ che contiene $x_0$ e derivabile in $(
 
 - Se $f'(x) > 0$ in $(a, x_0)$ e $f'(x) < 0$ in $(x_0, b)$, allora $x_0$ è un punto di **massimo relativo**.
 - Se $f'(x) < 0$ in $(a, x_0)$ e $f'(x) > 0$ in $(x_0, b)$, allora $x_0$ è un punto di **minimo relativo**.
-- Se $f'$ ha lo stesso segno in $(a, x_0)$ e in $(x_0, b)$, allora $x_0$ *non* è un estremo.
+- Se $f'$ è strettamente positiva su entrambi gli intervalli oppure strettamente negativa su entrambi, allora $x_0$ *non* è un estremo.
 
 Nel primo caso, per il criterio di monotonia, $f$ è crescente in $(a, x_0]$ e decrescente in $[x_0, b)$, quindi $f(x) < f(x_0)$ per ogni $x \neq x_0$ dell'intervallo; gli altri casi sono analoghi. Il criterio si usa con la tabella dei segni della derivata. Per $f(x) = x^3 - 6x^2 + 9x$ si ha $f'(x) = 3\,(x - 1)(x - 3)$, e
 
 | | $x < 1$ | $1 < x < 3$ | $x > 3$ |
 | --- | --- | --- | --- |
 | $f'(x)$ | $+$ | $-$ | $+$ |
-| $f$ | crescente | decrescente | crescente |
+| $f$ | $\nearrow$ | $\searrow$ | $\nearrow$ |
+
+Le frecce $\nearrow$ e $\searrow$ indicano rispettivamente crescenza e decrescenza.
 
 Quindi $x = 1$ è un punto di massimo relativo, con $f(1) = 4$, e $x = 3$ è un punto di minimo relativo, con $f(3) = 0$.
 :::
@@ -80,13 +82,13 @@ Sia $f$ continua nell'intervallo chiuso e limitato $[a, b]$. Allora $f$ ha in $[
 :::
 
 :::teorema{#estremi-intervallo-chiuso titolo="Massimo e minimo assoluti in un intervallo chiuso"}
-Sia $f$ continua in $[a, b]$ e derivabile in $(a, b)$, esclusi al più alcuni punti. Il massimo e il minimo assoluti di $f$ in $[a, b]$ esistono, per il teorema di Weierstrass, e sono assunti in punti dell'insieme formato da
+Sia $f$ continua in $[a, b]$. Il massimo e il minimo assoluti di $f$ in $[a, b]$ esistono, per il teorema di Weierstrass, e sono assunti in punti dell'insieme formato da
 
 - gli estremi $a$ e $b$;
 - i punti stazionari di $f$ in $(a, b)$;
 - i punti di $(a, b)$ in cui $f$ non è derivabile.
 
-Infatti un estremo assoluto assunto in un punto interno in cui $f$ è derivabile è anche un estremo relativo, e per il teorema di Fermat quel punto è stazionario. Per trovare massimo e minimo si calcola quindi $f$ in ciascuno di questi punti e si confrontano i valori. Per $f(x) = x^3 - 6x^2 + 9x$ in $[-1, 4]$ i punti stazionari sono $1$ e $3$, e
+Infatti un estremo assoluto assunto in un punto interno in cui $f$ è derivabile è anche un estremo relativo, e per il teorema di Fermat quel punto è stazionario. Quando i candidati sono in numero finito, si calcola quindi $f$ in ciascuno di essi e si confrontano i valori. Per $f(x) = x^3 - 6x^2 + 9x$ in $[-1, 4]$ i punti stazionari sono $1$ e $3$, e
 $$
 f(-1) = -16 ,
 \qquad
@@ -103,7 +105,7 @@ Il massimo assoluto è perciò $4$, assunto in $x = 1$ e in $x = 4$, e il minimo
 :::
 
 :::teorema{#unico-punto-stazionario titolo="Estremi assoluti in un intervallo qualsiasi"}
-Sia $f$ derivabile in un intervallo $I$, anche aperto o illimitato, e sia $x_0$ un punto interno a $I$ tale che $f'(x) < 0$ per $x < x_0$ e $f'(x) > 0$ per $x > x_0$, con $x$ in $I$. Allora $x_0$ è il punto di **minimo assoluto** di $f$ in $I$. Con i segni scambiati $x_0$ è il punto di massimo assoluto.
+Sia $f$ continua in un intervallo $I$, anche aperto o illimitato, e derivabile nei suoi punti interni, escluso al più $x_0$. Sia $x_0$ un punto interno a $I$ tale che $f'(x) < 0$ per $x < x_0$ e $f'(x) > 0$ per $x > x_0$, con $x$ in $I$. Allora $x_0$ è il punto di **minimo assoluto** di $f$ in $I$. Con i segni scambiati $x_0$ è il punto di massimo assoluto.
 
 Per il criterio di monotonia $f$ decresce in tutta la parte di $I$ a sinistra di $x_0$ e cresce in tutta la parte a destra, quindi nessun valore è minore di $f(x_0)$. Il teorema serve quando l'intervallo non è chiuso e il teorema di Weierstrass non si può applicare. Per $f(x) = x^2 + \dfrac{16}{x}$ in $(0, +\infty)$ si ha
 $$
@@ -136,7 +138,7 @@ La derivata seconda è la derivata di $f'$, cioè del coefficiente angolare dell
 :::
 
 :::definizione{#punto-di-flesso titolo="Punto di flesso"}
-Sia $f$ continua in un intorno di $x_0$. Il punto $x_0$ è un **punto di flesso** se il grafico ha la concavità verso l'alto da una parte di $x_0$ e verso il basso dall'altra, e se nel punto $\big( x_0, f(x_0) \big)$ esiste la retta tangente. Nel flesso il grafico attraversa la retta tangente, che si chiama **tangente inflessionale**. Il flesso si dice
+Sia $f$ continua in un intorno di $x_0$. Il punto $x_0$ è un **punto di flesso** se il grafico ha la concavità verso l'alto da una parte di $x_0$ e verso il basso dall'altra, e se nel punto $\big( x_0, f(x_0) \big)$ esiste la retta tangente. Se il grafico è strettamente concavo su un lato e strettamente convesso sull'altro, attraversa la retta tangente, che si chiama **tangente inflessionale**. Il flesso si dice
 
 - **orizzontale** se la tangente è orizzontale, cioè se $f'(x_0) = 0$, come quello di $x^3$ nell'origine;
 - **obliquo** se $f'(x_0)$ è un numero diverso da $0$;
@@ -149,7 +151,7 @@ Sia $f$ derivabile due volte in un intorno di $x_0$.
 - Condizione *necessaria*: se $x_0$ è un punto di flesso, allora $f''(x_0) = 0$.
 - Condizione *sufficiente*: se $f''(x_0) = 0$ e $f''$ ha un segno a sinistra di $x_0$ e il segno opposto a destra, allora $x_0$ è un punto di flesso.
 
-La seconda condizione segue dal teorema sul segno della derivata seconda. I flessi si cercano quindi tra gli zeri di $f''$, e per ciascuno si controlla il cambio di segno. Per $f(x) = x^3 - 6x^2 + 9x$ si ha $f''(x) = 6x - 12$, che è negativa per $x < 2$ e positiva per $x > 2$. Perciò $x = 2$ è un **flesso obliquo**, con $f(2) = 2$ e $f'(2) = -3$, e la tangente inflessionale è
+La seconda condizione segue dal teorema sul segno della derivata seconda. Dove $f$ è derivabile due volte, si cercano gli zeri di $f''$ e si controlla il cambio di segno. Se $f''$ manca in $x_0$, si studiano separatamente concavità e tangente. Per esempio la radice cubica ha in $0$ un flesso a tangente verticale. Per $f(x) = x^3 - 6x^2 + 9x$ si ha $f''(x) = 6x - 12$, che è negativa per $x < 2$ e positiva per $x > 2$. Perciò $x = 2$ è un **flesso obliquo**, con $f(2) = 2$ e $f'(2) = -3$, e la tangente inflessionale è
 $$
 y - 2 = -3\,(x - 2) ,
 \qquad
@@ -183,12 +185,12 @@ Per tracciare il grafico di una funzione si raccolgono le informazioni in quest'
 1. **Dominio**, con le condizioni viste nell'argomento sulle funzioni.
 2. **Simmetrie e periodicità**: si controlla se $f$ è pari, dispari o periodica.
 3. **Intersezioni con gli assi e segno**: si risolvono $f(x) = 0$ e $f(x) > 0$, e si calcola $f(0)$ se $0$ appartiene al dominio.
-4. **Limiti e asintoti**: si calcolano i limiti agli estremi del dominio e si cercano gli asintoti verticali, orizzontali e obliqui, come nell'argomento sulla continuità e gli asintoti.
+4. **Continuità, limiti e asintoti**. Si esaminano i punti di raccordo delle funzioni a tratti e i limiti ai bordi di ciascun intervallo del dominio. Un limite laterale finito permette di riconoscere un estremo del grafico o un punto escluso. I limiti infiniti o all'infinito servono per cercare gli asintoti.
 5. **Derivata prima**: si cercano i punti di non derivabilità e, dal segno di $f'$, gli intervalli di crescenza e di decrescenza e i massimi e i minimi relativi.
-6. **Derivata seconda**: dal segno di $f''$ si ricavano la concavità e i flessi, e per ogni flesso si scrive la tangente inflessionale quando è richiesta.
+6. **Derivata seconda**. Dal segno di $f''$ si ricava la concavità su ciascun intervallo. Nei punti del grafico in cui cambia la concavità si verifica che esista la tangente, anche verticale. Quando è richiesta, si scrive l'equazione della tangente inflessionale.
 7. **Grafico**: si riportano nel piano gli asintoti e i punti trovati e si traccia la curva in accordo con tutte le informazioni.
 
-Le informazioni si controllano a vicenda. Se per esempio la tabella di $f'$ indica un massimo in un punto dove il segno di $f$ e i limiti impongono un minimo, nei calcoli c'è un errore.
+Le informazioni si controllano a vicenda. Per esempio, se $f$ è negativa vicino a uno zero e vale zero nel punto, quello zero è un massimo relativo. La tabella di $f'$ deve essere compatibile con questo dato.
 :::
 
 :::esempio{titolo="Studio di una funzione razionale fratta"}
@@ -231,7 +233,7 @@ f''(x) = \frac{e^{x}\,\left( x^2 - 2x + 2 \right)}{x^3} .
 $$
 La derivata prima è negativa per $x < 1$, con $x \neq 0$, e positiva per $x > 1$, quindi $x = 1$ è un punto di minimo relativo, con $f(1) = e$. Il trinomio $x^2 - 2x + 2$ ha discriminante negativo ed è sempre positivo, perciò $f''$ ha il segno di $x^3$. Il grafico ha la concavità verso il basso per $x < 0$ e verso l'alto per $x > 0$, e non ci sono flessi.
 
-::grafico{f="exp(x)/x" punti="1,2.718,pieno" asintoti="x=0;y=0" xmin=-4 xmax=4 ymin=-6 ymax=10 titolo="Grafico di $f(x) = \dfrac{e^{x}}{x}$, con gli asintoti $x = 0$ e $y = 0$ e il minimo relativo $(1, e)$"}
+::grafico{f="exp(x)/x" punti="1,2.718,pieno" asintoti="x=0;y=0" xmin=-4 xmax=4 ymin=-6 ymax=10 titolo="Grafico di $f(x) = \dfrac{e^{x}}{x}$, con l'asintoto verticale $x = 0$, l'asintoto orizzontale $y = 0$ a sinistra e il minimo relativo $(1, e)$"}
 
 :::
 
@@ -240,7 +242,7 @@ Per studiare una funzione che contiene un valore assoluto si scrive la funzione 
 :::
 
 :::osservazione{#funzioni-goniometriche titolo="Funzioni goniometriche"}
-Se $f$ è periodica di periodo $T$, il suo grafico si ripete in ogni intervallo di ampiezza $T$, quindi basta studiarla in un solo periodo, per esempio $[0, T]$. Per $f(x) = \sin^2 x$ si ha $\sin^2 (x + \pi) = (-\sin x)^2 = \sin^2 x$, quindi il periodo è $\pi$. Le derivate sono
+Se $f$ è periodica di periodo $T$, il suo grafico si ripete in ogni intervallo di ampiezza $T$, quindi basta studiarla in un solo periodo, per esempio $[0, T]$. Per $f(x) = \sin^2 x$ si ha $\sin^2 (x + \pi) = (-\sin x)^2 = \sin^2 x$, quindi $\pi$ è un periodo. Le derivate sono
 $$
 f'(x) = 2 \sin x \cos x = \sin (2x) ,
 \qquad
@@ -295,10 +297,10 @@ La derivata è positiva per $0 < R < 2$ e negativa per $R > 2$, quindi per il te
 :::osservazione{#grafico-derivata titolo="Corrispondenze tra il grafico di f e il grafico di f'"}
 Il valore $f'(x)$ è il coefficiente angolare della tangente al grafico di $f$ nel punto di ascissa $x$. Dal grafico di $f$ si ricavano quindi le proprietà del grafico di $f'$, e viceversa.
 
-- Dove $f$ è crescente, il grafico di $f'$ sta sopra l'asse $x$; dove $f$ è decrescente, sta sotto.
-- Nei massimi e nei minimi relativi di $f$ in cui $f$ è derivabile, il grafico di $f'$ attraversa l'asse $x$.
-- Dove il grafico di $f$ ha la concavità verso l'alto, $f'$ è crescente; dove ha la concavità verso il basso, $f'$ è decrescente.
-- Nei flessi di $f$ la derivata $f'$ ha un massimo o un minimo relativo.
+- Dove il grafico di $f'$ sta sopra l'asse $x$, $f$ cresce. Dove sta sotto, $f$ decresce. La derivata di una funzione strettamente crescente può annullarsi in un punto, come accade a $f(x)=x^3$ in $0$.
+- Se $f'$ passa da positiva a negativa attraversando $x_0$ e $f$ è continua in $x_0$, allora $f$ ha un massimo relativo. Nel passaggio da negativa a positiva si ha un minimo relativo. In un estremo interno in cui $f$ è derivabile, il teorema di Fermat garantisce $f'(x_0)=0$.
+- Dove $f'$ è crescente, il grafico di $f$ ha la concavità verso l'alto. Dove $f'$ è decrescente, la concavità è verso il basso.
+- Se $f'$ esiste ed è continua in $x_0$ e passa da decrescente a crescente, allora $f'$ ha un minimo relativo e $f$ ha un flesso. Se $f'$ passa da crescente a decrescente si ha un massimo relativo di $f'$ e un flesso di $f$.
 
 Per $f(x) = x^3 - 6x^2 + 9x$ la derivata $f'(x) = 3x^2 - 12x + 9$ ha per grafico una parabola. La parabola incontra l'asse $x$ nelle ascisse $1$ e $3$ del massimo e del minimo di $f$, ed è negativa tra le due, dove $f$ decresce. Il suo vertice ha ascissa $2$, che è l'ascissa del flesso di $f$, e ordinata $f'(2) = -3$, che è il coefficiente angolare della tangente inflessionale.
 
@@ -309,7 +311,7 @@ Per $f(x) = x^3 - 6x^2 + 9x$ la derivata $f'(x) = 3x^2 - 12x + 9$ ha per grafico
 ## Discussione grafica di equazioni con un parametro
 
 :::osservazione{#discussione-grafica titolo="Discussione grafica di un'equazione"}
-Un'equazione con un parametro $k$ che si può scrivere nella forma $f(x) = k$ si discute con il grafico di $f$. Le soluzioni dell'equazione sono le ascisse dei punti comuni al grafico di $y = f(x)$ e alla retta orizzontale $y = k$. Il numero delle soluzioni cambia quando la retta passa per un massimo o un minimo relativo di $f$ o raggiunge il valore di un asintoto orizzontale. Questi valori di $k$ si leggono nello studio di funzione.
+Un'equazione con un parametro $k$ che si può scrivere nella forma $f(x) = k$ si discute con il grafico di $f$. Le soluzioni dell'equazione sono le ascisse dei punti comuni al grafico di $y = f(x)$ e alla retta orizzontale $y = k$. Su ogni tratto di stretta monotonia, la funzione assume ciascun livello dell'immagine una sola volta. Per trovare i livelli in cui il numero di soluzioni può cambiare, si leggono i valori degli estremi relativi e i limiti ai bordi del dominio, compresi i livelli degli asintoti orizzontali. Poi si controlla quali livelli sono effettivamente raggiunti. Per esempio, su $[0,2)$ la funzione $f(x)=x$ assume il livello $0$, mentre il livello $2$ è soltanto un limite.
 :::
 
 :::esempio{titolo="Numero delle soluzioni di un'equazione di terzo grado"}
@@ -336,7 +338,7 @@ L'esistenza segue dal teorema degli zeri. Per il criterio di monotonia $f$ è st
 :::
 
 :::esempio{#metodo-bisezione titolo="Approssimazione con il metodo di bisezione"}
-Il metodo di bisezione è descritto nell'argomento sulla continuità e gli asintoti. Per $f(x) = x^3 + x - 1$ in $[0, 1]$ i punti medi successivi danno $f(0{,}5) < 0$, $f(0{,}75) > 0$, $f(0{,}625) < 0$ e $f(0{,}6875) > 0$. Dopo quattro passi la soluzione sta quindi nell'intervallo $[0{,}625;\ 0{,}6875]$, di ampiezza $\dfrac{1}{16}$. Il valore della soluzione, con quattro cifre decimali, è $\alpha \approx 0{,}6823$.
+Il metodo di bisezione è descritto nell'argomento sulla continuità e gli asintoti. Per $f(x) = x^3 + x - 1$ in $[0, 1]$ i punti medi successivi danno $f(0{,}5) < 0$, $f(0{,}75) > 0$, $f(0{,}625) < 0$ e $f(0{,}6875) > 0$. Dopo quattro passi la soluzione sta quindi nell'intervallo $[0{,}625;\ 0{,}6875]$, di ampiezza $\dfrac{1}{16}$. Se si approssima $\alpha$ con il punto medio di questo intervallo, l'errore assoluto è al più $\dfrac{1}{32}$. Per garantire più cifre decimali si continua a dimezzare l'intervallo.
 :::
 
 :::osservazione{#metodo-tangenti titolo="Metodo delle tangenti"}
@@ -344,13 +346,13 @@ Nel **metodo delle tangenti**, detto anche metodo di Newton, si sostituisce il g
 $$
 x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} ,
 $$
-che si prende come nuova approssimazione. Ripetendo il passaggio si ottengono $x_2$, $x_3$ e così via. Se $f'$ e $f''$ non si annullano in $[a, b]$, si sceglie come $x_0$ l'estremo in cui $f$ e $f''$ hanno lo stesso segno, e allora le approssimazioni si avvicinano alla soluzione. Per $f(x) = x^3 + x - 1$ nell'intervallo $[0{,}5;\ 1]$, che contiene la soluzione, si ha $f'(x) = 3x^2 + 1 > 0$, $f''(x) = 6x > 0$ e $f(1) = 1 > 0$, perciò si parte da $x_0 = 1$:
+che si prende come nuova approssimazione. Ripetendo il passaggio si ottengono $x_2$, $x_3$ e così via. Sia $f$ derivabile due volte, con derivata seconda continua in $[a,b]$. Se $f(a)$ e $f(b)$ hanno segno opposto e $f'$ e $f''$ si mantengono diverse da zero nell'intervallo, si può partire dall'estremo in cui $f$ e $f''$ hanno lo stesso segno. Da quell'estremo le iterazioni restano nell'intervallo e convergono allo zero. Per $f(x) = x^3 + x - 1$ nell'intervallo $[0{,}5;\ 1]$, che contiene la soluzione, si ha $f'(x) = 3x^2 + 1 > 0$, $f''(x) = 6x > 0$ e $f(1) = 1 > 0$, perciò si parte da $x_0 = 1$:
 $$
 x_1 = 1 - \frac{f(1)}{f'(1)} = 1 - \frac{1}{4} = 0{,}75 ,
 \qquad
 x_2 = 0{,}75 - \frac{f(0{,}75)}{f'(0{,}75)} = 0{,}75 - \frac{0{,}171875}{2{,}6875} \approx 0{,}6860 .
 $$
-Con due soli passi l'errore è minore di $0{,}004$, mentre con la bisezione servono più passi per la stessa precisione.
+Con due passi si trova $x_2 \approx 0{,}6860$. Un confronto di segno dà $f(0{,}682)<0<f(0{,}683)$, perciò lo zero è fra questi valori e l'errore di $x_2$ è minore di $0{,}004$.
 
 ::grafico{f="x^3+x-1;4*x-3" punti="1,1,pieno;0.75,0,pieno;0.682,0,vuoto" segmenti="1,0,1,1" etichette="1.05,-0.35,x₀;0.7,-0.35,x₁" xmin=-1 xmax=2 ymin=-2 ymax=4 legenda="y = x^3 + x - 1;y = 4x - 3" titolo="La tangente al grafico di $x^3 + x - 1$ nel punto di ascissa $x_0 = 1$ incontra l'asse $x$ in $x_1 = 0{,}75$, più vicino alla soluzione $\alpha \approx 0{,}68$ (punto vuoto)"}
 

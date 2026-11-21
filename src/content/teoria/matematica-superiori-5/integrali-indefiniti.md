@@ -1,6 +1,6 @@
 ---
 titolo: Integrali indefiniti
-sommario: Che cosa sono le primitive di una funzione e l'integrale indefinito, come si calcolano gli integrali immediati e quelli di funzioni composte, come si usano l'integrazione per sostituzione e per parti e come si integrano le funzioni razionali fratte con denominatore di primo e di secondo grado.
+sommario: Primitive e costanti di integrazione, formule immediate, sostituzione, integrazione per parti e integrali di funzioni razionali fratte.
 ---
 
 ## Primitive e integrale indefinito
@@ -44,6 +44,18 @@ $$
 Ogni integrale indefinito si controlla derivando il risultato, perché la derivata di $F(x) + c$ deve essere la funzione integranda. Per il primo esempio $\left( x^3 + c \right)' = 3x^2$.
 :::
 
+:::attenzione{#costanti-su-intervalli titolo="Una costante per ogni intervallo del dominio"}
+La costante $c$ descrive le primitive su un intervallo. Se il dominio è formato da più intervalli disgiunti, la costante si sceglie indipendentemente su ciascuno. Per esempio, sul dominio di $f(x)=\dfrac{1}{x}$ si ottengono tutte le primitive con
+$$
+F(x)=
+\begin{cases}
+\ln(-x)+c_- & \text{se }x<0,\\[6pt]
+\ln x+c_+ & \text{se }x>0,
+\end{cases}
+$$
+dove $c_-$ e $c_+$ sono due numeri reali indipendenti. Il valore $F(1)=0$ fissa $c_+=0$ e lascia libero $c_-$.
+:::
+
 :::teorema{#esistenza-primitive titolo="Esistenza delle primitive"}
 Ogni funzione continua in un intervallo ha una primitiva in quell'intervallo.
 
@@ -60,7 +72,7 @@ Per esempio $F(x) = (x - 1)\,e^{x}$ è una primitiva di $f(x) = x\,e^{x}$, perch
 :::
 
 :::osservazione{#primitiva-per-un-punto titolo="Primitiva che passa per un punto"}
-Tra le infinite primitive di $f$ ce n'è una sola il cui grafico passa per un punto assegnato $P(x_0, y_0)$, con $x_0$ nell'intervallo. Infatti la condizione $F(x_0) + c = y_0$ determina il valore di $c$. Per esempio le primitive di $f(x) = 6x - 2$ sono $3x^2 - 2x + c$. La primitiva che passa per $P(1, 4)$ soddisfa $3 - 2 + c = 4$, quindi $c = 3$, e la primitiva cercata è
+Sia $f$ una funzione che ammette primitive su un intervallo $I$. Per un punto $P(x_0,y_0)$ con $x_0$ in $I$, esiste un'unica primitiva su $I$ il cui grafico passa per $P$. Infatti la condizione $F(x_0) + c = y_0$ determina il valore di $c$. Per esempio le primitive di $f(x) = 6x - 2$ sono $3x^2 - 2x + c$. La primitiva che passa per $P(1, 4)$ soddisfa $3 - 2 + c = 4$, quindi $c = 3$, e la primitiva cercata è
 $$
 F(x) = 3x^2 - 2x + 3 .
 $$
@@ -92,13 +104,11 @@ All'istante $t = 2\,\mathrm{s}$ il corpo si trova quindi in $s(2) = 8 - 4 + 2 = 
 ## Proprietà di linearità
 
 :::teorema{#linearita titolo="Linearità dell'integrale indefinito"}
-Siano $f$ e $g$ funzioni che hanno primitive in un intervallo e sia $k$ un numero reale. Allora
+Siano $F$ e $G$ primitive rispettivamente di $f$ e $g$ su uno stesso intervallo. Per ogni coppia di numeri reali $a$ e $b$ vale
 $$
-\int k\,f(x)\,dx = k \int f(x)\,dx ,
-\qquad
-\int \big( f(x) + g(x) \big)\,dx = \int f(x)\,dx + \int g(x)\,dx .
+\int \bigl(af(x)+bg(x)\bigr)\,dx=aF(x)+bG(x)+c .
 $$
-In parole, una costante moltiplicativa si porta fuori dal segno di integrale, e l'integrale di una somma è la somma degli integrali. Le due formule seguono dalle regole di derivazione del prodotto per una costante e della somma. Con la linearità un polinomio si integra termine per termine:
+Infatti derivando $aF+bG$ si ottiene $af+bg$. Questa è la **linearità** dell'integrale indefinito. Si sceglie una primitiva per ogni termine, si applicano i coefficienti e alla fine si aggiunge un'unica costante arbitraria. La costante resta arbitraria anche quando $a=b=0$, perché tutte le funzioni costanti hanno derivata nulla. Per esempio un polinomio si integra termine per termine.
 $$
 \int \left( 4x^3 - 6x + 2 \right) dx = 4 \cdot \frac{x^4}{4} - 6 \cdot \frac{x^2}{2} + 2x + c = x^4 - 3x^2 + 2x + c .
 $$
@@ -106,7 +116,7 @@ Le costanti di integrazione dei singoli termini si sommano in un'unica costante 
 :::
 
 :::attenzione
-L'integrale di un prodotto è diverso dal prodotto degli integrali. Per $f(x) = g(x) = x$ il prodotto è $x^2$, il cui integrale è $\dfrac{x^3}{3} + c$, mentre il prodotto delle primitive $\dfrac{x^2}{2} \cdot \dfrac{x^2}{2} = \dfrac{x^4}{4}$ ha derivata $x^3$, che è diversa da $x^2$. Per i prodotti si usano l'integrazione per sostituzione e l'integrazione per parti.
+In generale il prodotto di due primitive non è una primitiva del prodotto delle integrande. Per $f(x) = g(x) = x$ il prodotto è $x^2$, il cui integrale è $\dfrac{x^3}{3} + c$, mentre il prodotto delle primitive $\dfrac{x^2}{2} \cdot \dfrac{x^2}{2} = \dfrac{x^4}{4}$ ha derivata $x^3$, che è diversa da $x^2$. Per i prodotti si usano l'integrazione per sostituzione e l'integrazione per parti.
 :::
 
 ## Integrali immediati
@@ -124,15 +134,15 @@ Leggendo al contrario la tabella delle derivate delle funzioni elementari si ott
 | $\sin x$ | $-\cos x + c$ |
 | $\cos x$ | $\sin x + c$ |
 | $\dfrac{1}{\cos^2 x}$ | $\tan x + c$ |
-| $\dfrac{1}{\sin^2 x}$ | $-\dfrac{1}{\tan x} + c$ |
+| $\dfrac{1}{\sin^2 x}$ | $-\dfrac{\cos x}{\sin x} + c$ |
 | $\dfrac{1}{1 + x^2}$ | $\arctan x + c$ |
 | $\dfrac{1}{\sqrt{1 - x^2}}$ | $\arcsin x + c$ |
 
-Ogni riga si verifica derivando la seconda colonna. Per esempio $\left( \dfrac{x^{a + 1}}{a + 1} \right)' = \dfrac{(a + 1)\,x^{a}}{a + 1} = x^{a}$, e la condizione $a \neq -1$ serve perché per $a = -1$ il denominatore $a + 1$ è nullo.
+Ogni riga si ottiene leggendo una formula di derivazione in senso inverso. Per esempio $\left( \dfrac{x^{a + 1}}{a + 1} \right)'=x^a$ per $x>0$ e $a\ne -1$. La stessa formula vale anche per esponenti interi nei rispettivi intervalli di definizione. Per $a=-1$ il denominatore $a+1$ è nullo e si usa la formula del reciproco. Nella riga di $\dfrac{1}{\sin^2 x}$ si usa la forma $-\dfrac{\cos x}{\sin x}$, che è definita anche dove $\cos x=0$.
 :::
 
 :::esempio{titolo="Radici e potenze con esponente negativo"}
-La formula delle potenze vale anche per radici e reciproci, purché si scrivano prima come potenze. Per $x > 0$ si ha $\sqrt{x} = x^{\frac{1}{2}}$ e $\dfrac{1}{x^3} = x^{-3}$, quindi
+La formula delle potenze vale anche per radici e reciproci, purché si scrivano prima come potenze. Per $x > 0$ si ha $\sqrt{x} = x^{\dfrac{1}{2}}$ e $\dfrac{1}{x^3} = x^{-3}$, quindi
 $$
 \begin{aligned}
 \int \left( 3\sqrt{x} - \frac{2}{x^3} \right) dx
@@ -165,7 +175,7 @@ La funzione $\dfrac{1}{1 + x^2}$ è razionale, mentre la sua primitiva $\arctan 
 ## Integrali di funzioni composte
 
 :::teorema{#integrali-funzioni-composte titolo="Integrali di funzioni composte"}
-Sia $g$ una funzione derivabile, con derivata $g'$ continua. Dalla regola di derivazione della funzione composta seguono le formule
+Sia $g$ derivabile su un intervallo. Si applica ogni formula dove $g(x)$ appartiene all'intervallo in cui vale la corrispondente formula immediata. In particolare, per il logaritmo si richiede $g(x)\ne0$ e per l'arcoseno si richiede $-1<g(x)<1$. Dalla regola di derivazione della funzione composta seguono le formule.
 
 | funzione integranda | integrale |
 | --- | --- |
@@ -199,7 +209,7 @@ $$
 :::
 
 :::teorema{#funzione-interna-lineare titolo="Funzione interna di primo grado"}
-Sia $F$ una primitiva di $f$ e siano $m$ e $q$ numeri reali, con $m \neq 0$. Allora
+Sia $F$ una primitiva di $f$ su un intervallo $J$ e siano $m$ e $q$ numeri reali, con $m\neq0$. Su ogni intervallo in cui $mx+q$ appartiene a $J$ vale
 $$
 \int f(m x + q)\,dx = \frac{1}{m}\,F(m x + q) + c .
 $$
@@ -226,13 +236,13 @@ $$
 ## Integrazione per sostituzione
 
 :::teorema{#integrazione-per-sostituzione titolo="Integrazione per sostituzione"}
-Sia $f$ continua e sia $x = \varphi(t)$ una funzione invertibile, derivabile con derivata continua. Allora
+Sia $f$ continua su un intervallo $I$. Si scelga un cambiamento di variabile $x=\varphi(t)$ che sia derivabile con derivata continua e invertibile tra l'intervallo di $t$ e $I$. Si calcola una primitiva $H(t)$ di $f(\varphi(t))\varphi'(t)$ e si torna a $x$ usando l'inversa $t=\varphi^{-1}(x)$. Si ottiene
 $$
-\int f(x)\,dx = \int f\big( \varphi(t) \big)\,\varphi'(t)\,dt ,
+\int f(x)\,dx = H\bigl(\varphi^{-1}(x)\bigr)+c .
 $$
-e dopo aver calcolato l'integrale a secondo membro si torna alla variabile $x$ sostituendo $t = \varphi^{-1}(x)$. In pratica si sceglie una nuova variabile $t$ che rende più semplice la funzione integranda, si esprimono $x$ e $dx = \varphi'(t)\,dt$ in funzione di $t$, si integra rispetto a $t$ e si torna a $x$. La formula segue dalla regola di derivazione della funzione composta; la dimostrazione si studia all'università.
+Infatti, se $F$ è una primitiva di $f$, la derivata di $F(\varphi(t))$ è $f(\varphi(t))\varphi'(t)$. Quindi $H(t)$ e $F(\varphi(t))$ differiscono per una costante. La scrittura $dx=\varphi'(t)\,dt$ permette di ricordare il fattore che compare nell'integranda in $t$. Se l'equazione ha più rami, l'intervallo di partenza determina quello da usare. Per esempio con $t=x^2$ e $x<0$ si torna a $x$ mediante $x=-\sqrt t$.
 
-Per esempio, nell'integrale di $\dfrac{1}{1 + \sqrt{x}}$, con $x \geq 0$, si pone $t = \sqrt{x}$. Allora $x = t^2$, con $t \geq 0$, e $dx = 2t\,dt$. Poiché $\dfrac{t}{1 + t} = \dfrac{(1 + t) - 1}{1 + t} = 1 - \dfrac{1}{1 + t}$, si ottiene
+Per esempio, nell'integrale di $\dfrac{1}{1 + \sqrt{x}}$, con $x>0$, si pone $t = \sqrt{x}$. Allora $x=t^2$, con $t>0$, e $dx = 2t\,dt$. Poiché $\dfrac{t}{1 + t} = \dfrac{(1 + t) - 1}{1 + t} = 1 - \dfrac{1}{1 + t}$, si ottiene
 $$
 \begin{aligned}
 \int \frac{1}{1 + \sqrt{x}}\,dx
@@ -246,7 +256,7 @@ Il valore assoluto non serve, perché $1 + t > 0$.
 :::
 
 :::esempio{titolo="Sostituzione per una radice di primo grado"}
-Nell'integrale di $x\sqrt{x + 1}$, con $x \geq -1$, la radice contiene un'espressione di primo grado. Si pone $t = \sqrt{x + 1}$, cioè $x = t^2 - 1$, con $t \geq 0$, e $dx = 2t\,dt$. La funzione integranda diventa $\left( t^2 - 1 \right) t$, quindi
+Nell'integrale di $x\sqrt{x + 1}$, con $x>-1$, la radice contiene un'espressione di primo grado. Si pone $t=\sqrt{x+1}$, cioè $x=t^2-1$, con $t>0$, e $dx = 2t\,dt$. La funzione integranda diventa $\left( t^2 - 1 \right) t$, quindi
 $$
 \begin{aligned}
 \int x\sqrt{x + 1}\,dx
@@ -264,7 +274,7 @@ Nell'integrale di $\dfrac{e^{x}}{e^{2x} + 1}$ si pone $t = e^{x}$. Allora $dt = 
 $$
 \int \frac{e^{x}}{e^{2x} + 1}\,dx = \int \frac{1}{t^2 + 1}\,dt = \arctan t + c = \arctan \left( e^{x} \right) + c .
 $$
-Il risultato si controlla derivando, perché $\big( \arctan \left( e^{x} \right) \big)' = \dfrac{e^{x}}{1 + e^{2x}}$.
+L'esponenziale $t=e^x$ è positivo e invertibile su $\mathbb R$, quindi la formula vale per ogni $x$ reale.
 :::
 
 ## Integrazione per parti
@@ -374,7 +384,7 @@ e quindi
 $$
 \int \frac{p x + r}{D(x)}\,dx = A \ln \lvert x - x_1 \rvert + B \ln \lvert x - x_2 \rvert + c .
 $$
-Le frazioni a secondo membro si chiamano **fratti semplici**. I numeri $A$ e $B$ si trovano riducendo il secondo membro allo stesso denominatore e uguagliando i numeratori; l'uguaglianza vale per ogni $x$, e sostituendo $x = x_1$ e $x = x_2$ si ottiene un'equazione per ciascuno dei due numeri.
+Le frazioni a secondo membro si chiamano **fratti semplici**. I numeri $A$ e $B$ si trovano riducendo il secondo membro allo stesso denominatore e uguagliando i numeratori; l'identità polinomiale vale per ogni $x$, comprese le radici del denominatore della frazione iniziale. Sostituendo $x=x_1$ e $x=x_2$ si ricavano $A$ e $B$ separatamente.
 :::
 
 :::esempio{titolo="Scomposizione in fratti semplici"}
@@ -417,7 +427,7 @@ che si ottiene raccogliendo $k^2$ al denominatore e applicando la formula della 
 $$
 \int \frac{1}{x^2 + 2x + 5}\,dx = \frac{1}{2} \arctan \frac{x + 1}{2} + c .
 $$
-Se il numeratore è di primo grado, prima si fa comparire la derivata del denominatore, e la frazione si spezza in un termine con il logaritmo e un termine con l'arcotangente.
+Se il numeratore è di primo grado, lo si scrive come $\lambda D'(x)+r$, con $\lambda$ e $r$ costanti. Il termine $\lambda D'(x)$ porta a $\lambda\ln\lvert D(x)\rvert$ e il residuo $r$ porta all'arcotangente se $r\ne0$. Per $D(x)=a\bigl((x-h)^2+k^2\bigr)$ il fattore $a$ va mantenuto. Il coefficiente dell'arcotangente è quindi $\dfrac{r}{ak}$.
 
 ::grafico{f="1/(x^2+2*x+5);atan((x+1)/2)/2" punti="-1,0,pieno" xmin=-6 xmax=4 ymin=-1 ymax=1 legenda="y = \dfrac{1}{x^2 + 2x + 5};y = \dfrac{1}{2} \arctan \dfrac{x + 1}{2}" titolo="La primitiva $\dfrac{1}{2} \arctan \dfrac{x + 1}{2}$ di $\dfrac{1}{x^2 + 2x + 5}$ è crescente, perché la funzione integranda è positiva, e ha la pendenza massima in $x = -1$"}
 
@@ -436,5 +446,5 @@ Il valore assoluto nel logaritmo non serve, perché un trinomio con $\Delta < 0$
 :::
 
 :::attenzione
-Un denominatore di secondo grado senza radici reali dà un'arcotangente, e il logaritmo compare solo quando il numeratore contiene la derivata del denominatore. Per esempio la derivata di $\ln \left( x^2 + 4 \right)$ è $\dfrac{2x}{x^2 + 4}$, quindi $\ln \left( x^2 + 4 \right)$ *non* è una primitiva di $\dfrac{1}{x^2 + 4}$. La primitiva corretta, con $h = 0$ e $k = 2$, è $\dfrac{1}{2} \arctan \dfrac{x}{2} + c$.
+Quando il denominatore di secondo grado è privo di radici reali, il residuo costante del numeratore dà un'arcotangente. Se il numeratore coincide con un multiplo della derivata del denominatore, il residuo è zero e resta solo il logaritmo. Per esempio la derivata di $\ln \left( x^2 + 4 \right)$ è $\dfrac{2x}{x^2 + 4}$, quindi $\ln \left( x^2 + 4 \right)$ *non* è una primitiva di $\dfrac{1}{x^2 + 4}$. La primitiva corretta, con $h = 0$ e $k = 2$, è $\dfrac{1}{2} \arctan \dfrac{x}{2} + c$.
 :::

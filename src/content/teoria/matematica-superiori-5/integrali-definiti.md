@@ -1,12 +1,12 @@
 ---
 titolo: Integrali definiti, aree e volumi
-sommario: Che cos'è l'integrale definito e come si ottiene dalle somme di rettangoli, quali sono le sue proprietà, che cosa dicono il teorema della media e il teorema fondamentale del calcolo integrale, e come si usano gli integrali per calcolare aree, volumi dei solidi di rotazione, integrali impropri e grandezze fisiche come lo spazio percorso, il lavoro e la carica.
+sommario: L'integrale definito dalle somme di rettangoli al teorema fondamentale, con applicazioni ad aree, volumi, integrali impropri e grandezze fisiche.
 ---
 
 ## Trapezoide e integrale definito
 
 :::definizione{#trapezoide titolo="Trapezoide"}
-Sia $f$ una funzione continua e non negativa nell'intervallo $[a, b]$. Il **trapezoide** di $f$ su $[a, b]$ è la regione del piano delimitata dal grafico di $f$, dall'asse $x$ e dalle rette $x = a$ e $x = b$. Per $f(x) = x + 1$ su $[0, 2]$ il trapezoide è un trapezio rettangolo, con basi $f(0) = 1$ e $f(2) = 3$ e altezza $2$, quindi la sua area è
+Sia $f$ una funzione continua e non negativa nell'intervallo $[a,b]$, con $a<b$. Il **trapezoide** di $f$ su $[a, b]$ è la regione del piano delimitata dal grafico di $f$, dall'asse $x$ e dalle rette $x = a$ e $x = b$. Per $f(x) = x + 1$ su $[0, 2]$ il trapezoide è un trapezio rettangolo, con basi $f(0) = 1$ e $f(2) = 3$ e altezza $2$, quindi la sua area è
 $$
 \frac{(1 + 3) \cdot 2}{2} = 4 .
 $$
@@ -14,7 +14,7 @@ Il nome viene da questo caso. Quando il grafico è una curva, per l'area del tra
 :::
 
 :::definizione{#somme-inferiori-superiori titolo="Somma inferiore e somma superiore"}
-Sia $f$ continua in $[a, b]$. Si divide $[a, b]$ in $n$ intervalli di uguale ampiezza
+Sia $f$ continua in $[a,b]$, con $a<b$. Si divide $[a, b]$ in $n$ intervalli di uguale ampiezza
 $$
 h = \frac{b - a}{n} .
 $$
@@ -38,7 +38,7 @@ $$
 :::
 
 :::definizione{#integrale-definito titolo="Integrale definito"}
-Al crescere di $n$ i rettangoli diventano più stretti, e le due somme si avvicinano all'area del trapezoide. Si dimostra che, se $f$ è continua in $[a, b]$, le successioni $s_n$ e $S_n$ hanno lo stesso limite finito per $n \to +\infty$; la dimostrazione si studia all'università. Questo limite comune si chiama **integrale definito** di $f$ da $a$ a $b$ e si indica con
+Al crescere di $n$ i rettangoli diventano più stretti. Se $f$ è continua in $[a,b]$, con $a<b$, le successioni $s_n$ e $S_n$ hanno lo stesso limite finito per $n\to+\infty$. Questo limite comune si chiama **integrale definito** di $f$ da $a$ a $b$ e si indica con
 $$
 \int_a^b f(x)\,dx = \lim_{n \to +\infty} s_n = \lim_{n \to +\infty} S_n .
 $$
@@ -97,7 +97,7 @@ Se $f$ è continua nell'intervallo chiuso e limitato $[a, b]$, allora $f$ assume
 :::
 
 ::::teorema{#teorema-media titolo="Teorema della media"}
-Sia $f$ continua nell'intervallo $[a, b]$. Allora esiste almeno un punto $c$ di $[a, b]$ tale che
+Sia $f$ continua nell'intervallo $[a,b]$, con $a<b$. Allora esiste almeno un punto $c$ di $[a, b]$ tale che
 $$
 \int_a^b f(x)\,dx = (b - a) \cdot f(c) .
 $$
@@ -140,11 +140,11 @@ Per $f(t) = t$ e $a = 0$, con $x > 0$, il trapezoide è il triangolo di vertici 
 :::
 
 ::::teorema{#teorema-fondamentale titolo="Teorema fondamentale del calcolo integrale"}
-Sia $f$ continua nell'intervallo $I$, sia $a$ un punto di $I$ e sia $F(x) = \displaystyle\int_a^x f(t)\,dt$. Allora $F$ è derivabile in $I$ e
+Sia $f$ continua nell'intervallo $I$, sia $a$ un punto di $I$ e sia $F(x) = \displaystyle\int_a^x f(t)\,dt$. Allora $F$ è derivabile nei punti interni di $I$ e
 $$
-F'(x) = f(x) \qquad \text{per ogni } x \text{ di } I .
+F'(x) = f(x) .
 $$
-La funzione integrale è quindi una primitiva di $f$, e ogni funzione continua in un intervallo ha almeno una primitiva. Il teorema, detto anche *teorema di Torricelli-Barrow*, permette di studiare una funzione integrale senza calcolare l'integrale. Per esempio la funzione $F(x) = \displaystyle\int_0^x e^{-t^2}\,dt$ ha derivata $F'(x) = e^{-x^2}$, che è positiva per ogni $x$, quindi $F$ è **crescente** in $\mathbb{R}$. Per $e^{-t^2}$ non esiste una primitiva che si scriva con le funzioni elementari.
+In un estremo incluso in $I$ la stessa formula vale per la derivata dal lato interno. La funzione integrale è quindi una primitiva di $f$ nell'interno di $I$. Il teorema, detto anche *teorema di Torricelli-Barrow*, permette di studiare una funzione integrale senza calcolare l'integrale. Per esempio la funzione $F(x) = \displaystyle\int_0^x e^{-t^2}\,dt$ ha derivata $F'(x) = e^{-x^2}$, che è positiva per ogni $x$, quindi $F$ è **crescente** in $\mathbb{R}$. Per $e^{-t^2}$ non esiste una primitiva che si scriva con le funzioni elementari.
 
 :::dimostrazione
 L'idea è scrivere il rapporto incrementale di $F$ come un valore medio di $f$ e poi usare la continuità di $f$.
@@ -166,11 +166,16 @@ Il punto $c_h$ è compreso tra $x$ e $x + h$, quindi tende a $x$ quando $h \to 0
 ::::
 
 :::osservazione{#derivata-estremo-variabile titolo="Derivata di un integrale con estremo variabile"}
-Se l'estremo superiore è una funzione derivabile $g(x)$, la funzione $G(x) = \displaystyle\int_a^{g(x)} f(t)\,dt$ è la composizione di $F(x) = \displaystyle\int_a^x f(t)\,dt$ con $g$. Per la regola della funzione composta e per il teorema fondamentale
+Se l'estremo superiore è una funzione derivabile $g(x)$ che assume valori all'interno dell'intervallo di continuità di $f$, la funzione $G(x) = \displaystyle\int_a^{g(x)} f(t)\,dt$ è la composizione di $F(x) = \displaystyle\int_a^x f(t)\,dt$ con $g$. Per la regola della funzione composta e per il teorema fondamentale
 $$
 G'(x) = f\big( g(x) \big) \cdot g'(x) .
 $$
-Per esempio, per $G(x) = \displaystyle\int_0^{x^2} \sin t\,dt$ si ha $G'(x) = \sin\left( x^2 \right) \cdot 2x$. Se l'estremo variabile è quello inferiore, si scambiano gli estremi e si cambia il segno.
+Per esempio, per $G(x) = \displaystyle\int_0^{x^2} \sin t\,dt$ si ha $G'(x) = \sin\left( x^2 \right) \cdot 2x$. Con due estremi variabili $u(x)$ e $v(x)$ si scrive l'integrale come differenza $F(v(x))-F(u(x))$. Se $u$ e $v$ sono derivabili e assumono valori all'interno dell'intervallo di continuità di $f$, allora
+$$
+\frac{d}{dx}\int_{u(x)}^{v(x)} f(t)\,dt
+= f(v(x))\,v'(x) - f(u(x))\,u'(x) .
+$$
+Il contributo dell'estremo inferiore ha segno meno perché compare nel termine sottratto. Per esempio, la derivata di $\displaystyle\int_x^{2x} t^2\,dt$ è $(2x)^2\cdot2-x^2=7x^2$.
 :::
 
 :::richiamo{titolo="Funzioni con derivata nulla"}
@@ -178,7 +183,7 @@ Se $G$ è derivabile nell'intervallo $I$ e $G'(x) = 0$ per ogni $x$ di $I$, allo
 :::
 
 ::::teorema{#formula-fondamentale titolo="Formula fondamentale del calcolo integrale"}
-Sia $f$ continua in $[a, b]$ e sia $G$ una primitiva qualsiasi di $f$ in $[a, b]$. Allora
+Sia $f$ continua in $[a,b]$, con $a<b$, e sia $G$ una sua primitiva in $(a,b)$ che si estende con continuità agli estremi. Allora
 $$
 \int_a^b f(x)\,dx = G(b) - G(a) .
 $$
@@ -191,7 +196,7 @@ $$
 e il primo valore coincide con quello ottenuto con le somme inferiori. La costante additiva della primitiva non cambia il risultato, perché si elide nella differenza.
 
 :::dimostrazione
-Per il teorema fondamentale la funzione $F(x) = \displaystyle\int_a^x f(t)\,dt$ è una primitiva di $f$. La differenza $G - F$ ha quindi derivata $f - f = 0$ in tutto l'intervallo, e per il richiamo sulle funzioni con derivata nulla è una costante $k$. Perciò $G(x) = F(x) + k$ per ogni $x$ di $[a, b]$, e
+Per il teorema fondamentale la funzione $F(x) = \displaystyle\int_a^x f(t)\,dt$ è una primitiva di $f$. La differenza $G-F$ ha derivata $f-f=0$ in $(a,b)$, quindi è una costante $k$ in questo intervallo. Per continuità l'uguaglianza $G(x)=F(x)+k$ vale anche agli estremi e si ottiene
 $$
 G(b) - G(a) = \big( F(b) + k \big) - \big( F(a) + k \big) = F(b) - F(a) .
 $$
@@ -277,6 +282,19 @@ $$
 
 :::
 
+:::esempio{titolo="Curve che si scambiano di posizione"}
+L'altezza di ogni segmento verticale fra le curve è la distanza tra le ordinate, cioè $|f(x)-g(x)|$. Se le curve si scambiano di posizione, si divide l'intervallo alle intersezioni in cui la differenza cambia segno. Per esempio, tra $y=x$ e $y=x^2$ su $[0,2]$ la retta sta sopra su $[0,1]$ e la parabola sta sopra su $[1,2]$, perché $x-x^2=x(1-x)$.
+$$
+\begin{aligned}
+A&=\int_0^1(x-x^2)\,dx+\int_1^2(x^2-x)\,dx \\[6pt]
+&=\frac{1}{6}+\frac{5}{6}=1 .
+\end{aligned}
+$$
+
+::grafico{f="x;x^2" area="x;x^2;0;1|x^2;x;1;2" punti="0,0,pieno;1,1,pieno;2,2,pieno;2,4,pieno" xmin=-1 xmax=3 ymin=-1 ymax=5 legenda="y = x;y = x^2" titolo="La curva superiore cambia in $x=1$. Le aree delle due regioni sono $\dfrac{1}{6}$ e $\dfrac{5}{6}$"}
+
+:::
+
 :::osservazione{#segmento-parabolico titolo="Area del segmento parabolico"}
 La regione compresa tra una parabola e una retta che la taglia in due punti si chiama **segmento parabolico**. Se la differenza tra le due funzioni è un trinomio $a x^2 + b x + c$ con radici $x_1 < x_2$, l'area del segmento parabolico è
 $$
@@ -313,7 +331,7 @@ Per $r = 3$ il volume è $36\pi$.
 :::
 
 :::osservazione{#volume-corona titolo="Rotazione della regione compresa tra due curve"}
-Siano $f$ e $g$ continue in $[a, b]$ con $0 \leq g(x) \leq f(x)$. La rotazione attorno all'asse $x$ della regione compresa tra i due grafici genera un solido con un foro, e la sezione nel punto $x$ è una corona circolare di raggi $f(x)$ e $g(x)$. Il volume è quindi la differenza dei volumi generati dai due trapezoidi:
+Siano $f$ e $g$ continue in $[a, b]$ con $0 \leq g(x) \leq f(x)$. La sezione del solido all'ascissa $x$ è una corona circolare di raggi $f(x)$ e $g(x)$. Quando $g(x)=0$ la sezione è un disco pieno. Il volume è quindi la differenza dei volumi generati dai due trapezoidi.
 $$
 V = \pi \int_a^b \left( f(x)^2 - g(x)^2 \right) dx .
 $$
@@ -322,6 +340,10 @@ Per la regione compresa tra $y = x$ e $y = x^2$, che si incontrano in $x = 0$ e 
 
 :::attenzione
 Nella formula della corona si sottraggono i quadrati delle due funzioni, e il risultato è diverso dal quadrato della differenza. Per la regione dell'esempio precedente si avrebbe $\pi \displaystyle\int_0^1 \left( x - x^2 \right)^2 dx = \dfrac{\pi}{30}$, che è il volume del solido generato dal trapezoide di $x - x^2$, un solido diverso da quello cercato.
+:::
+
+:::esempio{titolo="Sezione che attraversa l'asse di rotazione"}
+I raggi sono distanze dall'asse di rotazione. Se il segmento verticale che ruota contiene l'asse $x$, la sezione è un disco pieno con raggio uguale alla maggiore delle distanze degli estremi. Per esempio, nella regione tra $y=-1$ e $y=2$ su $[0,1]$ le distanze sono $1$ e $2$. Ogni sezione ha area $4\pi$, quindi il volume è $4\pi\cdot1=4\pi$.
 :::
 
 :::teorema{#volume-rotazione-y titolo="Rotazione attorno all'asse y"}
@@ -333,7 +355,7 @@ In questo caso il solido si approssima con *gusci cilindrici*. La striscia sotti
 $$
 V = 2\pi \int_0^2 x^3\,dx = 2\pi \left[ \frac{x^4}{4} \right]_0^2 = 8\pi .
 $$
-Quando la regione è descritta da $x = g(y)$ con $c \leq y \leq d$, cioè è delimitata dal grafico di $g$, dall'asse $y$ e dalle rette $y = c$ e $y = d$, si applica la formula della rotazione attorno all'asse $x$ scambiando le variabili, e $V = \pi \displaystyle\int_c^d g(y)^2\,dy$.
+Quando la regione è delimitata dal grafico $x=g(y)$, dall'asse $y$ e dalle rette $y=c$ e $y=d$, si usano sezioni perpendicolari all'asse $y$. Ogni sezione è un disco di raggio $|g(y)|$, quindi $V=\pi\displaystyle\int_c^d g(y)^2\,dy$.
 :::
 
 :::teorema{#metodo-sezioni titolo="Metodo delle sezioni"}
@@ -355,7 +377,7 @@ L'integrale definito richiede un intervallo chiuso e limitato. Per una semiretta
 $$
 \int_a^{+\infty} f(x)\,dx = \lim_{t \to +\infty} \int_a^{t} f(x)\,dx .
 $$
-Se il limite esiste ed è finito, l'**integrale improprio** si dice **convergente**; se il limite è $+\infty$ oppure $-\infty$, si dice **divergente**. Allo stesso modo si definisce l'integrale su $(-\infty, b]$. Per esempio
+Se il limite esiste ed è finito, l'**integrale improprio** si dice **convergente**; se il limite è infinito, l'integrale diverge a $+\infty$ o a $-\infty$. Se il limite non esiste, l'integrale non converge. Allo stesso modo si definisce l'integrale su $(-\infty, b]$. Per esempio
 $$
 \int_1^{+\infty} \frac{1}{x^2}\,dx = \lim_{t \to +\infty} \left[ -\frac{1}{x} \right]_1^{t} = \lim_{t \to +\infty} \left( 1 - \frac{1}{t} \right) = 1 ,
 $$
@@ -367,10 +389,20 @@ Sia $f$ continua in $(a, b]$ e illimitata vicino ad $a$. Si pone
 $$
 \int_a^b f(x)\,dx = \lim_{t \to a^+} \int_t^b f(x)\,dx ,
 $$
-e l'integrale si dice convergente o divergente come nel caso precedente. Allo stesso modo si procede quando $f$ è illimitata vicino a $b$. Se $f$ è illimitata vicino a un punto interno $c$, si spezza l'intervallo in $c$, e l'integrale converge se convergono entrambe le parti. Per esempio
+e la convergenza dipende dalla finitezza del limite. Allo stesso modo si procede quando $f$ è illimitata vicino a $b$. Per esempio
 $$
 \int_0^1 \frac{1}{\sqrt{x}}\,dx = \lim_{t \to 0^+} \Big[ 2\sqrt{x} \Big]_t^1 = \lim_{t \to 0^+} \left( 2 - 2\sqrt{t} \right) = 2 .
 $$
+:::
+
+:::attenzione
+Se la singolarità è interna, in $c\in(a,b)$, si calcolano due limiti separati.
+$$
+\lim_{u\to c^-}\int_a^u f(x)\,dx ,
+\qquad
+\lim_{v\to c^+}\int_v^b f(x)\,dx .
+$$
+L'integrale converge se entrambi i limiti sono finiti, e in quel caso è uguale alla loro somma. Per $f(x)=\dfrac{1}{x}$ su $[-1,1]$ l'integrale a sinistra è $\ln|u|\to-\infty$, quello a destra è $-\ln v\to+\infty$. Dunque l'integrale improprio non converge. La somma nulla con tagli simmetrici esprime una cancellazione fra le due parti.
 :::
 
 :::teorema{#impropri-potenze titolo="Integrali impropri delle potenze"}
@@ -388,7 +420,7 @@ $$
 = +\infty & \text{se } \alpha \geq 1
 \end{cases}
 $$
-Per $\alpha \neq 1$ una primitiva di $x^{-\alpha}$ è $\dfrac{x^{1 - \alpha}}{1 - \alpha}$, e i limiti si calcolano secondo il segno dell'esponente $1 - \alpha$; per $\alpha = 1$ la primitiva è $\ln x$, che tende a $+\infty$ per $x \to +\infty$ e a $-\infty$ per $x \to 0^+$. Questi integrali servono come termine di paragone. Per esempio $\displaystyle\int_1^{+\infty} \dfrac{1}{x}\,dx$ diverge, mentre $\displaystyle\int_1^{+\infty} \dfrac{1}{x^2}\,dx = 1$; vicino a $0$ la situazione si inverte, e $\displaystyle\int_0^1 \dfrac{1}{\sqrt{x}}\,dx = 2$ converge.
+Per $\alpha \neq 1$ una primitiva di $x^{-\alpha}$ è $\dfrac{x^{1 - \alpha}}{1 - \alpha}$, e i limiti si calcolano secondo il segno dell'esponente $1 - \alpha$; per $\alpha = 1$ la primitiva è $\ln x$, che tende a $+\infty$ per $x \to +\infty$ e a $-\infty$ per $x \to 0^+$. Questi integrali servono come termine di paragone. Per esempio $\displaystyle\int_1^{+\infty} \dfrac{1}{x}\,dx$ diverge, mentre $\displaystyle\int_1^{+\infty} \dfrac{1}{x^2}\,dx = 1$; vicino a zero serve invece $\alpha<1$, perché la crescita dell'integranda dev'essere abbastanza lenta. Per esempio $\displaystyle\int_0^1 \dfrac{1}{\sqrt{x}}\,dx=2$.
 
 ::grafico{f="1/x^2+0*sqrt(x);1/x+0*sqrt(x)" area="1/x^2;0;1;9" segmenti="1,0,1,1" xmin=-1 xmax=9 ymin=-1 ymax=3 legenda="y = \dfrac{1}{x^2};y = \dfrac{1}{x}" titolo="Per $x \geq 1$ la regione illimitata sotto $y = \dfrac{1}{x^2}$ ha area $1$, mentre sotto $y = \dfrac{1}{x}$ l'integrale diverge"}
 
@@ -401,7 +433,7 @@ La formula fondamentale si applica solo a funzioni continue nell'intervallo chiu
 ## Applicazioni alla fisica
 
 :::teorema{#spazio-velocita titolo="Spostamento e spazio percorso dalla velocità"}
-Un corpo si muove lungo una retta con velocità $v(t)$ continua. Poiché la posizione $s(t)$ è una primitiva della velocità, per la formula fondamentale lo spostamento tra gli istanti $t_1$ e $t_2$ è
+Un corpo si muove lungo una retta con velocità $v(t)$ continua. Poiché la posizione $s(t)$ è una primitiva della velocità, per la formula fondamentale lo spostamento tra gli istanti $t_1$ e $t_2$, con $t_1<t_2$, è
 $$
 s(t_2) - s(t_1) = \int_{t_1}^{t_2} v(t)\,dt .
 $$
@@ -426,7 +458,7 @@ che è il valore medio della funzione $v$ in $[t_1, t_2]$. Per il teorema della 
 :::
 
 :::definizione{#lavoro-forza titolo="Lavoro di una forza variabile"}
-Un corpo si muove lungo l'asse $x$ dalla posizione $a$ alla posizione $b$, sotto l'azione di una forza diretta come l'asse e di componente $F(x)$ continua. Se la forza è costante, il lavoro è $F \cdot (b - a)$. Se la forza varia, si divide $[a, b]$ in tratti brevi, in ciascuno dei quali la forza è quasi costante, e si sommano i lavori; al limite si ottiene il **lavoro**
+Un corpo si muove lungo l'asse $x$ dalla posizione $a$ alla posizione $b$, con $a<b$. La componente $F(x)$ della forza lungo l'asse è continua e può avere entrambi i segni. Se la forza è costante, il lavoro è $F\cdot(b-a)$. Se la forza varia, si divide $[a,b]$ in tratti brevi e si sommano i contributi $F(x)\,\Delta x$. Al limite si ottiene il **lavoro**
 $$
 W = \int_a^b F(x)\,dx .
 $$

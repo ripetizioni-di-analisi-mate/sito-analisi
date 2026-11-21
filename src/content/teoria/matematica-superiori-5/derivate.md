@@ -41,7 +41,7 @@ Si calcola la derivata di $f(x) = x^3$ in $x_0 = 2$. Poiché $(2 + h)^3 = 8 + 12
 $$
 \frac{(2 + h)^3 - 8}{h} = \frac{12h + 6h^2 + h^3}{h} = 12 + 6h + h^2 .
 $$
-Per $h \to 0$ gli ultimi due termini tendono a $0$, quindi $f'(2) = 12$. Prima della semplificazione per $h$ il limite si presenta nella forma indeterminata $\dfrac{0}{0}$, come accade sempre nel calcolo di una derivata con la definizione.
+Per $h \to 0$ gli ultimi due termini tendono a $0$, quindi $f'(2) = 12$. Prima della semplificazione il limite si presenta nella forma indeterminata $\dfrac{0}{0}$, perché la funzione è continua in $2$ e dunque anche il numeratore tende a $0$.
 :::
 
 :::definizione{#derivata-destra-sinistra titolo="Derivata destra e derivata sinistra"}
@@ -88,7 +88,7 @@ Se $f'(x_0) = 0$ la tangente è orizzontale. Per $x^2$ questo accade in $x_0 = 0
 :::osservazione{#retta-normale titolo="Angolo della tangente e retta normale"}
 Il coefficiente angolare di una retta è la tangente goniometrica dell'angolo $\alpha$ che la retta forma con il verso positivo dell'asse $x$. Perciò $f'(x_0) = \tan \alpha$, dove $\alpha$ è l'angolo formato dalla retta tangente. Per $f(x) = x^2$ si ha $f'\left( \dfrac{1}{2} \right) = 1$, quindi nel punto di ascissa $\dfrac{1}{2}$ la tangente forma un angolo di $\dfrac{\pi}{4}$ con l'asse $x$.
 
-La **retta normale** al grafico in $P$ è la perpendicolare alla tangente in $P$. Due rette sono perpendicolari quando il prodotto dei coefficienti angolari è $-1$, quindi, se $f'(x_0) \neq 0$, la normale ha coefficiente angolare $-\dfrac{1}{f'(x_0)}$. Per $x^2$ nel punto $(1, 1)$ la normale è $y - 1 = -\dfrac{1}{2}\,(x - 1)$, cioè $y = -\dfrac{x}{2} + \dfrac{3}{2}$.
+La **retta normale** al grafico in $P$ è la perpendicolare alla tangente in $P$. Per due rette con coefficienti angolari finiti, la perpendicolarità equivale a un prodotto dei coefficienti pari a $-1$. Se $f'(x_0) \neq 0$, la normale ha quindi coefficiente angolare $-\dfrac{1}{f'(x_0)}$. Per $x^2$ nel punto $(1, 1)$ la normale è $y - 1 = -\dfrac{1}{2}\,(x - 1)$, cioè $y = -\dfrac{x}{2} + \dfrac{3}{2}$. Se $f'(x_0)=0$, la tangente è orizzontale e la normale è la verticale $x=x_0$.
 :::
 
 ## Continuità e derivabilità
@@ -126,13 +126,13 @@ Nei punti indicati valgono le formule
 | $f(x)$ | $f'(x)$ | dove |
 | --- | --- | --- |
 | $k$ (costante) | $0$ | $x \in \mathbb{R}$ |
-| $x^n$, con $n$ naturale | $n\,x^{n-1}$ | $x \in \mathbb{R}$ |
+| $x^n$, con $n$ intero positivo | $n\,x^{n-1}$ | $x \in \mathbb{R}$ |
 | $x^{a}$, con $a$ reale | $a\,x^{a-1}$ | $x > 0$ |
 | $\sqrt{x}$ | $\dfrac{1}{2\sqrt{x}}$ | $x > 0$ |
 | $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$ | $x \neq 0$ |
 | $\sin x$ | $\cos x$ | $x \in \mathbb{R}$ |
 | $\cos x$ | $-\sin x$ | $x \in \mathbb{R}$ |
-| $\tan x$ | $\dfrac{1}{\cos^2 x} = 1 + \tan^2 x$ | $x \neq \dfrac{\pi}{2} + k\pi$ |
+| $\tan x$ | $\dfrac{1}{\cos^2 x} = 1 + \tan^2 x$ | $x \neq \dfrac{\pi}{2} + k\pi$, con $k\in\mathbb{Z}$ |
 | $e^{x}$ | $e^{x}$ | $x \in \mathbb{R}$ |
 | $a^{x}$, con $a > 0$ | $a^{x} \ln a$ | $x \in \mathbb{R}$ |
 | $\ln x$ | $\dfrac{1}{x}$ | $x > 0$ |
@@ -141,7 +141,7 @@ Nei punti indicati valgono le formule
 | $\arccos x$ | $-\dfrac{1}{\sqrt{1 - x^2}}$ | $-1 < x < 1$ |
 | $\arctan x$ | $\dfrac{1}{1 + x^2}$ | $x \in \mathbb{R}$ |
 
-La tabella permette di derivare le funzioni elementari senza calcolare limiti. Per esempio $\left( x^5 \right)' = 5x^4$ e $\left( \sqrt[3]{x} \right)' = \left( x^{\frac{1}{3}} \right)' = \dfrac{1}{3}\,x^{-\frac{2}{3}} = \dfrac{1}{3\sqrt[3]{x^2}}$ per $x > 0$. Le formule della costante, delle potenze con esponente naturale, di seno, coseno, esponenziale e logaritmo naturale si dimostrano con la definizione di derivata; le altre si ricavano con le regole di derivazione.
+La tabella permette di derivare le funzioni elementari senza calcolare limiti. Per esempio $\left( x^5 \right)' = 5x^4$ e $\left( \sqrt[3]{x} \right)' = \left( x^{\dfrac{1}{3}} \right)' = \dfrac{1}{3}\,x^{-\dfrac{2}{3}} = \dfrac{1}{3\sqrt[3]{x^2}}$ per $x > 0$. Le formule della costante, delle potenze con esponente naturale, di seno, coseno, esponenziale e logaritmo naturale si dimostrano con la definizione di derivata; le altre si ricavano con le regole di derivazione.
 :::
 
 ::::teorema{#derivate-costante-potenze titolo="Derivate della costante e delle potenze"}
@@ -156,15 +156,15 @@ In particolare $(x)' = 1$, $\left( x^2 \right)' = 2x$ e $\left( x^3 \right)' = 3
 :::dimostrazione
 Per la funzione costante $f(x) = k$ il rapporto incrementale è $\dfrac{k - k}{h} = 0$ per ogni $h \neq 0$, quindi il suo limite è $0$.
 
-Per $f(x) = x^n$ l'idea è sviluppare $(x + h)^n$ con la formula del binomio di Newton e mettere in evidenza $h$. Lo sviluppo è
+Per $f(x) = x$ il rapporto incrementale è $\dfrac{x+h-x}{h}=1$ per $h\neq 0$, quindi il suo limite è $1$.
+
+Per $f(x) = x^n$ con $n\geq2$ si sviluppa $(x+h)^n$ con il binomio di Newton. Il termine di grado zero in $h$ è $x^n$ e quello di primo grado è $n\,x^{n-1}h$. Gli altri contengono almeno il fattore $h^2$, quindi si possono scrivere come $h^2P(h)$, con $P$ polinomio in $h$ a $x$ fissato. Per $h\neq0$ si ottiene
 $$
-(x + h)^n = x^n + n\,x^{n-1} h + \binom{n}{2} x^{n-2} h^2 + \dots + h^n ,
+\frac{(x+h)^n-x^n}{h}
+=\frac{n\,x^{n-1}h+h^2P(h)}{h}
+=n\,x^{n-1}+hP(h) .
 $$
-dove ogni termine dopo i primi due contiene il fattore $h^2$. Sottraendo $x^n$ e dividendo per $h$ si ottiene
-$$
-\frac{(x + h)^n - x^n}{h} = n\,x^{n-1} + h \left( \binom{n}{2} x^{n-2} + \dots + h^{n-2} \right) .
-$$
-Il fattore che moltiplica $h$ tende a $\dbinom{n}{2} x^{n-2}$, che è un numero finito, perciò il secondo addendo tende a $0$. Quindi il rapporto incrementale tende a $n\,x^{n-1}$. Per $n = 3$ il conto è $\dfrac{(x + h)^3 - x^3}{h} = \dfrac{3x^2 h + 3x h^2 + h^3}{h} = 3x^2 + 3xh + h^2$, che tende a $3x^2$.
+Poiché $P(h)$ tende a $P(0)$, il prodotto $hP(h)$ tende a $0$. Il limite del rapporto incrementale è quindi $n\,x^{n-1}$. Per esempio, con $n=3$ si ha $P(h)=3x+h$ e il rapporto incrementale vale $3x^2+3xh+h^2$.
 :::
 ::::
 
@@ -307,7 +307,7 @@ Le prime due formule giustificano le righe corrispondenti della tabella delle de
 :::
 
 :::teorema{#derivata-funzione-inversa titolo="Derivata della funzione inversa"}
-Sia $f$ continua e strettamente crescente, oppure strettamente decrescente, in un intervallo, così che abbia una funzione inversa $f^{-1}$. Se $f$ è derivabile in $x_0$ con $f'(x_0) \neq 0$, allora $f^{-1}$ è derivabile nel punto $y_0 = f(x_0)$ e
+Sia $f$ continua e strettamente monotona in un intervallo $I$. La funzione inversa $f^{-1}$ è definita sull'immagine $f(I)$. Se $x_0$ è interno a $I$ e $f$ è derivabile in $x_0$ con $f'(x_0) \neq 0$, allora $f^{-1}$ è derivabile nel punto $y_0 = f(x_0)$ e
 $$
 \left( f^{-1} \right)'(y_0) = \frac{1}{f'(x_0)} .
 $$
@@ -361,11 +361,11 @@ Poiché $10 = 4 \cdot 2 + 2$, la derivata decima coincide con la derivata second
 ## Punti di non derivabilità
 
 :::definizione{#punti-non-derivabilita titolo="Punti angolosi, cuspidi e flessi a tangente verticale"}
-Sia $f$ continua in $x_0$ e non derivabile in $x_0$. Si distinguono tre casi, secondo i valori della derivata destra e della derivata sinistra.
+Sia $f$ continua in un punto interno $x_0$ e non derivabile in $x_0$. Quando i limiti laterali del rapporto incrementale esistono, anche infiniti, la forma del grafico si può descrivere a partire da questi limiti.
 
-- **Punto angoloso**: $f'_+(x_0)$ e $f'_-(x_0)$ sono diverse e almeno una delle due è finita. Nel punto il grafico ha due semirette tangenti distinte.
-- **Cuspide**: le due derivate sono infinite e di segno opposto, una $+\infty$ e l'altra $-\infty$. Il grafico arriva nel punto con tangente verticale da entrambe le parti e torna indietro.
-- **Flesso a tangente verticale**: le due derivate sono entrambe $+\infty$ oppure entrambe $-\infty$. Il grafico attraversa la retta verticale $x = x_0$, che è la tangente.
+- In un **punto angoloso** i due limiti sono diversi e almeno uno è finito. Il grafico ha due semitangenti con direzioni diverse.
+- In una **cuspide** i limiti sono infiniti e hanno segni opposti. Le semitangenti sono entrambe verticali e puntano nello stesso verso a partire dal punto.
+- Se i limiti sono infiniti e hanno lo stesso segno, il grafico ha una **tangente verticale** di equazione $x=x_0$. Si ha un *flesso* a tangente verticale quando cambia anche la concavità, come si studia nell'argomento sullo studio di funzione.
 
 Per $f(x) = \left| x^2 - 4 \right|$ e $x_0 = 2$ il rapporto incrementale per $h > 0$ piccolo è $\dfrac{(2 + h)^2 - 4}{h} = 4 + h$, e per $h < 0$ è $\dfrac{4 - (2 + h)^2}{h} = -4 - h$. Quindi $f'_+(2) = 4$ e $f'_-(2) = -4$, e il punto $(2, 0)$ è un **punto angoloso**, con semitangenti $y = 4(x - 2)$ a destra e $y = -4(x - 2)$ a sinistra.
 
@@ -382,9 +382,9 @@ che tende a $+\infty$ per $h \to 0^+$ e a $-\infty$ per $h \to 0^-$. Le due deri
 
 ::grafico{f="cbrt(x^2)" punti="0,0,pieno" xmin=-4 xmax=4 ymin=-1 ymax=3 titolo="La funzione $\sqrt[3]{x^2}$ ha una cuspide nell'origine, perché la derivata destra è $+\infty$ e la derivata sinistra è $-\infty$"}
 
-Per $g(x) = \sqrt[3]{x}$ e $x_0 = 0$ il rapporto incrementale è $\dfrac{\sqrt[3]{h}}{h} = \dfrac{1}{\sqrt[3]{h^2}}$, che è positivo e tende a $+\infty$ sia da destra sia da sinistra. L'origine è quindi un **flesso a tangente verticale**, e la tangente è l'asse $y$.
+Per $g(x) = \sqrt[3]{x}$ e $x_0 = 0$ il rapporto incrementale è $\dfrac{\sqrt[3]{h}}{h} = \dfrac{1}{\sqrt[3]{h^2}}$, che è positivo e tende a $+\infty$ da entrambi i lati. La tangente è quindi l'asse $y$. La concavità cambia in $0$, poiché la derivata seconda $-\dfrac{2}{9(\sqrt[3]{x})^5}$ è positiva per $x<0$ e negativa per $x>0$. L'origine è dunque un **flesso a tangente verticale**.
 
-::grafico{f="cbrt(x)" punti="0,0,pieno" segmenti="0,-2,0,2" xmin=-4 xmax=4 ymin=-2 ymax=2 titolo="La funzione $\sqrt[3]{x}$ ha nell'origine un flesso a tangente verticale, perché le due derivate sono $+\infty$, e il grafico attraversa la tangente $x = 0$"}
+::grafico{f="cbrt(x)" punti="0,0,pieno" xmin=-4 xmax=4 ymin=-2 ymax=2 titolo="In $0$ la radice cubica ha tangente verticale e cambia concavità"}
 
 :::
 
@@ -417,12 +417,12 @@ $$
 $$
 mentre il valore esatto è $2{,}0248\ldots$
 
-::grafico{f="x^2;2*x-1" punti="1,1,pieno,P;2,4,pieno;2,3,pieno" segmenti="1,1,2,1;2,1,2,4" etichette="2.15,2,dy;1.5,0.5,h" xmin=-1 xmax=3 ymin=-1 ymax=6 legenda="y = x^2;y = 2x - 1" titolo="Per $x^2$ con $x_0 = 1$ e $h = 1$ l'incremento della funzione è $\Delta y = 4 - 1 = 3$, mentre il differenziale è l'incremento della tangente, $dy = 2 \cdot 1 = 2$"}
+::grafico{f="x^2;2*x-1" punti="1,1,pieno,P;2,4,pieno;2,3,pieno" segmenti="1,1,2.6,1;2,4,2.6,4;2,1,2,3;2.6,1,2.6,4" etichette="1.45,0.7,h;2.05,2.15,dy;2.65,2.7,Δy" xmin=-1 xmax=4 ymin=-1 ymax=6 legenda="y = x^2;y = 2x - 1" titolo="Per $x^2$ con $x_0=1$ e $h=1$, il differenziale $dy=2$ si legge sulla tangente e l'incremento $\Delta y=3$ si legge sulla parabola"}
 
 :::
 
 :::esempio{titolo="Errore sull'area di un quadrato"}
-Il lato di un quadrato misura $10\,\mathrm{cm}$, con un errore di $0{,}1\,\mathrm{cm}$. L'area è $A(\ell) = \ell^2$ e la sua derivata è $A'(\ell) = 2\ell$, quindi il differenziale è
+Il lato di un quadrato passa da $10\,\mathrm{cm}$ a $10{,}1\,\mathrm{cm}$. L'area è $A(\ell) = \ell^2$ e la sua derivata è $A'(\ell) = 2\ell$, quindi il differenziale è
 $$
 dA = 2\ell \cdot d\ell = 2 \cdot 10 \cdot 0{,}1 = 2\,\mathrm{cm^2} .
 $$

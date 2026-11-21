@@ -1,12 +1,12 @@
 ---
 titolo: Probabilità e distribuzioni
-sommario: Come si contano i casi con il calcolo combinatorio, come si calcola la probabilità di un evento con i teoremi della somma e del prodotto, la probabilità condizionata e il teorema di Bayes, che cosa sono le variabili aleatorie discrete e continue con valore medio e varianza, e come si usano le distribuzioni binomiale, di Poisson, uniforme, esponenziale e normale.
+sommario: Calcolo delle probabilità, condizionamento e teorema di Bayes, variabili aleatorie e distribuzioni binomiale, di Poisson, uniforme, esponenziale e normale.
 ---
 
 ## Richiami di calcolo combinatorio
 
 :::definizione{#disposizioni-permutazioni titolo="Disposizioni e permutazioni"}
-Siano dati $n$ oggetti distinti e un numero naturale $k \leq n$. Una **disposizione semplice** di classe $k$ è una sequenza ordinata di $k$ oggetti scelti fra gli $n$, senza ripetizioni. Due disposizioni sono diverse se contengono oggetti diversi oppure gli stessi oggetti in un ordine diverso. Il primo oggetto si sceglie in $n$ modi, il secondo fra gli $n - 1$ rimasti, e così via fino al $k$-esimo, quindi il numero delle disposizioni semplici è
+Siano dati $n$ oggetti distinti e un intero $k$ con $1\leq k\leq n$. Una **disposizione semplice** di classe $k$ è una sequenza ordinata di $k$ oggetti scelti fra gli $n$, senza ripetizioni. Due disposizioni sono diverse se contengono oggetti diversi oppure gli stessi oggetti in un ordine diverso. Il primo oggetto si sceglie in $n$ modi, il secondo fra gli $n - 1$ rimasti, e così via fino al $k$-esimo, quindi il numero delle disposizioni semplici è
 $$
 D_{n,k} = n\,(n - 1)\,(n - 2) \cdots (n - k + 1) .
 $$
@@ -54,11 +54,11 @@ Sia $\Omega$ un insieme finito di risultati **equiprobabili**, cioè con la stes
 $$
 P(E) = \frac{\text{numero dei casi favorevoli}}{\text{numero dei casi possibili}} .
 $$
-I casi favorevoli sono al massimo quanti i casi possibili, quindi $0 \leq P(E) \leq 1$; inoltre $P(\Omega) = 1$ e $P(\emptyset) = 0$. Nel lancio di un dado la probabilità che esca un numero pari è $\dfrac{3}{6} = \dfrac{1}{2}$. Nel lancio di due dadi i casi possibili sono le coppie ordinate di risultati, cioè $D'_{6,2} = 36$; la somma vale $7$ nei $6$ casi $(1, 6)$, $(2, 5)$, $(3, 4)$, $(4, 3)$, $(5, 2)$, $(6, 1)$, perciò la sua probabilità è $\dfrac{6}{36} = \dfrac{1}{6}$.
+I casi favorevoli sono al massimo quanti i casi possibili, quindi $0 \leq P(E) \leq 1$; inoltre $P(\Omega) = 1$ e $P(\emptyset) = 0$. Nel lancio di un dado regolare la probabilità che esca un numero pari è $\dfrac{3}{6} = \dfrac{1}{2}$. Per due dadi regolari e indipendenti i casi possibili sono le coppie ordinate di risultati, cioè $D'_{6,2} = 36$; la somma vale $7$ nei $6$ casi $(1, 6)$, $(2, 5)$, $(3, 4)$, $(4, 3)$, $(5, 2)$, $(6, 1)$, perciò la sua probabilità è $\dfrac{6}{36} = \dfrac{1}{6}$.
 :::
 
 :::osservazione{#altre-definizioni titolo="Probabilità statistica e soggettiva"}
-Quando i casi non sono equiprobabili si usano altre definizioni. Nella definizione **statistica** la probabilità di un evento è la frequenza relativa $\dfrac{m}{n}$ con cui l'evento si è verificato in un numero $n$ grande di prove ripetute nelle stesse condizioni; per esempio, se su $1000$ pezzi controllati $23$ sono difettosi, la probabilità che un pezzo sia difettoso si valuta $0{,}023$. Nella definizione **soggettiva** la probabilità è la somma che una persona coerente è disposta a pagare per ricevere $1$ se l'evento si verifica. I teoremi che seguono valgono per tutte queste definizioni.
+Quando i casi non sono equiprobabili si usano altre definizioni. Nella definizione **statistica** la frequenza relativa $\dfrac{m}{n}$ osservata in $n$ prove ripetute nelle stesse condizioni fornisce una stima della probabilità; per esempio, se su $1000$ pezzi controllati $23$ sono difettosi, la probabilità che un pezzo sia difettoso si valuta $0{,}023$. Nella definizione **soggettiva** la probabilità è la somma che una persona coerente è disposta a pagare per ricevere $1$ se l'evento si verifica. I teoremi che seguono valgono per tutte queste definizioni.
 :::
 
 :::teorema{#evento-contrario titolo="Probabilità dell'evento contrario"}
@@ -66,7 +66,7 @@ Per ogni evento $E$ vale
 $$
 P\big( \overline{E} \big) = 1 - P(E) .
 $$
-Nella probabilità classica i casi favorevoli a $\overline{E}$ sono i casi possibili meno quelli favorevoli a $E$, e da qui segue la formula. Il teorema serve per gli eventi del tipo "almeno uno", il cui contrario è più semplice. Per esempio, nel lancio di tre monete il contrario di "esce almeno una testa" è "escono tre croci", che ha probabilità $\dfrac{1}{8}$, perché i casi possibili sono $2^3 = 8$. Quindi la probabilità di almeno una testa è $1 - \dfrac{1}{8} = \dfrac{7}{8}$.
+Nella probabilità classica i casi favorevoli a $\overline{E}$ sono i casi possibili meno quelli favorevoli a $E$, e da qui segue la formula. Il teorema serve per gli eventi del tipo "almeno uno", il cui contrario è più semplice. Per esempio, nel lancio di tre monete regolari e indipendenti il contrario di "esce almeno una testa" è "escono tre croci", che ha probabilità $\dfrac{1}{8}$, perché i casi possibili sono $2^3 = 8$. Quindi la probabilità di almeno una testa è $1 - \dfrac{1}{8} = \dfrac{7}{8}$.
 :::
 
 :::esempio{titolo="Probabilità calcolata con le combinazioni"}
@@ -86,7 +86,7 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B) .
 $$
 Se $A$ e $B$ sono incompatibili, allora $P(A \cap B) = 0$ e la formula diventa $P(A \cup B) = P(A) + P(B)$. Nella probabilità classica la formula si ottiene contando i casi favorevoli. Sommando i casi di $A$ e quelli di $B$, i casi di $A \cap B$ vengono contati due volte, quindi si sottraggono una volta.
 
-Nel lancio di un dado, con $A = \{2, 4, 6\}$ e $B = \{4, 5, 6\}$, si ha
+Nel lancio di un dado regolare, con $A = \{2, 4, 6\}$ e $B = \{4, 5, 6\}$, si ha
 $$
 P(A \cup B) = \frac{3}{6} + \frac{3}{6} - \frac{2}{6} = \frac{4}{6} = \frac{2}{3} ,
 $$
@@ -101,7 +101,7 @@ Siano $A$ e $B$ due eventi, con $P(B) > 0$. La **probabilità di $A$ condizionat
 $$
 P(A \mid B) = \frac{P(A \cap B)}{P(B)} .
 $$
-Sapere che $B$ si è verificato riduce i casi possibili a quelli di $B$, e fra questi i casi favorevoli sono quelli di $A \cap B$. Con casi equiprobabili $P(A \mid B)$ è quindi il numero degli elementi di $A \cap B$ diviso per il numero degli elementi di $B$. Nel lancio di un dado, sapendo che è uscito un numero maggiore di $3$, la probabilità che il numero sia pari è
+Sapere che $B$ si è verificato riduce i casi possibili a quelli di $B$, e fra questi i casi favorevoli sono quelli di $A \cap B$. Con casi equiprobabili $P(A \mid B)$ è quindi il numero degli elementi di $A \cap B$ diviso per il numero degli elementi di $B$. Nel lancio di un dado regolare, sapendo che è uscito un numero maggiore di $3$, la probabilità che il numero sia pari è
 $$
 P(A \mid B) = \frac{P(\{4, 6\})}{P(\{4, 5, 6\})} = \frac{\dfrac{2}{6}}{\dfrac{3}{6}} = \frac{2}{3} ,
 $$
@@ -123,11 +123,13 @@ $$
 :::
 
 :::definizione{#eventi-indipendenti titolo="Eventi indipendenti"}
-Due eventi $A$ e $B$ con probabilità positiva sono **indipendenti** se $P(A \mid B) = P(A)$, cioè se sapere che $B$ si è verificato non cambia la probabilità di $A$. Per il teorema del prodotto la condizione equivale a
+Due eventi $A$ e $B$ sono **indipendenti** se
 $$
 P(A \cap B) = P(A) \cdot P(B) .
 $$
-Per più eventi indipendenti la probabilità che si verifichino tutti è il prodotto delle loro probabilità. Le prove ripetute con reinserimento e i lanci successivi di un dado o di una moneta danno eventi indipendenti. Nel lancio di due dadi la probabilità che il primo mostri $6$ e il secondo un numero pari è $\dfrac{1}{6} \cdot \dfrac{1}{2} = \dfrac{1}{12}$; lo conferma il conteggio diretto, perché le coppie favorevoli sono $(6, 2)$, $(6, 4)$, $(6, 6)$, cioè $3$ su $36$.
+Se $P(B)>0$, dividendo questa uguaglianza per $P(B)$ si ottiene $P(A\mid B)=P(A)$. In questo caso sapere che $B$ si è verificato lascia invariata la probabilità di $A$.
+
+Se le prove sono indipendenti, la probabilità che si verifichi un esito fissato per ciascuna prova è il prodotto delle singole probabilità. È il modello usato per estrazioni casuali con reinserimento, se l'urna viene rimescolata prima di ogni estrazione. Nel lancio di due dadi regolari e indipendenti la probabilità che il primo mostri $6$ e il secondo un numero pari è $\dfrac{1}{6} \cdot \dfrac{1}{2} = \dfrac{1}{12}$; lo conferma il conteggio diretto, perché le coppie favorevoli sono $(6, 2)$, $(6, 4)$, $(6, 6)$, cioè $3$ su $36$.
 :::
 
 :::attenzione
@@ -137,20 +139,20 @@ Due eventi incompatibili con probabilità positive *non* sono mai indipendenti. 
 ## Teorema di Bayes
 
 :::teorema{#disintegrazione titolo="Formula di disintegrazione"}
-Siano $B_1, B_2, \dots, B_n$ eventi incompatibili a due a due, con probabilità positive, la cui unione è $\Omega$; si dice che formano una **partizione** di $\Omega$. Allora per ogni evento $A$ vale
+Siano $B_1, B_2, \dots, B_n$ eventi incompatibili a due a due la cui unione è $\Omega$. Se ciascun evento è non vuoto, gli eventi formano una **partizione** di $\Omega$. Se inoltre tutti hanno probabilità positiva, allora per ogni evento $A$ vale
 $$
 P(A) = P(B_1) \cdot P(A \mid B_1) + P(B_2) \cdot P(A \mid B_2) + \dots + P(B_n) \cdot P(A \mid B_n) .
 $$
 L'evento $A$ è l'unione degli eventi incompatibili $A \cap B_1, \dots, A \cap B_n$, quindi la sua probabilità è la somma delle loro probabilità, e per il teorema del prodotto $P(A \cap B_i) = P(B_i) \cdot P(A \mid B_i)$. La formula si chiama anche formula della probabilità totale.
 
-Per esempio, l'urna $U_1$ contiene $2$ palline bianche e $3$ nere, l'urna $U_2$ contiene $4$ bianche e $1$ nera. Si sceglie un'urna lanciando una moneta e si estrae una pallina. Gli eventi $U_1$ e $U_2$ formano una partizione, perciò
+Per esempio, l'urna $U_1$ contiene $2$ palline bianche e $3$ nere, l'urna $U_2$ contiene $4$ bianche e $1$ nera. Si sceglie un'urna lanciando una moneta regolare e si estrae una pallina a caso dall'urna scelta. Gli eventi $U_1$ e $U_2$ formano una partizione, perciò
 $$
 P(\text{bianca}) = \frac{1}{2} \cdot \frac{2}{5} + \frac{1}{2} \cdot \frac{4}{5} = \frac{1}{5} + \frac{2}{5} = \frac{3}{5} .
 $$
 :::
 
 :::teorema{#teorema-bayes titolo="Teorema di Bayes"}
-Siano $B_1, \dots, B_n$ una partizione di $\Omega$ e sia $A$ un evento con $P(A) > 0$. Allora per ogni $k$ vale
+Siano $B_1, \dots, B_n$ eventi di probabilità positiva che formano una partizione di $\Omega$. Sia $A$ un evento con $P(A)>0$. Allora per ogni $k$ vale
 $$
 P(B_k \mid A) = \frac{P(B_k) \cdot P(A \mid B_k)}{P(B_1) \cdot P(A \mid B_1) + \dots + P(B_n) \cdot P(A \mid B_n)} .
 $$
@@ -175,24 +177,24 @@ Il valore è circa il $15\%$, perché i sani sono molto più numerosi dei malati
 ## Variabili aleatorie discrete
 
 :::definizione{#variabile-aleatoria-discreta titolo="Variabile aleatoria discreta"}
-Una **variabile aleatoria** $X$ associa un numero a ogni risultato di un esperimento aleatorio. Si dice **discreta** se assume un numero finito di valori $x_1, x_2, \dots, x_n$, oppure una successione di valori. La **distribuzione di probabilità** di $X$ è l'elenco dei valori con le loro probabilità $p_i = P(X = x_i)$. Gli eventi $X = x_i$ sono incompatibili e la loro unione è $\Omega$, quindi
+Una **variabile aleatoria** $X$ associa un numero a ogni risultato di un esperimento aleatorio. Si dice **discreta** se assume un numero finito di valori $x_1, x_2, \dots, x_n$, oppure una successione di valori. La **distribuzione di probabilità** di $X$ è l'elenco dei valori con le loro probabilità $p_i = P(X = x_i)$. Gli eventi $X=x_i$ sono incompatibili e la loro unione è $\Omega$. Nel caso di $n$ valori si ha quindi
 $$
 p_1 + p_2 + \dots + p_n = 1 .
 $$
-Per esempio, si lanciano tre monete e $X$ è il numero di teste. I casi possibili sono $8$; una sola sequenza dà $0$ teste, tre sequenze danno $1$ testa, cioè $TCC$, $CTC$, $CCT$, tre danno $2$ teste e una dà $3$ teste. La distribuzione è
+Se i valori sono infiniti, le somme delle probabilità dei primi valori tendono a $1$ al crescere del numero di termini. Per esempio, si lanciano tre monete regolari e indipendenti e $X$ è il numero di teste. I casi possibili sono $8$; una sola sequenza dà $0$ teste, tre sequenze danno $1$ testa, cioè $TCC$, $CTC$, $CCT$, tre danno $2$ teste e una dà $3$ teste. La distribuzione è
 
 | $x_i$ | $0$ | $1$ | $2$ | $3$ |
 | --- | --- | --- | --- | --- |
 | $p_i$ | $\dfrac{1}{8}$ | $\dfrac{3}{8}$ | $\dfrac{3}{8}$ | $\dfrac{1}{8}$ |
 
-e la somma delle probabilità è $1$. Nel grafico della distribuzione, detto istogramma, sopra ogni valore $x_i$ si disegna un rettangolo di altezza $p_i$.
+e la somma delle probabilità è $1$. Nel grafico a barre della distribuzione, sopra ogni valore $x_i$ si disegna un rettangolo di altezza $p_i$.
 
 ::grafico{poligoni="-0.35,0 -0.35,0.1250 0.35,0.1250 0.35,0;0.65,0 0.65,0.3750 1.35,0.3750 1.35,0;1.65,0 1.65,0.3750 2.35,0.3750 2.35,0;2.65,0 2.65,0.1250 3.35,0.1250 3.35,0" linee="-0.06,0.125 0.06,0.125;-0.06,0.375 0.06,0.375" etichette="-0.75,0.125,0,125;-0.75,0.375,0,375" xmin=-1 xmax=4 ymin=-0.05 ymax=0.45 nomi="x,p" legenda=0 titolo="Distribuzione del numero di teste in tre lanci di una moneta: i valori $0$ e $3$ hanno probabilità $\dfrac{1}{8}$, i valori $1$ e $2$ hanno probabilità $\dfrac{3}{8}$"}
 
 :::
 
 :::definizione{#valore-medio titolo="Valore medio"}
-Il **valore medio**, o speranza matematica, di una variabile aleatoria discreta $X$ è la somma dei prodotti di ogni valore per la sua probabilità:
+Il **valore medio**, o speranza matematica, di una variabile aleatoria discreta $X$ che assume $n$ valori è la somma dei prodotti di ogni valore per la sua probabilità:
 $$
 M(X) = x_1 p_1 + x_2 p_2 + \dots + x_n p_n .
 $$
@@ -234,7 +236,7 @@ Si sviluppa $(x_i - \mu)^2 = x_i^2 - 2\mu x_i + \mu^2$ in ogni termine della def
 :::
 
 :::osservazione{#trasformazione-lineare titolo="Valore medio e varianza di aX + b"}
-Siano $a$ e $b$ due numeri reali. La variabile $aX + b$ assume i valori $a x_i + b$ con le stesse probabilità $p_i$, e dalle definizioni seguono
+Siano $a$ e $b$ due numeri reali. Se $a\neq 0$, la variabile $aX+b$ assume i valori distinti $ax_i+b$ con le stesse probabilità $p_i$. Se $a=0$, assume soltanto il valore $b$, con probabilità $1$. Dalle definizioni seguono
 $$
 M(aX + b) = a\,M(X) + b ,
 \qquad
@@ -246,13 +248,13 @@ Una traslazione di tutti i valori sposta il valore medio e lascia invariata la d
 ## Distribuzione binomiale
 
 :::definizione{#distribuzione-binomiale titolo="Distribuzione binomiale"}
-Una prova ha due soli esiti, il successo con probabilità $p$ e l'insuccesso con probabilità $q = 1 - p$. Si ripete la prova $n$ volte, in modo che le ripetizioni siano indipendenti, e si indica con $X$ il numero dei successi. Allora per $k = 0, 1, \dots, n$ vale
+Una prova ha due soli esiti, il successo con probabilità $0<p<1$ e l'insuccesso con probabilità $q=1-p$. Si ripete la prova $n$ volte, in modo che le ripetizioni siano indipendenti, e si indica con $X$ il numero dei successi. Allora per $k = 0, 1, \dots, n$ vale
 $$
 P(X = k) = \binom{n}{k}\,p^k\,q^{\,n - k} .
 $$
 Si dice che $X$ ha **distribuzione binomiale** di parametri $n$ e $p$. Una sequenza particolare con $k$ successi e $n - k$ insuccessi ha probabilità $p^k q^{\,n - k}$, per il teorema del prodotto di eventi indipendenti. I $k$ posti dei successi fra le $n$ prove si scelgono in $\dbinom{n}{k}$ modi, e queste sequenze sono incompatibili, quindi le loro probabilità si sommano.
 
-Per esempio, si lancia un dado $4$ volte e $X$ è il numero di volte in cui esce $6$, con $p = \dfrac{1}{6}$ e $q = \dfrac{5}{6}$. Allora
+Se $p=0$, il conteggio vale sempre $0$. Se $p=1$, il conteggio vale sempre $n$. Per esempio, si lancia un dado regolare $4$ volte in modo indipendente e $X$ è il numero di volte in cui esce $6$, con $p = \dfrac{1}{6}$ e $q = \dfrac{5}{6}$. Allora
 $$
 P(X = 2) = \binom{4}{2} \left( \frac{1}{6} \right)^2 \left( \frac{5}{6} \right)^2 = 6 \cdot \frac{25}{1296} = \frac{25}{216} \approx 0{,}116 .
 $$
@@ -280,9 +282,9 @@ Sia $\lambda$ un numero positivo. Una variabile aleatoria $X$ che assume i valor
 $$
 P(X = k) = \frac{\lambda^k}{k!}\,e^{-\lambda} .
 $$
-Questa distribuzione descrive il numero di eventi rari che avvengono in un intervallo di tempo o in una regione di spazio, quando gli eventi sono indipendenti e il loro numero medio è $\lambda$. Sono di questo tipo il numero di telefonate a un centralino in un minuto, il numero di decadimenti di una sorgente radioattiva in un secondo e il numero di difetti in un metro di tessuto. La somma di tutte le probabilità è $1$; la verifica richiede le serie, che si studiano all'università.
+La distribuzione di Poisson si usa per modellare conteggi come il numero di chiamate a un centralino. In un modello con tasso costante si assume che i conteggi in intervalli disgiunti siano indipendenti e che il numero medio di eventi sia proporzionale alla durata. La somma di tutte le probabilità è $1$. La verifica richiede le serie, che si studiano all'università.
 
-Per esempio, se un centralino riceve in media $2$ telefonate al minuto, la probabilità di nessuna telefonata in un minuto è $P(X = 0) = e^{-2} \approx 0{,}135$, e quella di esattamente $3$ telefonate è
+Per esempio, se il numero di telefonate ricevute in un minuto ha distribuzione di Poisson con media $2$, la probabilità di nessuna telefonata in un minuto è $P(X = 0) = e^{-2} \approx 0{,}135$, e quella di esattamente $3$ telefonate è
 $$
 P(X = 3) = \frac{2^3}{3!}\,e^{-2} = \frac{4}{3}\,e^{-2} \approx 0{,}180 .
 $$
@@ -300,28 +302,28 @@ M(X) = \lambda ,
 \qquad
 \sigma = \sqrt{\lambda} .
 $$
-Il parametro $\lambda$ è quindi il numero medio di eventi, e si ricava dai dati del problema. La dimostrazione si studia all'università. Nell'esempio del centralino il numero di telefonate in un minuto ha valore medio $2$ e deviazione standard $\sqrt{2} \approx 1{,}41$, e il numero di telefonate in $5$ minuti ha distribuzione di Poisson con $\lambda = 10$.
+Il parametro $\lambda$ è quindi il numero medio di eventi, e si ricava dai dati del problema. La dimostrazione si studia all'università. Nell'esempio del centralino il numero di telefonate in un minuto ha valore medio $2$ e deviazione standard $\sqrt{2} \approx 1{,}41$, Se il modello di Poisson vale a tasso costante, in $5$ minuti il parametro è $\lambda=5\cdot2=10$.
 :::
 
 :::osservazione{#approssimazione-poisson titolo="Approssimazione della binomiale con la distribuzione di Poisson"}
-Se $n$ è grande e $p$ è piccolo, la distribuzione binomiale di parametri $n$ e $p$ ha valori molto vicini a quelli della distribuzione di Poisson con $\lambda = n p$. Il calcolo con la formula di Poisson è più semplice, perché non contiene coefficienti binomiali con $n$ grande. Per esempio, se lo $0{,}4\%$ dei pezzi prodotti da una macchina è difettoso, in un lotto di $500$ pezzi si ha $\lambda = 500 \cdot 0{,}004 = 2$. La probabilità che il lotto non contenga pezzi difettosi è $0{,}996^{500} \approx 0{,}1348$ con la binomiale e $e^{-2} \approx 0{,}1353$ con la distribuzione di Poisson.
+Se $n$ è grande e $p$ è piccolo, la distribuzione binomiale di parametri $n$ e $p$ ha valori molto vicini a quelli della distribuzione di Poisson con $\lambda = n p$. Il calcolo con la formula di Poisson è più semplice, perché non contiene coefficienti binomiali con $n$ grande. Per esempio, se ciascuno dei $500$ pezzi di un lotto è difettoso con probabilità $0{,}004$, indipendentemente dagli altri, il parametro per l'approssimazione è $\lambda=500\cdot0{,}004=2$. La probabilità che il lotto non contenga pezzi difettosi è $0{,}996^{500} \approx 0{,}1348$ con la binomiale e $e^{-2} \approx 0{,}1353$ con la distribuzione di Poisson.
 :::
 
 ## Variabili aleatorie continue
 
 :::definizione{#densita-probabilita titolo="Variabile aleatoria continua e densità di probabilità"}
-Una variabile aleatoria è **continua** se può assumere tutti i valori di un intervallo, come un tempo di attesa o una lunghezza. La sua distribuzione è descritta da una **densità di probabilità**, cioè da una funzione $f$ tale che
+Un tempo di attesa o una lunghezza si possono descrivere con un modello continuo. In questo capitolo si considerano **variabili continue con densità**, per le quali le probabilità di intervalli si ottengono come aree sotto una funzione $f$, detta **densità di probabilità**. La funzione $f$ soddisfa
 $$
 \begin{cases}
 f(x) \geq 0 \quad \text{per ogni } x , \\[4pt]
 \displaystyle\int_{-\infty}^{+\infty} f(x)\,dx = 1 .
 \end{cases}
 $$
-La probabilità che $X$ sia compresa tra $a$ e $b$ è l'area del trapezoide di $f$ su $[a, b]$:
+La probabilità che $X$ sia compresa tra $a$ e $b$ è l'area sotto il grafico di $f$ su $[a,b]$, per $a\leq b$.
 $$
 P(a \leq X \leq b) = \int_a^b f(x)\,dx .
 $$
-Gli integrali su intervalli illimitati sono integrali impropri, studiati nell'argomento sugli integrali definiti, aree e volumi. Per esempio, la funzione che vale $\dfrac{x}{2}$ per $0 \leq x \leq 2$ e $0$ altrove è una densità, perché non è mai negativa e $\displaystyle\int_0^2 \frac{x}{2}\,dx = \left[ \frac{x^2}{4} \right]_0^2 = 1$. Per questa densità
+Gli integrali su intervalli illimitati sono integrali impropri, studiati nell'argomento sugli integrali definiti, aree e volumi. Per esempio, la funzione che vale $\dfrac{x}{2}$ per $0 \leq x \leq 2$ e $0$ altrove è una densità, perché non è mai negativa e $\displaystyle\int_0^2 \dfrac{x}{2}\,dx = \left[ \dfrac{x^2}{4} \right]_0^2 = 1$. Per questa densità
 $$
 P(1 \leq X \leq 2) = \int_1^2 \frac{x}{2}\,dx = \left[ \frac{x^2}{4} \right]_1^2 = 1 - \frac{1}{4} = \frac{3}{4} .
 $$
@@ -339,11 +341,11 @@ La **funzione di ripartizione** di una variabile aleatoria continua $X$ con dens
 $$
 F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t)\,dt .
 $$
-È una funzione integrale, quindi, per il teorema fondamentale del calcolo integrale, $F'(x) = f(x)$ nei punti in cui $f$ è continua. Con la funzione di ripartizione si ha $P(a \leq X \leq b) = F(b) - F(a)$. Per la densità $\dfrac{x}{2}$ su $[0, 2]$ si ottiene $F(x) = 0$ per $x < 0$, $F(x) = \dfrac{x^2}{4}$ per $0 \leq x \leq 2$ e $F(x) = 1$ per $x > 2$; per esempio $P(X \leq 1) = F(1) = \dfrac{1}{4}$.
+La funzione $F$ è non decrescente, perché aumentando $x$ si aggiungono aree non negative. Per una variabile con densità, ogni numero $m$ con $F(m)=\dfrac{1}{2}$ è una **mediana**. L’area è metà a sinistra di $m$ e metà a destra. Nei punti in cui $f$ è continua vale $F'(x)=f(x)$ per il **teorema fondamentale del calcolo integrale**. Con la funzione di ripartizione si ha $P(a \leq X \leq b) = F(b) - F(a)$. Per la densità $\dfrac{x}{2}$ su $[0, 2]$ si ottiene $F(x) = 0$ per $x < 0$, $F(x) = \dfrac{x^2}{4}$ per $0 \leq x \leq 2$ e $F(x) = 1$ per $x > 2$; per esempio $P(X \leq 1) = F(1) = \dfrac{1}{4}$.
 :::
 
 :::definizione{#media-varianza-continua titolo="Valore medio e varianza di una variabile continua"}
-Per una variabile aleatoria continua con densità $f$ il valore medio e la varianza si definiscono come per le variabili discrete, con l'integrale al posto della somma:
+Per una variabile aleatoria continua con densità $f$, il valore medio e la varianza si ottengono integrando al posto di sommare. Quando gli integrali dei momenti sono finiti, si ha
 $$
 M(X) = \int_{-\infty}^{+\infty} x\,f(x)\,dx ,
 \qquad
@@ -361,7 +363,7 @@ quindi $\operatorname{var}(X) = 2 - \dfrac{16}{9} = \dfrac{2}{9}$ e $\sigma = \d
 ## Distribuzione uniforme ed esponenziale
 
 :::definizione{#distribuzione-uniforme titolo="Distribuzione uniforme"}
-Una variabile aleatoria ha **distribuzione uniforme** sull'intervallo $[a, b]$ se la sua densità vale $\dfrac{1}{b - a}$ su $[a, b]$ e $0$ altrove. La densità è costante, quindi intervalli della stessa lunghezza contenuti in $[a, b]$ hanno la stessa probabilità, e per $a \leq c \leq d \leq b$ si ha
+Siano $a<b$. Una variabile aleatoria ha **distribuzione uniforme** sull'intervallo $[a,b]$ se la sua densità vale $\dfrac{1}{b - a}$ su $[a, b]$ e $0$ altrove. La densità è costante, quindi intervalli della stessa lunghezza contenuti in $[a, b]$ hanno la stessa probabilità, e per $a \leq c \leq d \leq b$ si ha
 $$
 P(c \leq X \leq d) = \frac{d - c}{b - a} .
 $$
@@ -371,9 +373,9 @@ M(X) = \frac{a + b}{2} ,
 \qquad
 \operatorname{var}(X) = \frac{(b - a)^2}{12} .
 $$
-Per esempio, un treno della metropolitana passa ogni $8$ minuti e una persona arriva in stazione in un istante casuale. Il suo tempo di attesa $X$, in minuti, ha distribuzione uniforme su $[0, 8]$. La probabilità di aspettare al massimo $3$ minuti è $\dfrac{3}{8}$, l'attesa media è $4$ minuti e la deviazione standard è $\sqrt{\dfrac{64}{12}} = \dfrac{4}{\sqrt{3}} \approx 2{,}31$ minuti.
+Per esempio, un treno della metropolitana passa ogni $8$ minuti e l'istante di arrivo della persona è uniforme nell'intervallo fra due treni. Anche il suo tempo di attesa $X$, in minuti, è uniforme su $[0,8]$. La probabilità di aspettare al massimo $3$ minuti è $\dfrac{3}{8}$, l'attesa media è $4$ minuti e la deviazione standard è $\sqrt{\dfrac{64}{12}} = \dfrac{4}{\sqrt{3}} \approx 2{,}31$ minuti.
 
-::grafico{f="x<0||x>8?0:1/8" area="1/8;0;0;3" segmenti="0,0,0,0.125;8,0,8,0.125" xmin=-2 xmax=10 ymin=-0.03 ymax=0.2 nomi="x,y" legenda="y = f(x)" titolo="Densità uniforme su $[0, 8]$, di altezza $\dfrac{1}{8}$: l'area colorata è $P(0 \leq X \leq 3) = \dfrac{3}{8}$"}
+::grafico{f="abs(x)<0.025||abs(x-8)<0.025?NaN:x<0||x>8?0:1/8" area="1/8;0;0;3" punti="0,0,vuoto;0,0.125,pieno;8,0.125,pieno;8,0,vuoto" xmin=-2 xmax=10 ymin=-0.03 ymax=0.2 nomi="x,y" legenda="y = f(x)" titolo="Densità uniforme su $[0, 8]$, di altezza $\dfrac{1}{8}$: l'area colorata è $P(0 \leq X \leq 3) = \dfrac{3}{8}$"}
 
 :::
 
@@ -427,11 +429,19 @@ La distribuzione normale con $\mu = 0$ e $\sigma = 1$ si chiama **normale standa
 $$
 \Phi(z) = P(Z \leq z) = \int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}}\,e^{-\frac{t^2}{2}}\,dt .
 $$
-La funzione $e^{-\frac{t^2}{2}}$ non ha una primitiva esprimibile con le funzioni elementari, quindi i valori di $\Phi$ si leggono su una tavola. Alcuni valori sono
+La funzione $e^{-\dfrac{t^2}{2}}$ non ha una primitiva esprimibile con le funzioni elementari. Per calcolare $\Phi(z)$ si usano valori numerici come quelli della tavola, arrotondati a quattro cifre decimali.
 
-| $z$ | $0$ | $0{,}5$ | $1$ | $1{,}5$ | $1{,}645$ | $1{,}96$ | $2$ | $2{,}5$ | $3$ |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| $\Phi(z)$ | $0{,}5000$ | $0{,}6915$ | $0{,}8413$ | $0{,}9332$ | $0{,}9500$ | $0{,}9750$ | $0{,}9772$ | $0{,}9938$ | $0{,}9987$ |
+| $z$ | $\Phi(z)$ |
+| --- | --- |
+| $0$ | $0{,}5000$ |
+| $0{,}5$ | $0{,}6915$ |
+| $1$ | $0{,}8413$ |
+| $1{,}5$ | $0{,}9332$ |
+| $1{,}645$ | $0{,}9500$ |
+| $1{,}96$ | $0{,}9750$ |
+| $2$ | $0{,}9772$ |
+| $2{,}5$ | $0{,}9938$ |
+| $3$ | $0{,}9987$ |
 
 La tavola contiene solo valori di $z$ non negativi. Il grafico della densità è simmetrico rispetto all'asse $y$, quindi l'area a sinistra di $-z$ è uguale all'area a destra di $z$, e perciò
 $$
@@ -464,7 +474,7 @@ $$
 :::
 
 :::esempio{titolo="Dalla probabilità al valore"}
-Con la tavola si risolve anche il problema inverso. Nell'esempio delle altezze si cerca l'altezza $h$ superata solo dal $5\%$ dei ragazzi, cioè tale che $P(X \leq h) = 0{,}95$. Dalla tavola $\Phi(1{,}645) = 0{,}9500$, quindi
+Con la tavola si risolve anche il problema inverso. Nell'esempio delle altezze si cerca l'altezza $h$ superata solo dal $5\%$ dei ragazzi, cioè tale che $P(X \leq h) = 0{,}95$. Dalla tavola $\Phi(1{,}645)\approx0{,}9500$, quindi
 $$
 \frac{h - 170}{8} = 1{,}645 ,
 \qquad

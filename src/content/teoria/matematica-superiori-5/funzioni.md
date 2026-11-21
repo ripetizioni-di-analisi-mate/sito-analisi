@@ -1,6 +1,6 @@
 ---
 titolo: Funzioni e loro proprietà
-sommario: Che cos'è una funzione e come si classifica, come se ne trovano il dominio, il segno e le intersezioni con gli assi, che cosa significa che una funzione è pari, dispari, periodica, crescente, iniettiva o suriettiva, come si costruiscono la funzione inversa e la funzione composta, e come si disegnano i grafici delle funzioni elementari e quelli ottenuti con traslazioni, simmetrie, dilatazioni e valore assoluto.
+sommario: Dominio, immagine e proprietà delle funzioni reali, calcolo di inverse e composte e trasformazioni dei grafici elementari.
 ---
 
 ## Funzione, dominio e codominio
@@ -46,9 +46,9 @@ Una funzione che non è algebrica si dice **trascendente**. Sono trascendenti le
 Quando una funzione è data soltanto con la sua formula $y = f(x)$, il suo dominio è l'insieme dei numeri reali $x$ per i quali la formula dà come risultato un numero reale. Questo insieme si chiama **dominio naturale**, o campo di esistenza, e si indica con $D$. Le condizioni da imporre sono le seguenti.
 
 - Ogni denominatore è diverso da $0$.
-- Il radicando di una radice di indice pari è maggiore o uguale a $0$. Le radici di indice dispari non pongono condizioni.
+- Il radicando di una radice di indice pari è maggiore o uguale a $0$. Una radice di indice dispari ammette ogni radicando reale, quindi resta da controllare che il radicando sia definito.
 - L'argomento di un logaritmo è maggiore di $0$.
-- In una potenza $\big( f(x) \big)^{g(x)}$ con l'esponente che dipende da $x$, la base è maggiore di $0$.
+- Per una potenza a esponente reale variabile definita come $\big(f(x)\big)^{g(x)}=e^{g(x)\ln f(x)}$, occorre $f(x)>0$. Una potenza con esponente intero fissato si studia secondo le regole delle potenze intere.
 - L'argomento di $\tan x$ è diverso da $\dfrac{\pi}{2} + k\pi$, con $k$ intero; l'argomento di $\arcsin x$ e di $\arccos x$ è compreso tra $-1$ e $1$.
 
 I polinomi, gli esponenziali con base costante positiva, il seno, il coseno e l'arcotangente sono definiti per ogni $x$ reale. Quando le condizioni sono più di una, devono essere soddisfatte tutte insieme, quindi si risolve un sistema e il dominio è l'intersezione delle soluzioni. Per esempio $y = \dfrac{1}{x - 2}$ ha dominio $D = \mathbb{R} \setminus \{2\}$, e $y = \sqrt{6 - 2x}$ ha dominio $D = (-\infty, 3]$, perché $6 - 2x \geq 0$ equivale a $x \leq 3$.
@@ -68,6 +68,10 @@ x \neq -1, \quad x \neq 1 .
 \end{cases}
 $$
 Il dominio è quindi $D = [-3, -1) \cup (-1, 1) \cup (1, +\infty)$. Il numero $-3$ appartiene al dominio, perché $f(-3) = \dfrac{\sqrt{0}}{8} = 0$.
+:::
+
+:::attenzione
+La semplificazione della formula conserva i valori nei punti in cui la formula iniziale è definita. Per esempio $\dfrac{x^2-1}{x-1}=x+1$ vale per $x\neq1$. Il punto $(1,2)$ resta escluso dal grafico della frazione, perché in $x=1$ il denominatore è nullo.
 :::
 
 :::esempio{titolo="Dominio di una funzione logaritmica"}
@@ -126,11 +130,13 @@ Una funzione che vale $0$ in $0$ può non essere dispari. Per $f(x) = x^2 - 2x$ 
 :::
 
 :::definizione{#funzioni-periodiche titolo="Funzioni periodiche"}
-Una funzione $f$ con dominio $D$ si dice **periodica** se esiste un numero $T > 0$ tale che, per ogni $x$ di $D$, anche $x + T$ appartiene a $D$ e
+Un numero $T>0$ è un **periodo** di una funzione $f$ con dominio $D$ se, per ogni $x$ di $D$, anche $x+T$ e $x-T$ appartengono a $D$ e vale
 $$
-f(x + T) = f(x) .
+f(x+T)=f(x).
 $$
-Il più piccolo numero $T > 0$ con questa proprietà si chiama **periodo** della funzione. Il grafico di una funzione periodica si ripete uguale in ogni intervallo di ampiezza $T$, quindi basta disegnarlo in un intervallo come $[0, T]$ e poi ripeterlo. Le funzioni $\sin x$ e $\cos x$ hanno periodo $2\pi$, e la funzione $\tan x$ ha periodo $\pi$.
+Una funzione si dice **periodica** se ammette almeno un periodo. Quando esiste un periodo positivo più piccolo di tutti gli altri, si chiama *periodo minimo*. Il grafico si ripete per traslazioni di ampiezza $T$ in entrambi i versi, quindi è sufficiente conoscerlo sulle ascisse del dominio comprese in $[0,T)$. Le funzioni $\sin x$ e $\cos x$ hanno periodo minimo $2\pi$, mentre la funzione $\tan x$ ha periodo minimo $\pi$.
+
+La funzione costante $f(x)=5$ su $\mathbb{R}$ ha come periodo ogni $T>0$. In questo caso manca un periodo minimo, perché con $T$ è ammesso anche $\dfrac{T}{2}$.
 
 Un altro esempio è la funzione *mantissa* $y = x - [x]$, dove $[x]$ è la parte intera di $x$, cioè il più grande numero intero minore o uguale a $x$. Per esempio $[2{,}7] = 2$ e $[-0{,}5] = -1$, quindi la mantissa vale $0{,}7$ in $2{,}7$ e vale $0{,}5$ in $-0{,}5$. Questa funzione ha periodo $1$.
 
@@ -139,13 +145,17 @@ Un altro esempio è la funzione *mantissa* $y = x - [x]$, dove $[x]$ è la parte
 :::
 
 :::teorema{#periodo-sin-kx titolo="Periodo delle funzioni goniometriche con argomento kx"}
-Sia $k > 0$. Le funzioni $\sin (kx)$ e $\cos (kx)$ hanno periodo $\dfrac{2\pi}{k}$, e la funzione $\tan (kx)$ ha periodo $\dfrac{\pi}{k}$. Per il seno questo segue dal calcolo
+Sia $k>0$. Le funzioni $\sin(kx)$ e $\cos(kx)$ hanno periodo minimo $\dfrac{2\pi}{k}$, mentre la funzione $\tan(kx)$ ha periodo minimo $\dfrac{\pi}{k}$. Infatti una traslazione orizzontale di $T$ fa aumentare l'argomento di $kT$, che deve essere un periodo della funzione goniometrica di partenza. Per il seno questo segue dal calcolo
 $$
 \sin \left( k \left( x + \frac{2\pi}{k} \right) \right) = \sin (kx + 2\pi) = \sin (kx) ,
 $$
-e allo stesso modo si ragiona per il coseno e la tangente. Per esempio $\sin (3x)$ ha periodo $\dfrac{2\pi}{3}$, e $\tan \dfrac{x}{2}$ ha periodo $\dfrac{\pi}{\frac{1}{2}} = 2\pi$.
+e allo stesso modo si ragiona per il coseno e la tangente. Per esempio $\sin (3x)$ ha periodo $\dfrac{2\pi}{3}$, e $\tan \dfrac{x}{2}$ ha periodo $\dfrac{\pi}{\dfrac{1}{2}} = 2\pi$.
 
-Se due funzioni periodiche hanno periodi $T_1$ e $T_2$ e un numero $T$ è multiplo sia di $T_1$ sia di $T_2$, allora anche la loro somma soddisfa l'uguaglianza $f(x + T) = f(x)$. La funzione $y = \sin (2x) + \cos (3x)$ è somma di due funzioni di periodi $\pi$ e $\dfrac{2\pi}{3}$. Il numero $2\pi$ è uguale a $2 \cdot \pi$ e a $3 \cdot \dfrac{2\pi}{3}$, ed è il più piccolo multiplo comune dei due periodi; in questo caso $2\pi$ è proprio il periodo della somma.
+Se $T$ è un multiplo intero positivo sia di un periodo di $f$ sia di un periodo di $g$, allora $T$ è un periodo della somma sul dominio comune, purché questo sia non vuoto. Infatti la traslazione di $T$ conserva entrambi i domini e lascia invariati i due addendi. Per esempio $2\pi$ è un periodo di $\sin(2x)+\cos(3x)$, poiché è un multiplo di $\pi$ e di $\dfrac{2\pi}{3}$.
+:::
+
+:::attenzione
+Un periodo comune può essere più grande del periodo minimo della somma. Per esempio $\cos x$ e $\cos(2x)-\cos x$ hanno entrambi $2\pi$ come periodo. Nella somma i termini $\cos x$ si cancellano, quindi resta $\cos(2x)$, che ha periodo minimo $\pi$.
 :::
 
 ## Funzioni crescenti e decrescenti
@@ -188,8 +198,8 @@ Nel grafico, $f$ è iniettiva se ogni retta orizzontale $y = k$, con $k$ in $B$,
 
 :::
 
-:::teorema{#monotona-iniettiva titolo="Le funzioni monotone sono iniettive"}
-Se $f$ è crescente oppure decrescente in un intervallo $I$, allora $f$ è iniettiva in $I$. Infatti, se $x_1 \neq x_2$, uno dei due numeri è minore dell'altro, per esempio $x_1 < x_2$. Se $f$ è crescente si ha allora $f(x_1) < f(x_2)$, e se è decrescente si ha $f(x_1) > f(x_2)$; in entrambi i casi $f(x_1) \neq f(x_2)$.
+:::teorema{#monotona-iniettiva titolo="Monotonia stretta e iniettività"}
+Se $f$ è strettamente crescente oppure strettamente decrescente in un intervallo $I$, allora $f$ è iniettiva in $I$. Infatti, se $x_1 \neq x_2$, uno dei due numeri è minore dell'altro, per esempio $x_1 < x_2$. Se $f$ è crescente si ha allora $f(x_1) < f(x_2)$, e se è decrescente si ha $f(x_1) > f(x_2)$; in entrambi i casi $f(x_1) \neq f(x_2)$.
 
 Il teorema permette di stabilire l'iniettività senza risolvere equazioni. Per esempio $y = x^3$ e $y = 2^{x}$ sono crescenti in $\mathbb{R}$, quindi sono iniettive in $\mathbb{R}$.
 :::
@@ -217,7 +227,7 @@ Il simbolo $f^{-1}$ indica la funzione inversa, che è diversa dal reciproco $\d
 :::
 
 :::teorema{#grafico-inversa titolo="Grafico della funzione inversa"}
-Il grafico di $f^{-1}$ è il simmetrico del grafico di $f$ rispetto alla bisettrice del primo e del terzo quadrante, cioè la retta $y = x$. Infatti il punto $(a, b)$ appartiene al grafico di $f$ se e solo se $f(a) = b$, cioè se e solo se $f^{-1}(b) = a$, e questo significa che il punto $(b, a)$ appartiene al grafico di $f^{-1}$. I punti $(a, b)$ e $(b, a)$ sono simmetrici rispetto alla retta $y = x$.
+Se $f : A \to B$ è biiettiva, il grafico di $f^{-1}$ è il simmetrico del grafico di $f$ rispetto alla bisettrice del primo e del terzo quadrante, cioè la retta $y = x$. Infatti il punto $(a, b)$ appartiene al grafico di $f$ se e solo se $f(a) = b$, cioè se e solo se $f^{-1}(b) = a$, e questo significa che il punto $(b, a)$ appartiene al grafico di $f^{-1}$. I punti $(a, b)$ e $(b, a)$ sono simmetrici rispetto alla retta $y = x$.
 
 La funzione $f(x) = x^2$, con dominio e codominio $[0, +\infty)$, è biiettiva, e dall'equazione $y = x^2$ con $x \geq 0$ si ricava $x = \sqrt{y}$. Quindi $f^{-1}(x) = \sqrt{x}$. Il punto $(2, 4)$ appartiene al grafico di $x^2$ e il punto $(4, 2)$ appartiene al grafico di $\sqrt{x}$.
 
@@ -226,11 +236,12 @@ La funzione $f(x) = x^2$, con dominio e codominio $[0, +\infty)$, è biiettiva, 
 :::
 
 :::osservazione{#restrizione titolo="Inversa di una restrizione"}
-Una funzione non iniettiva non ha inversa, ma la sua restrizione a un intervallo in cui è monotona è iniettiva, per il teorema sulle funzioni monotone. Restringendo anche il codominio all'insieme immagine si ottiene una funzione biiettiva, che ha l'inversa.
+Su un intervallo in cui $f$ è strettamente monotona, la sua restrizione è iniettiva. Scegliendo come codominio l'insieme immagine della restrizione si ottiene una funzione biiettiva. Questa scelta è utile per invertire una funzione che assume più volte gli stessi valori sul dominio iniziale.
 
-- $y = x^2$ ristretta a $[0, +\infty)$ ha per inversa $y = \sqrt{x}$.
-- $y = \sin x$ ristretta a $\left[ -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right]$, con codominio $[-1, 1]$, ha per inversa $y = \arcsin x$. Per esempio $\arcsin \dfrac{1}{2} = \dfrac{\pi}{6}$, perché $\sin \dfrac{\pi}{6} = \dfrac{1}{2}$ e $\dfrac{\pi}{6}$ appartiene all'intervallo.
-- $y = \tan x$ ristretta a $\left( -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right)$ ha per inversa $y = \arctan x$, definita su $\mathbb{R}$.
+- La funzione $y=x^2$ ristretta a $[0,+\infty)$, con codominio $[0,+\infty)$, ha per inversa $y=\sqrt{x}$. Scegliendo invece il ramo $(-\infty,0]$ e lo stesso codominio si ottiene $y=-\sqrt{x}$.
+- Il seno è strettamente crescente su $\left[-\dfrac{\pi}{2},\dfrac{\pi}{2}\right]$ e ha immagine $[-1,1]$. L'inversa su tale ramo è $y=\arcsin x$. Per esempio $\arcsin\dfrac{1}{2}=\dfrac{\pi}{6}$, perché l'angolo $\dfrac{\pi}{6}$ appartiene all'intervallo e il suo seno vale $\dfrac{1}{2}$.
+- Il coseno è strettamente decrescente su $[0,\pi]$ e ha immagine $[-1,1]$. L'inversa su tale ramo è $y=\arccos x$. Per esempio $\arccos\left(-\dfrac{1}{2}\right)=\dfrac{2\pi}{3}$, perché $\dfrac{2\pi}{3}\in[0,\pi]$.
+- La tangente è strettamente crescente su $\left(-\dfrac{\pi}{2},\dfrac{\pi}{2}\right)$ e ha immagine $\mathbb{R}$. L'inversa su tale ramo è $y=\arctan x$, definita su $\mathbb{R}$.
 :::
 
 :::definizione{#funzione-composta titolo="Funzione composta"}
@@ -240,7 +251,11 @@ $$
 $$
 La funzione $g$ si chiama funzione interna e $f$ funzione esterna. Il dominio di $f \circ g$ è formato dai numeri $x$ del dominio di $g$ per i quali $g(x)$ appartiene al dominio di $f$.
 
-Per $f(x) = \sqrt{x}$ e $g(x) = x - 1$ si ha $(f \circ g)(x) = \sqrt{x - 1}$, con dominio $[1, +\infty)$, e $(g \circ f)(x) = \sqrt{x} - 1$, con dominio $[0, +\infty)$. Le due composte sono diverse, quindi l'ordine in cui si compongono le funzioni cambia il risultato. Una funzione come $y = \ln \left( x^2 + 1 \right)$ si scrive come composta di $g(x) = x^2 + 1$ e $f(x) = \ln x$; questa scomposizione serve per calcolarne la derivata, come si vede nell'argomento sulle derivate.
+Per $f(x) = \sqrt{x}$ e $g(x) = x - 1$ si ha $(f \circ g)(x) = \sqrt{x - 1}$, con dominio $[1, +\infty)$, e $(g \circ f)(x) = \sqrt{x} - 1$, con dominio $[0, +\infty)$. Le due composte hanno domini diversi. In generale, cambiare l'ordine della composizione può cambiare sia la formula sia il dominio. Una funzione come $y = \ln \left( x^2 + 1 \right)$ si scrive come composta di $g(x) = x^2 + 1$ e $f(x) = \ln x$; questa scomposizione serve per calcolarne la derivata, come si vede nell'argomento sulle derivate.
+:::
+
+:::attenzione
+Nel calcolo di una composta si controlla il dominio prima di semplificare la formula. Per $g(x)=\sqrt{x}$ e $f(t)=t^2$ si ha $(f\circ g)(x)=x$ sul dominio $[0,+\infty)$, perché la funzione interna richiede $x\geq0$.
 :::
 
 ## Grafici delle funzioni elementari
@@ -327,7 +342,7 @@ La seconda regola segue dal fatto che, se $(x_0, y_0)$ appartiene al grafico di 
 Sia $y = f(x)$ una funzione.
 
 - Il grafico di $y = |f(x)|$ coincide con quello di $f$ dove $f(x) \geq 0$; dove $f(x) < 0$ è il simmetrico del grafico di $f$ rispetto all'asse $x$. La ragione è la definizione di valore assoluto, perché $|f(x)| = f(x)$ se $f(x) \geq 0$ e $|f(x)| = -f(x)$ se $f(x) < 0$.
-- Il grafico di $y = f(|x|)$ coincide con quello di $f$ per $x \geq 0$. La funzione $f(|x|)$ è pari, perché $|-x| = |x|$, quindi per $x < 0$ il grafico è il simmetrico rispetto all'asse $y$ della parte con $x \geq 0$.
+- Il dominio di $y=f(|x|)$ comprende i numeri $x$ per i quali $|x|$ appartiene al dominio di $f$. Il grafico si costruisce a partire dalla parte di quello di $f$ con $x\geq0$. Poiché $|-x|=|x|$, la funzione ottenuta è pari e il suo ramo a sinistra è il simmetrico di quello a destra rispetto all'asse $y$.
 
 Per esempio $f(x) = x^2 - 4x + 3 = (x - 1)(x - 3)$ è negativa per $1 < x < 3$, con il minimo $-1$ nel vertice $(2, -1)$. Nel grafico di $y = \left| x^2 - 4x + 3 \right|$ l'arco tra $1$ e $3$ è sostituito dal suo simmetrico rispetto all'asse $x$, e il vertice diventa il punto $(2, 1)$. Il grafico di $y = x^2 - 4|x| + 3$ coincide invece con la parabola per $x \geq 0$ e, per simmetria, interseca l'asse $x$ nei quattro punti di ascissa $-3$, $-1$, $1$ e $3$.
 
