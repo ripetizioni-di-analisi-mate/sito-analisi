@@ -28,7 +28,7 @@ Le misure di spessore sono $25\cdot3=75$, ma le unità restano 25, perché ogni 
 :::
 
 :::definizione{#parametro-statistica titolo="Parametro e statistica"}
-Nel lotto di 300 piastrelle alcune hanno uno spessore fuori dai limiti ammessi dall'azienda; queste piastrelle si dicono fuori tolleranza. La quota di piastrelle fuori tolleranza su tutte le 300 è un numero fisso del lotto, anche se nessuno lo conosce finché non si misurano tutte. Un **parametro** è un numero di questo tipo, cioè una grandezza che descrive l'intera popolazione. Nei capitoli sulle variabili aleatorie la popolazione sarà descritta da un modello matematico, e anche le grandezze che descrivono quel modello si chiameranno parametri.
+Nel lotto di 300 piastrelle alcune hanno uno spessore fuori dai limiti ammessi dall'azienda; queste piastrelle si dicono fuori tolleranza. La quota di piastrelle fuori tolleranza su tutte le 300 è un numero fisso del lotto, anche se nessuno lo conosce finché non si misurano tutte. Un **parametro** è un numero di questo tipo, cioè una grandezza che descrive l'intera popolazione. Dal capitolo 5 la popolazione sarà rappresentata anche da una formula che dà la probabilità di ciascun valore possibile, detta modello. Anche i numeri che compaiono in quella formula, come la probabilità $0{,}03$ che una piastrella sia fuori tolleranza, si chiameranno parametri.
 
 La quota di piastrelle fuori tolleranza fra le 25 scelte si calcola invece dai soli dati del campione. Un numero calcolato a partire dalle osservazioni del campione si chiama **statistica campionaria**; in termini matematici è una funzione delle osservazioni campionarie.
 
@@ -82,8 +82,6 @@ In una scala a rapporti hanno quindi significato sia le differenze sia i rapport
 
 :::attenzione
 Per elaborare i dati, alle categorie di un carattere qualitativo si assegnano a volte dei numeri, per esempio 1 alla bici e 2 all'autobus. Questi numeri sono soltanto etichette. Con una risposta «bici» e una risposta «autobus», la codifica $(1,2)$ dà la media $\dfrac{1+2}{2}=1{,}5$, mentre la codifica $(10,20)$ dà la media $\dfrac{10+20}{2}=15$, anche se le risposte sono le stesse. La media di un carattere nominale dipende quindi dalla codifica scelta. I dati qualitativi sono descritti dal conteggio delle risposte in ciascuna categoria.
-
-Allo stesso modo, il rapporto fra $20\,^\circ\mathrm{C}$ e $10\,^\circ\mathrm{C}$ cambia passando ai kelvin, mentre la differenza di temperatura ha lo stesso valore numerico nelle due unità.
 :::
 
 ## Frequenze assolute e relative
@@ -107,6 +105,8 @@ $$
 $$
 
 Nell'esempio $13+17+10=40$ e $\dfrac{13}{40}+\dfrac{17}{40}+\dfrac{10}{40}=1$. La somma dei conteggi serve anche a ricavare una frequenza assoluta mancante. Se si conoscono soltanto i conteggi di A e di B, il conteggio di C è $40-13-17=10$.
+
+Due frequenze percentuali si confrontano in due modi. Se la quota di studenti che usano l'autobus scende dal $25\,\%$ di un anno al $20\,\%$ dell'anno successivo, la differenza $25-20=5$ si dice una diminuzione di 5 **punti percentuali**. La variazione relativa divide invece la differenza per il valore di partenza, e vale $\dfrac{25-20}{25}=0{,}20$, cioè il $20\,\%$ del valore iniziale.
 
 La figura rappresenta i tre conteggi con un diagramma a barre, in cui ogni modalità ha una barra alta quanto il suo conteggio.
 
@@ -183,6 +183,8 @@ Fra due valori osservati consecutivi la funzione è costante, perché spostando 
 Per i dati $1,2,2,4,6$, fino alla soglia $2$ si contano tre osservazioni, perciò $F_n(2)=\dfrac35$. Per ogni soglia dell'intervallo $[2,4)$ si contano sempre le stesse tre osservazioni. In $4$ si aggiunge una quarta osservazione, quindi $F_n(4)=\dfrac45$.
 
 ::grafico{xmin=-1.1 xmax=7.1 ymin=-0.1 ymax=1.16 nomi="x,F_n(x)" linee="-0.5,0 1,0;1,0.2 2,0.2;2,0.6 4,0.6;4,0.8 6,0.8;6,1 6.8,1" punti="1,0,vuoto;1,0.2,pieno;2,0.2,vuoto;2,0.6,pieno;4,0.6,vuoto;4,0.8,pieno;6,0.8,vuoto;6,1,pieno" etichette="-0.63,0.18,0,2;-0.63,0.58,0,6;-0.63,0.78,0,8" titolo="Ripartizione empirica dei cinque dati"}
+
+In ogni salto del grafico il punto pieno, all'inizio del gradino più alto, indica il valore della funzione in quel punto. Il punto vuoto, alla fine del gradino più basso, indica il valore subito prima del salto, che la funzione non assume.
 
 Per contare le osservazioni in $(2,4]$, si parte da quelle minori o uguali a $4$ e si tolgono quelle minori o uguali a $2$. Si ottiene $F_n(4)-F_n(2)=\dfrac45-\dfrac35=\dfrac15$. Per contare quelle in $[2,4]$ occorre invece togliere soltanto le osservazioni strettamente minori di $2$. Il valore subito prima del salto in $2$ è $F_n(2^-)=\dfrac15$, perché l'unica osservazione minore di $2$ è $1$. La frequenza relativa dell'intervallo chiuso è quindi $\dfrac45-\dfrac15=\dfrac35$.
 :::
@@ -305,7 +307,7 @@ Un campione grande può descrivere bene una parte della popolazione e trascurarn
 :::esempio{titolo="Tasso di risposta e percentuale sulle risposte valide"}
 Su 120 studenti invitati, 90 rispondono alla domanda sul mezzo di trasporto. Tra questi, 27 dichiarano di andare a piedi. Il tasso di risposta, cioè la quota di invitati che hanno risposto, è $\dfrac{90}{120}=0{,}75$. La quota di chi va a piedi fra le risposte valide è $\dfrac{27}{90}=0{,}30$. La quota di invitati di cui si sa che vanno a piedi è $\dfrac{27}{120}=0{,}225$.
 
-Se interessa la quota effettiva fra tutti i 120 invitati e non si sa nulla dei 30 che non hanno risposto, si può indicare un intervallo. Il conteggio minimo è 27, se tutti i 30 usano un altro mezzo. Il massimo è $27+30=57$, se vanno tutti a piedi. Le quote estreme sono quindi $\dfrac{27}{120}=0{,}225$ e $\dfrac{57}{120}=0{,}475$. Questo intervallo nasce dalle risposte mancanti. Nel capitolo sugli intervalli di confidenza si incontreranno intervalli di un altro tipo, che misurano l'incertezza dovuta alla scelta casuale del campione e che richiedono ipotesi specifiche.
+Se interessa la quota effettiva fra tutti i 120 invitati e non si sa nulla dei 30 che non hanno risposto, si può indicare un intervallo. Il conteggio minimo è 27, se tutti i 30 usano un altro mezzo. Il massimo è $27+30=57$, se vanno tutti a piedi. Le quote estreme sono quindi $\dfrac{27}{120}=0{,}225$ e $\dfrac{57}{120}=0{,}475$. La quota effettiva fra i 120 invitati è perciò compresa fra $0{,}225$ e $0{,}475$, qualunque mezzo usino i 30 studenti che non hanno risposto.
 
 ::grafico{assi=0 xmin=-4 xmax=124 ymin=-0.32 ymax=1.32 uguale=1 poligoni="0,0 27,0 27,1 0,1" linee="0,0 120,0 120,1 0,1 0,0;27,0 27,1;90,0 90,1" etichette="4,0.46,27 a piedi;49,0.46,63 altri mezzi;95,0.60,30 senza;96.2,0.32,risposta" titolo="I 120 invitati comprendono 90 rispondenti e 30 assenti. La quota effettiva di chi va a piedi dipende dalle risposte mancanti."}
 :::
