@@ -1042,9 +1042,7 @@ export default {
     if (versoLingua) return versoLingua;
 
     const serviziAcquisto = { aDO, utenteCollegato, MATERIE, VIDEOCORSI, conMaterieDeiVideo, dopoAcquistoMateria,
-      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req),
-      // 10% del primo acquisto, sommato allo sconto dei pacchetti (worker/benvenuto.mjs)
-      scontoPrimo: (io) => scontoBenvenuto(env, aDO, io) };
+      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req) };
     if (p.startsWith('/api/acquisti/')) return gestisciAcquisti(req, env, p, serviziAcquisto);
     if (p.startsWith('/api/stripe/postvendita/') || p === '/admin/vendite-stripe' || p.startsWith('/admin/vendite-stripe/'))
       return gestisciPostvendita(req, env, p, { aDO, utenteCollegato, leggiCookie, leggiToken, json });

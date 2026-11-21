@@ -241,14 +241,13 @@ export async function preventivoDigitale(c, io, h) {
     throw new Error('Hai già accesso a questo materiale. Controlla il tuo account prima di acquistare.');
   // Sconti nell'ordine in cui si applicano, ciascuno sul prezzo già ridotto dal precedente (righe del riepilogo).
   //  - materia singola: uno sconto solo (offerta via email, invito, oppure 10% del primo acquisto);
-  //  - pacchetto di materie: sconto del pacchetto e poi, se è il primo acquisto dell'account, il 10% dell'iscrizione.
+  //  - pacchetto di materie: solo lo sconto del pacchetto. Gli sconti NON si sommano (scelta di Carmine del
+  //    21/11/2026): il 10% del primo acquisto vale soltanto per una materia comprata da sola.
   let sconto = tipo === 'materia' ? await h.sconto(io, c.slug) : null;
   const sconti = [];
   let totale = q.totale;
-  if (tipo === 'materie') {
-    if (q.percentuale > 0) sconti.push({ tipo: 'pacchetto', percentuale: q.percentuale, importo: q.separato - q.totale });
-    sconto = (await h.scontoPrimo?.(io)) || null;
-  }
+  if (tipo === 'materie' && q.percentuale > 0)
+    sconti.push({ tipo: 'pacchetto', percentuale: q.percentuale, importo: q.separato - q.totale });
   if (sconto?.percentuale > 0) {
     const ridotto = Math.round((totale * (100 - sconto.percentuale)) / 100);
     sconti.push({ tipo: sconto.tipo, percentuale: sconto.percentuale, importo: totale - ridotto });

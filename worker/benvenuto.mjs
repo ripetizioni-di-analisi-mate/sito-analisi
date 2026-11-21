@@ -1,8 +1,8 @@
 // Sconto di benvenuto (richiesta di Carmine del 05/11/2026; regole in src/data/benvenuto.ts).
 //  - /api/registrati con `benvenuto: true` (barra in basso, src/components/BarraSconto.astro) registra l'account
 //    nella tabella `benvenuto`; gli altri account vi entrano al primo riepilogo di pagamento.
-// Dal 21/11/2026 la percentuale spetta a ogni account, una sola volta, sul primo acquisto di materie
-// (materia singola o pacchetto, dove si somma allo sconto del pacchetto: worker/stripe-digitale.mjs).
+// Dal 21/11/2026 la percentuale spetta a ogni account, una sola volta, sul primo acquisto, se è una materia
+// comprata da sola; non si somma allo sconto dei pacchetti (worker/stripe-digitale.mjs).
 // /admin/benvenuto mostra gli account e gli sconti utilizzati.
 import { SCONTO_BENVENUTO } from '../src/data/benvenuto.ts';
 
@@ -100,7 +100,7 @@ th{background:#f1ede4;font-size:13px;text-transform:uppercase;letter-spacing:.05
 .avviso{background:#fbeee0;border:1px solid #e8c9a3;border-radius:10px;padding:10px 14px}</style></head><body><main>
 <p class="piccolo"><a href="/admin">← Dashboard</a></p>
 <h1>Sconto di benvenuto</h1>
-<p class="piccolo">Ogni account ha il ${SCONTO_BENVENUTO}% sul primo acquisto di materie (una materia o un pacchetto), applicato da solo al pagamento. L’elenco riporta gli account creati dalla barra in basso e quelli arrivati al riepilogo di pagamento.</p>
+<p class="piccolo">Ogni account ha il ${SCONTO_BENVENUTO}% sul primo acquisto, se è una materia comprata da sola, applicato da solo al pagamento; non si somma allo sconto dei pacchetti. L’elenco riporta gli account creati dalla barra in basso e quelli arrivati al riepilogo di pagamento.</p>
 ${attivo ? '' : '<p class="avviso">I pagamenti con Stripe non sono configurati.</p>'}
 <div class="numeri"><div><b>${righe.length}</b>account</div><div><b>${righe.filter((r) => r.creato.startsWith(oggi)).length}</b>oggi</div><div><b>${righe.filter((r) => r.creato >= settimana).length}</b>ultimi 7 giorni</div><div><b>${righe.filter((r) => r.usato).length}</b>sconti usati</div></div>
 <p><a class="tasto" href="/admin/benvenuto.csv">Scarica l’elenco (CSV)</a></p>

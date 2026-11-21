@@ -278,49 +278,49 @@ test('bundle materie e video, accessi preesistenti conservati, abbandono e cance
   assert.equal((await b.call('checkout', acquista({ tipo: 'videocorso', slug: 'analisi-1' }, 36000))).status, 400);
 });
 
-test('primo acquisto: 10% per ogni account, sommato allo sconto del pacchetto; dal secondo acquisto solo il pacchetto', async (t) => {
+test('primo acquisto: 10% su una materia da sola per ogni account; sul pacchetto solo lo sconto del pacchetto', async (t) => {
   const b = banco(t);
   for (const colonna of ['creato', 'pagina', 'codice']) b.db.exec(`ALTER TABLE benvenuto ADD COLUMN ${colonna}`);
   // Sconto vero del primo acquisto (worker/benvenuto.mjs), anche per un account mai passato dalla barra.
-  const primo = (io) => scontoBenvenuto(b.env, (_, p, c) => archivioBenvenuto(b.o, p, c), io);
-  b.h.scontoPrimo = primo;
-  b.h.sconto = primo;
+  b.h.sconto = (io) => scontoBenvenuto(b.env, (_, p, c) => archivioBenvenuto(b.o, p, c), io);
   // Materia singola: 29 € → 26,10 €, con la riga dell'iscrizione.
   const una = await b.call('preventivo', { tipo: 'materia', slug: 'precorso' });
   assert.equal(una.totale, 2610);
+  assert.equal(una.listino, 2900);
   assert.deepEqual(una.sconti, [{ tipo: 'benvenuto', percentuale: 10, importo: 290 }]);
-  // Pacchetto al primo acquisto: 104 € → 88,40 € (−15%) → 79,56 € (−10% sul prezzo già ridotto).
+  // Pacchetto al primo acquisto: 104 € → 88,40 € (−15%). Gli sconti non si sommano.
   const sel = { tipo: 'materie', materie: ['analisi-1', 'analisi-2'] };
   const q = await b.call('preventivo', sel);
   assert.equal(q.listino, 10400);
-  assert.equal(q.totale, 7956);
-  assert.deepEqual(q.sconti, [
-    { tipo: 'pacchetto', percentuale: 15, importo: 1560 },
-    { tipo: 'benvenuto', percentuale: 10, importo: 884 },
-  ]);
-  assert.equal((await b.call('checkout', acquista(sel, 8840))).status, 409);
-  assert.equal((await b.call('checkout', acquista(sel, 7956))).status, 200);
+  assert.equal(q.totale, 8840);
+  assert.deepEqual(q.sconti, [{ tipo: 'pacchetto', percentuale: 15, importo: 1560 }]);
+  assert.equal((await b.call('checkout', acquista(sel, 7956))).status, 409);
+  assert.equal((await b.call('checkout', acquista(sel, 8840))).status, 200);
   const s = [...b.sessioni.values()][0];
-  assert.equal(s.amount_total, 7956);
+  assert.equal(s.amount_total, 8840);
   Object.assign(s, { status: 'complete', payment_status: 'paid', payment_intent: 'pi_primo' });
   assert.equal((await b.call('stato?session_id=' + s.id)).stato, 'pagato');
   assert.deepEqual(b.o.materieDi(b.io.email), ['analisi-1', 'analisi-2']);
-  assert.equal(Math.round(b.o.riga('SELECT SUM(importo) n FROM acquisti').n * 100), 7956);
-  assert.ok(b.o.riga('SELECT usato FROM benvenuto WHERE email=?', b.io.email).usato);
-  // Secondo acquisto: una materia da sola a prezzo pieno, nessuno sconto.
+  assert.equal(Math.round(b.o.riga('SELECT SUM(importo) n FROM acquisti').n * 100), 8840);
+  // Acquisto successivo: una materia da sola a prezzo pieno, nessuno sconto.
   const dopo = await b.call('preventivo', { tipo: 'materia', slug: 'precorso' });
   assert.equal(dopo.totale, 2900);
   assert.deepEqual(dopo.sconti, []);
 });
-test('secondo acquisto in pacchetto: resta lo sconto del pacchetto, senza il 10%', async (t) => {
+test('primo acquisto di una materia con il 10%: lo sconto si usa una volta sola', async (t) => {
   const b = banco(t);
   for (const colonna of ['creato', 'pagina', 'codice']) b.db.exec(`ALTER TABLE benvenuto ADD COLUMN ${colonna}`);
-  b.h.scontoPrimo = (io) => scontoBenvenuto(b.env, (_, p, c) => archivioBenvenuto(b.o, p, c), io);
-  b.o.sql.exec('INSERT INTO acquisti VALUES (?,?,?,?,?,?)', b.io.email, 'precorso', 26.1, 'EUR', 'pi_vecchio', '2026-11-01');
-  b.o.sql.exec('INSERT INTO abilitazioni VALUES (?,?,?,?)', b.io.email, 'precorso', 'stripe:x', '2026-11-01');
-  const q = await b.call('preventivo', { tipo: 'materie', materie: ['analisi-1', 'analisi-2'] });
-  assert.equal(q.totale, 8840);
-  assert.deepEqual(q.sconti, [{ tipo: 'pacchetto', percentuale: 15, importo: 1560 }]);
+  b.h.sconto = (io) => scontoBenvenuto(b.env, (_, p, c) => archivioBenvenuto(b.o, p, c), io);
+  const sel = { tipo: 'materia', slug: 'analisi-1' };
+  assert.equal((await b.call('preventivo', sel)).totale, 4410);
+  assert.equal((await b.call('checkout', acquista(sel, 4410))).status, 200);
+  const s = [...b.sessioni.values()][0];
+  Object.assign(s, { status: 'complete', payment_status: 'paid', payment_intent: 'pi_uno_solo' });
+  assert.equal((await b.call('stato?session_id=' + s.id)).stato, 'pagato');
+  assert.ok(b.o.riga('SELECT usato FROM benvenuto').usato);
+  const dopo = await b.call('preventivo', { tipo: 'materia', slug: 'analisi-2' });
+  assert.equal(dopo.totale, 5500);
+  assert.deepEqual(dopo.sconti, []);
 });
 
 test('pagamento differito: attende senza riaprire Stripe, abilita e invia la conferma una volta sola', async (t) => {
