@@ -1,12 +1,13 @@
 // Sconto di benvenuto (richiesta di Carmine del 05/11/2026; regole in src/data/benvenuto.ts).
 //  - /api/registrati con `benvenuto: true` (barra in basso, src/components/BarraSconto.astro) registra l'account
-//    nella tabella `benvenuto`.
-// La percentuale si applica una sola volta al primo acquisto di una materia.
-// /admin/benvenuto mostra gli account registrati dalla barra e gli sconti utilizzati.
-import PREZZI from '../src/data/prezzi.json';
+//    nella tabella `benvenuto`; gli altri account vi entrano al primo riepilogo di pagamento.
+// Dal 21/11/2026 la percentuale spetta a ogni account, una sola volta, sul primo acquisto di materie
+// (materia singola o pacchetto, dove si somma allo sconto del pacchetto: worker/stripe-digitale.mjs).
+// /admin/benvenuto mostra gli account e gli sconti utilizzati.
 import { SCONTO_BENVENUTO } from '../src/data/benvenuto.ts';
 
-const MATERIE = Object.keys(PREZZI);
+// Account non passati dalla barra: la riga nasce al primo riepilogo di pagamento.
+const PAGINA_AL_PAGAMENTO = '(al pagamento)';
 
 // ---------- archivio (Durable Object) ----------
 export function creaTabelleBenvenuto(sql) {
@@ -22,15 +23,15 @@ export function archivioBenvenuto(o, pathname, c) {
     case '/bv-registra':
       o.sql.exec('INSERT OR IGNORE INTO benvenuto (email, creato, pagina) VALUES (?, ?, ?)', c.email, ora, String(c.pagina || '').slice(0, 200));
       return { ok: true };
-    case '/bv-stato': { // sconto ancora da usare: account dalla barra, nessuna materia comprata
+    case '/bv-stato': { // sconto ancora da usare: ogni account che non ha mai comprato nulla (dal 21/11/2026)
       const r = o.riga('SELECT sconto_id, usato FROM benvenuto WHERE email = ?', c.email);
-      if (!r || r.usato) return { spetta: false };
-      const comprato = o.riga(`SELECT 1 AS x FROM acquisti WHERE email = ? AND materia IN (${MATERIE.map(() => '?').join(',')}) LIMIT 1`, c.email, ...MATERIE);
-      if (comprato) return { spetta: false };
-      let id = r.sconto_id;
+      if (r?.usato) return { spetta: false };
+      if (o.riga('SELECT 1 AS x FROM acquisti WHERE email = ? LIMIT 1', c.email)) return { spetta: false };
+      let id = r?.sconto_id;
       if (!id && c.crea) {
         id = 'BENV-' + crypto.randomUUID();
-        o.sql.exec('UPDATE benvenuto SET sconto_id = ?, codice = ? WHERE email = ?', id, id, c.email);
+        if (r) o.sql.exec('UPDATE benvenuto SET sconto_id = ?, codice = ? WHERE email = ?', id, id, c.email);
+        else o.sql.exec('INSERT INTO benvenuto (email, creato, pagina, sconto_id, codice) VALUES (?, ?, ?, ?, ?)', c.email, ora, PAGINA_AL_PAGAMENTO, id, id);
       }
       return { spetta: true, id };
     }
@@ -99,9 +100,9 @@ th{background:#f1ede4;font-size:13px;text-transform:uppercase;letter-spacing:.05
 .avviso{background:#fbeee0;border:1px solid #e8c9a3;border-radius:10px;padding:10px 14px}</style></head><body><main>
 <p class="piccolo"><a href="/admin">← Dashboard</a></p>
 <h1>Sconto di benvenuto</h1>
-<p class="piccolo">Account creati dalla barra in basso del sito. Ognuno ha il ${SCONTO_BENVENUTO}% sul primo acquisto di una materia, applicato da solo al pagamento.</p>
+<p class="piccolo">Ogni account ha il ${SCONTO_BENVENUTO}% sul primo acquisto di materie (una materia o un pacchetto), applicato da solo al pagamento. L’elenco riporta gli account creati dalla barra in basso e quelli arrivati al riepilogo di pagamento.</p>
 ${attivo ? '' : '<p class="avviso">I pagamenti con Stripe non sono configurati.</p>'}
-<div class="numeri"><div><b>${righe.length}</b>account dalla barra</div><div><b>${righe.filter((r) => r.creato.startsWith(oggi)).length}</b>oggi</div><div><b>${righe.filter((r) => r.creato >= settimana).length}</b>ultimi 7 giorni</div><div><b>${righe.filter((r) => r.usato).length}</b>sconti usati</div></div>
+<div class="numeri"><div><b>${righe.length}</b>account</div><div><b>${righe.filter((r) => r.creato.startsWith(oggi)).length}</b>oggi</div><div><b>${righe.filter((r) => r.creato >= settimana).length}</b>ultimi 7 giorni</div><div><b>${righe.filter((r) => r.usato).length}</b>sconti usati</div></div>
 <p><a class="tasto" href="/admin/benvenuto.csv">Scarica l’elenco (CSV)</a></p>
 ${righe.length ? `<div class="tab"><table><thead><tr><th>Studente</th><th>Iscritto il</th><th>Pagina</th><th>Sconto</th></tr></thead><tbody>${tab}</tbody></table></div>` : '<p class="piccolo">Nessun account per ora.</p>'}
 </main></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });

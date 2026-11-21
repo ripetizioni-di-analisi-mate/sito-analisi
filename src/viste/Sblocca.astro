@@ -99,12 +99,12 @@ const invito = lingua === 'en' ? {
   ospite: `You were invited by a friend: your first subject is ${SCONTO_INVITO}% off. The discount is applied at checkout, once your account is created.`,
   amico: `You were invited by a friend: this purchase is ${SCONTO_INVITO}% off. The discount is applied at checkout.`,
   premio: `A friend you invited unlocked a subject: this purchase is ${SCONTO_INVITO}% off. The discount is applied at checkout.`,
-  benvenuto: `Welcome discount: this purchase is ${SCONTO_BENVENUTO}% off. The discount is applied at checkout.`,
+  benvenuto: `Sign-up discount: your first purchase is ${SCONTO_BENVENUTO}% off thanks to your account. The discount is applied at checkout.`,
 } : {
   ospite: `Sei arrivato con l'invito di un amico: sul primo acquisto di una materia hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento dopo la creazione dell'account.`,
   amico: `Sei arrivato con l'invito di un amico: su questo acquisto hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento.`,
   premio: `Una persona che hai invitato ha sbloccato una materia: su questo acquisto hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento.`,
-  benvenuto: `Sconto di benvenuto: su questo acquisto hai il ${SCONTO_BENVENUTO}% di sconto, applicato al pagamento.`,
+  benvenuto: `Sconto iscrizione: sul tuo primo acquisto hai il ${SCONTO_BENVENUTO}% di sconto grazie alla tua iscrizione, applicato al pagamento.`,
 };
 ---
 <Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua} usa={usa} seo={{ titolo: t.sbloccaSeo(m.titolo) }}>

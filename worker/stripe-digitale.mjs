@@ -239,9 +239,23 @@ export async function preventivoDigitale(c, io, h) {
   const video = tipo === 'video' || tipo === 'videocorso';
   if (video ? videoSovrapposti(q.chiavi, io.materie, h.VIDEOCORSI) : sovrapposti(q.chiavi, io.materie))
     throw new Error('Hai già accesso a questo materiale. Controlla il tuo account prima di acquistare.');
-  const sconto = tipo === 'materia' ? await h.sconto(io, c.slug) : null;
-  const percentuale = sconto?.percentuale || q.percentuale || 0;
-  const totale = sconto ? Math.round((q.totale * (100 - percentuale)) / 100) : q.totale;
+  // Sconti nell'ordine in cui si applicano, ciascuno sul prezzo già ridotto dal precedente (righe del riepilogo).
+  //  - materia singola: uno sconto solo (offerta via email, invito, oppure 10% del primo acquisto);
+  //  - pacchetto di materie: sconto del pacchetto e poi, se è il primo acquisto dell'account, il 10% dell'iscrizione.
+  let sconto = tipo === 'materia' ? await h.sconto(io, c.slug) : null;
+  const sconti = [];
+  let totale = q.totale;
+  if (tipo === 'materie') {
+    if (q.percentuale > 0) sconti.push({ tipo: 'pacchetto', percentuale: q.percentuale, importo: q.separato - q.totale });
+    sconto = (await h.scontoPrimo?.(io)) || null;
+  }
+  if (sconto?.percentuale > 0) {
+    const ridotto = Math.round((totale * (100 - sconto.percentuale)) / 100);
+    sconti.push({ tipo: sconto.tipo, percentuale: sconto.percentuale, importo: totale - ridotto });
+    totale = ridotto;
+  } else sconto = null;
+  const percentuale = tipo === 'materie' ? q.percentuale || 0 : sconto?.percentuale || 0;
+  const listino = tipo === 'materie' ? q.separato : q.totale;
   const abilitazioni = h.conMaterieDeiVideo(q.chiavi);
   const selezione = { tipo };
   if (tipo === 'materie') selezione.materie = q.chiavi.join(',');
@@ -258,6 +272,8 @@ export async function preventivoDigitale(c, io, h) {
     importi: q.importi,
     totale,
     percentuale,
+    listino,
+    sconti,
     sconto: sconto?.id ? { id: sconto.id, tipo: sconto.tipo } : null,
     abilitazioni,
     risorse: lista([...abilitazioni, ...(video ? videoPosseduti(q.chiavi, h.VIDEOCORSI) : [])]),
@@ -527,7 +543,7 @@ export async function gestisciAcquisti(req, env, p, h) {
     return errore(e.message, 400);
   }
   if (p.endsWith('/preventivo'))
-    return risposta({ titolo: q.titolo, totale: q.totale, percentuale: q.percentuale, chiavi: q.chiavi });
+    return risposta({ titolo: q.titolo, totale: q.totale, percentuale: q.percentuale, chiavi: q.chiavi, listino: q.listino, sconti: q.sconti });
   const anagrafica = leggiFatturazione(c.fatturazione);
   if (anagrafica.errore) return errore(anagrafica.errore, 400);
   if (c.versioneCondizioni !== VERSIONE_CONDIZIONI)

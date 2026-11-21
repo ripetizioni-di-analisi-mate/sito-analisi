@@ -66,8 +66,20 @@ async function preventivo() {
     elenco.hidden = false;
   }
   const sconto = document.getElementById('sconto-digitale')!;
-  sconto.hidden = !(d.percentuale > 0);
-  if (!sconto.hidden) sconto.textContent = en ? `${d.percentuale}% discount included` : `Sconto del ${d.percentuale}% incluso`;
+  // Una riga per ogni sconto, nell'ordine in cui si applica; il 10% del primo acquisto dice che dipende dall'iscrizione.
+  const righe: string[] = (Array.isArray(d.sconti) ? d.sconti : []).map((s: { tipo: string; percentuale: number; importo: number }) => {
+    const quanto = `−${s.percentuale}% (−${formatta(s.importo)})`;
+    if (s.tipo === 'pacchetto') return (en ? 'Bundle discount ' : 'Sconto pacchetto ') + quanto;
+    if (s.tipo === 'benvenuto') return (en ? 'Sign-up discount ' : 'Sconto iscrizione ') + quanto
+      + (en ? ', thanks to your account' : ', grazie alla tua iscrizione');
+    if (s.tipo === 'amico' || s.tipo === 'premio') return (en ? 'Invite a friend ' : 'Invita un amico ') + quanto;
+    return (en ? 'Personal discount ' : 'Sconto riservato ') + quanto;
+  });
+  if (righe.length && Number.isSafeInteger(d.listino) && d.listino > d.totale)
+    righe.unshift((en ? 'Price without discounts: ' : 'Prezzo senza sconti: ') + formatta(d.listino));
+  if (!righe.length && d.percentuale > 0) righe.push(en ? `${d.percentuale}% discount included` : `Sconto del ${d.percentuale}% incluso`);
+  sconto.hidden = !righe.length;
+  sconto.textContent = righe.join('\n');
   const importo = formatta(totaleAtteso);
   document.getElementById('totale-digitale')!.textContent = importo;
   paga.textContent = (en ? 'Continue to Stripe · ' : 'Continua su Stripe · ') + importo;
