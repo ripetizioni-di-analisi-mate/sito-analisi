@@ -3,9 +3,11 @@ titolo: "Dati, frequenze e grafici"
 sommario: "Dalla rilevazione delle unità statistiche alla lettura di frequenze, tabelle, distribuzioni empiriche e istogrammi."
 ---
 
-La statistica serve a conoscere un gruppo grande partendo dai dati raccolti su una sua parte. La durata media del tragitto degli studenti per arrivare a lezione, o la quota di studenti che usa l'autobus, riguardano migliaia di persone, mentre di solito si conoscono le risposte di qualche centinaio. Prima di qualsiasi calcolo occorre quindi sapere di chi si parla, che cosa si è misurato e come si leggono i numeri raccolti.
+La statistica ricava da dati raccolti dei numeri che descrivono un gruppo di persone o di oggetti. Per gli studenti di un ateneo, per esempio, questi numeri possono essere la durata media del tragitto per arrivare a lezione oppure la percentuale di studenti che usa l'autobus.
 
-Questo capitolo tratta questi tre punti. Si definiscono la popolazione e il campione, poi i tipi di dati e i conti che hanno senso su ciascun tipo, infine le frequenze, le tabelle e i grafici con cui si riassumono i dati. Sono gli strumenti usati in tutto il corso. Gli indici del capitolo 2, come la media e la varianza, si calcolano a partire dalle frequenze; le tabelle a doppia entrata tornano nella probabilità condizionata del capitolo 4; il passaggio dal campione alla popolazione è l'argomento dei capitoli dall'8 all'11.
+Il lavoro ha due parti. La prima parte riassume i dati raccolti con tabelle, grafici e pochi indici, come la media, e si chiama statistica descrittiva; è l'argomento di questo capitolo e del successivo. La seconda parte nasce dal fatto che di solito non si raccolgono i dati di tutto il gruppo, perché costerebbe troppo tempo e denaro, perciò si intervista per esempio un gruppo di 200 studenti su 12000. Dalle risposte dei 200 si vuole stimare la percentuale di utenti dell'autobus fra tutti i 12000, e dire anche di quanto la stima può sbagliare. Questa seconda parte si chiama inferenza statistica ed è l'argomento dei capitoli dall'8 al 12. I capitoli dal 3 al 7 introducono la probabilità, che serve a misurare quell'errore.
+
+Questo capitolo comincia dalle basi: di chi si parla, che cosa si è misurato e come si leggono i numeri raccolti. Si definiscono la popolazione e il campione, poi i tipi di dati e i conti che hanno senso su ciascun tipo, infine le frequenze, le tabelle e i grafici con cui si riassumono i dati. Gli indici del capitolo 2, come la media e la varianza, si calcolano a partire da queste frequenze, e le tabelle a doppia entrata tornano nella probabilità condizionata del capitolo 4.
 
 ## Popolazione, unità e campione
 
