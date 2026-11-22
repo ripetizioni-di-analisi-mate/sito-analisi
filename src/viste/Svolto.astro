@@ -41,7 +41,7 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
   seo={{ canonico: originale(materia, argomento, 'esercizi-svolti', n), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'svolti', id), schema: [{ ...{
   '@type': 'LearningResource', name: voce.data.titolo, description: descrizioneSeo, learningResourceType: 'Worked example', inLanguage: lingua,
   educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
-  isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
+  isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
   ...accesso(!materiaL(lingua, materia).prezzo || Number(n) <= schedeLibere(materia, argomento)),

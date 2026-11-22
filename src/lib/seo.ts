@@ -51,13 +51,8 @@ export function elencoCorsi(materie: { slug: string; titolo: string; descrizione
     numberOfItems: materie.length,
     itemListElement: materie.map((materia, i) => ({
       '@type': 'ListItem', position: i + 1,
-      item: {
-        '@type': 'Course',
-        '@id': `${assoluto(nellaLingua(lingua, `/${materia.slug}`))}#corso`,
-        name: materia.titolo, description: materia.descrizione,
-        url: assoluto(nellaLingua(lingua, `/${materia.slug}`)),
-        provider: { '@id': `${SITO}/#organizzazione` },
-      },
+      name: materia.titolo,
+      url: assoluto(nellaLingua(lingua, `/${materia.slug}`)),
     })),
   };
 }

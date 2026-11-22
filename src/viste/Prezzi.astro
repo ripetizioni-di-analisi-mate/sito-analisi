@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { materieL, link, T, type Lingua } from '../i18n';
 import SchedaVideocorso from '../components/SchedaVideocorso.astro';
 import { VIDEOCORSI } from '../data/videocorsi';
+import { paginaLocalizzata } from '../lib/lingue-sito';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
@@ -60,7 +61,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
   <ul class="griglia-materie">
     {aPagamento.map((m) => (
       <li style={`--accento: ${m.colore}`}>
-        <a href={de || es || fr ? link(lingua, `/${m.slug}`) : link(lingua, `/${m.slug}/sblocca`)}>
+        <a href={de || es || fr ? (paginaLocalizzata(lingua, `/${m.slug}`) ? link(lingua, `/${m.slug}`) : `/${m.slug}`) : link(lingua, `/${m.slug}/sblocca`)}>
           <h3>{m.titolo} · {m.prezzo} €</h3>
           <p>{m.descrizione}</p>
           <span class="conteggio">{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</span>

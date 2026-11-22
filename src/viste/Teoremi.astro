@@ -36,7 +36,7 @@ const schema = [{
   numberOfItems: tutte.length,
   itemListElement: indice.flatMap((a) => a.voci).slice(0, 400).map((v, i) => ({ '@type': 'ListItem', position: i + 1, name: v.titolo,
     url: assoluto(href(indice.find((x) => x.voci.includes(v))!.argomento, v.ancora)) })),
-  isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso` },
+  isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso` },
   author: { '@id': `${SITO}/#carmine` },
 }];
 ---

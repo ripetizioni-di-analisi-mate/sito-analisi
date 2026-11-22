@@ -86,7 +86,7 @@ const schema = [{
   ...(alias.length ? { alternateName: alias } : {}),
   ...(voce.tipo === 'definizione' ? { termCode: ancora, inDefinedTermSet: { '@type': 'DefinedTermSet', name: `${m.titolo}`, url: assoluto(link(lingua, `/${materia}/teoremi`)) } } : {}),
   isPartOf: { '@type': 'LearningResource', name: `${arg.titolo} · ${t.sezioni.teoria}`, url: assoluto(link(lingua, `${base}/teoria`)),
-    isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: m.titolo } },
+    isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: m.titolo } },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
   // l'enunciato è libero; con la materia a pagamento la dimostrazione è riservata
