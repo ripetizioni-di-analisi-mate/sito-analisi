@@ -1,12 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { MISURAZIONE_ATTIVA } from '../../data/misurazione';
+import { MISURAZIONE_ATTIVA, META_PIXEL_ID } from '../../data/misurazione';
 // This policy, including the guidance section, requires review by a data protection professional.
 ---
 <Base titolo="Privacy policy" percorso={[{ titolo: 'Privacy policy' }]} descrizione="How the Ripetizioni di Analisi website processes personal data: which data it collects, what they are used for and what your rights are." lingua="en" seo={{ soloQuestaLingua: false }}>
   <p class="sopratitolo">Privacy</p>
   <h1>Privacy policy</h1>
-  <p class="sommario">Which data the website collects, what they are used for and what your rights are. Last updated: 15 November 2026. This is a translation; the Italian version prevails.</p>
+  <p class="sommario">Which data the website collects, what they are used for and what your rights are. Last updated: {META_PIXEL_ID ? '22 November 2026' : '15 November 2026'}. This is a translation; the Italian version prevails.</p>
 
   <h2>In short</h2>
   <ul>
@@ -49,6 +49,7 @@ import { MISURAZIONE_ATTIVA } from '../../data/misurazione';
   <h2>Cookies</h2>
   <p>The website uses only technical cookies: <code>sessione</code> keeps you logged in, <code>dispositivo</code> recognises the device connected to the account, <code>fonte</code> remembers the channel of the first visit for 90 days, <code>campagna-conversione</code> remembers for 90 days the ad or campaign link you arrived from, to know which ads bring sign-ups and purchases, <code>invito</code> keeps the code of an opened invite link for 30 days to apply the discount. There are no profiling cookies and no third-party cookies for browsing. Some reading preferences, such as whether the contents panel is open or closed, are stored only on the device and never leave the browser. Stripe may set cookies necessary to process payments. For earlier purchases handled by Paddle, its own portal may use cookies for support or refunds.</p>
   {MISURAZIONE_ATTIVA && <p><strong>Measurement cookies (only with your consent).</strong> The website uses Google tools (Google Ads and Google Analytics) to count how many people arrive from ads and searches and how many of them create an account, book a lesson, join a course or buy a subject. Until you accept from the banner, Google sets no cookies and receives only anonymous signals without identifiers. If you accept, Google sets its own cookies (for example <code>_ga</code>, <code>_gcl_au</code>) to recognise the browser and attribute the conversion to the ad, and at the time of a purchase the website sends Google the account email in hashed, unreadable form, to count conversions more accurately. Google processes these data according to its <a href="https://policies.google.com/privacy" rel="noopener">privacy policy</a>. You can change your choice at any time from <a href="#" data-consenso-apri>this link</a>.</p>}
+  {META_PIXEL_ID && <p><strong>Meta pixel (only with your consent).</strong> To measure the results of ads on Instagram and Facebook the website uses the Meta pixel. Until you accept from the banner, the Meta script is not loaded and Meta receives no data. If you accept, Meta sets its own cookies (for example <code>_fbp</code>, <code>_fbc</code>) and receives the address of the pages you open and the events of account creation, start of payment and purchase with its amount, without name or email. Meta uses these data to attribute conversions to ads and to show ads to interested people, according to its <a href="https://www.facebook.com/privacy/policy/" rel="noopener">privacy policy</a>. You can change your choice from the same link as in the previous paragraph.</p>}
 
   <h2>Legal basis and retention</h2>
   <p>The processing of account, purchase and support data is based on the performance of a contract (Art. 6(1)(b) GDPR); aggregate statistics are based on the legitimate interest in running the website. Account data are kept for as long as the service is active, so that access can be restored to those who purchased a subject, or until you ask for their deletion. Billing records for paid lessons and digital orders are kept to comply with tax and accounting obligations (Article 6(1)(c) GDPR) for the period required by law.</p>

@@ -4,28 +4,31 @@
 // «Accetta» → Google misura le conversioni e il remarketing; «Solo necessari» → il tag resta senza cookie (Consent Mode).
 // Si riapre da qualsiasi link con data-consenso-apri (per esempio nell'informativa sulla privacy).
 import { link, type Lingua } from '../i18n';
+import { META_PIXEL_ID, CONSENSO_VERSIONE } from '../data/misurazione';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
+// Con il pixel di Meta attivo il banner nomina anche Meta e chiede di nuovo la scelta a chi aveva risposto per i soli cookie di Google.
+const meta = Boolean(META_PIXEL_ID);
 const s = lingua === 'fr' ? {
   titolo: 'Cookies de mesure d’audience',
-  testo: 'Avec ton accord, nous utilisons les cookies de Google pour savoir quelles pages et annonces amènent les élèves et étudiants sur le site. Nous ne vendons pas tes données.',
+  testo: meta ? 'Avec ton accord, nous utilisons les cookies de Google et de Meta pour savoir quelles pages et annonces amènent les élèves et étudiants sur le site. Nous ne vendons pas tes données.' : 'Avec ton accord, nous utilisons les cookies de Google pour savoir quelles pages et annonces amènent les élèves et étudiants sur le site. Nous ne vendons pas tes données.',
   accetta: 'Accepter', rifiuta: 'Cookies nécessaires uniquement', privacy: 'Politique de confidentialité (en italien)',
 } : lingua === 'es' ? {
   titolo: 'Cookies de medición',
-  testo: 'Si das tu consentimiento, usamos cookies de Google para saber qué páginas y anuncios llevan a los estudiantes a este sitio. No vendemos tus datos.',
+  testo: meta ? 'Si das tu consentimiento, usamos cookies de Google y de Meta para saber qué páginas y anuncios llevan a los estudiantes a este sitio. No vendemos tus datos.' : 'Si das tu consentimiento, usamos cookies de Google para saber qué páginas y anuncios llevan a los estudiantes a este sitio. No vendemos tus datos.',
   accetta: 'Aceptar', rifiuta: 'Solo las necesarias', privacy: 'Política de privacidad (en italiano)',
 } : lingua === 'de' ? {
   titolo: 'Cookies für die Reichweitenmessung',
-  testo: 'Wenn du zustimmst, messen Google-Cookies, über welche Seiten und Anzeigen Lernende zu uns finden. Wir verkaufen keine Daten.',
+  testo: meta ? 'Wenn du zustimmst, messen Cookies von Google und Meta, über welche Seiten und Anzeigen Lernende zu uns finden. Wir verkaufen keine Daten.' : 'Wenn du zustimmst, messen Google-Cookies, über welche Seiten und Anzeigen Lernende zu uns finden. Wir verkaufen keine Daten.',
   accetta: 'Akzeptieren', rifiuta: 'Nur notwendige', privacy: 'Datenschutzerklärung (Italienisch)',
 } : en ? {
   titolo: 'Cookies for measurement',
-  testo: 'With your consent, Google cookies measure which pages and which ads bring students to the site. No data is sold.',
+  testo: meta ? 'With your consent, Google and Meta cookies measure which pages and which ads bring students to the site. No data is sold.' : 'With your consent, Google cookies measure which pages and which ads bring students to the site. No data is sold.',
   accetta: 'Accept', rifiuta: 'Only necessary', privacy: 'Privacy policy',
 } : {
   titolo: 'Cookie di misurazione',
-  testo: 'Con il tuo consenso, i cookie di Google misurano quali pagine e quali annunci portano gli studenti sul sito. Nessun dato viene venduto.',
+  testo: meta ? 'Con il tuo consenso, i cookie di Google e di Meta misurano quali pagine e quali annunci portano gli studenti sul sito. Nessun dato viene venduto.' : 'Con il tuo consenso, i cookie di Google misurano quali pagine e quali annunci portano gli studenti sul sito. Nessun dato viene venduto.',
   accetta: 'Accetta', rifiuta: 'Solo necessari', privacy: 'Informativa sulla privacy',
 };
 ---
@@ -38,15 +41,19 @@ const s = lingua === 'fr' ? {
   </div>
 </aside>
 
-<script is:inline>
+<script is:inline define:vars={{ versione: CONSENSO_VERSIONE }}>
   (() => {
     const box = document.querySelector('.consenso');
     if (!box) return;
-    const leggi = () => { try { return localStorage.getItem('consenso'); } catch { return null; } };
-    const scrivi = (v) => { try { localStorage.setItem('consenso', v); } catch {} };
+    // La scelta vale se è stata fatta con il testo attuale del banner («consenso-v»); chi non ha mai scelto con una versione numerata è alla 1.
+    const leggi = () => { try { return (localStorage.getItem('consenso-v') || '1') === versione ? localStorage.getItem('consenso') : null; } catch { return null; } };
+    const scrivi = (v) => { try { localStorage.setItem('consenso', v); localStorage.setItem('consenso-v', versione); } catch {} };
     const applica = (v) => {
       const stato = v === 'si' ? 'granted' : 'denied';
       if (typeof gtag === 'function') gtag('consent', 'update', { ad_storage: stato, ad_user_data: stato, ad_personalization: stato, analytics_storage: stato });
+      // Pixel di Meta: parte con «Accetta»; con «Solo necessari» si ferma, se era già stato caricato.
+      if (v === 'si') { if (typeof window.caricaMeta === 'function') window.caricaMeta(); }
+      else if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
     };
     const misuraAltezza = () => document.documentElement.style.setProperty('--altezza-consenso', `${Math.ceil(box.getBoundingClientRect().height)}px`);
     const mostra = () => { box.hidden = false; document.documentElement.classList.add('con-consenso'); misuraAltezza(); };

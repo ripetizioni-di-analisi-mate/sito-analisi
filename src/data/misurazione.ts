@@ -17,4 +17,10 @@ export const CONVERSIONI = {
 // Valori usati per le conversioni senza importo nel pagamento.
 export const VALORI = { gruppo: 75, account: 1 };
 
-export const MISURAZIONE_ATTIVA = Boolean(GOOGLE_ADS_ID || GA4_ID);
+// Pixel di Meta (campagne Instagram e Facebook con obiettivo vendite, novembre 2026): numero del dataset in Gestione eventi, per esempio '1234567890123456'.
+// Finché è vuoto lo script di Meta non si carica e il banner non nomina Meta. Il pixel parte solo dopo il consenso dato dal banner che nomina Meta (CONSENSO_VERSIONE).
+export const META_PIXEL_ID = '';
+// Versione del consenso: con il pixel di Meta il banner torna a chiedere la scelta anche a chi aveva già risposto per i soli cookie di Google.
+export const CONSENSO_VERSIONE = META_PIXEL_ID ? '2' : '1';
+
+export const MISURAZIONE_ATTIVA = Boolean(GOOGLE_ADS_ID || GA4_ID || META_PIXEL_ID);

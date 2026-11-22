@@ -21,7 +21,7 @@ import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
 import ConsensoCookie from '../components/ConsensoCookie.astro';
-import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA } from '../data/misurazione';
+import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA, META_PIXEL_ID, CONSENSO_VERSIONE } from '../data/misurazione';
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
@@ -210,11 +210,28 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   <meta name="theme-color" content="#faf8f2" />
   {/* Misurazione delle conversioni (Google Ads, Google Analytics): codici in src/data/misurazione.ts; senza codici non si carica nulla.
       Consent Mode v2: tutto negato finché il visitatore non accetta dal banner (ConsensoCookie.astro). */}
-  <script is:inline define:vars={{ ads: GOOGLE_ADS_ID, ga4: GA4_ID, etichette: CONVERSIONI, valori: VALORI, attiva: MISURAZIONE_ATTIVA }}>
+  <script is:inline define:vars={{ ads: GOOGLE_ADS_ID, ga4: GA4_ID, etichette: CONVERSIONI, valori: VALORI, attiva: MISURAZIONE_ATTIVA, meta: META_PIXEL_ID, versione: CONSENSO_VERSIONE }}>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     window.gtag = gtag;
-    if (attiva) {
+    // Pixel di Meta: si carica solo con il consenso dato dal banner che nomina Meta (localStorage «consenso» = si e «consenso-v» = versione attuale).
+    // Senza consenso lo script di Meta non viene scaricato e Meta non riceve nulla.
+    window.caricaMeta = function () {
+      if (!meta || window.fbq) return;
+      let n = window.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!window._fbq) window._fbq = n;
+      n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+      const t = document.createElement('script');
+      t.async = true;
+      t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(t);
+      fbq('init', meta);
+      fbq('track', 'PageView');
+    };
+    if (meta) {
+      try { if (localStorage.getItem('consenso') === 'si' && localStorage.getItem('consenso-v') === versione) window.caricaMeta(); } catch (e) {}
+    }
+    if (attiva && (ads || ga4)) {
       let scelta = null;
       try { scelta = localStorage.getItem('consenso'); } catch (e) {}
       const stato = scelta === 'si' ? 'granted' : 'denied';
@@ -244,6 +261,21 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
         if (evento === 'acquisto') gtag('event', 'purchase', Object.assign({ items: [{ item_name: dati.voce || 'materia' }] }, base));
         else gtag('event', evento, Object.assign({}, base));
         if (ads && etichette[evento]) gtag('event', 'conversion', Object.assign({ send_to: ads + '/' + etichette[evento] }, base));
+      } catch (e) {}
+      // Stessi eventi verso Meta, solo se il pixel è stato caricato (cioè con il consenso).
+      try {
+        if (window.fbq) {
+          const nomi = { acquisto: 'Purchase', account: 'CompleteRegistration', lezione: 'Schedule', gruppo: 'Lead', whatsapp: 'Contact' };
+          const valuta = dati.valuta || 'EUR';
+          const valore = dati.valore != null ? Number(dati.valore) : valori[evento];
+          const m = {};
+          if (valore != null && !isNaN(valore)) { m.value = valore; m.currency = valuta; }
+          if (evento === 'acquisto') m.content_name = dati.voce || 'materia';
+          if (dati.materia) m.content_name = dati.materia;
+          const opz = dati.id ? { eventID: String(dati.id) } : undefined;
+          if (nomi[evento]) fbq('track', nomi[evento], m, opz);
+          else fbq('trackCustom', evento, m);
+        }
       } catch (e) {}
     };
     document.addEventListener('click', function (e) {
@@ -759,7 +791,12 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
         const oss = new IntersectionObserver((voci) => { if (voci.some((v) => v.isIntersecting)) { manda('fine-anteprima'); oss.disconnect(); } });
         oss.observe(fine);
       }
-      document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('#invia-acquisto, #compra')) manda('tasto'); }, true);
+      document.addEventListener('click', (ev) => {
+        if (!(ev.target.closest && ev.target.closest('#invia-acquisto, #compra'))) return;
+        manda('tasto');
+        // Solo verso Meta (InitiateCheckout): Google non ha un'azione corrispondente.
+        try { if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: materia }); } catch (_) {}
+      }, true);
     })();
   </script>
   <script>
