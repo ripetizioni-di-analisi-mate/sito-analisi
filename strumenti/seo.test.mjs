@@ -229,3 +229,20 @@ test('da ogni quiz in sitemap il selettore inglese apre una pagina esistente',
       }
     }
   });
+
+// 22/11/2026: Google scartava tutte le pagine singole di teoremi e definizioni (ripetono un riquadro della teoria).
+// Restano online e leggibili da Bing e dagli assistenti IA; a Google si chiede di non indicizzarle e non entrano nella mappa del sito.
+test('le pagine singole dei teoremi restano fuori da Google e dalla mappa del sito',
+  { skip: !existsSync('dist/analisi-1/limiti/teoria/limite-finito.html') }, async () => {
+    const xml = await readFile('dist/sitemap.xml', 'utf8');
+    for (const pre of ['', '/en']) {
+      const percorso = pre + '/analisi-1/limiti/teoria/limite-finito';
+      const voce = await readFile('dist' + percorso + '.html', 'utf8');
+      assert.match(voce, /<meta name="googlebot" content="noindex, follow">/);
+      assert.doesNotMatch(voce, /<meta name="robots" content="noindex/);
+      assert.ok(!xml.includes('<loc>' + sito + percorso + '</loc>'), percorso);
+      const teoria = await readFile('dist' + pre + '/analisi-1/limiti/teoria.html', 'utf8');
+      assert.doesNotMatch(teoria, /<meta name="googlebot"/);
+      assert.ok(xml.includes('<loc>' + sito + pre + '/analisi-1/limiti/teoria</loc>'));
+    }
+  });

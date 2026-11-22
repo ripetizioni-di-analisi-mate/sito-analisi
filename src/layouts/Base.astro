@@ -52,7 +52,7 @@ interface Props {
   ricercaPrincipale?: boolean;
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
-  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string; canonico?: string };
+  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; fuoriDaGoogle?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string; canonico?: string };
 }
 const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', usa = false, nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
 const t = T(lingua);
@@ -187,6 +187,10 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   <link rel="canonical" href={canonico} />
   {alternati.map(({ l, path }) => <link rel="alternate" hreflang={l} href={assoluto(path)} />)}
   {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
+  {/* seo.fuoriDaGoogle: la pagina ripete un pezzo di un'altra (pagine singole di teoremi e definizioni). Google le scartava tutte
+      e la quantità pesava sul giudizio dell'intero sito (diagnosi del 22/11/2026): a Google si chiede di non indicizzarle;
+      Bing e gli assistenti IA continuano a leggerle. Per tornare indietro basta togliere fuoriDaGoogle da Voce.astro. */}
+  {seo.fuoriDaGoogle && !noindex && <meta name="googlebot" content="noindex, follow" />}
   {seo.data && <meta property="article:modified_time" content={seo.data} />}
   {seo.data && <meta name="last-modified" content={seo.data} />}
   <meta property="og:type" content={seo.tipo ?? 'website'} />

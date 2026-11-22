@@ -43,6 +43,7 @@ lunghezze_t, lunghezze_d = [], []
 indicizzabili = 0
 copie = 0
 link_rotti = Counter()
+fuori_da_google = set()
 for p, f in sorted(pagine.items()):
     h = open(f, encoding='utf-8').read()
     testa = h[:h.find('</head>')]
@@ -50,6 +51,9 @@ for p, f in sorted(pagine.items()):
     if noindex:
         continue
     indicizzabili += 1
+    # pagine tenute fuori da Google soltanto (pagine singole dei teoremi, seo.fuoriDaGoogle): non stanno nella mappa del sito
+    if re.search(r'<meta name="googlebot" content="[^"]*noindex', testa):
+        fuori_da_google.add(p)
     t = re.search(r'<title>(.*?)</title>', testa, re.S)
     t = html.unescape(t.group(1).strip()) if t else ''
     d = re.search(r'<meta name="description" content="([^"]*)"', testa)
@@ -113,7 +117,8 @@ if os.path.exists(mappa):
         elif q not in pagine and q != '/': pass
     nella_mappa = {u.replace(SITO, '') or '/' for u in locs}
     for p in hreflang:
-        if p not in nella_mappa: problemi['indicizzabile ma non nella mappa'].append(p)
+        if p not in nella_mappa and p not in fuori_da_google: problemi['indicizzabile ma non nella mappa'].append(p)
+    print(f'fuori da Google soltanto (googlebot noindex): {len(fuori_da_google)}')
     print(f'mappa del sito: {len(locs)} indirizzi, {sum(1 for _ in re.finditer("<lastmod>", open(mappa).read()))} con data')
 
 print(f'pagine html: {len(pagine)}, indicizzabili: {indicizzabili}')

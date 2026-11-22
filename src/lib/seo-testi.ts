@@ -100,7 +100,7 @@ const TITOLI_MATERIA: Record<string, string> = {
 };
 const IT = {
   home: 'Matematica e fisica: teoria ed esercizi svolti | Ripetizioni di Analisi',
-  homeDescr: 'Studia matematica e fisica con teoria ed esercizi svolti per università, superiori e test d’ingresso. Trovi schede gratuite, videocorsi e ripetizioni di Analisi online.',
+  homeDescr: 'Teoria ed esercizi svolti di matematica e fisica per università, superiori e test d’ingresso. Schede gratuite, videocorsi e ripetizioni di Analisi online.',
   materia: (m: string) => {
     const c = PER_NOME.get(m);
     if (c && TITOLI_MATERIA[c.slug]) return TITOLI_MATERIA[c.slug];
