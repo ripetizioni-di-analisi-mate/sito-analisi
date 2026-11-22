@@ -197,7 +197,6 @@ const acquista = (sel, totaleAtteso) => ({
   ...sel,
   totaleAtteso,
   condizioni: true,
-  immediato: true,
   versioneCondizioni: VERSIONE_CONDIZIONI,
   fatturazione: fattura,
 });
@@ -230,7 +229,7 @@ test('prezzi server, dati e consensi, doppio checkout, prova di pagamento ed esi
   const q = await b.call('preventivo', sel);
   assert.equal(q.totale, 4410);
   const ordine = acquista(sel, q.totale);
-  for (const modifica of [{ fatturazione: {} }, { immediato: false }, { condizioni: false }, { totaleAtteso: 49 }])
+  for (const modifica of [{ fatturazione: {} }, { condizioni: false }, { totaleAtteso: 49 }])
     assert.ok((await b.call('checkout', { ...ordine, ...modifica })).status >= 400);
   const go = await b.call('checkout', ordine);
   assert.equal(go.status, 200);
@@ -393,7 +392,7 @@ test('requisiti aggiornati nel registro prima di aprire Stripe e riprova dopo er
   const aperto = b.o.riga("SELECT * FROM ordini_stripe WHERE stato='in_attesa'");
   const q = JSON.parse(aperto.ordine);
   assert.equal(q.versioneCondizioni, ordine.versioneCondizioni);
-  assert.match(q.consensoFornitura, /Riconosco/);
+  assert.equal(q.consensoFornitura, undefined);
   assert.ok(Number.isFinite(Date.parse(aperto.consenso)));
   // Lo studente riceve l'accesso mentre è ancora sulla schermata dell'offerta.
   b.o.sql.exec('INSERT INTO abilitazioni VALUES (?,?,?,?)', b.io.email, 'video-analisi-1-e-2', 'paddle', '2026-11-09');

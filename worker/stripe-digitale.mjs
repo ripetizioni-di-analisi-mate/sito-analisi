@@ -1,7 +1,7 @@
 // Acquisti una tantum. Il browser sceglie i prodotti; listino, sconti e accessi sono decisi dal server.
 import { riepilogoMaterie, riepilogoVideo, videoPosseduti, videoSovrapposti } from '../src/data/pacchetti.mjs';
 import { VIDEOCORSI } from '../src/data/videocorsi.ts';
-import { CONSENSO_FORNITURA, VERSIONE_CONDIZIONI } from '../src/data/consenso-digitale.mjs';
+import { VERSIONE_CONDIZIONI } from '../src/data/consenso-digitale.mjs';
 import { allegatoContrattoDigitale } from './contratto-digitale.mjs';
 import { leggiFatturazione } from './fatturazione.mjs';
 import { stripe } from './prenotazioni.mjs';
@@ -332,11 +332,21 @@ async function confermaOrdine(env, h, r) {
       (en ? 'Included products: ' : 'Prodotti inclusi: ') + q.prodotti.join(', '),
     ],
     scheda: { etichetta: q.titolo, valore: formatoEuro(r.in_centesimi, en) },
+    // Gli ordini fino al 22 novembre 2026 riportano la rinuncia al recesso accettata al pagamento.
+    // Quelli successivi non la chiedono: l'email ricorda i 14 giorni per recedere.
     dopo: [
-      en
-        ? 'Before payment you accepted the terms of sale and made the following declaration. Your statutory rights for defective content still apply.'
-        : 'Prima del pagamento hai accettato le condizioni di vendita e confermato la dichiarazione riportata qui sotto. Restano validi i diritti per i contenuti difettosi.',
-      q.consensoFornitura,
+      ...(q.consensoFornitura
+        ? [
+            en
+              ? 'Before payment you accepted the terms of sale and made the following declaration. Your statutory rights for defective content still apply.'
+              : 'Prima del pagamento hai accettato le condizioni di vendita e confermato la dichiarazione riportata qui sotto. Restano validi i diritti per i contenuti difettosi.',
+            q.consensoFornitura,
+          ]
+        : [
+            en
+              ? 'Before payment you accepted the terms of sale. You have 14 days from the purchase date to withdraw from the contract without giving a reason. You can submit your withdrawal from the page linked below. Your statutory rights for defective content still apply.'
+              : 'Prima del pagamento hai accettato le condizioni di vendita. Hai 14 giorni dalla data dell’acquisto per recedere dal contratto senza indicare il motivo. La dichiarazione di recesso si invia dalla pagina indicata qui sotto. Restano validi i diritti per i contenuti difettosi.',
+          ]),
       (en ? 'Terms version: ' : 'Versione dei termini: ') + q.versioneCondizioni,
       SITO_EMAIL + pref + '/termini',
       SITO_EMAIL + pref + '/rimborsi',
@@ -547,11 +557,9 @@ export async function gestisciAcquisti(req, env, p, h) {
   if (anagrafica.errore) return errore(anagrafica.errore, 400);
   if (c.versioneCondizioni !== VERSIONE_CONDIZIONI)
     return errore('Ricarica la pagina per leggere le condizioni di vendita aggiornate.', 409);
-  if (c.condizioni !== true || c.immediato !== true)
-    return errore('Verifica le condizioni di vendita e la richiesta di accesso immediato.', 400);
+  if (c.condizioni !== true) return errore('Accetta le condizioni di vendita per continuare.', 400);
   if (c.totaleAtteso !== q.totale) return errore('Il prezzo è cambiato. Aggiorna il riepilogo prima di pagare.', 409);
   q.versioneCondizioni = VERSIONE_CONDIZIONI;
-  q.consensoFornitura = CONSENSO_FORNITURA[q.lingua];
   const id = crypto.randomUUID();
   const args = { id, email: io.email, ordine: q, fatturazione: anagrafica.dati };
   try {

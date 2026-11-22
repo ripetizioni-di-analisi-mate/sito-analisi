@@ -191,7 +191,7 @@ form.addEventListener('submit', async (e) => {
   errore.textContent = '';
   try {
     const d = await richiedi('checkout', { ...selezione, lingua: en ? 'en' : 'it', totaleAtteso,
-      fatturazione: datiIntestatario(f), versioneCondizioni: f.get('versioneCondizioni'), condizioni: f.has('condizioni'), immediato: f.has('immediato') });
+      fatturazione: datiIntestatario(f), versioneCondizioni: f.get('versioneCondizioni'), condizioni: f.has('condizioni') });
     if (!d) return;
     if (d.sessione) return mostraStatoSessione(d.sessione);
     const url = new URL(d.url);
