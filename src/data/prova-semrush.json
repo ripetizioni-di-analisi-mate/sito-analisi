@@ -4,29 +4,130 @@
   "costoMese": "163,74 €",
   "rinnovo": "attivo",
   "verdetto": "In valutazione",
-  "notaVerdetto": "La prova è al primo giorno: i numeri qui sotto sono il punto di partenza. Il giudizio sul rinnovo arriva quando ci sono interventi fatti e il loro effetto.",
+  "notaVerdetto": "Secondo giorno. La scansione ha trovato tre difetti tecnici veri, corretti il 22/11. L'effetto si misura con la prossima scansione e con le posizioni dei prossimi giorni.",
   "misure": [
-    { "voce": "Autorevolezza del sito (Authority Score, da 0 a 100)", "zero": "0", "ora": "0" },
-    { "voce": "Visite da Google stimate al mese", "zero": "9", "ora": "9" },
-    { "voce": "Ricerche in cui il sito compare fra i primi 100 risultati", "zero": "164", "ora": "164" },
-    { "voce": "Ricerche in prima pagina (posizioni 1-10)", "zero": "2", "ora": "2" },
-    { "voce": "Siti che hanno un link verso il sito", "zero": "232", "ora": "232" },
-    { "voce": "Pagine citate da ChatGPT", "zero": "4", "ora": "4" },
-    { "voce": "Salute tecnica del sito (Site Health)", "zero": "scansione in corso", "ora": "scansione in corso" }
+    {
+      "voce": "Autorevolezza del sito (Authority Score, da 0 a 100)",
+      "zero": "0",
+      "ora": "0"
+    },
+    {
+      "voce": "Visite da Google stimate al mese",
+      "zero": "9",
+      "ora": "9"
+    },
+    {
+      "voce": "Ricerche in cui il sito compare fra i primi 100 risultati",
+      "zero": "164",
+      "ora": "164"
+    },
+    {
+      "voce": "Ricerche in prima pagina (posizioni 1-10)",
+      "zero": "2",
+      "ora": "2"
+    },
+    {
+      "voce": "Siti che hanno un link verso il sito",
+      "zero": "232",
+      "ora": "232"
+    },
+    {
+      "voce": "Pagine citate da ChatGPT",
+      "zero": "4",
+      "ora": "4"
+    },
+    {
+      "voce": "Salute tecnica del sito (Site Health)",
+      "zero": "80 su 100",
+      "ora": "80 su 100"
+    },
+    {
+      "voce": "Errori tecnici segnalati",
+      "zero": "17.311",
+      "ora": "17.311"
+    },
+    {
+      "voce": "Schede «corso» non accettate da Google",
+      "zero": "14.682",
+      "ora": "14.682"
+    },
+    {
+      "voce": "Link interni rotti",
+      "zero": "52",
+      "ora": "52"
+    }
   ],
   "scoperte": [
-    { "giorno": "2026-11-21", "testo": "216 dei 232 siti che hanno un link verso il sito sono indirizzi .xyz creati in serie, con testi che pubblicizzano la vendita di link. Nessuno è stato comprato da Carmine. L’analisi di Semrush (Backlink Audit) giudica il rischio basso: 192 siti su 193 innocui, il 99,5% dei link ha l’attributo «nofollow», cioè Google non ne tiene conto.", "stato": "nessuna azione" },
-    { "giorno": "2026-11-21", "testo": "Le ricerche «analisi 1» (1.600 al mese), «esercizi analisi 1» (720), «esame analisi 1» (590) e «formulario analisi 1» (390) hanno difficoltà bassa, da 15 a 25 su 100. Fra le prime 100 posizioni lette il sito non compare.", "stato": "da lavorare" },
-    { "giorno": "2026-11-21", "testo": "Tre pagine a un passo dalla prima pagina di Google: «punti stazionari di una funzione» (posizione 18), «criterio del confronto asintotico» (21), «numero ossidazione ferro» (24).", "stato": "da lavorare" },
-    { "giorno": "2026-11-21", "testo": "Più pagine del sito in gara sulla stessa ricerca, per esempio tre pagine diverse per «formula inversa pressione», tutte oltre la sessantesima posizione.", "stato": "da lavorare" }
+    {
+      "giorno": "2026-11-21",
+      "testo": "216 dei 232 siti che hanno un link verso il sito sono indirizzi .xyz creati in serie, con testi che pubblicizzano la vendita di link. Nessuno è stato comprato da Carmine. L’analisi di Semrush (Backlink Audit) giudica il rischio basso: 192 siti su 193 innocui, il 99,5% dei link ha l’attributo «nofollow», cioè Google non ne tiene conto.",
+      "stato": "nessuna azione"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "Le ricerche «analisi 1» (1.600 al mese), «esercizi analisi 1» (720), «esame analisi 1» (590) e «formulario analisi 1» (390) hanno difficoltà bassa, da 15 a 25 su 100. Fra le prime 100 posizioni lette il sito non compare.",
+      "stato": "da lavorare"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "Tre pagine a un passo dalla prima pagina di Google: «punti stazionari di una funzione» (posizione 18), «criterio del confronto asintotico» (21), «numero ossidazione ferro» (24).",
+      "stato": "da lavorare"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "Più pagine del sito in gara sulla stessa ricerca, per esempio tre pagine diverse per «formula inversa pressione», tutte oltre la sessantesima posizione.",
+      "stato": "da lavorare"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "14.682 schede «corso» senza prezzo e modalità: Google le scartava. Erano ripetute su ogni pagina di teoria, esercizi e voci.",
+      "stato": "corretto"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "52 link rotti: tasto «Sblocca» nascosto nelle domande delle materie gratuite, e pagine dei prezzi in tedesco, spagnolo e francese verso materie non tradotte.",
+      "stato": "corretto"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "2.331 pagine doppie con «?lingua=it»: controllato, ogni pagina indica già a Google l'indirizzo originale. 19.103 «link esterni rotti»: è il tasto WhatsApp, che respinge i robot.",
+      "stato": "nessuna azione"
+    },
+    {
+      "giorno": "2026-11-21",
+      "testo": "Velocità da cellulare (Core Web Vitals) 10 su 100 e 2.029 titoli più lunghi di quanto Google mostra.",
+      "stato": "in esame"
+    }
   ],
   "diario": [
-    { "giorno": "2026-11-21", "voci": [
-      "Registrato il punto di partenza: autorevolezza, visite stimate, ricerche posizionate, link in entrata.",
-      "Avviata la scansione tecnica del sito (Site Audit), fino a 20.000 pagine.",
-      "Avviato il controllo quotidiano delle posizioni su Google Italia da cellulare per 60 ricerche.",
-      "Avviata l’analisi dei link in entrata (Backlink Audit)."
-    ] }
+    {
+      "giorno": "2026-11-21",
+      "voci": [
+        "Registrato il punto di partenza: autorevolezza, visite stimate, ricerche posizionate, link in entrata.",
+        "Avviata la scansione tecnica del sito (Site Audit), fino a 20.000 pagine.",
+        "Avviato il controllo quotidiano delle posizioni su Google Italia da cellulare per 60 ricerche.",
+        "Avviata l’analisi dei link in entrata (Backlink Audit)."
+      ]
+    },
+    {
+      "giorno": "2026-11-22",
+      "voci": [
+        "Letti i risultati della scansione: salute tecnica 80 su 100, 17.311 errori, 40.173 avvisi su 20.000 pagine.",
+        "Primo rilevamento delle posizioni da cellulare: nessuna delle 60 ricerche fra i primi 100 risultati.",
+        "Corretti dati strutturati dei corsi e link rotti."
+      ]
+    }
   ],
-  "interventi": []
+  "interventi": [
+    {
+      "giorno": "2026-11-22",
+      "testo": "Scheda «corso» completa di prezzo e modalità online nella pagina di ogni materia; tolta l'etichetta incompleta dalle altre pagine.",
+      "effetto": "da misurare con la prossima scansione"
+    },
+    {
+      "giorno": "2026-11-22",
+      "testo": "Corretti i link rotti nelle domande a tempo delle materie gratuite e nelle pagine dei prezzi in tedesco, spagnolo e francese.",
+      "effetto": "da misurare con la prossima scansione"
+    }
+  ]
 }

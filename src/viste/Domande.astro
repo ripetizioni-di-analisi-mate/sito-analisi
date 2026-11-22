@@ -50,7 +50,7 @@ const pref = prefisso(lingua);
 const hrefSezione = (sezione: string) => usa ? linkArgomentoUsa(materia, argomento, sezione) : link(lingua, `${base}/${sezione}`);
 const tornaAllaMateria = ripasso || m.eserciziDaFare === false;
 const hrefMateria = usa ? url(courseUrl(materia)) : link(lingua, '/' + materia);
-const hrefSblocca = usa ? url(courseUrl(materia) + '/sblocca') : link(es ? 'it' : lingua, '/' + materia + '/sblocca') + (es ? '?lingua=it' : '');
+const hrefSblocca = !usa && !m.prezzo ? hrefMateria : usa ? url(courseUrl(materia) + '/sblocca') : link(es ? 'it' : lingua, '/' + materia + '/sblocca') + (es ? '?lingua=it' : '');
 const hrefRitorno = tornaAllaMateria ? hrefMateria : hrefSezione('esercizi');
 const n = Math.min(DOMANDE_SESSIONE, totale);
 // Nome breve di ogni argomento, per indicare nel ripasso da quale argomento viene la domanda.

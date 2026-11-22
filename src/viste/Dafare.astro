@@ -45,7 +45,7 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
   seo={{ canonico: originale(materia, argomento, 'esercizi', n), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
   '@type': 'LearningResource', name: voce.data.titolo, description: descrizioneSeo, learningResourceType: 'Exercise', inLanguage: lingua,
   educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
-  isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
+  isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
   ...accesso(!materiaL(lingua, materia).prezzo),

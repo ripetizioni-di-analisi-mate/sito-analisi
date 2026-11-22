@@ -91,6 +91,8 @@ const incluso = [
   domandeMateria > 0 && !quizPerEsercitarsi && nomeCompito,
   guidata && (en ? 'Guided study (in Italian)' : 'Studio guidato'),
 ].filter((v): v is string => Boolean(v));
+// Stima dell'impegno per i dati strutturati del corso (Google la richiede): ore di studio per capitolo.
+const ORE_PER_CAPITOLO = 5;
 const video = lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === materia) : undefined;
 const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(video.slug)).map((p) => p.slug)]
   .map((s) => `html[data-materie~="${chiaveVideo(s)}"] .rimando-videocorso{display:none}`).join('') : '';
@@ -100,7 +102,8 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livelloDi(m.titolo),
   provider: { '@id': `${SITO}/#organizzazione` },
   syllabusSections: m.argomenti.map((a) => ({ '@type': 'Syllabus', name: a.titolo, url: assoluto(link(lingua, `/${m.slug}/${a.slug}/teoria`)) })),
-  ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { isAccessibleForFree: true }),
+  hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: `PT${m.argomenti.length * ORE_PER_CAPITOLO}H` },
+  ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { offers: { '@type': 'Offer', category: 'Free', price: 0, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}`)) }, isAccessibleForFree: true }),
 }] }}>
   {giaVideo && <style is:inline set:html={giaVideo}></style>}
   <p class:list={['sopratitolo', { 'vista-classica': nuova }]}>{sopra}</p>
