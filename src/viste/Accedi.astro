@@ -4,104 +4,37 @@ import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import '../styles/dispositivi-login.css';
-import { RANGHI } from '../../worker/stemmi.mjs';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
-
-// Pagina a due metà (scelta di Carmine del 18/11/2026, versione «Q1 con le tre modifiche»): a sinistra, su fondo
-// sabbia, l'invito a iscriversi con l'anello dei dieci titoli; a destra, su bianco, i vantaggi e il modulo.
-const P = {
-  it: { occ: 'Account gratuito', titolo: 'Iscriviti e sali di livello', frase: 'Mentre studi il sito tiene il conto per te. Vedi i tuoi progressi crescere, giorno dopo giorno.',
-    occA: 'Il tuo account', titoloA: 'Bentornato', fraseA: 'Ritrovi le materie acquistate, il tuo livello e i progressi dove li avevi lasciati.',
-    livello: 'LIVELLO', di: 'di 100', livelli: 'LIVELLI', titoli: 'dieci titoli',
-    mon: [['Tempo di studio', 'minuto per minuto'], ['Risposte giuste', 'domanda per domanda'], ['Progressi', 'capitolo per capitolo']],
-    con: 'Con l’iscrizione', van: [['tempo', 'Livelli, punti e lega settimanale'], ['mirino', 'Studio guidato con la diagnosi delle lacune'], ['calendario', 'Progressi e giorni mancanti all’esame'], ['sconto', '10% di sconto sulla prima materia']],
-    iscriviti: 'Iscriviti', studente: 'Sei già uno studente di Carmine?', privacy: 'Privacy' },
-  en: { occ: 'Free account', titolo: 'Sign up and level up', frase: 'While you study, the site keeps count for you. Watch your progress grow, day after day.',
-    occA: 'Your account', titoloA: 'Welcome back', fraseA: 'Your subjects, your level and your progress are where you left them.',
-    livello: 'LEVEL', di: 'of 100', livelli: 'LEVELS', titoli: 'ten titles',
-    mon: [['Study time', 'minute by minute'], ['Correct answers', 'question by question'], ['Progress', 'chapter by chapter']],
-    con: 'With your account', van: [['tempo', 'Levels and points for your study'], ['calendario', 'Progress and days left to your exam'], ['sconto', '10% off your first subject']],
-    iscriviti: 'Sign up', studente: '', privacy: 'Privacy' },
-  es: { occ: 'Cuenta gratuita', titolo: 'Regístrate y sube de nivel', frase: 'Mientras estudias, el sitio lleva la cuenta por ti. Tus progresos crecen día a día.',
-    occA: 'Tu cuenta', titoloA: 'Hola de nuevo', fraseA: 'Tus asignaturas, tu nivel y tus progresos están donde los dejaste.',
-    livello: 'NIVEL', di: 'de 100', livelli: 'NIVELES', titoli: 'diez títulos',
-    mon: [['Tiempo de estudio', 'minuto a minuto'], ['Respuestas correctas', 'pregunta a pregunta'], ['Progresos', 'capítulo a capítulo']],
-    con: 'Con tu cuenta', van: [['tempo', 'Niveles y puntos por tu estudio'], ['calendario', 'Progresos y días que faltan para el examen']],
-    iscriviti: 'Regístrate', studente: '', privacy: 'Privacidad' },
-  fr: { occ: 'Compte gratuit', titolo: 'Inscris-toi et monte de niveau', frase: 'Pendant que tu travailles, le site tient le compte pour toi. Tes progrès augmentent jour après jour.',
-    occA: 'Ton compte', titoloA: 'Bon retour', fraseA: 'Tes matières, ton niveau et tes progrès sont là où tu les avais laissés.',
-    livello: 'NIVEAU', di: 'sur 100', livelli: 'NIVEAUX', titoli: 'dix titres',
-    mon: [['Temps de travail', 'minute par minute'], ['Bonnes réponses', 'question par question'], ['Progrès', 'chapitre par chapitre']],
-    con: 'Avec ton compte', van: [['tempo', 'Niveaux et points pour ton travail'], ['calendario', 'Progrès et jours restants avant l’examen']],
-    iscriviti: 'S’inscrire', studente: '', privacy: 'Confidentialité' },
-  de: { occ: 'Kostenloses Konto', titolo: 'Registriere dich und steige auf', frase: 'Während du lernst, zählt die Seite für dich mit. Dein Fortschritt wächst Tag für Tag.',
-    occA: 'Dein Konto', titoloA: 'Willkommen zurück', fraseA: 'Deine Fächer, dein Level und dein Fortschritt sind dort, wo du aufgehört hast.',
-    livello: 'LEVEL', di: 'von 100', livelli: 'LEVEL', titoli: 'zehn Titel',
-    mon: [['Lernzeit', 'Minute für Minute'], ['Richtige Antworten', 'Frage für Frage'], ['Fortschritt', 'Kapitel für Kapitel']],
-    con: 'Mit deinem Konto', van: [['tempo', 'Level und Punkte für dein Lernen'], ['calendario', 'Fortschritt und Tage bis zur Prüfung']],
-    iscriviti: 'Registrieren', studente: '', privacy: 'Datenschutz' },
-}[lingua] ?? null;
-const p = P!;
-const sconto = lingua === 'it' || lingua === 'en';
-const privacyHref = lingua === 'it' || lingua === 'en' ? link(lingua, '/privacy') : '/privacy?lingua=it';
-// Anello: un arco per ciascuno dei dieci ranghi, nei colori degli stemmi.
-const punto = (a: number) => [130 + 112 * Math.cos((a * Math.PI) / 180), 130 + 112 * Math.sin((a * Math.PI) / 180)].map((v) => v.toFixed(2)).join(',');
-const archi = RANGHI.map((r, i) => ({ colore: r.it === 'Argento' ? '#9aa5ae' : r.medio, d: `M${punto(-90 + 36 * i + 3.2)} A112,112 0 0 1 ${punto(-90 + 36 * (i + 1) - 3.2)}` }));
-const ICONE: Record<string, string> = {
-  tempo: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/>',
-  mirino: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/>',
-  calendario: '<rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>',
-  sconto: '<path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/>',
-  giuste: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/>',
-  barre: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
-};
-const ICONE_MON = ['tempo', 'giuste', 'barre'];
 ---
 <Base titolo={t.accedi} percorso={[{ titolo: t.accedi }]} descrizione={t.accediDescrizione} lingua={lingua} seo={{ noindex: true }}>
-  <div class="acc" data-acc="accedi">
-  <div class="acc-sx">
-    <p class="acc-occ"><span data-acc-r>{p.occ}</span><span data-acc-a>{p.occA}</span></p>
-    <h1><span data-acc-r>{p.titolo}</span><span data-acc-a>{p.titoloA}</span></h1>
-    <p class="acc-frase"><span data-acc-r>{p.frase}</span><span data-acc-a>{p.fraseA}</span></p>
-    <svg class="acc-anello" viewBox="0 0 260 260" aria-hidden="true">
-      {archi.map((x) => <path d={x.d} fill="none" stroke={x.colore} stroke-width="9" stroke-linecap="round" />)}
-      <g data-acc-r><text x="130" y="96" text-anchor="middle" class="a1">{p.livello}</text><text x="130" y="158" text-anchor="middle" class="a2">1</text><text x="130" y="184" text-anchor="middle" class="a3">{p.di}</text></g>
-      <g data-acc-a><text x="130" y="96" text-anchor="middle" class="a1">{p.livelli}</text><text x="130" y="156" text-anchor="middle" class="a2 a2-100">100</text><text x="130" y="184" text-anchor="middle" class="a3">{p.titoli}</text></g>
-    </svg>
-    <ul class="acc-mon">
-      {p.mon.map(([a, b], i) => <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONE[ICONE_MON[i]]} /><b>{a}</b><span>{b}</span></li>)}
-    </ul>
-  </div>
-  <div class="acc-dx">
-  <div class="schede-accesso" role="tablist">
-    <button type="button" role="tab" aria-selected="false" data-scheda="registrati">{t.creaUnAccount}</button>
-    <button type="button" role="tab" aria-selected="true" data-scheda="accedi">{t.accedi}</button>
-  </div>
+  <h1>{t.ilTuoAccount}</h1>
+  <p class="sommario">{t.accediSommario}</p>
 
-  <div class="acc-vantaggi" id="acc-vantaggi" hidden>
-    <p class="acc-vt">{p.con}</p>
-    <ul>
-      {p.van.filter(([k]) => k !== 'sconto' || sconto).map(([k, testo]) => <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONE[k]} /><span>{testo}</span><svg class="acc-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></li>)}
-    </ul>
+  <div class="schede-accesso" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-scheda="accedi">{t.accedi}</button>
+    <button type="button" role="tab" aria-selected="false" data-scheda="registrati">{t.creaUnAccount}</button>
   </div>
 
   <form class="modulo" id="modulo" novalidate>
     <label id="campo-nome" hidden>{t.nome}<input type="text" name="nome" autocomplete="given-name" maxlength="40" /></label>
     <label>{lingua === 'fr' ? 'Adresse e-mail' : lingua === 'es' ? 'Correo electrónico' : lingua === 'de' ? 'E-Mail-Adresse' : 'Email'}<input type="email" name="email" autocomplete="email" required /></label>
     <label>{lingua === 'fr' ? 'Mot de passe' : lingua === 'es' ? 'Contraseña' : lingua === 'de' ? 'Passwort' : 'Password'}<span class="campo-password"><input type="password" name="password" autocomplete="current-password" required minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+    <label id="campo-conferma" hidden>{t.ripetiPassword}<span class="campo-password"><input type="password" name="conferma" autocomplete="new-password" minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
     {lingua === 'it' && <CampoCorso nascosto />}
     <p class="esito-modulo" id="esito" role="status"></p>
     <button class="bottone-primario" type="submit" id="invia">{t.accedi}</button>
+    <p class="nota-privacy" id="nota-privacy" hidden>{lingua === 'it'
+      ? <>Consulta come vengono trattati i dati del tuo account. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
+      : lingua === 'fr' ? <>La <a href="/privacy?lingua=it" hreflang="it">politique de confidentialité (en italien)</a> explique comment nous utilisons les données de ton compte.</>
+      : lingua === 'es' ? <>Consulta cómo tratamos los datos de tu cuenta en la <a href="/privacy?lingua=it" hreflang="it">política de privacidad (en italiano)</a>.</>
+      : lingua === 'de' ? <>Informationen zur Verarbeitung deiner Kontodaten findest du in der <a href="/privacy?lingua=it" hreflang="it">Datenschutzerklärung (Italienisch)</a>.</>
+      : <>See how we handle your account data. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
   </form>
-  <p class="acc-note" id="acc-note-registrati" hidden>
-    {p.studente ? <a href="#campo-corso" id="apri-corso" aria-expanded="false">{p.studente}</a> : <span></span>}
-    <a href={privacyHref} hreflang={lingua === 'it' || lingua === 'en' ? undefined : 'it'}>{p.privacy}</a>
-  </p>
   <p class="nota-accesso" id="nota-password"><a href="#recupera" id="apri-recupero">{t.passwordDimenticata}</a></p>
 
   <section class="dispositivi-login" id="gestione-dispositivi-login" aria-labelledby="titolo-dispositivi-login" hidden>
@@ -122,14 +55,12 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
     <p class="nota-accesso"><a href="#" id="torna-accesso">{t.tornaAccesso}</a></p>
   </form>
 
-  </div>
-  </div>
-
-  <script is:inline define:vars={{ js, pref, lingua, sconto, testoIscriviti: p.iscriviti }}>
+  <script is:inline define:vars={{ js, pref, lingua }}>
     (() => {
       const modulo = document.getElementById('modulo');
       const esito = document.getElementById('esito');
       const invia = document.getElementById('invia');
+      const conferma = document.getElementById('campo-conferma');
       const campoNome = document.getElementById('campo-nome');
       const campoCorso = document.getElementById('campo-corso');
       const excorso = document.getElementById('excorso');
@@ -150,18 +81,7 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
       };
       const dopo = new URLSearchParams(location.search).get('dopo');
       const destinazione = dopo && dopo.startsWith('/') && !dopo.startsWith('//') ? dopo : `${pref}/account`;
-      // Si apre sull'iscrizione; chi è già entrato da questo browser (o arriva per recuperare la password) trova l'accesso.
-      let giaEntrato = false; try { giaEntrato = localStorage.getItem('gia-entrato') === '1'; } catch (_) {}
-      let scheda = new URLSearchParams(location.search).get('nuovo') ? 'registrati' : (giaEntrato || location.hash === '#recupera') ? 'accedi' : 'registrati';
-      const riquadro = document.querySelector('.acc');
-      const vantaggi = document.getElementById('acc-vantaggi');
-      const noteRegistrati = document.getElementById('acc-note-registrati');
-      const apriCorso = document.getElementById('apri-corso');
-      let corsoAperto = false;
-      if (apriCorso) apriCorso.addEventListener('click', (e) => {
-        e.preventDefault(); corsoAperto = !corsoAperto;
-        campoCorso.hidden = !corsoAperto; apriCorso.setAttribute('aria-expanded', String(corsoAperto));
-      });
+      let scheda = new URLSearchParams(location.search).get('nuovo') ? 'registrati' : 'accedi';
       const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es', fr = lingua === 'fr';
       const gestioneDispositivi = document.getElementById('gestione-dispositivi-login');
       const elencoDispositivi = document.getElementById('dispositivi-login-elenco');
@@ -221,7 +141,7 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
         elencoDispositivi.replaceChildren();
         modulo.hidden = false;
         document.querySelector('.schede-accesso').hidden = false;
-        imposta(scheda);
+        document.getElementById('nota-password').hidden = false;
         modulo.password.value = '';
         invia.disabled = false;
         esito.textContent = messaggio;
@@ -320,7 +240,7 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
         clearTimeout(scadenzaGestione);
         modulo.hidden = true;
         document.querySelector('.schede-accesso').hidden = true;
-        document.getElementById('nota-password').hidden = true; vantaggi.hidden = true; noteRegistrati.hidden = true;
+        document.getElementById('nota-password').hidden = true;
         modulo.password.value = '';
         esito.textContent = '';
         esitoGestione('');
@@ -336,13 +256,11 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
       const imposta = (s) => {
         scheda = s;
         document.querySelectorAll('[data-scheda]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.scheda === s)));
-        riquadro.dataset.acc = s;
+        conferma.hidden = s !== 'registrati';
         campoNome.hidden = s !== 'registrati';
-        if (campoCorso) campoCorso.hidden = s !== 'registrati' || !corsoAperto;
-        vantaggi.hidden = s !== 'registrati';
-        noteRegistrati.hidden = s !== 'registrati';
-        document.getElementById('nota-password').hidden = s !== 'accedi';
-        invia.textContent = s === 'registrati' ? testoIscriviti : js.accedi;
+        if (campoCorso) campoCorso.hidden = s !== 'registrati';
+        document.getElementById('nota-privacy').hidden = s !== 'registrati';
+        invia.textContent = s === 'registrati' ? js.creaAccount : js.accedi;
         modulo.password.autocomplete = s === 'registrati' ? 'new-password' : 'current-password';
         esito.textContent = ''; esito.className = 'esito-modulo';
       };
@@ -356,6 +274,7 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
         const errore = (t) => { esito.textContent = t; esito.className = 'esito-modulo errore'; };
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errore(js.emailNonValida);
         if (password.length < 8) return errore(js.passwordCorta);
+        if (scheda === 'registrati' && password !== modulo.conferma.value) return errore(js.passwordDiverse);
         if (scheda === 'registrati' && !modulo.nome.value.trim()) return errore(js.nomeMancante);
         if (scheda === 'registrati' && excorso && excorso.checked && !modulo.querySelector('input[name="corso"]:checked') && !modulo.corsonote.value.trim()) return errore('Indica quale corso, oppure togli la spunta.');
         if (scheda === 'registrati' && preregistrato && preregistrato.checked && !scelti('corsopre')) return errore('Indica quale corso preregistrato hai acquistato, oppure togli la spunta.');
@@ -363,9 +282,7 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
         try {
           const r = await fetch(scheda === 'registrati' ? '/api/registrati' : '/api/accedi', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua,
-              // 10% sul primo acquisto di una materia, come dalla barra in basso (worker/benvenuto.mjs)
-              ...(scheda === 'registrati' && sconto ? { benvenuto: true, pagina: location.pathname } : {}) }),
+            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua }),
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) {
@@ -375,7 +292,6 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
           }
           // conversione per Google Ads (src/data/misurazione.ts)
           if (scheda === 'registrati') { try { window.misura && window.misura('account', { email }); } catch (_) {} }
-          try { localStorage.setItem('gia-entrato', '1'); } catch (_) {}
           location.href = destinazione;
         } catch {
           invia.disabled = false; errore(js.connessione);
@@ -388,7 +304,6 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
       const schede = document.querySelector('.schede-accesso');
       const mostraRecupero = (si) => {
         recupero.hidden = !si; modulo.hidden = si; schede.hidden = si; notaPassword.hidden = si;
-        if (si) { vantaggi.hidden = true; noteRegistrati.hidden = true; riquadro.dataset.acc = 'accedi'; }
         if (si) { recupero.email.value = modulo.email.value.trim(); recupero.email.focus(); }
       };
       document.getElementById('apri-recupero').addEventListener('click', (e) => { e.preventDefault(); mostraRecupero(true); });
@@ -418,50 +333,3 @@ const ICONE_MON = ['tempo', 'giuste', 'barre'];
     })();
   </script>
 </Base>
-
-<style is:global>
-  .pagina:has(.acc) { max-width: 58rem; }
-  .acc { display: grid; grid-template-columns: 1fr 1fr; margin: 0.6rem 0 2rem; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--riga), 0 30px 60px -44px rgba(35, 48, 46, 0.5); font-family: var(--ui); }
-  .acc [data-acc-a], .acc[data-acc="accedi"] [data-acc-r] { display: none; }
-  .acc[data-acc="accedi"] [data-acc-a] { display: revert; }
-  .acc-sx { background: #f3efe7; padding: 2.6rem 2.6rem 2.4rem; display: flex; flex-direction: column; }
-  .acc-dx { padding: 2.6rem 2.6rem 2.2rem; display: flex; flex-direction: column; min-width: 0; }
-  .acc-occ { margin: 0 0 0.8rem; font: 700 0.72rem var(--ui); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accento); }
-  .acc h1 { margin: 0; font-size: 2.15rem; line-height: 1.1; letter-spacing: -0.01em; }
-  .acc-frase { margin: 0.8rem 0 0; font-size: 1.02rem; line-height: 1.5; color: var(--inchiostro-2); max-width: 20rem; }
-  .acc-anello { width: 100%; max-width: 13.5rem; margin: auto; padding: 2rem 0 1.6rem; box-sizing: content-box; display: block; }
-  .acc-anello .a1 { font: 700 9.5px var(--ui); letter-spacing: 0.2em; fill: #8b938d; }
-  .acc-anello .a2 { font: 600 68px var(--titoli); fill: var(--inchiostro); }
-  .acc-anello .a2-100 { font-size: 54px; }
-  .acc-anello .a3 { font: 500 12.5px var(--ui); fill: #8b938d; }
-  .acc-mon { list-style: none; margin: 0; padding: 1.2rem 0 0; border-top: 1px solid #e2dccf; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; text-align: center; }
-  .acc-mon svg { width: 1.25rem; height: 1.25rem; color: var(--accento); display: block; margin: 0 auto 0.45rem; }
-  .acc-mon b { display: block; font-weight: 600; font-size: 0.86rem; }
-  .acc-mon span { display: block; font-size: 0.74rem; color: #8b938d; margin-top: 0.1rem; }
-  .acc .schede-accesso { margin: 0 0 1.6rem; gap: 1.6rem; border-bottom: 1px solid var(--riga); }
-  .acc .schede-accesso button { margin: 0 0 -1px; padding: 0 0 0.7rem; font-weight: 600; font-size: 1rem; color: #8b938d; }
-  .acc .schede-accesso button[aria-selected="true"] { color: var(--inchiostro); }
-  .acc-vt { margin: 0 0 0.5rem; font: 700 0.7rem var(--ui); letter-spacing: 0.14em; text-transform: uppercase; color: #8b938d; }
-  .acc-vantaggi ul { list-style: none; margin: 0 0 1.5rem; padding: 0; font-size: 0.92rem; }
-  .acc-vantaggi li { display: grid; grid-template-columns: 1.2rem 1fr 1rem; gap: 0.75rem; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #efece5; }
-  .acc-vantaggi li:last-child { border-bottom: 0; }
-  .acc-vantaggi svg { width: 1.2rem; height: 1.2rem; color: var(--inchiostro-2); }
-  .acc-vantaggi svg.acc-v { width: 1rem; height: 1rem; color: #2f8a57; }
-  .acc .modulo { max-width: none; margin: 0; gap: 1rem; }
-  .acc .modulo input:not([type="checkbox"]) { width: 100%; box-sizing: border-box; border-radius: 8px; }
-  .acc .modulo .bottone-primario { width: 100%; margin-top: 0.5rem; padding: 0.85rem; }
-  .acc .modulo .esito-modulo:empty { display: none; }
-  .acc-note { margin: auto 0 0; padding-top: 1.4rem; display: flex; justify-content: space-between; gap: 1rem; font-size: 0.82rem; }
-  .acc-note[hidden] { display: none; }
-  .acc-note a, .acc .nota-accesso a { color: var(--inchiostro-2); text-decoration: underline; text-decoration-color: var(--riga); text-underline-offset: 3px; }
-  .acc .nota-accesso { margin: auto 0 0; padding-top: 1.4rem; font-size: 0.82rem; }
-  .acc #modulo-recupero .nota-accesso, .acc .dispositivi-login .nota-accesso { margin: 0; padding-top: 0; font-size: 0.9rem; }
-  @media (max-width: 720px) {
-    .acc { grid-template-columns: 1fr; }
-    .acc-sx, .acc-dx { padding: 1.6rem 1.3rem; }
-    .acc h1 { font-size: 1.8rem; }
-    .acc-anello { max-width: 11rem; padding: 1.4rem 0 1.1rem; }
-    .acc-mon span { display: none; }
-    .acc-mon b { font-size: 0.78rem; }
-  }
-</style>
