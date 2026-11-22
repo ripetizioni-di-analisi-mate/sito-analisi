@@ -6,7 +6,6 @@ import CampoCorso from '../components/CampoCorso.astro';
 import '../styles/dispositivi-login.css';
 import { RANGHI } from '../../worker/stemmi.mjs';
 import { FASCE } from '../data/livelli';
-import { SCENE } from '../lib/accedi-disegni.mjs';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -14,10 +13,8 @@ const t = T(lingua);
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 
-// Pagina «Sali scorrendo», versione A «Aperta» (scelta di Carmine del 19/11/2026): nessun riquadro; a sinistra un solo
-// anello dei livelli che resta in vista, a destra titolo, vantaggi e modulo e, sotto, le quattro tappe illustrate.
-// Scorrendo il livello dell'anello sale da 1 a 100. Le tappe sono solo in italiano (Studio guidato, leghe e duelli
-// esistono solo in italiano); nelle altre lingue resta la parte alta.
+// Pagina Accedi (scelta di Carmine del 22/11/2026): la parte alta della versione «Sali scorrendo» del 19/11, senza le
+// quattro tappe da scorrere: a sinistra l'anello dei livelli, al centro titolo e vantaggi, a destra il modulo.
 const P = {
   it: { occ: 'Account gratuito', titolo: 'Iscriviti e sali di livello', frase: 'Mentre studi il sito tiene il conto per te. Vedi i tuoi progressi crescere, giorno dopo giorno.',
     occA: 'Il tuo account', titoloA: 'Bentornato', fraseA: 'Ritrovi le materie acquistate, il tuo livello e i progressi dove li avevi lasciati.',
@@ -64,28 +61,21 @@ const ICONE: Record<string, string> = {
   giuste: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/>',
   barre: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
 };
-const scene = lingua === 'it' ? SCENE : [];
 const LUNG = ((112 * Math.PI * 2 * (36 - 6.4)) / 360).toFixed(2);
+// Livello 1: il primo arco è pieno per un decimo, come nella pagina «Sali scorrendo» prima di scorrere.
+const INIZIO = (Number(LUNG) * 0.9).toFixed(2);
 const nomiFasce = FASCE.map((f) => (lingua === 'en' ? f.nomeEn : lingua === 'es' ? f.nomeEs : lingua === 'fr' ? f.nomeFr : f.nome));
 const conTitolo = lingua !== 'de';
-const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
 ---
 <Base titolo={t.accedi} percorso={[{ titolo: t.accedi }]} descrizione={t.accediDescrizione} lingua={lingua} seo={{ noindex: true }}>
-  <section class:list={['sl', { 'sl-solo': !scene.length }]}>
+  <section class="sl sl-solo">
   <div class="sl-griglia">
     <aside class="sl-fisso">
       <svg class="sl-anello" viewBox="0 0 260 260" aria-hidden="true">
-        {archi.map((x) => <Fragment><path d={x.d} class="sl-base" style={`--c:${x.colore}`} /><path d={x.d} class="sl-pieno" stroke={x.colore} stroke-dasharray={LUNG} stroke-dashoffset={LUNG} /></Fragment>)}
+        {archi.map((x, i) => <Fragment><path d={x.d} class="sl-base" style={`--c:${x.colore}`} /><path d={x.d} class="sl-pieno" stroke={x.colore} stroke-dasharray={LUNG} stroke-dashoffset={i === 0 ? INIZIO : LUNG} style={i === 0 ? 'opacity:1' : undefined} /></Fragment>)}
         <text x="130" y="96" text-anchor="middle" class="a1">{p.livello}</text><text x="130" y="158" text-anchor="middle" class="a2" data-sl="n">1</text><text x="130" y="184" text-anchor="middle" class="a3">{p.di}</text>
       </svg>
       {conTitolo && <p class="sl-titolo" data-sl="t">{nomiFasce[0]}</p>}
-      {scene.length > 0 && <div class="sl-sotto">
-        <p class="sl-scorri">Scorri e guarda il livello salire<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></p>
-        <div class="sl-nav">
-          <ol class="sl-indice">{scene.map(([breve], i) => <li><a href={`#sl-${i}`}><i>0{i + 1}</i>{breve}</a></li>)}</ol>
-          <a class="bottone-primario sl-cta" href="#cima" data-sl-iscriviti>Iscriviti gratis</a>
-        </div>
-      </div>}
     </aside>
     <div class="sl-scene">
   <div class="acc sl-hero" data-acc="accedi" id="cima">
@@ -140,13 +130,8 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 
   </div>
   </div>
-      {scene.map(([, titolo, descr, esempio, disegno], i) => <article class="sl-scena" id={`sl-${i}`}>
-        <div class="sl-fig" set:html={disegno} />
-        <div class="sl-testo"><p class="acc-occ">0{i + 1}</p><h2>{titolo}</h2><p class="sl-d">{descr}</p><p class="sl-es"><b>Per esempio</b>{esempio}</p><p class="sl-incl"><Fragment set:html={SPUNTA} />Compreso nell’account gratuito</p></div>
-      </article>)}
     </div>
   </div>
-  {scene.length > 0 && <div class="sl-fine"><p class="acc-occ">Account gratuito</p><h2>Si parte dal livello 1</h2><p>Tutto quello che hai visto è compreso nell’account gratuito.</p><ul class="sl-tre"><li><Fragment set:html={SPUNTA} />Gratuito</li><li><Fragment set:html={SPUNTA} />Si crea in un minuto</li><li><Fragment set:html={SPUNTA} />10% di sconto sulla prima materia</li></ul><a class="bottone-primario" href="#cima" data-sl-iscriviti>Iscriviti gratis</a></div>}
   </section>
 
   <script is:inline define:vars={{ js, pref, lingua, sconto, testoIscriviti: p.iscriviti }}>
@@ -372,10 +357,6 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
       };
       document.querySelectorAll('[data-scheda]').forEach((b) => b.addEventListener('click', () => imposta(b.dataset.scheda)));
       imposta(scheda);
-      document.querySelectorAll('[data-sl-iscriviti]').forEach((b) => b.addEventListener('click', () => {
-        if (!modulo.hidden) imposta('registrati');
-        setTimeout(() => { try { modulo.nome.focus({ preventScroll: true }); } catch (_) {} }, 700);
-      }));
 
       modulo.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -445,43 +426,6 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
       });
     })();
   </script>
-  <script is:inline define:vars={{ nomiFasce, lung: LUNG }}>
-(() => {
-  const NOMI = nomiFasce, LUNG = Number(lung);
-  const uno = (s, r = document) => r.querySelector(s), tutti = (s, r = document) => [...r.querySelectorAll(s)];
-  const lim = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), dolce = (t) => t * t * (3 - 2 * t);
-  const fermo = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const scene = tutti('.sl-scena').map((el) => ({ el, fig: uno('.sl-fig', el), testo: uno('.sl-testo', el), a: 0, b: 0 }));
-  const contenitore = uno('.sl-scene'), archi = tutti('.sl-pieno'), num = uno('[data-sl="n"]'), tit = uno('[data-sl="t"]'), voci = tutti('.sl-indice a');
-  const sez = uno('.sl');
-  if (!scene.length) return;
-  let livello = 1, visto = { n: 0, f: -1, i: -1 };
-  function anello(L) {
-    archi.forEach((p, i) => { const r = lim((L - 10 * i) / 10); p.style.opacity = r > 0.02 ? 1 : 0; p.setAttribute('stroke-dashoffset', (LUNG * (1 - r)).toFixed(2)); });
-    const n = Math.round(L), f = Math.min(9, Math.floor(n / 10));
-    if (n !== visto.n) { num.textContent = n; visto.n = n; }
-    if (f !== visto.f) { visto.f = f; if (fermo) tit.textContent = NOMI[f]; else { tit.classList.add('cambia'); setTimeout(() => { tit.textContent = NOMI[visto.f]; tit.classList.remove('cambia'); }, 200); } }
-  }
-  function passo() {
-    const vh = innerHeight, r0 = scene[0].el.getBoundingClientRect(), c = { top: r0.top, height: scene[scene.length - 1].el.getBoundingClientRect().bottom - r0.top };
-    const giu = r0.top < vh * 0.72; if (giu !== visto.g) { visto.g = giu; sez.classList.toggle('giu', giu); }
-    livello += (1 + 99 * lim((vh * 0.62 - c.top) / (c.height - vh * 0.55)) - livello) * (fermo ? 1 : 0.14); anello(livello);
-    let attiva = -1;
-    scene.forEach((s, i) => {
-      const r = s.el.getBoundingClientRect(), f = s.fig.getBoundingClientRect(), t = s.testo.getBoundingClientRect();
-      const ba = fermo ? 1 : lim((vh * 0.92 - f.top) / (vh * 0.32)), bb = fermo ? 1 : lim((vh * 0.95 - t.top) / (vh * 0.28));
-      s.a += (ba - s.a) * 0.16; s.b += (bb - s.b) * 0.16;
-      const a = dolce(s.a), b = dolce(s.b);
-      s.fig.style.opacity = a; s.fig.style.transform = `translateY(${(1 - a) * 30}px) scale(${0.97 + 0.03 * a})`;
-      s.testo.style.opacity = b; s.testo.style.transform = `translateY(${(1 - b) * 22}px)`;
-      if (r.top < vh * 0.5 && r.bottom > vh * 0.5) attiva = i;
-    });
-    if (attiva !== visto.i) { visto.i = attiva; voci.forEach((v, i) => v.classList.toggle('qui', i === attiva)); }
-    requestAnimationFrame(passo);
-  }
-  requestAnimationFrame(passo);
-})();
-  </script>
 </Base>
 
 <style is:global>
@@ -523,44 +467,13 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 .sl-anello .a1 { font: 700 9.5px var(--ui); letter-spacing: .2em; fill: #8b938d; }
 .sl-anello .a2 { font: 600 64px var(--titoli); fill: var(--inchiostro); font-variant-numeric: tabular-nums; }
 .sl-anello .a3 { font: 500 12.5px var(--ui); fill: #8b938d; }
-.sl-titolo { margin: 1rem 0 0; text-align: center; font: 600 1.3rem/1.2 var(--titoli); transition: opacity .25s; }
-.sl-titolo.cambia { opacity: 0; }
-.sl-indice { list-style: none; margin: 2rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--riga); display: grid; gap: .15rem; }
-.sl-indice a { display: grid; grid-template-columns: 2rem 1fr; align-items: baseline; padding: .32rem 0 .32rem .8rem; border-left: 2px solid transparent; color: #8b938d; text-decoration: none; font-size: .93rem; transition: color .3s, border-color .3s; }
-.sl-indice a i { font-style: normal; font-size: .72rem; font-weight: 700; letter-spacing: .08em; }
-.sl-indice a.qui { color: var(--inchiostro); font-weight: 600; border-left-color: var(--accento); }
-.sl-indice a.qui i { color: var(--accento); }
-.sl-scena { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 2.5rem 0; }
-.sl-fig, .sl-testo { will-change: transform, opacity; }
-.sl-disegno { display: block; width: 100%; max-width: 27rem; height: auto; margin-left: -1.2rem; }
-.sl-disegno .dz-n { font: 700 24px var(--ui); stroke: none; }
-.sl-disegno .dz-p { font: 700 19px var(--ui); stroke: none; }
-.sl-testo { margin-top: 1.2rem; max-width: 27rem; }
-.sl-scena h2 { margin: 0; font: 600 2.1rem/1.1 var(--titoli); letter-spacing: -.01em; border: 0; padding: 0; }
-.sl-d { margin: .7rem 0 0; font-size: 1.1rem; line-height: 1.5; color: var(--inchiostro-2); }
-.sl-es { margin: 1.1rem 0 0; padding: .1rem 0 .1rem .9rem; border-left: 2px solid var(--accento); font: italic 400 1.02rem/1.5 var(--titoli); color: var(--inchiostro); }
-.sl-es b { display: block; font: 700 .68rem var(--ui); letter-spacing: .14em; text-transform: uppercase; color: #8b938d; margin-bottom: .2rem; font-style: normal; }
-.sl-cta { display: block; text-align: center; text-decoration: none; margin-top: 1.6rem; padding: .7rem 1rem; }
-.sl-incl { display: flex; align-items: center; gap: .45rem; margin: 1.1rem 0 0; font-size: .9rem; font-weight: 600; color: var(--accento); }
-.sl-incl svg, .sl-tre svg { width: .95rem; height: .95rem; color: #2f8a57; flex: none; }
-.sl-tre { list-style: none; margin: 0 0 1.8rem; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 1.6rem; font-size: .95rem; }
-.sl-tre li { display: flex; align-items: center; gap: .4rem; }
-.sl-fine { text-align: center; padding: 4rem 1rem; margin-top: 1rem; border-top: 1px solid var(--riga); }
-.sl-fine h2 { margin: 0; font: 600 2.3rem/1.1 var(--titoli); letter-spacing: -.01em; border: 0; padding: 0; }
-.sl-fine p:not(.acc-occ) { margin: .7rem 0 1.2rem; color: var(--inchiostro-2); font-size: 1.05rem; }
-.sl-fine .bottone-primario { display: inline-block; text-decoration: none; padding: .85rem 2.6rem; }
+.sl-titolo { margin: 1rem 0 0; text-align: center; font: 600 1.3rem/1.2 var(--titoli); }
 @media (max-width: 720px) {
   .sl-griglia { grid-template-columns: 1fr; gap: 0; }
   .sl-fisso { top: 3.3rem; z-index: 3; height: auto; flex-direction: row; align-items: center; justify-content: flex-start; gap: .9rem; background: var(--carta); padding: .55rem 0; border-bottom: 1px solid var(--riga); }
   .sl-anello { max-width: 3.4rem; margin: 0; flex: none; }
   .sl-anello .a1, .sl-anello .a3 { display: none; } .sl-anello .a2 { font-size: 84px; transform: translateY(22px); } .sl-anello path { stroke-width: 14; }
   .sl-titolo { margin: 0; font-size: 1.1rem; }
-  .sl-indice { display: none; }
-  .sl-cta { margin: 0 0 0 auto; padding: .45rem 1rem; font-size: .88rem; white-space: nowrap; }
-  .sl-tre { flex-direction: column; align-items: center; }
-  .sl-scena { min-height: 88vh; padding: 1.6rem 0; } .sl-scena h2 { font-size: 1.7rem; } .sl-d { font-size: 1.02rem; }
-  .sl-disegno { margin-left: 0; }
-  .sl-fine { padding: 3rem 0 2rem; } .sl-fine h2 { font-size: 1.8rem; }
 }
 
 .sl { margin-top: 0; }
@@ -574,29 +487,16 @@ const SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 .sl-hero .acc-vantaggi ul { margin: 0; }
 .sl-hero-b { display: flex; flex-direction: column; min-width: 0; }
 .sl-hero .acc-note, .sl-hero .nota-accesso { margin-top: 0; }
-.sl-sotto { display: grid; margin-top: 1.6rem; }
-.sl-sotto > * { grid-area: 1 / 1; transition: opacity .45s ease, transform .45s ease; }
-.sl-scorri { margin: 0; text-align: center; font: 400 .88rem/1.4 var(--ui); color: #8b938d; }
-.sl-scorri svg { display: block; width: 1.1rem; height: 1.1rem; margin: .4rem auto 0; animation: sl-giu 1.8s ease-in-out infinite; }
-.sl-nav { opacity: 0; transform: translateY(8px); pointer-events: none; }
-.sl-indice { margin: 0; }
-.sl.giu .sl-nav { opacity: 1; transform: none; pointer-events: auto; }
-.sl.giu .sl-scorri { opacity: 0; pointer-events: none; }
 @media (max-width: 720px) {
   .sl-griglia { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .sl-sotto { margin: 0 0 0 auto; }
-  .sl-scorri { display: none; }
+  .sl-fisso { display: none; }
   .acc.sl-hero { display: flex; flex-direction: column; align-items: stretch; gap: 0; min-height: 0; padding: 1.4rem 0 2.2rem; }
   .sl-hero-a { display: contents; }
   .sl-hero h1 { font-size: 1.95rem; }
   .sl-hero-b { order: 1; margin-top: 1.6rem; }
   .sl-hero .acc-vantaggi { order: 2; margin-top: 1.8rem; }
 }
-@media (prefers-reduced-motion: reduce) { .sl-scorri svg { animation: none; } }
 
-@keyframes sl-giu { 50% { transform: translateY(4px); } }
-@media (prefers-reduced-motion: no-preference) { html:has(.sl) { scroll-behavior: smooth; } }
 #cima { scroll-margin-top: 5rem; }
 .sl-solo .sl-fisso { height: auto; align-self: center; position: static; }
-.sl-solo .acc.sl-hero { min-height: 0; padding: 2.5rem 0 3rem; }
 </style>
