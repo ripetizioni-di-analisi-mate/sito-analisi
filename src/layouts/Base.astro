@@ -684,27 +684,15 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     addEventListener('scroll', aggiornaFissi, { passive: true });
     telefono.addEventListener?.('change', aggiornaFissi);
 
-    // Il blocco della copia vale per chi non ha sbloccato la materia. Le protezioni
-    // di stampa e cattura si applicano anche alle pagine sbloccate.
+    // Selezione e copia del testo sono libere per tutti, anche senza la materia sbloccata
+    // (scelta di Carmine del 22/11/2026). Restano le protezioni di stampa, salvataggio e
+    // cattura, che si applicano anche alle pagine sbloccate.
     const radice = document.documentElement;
     if (radice.classList.contains('contenuto')) {
       const sbloccato = radice.classList.contains('sbloccato');
-      // La finestra dell'assistente resta libera: lì si scrive, si seleziona e si copia.
-      // Si guarda anche la selezione: il bersaglio di copia e scorciatoie è spesso la pagina intera o un nodo di testo.
-      const inPi = (n: Node | null | undefined) => {
-        const el = n && (n.nodeType === 1 ? (n as Element) : n.parentElement);
-        return Boolean(el?.closest?.('.assistente, .zona-libera'));
-      };
-      const libero = (e: Event) => {
-        if (sbloccato || inPi(e.target as Node)) return true;
-        const sel = getSelection();
-        return Boolean(sel && sel.rangeCount && !sel.isCollapsed && inPi(sel.anchorNode) && inPi(sel.focusNode));
-      };
-      const blocca = (e: Event) => { if (!libero(e)) e.preventDefault(); };
-      ['contextmenu', 'copy', 'cut', 'dragstart', 'selectstart'].forEach((t) => document.addEventListener(t, blocca));
       addEventListener('keydown', (e) => {
         const k = e.key.toLowerCase();
-        if ((e.ctrlKey || e.metaKey) && ['p', 's', 'c', 'u', 'a'].includes(k) && !(libero(e) && ['c', 'a'].includes(k))) e.preventDefault();
+        if ((e.ctrlKey || e.metaKey) && ['p', 's', 'u'].includes(k)) e.preventDefault();
         if (k === 'printscreen') { radice.classList.add('velato'); navigator.clipboard?.writeText('').catch(() => {}); }
       });
       addEventListener('keyup', (e) => { if (e.key.toLowerCase() === 'printscreen') setTimeout(() => radice.classList.remove('velato'), 1200); });
