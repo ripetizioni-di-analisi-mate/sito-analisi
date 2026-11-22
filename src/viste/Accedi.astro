@@ -5,7 +5,6 @@ import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import '../styles/dispositivi-login.css';
 import { RANGHI } from '../../worker/stemmi.mjs';
-import { FASCE } from '../data/livelli';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -13,8 +12,8 @@ const t = T(lingua);
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 
-// Pagina Accedi (scelta di Carmine del 22/11/2026): la parte alta della versione «Sali scorrendo» del 19/11, senza le
-// quattro tappe da scorrere: a sinistra l'anello dei livelli, al centro titolo e vantaggi, a destra il modulo.
+// Pagina a due metà (scelta di Carmine del 18/11/2026, versione «Q1 con le tre modifiche»): a sinistra, su fondo
+// sabbia, l'invito a iscriversi con l'anello dei dieci titoli; a destra, su bianco, i vantaggi e il modulo.
 const P = {
   it: { occ: 'Account gratuito', titolo: 'Iscriviti e sali di livello', frase: 'Mentre studi il sito tiene il conto per te. Vedi i tuoi progressi crescere, giorno dopo giorno.',
     occA: 'Il tuo account', titoloA: 'Bentornato', fraseA: 'Ritrovi le materie acquistate, il tuo livello e i progressi dove li avevi lasciati.',
@@ -61,39 +60,34 @@ const ICONE: Record<string, string> = {
   giuste: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/>',
   barre: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
 };
-const LUNG = ((112 * Math.PI * 2 * (36 - 6.4)) / 360).toFixed(2);
-// Livello 1: il primo arco è pieno per un decimo, come nella pagina «Sali scorrendo» prima di scorrere.
-const INIZIO = (Number(LUNG) * 0.9).toFixed(2);
-const nomiFasce = FASCE.map((f) => (lingua === 'en' ? f.nomeEn : lingua === 'es' ? f.nomeEs : lingua === 'fr' ? f.nomeFr : f.nome));
-const conTitolo = lingua !== 'de';
+const ICONE_MON = ['tempo', 'giuste', 'barre'];
 ---
 <Base titolo={t.accedi} percorso={[{ titolo: t.accedi }]} descrizione={t.accediDescrizione} lingua={lingua} seo={{ noindex: true }}>
-  <section class="sl sl-solo">
-  <div class="sl-griglia">
-    <aside class="sl-fisso">
-      <svg class="sl-anello" viewBox="0 0 260 260" aria-hidden="true">
-        {archi.map((x, i) => <Fragment><path d={x.d} class="sl-base" style={`--c:${x.colore}`} /><path d={x.d} class="sl-pieno" stroke={x.colore} stroke-dasharray={LUNG} stroke-dashoffset={i === 0 ? INIZIO : LUNG} style={i === 0 ? 'opacity:1' : undefined} /></Fragment>)}
-        <text x="130" y="96" text-anchor="middle" class="a1">{p.livello}</text><text x="130" y="158" text-anchor="middle" class="a2" data-sl="n">1</text><text x="130" y="184" text-anchor="middle" class="a3">{p.di}</text>
-      </svg>
-      {conTitolo && <p class="sl-titolo" data-sl="t">{nomiFasce[0]}</p>}
-    </aside>
-    <div class="sl-scene">
-  <div class="acc sl-hero" data-acc="accedi" id="cima">
-  <div class="sl-hero-a">
+  <div class="acc" data-acc="accedi">
+  <div class="acc-sx">
     <p class="acc-occ"><span data-acc-r>{p.occ}</span><span data-acc-a>{p.occA}</span></p>
     <h1><span data-acc-r>{p.titolo}</span><span data-acc-a>{p.titoloA}</span></h1>
     <p class="acc-frase"><span data-acc-r>{p.frase}</span><span data-acc-a>{p.fraseA}</span></p>
-    <div class="acc-vantaggi" id="acc-vantaggi" hidden>
-      <p class="acc-vt">{p.con}</p>
-      <ul>
-        {p.van.filter(([k]) => k !== 'sconto' || sconto).map(([k, testo]) => <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONE[k]} /><span>{testo}</span><svg class="acc-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></li>)}
-      </ul>
-    </div>
+    <svg class="acc-anello" viewBox="0 0 260 260" aria-hidden="true">
+      {archi.map((x) => <path d={x.d} fill="none" stroke={x.colore} stroke-width="9" stroke-linecap="round" />)}
+      <g data-acc-r><text x="130" y="96" text-anchor="middle" class="a1">{p.livello}</text><text x="130" y="158" text-anchor="middle" class="a2">1</text><text x="130" y="184" text-anchor="middle" class="a3">{p.di}</text></g>
+      <g data-acc-a><text x="130" y="96" text-anchor="middle" class="a1">{p.livelli}</text><text x="130" y="156" text-anchor="middle" class="a2 a2-100">100</text><text x="130" y="184" text-anchor="middle" class="a3">{p.titoli}</text></g>
+    </svg>
+    <ul class="acc-mon">
+      {p.mon.map(([a, b], i) => <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONE[ICONE_MON[i]]} /><b>{a}</b><span>{b}</span></li>)}
+    </ul>
   </div>
-  <div class="sl-hero-b">
+  <div class="acc-dx">
   <div class="schede-accesso" role="tablist">
     <button type="button" role="tab" aria-selected="false" data-scheda="registrati">{t.creaUnAccount}</button>
     <button type="button" role="tab" aria-selected="true" data-scheda="accedi">{t.accedi}</button>
+  </div>
+
+  <div class="acc-vantaggi" id="acc-vantaggi" hidden>
+    <p class="acc-vt">{p.con}</p>
+    <ul>
+      {p.van.filter(([k]) => k !== 'sconto' || sconto).map(([k, testo]) => <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONE[k]} /><span>{testo}</span><svg class="acc-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></li>)}
+    </ul>
   </div>
 
   <form class="modulo" id="modulo" novalidate>
@@ -130,9 +124,6 @@ const conTitolo = lingua !== 'de';
 
   </div>
   </div>
-    </div>
-  </div>
-  </section>
 
   <script is:inline define:vars={{ js, pref, lingua, sconto, testoIscriviti: p.iscriviti }}>
     (() => {
@@ -429,13 +420,24 @@ const conTitolo = lingua !== 'de';
 </Base>
 
 <style is:global>
-  .pagina:has(.sl) { max-width: 64rem; }
-  .acc { font-family: var(--ui); }
+  .pagina:has(.acc) { max-width: 58rem; }
+  .acc { display: grid; grid-template-columns: 1fr 1fr; margin: 0.6rem 0 2rem; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--riga), 0 30px 60px -44px rgba(35, 48, 46, 0.5); font-family: var(--ui); }
   .acc [data-acc-a], .acc[data-acc="accedi"] [data-acc-r] { display: none; }
   .acc[data-acc="accedi"] [data-acc-a] { display: revert; }
+  .acc-sx { background: #f3efe7; padding: 2.6rem 2.6rem 2.4rem; display: flex; flex-direction: column; }
+  .acc-dx { padding: 2.6rem 2.6rem 2.2rem; display: flex; flex-direction: column; min-width: 0; }
   .acc-occ { margin: 0 0 0.8rem; font: 700 0.72rem var(--ui); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accento); }
   .acc h1 { margin: 0; font-size: 2.15rem; line-height: 1.1; letter-spacing: -0.01em; }
   .acc-frase { margin: 0.8rem 0 0; font-size: 1.02rem; line-height: 1.5; color: var(--inchiostro-2); max-width: 20rem; }
+  .acc-anello { width: 100%; max-width: 13.5rem; margin: auto; padding: 2rem 0 1.6rem; box-sizing: content-box; display: block; }
+  .acc-anello .a1 { font: 700 9.5px var(--ui); letter-spacing: 0.2em; fill: #8b938d; }
+  .acc-anello .a2 { font: 600 68px var(--titoli); fill: var(--inchiostro); }
+  .acc-anello .a2-100 { font-size: 54px; }
+  .acc-anello .a3 { font: 500 12.5px var(--ui); fill: #8b938d; }
+  .acc-mon { list-style: none; margin: 0; padding: 1.2rem 0 0; border-top: 1px solid #e2dccf; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; text-align: center; }
+  .acc-mon svg { width: 1.25rem; height: 1.25rem; color: var(--accento); display: block; margin: 0 auto 0.45rem; }
+  .acc-mon b { display: block; font-weight: 600; font-size: 0.86rem; }
+  .acc-mon span { display: block; font-size: 0.74rem; color: #8b938d; margin-top: 0.1rem; }
   .acc .schede-accesso { margin: 0 0 1.6rem; gap: 1.6rem; border-bottom: 1px solid var(--riga); }
   .acc .schede-accesso button { margin: 0 0 -1px; padding: 0 0 0.7rem; font-weight: 600; font-size: 1rem; color: #8b938d; }
   .acc .schede-accesso button[aria-selected="true"] { color: var(--inchiostro); }
@@ -455,48 +457,11 @@ const conTitolo = lingua !== 'de';
   .acc .nota-accesso { margin: auto 0 0; padding-top: 1.4rem; font-size: 0.82rem; }
   .acc #modulo-recupero .nota-accesso, .acc .dispositivi-login .nota-accesso { margin: 0; padding-top: 0; font-size: 0.9rem; }
   @media (max-width: 720px) {
+    .acc { grid-template-columns: 1fr; }
+    .acc-sx, .acc-dx { padding: 1.6rem 1.3rem; }
+    .acc h1 { font-size: 1.8rem; }
+    .acc-anello { max-width: 11rem; padding: 1.4rem 0 1.1rem; }
+    .acc-mon span { display: none; }
+    .acc-mon b { font-size: 0.78rem; }
   }
-  /* Sali scorrendo */
-.sl { font-family: var(--ui); margin-top: 1rem; }
-.sl-griglia { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 4.5rem; }
-.sl-fisso { position: sticky; top: 4.6rem; align-self: start; height: calc(100vh - 5.6rem); display: flex; flex-direction: column; justify-content: center; }
-.sl-anello { display: block; width: 100%; max-width: 12.5rem; margin: 0 auto; }
-.sl-anello path { fill: none; stroke-width: 9; stroke-linecap: round; }
-.sl-base { stroke: color-mix(in srgb, var(--c) 16%, #f1ede5); }
-.sl-pieno { opacity: 0; }
-.sl-anello .a1 { font: 700 9.5px var(--ui); letter-spacing: .2em; fill: #8b938d; }
-.sl-anello .a2 { font: 600 64px var(--titoli); fill: var(--inchiostro); font-variant-numeric: tabular-nums; }
-.sl-anello .a3 { font: 500 12.5px var(--ui); fill: #8b938d; }
-.sl-titolo { margin: 1rem 0 0; text-align: center; font: 600 1.3rem/1.2 var(--titoli); }
-@media (max-width: 720px) {
-  .sl-griglia { grid-template-columns: 1fr; gap: 0; }
-  .sl-fisso { top: 3.3rem; z-index: 3; height: auto; flex-direction: row; align-items: center; justify-content: flex-start; gap: .9rem; background: var(--carta); padding: .55rem 0; border-bottom: 1px solid var(--riga); }
-  .sl-anello { max-width: 3.4rem; margin: 0; flex: none; }
-  .sl-anello .a1, .sl-anello .a3 { display: none; } .sl-anello .a2 { font-size: 84px; transform: translateY(22px); } .sl-anello path { stroke-width: 14; }
-  .sl-titolo { margin: 0; font-size: 1.1rem; }
-}
-
-.sl { margin-top: 0; }
-.sl-griglia { grid-template-columns: 12rem minmax(0, 1fr); gap: 3.2rem; }
-.acc.sl-hero { background: none; box-shadow: none !important; border-radius: 0; overflow: visible; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: center; min-height: calc(100vh - 13rem); padding: 1rem 0 2.5rem; box-sizing: border-box; }
-.sl-hero h1 { font-size: 2.4rem; }
-.sl-hero .acc-vantaggi ul { font-size: .89rem; }
-.sl-hero .acc-vantaggi li { gap: .6rem; }
-.sl-hero .acc-frase { max-width: 22rem; font-size: 1.08rem; }
-.sl-hero .acc-vantaggi { margin-top: 2rem; }
-.sl-hero .acc-vantaggi ul { margin: 0; }
-.sl-hero-b { display: flex; flex-direction: column; min-width: 0; }
-.sl-hero .acc-note, .sl-hero .nota-accesso { margin-top: 0; }
-@media (max-width: 720px) {
-  .sl-griglia { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .sl-fisso { display: none; }
-  .acc.sl-hero { display: flex; flex-direction: column; align-items: stretch; gap: 0; min-height: 0; padding: 1.4rem 0 2.2rem; }
-  .sl-hero-a { display: contents; }
-  .sl-hero h1 { font-size: 1.95rem; }
-  .sl-hero-b { order: 1; margin-top: 1.6rem; }
-  .sl-hero .acc-vantaggi { order: 2; margin-top: 1.8rem; }
-}
-
-#cima { scroll-margin-top: 5rem; }
-.sl-solo .sl-fisso { height: auto; align-self: center; position: static; }
 </style>
