@@ -4,7 +4,7 @@
   "costoMese": "163,74 €",
   "rinnovo": "attivo",
   "verdetto": "In valutazione",
-  "notaVerdetto": "Secondo giorno. La scansione ha trovato tre difetti tecnici veri, corretti il 22/11. L'effetto si misura con la prossima scansione e con le posizioni dei prossimi giorni.",
+  "notaVerdetto": "Secondo giorno. Le correzioni del 22/11 hanno tolto 15.012 errori su 17.311 e portato la salute tecnica da 80 a 84 su 100. Le visite da Google non sono ancora cambiate: servono settimane.",
   "misure": [
     {
       "voce": "Autorevolezza del sito (Authority Score, da 0 a 100)",
@@ -39,22 +39,22 @@
     {
       "voce": "Salute tecnica del sito (Site Health)",
       "zero": "80 su 100",
-      "ora": "80 su 100"
+      "ora": "84 su 100"
     },
     {
       "voce": "Errori tecnici segnalati",
       "zero": "17.311",
-      "ora": "17.311"
+      "ora": "2.299"
     },
     {
       "voce": "Schede «corso» non accettate da Google",
       "zero": "14.682",
-      "ora": "14.682"
+      "ora": "0"
     },
     {
       "voce": "Link interni rotti",
       "zero": "52",
-      "ora": "52"
+      "ora": "0"
     }
   ],
   "scoperte": [
@@ -97,6 +97,11 @@
       "giorno": "2026-11-21",
       "testo": "Velocità da cellulare (Core Web Vitals) 10 su 100 e 2.029 titoli più lunghi di quanto Google mostra.",
       "stato": "in esame"
+    },
+    {
+      "giorno": "2026-11-22",
+      "testo": "Velocità da cellulare: su 10 pagine campione il contenuto principale compare troppo tardi in tutte (misura di laboratorio di Semrush); stabilità e reattività della pagina sono buone.",
+      "stato": "in esame"
     }
   ],
   "diario": [
@@ -114,7 +119,8 @@
       "voci": [
         "Letti i risultati della scansione: salute tecnica 80 su 100, 17.311 errori, 40.173 avvisi su 20.000 pagine.",
         "Primo rilevamento delle posizioni da cellulare: nessuna delle 60 ricerche fra i primi 100 risultati.",
-        "Corretti dati strutturati dei corsi e link rotti."
+        "Corretti dati strutturati dei corsi e link rotti.",
+        "Seconda scansione dopo le correzioni: salute tecnica 84 su 100, errori da 17.311 a 2.299."
       ]
     }
   ],
@@ -122,12 +128,12 @@
     {
       "giorno": "2026-11-22",
       "testo": "Scheda «corso» completa di prezzo e modalità online nella pagina di ogni materia; tolta l'etichetta incompleta dalle altre pagine.",
-      "effetto": "da misurare con la prossima scansione"
+      "effetto": "14.682 segnalazioni azzerate; voto dei dati strutturati da 79 a 100"
     },
     {
       "giorno": "2026-11-22",
       "testo": "Corretti i link rotti nelle domande a tempo delle materie gratuite e nelle pagine dei prezzi in tedesco, spagnolo e francese.",
-      "effetto": "da misurare con la prossima scansione"
+      "effetto": "link interni rotti da 52 a 0; pagine inesistenti da 10 a 2"
     }
   ]
 }
