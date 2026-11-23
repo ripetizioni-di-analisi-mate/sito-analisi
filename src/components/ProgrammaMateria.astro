@@ -13,6 +13,7 @@
 // Vale anche per le pagine inglesi (prop lingua); lo Studio guidato e la compatibilità restano in italiano.
 import NotaBocconi from './NotaBocconi.astro';
 import { BOCCONI } from '../data/bocconi.mjs';
+import { ANTEPRIMA_ATTIVITA_ANALISI_1 } from '../data/anteprima-attivita.mjs';
 
 interface Argomento { slug: string; titolo: string; riassunto?: string; pronto: boolean; svolti: number; dafare: number; verificabili: number; domande: number }
 interface Props {
@@ -128,6 +129,9 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
         <div class="pm-cp">
           <h3>{a.pronto ? <a href={href(a.slug, 'teoria')}>{a.titolo}<span set:html={I.avanti} /></a> : a.titolo}</h3>
           {a.riassunto && <p>{a.riassunto}</p>}
+          {lingua === 'it' && materia === 'analisi-1' && a.slug === 'insiemi' && (
+            <a class="pm-anteprima-attivita" href={ANTEPRIMA_ATTIVITA_ANALISI_1} data-orientamento-gm hidden>Anteprima attività</a>
+          )}
         </div>
         {a.pronto ? (
           <div class="pm-voci">
@@ -274,6 +278,7 @@ const href = (slug: string, sezione: string) => `${sezione === 'domande' && ling
   .pm-perc h3 a > span { margin-left: .3rem; vertical-align: -.12em; color: var(--azione); font-size: .95rem; }
   .pm-perc h3 a:hover { color: var(--azione); }
   .pm-cp p { margin: .3rem 0 0; font: 400 .95rem/1.45 var(--testo); color: var(--inchiostro-2); }
+  .pm-anteprima-attivita { display: inline-block; margin-top: .45rem; color: var(--accento); font: 600 .9rem/1.5 var(--ui); text-underline-offset: .2em; }
   .pm-prep h3 { color: var(--inchiostro-2); }
   .pm-voci { display: flex; flex-direction: column; gap: .5rem; padding-top: .3rem; }
   .pm-stato { font: 600 .78rem/1 var(--ui); font-style: normal; color: var(--azione); }

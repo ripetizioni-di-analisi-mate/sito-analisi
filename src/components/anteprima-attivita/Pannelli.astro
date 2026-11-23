@@ -1,0 +1,554 @@
+<h1>Insiemi, induzione e funzioni elementari</h1>
+    <nav class="activities" aria-label="Attività del capitolo">
+      <a id="aa-nav-pratica" href="#esercizi-da-fare">Esercizi da fare</a>
+      <a id="aa-nav-schede" href="#esercizi-svolti">Esercizi svolti</a>
+      <a id="aa-nav-quiz" href="#domande-a-tempo" aria-current="page">Domande a tempo</a>
+    </nav>
+    <section class="panel" data-attivita="esercizi-da-fare" aria-labelledby="aa-nav-pratica" hidden>
+      <div class="toolbar">
+        <p class="count">2 esercizi in anteprima</p>
+        <a class="text-link" href="/analisi-1/insiemi/esercizi" target="_blank" rel="noopener">Tutti i 34 esercizi <span aria-hidden="true">↗</span></a>
+      </div>
+      <ol class="sheet-list practice-list" role="list">
+        <li class="sheet">
+          <details class="exercise" name="esercizi-del-capitolo" open>
+            <summary class="sheet-summary">
+              <span class="number" aria-hidden="true">01</span>
+              <span class="sheet-name"><span class="sr-only">Esercizio 1. </span>Operazioni tra insiemi finiti</span>
+              <span class="toggle-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="sheet-body">
+              <h2 class="sub-label">Traccia</h2>
+              <p class="question">Dati <span class="math">A = &#123;0, 1, 2, 3&#125;</span> e <span class="math">B = &#123;2, 3, 5&#125;</span>, determina l’unione, l’intersezione e le due differenze.</p>
+              <form class="practice" data-esercizio="insiemi" novalidate>
+                <fieldset class="answer-group" aria-describedby="aa-aiuto-insiemi">
+                  <legend class="sub-label">Le tue risposte</legend>
+                  <p class="notation" id="aa-aiuto-insiemi">Separa gli elementi con virgole. Le parentesi graffe sono facoltative.</p>
+                  <div class="answer-grid">
+                    <div class="answer-field">
+                      <label for="aa-insiemi-1"><span class="math" aria-hidden="true">A ∪ B</span><span class="sr-only">Unione di A e B</span></label>
+                      <input id="aa-insiemi-1" type="text" name="insiemi-1" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-insiemi-1">
+                      <span class="field-note" id="aa-esito-insiemi-1"></span>
+                    </div>
+                    <div class="answer-field">
+                      <label for="aa-insiemi-2"><span class="math" aria-hidden="true">A ∩ B</span><span class="sr-only">Intersezione di A e B</span></label>
+                      <input id="aa-insiemi-2" type="text" name="insiemi-2" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-insiemi-2">
+                      <span class="field-note" id="aa-esito-insiemi-2"></span>
+                    </div>
+                    <div class="answer-field">
+                      <label for="aa-insiemi-3"><span class="math" aria-hidden="true">A ∖ B</span><span class="sr-only">Differenza di A e B</span></label>
+                      <input id="aa-insiemi-3" type="text" name="insiemi-3" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-insiemi-3">
+                      <span class="field-note" id="aa-esito-insiemi-3"></span>
+                    </div>
+                    <div class="answer-field">
+                      <label for="aa-insiemi-4"><span class="math" aria-hidden="true">B ∖ A</span><span class="sr-only">Differenza di B e A</span></label>
+                      <input id="aa-insiemi-4" type="text" name="insiemi-4" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-insiemi-4">
+                      <span class="field-note" id="aa-esito-insiemi-4"></span>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="form-actions">
+                  <button type="submit" class="primary">Verifica risposte</button>
+                  <p class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                </div>
+              </form>
+            </div>
+          </details>
+        </li>
+        <li class="sheet">
+          <details class="exercise" name="esercizi-del-capitolo">
+            <summary class="sheet-summary">
+              <span class="number" aria-hidden="true">02</span>
+              <span class="sheet-name"><span class="sr-only">Esercizio 2. </span>Operazioni tra intervalli</span>
+              <span class="toggle-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="sheet-body">
+              <h2 class="sub-label">Traccia</h2>
+              <p class="question">Dati <span class="math">A = (−3, 2]</span> e <span class="math">B = [0, 4)</span>, determina l’intersezione, l’unione, la differenza e il complementare di B in ℝ.</p>
+              <form class="practice" data-esercizio="intervalli" novalidate>
+                <fieldset class="answer-group" aria-describedby="aa-aiuto-intervalli">
+                  <legend class="sub-label">Le tue risposte</legend>
+                  <p class="notation" id="aa-aiuto-intervalli">Usa le parentesi per indicare gli estremi. Puoi digitare «inf» per ∞ e «U» per ∪.</p>
+                  <div class="answer-grid">
+                    <div class="answer-field">
+                      <label for="aa-intervalli-1"><span class="math" aria-hidden="true">A ∩ B</span><span class="sr-only">Intersezione di A e B</span></label>
+                      <input id="aa-intervalli-1" type="text" name="intervalli-1" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-intervalli-1">
+                      <span class="field-note" id="aa-esito-intervalli-1"></span>
+                    </div>
+                    <div class="answer-field">
+                      <label for="aa-intervalli-2"><span class="math" aria-hidden="true">A ∪ B</span><span class="sr-only">Unione di A e B</span></label>
+                      <input id="aa-intervalli-2" type="text" name="intervalli-2" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-intervalli-2">
+                      <span class="field-note" id="aa-esito-intervalli-2"></span>
+                    </div>
+                    <div class="answer-field">
+                      <label for="aa-intervalli-3"><span class="math" aria-hidden="true">A ∖ B</span><span class="sr-only">Differenza di A e B</span></label>
+                      <input id="aa-intervalli-3" type="text" name="intervalli-3" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-intervalli-3">
+                      <span class="field-note" id="aa-esito-intervalli-3"></span>
+                    </div>
+                    <div class="answer-field">
+                      <label for="aa-intervalli-4"><span class="math" aria-hidden="true">ℝ ∖ B</span><span class="sr-only">Complementare di B nei reali</span></label>
+                      <input id="aa-intervalli-4" type="text" name="intervalli-4" spellcheck="false" autocomplete="off" autocapitalize="none" required aria-describedby="aa-esito-intervalli-4">
+                      <span class="field-note" id="aa-esito-intervalli-4"></span>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="form-actions">
+                  <button type="submit" class="primary">Verifica risposte</button>
+                  <p class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                </div>
+              </form>
+            </div>
+          </details>
+        </li>
+
+      </ol>
+    </section>
+
+    <section class="panel" data-attivita="esercizi-svolti" aria-labelledby="aa-nav-schede" hidden>
+      <div class="toolbar filter-bar">
+        <p id="aa-count" class="count" role="status" aria-live="polite" aria-atomic="true">16 schede</p>
+        <div class="filter-tools">
+          <div class="search-control" role="search">
+            <span class="magnify" aria-hidden="true"></span>
+            <label class="sr-only" for="aa-search">Cerca una scheda per titolo o parola chiave</label>
+            <input type="search" id="aa-search" placeholder="Cerca scheda" spellcheck="false" autocomplete="off" aria-controls="aa-sheet-list">
+            <button class="clear-search" type="button" aria-label="Cancella ricerca" hidden>×</button>
+          </div>
+          <label>
+            <span class="sr-only">Filtra per argomento</span>
+            <select id="aa-topic" aria-controls="aa-sheet-list">
+              <option value="tutte">Tutti gli argomenti</option>
+              <option value="insiemi">Insiemi e numeri</option>
+              <option value="induzione">Induzione e binomio</option>
+              <option value="funzioni">Funzioni</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <ol id="aa-sheet-list" class="sheet-list" role="list">
+
+      <li class="sheet" data-group="insiemi" data-terms="insiemi e numeri" data-number="01">
+        <details class="exercise" id="aa-scheda-1" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">01</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 1. </span>Operazioni tra insiemi dati</span>
+              <span class="keywords">Unione, intersezione, differenza, complementare, prodotto cartesiano e intervalli.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Siano <span class="math">A = &#123;1, 2, 3&#125;</span> e <span class="math">B = &#123;2, 4&#125;</span>. Quali elementi appartengono all’unione? Quali all’intersezione?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per l’unione raccogli tutti gli elementi dei due insiemi, scrivendo il 2 una volta sola. Ottieni <span class="math">A ∪ B = &#123;1, 2, 3, 4&#125;</span>.</p>
+<p>Per l’intersezione tieni solo gli elementi presenti in entrambi. Il 2 è l’unico numero che compare sia in <span class="math">A</span> sia in <span class="math">B</span>, quindi <span class="math">A ∩ B = &#123;2&#125;</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/1" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/operazioni-tra-insiemi" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="insiemi" data-terms="insiemi e numeri sup inf supremum infimum" data-number="02">
+        <details class="exercise" id="aa-scheda-2" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">02</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 2. </span>Estremi superiore e inferiore di insiemi numerici</span>
+              <span class="keywords">Estremo superiore, estremo inferiore, massimo, minimo, maggioranti e minoranti.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Considera i numeri <span class="math">1 − 1/n</span>, con <span class="math">n = 1, 2, 3, …</span>. L’insieme ha un massimo e un minimo?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per <span class="math">n = 1</span> si ottiene 0. Tutti gli altri termini sono positivi, quindi 0 è sia il minimo sia l’estremo inferiore.</p>
+<p>I termini crescono verso 1 restando sempre più piccoli di 1. Il numero 1 è l’estremo superiore. Un massimo non esiste, perché ogni termine è superato dal successivo.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/2" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/sup-inf" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="insiemi" data-terms="insiemi e numeri sup inf supremum infimum" data-number="03">
+        <details class="exercise" id="aa-scheda-3" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">03</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 3. </span>Verifiche di sup e inf con la caratterizzazione con epsilon</span>
+              <span class="keywords">Caratterizzazione, epsilon, estremo superiore, estremo inferiore e verifica.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Come si dimostra, usando <span class="math">ε</span>, che 2 è l’estremo superiore di <span class="math">[0, 2)</span>?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Tutti i punti dell’intervallo sono minori di 2, quindi 2 è un maggiorante. Resta da vedere che nessun numero più piccolo può esserlo.</p>
+<p>Fissato <span class="math">ε &gt; 0</span>, scegli <span class="math">x = 2 − min&#123;ε/2, 1&#125;</span>. Questo punto appartiene all’intervallo e soddisfa <span class="math">2 − ε &lt; x &lt; 2</span>. Ogni valore minore di 2 viene così superato da un punto dell’insieme.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/3" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/caratterizzazione-sup" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="insiemi" data-terms="insiemi e numeri" data-number="04">
+        <details class="exercise" id="aa-scheda-4" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">04</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 4. </span>Dimostrazioni di irrazionalità per assurdo</span>
+              <span class="keywords">Irrazionale, dimostrazione per assurdo, radice e frazione ridotta.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Perché <span class="math">√3</span> non si può scrivere come rapporto di due interi?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Supponi di avere <span class="math">√3 = p/q</span>, con <span class="math">q ≠ 0</span> e la frazione ridotta ai minimi termini. Elevando al quadrato ottieni <span class="math">p² = 3q²</span>. Poiché 3 è primo e divide <span class="math">p²</span>, deve dividere anche <span class="math">p</span>.</p>
+<p>Sostituisci <span class="math">p = 3k</span>. Si ricava <span class="math">q² = 3k²</span>, quindi 3 divide anche <span class="math">q</span>. Il fattore comune contraddice la scelta della frazione ridotta.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/4" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/radice-di-due" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="induzione" data-terms="induzione combinatoria binomio" data-number="05">
+        <details class="exercise" id="aa-scheda-5" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">05</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 5. </span>Dimostrazioni per induzione di formule per somme</span>
+              <span class="keywords">Induzione, somme, base, passo induttivo e identità.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Dimostra che la somma dei primi <span class="math">n</span> numeri dispari vale <span class="math">n²</span>.</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per <span class="math">n = 1</span> la somma è 1 e vale <span class="math">1²</span>. Supponi ora che i primi <span class="math">k</span> dispari abbiano somma <span class="math">k²</span>.</p>
+<p>Il dispari successivo è <span class="math">2k + 1</span>. Aggiungendolo ottieni <span class="math">k² + 2k + 1 = (k + 1)²</span>. È la stessa formula con un termine in più, quindi vale per ogni <span class="math">n ≥ 1</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/5" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/induzione" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="induzione" data-terms="induzione combinatoria binomio" data-number="06">
+        <details class="exercise" id="aa-scheda-6" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">06</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 6. </span>Dimostrazioni per induzione di disuguaglianze</span>
+              <span class="keywords">Induzione, disuguaglianze, potenze e fattoriale.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Come si prova che <span class="math">2<sup>n</sup> ≥ n + 1</span> per ogni intero <span class="math">n ≥ 0</span>?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per <span class="math">n = 0</span> i due membri valgono 1. Supponi che <span class="math">2<sup>k</sup> ≥ k + 1</span> e moltiplica entrambi i membri per 2.</p>
+<p>Ottieni <span class="math">2<sup>k+1</sup> ≥ 2k + 2</span>. Poiché <span class="math">k ≥ 0</span>, si ha <span class="math">2k + 2 ≥ k + 2</span>. Questo è il passaggio richiesto per l’indice <span class="math">k + 1</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/6" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/induzione" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="induzione" data-terms="induzione combinatoria binomio" data-number="07">
+        <details class="exercise" id="aa-scheda-7" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">07</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 7. </span>Dimostrazioni per induzione di proprietà di divisibilità</span>
+              <span class="keywords">Induzione, divisibilità e multipli.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Dimostra per induzione che <span class="math">4<sup>n</sup> − 1</span> è un multiplo di 3 per ogni <span class="math">n ≥ 1</span> intero.</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per <span class="math">n = 1</span> ottieni 3. Supponi che per un certo <span class="math">k</span> il numero <span class="math">4<sup>k</sup> − 1</span> sia un multiplo di 3.</p>
+<p>Scrivi <span class="math">4<sup>k+1</sup> − 1 = 4(4<sup>k</sup> − 1) + 3</span>. Il primo addendo è divisibile per 3 grazie all’ipotesi e il secondo è 3. Anche la somma è divisibile per 3.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/7" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/induzione" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="induzione" data-terms="induzione combinatoria binomio" data-number="08">
+        <details class="exercise" id="aa-scheda-8" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">08</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 8. </span>Calcoli con coefficienti binomiali e binomio di Newton</span>
+              <span class="keywords">Coefficiente binomiale, binomio di Newton, sviluppo, fattoriale e termine.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Qual è il coefficiente di <span class="math">x³</span> nello sviluppo di <span class="math">(2 + x)⁵</span>?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per ottenere <span class="math">x³</span> scegli <span class="math">x</span> da tre dei cinque fattori. Dagli altri due prendi 2. Ci sono dieci modi di scegliere quei tre fattori.</p>
+<p>Ogni scelta contribuisce <span class="math">2²x³ = 4x³</span>. In tutto il termine è <span class="math">10 · 4x³ = 40x³</span>, quindi il coefficiente richiesto è 40.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/8" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/binomio-di-newton" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="09">
+        <details class="exercise" id="aa-scheda-9" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">09</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 9. </span>Domini di funzioni composte</span>
+              <span class="keywords">Dominio naturale, condizioni di esistenza, radice, logaritmo e arcoseno.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Per quali valori reali di <span class="math">x</span> è definita la funzione <span class="math">f(x) = ln(√(3 − x))</span>?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>La radice richiede <span class="math">3 − x ≥ 0</span>. Il logaritmo richiede che il suo argomento sia strettamente positivo, quindi la radice deve anche essere diversa da zero.</p>
+<p>Le due condizioni insieme danno <span class="math">3 − x &gt; 0</span>. Il dominio è <span class="math">(−∞, 3)</span>. Nel punto 3 comparirebbe il logaritmo di zero.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/9" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/dominio-naturale" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="10">
+        <details class="exercise" id="aa-scheda-10" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">10</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 10. </span>Iniettività e funzioni inverse</span>
+              <span class="keywords">Funzione iniettiva, funzione inversa, invertibilità e monotonia.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Trova l’inversa di <span class="math">f(x) = 3e<sup>x</sup> − 2</span> e indica dove è definita.</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>L’esponenziale è strettamente crescente. Moltiplicarlo per 3 e sottrarre 2 conserva la crescenza, quindi a ogni valore dell’immagine corrisponde un solo <span class="math">x</span>.</p>
+<p>Da <span class="math">y = 3e<sup>x</sup> − 2</span> ricavi <span class="math">e<sup>x</sup> = (y + 2)/3</span>. Ne segue <span class="math">f<sup>−1</sup>(y) = ln((y + 2)/3)</span>, definita per <span class="math">y &gt; −2</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/10" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/funzione-inversa" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="11">
+        <details class="exercise" id="aa-scheda-11" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">11</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 11. </span>Parità e simmetrie</span>
+              <span class="keywords">Funzione pari, funzione dispari e simmetria del grafico.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">La funzione <span class="math">f(x) = x/(1 + x²)</span> è pari o dispari?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Il denominatore è sempre positivo, quindi il dominio è tutto l’asse reale ed è simmetrico rispetto a zero.</p>
+<p>Sostituisci <span class="math">−x</span> al posto di <span class="math">x</span>. Il numeratore cambia segno, mentre il denominatore resta identico. Vale <span class="math">f(−x) = −f(x)</span>, perciò la funzione è dispari e il grafico è simmetrico rispetto all’origine.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/11" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/pari-dispari" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="12">
+        <details class="exercise" id="aa-scheda-12" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">12</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 12. </span>Grafici ottenuti per trasformazioni</span>
+              <span class="keywords">Traslazione, riflessione, valore assoluto e grafico.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Come si ottiene il grafico di <span class="math">y = |x − 2| − 1</span> a partire da <span class="math">y = |x|</span>?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>L’espressione <span class="math">x − 2</span> dentro il valore assoluto sposta il grafico di due unità verso destra. Il vertice passa da <span class="math">(0, 0)</span> a <span class="math">(2, 0)</span>.</p>
+<p>Sottrarre 1 all’esterno abbassa ogni ordinata di un’unità. Il vertice finale è <span class="math">(2, −1)</span> e i due rami conservano la loro pendenza.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/12" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/trasformazioni-del-grafico" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="13">
+        <details class="exercise" id="aa-scheda-13" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">13</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 13. </span>Disequazioni esponenziali</span>
+              <span class="keywords">Disequazione esponenziale, base minore di 1 e sostituzione.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Risolvi <span class="math">(1/2)<sup>x−1</sup> &gt; 1/4</span>.</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Riscrivi il secondo membro come <span class="math">(1/2)²</span>. Ora i due membri hanno la stessa base.</p>
+<p>La base è compresa tra 0 e 1, quindi al valore maggiore della potenza corrisponde l’esponente minore. Serve <span class="math">x − 1 &lt; 2</span>, ossia <span class="math">x &lt; 3</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/13" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/esponenziale" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="14">
+        <details class="exercise" id="aa-scheda-14" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">14</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 14. </span>Disequazioni logaritmiche</span>
+              <span class="keywords">Disequazione logaritmica, condizioni di esistenza e base minore di 1.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Trova i valori di <span class="math">x</span> per cui <span class="math">log<sub>2</sub>(x − 1) ≤ 2</span>.</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Per prima cosa imponi <span class="math">x − 1 &gt; 0</span>, quindi <span class="math">x &gt; 1</span>. Il logaritmo in base 2 è crescente.</p>
+<p>La disequazione equivale a <span class="math">x − 1 ≤ 2²</span>, cioè <span class="math">x ≤ 5</span>. Intersecando il risultato con la condizione iniziale ottieni <span class="math">1 &lt; x ≤ 5</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/14" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/logaritmo" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="15">
+        <details class="exercise" id="aa-scheda-15" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">15</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 15. </span>Equazioni trigonometriche</span>
+              <span class="keywords">Equazione trigonometrica, seno, coseno e formule di duplicazione.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Risolvi nell’insieme dei reali <span class="math">2 sin(x) cos(x) = sin(x)</span>.</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Porta tutto a sinistra e raccogli il fattore comune. Si ottiene <span class="math">sin(x) · (2 cos(x) − 1) = 0</span>.</p>
+<p>Il primo fattore dà <span class="math">x = kπ</span>. Il secondo dà <span class="math">cos(x) = 1/2</span>, quindi <span class="math">x = 2kπ ± π/3</span>. In entrambe le famiglie <span class="math">k</span> è un intero.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/15" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/equazioni-trigonometriche" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="sheet" data-group="funzioni" data-terms="funzioni elementari" data-number="16">
+        <details class="exercise" id="aa-scheda-16" name="schede-del-capitolo">
+          <summary class="sheet-summary">
+            <span class="number" aria-hidden="true">16</span>
+            <span class="sheet-copy">
+              <span class="sheet-name"><span class="sr-only">Scheda 16. </span>Immagini di funzioni</span>
+              <span class="keywords">Immagine, completamento del quadrato, discriminante e funzione limitata.</span>
+            </span>
+            <span class="toggle-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="sheet-body">
+            <h2 class="sub-label">Traccia</h2>
+            <p class="question">Quali valori assume <span class="math">f(x) = x² − 4x + 7</span> al variare di <span class="math">x</span> in ℝ?</p>
+            <h2 class="sub-label solution-label">Svolgimento</h2>
+            <div class="working"><p>Completa il quadrato. Ottieni <span class="math">f(x) = (x − 2)² + 3</span>. Il quadrato è non negativo e vale zero per <span class="math">x = 2</span>, quindi il valore minimo è 3.</p>
+<p>Per ogni <span class="math">y ≥ 3</span> puoi scegliere <span class="math">x = 2 + √(y − 3)</span> e ottenere <span class="math">f(x) = y</span>. L’immagine è dunque <span class="math">[3, +∞)</span>.</p></div>
+            <div class="sheet-actions">
+              <a class="primary" href="/analisi-1/insiemi/esercizi-svolti/16" target="_blank" rel="noopener">Apri la scheda completa</a>
+              <a class="text-link" href="/analisi-1/insiemi/teoria/funzione" target="_blank" rel="noopener">Ripassa la teoria</a>
+            </div>
+          </div>
+        </details>
+      </li>
+      </ol>
+      <div id="aa-empty" class="empty" hidden>
+        <p>Nessuna scheda corrisponde alla ricerca.</p>
+        <button class="text-link" type="button" id="aa-reset">Mostra tutte le schede</button>
+      </div>
+    </section>
+
+    <section class="panel quiz-panel" data-attivita="domande-a-tempo" aria-labelledby="aa-nav-quiz">
+      <section id="aa-landing" class="quiz-intro" aria-label="Avvio del quiz">
+        <div>
+          <h2>2 domande di prova</h2>
+          <p>Hai 2 minuti per domanda. Dopo ogni risposta trovi la spiegazione.</p>
+        </div>
+        <button type="button" class="primary" id="aa-inizia" aria-label="Inizia il quiz">Inizia</button>
+      </section>
+
+    <section id="aa-sessione" class="quiz-view" aria-labelledby="aa-domanda" hidden>
+      <div class="quiz-meta">
+        <p id="aa-progresso"></p>
+        <p class="time" id="aa-tempo">Tempo rimasto <strong id="aa-minuti" role="timer" aria-live="off">2:00</strong></p>
+      </div>
+      <h2 id="aa-domanda" tabindex="-1"></h2>
+      <form id="aa-risposte">
+        <fieldset id="aa-scelte"><legend class="sr-only">Scegli una risposta</legend></fieldset>
+        <button type="submit" class="primary" id="aa-conferma" disabled>Conferma risposta</button>
+      </form>
+      <div class="feedback" id="aa-esito" hidden>
+        <h3 id="aa-titolo-esito" tabindex="-1"></h3>
+        <p id="aa-spiegazione"></p>
+        <a class="review-link" id="aa-ripasso-mirato" target="_blank" rel="noopener" hidden></a>
+        <button type="button" class="primary" id="aa-continua">Domanda successiva</button>
+      </div>
+      <button type="button" class="text-link quit" data-ritorno>Torna all’inizio del quiz</button>
+    </section>
+
+    <section id="aa-riepilogo" class="quiz-view" aria-labelledby="aa-titolo-riepilogo" hidden>
+      <h2 id="aa-titolo-riepilogo" tabindex="-1">Risultato del quiz</h2>
+      <p class="score" id="aa-punteggio"></p>
+      <a class="primary" href="/analisi-1/insiemi/domande" target="_blank" rel="noopener">Apri il quiz completo</a>
+      <button type="button" class="text-link replay" data-ritorno>Riprova</button>
+    </section>
+    </section>
