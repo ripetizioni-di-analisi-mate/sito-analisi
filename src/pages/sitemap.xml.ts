@@ -60,6 +60,7 @@ export async function GET() {
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);
+  due('/gratis', 0.7, false);
   // indici generali di tutti i teoremi e di tutte le definizioni
   due('/teoremi', 0.8);
   due('/definizioni', 0.7);

@@ -109,7 +109,7 @@ const icona = {
     <ul class="legenda-home-2">
       <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
       <li><Fragment set:html={icona.videoFilo} /><span><b><a href={url('/videocorsi')}>Videocorsi</a></b> con video e PDF.</span></li>
-      <li><Fragment set:html={icona.gratis} /><span><b>Gratis</b>: anteprime, quiz, formulari e corsi da zero.</span></li>
+      <li><Fragment set:html={icona.gratis} /><span><b><a href={url('/gratis')}>Gratis</a></b>: anteprime, quiz, formulari e corsi da zero.</span></li>
       <li class="solo-ospiti"><Fragment set:html={icona.account} /><span><b><a href={url('/accedi?nuovo=1')}>Con l’iscrizione</a></b>: livelli e punti, lega settimanale, Studio guidato e progressi verso l’esame.</span></li>
     </ul>
   ) : (

@@ -1,0 +1,84 @@
+---
+// Pagina del materiale gratuito (richiesta di Carmine del 24/11/2026: «le cose gratuite non hanno una parte loro sul sito?»).
+// Ci si arriva dalla parola «Gratis» nella legenda della home. Solo italiano.
+// Contiene solo ciò che è davvero gratuito: numeri e materie sono calcolati dai dati del sito, niente scritto a mano.
+import Base from '../layouts/Base.astro';
+import { materia as trovaMateria } from '../data/materie';
+import { FORMULARI } from '../data/formulari';
+import { percorsoRaccolta, raccolteSvolti } from '../lib/raccolte-svolti';
+import { url } from '../lib/url';
+
+const raccolte = await raccolteSvolti('it');
+const svolti = [...raccolte].map(([slug, capitoli]) => ({
+  slug,
+  m: trovaMateria(slug),
+  schede: capitoli.reduce((n, c) => n + c.schede.length, 0),
+}));
+const totaleSchede = svolti.reduce((n, s) => n + s.schede, 0);
+const gruppi = [...new Set(svolti.map((s) => s.m.gruppo))].map((g) => ({ nome: g, materie: svolti.filter((s) => s.m.gruppo === g) }));
+
+const elencoFormulari = FORMULARI.map((s) => trovaMateria(s).titolo);
+const formulariTesto = elencoFormulari.slice(0, -1).join(', ') + ' e ' + elencoFormulari.at(-1);
+const mz = trovaMateria('matematica-da-zero');
+const fz = trovaMateria('fisica-zero');
+
+const senzaAccount = [
+  { href: '/domande-a-tempo', titolo: 'Domande a tempo', testo: 'Quiz a risposta multipla per ogni argomento, con la spiegazione dopo ogni risposta.' },
+  { href: '/formulari', titolo: 'Formulari', testo: `Le formule di ${formulariTesto}, con le condizioni di validità.` },
+  ...(mz?.attiva ? [{ href: '/matematica-da-zero', titolo: mz.titolo, testo: `La matematica dalle basi, tutta gratuita: ${mz.argomenti.length} argomenti con teoria ed esercizi.` }] : []),
+  ...(fz?.attiva ? [{ href: '/fisica-zero', titolo: fz.titolo, testo: `La fisica dalle basi, tutta gratuita: ${fz.argomenti.length} argomenti con teoria ed esercizi.` }] : []),
+  { href: '/teoremi', titolo: 'Teoremi e definizioni', testo: 'Gli enunciati di tutti i teoremi e le definizioni del sito, in ordine alfabetico.' },
+  { href: '/compatibilita', titolo: 'Il sito copre il tuo esame?', testo: 'Si carica il testo di un compito universitario e si vede quanta parte è coperta dal materiale.' },
+  { href: '/concorsi/simulazione', titolo: 'Simulazioni a quiz', testo: 'Prove a quiz dei concorsi pubblici, con durata e punteggio a scelta.' },
+  { href: '/concorsi', titolo: 'Guida ai concorsi', testo: 'Che cosa studiare per il proprio concorso, materia per materia.' },
+  { href: '/materie', titolo: 'Anteprima di ogni materia', testo: 'In ogni materia i primi paragrafi della teoria e le prime schede svolte di ogni argomento.' },
+];
+---
+<Base titolo="Materiale gratuito: esercizi svolti, quiz e formulari" descrizione={`Tutto il materiale gratuito di ripetizionidianalisi.com: ${totaleSchede} schede di esercizi svolti, domande a tempo, formulari, Matematica zero e Fisica zero, teoremi e definizioni.`} lingua="it" percorso={[{ titolo: 'Gratis' }]}>
+  <h1>Materiale gratuito</h1>
+  <p class="sommario">Tutto ciò che sul sito si usa senza pagare. La prima parte si apre subito; l'ultima con un account gratuito.</p>
+
+  <h2>Senza account</h2>
+  <ul class="griglia-materie gratis-griglia">
+    {senzaAccount.map((v) => (
+      <li style="--accento: var(--azione)">
+        <a href={url(v.href)}>
+          <h3>{v.titolo}</h3>
+          <p>{v.testo}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <h2 id="esercizi-svolti">Esercizi svolti gratuiti</h2>
+  <p>{totaleSchede} schede svolte aperte per intero, raccolte per materia.</p>
+  {gruppi.map((g) => (
+    <div class="gratis-gruppo">
+      <h3>{g.nome}</h3>
+      <ul>
+        {g.materie.map((s) => <li><a href={url(percorsoRaccolta(s.slug))}>{s.m.titolo}</a> <span>{s.schede}</span></li>)}
+      </ul>
+    </div>
+  ))}
+
+  <h2>Con l'account gratuito</h2>
+  <ul class="gratis-account">
+    <li><b>Livelli e punti</b>: lo studio e le risposte giuste fanno salire di livello.</li>
+    <li><b>Lega settimanale</b>: la classifica della settimana con gli altri studenti.</li>
+    <li><b>Studio guidato</b>: il risultato completo del test e il percorso per recuperare le lacune.</li>
+    <li><b>Progressi verso l'esame</b>: la data dell'esame e i capitoli già studiati.</li>
+  </ul>
+  <p class="solo-ospiti"><a class="tasto-gratis" href={url('/accedi?nuovo=1')}>Crea un account gratuito</a></p>
+</Base>
+
+<style>
+  .gratis-griglia p { margin: 0.3rem 0 0; -webkit-line-clamp: unset; color: var(--inchiostro-2); font-size: 0.95rem; }
+  .gratis-gruppo h3 { font: 600 0.8rem/1.4 var(--ui); text-transform: uppercase; letter-spacing: 0.05em; color: var(--inchiostro-2); margin: 1.1rem 0 0.4rem; }
+  .gratis-gruppo ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.15rem 1.5rem; }
+  @media (min-width: 44rem) { .gratis-gruppo ul { grid-template-columns: 1fr 1fr; } }
+  .gratis-gruppo li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.35rem 0; border-bottom: 1px solid var(--riga); }
+  .gratis-gruppo li span { color: var(--inchiostro-2); font-variant-numeric: tabular-nums; font-size: 0.9rem; }
+  .gratis-account { padding-left: 1.2rem; }
+  .gratis-account li { margin: 0.35rem 0; }
+  .tasto-gratis { display: inline-block; margin-top: 0.5rem; padding: 0.55rem 1.1rem; border-radius: var(--raggio); background: var(--azione); color: #fff; text-decoration: none; font: 600 0.95rem/1.3 var(--ui); }
+</style>
