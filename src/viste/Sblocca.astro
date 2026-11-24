@@ -290,6 +290,8 @@ const invito = lingua === 'en' ? {
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) { invia.disabled = false; return errore(d.errore || js.erroreGenerico); }
+          // conversione «account creato» per Google Ads e Meta (src/data/misurazione.ts)
+          try { window.misura && window.misura('account', { email }); } catch (_) {}
           const rNuovo = await fetch('/api/io').catch(() => null);
           io = rNuovo && rNuovo.ok ? await rNuovo.json() : null;
           if (!io) { location.reload(); return; }

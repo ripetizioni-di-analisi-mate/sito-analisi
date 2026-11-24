@@ -291,7 +291,11 @@ const pref = prefisso(lingua);
             return errore(d.errore || js.erroreGenerico);
           }
           // conversione per Google Ads (src/data/misurazione.ts)
-          if (scheda === 'registrati') { try { window.misura && window.misura('account', { email }); } catch (_) {} }
+          if (scheda === 'registrati') {
+            try { window.misura && window.misura('account', { email }); } catch (_) {}
+            // Con il pixel di Meta caricato, una breve attesa lascia partire l'evento CompleteRegistration prima del cambio di pagina.
+            if (window.fbq) await new Promise((fatto) => setTimeout(fatto, 400));
+          }
           location.href = destinazione;
         } catch {
           invia.disabled = false; errore(js.connessione);
