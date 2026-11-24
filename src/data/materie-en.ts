@@ -31,7 +31,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-semestre-filtro': {
     titolo: 'Mathematics foundations for the filter semester',
     breve: 'Mathematics foundations',
-    descrizione: 'Preparation for Physics and Chemistry: calculations, proportions, powers, units, formulas, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed practice; study materials in Italian.',
+    descrizione: 'Preparatory mathematics for the filter semester: calculations, proportions, powers, units, formulas, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed practice; study materials in Italian.',
     argomenti: {
       'calcolo-e-proporzioni': { titolo: 'Calculations, proportions and percentages', breve: 'Calculations and proportions' },
       'potenze-e-notazione-scientifica': { titolo: 'Powers, roots and scientific notation', breve: 'Powers and notation' },

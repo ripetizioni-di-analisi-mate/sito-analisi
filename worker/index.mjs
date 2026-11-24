@@ -26,7 +26,6 @@ import { BOCCONI } from '../src/data/bocconi.mjs';
 import { anteprimaAnalisi3 } from '../src/data/analisi3.mjs';
 import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
-import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
@@ -1374,7 +1373,7 @@ export default {
       let dati = await domandeDi(env, materia, l);
       const argomentiCompleti = dati?.argomenti;
       const finanziaria = materia === 'matematica-finanziaria';
-      const quizConAnteprima = Object.hasOwn(TOLC, materia) || finanziaria || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
+      const quizConAnteprima = Object.hasOwn(TOLC, materia) || finanziaria || materia === 'statistica' || materia === 'analisi-3';
       if ((anteprimaScienza || anteprimaUsa) && argomentiCompleti) {
         dati = { ...dati, argomenti: Object.fromEntries(Object.entries(argomentiCompleti)
           .map(([slug, domande]) => [slug, domande.filter((q) => q.n === (anteprimaUsa ? FREE_TIMED_QUESTION : NUMERO_QUIZ_ANTEPRIMA_SCIENZA))])) };
@@ -1382,7 +1381,6 @@ export default {
         dati = { ...dati, argomenti: finanziaria ? anteprimaFinanziaria(argomentiCompleti)
           : materia === 'analisi-3' ? anteprimaAnalisi3(argomentiCompleti)
           : materia === 'statistica' ? anteprimaStatistica(argomentiCompleti)
-          : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(argomentiCompleti)
           : demoTolc(materia, argomentiCompleti) };
       }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
@@ -1394,7 +1392,7 @@ export default {
         if (l === 'en' && Object.hasOwn(corsiInglesi, materia)) {
           return json({ errore: `These topic quizzes are included in the full ${corsiInglesi[materia]} course. You can try ten sample questions in the course review.`, sblocca: `/en/${materia}/sblocca` }, 403);
         }
-        return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
+        return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'alla materia')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       }
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : l === 'es' ? 'No hay preguntas para este tema.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;

@@ -241,9 +241,9 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
   },
   'matematica-semestre-filtro': {
     titolo: 'Matematica per il semestre filtro | Basi ed esercizi svolti',
-    descrizione: 'Basi di matematica per studiare Fisica e Chimica nel semestre filtro. Proporzioni, potenze, unità, equazioni, grafici e vettori con esercizi.',
-    preparazione: 'Questo percorso raccoglie gli strumenti matematici usati nello studio di Fisica e Chimica del semestre filtro. Proporzioni, potenze, notazione scientifica e unità di misura precedono equazioni, grafici, logaritmi, trigonometria e vettori.',
-    metodo: 'Gli esercizi allenano il passaggio fra formula e calcolo. Le schede mostrano come isolare un’incognita, convertire le unità e leggere la relazione fra due grandezze. I collegamenti con Fisica e Chimica consentono di applicare subito questi strumenti.',
+    descrizione: 'Basi di matematica per studiare Fisica nel semestre filtro. Proporzioni, potenze, unità, equazioni, grafici e vettori con esercizi.',
+    preparazione: 'Questo percorso raccoglie gli strumenti matematici usati nello studio della Fisica del semestre filtro. Proporzioni, potenze, notazione scientifica e unità di misura precedono equazioni, grafici, logaritmi, trigonometria e vettori.',
+    metodo: 'Gli esercizi allenano il passaggio fra formula e calcolo. Le schede mostrano come isolare un’incognita, convertire le unità e leggere la relazione fra due grandezze. Il corso di Fisica del semestre filtro applica subito questi strumenti.',
     esempi: ['unita-di-misura', 'equazioni-e-formule', 'vettori-e-componenti'],
     collegate: ['fisica-semestre-filtro', 'fisica-1', 'precorso'],
   },

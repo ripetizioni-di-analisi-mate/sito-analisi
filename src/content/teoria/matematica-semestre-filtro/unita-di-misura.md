@@ -1,6 +1,6 @@
 ---
 titolo: "Unità di misura e conversioni"
-sommario: "Leggere le unità, convertire misure semplici e composte e controllare le formule di Fisica e Chimica."
+sommario: "Leggere le unità, convertire misure semplici e composte e controllare le formule della Fisica."
 ---
 
 ## Grandezze, misure e unità

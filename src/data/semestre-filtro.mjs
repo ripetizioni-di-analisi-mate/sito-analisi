@@ -8,9 +8,3 @@ export const PROGRAMMI_SEMESTRE_FILTRO = {
 };
 export const corsoSemestreFiltro = (slug) => Object.hasOwn(PROGRAMMI_SEMESTRE_FILTRO, slug);
 
-// Un insieme fisso evita che cambiare capitolo o aprire una nuova sessione
-// permetta di leggere oltre i dieci quesiti dimostrativi prima dell'acquisto.
-export function anteprimaBiologia(argomenti) {
-  const quote = { 'organizzazione-biologica': 2, 'genoma-cromatina': 2, 'flusso-informazione': 2, 'genetica-mutazioni': 1, 'strutture-cellulari': 1, 'segnalazione-cellulare': 1, 'ciclo-cellulare': 1 };
-  return Object.fromEntries(Object.entries(quote).map(([slug, n]) => [slug, (argomenti?.[slug] || []).slice(0, n)]));
-}

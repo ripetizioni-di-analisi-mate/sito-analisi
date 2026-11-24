@@ -12,7 +12,7 @@ const corsi = MATERIE.filter(m => m.attiva && Object.hasOwn(nomi, m.slug));
   <strong>{basi ? (en ? 'Preparatory module' : 'Modulo preparatorio') : (en ? 'Before starting: mathematics' : 'Prima di iniziare: la matematica')}</strong>
   {basi ? (
     <>
-      <p>{en ? 'Mathematics supports your study of Physics and Chemistry. The three national filter-semester exams are Biology, Physics, and Chemistry with introductory biochemistry; this module develops the mathematical prerequisites.' : 'La matematica serve per affrontare gli esercizi di Fisica e Chimica. I tre esami nazionali del semestre filtro sono Biologia, Fisica e Chimica e propedeutica biochimica; questo modulo prepara alle conoscenze matematiche richieste.'}</p>
+      <p>{en ? 'This module develops the mathematical prerequisites for the filter-semester Physics course: proportions, units, formulas, graphs, logarithms, trigonometry and vectors.' : 'Questo modulo prepara gli strumenti matematici usati nel corso di Fisica del semestre filtro: proporzioni, unità di misura, formule, grafici, logaritmi, trigonometria e vettori.'}</p>
       <p class="rimandi"><a href="https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027" target="_blank" rel="noopener">{en ? 'MUR programmes 2026/2027' : 'Programmi MUR 2026/2027'}</a>{corsi.map(m => <a href={link(lingua, `/${m.slug}`)}>{en ? `Continue with ${nomi[m.slug]} →` : `Prosegui con ${nomi[m.slug]} →`}</a>)}</p>
     </>
   ) : (

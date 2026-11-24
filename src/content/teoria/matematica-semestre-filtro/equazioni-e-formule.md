@@ -1,6 +1,6 @@
 ---
 titolo: "Equazioni e formule inverse"
-sommario: "Risolvere equazioni e sistemi, isolare le grandezze nelle formule di Fisica e Chimica e verificare che i risultati rispettino le condizioni del problema."
+sommario: "Risolvere equazioni e sistemi, isolare le grandezze nelle formule della Fisica e verificare che i risultati rispettino le condizioni del problema."
 ---
 
 ## Uguaglianze e operazioni equivalenti
