@@ -8,7 +8,6 @@ const materie = MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: 
 const video = VIDEOCORSI.map(({ slug, breve, prezzo, sblocca, lezioni, pacchettoDi }) => ({ slug, breve, prezzo, sblocca, lezioni, pacchettoDi }));
 const gruppi = [
   { id: 'universita', titolo: 'Università', pacchetti: ['analisi', 'fisica', 'base-universitaria', 'scientifico'] },
-  { id: 'semestre-filtro', titolo: 'Semestre filtro', pacchetti: ['semestre-filtro'] },
   { id: 'superiori', titolo: 'Superiori', pacchetti: ['maturita'] },
   { id: 'concorsi', titolo: 'Concorsi', pacchetti: ['concorsi'] },
 ];

@@ -95,7 +95,6 @@ const ARGOMENTI_CERCATI_EN: Record<string, string> = {
 const argEn = (a: string) => ARGOMENTI_CERCATI_EN[a] ?? a;
 // Titoli delle pagine delle materie che non seguono lo schema generale.
 const TITOLI_MATERIA: Record<string, string> = {
-  'chimica-semestre-filtro': 'Chimica e propedeutica biochimica (semestre filtro): teoria ed esercizi',
   'matematica-semestre-filtro': 'Basi di matematica per il semestre filtro: teoria ed esercizi svolti',
 };
 const IT = {

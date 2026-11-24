@@ -75,7 +75,7 @@ test('chi ha Statistica accede alla teoria completa e alle soluzioni', async () 
 });
 
 test('l’acquisto di un’altra materia non sblocca Statistica', async () => {
-  const b = await banco(['chimica-semestre-filtro']);
+  const b = await banco(['fisica-semestre-filtro']);
   assert.equal(await (await b.apri(`${programma}/teoria`)).text(), `/vetrine${programma}/teoria`);
 });
 
@@ -85,7 +85,7 @@ test('il banco delle risposte resta inaccessibile direttamente', async () => {
 });
 
 test('ospiti e iscritti senza acquisto vedono gli stessi dieci quiz complessivi', async () => {
-  for (const materie of [null, [], ['chimica-semestre-filtro']]) {
+  for (const materie of [null, [], ['fisica-semestre-filtro']]) {
     const b = await banco(materie);
     const risposta = await b.invia({argomento:'prove-d-esame'});
     assert.equal(risposta.status, 200);

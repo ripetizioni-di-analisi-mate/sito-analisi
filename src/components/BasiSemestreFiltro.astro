@@ -5,7 +5,7 @@ interface Props { lingua?: Lingua; materia: string }
 const { lingua = 'it', materia } = Astro.props;
 const en = lingua === 'en';
 const basi = materia === 'matematica-semestre-filtro';
-const nomi = { 'fisica-semestre-filtro': en ? 'Physics' : 'Fisica', 'chimica-semestre-filtro': en ? 'Chemistry' : 'Chimica', 'biologia-semestre-filtro': en ? 'Biology' : 'Biologia' };
+const nomi = { 'fisica-semestre-filtro': en ? 'Physics' : 'Fisica' };
 const corsi = MATERIE.filter(m => m.attiva && Object.hasOwn(nomi, m.slug));
 ---
 <aside class="basi-semestre" aria-label={en ? 'Preparatory mathematics' : 'Matematica preparatoria'}>

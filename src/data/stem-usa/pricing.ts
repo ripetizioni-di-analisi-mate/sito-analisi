@@ -18,20 +18,25 @@ export const equivalenteItaliano: Record<string, keyof typeof PREZZI> = {
   'engineering-statics': 'statica',
   'mechanics-of-materials': 'scienza-delle-costruzioni',
   'discrete-mathematics': 'matematica-generale',
-  'general-chemistry-1': 'chimica-semestre-filtro',
-  'introductory-biology': 'biologia-semestre-filtro',
   'hs-algebra-1': 'matematica-superiori-2',
   'hs-geometry': 'matematica-superiori-2',
   'hs-algebra-2': 'matematica-superiori-3',
   'hs-precalculus': 'matematica-superiori-5',
-  'hs-biology': 'biologia-semestre-filtro',
-  'hs-chemistry': 'chimica-semestre-filtro',
   'hs-physics': 'fisica-superiori-5',
   'hs-earth-space-science': 'fisica-superiori-5',
 };
 
+// Chimica e Biologia del semestre filtro sono state tolte dal sito (24/11/2026): i corsi USA di scienze
+// tengono il prezzo che avevano (49 €).
+const prezziPropri: Record<string, number> = {
+  'general-chemistry-1': 49,
+  'introductory-biology': 49,
+  'hs-biology': 49,
+  'hs-chemistry': 49,
+};
+
 export const usaProducts = courses.map(course => {
-  const prezzo = PREZZI[equivalenteItaliano[course.slug]];
+  const prezzo = prezziPropri[course.slug] ?? PREZZI[equivalenteItaliano[course.slug]];
   if (!prezzo) throw new Error('Missing Italian price for ' + course.slug);
   return { slug: course.slug, titolo: course.title, attiva: true, prezzo };
 });

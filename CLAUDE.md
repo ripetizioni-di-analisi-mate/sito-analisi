@@ -598,3 +598,10 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Tolte tutte le materie di informatica: Fondamenti di Informatica in C (università) e Informatica 1°-5° anno (superiori), con teoria, schede, tracce, domande (IT ed EN), immagini, chiavi di correzione, prezzi, facoltà, testi SEO, Studio guidato e orientamento. Nella sezione USA tolti Introduction to Computer Science e Data Structures; Discrete Mathematics resta, spostata nell'area Mathematics (`src/data/stem-usa/computing.mjs`).
 - I vecchi indirizzi (`/informatica…`, `/informatica-superiori-N…`, anche con `/en`, `/es`, `/fr`, `/de`, Studio guidato, immagini di anteprima, dati e i due corsi USA) portano con 301 alla home della lingua (`exInformatica` in `worker/index.mjs`).
 - Restano le menzioni di Informatica come corso di laurea (orientamento universitario sospeso, Pi) e nei testi di alcuni esercizi.
+
+## Chimica e Biologia del semestre filtro tolte (24/11/2026, richiesta di Carmine)
+- Tolte le materie `chimica-semestre-filtro` e `biologia-semestre-filtro` (contenuti IT ed EN, figure in `public/figure`, chiavi, prezzi, nomi tradotti, SEO, orientamento «Da dove comincio?»). Nell'area Semestre filtro restano Basi di matematica e Fisica. Nessuno le aveva acquistate (dashboard, 24/11).
+- Tolto il pacchetto «Semestre filtro completo» (Fisica + Chimica + Biologia) da `src/data/pacchetti.mjs` e da `/pacchetti`.
+- Le competenze «atomo» e «cellule» dell'orientamento, usate dai profili TOLC, ora puntano ai capitoli Chimica e Biologia del TOLC-S. I capitoli di chimica e biologia dei TOLC restano.
+- I corsi USA di chimica e biologia, che prendevano il prezzo dalle due materie, hanno il loro prezzo fisso (49 €) in `src/data/stem-usa/pricing.ts`.
+- Vecchi indirizzi (anche `/en`, figure, dati, Studio guidato) → 301 alla home, nello stesso controllo `exInformatica` di `worker/index.mjs`.

@@ -1888,7 +1888,8 @@ export default {
 
     // Informatica tolta dal sito (24/11/2026, richiesta di Carmine): università, superiori e corsi USA
     // di Computer Science. I vecchi indirizzi portano alla home della lingua.
-    const exInformatica = url.pathname.match(/^\/(?:(en|es|fr|de)\/)?(?:(?:studio-guidato|vetrine(?:\/[a-z]{2})?|og(?:\/[a-z]{2})?|dati-[a-z-]+)\/)?(?:informatica(?:-superiori-[1-5])?(?:--\d+)?|us\/(?:introduction-to-computer-science|data-structures))(?:[\/.].*)?$/);
+    // Stessa cosa per Chimica e Biologia del semestre filtro (24/11/2026, richiesta di Carmine).
+    const exInformatica = url.pathname.match(/^\/(?:(en|es|fr|de)\/)?(?:(?:studio-guidato|vetrine(?:\/[a-z]{2})?|og(?:\/[a-z]{2})?|dati-[a-z-]+|figure)\/)?(?:informatica(?:-superiori-[1-5])?|(?:chimica|biologia)-semestre-filtro|us\/(?:introduction-to-computer-science|data-structures))(?:--\d+)?(?:[\/.].*)?$/);
     if (exInformatica) {
       return new Response(null, { status: 301, headers: { location: exInformatica[1] ? `/${exInformatica[1]}/` : '/', 'cache-control': 'no-store' } });
     }

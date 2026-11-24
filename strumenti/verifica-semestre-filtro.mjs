@@ -12,7 +12,7 @@ import remarkTracce from '../src/plugins/remark-tracce.mjs';
 import rehypeKatex from '../src/plugins/rehype-katex-tex.mjs';
 import katex from 'katex';
 
-const materia = process.argv[2] || 'chimica-semestre-filtro';
+const materia = process.argv[2] || 'fisica-semestre-filtro';
 const radice = 'src/content';
 const cartellaTeoria = join(radice, 'teoria', materia);
 const teorie = readdirSync(cartellaTeoria).filter((f) => f.endsWith('.md')).sort();

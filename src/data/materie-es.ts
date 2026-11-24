@@ -46,8 +46,6 @@ export const MATERIE_ES: Record<string, [string, string]> = {
   'tol-politecnico': ['TOL del Politecnico di Milano', 'Matemáticas, lógica y física para la prueba de admisión del Politecnico di Milano.'],
   'ofa-matematica': ['Matemáticas para los requisitos OFA', 'Fundamentos de matemáticas para cumplir los requisitos formativos adicionales (OFA) que pueden establecer las universidades italianas tras la prueba de acceso.'],
   'fisica-semestre-filtro': ['Física para el semestre de selección', 'Siete unidades del programa italiano del semestre de selección de Medicina, Odontología y Veterinaria.'],
-  'chimica-semestre-filtro': ['Química y fundamentos de Bioquímica para el semestre de selección', 'Siete unidades del programa italiano del semestre de selección de Medicina, Odontología y Veterinaria.'],
-  'biologia-semestre-filtro': ['Biología para el semestre de selección', 'Siete unidades de biología celular y genética del programa italiano de Medicina, Odontología y Veterinaria.'],
 };
 
 export const ARGOMENTI_ES: Record<string, string> = {

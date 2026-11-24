@@ -1,5 +1,5 @@
 // Controlla i materiali del Semestre Filtro con il renderer usato dal sito.
-// node strumenti/verifica-semestre-filtro-bilingue.mjs biologia-semestre-filtro [capitolo]
+// node strumenti/verifica-semestre-filtro-bilingue.mjs fisica-semestre-filtro [capitolo]
 // RENDER_DIR=/tmp/resa salva anche l'HTML completo per la verifica visiva.
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -15,7 +15,7 @@ import rehypeKatex from '../src/plugins/rehype-katex-tex.mjs';
 import katex from 'katex';
 
 const [materia, capitolo] = process.argv.slice(2);
-assert.ok(['biologia', 'chimica', 'fisica'].some(s => materia === `${s}-semestre-filtro`), 'Indicare una delle tre materie del Semestre Filtro');
+assert.ok(materia === 'fisica-semestre-filtro', 'Indicare la materia del Semestre Filtro');
 const processore = await createMarkdownProcessor({
   remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
   rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],

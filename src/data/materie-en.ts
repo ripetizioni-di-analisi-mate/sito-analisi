@@ -28,33 +28,6 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'immunizzazione': { titolo: 'Financial immunization and interest-rate risk', breve: 'Immunization' },
     },
   },
-  'biologia-semestre-filtro': {
-    titolo: 'Biology for the filter semester', breve: 'Filter semester biology',
-    descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with illustrated theory, worked examples, practice exercises and 630 explained questions. Complete study materials in English and Italian.',
-    argomenti: {
-      'organizzazione-biologica': { titolo: 'Biological and molecular organisation of life', breve: 'Cells and biomolecules' },
-      'genoma-cromatina': { titolo: 'Genome, chromatin and epigenetics', breve: 'Genome and chromatin' },
-      'flusso-informazione': { titolo: 'Replication, gene expression and proteins', breve: 'Flow of information' },
-      'genetica-mutazioni': { titolo: 'Mutations, inheritance and traits', breve: 'Genetics and mutations' },
-      'strutture-cellulari': { titolo: 'Membranes, organelles, trafficking and cytoskeleton', breve: 'Cellular structures' },
-      'segnalazione-cellulare': { titolo: 'Adhesion, communication and cell signalling', breve: 'Cell signalling' },
-      'ciclo-cellulare': { titolo: 'Cell cycle, meiosis and cell death', breve: 'Proliferation and survival' },
-    },
-  },
-  'chimica-semestre-filtro': {
-    titolo: 'Chemistry and introductory biochemistry for the filter semester',
-    breve: 'Filter semester chemistry',
-    descrizione: 'Chemistry and introductory biochemistry for Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, from atoms to biomolecules. Illustrated theory, worked examples, practice exercises with solutions and 630 explained questions, in Italian and English.',
-    argomenti: {
-      'atomo-legami-termodinamica': { titolo: 'Atoms, bonds, states of matter and thermodynamics', breve: 'Atoms, bonds and thermodynamics' },
-      'soluzioni-proprieta-colligative': { titolo: 'Mixtures, solutions and colligative properties', breve: 'Solutions and colligative properties' },
-      'reazioni-cinetica-equilibrio': { titolo: 'Chemical reactions, kinetics and equilibrium', breve: 'Reactions and equilibrium' },
-      'acidi-basi-redox': { titolo: 'Acids, bases, buffers, redox and electrochemistry', breve: 'Acids, bases and redox' },
-      'carbonio-idrocarburi-stereochimica': { titolo: 'Carbon, hydrocarbons and stereochemistry', breve: 'Carbon and stereochemistry' },
-      'gruppi-funzionali': { titolo: 'Functional groups and reactions of organic compounds', breve: 'Functional groups' },
-      'biomolecole': { titolo: 'Amino acids, proteins, carbohydrates, lipids and nucleic acids', breve: 'Biomolecules' },
-    },
-  },
   'matematica-semestre-filtro': {
     titolo: 'Mathematics foundations for the filter semester',
     breve: 'Mathematics foundations',

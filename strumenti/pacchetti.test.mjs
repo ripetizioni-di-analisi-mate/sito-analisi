@@ -39,7 +39,7 @@ function banco(t) {
 }
 
 test('i pacchetti rispettano i prezzi concordati e gli scaglioni 15/20/25%', () => {
-  assert.deepEqual(PACCHETTI_MATERIE.map((p) => riepilogoMaterie(p.materie, materie).totale), [8840,8840,10960,4930,4930,15600,11760]);
+  assert.deepEqual(PACCHETTI_MATERIE.map((p) => riepilogoMaterie(p.materie, materie).totale), [8840,8840,10960,4930,4930,15600]);
   assert.throws(() => riepilogoMaterie(['analisi-1','analisi-1'], materie));
   assert.throws(() => riepilogoMaterie(['analisi-1'], materie));
   assert.throws(() => riepilogoMaterie(['analisi-1','gratis'], [...materie, { slug:'gratis', prezzo:0, attiva:true }]));

@@ -798,42 +798,6 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'radiazioni-e-ottica', titolo: 'Radiazioni, radioattività e ottica', breve: 'Radiazioni e ottica' },
     ],
   },
-  {
-    slug: 'chimica-semestre-filtro',
-    titolo: 'Chimica e propedeutica biochimica per il semestre filtro',
-    breve: 'Chimica semestre filtro',
-    descrizione: 'Chimica e propedeutica biochimica per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dall’atomo alle biomolecole. Teoria illustrata, schede svolte, esercizi con soluzione e 630 quiz spiegati, in italiano e inglese.',
-    colore: '#32746b',
-    gruppo: 'Semestre filtro',
-    attiva: true,
-    argomenti: [
-      { slug: 'atomo-legami-termodinamica', titolo: 'Atomo, legami, stati della materia e termodinamica', breve: 'Atomo, legami e termodinamica' },
-      { slug: 'soluzioni-proprieta-colligative', titolo: 'Miscele, soluzioni e proprietà colligative', breve: 'Soluzioni e proprietà colligative' },
-      { slug: 'reazioni-cinetica-equilibrio', titolo: 'Reazioni chimiche, cinetica ed equilibrio', breve: 'Reazioni ed equilibrio' },
-      { slug: 'acidi-basi-redox', titolo: 'Acidi, basi, tamponi, redox ed elettrochimica', breve: 'Acidi, basi e redox' },
-      { slug: 'carbonio-idrocarburi-stereochimica', titolo: 'Carbonio, idrocarburi e stereochimica', breve: 'Carbonio e stereochimica' },
-      { slug: 'gruppi-funzionali', titolo: 'Gruppi funzionali e reazioni dei composti organici', breve: 'Gruppi funzionali' },
-      { slug: 'biomolecole', titolo: 'Amminoacidi, proteine, carboidrati, lipidi e acidi nucleici', breve: 'Biomolecole' },
-    ],
-  },
-  {
-    slug: 'biologia-semestre-filtro',
-    titolo: 'Biologia per il semestre filtro',
-    breve: 'Biologia semestre filtro',
-    descrizione: 'Biologia per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dalla cellula alla genetica e al controllo della proliferazione. Teoria illustrata, schede svolte, esercizi con soluzione e 630 quiz spiegati, in italiano e inglese.',
-    colore: '#3e7460',
-    gruppo: 'Semestre filtro',
-    attiva: true,
-    argomenti: [
-      { slug: 'organizzazione-biologica', titolo: 'Organizzazione biologica e molecolare della vita', breve: 'Cellule e biomolecole' },
-      { slug: 'genoma-cromatina', titolo: 'Genoma, cromatina ed epigenetica', breve: 'Genoma e cromatina' },
-      { slug: 'flusso-informazione', titolo: 'Replicazione, espressione genica e proteine', breve: 'Flusso dell’informazione' },
-      { slug: 'genetica-mutazioni', titolo: 'Mutazioni, ereditarietà e caratteri', breve: 'Genetica e mutazioni' },
-      { slug: 'strutture-cellulari', titolo: 'Membrane, organelli, traffico e citoscheletro', breve: 'Strutture cellulari' },
-      { slug: 'segnalazione-cellulare', titolo: 'Adesione, comunicazione e segnalazione cellulare', breve: 'Segnalazione cellulare' },
-      { slug: 'ciclo-cellulare', titolo: 'Ciclo cellulare, meiosi e morte cellulare', breve: 'Proliferazione e sopravvivenza' },
-    ],
-  },
 ];
 
 // Prove in locale: con SOLO_MATERIE="analisi-1,precorso" le altre materie risultano in preparazione (build più rapida).

@@ -245,7 +245,7 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
     preparazione: 'Questo percorso raccoglie gli strumenti matematici usati nello studio di Fisica e Chimica del semestre filtro. Proporzioni, potenze, notazione scientifica e unità di misura precedono equazioni, grafici, logaritmi, trigonometria e vettori.',
     metodo: 'Gli esercizi allenano il passaggio fra formula e calcolo. Le schede mostrano come isolare un’incognita, convertire le unità e leggere la relazione fra due grandezze. I collegamenti con Fisica e Chimica consentono di applicare subito questi strumenti.',
     esempi: ['unita-di-misura', 'equazioni-e-formule', 'vettori-e-componenti'],
-    collegate: ['fisica-semestre-filtro', 'chimica-semestre-filtro', 'biologia-semestre-filtro'],
+    collegate: ['fisica-semestre-filtro', 'fisica-1', 'precorso'],
   },
   'test-bocconi': {
     titolo: 'Test Bocconi | Corso di preparazione e simulazioni',
@@ -285,23 +285,7 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
     preparazione: 'Il percorso comprende metodi della fisica, meccanica, fluidi, onde, termodinamica, elettricità, magnetismo e radiazioni. Il calcolo usa proporzioni, potenze, equazioni e vettori. Le basi matematiche sono raccolte anche in un percorso dedicato.',
     metodo: 'Negli esercizi occorre riconoscere il fenomeno descritto e scegliere la legge applicabile. Le schede esplicitano conversioni, sostituzioni e unità di misura. Le domande a tempo affiancano i calcoli al ripasso delle definizioni e delle relazioni fisiche.',
     esempi: ['meccanica', 'fluidi', 'termodinamica'],
-    collegate: ['matematica-semestre-filtro', 'chimica-semestre-filtro', 'biologia-semestre-filtro'],
-  },
-  'chimica-semestre-filtro': {
-    titolo: 'Chimica semestre filtro | Teoria, biochimica ed esercizi',
-    descrizione: 'Chimica e propedeutica biochimica per il semestre filtro con soluzioni, equilibri, pH, redox, chimica organica e biomolecole. Esercizi svolti.',
-    preparazione: 'Il programma collega struttura atomica e legami a termodinamica, soluzioni, reazioni ed equilibri. Acidi, basi e ossidoriduzioni precedono i capitoli sul carbonio, sui gruppi funzionali e sulle biomolecole.',
-    metodo: 'Le schede di calcolo distinguono quantità di sostanza, concentrazione e rapporti stechiometrici. Negli equilibri si esplicitano specie e condizioni del sistema. La parte organica collega struttura, gruppo funzionale e proprietà delle molecole.',
-    esempi: ['soluzioni-proprieta-colligative', 'acidi-basi-redox', 'biomolecole'],
-    collegate: ['matematica-semestre-filtro', 'fisica-semestre-filtro', 'biologia-semestre-filtro'],
-  },
-  'biologia-semestre-filtro': {
-    titolo: 'Biologia semestre filtro Medicina | Teoria e quiz svolti',
-    descrizione: 'Biologia per il semestre filtro con cellula, DNA, espressione genica, genetica, segnalazione e ciclo cellulare. Teoria e quesiti commentati.',
-    preparazione: 'Il percorso studia l’organizzazione biologica, il genoma e il flusso dell’informazione genetica. Strutture cellulari, genetica, mutazioni, segnalazione e ciclo cellulare sono sviluppati in capitoli collegati fra loro.',
-    metodo: 'La preparazione richiede di collegare strutture, processi e conseguenze. Le schede commentate esplicitano i passaggi del ragionamento e il significato dei termini biologici. Le domande a tempo verificano il riconoscimento dei meccanismi e delle relazioni studiate.',
-    esempi: ['flusso-informazione', 'genetica-mutazioni', 'ciclo-cellulare'],
-    collegate: ['chimica-semestre-filtro', 'fisica-semestre-filtro', 'matematica-semestre-filtro'],
+    collegate: ['matematica-semestre-filtro', 'fisica-1', 'fisica-superiori-5'],
   },
 };
 

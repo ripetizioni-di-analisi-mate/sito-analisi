@@ -46,8 +46,6 @@ export const MATERIE_DE: Record<string, [string, string]> = {
   'tol-politecnico': ['TOL des Politecnico di Milano', 'Mathematik, Logik und Physik für den Aufnahmetest des Politecnico di Milano.'],
   'ofa-matematica': ['Mathematik für die OFA-Auflagen', 'Mathematische Grundlagen zum Erfüllen der zusätzlichen Studienauflagen (OFA), die italienische Hochschulen nach dem Eingangstest festlegen können.'],
   'fisica-semestre-filtro': ['Physik für das Auswahlsemester', 'Sieben Einheiten nach dem italienischen Lehrplan für das Auswahlsemester in Human-, Zahn- und Tiermedizin.'],
-  'chimica-semestre-filtro': ['Chemie und Grundlagen der Biochemie für das Auswahlsemester', 'Sieben Einheiten nach dem italienischen Lehrplan für das Auswahlsemester in Human-, Zahn- und Tiermedizin.'],
-  'biologia-semestre-filtro': ['Biologie für das Auswahlsemester', 'Sieben Einheiten zur Zellbiologie und Genetik nach dem italienischen Lehrplan für das Auswahlsemester in Human-, Zahn- und Tiermedizin.'],
 };
 
 export const ARGOMENTI_DE: Record<string, string> = {
