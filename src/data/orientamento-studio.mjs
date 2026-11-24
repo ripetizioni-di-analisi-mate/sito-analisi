@@ -533,34 +533,6 @@ competenza('inglese', 'Inglese: frasi e istruzioni', 'tolc-i', 'inglese', [
   q('Nel contesto «The temperature increased», «increased» significa:', 'è aumentata', ['è diminuita', 'è rimasta invariata', 'è stata misurata una sola volta'], 'Il verbo «increase» indica un aumento della quantità citata, qui la temperatura.'),
 ]);
 
-competenza('reti', 'Indirizzi IPv4 e sottoreti', 'informatica-superiori-5', 'ipv4-e-sottoreti', [
-  q('Qual è l’indirizzo di rete dell’host $192.168.1.10/24$?', '$192.168.1.0$', ['$192.168.1.10$', '$192.168.1.255$', '$192.168.0.0$'], 'Il prefisso /24 fissa i primi 24 bit, cioè i primi tre ottetti. Azzerando gli otto bit host si ottiene 192.168.1.0.'),
-  q('Una sottorete IPv4 /26, con indirizzi di rete e broadcast esclusi e senza usi speciali, permette quanti indirizzi host?', '$62$', ['$64$', '$26$', '$30$'], 'Restano $32-26=6$ bit host, quindi $2^6=64$ indirizzi. Escludendo rete e broadcast ne restano $62$.'),
-  q('Quanti bit contiene un indirizzo IPv4?', '$32$', ['$4$', '$8$', '$128$'], 'Un indirizzo IPv4 è composto da quattro ottetti. Ogni ottetto contiene otto bit, quindi $4\\cdot8=32$.'),
-  q('Qual è l’indirizzo di broadcast della sottorete $192.168.1.64/26$?', '$192.168.1.127$', ['$192.168.1.64$', '$192.168.1.65$', '$192.168.1.255$'], 'Un blocco /26 contiene 64 indirizzi. A partire da 64, l’ultimo è $64+63=127$, ottenuto ponendo a uno tutti i bit host.'),
-]);
-
-competenza('algoritmi', 'Algoritmi e complessità', 'informatica-superiori-5', 'complessita-algoritmi', [
-  q('La ricerca binaria standard su un vettore ordinato di $n$ elementi richiede, nel caso peggiore, un numero di confronti dell’ordine di:', '$\\log n$', ['$n$', '$n^2$', '$2^n$'], 'Ogni confronto dimezza l’intervallo di ricerca. Dopo circa $\\log_2 n$ dimezzamenti resta al massimo un elemento.'),
-  q('Due cicli annidati eseguono ciascuno $n$ iterazioni, e il corpo interno ha costo costante. Il numero totale di esecuzioni del corpo è:', '$n^2$', ['$2n$', '$n$', '$\\log n$'], 'Per ciascuna delle $n$ iterazioni esterne si eseguono $n$ iterazioni interne. Il prodotto è $n\\cdot n=n^2$.'),
-  q('Per cercare un valore in un vettore non ordinato, la scansione lineare può richiedere nel caso peggiore:', 'l’esame di tutti gli $n$ elementi', ['un solo confronto per ogni vettore', 'sempre $\\log_2 n$ confronti', 'nessun accesso agli elementi'], 'Se il valore è assente, oppure si trova soltanto nell’ultima posizione, tutti gli elementi devono essere controllati.'),
-  q('Un algoritmo con tempo $T(n)=3n+20$ ha crescita asintotica:', '$\\Theta(n)$', ['$\\Theta(n^2)$', '$\\Theta(1)$', '$\\Theta(2^n)$'], 'Per $n$ grande il termine lineare domina la costante. Il fattore moltiplicativo 3 non cambia l’ordine di crescita lineare.'),
-]);
-
-competenza('automi', 'Automi e computabilità', 'informatica-superiori-5', 'automi-e-computabilita', [
-  q('Un automa deve riconoscere le stringhe binarie con un numero pari di simboli 1. Quale informazione minima occorre distinguere tra uno stato e l’altro?', 'Se il numero di 1 letti è pari oppure dispari', ['L’intera stringa già letta', 'Il numero esatto di zeri', 'Soltanto l’ultimo simbolo'], 'Leggere uno 0 lascia invariata la parità; leggere un 1 la inverte. Bastano quindi due stati che rappresentino pari e dispari.'),
-  q('In un automa finito deterministico completo, per ogni stato e ogni simbolo dell’alfabeto esiste:', 'esattamente una transizione uscente per quel simbolo', ['nessuna transizione', 'almeno due transizioni con lo stesso simbolo', 'una transizione soltanto dagli stati finali'], 'Il determinismo impone unicità e la completezza impone esistenza della transizione per ogni coppia stato-simbolo.'),
-  q('Quale stringa appartiene al linguaggio descritto da $a^*b^*$?', 'aaabb', ['bba', 'ababa', 'ba'], 'L’espressione ammette prima zero o più a e poi zero o più b. «aaabb» rispetta questo ordine; le altre stringhe tornano a una a dopo una b.'),
-  q('Esiste un algoritmo che decida correttamente per ogni programma e ogni input se il programma terminerà?', 'No, il problema generale dell’arresto è indecidibile', ['Sì, basta eseguire il programma per un minuto', 'Sì, basta contare le righe del programma', 'Sì, ogni programma termina per definizione'], 'L’indecidibilità riguarda un metodo universale per tutti i programmi e input. Alcuni casi particolari restano decidibili.'),
-]);
-
-competenza('calcolo-numerico', 'Errori e metodi numerici', 'informatica-superiori-5', 'errori-e-zeri', [
-  q('Il valore esatto è $2$ e un’approssimazione è $1{,}98$. Qual è l’errore assoluto?', '$0{,}02$', ['$0{,}01$', '$0{,}04$', '$3{,}98$'], 'L’errore assoluto è il valore assoluto della differenza: $|2-1{,}98|=0{,}02$.'),
-  q('Una funzione continua su $[a,b]$ soddisfa $f(a)f(b)<0$. Che cosa è garantito?', 'Almeno uno zero nell’intervallo aperto $(a,b)$', ['Esattamente uno zero', 'Nessuno zero', 'Uno zero necessariamente nel punto medio'], 'Il teorema degli zeri garantisce l’esistenza di almeno uno zero. Il cambio di segno non garantisce da solo l’unicità o la posizione nel punto medio.'),
-  q('Un passo del metodo di bisezione su $[1,3]$ valuta inizialmente la funzione nel punto:', '$2$', ['$1{,}5$', '$3$', '$4$'], 'La bisezione usa il punto medio dell’intervallo: $\\dfrac{1+3}{2}=2$.'),
-  q('La regola del trapezio su $[0,2]$ per $f(x)=x$ dà:', '$2$', ['$4$', '$1$', '$0$'], 'La formula è $\\dfrac{b-a}{2}[f(a)+f(b)]$. Quindi $\\dfrac22(0+2)=2$, che per una funzione lineare è anche il valore esatto.'),
-]);
-
 competenza('atomo', 'Atomi, ioni e legami', 'chimica-semestre-filtro', 'atomo-legami-termodinamica', [
   q('Un atomo neutro ha numero atomico $Z=6$. Quanti elettroni possiede?', '$6$', ['$12$', '$3$', '$0$'], 'Il numero atomico conta i protoni. In un atomo neutro il numero di elettroni è uguale a quello dei protoni, quindi è $6$.'),
   q('Due isotopi dello stesso elemento differiscono nel numero di:', 'neutroni', ['protoni', 'protoni ed elettroni necessariamente', 'nuclei per atomo'], 'Lo stesso elemento ha lo stesso numero atomico e quindi gli stessi protoni. Gli isotopi hanno invece diverso numero di neutroni.'),
@@ -3611,97 +3583,6 @@ export const PROFILI_STUDIO = {
         {
           "titolo": "Esercizi da provare",
           "url": "/fisica-superiori-5/relativita-spazio-tempo/esercizi",
-          "tipo": "esercizi"
-        }
-      ]
-    }
-  },
-  "informatica-superiori-5": {
-    "materia": "informatica-superiori-5",
-    "titolo": "Informatica 5° anno",
-    "gruppo": "Superiori",
-    "prerequisiti": [
-      "logica",
-      "potenze",
-      "funzioni",
-      "algebra"
-    ],
-    "corso": [
-      "reti",
-      "algoritmi",
-      "automi",
-      "calcolo-numerico"
-    ],
-    "inizio": {
-      "titolo": "Primo argomento di Informatica 5° anno",
-      "url": "/informatica-superiori-5/reti-e-modelli/teoria"
-    },
-    "materialiPerCompetenza": {
-      "reti": [
-        {
-          "titolo": "Teoria e definizioni",
-          "url": "/informatica-superiori-5/ipv4-e-sottoreti/teoria",
-          "tipo": "teoria"
-        },
-        {
-          "titolo": "Esempi svolti",
-          "url": "/informatica-superiori-5/ipv4-e-sottoreti/esercizi-svolti",
-          "tipo": "svolti"
-        },
-        {
-          "titolo": "Esercizi da provare",
-          "url": "/informatica-superiori-5/ipv4-e-sottoreti/esercizi",
-          "tipo": "esercizi"
-        }
-      ],
-      "algoritmi": [
-        {
-          "titolo": "Teoria e definizioni",
-          "url": "/informatica-superiori-5/complessita-algoritmi/teoria",
-          "tipo": "teoria"
-        },
-        {
-          "titolo": "Esempi svolti",
-          "url": "/informatica-superiori-5/complessita-algoritmi/esercizi-svolti",
-          "tipo": "svolti"
-        },
-        {
-          "titolo": "Esercizi da provare",
-          "url": "/informatica-superiori-5/complessita-algoritmi/esercizi",
-          "tipo": "esercizi"
-        }
-      ],
-      "automi": [
-        {
-          "titolo": "Teoria e definizioni",
-          "url": "/informatica-superiori-5/automi-e-computabilita/teoria",
-          "tipo": "teoria"
-        },
-        {
-          "titolo": "Esempi svolti",
-          "url": "/informatica-superiori-5/automi-e-computabilita/esercizi-svolti",
-          "tipo": "svolti"
-        },
-        {
-          "titolo": "Esercizi da provare",
-          "url": "/informatica-superiori-5/automi-e-computabilita/esercizi",
-          "tipo": "esercizi"
-        }
-      ],
-      "calcolo-numerico": [
-        {
-          "titolo": "Teoria e definizioni",
-          "url": "/informatica-superiori-5/errori-e-zeri/teoria",
-          "tipo": "teoria"
-        },
-        {
-          "titolo": "Esempi svolti",
-          "url": "/informatica-superiori-5/errori-e-zeri/esercizi-svolti",
-          "tipo": "svolti"
-        },
-        {
-          "titolo": "Esercizi da provare",
-          "url": "/informatica-superiori-5/errori-e-zeri/esercizi",
           "tipo": "esercizi"
         }
       ]

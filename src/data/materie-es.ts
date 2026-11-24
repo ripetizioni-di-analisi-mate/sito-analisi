@@ -7,7 +7,7 @@ export const GRUPPI_ES: Record<string, string> = {
   'TOLC, OFA e test di ingresso': 'Acceso a la universidad en Italia',
 };
 
-export const SOTTOGRUPPI_ES: Record<string, string> = { Matematica: 'Matemáticas', Fisica: 'Física', Informatica: 'Informática' };
+export const SOTTOGRUPPI_ES: Record<string, string> = { Matematica: 'Matemáticas', Fisica: 'Física' };
 
 export const MATERIE_ES: Record<string, [string, string]> = {
   precorso: ['Curso preparatorio de matemáticas', 'Lógica, potencias, polinomios, ecuaciones, inecuaciones y geometría analítica para preparar Cálculo I.'],
@@ -34,11 +34,6 @@ export const MATERIE_ES: Record<string, [string, string]> = {
   'fisica-superiori-3': ['Física, 3.er curso', 'Mecánica: movimiento, fuerzas, energía, choques, rotaciones, gravitación y fluidos.'],
   'fisica-superiori-4': ['Física, 4.º curso', 'Termodinámica, oscilaciones y ondas, acústica, óptica, electrostática, condensadores y circuitos de corriente continua.'],
   'fisica-superiori-5': ['Física, 5.º curso', 'Campos magnéticos, inducción electromagnética, corriente alterna, ecuaciones de Maxwell, relatividad especial y física cuántica.'],
-  'informatica-superiori-1': ['Informática, 1.er curso', 'Arquitectura de computadores, codificación de datos, hojas de cálculo y consulta de fuentes digitales.'],
-  'informatica-superiori-2': ['Informática, 2.º curso', 'Algoritmos, condiciones, bucles, funciones, secuencias y primeras pruebas.'],
-  'informatica-superiori-3': ['Informática, 3.er curso', 'Estructuras de datos, archivos, objetos y clases, HTML y formatos digitales.'],
-  'informatica-superiori-4': ['Informática, 4.º curso', 'Bases de datos, modelo relacional, consultas SQL y un proyecto práctico.'],
-  'informatica-superiori-5': ['Informática, 5.º curso', 'Redes, protocolos de internet, complejidad algorítmica, autómatas, métodos numéricos y simulación científica.'],
   'matematica-concorsi': ['Matemáticas para procesos selectivos', 'Cálculo básico, proporciones, porcentajes, ecuaciones, estadística, probabilidad y geometría para pruebas selectivas italianas.'],
   'logica-concorsi': ['Razonamiento lógico para procesos selectivos', 'Conjuntos, diagramas de Venn, inferencias, series numéricas, comprensión lectora y razonamiento espacial para pruebas selectivas italianas.'],
   'matematica-da-zero': ['Matemáticas desde cero', 'Números, fracciones, porcentajes, potencias, expresiones algebraicas, ecuaciones, coordenadas y geometría.'],

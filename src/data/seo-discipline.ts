@@ -15,14 +15,6 @@ export const BOCCONI_SEO_EN = {
 };
 
 export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
-  informatica: {
-    titolo: 'Fondamenti di Informatica in C | Esercizi e prova di laboratorio',
-    descrizione: 'Corso universitario di programmazione in C17. Studia puntatori, ricorsione, algoritmi e file con 88 esercizi svolti e 990 domande spiegate.',
-    preparazione: 'Il corso parte dalla rappresentazione dei numeri e segue il percorso di un programma C17 dalla compilazione alle prove sui file. Per affrontare lo scritto si impara a prevedere un risultato, tracciare le chiamate di una funzione e contare i confronti di un algoritmo.',
-    metodo: 'In laboratorio, per distinguere un errore di indice da un errore sulla durata di un oggetto, bisogna seguire separatamente il cursore e i dati a cui punta. Le schede propongono tracce di esecuzione e casi di prova. I quiz permettono di confrontare la propria previsione con una spiegazione passo per passo.',
-    esempi: ['rappresentazione-numeri', 'puntatori-e-memoria', 'file-e-laboratorio'],
-    collegate: ['precorso', 'algebra-lineare'],
-  },
   'precorso': {
     titolo: 'Precorso di matematica | Teoria ed esercizi svolti',
     descrizione: 'Precorso di matematica per l’università. Equazioni, disequazioni, logaritmi, trigonometria e geometria con teoria ed esercizi svolti.',
@@ -215,14 +207,6 @@ export const GUIDE_DISCIPLINE: Record<string, GuidaDisciplina> = {
     esempi: ['induzione-elettromagnetica', 'relativita-spazio-tempo', 'atomo-e-onde-di-materia'],
     collegate: ['fisica-superiori-4', 'matematica-superiori-5', 'fisica-2'],
   },
-  'informatica-superiori-5': {
-    titolo: 'Informatica quinta superiore | Teoria ed esercizi svolti',
-    descrizione: 'Informatica di quinta superiore con reti, IPv4 e sottoreti, protocolli, complessità, automi e calcolo numerico. Teoria ed esercizi svolti.',
-    preparazione: 'Il programma di Informatica del quinto anno comprende reti, indirizzamento IPv4, protocolli e aspetti teorici del calcolo. Complessità, automi e computabilità affiancano metodi numerici per zeri di funzione, integrazione e simulazione scientifica.',
-    metodo: 'Gli esercizi sulle sottoreti richiedono la lettura della maschera e il calcolo degli intervalli di indirizzi. Nel calcolo numerico si distinguono algoritmo, approssimazione ed errore. Le schede mostrano i passaggi e i capitoli di teoria ne esplicitano le ipotesi.',
-    esempi: ['ipv4-e-sottoreti', 'complessita-algoritmi', 'integrazione-numerica'],
-    collegate: ['matematica-superiori-5', 'matematica-superiori-4', 'algebra-lineare'],
-  },
   'matematica-concorsi': {
     titolo: 'Matematica per concorsi | Teoria, quiz svolti e soluzioni',
     descrizione: 'Matematica per concorsi pubblici con percentuali, proporzioni, problemi, successioni, probabilità e geometria. Quiz svolti e spiegazioni.',
@@ -346,13 +330,5 @@ export const GUIDE_DISCIPLINE_EN: Partial<Record<string, GuidaDisciplina>> = {
     metodo: 'The timing of the cash flows determines which formula applies. The worked examples show how to choose a valuation date, convert interest rates, and set up the equation of value. Amortization schedules distinguish the principal repaid, the interest paid, and the outstanding balance.',
     esempi: GUIDE_DISCIPLINE['matematica-finanziaria'].esempi,
     collegate: GUIDE_DISCIPLINE['matematica-finanziaria'].collegate,
-  },
-  informatica: {
-    titolo: 'Foundations of Computer Science in C | Exercises and Lab Practice',
-    descrizione: 'A university course in C17 programming. Study pointers, recursion, algorithms and files with 88 worked exercises and 990 questions with explanations.',
-    preparazione: 'The course begins with number representation and follows a C17 program from compilation to tests on files. To prepare for a written exam, students learn to predict results, trace function calls and count the comparisons an algorithm makes.',
-    metodo: 'In the lab, telling an indexing error from an object lifetime error requires tracking the cursor separately from the data it points to. The worksheets provide execution traces and test cases. The quizzes let students compare their predictions with step-by-step explanations.',
-    esempi: GUIDE_DISCIPLINE.informatica.esempi,
-    collegate: GUIDE_DISCIPLINE.informatica.collegate,
   },
 };

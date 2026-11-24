@@ -9,7 +9,7 @@ const materie = MATERIE.filter((m) => m.attiva);
 const gruppi = [...new Set(materie.map((m) => m.gruppo))];
 const descrizioni: Record<string, string> = {
   'Università': 'Programmi per gli esami di matematica, fisica, economia e ingegneria, con teoria e schede svolte per argomento.',
-  'Superiori': 'Matematica, fisica e informatica per anno scolastico, con spiegazioni ed esercizi per le verifiche.',
+  'Superiori': 'Matematica e fisica per anno scolastico, con spiegazioni ed esercizi per le verifiche.',
   'Concorsi': 'Calcolo e ragionamento logico per le prove a quiz dei concorsi pubblici.',
   'Percorso per principianti': 'Percorsi gratuiti per riprendere le operazioni, le equazioni e le prime leggi della fisica.',
   'Semestre filtro': 'Basi matematiche e materiali di fisica, chimica e biologia per il semestre filtro di Medicina.',

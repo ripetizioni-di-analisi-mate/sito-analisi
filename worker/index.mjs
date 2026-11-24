@@ -1886,6 +1886,13 @@ export default {
       return new Response(null, { status: 301, headers: { location: url.pathname.startsWith('/en/') ? '/en/' : '/', 'cache-control': 'no-store' } });
     }
 
+    // Informatica tolta dal sito (24/11/2026, richiesta di Carmine): università, superiori e corsi USA
+    // di Computer Science. I vecchi indirizzi portano alla home della lingua.
+    const exInformatica = url.pathname.match(/^\/(?:(en|es|fr|de)\/)?(?:(?:studio-guidato|vetrine(?:\/[a-z]{2})?|og(?:\/[a-z]{2})?|dati-[a-z-]+)\/)?(?:informatica(?:-superiori-[1-5])?(?:--\d+)?|us\/(?:introduction-to-computer-science|data-structures))(?:[\/.].*)?$/);
+    if (exInformatica) {
+      return new Response(null, { status: 301, headers: { location: exInformatica[1] ? `/${exInformatica[1]}/` : '/', 'cache-control': 'no-store' } });
+    }
+
     // ===== contenuti: oscuramento e consegna =====
     const info = analizza(url.pathname);
     // I PDF degli argomenti e le pagine di stampa sono stati tolti (03/11/2026, richiesta di Carmine):

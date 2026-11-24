@@ -7,7 +7,7 @@ export const GRUPPI_DE: Record<string, string> = {
   'TOLC, OFA e test di ingresso': 'Hochschulzugang in Italien',
 };
 
-export const SOTTOGRUPPI_DE: Record<string, string> = { Matematica: 'Mathematik', Fisica: 'Physik', Informatica: 'Informatik' };
+export const SOTTOGRUPPI_DE: Record<string, string> = { Matematica: 'Mathematik', Fisica: 'Physik' };
 
 export const MATERIE_DE: Record<string, [string, string]> = {
   precorso: ['Mathematik-Vorkurs', 'Logik, Potenzen, Polynome, Gleichungen, Ungleichungen und analytische Geometrie als Vorbereitung auf Analysis I.'],
@@ -34,11 +34,6 @@ export const MATERIE_DE: Record<string, [string, string]> = {
   'fisica-superiori-3': ['Physik, 3. Jahr', 'Mechanik mit Bewegung, Kräften, Energie, Stößen, Drehbewegungen, Gravitation und Fluiden.'],
   'fisica-superiori-4': ['Physik, 4. Jahr', 'Thermodynamik, Schwingungen und Wellen, Akustik, Optik, Elektrostatik, Kondensatoren und Gleichstromkreise.'],
   'fisica-superiori-5': ['Physik, 5. Jahr', 'Magnetfelder, elektromagnetische Induktion, Wechselstrom, Maxwell-Gleichungen, spezielle Relativitätstheorie und Quantenphysik.'],
-  'informatica-superiori-1': ['Informatik, 1. Jahr', 'Computerarchitektur, Datenkodierung, Tabellenkalkulation und der Umgang mit digitalen Quellen.'],
-  'informatica-superiori-2': ['Informatik, 2. Jahr', 'Algorithmen, Bedingungen, Schleifen, Funktionen, Sequenzen und erste Tests.'],
-  'informatica-superiori-3': ['Informatik, 3. Jahr', 'Datenstrukturen, Dateien, Objekte und Klassen, HTML und digitale Formate.'],
-  'informatica-superiori-4': ['Informatik, 4. Jahr', 'Datenbanken, relationales Modell, SQL-Abfragen und ein praktisches Datenbankprojekt.'],
-  'informatica-superiori-5': ['Informatik, 5. Jahr', 'Computernetze, Internetprotokolle, algorithmische Komplexität, Automaten, numerische Verfahren und wissenschaftliche Simulationen.'],
   'matematica-concorsi': ['Mathematik für Auswahltests', 'Grundrechenarten, Verhältnisse, Prozentrechnung, Gleichungen, Statistik, Wahrscheinlichkeit und Geometrie für italienische Auswahltests.'],
   'logica-concorsi': ['Logisches Denken für Auswahltests', 'Mengen, Venn-Diagramme, logische Schlüsse, Zahlenfolgen, Textverständnis und räumliches Denken für italienische Auswahltests.'],
   'matematica-da-zero': ['Mathematik von Grund auf', 'Zahlen, Brüche, Prozentrechnung, Potenzen, Terme, Gleichungen, Koordinaten und Geometrie.'],

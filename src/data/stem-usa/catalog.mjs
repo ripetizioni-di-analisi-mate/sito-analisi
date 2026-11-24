@@ -1,14 +1,13 @@
 import { mathematics } from './mathematics.mjs';
 import { physics } from './physics.mjs';
-import { computing } from './computing.mjs';
+import { discreteMathematics } from './computing.mjs';
 import { science } from './science.mjs';
 import { highSchoolCourses, highSchoolPath, highSchoolCourse, highSchoolHasStudyPages, highSchoolPreviewPage } from './high-school/index.mjs';
 import { haProgramma, programmaDi, SEZIONI_USA } from './programmi.mjs';
 
 export const groups = [
-  { id: 'mathematics', name: 'Mathematics', courses: mathematics },
+  { id: 'mathematics', name: 'Mathematics', courses: [...mathematics, ...discreteMathematics] },
   { id: 'physics-engineering', name: 'Physics & Engineering', courses: physics },
-  { id: 'computer-science', name: 'Computer Science', courses: computing },
   { id: 'natural-sciences', name: 'Natural Sciences', courses: science },
 ];
 

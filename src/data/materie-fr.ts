@@ -7,7 +7,7 @@ export const GRUPPI_FR: Record<string, string> = {
   'TOLC, OFA e test di ingresso': 'Admission à l’université en Italie',
 };
 
-export const SOTTOGRUPPI_FR: Record<string, string> = { Matematica: 'Mathématiques', Fisica: 'Physique', Informatica: 'Informatique' };
+export const SOTTOGRUPPI_FR: Record<string, string> = { Matematica: 'Mathématiques', Fisica: 'Physique' };
 
 export const MATERIE_FR: Record<string, [string, string]> = {
   precorso: ['Remise à niveau en mathématiques', 'Logique, puissances, polynômes, équations, inéquations et géométrie analytique pour préparer le cours d’analyse I.'],
@@ -34,11 +34,6 @@ export const MATERIE_FR: Record<string, [string, string]> = {
   'fisica-superiori-3': ['Physique, 3ᵉ année', 'Mécanique du point et du solide, forces, énergie, chocs, gravitation et fluides.'],
   'fisica-superiori-4': ['Physique, 4ᵉ année', 'Thermodynamique, oscillations, ondes, acoustique, optique, électrostatique, condensateurs et circuits en courant continu.'],
   'fisica-superiori-5': ['Physique, 5ᵉ année', 'Champs magnétiques, induction électromagnétique, courant alternatif, équations de Maxwell, relativité restreinte et physique quantique.'],
-  'informatica-superiori-1': ['Informatique, 1ʳᵉ année', 'Architecture des ordinateurs, codage des données, tableurs et recherche de sources numériques.'],
-  'informatica-superiori-2': ['Informatique, 2ᵉ année', 'Algorithmes, conditions, boucles, fonctions, séquences et premiers tests.'],
-  'informatica-superiori-3': ['Informatique, 3ᵉ année', 'Structures de données, fichiers, objets et classes, HTML et formats numériques.'],
-  'informatica-superiori-4': ['Informatique, 4ᵉ année', 'Bases de données, modèle relationnel, requêtes SQL et projet pratique.'],
-  'informatica-superiori-5': ['Informatique, 5ᵉ année', 'Réseaux, protocoles Internet, complexité des algorithmes, automates, méthodes numériques et simulation scientifique.'],
   'matematica-concorsi': ['Mathématiques pour les concours', 'Calcul, proportions, pourcentages, équations, statistique, probabilités et géométrie pour les concours italiens.'],
   'logica-concorsi': ['Raisonnement logique pour les concours', 'Ensembles, diagrammes de Venn, déductions, suites numériques, compréhension de texte et raisonnement dans l’espace pour les concours italiens.'],
   'matematica-da-zero': ['Les bases des mathématiques', 'Nombres, fractions, pourcentages, puissances, calcul littéral, équations, coordonnées et géométrie.'],
