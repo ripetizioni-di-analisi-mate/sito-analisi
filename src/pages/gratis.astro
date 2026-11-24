@@ -24,17 +24,20 @@ const fz = trovaMateria('fisica-zero');
 
 const senzaAccount = [
   { href: '/domande-a-tempo', titolo: 'Domande a tempo', testo: 'Quiz a risposta multipla per ogni argomento, con la spiegazione dopo ogni risposta.' },
-  { href: '/formulari', titolo: 'Formulari', testo: `Le formule di ${formulariTesto}, con le condizioni di validità.` },
-  ...(mz?.attiva ? [{ href: '/matematica-da-zero', titolo: mz.titolo, testo: `La matematica dalle basi, tutta gratuita: ${mz.argomenti.length} argomenti con teoria ed esercizi.` }] : []),
-  ...(fz?.attiva ? [{ href: '/fisica-zero', titolo: fz.titolo, testo: `La fisica dalle basi, tutta gratuita: ${fz.argomenti.length} argomenti con teoria ed esercizi.` }] : []),
   { href: '/teoremi', titolo: 'Teoremi e definizioni', testo: 'Gli enunciati di tutti i teoremi e le definizioni del sito, in ordine alfabetico.' },
   { href: '/compatibilita', titolo: 'Il sito copre il tuo esame?', testo: 'Si carica il testo di un compito universitario e si vede quanta parte è coperta dal materiale.' },
   { href: '/concorsi/simulazione', titolo: 'Simulazioni a quiz', testo: 'Prove a quiz dei concorsi pubblici, con durata e punteggio a scelta.' },
   { href: '/concorsi', titolo: 'Guida ai concorsi', testo: 'Che cosa studiare per il proprio concorso, materia per materia.' },
   { href: '/materie', titolo: 'Anteprima di ogni materia', testo: 'In ogni materia i primi paragrafi della teoria e le prime schede svolte di ogni argomento.' },
 ];
+// Gratis con un account (src/data/con-account.mjs): senza account se ne legge solo l'inizio.
+const conAccountGratis = [
+  { href: '/formulari', titolo: 'Formulari', testo: `Le formule di ${formulariTesto}, con le condizioni di validità, e il PDF da stampare. Senza account si leggono le prime sezioni.` },
+  ...(mz?.attiva ? [{ href: '/matematica-da-zero', titolo: mz.titolo, testo: `La matematica dalle basi: ${mz.argomenti.length} argomenti con teoria ed esercizi. Senza account si legge l’inizio di ogni argomento.` }] : []),
+  ...(fz?.attiva ? [{ href: '/fisica-zero', titolo: fz.titolo, testo: `La fisica dalle basi: ${fz.argomenti.length} argomenti con teoria ed esercizi. Senza account si legge l’inizio di ogni argomento.` }] : []),
+];
 ---
-<Base titolo="Materiale gratuito: esercizi svolti, quiz e formulari" descrizione={`Tutto il materiale gratuito di ripetizionidianalisi.com: ${totaleSchede} schede di esercizi svolti, domande a tempo, formulari, Matematica zero e Fisica zero, teoremi e definizioni.`} lingua="it" percorso={[{ titolo: 'Gratis' }]}>
+<Base titolo="Materiale gratuito: esercizi svolti, quiz e formulari" descrizione={`Tutto il materiale gratuito di ripetizionidianalisi.com: ${totaleSchede} schede di esercizi svolti, domande a tempo, teoremi e definizioni e, con un account gratuito, formulari, Matematica zero e Fisica zero.`} lingua="it" percorso={[{ titolo: 'Gratis' }]}>
   <h1>Materiale gratuito</h1>
   <p class="sommario">Tutto ciò che sul sito si usa senza pagare. La prima parte si apre subito; l'ultima con un account gratuito.</p>
 
@@ -51,7 +54,7 @@ const senzaAccount = [
   </ul>
 
   <h2 id="esercizi-svolti">Esercizi svolti gratuiti</h2>
-  <p>{totaleSchede} schede svolte aperte per intero, raccolte per materia.</p>
+  <p>{totaleSchede} schede svolte aperte per intero, anche senza account, raccolte per materia.</p>
   {gruppi.map((g) => (
     <div class="gratis-gruppo">
       <h3>{g.nome}</h3>
@@ -62,6 +65,16 @@ const senzaAccount = [
   ))}
 
   <h2>Con l'account gratuito</h2>
+  <ul class="griglia-materie gratis-griglia">
+    {conAccountGratis.map((v) => (
+      <li style="--accento: var(--azione)">
+        <a href={url(v.href)}>
+          <h3>{v.titolo}</h3>
+          <p>{v.testo}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
   <ul class="gratis-account">
     <li><b>Livelli e punti</b>: lo studio e le risposte giuste fanno salire di livello.</li>
     <li><b>Lega settimanale</b>: la classifica della settimana con gli altri studenti.</li>

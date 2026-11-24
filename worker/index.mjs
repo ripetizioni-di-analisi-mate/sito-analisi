@@ -28,6 +28,7 @@ import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
+import { conAccount, SEZIONI_FORMULARIO_LIBERE } from '../src/data/con-account.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti, cookieCampagna, campagnaIscrizione, riepilogoCampagne } from './provenienza.mjs';
 import { speseMeta } from './meta-ads.mjs';
@@ -1896,10 +1897,12 @@ export default {
     const info = analizza(url.pathname);
     // I PDF degli argomenti e le pagine di stampa sono stati tolti (03/11/2026, richiesta di Carmine):
     // i vecchi indirizzi portano alla teoria dell'argomento. Restano solo i PDF dei formulari (sopra).
-    if (info && (info.tipo === 'pdf' || info.tipo === 'stampa')) {
+    // (la pagina di stampa dei formulari, /formulari/<materia>/stampa, è un'altra cosa: la gestisce il blocco dei formulari più sotto)
+    if (info && (info.tipo === 'pdf' || info.tipo === 'stampa') && info.materia !== 'formulari') {
       return new Response(null, { status: 301, headers: { location: `${info.pref}/${info.materia}/${info.argomento}/teoria`, 'cache-control': 'no-store' } });
     }
-    const protetta = vendita && info && A_PAGAMENTO.includes(info.materia);
+    // Materie gratuite con account (src/data/con-account.mjs): stesse anteprime delle materie a pagamento, aperte da qualsiasi account.
+    const protetta = info && ((vendita && A_PAGAMENTO.includes(info.materia)) || conAccount(info.materia));
     const schedaSvoltaLibera = info?.tipo === 'esercizi-svolti' && info.n > 0
       && info.n <= schedeLibere(info.materia, info.argomento);
     // La sessione si verifica solo per le pagine e i PDF, non per font, stili e immagini.
@@ -1916,7 +1919,7 @@ export default {
     const primo = url.pathname.slice(prefissoLingua(url.pathname).length).split('/')[1]?.replace(/\.html$/, '');
     let sbloccataQui = corsoUsa ? !usaBloccato : Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
-      sbloccataQui = Boolean(io?.materie.includes(info.materia));
+      sbloccataQui = conAccount(info.materia) ? Boolean(io) : Boolean(io?.materie.includes(info.materia));
       // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
       const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n && !schedaSvoltaLibera);
       const motore = !sbloccataQui && ridotta && req.method === 'GET'
@@ -1941,6 +1944,22 @@ export default {
             ? `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi/${info.n}`
             : `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi`);
         }
+      }
+    }
+    // Formulari (24/11/2026, «porta socchiusa»): agli ospiti le prime sezioni (vetrina di scripts/vetrine.mjs),
+    // la pagina di stampa solo con un account; Googlebot e Bingbot verificati leggono tutto, con la parte riservata segnata.
+    const formulario = url.pathname.match(/^(\/en)?\/formulari\/([a-z0-9-]+)(\/stampa)?(?:\.html)?\/?$/);
+    if (!risposta && formulario && !io && (req.method === 'GET' || req.method === 'HEAD')) {
+      const pref = formulario[1] || '';
+      if (formulario[3]) return new Response(null, { status: 302, headers: { location: `${pref}/formulari/${formulario[2]}#scarica`, 'cache-control': 'private, no-store' } });
+      const motore = req.method === 'GET' ? await motoreVerificato(req).catch(() => null) : null;
+      if (motore) {
+        risposta = paginaPerMotore(await env.ASSETS.fetch(senzaCondizioni(req)), 'formulario', SEZIONI_FORMULARIO_LIBERE);
+        risposta = new Response(risposta.body, risposta);
+        if (motore === 'bing') risposta.headers.set('x-robots-tag', 'nocache');
+      } else {
+        const vetrina = await rispostaVetrina(env, req, `/vetrine${pref}/formulari/${formulario[2]}`);
+        if (vetrina.status === 200) risposta = vetrina;
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
@@ -2046,7 +2065,8 @@ export default {
         element(e) { e.setInnerContent(String(st.livello)); },
       }).on('html', {
         element(e) {
-          const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();
+          // le materie gratuite con account non sono «sbloccate»: niente spunta né protezioni delle materie acquistate
+          const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui && !(info && conAccount(info.materia)) ? 'sbloccato' : ''].join(' ').trim();
           e.setAttribute('class', classi);
           e.setAttribute('data-materie', io.materie.join(' '));
         },

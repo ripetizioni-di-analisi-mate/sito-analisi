@@ -159,7 +159,7 @@ const icona = {
                         </a>
                         {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
                       </span>
-                      <small class="accesso-scheda">{usa ? `${m.prezzo} € · Full course` : m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : 'Tutto gratuito'}</small>
+                      <small class="accesso-scheda">{usa ? `${m.prezzo} € · Full course` : m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : 'Gratis con un account'}</small>
                     </>
                   );
                 })() : m.attiva ? (

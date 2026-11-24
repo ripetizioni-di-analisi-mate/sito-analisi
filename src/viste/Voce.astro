@@ -6,6 +6,7 @@ import { originale } from '../lib/canonici';
 // Il riquadro è lo stesso HTML del capitolo (src/lib/voci-teoria.ts), quindi formule e stile coincidono.
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
+import { conAccount } from '../data/con-account.mjs';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
@@ -40,7 +41,8 @@ const ETICHETTA = en
   : { definizione: 'Definizione', teorema: 'Teorema', proposizione: 'Proposizione' };
 const etichetta = ETICHETTA[voce.tipo];
 const conDimostrazione = Boolean(voce.dimostrazione);
-const aPagamento = Boolean(m.prezzo);
+// dimostrazione riservata: materie a pagamento e materie gratuite con account (src/data/con-account.mjs)
+const aPagamento = Boolean(m.prezzo) || conAccount(materia);
 
 // esercizi che usano questa voce (frontmatter `teoria` delle schede e delle tracce)
 const svolti = perArgomento(await getCollection('svolti'), materia, argomento).filter((e) => e.data.teoria.includes(ancora));

@@ -25,7 +25,9 @@ const schema = [{
   name: voce.data.titolo,
   description: voce.data.descrizione,
   inLanguage: 'en',
-  isAccessibleForFree: true,
+  // gratis con un account: agli ospiti le prime sezioni (src/data/con-account.mjs)
+  isAccessibleForFree: false,
+  hasPart: { '@type': 'WebPageElement', isAccessibleForFree: false, cssSelector: '.contenuto-riservato' },
   learningResourceType: 'Formula sheet',
   educationalLevel: 'University',
   about: m.titolo,
@@ -42,7 +44,8 @@ const schema = [{
     <p class="sommario">{voce.data.sommario}</p>
 
     <div class="scarica-formulario" id="scarica">
-      <p class="scarica-testo">The whole formula sheet can be read here. The PDF, ready to print, can be downloaded with a free account.</p>
+      <p class="scarica-testo solo-ospiti">The first sections are open to everyone. With a free account you can read the whole formula sheet and download the PDF, ready to print.</p>
+      <p class="scarica-testo solo-collegati">With your account you can read the whole formula sheet and download the PDF, ready to print.</p>
       <a class="bottone-primario scarica-pdf solo-collegati" href={pdf} download>Download the PDF</a>
       <a class="bottone-primario scarica-pdf solo-ospiti" href={`/en/accedi?nuovo=1&dopo=${encodeURIComponent(indirizzo + '#scarica')}`}>Create a free account and download the PDF</a>
       <p class="nota-accesso solo-ospiti">Already have an account? <a href={`/en/accedi?dopo=${encodeURIComponent(indirizzo + '#scarica')}`}>Sign in</a></p>

@@ -2,6 +2,7 @@
 import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
+import { conAccount } from '../data/con-account.mjs';
 import { getCollection } from 'astro:content';
 import { resaVoce } from '../lib/resa';
 import { dataContenuto } from '../lib/date';
@@ -44,7 +45,7 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
   isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
-  ...accesso(!materiaL(lingua, materia).prezzo || Number(n) <= schedeLibere(materia, argomento)),
+  ...accesso((!materiaL(lingua, materia).prezzo && !conAccount(materia)) || Number(n) <= schedeLibere(materia, argomento)),
 }, keywords: (voce.data.parole ?? []).join(', ') }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'], href: lista }, { titolo: `${t.scheda} ${n}` }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"

@@ -2,6 +2,7 @@ import { getCollection } from 'astro:content';
 import { materieL } from '../i18n';
 import { schedeLibere } from '../data/schede-libere.mjs';
 import { originale } from './canonici';
+import { conAccount } from '../data/con-account.mjs';
 
 type LinguaRaccolta = 'it' | 'en';
 interface Scheda { numero: number; titolo: string; percorso: string; teoria: string[] }
@@ -20,7 +21,7 @@ async function raccogli(lingua: LinguaRaccolta) {
     const [materia, argomento, id] = scheda.id.split('/');
     const m = catalogo.get(materia);
     const numero = Number(id);
-    if (!m || (m.prezzo && numero > schedeLibere(materia, argomento))) continue;
+    if (!m || ((m.prezzo || conAccount(materia)) && numero > schedeLibere(materia, argomento))) continue;
     const titolo = lingua === 'it' ? scheda.data.titolo : traduzioni.get(scheda.id);
     if (!titolo) continue;
     const chiave = materia + '/' + argomento;

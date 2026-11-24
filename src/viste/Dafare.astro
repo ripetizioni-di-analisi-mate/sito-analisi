@@ -2,6 +2,7 @@
 import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
+import { conAccount } from '../data/con-account.mjs';
 import { getCollection, render } from 'astro:content';
 import { dataContenuto } from '../lib/date';
 import TeoriaEsercizio from '../components/TeoriaEsercizio.astro';
@@ -48,7 +49,7 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
   isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
-  ...accesso(!materiaL(lingua, materia).prezzo),
+  ...accesso(!materiaL(lingua, materia).prezzo && !conAccount(materia)),
 } }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi, href: lista }, { titolo: `${t.esercizio} ${n}` }]}
   materia={materia} argomento={argomento} sezione="esercizi"

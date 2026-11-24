@@ -12,7 +12,7 @@ const voci = (await getCollection('formulari'))
 <Base titolo="Formulari gratuiti di Analisi matematica e Fisica" descrizione="Formulari gratuiti di Precorso, Analisi matematica 1 e 2 e Fisica 1, con le condizioni di validità di ogni formula: si leggono online e si scaricano in PDF." lingua="it" percorso={[{ titolo: 'Formulari' }]}>
   <p class="sopratitolo">Gratis</p>
   <h1>Formulari</h1>
-  <p class="sommario">Le formule di ogni materia con le loro condizioni di validità, nell'ordine degli argomenti dell'esame. Si leggono qui per intero; il PDF si scarica con un account gratuito.</p>
+  <p class="sommario">Le formule di ogni materia con le loro condizioni di validità, nell'ordine degli argomenti dell'esame. Le prime sezioni si leggono subito; con un account gratuito si leggono per intero e si scaricano in PDF.</p>
   <ul class="griglia-materie">
     {voci.map((v) => {
       const m = trovaMateria(v.id);
@@ -21,7 +21,7 @@ const voci = (await getCollection('formulari'))
           <a href={`/formulari/${v.id}`}>
             <h3>{v.data.titolo}</h3>
             <p>{v.data.sommario}</p>
-            <span class="conteggio">Gratis · PDF con account</span>
+            <span class="conteggio">Gratis con un account</span>
           </a>
         </li>
       );

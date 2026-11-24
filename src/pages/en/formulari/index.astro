@@ -12,7 +12,7 @@ const voci = (await getCollection('formulari_en'))
 <Base titolo="Free calculus formula sheets (PDF)" descrizione="Free formula sheets for Precalculus, Calculus 1 and Multivariable Calculus, each formula with the conditions under which it holds: read online or download as PDF." lingua="en" percorso={[{ titolo: 'Formula sheets' }]} seo={{ titolo: 'Free calculus formula sheets (PDF): Precalculus, Calculus 1 and 2' }}>
   <p class="sopratitolo">Free</p>
   <h1>Formula sheets</h1>
-  <p class="sommario">The formulas of each subject with the conditions under which they hold, in the order of the exam topics. Read them here in full; the PDF can be downloaded with a free account.</p>
+  <p class="sommario">The formulas of each subject with the conditions under which they hold, in the order of the exam topics. The first sections are open to everyone; with a free account you can read them in full and download the PDF.</p>
   <ul class="griglia-materie">
     {voci.map((v) => {
       const m = materiaL('en', v.id);

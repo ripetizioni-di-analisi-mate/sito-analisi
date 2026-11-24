@@ -21,6 +21,7 @@ import { BOCCONI } from '../data/bocconi.mjs';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
+import { conAccount } from '../data/con-account.mjs';
 import { BOCCONI_SEO_EN, GUIDE_DISCIPLINE, GUIDE_DISCIPLINE_EN } from '../data/seo-discipline';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
@@ -132,6 +133,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     <FreeCourseAccess lingua={lingua} href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}
       testo={quizPerEsercitarsi ? (en ? `Theory, worked examples and ${domandeMateria} timed questions. No account needed.` : `Teoria, esercizi svolti e ${domandeMateria} domande a tempo. Puoi iniziare anche senza account.`) : undefined}>
       {quizPerEsercitarsi && domandeMateria > 0 && <a class="link-sblocca" href={link(linguaDomande, `/${materia}/${RIPASSO}/domande`)}>{en ? 'Start the quiz in Italian' : 'Inizia il ripasso a tempo'}</a>}
+      {conAccount(materia) && (lingua === 'it' || en) && <a class="link-sblocca solo-ospiti" href={link(lingua, `/accedi?nuovo=1&dopo=${encodeURIComponent(link(lingua, '/' + materia))}`)}>{en ? 'Create a free account' : 'Crea un account gratuito'}</a>}
     </FreeCourseAccess>
   )}
   {materia !== 'matematica-semestre-filtro' && <div class="esame-materia solo-collegati" data-materia={materia} data-titolo={m.titolo} hidden>

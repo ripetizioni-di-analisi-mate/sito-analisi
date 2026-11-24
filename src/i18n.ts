@@ -125,7 +125,7 @@ export const TESTI = {
     cercaSegnaposto: 'Cerca un argomento, un teorema, un tipo di esercizio…', cercaNelSito: 'Cerca nel sito',
     // pagina della materia
     argomentiEsame: "Gli argomenti dell'esame", argomentiConcorso: 'Gli argomenti del concorso', programma: 'Il programma',
-    tuttoGratis: 'Tutto gratuito', tuttoGratisTesto: 'Teoria, esercizi svolti ed esercizi con soluzione di ogni argomento, senza account e senza pagamento.', iniziaPrimo: 'Inizia dal primo argomento',
+    tuttoGratis: 'Gratis con un account', tuttoGratisTesto: 'Con un account gratuito si aprono teoria, esercizi svolti ed esercizi con soluzione di ogni argomento. Senza account si leggono l’inizio della teoria e le prime 3 schede svolte.', iniziaPrimo: 'Inizia dal primo argomento',
     accessoAttivo: 'Accesso completo attivo',
     accessoAttivoTesto: (m: string) => `Teoria, tutte le schede svolte e soluzioni di ${m} sono sbloccate nel tuo account.`,
     anteprima: 'Anteprima gratuita',
@@ -221,7 +221,7 @@ export const TESTI = {
     homeDescrizione: 'Theory and exercises for university mathematics exams, subject by subject.',
     cercaSegnaposto: 'Search for a topic, a theorem, a type of exercise…', cercaNelSito: 'Search the site',
     argomentiEsame: 'The exam topics', argomentiConcorso: 'The exam topics', programma: 'The syllabus',
-    tuttoGratis: 'Completely free', tuttoGratisTesto: 'Theory, worked examples and exercises with solutions for every topic, with no account and no payment.', iniziaPrimo: 'Start with the first topic',
+    tuttoGratis: 'Free with an account', tuttoGratisTesto: 'A free account opens the theory, worked examples and exercises with solutions of every topic. Without an account you can read the beginning of the theory and the first 3 worked examples.', iniziaPrimo: 'Start with the first topic',
     accessoAttivo: 'Full access active',
     accessoAttivoTesto: (m: string) => `Theory, all worked examples and solutions of ${m} are unlocked in your account.`,
     anteprima: 'Free preview',

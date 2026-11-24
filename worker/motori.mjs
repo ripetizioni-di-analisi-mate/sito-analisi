@@ -109,6 +109,14 @@ export function paginaPerMotore(risposta, tipo, n) {
     }).on('.testo-studio', {
       element(e) { e.onEndTag((fine) => { if (aperto) fine.before('</div>', { html: true }); }); },
     });
+  } else if (tipo === 'formulario') {
+    // formulari: riservate le sezioni dopo le prime n (src/data/con-account.mjs)
+    let h2 = 0, aperto = false;
+    riscrivi.on('.testo-formulario > h2', {
+      element(e) { h2++; if (h2 === n + 1 && !aperto) { e.before(APRI, { html: true }); aperto = true; } },
+    }).on('.testo-formulario', {
+      element(e) { e.onEndTag((fine) => { if (aperto) fine.before('</div>', { html: true }); }); },
+    });
   } else if (tipo === 'voce') {
     // pagina singola di un teorema: riservata solo la dimostrazione
     riscrivi.on('.testo-studio details.blocco-dimostrazione', {

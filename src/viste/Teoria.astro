@@ -2,6 +2,7 @@
 import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
+import { conAccount } from '../data/con-account.mjs';
 import { getCollection } from 'astro:content';
 import { resaVoce } from '../lib/resa';
 import IndiceTeoria from '../components/IndiceTeoria.astro';
@@ -58,7 +59,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
   isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
-  ...accesso(!materiaL(lingua, materia).prezzo),
+  ...accesso(!materiaL(lingua, materia).prezzo && !conAccount(materia)),
 }, teaches: sezioni.map((x: { text: string }) => x.text), ...(nominati.length ? { about: nominati.map((x) => ({ '@type': 'Thing', name: x })) } : {}) }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria }]}
   materia={materia} argomento={argomento} sezione="teoria"
