@@ -128,3 +128,12 @@ test('i vecchi link del catalogo USA rimandano temporaneamente al catalogo ingle
     assert.match(risposta?.headers.get('cache-control') ?? '', /no-store/);
   }
 });
+
+test('ai motori e agli strumenti SEO il parametro «lingua» porta all\'indirizzo pulito', async () => {
+  const motore = { agente: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' };
+  assert.equal(await destinazione('/analisi-1/limiti/teoria?lingua=it', motore), '/analisi-1/limiti/teoria');
+  assert.equal(await destinazione('/?lingua=en', { agente: 'Mozilla/5.0 (compatible; SemrushBot/7~bl)' }), '/');
+  assert.equal(await destinazione('/analisi-1?ref=x&lingua=it', motore), '/analisi-1?ref=x');
+  assert.equal(await destinazione('/?catalogo=IT&lingua=en', motore), null);
+  assert.equal(await destinazione('/analisi-1', motore), null);
+});

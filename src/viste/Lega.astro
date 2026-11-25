@@ -7,7 +7,7 @@ const titolo = 'Lega della settimana';
 const q = quoteLega(LEGA_GRUPPO, 4);
 ---
 <Base titolo={titolo} descrizione="La classifica settimanale degli studenti: dieci leghe, gruppi di trenta, i primi salgono e gli ultimi scendono." percorso={[{ titolo }]}
-  lingua="it" seo={{ noindex: true }}>
+  lingua="it" seo={{ noindex: true, senzaInglese: true }}>
   <div class="lega" data-leghe={JSON.stringify(LEGHE)}>
     <div class="lega-barra">
       <p class="sopratitolo">{titolo}</p>

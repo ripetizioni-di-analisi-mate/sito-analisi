@@ -59,6 +59,16 @@ export function navigazioneVisitatore(req) {
 
 // Restituisce la risposta di reindirizzamento, oppure null se la pagina va servita così com'è.
 export async function versoLaLinguaGiusta(req, env, url) {
+  // «?lingua=xx» nei link (menu lingue, pagine in spagnolo, francese e tedesco): per le persone il parametro
+  // tiene la lingua scelta (sotto); ai motori e agli strumenti SEO si risponde con l'indirizzo pulito, così non
+  // trovano una copia «?lingua=it» di ogni pagina (2.062 errori hreflang nella scansione Semrush del 22/11/2026).
+  // Il contenuto è lo stesso: cambia solo l'indirizzo.
+  if ((req.method === 'GET' || req.method === 'HEAD') && !navigazioneVisitatore(req) && url.searchParams.has('lingua')
+    && !url.searchParams.has('catalogo') && !ESCLUSI.test(url.pathname)) {
+    const pulito = new URL(url);
+    pulito.searchParams.delete('lingua');
+    return new Response(null, { status: 301, headers: { location: pulito.pathname + pulito.search + pulito.hash, 'cache-control': 'private, no-store' } });
+  }
   if (!navigazioneVisitatore(req)) return null;
   if (url.searchParams.has('lingua')) return null; // scelta esplicita nell'indirizzo: si rispetta
   const percorso = url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';

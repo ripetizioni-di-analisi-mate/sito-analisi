@@ -39,11 +39,13 @@ const descrizioneSeo = estrattoTraccia(voce.body) || SEO(lingua).dafareDescr(voc
 const esempi = tradotta && (lingua === 'en' || lingua === 'it')
   ? await esempiPerEsercizio(lingua, materia, argomento, voce.data.teoria) : [];
 const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua)).successivo;
+// SEO (25/11/2026, ok di Carmine): la singola traccia (~100 parole) ripete testo e risultato già presenti
+// nell'elenco /esercizi del capitolo, che resta indicizzato. Per Google: noindex, follow e fuori dalla mappa del sito.
 ---
 <Base
   titolo={`${arg.breve} · ${t.esercizioDaFare} ${n}`}
   descrizione={descrizioneSeo}
-  seo={{ canonico: originale(materia, argomento, 'esercizi', n), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
+  seo={{ noindex: true, canonico: originale(materia, argomento, 'esercizi', n), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
   '@type': 'LearningResource', name: voce.data.titolo, description: descrizioneSeo, learningResourceType: 'Exercise', inLanguage: lingua,
   educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },

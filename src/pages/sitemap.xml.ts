@@ -105,7 +105,7 @@ export async function GET() {
       due(`/${id}/esercizi-svolti`, 0.7, sv.length > 0 && sv.every((v) => tradotte.has(v.id)), lsIt, lsEn);
       if (m.eserciziDaFare !== false) due(`/${id}/esercizi`, 0.6, df.length > 0 && df.every((v) => tradotte.has(v.id)), ldIt, ldEn);
       sv.forEach((v, k) => due(`/${m.slug}/${a.slug}/esercizi-svolti/${v.id.split('/').pop()}`, 0.6, tradotte.has(v.id), dSv[k].it, dSv[k].en));
-      df.forEach((v, k) => due(`/${m.slug}/${a.slug}/esercizi/${v.id.split('/').pop()}`, 0.5, tradotte.has(v.id), dDf[k].it, dDf[k].en));
+      // le singole tracce sono noindex (src/viste/Dafare.astro): non entrano nella mappa
       mIt = piuRecente(mIt, t.it, lsIt, ldIt); mEn = piuRecente(mEn, t.en, lsEn, ldEn);
     }
     pagine[materia].dIt = mIt; pagine[materia].dEn = mEn;

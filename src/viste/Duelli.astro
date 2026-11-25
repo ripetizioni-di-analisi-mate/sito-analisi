@@ -13,7 +13,7 @@ const titolo = 'Duelli';
 const minuti = Math.round((DUELLO.domande * DUELLO.secondi) / 60);
 ---
 <Base titolo={titolo} descrizione={`Sfida un altro studente sulle domande a tempo: ${DUELLO.domande} domande uguali per entrambi, vince chi risponde correttamente a più domande.`}
-  percorso={[{ titolo }]} lingua="it" seo={{ noindex: true }}>
+  percorso={[{ titolo }]} lingua="it" seo={{ noindex: true, senzaInglese: true }}>
   <div class="duelli" data-materie={JSON.stringify(materie)} data-domande={DUELLO.domande} data-secondi={DUELLO.secondi}>
     <p class="sopratitolo">Sfide tra studenti</p>
     <h1>Duelli</h1>
