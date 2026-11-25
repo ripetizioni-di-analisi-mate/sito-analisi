@@ -10,6 +10,8 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { MATERIE_ES, ARGOMENTI_ES } from '../src/data/materie-es.ts';
+import { MATERIE_FR, ARGOMENTI_FR } from '../src/data/materie-fr.ts';
+import { MATERIE_DE, ARGOMENTI_DE } from '../src/data/materie-de.ts';
 import { SCHEDE_LIBERE, schedeLibere } from '../src/data/schede-libere.mjs';
 import { MATERIE_CON_ACCOUNT, SEZIONI_FORMULARIO_LIBERE, conAccount } from '../src/data/con-account.mjs';
 
@@ -167,8 +169,54 @@ const LINGUE = [
     schedaResto: () => 'También tendrás acceso a la teoría del tema y a las soluciones de los ejercicios para practicar.',
     schedaRestoAnteprimaUnica: () => 'El acceso completo incluye la teoría y los ejercicios de este tema.',
     schedaGratis: (tema) => `Ficha gratuita de ${tema} →`,
-    schedeGratis: (tema) => `Ejercicios resueltos gratuitos de ${tema} →` },
-
+    schedeGratis: (tema) => `Ejercicios resueltos gratuitos de ${tema} →`,
+    // 25/11/2026: Fisica zero è gratuita con un account e ha una pagina in spagnolo, francese e tedesco;
+    // senza anteprima per queste lingue gli ospiti ricevevano 404 (scansione Semrush del 25/11).
+    acc: { sblocca: 'Crear una cuenta gratuita',
+      resto: () => 'Con una cuenta gratuita puedes leer también los demás apartados de este tema.',
+      tasto: () => 'Crear una cuenta gratuita',
+      riservata: 'Solución visible con una cuenta gratuita.', soluzione: 'La solución completa de este ejercicio se ve con una cuenta gratuita.',
+      svolgimento: 'Solución paso a paso con una cuenta gratuita.',
+      dimostrazione: 'La demostración se lee con una cuenta gratuita.',
+      schedaSopra: 'Gratis con una cuenta',
+      schedaTitolo: (nombre) => `Puedes leer los enunciados gratis; las soluciones de ${nombre} se ven con una cuenta gratuita.`,
+      schedaResto: () => 'Con la cuenta gratuita tendrás también la teoría completa y las soluciones de los ejercicios.',
+      gia: (href) => `<p class="velo-gratis">¿Ya tienes una cuenta? <a href="${href}">Inicia sesión</a></p>` } },
+  ...[
+    ['/fr', MATERIE_FR, ARGOMENTI_FR, {
+      fine: 'Fin de l’aperçu gratuit',
+      titolo: (n) => n === 1 ? 'Il reste une section de théorie' : `Il reste ${n} sections de théorie`,
+      sblocca: 'Créer un compte gratuit',
+      resto: () => 'Avec un compte gratuit, vous lisez aussi les autres sections de ce chapitre.',
+      riservata: 'Solution visible avec un compte gratuit.', soluzione: 'La solution complète de cet exercice est visible avec un compte gratuit.',
+      svolgimento: 'Solution pas à pas avec un compte gratuit.',
+      dimostrazione: 'La démonstration se lit avec un compte gratuit.',
+      schedaSopra: 'Gratuit avec un compte',
+      schedaTitolo: (nom) => `Les énoncés sont libres ; les solutions de ${nom} se lisent avec un compte gratuit.`,
+      schedaResto: () => 'Avec le compte gratuit, vous avez aussi la théorie complète et les solutions des exercices.',
+      gratis: (url) => `Les premières fiches sont gratuites dans les <a href="${url}">exercices corrigés</a>.`,
+      gia: (href) => `<p class="velo-gratis">Vous avez déjà un compte ? <a href="${href}">Se connecter</a></p>` }],
+    ['/de', MATERIE_DE, ARGOMENTI_DE, {
+      fine: 'Ende der kostenlosen Vorschau',
+      titolo: (n) => n === 1 ? 'Ein weiterer Theorieabschnitt folgt' : `${n} weitere Theorieabschnitte folgen`,
+      sblocca: 'Kostenloses Konto erstellen',
+      resto: () => 'Mit einem kostenlosen Konto lesen Sie auch die übrigen Abschnitte dieses Kapitels.',
+      riservata: 'Lösung mit einem kostenlosen Konto sichtbar.', soluzione: 'Die vollständige Lösung dieser Aufgabe ist mit einem kostenlosen Konto sichtbar.',
+      svolgimento: 'Lösung Schritt für Schritt mit einem kostenlosen Konto.',
+      dimostrazione: 'Der Beweis ist mit einem kostenlosen Konto lesbar.',
+      schedaSopra: 'Kostenlos mit einem Konto',
+      schedaTitolo: (name) => `Die Aufgaben sind frei lesbar; die Lösungen von ${name} gibt es mit einem kostenlosen Konto.`,
+      schedaResto: () => 'Mit dem kostenlosen Konto erhalten Sie auch die vollständige Theorie und die Lösungen der Aufgaben.',
+      gratis: (url) => `Die ersten Blätter sind in den <a href="${url}">gelösten Aufgaben</a> kostenlos.`,
+      gia: (href) => `<p class="velo-gratis">Sie haben bereits ein Konto? <a href="${href}">Anmelden</a></p>` }],
+  ].map(([pref, materie, argomenti, testi]) => {
+    const nomi = Object.fromEntries(Object.entries(materie).map(([slug, [nome]]) => [slug, nome]));
+    // Solo per le materie gratuite con account: le materie a pagamento non hanno pagine in francese e tedesco.
+    return { pref, breve: nomi, nomi, argomenti: Object.fromEntries(Object.keys(materie).map((slug) => [slug, argomenti])),
+      fine: testi.fine, titolo: testi.titolo, gratis: testi.gratis, soloAccount: true,
+      resto: () => '', restoAnteprimaUnica: () => '', schedaGratis: () => '', schedeGratis: () => '',
+      acc: { ...testi, tasto: () => testi.sblocca } };
+  }),
 ];
 let L = LINGUE[0];
 // Materie gratuite con account: il tasto porta all'iscrizione e, dopo, di nuovo alla pagina (`dopo`).
@@ -184,6 +232,7 @@ let teorie = 0, esercizi = 0, schedeVetrina = 0, voci = 0;
 const problemi = [];
 for (L of LINGUE) for (const materia of [...A_PAGAMENTO, ...MATERIE_CON_ACCOUNT]) {
   if (conAccount(materia) && !L.acc) continue;
+  if (L.soloAccount && !conAccount(materia)) continue;
   const T = conAccount(materia) ? { ...L, ...L.acc } : L;
   const base = join(DIST, T.pref, materia);
   if (!existsSync(base)) continue;

@@ -37,7 +37,7 @@ const conAccountGratis = [
   ...(fz?.attiva ? [{ href: '/fisica-zero', titolo: fz.titolo, testo: `La fisica dalle basi: ${fz.argomenti.length} argomenti con teoria ed esercizi. Senza account si legge l’inizio di ogni argomento.` }] : []),
 ];
 ---
-<Base titolo="Materiale gratuito: esercizi svolti, quiz e formulari" descrizione={`Tutto il materiale gratuito di ripetizionidianalisi.com: ${totaleSchede} schede di esercizi svolti, domande a tempo, teoremi e definizioni e, con un account gratuito, formulari, Matematica zero e Fisica zero.`} lingua="it" percorso={[{ titolo: 'Gratis' }]}>
+<Base titolo="Materiale gratuito: esercizi svolti, quiz e formulari" descrizione={`Tutto il materiale gratuito di ripetizionidianalisi.com: ${totaleSchede} schede di esercizi svolti, domande a tempo, teoremi e definizioni e, con un account gratuito, formulari, Matematica zero e Fisica zero.`} lingua="it" percorso={[{ titolo: 'Gratis' }]} seo={{ senzaInglese: true }}>
   <h1>Materiale gratuito</h1>
   <p class="sommario">Tutto ciò che sul sito si usa senza pagare. La prima parte si apre subito; l'ultima con un account gratuito.</p>
 
