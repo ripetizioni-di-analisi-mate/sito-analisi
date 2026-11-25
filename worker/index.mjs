@@ -1885,6 +1885,16 @@ export default {
       return new Response(null, { status: 301, headers: { location: url.pathname.startsWith('/en/') ? '/en/' : '/', 'cache-control': 'no-store' } });
     }
 
+    // SEO (25/11/2026): le pagine di Chimica e Biologia del semestre filtro erano le più cercate in italiano
+    // (gli studenti incollano il testo delle domande). Invece della home portano al capitolo dello stesso
+    // argomento nel TOLC-S, nella stessa sezione, così Google trasferisce il valore a una pagina affine.
+    const exScienze = url.pathname.match(/^\/(?:(en)\/)?(chimica|biologia)-semestre-filtro(?:\/[^/]+(?:\/(teoria|esercizi-svolti|esercizi|domande)(?:[\/.].*)?)?)?\/?$/);
+    if (exScienze) {
+      const [, en, capitolo, sezione] = exScienze;
+      const dest = `${en ? '/en' : ''}/tolc-s/${capitolo}/${sezione || 'teoria'}`;
+      return new Response(null, { status: 301, headers: { location: dest, 'cache-control': 'public, max-age=86400' } });
+    }
+
     // Informatica tolta dal sito (24/11/2026, richiesta di Carmine): università, superiori e corsi USA
     // di Computer Science. I vecchi indirizzi portano alla home della lingua.
     // Stessa cosa per Chimica e Biologia del semestre filtro (24/11/2026, richiesta di Carmine).
