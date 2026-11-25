@@ -400,6 +400,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   <footer class="pie">
     <nav class="pie-link" aria-label={fr ? 'Informations' : es ? 'Información' : de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
       <a href={link(lingua, '/chi-sono')}>{t.chiSono}</a>
+      {lingua === 'it' && <a href="/recensioni">Recensioni</a>}
       {lingua === 'it' && <a href="/ripetizioni-analisi">Ripetizioni online</a>}
       {lingua === 'it' && <a href={url('/materie')}>Tutte le materie</a>}
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>

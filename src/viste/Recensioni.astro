@@ -1,0 +1,46 @@
+---
+// Pagina «Recensioni»: gli screenshot dei messaggi degli studenti (gli stessi di Chi sono),
+// ognuno porta alle storie in evidenza su Instagram. Link nel piè di pagina.
+import Base from '../layouts/Base.astro';
+const IN_EVIDENZA = 'https://www.instagram.com/stories/highlights/18377269690180577/';
+const SCREEN = Array.from({ length: 14 }, (_, i) => `/chi-sono/risultati/${String(i + 1).padStart(2, '0')}.webp`);
+const ALT = 'Messaggio di uno studente dopo l’esame, dalle storie in evidenza su Instagram';
+const icIg = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"/></svg>';
+---
+<Base
+  titolo="Recensioni degli studenti"
+  descrizione="I messaggi degli studenti dopo l’esame: Analisi 1, Analisi 2, Fisica e le altre materie seguite con Carmine. Tutti gli originali sono nelle storie in evidenza su Instagram."
+  lingua="it"
+  percorso={[{ titolo: 'Recensioni' }]}
+  seo={{ titolo: 'Recensioni degli studenti dopo l’esame', senzaInglese: true }}
+>
+  <article class="rec">
+    <h1>Recensioni</h1>
+    <p class="rec-sotto">I messaggi degli studenti dopo l’esame. Toccando uno screenshot si aprono le storie in evidenza su Instagram, dove ci sono tutti gli originali.</p>
+
+    <div class="rec-griglia">
+      {SCREEN.map((src, i) => (
+        <a href={IN_EVIDENZA} target="_blank" rel="noopener"><img src={src} width="640" height="640" loading={i < 6 ? 'eager' : 'lazy'} alt={ALT} /></a>
+      ))}
+    </div>
+
+    <p class="rec-fondo">
+      <a class="rec-tasto" href={IN_EVIDENZA} target="_blank" rel="noopener"><Fragment set:html={icIg} />Tutte le recensioni su Instagram</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .rec h1 { margin-bottom: 0.3rem; }
+  .rec-sotto { color: var(--testo-2, #555); margin: 0 0 1.4rem; font-family: var(--ui); }
+  .rec-griglia { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .rec-griglia a { display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--riga); background: var(--carta-2); }
+  .rec-griglia img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; transition: transform 0.2s; }
+  .rec-griglia a:hover img { transform: scale(1.03); }
+  .rec-fondo { text-align: center; margin-top: 1.4rem; }
+  .rec-tasto { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.1rem; border-radius: 999px; border: 1px solid var(--accento); color: var(--accento); text-decoration: none; font-family: var(--ui); font-size: 0.95rem; }
+  .rec-tasto:hover { background: color-mix(in srgb, var(--accento) 8%, transparent); }
+  @media (max-width: 640px) {
+    .rec-griglia { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

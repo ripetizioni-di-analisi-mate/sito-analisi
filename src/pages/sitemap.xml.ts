@@ -58,6 +58,7 @@ export async function GET() {
     }
   }
   due('/chi-sono', 0.5);
+  due('/recensioni', 0.5, false);
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);
   due('/gratis', 0.7, false);
