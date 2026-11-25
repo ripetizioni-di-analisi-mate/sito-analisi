@@ -155,7 +155,7 @@ const icona = {
                       </div>
                       <span class="piede-scheda pulsanti-scheda">
                         <a class="pulsante-scheda pulsante-teoria" href={hrefMateria(m.slug)}>
-                          <Fragment set:html={icona.teoria} />{usa ? 'Theory and exercises' : 'Teoria ed esercizi'}<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />{usa ? 'Unlocked' : 'Sbloccata'}</span>}
+                          <Fragment set:html={icona.teoria} />{usa ? 'Theory and exercises' : 'Teoria ed esercizi'}{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />{usa ? 'Unlocked' : 'Sbloccata'}</span>}
                         </a>
                         {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
                       </span>
