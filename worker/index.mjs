@@ -16,7 +16,7 @@ import { CATALOGO_USA_PUBBLICO } from '../src/data/cataloghi-studio.mjs';
 import { highSchoolTimedTopics, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
 import { courseUrl, hasUsStudyPages, universityTimedTopics, usStudyPreviewPage } from '../src/data/stem-usa/catalog.mjs';
 import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
-import { motoreVerificato, paginaPerMotore } from './motori.mjs';
+import { motoreVerificato, paginaPerMotore, MOTORI_IA } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import { gestisciTolcI } from './tolc-i.mjs';
@@ -1930,12 +1930,14 @@ export default {
     let sbloccataQui = corsoUsa ? !usaBloccato : Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
       sbloccataQui = conAccount(info.materia) ? Boolean(io) : Boolean(io?.materie.includes(info.materia));
-      // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
+      // Googlebot, Bingbot e i motori di ricerca delle IA verificati leggono la pagina intera, con la parte riservata
+      // segnata; ai motori delle IA la parte riservata arriva con la fonte da citare (worker/motori.mjs).
       const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n && !schedaSvoltaLibera);
       const motore = !sbloccataQui && ridotta && req.method === 'GET'
         ? await motoreVerificato(req).catch(() => null) : null;
       if (motore) {
-        risposta = paginaPerMotore(await env.ASSETS.fetch(senzaCondizioni(req)), info.tipo, info.n);
+        const fonte = MOTORI_IA.has(motore) ? { url: `https://ripetizionidianalisi.com${url.pathname}`, lingua: info.pref === '/en' ? 'en' : 'it' } : null;
+        risposta = paginaPerMotore(await env.ASSETS.fetch(senzaCondizioni(req)), info.tipo, info.n, fonte);
         risposta = new Response(risposta.body, risposta);
         if (motore === 'bing') risposta.headers.set('x-robots-tag', 'nocache');
       } else if (!sbloccataQui) {
@@ -1964,7 +1966,8 @@ export default {
       if (formulario[3]) return new Response(null, { status: 302, headers: { location: `${pref}/formulari/${formulario[2]}#scarica`, 'cache-control': 'private, no-store' } });
       const motore = req.method === 'GET' ? await motoreVerificato(req).catch(() => null) : null;
       if (motore) {
-        risposta = paginaPerMotore(await env.ASSETS.fetch(senzaCondizioni(req)), 'formulario', SEZIONI_FORMULARIO_LIBERE);
+        const fonte = MOTORI_IA.has(motore) ? { url: `https://ripetizionidianalisi.com${url.pathname}`, lingua: pref === '/en' ? 'en' : 'it' } : null;
+        risposta = paginaPerMotore(await env.ASSETS.fetch(senzaCondizioni(req)), 'formulario', SEZIONI_FORMULARIO_LIBERE, fonte);
         risposta = new Response(risposta.body, risposta);
         if (motore === 'bing') risposta.headers.set('x-robots-tag', 'nocache');
       } else {
