@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { PERCORSI_STUDIO_ES } from '../../../../data/materiali-es.mjs';
+import { paginaLocalizzata } from '../../../../lib/lingue-sito';
 import Teoria from '../../../../viste/Teoria.astro';
 import SvoltiLista from '../../../../viste/SvoltiLista.astro';
 import Svolto from '../../../../viste/Svolto.astro';
@@ -10,7 +11,8 @@ import Domande from '../../../../viste/Domande.astro';
 
 export async function getStaticPaths() {
   const domande = await getCollection('domande_es');
-  return PERCORSI_STUDIO_ES.map((path) => {
+  const percorsiAttivi = PERCORSI_STUDIO_ES.filter((path) => paginaLocalizzata('es', path));
+  return percorsiAttivi.map((path) => {
     const [, materia, argomento, ...parti] = path.split('/');
     return {
       params: { materia, argomento, parte: parti.join('/') },
