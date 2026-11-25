@@ -1,40 +1,46 @@
-// /llms.txt: descrizione del sito per gli assistenti IA (ChatGPT, Claude, Perplexity…), con i collegamenti principali.
-import { getCollection } from 'astro:content';
+// /llms.txt: presentazione breve del sito per gli assistenti IA (ChatGPT, Claude, Perplexity, Gemini…).
+// SEO per le IA (25/11/2026): la versione con tutti i capitoli superava i 250.000 caratteri e gli assistenti
+// ne leggevano solo l'inizio. Qui restano chi siamo, le materie con il loro indice e le pagine utili;
+// l'elenco completo degli argomenti è in /llms-full.txt (formato proposto da llmstxt.org).
 import { MATERIE } from '../data/materie';
 import { assoluto } from '../lib/seo';
 
 export async function GET() {
-  const teoria = new Map((await getCollection('teoria')).map((v) => [v.id, v.data.sommario ?? '']));
   const attive = MATERIE.filter((x) => x.attiva);
-  let t = `# Ripetizioni di Analisi\n\n`;
-  t += `> Teoria ed esercizi svolti di matematica e fisica per gli esami universitari, per la maturità scientifica e per i concorsi, in italiano (gran parte anche in inglese). Materie: ${attive.map((x) => x.titolo).join(', ')}. Autore di tutti i contenuti: Carmine Tornincasa, insegnante privato di Analisi matematica (laurea in Ingegneria civile e master in matematica, oltre mille studenti seguiti e più di diecimila ore di lezione, Instagram @ripetizioni_di_analisi_mate).\n\n`;
-  t += `English: theory and step-by-step worked examples for university exams in Calculus 1 and 2 (Mathematical Analysis), Precalculus, Linear Algebra, Physics 1 and 2 and Mathematics for Economics are also available in English at ${assoluto('/en')}. Visitors whose browser is not set to Italian see the English pages automatically.\n\n`;
-  t += `Ogni argomento ha tre sezioni: teoria (definizioni, teoremi con ipotesi esplicite e dimostrazioni, esempi), esercizi svolti passo dopo passo divisi per tipologia (il calcolo e sotto la spiegazione a parole di ogni passaggio), esercizi da fare con la soluzione. Senza account sono liberi i primi paragrafi della teoria, le prime tre schede di esercizi svolti di ogni argomento e le tracce degli esercizi; il resto si sblocca con l'acquisto della materia (pagamento una tantum). Oltre ai materiali scritti ci sono videocorsi preregistrati, corsi di gruppo dal vivo e lezioni individuali online con Carmine.\n\n`;
-  t += `## Teoremi e definizioni\n\nOgni teorema, proposizione e definizione della teoria ha una pagina propria (/<materia>/<argomento>/teoria/<nome>) con l'enunciato in chiaro, la dimostrazione, gli esercizi in cui si applica e i nomi alternativi con cui è noto.\n\n- [Tutti i teoremi del sito, in ordine alfabetico](${assoluto('/teoremi')})\n- [Tutte le definizioni, in ordine alfabetico](${assoluto('/definizioni')})\n- [All the theorems (English)](${assoluto('/en/teoremi')})\n\n`;
+  const gruppi = new Map<string, typeof attive>();
   for (const m of attive) {
-    t += `## ${m.titolo}\n\n${m.descrizione}\n\n- [${m.titolo}: indice degli argomenti](${assoluto(`/${m.slug}`)})\n`;
-    if ([...teoria.keys()].some((id) => id.startsWith(`${m.slug}/`))) t += `- [${m.titolo}: tutti i teoremi e le definizioni, ognuno con la sua pagina](${assoluto(`/${m.slug}/teoremi`)})\n`;
-    for (const a of m.argomenti) {
-      const id = `${m.slug}/${a.slug}`;
-      if (!teoria.has(id)) continue;
-      t += `- [${a.titolo}: teoria](${assoluto(`/${id}/teoria`)}): ${teoria.get(id)}\n`;
-      t += `- [${a.titolo}: esercizi svolti](${assoluto(`/${id}/esercizi-svolti`)})\n`;
-      if (m.eserciziDaFare !== false) t += `- [${a.titolo}: esercizi con soluzione](${assoluto(`/${id}/esercizi`)})\n`;
+    if (!gruppi.has(m.gruppo)) gruppi.set(m.gruppo, []);
+    gruppi.get(m.gruppo)!.push(m);
+  }
+  let t = `# Ripetizioni di Analisi\n\n`;
+  t += `> Sito italiano di teoria ed esercizi svolti di matematica e fisica per gli esami universitari (Analisi matematica 1 e 2, Algebra lineare, Fisica 1 e 2, materie di Ingegneria ed Economia), per le superiori, per i test di ingresso (TOLC, TIEC) e per i concorsi. Autore di tutti i contenuti: Ing. Carmine Tornincasa, insegnante privato di Analisi matematica (laurea in Ingegneria civile e master in matematica, oltre mille studenti seguiti e più di diecimila ore di lezione; Instagram @ripetizioni_di_analisi_mate).\n\n`;
+  t += `Ogni capitolo ha la teoria (definizioni, teoremi con ipotesi esplicite e dimostrazioni, esempi), esercizi svolti passo dopo passo divisi per tipologia, esercizi da fare con la soluzione e domande a risposta multipla con la spiegazione. Ogni teorema e ogni definizione ha anche una pagina propria con l'enunciato in chiaro.\n\n`;
+  t += `Gratis senza account: l'inizio della teoria e le prime tre schede di esercizi svolti di ogni capitolo, gli enunciati di tutti i teoremi e le definizioni, le domande a tempo, il confronto fra il proprio esame e il materiale del sito. Con un account gratuito: formulari, Matematica zero, Fisica zero, Studio guidato. Il resto si sblocca acquistando la materia (pagamento una tantum, senza abbonamento). Ci sono anche videocorsi, corsi di gruppo dal vivo e lezioni individuali online con l'autore.\n\n`;
+  t += `English: most university subjects are also available in English (Calculus 1 and 2, Precalculus, Linear Algebra, Physics 1 and 2, Mathematics for Economics) at ${assoluto('/en')}.\n\n`;
+  t += `L'elenco completo dei capitoli di ogni materia, con il sommario di ciascuno, è in [llms-full.txt](${assoluto('/llms-full.txt')}).\n\n`;
+  t += `## Teoremi e definizioni\n\n`;
+  t += `- [Tutti i teoremi e le proposizioni, in ordine alfabetico, con l'enunciato e i nomi alternativi](${assoluto('/teoremi')})\n`;
+  t += `- [Tutte le definizioni, in ordine alfabetico](${assoluto('/definizioni')})\n`;
+  t += `- [All the theorems (English)](${assoluto('/en/teoremi')})\n\n`;
+  for (const [gruppo, materie] of gruppi) {
+    t += `## ${gruppo}\n\n`;
+    for (const m of materie) {
+      t += `- [${m.titolo}](${assoluto(`/${m.slug}`)}): ${m.descrizione}`;
+      if (m.argomenti.length) t += ` Capitoli: ${m.argomenti.map((a) => a.titolo).join('; ')}.`;
+      t += `\n`;
     }
-    t += '\n';
+    t += `\n`;
   }
-  const formulari = await getCollection('formulari');
-  if (formulari.length) {
-    t += `## Formulari gratuiti\n\nLe formule di ogni materia con le condizioni di validità, nell'ordine degli argomenti dell'esame; si leggono online e si scaricano in PDF con un account gratuito.\n\n`;
-    for (const v of formulari) t += `- [${v.data.titolo}](${assoluto(`/formulari/${v.id}`)}): ${v.data.sommario}\n`;
-    t += '\n';
-  }
-  const formulariEn = await getCollection('formulari_en');
-  if (formulariEn.length) {
-    t += `## Free formula sheets (English)\n\nThe formulas of each subject with the conditions under which they hold; read online, PDF with a free account.\n\n`;
-    for (const v of formulariEn) t += `- [${v.data.titolo}](${assoluto(`/en/formulari/${v.id}`)}): ${v.data.sommario}\n`;
-    t += '\n';
-  }
-  t += `## Altre pagine\n\n- [Chi sono: Carmine Tornincasa, autore dei contenuti](${assoluto('/chi-sono')})\n- [Recensioni: i messaggi degli studenti dopo l’esame](${assoluto('/recensioni')})\n- [Ripetizioni di Analisi 1 e Analisi 2 online: lezioni individuali e corsi di gruppo con Carmine](${assoluto('/ripetizioni-analisi')})\n- [Videocorsi di Analisi 1, Analisi 2, Algebra lineare e Matematica generale](${assoluto('/videocorsi')})\n- [Compatibilità con il tuo esame: confronto gratuito di compiti e programmi universitari con il materiale del sito](${assoluto('/compatibilita')})\n- [Materiale gratuito: esercizi svolti, domande a tempo, formulari, Matematica zero e Fisica zero](${assoluto('/gratis')})\n- [Domande a tempo: quiz gratuiti per materia e argomento](${assoluto('/domande-a-tempo')})\n- [Timed questions: free quizzes in English](${assoluto('/en/domande-a-tempo')})\n- [Che cosa studiare per un concorso pubblico (guida gratuita)](${assoluto('/concorsi')})\n- [Prezzi](${assoluto('/prezzi')})\n- [Pacchetti di materie e di videocorsi](${assoluto('/pacchetti')})\n- [Contatti e assistenza](${assoluto('/contatti')})\n- [Versione inglese](${assoluto('/en')})\n`;
+  t += `## Pagine utili\n\n`;
+  t += `- [Materiale gratuito](${assoluto('/gratis')}): tutto ciò che si usa senza pagare, con o senza account\n`;
+  t += `- [Formulari gratuiti](${assoluto('/formulari')}): le formule di ogni materia con le condizioni di validità\n`;
+  t += `- [Domande a tempo](${assoluto('/domande-a-tempo')}): quiz gratuiti a risposta multipla per materia e capitolo, con la spiegazione\n`;
+  t += `- [Il sito copre il tuo esame?](${assoluto('/compatibilita')}): si carica il compito o il programma del proprio corso e il sito indica quali parti tratta\n`;
+  t += `- [Lezioni individuali e corsi di gruppo di Analisi 1 e 2 online](${assoluto('/ripetizioni-analisi')})\n`;
+  t += `- [Videocorsi](${assoluto('/videocorsi')})\n`;
+  t += `- [Chi è l'autore: Carmine Tornincasa](${assoluto('/chi-sono')})\n`;
+  t += `- [Recensioni degli studenti](${assoluto('/recensioni')})\n`;
+  t += `- [Che cosa studiare per un concorso pubblico](${assoluto('/concorsi')})\n`;
+  t += `- [Prezzi](${assoluto('/prezzi')}) · [Pacchetti](${assoluto('/pacchetti')}) · [Contatti](${assoluto('/contatti')})\n`;
   return new Response(t, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }
