@@ -1,5 +1,5 @@
 ---
-titolo: Analytic geometry in three dimensions
+titolo: Analytic geometry in space
 sommario: How to use coordinates to describe points, vectors, planes, lines and spheres in three dimensions, calculate distances, angles and vector products, and determine the relative positions of lines and planes.
 ---
 

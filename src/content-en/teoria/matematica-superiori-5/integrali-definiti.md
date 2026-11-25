@@ -1,5 +1,5 @@
 ---
-titolo: Definite integrals, areas, and volumes
+titolo: Definite integrals, areas and volumes
 sommario: What a definite integral is and how it arises from sums of rectangle areas, what its properties are, what the mean value theorem for integrals and the fundamental theorem of calculus say, and how to use integrals to find areas, volumes of solids of revolution, improper integrals, and physical quantities such as distance traveled, work, and charge.
 ---
 
