@@ -85,8 +85,8 @@ export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
       pulsante: [en ? 'Choose your subjects' : 'Scegli le materie', link],
     },
     dopo: [
-      en ? 'Sign in with the account you registered with and the discount is applied automatically at checkout, on a single purchase. Discounts do not add up: if you buy several subjects together, the higher of this discount and the bundle discount applies.'
-        : 'Accedi con l’account con cui ti sei iscritto e lo sconto si applica da solo al pagamento, su un solo acquisto. Gli sconti non si sommano: se prendi più materie insieme vale il più alto fra questo e lo sconto del pacchetto.',
+      en ? 'Sign in with the account you registered with and the discount is applied automatically at checkout, on a single purchase.'
+        : 'Accedi con l’account con cui ti sei iscritto e lo sconto si applica da solo al pagamento, su un solo acquisto.',
     ],
     firma: 'Carmine',
     motivo: en ? 'You are receiving this email because you created an account on ripetizionidianalisi.com.'
