@@ -15,7 +15,7 @@ const DURATA_ANTEPRIMA = 30 * 60000;
 const MAX_DESTINATARI = 100;
 const BLOCCO_INVIO = 30000;
 const QUOTA_INVII = 90;
-export const PERCENTUALE_PREDEFINITA = 20;
+export const PERCENTUALE_PREDEFINITA = 30;
 const prezzoMinimo = Math.min(...MATERIE.filter((m) => m.attiva && m.prezzo > 0).map((m) => m.prezzo));
 const problema = (errore, stato = 400) => ({ errore, stato });
 
@@ -23,15 +23,15 @@ const quando = (t, en) => new Intl.DateTimeFormat(en ? 'en-GB' : 'it-IT', {
   weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
 }).format(t).replace(/,? (alle ore |at )?(\d{1,2}:\d{2})$/, en ? ' at $2' : ' alle $2');
 
-// Iscritti degli ultimi 10 giorni senza nessuna materia nell'account, che non hanno chiesto di non ricevere offerte
-// e non hanno già ricevuto questa email. Esclusi gli studenti dei corsi di Carmine e gli account Premium o GM.
+// Iscritti degli ultimi 10 giorni senza nessuna materia nell'account, che hanno dato il consenso alle offerte via email
+// (casella all'iscrizione, dal 26/11/2026), non l'hanno revocato e non hanno già ricevuto questa email. Esclusi gli studenti dei corsi di Carmine e gli account Premium o GM.
 export function candidatiOfferta24h(ar, ora = Date.now(), emails = null) {
   const dal = new Date(ora - FINESTRA_GIORNI * GIORNO).toISOString();
   return ar.righe(`
     SELECT u.email, u.nome, u.lingua, u.creato FROM utenti u
-    LEFT JOIN email_preferenze p ON p.email = u.email
+    JOIN email_preferenze p ON p.email = u.email
     WHERE u.hash IS NOT NULL AND u.creato >= ?
-      AND p.revocato IS NULL
+      AND p.confermato IS NOT NULL AND p.revocato IS NULL
       AND COALESCE(u.corso, '') = '' AND u.premium_manuale IS NULL AND u.gm_manuale IS NULL
       AND (? = 0 OR u.email IN (SELECT value FROM json_each(?)))
       AND NOT EXISTS (SELECT 1 FROM abilitazioni a WHERE a.email = u.email)

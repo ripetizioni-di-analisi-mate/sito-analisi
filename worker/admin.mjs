@@ -1217,8 +1217,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     pannello.innerHTML =
       '<header><h2>Offerta 24 ore ai nuovi iscritti</h2><span class="nota" id="o24-conta" role="status">Caricamento…</span></header>' +
       '<div class="corpo modulo">' +
-      '<p class="nota" style="margin:0">Email con la tua foto e uno sconto valido 24 ore sull’acquisto di una o più materie (non si somma allo sconto dei pacchetti: vale il più alto). La ricevono gli iscritti degli ultimi 10 giorni che non hanno nessuna materia nell’account e non hanno chiesto di non ricevere offerte. Ognuno la riceve una sola volta; sono esclusi gli studenti dei tuoi corsi e gli account Premium e GM.</p>' +
-      '<div class="azioni promo-scelte"><label class="campo">Sconto (%)<input id="o24-sconto" type="number" min="5" max="60" step="1" value="20"></label>' +
+      '<p class="nota" style="margin:0">Email con la tua foto e uno sconto valido 24 ore sull’acquisto di una o più materie (non si somma allo sconto dei pacchetti: vale il più alto). La ricevono gli iscritti degli ultimi 10 giorni che non hanno nessuna materia nell’account e che all’iscrizione hanno spuntato la casella del consenso alle offerte via email (presente dal 26 novembre). Ognuno la riceve una sola volta; sono esclusi gli studenti dei tuoi corsi e gli account Premium e GM.</p>' +
+      '<div class="azioni promo-scelte"><label class="campo">Sconto (%)<input id="o24-sconto" type="number" min="5" max="60" step="1" value="30"></label>' +
       '<button class="bottone" type="button" id="o24-tutti">Seleziona tutti</button><button class="bottone" type="button" id="o24-nessuno">Nessuno</button></div>' +
       '<div class="promo-lista" id="o24-lista">Caricamento…</div>' +
       '<div class="azioni"><button class="bottone" type="button" id="o24-anteprima">Prepara anteprima</button>' +

@@ -87,6 +87,9 @@ export function archivioEmail(ar, p, c) {
         ar.sql.exec('UPDATE utenti SET avvisi_lega = COALESCE(avvisi_lega, promemoria, 1), promemoria = ? WHERE email = ?', Number(c.studio), c.email);
         if (!c.studio) ar.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', c.email);
       }
+      // Dal 26/11/2026 le preferenze dell'account riguardano solo i promemoria: il consenso alle offerte dato
+      // all'iscrizione resta com'è (si toglie dal link in fondo alle email).
+      if (c.mantieniOfferte) return preferenze(ar, c.email);
       if (!c.offerte) {
         disattivaOfferte(ar, c.email, ora);
         return preferenze(ar, c.email);
@@ -100,6 +103,12 @@ export function archivioEmail(ar, p, c) {
       ar.sql.exec('UPDATE email_preferenze SET richiesto = ?, token = ? WHERE email = ?', ora, token, c.email);
       return { ...preferenze(ar, c.email), token };
     }
+    case '/em-consenso-iscrizione':
+      // Casella «Voglio ricevere via email offerte…» spuntata all'iscrizione (26/11/2026).
+      ar.sql.exec(`INSERT INTO email_preferenze (email, confermato) VALUES (?, ?)
+        ON CONFLICT(email) DO UPDATE SET confermato = excluded.confermato, token = NULL, revocato = NULL`, c.email, ora);
+      ar.sql.exec(`INSERT INTO email_consensi (email, evento, quando, versione) VALUES (?, 'iscrizione', ?, 2)`, c.email, ora);
+      return { ok: true };
     case '/em-conferma-fallita':
       ar.sql.exec('UPDATE email_preferenze SET token = NULL WHERE email = ? AND token = ?', c.email, c.token);
       return { ok: true };
