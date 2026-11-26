@@ -41,6 +41,16 @@ export function candidatiOfferta24h(ar, ora = Date.now(), emails = null) {
     dal, Number(Boolean(emails)), JSON.stringify(emails || []), TIPO_OFFERTA_24H, MATERIA_TUTTE);
 }
 
+// Iscritti degli ultimi 10 giorni che avrebbero i requisiti ma non hanno dato il consenso (solo il numero, per la dashboard).
+function senzaConsenso(ar, ora = Date.now()) {
+  const dal = new Date(ora - FINESTRA_GIORNI * GIORNO).toISOString();
+  return ar.riga(`
+    SELECT COUNT(*) AS n FROM utenti u LEFT JOIN email_preferenze p ON p.email = u.email
+    WHERE u.hash IS NOT NULL AND u.creato >= ? AND p.confermato IS NULL
+      AND COALESCE(u.corso, '') = '' AND u.premium_manuale IS NULL AND u.gm_manuale IS NULL
+      AND NOT EXISTS (SELECT 1 FROM abilitazioni a WHERE a.email = u.email)`, dal)?.n || 0;
+}
+
 export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
   const en = r.lingua === 'en';
   const nome = (r.nome || '').trim().split(/\s+/)[0];
@@ -191,6 +201,7 @@ export async function archivioOfferta24h(ar, p, c, { firmaToken, leggiToken, con
       disponibile: Boolean(ar.env.RESEND_API_KEY), giorni: FINESTRA_GIORNI, percentuale: PERCENTUALE_PREDEFINITA,
       massimoDestinatari: MAX_DESTINATARI,
       destinatari: candidatiOfferta24h(ar).map(({ email, nome, creato }) => ({ email, nome, creato })),
+      senzaConsenso: senzaConsenso(ar),
     };
   }
   if (!ar.env.RESEND_API_KEY) return problema('Invio delle email non disponibile (manca la chiave di Resend).', 503);

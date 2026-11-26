@@ -1,0 +1,153 @@
+---
+// Pagina dell'offerta di 24 ore ai nuovi iscritti (26/11/2026, richiesta di Carmine): il tasto dell'email porta qui
+// (Worker: /offerta-email/tutte/<id>) invece che ai Prezzi, dove gli sconti dei pacchetti confondevano.
+// Lo studente sceglie una o più materie e vede il totale con il suo sconto; il pagamento è quello solito
+// (/acquisto), dove il Worker applica lo sconto (worker/stripe-digitale.mjs). Dati: /api/io e /api/offerta-24h.
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+import PREZZI from '../data/prezzi.json';
+import { SCONTI_PACCHETTI } from '../data/pacchetti.mjs';
+
+const prezzi = PREZZI as Record<string, number>;
+const gruppi: { nome: string; materie: { slug: string; titolo: string; prezzo: number }[] }[] = [];
+for (const m of MATERIE) {
+  if (!m.attiva || !(prezzi[m.slug] > 0)) continue;
+  let g = gruppi.find((x) => x.nome === m.gruppo);
+  if (!g) gruppi.push(g = { nome: m.gruppo, materie: [] });
+  g.materie.push({ slug: m.slug, titolo: m.titolo, prezzo: prezzi[m.slug] });
+}
+---
+<Base titolo="La tua offerta riservata" descrizione="Sconto riservato sul tuo acquisto di una o più materie." seo={{ noindex: true, soloQuestaLingua: true }} lingua="it">
+  <div class="of" id="offerta">
+    <p class="sopratitolo">Offerta riservata</p>
+    <h1 id="of-titolo">La tua offerta</h1>
+    <p class="of-stato" id="of-stato">Caricamento…</p>
+
+    <div id="of-attiva" hidden>
+      <div class="of-biglietto">
+        <div>
+          <p class="of-sconto"><span id="of-perc"></span> sul tuo acquisto</p>
+          <p class="of-sotto">Scegli una o più materie: lo sconto si applica da solo al pagamento.</p>
+        </div>
+        <p class="of-tempo">Scade tra<b id="of-conto">--:--:--</b></p>
+      </div>
+
+      {gruppi.map((g) => (
+        <section class="of-gruppo" data-gruppo>
+          <h2>{g.nome}</h2>
+          <ul>
+            {g.materie.map((m) => (
+              <li data-materia={m.slug}>
+                <label>
+                  <input type="checkbox" value={m.slug} data-prezzo={m.prezzo} />
+                  <span class="of-nome">{m.titolo}</span>
+                  <span class="of-prezzo" data-prezzo-scontato></span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <div class="of-barra" id="of-barra">
+        <p id="of-totale">Scegli almeno una materia.</p>
+        <button class="bottone-primario" type="button" id="of-paga" disabled>Vai al pagamento</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ SCONTI: SCONTI_PACCHETTI }}>
+    (async () => {
+      const $ = (s) => document.querySelector(s);
+      const stato = $('#of-stato');
+      const euro = (c) => (c / 100).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+      const scontoPacchetto = (n) => SCONTI.find((s) => n >= s.da)?.percentuale || 0;
+      const rIo = await fetch('/api/io').catch(() => null);
+      const io = rIo && rIo.ok ? await rIo.json() : null;
+      if (!io) {
+        stato.innerHTML = 'Accedi con l’account con cui ti sei iscritto per vedere il tuo sconto. <a class="bottone-primario" href="/accedi?dopo=%2Fofferta">Accedi</a>';
+        return;
+      }
+      const r = await fetch('/api/offerta-24h').catch(() => null);
+      const d = r && r.ok ? await r.json() : {};
+      if (!d.percentuale || !(d.scade > Date.now())) {
+        stato.innerHTML = 'Nel tuo account non c’è un’offerta attiva: è già stata usata oppure è scaduta. <a href="/materie">Vai alle materie</a>';
+        return;
+      }
+      const p = d.percentuale;
+      $('#of-titolo').textContent = 'Il tuo sconto del ' + p + '%';
+      $('#of-perc').textContent = '−' + p + '%';
+      stato.hidden = true;
+      $('#of-attiva').hidden = false;
+
+      // Materie già nell'account: non si mostrano; gruppi rimasti vuoti nemmeno.
+      for (const li of document.querySelectorAll('#offerta [data-materia]')) {
+        if (io.materie.includes(li.dataset.materia)) { li.remove(); continue; }
+        const c = li.querySelector('input'), cent = Math.round(Number(c.dataset.prezzo) * 100);
+        li.querySelector('[data-prezzo-scontato]').innerHTML = '<b>' + euro(Math.round(cent * (100 - p) / 100)) + '</b><small>senza sconto ' + euro(cent) + '</small>';
+      }
+      for (const g of document.querySelectorAll('#offerta [data-gruppo]')) if (!g.querySelector('li')) g.remove();
+
+      const caselle = [...document.querySelectorAll('#offerta [data-materia] input')];
+      const paga = $('#of-paga'), totale = $('#of-totale');
+      const scelte = () => caselle.filter((c) => c.checked);
+      // Stesso calcolo del pagamento: sconto dell'offerta sul prezzo pieno, oppure quello del pacchetto se è più alto.
+      const aggiorna = () => {
+        const s = scelte();
+        paga.disabled = !s.length;
+        if (!s.length) { totale.textContent = 'Scegli almeno una materia.'; return; }
+        const cent = s.map((c) => Math.round(Number(c.dataset.prezzo) * 100));
+        const pieno = cent.reduce((a, b) => a + b, 0), pk = s.length > 1 ? scontoPacchetto(s.length) : 0;
+        const tot = p > pk ? Math.round(pieno * (100 - p) / 100) : cent.reduce((a, b) => a + Math.round(b * (100 - pk) / 100), 0);
+        totale.innerHTML = (s.length === 1 ? '1 materia' : s.length + ' materie') + ' · <b>' + euro(tot) + '</b> <small>senza sconto ' + euro(pieno) + '</small>';
+      };
+      caselle.forEach((c) => c.addEventListener('change', aggiorna));
+      paga.addEventListener('click', () => {
+        const s = scelte().map((c) => c.value);
+        if (!s.length) return;
+        location.assign('/acquisto?' + new URLSearchParams(s.length === 1 ? { tipo: 'materia', slug: s[0] } : { tipo: 'materie', materie: s.join(',') }));
+      });
+      aggiorna();
+
+      const conto = $('#of-conto');
+      const passo = () => {
+        const sec = Math.max(0, Math.floor((d.scade - Date.now()) / 1000));
+        conto.textContent = [Math.floor(sec / 3600), Math.floor(sec / 60) % 60, sec % 60].map((n) => String(n).padStart(2, '0')).join(':');
+        if (!sec) { clearInterval(giro); location.reload(); }
+      };
+      const giro = setInterval(passo, 1000);
+      passo();
+    })();
+  </script>
+
+  <style>
+    .of { max-width: 46rem; }
+    .of-stato { font-size: 1.02rem; line-height: 1.6; }
+    .of-stato .bottone-primario { display: inline-block; margin-left: .6rem; }
+    .of-biglietto { display: flex; align-items: center; justify-content: space-between; gap: 1rem 1.6rem; flex-wrap: wrap;
+      background: #214f50; color: #fff; border-radius: 14px; padding: 1.1rem 1.4rem; margin: .4rem 0 1.6rem; }
+    .of-biglietto > div { flex: 1 1 18rem; min-width: 0; }
+    .of-sconto { margin: 0; font: 700 1.7rem/1.15 Georgia, serif; }
+    .of-sconto span { color: #e8c9a0; }
+    .of-sotto { margin: .3rem 0 0; color: #d7e4e1; font-size: .95rem; }
+    .of-tempo { margin: 0; display: grid; justify-items: end; color: #d9c3a5; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    .of-tempo b { color: #fff; font: 700 1.7rem/1.1 ui-monospace, 'SF Mono', Menlo, monospace; letter-spacing: .04em; text-transform: none; }
+    .of-gruppo h2 { font-size: 1.05rem; margin: 1.3rem 0 .4rem; }
+    .of-gruppo ul { list-style: none; margin: 0; padding: 0; border: 1px solid var(--riga, #e1dcd2); border-radius: 10px; overflow: hidden; }
+    .of-gruppo li + li { border-top: 1px solid var(--riga, #e1dcd2); }
+    .of-gruppo label { display: flex; align-items: center; gap: .7rem; padding: .7rem .9rem; cursor: pointer; }
+    .of-gruppo label:has(input:checked) { background: #f3ece2; }
+    .of-gruppo input { width: 1.05rem; height: 1.05rem; accent-color: #214f50; flex: none; }
+    .of-nome { flex: 1; }
+    .of-prezzo { display: grid; justify-items: end; white-space: nowrap; text-align: right; line-height: 1.25; }
+    .of-prezzo small { color: #8a8f8c; font-size: .78rem; }
+    #of-totale small { color: #8a8f8c; font-size: .82rem; margin-left: .3rem; }
+    .of-barra { position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      background: var(--carta, #faf9f6); border-top: 1px solid var(--riga, #e1dcd2); padding: .9rem 0 1rem; margin-top: 1.4rem; }
+    .of-barra p { margin: 0; }
+    @media (max-width: 560px) {
+      .of-tempo { justify-items: start; }
+      .of-barra .bottone-primario { width: 100%; }
+    }
+  </style>
+</Base>

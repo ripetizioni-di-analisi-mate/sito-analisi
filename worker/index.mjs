@@ -1035,9 +1035,10 @@ export default {
       // Chi non ha fatto l'accesso passa prima da «Accedi», perché lo sconto è legato al suo account.
       if (materia === 'tutte' && codice && resto === undefined) {
         const io = await utenteCollegato(env, req).catch(() => null);
-        const prezzi = lingua + '/prezzi';
+        // pagina dell'offerta (src/pages/offerta.astro, solo italiano): scelta di una o più materie con il totale scontato
+        const pagina = '/offerta';
         return new Response(null, { status: 303, headers: {
-          location: io ? prezzi : lingua + '/accedi?dopo=' + encodeURIComponent(prezzi),
+          location: io ? pagina : lingua + '/accedi?dopo=' + encodeURIComponent(pagina),
           'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer' } });
       }
       if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
@@ -1079,6 +1080,12 @@ export default {
     }
 
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
+    // offerta di 24 ore ai nuovi iscritti dell'account collegato (pagina /offerta)
+    if (p === '/api/offerta-24h' && req.method === 'GET') {
+      const io = await utenteCollegato(env, req);
+      const o = io ? await aDO(env, '/promo-offerta', { email: io.email, materia: '*' }) : {};
+      return json(o.id ? { percentuale: o.percentuale, scade: o.scade } : {}, 200, { 'cache-control': 'private, no-store' });
+    }
     if ((p === '/api/email/offerta' || p === '/api/sconto') && req.method === 'GET') {
       const io = await utenteCollegato(env, req), m = url.searchParams.get('materia');
       const offerta = await scontoPerMateria(env, io, m, p === '/api/email/offerta', req);
