@@ -66,7 +66,7 @@ Le differenze possono formare una successione di un altro tipo. Nella succession
 :::
 
 :::definizione{#rapporti titolo="Rapporti tra termini consecutivi"}
-Il **rapporto** tra due termini consecutivi è $\dfrac{a_{n+1}}{a_n}$, cioè il numero per cui si moltiplica un termine per ottenere il successivo. Se i rapporti sono tutti uguali, ogni termine è il precedente moltiplicato per lo stesso numero. Nella successione $3, 6, 12, 24, \dots$ ogni termine è il doppio del precedente, quindi il termine successivo è $48$. Nella successione $400, 200, 100, 50, \dots$ il rapporto vale $\dfrac{1}{2}$, quindi il termine successivo è $25$. In queste successioni le differenze non sono costanti, perché ognuna è il doppio, oppure la metà, della precedente; la regola si trova quindi con i rapporti.
+Se il termine precedente non è zero, il **rapporto** tra due termini consecutivi è $\dfrac{a_{n+1}}{a_n}$, cioè il numero per cui si moltiplica un termine per ottenere il successivo. Se i rapporti sono tutti uguali, ogni termine è il precedente moltiplicato per lo stesso numero. Nella successione $3, 6, 12, 24, \dots$ ogni termine è il doppio del precedente, quindi il termine successivo è $48$. Nella successione $400, 200, 100, 50, \dots$ il rapporto vale $\dfrac{1}{2}$, quindi il termine successivo è $25$. In queste successioni le differenze non sono costanti, perché ognuna è il doppio, oppure la metà, della precedente; la regola si trova quindi con i rapporti.
 
 ::grafico{f="400*(1/2)^(x-1)" punti="1,400,pieno;2,200,pieno;3,100,pieno;4,50,pieno;5,25,vuoto" xmin=-1 xmax=6 ymin=-50 ymax=450 nomi="n,aₙ" titolo="Con rapporto $\dfrac{1}{2}$ ogni termine è la metà del precedente: $400, 200, 100, 50$ e il successivo $25$ (punto vuoto)"}
 
@@ -159,7 +159,7 @@ La somma dei primi $n$ termini di una progressione aritmetica è
 $$
 S_n = \frac{(a_1 + a_n) \cdot n}{2},
 $$
-cioè il numero dei termini moltiplicato per la media tra il primo e l'ultimo. Quando il numero dei termini non è dato, si ricava dal termine generale come $n = \dfrac{a_n - a_1}{d} + 1$. I numeri dispari da $1$ a $49$ sono quindi $\dfrac{48}{2} + 1 = 25$, e la loro somma è
+cioè il numero dei termini moltiplicato per la media tra il primo e l'ultimo. Se la ragione è diversa da zero, il numero dei termini si ricava dal termine generale come $n = \dfrac{a_n - a_1}{d} + 1$. In una progressione costante, i soli valori del primo e dell’ultimo termine non permettono di stabilire quanti termini ci siano. I numeri dispari da $1$ a $49$ sono quindi $\dfrac{48}{2} + 1 = 25$, e la loro somma è
 $$
 S_{25} = \frac{(1 + 49) \cdot 25}{2} = 625 .
 $$

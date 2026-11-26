@@ -10,7 +10,7 @@ Un **angolo** è ciascuna delle due parti di piano delimitate da due semirette c
 
 - l'angolo **piatto**, i cui lati formano una retta, è metà dell'angolo giro e misura $180^\circ$;
 - l'angolo **retto** è metà dell'angolo piatto e misura $90^\circ$;
-- un angolo è **acuto** se misura meno di $90^\circ$ e **ottuso** se misura più di $90^\circ$ e meno di $180^\circ$.
+- un angolo è **acuto** se la sua misura è maggiore di zero e minore di $90^\circ$ e **ottuso** se misura più di $90^\circ$ e meno di $180^\circ$.
 
 Le misure in gradi permettono di trattare gli angoli come numeri. Per esempio, l'angolo di cui ruota la lancetta dei minuti in $20$ minuti è $\dfrac{20}{60} \cdot 360^\circ = 120^\circ$, perché in $60$ minuti la lancetta compie un giro intero.
 :::
@@ -33,7 +33,7 @@ Due rette parallele $r$ e $s$ tagliate da una terza retta $t$, detta **trasversa
 - gli angoli **corrispondenti**, che occupano la stessa posizione rispetto a $r$ e rispetto a $s$, sono uguali;
 - gli angoli **coniugati interni**, che stanno tra le due parallele e dalla stessa parte della trasversale, sono supplementari.
 
-Di conseguenza gli otto angoli assumono soltanto due misure, $\alpha$ e $180^\circ - \alpha$. Se la trasversale forma con $r$ un angolo di $60^\circ$, ogni angolo della figura misura $60^\circ$ oppure $120^\circ$.
+Di conseguenza gli otto angoli assumono al massimo due misure distinte, $\alpha$ e $180^\circ - \alpha$. Se la trasversale forma con $r$ un angolo di $60^\circ$, ogni angolo della figura misura $60^\circ$ oppure $120^\circ$.
 
 ::grafico{assi=0 uguale=1 linee="-3,0 4,0;-3,2 4,2;-0.75,-1.3 1.91,3.3;0.45,0 0.44,0.07 0.43,0.13 0.41,0.2 0.37,0.25 0.33,0.31 0.28,0.35 0.23,0.39;0.7,2 0.71,1.93 0.72,1.87 0.75,1.8 0.78,1.75 0.82,1.69 0.87,1.65 0.93,1.61;1.6,2 1.6,2.07 1.58,2.13 1.56,2.2 1.53,2.25 1.48,2.31 1.44,2.35 1.38,2.39;0.3,0.52 0.22,0.56 0.15,0.58 0.06,0.6 -0.02,0.6 -0.1,0.59 -0.19,0.57 -0.26,0.54 -0.34,0.5 -0.4,0.45 -0.46,0.39 -0.51,0.32 -0.55,0.24 -0.58,0.17 -0.59,0.08 -0.6,0" etichette="0.6,0.12,α;0.15,1.65,α;1.7,2.15,α;-0.75,0.5,β;4.1,-0.1,r;4.1,1.9,s;2.01,3.2,t" xmin=-3.2 xmax=4.6 ymin=-1.5 ymax=3.5 titolo="Due rette parallele $r$ e $s$ tagliate dalla trasversale $t$: i tre angoli indicati con $\alpha$ sono uguali perché alterni interni o corrispondenti, mentre $\alpha$ e $\beta$ sono supplementari"}
 
@@ -210,7 +210,7 @@ Se due figure sono simili con rapporto $k$, le loro aree stanno nel rapporto $k^
 :::
 
 :::osservazione{#cambio-di-una-dimensione titolo="Variazione di una sola dimensione"}
-Se cambia una sola dimensione la figura non resta simile, e l'area o il volume si moltiplicano soltanto per il fattore di quella dimensione. Raddoppiando la base di un rettangolo e lasciando invariata l'altezza l'area raddoppia. Nel cilindro e nel cono il raggio compare al quadrato, quindi raddoppiando il raggio e lasciando invariata l'altezza il volume diventa $4$ volte maggiore, mentre raddoppiando l'altezza e lasciando invariato il raggio il volume raddoppia.
+Se cambia una sola dimensione, in generale la figura non resta simile. Il fattore di variazione dell'area o del volume dipende da come compare quella dimensione nella formula. Se l'area o il volume è proporzionale a una sua potenza, il fattore di scala della dimensione va elevato a quella stessa potenza. Raddoppiando la base di un rettangolo e lasciando invariata l'altezza l'area raddoppia. Nel cilindro e nel cono il raggio compare al quadrato, quindi raddoppiando il raggio e lasciando invariata l'altezza il volume diventa $4$ volte quello iniziale, mentre raddoppiando l'altezza e lasciando invariato il raggio il volume raddoppia.
 :::
 
 ## Solidi: superfici e volumi
@@ -258,7 +258,7 @@ $$
 \text{sfera: } & S = 4\pi r^2, \qquad V = \frac{4}{3}\pi r^3
 \end{aligned}
 $$
-Nel cono $a = \sqrt{r^2 + h^2}$ è l'apotema, cioè l'ipotenusa del triangolo rettangolo di cateti $r$ e $h$. Il cilindro è un prisma con base circolare, quindi il suo volume è area di base per altezza, e il cono sta al cilindro come la piramide sta al prisma. Un cono con $r = 3$ e $h = 4$ ha apotema $5$, superficie laterale $15\pi$ e volume $12\pi$; una sfera di raggio $3$ ha superficie $36\pi$ e volume $36\pi$.
+Nel cono $a = \sqrt{r^2 + h^2}$ è l'apotema, cioè l'ipotenusa del triangolo rettangolo di cateti $r$ e $h$. Come per un prisma, il volume del cilindro si calcola moltiplicando l'area della sua base circolare per l'altezza. Il cono sta al cilindro come la piramide sta al prisma. Un cono con $r = 3$ e $h = 4$ ha apotema $5$, superficie laterale $15\pi$ e volume $12\pi$; una sfera di raggio $3$ ha superficie $36\pi$ e volume $36\pi$.
 
 ::grafico{assi=0 uguale=1 linee="2,4 1.97,4.09 1.88,4.17 1.73,4.25 1.53,4.32 1.29,4.38 1,4.43 0.68,4.47 0.35,4.49 0,4.5 -0.35,4.49 -0.68,4.47 -1,4.43 -1.29,4.38 -1.53,4.32 -1.73,4.25 -1.88,4.17 -1.97,4.09 -2,4 -1.97,3.91 -1.88,3.83 -1.73,3.75 -1.53,3.68 -1.29,3.62 -1,3.57 -0.68,3.53 -0.35,3.51 0,3.5 0.35,3.51 0.68,3.53 1,3.57 1.29,3.62 1.53,3.68 1.73,3.75 1.88,3.83 1.97,3.91 2,4;-2,0 -1.97,-0.09 -1.88,-0.17 -1.73,-0.25 -1.53,-0.32 -1.29,-0.38 -1,-0.43 -0.68,-0.47 -0.35,-0.49 0,-0.5 0.35,-0.49 0.68,-0.47 1,-0.43 1.29,-0.38 1.53,-0.32 1.73,-0.25 1.88,-0.17 1.97,-0.09 2,0;-2,0 -2,4;2,0 2,4;4,0 4.03,-0.09 4.12,-0.17 4.27,-0.25 4.47,-0.32 4.71,-0.38 5,-0.43 5.32,-0.47 5.65,-0.49 6,-0.5 6.35,-0.49 6.68,-0.47 7,-0.43 7.29,-0.38 7.53,-0.32 7.73,-0.25 7.88,-0.17 7.97,-0.09 8,0;4,0 6,4 8,0" segmenti="2,0,1.97,0.09;1.88,0.17,1.73,0.25;1.53,0.32,1.29,0.38;1,0.43,0.68,0.47;0.35,0.49,0,0.5;-0.35,0.49,-0.68,0.47;-1,0.43,-1.29,0.38;-1.53,0.32,-1.73,0.25;-1.88,0.17,-1.97,0.09;8,0,7.97,0.09;7.88,0.17,7.73,0.25;7.53,0.32,7.29,0.38;7,0.43,6.68,0.47;6.35,0.49,6,0.5;5.65,0.49,5.32,0.47;5,0.43,4.71,0.38;4.47,0.32,4.27,0.25;4.12,0.17,4.03,0.09;0,0,0,4;0,0,2,0;6,0,6,4;6,0,8,0" punti="0,0,pieno;6,0,pieno" etichette="0.8,0.15,r;-0.45,2,h;6.8,0.15,r;5.6,2,h;7.25,2.2,a" xmin=-2.6 xmax=8.6 ymin=-0.9 ymax=4.9 titolo="Un cilindro e un cono con raggio di base $r$ e altezza $h$; nel cono l'apotema $a$ è l'ipotenusa del triangolo rettangolo di cateti $r$ e $h$"}
 

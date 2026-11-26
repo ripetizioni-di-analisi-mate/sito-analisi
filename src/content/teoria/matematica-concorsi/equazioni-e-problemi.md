@@ -127,7 +127,7 @@ Un problema con un'incognita si risolve in quattro passaggi.
 1. Si indica con $x$ la quantità richiesta, oppure una quantità da cui la richiesta si ricava subito.
 2. Si scrivono le altre quantità del testo in funzione di $x$.
 3. Si traduce in un'equazione la frase che lega le quantità.
-4. Si risolve l'equazione e si controlla che il risultato sia accettabile nel contesto; per esempio, un numero di persone o di monete è intero e positivo, e un'età è positiva.
+4. Si risolve l'equazione e si controlla che il risultato sia accettabile nel contesto; per esempio, un numero di persone o di monete è un intero non negativo, e anche un'età non può essere negativa. Se il testo richiede una quantità strettamente positiva, si esclude anche lo zero.
 
 Per esempio, se la somma di un numero e del suo triplo è $48$, si scrive $x + 3x = 48$, quindi $4x = 48$ e $x = 12$.
 :::
@@ -332,18 +332,18 @@ $$
 \iff
 n > 10 .
 $$
-Con $10$ ingressi le due soluzioni costano entrambe $80$ euro, quindi l'abbonamento costa meno a partire da $11$ ingressi. Quando l'incognita è un numero intero, la risposta è il primo intero che soddisfa la disequazione, e il valore di confine si controlla a parte.
+Con $10$ ingressi le due soluzioni costano entrambe $80$ euro, quindi l'abbonamento costa meno a partire da $11$ ingressi. Quando si cerca il numero minimo di ingressi, si sceglie il più piccolo intero che soddisfa la disequazione e si controlla a parte il valore di confine.
 :::
 
 ## Metodi rapidi per i quiz
 
 :::osservazione{#verifica-delle-opzioni titolo="Verifica delle opzioni"}
-Nei quiz a risposta multipla la soluzione è una delle cinque opzioni, quindi spesso si trova sostituendo le opzioni nel testo, senza risolvere l'equazione. Un padre ha $36$ anni e il figlio $8$. Se si chiede fra quanti anni il padre avrà il triplo dell'età del figlio e le opzioni sono $3$, $4$, $5$, $6$ e $8$, si provano i valori.
+Nei quiz a risposta multipla la soluzione è una delle opzioni proposte, quindi spesso si trova sostituendo le opzioni nel testo, senza risolvere l'equazione. Un padre ha $36$ anni e il figlio $8$. Se si chiede fra quanti anni il padre avrà il triplo dell'età del figlio e le opzioni sono $3$, $4$, $5$, $6$ e $8$, si provano i valori.
 
 - Fra $4$ anni il padre ha $40$ anni e il figlio $12$, e $3 \cdot 12 = 36$ è diverso da $40$, quindi $4$ si scarta.
 - Fra $6$ anni il padre ha $42$ anni e il figlio $14$, e $3 \cdot 14 = 42$, quindi $6$ è la risposta.
 
-In un sistema l'opzione corretta soddisfa *tutte* le equazioni. Una coppia che ne soddisfa una sola compare spesso tra le opzioni sbagliate, perciò la verifica riguarda ogni condizione del testo. Quando le opzioni sono numeri in ordine crescente, si comincia dal valore centrale, perché il confronto dice se la risposta è più grande o più piccola e permette di scartare due opzioni insieme.
+In un sistema l'opzione corretta soddisfa *tutte* le equazioni. Una coppia che ne soddisfa una sola compare spesso tra le opzioni sbagliate, perciò la verifica riguarda ogni condizione del testo. Se le opzioni sono in ordine crescente e la differenza tra i due membri cresce sempre o diminuisce sempre, si può provare prima il valore centrale. Il segno della differenza e il verso in cui varia indicano da quale parte cercare la soluzione e permettono di scartare due opzioni insieme.
 :::
 
 :::osservazione{#controlli-rapidi titolo="Scorciatoie e controlli"}
@@ -351,7 +351,7 @@ Alcuni fatti accorciano i calcoli e permettono di eliminare opzioni senza svolge
 
 - La somma di un numero dispari di interi consecutivi è il numero centrale moltiplicato per quanti sono i numeri. Se tre consecutivi hanno somma $72$, il centrale è $\dfrac{72}{3} = 24$.
 - Se $x + y = s$ e $x - y = d$, sommando e sottraendo le due equazioni si ottiene $x = \dfrac{s + d}{2}$ e $y = \dfrac{s - d}{2}$. Due numeri con somma $40$ e differenza $12$ sono quindi $26$ e $14$.
-- Nel contesto del problema un numero di persone o di monete è intero e positivo, l'età di un figlio è minore di quella del genitore, una quota di eredità è minore del totale. Le opzioni che non rispettano questi vincoli si scartano subito.
+- Il numero di persone o di monete è un intero non negativo. È positivo se il testo richiede la presenza di almeno una persona o moneta. L'età di un figlio è minore di quella del genitore, e se più eredi ricevono una quota positiva, ciascuna quota è minore del totale. Le opzioni che non rispettano questi vincoli si scartano subito.
 
 Tra le opzioni sbagliate compaiono di solito il risultato di un passaggio intermedio, come $3x = 15$ letto come $x = 15$, e il valore dell'altra incognita del problema.
 :::

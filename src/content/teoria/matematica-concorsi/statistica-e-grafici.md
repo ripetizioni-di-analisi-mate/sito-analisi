@@ -219,15 +219,15 @@ Ogni punto percentuale corrisponde quindi a $3{,}6°$. Per le $20$ famiglie i se
 :::
 
 :::definizione{#diagramma-cartesiano titolo="Diagramma cartesiano"}
-Un **diagramma cartesiano** (o grafico a linee) rappresenta l'andamento di una grandezza nel tempo. Sull'asse orizzontale si riporta il tempo, sull'asse verticale il valore della grandezza, e i punti consecutivi sono uniti da segmenti. Un segmento in salita indica un aumento, uno in discesa una diminuzione, e la pendenza indica di quanto la grandezza è cambiata. Il grafico mostra le pratiche evase da un ufficio nei primi sei mesi dell'anno.
+Un **diagramma cartesiano** (o grafico a linee) rappresenta l'andamento di una grandezza nel tempo. Sull'asse orizzontale si riporta il tempo, sull'asse verticale il valore della grandezza, e i punti consecutivi sono uniti da segmenti. Un segmento in salita indica un aumento, uno in discesa una diminuzione, e la pendenza indica di quanto la grandezza cambia per unità di tempo. Il grafico mostra le pratiche evase da un ufficio nei primi sei mesi dell'anno.
 
 ::grafico{linee="1,80 2,100 3,90 4,120 5,150 6,120" punti="1,80,pieno;2,100,pieno;3,90,pieno;4,120,pieno;5,150,pieno;6,120,pieno" etichette="0.8,87,80;1.8,107,100;2.8,97,90;3.8,127,120;4.8,157,150;5.8,127,120" xmin=0 xmax=7 ymin=0 ymax=200 nomi="t,n" legenda=0 titolo="Numero $n$ di pratiche evase nel mese $t$, da gennaio ($t = 1$) a giugno ($t = 6$)"}
 
-Tra marzo e aprile e tra aprile e maggio l'aumento è lo stesso, $30$ pratiche. La variazione percentuale invece è diversa, perché si calcola sul valore di partenza: $\dfrac{30}{90} \cdot 100 \approx 33{,}3\%$ tra marzo e aprile e $\dfrac{30}{120} \cdot 100 = 25\%$ tra aprile e maggio. Per la variazione percentuale si rimanda all'argomento su rapporti, proporzioni e percentuali.
+Tra marzo e aprile e tra aprile e maggio l'aumento è lo stesso, $30$ pratiche. La variazione percentuale invece è diversa, perché si calcola sul valore di partenza: $\dfrac{30}{90} \cdot 100\% \approx 33{,}3\%$ tra marzo e aprile e $\dfrac{30}{120} \cdot 100\% = 25\%$ tra aprile e maggio. Per la variazione percentuale si rimanda all'argomento su rapporti, proporzioni e percentuali.
 :::
 
 :::attenzione
-Il segmento più ripido di un diagramma cartesiano indica la variazione *assoluta* maggiore, e non sempre la variazione percentuale maggiore. Nel grafico delle pratiche i segmenti da marzo ad aprile e da aprile a maggio salgono entrambi di $30$, ma l'aumento percentuale maggiore è il primo, perché parte da un valore più basso. Per la stessa ragione un aumento di $10$ su un valore di partenza $20$ vale il $50\%$, mentre un aumento di $30$ su un valore di partenza $150$ vale il $20\%$.
+Se gli intervalli di tempo sono uguali, il segmento più ripido di un diagramma cartesiano indica la variazione *assoluta* maggiore, e non sempre la variazione percentuale maggiore. Nel grafico delle pratiche i segmenti da marzo ad aprile e da aprile a maggio salgono entrambi di $30$, ma l'aumento percentuale maggiore è il primo, perché parte da un valore più basso. Per la stessa ragione un aumento di $10$ su un valore di partenza $20$ vale il $50\%$, mentre un aumento di $30$ su un valore di partenza $150$ vale il $20\%$.
 :::
 
 ## Metodi rapidi per i quiz
@@ -237,7 +237,7 @@ Nelle prove a tempo molti quesiti di statistica si risolvono a mente.
 
 - **Media con un valore di riferimento**: si sceglie un numero vicino ai dati, si calcola la media degli scarti da quel numero e la si aggiunge. Per $998$, $1003$, $1005$, $994$, $1010$ gli scarti da $1000$ sono $-2$, $3$, $5$, $-6$, $10$, con somma $10$ e media $2$, quindi la media è $1002$. Il metodo segue dalla regola sulla media di dati trasformati.
 - **Lavorare con le somme**: nei quesiti con un dato aggiunto, tolto o mancante si trasforma ogni media in una somma moltiplicando per il numero dei dati, si fanno i conti sulle somme e solo alla fine si divide.
-- **Controlli sul risultato**: la media è compresa tra il dato minimo e il dato massimo; una media ponderata è più vicina al dato con il peso maggiore; le frequenze relative hanno somma $1$ e gli angoli di un diagramma a torta hanno somma $360°$.
+- **Controlli sul risultato**: la media è compresa tra il dato minimo e il dato massimo; la media ponderata di due valori è più vicina al valore con il peso maggiore; le frequenze relative hanno somma $1$ e gli angoli di un diagramma a torta hanno somma $360°$.
 
 Tra le opzioni compaiono spesso la somma dei dati al posto della media, la mediana calcolata senza ordinare i dati, la media delle medie al posto della media ponderata e la percentuale calcolata sul totale sbagliato. Riconoscere questi valori permette di eliminarli prima di fare il conto.
 :::

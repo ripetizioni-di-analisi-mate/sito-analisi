@@ -266,12 +266,12 @@ Scegliere prima una donna e poi le altre due persone fra tutte le rimanenti cont
 Nelle prove a tempo i conteggi si controllano con alcune osservazioni.
 
 - **Riconoscere il modello** prima di calcolare, con le due domande sull'ordine e sulle ripetizioni. Tra le opzioni di un quiz compaiono spesso i risultati degli altri modelli: se la risposta corretta è $C_{8,3} = 56$, tra le opzioni si trovano facilmente anche $D_{8,3} = 336$ e $8^3 = 512$.
-- **Confrontare gli ordini di grandezza**. A parità di $n$ e $k$ vale $C_{n,k} \leq D_{n,k} \leq n^k$, perché le combinazioni non distinguono l'ordine e le disposizioni con ripetizione ammettono più file. Un'opzione che non rispetta queste disuguaglianze corrisponde a un modello sbagliato.
+- **Confrontare gli ordini di grandezza**. A parità di $n$ e $k$ vale $C_{n,k} \leq D_{n,k} \leq n^k$, perché le combinazioni non distinguono l'ordine e le disposizioni con ripetizione ammettono tutte le file senza ripetizioni. Un'opzione che non rispetta queste disuguaglianze corrisponde a un modello sbagliato.
 - **Semplificare i fattoriali** prima di moltiplicare: $\dfrac{10!}{7! \cdot 3!} = \dfrac{10 \cdot 9 \cdot 8}{6} = 120$, senza calcolare $10!$.
 - **Provare con numeri piccoli**. Quando non è chiaro quale formula si applica, si risolve lo stesso problema con $3$ o $4$ oggetti elencando i casi a mano, e si confronta il risultato con le formule.
 - **Verificare le opzioni**. Nei quesiti inversi, come "un poligono ha $20$ diagonali: quanti lati ha?", si sostituiscono le opzioni nella formula, e con $n = 8$ si ottiene $\dfrac{8 \cdot 5}{2} = 20$.
 
-Il verso del risultato offre un ulteriore controllo, perché aggiungere un vincolo (due persone vicine, una cifra vietata) riduce il numero dei casi, mentre ammettere le ripetizioni lo aumenta.
+Il verso del risultato offre un ulteriore controllo, perché aggiungere un vincolo (due persone vicine, una cifra vietata) non può aumentare il numero dei casi, mentre ammettere le ripetizioni non può diminuirlo.
 
 ::grafico{assi=0 uguale=1 xmin=-0.5 xmax=11 ymin=-1 ymax=6.2 poligoni="0,0 2.6,0 2.6,0.56 0,0.56;3.6,0 6.2,0 6.2,3.36 3.6,3.36;7.2,0 9.8,0 9.8,5.12 7.2,5.12" etichette="0.1,0.96,C₈,₃ = 56;0.1,-0.5,combinazioni;3.7,3.76,D₈,₃ = 336;3.7,-0.5,disposizioni;7.3,5.52,8³ = 512;7.3,-0.5,con ripetizione" titolo="Con $n = 8$ e $k = 3$ i tre conteggi rispettano $C_{8,3} \leq D_{8,3} \leq 8^3$: $56 \leq 336 \leq 512$"}
 :::
