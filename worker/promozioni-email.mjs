@@ -2,6 +2,7 @@ import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { componiEmail, intestazioniDisiscrizione, mittenteEmail, SITO_EMAIL } from './email.mjs';
 import { registraInviiEmail } from './storico-email.mjs';
+import { archivioOfferta24h, MATERIA_TUTTE } from './offerta-nuovi-iscritti.mjs';
 
 const GIORNO = 86400000;
 const DURATA_OFFERTA = 7 * GIORNO;
@@ -47,9 +48,9 @@ export function codicePromozione(codice) {
 
 export function offertaPromozionale(ar, { email, materia, codice }) {
   const r = ar.riga(`
-    SELECT id, percentuale, scade FROM promozioni_email WHERE email = ? AND materia = ? AND scade > ? AND usato IS NULL
+    SELECT id, percentuale, scade FROM promozioni_email WHERE email = ? AND materia IN (?, ?) AND scade > ? AND usato IS NULL
     ORDER BY (id = ?) DESC, percentuale DESC, scade DESC, id LIMIT 1`,
-    email, materia, Date.now(), codicePromozione(codice) || '');
+    email, materia, MATERIA_TUTTE, Date.now(), codicePromozione(codice) || '');
   return r ? { ...r, tipo: 'promozione' } : {};
 }
 
@@ -212,6 +213,8 @@ async function inviaPromozione(ar, bozza, firmaToken) {
 
 export async function archivioPromozioni(ar, p, c, firmaToken, leggiToken) {
   if (p === '/promo-offerta') return offertaPromozionale(ar, c);
+  // Offerta di 24 ore ai nuovi iscritti (26/11/2026): attiva anche con le promozioni manuali spente.
+  if (p.startsWith('/promo-nuovi-')) return archivioOfferta24h(ar, p, c, { firmaToken, leggiToken, contaPromozioniOggi });
   if (p === '/promo-catalogo') {
     return { disponibile: disponibile(ar.env), massimoDestinatari: MAX_DESTINATARI,
       materie: [...materie.values()].map(({ slug, titolo }) => ({ slug, titolo })) };

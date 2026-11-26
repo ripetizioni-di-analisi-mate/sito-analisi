@@ -49,9 +49,14 @@ function preferenze(ar, email) {
   return { studio, offerte: Boolean(p?.confermato), inAttesa: Boolean(p?.token), materia: p?.materia || null };
 }
 
-function disattivaOfferte(ar, email, ora) {
-  const scelta = ar.riga('SELECT confermato, token FROM email_preferenze WHERE email = ?', email);
-  if (!scelta?.confermato && !scelta?.token) return;
+function disattivaOfferte(ar, email, ora, daLink = false) {
+  const scelta = ar.riga('SELECT confermato, token, revocato FROM email_preferenze WHERE email = ?', email);
+  if (!scelta?.confermato && !scelta?.token) {
+    // Chi non aveva dato il consenso ma riceve l'offerta di 24 ore ai nuovi iscritti: si registra il «no» alle offerte.
+    if (daLink && !scelta?.revocato) ar.sql.exec(`INSERT INTO email_preferenze (email, revocato) VALUES (?, ?)
+      ON CONFLICT(email) DO UPDATE SET revocato = excluded.revocato`, email, ora);
+    return;
+  }
   ar.sql.exec('UPDATE email_preferenze SET token = NULL, confermato = NULL, revocato = ? WHERE email = ?', ora, email);
   ar.sql.exec(`INSERT INTO email_consensi (email, evento, quando, versione) VALUES (?, 'revoca', ?, 1)`, email, ora);
   ar.sql.exec(`UPDATE email_automatiche SET stato = 'annullata', payload = NULL
@@ -105,7 +110,7 @@ export function archivioEmail(ar, p, c) {
       return { ok: modifica.rowsWritten > 0 };
     }
     case '/em-disattiva':
-      disattivaOfferte(ar, c.email, ora);
+      disattivaOfferte(ar, c.email, ora, true);
       return { ok: true };
     case '/em-offerta': {
       const r = ar.riga(`SELECT sconto, scade_sconto FROM email_automatiche

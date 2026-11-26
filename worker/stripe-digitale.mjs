@@ -39,7 +39,7 @@ export function archivioStripeDigitale(o, p, c) {
         return { posseduto: true };
       const idSconto = c.ordine.sconto?.id;
       if (c.ordine.sconto?.tipo === 'promozione' && !o.riga(
-        'SELECT 1 FROM promozioni_email WHERE id=? AND email=? AND materia=? AND percentuale=? AND scade>? AND usato IS NULL',
+        "SELECT 1 FROM promozioni_email WHERE id=? AND email=? AND materia IN (?,'*') AND percentuale=? AND scade>? AND usato IS NULL",
         idSconto, c.email, c.ordine.chiavi[0], c.ordine.percentuale, Date.now(),
       )) return { scontoUsato: true };
       const usato =
@@ -165,7 +165,7 @@ export function archivioStripeDigitale(o, p, c) {
           );
         if (q.sconto?.id) {
           if (q.sconto.tipo === 'promozione') o.sql.exec(
-            'UPDATE promozioni_email SET usato=? WHERE id=? AND email=? AND materia=? AND usato IS NULL',
+            "UPDATE promozioni_email SET usato=? WHERE id=? AND email=? AND materia IN (?,'*') AND usato IS NULL",
             s.payment_intent, q.sconto.id, r.email, q.chiavi[0],
           );
           o.sql.exec(

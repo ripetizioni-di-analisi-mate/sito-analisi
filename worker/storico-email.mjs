@@ -23,6 +23,7 @@ export const TIPI_EMAIL = {
   'avviso-recesso': 'Avviso di recesso al titolare',
   prova: 'Email di prova',
   promozione: 'Promozione manuale',
+  'offerta-24h': 'Offerta 24 ore ai nuovi iscritti',
 };
 
 export function preparaStoricoEmail(ar, ora) {

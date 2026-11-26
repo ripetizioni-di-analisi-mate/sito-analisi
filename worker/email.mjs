@@ -12,9 +12,14 @@ const paragrafo = (s) => `<p style="margin:0 0 15px;line-height:1.55">${esc(s)}<
 
 export function componiEmail({
   subject, titolo = subject, anteprima, categoria, lingua = 'it', righe, scheda, dopo = [], pulsante,
-  firma = 'Carmine', motivo, disattiva, bronzo = false,
+  firma = 'Carmine', motivo, disattiva, bronzo = false, autore,
 }) {
   const colore = bronzo ? '#785735' : '#214f50';
+  // Foto e nome di Carmine sotto il titolo: solo nelle email promozionali (richiesta di Carmine del 26/11/2026).
+  const presentazione = autore ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 16px"><tr>
+<td width="68" valign="middle" style="padding:0 12px 0 0"><img src="${esc(autore.foto)}" width="56" height="56" alt="${esc(autore.nome)}" style="display:block;width:56px;height:56px;border-radius:50%;border:1px solid #e1dcd2"></td>
+<td valign="middle" style="font-family:Arial,sans-serif"><div style="font-size:15px;font-weight:700;color:#23302e">${esc(autore.nome)}</div>
+<div style="font-size:13px;line-height:1.45;color:#59645f">${esc(autore.ruolo)}</div></td></tr></table>` : '';
   const dettagli = scheda ? `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 16px;background:${bronzo ? '#f3ece2' : '#faf9f6'};border:1px solid ${bronzo ? '#dfceb7' : '#e1dcd2'};border-radius:8px"><tr>
 ${scheda.immagine ? `<td width="62" valign="middle" style="padding:10px 0 10px 12px"><img src="${esc(scheda.immagine)}" width="52" alt="" style="display:block;max-width:52px;height:auto"></td>` : ''}
 <td style="padding:12px 14px;font-family:Arial,sans-serif">
@@ -35,7 +40,7 @@ ${scheda.nota ? `<div style="font-size:13px;color:#59645f;margin-top:4px">${esc(
 <tr><td style="padding:17px 24px 3px;font:15px/1.55 Arial,sans-serif;color:#23302e">
 ${categoria ? `<div style="font:700 11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:${colore}">${esc(categoria)}</div>` : ''}
 <h1 style="margin:5px 0 13px;font:700 28px/1.17 Georgia,serif;color:#23302e">${esc(titolo)}</h1>
-${righe.map(paragrafo).join('')}${dettagli}${dopo.map(paragrafo).join('')}${bottone}
+${presentazione}${righe.map(paragrafo).join('')}${dettagli}${dopo.map(paragrafo).join('')}${bottone}
 <p style="margin:0 0 14px;line-height:1.4"><strong>${esc(firma)}</strong><br><span style="color:#59645f;font-size:12px">Ripetizioni di Analisi</span></p>
 </td></tr>${piede}</table></td></tr></table></body></html>`;
   const text = [
