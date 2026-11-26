@@ -113,7 +113,7 @@ $$
 :::
 
 :::osservazione{#riduzione-notazione-scientifica titolo="Bringing the coefficient back into the range from 1 to 10"}
-After multiplication or division, the coefficient may be less than $1$ or greater than $10$. In this case, move the decimal point in the coefficient and adjust the exponent. Increase it by $1$ for every place the point moves left and decrease it by $1$ for every place it moves right. For example,
+After multiplication or division, the coefficient may be less than $1$ or greater than or equal to $10$. In this case, move the decimal point in the coefficient and adjust the exponent. Increase it by $1$ for every place the point moves left and decrease it by $1$ for every place it moves right. For example,
 $$
 (4 \cdot 10^{5}) \cdot (5 \cdot 10^{-2}) = 20 \cdot 10^{3} = 2 \cdot 10^{4},
 \qquad

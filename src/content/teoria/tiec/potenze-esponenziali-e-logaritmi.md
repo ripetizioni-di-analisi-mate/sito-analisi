@@ -113,7 +113,7 @@ $$
 :::
 
 :::osservazione{#riduzione-notazione-scientifica titolo="Coefficiente da riportare tra 1 e 10"}
-Dopo un prodotto o un quoziente il coefficiente può risultare minore di $1$ o maggiore di $10$. In questo caso si sposta la virgola del coefficiente e si corregge l'esponente, che aumenta di $1$ per ogni posto a sinistra e diminuisce di $1$ per ogni posto a destra. Per esempio
+Dopo un prodotto o un quoziente il coefficiente può risultare minore di $1$ oppure maggiore o uguale a $10$. In questo caso si sposta la virgola del coefficiente e si corregge l'esponente, che aumenta di $1$ per ogni posto a sinistra e diminuisce di $1$ per ogni posto a destra. Per esempio
 $$
 (4 \cdot 10^{5}) \cdot (5 \cdot 10^{-2}) = 20 \cdot 10^{3} = 2 \cdot 10^{4},
 \qquad
