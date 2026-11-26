@@ -227,7 +227,7 @@ Il legame tra queste formule e le condizioni necessarie e sufficienti si studia 
 :::
 
 :::osservazione{#a-meno-che titolo="A meno che"}
-La frase "$A$, a meno che $B$" significa "se non $B$, allora $A$", cioè $\lnot B \Rightarrow A$, che per la regola dell'implicazione come disgiunzione equivale ad "$A$ o $B$". In italiano dopo "a meno che" si mette spesso un "non" che non ha valore di negazione. La frase "Il volo parte alle 18:00, a meno che non ci sia nebbia" significa "se non c'è nebbia, allora il volo parte alle 18:00". Per la contronominale, se il volo non parte alle 18:00, allora c'è nebbia.
+La frase "$A$, a meno che $B$" significa "se non $B$, allora $A$", cioè $\lnot B \Rightarrow A$, che per la regola dell'implicazione come disgiunzione equivale ad "$A$ o $B$". In italiano dopo "a meno che" si mette spesso un "non" che non ha valore di negazione. La frase "Il volo parte alle 18\:00, a meno che non ci sia nebbia" significa "se non c'è nebbia, allora il volo parte alle 18\:00". Per la contronominale, se il volo non parte alle 18\:00, allora c'è nebbia.
 :::
 
 :::osservazione{#ne-ne-e-ma titolo="Né … né, ma, non è vero che"}
@@ -277,7 +277,7 @@ Molti quiz su connettivi e negazioni si risolvono senza scrivere la tavola di ve
 
 - **Schema a margine**. Si assegna una lettera a ogni frase semplice, per esempio $L$ = "Laura è in ferie", si traduce il testo in simboli, si applica la regola e si ritraduce in parole.
 - **Caso falso**. La negazione di una frase descrive esattamente i casi in cui la frase è falsa. Un'implicazione è falsa solo con antecedente vero e conseguente falso, una congiunzione è falsa quando almeno una parte è falsa, una disgiunzione è falsa solo quando tutte le parti sono false.
-- **Forma delle opzioni**. La negazione di un'implicazione è una congiunzione, quindi le opzioni che contengono "se" si escludono subito. Nei quiz di equivalenza l'implicazione $A \Rightarrow B$ è equivalente sia a $\lnot B \Rightarrow \lnot A$ sia a $\lnot A \lor B$; l'inversa e la contraria compaiono spesso tra le opzioni sbagliate.
+- **Forma delle opzioni**. La negazione di un'implicazione è vera esattamente quando l'antecedente è vero e il conseguente è falso. Si escludono le opzioni che non descrivono proprio questo caso. Nei quiz di equivalenza l'implicazione $A \Rightarrow B$ è equivalente sia a $\lnot B \Rightarrow \lnot A$ sia a $\lnot A \lor B$; l'inversa e la contraria compaiono spesso tra le opzioni sbagliate.
 - **Controesempio**. Un'opzione si scarta trovando un caso in cui la frase data è vera e l'opzione è falsa.
 
 Le negazioni più frequenti sono riassunte in questa tabella.

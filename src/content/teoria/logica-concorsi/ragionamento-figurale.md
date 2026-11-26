@@ -204,7 +204,7 @@ Nello sviluppo a croce latina il punto, il cerchio e la croce si toccano nell'an
 Nei quesiti "quale cubo si ottiene dallo sviluppo" il controllo procede in due passi.
 
 1. Si scrivono a margine le tre coppie di facce opposte e si scartano i cubi che mostrano insieme due facce opposte.
-2. Per i cubi rimasti si controlla l'ordine delle tre facce visibili attorno al vertice, confrontandolo con il punto dello sviluppo in cui le stesse tre facce si toccano.
+2. Per i cubi rimasti si controlla l'ordine delle tre facce visibili attorno al vertice. Se queste si toccano in un punto dello sviluppo, si legge il loro ordine in quel punto. Altrimenti si seguono le facce piegando mentalmente lo sviluppo finché si incontrano.
 :::
 
 ## Conteggio di figure

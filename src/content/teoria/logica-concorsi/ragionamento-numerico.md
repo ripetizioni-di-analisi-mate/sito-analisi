@@ -185,7 +185,7 @@ e infatti tra $6$ anni le età saranno $36$ e $12$. La differenza è sempre $24$
 Se $n + 1$ oggetti si distribuiscono in $n$ cassetti, almeno un cassetto contiene almeno $2$ oggetti. Più in generale, se $k \cdot n + 1$ oggetti si distribuiscono in $n$ cassetti, almeno un cassetto contiene almeno $k + 1$ oggetti. Il principio serve a garantire una coincidenza senza sapere dove si trova. In un gruppo di $13$ persone almeno due sono nate nello stesso mese, perché i mesi sono $12$. In un gruppo di $25$ persone almeno $3$ sono nate nello stesso mese, perché $25 = 2 \cdot 12 + 1$.
 
 :::dimostrazione
-Se ogni cassetto contenesse al più $k$ oggetti, gli oggetti sarebbero al più $k \cdot n$, che è meno di $k \cdot n + 1$. Questo contraddice il numero di oggetti, quindi almeno un cassetto ne contiene $k + 1$.
+Se ogni cassetto contenesse al più $k$ oggetti, gli oggetti sarebbero al più $k \cdot n$, che è meno di $k \cdot n + 1$. Questo contraddice il numero di oggetti, quindi almeno un cassetto ne contiene almeno $k + 1$.
 :::
 ::::
 

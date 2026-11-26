@@ -1183,7 +1183,7 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .testo-domanda th { background: var(--carta-2); }
 .scelte { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
 .scelta { display: flex; align-items: center; gap: 0.9rem; min-height: 3.2rem; text-align: left; font: inherit; color: var(--inchiostro); background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 0.4rem 1rem; cursor: pointer; }
-.scelta .lettera { flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--riga); display: inline-grid; place-items: center; font-family: var(--ui); font-size: 0.85rem; font-weight: 700; color: var(--inchiostro-2); }
+.scelta > .lettera { flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--riga); display: inline-grid; place-items: center; font-family: var(--ui); font-size: 0.85rem; font-weight: 700; color: var(--inchiostro-2); }
 /* Le formule lunghe scorrono in orizzontale; in verticale niente barra (le frazioni sporgono di poco). */
 .scelta .valore { min-width: 0; overflow-x: auto; overflow-y: hidden; padding: 0.3rem 0; }
 /* Domande e risposte (domande a tempo, duelli, simulazioni, Studio guidato): nessuna barra di scorrimento visibile.
@@ -1193,10 +1193,10 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 :is(.testo-domanda, .scelte, .spiegazione, .sg-dom, .boc-domanda-testo, .boc-risposta-testo, .tolc-scelta, .tiec-scelta)::-webkit-scrollbar,
 :is(.testo-domanda, .scelte, .spiegazione, .sg-dom, .boc-domanda-testo, .boc-risposta-testo, .tolc-scelta, .tiec-scelta) *::-webkit-scrollbar { display: none; }
 .scelta-attiva { border: 2px solid var(--accento); padding: calc(0.4rem - 1px) calc(1rem - 1px); background: color-mix(in srgb, var(--accento) 7%, #fff); }
-.scelta-attiva .lettera { background: var(--accento); border-color: var(--accento); color: #fff; }
+.scelta-attiva > .lettera { background: var(--accento); border-color: var(--accento); color: #fff; }
 .scelta-chiusa { cursor: default; color: var(--inchiostro-2); }
 .scelta-giusta { border: 2px solid var(--verde); padding: calc(0.4rem - 1px) calc(1rem - 1px); background: color-mix(in srgb, var(--verde) 9%, #fff); color: var(--inchiostro); }
-.scelta-giusta .lettera { background: var(--verde); border-color: var(--verde); color: #fff; }
+.scelta-giusta > .lettera { background: var(--verde); border-color: var(--verde); color: #fff; }
 .scelta-sbagliata { border-color: color-mix(in srgb, var(--c-esempio) 60%, transparent); background: color-mix(in srgb, var(--c-esempio) 8%, #fff); }
 .esito { font-family: var(--ui); font-weight: 600; margin-top: 1rem; }
 .esito-giusto { color: var(--verde); }

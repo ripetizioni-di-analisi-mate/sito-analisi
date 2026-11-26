@@ -483,7 +483,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'logica-concorsi': {
     titolo: 'Logic for public exams',
     breve: 'Logic for exams',
-    descrizione: 'The logic of Italian public competitive exams and aptitude tests: sets and Venn diagrams, negations and implications, necessary and sufficient conditions, syllogisms, numerical reasoning, deduction problems, verbal reasoning and abstract reasoning.',
+    descrizione: 'Logic for Italian public competitive exams and aptitude tests. Eight chapters cover sets, syllogisms, deduction, and numerical, verbal and spatial reasoning. Theory, worked examples, practice exercises and 720 timed questions are available in Italian and English. The combined public exam simulation runs in Italian.',
     argomenti: {
       'insiemi-e-venn': { titolo: 'Sets and Venn diagrams', breve: 'Sets and Venn' },
       'connettivi-e-negazioni': { titolo: 'Connectives, negations and implications', breve: 'Negations' },

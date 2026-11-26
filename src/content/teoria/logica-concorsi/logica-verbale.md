@@ -45,7 +45,7 @@ Se la frase ponte è troppo generica, più opzioni la completano. In questo caso
 ## Classificazioni e termine estraneo
 
 :::definizione{#termine-estraneo titolo="Termine estraneo"}
-Nei quesiti sul **termine estraneo** si danno cinque parole, o cinque coppie di parole, e si cerca quella che non appartiene al gruppo. La risposta è giustificata da un **criterio**, cioè da una proprietà che quattro elementi del gruppo hanno e che l'elemento estraneo non ha.
+Nei quesiti sul **termine estraneo** si dà un gruppo di parole o di coppie di parole e si cerca quella che non vi appartiene. La risposta è giustificata da un **criterio**, cioè da una proprietà condivisa da tutti gli elementi tranne uno. In un gruppo di cinque, per esempio, quattro devono possedere la proprietà.
 
 Nel gruppo *rosa*, *tulipano*, *margherita*, *quercia*, *viola* il criterio è "è un fiore". Rosa, tulipano, margherita e viola sono fiori, mentre la quercia è un albero, quindi il termine estraneo è *quercia*.
 :::
@@ -62,7 +62,7 @@ Nelle coppie *alto – basso*, *largo – stretto*, *lungo – corto*, *pesante 
 :::
 
 :::attenzione{#criterio-unico titolo="Un criterio deve isolare un solo elemento"}
-Un criterio che divide il gruppo in tre elementi e due *non* individua il termine estraneo. Nel gruppo *treno*, *nave*, *aereo*, *autobus*, *bicicletta* il criterio "ha un motore" vale per i primi quattro e non per la bicicletta, quindi isola un solo elemento. Il criterio "viaggia su strada" vale invece per autobus e bicicletta e non per treno, nave e aereo, perciò non indica nessun estraneo. Nei quiz ben costruiti un solo elemento è isolato da un criterio valido. Quando due criteri sembrano isolare due elementi diversi, uno dei due, controllato su tutti e cinque gli elementi, risulta non valido.
+Un criterio che divide il gruppo in tre elementi e due *non* individua il termine estraneo. Nel gruppo *treno a vapore*, *nave a motore*, *aereo di linea*, *autobus*, *bicicletta a pedali*, il criterio "ha un motore" vale per i primi quattro e non per la bicicletta, quindi isola un solo elemento. Il criterio "viaggia su strada" vale invece per autobus e bicicletta e non per treno, nave e aereo, perciò non indica nessun estraneo. Se due criteri sembrano isolare elementi diversi, si controlla quale risponde alla domanda e descrive gli altri quattro come gruppo. Se entrambi soddisfano queste condizioni, senza ulteriori indicazioni il quesito è ambiguo.
 :::
 
 ## Completamento di frasi e connettivi
@@ -93,7 +93,7 @@ Nella frase «Il ristorante era quasi vuoto, ___ il servizio è stato lento» un
 :::
 
 :::attenzione{#perche-e-infatti titolo="«Quindi», «perché» e «infatti»"}
-I connettivi *quindi* e *perché* *non* si scambiano, perché vanno in versi opposti. La frase «Piove, quindi le strade sono bagnate» è coerente, mentre «Piove perché le strade sono bagnate» presenta l'effetto come causa. Anche *infatti* va nel verso di *perché*, cioè dal fatto al suo motivo, ma apre una nuova frase o segue un punto e virgola. Le frasi «Luca è rimasto a casa perché aveva la febbre» e «Luca è rimasto a casa; infatti aveva la febbre» hanno quindi lo stesso significato.
+I connettivi *quindi* e *perché* *non* si scambiano, perché vanno in versi opposti. La frase «Piove, quindi le strade sono bagnate» è coerente, mentre «Piove perché le strade sono bagnate» presenta l'effetto come causa. Anche *infatti* può introdurre un motivo o una conferma. In questi esempi apre una nuova frase o segue un punto e virgola. Le frasi «Luca è rimasto a casa perché aveva la febbre» e «Luca è rimasto a casa; infatti aveva la febbre» collegano dunque la febbre alla permanenza a casa: *perché* esplicita la causa, mentre *infatti* introduce il fatto che la spiega.
 :::
 
 :::osservazione{#parola-mancante titolo="Parola mancante"}
@@ -101,7 +101,7 @@ Nei quesiti con una parola mancante si cerca la parola coerente con il resto del
 
 Nella frase «Benché il bando fosse ___, molti candidati hanno sbagliato a compilare la domanda» la parte introdotta da *benché* deve far aspettare il contrario della frase principale. Poiché la frase principale dice che molti candidati hanno sbagliato, la parola mancante deve far aspettare pochi errori, quindi è *chiaro*. La parola *confuso* rende la frase incoerente, perché un bando confuso è un motivo degli errori, e un motivo si introduce con *poiché*.
 
-Anche il modo del verbo è un indizio. *Benché* e *sebbene* reggono il congiuntivo, come in "benché fosse", mentre *poiché* e *anche se* reggono l'indicativo, come in "poiché era". Quando le parole mancanti sono due, un'opzione è corretta solo se entrambe le parole rendono la frase coerente.
+Anche il modo del verbo è un indizio. *Benché* e *sebbene* reggono il congiuntivo, come in "benché fosse", mentre *poiché* e *anche se*, quando introducono un fatto, reggono l'indicativo, come in "poiché era". Con una circostanza ipotetica, *anche se* può invece reggere il congiuntivo, come in "anche se fosse". Quando le parole mancanti sono due, un'opzione è corretta solo se entrambe le parole rendono la frase coerente.
 :::
 
 ## Brani e affermazioni
@@ -142,7 +142,7 @@ La conclusione può stare all'inizio, in mezzo o alla fine del testo. Nell'argom
 :::definizione{#assunzione-implicita titolo="Assunzione implicita"}
 L'**assunzione implicita** di un argomento è una premessa che l'autore non scrive, ma senza la quale la conclusione non segue dalle premesse scritte. L'assunzione è quindi una condizione *necessaria* perché l'argomento sia corretto.
 
-Nell'argomento «Marco è iscritto all'albo degli ingegneri, quindi può firmare il progetto» l'unica premessa scritta riguarda l'iscrizione all'albo. La conclusione segue solo se vale anche "chi è iscritto all'albo degli ingegneri può firmare il progetto", che è l'assunzione implicita. In molti quiz l'assunzione implicita è proprio l'implicazione "se premessa, allora conclusione" che l'autore sottintende.
+Nell'argomento «Marco è iscritto all'albo degli ingegneri, quindi può firmare il progetto» l'unica premessa scritta riguarda l'iscrizione all'albo. Il passaggio alla conclusione presuppone che quell'iscrizione autorizzi Marco a firmare questo progetto. La regola "chi è iscritto all'albo degli ingegneri può firmare il progetto" sarebbe sufficiente, ma è più forte del necessario: la conclusione riguarda Marco, non ogni iscritto. In molti quiz l'assunzione implicita è proprio l'implicazione "se premessa, allora conclusione" che l'autore sottintende.
 :::
 
 :::teorema{#prova-della-negazione titolo="Prova della negazione"}
@@ -186,9 +186,9 @@ Un'affermazione che parla dello stesso tema dell'argomento *non* per questo lo r
 I quesiti di logica verbale si risolvono con poche operazioni, quasi tutte da fare prima di leggere le opzioni.
 
 - **Analogie**: si scrive la frase ponte della coppia completa e la si ripete con ogni opzione. Si scartano le opzioni con un tipo di relazione diverso e quelle con il verso invertito. Con due parole mancanti si controlla ogni coppia proposta per intero, perché spesso la prima parola va bene e la seconda no.
-- **Termine estraneo**: si cerca un criterio che valga per quattro elementi e non per il quinto, e lo si controlla su tutti e cinque.
-- **Connettivi**: si decide il rapporto tra le due parti (conseguenza, causa, spiegazione, contrasto, concessione) prima di leggere le opzioni. Quando il rapporto è di concessione, un congiuntivo dopo lo spazio vuoto indica *benché* o *sebbene*.
-- **Brani**: per ogni affermazione si cerca la frase del brano che la conferma o la smentisce. Se nessuna frase lo fa, l'affermazione è non deducibile. Le parole di quantità, frequenza e certezza si confrontano una per una con il testo.
+- **Termine estraneo**: si cerca un criterio che valga per tutti gli elementi tranne uno e lo si controlla su ogni elemento. In un gruppo di cinque, il criterio deve valere per quattro.
+- **Connettivi**: si decide il rapporto tra le due parti (conseguenza, causa, spiegazione, contrasto, concessione) prima di leggere le opzioni. Quando il rapporto è di concessione, un congiuntivo dopo lo spazio vuoto può suggerire *benché* o *sebbene*.
+- **Brani**: per ogni affermazione si cercano le informazioni del brano che, da sole o insieme, la confermano o la smentiscono. Se il testo non permette nessuna delle due conclusioni, l'affermazione è non deducibile. Le parole di quantità, frequenza e certezza si confrontano una per una con il testo.
 - **Assunzioni**: si applica la prova della negazione a ogni opzione, e si scartano le opzioni che ripetono una premessa e quelle troppo forti.
 - **Rafforzare e indebolire**: si scrive il legame che l'argomento sottintende, di solito "se $A$, allora $B$" oppure "$A$ è la causa di $B$". Un'altra causa possibile o un controesempio indebolisce l'argomento, mentre un'affermazione che esclude le altre cause o rende $A$ sufficiente per $B$ lo rafforza.
 :::

@@ -103,14 +103,24 @@ export default function remarkBlocchi() {
       if (NUMERATI.has(n.name)) sezione.push(n);
     }
     chiudi();
-    visit(tree, (node) => {
+    visit(tree, (node, indice, padre) => {
+      // remark-directive interpreta i minuti di un orario come una direttiva inline (es. 8:30).
+      if (node.type === 'textDirective' && /^\d{2}$/.test(node.name)) {
+        const prima = padre?.children[indice - 1];
+        const lunghezza = node.position?.end.offset - node.position?.start.offset;
+        if (prima?.type === 'text' && /\d$/.test(prima.value) && lunghezza === 3) {
+          node.type = 'text';
+          node.value = ':' + node.name;
+          return;
+        }
+      }
       if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura' || node.name === 'schema')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };
         if (node.name === 'grafico' && traduciAssi && attr.nomi) {
           attr.nomi = String(attr.nomi).split(',').map((nome) => ASSI_ANALISI_STATISTICA_FINANZIARIA_EN.get(nome.trim()) ?? nome).join(',');
         }
-        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}, schemaInglese) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}, schemaInglese) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(attr) : venn(attr);
         return;
       }
       if (node.type !== 'containerDirective') return;
