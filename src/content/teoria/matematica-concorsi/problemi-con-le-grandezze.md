@@ -107,7 +107,7 @@ Per passare da km/h a m/s si divide per $3{,}6$; per passare da m/s a km/h si mo
 $$
 \frac{1000}{3600}\ \text{m/s} = \frac{1}{3{,}6}\ \text{m/s} .
 $$
-Quindi $72$ km/h sono $\dfrac{72}{3{,}6} = 20$ m/s, e $15$ m/s sono $15 \cdot 3{,}6 = 54$ km/h. Il valore in m/s è sempre minore del valore in km/h, e questo permette di controllare il verso della conversione.
+Quindi $72$ km/h sono $\dfrac{72}{3{,}6} = 20$ m/s, e $15$ m/s sono $15 \cdot 3{,}6 = 54$ km/h. Per una velocità positiva il valore in m/s è sempre minore del valore in km/h, e questo permette di controllare il verso della conversione.
 :::
 
 ::::teorema{#velocita-media-andata-ritorno titolo="Velocità media su andata e ritorno"}
@@ -210,7 +210,7 @@ In una soluzione, come acqua e sale oppure acqua e alcol, la **concentrazione** 
 $$
 c = \frac{\text{quantità di sostanza}}{\text{quantità di soluzione}} \cdot 100 .
 $$
-Una soluzione di $600$ g che contiene $30$ g di sale ha concentrazione $\dfrac{30}{600} \cdot 100 = 5\%$. Mescolando due soluzioni, la concentrazione della miscela è la media ponderata delle concentrazioni, con pesi uguali alle quantità di soluzione, esattamente come per i prezzi.
+Una soluzione di $600$ g che contiene $30$ g di sale ha concentrazione $\dfrac{30}{600} \cdot 100\% = 5\%$. Mescolando due soluzioni, la concentrazione della miscela è la media ponderata delle concentrazioni, esattamente come per i prezzi. Per le percentuali in massa i pesi sono le masse delle soluzioni. Per le percentuali in volume si usano i volumi, assumendo che i volumi delle soluzioni si sommino.
 :::
 
 :::teorema{#diluizione titolo="Diluizione"}
@@ -220,7 +220,7 @@ c_1 \cdot V_1 = c_2 \cdot V_2 .
 $$
 Cinque litri di una soluzione al $12\%$ contengono $0{,}12 \cdot 5 = 0{,}6$ litri di sostanza. Per portare la concentrazione all'$8\%$ la soluzione deve diventare di $\dfrac{0{,}6}{0{,}08} = 7{,}5$ litri, perciò si aggiungono $2{,}5$ litri di acqua. Concentrazione e volume sono inversamente proporzionali, e l'acqua *aggiunta* è la differenza tra i due volumi.
 
-::grafico{f="60/x" punti="5,12,pieno,prima;7.5,8,pieno,dopo" segmenti="5,0,5,12;7.5,0,7.5,8;0,12,5,12;0,8,7.5,8" xmin=0 xmax=10 ymin=0 ymax=20 nomi="V,c" legenda="c \cdot V = 60" titolo="Concentrazione $c$ in percentuale in funzione del volume $V$ in litri: la quantità di sostanza è $c \cdot V = 60$ (cioè $0{,}6$ litri di sostanza) prima e dopo la diluizione"}
+::grafico{f="60/x" punti="5,12,pieno,prima;7.5,8,pieno,dopo" segmenti="5,0,5,12;7.5,0,7.5,8;0,12,5,12;0,8,7.5,8" xmin=0 xmax=10 ymin=0 ymax=20 nomi="V,c" legenda="c \cdot V = 60" titolo="Concentrazione $c$ in percentuale in funzione del volume $V$ in litri: prima e dopo la diluizione il prodotto resta $c \cdot V = 60$, che corrisponde a $0{,}6$ litri di soluto"}
 
 :::
 
@@ -252,10 +252,10 @@ Molti quesiti collegano più grandezze attraverso rapporti noti, come un consumo
 :::osservazione{#metodi-rapidi titolo="Controlli sulle unità e sull'ordine di grandezza"}
 Nei quesiti su grandezze e unità di misura le opzioni sbagliate nascono quasi sempre da pochi errori ricorrenti, che si riconoscono con alcuni controlli.
 
-- **Contare i gradini** della conversione, tenendo conto che per le superfici ogni gradino vale $100$ e per i volumi $1000$. Se due opzioni differiscono per un fattore $10$, una delle due nasce da un errore di gradino.
-- **Controllare il verso**: un'unità più piccola dà un numero più grande. Il valore in m/s è minore di quello in km/h, e il tempo di un lavoro svolto insieme è minore del tempo del più veloce.
+- **Contare i gradini** della conversione, tenendo conto che per le superfici ogni gradino vale $100$ e per i volumi $1000$. Una differenza di un fattore $10$ tra due opzioni può indicare un errore di un gradino in una conversione di lunghezza, massa o capacità.
+- **Controllare il verso**: per una grandezza positiva, un'unità più piccola dà un numero più grande. Una velocità positiva ha un valore numerico minore in m/s che in km/h. Un lavoro svolto insieme richiede meno tempo di quanto impiegherebbe da solo il più veloce.
 - **Scrivere i minuti come frazioni di ora**: $15$ min $= \dfrac{1}{4}$ h, $20$ min $= \dfrac{1}{3}$ h, $40$ min $= \dfrac{2}{3}$ h, $45$ min $= \dfrac{3}{4}$ h.
-- **Stimare la media**: il prezzo o la concentrazione di una miscela sta tra i due valori di partenza e più vicino a quello della quantità maggiore; la velocità media su andata e ritorno è un po' minore della media aritmetica delle due velocità.
+- **Stimare la media**: il prezzo o la concentrazione di una miscela sta tra i due valori di partenza e più vicino a quello della quantità maggiore; a parità di distanza all'andata e al ritorno, la velocità media è minore della media aritmetica quando le due velocità sono diverse e coincide con essa quando sono uguali.
 
 Con questi controlli spesso restano una o due opzioni compatibili, e il calcolo esatto serve solo per scegliere tra quelle.
 :::

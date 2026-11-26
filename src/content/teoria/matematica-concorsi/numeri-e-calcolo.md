@@ -25,18 +25,18 @@ Tra due numeri negativi è maggiore quello con il valore assoluto minore. Per es
 ## Operazioni, segni ed espressioni
 
 :::teorema{#regole-dei-segni titolo="Regole dei segni"}
-Nel prodotto e nel quoziente di due numeri interi il segno del risultato dipende soltanto dai segni dei due numeri.
+Nel prodotto e nel quoziente di due numeri interi diversi da zero il segno del risultato dipende soltanto dai segni dei due numeri. Un prodotto con un fattore nullo vale zero. Zero diviso per un numero diverso da zero vale zero, mentre la divisione per zero non è definita.
 
 - Se i due numeri hanno lo stesso segno, il risultato è positivo: $(-3) \cdot (-4) = 12$ e $\dfrac{-12}{-4} = 3$.
 - Se i due numeri hanno segni diversi, il risultato è negativo: $(-3) \cdot 4 = -12$ e $\dfrac{12}{-4} = -3$.
 
-Moltiplicare per $-1$ porta ogni numero nel suo simmetrico rispetto allo zero, e ripetere due volte l'operazione riporta al numero di partenza; per questo $(-1) \cdot (-1) = 1$ e il prodotto di due numeri negativi è positivo. In un prodotto di più fattori il risultato è negativo se i fattori negativi sono in numero dispari, perciò $(-1) \cdot (-2) \cdot (-3) = -6$. Nella somma di due numeri di segno diverso si sottraggono i valori assoluti, e il risultato ha il segno del numero con valore assoluto maggiore, come in $-7 + 3 = -4$. Il segno meno davanti a un'espressione cambia il segno di tutti i suoi termini, quindi $10 - (3 - 8) = 10 - 3 + 8 = 15$.
+Moltiplicare per $-1$ porta ogni numero nel suo simmetrico rispetto allo zero, e ripetere due volte l'operazione riporta al numero di partenza; per questo $(-1) \cdot (-1) = 1$ e il prodotto di due numeri negativi è positivo. In un prodotto di fattori diversi da zero il risultato è negativo se i fattori negativi sono in numero dispari, perciò $(-1) \cdot (-2) \cdot (-3) = -6$. Nella somma di due numeri di segno diverso si sottraggono i valori assoluti. Se sono uguali la somma è zero, altrimenti il risultato ha il segno del numero con valore assoluto maggiore, come in $-7 + 3 = -4$. Il segno meno davanti a un'espressione cambia il segno di tutti i suoi termini, quindi $10 - (3 - 8) = 10 - 3 + 8 = 15$.
 
 ::grafico{assi=0 uguale=1 linee="-8.5,0 3.5,0;3.3,0.15 3.5,0 3.3,-0.15;-8,-0.1 -8,0.1;-7,-0.1 -7,0.1;-6,-0.1 -6,0.1;-5,-0.1 -5,0.1;-4,-0.1 -4,0.1;-3,-0.1 -3,0.1;-2,-0.1 -2,0.1;-1,-0.1 -1,0.1;0,-0.1 0,0.1;1,-0.1 1,0.1;2,-0.1 2,0.1;3,-0.1 3,0.1" vettori="0,0.9,-7,0.9,−7;-7,1.8,-4,1.8,+3" segmenti="-7,0,-7,1.8;-4,0,-4,1.8" punti="-4,0,pieno" etichette="-7.2,-0.5,−7;-4.2,-0.5,−4;-0.05,-0.5,0" xmin=-9 xmax=4 ymin=-1 ymax=2.4 titolo="La somma $-7 + 3$ sulla retta: si parte da $0$, ci si sposta di $7$ posti a sinistra e poi di $3$ a destra, e si arriva in $-4$"}
 :::
 
 :::teorema{#ordine-operazioni titolo="Ordine delle operazioni"}
-In un'espressione si calcolano prima le potenze, poi le moltiplicazioni e le divisioni nell'ordine in cui compaiono da sinistra a destra, infine le addizioni e le sottrazioni, anch'esse da sinistra a destra. Se ci sono parentesi, si calcolano prima le espressioni contenute nelle parentesi tonde, poi quelle nelle quadre, infine quelle nelle graffe. La regola è una convenzione, adottata perché ogni espressione abbia un solo valore. Per esempio
+In un'espressione si calcolano prima le potenze, poi le moltiplicazioni e le divisioni nell'ordine in cui compaiono da sinistra a destra, infine le addizioni e le sottrazioni, anch'esse da sinistra a destra. Se ci sono parentesi annidate, si procede dalle più interne verso le più esterne. Nella disposizione abituale le tonde sono interne alle quadre, che a loro volta sono interne alle graffe. La regola è una convenzione, adottata perché ogni espressione abbia un solo valore. Per esempio
 $$
 20 - 4 \cdot 3 = 20 - 12 = 8 ,
 $$
@@ -141,7 +141,7 @@ $$
 :::
 
 :::teorema{#confronto-frazioni titolo="Confronto tra frazioni"}
-Tra due frazioni con lo stesso denominatore è maggiore quella con il numeratore maggiore, per esempio $\dfrac{5}{7} > \dfrac{3}{7}$. Se i denominatori sono diversi, si riducono le frazioni allo stesso denominatore, che è il mcm dei denominatori, e si confrontano i numeratori. Per confrontare $\dfrac{5}{6}$ e $\dfrac{7}{9}$ si usa il denominatore $\operatorname{mcm}(6, 9) = 18$:
+Tra due frazioni con lo stesso denominatore positivo è maggiore quella con il numeratore maggiore, per esempio $\dfrac{5}{7} > \dfrac{3}{7}$. Se i denominatori sono diversi, si scrivono prima le frazioni con denominatore positivo, poi si usa come denominatore comune il mcm dei denominatori e si confrontano i numeratori. Per confrontare $\dfrac{5}{6}$ e $\dfrac{7}{9}$ si usa il denominatore $\operatorname{mcm}(6, 9) = 18$:
 $$
 \frac{5}{6} = \frac{15}{18},
 \qquad
@@ -321,7 +321,7 @@ Nei quiz di calcolo le opzioni sbagliate nascono di solito da errori tipici, e a
 
 - **Stima**: si arrotondano i numeri e si calcola a mente. Per esempio $\dfrac{4{,}02 \cdot 59{,}7}{0{,}298}$ vale circa $\dfrac{4 \cdot 60}{0{,}3} = 800$, quindi le opzioni che differiscono da $800$ per un fattore $10$ si scartano.
 - **Ultima cifra**: l'ultima cifra di un prodotto dipende solo dalle ultime cifre dei fattori. Il prodotto $37 \cdot 48$ termina con $6$, perché $7 \cdot 8 = 56$; tra le opzioni $1\,774$, $1\,776$ e $1\,778$ è quindi corretta $1\,776$.
-- **Segno e ordine**: un prodotto con tre fattori negativi è negativo, una frazione propria di un numero positivo è minore del numero, il mcm non è minore dei numeri dati e il MCD non è maggiore.
+- **Segno e ordine**: il prodotto di tre numeri negativi è negativo, una frazione propria di un numero positivo è minore del numero, il mcm non è minore dei numeri dati e il MCD non è maggiore.
 
 I criteri di divisibilità offrono un ultimo controllo. Il prodotto $27 \cdot 43$ è multiplo di $9$, perciò anche la somma delle cifre del risultato $1\,161$ deve esserlo, e infatti vale $9$.
 :::

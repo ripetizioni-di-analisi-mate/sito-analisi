@@ -179,9 +179,9 @@ Il calcolo inverso, detto **scorporo**, parte dal prezzo con IVA e trova l'impon
 :::definizione{#variazione-percentuale titolo="Variazione percentuale"}
 Quando una grandezza passa dal valore $V_1 > 0$ al valore $V_2$, la sua **variazione percentuale** è
 $$
-\frac{V_2 - V_1}{V_1} \cdot 100 .
+\frac{V_2 - V_1}{V_1} \cdot 100\% .
 $$
-Si divide sempre per il valore *iniziale*. È positiva per un aumento e negativa per una diminuzione. Un abbonamento che passa da $40$ a $46$ euro aumenta del $\dfrac{6}{40} \cdot 100 = 15\%$; un prezzo che scende da $64$ a $48$ euro diminuisce del $\dfrac{16}{64} \cdot 100 = 25\%$.
+Si divide sempre per il valore *iniziale*. È positiva per un aumento e negativa per una diminuzione. Un abbonamento che passa da $40$ a $46$ euro aumenta del $\dfrac{6}{40} \cdot 100\% = 15\%$; un prezzo che scende da $64$ a $48$ euro diminuisce del $\dfrac{16}{64} \cdot 100\% = 25\%$.
 :::
 
 :::teorema{#variazioni-successive titolo="Variazioni percentuali successive"}
@@ -200,7 +200,7 @@ Un aumento e una diminuzione della stessa percentuale *non* si compensano. Un pr
 :::
 
 :::osservazione{#punti-percentuali titolo="Punti percentuali"}
-Quando la grandezza che varia è già una percentuale, come un tasso di interesse o di disoccupazione, si distingue la differenza in **punti percentuali** dalla variazione percentuale. Se il tasso di disoccupazione passa dall'$8\%$ al $10\%$, la differenza è di $2$ punti percentuali, mentre la variazione percentuale è $\dfrac{10 - 8}{8} \cdot 100 = 25\%$. Nei quesiti a risposta multipla le due risposte compaiono spesso entrambe tra le opzioni.
+Quando la grandezza che varia è già una percentuale, come un tasso di interesse o di disoccupazione, si distingue la differenza in **punti percentuali** dalla variazione percentuale. Se il tasso di disoccupazione passa dall'$8\%$ al $10\%$, la differenza è di $2$ punti percentuali, mentre la variazione percentuale è $\dfrac{10 - 8}{8} \cdot 100\% = 25\%$. Nei quesiti a risposta multipla le due risposte compaiono spesso entrambe tra le opzioni.
 :::
 
 ## Metodi rapidi per i quiz

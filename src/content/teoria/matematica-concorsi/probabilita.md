@@ -280,9 +280,9 @@ $$
 \qquad
 \frac{3}{8} = 0{,}375 = 37{,}5\% .
 $$
-Per passare da un numero decimale alla percentuale si moltiplica per $100$; per il passaggio inverso si divide per $100$. Il calcolo delle percentuali si trova nell'argomento su rapporti, proporzioni e percentuali.
+Per esprimere un numero decimale in percentuale si moltiplica il numero per $100$ e si aggiunge il simbolo di percentuale. Per il passaggio inverso si divide per $100$ il numero che precede il simbolo. Il calcolo delle percentuali si trova nell'argomento su rapporti, proporzioni e percentuali.
 
-Se un evento ha probabilità $p$ e l'esperimento si ripete $n$ volte, il numero di volte in cui ci si aspetta che l'evento si verifichi è circa $n \cdot p$. Se un pezzo è difettoso con probabilità del $3\%$, in un lotto di $2000$ pezzi ci si aspettano circa $2000 \cdot 0{,}03 = 60$ pezzi difettosi.
+Se un evento ha probabilità $p$ in ciascuna di $n$ prove, il numero atteso di volte in cui si verifica è $n \cdot p$. Se ciascun pezzo ha una probabilità del $3\%$ di essere difettoso, in un lotto di $2000$ pezzi il numero atteso di pezzi difettosi è $2000 \cdot 0{,}03 = 60$. Il numero effettivamente osservato può essere diverso dal valore atteso.
 :::
 
 ## Metodi rapidi per i quiz
