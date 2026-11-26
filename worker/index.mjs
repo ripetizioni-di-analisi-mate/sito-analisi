@@ -36,7 +36,7 @@ import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione
 import { speseMeta } from './meta-ads.mjs';
 import { PERIODI_DASHBOARD } from './periodi.mjs';
 import { MATERIE } from '../src/data/materie.ts';
-import { capitoli, abilitaDi, materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
+import { capitoli, abilitaDi, materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica, rimandiDomanda } from './studio-guidato.mjs';
 import { raccontaInStreaming, capisciBlocco, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
 import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
@@ -1478,7 +1478,9 @@ export default {
       }
       const giusta = Number(scelta) === q.corretta;
       const secondi = Math.round((Date.now() - tok.t) / 1000);
-      const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
+      // Abilità della domanda con paragrafo di teoria e scheda svolta (solo in italiano, per le materie classificate).
+      const rimandi = linguaQuiz(tok.l) === 'it' ? rimandiDomanda(tok.m, q.id) : null;
+      const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi, ...(rimandi ? { rimandi } : {}) };
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,

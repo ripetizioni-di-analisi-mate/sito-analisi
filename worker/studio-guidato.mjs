@@ -43,6 +43,18 @@ const chiave = (m, a, i) => `${m}/${a}#${i}`;
 const parti = (k) => { const [ma, i] = k.split('#'); const [m, a] = ma.split('/'); return { m, a, i: Number(i), ma }; };
 export const abilitaDi = (m, a) => CLASSI.abilita?.[`${m}/${a}`] || [];
 export const nomeAbilita = (k) => { const p = parti(k); return CLASSI.abilita?.[p.ma]?.[p.i] ?? null; };
+// Abilità, paragrafo di teoria e scheda svolta collegati a una domanda a tempo: la pagina delle domande li mostra
+// dopo una risposta sbagliata («Da ripassare») e nel risultato della serie. null se la domanda non è classificata.
+export function rimandiDomanda(materia, id) {
+  const classe = CLASSI.domande?.[materia]?.[id];
+  if (!classe) return null;
+  const [argomento] = String(id).split('/');
+  const i = classe[1];
+  const abilita = CLASSI.abilita?.[`${materia}/${argomento}`]?.[i];
+  if (!abilita) return null;
+  const r = TITOLI_RIMANDI[`${materia}/${argomento}`]?.[i] || {};
+  return { k: `${argomento}#${i}`, argomento, abilita, t: (r.t || []).slice(0, 1), s: (r.s || []).slice(0, 1) };
+}
 const basiDi = (k) => { const p = parti(k); return (RIMANDI[p.ma]?.[p.i] || '||').split('|')[2].split(',').filter(Boolean); };
 
 // tipo: 'ab' abilità del capitolo, 'base' prerequisito, 'ric' ricontrollo. st: null finché non è chiusa.

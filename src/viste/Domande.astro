@@ -1,13 +1,12 @@
 ---
-// Domande a tempo di un argomento: una alla volta, due minuti ciascuna, spiegazione subito dopo la conferma.
+// Domande a tempo di un argomento: una alla volta, due minuti ciascuna, spiegazione subito dopo la conferma,
+// risultato della serie per argomento con ciò che è da ripassare.
 // I testi arrivano dal Worker (/api/domande/…): la risposta corretta non è mai nella pagina.
 import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { originale } from '../lib/canonici';
-import { tutteLeVoci } from '../lib/voci-teoria';
-import { raccolteSvolti } from '../lib/raccolte-svolti';
-import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { DOMANDE_SESSIONE, PUNTI, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { BOCCONI } from '../data/bocconi.mjs';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import { catalogoDomande, conteggiDomande } from '../lib/domande';
@@ -83,15 +82,9 @@ const T = es ? {
   inizia: 'Inizia', avvio: 'Il tempo parte quando premi «Inizia».',
   anteprima: 'Anteprima gratuita', bloccata: 'Questa domanda è riservata a chi ha acquistato l’accesso completo alla materia.', sblocca: 'Sblocca la materia',
 };
-// La pagina pubblica descrive il quiz e collega il materiale dello stesso argomento.
+// La pagina pubblica è quella che i motori di ricerca possono indicizzare.
 const pubblica = !usa && !personale && totale > 0;
 const titoloQuiz = ripasso ? T.titolo + ' · ' + m.titolo : arg.titolo + ' · ' + T.titolo;
-const numeroPerArgomento = pubblica && ripasso && (lingua === 'it' || en) ? (await conteggiDomande(en ? 'en' : 'it'))[materia] ?? {} : {};
-const capitoli = m.argomenti.filter((a) => numeroPerArgomento[a.slug] > 0);
-const esempi = pubblica && !ripasso && (lingua === 'it' || lingua === 'en')
-  ? (await raccolteSvolti(lingua)).get(materia)?.find((c) => c.slug === argomento)?.schede.slice(0, 3) ?? [] : [];
-const voci = pubblica && !ripasso && (lingua === 'it' || lingua === 'en')
-  ? ((await tutteLeVoci(lingua)).get(materia + '/' + argomento) ?? []).filter((v) => v.titolo).slice(0, 4) : [];
 const canonicoQuiz = pubblica && !ripasso ? originale(materia, argomento, 'domande') : undefined;
 // Testi usati dallo script nel browser.
 const JS = es ? {
@@ -125,6 +118,44 @@ const JS = es ? {
   numeroBloccato: 'Domanda §, accesso completo richiesto',
   livello: 'Livello', massimo: 'Livello massimo', alLivello: 'al livello', obiettivi: 'Obiettivi della settimana', completato: 'Completato', tornaEsercizi: 'Torna agli esercizi', tornaMateria: 'Torna agli argomenti', percorso: 'Il tuo percorso',
 };
+// Percorso nuovo (26/11/2026, scelte di Carmine sulle anteprime): prima un solo blocco al centro con i tre dati della serie,
+// durante solo la domanda, dopo un errore «Da ripassare», a fine serie il risultato per argomento.
+const tempoDomanda = `${Math.floor(PUNTI.secondiDomanda / 60)}:${String(PUNTI.secondiDomanda % 60).padStart(2, '0')}`;
+const expMassimi = PUNTI.corretta + PUNTI.veloce;
+const P = es ? {
+  domande: 'preguntas', perDomanda: 'por pregunta', exp: 'EXP como máximo por respuesta',
+  precedente: 'Pregunta anterior', successiva: 'Pregunta siguiente', vedi: 'Ver el resultado', segnala: 'Informar de un error',
+} : en ? {
+  domande: 'questions', perDomanda: 'per question', exp: 'XP at most per answer',
+  precedente: 'Previous question', successiva: 'Next question', vedi: 'See the result', segnala: 'Report an error',
+} : {
+  domande: 'domande', perDomanda: 'per ogni domanda', exp: 'EXP al massimo per risposta',
+  precedente: 'Domanda precedente', successiva: 'Domanda successiva', vedi: 'Vedi il risultato', segnala: 'Segnala un errore',
+};
+const JS2 = es ? {
+  daRipassare: 'Para repasar', teoria: 'Teoría', teoriaCap: 'Teoría del tema', scheda: 'Ficha resuelta §', svoltiCap: 'Ejercicios resueltos',
+  corrette: 'respuestas correctas', unaCorrettaR: 'respuesta correcta', senzaRisposta: '§ sin responder', andatiBene: 'Bien resueltas',
+  errore1: '1 error', erroriN: '§ errores', nessunErrore: 'Sin errores en esta serie.', rifai1: 'Repetir la pregunta fallada', rifaiN: 'Repetir las § preguntas falladas',
+  nuova: 'Nueva serie', ospiteRis: 'Con una cuenta gratuita se guardan tus puntos y avances.', accedi: T.accedi, domandaN: 'Pregunta §',
+} : en ? {
+  daRipassare: 'To review', teoria: 'Theory', teoriaCap: 'Chapter theory', scheda: 'Worked sheet §', svoltiCap: 'Worked examples',
+  corrette: 'correct answers', unaCorrettaR: 'correct answer', senzaRisposta: '§ unanswered', andatiBene: 'Went well',
+  errore1: '1 mistake', erroriN: '§ mistakes', nessunErrore: 'No mistakes in this set.', rifai1: 'Retry the wrong question', rifaiN: 'Retry the § wrong questions',
+  nuova: 'New set', ospiteRis: 'With a free account your points and progress are saved.', accedi: T.accedi, domandaN: 'Question §',
+} : {
+  daRipassare: 'Da ripassare', teoria: 'Teoria', teoriaCap: 'Teoria del capitolo', scheda: 'Scheda svolta §', svoltiCap: 'Esercizi svolti',
+  corrette: 'risposte corrette', unaCorrettaR: 'risposta corretta', senzaRisposta: '§ senza risposta', andatiBene: 'Andati bene',
+  errore1: '1 errore', erroriN: '§ errori', nessunErrore: 'Nessun errore in questa serie.', rifai1: 'Rifai la domanda sbagliata', rifaiN: 'Rifai le § domande sbagliate',
+  nuova: 'Nuova serie', ospiteRis: 'Con un account gratuito punti e progressi si salvano.', accedi: T.accedi, domandaN: 'Domanda §',
+};
+// Simboli a due toni della schermata di partenza: fumetto (domande), clessidra (tempo), scintilla (esperienza).
+const simbolo = (d: string) => `<svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const SIMBOLI = {
+  domande: simbolo('<rect class="t" x="14" y="5" width="29" height="25" rx="7"/><path class="b" d="M12 11h22a6 6 0 0 1 6 6v13a6 6 0 0 1-6 6H22.5l-7.5 6.5V36h-3a6 6 0 0 1-6-6V17a6 6 0 0 1 6-6z"/><path class="s" d="M19.2 20.3a4 4 0 1 1 6 3.45c-1.3.75-2 1.5-2 2.85"/><circle class="p" cx="23.2" cy="30.6" r="1.35"/>'),
+  tempo: simbolo('<path class="b" d="M16 7v6c0 5 8 7 8 11s-8 6-8 11v6h16v-6c0-5-8-7-8-11s8-6 8-11V7z"/><path class="t" d="M18.6 14h10.800c-.9 2.800-4.100 4.300-5.400 6.200-1.300-1.900-4.500-3.400-5.400-6.200z"/><path class="t" d="M18 39.500c.600-3.300 3.800-5.200 6-6.700 2.200 1.500 5.400 3.400 6 6.700z"/><path class="s" d="M12.500 7h23M12.500 41h23"/>'),
+  exp: simbolo('<path class="b tt" d="M21 7c1.700 8.700 5.300 12.300 14 14-8.700 1.700-12.300 5.300-14 14-1.700-8.700-5.300-12.300-14-14 8.700-1.700 12.300-5.300 14-14z"/><path class="p" d="M37 28c.700 3.500 2.500 5.300 6 6-3.500.700-5.300 2.500-6 6-.700-3.500-2.500-5.300-6-6 3.500-.700 5.300-2.500 6-6z"/>'),
+};
+const freccia = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10h11M10.5 4.5L16 10l-5.500 5.500"/></svg>';
 ---
 <Base
   titolo={`${arg.titolo} · ${T.titolo}`}
@@ -133,15 +164,24 @@ const JS = es ? {
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua} usa={usa}
   seo={{ titolo: ripasso ? titoloQuiz : titoloQuiz + ' | ' + m.breve, noindex: !pubblica, canonico: canonicoQuiz, senzaInglese, soloQuestaLingua: (materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && senzaInglese }}
 >
-  <div class="domande" data-materia={materia} data-bocconi-quiz={bocconi || undefined} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
-    <div class="domande-testa">
-      <div>
-        <p class="sopratitolo ripete">{pubblica ? m.titolo : T.titolo}</p>
-        <h1>{pubblica ? titoloQuiz : arg.titolo}</h1>
-      </div>
-      <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
-    </div>
-    <p class="sommario">{T.sommario}</p>
+  <script is:inline>try { if (sessionStorage.getItem('domande-avvio-subito') === '1') document.documentElement.classList.add('dq-subito'); } catch (e) {}</script>
+  <div class="domande dq" data-materia={materia} data-bocconi-quiz={bocconi || undefined} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify({ ...JS, ...JS2 })} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}
+    data-teoria={ripasso || usa ? '' : hrefSezione('teoria')} data-svolti={ripasso ? '' : hrefSezione('esercizi-svolti')} data-accedi={`${pref}/accedi?dopo=${hrefSezione('domande')}`}>
+    <h1 class="dq-lettori">{pubblica ? titoloQuiz : arg.titolo}</h1>
+    <p class="dq-lettori">{T.sommario}</p>
+
+    <section class="dq-avvio">
+      <p class="dq-capitolo" aria-hidden="true">{arg.titolo}</p>
+      {ripasso && <p class="dq-materia">{m.titolo}</p>}
+      {personale ? <p class="dq-spiega">{T.sommario}</p> : (
+        <ul class="dq-dati">
+          <li class="dq-k-d"><span class="dq-sim" set:html={SIMBOLI.domande} /><b>{n}</b><span>{P.domande}</span></li>
+          <li class="dq-k-t"><span class="dq-sim" set:html={SIMBOLI.tempo} /><b>{tempoDomanda}</b><span>{P.perDomanda}</span></li>
+          <li class="dq-k-e"><span class="dq-sim" set:html={SIMBOLI.exp} /><b>{expMassimi}</b><span>{P.exp}</span></li>
+        </ul>
+      )}
+      <button type="button" class="bottone-primario avvia">{T.inizia}<Fragment set:html={freccia} /></button>
+      <div class="dq-note">
     {(anteprimaScienza || anteprimaUsa) && <p class="nota nota-anteprima-scienza" data-usa-preview={anteprimaUsa || undefined}>
       {notaAnteprima} <a href={hrefSblocca}>{T.sblocca} · {m.prezzo} €</a>
     </p>}
@@ -150,6 +190,8 @@ const JS = es ? {
     {materia === 'statistica' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access to Statistics and Probability</a> includes all {quizStatistica} questions with explanations.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Statistica e probabilità</a> comprende tutti i {quizStatistica} quiz con spiegazione.</>}</p>}
     {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p class="nota">{en ? 'Mathematics practice for the filter semester. These questions train the prerequisites; they are not an official filter-semester exam.' : 'Allenamento di matematica per il semestre filtro. Queste domande servono a consolidare i prerequisiti; non costituiscono una prova ufficiale del semestre filtro.'}</p>}
+      </div>
+    </section>
 
     <div class="nota-ospite" hidden>
       <p>{T.ospite}</p>
@@ -157,17 +199,19 @@ const JS = es ? {
     </div>
 
     <nav class="navigazione-domande" aria-label={T.navigazione} hidden>
-      <button type="button" class="bottone-secondario precedente">{T.precedente}</button>
+      <button type="button" class="bottone-secondario precedente" aria-label={P.precedente} title={P.precedente} set:html={freccia} />
       <ol class="numeri-domande"></ol>
-      <button type="button" class="bottone-secondario successiva">{T.successiva}</button>
+      <button type="button" class="bottone-secondario successiva" aria-label={P.successiva} title={P.successiva} set:html={freccia} />
     </nav>
 
-    <section class="scheda-domanda" aria-live="polite">
-      <div class="avvio-domande" hidden>
-        <button type="button" class="bottone-primario avvia">{T.inizia}</button>
-        <p>{T.avvio}</p>
+    <section class="scheda-domanda" aria-live="polite" hidden>
+      <div class="dq-stato">
+        <p class="numero-domanda"></p>
+        <div class="tempo" hidden>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="11" r="6.5" /><path d="M10 7.500V11l2.200 1.600M8 2.500h4" /></svg>
+          <span class="secondi">{tempoDomanda}</span>
+        </div>
       </div>
-      <p class="numero-domanda"></p>
       <div class="velo-blocco velo-scheda blocco-domande" hidden>
         {bocconi ? <>
           <h2>{en ? 'Timed questions are included in the full Bocconi course' : 'I quiz a tempo sono inclusi nel corso completo Bocconi'}</h2>
@@ -179,47 +223,154 @@ const JS = es ? {
           <a class="bottone-sblocca" href={hrefSblocca}>{T.sblocca}</a>
         </>}
       </div>
-      <div class="tempo" hidden>
-        <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="12" r="8" /><path d="M11 8v4l2.5 2M9 2h4" /></svg>
-        <div class="barra-tempo"><span></span></div>
-        <span class="secondi">2:00</span>
-      </div>
       <p class="nota-tempo" hidden></p>
       <div class="testo-domanda testo-studio"><p class="caricamento">{T.caricamento}</p></div>
       <div class="scelte" role="radiogroup" aria-label={T.risposte}></div>
       <p class="esito" hidden></p>
       <div class="spiegazione testo-studio" hidden></div>
+      <div class="dq-ripassa" hidden></div>
       <div class="azioni-domanda">
         <button type="button" class="bottone-primario conferma" disabled hidden>{T.conferma}</button>
         <button type="button" class="bottone-primario prossima" hidden>{T.prossima}</button>
-        <button type="button" class="bottone-primario nuova-serie" hidden>{T.nuovaSerie}</button>
-        <a class="link-svolti" href={ripasso ? hrefMateria : hrefSezione('esercizi-svolti')} hidden>{T.svolti}</a>
+        <button type="button" class="bottone-primario vedi-risultato" hidden>{P.vedi}</button>
+        <button type="button" class="dq-segnala" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17V3.500M5 4h9l-1.800 3 1.800 3H5" /></svg>{P.segnala}</button>
       </div>
     </section>
 
+    <section class="dq-risultato" hidden></section>
+    <p class="dq-sotto"><button type="button" class="termina" hidden>{T.termina}</button></p>
     <section class="riepilogo-sessione" hidden></section>
   </div>
-  {voci.length > 0 && <nav aria-label={en ? 'Theory for this quiz' : 'Teoria per questo quiz'}>
-    <h2>{en ? 'What to review' : 'Cosa ripassare'}</h2>
-    <ul>{voci.map((v) => <li><a href={link(lingua, base + '/teoria/' + v.ancora)}>{v.titolo}</a></li>)}</ul>
-  </nav>}
-  {pubblica && (capitoli.length > 0 || esempi.length > 0) && (
-    <details class="quiz-argomenti">
-      <summary>{ripasso ? (en ? 'Topics covered in this review' : 'Argomenti del ripasso')
-        : (en ? 'Worked examples for this quiz' : 'Esercizi svolti per preparare il quiz')}</summary>
-      <ul>
-        {ripasso ? capitoli.map((a) => <li><a href={link(lingua, '/' + materia + '/' + a.slug + '/domande')}>{a.titolo}</a> · {numeroPerArgomento[a.slug]} {en ? 'questions' : 'domande'}</li>)
-          : esempi.map((s) => <li><a href={link(lingua, s.percorso)}>{s.titolo}</a></li>)}
-      </ul>
-    </details>
-  )}
 </Base>
 
-<style>
-  :global(html.sbloccato) .nota-anteprima-scienza { display: none; }
-  .avvio-domande { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; padding: .4rem 0 .2rem; }
-  .avvio-domande[hidden] { display: none; }
-  .avvio-domande p { margin: 0; color: var(--inchiostro); opacity: .75; font-family: var(--ui); font-size: .92rem; }
+<style is:global>
+  /* Domande a tempo, percorso nuovo: tutto sotto .dq, così duelli e simulazioni non cambiano. */
+  .dq { --dq-ocra: #8a5f1f; }
+  .dq-lettori { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  html.sbloccato .nota-anteprima-scienza { display: none; }
+  /* In questa pagina: niente «Argomento successivo» né «Segnala un errore» in fondo; al telefono niente «Cerca nel capitolo». */
+  main:has(.dq) nav.passi, main:has(.dq) p.segnala-errore, main:has(.dq) .cerca-capitolo-mobile { display: none; }
+
+  /* Prima */
+  .dq-avvio { display: grid; justify-items: center; align-content: center; row-gap: 2.2rem; min-height: min(35rem, calc(100vh - 13rem)); padding-bottom: 1.5rem; text-align: center; font-family: var(--ui); }
+  .dq-avvio[hidden], html.dq-subito .dq-avvio { display: none; }
+  .dq-capitolo { margin: 0; font: 700 2rem/1.2 var(--titoli); color: var(--inchiostro); text-wrap: balance; }
+  .dq-materia { margin: -1.8rem 0 0; font-size: 1rem; color: var(--inchiostro-2); }
+  .dq-spiega { margin: -1rem 0 0; max-width: 34rem; font-size: 1rem; line-height: 1.5; color: var(--inchiostro-2); }
+  .dq-dati { list-style: none; margin: 0; padding: 0; width: min(39rem, 100%); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dq-dati li { display: grid; justify-items: center; align-content: start; gap: 0.45rem; padding: 0.3rem 1rem; border-left: 1px solid var(--riga); }
+  .dq-dati li:first-child { border-left: 0; }
+  .dq-k-d { --k: var(--c-definizione); } .dq-k-t { --k: var(--c-esempio); } .dq-k-e { --k: var(--c-osservazione); }
+  .dq-sim { display: block; margin-bottom: 0.8rem; }
+  .dq-sim svg { display: block; width: 3.9rem; height: 3.9rem; stroke-width: 2; }
+  .dq-sim .b { fill: #fff; stroke: var(--k); }
+  .dq-sim .t { fill: color-mix(in srgb, var(--k) 26%, #fff); stroke: none; }
+  .dq-sim .b.tt { fill: color-mix(in srgb, var(--k) 20%, #fff); }
+  .dq-sim .s { stroke: var(--k); }
+  .dq-sim .p { fill: var(--k); stroke: none; }
+  .dq-dati b { font: 700 3.3rem/1 var(--titoli); letter-spacing: -0.025em; color: var(--inchiostro); font-variant-numeric: tabular-nums; }
+  .dq-dati li > span:last-child { font-size: 0.9rem; line-height: 1.3; color: var(--inchiostro-2); }
+  .dq-avvio .avvia { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 4.5rem; font-size: 1.08rem; }
+  .dq-avvio .avvia svg { width: 1.1em; height: 1.1em; }
+  .dq-note { max-width: 36rem; font-size: 0.86rem; color: var(--inchiostro-2); }
+  .dq-note:empty { display: none; }
+  .dq-note .nota { margin: 0.4rem 0 0; }
+
+  /* Durante */
+  .dq .navigazione-domande { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.55rem; margin-top: 0.2rem; }
+  .dq .navigazione-domande[hidden] { display: none; }
+  .dq .navigazione-domande > button { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border-radius: 50%; background: #fff; }
+  .dq .navigazione-domande > button svg { width: 1rem; height: 1rem; }
+  .dq .navigazione-domande .precedente svg { transform: scaleX(-1); }
+  .dq .navigazione-domande > button:disabled { opacity: 0.35; }
+  .dq .numeri-domande { flex: 1; order: 0; flex-basis: auto; display: flex; flex-wrap: nowrap; justify-content: stretch; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .dq .numeri-domande li { flex: 1; }
+  .dq .numeri-domande .numero { position: relative; display: block; width: 100%; min-width: 0; height: 1.6rem; padding: 0; border: 0; border-radius: 0; background: none; font-size: 0; outline: 0; cursor: pointer; }
+  .dq .numeri-domande .numero::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 6px; translate: 0 -50%; border-radius: 3px; background: var(--riga); transition: height 0.15s, background 0.15s; }
+  .dq .numeri-domande .numero:hover::after, .dq .numeri-domande .numero:focus-visible::after { height: 10px; }
+  .dq .numeri-domande .numero-attivo::after { height: 10px; background: color-mix(in srgb, var(--verde) 38%, #fff); }
+  .dq .numeri-domande .numero-giusto::after { background: var(--verde); }
+  .dq .numeri-domande .numero-sbagliato::after { background: color-mix(in srgb, var(--c-esempio) 75%, #fff); }
+  .dq .numeri-domande .numero-bloccato::after { background: repeating-linear-gradient(90deg, var(--riga) 0 4px, transparent 4px 7px); }
+  .dq .scheda-domanda { margin-top: 0.9rem; padding: 1.15rem 1.35rem 1.3rem; background: #fff; border: 1px solid var(--riga); border-radius: 16px; }
+  .dq .scheda-domanda[hidden] { display: none; }
+  .dq-stato { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2rem; }
+  .dq-stato .numero-domanda { margin: 0; font: 700 0.72rem var(--ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--verde); }
+  .dq-stato .tempo { gap: 0.4rem; padding: 0.3rem 0.7rem 0.3rem 0.5rem; border-radius: 999px; background: var(--bronzo-fondo); color: var(--bronzo-scuro); }
+  .dq-stato .tempo svg { width: 1.05rem; height: 1.05rem; stroke: var(--bronzo-icona); stroke-width: 1.5; }
+  .dq-stato .tempo .secondi { min-width: 0; font-size: 0.92rem; }
+  .dq-stato .tempo.poco { background: color-mix(in srgb, var(--c-attenzione) 10%, #fff); color: var(--c-attenzione); }
+  .dq-stato .tempo.poco svg { stroke: var(--c-attenzione); }
+  .dq .nota-tempo { margin: 0.4rem 0 0; font-size: 0.8rem; }
+  .dq .scelta { border-radius: 12px; background: var(--carta); transition: border-color 0.15s, background 0.15s, transform 0.12s; }
+  .dq .scelta:not(.scelta-chiusa):hover { border-color: color-mix(in srgb, var(--verde) 55%, var(--riga)); background: #fff; }
+  .dq .scelta:not(.scelta-chiusa):active { transform: scale(0.995); }
+  .dq .scelta-attiva { background: color-mix(in srgb, var(--accento) 7%, #fff); }
+  .dq .scelta-giusta { background: color-mix(in srgb, var(--verde) 9%, #fff); }
+  .dq .esito { display: inline-flex; align-items: center; padding: 0.4rem 0.8rem; border-radius: 999px; font-size: 0.9rem; }
+  .dq .esito[hidden] { display: none; }
+  .dq .esito-giusto { background: color-mix(in srgb, var(--verde) 10%, transparent); }
+  .dq .esito-sbagliato { background: color-mix(in srgb, var(--c-esempio) 13%, transparent); }
+  .dq .spiegazione { border: 0; border-radius: 12px; background: color-mix(in srgb, var(--carta-2) 60%, #fff); padding: 0.3rem 1.1rem 0.9rem; box-shadow: inset 3px 0 var(--verde); }
+  .dq .azioni-domanda { gap: 0.7rem 1rem; }
+
+  /* Dopo una risposta sbagliata */
+  .dq-ripassa { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.3rem 0.9rem; margin-top: 0.9rem; font-family: var(--ui); }
+  .dq-ripassa[hidden] { display: none; }
+  .dq-ripassa > span:first-child { font: 700 0.72rem var(--ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--dq-ocra); }
+  .dq-link { display: inline-flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; }
+  .dq-link a { display: inline-flex; align-items: center; gap: 0.4rem; font: 600 0.9rem var(--ui); color: var(--verde); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--verde) 35%, transparent); text-underline-offset: 3px; }
+  .dq-link a svg { width: 1.05rem; height: 1.05rem; flex: none; }
+  .dq-segnala { display: inline-flex; align-items: center; gap: 0.35rem; margin-left: auto; padding: 0; border: 0; background: none; font: 0.84rem var(--ui); color: var(--inchiostro-2); cursor: pointer; }
+  .dq-segnala[hidden] { display: none; }
+  .dq-segnala svg { width: 1rem; height: 1rem; }
+  .dq-sotto { margin: 0.7rem 0 0; text-align: right; }
+  .dq-sotto .termina { padding: 0; border: 0; background: none; font: 0.84rem var(--ui); color: var(--inchiostro-2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+  /* Risultato della serie */
+  .dq-risultato { margin-top: 1.2rem; padding: 1.6rem 1.6rem 1.4rem; background: #fff; border: 1px solid var(--riga); border-radius: 16px; font-family: var(--ui); }
+  .dq-risultato[hidden] { display: none; }
+  .dq-voto p { margin: 0; font: 600 1.5rem/1 var(--titoli); color: var(--inchiostro-2); }
+  .dq-voto b { font-size: 3.2rem; font-weight: 700; color: var(--inchiostro); letter-spacing: -0.02em; }
+  .dq-voto span { display: block; margin-top: 0.35rem; font-size: 0.95rem; color: var(--inchiostro-2); }
+  .dq-barra { display: flex; gap: 4px; margin-top: 1rem; }
+  .dq-barra i { flex: 1; height: 8px; border-radius: 4px; background: var(--riga); }
+  .dq-barra i.ok { background: var(--verde); }
+  .dq-barra i.no { background: color-mix(in srgb, var(--c-esempio) 70%, #fff); }
+  .dq-risultato h2 { display: flex; align-items: center; gap: 0.5rem; margin: 1.7rem 0 0.2rem; font: 700 1.05rem var(--ui); }
+  .dq-risultato h2::before { content: ''; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--verde); }
+  .dq-risultato h2.no::before { background: color-mix(in srgb, var(--c-esempio) 80%, #fff); }
+  .dq-lista { list-style: none; margin: 0; padding: 0; }
+  .dq-lista li { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid color-mix(in srgb, var(--riga) 75%, transparent); }
+  .dq-cosa { flex: 1; min-width: 0; display: grid; gap: 0.3rem; }
+  .dq-cosa b { font: 600 1.08rem/1.3 var(--titoli); }
+  .dq-err { flex: none; font: 600 0.84rem var(--ui); color: var(--dq-ocra); background: color-mix(in srgb, var(--c-esempio) 13%, transparent); padding: 0.3rem 0.65rem; border-radius: 999px; }
+  .dq-bene { list-style: none; margin: 0.6rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .dq-bene li { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; padding: 0.35rem 0.75rem 0.35rem 0.6rem; border-radius: 999px; background: color-mix(in srgb, var(--verde) 8%, transparent); }
+  .dq-bene svg { width: 0.95rem; height: 0.95rem; color: var(--verde); }
+  .dq-pulito { margin: 1.2rem 0 0; font-size: 1rem; color: var(--verde); font-weight: 600; }
+  .dq-azioni { display: flex; align-items: center; flex-wrap: wrap; gap: 0.7rem 1.4rem; margin-top: 1.6rem; }
+  .dq-testo { padding: 0; border: 0; background: none; font: 600 0.95rem var(--ui); color: var(--verde); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .dq-ospite { margin: 1.2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--riga); font-size: 0.86rem; color: var(--inchiostro-2); }
+
+  @media (max-width: 720px) {
+    .dq-avvio { min-height: calc(100vh - 16rem); row-gap: 1.8rem; }
+    .dq-capitolo { font-size: 1.7rem; }
+    .dq-dati li { padding: 0.2rem 0.4rem; }
+    .dq-dati b { font-size: 2.1rem; }
+    .dq-dati li > span:last-child { font-size: 0.76rem; }
+    .dq-sim svg { width: 3rem; height: 3rem; }
+    .dq-avvio .avvia { width: 100%; justify-content: center; padding-inline: 1rem; }
+    .dq .numeri-domande { gap: 3px; }
+    .dq .scheda-domanda { padding: 1rem 0.95rem 1.1rem; }
+    .dq .azioni-domanda .bottone-primario { width: 100%; }
+    .dq-segnala { margin-left: 0; }
+    .dq-risultato { padding: 1.2rem 1rem; }
+    .dq-voto b { font-size: 2.7rem; }
+    .dq-lista li { flex-wrap: wrap; gap: 0.5rem; }
+    .dq-azioni .bottone-primario { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .dq .scelta, .dq .numeri-domande .numero::after { transition: none; } }
 </style>
 
 <script>
@@ -230,8 +381,8 @@ const JS = es ? {
   const f = (k: string, x: string | number) => L[k].replace('§', String(x));
   const $ = <T extends HTMLElement>(s: string) => radice.querySelector<T>(s)!;
   const testo = $('.testo-domanda'), scelte = $('.scelte'), esito = $('.esito'), spieg = $('.spiegazione');
-  const conferma = $<HTMLButtonElement>('.conferma'), prossima = $<HTMLButtonElement>('.prossima'), svolti = $<HTMLAnchorElement>('.link-svolti');
-  const nuovaSerie = $<HTMLButtonElement>('.nuova-serie');
+  const conferma = $<HTMLButtonElement>('.conferma'), prossima = $<HTMLButtonElement>('.prossima'), vedi = $<HTMLButtonElement>('.vedi-risultato');
+  const ripassa = $('.dq-ripassa'), segnala = $<HTMLButtonElement>('.dq-segnala');
   const ripasso = radice.dataset.ripasso === '1';
   const tornaAllaMateria = radice.dataset.tornaAllaMateria === '1';
   const brevi = JSON.parse(radice.dataset.brevi || '{}') as Record<string, string>;
@@ -240,8 +391,9 @@ const JS = es ? {
   const chiaveRecenti = `domande-recenti-${materia}-${argomento}`;
   let recenti: string[] = [];
   try { recenti = JSON.parse(localStorage.getItem(chiaveRecenti) || '[]'); } catch { /* niente memoria */ }
-  const tempo = $('.tempo'), barra = $('.barra-tempo span'), secondiEl = $('.secondi'), notaTempo = $('.nota-tempo');
+  const tempo = $('.tempo'), secondiEl = $('.secondi'), notaTempo = $('.nota-tempo');
   const termina = $<HTMLButtonElement>('.termina'), scheda = $('.scheda-domanda'), riepilogo = $('.riepilogo-sessione');
+  const risultato = $('.dq-risultato'), avvio = $('.dq-avvio');
   const nav = $('.navigazione-domande'), numeri = $('.numeri-domande'), numeroEl = $('.numero-domanda');
   const blocco = $('.blocco-domande');
   const prec = $<HTMLButtonElement>('.precedente'), succ = $<HTMLButtonElement>('.successiva');
@@ -250,12 +402,18 @@ const JS = es ? {
   const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
   const num = (x: number) => x.toLocaleString(lingua === 'en' ? 'en-US' : 'it-IT');
   const adatta = () => dispatchEvent(new Event('resize')); // le formule in display si adattano alla larghezza
+  const IC = {
+    libro: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5.5C8.5 4.3 6.3 4 3.5 4v11c2.8 0 5 .3 6.500 1.500 1.500-1.200 3.700-1.500 6.500-1.500V4c-2.800 0-5 .3-6.500 1.500zM10 5.500v11"/></svg>',
+    foglio: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.500" width="14" height="13" rx="2.500"/><path d="M6.500 8h7M6.500 12h4.500"/></svg>',
+    spunta: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.500 10.500l3.500 3.500 7.500-8"/></svg>',
+  };
 
   // Stato della pagina: l'ordine delle domande e, per ognuna, la domanda caricata, la scelta e l'esito.
   interface Domanda { token: string; id: string; numero: number; testo: string; scelte: string[]; secondi: number; collegato: boolean }
-  interface Esito { giusta: boolean; corretta: number; spiegazione: string; punti: number; veloce?: boolean; motivo?: string; scelta: number; scaduto: boolean }
+  interface Rimandi { k: string; argomento: string; abilita: string; t: { id: string; titolo: string }[]; s: { n: number; titolo: string }[] }
+  interface Esito { giusta: boolean; corretta: number; spiegazione: string; punti: number; veloce?: boolean; motivo?: string; scelta: number; scaduto: boolean; rimandi?: Rimandi }
   let ordine: string[] = [];
-  let pos = 0, lunghezzaSerie = 0;
+  let pos = 0, lunghezzaSerie = 0, collegato = false;
   const domande = new Map<string, Domanda>();
   const esiti = new Map<string, Esito>();
   let corrente: Domanda | null = null;
@@ -266,13 +424,14 @@ const JS = es ? {
     const passati = Math.floor((Date.now() - inizio) / 1000);
     const resto = Math.max(0, corrente.secondi - passati);
     secondiEl.textContent = mmss(resto);
-    barra.style.width = `${(resto / corrente.secondi) * 100}%`;
+    tempo.classList.toggle('poco', resto <= 20);
     const bonus = 60 - passati;
     if (resto === 0) { notaTempo.hidden = false; notaTempo.textContent = L.scaduto2; clearInterval(timer); return; }
     notaTempo.hidden = !corrente.collegato || bonus <= 0;
     notaTempo.textContent = bonus > 0 ? f('bonus', bonus) : '';
   }
 
+  // L'avanzamento: un segmento per domanda (verde giusta, ocra sbagliata), cliccabile.
   function disegnaNumeri() {
     numeri.innerHTML = '';
     for (let i = 0; i < lunghezzaSerie; i++) {
@@ -283,7 +442,8 @@ const JS = es ? {
       const id = ordine[i];
       const e = id ? esiti.get(id) : undefined;
       b.className = ['numero', e ? (e.giusta ? 'numero-giusto' : 'numero-sbagliato') : '', id ? '' : 'numero-bloccato', i === pos ? 'numero-attivo' : ''].join(' ').trim();
-      if (!id) b.setAttribute('aria-label', f('numeroBloccato', i + 1));
+      b.setAttribute('aria-label', id ? f('domandaN', i + 1) : f('numeroBloccato', i + 1));
+      b.title = f('domandaN', i + 1);
       if (i === pos) b.setAttribute('aria-current', 'step');
       b.addEventListener('click', () => vai(i));
       li.appendChild(b);
@@ -316,6 +476,26 @@ const JS = es ? {
     });
   }
 
+  // Collegamenti di una domanda: il paragrafo di teoria e la scheda svolta della sua abilità (se la materia è
+  // classificata), altrimenti la teoria e gli esercizi svolti del capitolo.
+  function collegamenti(r: Rimandi | undefined, id: string): string {
+    if (r && (r.t.length || r.s.length)) {
+      const base = `${pref}/${materia}/${r.argomento}`;
+      return [
+        ...r.t.map((t) => `<a href="${base}/teoria#${t.id}">${IC.libro}${t.titolo}</a>`),
+        ...r.s.map((s) => `<a href="${base}/esercizi-svolti/${s.n}">${IC.foglio}${f('scheda', s.n)}</a>`),
+      ].join('');
+    }
+    const teoria = ripasso ? `${pref}/${materia}/${argDi(id)}/teoria` : radice.dataset.teoria;
+    const svolti = ripasso ? `${pref}/${materia}/${argDi(id)}/esercizi-svolti` : radice.dataset.svolti;
+    return [teoria ? `<a href="${teoria}">${IC.libro}${L.teoriaCap}</a>` : '', svolti ? `<a href="${svolti}">${IC.foglio}${L.svoltiCap}</a>` : ''].join('');
+  }
+
+  // Le domande libere della serie hanno tutte una risposta (nell'anteprima con domande bloccate il risultato non c'è).
+  const libere = () => ordine.filter(Boolean);
+  const serieFinita = () => lunghezzaSerie > 0 && libere().length === lunghezzaSerie
+    && (libere().every((id) => esiti.has(id)) || (pos >= lunghezzaSerie - 1 && esiti.has(ordine[pos])));
+
   function mostraEsito(e: Esito) {
     let frase = e.giusta ? L.giusta : f(e.scaduto ? 'scaduto' : 'corretta', LETTERE[e.corretta - 1]);
     if (e.punti > 0) frase += ` · +${e.punti} ${lingua === 'en' ? 'XP' : 'EXP'}` + (e.veloce ? L.veloce : '') + (e.motivo === 'ripetuta' ? L.ripetuta : '');
@@ -325,11 +505,13 @@ const JS = es ? {
     esito.hidden = false;
     spieg.innerHTML = `<h2>${L.spiegazione}</h2>${e.spiegazione}`;
     spieg.hidden = false;
-    conferma.hidden = true;
-    prossima.hidden = pos >= lunghezzaSerie - 1;
-    nuovaSerie.hidden = pos < lunghezzaSerie - 1;
-    if (ripasso && corrente) svolti.href = `${pref}/${materia}/${argDi(corrente.id)}/esercizi-svolti`;
-    svolti.hidden = false;
+    const link = e.giusta || !corrente ? '' : collegamenti(e.rimandi, corrente.id);
+    ripassa.innerHTML = link ? `<span>${L.daRipassare}</span><span class="dq-link">${link}</span>` : '';
+    ripassa.hidden = !link;
+    conferma.hidden = true; tempo.hidden = true;
+    vedi.hidden = !serieFinita();
+    prossima.hidden = pos >= lunghezzaSerie - 1 || !vedi.hidden;
+    segnala.hidden = false;
   }
 
   // Apre la domanda in posizione i. Una domanda non ancora risolta si ricarica con un tempo nuovo di due minuti.
@@ -339,7 +521,7 @@ const JS = es ? {
     pos = Math.max(0, Math.min(i, lunghezzaSerie - 1));
     corrente = null;
     scelta = 0;
-    esito.hidden = true; spieg.hidden = true; prossima.hidden = true; nuovaSerie.hidden = true; svolti.hidden = true; notaTempo.hidden = true;
+    esito.hidden = true; spieg.hidden = true; prossima.hidden = true; vedi.hidden = true; ripassa.hidden = true; segnala.hidden = true; notaTempo.hidden = true;
     conferma.hidden = true; conferma.disabled = true; tempo.hidden = true;
     const id = ordine[pos];
     const bloccata = ordine.length > 0 && !id;
@@ -392,7 +574,7 @@ const JS = es ? {
     if (esiti.has(d.id)) { vai(pos); return; }
     corrente = d;
     domande.set(d.id, d);
-    (radice.querySelector('.nota-ospite') as HTMLElement).hidden = d.collegato;
+    collegato = d.collegato;
     termina.hidden = !d.collegato;
     testo.innerHTML = d.testo;
     mostraScelte(d);
@@ -432,23 +614,72 @@ const JS = es ? {
     if (d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
   }
 
-  conferma.addEventListener('click', () => invia());
-  const sposta = (i: number) => { vai(i); scheda.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-  prossima.addEventListener('click', () => sposta(pos + 1));
-  nuovaSerie.addEventListener('click', () => {
+  // Risultato della serie: quante corrette, gli argomenti da ripassare con i collegamenti, quelli andati bene.
+  function mostraRisultato() {
+    clearInterval(timer);
+    const righe = ordine.map((id) => ({ id, e: esiti.get(id) }));
+    const ok = righe.filter((x) => x.e?.giusta).length;
+    const sbagliate = righe.filter((x) => x.e && !x.e.giusta);
+    const saltate = righe.filter((x) => !x.e).length;
+    // Per argomento (abilità) quando la materia è classificata; altrimenti un solo gruppo con i collegamenti del capitolo.
+    const gruppi = new Map<string, { nome: string; link: string; err: number; tot: number }>();
+    for (const x of righe) {
+      if (!x.e) continue;
+      const r = x.e.rimandi;
+      const k = r?.k ?? (ripasso ? argDi(x.id) : '');
+      const g = gruppi.get(k) ?? { nome: r?.abilita ?? (ripasso ? brevi[argDi(x.id)] ?? titolo : titolo), link: collegamenti(r, x.id), err: 0, tot: 0 };
+      g.tot++; if (!x.e.giusta) g.err++;
+      gruppi.set(k, g);
+    }
+    const tutti = [...gruppi.values()];
+    const deboli = tutti.filter((g) => g.err).sort((a, b) => b.err - a.err);
+    const forti = tutti.filter((g) => !g.err);
+    const classificata = righe.some((x) => x.e?.rimandi) || ripasso;
+    const n = sbagliate.length;
+    risultato.innerHTML = `
+      <div class="dq-voto"><p><b>${ok}</b> ${L.su} ${lunghezzaSerie}</p><span>${ok === 1 ? L.unaCorrettaR : L.corrette}${saltate ? ` · ${f('senzaRisposta', saltate)}` : ''}</span></div>
+      <div class="dq-barra" aria-hidden="true">${righe.map((x) => `<i class="${x.e ? (x.e.giusta ? 'ok' : 'no') : ''}"></i>`).join('')}</div>
+      ${deboli.length ? `<h2 class="no">${L.daRipassare}</h2>
+        <ul class="dq-lista">${deboli.map((g) => `<li><div class="dq-cosa"><b>${g.nome}</b><span class="dq-link">${g.link}</span></div><span class="dq-err">${g.err === 1 ? L.errore1 : f('erroriN', g.err)}</span></li>`).join('')}</ul>` : `<p class="dq-pulito">${L.nessunErrore}</p>`}
+      ${classificata && forti.length && deboli.length ? `<h2>${L.andatiBene}</h2><ul class="dq-bene">${forti.map((g) => `<li>${IC.spunta}${g.nome}</li>`).join('')}</ul>` : ''}
+      <div class="dq-azioni">${n ? `<button type="button" class="bottone-primario dq-rifai">${n === 1 ? L.rifai1 : f('rifaiN', n)}</button><button type="button" class="dq-testo dq-nuova">${L.nuova}</button>`
+        : `<button type="button" class="bottone-primario dq-nuova">${L.nuova}</button>`}</div>
+      ${collegato ? '' : `<p class="dq-ospite">${L.ospiteRis} <a href="${radice.dataset.accedi}">${L.accedi}</a></p>`}`;
+    risultato.querySelector('.dq-rifai')?.addEventListener('click', () => rifai(sbagliate.map((x) => x.id)));
+    risultato.querySelector('.dq-nuova')?.addEventListener('click', nuovaSerie);
+    scheda.hidden = true; nav.hidden = true; risultato.hidden = false;
+    adatta();
+    scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Le sole domande sbagliate, di nuovo: stesse domande, tempo nuovo.
+  function rifai(ids: string[]) {
+    ordine = ids; lunghezzaSerie = ids.length;
+    ids.forEach((id) => { esiti.delete(id); domande.delete(id); });
+    risultato.hidden = true; scheda.hidden = false; nav.hidden = false;
+    vai(0);
+  }
+  function nuovaSerie() {
     // Chi chiede una nuova serie ha già premuto «Inizia»: la serie nuova parte subito.
     try { sessionStorage.setItem('domande-avvio-subito', '1'); } catch { /* niente memoria */ }
     location.reload();
-  });
+  }
+
+  conferma.addEventListener('click', () => invia());
+  const sposta = (i: number) => { vai(i); scheda.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  prossima.addEventListener('click', () => sposta(pos + 1));
+  vedi.addEventListener('click', mostraRisultato);
   succ.addEventListener('click', () => sposta(pos + 1));
   prec.addEventListener('click', () => sposta(pos - 1));
+  // «Segnala un errore» apre la stessa finestra del tasto in fondo alle altre pagine di studio.
+  segnala.addEventListener('click', () => document.querySelector<HTMLElement>('[data-apri-segnala]')?.click());
 
   termina.addEventListener('click', async () => {
     clearInterval(timer);
     nav.hidden = true;
     const r = await post('/api/sessione/riepilogo', { chiudi: true, lingua }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
-    scheda.hidden = true; termina.hidden = true;
+    scheda.hidden = true; risultato.hidden = true; termina.hidden = true;
     const s = d?.sessione;
     const st = d?.stato;
     const righe = s ? [
@@ -474,17 +705,9 @@ const JS = es ? {
 
   // Il tempo della prima domanda parte solo quando lo studente preme «Inizia» (richiesta di Carmine del 16/11/2026:
   // prima il cronometro partiva all'apertura della pagina, mentre si leggevano le istruzioni).
-  const avvio = $('.avvio-domande');
+  const parti = () => { avvio.hidden = true; scheda.hidden = false; vai(0); };
   let subito = false;
   try { subito = sessionStorage.getItem('domande-avvio-subito') === '1'; sessionStorage.removeItem('domande-avvio-subito'); } catch { /* niente memoria */ }
-  if (subito) vai(0);
-  else {
-    testo.hidden = true;
-    avvio.hidden = false;
-    $<HTMLButtonElement>('.avvia').addEventListener('click', () => {
-      avvio.hidden = true;
-      testo.hidden = false;
-      vai(0);
-    }, { once: true });
-  }
+  if (subito) parti();
+  else $<HTMLButtonElement>('.avvia').addEventListener('click', parti, { once: true });
 </script>
