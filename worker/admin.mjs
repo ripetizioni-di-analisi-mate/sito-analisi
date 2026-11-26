@@ -1221,6 +1221,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       '<div class="azioni promo-scelte"><label class="campo">Sconto (%)<input id="o24-sconto" type="number" min="5" max="60" step="1" value="30"></label>' +
       '<button class="bottone" type="button" id="o24-tutti">Seleziona tutti</button><button class="bottone" type="button" id="o24-nessuno">Nessuno</button></div>' +
       '<div class="promo-lista" id="o24-lista">Caricamento…</div>' +
+      '<p class="nota" id="o24-altri" style="margin:0"></p>' +
       '<div class="azioni"><button class="bottone" type="button" id="o24-anteprima">Prepara anteprima</button>' +
       '<button class="bottone" type="button" id="o24-prova">Invia una prova a me</button></div>' +
       '<p class="nota" id="o24-esito" role="status" style="margin:0"></p>' +
@@ -1250,6 +1251,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
         massimo = r.massimoDestinatari || 100;
         if (!r.disponibile) esito.textContent = 'Invio non disponibile: manca la chiave di Resend.';
         c('conta').textContent = candidati.length === 1 ? '1 iscritto' : nf.format(candidati.length) + ' iscritti';
+        const altri = r.senzaConsenso || 0;
+        c('altri').textContent = altri ? (altri === 1 ? 'Un altro iscritto' : nf.format(altri) + ' altri iscritti') + ' degli ultimi 10 giorni senza materie non ' + (altri === 1 ? 'ha' : 'hanno') + ' dato il consenso alle offerte via email, quindi non ' + (altri === 1 ? 'compare' : 'compaiono') + ' qui.' : '';
         lista.innerHTML = candidati.length ? candidati.map((x, i) => '<label><input type="checkbox" value="' + esc(x.email) + '"' + (i < massimo ? ' checked' : '') + '> <span><b>' +
           esc(x.nome || x.email) + '</b> <span class="nota">' + esc((x.nome ? x.email + ' · ' : '') + 'iscritto il ' + data.format(new Date(x.creato))) + '</span></span></label>').join('')
           : 'Nessun iscritto da contattare in questo momento.';
