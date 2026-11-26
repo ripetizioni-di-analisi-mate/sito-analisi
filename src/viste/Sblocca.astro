@@ -184,12 +184,23 @@ const invito = lingua === 'en' ? {
         const r = await fetch('/api/email/offerta?' + new URLSearchParams({ materia })).catch(() => null);
         const d = r?.ok ? await r.json() : {};
         if (!d.percentuale) return '';
-        // Offerta di 24 ore (e altre a scadenza vicina): giorno e ora in cui finisce.
-        const vicina = d.scade && d.scade - Date.now() < 3 * 86400000;
-        const fine = vicina ? new Intl.DateTimeFormat(lingua === 'en' ? 'en-GB' : 'it-IT', { weekday: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' }).format(d.scade) : '';
+        // Offerta di 24 ore (e altre a scadenza vicina): conto alla rovescia che si aggiorna ogni secondo.
+        if (d.scade && d.scade - Date.now() < 3 * 86400000) scadeOfferta = d.scade;
         return lingua === 'en'
-          ? `Your personal ${d.percentuale}% discount on ${titolo} applies at checkout${fine ? ' (valid until ' + fine + ')' : ''}.`
-          : `La tua offerta riservata del ${d.percentuale}% su ${titolo} si applica al pagamento${fine ? ' (valida fino a ' + fine.replace(/,? /, ' alle ') + ')' : ''}.`;
+          ? `Your personal ${d.percentuale}% discount on ${titolo} applies at checkout.`
+          : `La tua offerta riservata del ${d.percentuale}% su ${titolo} si applica al pagamento.`;
+      };
+      let scadeOfferta = 0;
+      const avviaConto = (testo) => {
+        if (!scadeOfferta) return;
+        const passo = () => {
+          const s = Math.max(0, Math.floor((scadeOfferta - Date.now()) / 1000));
+          const hms = [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60].map((n) => String(n).padStart(2, '0')).join(':');
+          notaInvito.textContent = testo + (lingua === 'en' ? ' Time left: ' : ' Scade tra ') + hms + '.';
+          if (!s) clearInterval(giro);
+        };
+        const giro = setInterval(passo, 1000);
+        passo();
       };
       // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
       const notaBenvenuto = async () => {
@@ -202,7 +213,7 @@ const invito = lingua === 'en' ? {
         if (!io) { mostraInvito(/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie) ? invito.ospite : ''); return; }
         if (io.materie.includes(materia)) { mostraInvito(''); return; }
         const offerta = await notaOfferta();
-        if (offerta) { mostraInvito(offerta); return; }
+        if (offerta) { mostraInvito(offerta); avviaConto(offerta); return; }
         const r = await fetch('/api/invito').catch(() => null);
         const d = r && r.ok ? await r.json() : null;
         const testo = d && d.attivo ? (d.scontoAmico ? invito.amico : d.premiDisponibili > 0 ? invito.premio : '') : '';

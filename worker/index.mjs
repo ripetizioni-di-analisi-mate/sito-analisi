@@ -2,6 +2,7 @@ import { componiEmail, inviaEmailResend } from './email.mjs';
 import { preparaStoricoEmail, registraInviiEmail } from './storico-email.mjs';
 import { archivioPromozioni, codicePromozione, contaPromozioniOggi, creaTabellePromozioni, pulisciPromozioni } from './promozioni-email.mjs';
 import { esempioOfferta24h, TIPO_OFFERTA_24H } from './offerta-nuovi-iscritti.mjs';
+import { rispostaTimer } from './timer-email.mjs';
 import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, FLUSSI_EMAIL, inviaConfermaOfferte, paginaPreferenzeEmail } from './email-automatiche.mjs';
 // Worker del sito: serve le pagine statiche e aggiunge account e accessi a pagamento.
 //  - account studenti (email e password), sessione in un cookie firmato;
@@ -1030,9 +1031,13 @@ export default {
       const codice = codicePromozione(valore);
       const lingua = url.searchParams.get('l') === 'en' ? '/en' : '';
       // Offerta di 24 ore ai nuovi iscritti: vale su una materia a scelta, quindi si apre l'elenco delle materie.
+      // Chi non ha fatto l'accesso passa prima da «Accedi», perché lo sconto è legato al suo account.
       if (materia === 'tutte' && codice && resto === undefined) {
+        const io = await utenteCollegato(env, req).catch(() => null);
+        const prezzi = lingua + '/prezzi';
         return new Response(null, { status: 303, headers: {
-          location: lingua + '/prezzi', 'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer' } });
+          location: io ? prezzi : lingua + '/accedi?dopo=' + encodeURIComponent(prezzi),
+          'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer' } });
       }
       if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
       return new Response(null, { status: 303, headers: {
@@ -1040,6 +1045,9 @@ export default {
         'set-cookie': 'offerta-' + materia + '=' + codice + '; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Lax',
       } });
     }
+
+    // Conto alla rovescia dell'offerta di 24 ore dentro le email (worker/timer-email.mjs).
+    if (p === '/email/timer.gif' && (req.method === 'GET' || req.method === 'HEAD')) return rispostaTimer(url);
 
     const versoCatalogo = versoCatalogoStudio(req, url);
     if (versoCatalogo) return versoCatalogo;
