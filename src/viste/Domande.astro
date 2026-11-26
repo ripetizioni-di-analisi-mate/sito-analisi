@@ -274,6 +274,19 @@ const freccia = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stro
   .dq-dati b { font: 700 1rem var(--ui); color: var(--inchiostro); font-variant-numeric: tabular-nums; }
   .dq-dati li > span:last-child { font-size: 0.95rem; line-height: 1.3; color: var(--inchiostro-2); }
   .dq-avvio .avvia { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.2rem; padding: 0.68rem 2.4rem; font-size: 1rem; }
+  /* Al computer il riquadro e le scritte sono più grandi (26/11/2026, richiesta di Carmine). */
+  @media (min-width: 721px) {
+    .dq-riquadro { width: min(48rem, 100%); padding: 2.3rem 1.6rem 2.2rem; row-gap: 1.5rem; }
+    .dq-capitolo { font-size: 1.85rem; }
+    .dq-materia { font-size: 1.08rem; }
+    .dq-spiega { font-size: 1.08rem; }
+    .dq-dati { gap: 0.5rem 1.2rem; }
+    .dq-dati li { gap: 0.45rem; white-space: nowrap; }
+    .dq-sim svg { width: 1.55rem; height: 1.55rem; stroke-width: 2.4; }
+    .dq-dati b { font-size: 1.15rem; }
+    .dq-dati li > span:last-child { font-size: 1.04rem; }
+    .dq-avvio .avvia { margin-top: 0.3rem; padding: 0.85rem 3rem; font-size: 1.12rem; }
+  }
   .dq-avvio .avvia svg { width: 1.1em; height: 1.1em; }
   .dq-note { max-width: 36rem; padding-inline: 1rem; font-size: 0.86rem; color: var(--inchiostro-2); }
   .dq-note:empty { display: none; }
