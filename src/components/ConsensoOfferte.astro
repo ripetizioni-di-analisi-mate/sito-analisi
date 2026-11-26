@@ -1,0 +1,25 @@
+---
+// Casella facoltativa del consenso alle offerte via email, all'iscrizione (richiesta di Carmine del 26/11/2026).
+// Non è spuntata in partenza; il valore arriva a /api/registrati come `offerte` e viene registrato in
+// email_preferenze ed email_consensi (worker/email-automatiche.mjs, «/em-consenso-iscrizione»).
+// Solo chi la spunta riceve l'offerta di 24 ore ai nuovi iscritti (worker/offerta-nuovi-iscritti.mjs).
+interface Props { lingua?: string; nascosto?: boolean; compatta?: boolean }
+const { lingua = 'it', nascosto = false, compatta = false } = Astro.props;
+const testo = {
+  it: 'Voglio ricevere via email offerte e sconti sulle materie del sito (dai 14 anni). Puoi disattivarle quando vuoi.',
+  en: 'I want to receive offers and discounts on the site’s subjects by email (14 or older). You can turn them off at any time.',
+  es: 'Quiero recibir por correo ofertas y descuentos sobre las materias del sitio (desde los 14 años). Puedes desactivarlas cuando quieras.',
+  fr: 'Je souhaite recevoir par e-mail des offres et des réductions sur les matières du site (à partir de 14 ans). Tu peux les désactiver à tout moment.',
+  de: 'Ich möchte per E-Mail Angebote und Rabatte für die Fächer der Website erhalten (ab 14 Jahren). Du kannst sie jederzeit abbestellen.',
+}[lingua] || '';
+---
+<label class:list={['consenso-offerte', { compatta }]} id="campo-offerte" hidden={nascosto}>
+  <input type="checkbox" name="offerte" value="1" />
+  <span>{testo}</span>
+</label>
+<style>
+  .consenso-offerte { display: flex; gap: .55rem; align-items: flex-start; font-size: .86rem; line-height: 1.45; color: var(--testo-tenue, #59645f); cursor: pointer; font-weight: 400; }
+  .consenso-offerte[hidden] { display: none; }
+  .consenso-offerte input { flex: none; width: 1rem; height: 1rem; margin: .15rem 0 0; accent-color: var(--azione, #214f50); }
+  .consenso-offerte.compatta { font-size: .78rem; line-height: 1.35; margin: .35rem 0 0; }
+</style>
