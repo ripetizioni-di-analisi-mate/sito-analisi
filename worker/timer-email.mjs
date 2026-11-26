@@ -1,10 +1,11 @@
 // Conto alla rovescia dell'offerta di 24 ore, come GIF animata dentro l'email (26/11/2026, richiesta di Carmine).
-// Le email non eseguono codice: il programma di posta scarica /email/timer.gif?f=<scadenza in ms> quando l'email
-// viene aperta, e riceve 60 fotogrammi da un secondo che partono dal tempo che manca in quel momento.
+// Le email non eseguono codice: il programma di posta scarica /email/timer.gif?f=<scadenza in ms>&t=<tema> quando
+// l'email viene aperta, e riceve FOTOGRAMMI fotogrammi da un secondo che partono dal tempo che manca in quel momento.
+// Ogni volta che l'email viene riaperta la GIF si scarica di nuovo, quindi il tempo è sempre quello giusto.
 // Sfondo e cifre sono disegnati una volta da strumenti/timer-email.py (worker/timer-email-dati.json).
 import DATI from './timer-email-dati.json' with { type: 'json' };
 
-const FOTOGRAMMI = 60;
+const FOTOGRAMMI = 300; // 5 minuti, poi l'immagine resta ferma sull'ultimo secondo
 const MAX_ORE = 99;
 
 function daRle(b64) {
@@ -12,12 +13,15 @@ function daRle(b64) {
   for (let i = 0; i < bin.length; i += 2) for (let n = bin.charCodeAt(i + 1); n > 0; n--) out.push(bin.charCodeAt(i));
   return Uint8Array.from(out);
 }
-let grafica = null;
-const leggiGrafica = () => (grafica ??= { sfondo: daRle(DATI.sfondo), cifre: DATI.cifre.map(daRle) });
+const grafiche = {};
+const TEMA = 'verde';
+const leggiGrafica = (tema) => (grafiche[tema] ??= {
+  tavolozza: DATI.temi[tema].tavolozza, sfondo: daRle(DATI.temi[tema].sfondo), cifre: DATI.temi[tema].cifre.map(daRle),
+});
 
 // Fotogramma intero: sfondo con le sei cifre hh mm ss.
-function fotogramma(secondi) {
-  const { sfondo, cifre } = leggiGrafica();
+function fotogramma(g, secondi) {
+  const { sfondo, cifre } = g;
   const img = sfondo.slice();
   const ore = Math.min(MAX_ORE, Math.floor(secondi / 3600));
   const testo = [ore, Math.floor(secondi / 60) % 60, secondi % 60].map((n) => String(n).padStart(2, '0')).join('');
@@ -64,21 +68,25 @@ function lzw(indici, minimo) {
 
 const u16 = (n) => [n & 255, (n >> 8) & 255];
 
-export function gifTimer(scadenza, ora = Date.now()) {
+export function gifTimer(scadenza, ora = Date.now(), tema = TEMA) {
+  const g = leggiGrafica(DATI.temi[tema] ? tema : TEMA);
   const restano = Math.max(0, Math.floor((scadenza - ora) / 1000));
   const n = Math.max(1, Math.min(FOTOGRAMMI, restano + 1));
   const { w, h } = DATI;
-  const byte = [...new TextEncoder().encode('GIF89a'), ...u16(w), ...u16(h), 0xf4, 0, 0, ...DATI.tavolozza];
+  const byte = [...new TextEncoder().encode('GIF89a'), ...u16(w), ...u16(h), 0xf4, 0, 0, ...g.tavolozza];
   let prima = null;
   for (let f = 0; f < n; f++) {
-    const img = fotogramma(Math.max(0, restano - f));
+    const img = fotogramma(g, Math.max(0, restano - f));
     // Dal secondo fotogramma in poi si scrive solo il rettangolo che cambia (le cifre dei secondi, a volte i minuti).
     let x0 = 0, y0 = 0, x1 = w - 1, y1 = h - 1;
     if (prima) {
       x0 = w; y0 = h; x1 = -1; y1 = -1;
-      for (let i = 0; i < img.length; i++) if (img[i] !== prima[i]) {
-        const x = i % w, y = (i - x) / w;
-        if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      for (const [cx, cy] of DATI.posti) {
+        let diversa = false;
+        for (let y = cy; y < cy + DATI.ch && !diversa; y++)
+          for (let i = y * w + cx, e = i + DATI.cw; i < e; i++) if (img[i] !== prima[i]) { diversa = true; break; }
+        if (!diversa) continue;
+        x0 = Math.min(x0, cx); y0 = Math.min(y0, cy); x1 = Math.max(x1, cx + DATI.cw - 1); y1 = Math.max(y1, cy + DATI.ch - 1);
       }
       if (x1 < 0) { x0 = x1 = y0 = y1 = 0; }
     }
@@ -98,7 +106,7 @@ export function rispostaTimer(url) {
   const ora = Date.now();
   // Scadenze plausibili: da adesso a 8 giorni (oltre, o non valide, si mostra 00 00 00).
   const scadenza = Number.isFinite(f) && f > ora - 86400000 && f < ora + 8 * 86400000 ? f : ora;
-  return new Response(gifTimer(scadenza, ora), { headers: {
+  return new Response(gifTimer(scadenza, ora, url.searchParams.get('t') || TEMA), { headers: {
     'content-type': 'image/gif', 'cache-control': 'no-store, no-cache, must-revalidate, max-age=0',
     expires: '0', 'x-robots-tag': 'noindex',
   } });

@@ -12,11 +12,21 @@ const paragrafo = (s) => `<p style="margin:0 0 15px;line-height:1.55">${esc(s)}<
 
 export function componiEmail({
   subject, titolo = subject, anteprima, categoria, lingua = 'it', righe, scheda, dopo = [], pulsante,
-  firma = 'Carmine', motivo, disattiva, bronzo = false, autore, timer,
+  firma = 'Carmine', motivo, disattiva, bronzo = false, autore, biglietto,
 }) {
-  // Conto alla rovescia (GIF di /email/timer.gif) sotto la scheda dell'offerta.
-  const orologio = timer ? `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:-4px 0 16px"><tr><td align="center">
-<img src="${esc(timer.src)}" width="300" height="75" alt="${esc(timer.alt)}" style="display:block;width:300px;max-width:100%;height:auto"></td></tr></table>` : '';
+  // Biglietto dell'offerta: percentuale grande, conto alla rovescia (GIF di /email/timer.gif) e tasto.
+  // Temi «verde» (fondo #214f50) e «chiaro»: il fondo della GIF è dello stesso colore del biglietto.
+  const B = biglietto && (biglietto.tema === 'chiaro'
+    ? { fondo: '#faf5ee', bordo: '#dfceb7', etichetta: '#785735', valore: '#57432e', testo: '#59472f', nota: '#7a6650', tasto: '#214f50', tastoTesto: '#ffffff' }
+    : { fondo: '#214f50', bordo: '#214f50', etichetta: '#e8c9a0', valore: '#ffffff', testo: '#e3ecea', nota: '#bcd0cc', tasto: '#e8c9a0', tastoTesto: '#2a2117' });
+  const offerta = biglietto ? `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="${B.fondo}" style="margin:4px 0 20px;background:${B.fondo};border:1px solid ${B.bordo};border-radius:14px"><tr><td align="center" style="padding:22px 18px 20px;font-family:Arial,sans-serif">
+<div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${B.etichetta}">${esc(biglietto.etichetta)}</div>
+<div style="font:700 60px/1.05 Georgia,serif;color:${B.valore};margin:8px 0 2px">${esc(biglietto.valore)}</div>
+<div style="font-size:16px;line-height:1.4;color:${B.testo};margin:0 0 16px">${esc(biglietto.sotto)}</div>
+<img src="${esc(biglietto.timer)}" width="300" height="75" alt="${esc(biglietto.nota)}" style="display:block;margin:0 auto;width:300px;max-width:100%;height:auto">
+<div style="font-size:12px;color:${B.nota};margin:10px 0 18px">${esc(biglietto.nota)}</div>
+<table role="presentation" cellspacing="0" cellpadding="0" align="center"><tr><td bgcolor="${B.tasto}" style="border-radius:10px"><a href="${esc(biglietto.pulsante[1])}" style="display:inline-block;background:${B.tasto};color:${B.tastoTesto};border-radius:10px;text-decoration:none;padding:13px 26px;font:700 15px Arial,sans-serif">${esc(biglietto.pulsante[0])}</a></td></tr></table>
+</td></tr></table>` : '';
   const colore = bronzo ? '#785735' : '#214f50';
   // Foto e nome di Carmine sotto il titolo: solo nelle email promozionali (richiesta di Carmine del 26/11/2026).
   const presentazione = autore ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 16px"><tr>
@@ -43,11 +53,12 @@ ${scheda.nota ? `<div style="font-size:13px;color:#59645f;margin-top:4px">${esc(
 <tr><td style="padding:17px 24px 3px;font:15px/1.55 Arial,sans-serif;color:#23302e">
 ${categoria ? `<div style="font:700 11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:${colore}">${esc(categoria)}</div>` : ''}
 <h1 style="margin:5px 0 13px;font:700 28px/1.17 Georgia,serif;color:#23302e">${esc(titolo)}</h1>
-${presentazione}${righe.map(paragrafo).join('')}${dettagli}${orologio}${dopo.map(paragrafo).join('')}${bottone}
+${presentazione}${righe.map(paragrafo).join('')}${dettagli}${offerta}${dopo.map(paragrafo).join('')}${bottone}
 <p style="margin:0 0 14px;line-height:1.4"><strong>${esc(firma)}</strong><br><span style="color:#59645f;font-size:12px">Ripetizioni di Analisi</span></p>
 </td></tr>${piede}</table></td></tr></table></body></html>`;
   const text = [
-    'Ripetizioni di Analisi', titolo, ...righe, scheda?.etichetta, scheda?.prima, scheda?.valore, scheda?.nota, ...dopo,
+    'Ripetizioni di Analisi', titolo, ...righe, biglietto && [biglietto.etichetta, biglietto.valore + ' ' + biglietto.sotto, biglietto.nota,
+      biglietto.pulsante[0] + '\n' + biglietto.pulsante[1]].join('\n'), scheda?.etichetta, scheda?.prima, scheda?.valore, scheda?.nota, ...dopo,
     pulsante && `${pulsante[0]}\n${pulsante[1]}`, firma, motivo, disattiva && `${disattiva[0]}\n${disattiva[1]}`,
   ].filter(Boolean).join('\n\n');
   return { subject, html, text };

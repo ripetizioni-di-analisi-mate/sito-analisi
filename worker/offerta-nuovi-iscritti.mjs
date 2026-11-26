@@ -16,6 +16,7 @@ const MAX_DESTINATARI = 100;
 const BLOCCO_INVIO = 30000;
 const QUOTA_INVII = 90;
 export const PERCENTUALE_PREDEFINITA = 20;
+export const TEMA_BIGLIETTO = 'verde';
 const prezzoMinimo = Math.min(...MATERIE.filter((m) => m.attiva && m.prezzo > 0).map((m) => m.prezzo));
 const problema = (errore, stato = 400) => ({ errore, stato });
 
@@ -41,7 +42,7 @@ export function candidatiOfferta24h(ar, ora = Date.now(), emails = null) {
     dal, Number(Boolean(emails)), JSON.stringify(emails || []), TIPO_OFFERTA_24H, MATERIA_TUTTE);
 }
 
-export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
+export function componiOfferta24h(r, { percentuale, scade, link, disattiva, tema = TEMA_BIGLIETTO }) {
   const en = r.lingua === 'en';
   const nome = (r.nome || '').trim().split(/\s+/)[0];
   const fino = quando(scade, en);
@@ -64,31 +65,31 @@ export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
     righe: en ? [
       nome ? 'Hi ' + nome + ',' : 'Hi,',
       'my name is Carmine Tornincasa. I am a civil engineer with a master’s degree in mathematics, and I started teaching mathematics while I was still in high school. Since then I have taught thousands of students, for more than ten thousand hours of lessons.',
-      'I teach Calculus, Physics and Linear Algebra in one-to-one lessons, in group courses and in my video courses. Ripetizionidianalisi.com grew out of those lessons: theory explained with its proofs, exercises solved step by step the way I solve them on the board, practice exercises that are checked as soon as you answer, timed questions and exam simulations.',
+      'I teach STEM subjects in one-to-one lessons, in group courses and in my video courses. Ripetizionidianalisi.com grew out of those lessons: theory explained with its proofs, exercises solved step by step the way I solve them on the board, practice exercises that are checked as soon as you answer, timed questions and exam simulations.',
       'What I love most about this job is the moment when a topic that looked impossible becomes clear. I see it on my students’ faces during lessons, and I read it in the messages they send me after their exams.',
       'I truly care about my students, and I built the site to stay with you when you study on your own, late in the evening or the day before the exam. In the main subjects the Guided study asks you a few questions and shows you the paragraph to start again from, and Pi, the site’s assistant, answers your doubts about exercises and theory.',
-      'You created your account a few days ago, and I want your first step to cost you less. For the next 24 hours you have ' + percentuale + '% off one subject of your choice: Calculus 1 and 2, Physics, Linear Algebra, the Pre-course, high school subjects or admission tests.',
+      'You created your account a few days ago, and I want your first step to cost you less. For the next 24 hours you have ' + percentuale + '% off one subject of your choice, among all the subjects on the site.',
     ] : [
       nome ? 'Ciao ' + nome + ',' : 'Ciao,',
       'mi chiamo Carmine Tornincasa. Sono ingegnere civile, ho un master in matematica e ho cominciato a insegnare matematica quando ero ancora alle superiori. Da allora ho seguito migliaia di studenti, per più di diecimila ore di lezione.',
-      'Faccio lezione di Analisi, Fisica e Algebra, con le lezioni individuali, i corsi di gruppo e i videocorsi. Ripetizionidianalisi.com nasce da queste lezioni: ci ho messo la teoria spiegata con le dimostrazioni, gli esercizi svolti passaggio per passaggio come li svolgo alla lavagna, gli esercizi da fare con la correzione immediata, le domande a tempo e la simulazione d’esame.',
+      'Faccio ripetizioni di materie STEM, con le lezioni individuali, i corsi di gruppo e i videocorsi. Ripetizionidianalisi.com nasce da queste lezioni: ci ho messo la teoria spiegata con le dimostrazioni, gli esercizi svolti passaggio per passaggio come li svolgo alla lavagna, gli esercizi da fare con la correzione immediata, le domande a tempo e la simulazione d’esame.',
       'La cosa che amo di più di questo lavoro è il momento in cui un argomento che sembrava impossibile diventa chiaro. Lo vedo sul viso degli studenti durante le lezioni e lo leggo nei messaggi che mi mandano dopo l’esame.',
       'Ai miei studenti tengo davvero, e ho costruito il sito perché ti accompagni anche quando studi da solo, la sera tardi o il giorno prima dell’esame. Nelle materie principali lo Studio guidato ti fa qualche domanda e ti indica il paragrafo da cui ripartire, e Pi, l’assistente del sito, risponde ai tuoi dubbi su esercizi e teoria.',
-      'Hai creato il tuo account da pochi giorni e voglio che il primo passo ti costi meno. Per le prossime 24 ore hai il ' + percentuale + '% di sconto su una materia a tua scelta: Analisi 1 e 2, Fisica, Algebra, il Precorso, le materie delle superiori o i test di ingresso.',
+      'Hai creato il tuo account da pochi giorni e voglio che il primo passo ti costi meno. Per le prossime 24 ore hai il ' + percentuale + '% di sconto su una materia a tua scelta, fra tutte quelle del sito.',
     ],
-    scheda: {
-      etichetta: en ? 'Your discount' : 'Il tuo sconto',
-      valore: '−' + percentuale + '% ' + (en ? 'on one subject' : 'su una materia'),
-      nota: en ? 'Valid until ' + fino + '.' : 'Valido fino a ' + fino + '.',
+    biglietto: {
+      tema,
+      etichetta: en ? 'Your discount · 24 hours' : 'Il tuo sconto · 24 ore',
+      valore: '−' + percentuale + '%',
+      sotto: en ? 'on a subject of your choice' : 'su una materia a tua scelta',
+      timer: SITO_EMAIL + '/email/timer.gif?f=' + Math.round(scade) + '&t=' + tema,
+      nota: en ? 'Valid until ' + fino : 'Valido fino a ' + fino,
+      pulsante: [en ? 'Choose your subject' : 'Scegli la materia', link],
     },
-    timer: { src: SITO_EMAIL + '/email/timer.gif?f=' + Math.round(scade), alt: en ? 'Time left: until ' + fino : 'Tempo rimasto: fino a ' + fino },
     dopo: [
       en ? 'Sign in with the account you registered with and the discount is applied automatically at checkout, once, on the subject you choose.'
         : 'Accedi con l’account con cui ti sei iscritto e lo sconto si applica da solo al pagamento, una sola volta, sulla materia che scegli.',
-      en ? 'If you are not sure which subject is right for you, write to me on WhatsApp from the site and I will advise you myself.'
-        : 'Se non sai quale materia fa per te, scrivimi su WhatsApp dal sito e ti consiglio io.',
     ],
-    pulsante: [en ? 'Choose your subject' : 'Scegli la materia', link],
     firma: 'Carmine',
     motivo: en ? 'You are receiving this email because you created an account on ripetizionidianalisi.com.'
       : 'Ricevi questa email perché hai creato un account su ripetizionidianalisi.com.',
@@ -96,9 +97,9 @@ export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
   });
 }
 
-export function esempioOfferta24h(percentuale = PERCENTUALE_PREDEFINITA) {
+export function esempioOfferta24h(percentuale = PERCENTUALE_PREDEFINITA, tema) {
   return componiOfferta24h({ nome: 'Andrea', lingua: 'it' },
-    { percentuale, scade: Date.now() + DURATA, link: SITO_EMAIL + '/prezzi', disattiva: SITO_EMAIL + '/account#impostazioni' });
+    { tema, percentuale, scade: Date.now() + DURATA, link: SITO_EMAIL + '/prezzi', disattiva: SITO_EMAIL + '/account#impostazioni' });
 }
 
 function percentualeValida(x) {
