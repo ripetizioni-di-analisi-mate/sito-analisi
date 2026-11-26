@@ -58,7 +58,15 @@
   from { background-position: 100% 50%; }
   to { background-position: 0% 50%; }
 }
-@media (prefers-reduced-motion: reduce), print {
+@media (prefers-reduced-motion: reduce) {
+  html:not(.luccichio-prova) [data-sconto-bronzo].bronzo-luccichio [data-luccichio-bronzo] {
+    animation: none;
+    background-image: none;
+    color: var(--bronzo-testo);
+    -webkit-text-fill-color: currentColor;
+  }
+}
+@media print {
   [data-sconto-bronzo].bronzo-luccichio [data-luccichio-bronzo] {
     animation: none;
     background-image: none;

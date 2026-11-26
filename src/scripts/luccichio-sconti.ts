@@ -5,7 +5,10 @@
 import { conAccount } from '../data/con-account.mjs';
 
 const collegamenti = [...document.querySelectorAll<HTMLElement>('[data-sconto-bronzo]')];
-const haAcquistato = (document.documentElement.dataset.materie || '')
+// Prova: con ?luccichio=1 nell'indirizzo il riflesso parte dopo un secondo e mezzo, anche per chi ha acquistato.
+const prova = new URLSearchParams(location.search).get('luccichio') === '1';
+if (prova) document.documentElement.classList.add('luccichio-prova');
+const haAcquistato = !prova && (document.documentElement.dataset.materie || '')
   .split(/\s+/)
   .some((m) => m && !conAccount(m));
 
@@ -20,7 +23,8 @@ if (collegamenti.length && !haAcquistato) {
   let timer = 0;
   let fineTimer = 0;
 
-  const disponibile = () => !document.hidden && !riduciMovimento.matches;
+  const disponibile = () => !document.hidden && (prova || !riduciMovimento.matches);
+  let primo = prova;
   const visibile = (elemento: HTMLElement) => {
     const r = elemento.getBoundingClientRect();
     return elemento.getClientRects().length > 0 && r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight;
@@ -48,7 +52,7 @@ if (collegamenti.length && !haAcquistato) {
         fineTimer = 0;
         programma();
       }, 1850);
-    }, intervallo());
+    }, primo ? (primo = false, 1500) : intervallo());
   }
 
   function segnaCliccato() {
