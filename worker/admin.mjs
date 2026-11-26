@@ -1210,6 +1210,117 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     return pannello;
   }
 
+  // Offerta di 24 ore ai nuovi iscritti che non hanno ancora acquistato (richiesta di Carmine del 26/11/2026).
+  function pannelloOfferta24h() {
+    const pannello = document.createElement('section');
+    pannello.className = 'card';
+    pannello.innerHTML =
+      '<header><h2>Offerta 24 ore ai nuovi iscritti</h2><span class="nota" id="o24-conta" role="status">Caricamento…</span></header>' +
+      '<div class="corpo modulo">' +
+      '<p class="nota" style="margin:0">Email con la tua foto e uno sconto valido 24 ore sull’acquisto di una o più materie (non si somma allo sconto dei pacchetti: vale il più alto). La ricevono gli iscritti degli ultimi 10 giorni che non hanno nessuna materia nell’account e non hanno chiesto di non ricevere offerte. Ognuno la riceve una sola volta; sono esclusi gli studenti dei tuoi corsi e gli account Premium e GM.</p>' +
+      '<div class="azioni promo-scelte"><label class="campo">Sconto (%)<input id="o24-sconto" type="number" min="5" max="60" step="1" value="20"></label>' +
+      '<button class="bottone" type="button" id="o24-tutti">Seleziona tutti</button><button class="bottone" type="button" id="o24-nessuno">Nessuno</button></div>' +
+      '<div class="promo-lista" id="o24-lista">Caricamento…</div>' +
+      '<div class="azioni"><button class="bottone" type="button" id="o24-anteprima">Prepara anteprima</button>' +
+      '<button class="bottone" type="button" id="o24-prova">Invia una prova a me</button></div>' +
+      '<p class="nota" id="o24-esito" role="status" style="margin:0"></p>' +
+      '<div id="o24-riepilogo" hidden><div class="azioni promo-scelte">' +
+      '<label class="campo">Anteprima per<select class="scelta" id="o24-modello"></select></label>' +
+      '<button class="bottone primario" type="button" id="o24-invia">Invia l’offerta</button></div>' +
+      '<p id="o24-oggetto"></p><iframe id="o24-frame" title="Anteprima dell’offerta" sandbox style="width:100%;height:620px;border:1px solid var(--riga);border-radius:9px"></iframe></div></div>';
+    const c = (id) => $('#o24-' + id, pannello);
+    const lista = c('lista'), esito = c('esito'), sconto = c('sconto'), prepara = c('anteprima'), invia = c('invia');
+    const riepilogo = c('riepilogo'), modello = c('modello');
+    const data = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
+    let candidati = [], bozza = null, occupato = false, massimo = 100;
+    const scelti = () => [...lista.querySelectorAll('input:checked')].map((i) => i.value);
+    function aggiorna() {
+      bozza = null;
+      riepilogo.hidden = true;
+      const n = scelti().length;
+      prepara.textContent = n ? 'Prepara anteprima (' + n + ')' : 'Prepara anteprima';
+      prepara.disabled = !n || occupato;
+    }
+    async function carica() {
+      lista.textContent = 'Caricamento…';
+      try {
+        const r = await api('email-promo/nuovi-candidati');
+        if (!Array.isArray(r.destinatari)) throw new Error(r.errore || 'Dati non disponibili.');
+        candidati = r.destinatari;
+        massimo = r.massimoDestinatari || 100;
+        if (!r.disponibile) esito.textContent = 'Invio non disponibile: manca la chiave di Resend.';
+        c('conta').textContent = candidati.length === 1 ? '1 iscritto' : nf.format(candidati.length) + ' iscritti';
+        lista.innerHTML = candidati.length ? candidati.map((x, i) => '<label><input type="checkbox" value="' + esc(x.email) + '"' + (i < massimo ? ' checked' : '') + '> <span><b>' +
+          esc(x.nome || x.email) + '</b> <span class="nota">' + esc((x.nome ? x.email + ' · ' : '') + 'iscritto il ' + data.format(new Date(x.creato))) + '</span></span></label>').join('')
+          : 'Nessun iscritto da contattare in questo momento.';
+      } catch (e) { lista.textContent = e.message === '401' ? 'Accedi alla dashboard.' : e.message; c('conta').textContent = ''; }
+      aggiorna();
+    }
+    lista.addEventListener('change', (e) => {
+      if (e.target.matches('input') && e.target.checked && scelti().length > massimo) {
+        e.target.checked = false;
+        esito.textContent = 'Puoi inviare fino a ' + massimo + ' email alla volta.';
+      }
+      aggiorna();
+    });
+    sconto.addEventListener('input', aggiorna);
+    c('tutti').addEventListener('click', () => { [...lista.querySelectorAll('input')].forEach((i, k) => { i.checked = k < massimo; }); aggiorna(); });
+    c('nessuno').addEventListener('click', () => { lista.querySelectorAll('input').forEach((i) => { i.checked = false; }); aggiorna(); });
+    function mostra() {
+      const m = bozza.modelli[Number(modello.value)];
+      c('oggetto').textContent = 'Oggetto: ' + m.subject;
+      c('frame').srcdoc = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src https://ripetizionidianalisi.com">' + m.html;
+    }
+    modello.addEventListener('change', mostra);
+    prepara.addEventListener('click', async () => {
+      const emails = scelti();
+      if (!emails.length || occupato) return;
+      occupato = true; prepara.disabled = true;
+      esito.textContent = 'Preparazione…';
+      try {
+        const r = await api('email-promo/nuovi-anteprima', { percentuale: Number(sconto.value), emails });
+        if (!r.token || !r.modelli?.length) throw new Error(r.errore || 'Anteprima non disponibile.');
+        bozza = { ...r, percentuale: Number(sconto.value) };
+        modello.innerHTML = r.modelli.map((m, i) => '<option value="' + i + '">' + esc(m.email) + '</option>').join('');
+        invia.textContent = 'Invia l’offerta a ' + (r.modelli.length === 1 ? '1 iscritto' : r.modelli.length + ' iscritti');
+        esito.textContent = '';
+        riepilogo.hidden = false;
+        mostra();
+      } catch (e) { esito.textContent = e.message; }
+      finally { occupato = false; prepara.disabled = !scelti().length; }
+    });
+    c('prova').addEventListener('click', async (e) => {
+      const b = e.currentTarget;
+      b.disabled = true;
+      try {
+        const r = await api('email-prova', { tipo: 'offerta-24h', percentuale: Number(sconto.value) });
+        esito.textContent = r.ok ? 'Prova inviata al tuo indirizzo (con dati di esempio).' : (r.errore || 'Invio di prova non riuscito.');
+      } catch { esito.textContent = 'Invio di prova non riuscito.'; }
+      finally { b.disabled = false; }
+    });
+    invia.addEventListener('click', async () => {
+      const d = bozza;
+      if (!d || occupato) return;
+      const n = d.modelli.length;
+      if (!(await conferma('Inviare l’offerta?', 'Sconto del ' + d.percentuale + '% per 24 ore sull’acquisto di una o più materie. ' +
+        (n === 1 ? 'Destinatario: ' + d.modelli[0].email + '.' : n + ' iscritti selezionati.'), 'Invia'))) return;
+      occupato = true; invia.disabled = prepara.disabled = true;
+      esito.textContent = 'Invio in corso…';
+      try {
+        const r = await api('email-promo/nuovi-invia', { token: d.token });
+        if (!Number.isInteger(r.inviate)) throw new Error(r.errore || 'Invio non confermato.');
+        esito.textContent = (r.inviate === 1 ? '1 offerta inviata.' : r.inviate + ' offerte inviate.') +
+          (r.saltati ? ' ' + r.saltati + ' non più disponibili (hanno comprato o si sono disiscritti).' : '') +
+          (r.rimasti ? ' Raggiunto il limite di oggi: le altre ' + r.rimasti + ' si inviano domani dallo stesso pulsante.' : '');
+        pannello.dispatchEvent(new Event('promozione-inviata', { bubbles: true }));
+        await carica();
+      } catch (e) { esito.textContent = e.message; }
+      finally { occupato = false; invia.disabled = false; prepara.disabled = !scelti().length; }
+    });
+    carica();
+    return pannello;
+  }
+
   function email() {
     const modelli = {
       studio: ['Riprendi lo studio', 'Dopo 3 e 10 giorni di inattività.'],
@@ -1346,7 +1457,10 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       } catch { esito.textContent = 'Invio di prova non riuscito.'; }
       finally { prova.disabled = false; }
     });
-    // Promozioni via email spente il 18/11/2026 (Carmine non vuole offerte via email): pannello non mostrato.
+    // Promozioni manuali per materia spente il 18/11/2026; dal 26/11/2026 c'è solo l'offerta di 24 ore ai nuovi iscritti.
+    const posto = $('#email-promozioni');
+    posto.appendChild(pannelloOfferta24h());
+    posto.addEventListener('promozione-inviata', () => caricaStorico());
     caricaStato();
     caricaStorico();
   }

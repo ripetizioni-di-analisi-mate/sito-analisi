@@ -1,6 +1,8 @@
 import { componiEmail, inviaEmailResend } from './email.mjs';
 import { preparaStoricoEmail, registraInviiEmail } from './storico-email.mjs';
 import { archivioPromozioni, codicePromozione, contaPromozioniOggi, creaTabellePromozioni, pulisciPromozioni } from './promozioni-email.mjs';
+import { esempioOfferta24h, TIPO_OFFERTA_24H } from './offerta-nuovi-iscritti.mjs';
+import { rispostaTimer } from './timer-email.mjs';
 import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, FLUSSI_EMAIL, inviaConfermaOfferte, paginaPreferenzeEmail } from './email-automatiche.mjs';
 // Worker del sito: serve le pagine statiche e aggiunge account e accessi a pagamento.
 //  - account studenti (email e password), sessione in un cookie firmato;
@@ -1027,13 +1029,25 @@ export default {
     if (p.startsWith('/offerta-email/') && (req.method === 'GET' || req.method === 'HEAD')) {
       const [, , materia, valore, resto] = p.split('/');
       const codice = codicePromozione(valore);
-      if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
       const lingua = url.searchParams.get('l') === 'en' ? '/en' : '';
+      // Offerta di 24 ore ai nuovi iscritti: vale su una materia a scelta, quindi si apre l'elenco delle materie.
+      // Chi non ha fatto l'accesso passa prima da «Accedi», perché lo sconto è legato al suo account.
+      if (materia === 'tutte' && codice && resto === undefined) {
+        const io = await utenteCollegato(env, req).catch(() => null);
+        const prezzi = lingua + '/prezzi';
+        return new Response(null, { status: 303, headers: {
+          location: io ? prezzi : lingua + '/accedi?dopo=' + encodeURIComponent(prezzi),
+          'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer' } });
+      }
+      if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
       return new Response(null, { status: 303, headers: {
         location: lingua + '/' + materia + '/sblocca', 'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer',
         'set-cookie': 'offerta-' + materia + '=' + codice + '; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Lax',
       } });
     }
+
+    // Conto alla rovescia dell'offerta di 24 ore dentro le email (worker/timer-email.mjs).
+    if (p === '/email/timer.gif' && (req.method === 'GET' || req.method === 'HEAD')) return rispostaTimer(url);
 
     const versoCatalogo = versoCatalogoStudio(req, url);
     if (versoCatalogo) return versoCatalogo;
@@ -1043,7 +1057,9 @@ export default {
     if (versoLingua) return versoLingua;
 
     const serviziAcquisto = { aDO, utenteCollegato, MATERIE, VIDEOCORSI, conMaterieDeiVideo, dopoAcquistoMateria,
-      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req) };
+      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req),
+      // Offerta di 24 ore ai nuovi iscritti anche sui pacchetti di materie (riga con materia '*').
+      offertaAcquisto: (io) => (io ? aDO(env, '/promo-offerta', { email: io.email, materia: '*' }) : null) };
     if (p.startsWith('/api/acquisti/')) return gestisciAcquisti(req, env, p, serviziAcquisto);
     if (p.startsWith('/api/stripe/postvendita/') || p === '/admin/vendite-stripe' || p.startsWith('/admin/vendite-stripe/'))
       return gestisciPostvendita(req, env, p, { aDO, utenteCollegato, leggiCookie, leggiToken, json });
@@ -1809,8 +1825,8 @@ export default {
         const headers = { 'cache-control': 'private, no-store' };
         if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
         const azione = p.slice('/admin/api/email-promo/'.length);
-        if ((['catalogo', 'candidati'].includes(azione) && req.method === 'GET') ||
-            (['anteprima', 'invia'].includes(azione) && POST)) {
+        if ((['catalogo', 'candidati', 'nuovi-candidati'].includes(azione) && req.method === 'GET') ||
+            (['anteprima', 'invia', 'nuovi-anteprima', 'nuovi-invia'].includes(azione) && POST)) {
           if (POST && req.headers.get('origin') !== url.origin) return json({ errore: 'Origine non valida.' }, 403, headers);
           const dati = POST ? await req.json().catch(() => null) : Object.fromEntries(url.searchParams);
           if (!dati || typeof dati !== 'object' || Array.isArray(dati)) return json({ errore: 'Richiesta non valida.' }, 400, headers);
@@ -1824,9 +1840,10 @@ export default {
         return json(await aDO(env, '/em-interruttore', { tipo, attivo }));
       }
       if ((p === '/admin/api/email-anteprima' && req.method === 'GET') || (p === '/admin/api/email-prova' && POST)) {
-        const { tipo } = POST ? await req.json().catch(() => ({})) : { tipo: url.searchParams.get('tipo') };
-        if (!FLUSSI_EMAIL.includes(tipo) && tipo !== 'lega') return json({ errore: 'Modello non valido.' }, 400);
-        const m = esempioEmail(tipo);
+        const { tipo, percentuale } = POST ? await req.json().catch(() => ({})) : { tipo: url.searchParams.get('tipo'), percentuale: url.searchParams.get('percentuale') };
+        if (!FLUSSI_EMAIL.includes(tipo) && tipo !== 'lega' && tipo !== TIPO_OFFERTA_24H) return json({ errore: 'Modello non valido.' }, 400);
+        const perc = Number(percentuale);
+        const m = tipo === TIPO_OFFERTA_24H ? esempioOfferta24h(Number.isInteger(perc) && perc >= 5 && perc <= 60 ? perc : undefined) : esempioEmail(tipo);
         if (!POST) return new Response(m.html, { headers: {
           'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
           'content-security-policy': "default-src 'none'; img-src https://ripetizionidianalisi.com; style-src 'unsafe-inline'; sandbox",
