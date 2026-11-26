@@ -1,15 +1,26 @@
 // Il riflesso attraversa soltanto le scritte visibili e resta spento fra i passaggi.
-const collegamenti = [...document.querySelectorAll<HTMLElement>('[data-sconto-bronzo]')];
+// Regole del 26/11/2026 (scelta di Carmine): un passaggio ogni 60 secondi; dopo che il visitatore ha cliccato
+// una volta sul riquadro degli sconti, uno ogni 3 minuti; spento per chi ha già acquistato. Il Worker scrive su
+// <html> data-materie con le materie dell'account; le materie gratuite con account non contano.
+import { conAccount } from '../data/con-account.mjs';
 
-if (collegamenti.length) {
-  const chiaveVisitato = 'rda:sconti:visitati';
+const collegamenti = [...document.querySelectorAll<HTMLElement>('[data-sconto-bronzo]')];
+const haAcquistato = (document.documentElement.dataset.materie || '')
+  .split(/\s+/)
+  .some((m) => m && !conAccount(m));
+
+if (collegamenti.length && !haAcquistato) {
+  // Prima il riflesso si spegneva per sempre al primo clic: il vecchio segno nel browser si cancella.
+  try { localStorage.removeItem('rda:sconti:visitati'); } catch { /* Storage non disponibile. */ }
+  const chiaveCliccato = 'rda:sconti:cliccato';
   const riduciMovimento = matchMedia('(prefers-reduced-motion: reduce)');
-  let visitato = false;
-  try { visitato = localStorage.getItem(chiaveVisitato) === '1'; } catch { /* Storage non disponibile. */ }
+  let cliccato = false;
+  try { cliccato = localStorage.getItem(chiaveCliccato) === '1'; } catch { /* Storage non disponibile. */ }
+  const intervallo = () => (cliccato ? 180000 : 60000);
   let timer = 0;
   let fineTimer = 0;
 
-  const disponibile = () => !visitato && !document.hidden && !riduciMovimento.matches;
+  const disponibile = () => !document.hidden && !riduciMovimento.matches;
   const visibile = (elemento: HTMLElement) => {
     const r = elemento.getBoundingClientRect();
     return elemento.getClientRects().length > 0 && r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight;
@@ -37,24 +48,22 @@ if (collegamenti.length) {
         fineTimer = 0;
         programma();
       }, 1850);
-    }, 120000 + Math.random() * 60000);
+    }, intervallo());
   }
 
-  function segnaVisitato() {
-    visitato = true;
-    ferma();
-    try { localStorage.setItem(chiaveVisitato, '1'); } catch { /* Resta spento nella pagina corrente. */ }
+  function segnaCliccato() {
+    if (cliccato) return;
+    cliccato = true;
+    try { localStorage.setItem(chiaveCliccato, '1'); } catch { /* Vale per la pagina corrente. */ }
   }
   collegamenti.forEach((elemento) => {
-    elemento.addEventListener('click', segnaVisitato);
-    elemento.addEventListener('auxclick', (evento) => { if (evento.button === 1) segnaVisitato(); });
+    elemento.addEventListener('click', segnaCliccato);
+    elemento.addEventListener('auxclick', (evento) => { if (evento.button === 1) segnaCliccato(); });
   });
   window.addEventListener('storage', (evento) => {
-    if (evento.key === chiaveVisitato && evento.newValue === '1') {
-      visitato = true;
-      ferma();
-    }
+    if (evento.key === chiaveCliccato && evento.newValue === '1') { cliccato = true; riparti(); }
   });
+
   function riparti() { ferma(); programma(); }
   document.addEventListener('visibilitychange', riparti);
   riduciMovimento.addEventListener('change', riparti);
