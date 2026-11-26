@@ -138,6 +138,10 @@ const giornoRoma = (istante) => {
   const { y, m, d } = partiRoma(istante);
   return Date.UTC(y, m - 1, d);
 };
+// Giorni «imminenti»: i primi di limitiPrimiGiorni, dove l'agenda deve sembrare quasi piena.
+function imminente(inizio, adesso) {
+  return (giornoRoma(inizio) - giornoRoma(adesso)) / (24 * ORA_MS) < LEZIONI.limitiPrimiGiorni.length;
+}
 function limiteGiorno(inizio, adesso) {
   const giorni = (giornoRoma(inizio) - giornoRoma(adesso)) / (24 * ORA_MS);
   return LEZIONI.limitiPrimiGiorni[giorni] ?? LEZIONI.limiteSuccessivi;
@@ -177,6 +181,7 @@ function selezionaOrari(previsti, impegni, prenotazioni, adesso, minimo) {
   const candidati = new Map();
   for (const s of previsti) {
     if (s.inizio < minimo || siSovrappone(s, impegni) || siSovrappone(s, prenotazioni)) continue;
+    if (imminente(s.inizio, adesso) && LEZIONI.oreSoloLontane.includes(partiRoma(s.inizio).h)) continue;
     const lista = candidati.get(s.giorno) ?? [];
     lista.push(s);
     candidati.set(s.giorno, lista);
@@ -365,7 +370,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     // la lezione che si sta spostando occupa il suo orario anche in Google: quell'intervallo non conta
     const daGoogle = nostre ? g.filter((x) => !(x.inizio >= nostre.inizio && x.fine <= nostre.fine)) : g;
     const daDB = db.occupate.filter((x) => !(nostre && x.inizio === nostre.inizio && x.fine === nostre.fine));
-    const minimo = adesso + (nostre ? LEZIONI.preavvisoSpostamentoOre * ORA_MS : LEZIONI.preavvisoMinuti * 60000);
+    const minimo = adesso + (nostre ? LEZIONI.preavvisoSpostamentoOre * ORA_MS : LEZIONI.preavvisoOre * ORA_MS);
     const alternative = nostre ? previsti.filter((s) => s.inizio !== nostre.inizio) : previsti;
     return selezionaOrari(alternative, daGoogle, daDB, adesso, minimo);
   };
@@ -692,7 +697,7 @@ ${collegato ? '<form method="post" action="/admin/google/scollega" style="margin
 <button type="submit">Mostra</button>${periodo.da ? '<a href="/admin/lezioni">Torna alle lezioni recenti</a>' : ''}</form>
 ${righe ? `<div class="tab"><table><thead><tr><th>Quando</th><th>Materia</th><th>Studente</th><th>Università e argomenti</th><th>Fatturazione</th><th>Stato</th><th></th></tr></thead><tbody>${righe}</tbody></table></div>`
     : '<p>Nessuna lezione da mostrare per il periodo selezionato.</p>'}
-<p class="piccolo">Lezioni dal lunedì al sabato nelle fasce 10–13 e 14–19. Per prenotare servono almeno ${LEZIONI.preavvisoMinuti} minuti di anticipo. La disponibilità dipende dagli impegni del calendario e dal limite giornaliero.</p>`);
+<p class="piccolo">Lezioni dal lunedì al sabato nelle fasce 9–13 e 14–17. Per prenotare servono almeno ${LEZIONI.preavvisoOre} ore di anticipo. Nei 7 giorni successivi a oggi si mostrano pochi orari (mai alle 9 e alle 10); dalle settimane dopo tutte le fasce, salvo gli impegni del calendario Google.</p>`);
 }
 
 function dettagliFattura(l) {
