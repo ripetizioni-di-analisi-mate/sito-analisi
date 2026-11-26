@@ -31,12 +31,12 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-semestre-filtro': {
     titolo: 'Mathematics foundations for the filter semester',
     breve: 'Mathematics foundations',
-    descrizione: 'Preparatory mathematics for the filter semester: calculations, proportions, powers, units, formulas, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed practice; study materials in Italian.',
+    descrizione: 'Preparatory mathematics for the filter semester: calculations, proportions, powers, units, formulas, graphs, logarithms, trigonometry and vectors. Theory, worked examples, practice exercises and timed questions are available in English and Italian.',
     argomenti: {
       'calcolo-e-proporzioni': { titolo: 'Calculations, proportions and percentages', breve: 'Calculations and proportions' },
       'potenze-e-notazione-scientifica': { titolo: 'Powers, roots and scientific notation', breve: 'Powers and notation' },
       'unita-di-misura': { titolo: 'Units and conversions', breve: 'Units' },
-      'equazioni-e-formule': { titolo: 'Equations and rearranging formulas', breve: 'Equations and formulas' },
+      'equazioni-e-formule': { titolo: 'Solving equations and rearranging formulas', breve: 'Equations and formulas' },
       'funzioni-e-grafici': { titolo: 'Functions, proportionality and graphs', breve: 'Functions and graphs' },
       'esponenziali-e-logaritmi': { titolo: 'Exponentials, logarithms and applications', breve: 'Exponentials and logarithms' },
       'trigonometria': { titolo: 'Trigonometry and right triangles', breve: 'Trigonometry' },
