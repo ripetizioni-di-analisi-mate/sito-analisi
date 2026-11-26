@@ -150,7 +150,8 @@ test('quiz, ripasso generale e simulazioni pubblici restano distinti dal ripasso
         assert.doesNotMatch(pagina, /<meta name="robots" content="noindex/);
         assert.ok(xml.includes('<loc>' + sito + percorso + '</loc>'), percorso);
         const destinazione = fine.startsWith('/prove-') ? '/limiti/domande'
-          : fine === '/simulazione' ? '/limiti/esercizi' : '/limiti/teoria/';
+          // Dal 26/11/2026 la pagina del quiz non ha più l'elenco «Cosa ripassare»: resta il link alla teoria del capitolo.
+          : fine === '/simulazione' ? '/limiti/esercizi' : '/limiti/teoria"';
         assert.ok(pagina.includes('href="' + radice + destinazione), destinazione);
       }
       const personale = radice + '/ripasso-di-oggi/domande';
