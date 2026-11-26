@@ -1217,7 +1217,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     pannello.innerHTML =
       '<header><h2>Offerta 24 ore ai nuovi iscritti</h2><span class="nota" id="o24-conta" role="status">Caricamento…</span></header>' +
       '<div class="corpo modulo">' +
-      '<p class="nota" style="margin:0">Email con la tua foto e uno sconto valido 24 ore su una materia a scelta. La ricevono gli iscritti degli ultimi 10 giorni che non hanno nessuna materia nell’account e non hanno chiesto di non ricevere offerte. Ognuno la riceve una sola volta; sono esclusi gli studenti dei tuoi corsi e gli account Premium e GM.</p>' +
+      '<p class="nota" style="margin:0">Email con la tua foto e uno sconto valido 24 ore sull’acquisto di una o più materie (non si somma allo sconto dei pacchetti: vale il più alto). La ricevono gli iscritti degli ultimi 10 giorni che non hanno nessuna materia nell’account e non hanno chiesto di non ricevere offerte. Ognuno la riceve una sola volta; sono esclusi gli studenti dei tuoi corsi e gli account Premium e GM.</p>' +
       '<div class="azioni promo-scelte"><label class="campo">Sconto (%)<input id="o24-sconto" type="number" min="5" max="60" step="1" value="20"></label>' +
       '<button class="bottone" type="button" id="o24-tutti">Seleziona tutti</button><button class="bottone" type="button" id="o24-nessuno">Nessuno</button></div>' +
       '<div class="promo-lista" id="o24-lista">Caricamento…</div>' +
@@ -1302,7 +1302,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       const d = bozza;
       if (!d || occupato) return;
       const n = d.modelli.length;
-      if (!(await conferma('Inviare l’offerta?', 'Sconto del ' + d.percentuale + '% per 24 ore su una materia a scelta. ' +
+      if (!(await conferma('Inviare l’offerta?', 'Sconto del ' + d.percentuale + '% per 24 ore sull’acquisto di una o più materie. ' +
         (n === 1 ? 'Destinatario: ' + d.modelli[0].email + '.' : n + ' iscritti selezionati.'), 'Invia'))) return;
       occupato = true; invia.disabled = prepara.disabled = true;
       esito.textContent = 'Invio in corso…';

@@ -1057,7 +1057,9 @@ export default {
     if (versoLingua) return versoLingua;
 
     const serviziAcquisto = { aDO, utenteCollegato, MATERIE, VIDEOCORSI, conMaterieDeiVideo, dopoAcquistoMateria,
-      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req) };
+      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req),
+      // Offerta di 24 ore ai nuovi iscritti anche sui pacchetti di materie (riga con materia '*').
+      offertaAcquisto: (io) => (io ? aDO(env, '/promo-offerta', { email: io.email, materia: '*' }) : null) };
     if (p.startsWith('/api/acquisti/')) return gestisciAcquisti(req, env, p, serviziAcquisto);
     if (p.startsWith('/api/stripe/postvendita/') || p === '/admin/vendite-stripe' || p.startsWith('/admin/vendite-stripe/'))
       return gestisciPostvendita(req, env, p, { aDO, utenteCollegato, leggiCookie, leggiToken, json });

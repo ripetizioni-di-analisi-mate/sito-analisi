@@ -1,7 +1,7 @@
 // Offerta di 24 ore ai nuovi iscritti che non hanno ancora acquistato (richiesta di Carmine del 26/11/2026).
 // Dashboard → Email automatiche → «Offerta 24 ore ai nuovi iscritti». Una sola email per persona, con la foto di
-// Carmine, e uno sconto valido 24 ore su una materia a scelta (riga di promozioni_email con materia '*').
-// Lo sconto si usa una volta: al primo acquisto di una materia singola dell'account.
+// Carmine, e uno sconto valido 24 ore su un acquisto (riga di promozioni_email con materia '*').
+// Lo sconto si usa una volta: sulla prima materia o sul primo pacchetto di materie, senza sommarsi ad altri sconti.
 import { MATERIE } from '../src/data/materie.ts';
 import { componiEmail, intestazioniDisiscrizione, mittenteEmail, SITO_EMAIL } from './email.mjs';
 import { registraInviiEmail } from './storico-email.mjs';
@@ -16,7 +16,6 @@ const MAX_DESTINATARI = 100;
 const BLOCCO_INVIO = 30000;
 const QUOTA_INVII = 90;
 export const PERCENTUALE_PREDEFINITA = 20;
-export const TEMA_BIGLIETTO = 'verde';
 const prezzoMinimo = Math.min(...MATERIE.filter((m) => m.attiva && m.prezzo > 0).map((m) => m.prezzo));
 const problema = (errore, stato = 400) => ({ errore, stato });
 
@@ -42,15 +41,15 @@ export function candidatiOfferta24h(ar, ora = Date.now(), emails = null) {
     dal, Number(Boolean(emails)), JSON.stringify(emails || []), TIPO_OFFERTA_24H, MATERIA_TUTTE);
 }
 
-export function componiOfferta24h(r, { percentuale, scade, link, disattiva, tema = TEMA_BIGLIETTO }) {
+export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
   const en = r.lingua === 'en';
   const nome = (r.nome || '').trim().split(/\s+/)[0];
   const fino = quando(scade, en);
   return componiEmail({
     lingua: en ? 'en' : 'it',
-    subject: en ? (nome ? nome + ', ' : '') + percentuale + '% off a subject of your choice, for 24 hours only'
-      : (nome ? nome + ', il ' : 'Il ') + percentuale + '% su una materia a tua scelta, solo per 24 ore',
-    titolo: en ? percentuale + '% off a subject of your choice' : 'Il ' + percentuale + '% su una materia a tua scelta',
+    subject: en ? (nome ? nome + ', ' : '') + percentuale + '% off your purchase, for 24 hours only'
+      : (nome ? nome + ', il ' : 'Il ') + percentuale + '% sul tuo acquisto, solo per 24 ore',
+    titolo: en ? percentuale + '% off your purchase' : 'Il ' + percentuale + '% sul tuo acquisto',
     categoria: en ? 'Personal offer · 24 hours' : 'Offerta riservata · 24 ore',
     anteprima: en ? 'A message from Carmine, with a discount valid until ' + fino + '.'
       : 'Un messaggio di Carmine, con uno sconto valido fino a ' + fino + '.',
@@ -68,27 +67,26 @@ export function componiOfferta24h(r, { percentuale, scade, link, disattiva, tema
       'I teach STEM subjects in one-to-one lessons, in group courses and in my video courses. Ripetizionidianalisi.com grew out of those lessons: theory explained with its proofs, exercises solved step by step the way I solve them on the board, practice exercises that are checked as soon as you answer, timed questions and exam simulations.',
       'What I love most about this job is the moment when a topic that looked impossible becomes clear. I see it on my students’ faces during lessons, and I read it in the messages they send me after their exams.',
       'I truly care about my students, and I built the site to stay with you when you study on your own, late in the evening or the day before the exam. In the main subjects the Guided study asks you a few questions and shows you the paragraph to start again from, and Pi, the site’s assistant, answers your doubts about exercises and theory.',
-      'You created your account a few days ago, and I want your first step to cost you less. For the next 24 hours you have ' + percentuale + '% off one subject of your choice, among all the subjects on the site.',
+      'You created your account a few days ago, and I want your first step to cost you less. For the next 24 hours you have ' + percentuale + '% off your purchase: one subject or several subjects together, chosen among all those on the site.',
     ] : [
       nome ? 'Ciao ' + nome + ',' : 'Ciao,',
       'mi chiamo Carmine Tornincasa. Sono ingegnere civile, ho un master in matematica e ho cominciato a insegnare matematica quando ero ancora alle superiori. Da allora ho seguito migliaia di studenti, per più di diecimila ore di lezione.',
       'Faccio ripetizioni di materie STEM, con le lezioni individuali, i corsi di gruppo e i videocorsi. Ripetizionidianalisi.com nasce da queste lezioni: ci ho messo la teoria spiegata con le dimostrazioni, gli esercizi svolti passaggio per passaggio come li svolgo alla lavagna, gli esercizi da fare con la correzione immediata, le domande a tempo e la simulazione d’esame.',
       'La cosa che amo di più di questo lavoro è il momento in cui un argomento che sembrava impossibile diventa chiaro. Lo vedo sul viso degli studenti durante le lezioni e lo leggo nei messaggi che mi mandano dopo l’esame.',
       'Ai miei studenti tengo davvero, e ho costruito il sito perché ti accompagni anche quando studi da solo, la sera tardi o il giorno prima dell’esame. Nelle materie principali lo Studio guidato ti fa qualche domanda e ti indica il paragrafo da cui ripartire, e Pi, l’assistente del sito, risponde ai tuoi dubbi su esercizi e teoria.',
-      'Hai creato il tuo account da pochi giorni e voglio che il primo passo ti costi meno. Per le prossime 24 ore hai il ' + percentuale + '% di sconto su una materia a tua scelta, fra tutte quelle del sito.',
+      'Hai creato il tuo account da pochi giorni e voglio che il primo passo ti costi meno. Per le prossime 24 ore hai il ' + percentuale + '% di sconto sul tuo acquisto: una materia o più materie insieme, scelte fra tutte quelle del sito.',
     ],
     biglietto: {
-      tema,
       etichetta: en ? 'Your discount · 24 hours' : 'Il tuo sconto · 24 ore',
       valore: '−' + percentuale + '%',
-      sotto: en ? 'on a subject of your choice' : 'su una materia a tua scelta',
-      timer: SITO_EMAIL + '/email/timer.gif?f=' + Math.round(scade) + '&t=' + tema,
+      sotto: en ? 'on your purchase of one or more subjects' : 'sul tuo acquisto di una o più materie',
+      timer: SITO_EMAIL + '/email/timer.gif?f=' + Math.round(scade) + '&t=verde',
       nota: en ? 'Valid until ' + fino : 'Valido fino a ' + fino,
-      pulsante: [en ? 'Choose your subject' : 'Scegli la materia', link],
+      pulsante: [en ? 'Choose your subjects' : 'Scegli le materie', link],
     },
     dopo: [
-      en ? 'Sign in with the account you registered with and the discount is applied automatically at checkout, once, on the subject you choose.'
-        : 'Accedi con l’account con cui ti sei iscritto e lo sconto si applica da solo al pagamento, una sola volta, sulla materia che scegli.',
+      en ? 'Sign in with the account you registered with and the discount is applied automatically at checkout, on a single purchase. Discounts do not add up: if you buy several subjects together, the higher of this discount and the bundle discount applies.'
+        : 'Accedi con l’account con cui ti sei iscritto e lo sconto si applica da solo al pagamento, su un solo acquisto. Gli sconti non si sommano: se prendi più materie insieme vale il più alto fra questo e lo sconto del pacchetto.',
     ],
     firma: 'Carmine',
     motivo: en ? 'You are receiving this email because you created an account on ripetizionidianalisi.com.'
@@ -97,9 +95,9 @@ export function componiOfferta24h(r, { percentuale, scade, link, disattiva, tema
   });
 }
 
-export function esempioOfferta24h(percentuale = PERCENTUALE_PREDEFINITA, tema) {
+export function esempioOfferta24h(percentuale = PERCENTUALE_PREDEFINITA) {
   return componiOfferta24h({ nome: 'Andrea', lingua: 'it' },
-    { tema, percentuale, scade: Date.now() + DURATA, link: SITO_EMAIL + '/prezzi', disattiva: SITO_EMAIL + '/account#impostazioni' });
+    { percentuale, scade: Date.now() + DURATA, link: SITO_EMAIL + '/prezzi', disattiva: SITO_EMAIL + '/account#impostazioni' });
 }
 
 function percentualeValida(x) {

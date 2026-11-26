@@ -15,11 +15,9 @@ export function componiEmail({
   firma = 'Carmine', motivo, disattiva, bronzo = false, autore, biglietto,
 }) {
   // Biglietto dell'offerta: percentuale grande, conto alla rovescia (GIF di /email/timer.gif) e tasto.
-  // Temi «verde» (fondo #214f50) e «chiaro»: il fondo della GIF è dello stesso colore del biglietto.
-  const B = biglietto && (biglietto.tema === 'chiaro'
-    ? { fondo: '#faf5ee', bordo: '#dfceb7', etichetta: '#785735', valore: '#57432e', testo: '#59472f', nota: '#7a6650', tasto: '#214f50', tastoTesto: '#ffffff' }
-    : { fondo: '#214f50', bordo: '#214f50', etichetta: '#e8c9a0', valore: '#ffffff', testo: '#e3ecea', nota: '#bcd0cc', tasto: '#e8c9a0', tastoTesto: '#2a2117' });
-  const offerta = biglietto ? `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="${B.fondo}" style="margin:4px 0 20px;background:${B.fondo};border:1px solid ${B.bordo};border-radius:14px"><tr><td align="center" style="padding:22px 18px 20px;font-family:Arial,sans-serif">
+  // Biglietto verde, scelto da Carmine il 26/11/2026; la GIF del conto alla rovescia ha lo stesso fondo.
+  const B = { fondo: '#214f50', etichetta: '#e8c9a0', valore: '#ffffff', testo: '#e3ecea', nota: '#bcd0cc', tasto: '#e8c9a0', tastoTesto: '#2a2117' };
+  const offerta = biglietto ? `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="${B.fondo}" style="margin:4px 0 20px;background:${B.fondo};border-radius:14px"><tr><td align="center" style="padding:22px 18px 20px;font-family:Arial,sans-serif">
 <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${B.etichetta}">${esc(biglietto.etichetta)}</div>
 <div style="font:700 60px/1.05 Georgia,serif;color:${B.valore};margin:8px 0 2px">${esc(biglietto.valore)}</div>
 <div style="font-size:16px;line-height:1.4;color:${B.testo};margin:0 0 16px">${esc(biglietto.sotto)}</div>

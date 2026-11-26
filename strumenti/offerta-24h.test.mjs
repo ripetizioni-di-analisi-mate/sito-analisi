@@ -108,6 +108,7 @@ function banco(t) {
         ...new Set(keys.flatMap((k) => [k, ...(this.VIDEOCORSI.find((v) => 'video-' + v.slug === k)?.sblocca || [])])),
       ];
     },
+    offertaAcquisto: async (io) => offertaPromozionale(o, { email: io.email, materia: '*' }),
     sconto: async (io, m) => {
       const p = offertaPromozionale(o, { email: io.email, materia: m });
       return p.id && p.percentuale >= (sconto?.percentuale || 0) ? p : sconto;
@@ -253,9 +254,30 @@ test('offerta che scade fra preventivo e pagamento: il checkout si ferma', async
   assert.ok((await b.call('checkout', acquista({ tipo: 'materia', slug: 'analisi-1' }, 3920))).status >= 400);
 });
 
-test('il pacchetto di materie non usa l\'offerta di 24 ore', async (t) => {
+test('più materie insieme: vale lo sconto più alto fra offerta e pacchetto, senza sommarli', async (t) => {
   const b = banco(t);
-  offerta(b);
+  const sel = { tipo: 'materie', materie: ['analisi-1', 'analisi-2'] };
+  // senza offerta: sconto del pacchetto (15% su 49 + 55 = 104 €)
+  const base = await b.call('preventivo', sel);
+  assert.equal(base.percentuale, 15);
+  offerta(b, { percentuale: 20 });
+  const q = await b.call('preventivo', sel);
+  assert.equal(q.totale, 8320); // 104 € − 20%, sul prezzo pieno
+  assert.deepEqual(q.sconti.map((s) => s.tipo), ['promozione']);
+  const go = await b.call('checkout', acquista(sel, 8320));
+  assert.equal(go.status, 200);
+  const s = [...b.sessioni.values()].at(-1);
+  assert.equal(s.amount_total, 8320);
+  Object.assign(s, { status: 'complete', payment_status: 'paid', payment_intent: 'pi_pacchetto' });
+  assert.equal((await eventoDigitale(b.env, b.h, { type: 'checkout.session.completed', data: { object: s } })).status, 200);
+  assert.deepEqual(b.o.materieDi(b.io.email).sort(), ['analisi-1', 'analisi-2']);
+  assert.equal(b.o.riga("SELECT usato FROM promozioni_email WHERE id='off-1'").usato, 'pi_pacchetto');
+});
+
+test('offerta più bassa dello sconto del pacchetto: resta il pacchetto', async (t) => {
+  const b = banco(t);
+  offerta(b, { percentuale: 10 });
   const q = await b.call('preventivo', { tipo: 'materie', materie: ['analisi-1', 'analisi-2'] });
-  assert.ok(!q.sconti?.some((s) => s.tipo === 'promozione'));
+  assert.deepEqual(q.sconti.map((s) => s.tipo), ['pacchetto']);
+  assert.equal(q.percentuale, 15);
 });

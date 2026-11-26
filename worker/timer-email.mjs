@@ -16,12 +16,13 @@ function daRle(b64) {
 const grafiche = {};
 const TEMA = 'verde';
 const leggiGrafica = (tema) => (grafiche[tema] ??= {
-  tavolozza: DATI.temi[tema].tavolozza, sfondo: daRle(DATI.temi[tema].sfondo), cifre: DATI.temi[tema].cifre.map(daRle),
+  ...DATI.temi[tema], sfondo: daRle(DATI.temi[tema].sfondo), cifre: DATI.temi[tema].cifre.map(daRle),
 });
 
 // Fotogramma intero: sfondo con le sei cifre hh mm ss.
 function fotogramma(g, secondi) {
   const { sfondo, cifre } = g;
+  const DATI = g;
   const img = sfondo.slice();
   const ore = Math.min(MAX_ORE, Math.floor(secondi / 3600));
   const testo = [ore, Math.floor(secondi / 60) % 60, secondi % 60].map((n) => String(n).padStart(2, '0')).join('');
@@ -72,7 +73,7 @@ export function gifTimer(scadenza, ora = Date.now(), tema = TEMA) {
   const g = leggiGrafica(DATI.temi[tema] ? tema : TEMA);
   const restano = Math.max(0, Math.floor((scadenza - ora) / 1000));
   const n = Math.max(1, Math.min(FOTOGRAMMI, restano + 1));
-  const { w, h } = DATI;
+  const { w, h } = g;
   const byte = [...new TextEncoder().encode('GIF89a'), ...u16(w), ...u16(h), 0xf4, 0, 0, ...g.tavolozza];
   let prima = null;
   for (let f = 0; f < n; f++) {
@@ -81,12 +82,12 @@ export function gifTimer(scadenza, ora = Date.now(), tema = TEMA) {
     let x0 = 0, y0 = 0, x1 = w - 1, y1 = h - 1;
     if (prima) {
       x0 = w; y0 = h; x1 = -1; y1 = -1;
-      for (const [cx, cy] of DATI.posti) {
+      for (const [cx, cy] of g.posti) {
         let diversa = false;
-        for (let y = cy; y < cy + DATI.ch && !diversa; y++)
-          for (let i = y * w + cx, e = i + DATI.cw; i < e; i++) if (img[i] !== prima[i]) { diversa = true; break; }
+        for (let y = cy; y < cy + g.ch && !diversa; y++)
+          for (let i = y * w + cx, e = i + g.cw; i < e; i++) if (img[i] !== prima[i]) { diversa = true; break; }
         if (!diversa) continue;
-        x0 = Math.min(x0, cx); y0 = Math.min(y0, cy); x1 = Math.max(x1, cx + DATI.cw - 1); y1 = Math.max(y1, cy + DATI.ch - 1);
+        x0 = Math.min(x0, cx); y0 = Math.min(y0, cy); x1 = Math.max(x1, cx + g.cw - 1); y1 = Math.max(y1, cy + g.ch - 1);
       }
       if (x1 < 0) { x0 = x1 = y0 = y1 = 0; }
     }

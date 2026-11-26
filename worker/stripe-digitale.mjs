@@ -243,17 +243,28 @@ export async function preventivoDigitale(c, io, h) {
   //  - materia singola: uno sconto solo (offerta via email, invito, oppure 10% del primo acquisto);
   //  - pacchetto di materie: solo lo sconto del pacchetto. Gli sconti NON si sommano (scelta di Carmine del
   //    21/11/2026): il 10% del primo acquisto vale soltanto per una materia comprata da sola.
+  //  - offerta di 24 ore ai nuovi iscritti (26/11/2026): vale su tutto l'acquisto, anche su più materie insieme;
+  //    non si somma allo sconto del pacchetto, si applica sul prezzo pieno solo se è più alta.
   let sconto = tipo === 'materia' ? await h.sconto(io, c.slug) : null;
   const sconti = [];
   let totale = q.totale;
-  if (tipo === 'materie' && q.percentuale > 0)
+  let offerta = null;
+  if (tipo === 'materie' && h.offertaAcquisto) {
+    const p = await h.offertaAcquisto(io);
+    if (p?.id && p.percentuale > (q.percentuale || 0)) offerta = p;
+  }
+  if (offerta) {
+    totale = Math.round((q.separato * (100 - offerta.percentuale)) / 100);
+    sconti.push({ tipo: offerta.tipo, percentuale: offerta.percentuale, importo: q.separato - totale });
+    sconto = offerta;
+  } else if (tipo === 'materie' && q.percentuale > 0)
     sconti.push({ tipo: 'pacchetto', percentuale: q.percentuale, importo: q.separato - q.totale });
-  if (sconto?.percentuale > 0) {
+  if (offerta) { /* sconto già applicato */ } else if (sconto?.percentuale > 0) {
     const ridotto = Math.round((totale * (100 - sconto.percentuale)) / 100);
     sconti.push({ tipo: sconto.tipo, percentuale: sconto.percentuale, importo: totale - ridotto });
     totale = ridotto;
   } else sconto = null;
-  const percentuale = tipo === 'materie' ? q.percentuale || 0 : sconto?.percentuale || 0;
+  const percentuale = offerta ? offerta.percentuale : tipo === 'materie' ? q.percentuale || 0 : sconto?.percentuale || 0;
   const listino = tipo === 'materie' ? q.separato : q.totale;
   const abilitazioni = h.conMaterieDeiVideo(q.chiavi);
   const selezione = { tipo };
