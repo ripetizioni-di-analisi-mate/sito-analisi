@@ -7,7 +7,6 @@ import { dataContenuto, piuRecente } from '../lib/date';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
-import { catalogoDomande } from '../lib/domande';
 import { risultatoDi } from '../lib/risposte';
 import { chiavePubblica } from '../../worker/valuta.mjs';
 import VerificaRisposta from '../components/VerificaRisposta.astro';
@@ -25,8 +24,38 @@ const haAltra = voci.length > 0 && (await Promise.all(voci.map(({ voce }) =>
 const resi = await Promise.all(voci.map(async ({ voce: v }) => ({ v, Content: (await render(v)).Content })));
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
-// Domande a tempo, per gli argomenti che ne hanno.
-const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(argomento);
+// Elenco che si apre (26/11/2026, scelta B di Carmine sulle anteprime): una riga per esercizio con lo stato a destra;
+// un tocco apre l'esercizio sul posto, con la risposta e gli aiuti in ordine (indizio di Pi, esercizio svolto simile, soluzione).
+// «Esercizio svolto simile»: la scheda svolta dello stesso capitolo che ha più teoria e parole chiave in comune con l'esercizio
+// (due riquadri di teoria, oppure un riquadro e una parola chiave); sotto questa soglia l'aiuto non compare.
+const schede = await Promise.all(perArgomento(await getCollection(lingua === 'es' ? 'svolti_es' : 'svolti'), materia, argomento).map((e) => voceL(lingua, 'svolti', e.id)));
+const comuni = (a: string[] = [], b: string[] = []) => a.filter((x) => b.includes(x)).length;
+const simili = Object.fromEntries(voci.map(({ voce: e }) => {
+  let scelta: (typeof schede)[number]['voce'] | null = null, punti = 0;
+  for (const { voce: sc } of schede) {
+    const k = 2 * comuni(e.data.teoria, sc.data.teoria) + 3 * comuni(e.data.parole, sc.data.parole);
+    if (k > punti) { punti = k; scelta = sc; }
+  }
+  return [e.id, scelta && punti >= 4 ? { n: numero(scelta.id), titolo: scelta.data.titolo } : null];
+}));
+const L = lingua === 'en' ? {
+  di: 'of', risolti: 'solved', aiuti: 'Help', indizio: 'Hint from Pi', simile: 'Similar worked example', soluzione: 'Solution', segnala: 'Report an error',
+  stessoTipo: 'A problem of the same type, worked step by step:', scheda: 'Sheet', risolto: 'Solved', vista: 'Solution seen',
+} : lingua === 'es' ? {
+  di: 'de', risolti: 'resueltos', aiuti: 'Ayudas', indizio: 'Pista de Pi', simile: 'Ejercicio resuelto similar', soluzione: 'Solución', segnala: 'Informar de un error',
+  stessoTipo: 'Un ejercicio del mismo tipo, resuelto paso a paso:', scheda: 'Ficha', risolto: 'Resuelto', vista: 'Solución vista',
+} : {
+  di: 'di', risolti: 'risolti', aiuti: 'Aiuti', indizio: 'Indizio di Pi', simile: 'Esercizio svolto simile', soluzione: 'Soluzione', segnala: 'Segnala un errore',
+  stessoTipo: 'Un esercizio dello stesso tipo, svolto passo per passo:', scheda: 'Scheda', risolto: 'Risolto', vista: 'Soluzione vista',
+};
+const icona = (d: string, sw = 1.5) => `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const I = {
+  giu: icona('<path d="M5 7.500l5 5 5-5"/>', 1.8),
+  lampada: icona('<path d="M7.500 14.500h5M8.300 17h3.400M10 2.800a4.700 4.700 0 0 0-2.800 8.500c.5.4.8 1 .8 1.700h4c0-.7.3-1.300.8-1.700A4.700 4.700 0 0 0 10 2.800z"/>'),
+  foglio: icona('<rect x="3" y="3.500" width="14" height="13" rx="2.500"/><path d="M6.500 8h7M6.500 12h4.500"/>'),
+  occhio: icona('<path d="M2.500 10S5.300 5 10 5s7.500 5 7.500 5-2.800 5-7.500 5S2.500 10 2.500 10z"/><circle cx="10" cy="10" r="2.200"/>'),
+  spunta: icona('<path d="M4.500 10.500l3.500 3.500 7.500-8"/>', 2),
+};
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
@@ -37,22 +66,170 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
   precedente={precedente} successivo={successivo}
   lingua={lingua} nonTradotta={nonTradotta}
 >
-  <p class="sopratitolo ripete">{materiaL(lingua, materia).titolo}</p>
-  <h1>{arg.titolo} · {t.sezioni.esercizi}</h1>
-  <p class="sommario">{t.dafareSommario}</p>
+  <h1 class="df-lettori solo-lettori">{arg.titolo} · {t.sezioni.esercizi}</h1>
   {voci.length === 0 && <p class="nota-segnaposto">{t.dafareInPreparazione}</p>}
-  {resi.map(({ v, Content }) => (
-    <section class="traccia" id={`esercizio-${numero(v.id)}`}>
-      <h2><a href={link(lingua, `${base}/esercizi/${numero(v.id)}`)}><span class="numero">{numero(v.id)}.</span> {v.data.titolo}</a></h2>
-      <div class="testo-studio"><Content /></div>
-      <VerificaRisposta id={v.id} tipo={risultati[v.id]?.tipo} primitiva={risultati[v.id]?.primitiva} unita={risultati[v.id]?.u} campi={risultati[v.id]?.tipo === 'multi' ? chiavePubblica(risultati[v.id]) : undefined} lingua={lingua} />
-    </section>
-  ))}
-  {conDomande && (
-    <section class="ingresso-domande">
-      <div class="ingresso-testa"><h2>{lingua === 'en' ? 'Timed questions' : lingua === 'es' ? 'Preguntas cronometradas' : 'Domande a tempo'}</h2><span>{arg.breve}</span></div>
-      <p>{lingua === 'en' ? 'Multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.' : lingua === 'es' ? 'Responde a preguntas de opción múltiple sobre este tema. Tienes dos minutos por pregunta y verás la explicación tras responder.' : 'Domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.'}</p>
-      <p class="ingresso-azioni"><a class="bottone-primario" href={link(lingua, `${base}/domande`)}>{lingua === 'en' ? 'Start' : lingua === 'es' ? 'Empezar' : 'Inizia'}</a><span>{lingua === 'en' ? 'Up to 15 XP per correct answer' : lingua === 'es' ? 'Hasta 15 EXP por respuesta correcta' : 'Fino a 15 EXP per risposta corretta'}</span></p>
-    </section>
+  {voci.length > 0 && (
+    <div class="df" data-materia={materia} data-argomento={argomento} data-testi={JSON.stringify({ risolto: L.risolto, vista: L.vista })} data-spunta={I.spunta}>
+      <div class="df-conta">
+        <p><b><span class="df-fatti">0</span> {L.di} {voci.length}</b> {L.risolti}</p>
+        <div class="df-barra" aria-hidden="true">{voci.map(() => <i />)}</div>
+      </div>
+      {resi.map(({ v, Content }) => {
+        const n = numero(v.id), simile = simili[v.id];
+        return (
+          <section class="traccia df-voce" id={`esercizio-${n}`} data-n={n} data-pagina={link(lingua, `${base}/esercizi/${n}`)}>
+            <details name="df-esercizi">
+              <summary class="df-riga"><span class="df-num">{n}</span><h2>{v.data.titolo}</h2><span class="df-stato"></span><span class="df-frec" set:html={I.giu} /></summary>
+              <div class="df-corpo">
+                <div class="testo-studio"><Content /></div>
+                <VerificaRisposta id={v.id} tipo={risultati[v.id]?.tipo} primitiva={risultati[v.id]?.primitiva} unita={risultati[v.id]?.u} campi={risultati[v.id]?.tipo === 'multi' ? chiavePubblica(risultati[v.id]) : undefined} lingua={lingua} />
+                <div class="df-aiuti">
+                  <span class="df-et">{L.aiuti}</span>
+                  <button type="button" class="df-aiuto" data-aiuto="indizio"><Fragment set:html={I.lampada} />{L.indizio}</button>
+                  {simile && <a class="df-aiuto" href={link(lingua, `${base}/esercizi-svolti/${simile.n}`)}><Fragment set:html={I.foglio} />{L.simile}</a>}
+                  <button type="button" class="df-aiuto" data-aiuto="soluzione" aria-expanded="false"><Fragment set:html={I.occhio} />{L.soluzione}</button>
+                  <button type="button" class="df-segnala">{L.segnala}</button>
+                </div>
+                {simile && <p class="df-simile" hidden><Fragment set:html={I.foglio} /><span>{L.stessoTipo} <a href={link(lingua, `${base}/esercizi-svolti/${simile.n}`)}>{L.scheda} {simile.n} · {simile.titolo}</a></span></p>}
+              </div>
+            </details>
+          </section>
+        );
+      })}
+    </div>
   )}
 </Base>
+
+<style is:global>
+  /* Esercizi da fare, elenco che si apre: tutto sotto .df. */
+  .df { --df-ocra: #8a5f1f; font-family: var(--ui); }
+  /* In questa pagina: niente passi in fondo né «Segnala un errore» in fondo (sta dentro l'esercizio); al telefono niente «Cerca nel capitolo». */
+  main:has(.df) nav.passi, main:has(.df) p.segnala-errore, main:has(.df) .cerca-capitolo-mobile { display: none; }
+  .df-lettori { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .df svg { flex: none; }
+  .df-conta { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 1rem; margin: 0.5rem 0 0.9rem; }
+  .df-conta p { margin: 0; font-size: 0.95rem; color: var(--inchiostro-2); }
+  .df-conta p b { color: var(--inchiostro); }
+  .df-barra { display: flex; gap: 4px; }
+  .df-barra i { flex: 1; height: 6px; border-radius: 3px; background: var(--riga); }
+  .df-barra i.ok { background: var(--verde); }
+  .df-barra i.vista { background: color-mix(in srgb, var(--c-esempio) 70%, #fff); }
+  .df .traccia { margin: 0; padding: 0; border: 0; border-bottom: 1px solid var(--riga); scroll-margin-top: 5rem; }
+  .df .traccia:first-of-type { border-top: 1px solid var(--riga); }
+  .df-riga { display: flex; align-items: center; gap: 0.9rem; padding: 0.8rem 0.2rem; list-style: none; cursor: pointer; color: var(--inchiostro); }
+  .df-riga::-webkit-details-marker { display: none; }
+  .df-riga h2 { flex: 1; min-width: 0; margin: 0; font: 600 1.08rem/1.3 var(--titoli); color: inherit; }
+  .df-riga:hover h2 { color: var(--verde); }
+  .df-num { flex: none; display: inline-grid; place-items: center; min-width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 1px solid var(--riga); background: #fff; font: 700 0.85rem var(--ui); color: var(--verde); font-variant-numeric: tabular-nums; }
+  .df-frec { display: grid; color: var(--inchiostro-2); transition: rotate 0.15s; }
+  .df-frec svg { width: 1.05rem; height: 1.05rem; }
+  details[open] > .df-riga .df-frec { rotate: 180deg; }
+  details[open] > .df-riga .df-num { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .df-pill { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.65rem 0.25rem 0.5rem; border-radius: 999px; font: 600 0.8rem var(--ui); white-space: nowrap; }
+  .df-pill svg { width: 0.9rem; height: 0.9rem; }
+  .df-pill.ok { background: color-mix(in srgb, var(--verde) 10%, transparent); color: var(--verde); }
+  .df-pill.vista { background: color-mix(in srgb, var(--c-esempio) 13%, transparent); color: var(--df-ocra); padding-left: 0.65rem; }
+  .df-corpo { padding: 0 0.2rem 1.3rem 3rem; }
+  .df-corpo > .testo-studio > :first-child { margin-top: 0.2rem; }
+  .df form.verifica { margin: 1.1rem 0 0; padding: 0; border: 0; background: none; box-shadow: none; }
+  .df .traccia .chiedi-pi { display: none; }
+  .df-aiuti { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin-top: 1.1rem; padding-top: 0.95rem; border-top: 1px solid color-mix(in srgb, var(--riga) 75%, transparent); }
+  .df-et { font: 700 0.72rem var(--ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--df-ocra); }
+  .df-aiuto { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0; border: 0; background: none; font: 600 0.9rem var(--ui); color: var(--verde); text-decoration: none; cursor: pointer; }
+  .df-aiuto svg { width: 1.05rem; height: 1.05rem; }
+  .df-aiuto:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .df-aiuto[hidden] { display: none; }
+  .df-segnala { margin-left: auto; padding: 0; border: 0; background: none; font: 0.84rem var(--ui); color: var(--inchiostro-2); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--inchiostro-2) 35%, transparent); text-underline-offset: 3px; cursor: pointer; }
+  .df-simile { display: flex; align-items: flex-start; gap: 0.5rem; margin: 0.9rem 0 0; font: 0.92rem/1.45 var(--ui); color: var(--inchiostro-2); }
+  .df-simile[hidden] { display: none; }
+  .df-simile svg { width: 1.05rem; height: 1.05rem; margin-top: 0.15rem; color: var(--verde); }
+  .df-simile a { font-weight: 600; color: var(--verde); }
+  /* Con lo script attivo la soluzione si apre dal tasto «Soluzione»; senza script resta la riga «Mostra soluzione» di sempre. */
+  .df-attivo details.blocco-soluzione:not([open]), .df-attivo .traccia:not(.df-sol) .soluzione-riservata { display: none; }
+  .df-attivo .traccia:not(.df-sol) .df-sotto { display: none; }
+  .df-attivo details.blocco-soluzione[open] { margin: 1.1rem 0 0; border: 0; border-radius: 12px; background: color-mix(in srgb, var(--carta-2) 60%, #fff); padding: 0.5rem 1.1rem 0.6rem; box-shadow: inset 3px 0 var(--verde); }
+  .df-attivo details.blocco-soluzione[open] > summary { display: none; }
+  .df-attivo .soluzione-riservata { margin: 1.1rem 0 0; }
+  .df:not(.df-attivo) .df-aiuto[data-aiuto] { display: none; }
+  @media (max-width: 720px) {
+    .df-riga { gap: 0.7rem; }
+    .df-riga h2 { font-size: 1rem; }
+    .df-corpo { padding-left: 0.2rem; }
+    .df-aiuti { gap: 0.55rem 1.1rem; }
+    .df-segnala { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .df-frec { transition: none; } }
+</style>
+
+<script>
+  const df = document.querySelector<HTMLElement>('.df');
+  if (df) {
+    const { materia, argomento } = df.dataset as { materia: string; argomento: string };
+    const T = JSON.parse(df.dataset.testi || '{}') as { risolto: string; vista: string };
+    const voci = [...df.querySelectorAll<HTMLElement>('.df-voce')];
+    const barra = [...df.querySelectorAll<HTMLElement>('.df-barra i')];
+    // Stato di ogni esercizio: «ok» risolto, «vista» soluzione vista. Sta nel browser; con l'account gli esercizi risolti arrivano anche dal sito.
+    const chiave = `dafare-stato-${materia}-${argomento}`;
+    let stato: Record<string, 'ok' | 'vista'> = {};
+    try { stato = JSON.parse(localStorage.getItem(chiave) || '{}'); } catch { /* niente memoria */ }
+    const salva = () => { try { localStorage.setItem(chiave, JSON.stringify(stato)); } catch { /* niente memoria */ } };
+    const disegna = () => {
+      voci.forEach((v, i) => {
+        const s = stato[v.dataset.n!];
+        v.querySelector('.df-stato')!.innerHTML = s === 'ok' ? `<span class="df-pill ok">${df.dataset.spunta}${T.risolto}</span>` : s === 'vista' ? `<span class="df-pill vista">${T.vista}</span>` : '';
+        if (barra[i]) barra[i].className = s || '';
+      });
+      df.querySelector('.df-fatti')!.textContent = String(voci.filter((v) => stato[v.dataset.n!] === 'ok').length);
+    };
+    const segna = (n: string, s: 'ok' | 'vista') => { if (stato[n] === 'ok' || stato[n] === s) return; stato[n] = s; salva(); disegna(); };
+    df.classList.add('df-attivo');
+    disegna();
+    if (document.documentElement.classList.contains('collegato')) {
+      fetch(`/api/progressi?materia=${encodeURIComponent(materia)}&argomento=${encodeURIComponent(argomento)}`).then((r) => (r.ok ? r.json() : null)).then((d) => {
+        const risolti: number[] = d?.dettaglio?.esercizi || [];
+        if (!risolti.length) return;
+        risolti.forEach((n) => { stato[String(n)] = 'ok'; });
+        salva(); disegna();
+      }).catch(() => { /* resta lo stato del browser */ });
+    }
+    for (const v of voci) {
+      const n = v.dataset.n!;
+      // La verifica della risposta scrive l'esito sul modulo: «giusta» segna l'esercizio come risolto.
+      const modulo = v.querySelector<HTMLElement>('form.verifica');
+      if (modulo) new MutationObserver(() => { if (modulo.dataset.esito === 'giusta') segna(n, 'ok'); }).observe(modulo, { attributes: true, attributeFilter: ['data-esito'] });
+      const tasto = v.querySelector<HTMLButtonElement>('[data-aiuto="soluzione"]')!;
+      const simile = v.querySelector<HTMLElement>('.df-simile');
+      // La soluzione (o, nell'anteprima, la riga «soluzione riservata») si apre sotto la riga degli aiuti.
+      // Ai motori di ricerca verificati il Worker consegna la soluzione dentro .contenuto-riservato: si sposta con il suo contenitore.
+      const sotto = v.querySelector<HTMLElement>('.testo-studio details.blocco-soluzione, .testo-studio .soluzione-riservata');
+      const soluzione = sotto?.matches('details') ? (sotto as HTMLDetailsElement) : null;
+      if (sotto) {
+        const posto = document.createElement('div');
+        posto.className = 'testo-studio df-sotto';
+        v.querySelector('.df-aiuti')!.after(posto);
+        posto.append(sotto.closest<HTMLElement>('.contenuto-riservato') ?? sotto);
+      } else tasto.hidden = true;
+      tasto.addEventListener('click', () => {
+        const apri = !v.classList.contains('df-sol');
+        v.classList.toggle('df-sol', apri);
+        if (soluzione) soluzione.open = apri;
+        if (simile) simile.hidden = !apri;
+        tasto.setAttribute('aria-expanded', String(apri));
+        if (apri && soluzione) { segna(n, 'vista'); dispatchEvent(new Event('resize')); }
+      });
+      // «Indizio di Pi» usa il tasto che l'assistente aggiunge a ogni esercizio (nascosto in questa pagina).
+      v.querySelector('[data-aiuto="indizio"]')!.addEventListener('click', () => v.querySelector<HTMLElement>('.chiedi-pi')?.click());
+      v.querySelector('.df-segnala')!.addEventListener('click', () => document.querySelector<HTMLElement>('[data-apri-segnala]')?.click());
+      v.querySelector('details')!.addEventListener('toggle', (e) => { if ((e.target as HTMLDetailsElement).open) dispatchEvent(new Event('resize')); });
+    }
+    addEventListener('load', () => { for (const v of voci) if (!v.querySelector('.chiedi-pi')) v.querySelector<HTMLElement>('[data-aiuto="indizio"]')!.hidden = true; });
+    // Un link a #esercizio-N apre quell'esercizio.
+    const daIndirizzo = () => {
+      const v = /^#esercizio-\d+$/.test(location.hash) ? df.querySelector<HTMLElement>(location.hash) : null;
+      const d = v?.querySelector('details');
+      if (d && !d.open) { d.open = true; v!.scrollIntoView({ block: 'start' }); }
+    };
+    daIndirizzo();
+    addEventListener('hashchange', daIndirizzo);
+  }
+</script>

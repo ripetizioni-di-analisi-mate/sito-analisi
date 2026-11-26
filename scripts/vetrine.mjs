@@ -340,7 +340,7 @@ for (L of LINGUE) for (const materia of [...A_PAGAMENTO, ...MATERIE_CON_ACCOUNT]
     // --- elenco degli esercizi da fare: tracce visibili, soluzioni tolte ---
     if (existsSync(join(cartella, 'esercizi.html'))) {
       const el = readFileSync(join(cartella, 'esercizi.html'), 'utf8');
-      writeFileSync(join(dest, 'esercizi.html'), senzaSoluzioni(el, `<p class="soluzione-riservata">${T.riservata}</p>`));
+      writeFileSync(join(dest, 'esercizi.html'), senzaSoluzioni(el, `<p class="soluzione-riservata">${T.riservata} <a href="${linkSblocca(materia, T, `${T.pref}/${materia}/${argomento}/esercizi`)}">${T.sblocca}</a></p>`));
     }
 
     // --- esercizi da fare: soluzioni oscurate ---

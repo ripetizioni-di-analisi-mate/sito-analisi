@@ -1,0 +1,103 @@
+---
+// Elenco delle schede svolte «con la formula» (26/11/2026, scelta B di Carmine sulle anteprime): una carta per scheda
+// con l'anteprima della traccia del primo esercizio, il numero di esercizi e lo stato a destra (Vista, Gratis, lucchetto).
+interface Scheda { numero: number; href: string; titolo: string; esercizi: number; anteprima: { tipo: string; html: string }; gratis: boolean }
+interface Props { schede: Scheda[]; materia: string; argomento: string; accesso: 'prezzo' | 'account' | 'libero'; lingua: string }
+const { schede, materia, argomento, accesso, lingua } = Astro.props;
+const L = lingua === 'en' ? { schede: (n: number) => `${n} sheet${n === 1 ? '' : 's'}`, svolti: (n: number) => `${n} worked problem${n === 1 ? '' : 's'}`, vista: 'Seen', gratis: 'Free', riservata: 'With full access', conAccount: 'With a free account' }
+  : lingua === 'es' ? { schede: (n: number) => `${n} ficha${n === 1 ? '' : 's'}`, svolti: (n: number) => `${n} ejercicio${n === 1 ? '' : 's'} resuelto${n === 1 ? '' : 's'}`, vista: 'Vista', gratis: 'Gratis', riservata: 'Con el acceso completo', conAccount: 'Con una cuenta gratuita' }
+  : { schede: (n: number) => (n === 1 ? '1 scheda' : `${n} schede`), svolti: (n: number) => (n === 1 ? '1 esercizio svolto' : `${n} esercizi svolti`), vista: 'Vista', gratis: 'Gratis', riservata: 'Con l’accesso completo', conAccount: 'Con un account gratuito' };
+const totale = schede.reduce((s, x) => s + x.esercizi, 0);
+const spunta = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg>';
+const lucchetto = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="9" width="11" height="8" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>';
+---
+{schede.length > 0 && (
+  <div class="sg" data-materia={materia} data-argomento={argomento} data-accesso={accesso}>
+    <p class="sg-conta"><b>{L.schede(schede.length)}</b>{totale > 0 && <> · {L.svolti(totale)}</>}</p>
+    <ul class="sg-griglia">
+      {schede.map((s) => (
+        <li>
+          <a class="sg-carta" href={s.href} data-n={s.numero}>
+            <span class="sg-testa">
+              <span class="sg-num">{s.numero}</span>
+              <span class="sg-stato">
+                <span class="sg-pill sg-vista"><Fragment set:html={spunta} />{L.vista}</span>
+                {accesso !== 'libero' && (s.gratis
+                  ? <span class="sg-pill sg-gratis sg-acc">{L.gratis}</span>
+                  : <span class="sg-luc sg-acc" title={accesso === 'account' ? L.conAccount : L.riservata}><Fragment set:html={lucchetto} /><span class="sg-lettori">{accesso === 'account' ? L.conAccount : L.riservata}</span></span>)}
+              </span>
+            </span>
+            {s.anteprima.tipo === 'formula' && <span class="sg-anteprima sg-formula" aria-hidden="true" set:html={s.anteprima.html.replace(/<\/?p>/g, '')} />}
+            {s.anteprima.tipo === 'testo' && <span class="sg-anteprima sg-testo" aria-hidden="true"><span class="sg-righe" set:html={s.anteprima.html.replace(/<\/?p>/g, '')} /></span>}
+            <b>{s.titolo}</b>
+            {s.esercizi > 0 && <span class="sg-meta">{L.svolti(s.esercizi)}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style is:global>
+  /* Elenco delle schede svolte con l'anteprima: tutto sotto .sg. */
+  main:has(.sg) nav.passi, main:has(.sg) p.segnala-errore, main:has(.sg) .cerca-capitolo-mobile { display: none; }
+  .sg { font-family: var(--ui); }
+  .sg-lettori { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .sg-conta { margin: 0.5rem 0 1rem; font-size: 0.95rem; color: var(--inchiostro-2); }
+  .sg-conta b { color: var(--inchiostro); }
+  .sg-griglia { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+  .sg-griglia li { display: grid; min-width: 0; }
+  .sg-carta { display: grid; align-content: start; gap: 0.35rem; min-width: 0; padding: 0.85rem 1rem 1rem; background: #fff; border: 1px solid var(--riga); border-radius: 14px; color: var(--inchiostro); text-decoration: none; transition: border-color 0.15s; }
+  .sg-carta:hover { border-color: color-mix(in srgb, var(--verde) 55%, var(--riga)); }
+  .sg-carta.sg-qui { border-color: var(--verde); box-shadow: 0 0 0 1px var(--verde); }
+  .sg-testa { display: flex; align-items: center; justify-content: space-between; min-height: 1.7rem; }
+  .sg-num { display: inline-grid; place-items: center; min-width: 1.65rem; height: 1.65rem; border-radius: 50%; border: 1px solid var(--riga); background: #fff; font: 700 0.8rem var(--ui); color: var(--verde); font-variant-numeric: tabular-nums; }
+  .sg-stato { display: inline-flex; align-items: center; }
+  .sg-pill { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.65rem; border-radius: 999px; font: 600 0.8rem var(--ui); white-space: nowrap; }
+  .sg-pill svg { width: 0.9rem; height: 0.9rem; }
+  .sg-vista { display: none; padding-left: 0.5rem; background: color-mix(in srgb, var(--verde) 10%, transparent); color: var(--verde); }
+  .sg-gratis { background: var(--bronzo-fondo); color: var(--bronzo-scuro); }
+  .sg-luc { display: inline-grid; place-items: center; color: color-mix(in srgb, var(--inchiostro-2) 70%, #fff); }
+  .sg-luc svg { width: 1.05rem; height: 1.05rem; }
+  /* Chi ha la materia (o, per le materie gratuite con account, chi ha fatto l'accesso) non vede «Gratis» e lucchetto. */
+  html.sbloccato .sg[data-accesso="prezzo"] .sg-acc, html.collegato .sg[data-accesso="account"] .sg-acc { display: none; }
+  .sg-carta.sg-letta .sg-acc { display: none; }
+  .sg-carta.sg-letta .sg-vista { display: inline-flex; }
+  .sg-anteprima { display: grid; place-items: center; height: 5.2rem; margin: 0.15rem 0 0.3rem; padding: 0 0.7rem; border-radius: 10px; background: var(--carta); overflow: hidden; font-size: 0.92rem; color: var(--inchiostro); }
+  .sg-anteprima .katex-display { margin: 0; }
+  .sg-anteprima.sg-testo { display: block; height: auto; padding: 0.6rem 0.8rem; font: 0.88rem/1.5 var(--testo); color: var(--inchiostro-2); }
+  .sg-righe { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .sg-carta b { font: 600 1.02rem/1.3 var(--titoli); }
+  .sg-meta { font-size: 0.82rem; color: var(--inchiostro-2); }
+  @media (max-width: 720px) {
+    .sg-griglia { grid-template-columns: 1fr; }
+    .sg-anteprima { height: 4.6rem; }
+    .sg-anteprima.sg-testo { height: auto; }
+  }
+</style>
+
+<script>
+  const sg = document.querySelector<HTMLElement>('.sg');
+  if (sg) {
+    const { materia, argomento } = sg.dataset as { materia: string; argomento: string };
+    const carte = [...sg.querySelectorAll<HTMLElement>('.sg-carta')];
+    // Schede già aperte: dal browser e, con l'account, dal sito (schede aperte per intero).
+    let viste: number[] = [];
+    try { viste = JSON.parse(localStorage.getItem(`svolti-viste-${materia}-${argomento}`) || '[]'); } catch { /* niente memoria */ }
+    const disegna = () => {
+      carte.forEach((c) => c.classList.toggle('sg-letta', viste.includes(Number(c.dataset.n))));
+      // «Continua da qui»: la prima scheda non ancora vista, quando almeno una è stata vista.
+      const prossima = viste.length ? carte.find((c) => !viste.includes(Number(c.dataset.n))) : undefined;
+      carte.forEach((c) => c.classList.toggle('sg-qui', c === prossima));
+    };
+    disegna();
+    if (document.documentElement.classList.contains('collegato')) {
+      fetch(`/api/progressi?materia=${encodeURIComponent(materia)}&argomento=${encodeURIComponent(argomento)}`).then((r) => (r.ok ? r.json() : null)).then((d) => {
+        const dalSito: number[] = d?.dettaglio?.schede || [];
+        if (!dalSito.length) return;
+        viste = [...new Set([...viste, ...dalSito])];
+        disegna();
+      }).catch(() => { /* resta lo stato del browser */ });
+    }
+  }
+</script>

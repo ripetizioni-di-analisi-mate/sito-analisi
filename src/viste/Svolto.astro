@@ -133,3 +133,14 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
     });
   })();
 </script>
+
+<script is:inline define:vars={{ chiaveViste: `svolti-viste-${materia}-${argomento}`, numeroScheda: Number(n) }}>
+  // La scheda aperta per intero si ricorda nel browser: l'elenco delle schede la segna come «Vista».
+  // (La vetrina delle schede riservate, con i soli testi degli esercizi, non conta.)
+  if (!document.querySelector('.svolgimento-riservato')) {
+    try {
+      const viste = JSON.parse(localStorage.getItem(chiaveViste) || '[]');
+      if (!viste.includes(numeroScheda)) { viste.push(numeroScheda); localStorage.setItem(chiaveViste, JSON.stringify(viste)); }
+    } catch (e) { /* niente memoria */ }
+  }
+</script>

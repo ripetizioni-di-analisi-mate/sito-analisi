@@ -202,7 +202,8 @@ if (semestreFiltro) {
         const corpo = s.querySelector('.testo-studio')!.cloneNode(true) as HTMLElement;
         const soluzione = [...corpo.querySelectorAll('details.blocco-soluzione, .soluzione-riservata')];
         soluzione.forEach((x) => x.remove());
-        const fonte = s.querySelector('h2 a')?.getAttribute('href');
+        // Pagina propria dell'esercizio: dal 26/11/2026 l'elenco la indica in data-pagina (prima era il link nel titolo).
+        const fonte = s.getAttribute('data-pagina') || s.querySelector('h2 a')?.getAttribute('href');
         const titolo = s.querySelector('h2')?.textContent?.replace(/^\s*\d+\.\s*/, '').trim() || '';
         li.innerHTML = `<p class="sim-testa"><strong>${T.esercizio} ${i + 1}</strong> <span>${a.breve} · ${num(punti)} ${T.punti}</span></p><h2></h2>`;
         li.querySelector('h2')!.textContent = titolo;

@@ -1569,7 +1569,10 @@ export default {
       if (!io) return json({ errore: 'non collegato' }, 401);
       const materia = url.searchParams.get('materia') || '';
       if (!MATERIE.some((m) => m.slug === materia)) return json({ errore: 'materia' }, 400);
-      return json(await aDO(env, '/liv-progressi', { email: io.email, materia }), 200, { 'cache-control': 'no-store' });
+      // Con «argomento» la risposta porta anche le schede viste e gli esercizi risolti di quel capitolo, uno per uno
+      // (stato delle righe negli elenchi di Esercizi svolti ed Esercizi da fare).
+      const argomento = (url.searchParams.get('argomento') || '').slice(0, 80);
+      return json(await aDO(env, '/liv-progressi', { email: io.email, materia, ...(/^[a-z0-9-]+$/.test(argomento) ? { argomento } : {}) }), 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/esame' && POST) { // data dell'esame di una materia (vuota = tolta)
       const io = await utenteCollegato(env, req).catch(() => null);

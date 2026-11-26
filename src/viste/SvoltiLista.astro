@@ -4,7 +4,9 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import { dataContenuto, piuRecente } from '../lib/date';
-import ElencoSchedeSvolte from '../components/ElencoSchedeSvolte.astro';
+import GrigliaSchedeSvolte from '../components/GrigliaSchedeSvolte.astro';
+import { anteprimaScheda } from '../lib/anteprima-scheda';
+import { conAccount } from '../data/con-account.mjs';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
@@ -19,10 +21,14 @@ const haAltra = voci.length > 0 && (await Promise.all(voci.map(({ voce }) =>
   voceL(lingua === 'it' ? 'en' : 'it', 'svolti', voce.id)))).every((v) => v.tradotta);
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
-const mostraAccesso = materia === 'scienza-delle-costruzioni' && Boolean(materiaL(lingua, materia).prezzo);
-const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
-  ? (lingua === 'en' ? 'Free worked sheet' : 'Scheda completa gratuita')
-  : (lingua === 'en' ? 'Free problems · solutions with full access' : 'Tracce gratuite · svolgimenti con accesso completo');
+// Stato a destra di ogni carta: «Gratis» sulle schede libere e lucchetto sulle altre, per chi non ha ancora l'accesso.
+const accesso = conAccount(materia) ? 'account' : materiaL(lingua, materia).prezzo ? 'prezzo' : 'libero';
+const libere = schedeLibere(materia, argomento);
+const schede = await Promise.all(voci.map(async ({ voce: e, tradotta }) => {
+  const n = Number(numero(e.id));
+  const anteprima = await anteprimaScheda(tradotta ? lingua : 'it', e);
+  return { numero: n, href: link(lingua, `${base}/esercizi-svolti/${n}`), titolo: e.data.titolo, esercizi: anteprima.esercizi, anteprima, gratis: n <= libere };
+}));
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
@@ -37,12 +43,7 @@ const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
   lingua={lingua} nonTradotta={nonTradotta}
 >
   <p class="sopratitolo ripete">{materiaL(lingua, materia).titolo}</p>
-  <h1>{arg.titolo} · {t.sezioni['esercizi-svolti']}</h1>
-  <p class="sommario">{t.svoltiSommario}</p>
+  <h1 class="sg-lettori">{arg.titolo} · {t.sezioni['esercizi-svolti']}</h1>
   {voci.length === 0 && <p class="nota-segnaposto">{t.svoltiInPreparazione}</p>}
-  <ElencoSchedeSvolte schede={voci.map(({ voce: e }) => {
-    const n = numero(e.id);
-    return { numero: n, href: link(lingua, base + '/esercizi-svolti/' + n), titolo: e.data.titolo,
-      accesso: mostraAccesso ? etichettaAccesso(n) : undefined, parole: e.data.parole };
-  })} />
+  <GrigliaSchedeSvolte schede={schede} materia={materia} argomento={argomento} accesso={accesso} lingua={lingua} />
 </Base>

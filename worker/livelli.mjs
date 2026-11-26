@@ -330,7 +330,13 @@ export function progressi(ar, c) {
   for (const r of ar.righe('SELECT argomento, COUNT(*) AS k FROM esercizi WHERE email = ? AND materia = ? GROUP BY argomento', email, materia)) voce(r.argomento).esercizi = r.k;
   for (const r of ar.righe('SELECT argomento, COUNT(DISTINCT domanda) AS k FROM risposte WHERE email = ? AND materia = ? AND corretta = 1 GROUP BY argomento', email, materia)) voce(r.argomento).domande = r.k;
   const e = ar.riga('SELECT data FROM esami WHERE email = ? AND materia = ?', email, materia);
-  return { argomenti: out, esame: e?.data || null };
+  // Per un capitolo: numeri delle schede svolte aperte per intero e degli esercizi da fare risolti.
+  const dettaglio = c.argomento ? {
+    schede: ar.righe("SELECT n FROM viste WHERE email = ? AND materia = ? AND argomento = ? AND tipo = 'esercizi-svolti' ORDER BY n", email, materia, c.argomento).map((r) => r.n),
+    esercizi: ar.righe('SELECT id FROM esercizi WHERE email = ? AND materia = ? AND argomento = ?', email, materia, c.argomento)
+      .map((r) => Number(String(r.id).split('/').pop())).filter((n) => Number.isInteger(n) && n > 0).sort((a, b) => a - b),
+  } : undefined;
+  return { argomenti: out, esame: e?.data || null, ...(dettaglio ? { dettaglio } : {}) };
 }
 export function salvaEsame(ar, c) {
   if (c.data) ar.sql.exec(`INSERT INTO esami (email, materia, data) VALUES (?, ?, ?) ON CONFLICT(email, materia) DO UPDATE SET data = excluded.data`, c.email, c.materia, c.data);
