@@ -609,10 +609,14 @@ export class Archivio {
           provenienze: perPeriodo((g) => riepilogoFonti(this, g)),
           fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
                               COUNT(DISTINCT a.email) AS paganti FROM utenti u
-                              LEFT JOIN (SELECT DISTINCT email FROM acquisti) a ON a.email = u.email
+                              LEFT JOIN (SELECT email FROM acquisti UNION SELECT email FROM lezioni WHERE stato = 'pagata') a ON a.email = u.email
                               GROUP BY COALESCE(u.fonte, 'Non registrata') ORDER BY iscritti DESC`),
-          acquisti: this.righe('SELECT * FROM acquisti ORDER BY id DESC LIMIT 500'),
-          totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
+          // le lezioni individuali pagate con Stripe contano come acquisti (materia «lezione:<slug>»), come le materie
+          acquisti: this.righe(`SELECT * FROM (SELECT id, email, materia, importo, valuta, transazione, creato FROM acquisti
+                                UNION ALL SELECT NULL, email, 'lezione:' || materia, importo, 'EUR', COALESCE(pagamento, id), creato
+                                FROM lezioni WHERE stato = 'pagata') ORDER BY creato DESC LIMIT 500`),
+          totali: this.righe(`SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia
+                              UNION ALL SELECT 'lezione:' || materia, COUNT(*), SUM(importo) FROM lezioni WHERE stato = 'pagata' GROUP BY materia`),
           // livello e studio di ogni studente (EXP totali in utenti.exp; minuti e risposte dalle tabelle dei livelli)
           // attivita = ultima volta che lo studente ha usato il sito con l'account (pagine, studio, domande), in millisecondi
           utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.fonte_conversione, u.corso, u.creato, u.ultimo_accesso, u.premium_manuale, u.gm_manuale, GROUP_CONCAT(a.materia, ', ') AS materie,

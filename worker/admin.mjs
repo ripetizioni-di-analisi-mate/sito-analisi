@@ -371,7 +371,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
   const iniziali = (u) => ((u.nome || u.email || '?').trim().split(/[\s@._-]+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join('') || '?').toUpperCase();
   function coloreDa(s) { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 360; return 'hsl(' + h + ' 38% 46%)'; }
   const nomeMateria = (m) => (M[m] ? M[m].titolo : m);
-  const breveMateria = (m) => (M[m] ? M[m].breve || M[m].titolo : m);
+  const LEZ = 'lezione:';
+  const breveMateria = (m) => (String(m).startsWith(LEZ) ? 'Lezione individuale · ' + breveMateria(m.slice(LEZ.length)) : M[m] ? M[m].breve || M[m].titolo : m);
+  const coloreVendita = (m) => (M[String(m).startsWith(LEZ) ? m.slice(LEZ.length) : m] || {}).colore;
   function nomeSezione(s) {
     if (s === 'home') return 'Home'; if (s === 'en') return 'Home inglese';
     const [m, a] = s.split('/');
@@ -929,10 +931,11 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       '<div class="card kpi"><span class="etichetta">Incasso da sempre</span><b>' + eur.format(somma(D.totali.map((t) => t.incasso || 0))) + '</b><span class="delta pari">' + nf.format(somma(D.totali.map((t) => t.vendite))) + ' vendite in tutto</span></div></div>' +
       '<div class="due"><section class="card"><header><h2>Incasso giornaliero</h2><span class="nota">importi lordi prima dei rimborsi e delle commissioni</span></header><div class="corpo"><div class="grafico" id="g-incasso"></div></div></section>' +
       '<section class="card"><header><h2>Per materia</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
-      barre(A_PAGAMENTO.map((m) => ({ nome: breveMateria(m), valore: Math.round(((perM[m] || {}).e || 0) * 100) / 100, colore: M[m].colore, extra: '' })).filter((r) => r.valore > 0).sort((a, b) => b.valore - a.valore), { formato: (x) => eur.format(x), vuoto: 'Nessuna vendita nel periodo' }) +
+      barre(A_PAGAMENTO.map((m) => ({ nome: breveMateria(m), valore: Math.round(((perM[m] || {}).e || 0) * 100) / 100, colore: M[m].colore, extra: '' }))
+        .concat([{ nome: 'Lezioni individuali', valore: Math.round(somma(nel.filter((a) => String(a.materia).startsWith(LEZ)).map((a) => Number(a.importo) || 0)) * 100) / 100, colore: 'var(--c4)', extra: '' }]).filter((r) => r.valore > 0).sort((a, b) => b.valore - a.valore), { formato: (x) => eur.format(x), vuoto: 'Nessuna vendita nel periodo' }) +
       '<p class="nota" style="margin:1rem 0 .3rem">Prezzi attuali</p><div class="scelte">' + A_PAGAMENTO.map((m) => '<span class="chip"><i class="punto" style="background:' + M[m].colore + '"></i>' + esc(breveMateria(m)) + ' · ' + (M[m].prezzo ? eur.format(M[m].prezzo) : '—') + '</span>').join('') + '</div></div></section></div>' +
       '<section class="card"><header><h2>Pagamenti</h2><a class="bottone" href="/admin/vendite-stripe">Fatture e rimborsi Stripe</a><span class="nota">' + nf.format(D.acquisti.length) + ' in tutto</span></header><div class="tabella"><table><thead><tr><th>Data</th><th>Studente</th><th>Materia</th><th class="destra">Importo</th><th class="solo-largo">Transazione</th></tr></thead><tbody>' +
-      (D.acquisti.length ? D.acquisti.map((a) => '<tr class="cliccabile" data-email="' + esc(a.email) + '"><td>' + dataOra(a.creato) + '</td><td>' + esc(a.email) + '</td><td><i class="punto" style="background:' + (M[a.materia] || {}).colore + ';margin-right:.4rem"></i>' + esc(breveMateria(a.materia)) + '</td><td class="destra cifra"><b>' + eur.format(a.importo) + '</b></td><td class="nota solo-largo">' + (String(a.transazione).startsWith('pi_') ? 'Stripe · ' : String(a.transazione).startsWith('txn_') ? 'Paddle · ' : '') + esc(a.transazione) + '</td></tr>').join('') :
+      (D.acquisti.length ? D.acquisti.map((a) => '<tr class="cliccabile" data-email="' + esc(a.email) + '"><td>' + dataOra(a.creato) + '</td><td>' + esc(a.email) + '</td><td><i class="punto" style="background:' + coloreVendita(a.materia) + ';margin-right:.4rem"></i>' + esc(breveMateria(a.materia)) + '</td><td class="destra cifra"><b>' + eur.format(a.importo) + '</b></td><td class="nota solo-largo">' + (String(a.transazione).startsWith('pi_') ? 'Stripe · ' : String(a.transazione).startsWith('txn_') ? 'Paddle · ' : '') + esc(a.transazione) + '</td></tr>').join('') :
         '<tr><td colspan="5"><div class="vuoto"><b>Nessun pagamento ancora</b>Le vendite compaiono dopo la conferma del pagamento.</div></td></tr>') + '</tbody></table></div></section>';
     grafico($('#g-incasso'), g, [{ nome: 'Incasso', valori: inc, colore: 'var(--c5)', formato: (x) => eur.format(x) }], { id: 'inc', euro: true, titolo: 'Incasso giornaliero' });
   }
