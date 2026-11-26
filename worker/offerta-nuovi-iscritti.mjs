@@ -51,6 +51,30 @@ function senzaConsenso(ar, ora = Date.now()) {
       AND NOT EXISTS (SELECT 1 FROM abilitazioni a WHERE a.email = u.email)`, dal)?.n || 0;
 }
 
+// Tutti gli account che hanno dato il consenso alle offerte (e non l'hanno revocato), con quanto hanno pagato e,
+// se non possono ricevere l'offerta di 24 ore, il motivo. Per la dashboard (richiesta di Carmine del 26/11/2026).
+function consensi(ar, idonei, ora = Date.now()) {
+  const dal = new Date(ora - FINESTRA_GIORNI * GIORNO).toISOString();
+  return ar.righe(`
+    SELECT u.email, u.nome, u.creato, p.confermato AS consenso,
+      (SELECT COALESCE(SUM(a.importo), 0) FROM acquisti a WHERE a.email = u.email) AS pagato,
+      (SELECT COUNT(*) FROM abilitazioni b WHERE b.email = u.email) AS materie,
+      COALESCE(u.corso, '') <> '' OR u.premium_manuale IS NOT NULL OR u.gm_manuale IS NOT NULL AS speciale,
+      EXISTS (SELECT 1 FROM email_inviate e WHERE e.email = u.email AND e.tipo = ?)
+        OR EXISTS (SELECT 1 FROM promozioni_email x WHERE x.email = u.email AND x.materia = ?) AS ricevuta
+    FROM utenti u JOIN email_preferenze p ON p.email = u.email
+    WHERE u.hash IS NOT NULL AND p.confermato IS NOT NULL AND p.revocato IS NULL
+    ORDER BY p.confermato DESC, u.email LIMIT 500`, TIPO_OFFERTA_24H, MATERIA_TUTTE).map((r) => ({
+    email: r.email, nome: r.nome, creato: r.creato, consenso: r.consenso,
+    pagato: Math.round(Number(r.pagato || 0) * 100) / 100,
+    idoneo: idonei.has(r.email),
+    motivo: idonei.has(r.email) ? '' : r.ricevuta ? 'Offerta già ricevuta'
+      : r.pagato > 0 ? 'Ha già acquistato' : r.materie ? 'Ha già materie nell’account'
+      : r.speciale ? 'Studente dei tuoi corsi o account Premium/GM'
+      : r.creato < dal ? 'Iscritto da più di ' + FINESTRA_GIORNI + ' giorni' : '',
+  }));
+}
+
 export function componiOfferta24h(r, { percentuale, scade, link, disattiva }) {
   const en = r.lingua === 'en';
   const nome = (r.nome || '').trim().split(/\s+/)[0];
@@ -201,6 +225,7 @@ export async function archivioOfferta24h(ar, p, c, { firmaToken, leggiToken, con
       disponibile: Boolean(ar.env.RESEND_API_KEY), giorni: FINESTRA_GIORNI, percentuale: PERCENTUALE_PREDEFINITA,
       massimoDestinatari: MAX_DESTINATARI,
       destinatari: candidatiOfferta24h(ar).map(({ email, nome, creato }) => ({ email, nome, creato })),
+      consensi: consensi(ar, new Set(candidatiOfferta24h(ar).map((r) => r.email))),
       senzaConsenso: senzaConsenso(ar),
     };
   }
