@@ -78,8 +78,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   )}
   {lingua === 'it' && (
     <a class="indice-scaffale" href="/pacchetti" data-sconto-bronzo aria-current={qui === '/pacchetti' ? 'page' : undefined}>
-      <span class="is-icona" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg></span>
       <strong data-luccichio-bronzo>Pacchetti e sconti</strong>
+      <span class="is-icona" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg></span>
     </a>
   )}
   {localizzato && <div class="lezioni-indice">
@@ -296,10 +296,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 
 <style>
   .indice-materia-corrente { flex-direction: column; align-items: flex-start; gap: 0.2rem; text-wrap: balance; }
-  .indice-scaffale { display: flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 2.85rem; margin: 0.75rem 0 1rem; padding: 0.45rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); background: var(--bronzo-fondo); font-family: var(--ui); text-decoration: none; }
+  .indice-scaffale { position: relative; display: flex; align-items: center; justify-content: center; min-height: 2.85rem; margin: 0.75rem 0 1rem; padding: 0.45rem 2.75rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); background: var(--bronzo-fondo); font-family: var(--ui); text-decoration: none; }
   .indice-scaffale:hover { border-color: #c9ac89; background: #ede1d1; }
   .indice-scaffale[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
-  .is-icona { display: grid; place-items: center; flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--bronzo-icona); color: #fffdf9; }
+  .is-icona { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); display: grid; place-items: center; flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--bronzo-icona); color: #fffdf9; }
   .is-icona svg { width: 0.9rem; height: 0.9rem; }
   .indice-scaffale strong { --bronzo-testo: var(--bronzo-scuro); color: var(--bronzo-scuro); font: 600 0.95rem/1.3 var(--ui); white-space: nowrap; }
   .indice-materie li.best-seller { position: relative; overflow: hidden; }
