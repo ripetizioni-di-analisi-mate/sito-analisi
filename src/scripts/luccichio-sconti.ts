@@ -1,5 +1,5 @@
 // Il riflesso attraversa soltanto le scritte visibili e resta spento fra i passaggi.
-// Regole del 26/11/2026 (scelta di Carmine): un passaggio ogni 60 secondi; dopo che il visitatore ha cliccato
+// Regole del 26/11/2026 (scelta di Carmine): un passaggio a ogni apertura della pagina, poi uno ogni 60 secondi; dopo che il visitatore ha cliccato
 // una volta sul riquadro degli sconti, uno ogni 3 minuti; spento per chi ha già acquistato. Il Worker scrive su
 // <html> data-materie con le materie dell'account; le materie gratuite con account non contano.
 import { conAccount } from '../data/con-account.mjs';
@@ -24,7 +24,8 @@ if (collegamenti.length && !haAcquistato) {
   let fineTimer = 0;
 
   const disponibile = () => !document.hidden && (prova || !riduciMovimento.matches);
-  let primo = prova;
+  // Il primo passaggio arriva a ogni apertura o aggiornamento della pagina, appena la scritta è in vista.
+  let primo = true;
   const visibile = (elemento: HTMLElement) => {
     const r = elemento.getBoundingClientRect();
     return elemento.getClientRects().length > 0 && r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight;
@@ -45,14 +46,19 @@ if (collegamenti.length && !haAcquistato) {
       timer = 0;
       if (!disponibile()) return;
       const presenti = collegamenti.filter(visibile);
-      if (!presenti.length) { programma(); return; }
+      if (!presenti.length) {
+        if (primo) { timer = window.setTimeout(() => programma(), 1000); return; }
+        programma();
+        return;
+      }
+      primo = false;
       presenti.forEach((elemento) => elemento.classList.add('bronzo-luccichio'));
       fineTimer = window.setTimeout(() => {
         collegamenti.forEach((elemento) => elemento.classList.remove('bronzo-luccichio'));
         fineTimer = 0;
         programma();
       }, 1850);
-    }, primo ? (primo = false, 1500) : intervallo());
+    }, primo ? 1500 : intervallo());
   }
 
   function segnaCliccato() {
