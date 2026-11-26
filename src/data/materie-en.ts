@@ -546,7 +546,20 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'tolc-e': { titolo: 'TOLC-E (Economics)', breve: 'TOLC-E', descrizione: 'The mathematics, logic and reading comprehension of the TOLC-E, the CISIA test for Economics degree programmes.', argomenti: {} },
-  'tiec': { titolo: 'TIEC Cattolica (Economics)', breve: 'TIEC Cattolica', descrizione: 'The mathematics, logic, reading comprehension and English of the TIEC, the admission test of Università Cattolica for its Economics degree programmes. Materials are in Italian.', argomenti: {} },
+  'tiec': {
+    titolo: 'TIEC Cattolica (Economics)', breve: 'TIEC Cattolica',
+    descrizione: 'Prepare for the TIEC, the entrance test for economics programs at Università Cattolica. Five mathematics chapters cover the university’s syllabus, followed by logic, reading comprehension, and English. Lessons, worked examples, exercises, and four-option practice questions are available in English and Italian. The Italian-language mock test has 48 questions, a 60-minute time limit, and a minimum score for each section.',
+    argomenti: {
+      'insiemi-numeri-e-percentuali': { titolo: 'Mathematics · Sets, numbers, and percentages', breve: 'Sets and percentages' },
+      'potenze-esponenziali-e-logaritmi': { titolo: 'Mathematics · Powers, exponentials, and logarithms', breve: 'Powers and logarithms' },
+      'calcolo-letterale-e-frazioni-algebriche': { titolo: 'Mathematics · Algebraic expressions and rational expressions', breve: 'Algebraic expressions' },
+      'equazioni-disequazioni-e-sistemi': { titolo: 'Mathematics · Equations, inequalities, and systems of equations', breve: 'Equations and inequalities' },
+      'geometria-analitica-e-trigonometria': { titolo: 'Mathematics · Analytic geometry and introductory trigonometry', breve: 'Analytic geometry' },
+      'logica': { titolo: 'Logic', breve: 'Logic' },
+      'comprensione-del-testo': { titolo: 'Reading comprehension', breve: 'Reading comprehension' },
+      'inglese': { titolo: 'English', breve: 'English' },
+    },
+  },
   'tolc-s': {
     titolo: 'TOLC-S (Science)', breve: 'TOLC-S',
     descrizione: 'Preparation for the TOLC-S for science degrees: mathematics, reasoning and reading comprehension, biology, chemistry, physics, Earth science and English. Illustrated theory, worked exercises with explained steps and 1,080 five-option questions with explanations, in Italian and English. Section-timed simulations in Italian.',
