@@ -36,6 +36,8 @@ export function accodaSorpassi(ar, email, prima, dopo) {
     const u = ar.riga('SELECT hash, COALESCE(avvisi_lega, promemoria, 1) AS attivi FROM utenti WHERE email = ?', m.email);
     // Rispetta anche chi aveva già rinunciato alle email per tornare a studiare.
     if (!u?.hash || !u.attivi) return;
+    // Un solo avviso a settimana (scelta di Carmine del 26/11/2026): dopo il primo invio i sorpassi non mandano email.
+    if (ar.riga("SELECT 1 AS x FROM leghe_avvisi WHERE email = ? AND settimana = ? AND stato IN ('invio', 'inviato')", m.email, prima.settimana)) return;
     const pendente = ar.riga("SELECT id FROM leghe_avvisi WHERE email = ? AND settimana = ? AND stato = 'attesa'", m.email, prima.settimana);
     if (pendente) ar.sql.exec('UPDATE leghe_avvisi SET a = ? WHERE id = ?', a, pendente.id);
     else ar.sql.exec(`INSERT INTO leghe_avvisi (id, email, settimana, lega, gruppo, da, a, creato, prossimo)
@@ -93,7 +95,8 @@ export async function inviaAvvisoLega(ar, env, firmaToken) {
   const u = ar.riga('SELECT nome, lingua, hash, COALESCE(avvisi_lega, promemoria, 1) AS attivi FROM utenti WHERE email = ?', r.email);
   const cl = fotografiaLega(ar, r.email);
   const pos = cl?.membri.findIndex((m) => m.email === r.email) + 1;
-  if (!u?.hash || !u.attivi || !cl || cl.lega !== r.lega || cl.gruppo !== r.gruppo || (r.stato === 'attesa' && (!pos || pos <= r.da))) {
+  const giaInviato = r.stato === 'attesa' && ar.riga("SELECT 1 AS x FROM leghe_avvisi WHERE email = ? AND settimana = ? AND id != ? AND stato IN ('invio', 'inviato')", r.email, r.settimana, r.id);
+  if (giaInviato || !u?.hash || !u.attivi || !cl || cl.lega !== r.lega || cl.gruppo !== r.gruppo || (r.stato === 'attesa' && (!pos || pos <= r.da))) {
     ar.sql.exec("UPDATE leghe_avvisi SET stato = 'annullato' WHERE id = ?", r.id);
     return;
   }

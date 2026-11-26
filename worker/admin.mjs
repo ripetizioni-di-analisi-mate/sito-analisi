@@ -1326,8 +1326,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
 
   function email() {
     const modelli = {
-      studio: ['Riprendi lo studio', 'Dopo 3 e 10 giorni di inattività.'],
-      lega: ['Sorpasso in lega', 'Quando cambia la posizione in classifica.'],
+      studio: ['Riprendi lo studio', 'Dopo 2, 4, 7, 10 e 14 giorni di inattività, poi una a settimana fino a due mesi (al massimo una ogni due giorni).'],
+      lega: ['Sorpasso in lega', 'Al primo sorpasso della settimana (al massimo una a settimana).'],
       'offerta-24h': ['Offerta 24 ore ai nuovi iscritti', 'Dal riquadro qui sopra, una volta per iscritto.'],
     };
     const formatoData = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeZone: 'Europe/Rome' });

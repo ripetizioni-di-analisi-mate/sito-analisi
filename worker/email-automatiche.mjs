@@ -13,6 +13,11 @@ const ORIGINE = 'analisi-1';
 const DESTINAZIONE = 'analisi-2';
 const MATERIE_ATTIVE = new Map(MATERIE.filter((m) => m.attiva).map((m) => [m.slug, m]));
 export const FLUSSI_EMAIL = ['prima-prova', 'studio', 'seconda-materia'];
+// Promemoria «Riprendi da dove eri» (scelta di Carmine del 26/11/2026): giorni dall'ultima attività con l'account.
+// Più fitti nelle prime due settimane, poi uno a settimana fino a due mesi.
+export const GIORNI_STUDIO = [2, 4, 7, 10, 14, 21, 28, 35, 42, 49, 56];
+// Email automatiche al giorno (oltre a recupero password, promemoria dalla dashboard e avvisi della lega, contati a parte).
+const MAX_AUTOMATICHE = 40;
 const ISO = (t) => new Date(t).toISOString();
 const giornoDi = (t) => ISO(t).slice(0, 10);
 const pref = (lingua) => lingua === 'en' ? '/en' : '';
@@ -187,16 +192,18 @@ function accoda(ar, ora, prove) {
   }
 
   if (flussoAttivo(ar, 'studio') && disponibile(ar.env, 'studio')) {
-    for (const giorni of [3, 10]) {
+    // GIORNI_STUDIO: giorni dall'ultima attività. Se un turno salta (limite del giorno), resta valido fino al turno dopo.
+    GIORNI_STUDIO.forEach((giorni, i) => {
+      const finestra = Math.min(2, (GIORNI_STUDIO[i + 1] ?? giorni + 3) - giorni - 1) || 1;
       for (const r of ar.righe(`SELECT u.email, s.materia, s.argomento, ${ultimaAttivita} AS ultima
         FROM utenti u ${conSessione} WHERE u.hash IS NOT NULL AND COALESCE(u.promemoria, 1) = 1
         AND u.attivo <= ? AND ${ultimaAttivita} BETWEEN ? AND ?
         AND NOT EXISTS (SELECT 1 FROM email_automatiche f WHERE f.email = u.email AND f.tipo = 'studio'
           AND f.evento = CAST(${ultimaAttivita} AS TEXT) || '/' || ?)
-        ORDER BY ultima LIMIT 40`, ora - giorni * GIORNO, ora - (giorni + 2) * GIORNO, ora - giorni * GIORNO, giorni)) {
-        inserisci('studio', r, `${r.ultima}/${giorni}`, r.ultima + (giorni + 2) * GIORNO);
+        ORDER BY ultima LIMIT 40`, ora - giorni * GIORNO, ora - (giorni + finestra) * GIORNO, ora - giorni * GIORNO, giorni)) {
+        inserisci('studio', r, `${r.ultima}/${giorni}`, r.ultima + (giorni + finestra) * GIORNO);
       }
-    }
+    });
   }
 
   if (flussoAttivo(ar, 'seconda-materia') && disponibile(ar.env, 'seconda-materia')) {
@@ -308,7 +315,8 @@ export async function eseguiEmailAutomatiche(ar, { giornaliero, catalogo = {}, p
     const n = ar.riga('SELECT COUNT(*) AS n FROM email_automatiche WHERE inviato >= ? OR (stato = ? AND iniziato >= ?)', Date.parse(oggi), 'invio', Date.parse(oggi))?.n || 0;
     const rec = ar.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", oggi)?.n || 0;
     const prom = ar.riga('SELECT COUNT(*) AS n FROM promemoria WHERE giorno = ?', oggi)?.n || 0;
-    return Math.max(0, Math.min(20 - n, 90 - n - rec - prom - contaPromozioniOggi(ar, Date.now())));
+    const lega = ar.riga("SELECT COUNT(*) AS n FROM email_inviate WHERE tipo = 'lega' AND inviato >= ?", Date.parse(oggi))?.n || 0;
+    return Math.max(0, Math.min(MAX_AUTOMATICHE - n, 90 - n - rec - prom - lega - contaPromozioniOggi(ar, Date.now())));
   };
   let inviati = 0;
   for (let i = 0; i < 6 && abilitati.length; i++) {
@@ -319,7 +327,8 @@ export async function eseguiEmailAutomatiche(ar, { giornaliero, catalogo = {}, p
     const annulla = () => ar.sql.exec("UPDATE email_automatiche SET stato = 'annullata', payload = NULL WHERE id = ? AND stato IN ('attesa','invio')", f.id);
     const u = destinatarioValido(ar, f);
     if (!u) { annulla(); continue; }
-    if (f.tipo === 'studio' && ar.riga('SELECT 1 FROM promemoria WHERE email = ? AND giorno = ?', f.email, oggi)) {
+    // Al massimo un promemoria ogni due giorni, anche quando due turni del calendario sono vicini.
+    if (f.tipo === 'studio' && ar.riga('SELECT 1 FROM promemoria WHERE email = ? AND giorno >= ?', f.email, giornoDi(ora - GIORNO))) {
       annulla(); continue;
     }
     if (f.tipo !== 'studio') {

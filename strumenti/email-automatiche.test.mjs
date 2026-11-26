@@ -104,18 +104,23 @@ test('prima prova solo dopo doppia conferma e senza studio già iniziato', async
   assert.equal(stato.flussi.find((f) => f.tipo === 'prima-prova').consegnate, 1);
 });
 
-test('richiami al giorno 3 e 10, con stop al rientro e deduplicazione', async (t) => {
-  const b = banco(t), email = 'andrea@esempio.test', torna = 'elena@esempio.test', attivo = b.ora - 3 * GIORNO;
+test('richiami ai giorni 2, 4, 7, 10, 14, poi settimanali fino a 56, con stop al rientro e deduplicazione', async (t) => {
+  const b = banco(t), email = 'andrea@esempio.test', torna = 'elena@esempio.test', attivo = b.ora - GIORNO / 2;
   for (const e of [email, torna]) { b.utente(e, attivo, attivo); b.studia(e, attivo); }
-  await b.cron(); await b.cron();
-  assert.deepEqual(b.invii.map((m) => m.to[0]), [email, torna]);
-  b.db.prepare('UPDATE utenti SET attivo = ? WHERE email = ?').run(b.ora + 6 * GIORNO, torna);
-  b.avanza(7 * GIORNO);
-  await b.cron(); await b.cron();
-  assert.deepEqual(b.invii.map((m) => m.to[0]), [email, torna, email]);
+  const giorni = { [email]: [], [torna]: [] };
+  for (let d = 0; d < 70; d++) {
+    const prima = b.invii.length;
+    await b.cron(); await b.cron(false);
+    for (const m of b.invii.slice(prima)) giorni[m.to[0]].push(d);
+    // Elena torna a studiare dopo il primo promemoria: il calendario riparte dal rientro.
+    if (d === 3) b.db.prepare('UPDATE utenti SET attivo = ? WHERE email = ?').run(b.ora, torna);
+    b.avanza(GIORNO);
+  }
+  assert.deepEqual(giorni[email], [2, 4, 7, 10, 14, 21, 28, 35, 42, 49, 56]);
+  assert.deepEqual(giorni[torna].slice(0, 3), [2, 5, 7]);
   assert.match(b.invii[2].text, /analisi-1\/limiti\/domande/);
-  b.avanza(5 * GIORNO); await b.cron();
-  assert.equal(b.invii.length, 3);
+  const oggetti = b.invii.filter((m) => m.to[0] === email).map((m) => m.subject);
+  assert.equal(new Set(oggetti).size >= 8, true, 'gli oggetti cambiano da un promemoria all’altro');
 });
 
 test('offerta limitata ad Analisi 2, attribuita una sola volta e assente per chi la possiede', async (t) => {

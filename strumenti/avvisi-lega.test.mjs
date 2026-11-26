@@ -87,6 +87,17 @@ test('sorpassi ravvicinati vengono riuniti prima del primo invio', (t) => {
   assert.equal(anna.length, 1); assert.equal(anna[0].da, 1); assert.equal(anna[0].a, 3);
 });
 
+test('al massimo un avviso di sorpasso a settimana per studente', async (t) => {
+  const b = banco(t);
+  b.utenti('anna@test.invalid', 100, 1); b.utenti('luca@test.invalid', 80, 2); b.utenti('mario@test.invalid', 60, 3);
+  aggiungi(b.ar, 'luca@test.invalid', 21, 'risposta');
+  await b.api('/sfi-lega', { email: 'luca@test.invalid' }); await b.sveglia();
+  assert.equal(b.invii.length, 1);
+  aggiungi(b.ar, 'mario@test.invalid', 60, 'risposta');
+  await b.api('/sfi-lega', { email: 'mario@test.invalid' }); await b.sveglia(); await b.sveglia();
+  assert.deepEqual(b.invii.map((m) => JSON.parse(m.body).to[0]), ['anna@test.invalid', 'luca@test.invalid']);
+});
+
 test('la preferenza precedente è rispettata e si può riattivare soltanto la lega', async (t) => {
   const b = banco(t);
   b.utenti('anna@test.invalid', 80, 1, { promemoria: 0 }); b.utenti('luca@test.invalid', 60, 2);

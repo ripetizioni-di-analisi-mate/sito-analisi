@@ -18,13 +18,26 @@ const TESTI = {
       [(n, a) => `${n}, riprendiamo ${a}?`, () => "Pochi minuti ogni giorno aiutano a ricordare i procedimenti più di molte ore in un giorno solo. Puoi ripartire con qualche domanda a tempo sullo stesso argomento."],
       [(n, a, m) => `Un po' di ${m} anche oggi`, () => "Per l'esame conta la costanza: ogni giorno in cui studi anche poco rende più facile il giorno successivo. Bastano poche domande a tempo per riprendere il filo."],
       [(n) => `${n}, una serie di domande per oggi`, (m) => `Gli argomenti di ${m} si costruiscono uno sull'altro, quindi riprenderli spesso aiuta a seguire quelli successivi. Oggi puoi dedicare dieci minuti alle domande a tempo sull'ultimo che avevi aperto.`],
+      [(n, a) => `Riparti da ${a}, ${n}`, () => 'Riprendere dopo qualche giorno di pausa costa meno fatica di quanto sembri. Le prime domande riportano alla mente i procedimenti, e da lì si va avanti con più sicurezza.'],
+      [(n, a, m) => `${n}, oggi è un buon giorno per ${m}`, (m, a) => `Ogni esame superato è fatto di tante giornate di studio normali, una dopo l'altra. Oggi puoi aggiungerne una con una serie di domande a tempo su ${a}.`],
+      [(n) => `${n}, continua a salire di livello`, () => 'Ogni risposta corretta ti dà EXP e ti avvicina al livello successivo. I punti che hai già accumulato sono il lavoro che hai fatto finora, e una serie di domande oggi lo porta un po’ più avanti.'],
+      [(n, a, m) => `Un passo alla volta verso l'esame di ${m}`, () => 'Chi arriva preparato all’esame ha ripreso gli argomenti tante volte, anche per pochi minuti. Una serie di domande a tempo è uno di questi momenti, e puoi farla adesso.'],
     ],
     // senza domande a tempo per quell'argomento: si torna alla teoria
     teoria: [
       [(n, a, m) => `Dieci minuti di ${m}, ${n}?`, () => "Chi studia un po' ogni giorno arriva all'esame con gli esercizi ancora chiari in mente. Ti propongo dieci minuti adesso, ripartendo dall'argomento che avevi lasciato."],
       [(n, a) => `${n}, riprendiamo ${a}?`, () => 'Pochi minuti ogni giorno aiutano a ricordare i procedimenti più di molte ore in un giorno solo. Puoi ripartire dalla pagina che stavi leggendo.'],
+      [(n, a, m) => `Un po' di ${m} anche oggi`, () => 'Per l’esame conta la costanza: ogni giorno in cui studi anche poco rende più facile il giorno successivo. Puoi riprendere dalla pagina che stavi leggendo.'],
+      [(n, a) => `Riparti da ${a}, ${n}`, () => 'Riprendere dopo qualche giorno di pausa costa meno fatica di quanto sembri. Rileggere la pagina dove ti eri fermato riporta alla mente i passaggi, e da lì si va avanti.'],
+      [(n, a, m) => `${n}, oggi è un buon giorno per ${m}`, (m, a) => `Ogni esame superato è fatto di tante giornate di studio normali, una dopo l'altra. Oggi puoi aggiungerne una ripartendo da ${a}.`],
+      [(n) => `${n}, continua a salire di livello`, () => 'Ogni minuto di studio attivo ti dà EXP e ti avvicina al livello successivo. Qualche minuto oggi porta un po’ più avanti il lavoro che hai già fatto.'],
     ],
-    generico: [(n) => `Dieci minuti di studio, ${n}?`, () => "Chi studia un po' ogni giorno arriva all'esame con gli esercizi ancora chiari in mente. Ti propongo dieci minuti adesso: scegli un argomento e prova una serie di domande a tempo."],
+    generico: [
+      [(n) => `Dieci minuti di studio, ${n}?`, () => "Chi studia un po' ogni giorno arriva all'esame con gli esercizi ancora chiari in mente. Ti propongo dieci minuti adesso: scegli un argomento e prova una serie di domande a tempo."],
+      [(n) => `${n}, oggi è un buon giorno per studiare`, () => 'Ogni esame superato è fatto di tante giornate di studio normali, una dopo l’altra. Oggi puoi cominciare con una serie di domande a tempo sull’argomento che preferisci.'],
+      [(n) => `Un po' di studio anche oggi, ${n}?`, () => 'Per l’esame conta la costanza: ogni giorno in cui studi anche poco rende più facile il giorno successivo. Bastano dieci minuti di domande a tempo per cominciare.'],
+      [(n) => `${n}, continua a salire di livello`, () => 'Ogni risposta corretta alle domande a tempo ti dà EXP e ti avvicina al livello successivo. Una serie richiede una decina di minuti.'],
+    ],
     riprendi: 'Riprendi da dove eri', scegli: 'Scegli un argomento',
     livello: (l) => `Livello ${l}`,
     exp: (x, m, p) => (p === null ? `${x} EXP · livello massimo` : `${x} EXP · mancano ${m} EXP al livello ${p}`),
@@ -41,12 +54,25 @@ const TESTI = {
       [(n, a) => `${n}, shall we pick up ${a} again?`, () => 'A few minutes every day keep the methods in mind better than many hours on a single day. You can start again with some timed questions on the same topic.'],
       [(n, a, m) => `A little ${m} today too`, () => 'What counts for the exam is consistency: every day you study, even briefly, makes the next one easier. A few timed questions are enough to pick up the thread.'],
       [(n) => `${n}, a set of questions for today`, (m) => `The topics of ${m} build on one another, so going back to them often helps with the ones that follow. Today you can spend ten minutes on timed questions about the last one you opened.`],
+      [(n, a) => `Start again from ${a}, ${n}`, () => 'Getting back to work after a few days off takes less effort than it seems. The first questions bring the methods back to mind, and from there you move on with more confidence.'],
+      [(n, a, m) => `${n}, today is a good day for ${m}`, (m, a) => `Every passed exam is made of many ordinary study days, one after the other. Today you can add one with a set of timed questions on ${a}.`],
+      [(n) => `${n}, keep levelling up`, () => 'Every correct answer gives you XP and brings you closer to the next level. The points you have collected are the work you have done so far, and a set of questions today takes it a little further.'],
+      [(n, a, m) => `One step at a time towards your ${m} exam`, () => 'Students who reach the exam well prepared have gone back to the topics many times, even for a few minutes. A set of timed questions is one of those moments, and you can do it now.'],
     ],
     teoria: [
       [(n, a, m) => `Ten minutes of ${m}, ${n}?`, () => 'Studying a little every day takes you to the exam with the exercises still clear in your mind. How about ten minutes now, starting from the topic you left.'],
       [(n, a) => `${n}, shall we pick up ${a} again?`, () => 'A few minutes every day keep the methods in mind better than many hours on a single day. You can start again from where you stopped reading.'],
+      [(n, a, m) => `A little ${m} today too`, () => 'What counts for the exam is consistency: every day you study, even briefly, makes the next one easier. You can start again from the page you were reading.'],
+      [(n, a) => `Start again from ${a}, ${n}`, () => 'Getting back to work after a few days off takes less effort than it seems. Reading again the page where you stopped brings the steps back to mind, and from there you move on.'],
+      [(n, a, m) => `${n}, today is a good day for ${m}`, (m, a) => `Every passed exam is made of many ordinary study days, one after the other. Today you can add one starting again from ${a}.`],
+      [(n) => `${n}, keep levelling up`, () => 'Every minute of active study gives you XP and brings you closer to the next level. A few minutes today take the work you have already done a little further.'],
     ],
-    generico: [(n) => `Ten minutes of study, ${n}?`, () => 'Studying a little every day takes you to the exam with the exercises still clear in your mind. How about ten minutes now: choose a topic and try a set of timed questions.'],
+    generico: [
+      [(n) => `Ten minutes of study, ${n}?`, () => 'Studying a little every day takes you to the exam with the exercises still clear in your mind. How about ten minutes now: choose a topic and try a set of timed questions.'],
+      [(n) => `${n}, today is a good day to study`, () => 'Every passed exam is made of many ordinary study days, one after the other. Today you can start with a set of timed questions on the topic you prefer.'],
+      [(n) => `A little study today too, ${n}?`, () => 'What counts for the exam is consistency: every day you study, even briefly, makes the next one easier. Ten minutes of timed questions are enough to start.'],
+      [(n) => `${n}, keep levelling up`, () => 'Every correct answer to the timed questions gives you XP and brings you closer to the next level. A set takes about ten minutes.'],
+    ],
     riprendi: 'Pick up where you left off', scegli: 'Choose a topic',
     livello: (l) => `Level ${l}`,
     exp: (x, m, p) => (p === null ? `${x} XP · maximum level` : `${x} XP · ${m} XP to level ${p}`),
@@ -84,13 +110,14 @@ export function componiPromemoria(r, catalogo, linkNo) {
     const elenco = conDomande ? T.domande : T.teoria;
     const [o, f] = elenco[(r.inviati || 0) % elenco.length];
     oggetto = pulisci(o(nome, nomi.titoloA, nomi.breveM));
-    frase = f(nomi.breveM);
+    frase = f(nomi.breveM, nomi.titoloA);
     apertura = T.ultima(nomi.titoloA, nomi.titoloM);
     link = `${SITO}${pref}/${r.materia}/${r.argomento}${conDomande ? '/domande' : '/teoria'}`;
     tasto = T.riprendi;
   } else {
-    oggetto = pulisci(T.generico[0](nome));
-    frase = T.generico[1]();
+    const [o, f] = T.generico[(r.inviati || 0) % T.generico.length];
+    oggetto = pulisci(o(nome));
+    frase = f();
     apertura = T.nessuna;
     link = `${SITO}${pref}/`;
     tasto = T.scegli;
