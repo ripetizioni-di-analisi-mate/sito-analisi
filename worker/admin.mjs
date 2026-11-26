@@ -1234,7 +1234,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     const riepilogo = c('riepilogo'), modello = c('modello');
     const data = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
     let candidati = [], bozza = null, occupato = false, massimo = 100;
-    const scelti = () => [...lista.querySelectorAll('input:checked')].map((i) => i.value);
+    const scelti = () => [...lista.querySelectorAll('input:checked:not(:disabled)')].map((i) => i.value);
     function aggiorna() {
       bozza = null;
       riepilogo.hidden = true;
@@ -1253,9 +1253,21 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
         c('conta').textContent = candidati.length === 1 ? '1 iscritto' : nf.format(candidati.length) + ' iscritti';
         const altri = r.senzaConsenso || 0;
         c('altri').textContent = altri ? (altri === 1 ? 'Un altro iscritto' : nf.format(altri) + ' altri iscritti') + ' degli ultimi 10 giorni senza materie non ' + (altri === 1 ? 'ha' : 'hanno') + ' dato il consenso alle offerte via email, quindi non ' + (altri === 1 ? 'compare' : 'compaiono') + ' qui.' : '';
-        lista.innerHTML = candidati.length ? candidati.map((x, i) => '<label><input type="checkbox" value="' + esc(x.email) + '"' + (i < massimo ? ' checked' : '') + '> <span><b>' +
-          esc(x.nome || x.email) + '</b> <span class="nota">' + esc((x.nome ? x.email + ' · ' : '') + 'iscritto il ' + data.format(new Date(x.creato))) + '</span></span></label>').join('')
-          : 'Nessun iscritto da contattare in questo momento.';
+        // Tutti quelli che hanno dato il consenso, con «ha già pagato / non ha ancora pagato» (26/11/2026).
+        // Si possono selezionare solo quelli a cui l'offerta può partire; per gli altri c'è il motivo.
+        const tutti = Array.isArray(r.consensi) ? r.consensi : candidati.map((x) => ({ ...x, idoneo: true, pagato: 0 }));
+        let messi = 0;
+        const euro = (n) => n.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+        const pill = (testo, verde) => '<span style="display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;margin-left:6px;' +
+          (verde ? 'background:#e3f1ea;color:#1f6a45' : 'background:#f1ede6;color:#6b5a43') + '">' + esc(testo) + '</span>';
+        c('conta').textContent = (tutti.length === 1 ? '1 consenso' : nf.format(tutti.length) + ' consensi') + ' · ' +
+          (candidati.length === 1 ? '1 a cui inviare' : nf.format(candidati.length) + ' a cui inviare');
+        lista.innerHTML = tutti.length ? tutti.map((x) => {
+          const spunta = x.idoneo && messi++ < massimo;
+          return '<label' + (x.idoneo ? '' : ' style="opacity:.75"') + '><input type="checkbox" value="' + esc(x.email) + '"' + (spunta ? ' checked' : '') + (x.idoneo ? '' : ' disabled') + '> <span><b>' +
+            esc(x.nome || x.email) + '</b>' + (x.pagato > 0 ? pill('Ha già pagato · ' + euro(x.pagato), true) : pill('Non ha ancora pagato', false)) +
+            ' <span class="nota">' + esc((x.nome ? x.email + ' · ' : '') + 'iscritto il ' + data.format(new Date(x.creato)) + (x.motivo ? ' · ' + x.motivo : '')) + '</span></span></label>';
+        }).join('') : 'Nessuno ha ancora dato il consenso alle offerte.';
       } catch (e) { lista.textContent = e.message === '401' ? 'Accedi alla dashboard.' : e.message; c('conta').textContent = ''; }
       aggiorna();
     }
@@ -1267,7 +1279,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       aggiorna();
     });
     sconto.addEventListener('input', aggiorna);
-    c('tutti').addEventListener('click', () => { [...lista.querySelectorAll('input')].forEach((i, k) => { i.checked = k < massimo; }); aggiorna(); });
+    c('tutti').addEventListener('click', () => { [...lista.querySelectorAll('input:not(:disabled)')].forEach((i, k) => { i.checked = k < massimo; }); aggiorna(); });
     c('nessuno').addEventListener('click', () => { lista.querySelectorAll('input').forEach((i) => { i.checked = false; }); aggiorna(); });
     function mostra() {
       const m = bozza.modelli[Number(modello.value)];
