@@ -19,7 +19,7 @@ In logica "alcuni" significa *almeno uno, forse tutti*. La frase "Alcuni dipende
 :::
 
 :::osservazione{#categorie-non-vuote titolo="Categorie con almeno un elemento"}
-Nei quiz si intende che ogni categoria nominata abbia almeno un elemento. Per esempio, se il testo parla dei vigili del turno di notte, almeno un vigile fa il turno di notte. Con questa convenzione da "Tutti i vigili del turno di notte hanno la patente" segue "Alcuni vigili del turno di notte hanno la patente". Quando una deduzione dipende da questa convenzione, il testo del quesito di solito la rende esplicita, per esempio con "Sullo scaffale ci sono $12$ libri".
+Nel quadrato logico tradizionale si assume che la categoria che fa da soggetto abbia almeno un elemento. Nei quesiti che ammettono categorie vuote, invece, nominare una categoria non basta a garantirne l’esistenza. Per esempio, da "Tutti i vigili del turno di notte hanno la patente" segue "Alcuni vigili del turno di notte hanno la patente" se almeno un vigile fa quel turno. Il testo può dare esplicitamente l’informazione necessaria, per esempio con "Sullo scaffale ci sono $12$ libri".
 :::
 
 ## Le quattro forme
@@ -62,7 +62,7 @@ Due frasi sono **equivalenti** quando sono vere nelle stesse situazioni. I bandi
 | Almeno un $A$ è $B$; esiste un $A$ che è $B$; alcuni $B$ sono $A$ | Alcuni $A$ sono $B$ |
 | Non tutti gli $A$ sono $B$; almeno un $A$ non è $B$ | Alcuni $A$ non sono $B$ |
 
-La frase "Solo i dipendenti con cinque anni di servizio possono chiedere il trasferimento" significa che chi chiede il trasferimento ha cinque anni di servizio, quindi equivale a "Tutti quelli che possono chiedere il trasferimento hanno cinque anni di servizio". Il verso di "solo" è trattato per esteso nell'argomento sulle condizioni necessarie e sufficienti.
+La frase "Solo i dipendenti con cinque anni di servizio possono chiedere il trasferimento" significa che chi può chiedere il trasferimento deve essere un dipendente con cinque anni di servizio, quindi equivale a "Tutti quelli che possono chiedere il trasferimento sono dipendenti con cinque anni di servizio". Il verso di "solo" è trattato per esteso nell'argomento sulle condizioni necessarie e sufficienti.
 :::
 
 ## Negazione delle frasi quantificate
@@ -91,7 +91,7 @@ La frase "Ogni candidato ammesso ha superato sia la prova scritta sia la prova o
 ## Il quadrato logico
 
 :::definizione{#quadrato-logico titolo="Contraddittorie, contrarie e subcontrarie"}
-Il **quadrato logico** classifica le coppie formate dalle quattro forme con gli stessi $A$ e $B$, secondo la possibilità che le due frasi siano vere insieme o false insieme.
+Il **quadrato logico** classifica le coppie formate dalle quattro forme con gli stessi $A$ e $B$, secondo la possibilità che le due frasi siano vere insieme o false insieme. Le tabelle del quadrato suppongono che la categoria soggetto $A$ abbia almeno un elemento.
 
 - Due frasi sono **contraddittorie** se non possono essere né entrambe vere né entrambe false, cioè se una è la negazione dell'altra.
 - Due frasi sono **contrarie** se non possono essere entrambe vere, ma possono essere entrambe false.
@@ -185,7 +185,7 @@ Il secondo schema vale perché, se Anna fosse un $A$, sarebbe anche un $B$ per l
 Per controllare un sillogismo si disegnano tre cerchi che si intersecano, uno per categoria, e si leggono le premesse una alla volta.
 
 - Una premessa con "tutti" o "nessuno" dice quali zone sono *vuote*. "Tutti gli $A$ sono $B$" svuota le zone di $A$ fuori da $B$; "Nessun $A$ è $B$" svuota le zone comuni ad $A$ e $B$.
-- Una premessa con "alcuni" dice in quale zona c'è *almeno un* elemento, e lo si segna con $\times$, dopo aver svuotato le zone indicate dalle premesse universali.
+- Una premessa con "alcuni" garantisce *almeno un* elemento. Dopo aver svuotato le zone indicate dalle premesse universali, si segna con $\times$ la zona che deve contenerlo. Se la premessa lascia aperte due zone, si mette il segno sul confine fra le due: almeno una delle due contiene l’elemento.
 
 Nelle figure le zone vuote restano bianche e le altre sono colorate. La conclusione segue necessariamente se è già scritta nel diagramma. Per "Tutti gli $A$ sono $C$" ogni zona colorata di $A$ deve stare dentro $C$, e per "Alcuni $A$ sono $C$" un $\times$ deve stare dentro $A$ e dentro $C$. Il metodo funziona perché il diagramma mostra tutte le situazioni compatibili con le premesse.
 :::
@@ -222,7 +222,7 @@ Dalle premesse "Tutti i dipendenti del primo piano sono laureati" e "Tutti i dip
 Le domande sui quantificatori si risolvono in fretta con alcune operazioni ricorrenti.
 
 - **Riscrivere le premesse nelle quattro forme**: "solo i $B$ sono $A$" diventa "Tutti gli $A$ sono $B$", "non tutti" diventa "Alcuni … non". Dopo la traduzione si riconosce lo schema.
-- **Negare con la tabella**: la negazione di una frase con "tutti" contiene "almeno uno … non", e la negazione di una frase con "alcuni" contiene "nessuno". Le opzioni che negano "tutti" con "nessuno" si scartano subito.
+- **Negare con la tabella**: la negazione di una frase con "tutti" contiene "almeno uno … non", e la negazione di una frase affermativa con "alcuni" contiene "nessuno". Le opzioni che negano "tutti" con "nessuno" si scartano subito.
 - **Disegnare tre cerchi a margine**: si svuotano le zone indicate da "tutti" e "nessuno", poi si segna $\times$ per "alcuni". Ogni opzione si confronta con il disegno.
 - **Cercare un controesempio per ogni opzione**: un'opzione che è falsa in una situazione compatibile con le premesse non segue necessariamente e si elimina. Bastano categorie familiari, come animali o numeri.
 - **Controllare il verso**: "Tutti gli $A$ sono $B$" non si rovescia in "Tutti i $B$ sono $A$", mentre "Nessun $A$ è $B$" e "Alcuni $A$ sono $B$" si leggono nei due versi.

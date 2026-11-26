@@ -213,7 +213,7 @@ Un elemento che appartiene a tutti e tre gli insiemi è contato tre volte nella 
 :::
 
 :::osservazione{#dal-centro-verso-esterno titolo="Riempimento dal centro verso l'esterno"}
-Tre cerchi che si sovrappongono formano sette zone dentro i cerchi, più la zona esterna. Il diagramma si riempie dal centro verso l'esterno.
+Nel diagramma di Venn completo a tre insiemi, i cerchi delimitano sette zone interne, più la zona esterna. Il diagramma si riempie dal centro verso l'esterno.
 
 - Al centro si scrive $|A \cap B \cap C|$.
 - Nella zona di $A$ e $B$ senza $C$ si scrive $|A \cap B| - |A \cap B \cap C|$, e allo stesso modo nelle altre due zone comuni a due soli insiemi.
@@ -295,7 +295,7 @@ I problemi di conteggio si risolvono in pochi passaggi con un diagramma disegnat
 - Si riempiono le altre zone per differenza, dal centro verso l'esterno.
 - Si controlla che la somma di tutte le zone, compresa quella esterna, sia il numero totale di elementi.
 
-Le opzioni sbagliate dei quesiti nascono di solito da errori riconoscibili. Un'opzione uguale a $|U| - |A| - |B|$ nasce dall'aver tolto due volte l'intersezione; un'opzione uguale a $|A|$ al posto di $|A| - |A \cap B|$ nasce dal confondere "giocano a calcio" con "giocano solo a calcio". Un risultato negativo, oppure maggiore del totale, indica un doppio conteggio.
+Le opzioni sbagliate dei quesiti nascono di solito da errori riconoscibili. Un'opzione uguale a $|U| - |A| - |B|$ nasce dall'aver tolto due volte l'intersezione; un'opzione uguale a $|A|$ al posto di $|A| - |A \cap B|$ nasce dal confondere "giocano a calcio" con "giocano solo a calcio". Un risultato negativo o maggiore del totale indica un errore, che può essere dovuto a un doppio conteggio.
 :::
 
 :::osservazione{#metodi-rapidi-diagrammi titolo="Eliminazione delle opzioni per la scelta del diagramma"}

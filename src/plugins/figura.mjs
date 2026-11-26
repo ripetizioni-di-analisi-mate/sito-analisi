@@ -134,7 +134,7 @@ function etichetteDi(attr, n, predefinite) {
 }
 
 function avvolgi(svg, attr, larghezza) {
-  const descr = attr.titolo || 'Figura';
+  const descr = attr.titolo || (attr.inglese ? 'Figure' : 'Figura');
   return `<figure class="grafico figura-logica">${svg.replace('<svg ', `<svg role="img" aria-label="${esc(testoSemplice(descr))}" style="max-width: ${larghezza}px" `)}${attr.titolo ? `<figcaption>${didascalia(attr.titolo)}</figcaption>` : ''}</figure>`;
 }
 

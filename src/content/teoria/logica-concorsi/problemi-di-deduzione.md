@@ -134,7 +134,7 @@ Se Lucio è sincero e dice "Mirta è bugiarda", allora Mirta è bugiarda. Se inv
 :::
 
 ::::teorema{#metodo-per-ipotesi titolo="Metodo per ipotesi e contraddizione"}
-Per stabilire il tipo di una persona si suppone che sia sincera e si ricavano le conseguenze delle affermazioni. Se si arriva a una contraddizione, cioè a una persona che dovrebbe essere insieme sincera e bugiarda, l'ipotesi è falsa e la persona è bugiarda. Se non si arriva a una contraddizione, si prova anche l'ipotesi opposta, e la soluzione è unica quando una sola delle due ipotesi porta a un'assegnazione coerente.
+Per stabilire il tipo di una persona si suppone che sia sincera e si ricavano le conseguenze delle affermazioni. Se si arriva a una contraddizione, cioè a una persona che dovrebbe essere insieme sincera e bugiarda, l'ipotesi è falsa e la persona è bugiarda. Se non si arriva a una contraddizione, si prova anche l'ipotesi opposta. Se una sola delle due ipotesi ammette un'assegnazione coerente, il tipo della persona è determinato. Per avere una soluzione completa unica, deve esserci una sola assegnazione coerente per tutte le persone.
 
 :::dimostrazione
 Ogni persona è sincera oppure bugiarda e non può essere entrambe le cose. Se l'ipotesi "è sincera" produce una contraddizione, quell'ipotesi non può essere vera, quindi resta soltanto l'altra.
@@ -211,7 +211,7 @@ Nei problemi a tavolo rotondo si fissa la persona citata più volte; nei problem
 :::
 
 :::osservazione{#provare-le-opzioni titolo="Provare le opzioni una per una"}
-Le cinque opzioni riducono i casi da esaminare. In un quesito "chi è stato" ogni opzione è un possibile colpevole, e basta contare le affermazioni vere per ciascuno. In un quesito "chi è terzo" si mette la persona dell'opzione in terza posizione e si controlla se gli indizi si possono rispettare. Per escludere un'opzione del tipo "necessariamente vera" basta una soluzione in cui l'opzione è falsa, cioè un controesempio.
+Le opzioni di risposta riducono i casi da esaminare. In un quesito "chi è stato" ogni opzione è un possibile colpevole, e basta contare le affermazioni vere per ciascuno. In un quesito "chi è terzo" si mette la persona dell'opzione in terza posizione e si controlla se gli indizi si possono rispettare. Per escludere un'opzione del tipo "necessariamente vera" basta una soluzione in cui l'opzione è falsa, cioè un controesempio.
 
 Le opzioni sbagliate nascono spesso da errori ricorrenti: scambiare destra e sinistra al tavolo, leggere "dietro" come "subito dietro", usare un indizio nel verso opposto. Un'opzione del tipo "i dati non bastano" è corretta soltanto quando si sono trovate due soluzioni con risposte diverse.
 :::

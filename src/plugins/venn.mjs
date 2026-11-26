@@ -8,6 +8,7 @@ import katex from 'katex';
 //             Esempi: unione "a,ab,b"; intersezione "ab"; differenza A \ B "a"; differenza simmetrica "a,b";
 //             complementare di A "b,u"; con tre insiemi A ∩ (B ∪ C) "ab,ac,abc".
 //   nomi      nomi degli insiemi (predefinito "A,B,C")
+//   etichetteNomi   nomi da mostrare nella lingua della lezione, nello stesso ordine di nomi
 //   universo  1 per disegnare l'insieme universo (automatico se è colorata la zona u)
 //   ambiente  nome dell'insieme universo (predefinito U; per esempio E)
 //   elementi  elementi scritti nelle zone: "a:1,2;ab:3;b:4,5;u:6"
@@ -53,7 +54,7 @@ export function venn(attr) {
   const id = `v${++contatore}`;
   const S = SCHEMI[attr.tipo] || SCHEMI.due;
   const lettere = Object.keys(S.cerchi);
-  const nomi = String(attr.nomi || 'A,B,C').split(',').map((x) => x.trim());
+  const nomi = String(attr.etichetteNomi || attr.nomi || 'A,B,C').split(',').map((x) => x.trim());
   const zone = String(attr.zone || '').split(',').map((x) => x.trim().toLowerCase()).filter(Boolean);
   const conU = attr.universo === '1' || attr.universo === 1 || attr.universo === true || zone.includes('u') || /(^|;)\s*u:/.test(attr.elementi || '');
   const [ux, uy, uw, uh] = S.U;
@@ -85,7 +86,7 @@ export function venn(attr) {
     return c ? `<text class="elementi" x="${c[0]}" y="${c[1] + 6}" text-anchor="middle">${esc(el.trim().replace(/,/g, ', '))}</text>` : '';
   }).join('');
 
-  const descr = attr.titolo || 'Diagramma di Venn';
+  const descr = attr.titolo || (attr.inglese ? 'Venn diagram' : 'Diagramma di Venn');
   return `<figure class="grafico venn"><svg viewBox="0 0 ${S.W} ${S.H}" style="max-width: 480px" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs>${clip}${maschere}</defs>
 ${universo}${colori}${contorni}${etichette}${elementi}
