@@ -211,7 +211,7 @@ Object.assign(TIPI, {
     legenda: () => null,
   },
   'sezione-orizzontale': {
-    predefiniti: { regione: 'y>=x^2; y<=x+2', sinistra: '-sqrt(y)', sinistra2: 'y-2', cambio: 1, destra: 'sqrt(y)', nomeSinistra: 'parabola', nomeSinistra2: 'retta', texDestra: '\\sqrt{y}', min: 0, max: 4, passo: 0.05, valore: 0.5, xmin: -3, xmax: 4, ymin: -1, ymax: 6 },
+    predefiniti: { regione: 'y>=x^2; y<=x+2', sinistra: '-sqrt(y)', sinistra2: 'y-2', cambio: 1, destra: 'sqrt(y)', nomeSinistra: 'parabola', nomeSinistra2: 'retta', nomeSinistraEn: 'parabola', nomeSinistra2En: 'line', texDestra: '\\sqrt{y}', min: 0, max: 4, passo: 0.05, valore: 0.5, xmin: -3, xmax: 4, ymin: -1, ymax: 6 },
     ingresso(p, v) { const due = Number.isFinite(p.cambio) && v > p.cambio; return { x: compila(due ? p.sinistra2 : p.sinistra, 'y')(v), due }; },
     figura(p, v) {
       const x1 = TIPI['sezione-orizzontale'].ingresso(p, v).x, x2 = compila(p.destra, 'y')(v);
@@ -221,7 +221,7 @@ Object.assign(TIPI, {
     },
     valori(p, v, en) {
       const i = TIPI['sezione-orizzontale'].ingresso(p, v);
-      const r = { y: numero(v, 2, en), x1: numero(i.x, 2, en), x2: numero(compila(p.destra, 'y')(v), 2, en), curva: i.due ? p.nomeSinistra2 : p.nomeSinistra };
+      const r = { y: numero(v, 2, en), x1: numero(i.x, 2, en), x2: numero(compila(p.destra, 'y')(v), 2, en), curva: en ? (i.due ? p.nomeSinistra2En : p.nomeSinistraEn) : (i.due ? p.nomeSinistra2 : p.nomeSinistra) };
       return { ...r, testo: `y = ${r.y}, ${en ? 'from' : 'da'} x = ${r.x1} ${en ? 'to' : 'a'} x = ${r.x2}` };
     },
     testi: (p, en) => ({ nome: 'y =', righe: en
