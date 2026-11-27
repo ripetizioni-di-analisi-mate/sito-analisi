@@ -141,5 +141,8 @@ export function avviaInvito(dialogo) {
       link.href = destinazione.href;
     }
     dialogo.showModal();
+    if (globalThis.navigator && !navigator.webdriver) {
+      fetch('/api/fermo-iscrizione/mostrato', { method: 'POST', keepalive: true }).catch(() => {});
+    }
   });
 }
