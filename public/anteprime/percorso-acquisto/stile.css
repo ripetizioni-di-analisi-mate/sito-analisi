@@ -1,0 +1,112 @@
+#anteprima-percorso-acquisto,
+.pa-fine-esercizio {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .45rem 1rem;
+  margin: .8rem 0 1rem; padding: .55rem .85rem; border: 1px solid #c8d8cd; border-radius: 8px;
+  color: var(--azione); background: #eef4ed; font: 600 .97rem/1.3 var(--ui);
+}
+#anteprima-percorso-acquisto[hidden] { display: none !important; }
+#anteprima-percorso-acquisto button, .pa-fine-esercizio button {
+  min-height: 2.75rem; padding: .45rem .72rem; border: 1px solid #9fb5a5; border-radius: 6px;
+  background: var(--carta); color: var(--azione); font: 600 1rem var(--ui); cursor: pointer;
+}
+html:has(.pa-dialog[open]) { overflow: hidden; }
+.pa-dialog {
+  width: min(45rem, calc(100% - 2.25rem)); max-width: none; max-height: min(52rem, calc(100vh - 4rem));
+  max-height: min(52rem, calc(100dvh - 4rem)); margin: auto; padding: 0; overflow: hidden;
+  border: 1px solid var(--riga); border-radius: 15px; box-shadow: 0 1.4rem 4rem rgb(15 34 33 / 20%);
+  background: var(--carta); color: var(--inchiostro); font: 400 1rem/1.4 var(--ui);
+}
+.pa-dialog[open] { display: flex; flex-direction: column; }
+.pa-dialog::backdrop { background: rgb(26 45 44 / 35%); }
+.pa-dialog * { box-sizing: border-box; }
+.pa-dialog .pa-progress { flex: none; padding: 1rem 1.5rem .85rem; border-bottom: 1px solid var(--riga); background: #f0f3eb; }
+.pa-dialog .pa-progress ol { display: flex; gap: .65rem; list-style: none; margin: 0; padding: 0; }
+.pa-dialog .pa-progress li { flex: 1; margin: 0; padding: 0; color: #59695d; font: 600 .86rem/1.2 var(--ui); }
+.pa-dialog .pa-progress li::after { display: block; content: ''; height: 3px; margin-top: .4rem; background: #d5dfd3; border-radius: 2px; }
+.pa-dialog .pa-progress li.completo::after { background: #87a894; }
+.pa-dialog .pa-progress [aria-current=step] { color: var(--azione); font-weight: 700; }
+.pa-dialog .pa-progress [aria-current=step]::after { background: var(--azione); }
+.pa-dialog .pa-corpo { flex: 1 1 auto; min-height: 0; padding: 1.4rem 1.65rem 1.5rem; overflow-y: auto; overscroll-behavior: contain; }
+.pa-dialog .pa-meta { display: flex; justify-content: space-between; align-items: center; gap: .6rem; margin: 0 0 .45rem; color: var(--azione); font-weight: 600; font-size: .94rem; }
+.pa-dialog h2 { margin: .1rem 0 .6rem; color: var(--inchiostro); font: 550 clamp(1.8rem, 3.3vw, 2.35rem)/1.09 var(--titoli); letter-spacing: -.04em; }
+.pa-dialog h3 { margin: .2rem 0 .4rem; font: 600 1.35rem/1.2 var(--titoli); letter-spacing: -.025em; }
+.pa-dialog p { margin: 0; }
+.pa-dialog .pa-intro { color: var(--inchiostro-2); font-size: 1.05rem; line-height: 1.4; }
+.pa-dialog button, .pa-dialog summary { font-family: var(--ui); touch-action: manipulation; }
+.pa-dialog button:not(:disabled), .pa-dialog label, .pa-dialog summary { cursor: pointer; }
+.pa-dialog button:focus-visible, .pa-dialog summary:focus-visible,
+.pa-dialog input:focus-visible + span, #anteprima-percorso-acquisto button:focus-visible, .pa-fine-esercizio button:focus-visible {
+  outline: 3px solid #996826; outline-offset: 2px;
+}
+.pa-dialog [tabindex="-1"]:focus { outline: none; }
+.pa-dialog .pa-indietro, .pa-dialog .pa-nonso {
+  min-height: 2.75rem; padding: .4rem .35rem; border: 0; background: transparent; color: var(--azione);
+  text-decoration: underline; text-underline-offset: .18em; font: 600 .98rem/1.25 var(--ui);
+}
+.pa-dialog .pa-indietro { margin: -.55rem 0; }
+.pa-dialog .pa-scelte { display: grid; gap: .5rem; margin: 1rem 0 0; padding: 0; border: 0; }
+.pa-dialog .pa-opzione { position: relative; display: block; margin: 0; }
+.pa-dialog .pa-opzione input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.pa-dialog .pa-opzione > span, .pa-dialog .pa-risposta {
+  display: flex; align-items: center; gap: .72rem; min-height: 2.85rem; width: 100%; margin: 0;
+  padding: .58rem .85rem; text-align: left; background: #fffefa; border: 1px solid #c7d1c6; border-radius: 8px;
+  font: 600 1.04rem/1.29 var(--ui); color: var(--inchiostro);
+}
+.pa-dialog .pa-opzione > span { min-height: 3.75rem; }
+.pa-dialog .pa-opzione > span::before {
+  content: ''; flex: none; width: 1.06rem; height: 1.06rem; border: 1px solid #829989;
+  border-radius: 50%; box-sizing: border-box; background: white;
+}
+.pa-dialog .pa-opzione input:checked + span { border-color: #507867; background: #eaf2e9; }
+.pa-dialog .pa-opzione input:checked + span::before { border: 5px solid #386652; }
+.pa-dialog .pa-opzione small { display: block; margin-top: .12rem; color: var(--inchiostro-2); font: 400 .96rem/1.25 var(--ui); }
+.pa-dialog .pa-risposta:enabled:hover, .pa-dialog .pa-opzione:hover > span { border-color: #7c9e86; }
+.pa-dialog .pa-risposta:disabled { opacity: 1; cursor: default; }
+.pa-dialog .pa-risposta.giusta { border-color: #6a9278; background: #e8f2e8; }
+.pa-dialog .pa-risposta.scelta { border-color: #af9671; background: #f7efe4; }
+.pa-dialog .pa-lettera { flex: none; border: 1px solid #cdd6cb; border-radius: 4px; background: #f2f4ed; width: 1.5rem; height: 1.5rem; display: grid; place-items: center; font-size: .9rem; }
+.pa-dialog .pa-esito-scelta { margin-left: auto; font-size: .87rem; text-align: right; }
+.pa-dialog .pa-nonso { justify-self: start; }
+.pa-dialog .pa-nota { margin: .7rem 0 0; padding: .65rem .85rem; border-left: 3px solid #688c72; background: #edf3e9; border-radius: 0 5px 5px 0; }
+.pa-dialog .pa-nota.neutra { border-color: #aa8e65; background: #f4eee2; }
+.pa-dialog .pa-nota p + p { margin-top: .2rem; }
+.pa-dialog .pa-formula { display: flex; justify-content: center; align-items: center; gap: .42em; padding: .55rem .5rem; margin: .72rem 0; background: #f0f3e9; border-radius: 5px; font: 500 1.58rem/1.15 var(--titoli); }
+.pa-dialog .pa-lim, .pa-dialog .pa-frazione { display: inline-flex; flex-direction: column; text-align: center; }
+.pa-dialog .pa-lim small { font-size: .45em; line-height: 1.2; }
+.pa-dialog .pa-frazione > span { padding: .05em .18em; }
+.pa-dialog .pa-frazione > span + span { border-top: 1px solid currentColor; }
+.pa-dialog .pa-esiti { list-style: none; padding: 0; margin: .8rem 0; }
+.pa-dialog .pa-esiti li, .pa-dialog .pa-riga-prezzo { display: flex; align-items: baseline; justify-content: space-between; gap: .85rem; margin: 0; padding: .28rem 0; }
+.pa-dialog .pa-esiti li { border-bottom: 1px solid var(--riga); }
+.pa-dialog .pa-esiti small { text-align: right; flex: none; color: var(--azione); font-size: .91rem; }
+.pa-dialog .pa-esempio, .pa-dialog .pa-ordine { border: 1px solid #c6d5c7; background: #f2f6ed; padding: .9rem 1rem; border-radius: 8px; margin: .9rem 0 0; }
+.pa-dialog .pa-etichetta { color: var(--azione); font: 600 .9rem/1.2 var(--ui); }
+.pa-dialog .pa-esempio summary { display: list-item; width: fit-content; min-height: 2.75rem; padding: .57rem .08rem; color: var(--azione); font: 600 1rem/1.4 var(--ui); }
+.pa-dialog .pa-esempio ol { margin: 0 0 .2rem; padding-left: 1.4rem; }
+.pa-dialog .pa-esempio li { padding-left: .15rem; margin: .25rem 0; }
+.pa-dialog .pa-elenco { margin: .65rem 0; padding-left: 1.3rem; }
+.pa-dialog .pa-totale { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-top: .55rem; margin-top: .5rem; border-top: 1px solid #c6d5c7; font-weight: 600; }
+.pa-dialog .pa-totale strong { font: 600 1.6rem/1.15 var(--titoli); color: var(--azione); }
+.pa-dialog .pa-riga-prezzo span:last-child, .pa-dialog .pa-totale strong { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pa-dialog .pa-azioni { flex: none; display: flex; justify-content: space-between; gap: .6rem; margin: 0; padding: .85rem 1.65rem; border-top: 1px solid var(--riga); background: #f6f7f0; }
+.pa-dialog .pa-azioni button { min-height: 2.85rem; padding: .58rem 1rem; border-radius: 7px; font: 600 1.03rem/1.22 var(--ui); }
+.pa-dialog .pa-salta { color: var(--azione); background: var(--carta); border: 1px solid #91a493; }
+.pa-dialog .pa-salta:hover { background: #e8efe5; }
+.pa-dialog .pa-primario { color: white; background: var(--azione); border: 1px solid var(--azione); }
+.pa-dialog .pa-primario:hover:enabled { background: #173d3e; }
+.pa-dialog .pa-primario:disabled { color: #526256; border-color: #d7dfd4; background: #d7dfd4; }
+@media(max-width: 38rem) {
+  .pa-dialog { width: calc(100% - 1rem); max-height: calc(100vh - 3.5rem); max-height: calc(100dvh - 3.5rem); border-radius: 12px; }
+  .pa-dialog .pa-corpo { padding: 1rem; }
+  .pa-dialog .pa-progress { padding: .75rem 1rem; }
+  .pa-dialog .pa-progress ol { gap: .4rem; }
+  .pa-dialog .pa-azioni { padding: .6rem 1rem; }
+  .pa-dialog .pa-salta span { display: none; }
+  .pa-dialog .pa-azioni button { padding-inline: .7rem; }
+  .pa-dialog .pa-risposta { gap: .45rem; padding-inline: .65rem; }
+  .pa-dialog .pa-opzione small { font-size: .91rem; }
+}
+@media(max-height: 32rem) {
+  .pa-dialog { max-height: calc(100dvh - .6rem); }
+  .pa-dialog .pa-progress, .pa-dialog .pa-azioni { padding-block: .35rem; }
+}

@@ -1,0 +1,33 @@
+---
+import { materiaL, type Lingua } from '../i18n';
+import { SCONTO_BENVENUTO } from '../data/benvenuto';
+import { url } from '../lib/url';
+
+interface Props { lingua: Lingua; materia: string; argomento: string }
+const { lingua, materia, argomento } = Astro.props;
+const corso = materiaL(lingua, materia);
+const en = lingua === 'en';
+const modulo = url('/anteprime/percorso-acquisto/percorso.mjs');
+---
+<div id="anteprima-percorso-acquisto" hidden data-materia={materia} data-lingua={lingua}
+  data-titolo={corso.breve} data-argomento={argomento} data-prezzo={corso.prezzo} data-sconto={SCONTO_BENVENUTO}>
+  <span>{en ? 'Preview of the study guide' : 'Anteprima del percorso per gli iscritti'}</span>
+  <button type="button" data-avvia-anteprima>{en ? 'Try the guide' : 'Prova il percorso'}</button>
+</div>
+<script is:inline define:vars={{ modulo }}>
+  const modo = new URLSearchParams(location.search).get('anteprima-percorso');
+  if (modo === '1' || modo === 'esercizio') {
+    const avvio = document.getElementById('anteprima-percorso-acquisto');
+    const carica = () => import(modulo).then(({ attivaAnteprima }) => attivaAnteprima(avvio, modo));
+    const avvia = () => carica().catch(() => {
+      avvio.hidden = false;
+      const pulsante = avvio.querySelector('button');
+      const en = avvio.dataset.lingua === 'en';
+      avvio.querySelector('span').textContent = en ? 'The preview could not load.' : 'Caricamento dell’anteprima interrotto.';
+      pulsante.textContent = en ? 'Reload the page' : 'Ricarica la pagina';
+      pulsante.onclick = () => location.reload();
+    });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avvia, { once: true });
+    else avvia();
+  }
+</script>
