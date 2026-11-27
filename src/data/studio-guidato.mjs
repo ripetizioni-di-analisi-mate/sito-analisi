@@ -36,6 +36,7 @@ export const STUDIO_GUIDATO = {
   // senza domande proprie): non entrano nel test di Analisi 2.
   'analisi-2': {
     dipendenze: {
+      'disequazioni-grafiche': { interni: [], basi: ['geometria-analitica', 'equazioni-polinomiali', 'valore-assoluto'] },
       'funzioni-di-piu-variabili': { interni: [], basi: ['analisi-1/limiti', 'analisi-1/insiemi'] },
       'calcolo-differenziale': { interni: ['funzioni-di-piu-variabili'], basi: ['analisi-1/derivate'] },
       'funzioni-implicite': { interni: ['calcolo-differenziale'], basi: ['analisi-1/derivate'] },
@@ -326,6 +327,16 @@ export const RIMANDI = {
     'equazioni-di-bernoulli|5|analisi-1/equazioni-differenziali#2',
     'secondo-ordine-a-coefficienti-costanti-equazioni-omogenee|6|precorso/equazioni-polinomiali#1',
     'equazioni-non-omogenee-il-metodo-di-somiglianza|7|analisi-1/equazioni-differenziali#4',
+  ],
+  'analisi-2/disequazioni-grafiche': [
+    'disequazioni-in-due-variabili|1|precorso/equazioni-polinomiali#3,precorso/geometria-analitica#1',
+    'rette-e-semipiani|1|precorso/geometria-analitica#1,precorso/valore-assoluto#4',
+    'parabole|2,3|precorso/geometria-analitica#4,precorso/equazioni-polinomiali#4',
+    'circonferenze,ellissi|4,5|precorso/geometria-analitica#5,precorso/geometria-analitica#6',
+    'iperboli|6,7|precorso/geometria-analitica#7,precorso/equazioni-polinomiali#6',
+    'riconoscere-la-conica-e-procedimento,curve-che-non-sono-coniche|8,9|precorso/polinomi#0,precorso/esponenziali#5',
+    'sistemi-prodotti-e-quozienti|10,11|precorso/equazioni-polinomiali#5,precorso/valore-assoluto#6',
+    'domini-normali-per-gli-integrali-doppi,interno-frontiera-e-vertici-per-i-massimi-e-minimi|12,13|precorso/geometria-analitica#4,precorso/geometria-analitica#5',
   ],
   'analisi-2/funzioni-di-piu-variabili': [
     'lo-spazio-ℝⁿ,punti-e-insiemi-del-piano|8,1|precorso/geometria-analitica#0,precorso/geometria-analitica#5',

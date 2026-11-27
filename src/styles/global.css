@@ -923,6 +923,12 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
   .cursore-riga input[type="range"] { flex-basis: 100%; height: 2.4rem; }
 }
 /* in stampa resta la figura nello stato del momento, con il valore del cursore e i numeri; sparisce il cursore */
+/* Tabelle Markdown nei contenuti di studio (teoria, schede, soluzioni): righe sottili come nelle domande a tempo;
+   se la tabella è più larga della colonna scorre da sola, senza allargare la pagina */
+.testo-studio table, .blocco table { display: block; width: fit-content; max-width: 100%; overflow-x: auto; margin-block: 0.8rem; border-collapse: collapse; font-size: 0.95em; }
+.testo-studio :is(th, td), .blocco :is(th, td) { padding: 0.45rem 1.1rem 0.45rem 0; border-bottom: 1px solid var(--riga); text-align: left; vertical-align: middle; }
+.testo-studio :is(th, td):last-child, .blocco :is(th, td):last-child { padding-right: 0.2rem; }
+.testo-studio th, .blocco th { font-family: var(--ui); font-size: 0.84em; font-weight: 700; letter-spacing: 0.03em; color: var(--inchiostro-2); }
 /* Più figure piccole affiancate (al telefono una sotto l'altra): <div class="figure-affiancate"> con le direttive dentro */
 .figure-affiancate { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.2rem 1rem; align-items: start; margin: 0.8rem 0; }
 .figure-affiancate > .grafico:last-child:nth-child(odd) { grid-column: 1 / -1; }

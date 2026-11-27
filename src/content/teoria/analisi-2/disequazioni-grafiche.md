@@ -546,7 +546,7 @@ Gli estremi dell'intervallo fisso e le due funzioni diventano gli estremi dell'i
 2. Per la forma rispetto all'asse $x$, l'intervallo $[a, b]$ è la proiezione della regione sull'asse $x$. Si isola $y$ nelle equazioni delle curve di frontiera: la curva più bassa è $g_1$, la più alta è $g_2$.
 3. Per la forma rispetto all'asse $y$, l'intervallo $[c, d]$ è la proiezione sull'asse $y$. Si isola $x$: la curva a sinistra è $h_1$, quella a destra è $h_2$.
 
-Se la curva di ingresso o di uscita cambia lungo l'intervallo, la regione si divide in più domini normali.
+Se la curva di ingresso o di uscita cambia lungo l'intervallo, la funzione corrispondente è definita a tratti. La regione si divide allora in più domini normali, uno per ogni tratto, e l'integrale doppio è la somma degli integrali sui singoli domini.
 :::
 
 :::esempio{titolo="La stessa regione nelle due forme"}
@@ -556,14 +556,14 @@ Rispetto all'asse $x$ la proiezione è l'intervallo $[-1, 2]$. Ogni segmento ver
 $$
 D = \{ (x, y) : -1 \leq x \leq 2,\ x^2 \leq y \leq x + 2 \} .
 $$
-Rispetto all'asse $y$ la proiezione è l'intervallo $[0, 4]$. Isolando $x$, la parabola dà $x = -\sqrt{y}$ e $x = \sqrt{y}$, la retta dà $x = y - 2$. La curva a destra è sempre $x = \sqrt{y}$. La curva a sinistra è $x = -\sqrt{y}$ per $0 \leq y \leq 1$ ed è la retta $x = y - 2$ per $1 \leq y \leq 4$. La regione è quindi l'unione di due domini normali:
+Rispetto all'asse $y$ la proiezione è l'intervallo $[0, 4]$. Isolando $x$, la parabola dà $x = -\sqrt{y}$ e $x = \sqrt{y}$, la retta dà $x = y - 2$. La curva a destra è sempre $x = \sqrt{y}$. La curva a sinistra è $x = -\sqrt{y}$ per $0 \leq y \leq 1$ ed è la retta $x = y - 2$ per $1 \leq y \leq 4$, quindi la funzione $h_1$ è definita a tratti. La regione si scrive come unione di due domini normali, uno per ogni tratto:
 $$
 \begin{gathered}
 D_1 = \{ (x, y) : 0 \leq y \leq 1,\ -\sqrt{y} \leq x \leq \sqrt{y} \} \\[6pt]
 D_2 = \{ (x, y) : 1 \leq y \leq 4,\ y - 2 \leq x \leq \sqrt{y} \}
 \end{gathered}
 $$
-Rispetto all'asse $x$ basta **un solo dominio**, quindi l'integrale doppio si calcola con un solo integrale iterato.
+Rispetto all'asse $x$ gli estremi hanno **una sola espressione**, quindi l'integrale doppio si calcola con un solo integrale iterato. Rispetto all'asse $y$ ne servono due.
 
 ::cursore{tipo="sezione-orizzontale" valore=2.5 titolo="Segmenti orizzontali: sotto $y = 1$ entrano dalla parabola, sopra entrano dalla retta"}
 :::
