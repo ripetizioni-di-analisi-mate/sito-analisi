@@ -740,14 +740,37 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     // (i programmi che scaricano le pagine senza eseguirle non mandano nulla). Serve al conteggio della dashboard.
     (() => {
       if (!navigator.sendBeacon || navigator.webdriver) return;
-      let fatto = false, timer = 0;
+      let giornoInviato = '', timer = 0;
       const manda = () => {
-        if (fatto) return; fatto = true;
-        try { navigator.sendBeacon('/api/presenza', new Blob([JSON.stringify({ p: location.pathname.slice(0, 200) })], { type: 'application/json' })); } catch (_) {}
+        const giorno = new Date().toISOString().slice(0, 10);
+        if (giorno === giornoInviato || document.hidden) return;
+        try {
+          if (navigator.sendBeacon('/api/presenza', new Blob([JSON.stringify({ p: location.pathname.slice(0, 200) })], { type: 'application/json' }))) giornoInviato = giorno;
+        } catch (_) {}
       };
       const prova = () => { clearTimeout(timer); if (document.visibilityState === 'visible') timer = setTimeout(manda, 2000); };
       document.addEventListener('visibilitychange', prova);
       prova();
+
+      const pagina = document.documentElement, invito = document.querySelector('.invito-iscrizione');
+      if (pagina.classList.contains('collegato')) return;
+      const studio = pagina.hasAttribute('data-studio-materia') && document.querySelector('main');
+      const azioni = ['click', 'keydown', 'wheel', 'touchmove'];
+      function attivita(ev) {
+        if (!ev.isTrusted || document.hidden || document.querySelector('dialog[open]')) return;
+        if (ev.type === 'keydown' && !['Enter', ' ', 'PageDown', 'PageUp', 'ArrowDown', 'ArrowUp'].includes(ev.key)) return;
+        if (ev.target.closest?.('a, nav, header, footer, [role="navigation"]')) return;
+        if (navigator.sendBeacon('/api/fermo-iscrizione/proseguito')) {
+          for (const tipo of azioni) studio.removeEventListener(tipo, attivita);
+        }
+      }
+      function osservaRipresa() {
+        if (studio) for (const tipo of azioni) studio.addEventListener(tipo, attivita, { passive: true });
+      }
+      if (pagina.hasAttribute('data-fermo-visto')) osservaRipresa();
+      invito?.addEventListener('toggle', () => {
+        if (invito.open) { prova(); osservaRipresa(); }
+      });
     })();
   </script>
   <script is:inline>

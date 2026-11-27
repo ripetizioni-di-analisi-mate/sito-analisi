@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { datiFermi } from '../worker/fermi-iscrizione.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const temp = mkdtempSync(join(tmpdir(), 'dispositivi-'));
@@ -71,6 +72,65 @@ function banco(t) {
   const tre = async () => { const a = await registrati(), b = new Browser('Android Chrome'), c = new Browser('Mac Safari'); assert.equal((await accedi(b)).status, 200); assert.equal((await accedi(c)).status, 200); return [a, b, c]; };
   return { db, env, ar, api, registrati, accedi, dispositivi, tre, avanza(ms) { ora += ms; } };
 }
+
+test('fermo giornaliero verificato: distingue uscita, ripresa da ospite, iscrizione e accesso', async (t) => {
+  const b = banco(t);
+  await b.registrati(); // account già esistente, creato fuori dal fermo
+  const persone = ['Lettore A', 'Lettore B', 'Lettore C', 'Lettore D'].map((ua) => new Browser(ua));
+  const [uscita, ripresa, iscrizione, accesso] = persone;
+  const mostra = (p) => b.api(p, '/api/fermo-iscrizione/mostrato', {});
+  const prosegui = (p) => b.api(p, '/api/fermo-iscrizione/proseguito', {});
+  for (const persona of persone) {
+    await mostra(persona);
+    await mostra(persona);
+    assert.ok(persona.cookies.has('fermo_iscrizione'));
+  }
+  assert.deepEqual(datiFermi(b.ar).giorni, []); // l'invito da solo non verifica la presenza
+  for (const p of persone) await b.api(p, '/api/presenza', {});
+  await prosegui(ripresa); await prosegui(ripresa); await prosegui(iscrizione);
+  assert.equal((await b.accedi(uscita, email, 'errata')).status, 401);
+  assert.equal((await b.api(iscrizione, '/api/registrati', { email: 'nuovo@test.invalid', password })).status, 200);
+  assert.equal((await b.accedi(accesso)).status, 200);
+  await b.accedi(iscrizione, 'nuovo@test.invalid'); // il primo esito resta iscrizione
+  await mostra(accesso); await prosegui(accesso);
+  const d = datiFermi(b.ar).giorni[0];
+  assert.deepEqual({ ...d }, { giorno: new Date().toISOString().slice(0, 10), fermi: 4, iscrizioni: 1, accessi: 1, proseguiti: 1 });
+});
+
+test('un accesso dopo la mezzanotte resta sul giorno del fermo, entro 24 ore', async (t) => {
+  const b = banco(t);
+  await b.registrati();
+  const fine = new Date();
+  fine.setUTCHours(23, 59, 0, 0);
+  b.avanza(fine.getTime() - Date.now());
+  const vicino = new Browser('Ospite vicino'), tardi = new Browser('Ospite tardi');
+  for (const persona of [vicino, tardi]) {
+    await b.api(persona, '/api/presenza', {});
+    await b.api(persona, '/api/fermo-iscrizione/mostrato', {});
+  }
+  b.avanza(120000);
+  assert.equal((await b.accedi(vicino)).status, 200);
+  b.avanza(86400000);
+  assert.equal((await b.accedi(tardi)).status, 200);
+  const d = datiFermi(b.ar).giorni[0];
+  assert.equal(d.giorno, fine.toISOString().slice(0, 10)); assert.equal(d.fermi, 2); assert.equal(d.accessi, 1);
+});
+
+test('il fermo ignora bot e richieste di altra origine, e conta il quarto dispositivo solo a sessione aperta', async (t) => {
+  const b = banco(t), [, secondo] = await b.tre();
+  const ospite = new Browser('iPhone Safari');
+  const mostra = '/api/fermo-iscrizione/mostrato';
+  await b.api(new Browser('Googlebot'), mostra, {});
+  await b.api(ospite, mostra, {}, { origin: 'https://esempio.invalid' });
+  await b.api(ospite, '/api/fermo-iscrizione/proseguito', {});
+  assert.equal(b.ar.riga('SELECT COUNT(*) AS n FROM fermi_iscrizione').n, 0);
+  await b.api(ospite, '/api/presenza', {});
+  await b.api(ospite, mostra, {});
+  assert.equal((await b.accedi(ospite)).status, 403);
+  assert.equal(datiFermi(b.ar).giorni[0].accessi, 0);
+  assert.equal((await b.api(ospite, '/api/dispositivi/sostituisci', { id: secondo.cookies.get('dispositivo') })).status, 200);
+  assert.equal(datiFermi(b.ar).giorni[0].accessi, 1);
+});
 
 test('elenco privato, dispositivo corrente riconoscibile e scollegamento selettivo', async (t) => {
   const b = banco(t), [corrente, remoto, terzo] = await b.tre();

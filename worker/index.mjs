@@ -32,6 +32,7 @@ import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { conAccount, SEZIONI_FORMULARIO_LIBERE } from '../src/data/con-account.mjs';
 import { paginaAdmin } from './admin.mjs';
+import { creaTabelleFermi, datiFermi, improntaGiornaliera, registraFermo } from './fermi-iscrizione.mjs';
 import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti, cookieCampagna, campagnaIscrizione, riepilogoCampagne } from './provenienza.mjs';
 import { speseMeta } from './meta-ads.mjs';
 import { PERIODI_DASHBOARD } from './periodi.mjs';
@@ -221,6 +222,7 @@ export class Archivio {
     creaTabellePromozioni(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
     creaTabellePrenotazioni(this.sql);
+    creaTabelleFermi(this.sql);
     // iscrizioni ai corsi di gruppo e tracce d'esame (worker/gruppi.mjs)
     creaTabelleGruppi(this.sql);
     // «Invita un amico»: codici personali, invitati e sconti del 15% (worker/inviti.mjs)
@@ -324,8 +326,15 @@ export class Archivio {
         if (c.h) {
           this.sql.exec('INSERT OR IGNORE INTO presenze (giorno, h, mobile, minuto) VALUES (?, ?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0,
             Number.isInteger(c.minuto) ? c.minuto : null);
-          if (Math.random() < 0.01) this.sql.exec("DELETE FROM presenze WHERE giorno < date('now', '-200 days')");
+          if (Math.random() < 0.01) {
+            this.sql.exec("DELETE FROM presenze WHERE giorno < date('now', '-200 days')");
+            this.sql.exec("DELETE FROM fermi_iscrizione WHERE giorno < date('now', '-200 days')");
+          }
         }
+        return Response.json({ ok: true });
+
+      case '/fermo-iscrizione':
+        registraFermo(this.sql, c);
         return Response.json({ ok: true });
 
       case '/evento':
@@ -598,6 +607,7 @@ export class Archivio {
           orarioIeri: orarioIeri(this),
           verificati: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM presenze
                                   WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
+          invitiIscrizione: datiFermi(this),
           inizioVerificati: this.riga('SELECT MIN(giorno) AS g FROM presenze')?.g || null,
           sezioni: perPeriodo(sezioni),
           percorsoAcquisto: perPeriodo(percorsoAcquisto),
@@ -653,6 +663,19 @@ async function aDO(env, percorso, dati = {}) {
   return r.json();
 }
 
+// Il riferimento firmato dura 24 ore e identifica il giorno in cui il browser ha visto l'invito.
+const COOKIE_FERMO = 'fermo_iscrizione';
+const DURATA_FERMO = 86400;
+async function segnaDopoFermo(env, req, evento) {
+  const cookie = leggiCookie(req, COOKIE_FERMO);
+  if (!cookie) return;
+  const t = await leggiToken(env, cookie);
+  const eta = Date.now() - t?.t;
+  if (t?.scopo === COOKIE_FERMO && eta >= 0 && eta <= DURATA_FERMO * 1000) {
+    await aDO(env, '/fermo-iscrizione', { giorno: t.giorno, h: t.h, evento });
+  }
+}
+
 // ---------- sessione ----------
 const cookieSessione = (valore, durata) =>
   `sessione=${encodeURIComponent(valore)}; Path=/; Max-Age=${durata}; HttpOnly; Secure; SameSite=Lax`;
@@ -686,7 +709,7 @@ const MSG = {
   },
 };
 // Registra il dispositivo e apre la sessione; se il limite è raggiunto risponde con l'errore.
-async function entraDaDispositivo(env, req, email, versione, lingua) {
+async function entraDaDispositivo(env, req, email, versione, lingua, ctx, esito = 'accesso') {
   const id = idDispositivo(req);
   const nome = nomeDispositivo(req), nonce = nuovoIdDispositivo();
   const r = await aDO(env, '/dispositivo-registra', { email, id, nome, nonce, versione });
@@ -703,6 +726,7 @@ async function entraDaDispositivo(env, req, email, versione, lingua) {
   }
   h.append('set-cookie', cookieGestioneDispositivi('', 0));
   h.append('set-cookie', await apriSessione(env, email, versione, id, r.nonce));
+  ctx.waitUntil(segnaDopoFermo(env, req, esito).catch(() => {}));
   return new Response('{"ok":true}', { headers: h });
 }
 async function tokenSessione(env, req) {
@@ -1132,7 +1156,11 @@ export default {
       return gestisciOrientamento(req, env, { aDO, json, tokenSessione, durataSessione: DURATA_SESSIONE });
     }
     if (p === '/api/dispositivi' || p.startsWith('/api/dispositivi/')) {
-      return gestisciDispositivi(req, env, p, { aDO, json, tokenSessione, leggiToken, leggiCookie, cookieDispositivo, apriSessione });
+      const risposta = await gestisciDispositivi(req, env, p, { aDO, json, tokenSessione, leggiToken, leggiCookie, cookieDispositivo, apriSessione });
+      if (POST && p === '/api/dispositivi/sostituisci' && risposta.ok) {
+        ctx.waitUntil(segnaDopoFermo(env, req, 'accesso').catch(() => {}));
+      }
+      return risposta;
     }
     if (p === '/api/email/preferenze' && (req.method === 'GET' || POST)) {
       const io = await utenteCollegato(env, req).catch(() => null);
@@ -1162,7 +1190,7 @@ export default {
       if (benvenuto === true) await aDO(env, '/bv-registra', { email, pagina: String(pagina || '') }).catch(() => {});
       // casella facoltativa «Voglio ricevere via email offerte e sconti…» (src/components/ConsensoOfferte.astro)
       if (offerte === true) await aDO(env, '/em-consenso-iscrizione', { email }).catch(() => console.log('consenso offerte non registrato'));
-      return entraDaDispositivo(env, req, email, r.versione, lingua);
+      return entraDaDispositivo(env, req, email, r.versione, lingua, ctx, 'iscrizione');
     }
     if (p === '/api/accedi' && POST) {
       const { email: e, password, lingua } = await req.json().catch(() => ({}));
@@ -1174,7 +1202,7 @@ export default {
       const ok = confrontoCostante(await hashPassword(password, u.sale, u.iterazioni), u.hash);
       ctx.waitUntil(aDO(env, '/utente-esito-login', { email, ok, lingua }));
       if (!ok) return sbagliato();
-      return entraDaDispositivo(env, req, email, u.versione, lingua);
+      return entraDaDispositivo(env, req, email, u.versione, lingua, ctx);
     }
     if (p === '/api/esci' && POST) {
       const t = await tokenSessione(env, req);
@@ -1192,14 +1220,29 @@ export default {
 
     // ===== percorso d'acquisto: conteggi anonimi (fine dell'anteprima, tasto di acquisto premuto) =====
     // ===== persone verificate: segnale mandato dal browser dopo 2 secondi di pagina in primo piano =====
+    if (POST && (p === '/api/fermo-iscrizione/mostrato' || p === '/api/fermo-iscrizione/proseguito')) {
+      const headers = new Headers({ 'cache-control': 'no-store, private' });
+      const ua = req.headers.get('user-agent') || '';
+      if (req.headers.get('origin') === url.origin && ua && !ROBOT.test(ua) && !(await utenteCollegato(env, req))) {
+        if (p.endsWith('/mostrato')) {
+          const ora = Date.now(), giorno = new Date(ora).toISOString().slice(0, 10);
+          const h = await improntaGiornaliera(req, giorno);
+          await aDO(env, '/fermo-iscrizione', { giorno, h, evento: 'mostrato' });
+          const riferimento = await firmaToken(env, { scopo: COOKIE_FERMO, giorno, h, t: ora });
+          headers.append('set-cookie', `${COOKIE_FERMO}=${riferimento}; Path=/; Max-Age=${DURATA_FERMO}; HttpOnly; Secure; SameSite=Lax`);
+        } else {
+          await segnaDopoFermo(env, req, 'proseguito');
+        }
+      }
+      return new Response(null, { status: 204, headers });
+    }
     if (p === '/api/presenza' && POST) {
       const ua = req.headers.get('user-agent') || '';
       if (ua && !ROBOT.test(ua) && (req.headers.get('sec-fetch-site') || 'same-origin') === 'same-origin') {
         const adesso = new Date();
         const giorno = adesso.toISOString().slice(0, 10);
         // stessa impronta del conteggio delle visite (giorno, indirizzo, browser): i due numeri si confrontano persona per persona
-        const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${giorno}|${req.headers.get('cf-connecting-ip') || ''}|${ua}`));
-        const h = [...new Uint8Array(impronta).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
+        const h = await improntaGiornaliera(req, giorno);
         ctx.waitUntil(aDO(env, '/presenza', { giorno, h, mobile: /Mobi|Android|iPhone|iPad/i.test(ua), minuto: adesso.getUTCHours() * 60 + adesso.getUTCMinutes() }).catch(() => {}));
       }
       return new Response(null, { status: 204 });
@@ -1688,7 +1731,7 @@ export default {
       const r = await aDO(env, '/utente-password', { email: tok.r, hash: await hashPassword(password, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
       // Come la password provvisoria della dashboard: si scollegano tutti i dispositivi e si entra da questo.
       await aDO(env, '/dispositivo-rimuovi', { email: tok.r });
-      return entraDaDispositivo(env, req, tok.r, r.versione, l);
+      return entraDaDispositivo(env, req, tok.r, r.versione, l, ctx);
     }
 
     // ===== vecchi link personali: non danno più accesso, serve l'account =====
@@ -2075,6 +2118,12 @@ export default {
       const intera = !protetta || sbloccataQui || schedaSvoltaLibera;
       if (intera) ctx.waitUntil(aDO(env, '/liv-vista', { email: io.email, materia: info.materia, argomento: info.argomento, tipo: info.tipo, n: info.n || 0 }).catch(() => {}));
     }
+    // Il client attiva la misura della ripresa solo per gli ospiti che hanno già visto l'invito.
+    if (html && !io && leggiCookie(req, COOKIE_FERMO)) {
+      risposta = new HTMLRewriter().on('html[data-studio-materia]', {
+        element(e) { e.setAttribute('data-fermo-visto', ''); },
+      }).transform(risposta);
+    }
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
       const nome = nomeVisibile(io);
@@ -2140,8 +2189,7 @@ export default {
       const campagnaGrezza = (url.searchParams.get('utm_campaign') || '').toLowerCase();
       const campagna = fonte && /^[a-z0-9-]{1,40}$/.test(campagnaGrezza) ? campagnaGrezza : null;
       // Visitatore unico del giorno: impronta non reversibile di giorno, indirizzo e browser (nessun dato personale salvato).
-      const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${giorno}|${req.headers.get('cf-connecting-ip') || ''}|${ua}`));
-      const h = [...new Uint8Array(impronta).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
+      const h = await improntaGiornaliera(req, giorno);
       const mobile = /Mobi|Android|iPhone|iPad/i.test(ua);
       ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte, campagna, h, mobile, minuto }).catch(() => {}));
       // La prima provenienza resta in un cookie per 90 giorni: serve a sapere da dove arriva chi poi si iscrive.

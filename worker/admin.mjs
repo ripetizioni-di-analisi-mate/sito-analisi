@@ -163,6 +163,9 @@ main{padding:1.4rem clamp(16px,3vw,2.2rem) 3rem;min-width:0}
 .filtro small{font-weight:400;opacity:.75;margin-left:.2rem}
 select.scelta{border:1px solid var(--riga);border-radius:9px;padding:.38rem .6rem;background:var(--pannello)}
 .tabella{overflow-x:auto}
+.fermo-cifre{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:1rem;margin:0}
+.fermo-cifre dt{font-size:.8rem;color:var(--ink-2);line-height:1.3}
+.fermo-cifre dd{margin:.3rem 0 0;font-size:1.65rem;font-weight:650;font-variant-numeric:tabular-nums}
 .tabella-email-giorni{max-height:16rem;overflow:auto}
 .tabella-email-giorni th{position:sticky;top:0}
 .promo-campi{display:grid;gap:.75rem;border:0;padding:0;margin:0;min-width:0}
@@ -450,7 +453,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       .map((e) => ({ email: e, nome: '', fonte: '', creato: (ab[e][0] || {}).creato, ultimo_accesso: null, ultima: null, abil: ab[e], acquisti: acq[e] || [], spesa: 0, tipo: 'attesa', dispositivi: [], registrato: false }));
     const primoAcquisto = {}; D.acquisti.forEach((a) => { const g = a.creato.slice(0, 10); if (!primoAcquisto[a.email] || g < primoAcquisto[a.email]) primoAcquisto[a.email] = g; });
     const perGiorno = (righe) => Object.fromEntries(righe.map((r) => [r.giorno, r]));
-    S = { studenti: studenti.concat(attesa), primoAcquisto, visite: perGiorno(D.visite), visitatori: perGiorno(D.visitatori || []), verificati: perGiorno(D.verificati || []) };
+    S = { studenti: studenti.concat(attesa), primoAcquisto, visite: perGiorno(D.visite), visitatori: perGiorno(D.visitatori || []), verificati: perGiorno(D.verificati || []), fermi: perGiorno(D.invitiIscrizione?.giorni || []) };
   }
   // serie giornaliere su un intervallo; fine = quanti giorni prima di oggi termina (per il periodo precedente)
   function serie(nome, n, fine = 0) {
@@ -606,6 +609,37 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
     segnaAggiornato();
   }
 
+  function riepilogoFermi(storico = false) {
+    const dal = D.invitiIscrizione?.dal;
+    if (!dal) return '';
+    const en = document.documentElement.lang === 'en';
+    const titolo = en ? 'Sign-up invitation after 5 minutes' : 'Invito a iscriversi dopo 5 minuti';
+    const etichette = en ? ['Verified visitors', 'Saw the invitation', 'Signed up', 'Signed in', 'No sign-in', 'Of those, continued as guests']
+      : ['Visitatori verificati', 'Arrivati al fermo', 'Nuovi iscritti', 'Accessi con account esistente', 'Senza accesso', 'Di cui proseguiti da ospiti'];
+    const cifre = (g) => {
+      const { fermi = 0, iscrizioni = 0, accessi = 0, proseguiti = 0 } = S.fermi[g] || {};
+      return [S.verificati[g]?.n || 0, fermi, iscrizioni, accessi, fermi - iscrizioni - accessi, proseguiti].map((n) => nf.format(n));
+    };
+    const dataAvvio = new Intl.DateTimeFormat(en ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }).format(new Date(dal));
+    const nota = en ? 'No sign-in includes visitors who leave. Continued as guests counts only subsequent interaction with study content. A completed sign-up or sign-in is attributed to the invitation day for up to 24 hours.'
+      : 'Senza accesso comprende anche chi lascia il sito. Tra questi, contiamo come proseguiti da ospiti solo quelli che hanno interagito di nuovo con una pagina di studio. Un’iscrizione o un accesso completato entro 24 ore viene attribuito al giorno dell’invito.';
+    const inizio = (en ? 'Tracking started on ' : 'Rilevazione dal ') + dataAvvio + ' UTC.';
+    const oggi = oggiISO();
+    const intestazione = '<section class="card" style="margin-bottom:1rem"><header><h2>' + titolo + '</h2><span class="nota">' +
+      (storico ? (en ? 'Daily · UTC' : 'Per giorno · UTC') : (en ? 'Today · ' : 'Oggi · ') + breveData(oggi) + ' UTC') + '</span></header>';
+    if (!storico) {
+      const valori = cifre(oggi);
+      return intestazione + '<div class="corpo"><dl class="fermo-cifre">' +
+        etichette.map((e, i) => '<div><dt>' + e + '</dt><dd>' + valori[i] + '</dd></div>').join('') +
+        '</dl><p class="nota">' + nota + (oggi === dal.slice(0, 10) ? ' ' + inizio : '') + '</p><a href="#traffico">' + (en ? 'View daily counts' : 'Vedi lo storico giornaliero') + '</a></div></section>';
+    }
+    const date = elencoGiorni(giorni).filter((g) => g >= dal.slice(0, 10)).reverse();
+    return intestazione + '<div class="tabella tabella-email-giorni"><table aria-label="' + titolo + '"><thead><tr><th scope="col">' + (en ? 'Day' : 'Giorno') +
+      '</th>' + etichette.map((e) => '<th class="destra" scope="col">' + e + '</th>').join('') + '</tr></thead><tbody>' +
+      date.map((g) => '<tr><th scope="row">' + breveData(g) + '</th>' + cifre(g).map((n) => '<td class="destra">' + n + '</td>').join('') + '</tr>').join('') +
+      '</tbody></table></div><div class="corpo"><p class="nota">' + nota + '</p><p class="nota">' + inizio + '</p></div></section>';
+  }
+
   function panoramica() {
     const g = elencoGiorni(giorni);
     const v = serie('visitatori', giorni), vp = serie('visitatori', giorni, giorni);
@@ -624,6 +658,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       kpi('Nuovi clienti', nf.format(somma(pa)), somma(pa), somma(pap), pa, 'var(--c4)') +
       kpi('Incasso lordo', eur.format(somma(inc)), somma(inc), somma(incp), inc, 'var(--c5)') +
       '</div>' +
+      riepilogoFermi() +
       '<div class="due"><section class="card"><header><h2>Visitatori unici</h2><span class="nota">' + notaTraffico + '</span></header>' +
       legenda(andamento.serieG) + '<div class="corpo">' + andamento.parziale + '<div class="grafico" id="g-andamento"></div></div></section>' +
       '<section class="card"><header><h2>Dalla visita al pagamento</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' + imbuto(somma(v), somma(is), somma(pa)) + '</div></section></div>' +
@@ -975,6 +1010,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIE
       kpi('Pagine viste', nf.format(somma(pv)), somma(pv), somma(serie('visite', giorni, giorni)), storicoPagine.valori.filter((n) => n != null), storicoPagine.colore) +
       '<div class="card kpi"><span class="etichetta">Pagine per visitatore</span><b>' + (somma(v) ? (somma(pv) / somma(v)).toFixed(1).replace('.', ',') : '—') + '</b><span class="delta pari">media del periodo</span></div>' +
       '<div class="card kpi"><span class="etichetta">Da telefono</span><b>' + (tot ? Math.round((mob / tot) * 100) + '%' : '—') + '</b><span class="delta pari">' + (tot ? nf.format(tot - mob) + ' da computer' : 'nessun dato') + '</span></div></div>' +
+      riepilogoFermi(true) +
       '<section class="card" style="margin-bottom:1rem"><header><h2>Visite</h2><span class="nota">Giorni conclusi · robot e anteprime esclusi</span></header>' + legenda(andamento.serieG) +
       '<div class="corpo">' + andamento.parziale + '<div class="grafico" id="g-visite"></div></div></section>' +
       '<section class="card" style="margin-bottom:1rem"><header><h2>' + esc(testiFonti.titolo) + '</h2><span class="nota">' + giorni + ' ' + esc(testiFonti.giorni) + '</span></header>' +
