@@ -275,9 +275,10 @@ export async function attivaAnteprima(avvio, modo) {
       const comandi = evento.target.closest('.passi-comandi');
       if (!comandi || !(titoli[0].compareDocumentPosition(comandi) & Node.DOCUMENT_POSITION_FOLLOWING)
           || !(fineTraccia.compareDocumentPosition(comandi) & Node.DOCUMENT_POSITION_PRECEDING)) return;
-      queueMicrotask(() => {
+      // Il click sul pulsante rimuove i comandi dopo la fase di cattura.
+      setTimeout(() => {
         if (!comandi.isConnected && aperturaAutomatica) apri(fineEsercizio);
-      });
+      }, 0);
     }, true);
   }
   if (modo === '1') apri(pulsanteProva);
