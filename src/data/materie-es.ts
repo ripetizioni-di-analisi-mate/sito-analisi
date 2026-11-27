@@ -95,6 +95,7 @@ export const ARGOMENTI_ES: Record<string, string> = {
   'integrali-impropri': 'Integrales impropias',
   serie: 'Series numéricas',
   'equazioni-differenziali': 'Ecuaciones diferenciales',
+  'disequazioni-grafiche': 'Inecuaciones en dos variables: resolución gráfica',
   'funzioni-di-piu-variabili': 'Funciones de varias variables',
   'calcolo-differenziale': 'Cálculo diferencial en varias variables',
   'funzioni-implicite': 'Funciones implícitas',

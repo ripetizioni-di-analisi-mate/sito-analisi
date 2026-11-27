@@ -830,6 +830,11 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .grafico .curva.c2 { stroke: var(--c-attenzione); }
 .grafico .area { fill: color-mix(in srgb, var(--accento) 22%, transparent); stroke: none; }
 .grafico .segmento { stroke: var(--inchiostro-2); stroke-width: 1.3; stroke-dasharray: 4 4; }
+/* Regioni del piano (attributo regione di ::grafico): colore pieno leggero, frontiera continua se compresa, tratteggiata se esclusa */
+.grafico .regione { fill: color-mix(in srgb, var(--accento) 20%, transparent); stroke: none; }
+.grafico .frontiera { fill: none; stroke: var(--accento); stroke-width: 2.8; stroke-linejoin: round; stroke-linecap: round; }
+.grafico .frontiera.esclusa { stroke-dasharray: 9 7; stroke-linecap: butt; }
+.grafico .frontiera.traccia { stroke-width: 1; stroke: color-mix(in srgb, var(--accento) 42%, transparent); }
 .grafico .vettore { stroke-width: 2.6; stroke-linecap: round; }
 .grafico .vettore.v0, .grafico .punta.v0 { stroke: var(--accento); fill: var(--accento); }
 .grafico .vettore.v1, .grafico .punta.v1 { stroke: var(--c-attenzione); fill: var(--c-attenzione); }
@@ -918,6 +923,24 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
   .cursore-riga input[type="range"] { flex-basis: 100%; height: 2.4rem; }
 }
 /* in stampa resta la figura nello stato del momento, con il valore del cursore e i numeri; sparisce il cursore */
+/* Più figure piccole affiancate (al telefono una sotto l'altra): <div class="figure-affiancate"> con le direttive dentro */
+.figure-affiancate { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.2rem 1rem; align-items: start; margin: 0.8rem 0; }
+.figure-affiancate > .grafico:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (max-width: 520px) { .figure-affiancate { grid-template-columns: minmax(0, 1fr); } }
+.figure-affiancate > .grafico { margin: 0.4rem 0; min-width: 0; }
+.figure-affiancate > .grafico figcaption { font-size: 0.82rem; line-height: 1.35; }
+/* Figura «una curva, sei simboli» (::simboli) */
+.simboli-comandi { max-width: 520px; margin: 0.6rem auto 0; font-family: var(--ui); color: var(--inchiostro); }
+.simboli-gruppo { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-bottom: 0.45rem; }
+.simboli-gruppo button { font: inherit; font-size: 0.88rem; color: var(--inchiostro); background: var(--carta); border: 1px solid var(--riga); border-radius: 999px; padding: 0.25rem 0.75rem; min-height: 2.1rem; cursor: pointer; }
+.simboli-gruppo button:hover { border-color: var(--accento); }
+.simboli-gruppo button:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
+.simboli-gruppo button[aria-pressed="true"] { background: var(--accento); border-color: var(--accento); color: #fff; }
+.simboli-segni button { min-width: 2.7rem; font-size: 1rem; }
+.simboli-segni button .katex { font-size: 1em; }
+.simboli-formula { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.45rem; margin: 0.5rem 0 0.2rem; font-size: 1.25rem; min-height: 2.9rem; }
+.simboli-lettura { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.1rem 1.2rem; margin: 0; font-size: 0.93rem; color: var(--inchiostro-2); text-align: center; }
+@media print { .simboli-pulsanti { display: none !important; } }
 @media print { .cursore-riga input[type="range"] { display: none !important; } .cursore-nome { min-width: 0; width: 100%; text-align: center; } }
 /* diagrammi di Venn */
 .venn > svg { max-width: 30rem; margin: 0 auto; }

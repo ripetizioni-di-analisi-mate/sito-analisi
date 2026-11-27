@@ -80,8 +80,9 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'analisi-2': {
     titolo: 'Mathematical Analysis 2',
     breve: 'Analysis 2',
-    descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions, differential equations and linear systems.',
+    descrizione: 'Graphing inequalities in two variables, functions of several variables, multiple integrals, curves and surfaces, series of functions, differential equations and linear systems.',
     argomenti: {
+      'disequazioni-grafiche': { titolo: 'Graphing inequalities in two variables', breve: 'Graphing inequalities' },
       'funzioni-di-piu-variabili': { titolo: 'Functions of several variables', breve: 'Several variables' },
       'calcolo-differenziale': { titolo: 'Differential calculus in several variables', breve: 'Differential calculus' },
       'funzioni-implicite': { titolo: 'Implicit functions', breve: 'Implicit functions' },
