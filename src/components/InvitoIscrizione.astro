@@ -1,0 +1,74 @@
+---
+import { link } from '../i18n';
+import { url } from '../lib/url';
+
+interface Props { lingua: 'it' | 'en' }
+const { lingua } = Astro.props;
+const t = lingua === 'en' ? {
+  titolo: 'Keep studying',
+  testo: 'With a free account, you can pick up where you left off and see your progress next time you visit.',
+  iscrizione: 'Sign up for free', gia: 'Already have an account?', accesso: 'Sign in',
+} : {
+  titolo: 'Continua a studiare',
+  testo: 'Con un account gratuito puoi riprendere da questa pagina e ritrovare i tuoi progressi quando torni.',
+  iscrizione: 'Iscriviti gratis', gia: 'Hai già un account?', accesso: 'Accedi',
+};
+const accesso = link(lingua, '/accedi');
+---
+<dialog class="invito-iscrizione" aria-labelledby="titolo-invito-iscrizione" aria-describedby="testo-invito-iscrizione">
+  <div class="invito-interno">
+    <div class="invito-marchio"><img src={url('/logo.svg')} width="29" height="29" alt="" />Ripetizioni di Analisi</div>
+    <h2 id="titolo-invito-iscrizione" tabindex="-1" autofocus>{t.titolo}</h2>
+    <p id="testo-invito-iscrizione">{t.testo}</p>
+    <a class="invito-primario" href={accesso + '?nuovo=1'}>{t.iscrizione}</a>
+    <p class="invito-accesso">{t.gia} <a href={accesso}>{t.accesso}</a></p>
+  </div>
+</dialog>
+
+<script>
+  import { avviaInvito } from '../scripts/invito-iscrizione.mjs';
+  const invito = document.querySelector<HTMLDialogElement>('.invito-iscrizione');
+  if (invito) avviaInvito(invito);
+</script>
+
+<style>
+  .invito-iscrizione {
+    width: min(27.5rem, calc(100% - 2rem));
+    max-width: none;
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    color: var(--inchiostro);
+    background: var(--carta);
+    border: 1px solid var(--riga);
+    border-radius: 14px;
+    box-shadow: 0 1.4rem 4rem rgb(15 34 33 / 18%);
+  }
+  .invito-iscrizione::backdrop {
+    background: rgb(26 45 44 / 35%);
+    backdrop-filter: blur(2px);
+  }
+  :global(html:has(.invito-iscrizione[open])) { overflow: hidden; }
+  .invito-interno { padding: clamp(1.5rem, 5vw, 2.5rem); }
+  .invito-marchio { display: flex; align-items: center; gap: .55rem; font: 600 .98rem/1.3 var(--titoli); }
+  .invito-marchio img { width: 1.8rem; height: 1.8rem; }
+  h2 { margin: 1.5rem 0 .65rem; font: 600 clamp(1.9rem, 5vw, 2.25rem)/1.12 var(--titoli); letter-spacing: -.035em; }
+  h2:focus { outline: none; }
+  #testo-invito-iscrizione { margin: 0; font: 400 1.12rem/1.5 var(--ui); color: var(--inchiostro-2); }
+  .invito-primario {
+    display: grid; place-items: center; min-height: 2.9rem; margin-top: 1.65rem; padding: .65rem 1.2rem;
+    font: 600 1.08rem/1.3 var(--ui); text-align: center; text-decoration: none;
+    background: var(--azione); color: white; border-radius: 999px;
+  }
+  .invito-primario:hover { background: #173f40; }
+  .invito-accesso { margin: .8rem 0 0; text-align: center; color: var(--inchiostro-2); font: 400 1rem/1.55 var(--ui); }
+  .invito-accesso a { display: inline-block; padding: .2rem .1rem; color: var(--azione); font-weight: 600; }
+  @media (prefers-reduced-motion: no-preference) {
+    .invito-iscrizione[open] { animation: invito-appare .22s ease-out; }
+    .invito-iscrizione[open]::backdrop { animation: invito-sfondo .22s ease-out; }
+    @keyframes invito-appare { from { opacity: 0; transform: translateY(.35rem); } }
+    @keyframes invito-sfondo { from { opacity: 0; } }
+  }
+</style>

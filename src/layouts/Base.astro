@@ -21,6 +21,7 @@ import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
 import ConsensoCookie from '../components/ConsensoCookie.astro';
+import InvitoIscrizione from '../components/InvitoIscrizione.astro';
 import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA, META_PIXEL_ID, CONSENSO_VERSIONE } from '../data/misurazione';
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
@@ -424,6 +425,9 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
 
   {!localizzato && sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
   {sezione !== 'stampa' && MISURAZIONE_ATTIVA && <ConsensoCookie lingua={lingua} />}
+  {(lingua === 'it' || lingua === 'en') && sezione !== 'stampa' &&
+    !/^\/(?:accedi|account|reimposta-password|acquisto|prenota|corsi-di-gruppo|prezzi|offerta|pacchetti|invito|privacy|termini|rimborsi|recesso|contatti)(?:\/|$)/.test(versioneIt) &&
+    !versioneIt.endsWith('/sblocca') && <InvitoIscrizione lingua={lingua} />}
   <script type="application/json" id="catalogo-percorso" data-solo-sessione is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
 
   <div class="avviso-premio" role="status" aria-live="polite" hidden></div>

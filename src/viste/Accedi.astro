@@ -4,6 +4,7 @@ import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import ConsensoOfferte from '../components/ConsensoOfferte.astro';
+import { SEGNALE_ACCESSO } from '../scripts/invito-iscrizione.mjs';
 import '../styles/dispositivi-login.css';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
@@ -57,7 +58,7 @@ const pref = prefisso(lingua);
     <p class="nota-accesso"><a href="#" id="torna-accesso">{t.tornaAccesso}</a></p>
   </form>
 
-  <script is:inline define:vars={{ js, pref, lingua }}>
+  <script is:inline define:vars={{ js, pref, lingua, segnaleAccesso: SEGNALE_ACCESSO }}>
     (() => {
       const modulo = document.getElementById('modulo');
       const esito = document.getElementById('esito');
@@ -83,6 +84,10 @@ const pref = prefisso(lingua);
       };
       const dopo = new URLSearchParams(location.search).get('dopo');
       const destinazione = dopo && dopo.startsWith('/') && !dopo.startsWith('//') ? dopo : `${pref}/account`;
+      function completaAccesso() {
+        try { localStorage.setItem(segnaleAccesso, String(Date.now())); } catch {}
+        location.href = destinazione;
+      }
       let scheda = new URLSearchParams(location.search).get('nuovo') ? 'registrati' : 'accedi';
       const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es', fr = lingua === 'fr';
       const gestioneDispositivi = document.getElementById('gestione-dispositivi-login');
@@ -221,7 +226,7 @@ const pref = prefisso(lingua);
             method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id }),
           });
           const dati = await risposta.json().catch(() => ({}));
-          if (risposta.ok && dati.ok) { clearTimeout(scadenzaGestione); location.href = destinazione; return; }
+          if (risposta.ok && dati.ok) { clearTimeout(scadenzaGestione); completaAccesso(); return; }
           if (risposta.status === 401 || dati.scaduto) { chiudiGestione(testiDispositivi.scaduto); return; }
           if (risposta.status === 409 && dati.aggiorna) {
             if (await aggiornaDispositivi()) {
@@ -300,7 +305,7 @@ const pref = prefisso(lingua);
             // Con il pixel di Meta caricato, una breve attesa lascia partire l'evento CompleteRegistration prima del cambio di pagina.
             if (window.fbq) await new Promise((fatto) => setTimeout(fatto, 400));
           }
-          location.href = destinazione;
+          completaAccesso();
         } catch {
           invia.disabled = false; errore(js.connessione);
         }
