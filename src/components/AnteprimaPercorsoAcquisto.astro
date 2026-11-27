@@ -1,16 +1,24 @@
 ---
-import { materiaL, type Lingua } from '../i18n';
+import { materieL, type Lingua } from '../i18n';
 import { SCONTO_BENVENUTO } from '../data/benvenuto';
 import { url } from '../lib/url';
 
-interface Props { lingua: Lingua; materia: string; argomento: string }
-const { lingua, materia, argomento } = Astro.props;
-const corso = materiaL(lingua, materia);
+export const schedePercorso: Record<string, string> = {
+  'analisi-1': 'limiti',
+  'fisica-1': 'cinematica-1d',
+  'matematica-superiori-5': 'derivate',
+  'tolc-i': 'aritmetica-e-algebra',
+};
+interface Props { lingua: Lingua; materia: string }
+const { lingua, materia } = Astro.props;
+const catalogo = Object.fromEntries(materieL(lingua)
+  .filter(corso => Object.hasOwn(schedePercorso, corso.slug))
+  .map(corso => [corso.slug, { nome: corso.breve, prezzo: corso.prezzo }]));
 const en = lingua === 'en';
 const modulo = url('/anteprime/percorso-acquisto/percorso.mjs');
 ---
 <div id="anteprima-percorso-acquisto" hidden data-materia={materia} data-lingua={lingua}
-  data-titolo={corso.breve} data-argomento={argomento} data-prezzo={corso.prezzo} data-sconto={SCONTO_BENVENUTO}>
+  data-catalogo={JSON.stringify(catalogo)} data-logo={url('/logo.svg')} data-sconto={SCONTO_BENVENUTO}>
   <span>{en ? 'Preview of the study guide' : 'Anteprima del percorso per gli iscritti'}</span>
   <button type="button" data-avvia-anteprima>{en ? 'Try the guide' : 'Prova il percorso'}</button>
 </div>
