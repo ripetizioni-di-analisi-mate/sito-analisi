@@ -506,6 +506,8 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
 
     // Figure con cursore della teoria: il codice che le ridisegna si scarica solo nelle pagine che ne hanno.
     if (document.querySelector('[data-cursore]')) import('../scripts/cursori.ts');
+    // Figura «una curva, sei simboli»: stessa regola.
+    if (document.querySelector('[data-simboli]')) import('../scripts/simboli.ts');
 
     // Occhietto accanto alle password: mostra o nasconde quello che si è scritto.
     document.addEventListener('click', (e) => {

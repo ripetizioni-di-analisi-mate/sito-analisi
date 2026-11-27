@@ -67,11 +67,12 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'analisi-2',
     titolo: 'Analisi matematica 2',
     breve: 'Analisi 2',
-    descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni, equazioni differenziali e sistemi lineari.',
+    descrizione: 'Disequazioni grafiche, funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni, equazioni differenziali e sistemi lineari.',
     colore: '#336976',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
+      { slug: 'disequazioni-grafiche', titolo: 'Disequazioni grafiche', breve: 'Disequazioni grafiche' },
       { slug: 'funzioni-di-piu-variabili', titolo: 'Funzioni di più variabili', breve: 'Più variabili' },
       { slug: 'calcolo-differenziale', titolo: 'Calcolo differenziale in più variabili', breve: 'Calcolo differenziale' },
       { slug: 'funzioni-implicite', titolo: 'Funzioni implicite', breve: 'Funzioni implicite' },

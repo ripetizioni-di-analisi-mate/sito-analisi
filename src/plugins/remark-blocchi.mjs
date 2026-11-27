@@ -13,6 +13,7 @@
 //   ::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello"}   schemi della Statica: travi, vincoli,
 //   ::schema{acqua="…" condotte="A-B,0.4" pelo="0,6,3"}   stesso generatore, per gli schemi dell'Idraulica
 //       carichi, quote, sezioni e diagrammi delle sollecitazioni (attributi in struttura.mjs)
+//   ::simboli{curva="circonferenza" simbolo="<=" titolo="…"}   una curva e sei simboli da scegliere: la figura mostra la regione (simboli.mjs)
 //   ::cursore{tipo="epsilon-delta" titolo="…"}   grafico con un cursore che ne cambia un parametro (cursore.mjs):
 //       tipi epsilon-delta (ε nella definizione di limite), secante (h nel rapporto incrementale),
 //       riemann (n nelle somme di Riemann), taylor (grado di McLaurin), somme-parziali (N di una serie);
@@ -23,6 +24,7 @@ import { h } from 'hastscript';
 import { grafico } from './grafico.mjs';
 import { venn } from './venn.mjs';
 import { cursore } from './cursore.mjs';
+import { simboli } from './simboli.mjs';
 import { figura } from './figura.mjs';
 import { struttura } from './struttura.mjs';
 import { incorporaFigure } from './incorpora.mjs';
@@ -114,13 +116,13 @@ export default function remarkBlocchi() {
           return;
         }
       }
-      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura' || node.name === 'schema')) {
+      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'simboli' || node.name === 'figura' || node.name === 'struttura' || node.name === 'schema')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };
         if (node.name === 'grafico' && traduciAssi && attr.nomi) {
           attr.nomi = String(attr.nomi).split(',').map((nome) => ASSI_ANALISI_STATISTICA_FINANZIARIA_EN.get(nome.trim()) ?? nome).join(',');
         }
-        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}, schemaInglese) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(attr) : venn(attr);
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}, schemaInglese) : node.name === 'cursore' ? cursore(attr) : node.name === 'simboli' ? simboli(attr) : node.name === 'figura' ? figura(attr) : venn(attr);
         return;
       }
       if (node.type !== 'containerDirective') return;

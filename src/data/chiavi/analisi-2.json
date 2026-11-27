@@ -592,6 +592,901 @@
    }
   ]
  },
+ "disequazioni-grafiche/1": {
+  "campi": [
+   {
+    "e": "Retta di frontiera: $y =$",
+    "t": "funzione",
+    "v": "\\frac{1}{3}x - 1",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Le soluzioni sono i punti",
+    "t": "scelta",
+    "opzioni": [
+     "sopra la retta",
+     "sotto la retta"
+    ],
+    "v": "sopra la retta"
+   },
+   {
+    "e": "La retta è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/2": {
+  "campi": [
+   {
+    "e": "Retta più bassa: $y =$",
+    "t": "funzione",
+    "v": "x - 2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Retta più alta: $y =$",
+    "t": "funzione",
+    "v": "x + 1",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Le soluzioni sono i punti",
+    "t": "scelta",
+    "opzioni": [
+     "tra le due rette",
+     "sopra entrambe le rette",
+     "sotto entrambe le rette"
+    ],
+    "v": "tra le due rette"
+   },
+   {
+    "e": "La retta più bassa è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "esclusa"
+   },
+   {
+    "e": "La retta più alta è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/3": {
+  "campi": [
+   {
+    "e": "Vertice della parabola",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Concavità della parabola",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Ascisse dei punti in cui la parabola incontra l'asse $x$",
+    "t": "valori",
+    "v": [
+     "1",
+     "5"
+    ]
+   },
+   {
+    "e": "Le soluzioni sono i punti",
+    "t": "scelta",
+    "opzioni": [
+     "sopra la parabola",
+     "sotto la parabola"
+    ],
+    "v": "sotto la parabola"
+   },
+   {
+    "e": "La parabola è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "esclusa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/4": {
+  "campi": [
+   {
+    "e": "Parabola di frontiera: $y =$",
+    "t": "funzione",
+    "v": "-\\frac{1}{2}x^2 + x + \\frac{3}{2}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Vertice della parabola",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Concavità della parabola",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Le soluzioni sono i punti",
+    "t": "scelta",
+    "opzioni": [
+     "sopra la parabola",
+     "sotto la parabola"
+    ],
+    "v": "sopra la parabola"
+   },
+   {
+    "e": "La parabola è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/5": {
+  "campi": [
+   {
+    "e": "Asse della parabola",
+    "t": "scelta",
+    "opzioni": [
+     "verticale",
+     "orizzontale"
+    ],
+    "v": "orizzontale"
+   },
+   {
+    "e": "Vertice della parabola",
+    "t": "valori",
+    "v": [
+     "-1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "La parabola si apre",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso",
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra",
+    "fisso": true
+   },
+   {
+    "e": "Le soluzioni sono i punti",
+    "t": "scelta",
+    "opzioni": [
+     "sopra la parabola",
+     "sotto la parabola",
+     "a destra della parabola",
+     "a sinistra della parabola"
+    ],
+    "v": "a destra della parabola",
+    "fisso": true
+   },
+   {
+    "e": "La parabola è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "esclusa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/6": {
+  "campi": [
+   {
+    "e": "Parabola di frontiera: $x =$",
+    "t": "funzione",
+    "v": "4 - y^2",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "Vertice della parabola",
+    "t": "valori",
+    "v": [
+     "4",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "La parabola si apre",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso",
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra",
+    "fisso": true
+   },
+   {
+    "e": "Le soluzioni sono i punti",
+    "t": "scelta",
+    "opzioni": [
+     "sopra la parabola",
+     "sotto la parabola",
+     "a destra della parabola",
+     "a sinistra della parabola"
+    ],
+    "v": "a sinistra della parabola",
+    "fisso": true
+   },
+   {
+    "e": "La parabola è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/7": {
+  "campi": [
+   {
+    "e": "Centro della circonferenza",
+    "t": "valori",
+    "v": [
+     "-1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Raggio",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Le soluzioni sono i",
+    "t": "scelta",
+    "opzioni": [
+     "punti interni",
+     "punti esterni"
+    ],
+    "v": "punti esterni"
+   },
+   {
+    "e": "La circonferenza è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/8": {
+  "campi": [
+   {
+    "e": "Centro delle due circonferenze",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Raggio della circonferenza interna",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Raggio della circonferenza esterna",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "La circonferenza interna è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   },
+   {
+    "e": "La circonferenza esterna è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "esclusa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/9": {
+  "campi": [
+   {
+    "e": "Centro dell'ellisse",
+    "t": "valori",
+    "v": [
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Semiasse orizzontale $a$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Semiasse verticale $b$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Le soluzioni sono i",
+    "t": "scelta",
+    "opzioni": [
+     "punti interni",
+     "punti esterni"
+    ],
+    "v": "punti esterni"
+   },
+   {
+    "e": "L'ellisse è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "esclusa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/10": {
+  "campi": [
+   {
+    "e": "Centro dell'ellisse",
+    "t": "valori",
+    "v": [
+     "2",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Semiasse orizzontale $a$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Semiasse verticale $b$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Le soluzioni sono i",
+    "t": "scelta",
+    "opzioni": [
+     "punti interni",
+     "punti esterni"
+    ],
+    "v": "punti interni"
+   },
+   {
+    "e": "L'ellisse è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/11": {
+  "campi": [
+   {
+    "e": "I rami dell'iperbole si trovano",
+    "t": "scelta",
+    "opzioni": [
+     "a destra e a sinistra",
+     "in alto e in basso"
+    ],
+    "v": "a destra e a sinistra"
+   },
+   {
+    "e": "Vertice con coordinate non negative",
+    "t": "valori",
+    "v": [
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Asintoto con pendenza positiva: $y =$",
+    "t": "funzione",
+    "v": "3x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Le soluzioni formano",
+    "t": "scelta",
+    "opzioni": [
+     "la regione tra i due rami",
+     "le regioni interne ai rami"
+    ],
+    "v": "la regione tra i due rami"
+   },
+   {
+    "e": "I rami sono",
+    "t": "scelta",
+    "opzioni": [
+     "compresi",
+     "esclusi"
+    ],
+    "v": "compresi"
+   }
+  ]
+ },
+ "disequazioni-grafiche/12": {
+  "campi": [
+   {
+    "e": "Asintoto verticale: $x =$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Asintoto orizzontale: $y =$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Rispetto agli asintoti i rami si trovano",
+    "t": "scelta",
+    "opzioni": [
+     "in alto a destra e in basso a sinistra",
+     "in alto a sinistra e in basso a destra"
+    ],
+    "v": "in alto a destra e in basso a sinistra"
+   },
+   {
+    "e": "Le soluzioni formano",
+    "t": "scelta",
+    "opzioni": [
+     "la regione tra i due rami",
+     "le regioni oltre i rami"
+    ],
+    "v": "le regioni oltre i rami"
+   },
+   {
+    "e": "I rami sono",
+    "t": "scelta",
+    "opzioni": [
+     "compresi",
+     "esclusi"
+    ],
+    "v": "esclusi"
+   }
+  ]
+ },
+ "disequazioni-grafiche/13": {
+  "campi": [
+   {
+    "e": "Centro della circonferenza di frontiera",
+    "t": "valori",
+    "v": [
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Raggio della circonferenza di frontiera",
+    "t": "numero",
+    "v": "\\sqrt{3}"
+   },
+   {
+    "e": "Le soluzioni sono i",
+    "t": "scelta",
+    "opzioni": [
+     "punti interni",
+     "punti esterni"
+    ],
+    "v": "punti interni"
+   },
+   {
+    "e": "La circonferenza è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   }
+  ]
+ },
+ "disequazioni-grafiche/14": {
+  "campi": [
+   {
+    "e": "Curva di frontiera: $y =$",
+    "t": "funzione",
+    "v": "\\ln x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Rispetto alla curva il dominio è la regione",
+    "t": "scelta",
+    "opzioni": [
+     "sopra il grafico",
+     "sotto il grafico"
+    ],
+    "v": "sopra il grafico"
+   },
+   {
+    "e": "La curva è",
+    "t": "scelta",
+    "opzioni": [
+     "compresa",
+     "esclusa"
+    ],
+    "v": "compresa"
+   },
+   {
+    "e": "Rispetto all'asse $y$ il dominio si trova",
+    "t": "scelta",
+    "opzioni": [
+     "a destra",
+     "a sinistra",
+     "da entrambe le parti"
+    ],
+    "v": "a destra"
+   }
+  ]
+ },
+ "disequazioni-grafiche/15": {
+  "campi": [
+   {
+    "e": "Punto di incontro delle due curve sull'asse $y$",
+    "t": "valori",
+    "v": [
+     "0",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Punto di incontro delle due curve con $x > 0$",
+    "t": "valori",
+    "v": [
+     "\\sqrt{3}",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Rispetto alla circonferenza le soluzioni sono",
+    "t": "scelta",
+    "opzioni": [
+     "punti interni",
+     "punti esterni"
+    ],
+    "v": "punti interni"
+   },
+   {
+    "e": "Rispetto alla parabola le soluzioni stanno",
+    "t": "scelta",
+    "opzioni": [
+     "sopra la parabola",
+     "sotto la parabola"
+    ],
+    "v": "sopra la parabola"
+   },
+   {
+    "e": "L'arco di parabola è",
+    "t": "scelta",
+    "opzioni": [
+     "compreso",
+     "escluso"
+    ],
+    "v": "compreso"
+   },
+   {
+    "e": "L'arco di circonferenza è",
+    "t": "scelta",
+    "opzioni": [
+     "compreso",
+     "escluso"
+    ],
+    "v": "escluso"
+   },
+   {
+    "e": "I punti di incontro delle due curve sono",
+    "t": "scelta",
+    "opzioni": [
+     "compresi",
+     "esclusi"
+    ],
+    "v": "esclusi"
+   }
+  ]
+ },
+ "disequazioni-grafiche/16": {
+  "campi": [
+   {
+    "e": "Numero di punti in comune tra la retta $x + y = 0$ e l'iperbole $xy = 1$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Oltre il ramo del primo quadrante il prodotto è",
+    "t": "scelta",
+    "opzioni": [
+     "positivo",
+     "negativo"
+    ],
+    "v": "positivo"
+   },
+   {
+    "e": "Tra il ramo del primo quadrante e la retta il prodotto è",
+    "t": "scelta",
+    "opzioni": [
+     "positivo",
+     "negativo"
+    ],
+    "v": "negativo"
+   },
+   {
+    "e": "Tra la retta e il ramo del terzo quadrante il prodotto è",
+    "t": "scelta",
+    "opzioni": [
+     "positivo",
+     "negativo"
+    ],
+    "v": "positivo"
+   },
+   {
+    "e": "Oltre il ramo del terzo quadrante il prodotto è",
+    "t": "scelta",
+    "opzioni": [
+     "positivo",
+     "negativo"
+    ],
+    "v": "negativo"
+   },
+   {
+    "e": "La retta e i due rami sono",
+    "t": "scelta",
+    "opzioni": [
+     "compresi",
+     "esclusi"
+    ],
+    "v": "compresi"
+   }
+  ]
+ },
+ "disequazioni-grafiche/17": {
+  "campi": [
+   {
+    "e": "Rispetto all'asse $x$: intervallo in cui varia $x$",
+    "t": "intervallo",
+    "v": "[0, 2]"
+   },
+   {
+    "e": "Curva in basso: $g_1(x) =$",
+    "t": "funzione",
+    "v": "x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Curva in alto: $g_2(x) =$",
+    "t": "funzione",
+    "v": "2x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Rispetto all'asse $y$: intervallo in cui varia $y$",
+    "t": "intervallo",
+    "v": "[0, 4]",
+    "var": "y"
+   },
+   {
+    "e": "Curva a sinistra: $h_1(y) =$",
+    "t": "funzione",
+    "v": "\\frac{y}{2}",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "Curva a destra: $h_2(y) =$",
+    "t": "funzione",
+    "v": "\\sqrt{y}",
+    "var": [
+     "y"
+    ]
+   }
+  ]
+ },
+ "disequazioni-grafiche/18": {
+  "campi": [
+   {
+    "e": "Intervallo in cui varia $y$",
+    "t": "intervallo",
+    "v": "[-1, 1]",
+    "var": "y"
+   },
+   {
+    "e": "Curva a sinistra: $h_1(y) =$",
+    "t": "funzione",
+    "v": "y^2 - 1",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "Curva a destra: $h_2(y) =$",
+    "t": "funzione",
+    "v": "1 - y^2",
+    "var": [
+     "y"
+    ]
+   }
+  ]
+ },
+ "disequazioni-grafiche/19": {
+  "campi": [
+   {
+    "e": "I punti interni soddisfano",
+    "t": "scelta",
+    "opzioni": [
+     "$x^2 + y^2 < 4$ e $x > 0$",
+     "$x^2 + y^2 < 4$ e $x \\geq 0$",
+     "$x^2 + y^2 \\leq 4$ e $x > 0$"
+    ],
+    "v": "$x^2 + y^2 < 4$ e $x > 0$"
+   },
+   {
+    "e": "Tratto curvo: $x =$",
+    "t": "funzione",
+    "v": "\\sqrt{4 - y^2}",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "Tratto rettilineo: $x =$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Intervallo in cui varia $y$ sui due tratti",
+    "t": "intervallo",
+    "v": "[-2, 2]",
+    "var": "y"
+   },
+   {
+    "e": "Vertice con ordinata negativa",
+    "t": "valori",
+    "v": [
+     "0",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Vertice con ordinata positiva",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "disequazioni-grafiche/20": {
+  "campi": [
+   {
+    "e": "La curva è",
+    "t": "scelta",
+    "opzioni": [
+     "una circonferenza",
+     "un'ellisse",
+     "un'iperbole",
+     "una parabola"
+    ],
+    "v": "un'ellisse"
+   },
+   {
+    "e": "Centro di simmetria della curva",
+    "t": "valori",
+    "v": [
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Forma canonica: valore di $a$ (termine in $x$)",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Forma canonica: valore di $b$ (termine in $y$)",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "La curva è un insieme limitato?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
  "equazioni-differenziali/1": {
   "campi": [
    {

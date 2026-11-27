@@ -185,6 +185,52 @@ export const TIPI = {
   },
 };
 
+// Domini normali: un segmento verticale (o orizzontale) attraversa la regione; il cursore lo sposta e sotto la figura
+// si leggono il punto di ingresso e il punto di uscita.
+//   regione            la regione, come nell'attributo regione di ::grafico
+//   sotto, sopra       (verticale) le curve y = g1(x), y = g2(x) di ingresso e di uscita, in x
+//   sinistra, destra   (orizzontale) le curve x = h1(y), x = h2(y), in y; con cambio la curva di sinistra è
+//                      «sinistra» sotto y = cambio e «sinistra2» sopra
+//   texSotto, texSopra, texDestra   le curve in LaTeX, per le righe sotto la figura; nomeSinistra, nomeSinistra2 i nomi a parole
+Object.assign(TIPI, {
+  'sezione-verticale': {
+    predefiniti: { regione: 'y>=x^2; y<=x+2', sotto: 'x^2', sopra: 'x+2', texSotto: 'x^2', texSopra: 'x + 2', min: -1, max: 2, passo: 0.05, valore: 0.5, xmin: -3, xmax: 4, ymin: -1, ymax: 6 },
+    figura(p, v) {
+      const y1 = compila(p.sotto)(v), y2 = compila(p.sopra)(v);
+      return { regione: p.regione, xmin: p.xmin, xmax: p.xmax, ymin: p.ymin, ymax: p.ymax, uguale: 1,
+        linee: `${nr(v)},${nr(y1)} ${nr(v)},${nr(y2)}`, punti: `${nr(v)},${nr(y1)},pieno;${nr(v)},${nr(y2)},pieno`,
+        segmenti: `${nr(v)},0,${nr(v)},${nr(y1)}` };
+    },
+    valori(p, v, en) {
+      const r = { x: numero(v, 2, en), y1: numero(compila(p.sotto)(v), 2, en), y2: numero(compila(p.sopra)(v), 2, en) };
+      return { ...r, testo: `x = ${r.x}, ${en ? 'from' : 'da'} y = ${r.y1} ${en ? 'to' : 'a'} y = ${r.y2}` };
+    },
+    testi: (p, en) => ({ nome: 'x =', righe: en
+      ? [`enters at $y = ${p.texSotto} =$ {y1}`, `leaves at $y = ${p.texSopra} =$ {y2}`]
+      : [`ingresso in $y = ${p.texSotto} =$ {y1}`, `uscita in $y = ${p.texSopra} =$ {y2}`] }),
+    legenda: () => null,
+  },
+  'sezione-orizzontale': {
+    predefiniti: { regione: 'y>=x^2; y<=x+2', sinistra: '-sqrt(y)', sinistra2: 'y-2', cambio: 1, destra: 'sqrt(y)', nomeSinistra: 'parabola', nomeSinistra2: 'retta', nomeSinistraEn: 'parabola', nomeSinistra2En: 'line', texDestra: '\\sqrt{y}', min: 0, max: 4, passo: 0.05, valore: 0.5, xmin: -3, xmax: 4, ymin: -1, ymax: 6 },
+    ingresso(p, v) { const due = Number.isFinite(p.cambio) && v > p.cambio; return { x: compila(due ? p.sinistra2 : p.sinistra, 'y')(v), due }; },
+    figura(p, v) {
+      const x1 = TIPI['sezione-orizzontale'].ingresso(p, v).x, x2 = compila(p.destra, 'y')(v);
+      return { regione: p.regione, xmin: p.xmin, xmax: p.xmax, ymin: p.ymin, ymax: p.ymax, uguale: 1,
+        linee: `${nr(x1)},${nr(v)} ${nr(x2)},${nr(v)}`, punti: `${nr(x1)},${nr(v)},pieno;${nr(x2)},${nr(v)},pieno`,
+        segmenti: `0,${nr(v)},${nr(Math.min(x1, x2) < 0 ? 0 : x1)},${nr(v)}${Number.isFinite(p.cambio) ? `;${nr(p.xmin)},${nr(p.cambio)},${nr(p.xmax)},${nr(p.cambio)}` : ''}` };
+    },
+    valori(p, v, en) {
+      const i = TIPI['sezione-orizzontale'].ingresso(p, v);
+      const r = { y: numero(v, 2, en), x1: numero(i.x, 2, en), x2: numero(compila(p.destra, 'y')(v), 2, en), curva: en ? (i.due ? p.nomeSinistra2En : p.nomeSinistraEn) : (i.due ? p.nomeSinistra2 : p.nomeSinistra) };
+      return { ...r, testo: `y = ${r.y}, ${en ? 'from' : 'da'} x = ${r.x1} ${en ? 'to' : 'a'} x = ${r.x2}` };
+    },
+    testi: (p, en) => ({ nome: 'y =', righe: en
+      ? ['enters at the {curva}, $x =$ {x1}', `leaves at $x = ${p.texDestra} =$ {x2}`]
+      : ['ingresso dalla {curva}, $x =$ {x1}', `uscita in $x = ${p.texDestra} =$ {x2}`] }),
+    legenda: () => null,
+  },
+});
+
 // Parametri di una figura: i predefiniti del tipo, sostituiti dagli attributi della direttiva (i numeri come numeri).
 export function parametri(tipo, attributi = {}) {
   const T = TIPI[tipo];

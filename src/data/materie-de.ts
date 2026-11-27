@@ -95,6 +95,7 @@ export const ARGOMENTI_DE: Record<string, string> = {
   'integrali-impropri': 'Uneigentliche Integrale',
   serie: 'Zahlenreihen',
   'equazioni-differenziali': 'Differentialgleichungen',
+  'disequazioni-grafiche': 'Ungleichungen in zwei Variablen: grafische Lösung',
   'funzioni-di-piu-variabili': 'Funktionen mehrerer Variablen',
   'calcolo-differenziale': 'Differentialrechnung in mehreren Variablen',
   'funzioni-implicite': 'Implizite Funktionen',
