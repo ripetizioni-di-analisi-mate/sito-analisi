@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 import { resaVoce } from '../lib/resa';
 import { dataContenuto } from '../lib/date';
 import TeoriaEsercizio from '../components/TeoriaEsercizio.astro';
-import AnteprimaPercorsoAcquisto from '../components/AnteprimaPercorsoAcquisto.astro';
+import AnteprimaPercorsoAcquisto, { schedePercorso } from '../components/AnteprimaPercorsoAcquisto.astro';
 import { estrattoTraccia } from '../lib/estratto-traccia.mjs';
 import { titoloRipetuto } from '../lib/titoli-esercizi';
 import Base from '../layouts/Base.astro';
@@ -35,9 +35,7 @@ const salti = resa.headings.filter((h) => h.depth === 2);
 const base = `/${materia}/${argomento}`;
 const lista = link(lingua, `${base}/esercizi-svolti`);
 const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${t.scheda} ${numero(v.id)}`, sotto: tt, href: link(lingua, `${base}/esercizi-svolti/${numero(v.id)}`) };
-const schedaConPercorso = n === '1' && (lingua === 'it' || lingua === 'en') && [
-  'analisi-1/limiti', 'fisica-1/cinematica-1d', 'matematica-superiori-5/derivate', 'tolc-i/aritmetica-e-algebra',
-].includes(materia + '/' + argomento);
+const schedaConPercorso = n === '1' && (lingua === 'it' || lingua === 'en') && schedePercorso[materia] === argomento;
 const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua)).successivo;
 ---
 <Base
@@ -59,7 +57,7 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
 >
   <p class="sopratitolo">{t.sezioni['esercizi-svolti']} · {t.scheda} {n}</p>
   <h1>{voce.data.titolo}</h1>
-  {schedaConPercorso && <AnteprimaPercorsoAcquisto {lingua} {materia} argomento={arg.breve} />}
+  {schedaConPercorso && <AnteprimaPercorsoAcquisto {lingua} {materia} />}
   {voce.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
   <TeoriaEsercizio {lingua} {materia} {argomento} riferimenti={voce.data.teoria} />
   {salti.length > 1 && (

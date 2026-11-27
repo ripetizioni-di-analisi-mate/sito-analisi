@@ -1,4 +1,4 @@
-import { courses, extensions } from './contenuti.mjs';
+import { argomenti, programmi } from './contenuti.mjs';
 
 const nonSo = 'non-so';
 const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
@@ -17,40 +17,43 @@ function caricaStile() {
 }
 
 export async function attivaAnteprima(avvio, modo) {
-  if (!avvio || avvio.dataset.pronta || !Object.hasOwn(courses, avvio.dataset.materia)) return;
+  if (!avvio || avvio.dataset.pronta || !Object.hasOwn(programmi, avvio.dataset.materia)) return;
   const studio = document.querySelector('main .testo-studio');
   if (!studio || !['1', 'esercizio'].includes(modo)) return;
   await caricaStile();
   avvio.dataset.pronta = '1';
-  const { materia, lingua, titolo, argomento } = avvio.dataset;
-  const corso = courses[materia];
+  const { materia: partenza, lingua } = avvio.dataset;
+  const catalogo = JSON.parse(avvio.dataset.catalogo);
   const en = lingua === 'en';
   const t = (it, english) => en ? english : it;
   const testo = value => typeof value === 'string' ? value : value[lingua];
   const mostra = value => escapeHtml(testo(value));
-  const nome = escapeHtml(titolo);
   const euro = new Intl.NumberFormat(en ? 'en-IE' : 'it-IT', { style: 'currency', currency: 'EUR' });
-  const listino = Math.round(Number(avvio.dataset.prezzo) * 100);
   const percentuale = Number(avvio.dataset.sconto);
-  const sconto = Math.round(listino * percentuale / 100);
   const prezzo = centesimi => euro.format(centesimi / 100);
   const dialogo = document.createElement('dialog');
   dialogo.className = 'pa-dialog';
   dialogo.setAttribute('aria-labelledby', 'pa-titolo');
-  dialogo.innerHTML = '<div class="pa-progress"></div><div class="pa-corpo"></div><div class="pa-azioni"></div>';
+  dialogo.innerHTML = `<div class="pa-testata"><div class="pa-marchio"><img alt="" width="26" height="26">Ripetizioni di Analisi</div><span class="pa-fase"></span></div>
+    <div class="pa-progress" role="progressbar" aria-label="${t('Passaggi del percorso','Journey steps')}" aria-valuemin="1" aria-valuemax="5"></div>
+    <div class="pa-corpo"></div><div class="pa-azioni"></div>`;
+  dialogo.querySelector('.pa-marchio img').src = avvio.dataset.logo;
   document.body.append(dialogo);
   const avanzamento = dialogo.querySelector('.pa-progress');
   const corpo = dialogo.querySelector('.pa-corpo');
   const azioni = dialogo.querySelector('.pa-azioni');
   const pulsanteProva = avvio.querySelector('[data-avvia-anteprima]');
-  const inizio = () => ({ fase: 'obiettivo', obiettivo: 'method', risposte: [null, null] });
+  const inizio = () => ({ fase: 'argomento', materia: partenza, tema: null, obiettivo: 'method', risposte: [null, null] });
   let stato = inizio();
   let origine;
   let aperturaAutomatica = true;
 
+  const tema = () => argomenti[stato.tema];
+  const nomeMateria = () => escapeHtml(catalogo[stato.materia].nome);
   function quesiti() {
-    const prima = corso.questions[stato.obiettivo];
-    return [prima, stato.risposte[0] === prima.correct ? corso.questions.stretch : corso.questions.support];
+    const { questions } = tema();
+    const prima = questions[stato.obiettivo];
+    return [prima, stato.risposte[0] === prima.correct ? questions.stretch : questions.support];
   }
   function esito() {
     const domande = quesiti();
@@ -59,7 +62,8 @@ export async function attivaAnteprima(avvio, modo) {
     let priorita = domande.findIndex((_, i) => !corrette[i] && stato.risposte[i] !== nonSo);
     if (priorita < 0) priorita = stato.risposte.indexOf(nonSo);
     const livello = priorita === 0 && stato.obiettivo === 'method' ? 0 : punti;
-    return { corrette, punti, priorita, esempio: corso.samples[livello], prossimo: corso.samples[livello + 1] || extensions[materia] };
+    const esempi = tema().samples;
+    return { corrette, punti, priorita, esempio: esempi[livello], prossimo: esempi[livello + 1] };
   }
   function pulsante(azione, etichetta, classe, disabilitato = false) {
     return `<button type="button" class="${classe}" data-pa="${azione}" ${disabilitato ? 'disabled' : ''}>${etichetta}</button>`;
@@ -68,7 +72,8 @@ export async function attivaAnteprima(avvio, modo) {
     return `<h2 id="pa-titolo" tabindex="-1">${titoloFase}</h2>${descrizione ? `<p class="pa-intro">${descrizione}</p>` : ''}`;
   }
   function riferimento(label, indietro = true) {
-    return `<div class="pa-meta"><span>${nome} · ${label}</span>${indietro ? pulsante('indietro', t('Indietro','Back'), 'pa-indietro') : ''}</div>`;
+    const contesto = [nomeMateria(), mostra(tema().label), label].filter(Boolean).join(' · ');
+    return `<div class="pa-meta"><span>${contesto}</span>${indietro ? pulsante('indietro', t('Indietro','Back'), 'pa-indietro') : ''}</div>`;
   }
   function formula(f) {
     if (!f) return '';
@@ -88,15 +93,29 @@ export async function attivaAnteprima(avvio, modo) {
       <details><summary>${t('Mostra lo svolgimento','Show the worked solution')}</summary>
       <ol>${ex.steps.map(passo => `<li>${mostra(passo)}</li>`).join('')}</ol></details></section>`;
   }
+  function scegliArgomento() {
+    const materie = Object.entries(catalogo).map(([slug, materia]) =>
+      `<option value="${escapeHtml(slug)}">${escapeHtml(materia.nome)}</option>`);
+    const temi = programmi[stato.materia].temi.map(id => {
+      const voce = argomenti[id];
+      return `<label class="pa-tema"><input type="radio" name="pa-tema" value="${id}"${stato.tema === id ? ' checked' : ''}>
+        <span class="pa-tessera"><span class="pa-simbolo" aria-hidden="true">${escapeHtml(voce.symbol)}</span>
+        <span class="pa-nomi"><strong>${mostra(voce.label)}</strong><small>${mostra(voce.detail)}</small></span>
+        <span class="pa-spunta" aria-hidden="true"></span></span></label>`;
+    });
+    return titoloFase(t('Cosa vuoi ripassare?', 'What would you like to review?'),
+      t('Due domande sul tema che scegli, poi un esercizio svolto da provare.', 'Answer two questions on your chosen topic, then try a worked exercise.'))
+      + `<div class="pa-corso"><label for="pa-materia">${t('Materia','Course')}</label><select id="pa-materia" name="pa-materia">${materie.join('')}</select></div>
+         <fieldset class="pa-temi"><legend>${t('Scegli un argomento','Choose a topic')}</legend><div class="pa-griglia">${temi.join('')}</div></fieldset>`;
+  }
   function obiettivo() {
+    const corso = tema();
     const opzioni = corso.goals.map((goal, i) => {
       const id = i === 0 ? 'method' : 'practice';
       return `<label class="pa-opzione"><input type="radio" name="pa-obiettivo" value="${id}" ${stato.obiettivo === id ? 'checked' : ''}>
         <span><span>${mostra(goal.title)}<small>${mostra(goal.detail)}</small></span></span></label>`;
     });
-    return riferimento(escapeHtml(argomento), false) + titoloFase(mostra(corso.headline),
-      t('Scegli il tuo obiettivo. Dopo due domande trovi un esercizio da provare gratis.',
-        'Choose your goal. Two questions will help us suggest a free exercise to try.'))
+    return riferimento('') + titoloFase(mostra(corso.headline))
       + `<div class="pa-scelte" role="radiogroup" aria-labelledby="pa-titolo">${opzioni.join('')}</div>`;
   }
   function domanda(i) {
@@ -128,7 +147,7 @@ export async function attivaAnteprima(avvio, modo) {
     const domande = quesiti();
     let titoloConsiglio, descrizione;
     if (punti === 2) {
-      titoloConsiglio = mostra(corso.next);
+      titoloConsiglio = mostra(tema().next);
       descrizione = t('Hai risolto entrambi i quesiti. Prova ad applicare il metodo in una situazione nuova.',
         'You solved both questions. Try applying the method to a new situation.');
     } else if (stato.risposte.every(r => r === nonSo)) {
@@ -156,15 +175,17 @@ export async function attivaAnteprima(avvio, modo) {
       + esempio(ex, t('Esercizio gratuito per te','A free exercise for you'));
   }
   function ordine() {
-    return `<div class="pa-ordine"><span class="pa-etichetta">${t('Primo acquisto simulato · Una tantum','Simulated first purchase · One-time payment')}</span><h3>${nome}</h3>
+    const listino = Math.round(catalogo[stato.materia].prezzo * 100);
+    const sconto = Math.round(listino * percentuale / 100);
+    return `<div class="pa-ordine"><span class="pa-etichetta">${t('Primo acquisto simulato · Una tantum','Simulated first purchase · One-time payment')}</span><h3>${nomeMateria()}</h3>
       <div class="pa-riga-prezzo"><span>${t('Prezzo della materia','Course price')}</span><span>${prezzo(listino)}</span></div>
       <div class="pa-riga-prezzo"><span>${t('Sconto iscrizione','Sign-up discount')} (${percentuale}%)</span><span>−${prezzo(sconto)}</span></div>
       <div class="pa-totale"><span>${t('Totale','Total')}</span><strong>${prezzo(listino-sconto)}</strong></div></div>`;
   }
   function offerta() {
-    const vantaggi = [mostra(corso.syllabus),t('Esercizi svolti con i passaggi spiegati','Worked exercises with each step explained'),
+    const vantaggi = [mostra(programmi[stato.materia].programma),t('Esercizi svolti con i passaggi spiegati','Worked exercises with each step explained'),
       t('Esercizi da risolvere e domande a tempo','Practice exercises and timed questions')];
-    return riferimento(t('La materia completa','The full course')) + titoloFase(t(`Vuoi continuare con ${nome}?`,`Would you like to continue with ${nome}?`), mostra(corso.courseUse))
+    return riferimento('') + titoloFase(t(`Vuoi continuare con ${nomeMateria()}?`,`Would you like to continue with ${nomeMateria()}?`), mostra(tema().courseUse))
       + `<ul class="pa-elenco">${vantaggi.map(v => `<li>${v}</li>`).join('')}</ul><p>${t('Il tuo prossimo esercizio','Your next exercise')} · <strong>${mostra(esito().prossimo.title)}</strong></p>` + ordine();
   }
   function riepilogo() {
@@ -177,25 +198,30 @@ export async function attivaAnteprima(avvio, modo) {
       + esempio(esito().prossimo, t('Il tuo prossimo esercizio','Your next exercise'));
   }
 
-  const fasi = ['obiettivo','prima','seconda','consiglio','offerta','riepilogo','fine'];
-  const schermate = { obiettivo, prima: () => domanda(0), seconda: () => domanda(1), consiglio, offerta, riepilogo, fine };
+  const fasi = ['argomento','obiettivo','prima','seconda','consiglio','offerta','riepilogo','fine'];
+  const schermate = { argomento: scegliArgomento, obiettivo, prima: () => domanda(0), seconda: () => domanda(1), consiglio, offerta, riepilogo, fine };
   const etichette = [
-    t('Inizia la prova','Start the questions'), t('Seconda domanda','Second question'), t('Vedi il mio consiglio','See my feedback'),
+    t('Continua','Continue'), t('Inizia la prova','Start the questions'), t('Seconda domanda','Second question'), t('Vedi il mio consiglio','See my feedback'),
     t('Vedi il corso completo','See the full course'), t('Vai al riepilogo','Review my order'), t('Simula il pagamento','Simulate payment'),
     t('Vedi i passaggi','View the steps')
   ];
   function indiceDomanda() { return ['prima','seconda'].indexOf(stato.fase); }
   function inAttesa() {
+    if (stato.fase === 'argomento') return !stato.tema;
     const i = indiceDomanda();
     return i >= 0 && stato.risposte[i] === null;
   }
   function disegna(focus = 'titolo') {
     const i = fasi.indexOf(stato.fase);
-    const macro = [0,1,1,2,3,3,3][i];
-    const tappe = t(['Obiettivo','Prova','Consiglio','Acquisto'], ['Goal','Questions','Feedback','Purchase']);
-    avanzamento.innerHTML = `<ol aria-label="${t('Passaggi del percorso','Journey steps')}">${tappe.map((v,k) =>
-      `<li ${k === macro ? 'aria-current="step"' : ''} class="${k < macro ? 'completo' : ''}">${v}</li>`).join('')}</ol>`;
+    const macro = [0,1,2,2,3,4,4,4][i];
+    const tappe = t(['Argomento','Obiettivo','Prova','Consiglio','Acquisto'], ['Topic','Goal','Questions','Feedback','Purchase']);
+    const fase = `${tappe[macro]} · ${macro + 1} ${t('di','of')} ${tappe.length}`;
+    dialogo.querySelector('.pa-fase').textContent = fase;
+    avanzamento.setAttribute('aria-valuenow', String(macro + 1));
+    avanzamento.setAttribute('aria-valuetext', fase);
+    avanzamento.innerHTML = tappe.map((_, k) => `<span${k <= macro ? ' class="attiva"' : ''}></span>`).join('');
     corpo.innerHTML = schermate[stato.fase]();
+    if (stato.fase === 'argomento') corpo.querySelector('select').value = stato.materia;
     const salta = stato.fase === 'fine' ? t('Torna all’esercizio','Back to the exercise')
       : t('Salta<span> e torna all’esercizio</span>','Skip<span> and return to the exercise</span>');
     azioni.innerHTML = pulsante('esci', salta, 'pa-salta') + pulsante(stato.fase === 'fine' ? 'soluzione' : 'avanti', etichette[i], 'pa-primario', inAttesa());
@@ -206,7 +232,7 @@ export async function attivaAnteprima(avvio, modo) {
       rs.scrollIntoView({block:'nearest'});
     } else {
       corpo.scrollTop = 0;
-      corpo.querySelector('h2').focus({preventScroll:true});
+      corpo.querySelector(focus === 'materia' ? 'select' : 'h2').focus({preventScroll:true});
     }
   }
   function apri(da) {
@@ -228,6 +254,19 @@ export async function attivaAnteprima(avvio, modo) {
     if (origine) window.scrollTo({left:origine.x,top:origine.y,behavior:'instant'});
   });
   dialogo.addEventListener('change', evento => {
+    const { name, value } = evento.target;
+    if (name === 'pa-materia' && value !== stato.materia && Object.hasOwn(catalogo, value)) {
+      stato = { ...inizio(), materia: value };
+      disegna('materia');
+      return;
+    }
+    if (name === 'pa-tema' && value !== stato.tema && programmi[stato.materia].temi.includes(value)) {
+      stato.tema = value;
+      stato.obiettivo = 'method';
+      stato.risposte = [null, null];
+      azioni.querySelector('[data-pa="avanti"]').disabled = false;
+      return;
+    }
     if (evento.target.name === 'pa-obiettivo' && ['method','practice'].includes(evento.target.value) && stato.obiettivo !== evento.target.value) {
       stato.obiettivo = evento.target.value;
       stato.risposte = [null, null];
