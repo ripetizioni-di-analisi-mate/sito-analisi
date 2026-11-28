@@ -24,7 +24,7 @@ const dati = (m) => {
   return d;
 };
 // Si caricano solo le materie presenti nella build: ogni test usa le sue.
-const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi', 'meccanica-razionale', 'idraulica', 'algebra-lineare', 'matematica-generale', 'fisica-2', 'statica', 'scienza-delle-costruzioni']
+const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi', 'meccanica-razionale', 'idraulica', 'algebra-lineare', 'matematica-generale', 'fisica-2', 'statica', 'scienza-delle-costruzioni', 'test-bocconi', 'fisica-zero']
   .filter((m) => existsSync(join(root, 'dist/dati-domande', `${m}.json`))).map((m) => [m, dati(m)]));
 const corretta = (id, m) => DATI[m].argomenti[id.split('/')[0]].find((q) => q.id === id).corretta;
 
@@ -214,5 +214,27 @@ test('cinque materie nuove: ogni capitolo senza errori, e con tutti gli errori q
       assert.ok(male.esito.lacune.length > 0, `${m}/${a}: nessuna lacuna`);
       assert.ok(male.esito.lacune.every((l) => l.teoria.length && l.teoria.every((x) => x.titolo && x.href)), `${m}/${a}: rimandi`);
     }
+  }
+});
+
+// Analisi 1 · Successioni, Test Bocconi, Fisica zero (28/11/2026).
+// Build: SOLO_MATERIE="analisi-1,precorso,test-bocconi,fisica-zero"
+test('Successioni, Test Bocconi e Fisica zero: ogni capitolo senza errori e con tutti gli errori', async (t) => {
+  const { STUDIO_GUIDATO } = await import(pathToFileURL(join(root, 'src/data/studio-guidato.mjs')));
+  const CL = JSON.parse(readFileSync(join(root, 'src/data/studio-guidato-livelli.json'), 'utf8'));
+  const RIM = JSON.parse(readFileSync(join(root, 'src/data/studio-guidato-rimandi.json'), 'utf8'));
+  const b = banco(t);
+  const tok = await b.utente('gm-tre@test.invalid', true);
+  const capitoli = [['analisi-1', 'successioni'], ...['test-bocconi', 'fisica-zero'].flatMap((m) => Object.keys(STUDIO_GUIDATO[m]?.dipendenze ?? {}).map((a) => [m, a]))];
+  for (const [m, a] of capitoli) {
+    if (!DATI[m]) continue;
+    const ok = await giro(b, tok, { materia: m, argomento: a }, []);
+    assert.equal(ok.esito.lacune.length, 0, `${m}/${a}`);
+    const tutte = CL.abilita[`${m}/${a}`].map((_, i) => `${m}/${a}#${i}`);
+    const basi = RIM[`${m}/${a}`].flatMap((r) => r.b);
+    if (!basi.every((k) => DATI[k.split('/')[0]])) continue;
+    const male = await giro(b, tok, { materia: m, argomento: a }, [...tutte, ...basi]);
+    assert.ok(male.esito.lacune.length > 0, `${m}/${a}: nessuna lacuna`);
+    assert.ok(male.esito.lacune.every((l) => l.teoria.length && l.teoria.every((x) => x.titolo && x.href)), `${m}/${a}: rimandi`);
   }
 });
