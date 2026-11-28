@@ -302,9 +302,9 @@ Sia un getto libero di portata $Q$ e velocità $v$ che imbocca una pala fissa e 
 $$
 F_x = \rho\,Q\,v\,(1 - \cos\theta) ,
 \qquad
-F_y = \rho\,Q\,v\,\sin\theta ,
+F_y = -\rho\,Q\,v\,\sin\theta ,
 $$
-e modulo $F = 2\,\rho\,Q\,v\,\sin\dfrac{\theta}{2}$.
+e modulo $F = 2\,\rho\,Q\,v\,\sin\dfrac{\theta}{2}$. Il segno meno di $F_y$ indica che la pala è spinta in verso opposto a quello in cui il getto viene deviato.
 
 La deviazione massima si ha per $\theta = 180^\circ$, che dà $F = 2\rho Q v$, cioè il doppio della spinta su una piastra piana normale; è questo il motivo per cui le pale delle turbine Pelton hanno forma di doppio cucchiaio. Quando l'attrito non si trascura si pone $v_2 = k\,v$ con $k$ poco minore di $1$ e si ottiene $F_x = \rho Q v\,(1 - k\cos\theta)$.
 
