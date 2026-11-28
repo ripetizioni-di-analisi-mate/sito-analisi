@@ -1,0 +1,581 @@
+#anteprima-percorso-acquisto,
+.pa-fine-esercizio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  padding: 0.7rem 1rem;
+  border: 1px solid #d9d5cf;
+  border-radius: 10px;
+  color: #343a40;
+  background: #f6f4ef;
+  font: 500 1rem/1.35 var(--ui);
+}
+#anteprima-percorso-acquisto[hidden],
+.pa-dialog [hidden] {
+  display: none !important;
+}
+#anteprima-percorso-acquisto button,
+.pa-fine-esercizio button {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid #bbb6ae;
+  border-radius: 99px;
+  background: #fffefa;
+  color: #263446;
+  font: 600 1rem/1.25 var(--ui);
+  cursor: pointer;
+}
+html:has(.pa-dialog[open]) {
+  overflow: hidden;
+}
+.pa-dialog {
+  --pa-ink: #222b35;
+  --pa-dim: #535d67;
+  --pa-navy: #182b42;
+  --pa-bronze: #74583c;
+  --pa-line: #dbd7d0;
+  --pa-paper: #fcfbf8;
+  --pa-wash: #f4f1eb;
+  --pa-pad: clamp(1.05rem, 4vw, 2rem);
+  width: min(42rem, calc(100% - 2rem));
+  max-width: none;
+  max-height: calc(100vh - 2rem);
+  max-height: min(52rem, calc(100dvh - 2rem));
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  color: var(--pa-ink);
+  background: var(--pa-paper);
+  border: 1px solid #e1dcd2;
+  border-radius: 16px;
+  box-shadow: 0 1.4rem 4rem rgb(15 34 33 / 18%);
+  font: 400 1rem/1.48 var(--ui);
+}
+.pa-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.pa-dialog::backdrop {
+  background: rgb(26 45 44 / 35%);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.pa-dialog,
+.pa-dialog * {
+  box-sizing: border-box;
+}
+.pa-dialog .pa-testata,
+.pa-dialog .pa-azioni,
+.pa-dialog .pa-settimana,
+.pa-dialog .pa-totale,
+.pa-dialog .pa-riga-prezzo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.pa-dialog .pa-testata {
+  flex: none;
+  padding: 1.15rem var(--pa-pad) 0.85rem;
+}
+.pa-dialog .pa-marchio {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--pa-navy);
+  font: 600 1rem/1.2 var(--titoli);
+}
+.pa-dialog .pa-marchio img {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.pa-dialog .pa-fase {
+  font: 600 0.86rem/1.3 var(--ui);
+  color: var(--pa-dim);
+  text-align: right;
+}
+.pa-dialog .pa-progress {
+  display: flex;
+  flex: none;
+  gap: 3px;
+  margin: 0 var(--pa-pad);
+}
+.pa-dialog .pa-progress span {
+  height: 2px;
+  flex: 1;
+  background: #e6e1da;
+}
+.pa-dialog .pa-progress .attiva {
+  background: #947456;
+}
+.pa-dialog .pa-corpo {
+  min-height: 0;
+  padding: 1.35rem var(--pa-pad);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.pa-dialog .pa-azioni {
+  flex: none;
+  padding: 0.85rem var(--pa-pad);
+  border-top: 1px solid var(--pa-line);
+}
+.pa-dialog .pa-primario {
+  margin-inline-start: auto;
+  padding: 0.65rem 1.3rem;
+  border: 1px solid var(--pa-navy);
+  border-radius: 99px;
+  background: var(--pa-navy);
+  color: white;
+}
+.pa-dialog .pa-primario:enabled:hover {
+  background: #2d4057;
+}
+.pa-dialog .pa-primario:disabled {
+  border-color: #e8e5df;
+  background: #e8e5df;
+  color: #625e58;
+}
+.pa-dialog .pa-azioni button {
+  min-height: 2.8rem;
+  font: 600 1rem/1.25 var(--ui);
+}
+.pa-dialog .pa-salta,
+.pa-dialog .pa-indietro,
+.pa-dialog .pa-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.65rem;
+  padding: 0.3rem 0.12rem;
+  border: 0;
+  background: transparent;
+  color: var(--pa-navy);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  font: 600 0.98rem/1.3 var(--ui);
+}
+.pa-dialog .pa-salta {
+  color: #444c54;
+}
+.pa-dialog .pa-meta {
+  margin: -0.45rem 0 0.15rem;
+}
+.pa-dialog .pa-indietro {
+  min-height: 2.35rem;
+  color: var(--pa-dim);
+  font-size: 0.9rem;
+}
+.pa-dialog h2,
+.pa-dialog h3 {
+  color: var(--pa-ink);
+  text-wrap: pretty;
+}
+.pa-dialog h2 {
+  margin: 0 0 0.55rem;
+  font: 600 clamp(1.85rem, 4vw, 2.45rem)/1.12 var(--titoli);
+  letter-spacing: -0.035em;
+}
+.pa-dialog h3 {
+  margin: 0 0 0.4rem;
+  font: 600 1.29rem/1.22 var(--titoli);
+  letter-spacing: -0.018em;
+}
+.pa-dialog p {
+  margin: 0;
+}
+.pa-dialog .pa-intro,
+.pa-dialog .pa-scelte small,
+.pa-dialog .pa-agenda small {
+  color: var(--pa-dim);
+}
+.pa-dialog .pa-intro {
+  font-size: 1.05rem;
+}
+.pa-dialog :is(button, input, select, summary) {
+  font-family: var(--ui);
+  touch-action: manipulation;
+}
+.pa-dialog
+  :is(button:enabled, select, summary, label:has(input[type='radio']), label:has(input[type='checkbox'])) {
+  cursor: pointer;
+}
+.pa-dialog :is(button, a, select, input, summary):focus-visible,
+.pa-dialog .pa-opzione input:focus-visible + span {
+  outline: 3px solid #997446;
+  outline-offset: 2px;
+}
+.pa-dialog [tabindex='-1']:focus {
+  outline: none;
+}
+.pa-dialog fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.pa-dialog .pa-scelte {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.05rem 0 0;
+}
+.pa-dialog .pa-due,
+.pa-dialog .pa-filtri,
+.pa-dialog .pa-materie {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+.pa-dialog .pa-opzione {
+  display: block;
+  position: relative;
+  min-width: 0;
+}
+.pa-dialog .pa-opzione input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.pa-dialog .pa-opzione > span {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  height: 100%;
+  min-height: 3.3rem;
+  padding: 0.78rem 0.85rem;
+  border: 1px solid var(--pa-line);
+  border-radius: 10px;
+  background: #fffefa;
+}
+.pa-dialog .pa-opzione > span::before {
+  content: '';
+  display: block;
+  flex: none;
+  width: 0.88rem;
+  height: 0.88rem;
+  margin-top: 0.28rem;
+  border: 1px solid #928a7d;
+  border-radius: 50%;
+}
+.pa-dialog .pa-opzione input:checked + span {
+  border-color: #80664a;
+  box-shadow: inset 0 0 0 1px #80664a;
+  background: #f7f3ec;
+}
+.pa-dialog .pa-opzione input:checked + span::before {
+  border: 4px solid #765f46;
+}
+.pa-dialog .pa-opzione b,
+.pa-dialog .pa-agenda b {
+  font-weight: 600;
+}
+.pa-dialog .pa-opzione small,
+.pa-dialog .pa-agenda small {
+  display: block;
+  margin-top: 0.18rem;
+  font-size: 0.91rem;
+  line-height: 1.36;
+}
+.pa-dialog .pa-campo {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0.8rem 0 0.4rem;
+  min-width: 0;
+  font-weight: 600;
+}
+.pa-dialog .pa-campo select,
+.pa-dialog .pa-campo input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.7rem;
+  padding: 0.4rem 0.65rem;
+  font: 400 1rem/1.35 var(--ui);
+  color: var(--pa-ink);
+  background-color: #fffefa;
+  border: 1px solid #bcb7ae;
+  border-radius: 8px;
+}
+.pa-dialog .pa-campo select {
+  appearance: none;
+  padding-right: 2rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #59626b 50%),
+    linear-gradient(135deg, #59626b 50%, transparent 50%);
+  background-position:
+    calc(100% - 15px) 53%,
+    calc(100% - 10px) 53%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.pa-dialog .pa-selezione {
+  margin: 0.65rem 0;
+  font-size: 0.94rem;
+  color: var(--pa-dim);
+}
+.pa-dialog .pa-materie {
+  margin: 0;
+}
+.pa-dialog .pa-check {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  line-height: 1.32;
+}
+.pa-dialog .pa-check input {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--pa-navy);
+}
+.pa-dialog .pa-materie .pa-check {
+  min-height: 2.85rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--pa-line);
+  border-radius: 8px;
+  background: #fffefa;
+}
+.pa-dialog .pa-materie .pa-check:has(:checked) {
+  border-color: #80664a;
+  background: #f7f3ec;
+}
+.pa-dialog .pa-capitolo,
+.pa-dialog .pa-box,
+.pa-dialog .pa-ordine,
+.pa-dialog .pa-lezione {
+  margin: 0.8rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--pa-line);
+  border-radius: 10px;
+  background: #fffefa;
+}
+.pa-dialog .pa-capitolo .pa-campo {
+  margin: 0 0 0.4rem;
+}
+.pa-dialog .pa-capitolo .pa-check,
+.pa-dialog .pa-capitolo small {
+  font-size: 0.9rem;
+  color: var(--pa-dim);
+}
+.pa-dialog .pa-capitolo .pa-check {
+  min-height: 2.3rem;
+}
+.pa-dialog .pa-pillole {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 1rem 0;
+}
+.pa-dialog legend {
+  margin: 0 0 0.4rem;
+  padding: 0;
+  font-weight: 600;
+}
+.pa-dialog .pa-pillole label {
+  position: relative;
+  display: inline-flex;
+}
+.pa-dialog .pa-pillole input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.pa-dialog .pa-pillole label span {
+  display: grid;
+  min-height: 2.6rem;
+  min-width: 2.65rem;
+  place-items: center;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--pa-line);
+  border-radius: 8px;
+  background: #fffefa;
+}
+.pa-dialog .pa-pillole input:checked + span {
+  background: var(--pa-navy);
+  color: #fff;
+}
+.pa-dialog .pa-pillole input:focus-visible + span {
+  outline: 3px solid #997446;
+  outline-offset: 2px;
+}
+.pa-dialog .pa-nota {
+  margin: 0.85rem 0;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid #9a8064;
+  background: var(--pa-wash);
+}
+.pa-dialog .pa-settimana {
+  margin: 0.6rem 0 0.15rem;
+  flex-wrap: wrap;
+}
+.pa-dialog .pa-settimana h3 {
+  margin: 0;
+}
+.pa-dialog .pa-settimana .pa-link + .pa-link {
+  margin-left: 0.6rem;
+}
+.pa-dialog .pa-agenda {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pa-dialog .pa-agenda li {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--pa-line);
+}
+.pa-dialog .pa-data {
+  color: var(--pa-bronze);
+  font-weight: 600;
+}
+.pa-dialog .pa-box,
+.pa-dialog .pa-ordine {
+  background: var(--pa-wash);
+}
+.pa-dialog .pa-box p + p,
+.pa-dialog .pa-traccia p + p {
+  margin-top: 0.38rem;
+}
+.pa-dialog .pa-box ul {
+  margin: 0.3rem 0;
+  padding-left: 1.2rem;
+}
+.pa-dialog .pa-box .pa-link {
+  min-height: 2rem;
+}
+.pa-dialog .pa-lezione {
+  overflow-wrap: break-word;
+}
+.pa-dialog .pa-lezione .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.pa-dialog .pa-lezione table {
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+}
+.pa-dialog .pa-passo {
+  margin: 0.65rem 0 0;
+  padding: 0.55rem 0 0;
+  border-top: 1px solid var(--pa-line);
+}
+.pa-dialog .pa-passo > small {
+  display: block;
+  color: var(--pa-bronze);
+  font-weight: 600;
+}
+.pa-dialog .pa-msg {
+  display: block;
+  color: var(--pa-dim);
+  font-size: 0.9rem;
+}
+.pa-dialog .pa-rivedi {
+  display: block;
+}
+.pa-dialog .pa-condizioni {
+  margin: 0.7rem 0 0;
+}
+.pa-dialog .pa-condizioni summary {
+  padding: 0.45rem 0;
+  font-weight: 600;
+}
+.pa-dialog .pa-condizioni p {
+  color: var(--pa-dim);
+  font-size: 0.92rem;
+}
+.pa-dialog .pa-condizioni .pa-check {
+  padding: 0.4rem 0;
+}
+.pa-dialog .pa-pacchetto {
+  margin: 0.6rem 0;
+}
+.pa-dialog .pa-riga-prezzo {
+  padding: 0.28rem 0;
+}
+.pa-dialog .pa-totale {
+  margin-top: 0.5rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--pa-line);
+}
+.pa-dialog .pa-totale strong {
+  font: 600 1.5rem/1.18 var(--titoli);
+}
+@media (max-width: 36rem) {
+  .pa-dialog {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+    border-radius: 14px;
+  }
+  .pa-dialog .pa-corpo {
+    padding-block: 0.95rem;
+  }
+  .pa-dialog .pa-due {
+    grid-template-columns: 1fr;
+  }
+  .pa-dialog .pa-testata,
+  .pa-dialog .pa-azioni {
+    padding-block: 0.65rem;
+  }
+  .pa-dialog .pa-fase {
+    font-size: 0.8rem;
+  }
+  .pa-dialog .pa-opzione > span {
+    min-height: 2.8rem;
+    padding: 0.58rem 0.65rem;
+  }
+  .pa-dialog .pa-filtri {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .pa-dialog .pa-filtri .pa-campo {
+    margin: 0.5rem 0 0;
+  }
+  .pa-dialog .pa-agenda li {
+    grid-template-columns: 4.7rem minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+}
+@media (max-width: 23rem) {
+  .pa-dialog .pa-materie {
+    grid-template-columns: 1fr;
+  }
+  .pa-dialog .pa-marchio {
+    font-size: 0.9rem;
+  }
+}
+@media (max-height: 31rem) {
+  .pa-dialog {
+    max-height: calc(100dvh - 0.4rem);
+  }
+  .pa-dialog .pa-testata,
+  .pa-dialog .pa-azioni {
+    padding-block: 0.3rem;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pa-dialog[open] {
+    animation: pa-apertura 0.22s ease-out;
+  }
+  .pa-dialog[open]::backdrop {
+    animation: pa-velo 0.22s ease-out;
+  }
+  @keyframes pa-apertura {
+    from {
+      opacity: 0;
+      transform: translateY(0.35rem);
+    }
+  }
+  @keyframes pa-velo {
+    from {
+      opacity: 0;
+    }
+  }
+}

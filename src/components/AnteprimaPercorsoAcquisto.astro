@@ -1,6 +1,5 @@
 ---
-import { materieL, type Lingua } from '../i18n';
-import { SCONTO_BENVENUTO } from '../data/benvenuto';
+import type { Lingua } from '../i18n';
 import { url } from '../lib/url';
 
 export const schedePercorso: Record<string, string> = {
@@ -11,31 +10,24 @@ export const schedePercorso: Record<string, string> = {
 };
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
-const catalogo = Object.fromEntries(materieL(lingua)
-  .filter(corso => Object.hasOwn(schedePercorso, corso.slug))
-  .map(corso => [corso.slug, { nome: corso.breve, prezzo: corso.prezzo }]));
 const en = lingua === 'en';
-const modulo = url('/anteprime/percorso-acquisto/percorso.mjs');
 ---
-<div id="anteprima-percorso-acquisto" hidden data-materia={materia} data-lingua={lingua}
-  data-catalogo={JSON.stringify(catalogo)} data-logo={url('/logo.svg')} data-sconto={SCONTO_BENVENUTO}>
-  <span>{en ? 'Preview of the study guide' : 'Anteprima del percorso per gli iscritti'}</span>
-  <button type="button" data-avvia-anteprima>{en ? 'Try the guide' : 'Prova il percorso'}</button>
+<div id="anteprima-percorso-acquisto" hidden data-materia={materia} data-argomento={schedePercorso[materia]} data-lingua={lingua}
+  data-catalogo={url(`/anteprime/percorso-acquisto/${lingua}.json`)} data-logo={url('/logo.svg')}>
+  <span>{en ? 'Your personal study plan' : 'Il tuo piano di studio personale'}</span>
+  <button type="button" data-avvia-anteprima>{en ? 'Build my plan' : 'Costruisci il mio piano'}</button>
 </div>
-<script is:inline define:vars={{ modulo }}>
+<script>
   const modo = new URLSearchParams(location.search).get('anteprima-percorso');
-  if (modo === '1' || modo === 'esercizio') {
-    const avvio = document.getElementById('anteprima-percorso-acquisto');
-    const carica = () => import(modulo).then(({ attivaAnteprima }) => attivaAnteprima(avvio, modo));
-    const avvia = () => carica().catch(() => {
+  const avvio = document.querySelector<HTMLElement>('#anteprima-percorso-acquisto');
+  if (avvio && (modo === '1' || modo === 'esercizio')) {
+    import('../scripts/anteprima-consulenza/percorso.mjs').then(mod => mod.attivaAnteprima(avvio, modo)).catch(() => {
       avvio.hidden = false;
-      const pulsante = avvio.querySelector('button');
+      const pulsante = avvio.querySelector('button')!;
       const en = avvio.dataset.lingua === 'en';
-      avvio.querySelector('span').textContent = en ? 'The preview could not load.' : 'Caricamento dell’anteprima interrotto.';
-      pulsante.textContent = en ? 'Reload the page' : 'Ricarica la pagina';
+      avvio.querySelector('span')!.textContent = en ? 'The plan could not load.' : 'Caricamento del piano interrotto.';
+      pulsante.textContent = en ? 'Try again' : 'Riprova';
       pulsante.onclick = () => location.reload();
     });
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avvia, { once: true });
-    else avvia();
   }
 </script>
