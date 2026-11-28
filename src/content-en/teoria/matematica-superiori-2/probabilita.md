@@ -93,13 +93,13 @@ Each outcome belongs to exactly one of $E$ and $E^c$, and together the two event
 ::::
 
 :::esempio{titolo="At least one six in two rolls"}
-A fair die is rolled twice. The outcomes are the $6\cdot6=36$ ordered pairs $(\text{first},\text{second})$, all equally likely. The event “at least one six” occurs with a six on the first roll, on the second, or on both. Adding the cases “six on the first” and “six on the second” would count the pair $(6,6)$ twice.
+A fair die is rolled twice. The outcomes are the $6\cdot6=36$ ordered pairs $(\text{first};\text{second})$, all equally likely. The event “at least one six” occurs with a six on the first roll, on the second, or on both. Adding the cases “six on the first” and “six on the second” would count the pair $(6;6)$ twice.
 
 The complement is simpler to count. The complement of “at least one six” is “no six”, and in that case each roll has five permitted values, from $1$ to $5$. The complement therefore contains $5\cdot5=25$ of the $36$ pairs, and
 $$
 P(\text{at least one six})=1-\frac{25}{36}=\frac{36-25}{36}=\frac{11}{36}.
 $$
-The grid highlights the row and the column that contain a six. The point $(6,6)$ is shared by the two lines and is a single pair, so there are $6+6-1=11$ points.
+The grid highlights the row and the column that contain a six. The point $(6;6)$ is shared by the two lines and is a single pair, so there are $6+6-1=11$ points.
 
 ::grafico{xmin=0 xmax=7 ymin=0 ymax=7 linee="1,6 6,6 6,1" punti="1,6;2,6;3,6;4,6;5,6;6,6;6,1;6,2;6,3;6,4;6,5" nomi="First,Second" titolo="Eleven ordered pairs have at least one coordinate equal to 6"}
 :::
@@ -161,7 +161,7 @@ A proposed intersection of $\dfrac13=\dfrac4{12}$ would instead give $P(A\cup B)
 ## Compound experiments and tree diagrams
 
 :::definizione{#composti titolo="Paths and ordered pairs"}
-An experiment can consist of several trials one after another, such as two rolls of a die. A complete outcome gives the result of each trial in the order in which it happens. With two trials the outcome is an **ordered pair**, in which order matters: $(1,6)$ and $(6,1)$ are different outcomes.
+An experiment can consist of several trials one after another, such as two rolls of a die. A complete outcome gives the result of each trial in the order in which it happens. With two trials the outcome is an **ordered pair**, in which order matters: $(1;6)$ and $(6;1)$ are different outcomes.
 
 A **tree diagram** represents these trials.
 
@@ -175,10 +175,10 @@ The probability of a path is the product of the probabilities of its branches. I
 :::esempio{titolo="Two dice totals with different probabilities"}
 A fair die is rolled twice, with independent rolls, that is, rolls that do not influence each other. There are $36$ equally likely ordered pairs.
 
-- The total $7$ comes from the six pairs $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$, so it has probability $\dfrac6{36}=\dfrac16$.
-- The total $8$ comes from the five pairs $(2,6),(3,5),(4,4),(5,3),(6,2)$, so it has probability $\dfrac5{36}$.
+- The total $7$ comes from the six pairs $(1;6),(2;5),(3;4),(4;3),(5;2),(6;1)$, so it has probability $\dfrac6{36}=\dfrac16$.
+- The total $8$ comes from the five pairs $(2;6),(3;5),(4;4),(5;3),(6;2)$, so it has probability $\dfrac5{36}$.
 
-From one pair to the next the first number goes up by one and the second goes down by one, so the total stays the same and the points lie on a diagonal. In the total $8$ the pair $(4,4)$ has equal coordinates and swapping them gives the same pair, so it is counted only once.
+From one pair to the next the first number goes up by one and the second goes down by one, so the total stays the same and the points lie on a diagonal. In the total $8$ the pair $(4;4)$ has equal coordinates and swapping them gives the same pair, so it is counted only once.
 
 ::grafico{xmin=0 xmax=7 ymin=0 ymax=7 linee="1,6 6,1;2,6 6,2" punti="1,6;2,5;3,4;4,3;5,2;6,1;2,6;3,5;4,4;5,3;6,2" nomi="First,Second" titolo="The total of 7 has six points on its diagonal. The total of 8 has five."}
 :::

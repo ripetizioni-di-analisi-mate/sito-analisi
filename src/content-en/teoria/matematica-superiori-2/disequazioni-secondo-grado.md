@@ -116,7 +116,7 @@ The square of a real number is always greater than or equal to zero. For $(x-2)^
 :::esempio{titolo="An extremum away from zero"}
 The quadratic $-x^2+4x-5$ equals $-(x-2)^2-1$, as expanding shows: $-(x^2-4x+4)-1=-x^2+4x-5$. Since a square is always greater than or equal to zero, $-(x-2)^2$ is at most $0$. The quadratic therefore has maximum $-1$, reached at $x=2$. Hence the inequality $-x^2+4x-5\ge0$ has an empty solution set, while the strict comparison $-x^2+4x-5<0$ holds for every real number. The discriminant gives the same result: with $a=-1$, $b=4$, $c=-5$ one has $\Delta=4^2-4(-1)(-5)=16-20=-4<0$, and $a<0$, so the quadratic is always negative.
 
-::grafico{f="-(x-2)^2-1" xmin=-0.5 xmax=4.5 ymin=-7.6 ymax=1.2 nomi="x,y" punti="2,-1,pieno" segmenti="2,0,2,-1" titolo="The highest point is $(2,-1)$, still below the horizontal axis"}
+::grafico{f="-(x-2)^2-1" xmin=-0.5 xmax=4.5 ymin=-7.6 ymax=1.2 nomi="x,y" punti="2,-1,pieno" segmenti="2,0,2,-1" titolo="The highest point is $(2;-1)$, still below the horizontal axis"}
 :::
 
 ## From the original inequality to the solution
@@ -165,7 +165,7 @@ The quotient is negative only on $(-2,1)$; one adds $-2$, where it equals zero. 
 :::attenzione{#buco titolo="Simplifying preserves the original domain"}
 In the fraction $\dfrac{(x-1)(x+3)}{x-1}$ the value $x=1$ is excluded. At the allowed points the factor $x-1$ is nonzero, so it cancels between numerator and denominator and $x+3$ remains. The comparison with zero, with the symbol $\ge$, gives $x\ge-3$ and $x\ne1$. The solution set is $[-3,1)\cup(1,+\infty)$. At $1$ the simplified line would have vertical coordinate $4$, but the value of the fraction remains undefined; the figure marks it with an open point.
 
-::grafico{f="x+3" xmin=-4.6 xmax=3.1 ymin=-1.75 ymax=6.6 punti="-3,0,pieno;1,4,vuoto" titolo="The open point at $(1,4)$ marks the value still excluded after simplification"}
+::grafico{f="x+3" xmin=-4.6 xmax=3.1 ymin=-1.75 ymax=6.6 punti="-3,0,pieno;1,4,vuoto" titolo="The open point at $(1;4)$ marks the value still excluded after simplification"}
 
 If the original comparison has a nonzero right-hand side, one moves everything to the left and uses a common denominator. For example, with $x\ne1$,
 $$
@@ -253,7 +253,7 @@ A rectangle has sides $x$ and $x+3$ metres and area at most $40\,\mathrm{m}^2$. 
 ## A family of parabolas with a parameter
 
 :::esempio{#parametri titolo="Check the maximum before finding the roots"}
-A **parameter** is a letter, here $k$, that stands for a fixed but unspecified number; the solution is written for each possible value of $k$. Consider $k-(x-1)^2\ge0$, with $k$ a fixed real number. For every $x$ the square is nonnegative, so the largest value of the left-hand side is $k$, reached at $x=1$. The highest point of the parabola, $(1,k)$, is its **vertex**.
+A **parameter** is a letter, here $k$, that stands for a fixed but unspecified number; the solution is written for each possible value of $k$. Consider $k-(x-1)^2\ge0$, with $k$ a fixed real number. For every $x$ the square is nonnegative, so the largest value of the left-hand side is $k$, reached at $x=1$. The highest point of the parabola, $(1;k)$, is its **vertex**.
 
 - For $k<0$, not even the maximum satisfies the comparison and the solution set is empty.
 - For $k=0$, the only allowed value is $x=1$, which makes the square zero.

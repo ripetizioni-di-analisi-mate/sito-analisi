@@ -175,7 +175,7 @@ Per $-x^2-2x-3=0$ si ha $a=-1$, $b=-2$, $c=-3$ e quindi
 $$
 \Delta=(-2)^2-4\cdot(-1)\cdot(-3)=4-12=-8.
 $$
-Completando il quadrato, $-x^2-2x-3=-(x^2+2x+1)-2=-(x+1)^2-2$. La curva $y=-(x+1)^2-2$ è rivolta verso il basso, perché $a<0$, e ha massimo $-2$ nel vertice $V=(-1,-2)$. Resta quindi tutta sotto l’asse orizzontale. In generale, con discriminante negativo i valori del polinomio hanno tutti il segno di $a$.
+Completando il quadrato, $-x^2-2x-3=-(x^2+2x+1)-2=-(x+1)^2-2$. La curva $y=-(x+1)^2-2$ è rivolta verso il basso, perché $a<0$, e ha massimo $-2$ nel vertice $V=(-1;-2)$. Resta quindi tutta sotto l’asse orizzontale. In generale, con discriminante negativo i valori del polinomio hanno tutti il segno di $a$.
 
 Nel caso di due radici distinte, la distanza tra le loro ascisse è $\dfrac{\sqrt\Delta}{|a|}$. Si ottiene sottraendo i due valori della formula,
 $$
@@ -262,7 +262,7 @@ Per ogni $x$ del dominio il multiplo comune è diverso da zero, quindi dividendo
 :::esempio{titolo="Un fattore comune lascia un punto mancante"}
 In $\dfrac{x^2-5x+6}{x-2}=0$ il denominatore si annulla per $x=2$, quindi si esclude $x=2$. Una frazione vale zero quando il numeratore è zero e il denominatore no. Il numeratore si scompone in $(x-2)(x-3)$ e i suoi zeri sono $2$ e $3$. Il primo è escluso, quindi resta $x=3$.
 
-Per $x\ne2$ si semplifica il fattore $x-2$ e il primo membro diventa $x-3$. Il grafico è perciò la retta $y=x-3$ privata del punto di ascissa $2$. In figura il punto $(2,-1)$ è vuoto e l’unico zero ammesso è $(3,0)$. Il controllo nell’equazione originale dà $\dfrac{9-15+6}{3-2}=\dfrac01=0$.
+Per $x\ne2$ si semplifica il fattore $x-2$ e il primo membro diventa $x-3$. Il grafico è perciò la retta $y=x-3$ privata del punto di ascissa $2$. In figura il punto $(2;-1)$ è vuoto e l’unico zero ammesso è $(3;0)$. Il controllo nell’equazione originale dà $\dfrac{9-15+6}{3-2}=\dfrac01=0$.
 
 ::grafico{f="x-3" xmin=-0.6 xmax=5.4 ymin=-4 ymax=2.6 punti="2,-1,vuoto;3,0,pieno" titolo="Il membro sinistro ha uno zero e un punto mancante"}
 :::

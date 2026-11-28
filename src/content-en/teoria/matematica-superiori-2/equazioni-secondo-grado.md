@@ -175,7 +175,7 @@ For $-x^2-2x-3=0$ we have $a=-1$, $b=-2$, $c=-3$, and therefore
 $$
 \Delta=(-2)^2-4\cdot(-1)\cdot(-3)=4-12=-8.
 $$
-Completing the square, $-x^2-2x-3=-(x^2+2x+1)-2=-(x+1)^2-2$. The curve $y=-(x+1)^2-2$ opens downwards, because $a<0$, and has maximum $-2$ at the vertex $V=(-1,-2)$. It therefore stays entirely below the horizontal axis. In general, when the discriminant is negative, all values of the polynomial have the sign of $a$.
+Completing the square, $-x^2-2x-3=-(x^2+2x+1)-2=-(x+1)^2-2$. The curve $y=-(x+1)^2-2$ opens downwards, because $a<0$, and has maximum $-2$ at the vertex $V=(-1;-2)$. It therefore stays entirely below the horizontal axis. In general, when the discriminant is negative, all values of the polynomial have the sign of $a$.
 
 If there are two distinct roots, the distance between their horizontal coordinates is $\dfrac{\sqrt\Delta}{|a|}$. It is obtained by subtracting the two values from the formula,
 $$
@@ -262,7 +262,7 @@ For every $x$ in the domain the common multiple is nonzero, so dividing by it gi
 :::esempio{titolo="A common factor leaves a missing point"}
 In $\dfrac{x^2-5x+6}{x-2}=0$ the denominator is zero for $x=2$, so $x=2$ is excluded. A fraction equals zero when the numerator is zero and the denominator is not. The numerator factors as $(x-2)(x-3)$ and its zeroes are $2$ and $3$. The first is excluded, so only $x=3$ remains.
 
-For $x\ne2$ the factor $x-2$ cancels and the left-hand side becomes $x-3$. The graph is therefore the line $y=x-3$ without the point with horizontal coordinate $2$. In the figure the point $(2,-1)$ is open and the only allowed zero is $(3,0)$. Checking the original equation gives $\dfrac{9-15+6}{3-2}=\dfrac01=0$.
+For $x\ne2$ the factor $x-2$ cancels and the left-hand side becomes $x-3$. The graph is therefore the line $y=x-3$ without the point with horizontal coordinate $2$. In the figure the point $(2;-1)$ is open and the only allowed zero is $(3;0)$. Checking the original equation gives $\dfrac{9-15+6}{3-2}=\dfrac01=0$.
 
 ::grafico{f="x-3" xmin=-0.6 xmax=5.4 ymin=-4 ymax=2.6 punti="2,-1,vuoto;3,0,pieno" titolo="The left side has one zero and one missing point"}
 :::

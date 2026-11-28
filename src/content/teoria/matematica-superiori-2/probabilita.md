@@ -93,13 +93,13 @@ Ogni esito sta in uno solo fra $E$ ed $E^c$, e insieme i due eventi formano tutt
 ::::
 
 :::esempio{titolo="Almeno un sei in due lanci"}
-Si lancia due volte un dado regolare. Gli esiti sono le $6\cdot6=36$ coppie ordinate $(\text{primo},\text{secondo})$, tutte equiprobabili. L'evento «almeno un sei» si verifica con il sei al primo lancio, al secondo oppure in entrambi. Sommando i casi «sei al primo» e «sei al secondo» la coppia $(6,6)$ verrebbe contata due volte.
+Si lancia due volte un dado regolare. Gli esiti sono le $6\cdot6=36$ coppie ordinate $(\text{primo};\text{secondo})$, tutte equiprobabili. L'evento «almeno un sei» si verifica con il sei al primo lancio, al secondo oppure in entrambi. Sommando i casi «sei al primo» e «sei al secondo» la coppia $(6;6)$ verrebbe contata due volte.
 
 Il complementare è più semplice da contare. Il complementare di «almeno un sei» è «nessun sei», e in quel caso ciascun lancio ha cinque valori ammessi, da $1$ a $5$. Le coppie del complementare sono quindi $5\cdot5=25$ su $36$, e
 $$
 P(\text{almeno un sei})=1-\frac{25}{36}=\frac{36-25}{36}=\frac{11}{36}.
 $$
-Nella griglia sono evidenziate la riga e la colonna che contengono un sei. Il punto $(6,6)$ è comune alle due file e rappresenta una sola coppia, quindi i punti sono $6+6-1=11$.
+Nella griglia sono evidenziate la riga e la colonna che contengono un sei. Il punto $(6;6)$ è comune alle due file e rappresenta una sola coppia, quindi i punti sono $6+6-1=11$.
 
 ::grafico{xmin=0 xmax=7 ymin=0 ymax=7 linee="1,6 6,6 6,1" punti="1,6;2,6;3,6;4,6;5,6;6,6;6,1;6,2;6,3;6,4;6,5" nomi="Primo,Secondo" titolo="Undici coppie ordinate hanno almeno una coordinata uguale a 6"}
 :::
@@ -161,7 +161,7 @@ Una proposta con intersezione $\dfrac13=\dfrac4{12}$ darebbe invece $P(A\cup B)=
 ## Prove composte e uso dell’albero
 
 :::definizione{#composti titolo="Percorsi e coppie ordinate"}
-Un esperimento può essere formato da più prove una dopo l'altra, come due lanci di un dado. Un esito completo indica il risultato di ciascuna prova nell'ordine in cui avviene. Con due prove l'esito è una **coppia ordinata**, in cui conta l'ordine: $(1,6)$ e $(6,1)$ sono esiti diversi.
+Un esperimento può essere formato da più prove una dopo l'altra, come due lanci di un dado. Un esito completo indica il risultato di ciascuna prova nell'ordine in cui avviene. Con due prove l'esito è una **coppia ordinata**, in cui conta l'ordine: $(1;6)$ e $(6;1)$ sono esiti diversi.
 
 Un **diagramma ad albero** rappresenta queste prove.
 
@@ -175,10 +175,10 @@ La probabilità di un percorso si ottiene moltiplicando le probabilità dei rami
 :::esempio{titolo="Due totali al dado con pesi diversi"}
 Si lancia due volte un dado regolare, con lanci indipendenti, cioè che non si influenzano. Le coppie ordinate sono $36$ ed equiprobabili.
 
-- Il totale $7$ si ottiene dalle sei coppie $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$, quindi ha probabilità $\dfrac6{36}=\dfrac16$.
-- Il totale $8$ si ottiene dalle cinque coppie $(2,6),(3,5),(4,4),(5,3),(6,2)$, quindi ha probabilità $\dfrac5{36}$.
+- Il totale $7$ si ottiene dalle sei coppie $(1;6),(2;5),(3;4),(4;3),(5;2),(6;1)$, quindi ha probabilità $\dfrac6{36}=\dfrac16$.
+- Il totale $8$ si ottiene dalle cinque coppie $(2;6),(3;5),(4;4),(5;3),(6;2)$, quindi ha probabilità $\dfrac5{36}$.
 
-Passando da una coppia alla successiva il primo numero cresce di uno e il secondo cala di uno, perciò la somma resta la stessa e i punti stanno su una diagonale. Nel totale $8$ la coppia $(4,4)$ ha le due coordinate uguali e scambiandole si ottiene la stessa coppia, quindi si conta una volta sola.
+Passando da una coppia alla successiva il primo numero cresce di uno e il secondo cala di uno, perciò la somma resta la stessa e i punti stanno su una diagonale. Nel totale $8$ la coppia $(4;4)$ ha le due coordinate uguali e scambiandole si ottiene la stessa coppia, quindi si conta una volta sola.
 
 ::grafico{xmin=0 xmax=7 ymin=0 ymax=7 linee="1,6 6,1;2,6 6,2" punti="1,6;2,5;3,4;4,3;5,2;6,1;2,6;3,5;4,4;5,3;6,2" nomi="Primo,Secondo" titolo="La diagonale del totale 7 ha sei punti. Quella del totale 8 ne ha cinque."}
 :::

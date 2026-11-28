@@ -122,7 +122,7 @@ x^2-x-6&=0\\[6pt]
 \end{aligned}
 $$
 
-The values $3$ and $-2$ are **candidates**, that is, values to be checked in the original equation. Candidate $-2$ satisfies only the domain of the radical, but $\sqrt{-2+6}=\sqrt4=2$, which differs from $-2$. A candidate of this kind is called an **extraneous candidate**. Candidate $3$ checks as $\sqrt9=3$, so the only solution is $x=3$. The two original curves have just one intersection, the point $P=(3,3)$.
+The values $3$ and $-2$ are **candidates**, that is, values to be checked in the original equation. Candidate $-2$ satisfies only the domain of the radical, but $\sqrt{-2+6}=\sqrt4=2$, which differs from $-2$. A candidate of this kind is called an **extraneous candidate**. Candidate $3$ checks as $\sqrt9=3$, so the only solution is $x=3$. The two original curves have just one intersection, the point $P=(3;3)$.
 
 A function is **increasing** if its value grows as $x$ grows, and **decreasing** if its value falls. Since $\sqrt x$ increases and $2-x$ decreases, the equation $\sqrt x=2-x$ has at most one solution, which is $x=1$.
 
@@ -213,7 +213,7 @@ The equation $|2x-1|=x+2$ requires $x+2\ge0$, that is, $x\ge-2$. The argument $2
 - On the branch $x\ge\dfrac12$ the argument is nonnegative, and we solve $2x-1=x+2$, which gives $x=3$.
 - On the branch $-2\le x<\dfrac12$ the argument is negative, so $|2x-1|=1-2x$. We solve $1-2x=x+2$, that is, $-3x=1$, and find $x=-\dfrac13$.
 
-Both solutions belong to their own intervals, because $3\ge\dfrac12$ and $-2\le-\dfrac13<\dfrac12$. The corresponding **y-coordinates** (vertical coordinates), $5$ and $\dfrac53$, are the common values of the two sides at the intersections of the graphs; the solutions are the x-coordinates. The point $\left(\dfrac12,0\right)$ of the graph is where $y=|2x-1|$ changes branch.
+Both solutions belong to their own intervals, because $3\ge\dfrac12$ and $-2\le-\dfrac13<\dfrac12$. The corresponding **y-coordinates** (vertical coordinates), $5$ and $\dfrac53$, are the common values of the two sides at the intersections of the graphs; the solutions are the x-coordinates. The point $\left(\dfrac12;0\right)$ of the graph is where $y=|2x-1|$ changes branch.
 
 ::grafico{f="abs(2*x-1);x+2" legenda="y=|2x-1|;y=x+2" xmin=-2.5 xmax=4.15 ymin=-0.7 ymax=7.25 punti="-0.333333333,1.666666667,pieno;3,5,pieno;0.5,0,pieno" titolo="Each solution lies on the branch used to find it"}
 :::
@@ -243,9 +243,9 @@ The candidates are $-4$ and $2$. At the first value both arguments equal $-9$. A
 ## Systems with a linear and a nonlinear relation
 
 ::::teorema{#sistemi titolo="Substituting and reconstructing the pair"}
-A **system** is a group of equations that must hold at the same time. A solution is an **ordered pair** $(x,y)$, in which the order matters: $(1,2)$ and $(2,1)$ are different pairs. The system is **nonlinear** when at least one equation is not of first degree, such as $y=x^2$. The notation $y=g(x)$ means that $y$ is given by an expression in $x$, such as $y=2x+3$, and $F(x,y)=0$ denotes another equation in $x$ and $y$.
+A **system** is a group of equations that must hold at the same time. A solution is an **ordered pair** $(x;y)$, in which the order matters: $(1;2)$ and $(2;1)$ are different pairs. The system is **nonlinear** when at least one equation is not of first degree, such as $y=x^2$. The notation $y=g(x)$ means that $y$ is given by an expression in $x$, such as $y=2x+3$, and $F(x,y)=0$ denotes another equation in $x$ and $y$.
 
-In a system with $y=g(x)$ and $F(x,y)=0$, we can solve $F(x,g(x))=0$ where the expressions are defined. This is the **substitution method**: $g(x)$ is written in place of $y$, and only the unknown $x$ remains. Each allowed value of $x$ gives the pair $(x,g(x))$.
+In a system with $y=g(x)$ and $F(x,y)=0$, we can solve $F(x,g(x))=0$ where the expressions are defined. This is the **substitution method**: $g(x)$ is written in place of $y$, and only the unknown $x$ remains. Each allowed value of $x$ gives the pair $(x;g(x))$.
 :::dimostrazione
 A pair solving the system satisfies the first equation, so $y=g(x)$, and replacing $y$ with $g(x)$ in the second preserves equality. Conversely, if the equation after substitution holds and the reconstructed pair is allowed, then that pair satisfies both equations of the system. Therefore each pair uses the value $y=g(x)$ associated with its $x$.
 :::
@@ -254,7 +254,7 @@ A pair solving the system satisfies the first equation, so $y=g(x)$, and replaci
 :::esempio{titolo="The line meets the parabola at two points"}
 The graph of $y=x^2$ is a **parabola**, and that of $y=2x+3$ is a line. At the intersections the two y-coordinates are equal, so $x^2=2x+3$, that is, $x^2-2x-3=0$. Factoring gives $(x-3)(x+1)=0$.
 
-With $x=-1$ the line gives $y=2\cdot(-1)+3=1$. With $x=3$ it gives $y=2\cdot3+3=9$. The solutions are $(-1,1)$ and $(3,9)$. Crossing the two y-coordinates would give pairs that fail the system. The check computes the y-coordinate using both relations.
+With $x=-1$ the line gives $y=2\cdot(-1)+3=1$. With $x=3$ it gives $y=2\cdot3+3=9$. The solutions are $(-1;1)$ and $(3;9)$. Crossing the two y-coordinates would give pairs that fail the system. The check computes the y-coordinate using both relations.
 
 ::grafico{f="x^2;2*x+3" legenda="y=x^2;y=2x+3" xmin=-2 xmax=3.8 ymin=-1.4 ymax=11.8 punti="-1,1,pieno;3,9,pieno" segmenti="-1,0,-1,1;3,0,3,9" titolo="Each intersection has the vertical coordinate required by both curves"}
 :::
@@ -267,10 +267,10 @@ $$
 $$
 
 - If $m<-1$, the right side is negative, so it cannot equal a real square, and there are no intersections.
-- If $m=-1$, then $(x-1)^2=0$, so $x=1$ and the only pair is $(1,1)$. The line is **tangent** to the parabola, that is, it touches it at a single point without crossing it.
+- If $m=-1$, then $(x-1)^2=0$, so $x=1$ and the only pair is $(1;1)$. The line is **tangent** to the parabola, that is, it touches it at a single point without crossing it.
 - If $m>-1$, then $x-1=\pm\sqrt{m+1}$, and the two signs give two distinct x-coordinates and hence two pairs.
 
-In the graph the line $y=2x-1$, with $m=-1$, touches the parabola at $(1,1)$, while $y=2x-2$, with $m=-2$, remains below it. If the line were vertical, as in $x=2$, we would instead substitute the value of $x$ into the parabola, obtaining $(2,4)$.
+In the graph the line $y=2x-1$, with $m=-1$, touches the parabola at $(1;1)$, while $y=2x-2$, with $m=-2$, remains below it. If the line were vertical, as in $x=2$, we would instead substitute the value of $x$ into the parabola, obtaining $(2;4)$.
 
 ::grafico{f="x^2;2*x-1;2*x-2" legenda="y=x^2;y=2x-1;y=2x-2" xmin=-1.25 xmax=3.15 ymin=-2.65 ymax=6.8 punti="1,1,pieno" titolo="One line is tangent, while the other remains below the parabola"}
 :::
@@ -289,8 +289,8 @@ $$
 
 The unknowns are the roots of the auxiliary equation $t^2-st+p=0$. Its **discriminant** is $\Delta=s^2-4p$ (the Greek letter “delta”), the quantity under the root in the quadratic formula.
 
-- Two distinct real roots $t_1$ and $t_2$ give two ordered pairs, $(t_1,t_2)$ and $(t_2,t_1)$.
-- A double root $t_1$ gives a single pair, $(t_1,t_1)$.
+- Two distinct real roots $t_1$ and $t_2$ give two ordered pairs, $(t_1;t_2)$ and $(t_2;t_1)$.
+- A double root $t_1$ gives a single pair, $(t_1;t_1)$.
 - When the roots are not real, that is, when $\Delta<0$, there are no real pairs.
 :::dimostrazione
 For each pair satisfying the system, expanding the product gives
@@ -314,7 +314,7 @@ xy&=6.
 \end{aligned}
 $$
 
-The equation $t^2-5t+6=(t-2)(t-3)=0$ gives $2$ and $3$. The system admits $(2,3)$ and $(3,2)$, with sum $5$ and sum of squares $4+9=13$. Since $(x+y)^3=x^3+y^3+3xy(x+y)$, we also have $x^3+y^3=(x+y)^3-3xy(x+y)=125-3\cdot6\cdot5=35$. In the graph the first condition is the line $y=5-x$. The second is the **circle** with centre at the origin and radius $\sqrt{13}$ (the points at distance $\sqrt{13}$ from the origin), and the points $P$ and $Q$ are the two solutions. Adding $x\le y$ leaves only $(2,3)$.
+The equation $t^2-5t+6=(t-2)(t-3)=0$ gives $2$ and $3$. The system admits $(2;3)$ and $(3;2)$, with sum $5$ and sum of squares $4+9=13$. Since $(x+y)^3=x^3+y^3+3xy(x+y)$, we also have $x^3+y^3=(x+y)^3-3xy(x+y)=125-3\cdot6\cdot5=35$. In the graph the first condition is the line $y=5-x$. The second is the **circle** with centre at the origin and radius $\sqrt{13}$ (the points at distance $\sqrt{13}$ from the origin), and the points $P$ and $Q$ are the two solutions. Adding $x\le y$ leaves only $(2;3)$.
 
 ::grafico{f="5-x" curve="sqrt(13)*cos(t),sqrt(13)*sin(t),0,6.283185307" legenda="y=5-x;x^2+y^2=13" xmin=-3.95 xmax=5.2 ymin=-3.95 ymax=5.2 uguale=1 punti="2,3,pieno,P;3,2,pieno,Q" titolo="Swapping the coordinates leaves both relations true"}
 :::
@@ -326,7 +326,7 @@ $$
 (x+y)^2-4xy=x^2+2xy+y^2-4xy=x^2-2xy+y^2=(x-y)^2.
 $$
 
-Since $(x-y)^2\ge0$, it follows that $s^2-4p\ge0$, that is, $p\le\dfrac{s^2}{4}$. With sum $2$ the greatest product is $\dfrac{2^2}{4}=1$, so requiring sum $2$ and product $3$ violates the condition. With sum $2$ and product $1$ we have $(x-y)^2=4-4=0$, the difference must be zero, and the only pair is $(1,1)$. Since $s^2-4p$ is the discriminant $\Delta$, the condition is the same as $\Delta\ge0$.
+Since $(x-y)^2\ge0$, it follows that $s^2-4p\ge0$, that is, $p\le\dfrac{s^2}{4}$. With sum $2$ the greatest product is $\dfrac{2^2}{4}=1$, so requiring sum $2$ and product $3$ violates the condition. With sum $2$ and product $1$ we have $(x-y)^2=4-4=0$, the difference must be zero, and the only pair is $(1;1)$. Since $s^2-4p$ is the discriminant $\Delta$, the condition is the same as $\Delta\ge0$.
 :::
 
 :::esempio{titolo="A circle with too small a radius"}
@@ -336,7 +336,7 @@ $$
 (x-y)^2=2(x^2+y^2)-(x+y)^2=2q-16.
 $$
 
-Thus $2q-16\ge0$, that is, $q\ge8$, is necessary. At $q=8$ the unknowns are equal and the only pair is $(2,2)$. For $q>8$ the possible differences are $\sqrt{2q-16}$ and $-\sqrt{2q-16}$, opposite and distinct. Each, together with sum $4$, determines a pair. For example, at $q=10$ the differences are $2$ and $-2$, and together with $x+y=4$ they give $(3,1)$ and $(1,3)$.
+Thus $2q-16\ge0$, that is, $q\ge8$, is necessary. At $q=8$ the unknowns are equal and the only pair is $(2;2)$. For $q>8$ the possible differences are $\sqrt{2q-16}$ and $-\sqrt{2q-16}$, opposite and distinct. Each, together with sum $4$, determines a pair. For example, at $q=10$ the differences are $2$ and $-2$, and together with $x+y=4$ they give $(3;1)$ and $(1;3)$.
 
 The circle $x^2+y^2=q$ has radius $\sqrt q$. When $0\le q<8$, the circle is too small to reach the line. Increasing the radius to the boundary value $\sqrt8$ gives tangency.
 :::
@@ -348,13 +348,13 @@ The **condition of existence** of a fraction is that the denominator is nonzero.
 
 The remaining solutions are $x=0$ and $x=-2$, which make the numerator zero while leaving the denominator nonzero. The simplified expression would equal $2\cdot4=8$ at $x=2$, but the graph of the fraction omits that point, marked by an open circle. The condition of existence must be kept even when the expression changes form.
 
-::grafico{f="x*(x+2)" xmin=-3.3 xmax=2.9 ymin=-2 ymax=10 punti="-2,0,pieno;0,0,pieno;2,8,vuoto" titolo="The graph has two allowed zeroes and a missing point at (2, 8)"}
+::grafico{f="x*(x+2)" xmin=-3.3 xmax=2.9 ymin=-2 ymax=10 punti="-2,0,pieno;0,0,pieno;2,8,vuoto" titolo="The graph has two allowed zeroes and a missing point at (2; 8)"}
 :::
 
 :::esempio{titolo="The problem can prescribe an order"}
-Two adjacent sides of a rectangle measure $x$ and $y$ centimetres. The measurements satisfy $x+y=7$ and $xy=12$. The auxiliary roots of $t^2-7t+12=(t-3)(t-4)$ are $3$ and $4$, both positive. The ordered pairs are $(3,4)$ and $(4,3)$.
+Two adjacent sides of a rectangle measure $x$ and $y$ centimetres. The measurements satisfy $x+y=7$ and $xy=12$. The auxiliary roots of $t^2-7t+12=(t-3)(t-4)$ are $3$ and $4$, both positive. The ordered pairs are $(3;4)$ and $(4;3)$.
 
-If $x$ specifically denotes the shorter side, we need $x<y$ and keep only $(3,4)$. This choice preserves the area $12\,\mathrm{cm}^2$ and perimeter $14\,\mathrm{cm}$. The constraint comes from the description of the measurements, while the two equations alone are symmetric.
+If $x$ specifically denotes the shorter side, we need $x<y$ and keep only $(3;4)$. This choice preserves the area $12\,\mathrm{cm}^2$ and perimeter $14\,\mathrm{cm}$. The constraint comes from the description of the measurements, while the two equations alone are symmetric.
 :::
 
 :::esempio{titolo="A radical also represented in the denominator"}

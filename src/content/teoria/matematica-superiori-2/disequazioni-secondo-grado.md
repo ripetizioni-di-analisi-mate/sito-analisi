@@ -116,7 +116,7 @@ Un quadrato di un numero reale è sempre maggiore o uguale a zero. Per $(x-2)^2>
 :::esempio{titolo="Un estremo che non coincide con lo zero"}
 Il trinomio $-x^2+4x-5$ vale $-(x-2)^2-1$, come si vede sviluppando: $-(x^2-4x+4)-1=-x^2+4x-5$. Poiché un quadrato è sempre maggiore o uguale a zero, $-(x-2)^2$ è al massimo $0$. Il trinomio ha quindi massimo $-1$, raggiunto in $x=2$. Perciò la disequazione $-x^2+4x-5\ge0$ ha insieme soluzione vuoto, mentre il confronto stretto $-x^2+4x-5<0$ vale per ogni reale. Anche il discriminante dà lo stesso esito: con $a=-1$, $b=4$, $c=-5$ si ha $\Delta=4^2-4(-1)(-5)=16-20=-4<0$, e $a<0$, quindi il trinomio è sempre negativo.
 
-::grafico{f="-(x-2)^2-1" xmin=-0.5 xmax=4.5 ymin=-7.6 ymax=1.2 nomi="x,y" punti="2,-1,pieno" segmenti="2,0,2,-1" titolo="Il punto più alto è $(2,-1)$ e resta sotto l’asse delle ascisse"}
+::grafico{f="-(x-2)^2-1" xmin=-0.5 xmax=4.5 ymin=-7.6 ymax=1.2 nomi="x,y" punti="2,-1,pieno" segmenti="2,0,2,-1" titolo="Il punto più alto è $(2;-1)$ e resta sotto l’asse delle ascisse"}
 :::
 
 ## Dalla forma iniziale alla soluzione
@@ -165,7 +165,7 @@ Il rapporto è negativo solo in $(-2,1)$; si aggiunge $-2$, dove vale zero. Si o
 :::attenzione{#buco titolo="Una semplificazione conserva il dominio iniziale"}
 Nella frazione $\dfrac{(x-1)(x+3)}{x-1}$ si esclude $x=1$. Nei punti ammessi il fattore $x-1$ è diverso da zero, quindi si semplifica fra numeratore e denominatore e rimane $x+3$. Il confronto con zero, con il simbolo $\ge$, dà $x\ge-3$ e $x\ne1$. La soluzione è $[-3,1)\cup(1,+\infty)$. In $1$ la retta semplificata avrebbe ordinata $4$, ma il valore della frazione resta indefinito; la figura lo segna con un punto vuoto.
 
-::grafico{f="x+3" xmin=-4.6 xmax=3.1 ymin=-1.75 ymax=6.6 punti="-3,0,pieno;1,4,vuoto" titolo="Il punto vuoto in $(1,4)$ indica il valore escluso dopo la semplificazione"}
+::grafico{f="x+3" xmin=-4.6 xmax=3.1 ymin=-1.75 ymax=6.6 punti="-3,0,pieno;1,4,vuoto" titolo="Il punto vuoto in $(1;4)$ indica il valore escluso dopo la semplificazione"}
 
 Se il confronto iniziale ha un secondo membro diverso da zero, si porta tutto a sinistra e si usa un denominatore comune. Per esempio, con $x\ne1$,
 $$
@@ -253,7 +253,7 @@ Un rettangolo ha lati $x$ e $x+3$ metri e area al massimo $40\,\mathrm{m}^2$. Oc
 ## Una famiglia di parabole con parametro
 
 :::esempio{#parametri titolo="Controllare il valore massimo prima di calcolare gli zeri"}
-Un **parametro** è una lettera, qui $k$, che indica un numero fissato ma non dato; la soluzione si scrive per ciascun valore possibile di $k$. Si considera $k-(x-1)^2\ge0$, con $k$ reale fissato. Per ogni $x$ il quadrato è non negativo, quindi il valore più alto del membro a sinistra è $k$, raggiunto a $x=1$. Il punto più alto della parabola, $(1,k)$, è il suo **vertice**.
+Un **parametro** è una lettera, qui $k$, che indica un numero fissato ma non dato; la soluzione si scrive per ciascun valore possibile di $k$. Si considera $k-(x-1)^2\ge0$, con $k$ reale fissato. Per ogni $x$ il quadrato è non negativo, quindi il valore più alto del membro a sinistra è $k$, raggiunto a $x=1$. Il punto più alto della parabola, $(1;k)$, è il suo **vertice**.
 
 - Per $k<0$, neppure il massimo soddisfa il confronto e l’insieme soluzione è vuoto.
 - Per $k=0$, il solo valore ammesso è $x=1$, che rende il quadrato nullo.

@@ -57,7 +57,7 @@ If $n$ is odd, $\sqrt[n]{a}$ is the unique real number $r$ with $r^n=a$, and it 
 :::esempio{titolo="A root and the solutions of an equation"}
 The equation $u^2=4$ has two solutions, $-2$ and $2$, because $(-2)^2=4$ and $2^2=4$. The root $\sqrt4$, on the other hand, is a single number, $2$, namely the nonnegative solution.
 
-On the graph of $y=x^2$, the two solutions are the **horizontal coordinates** ($x$-coordinates) of the points $A=(-2,4)$ and $B=(2,4)$, which have the same **vertical coordinate** ($y$-coordinate), equal to $4$. The graph of $y=\sqrt x$ contains the point $C=(4,2)$, because $\sqrt4=2$. Swapping the coordinates of $B$ gives $C$, so in the figure $B$ and $C$ are symmetric with respect to the line $y=x$. In the same way, the graph of the root is the reflection, across that line, of only the branch of the parabola with $x\ge0$. This is why the root gives a single value.
+On the graph of $y=x^2$, the two solutions are the **horizontal coordinates** ($x$-coordinates) of the points $A=(-2;4)$ and $B=(2;4)$, which have the same **vertical coordinate** ($y$-coordinate), equal to $4$. The graph of $y=\sqrt x$ contains the point $C=(4;2)$, because $\sqrt4=2$. Swapping the coordinates of $B$ gives $C$, so in the figure $B$ and $C$ are symmetric with respect to the line $y=x$. In the same way, the graph of the root is the reflection, across that line, of only the branch of the parabola with $x\ge0$. This is why the root gives a single value.
 
 ::grafico{f="x^2;sqrt(x);x" xmin=-2.6 xmax=4.8 ymin=-0.65 ymax=5.3 punti="-2,4,pieno,A;2,4,pieno,B;4,2,pieno,C" legenda="y=x^2;y=\sqrt{x};y=x" titolo="The square root corresponding to $4$ is $2$"}
 :::
@@ -77,7 +77,7 @@ $$
 $$
 The symbol $\iff$ is read "is equivalent to". In the second step $6$ is added to both sides, and in the third both sides are divided by $2$, which is positive. At $x=3$ the root equals $\sqrt0=0$. The reciprocal $\dfrac1{\sqrt{2x-6}}$ has the root in its denominator, so it requires $2x-6>0$, that is, $x>3$. In interval notation the two domains are written $[3,+\infty)$ and $(3,+\infty)$. The symbol $[$ indicates that the endpoint $3$ is included, the symbol $($ that it is excluded, and $+\infty$ (plus infinity) indicates that the interval continues without end to the right.
 
-In the figure, the point $A=(3,0)$ belongs to the graph of the root. The dashed vertical line $x=3$ marks the value excluded from the reciprocal. The point $B=\left(\dfrac72,1\right)$ belongs to both graphs, because at $x=\dfrac72$ the radicand equals $7-6=1$, so the root and its reciprocal both equal $1$.
+In the figure, the point $A=(3;0)$ belongs to the graph of the root. The dashed vertical line $x=3$ marks the value excluded from the reciprocal. The point $B=\left(\dfrac72;1\right)$ belongs to both graphs, because at $x=\dfrac72$ the radicand equals $7-6=1$, so the root and its reciprocal both equal $1$.
 
 ::grafico{f="sqrt(2*x-6);1/sqrt(2*x-6)" xmin=-0.6 xmax=7.4 ymin=-0.6 ymax=3.6 punti="3,0,pieno,A;3.5,1,pieno,B" asintoti="x=3" legenda="y=\sqrt{2x-6};y=\dfrac1{\sqrt{2x-6}}" titolo="The root is defined at $x=3$, while its reciprocal excludes that value"}
 :::
@@ -91,7 +91,7 @@ For $\sqrt{\dfrac{x-1}{x+2}}$, the quotient must be defined and greater than or 
 | $-2<x<1$ | $-$ | $+$ | $-$ |
 | $x>1$ | $+$ | $+$ | $+$ |
 
-The domain is $(-\infty,-2)\cup[1,+\infty)$. The symbol $-\infty$ (minus infinity) indicates that the first interval continues without end to the left, and the symbol $\cup$ (union) indicates that the numbers of the two intervals are taken together. The value $-2$ is excluded and $1$ is included. For example, $x=-3$ belongs to the left branch and gives the point $(-3,2)$ in the figure:
+The domain is $(-\infty,-2)\cup[1,+\infty)$. The symbol $-\infty$ (minus infinity) indicates that the first interval continues without end to the left, and the symbol $\cup$ (union) indicates that the numbers of the two intervals are taken together. The value $-2$ is excluded and $1$ is included. For example, $x=-3$ belongs to the left branch and gives the point $(-3;2)$ in the figure:
 $$
 \frac{-3-1}{-3+2}=\frac{-4}{-1}=4,\qquad\sqrt4=2.
 $$
@@ -167,7 +167,7 @@ When the radicand contains a variable, a change of index is checked against the 
 $$
 \left(\sqrt[3]{|x|}\right)^6=\left(\left(\sqrt[3]{|x|}\right)^3\right)^2=|x|^2=x^2.
 $$
-It follows that $\sqrt[6]{x^2}=\sqrt[3]{|x|}$ for every real $x$. The absolute value is necessary, because at $x=-8$ we have $\sqrt[6]{(-8)^2}=\sqrt[6]{64}=2$, whereas $\sqrt[3]{-8}=-2$. In the figure these values are the points $A=(-8,2)$ and $B=(-8,-2)$. For $x\ge0$ the two graphs coincide, as at the point $(8,2)$.
+It follows that $\sqrt[6]{x^2}=\sqrt[3]{|x|}$ for every real $x$. The absolute value is necessary, because at $x=-8$ we have $\sqrt[6]{(-8)^2}=\sqrt[6]{64}=2$, whereas $\sqrt[3]{-8}=-2$. In the figure these values are the points $A=(-8;2)$ and $B=(-8;-2)$. For $x\ge0$ the two graphs coincide, as at the point $(8;2)$.
 
 ::grafico{f="cbrt(abs(x));cbrt(x)" xmin=-10 xmax=10 ymin=-2.8 ymax=2.8 punti="-8,2,pieno,A;-8,-2,pieno,B;8,2" legenda="y=\sqrt[6]{x^2};y=\sqrt[3]{x}" titolo="The sixth root of $x^2$ is nonnegative even when $x<0$"}
 :::
@@ -178,7 +178,7 @@ The radicand $x^2(x-1)$ is the product of $x^2$, which is always greater than or
 - For $x\ge1$, because both factors are nonnegative.
 - For $x=0$, because the factor $x^2$ is zero and therefore the product equals $0\cdot(-1)=0$.
 
-Taking out the factor $x^2$ gives the form $|x|\sqrt{x-1}$, which is defined only for $x\ge1$ because it contains $\sqrt{x-1}$. The two forms agree on that interval, but the original formula also allows $x=0$. In the figure this is the point $A=(0,0)$, an **isolated point**, that is, a point separated from the rest of the graph, which starts at $B=(1,0)$.
+Taking out the factor $x^2$ gives the form $|x|\sqrt{x-1}$, which is defined only for $x\ge1$ because it contains $\sqrt{x-1}$. The two forms agree on that interval, but the original formula also allows $x=0$. In the figure this is the point $A=(0;0)$, an **isolated point**, that is, a point separated from the rest of the graph, which starts at $B=(1;0)$.
 
 ::grafico{f="sqrt(x*x*(x-1))" xmin=-1.5 xmax=4.0 ymin=-0.65 ymax=7.5 punti="0,0,pieno,A;1,0,pieno,B;2,2" legenda="y=\sqrt{x^2(x-1)}" titolo="The domain includes $0$ even though $x-1$ is negative there"}
 :::
@@ -320,9 +320,9 @@ $$
 =\frac{\sqrt x-2}{(\sqrt x+2)(\sqrt x-2)}
 =\frac{\sqrt x-2}{x-4}.
 $$
-The new formula is not defined at $x=4$, where the denominator $x-4$ is zero. The form with denominator $x-4$ therefore needs the separate value $\dfrac14$ at $x=4$ to represent the whole original function. In the figure, the open point $A=\left(4,\dfrac14\right)$ marks the value missing from the rewritten formula on its own. The point $B=\left(0,\dfrac12\right)$ is the value at $x=0$, where the original denominator equals $2$.
+The new formula is not defined at $x=4$, where the denominator $x-4$ is zero. The form with denominator $x-4$ therefore needs the separate value $\dfrac14$ at $x=4$ to represent the whole original function. In the figure, the open point $A=\left(4;\dfrac14\right)$ marks the value missing from the rewritten formula on its own. The point $B=\left(0;\dfrac12\right)$ is the value at $x=0$, where the original denominator equals $2$.
 
-::grafico{f="1/(sqrt(x)+2)" xmin=-1.25 xmax=11 ymin=-0.09 ymax=0.65 punti="4,0.25,vuoto,A;0,0.5,pieno,B" legenda="y=\dfrac{\sqrt{x}-2}{x-4}\quad(x\ge0,\ x\ne4)" titolo="The quotient with denominator $x-4$ omits the point $(4,\dfrac14)$"}
+::grafico{f="1/(sqrt(x)+2)" xmin=-1.25 xmax=11 ymin=-0.09 ymax=0.65 punti="4,0.25,vuoto,A;0,0.5,pieno,B" legenda="y=\dfrac{\sqrt{x}-2}{x-4}\quad(x\ge0,\ x\ne4)" titolo="The quotient with denominator $x-4$ omits the point $(4;\dfrac14)$"}
 :::
 
 ## Rational exponents
@@ -368,7 +368,7 @@ For $x>0$, we have $x^{\frac32}=\sqrt{x^3}=\sqrt{x^2\cdot x}=x\sqrt x$. So $x^{\
 
 - If $0<x<1$, multiplying the positive number $\sqrt x$ by $x$ makes it smaller, because $x$ is less than $1$. Therefore $x^{\frac32}<x^{\frac12}$.
 - If $x>1$, multiplying by $x$ makes it larger. Therefore $x^{\frac32}>x^{\frac12}$.
-- At $x=1$ both powers equal $1$, and on the graph they meet at the point $A=(1,1)$.
+- At $x=1$ both powers equal $1$, and on the graph they meet at the point $A=(1;1)$.
 
 For example, at $x=2.25$ we have $\sqrt{2.25}=1.5$ and $2.25\cdot1.5=3.375$; these are the two points marked on the right. The origin belongs to both graphs, because for positive exponents we set $0^{\frac pq}=0$.
 
