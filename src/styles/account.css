@@ -225,3 +225,8 @@
 }
 @media (pointer: coarse) { .invita-riga .invita-copia { min-height: 44px; } .invita-riga .invita-wa { width: 2.75rem; height: 2.75rem; } }
 .invita-riga .invita-testo i { font-style: normal; }
+
+/* «Sconto iscrizione» sotto la copertina: stessa riga sottile di «Invita un amico» (28/11/2026). */
+.sconto-iscrizione[hidden] { display: none !important; }
+.sconto-iscrizione { font-family: var(--ui); }
+.sconto-iscrizione a.invita-copia { display: inline-flex; align-items: center; }

@@ -1,0 +1,38 @@
+---
+// Riga «Sconto iscrizione» nella pagina Account (richiesta di Carmine del 28/11/2026, versione A scelta sull'anteprima):
+// chi si iscrive non riceve codici né email, quindi la pagina dice che lo sconto è già attivo e che si applica da solo
+// al pagamento. Compare solo se lo sconto spetta ancora (/api/benvenuto, worker/benvenuto.mjs) e sparisce dopo il
+// primo acquisto. Stessa riga sottile di «Invita un amico» (classi `.invita-riga` in src/styles/account.css).
+import { SCONTO_BENVENUTO } from '../data/benvenuto';
+import { link, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const p = SCONTO_BENVENUTO;
+const s = lingua === 'fr' ? {
+  su: 'Réduction d’inscription', riga: `Tes ${p} % de réduction sur ta première matière sont déjà actifs et s’appliquent automatiquement au paiement.`, scegli: 'Choisir une matière',
+} : lingua === 'es' ? {
+  su: 'Descuento por registro', riga: `Tu ${p} % de descuento en la primera asignatura ya está activo y se aplica automáticamente al pagar.`, scegli: 'Elegir asignatura',
+} : lingua === 'de' ? {
+  su: 'Anmelderabatt', riga: `Deine ${p} % Rabatt auf das erste Fach sind bereits aktiv und werden beim Bezahlen automatisch abgezogen.`, scegli: 'Fach auswählen',
+} : lingua === 'en' ? {
+  su: 'Sign-up discount', riga: `Your ${p}% discount on your first subject is already active and is applied automatically at checkout.`, scegli: 'Choose a subject',
+} : {
+  su: 'Sconto iscrizione', riga: `Il tuo ${p}% di sconto sulla prima materia è già attivo e si applica da solo al pagamento.`, scegli: 'Scegli la materia',
+};
+const cartellino = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M3 3.5h6.2l7.6 7.6a1.2 1.2 0 0 1 0 1.7l-4 4a1.2 1.2 0 0 1-1.700 0L3.500 9.200Z"/><circle cx="6.700" cy="7.200" r="1.100"/></svg>';
+---
+<section class="sconto-iscrizione invita-riga" id="sconto-iscrizione" hidden>
+  <span class="invita-icona" set:html={cartellino} />
+  <p class="invita-testo"><b>{s.su}</b> <span><i aria-hidden="true">· </i>{s.riga}</span></p>
+  <a class="invita-copia" href={link(lingua, '/prezzi')}>{s.scegli}</a>
+</section>
+
+<script is:inline>
+  (async () => {
+    const box = document.getElementById('sconto-iscrizione');
+    if (!box) return;
+    const r = await fetch('/api/benvenuto', { credentials: 'same-origin', cache: 'no-store' }).catch(() => null);
+    const d = r && r.ok ? await r.json().catch(() => ({})) : {};
+    if (d.percentuale) box.hidden = false;
+  })();
+</script>
