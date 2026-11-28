@@ -86,11 +86,11 @@ test('errore solo sulla domanda media: abilità da consolidare, senza verifica d
 test('«Non so da dove iniziare»: una domanda per capitolo fino al primo errore, poi il test sul capitolo', () => {
   const { e, chieste } = simula((q) => !q.startsWith('analisi-1/limiti#') && !q.startsWith('precorso/'));
   assert.equal(e.capitolo, 'limiti');
-  assert.deepEqual(chieste.slice(0, 3).map((c) => c.k.split('#')[0]), ['analisi-1/insiemi', 'analisi-1/numeri-complessi', 'analisi-1/limiti']);
-  assert.ok(e.domande <= REGOLE_SG.maxDomandeTest + 2);
+  assert.deepEqual(chieste.slice(0, 4).map((c) => c.k.split('#')[0]), ['analisi-1/insiemi', 'analisi-1/numeri-complessi', 'analisi-1/successioni', 'analisi-1/limiti']);
+  assert.ok(e.domande <= REGOLE_SG.maxDomandeTest + 3);
   assert.ok(e.lacune.length >= 1);
   const tuttoGiusto = simula(tutto);
-  assert.equal(tuttoGiusto.e.domande, 9);
+  assert.equal(tuttoGiusto.e.domande, 10);
   assert.equal(tuttoGiusto.e.capitolo, null);
   assert.equal(tuttoGiusto.e.lacune.length, 0);
 });

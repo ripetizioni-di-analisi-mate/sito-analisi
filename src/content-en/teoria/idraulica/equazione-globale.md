@@ -302,9 +302,9 @@ A free jet of discharge $Q$ and speed $v$ enters a fixed vane and leaves at angl
 $$
 F_x = \rho\,Q\,v\,(1 - \cos\theta) ,
 \qquad
-F_y = \rho\,Q\,v\,\sin\theta ,
+F_y = -\rho\,Q\,v\,\sin\theta ,
 $$
-and magnitude $F = 2\,\rho\,Q\,v\,\sin\dfrac{\theta}{2}$.
+and magnitude $F = 2\,\rho\,Q\,v\,\sin\dfrac{\theta}{2}$. The minus sign of $F_y$ means that the vane is pushed opposite to the direction in which the jet is deflected.
 
 The greatest deflection occurs at $\theta = 180^\circ$ and gives $F = 2\rho Q v$, twice the force on a flat plate normal to the jet. This is why Pelton turbine buckets have a double-cup shape. To allow for friction, take $v_2 = k\,v$ with $k$ slightly below $1$. The resulting force is $F_x = \rho Q v\,(1 - k\cos\theta)$.
 
