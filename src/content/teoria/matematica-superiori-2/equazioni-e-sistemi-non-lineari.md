@@ -122,7 +122,7 @@ x^2-x-6&=0\\[6pt]
 \end{aligned}
 $$
 
-I valori $3$ e $-2$ sono **candidati**, cioè valori da controllare nell’equazione di partenza. Il candidato $-2$ rispetta il solo dominio della radice, ma $\sqrt{-2+6}=\sqrt4=2$ e non vale $-2$. Un candidato di questo tipo si chiama **candidato estraneo**. Il candidato $3$ verifica $\sqrt9=3$, quindi l’unica soluzione è $x=3$. Nel grafico c’è una sola intersezione fra le due curve originali, il punto $P=(3,3)$.
+I valori $3$ e $-2$ sono **candidati**, cioè valori da controllare nell’equazione di partenza. Il candidato $-2$ rispetta il solo dominio della radice, ma $\sqrt{-2+6}=\sqrt4=2$ e non vale $-2$. Un candidato di questo tipo si chiama **candidato estraneo**. Il candidato $3$ verifica $\sqrt9=3$, quindi l’unica soluzione è $x=3$. Nel grafico c’è una sola intersezione fra le due curve originali, il punto $P=(3;3)$.
 
 Una funzione è **crescente** se al crescere di $x$ cresce anche il suo valore, **decrescente** se diminuisce. Poiché $\sqrt x$ cresce e $2-x$ decresce, l’equazione $\sqrt x=2-x$ ha al massimo una soluzione, che è $x=1$.
 
@@ -213,7 +213,7 @@ Per $|2x-1|=x+2$ occorre $x+2\ge0$, cioè $x\ge-2$. L’argomento $2x-1$ si annu
 - Nel ramo $x\ge\dfrac12$ l’argomento è non negativo e si risolve $2x-1=x+2$, che dà $x=3$.
 - Nel ramo $-2\le x<\dfrac12$ l’argomento è negativo, quindi $|2x-1|=1-2x$. Si risolve $1-2x=x+2$, cioè $-3x=1$, e si trova $x=-\dfrac13$.
 
-Entrambe le soluzioni appartengono al proprio intervallo, perché $3\ge\dfrac12$ e $-2\le-\dfrac13<\dfrac12$. Le **ordinate** (coordinate $y$) corrispondenti, $5$ e $\dfrac53$, sono i valori comuni dei due membri nei punti d’incontro dei grafici; le soluzioni sono le ascisse. Il punto $\left(\dfrac12,0\right)$ del grafico è quello in cui $y=|2x-1|$ cambia ramo.
+Entrambe le soluzioni appartengono al proprio intervallo, perché $3\ge\dfrac12$ e $-2\le-\dfrac13<\dfrac12$. Le **ordinate** (coordinate $y$) corrispondenti, $5$ e $\dfrac53$, sono i valori comuni dei due membri nei punti d’incontro dei grafici; le soluzioni sono le ascisse. Il punto $\left(\dfrac12;0\right)$ del grafico è quello in cui $y=|2x-1|$ cambia ramo.
 
 ::grafico{f="abs(2*x-1);x+2" legenda="y=|2x-1|;y=x+2" xmin=-2.5 xmax=4.15 ymin=-0.7 ymax=7.25 punti="-0.333333333,1.666666667,pieno;3,5,pieno;0.5,0,pieno" titolo="Ogni soluzione appartiene al ramo usato per trovarla"}
 :::
@@ -243,9 +243,9 @@ I candidati sono $-4$ e $2$. Al primo valore i due argomenti valgono entrambi $-
 ## Sistemi tra una relazione lineare e una non lineare
 
 ::::teorema{#sistemi titolo="Sostituire e ricostruire la coppia"}
-Un **sistema** è un gruppo di equazioni che devono valere insieme. Una sua soluzione è una **coppia ordinata** $(x,y)$, in cui conta l’ordine: $(1,2)$ e $(2,1)$ sono coppie diverse. Il sistema è **non lineare** quando almeno un’equazione non è di primo grado, come $y=x^2$. La scrittura $y=g(x)$ indica che $y$ è dato da un’espressione in $x$, come $y=2x+3$, e $F(x,y)=0$ indica un’altra equazione in $x$ e $y$.
+Un **sistema** è un gruppo di equazioni che devono valere insieme. Una sua soluzione è una **coppia ordinata** $(x;y)$, in cui conta l’ordine: $(1;2)$ e $(2;1)$ sono coppie diverse. Il sistema è **non lineare** quando almeno un’equazione non è di primo grado, come $y=x^2$. La scrittura $y=g(x)$ indica che $y$ è dato da un’espressione in $x$, come $y=2x+3$, e $F(x,y)=0$ indica un’altra equazione in $x$ e $y$.
 
-In un sistema con $y=g(x)$ e $F(x,y)=0$, si può risolvere $F(x,g(x))=0$ nei punti in cui le espressioni sono definite. È il **metodo di sostituzione**: si scrive $g(x)$ al posto di $y$ e resta la sola incognita $x$. A ogni valore ammesso di $x$ si associa la coppia $(x,g(x))$.
+In un sistema con $y=g(x)$ e $F(x,y)=0$, si può risolvere $F(x,g(x))=0$ nei punti in cui le espressioni sono definite. È il **metodo di sostituzione**: si scrive $g(x)$ al posto di $y$ e resta la sola incognita $x$. A ogni valore ammesso di $x$ si associa la coppia $(x;g(x))$.
 :::dimostrazione
 Una coppia del sistema verifica la prima equazione, quindi $y=g(x)$, e sostituire $g(x)$ a $y$ nella seconda conserva l’uguaglianza. Viceversa, se l’equazione dopo la sostituzione è verificata e la coppia ricostruita è ammessa, allora la stessa coppia verifica entrambe le equazioni del sistema. Perciò in ogni coppia si usa il valore $y=g(x)$ associato a quella $x$.
 :::
@@ -254,7 +254,7 @@ Una coppia del sistema verifica la prima equazione, quindi $y=g(x)$, e sostituir
 :::esempio{titolo="La retta incontra la parabola in due punti"}
 Il grafico di $y=x^2$ è una **parabola**, quello di $y=2x+3$ è una retta. Nei punti d’incontro le due ordinate sono uguali, quindi $x^2=2x+3$, cioè $x^2-2x-3=0$. Scomponendo si ottiene $(x-3)(x+1)=0$.
 
-Con $x=-1$ la retta dà $y=2\cdot(-1)+3=1$. Con $x=3$ dà $y=2\cdot3+3=9$. Si trovano $(-1,1)$ e $(3,9)$. Incrociare le ordinate ottenute formerebbe coppie che non verificano il sistema. La verifica consiste nel calcolare l’ordinata tramite entrambe le relazioni.
+Con $x=-1$ la retta dà $y=2\cdot(-1)+3=1$. Con $x=3$ dà $y=2\cdot3+3=9$. Si trovano $(-1;1)$ e $(3;9)$. Incrociare le ordinate ottenute formerebbe coppie che non verificano il sistema. La verifica consiste nel calcolare l’ordinata tramite entrambe le relazioni.
 
 ::grafico{f="x^2;2*x+3" legenda="y=x^2;y=2x+3" xmin=-2 xmax=3.8 ymin=-1.4 ymax=11.8 punti="-1,1,pieno;3,9,pieno" segmenti="-1,0,-1,1;3,0,3,9" titolo="Ogni punto d’intersezione ha l’ordinata imposta da entrambe le curve"}
 :::
@@ -267,10 +267,10 @@ $$
 $$
 
 - Per $m<-1$ il secondo membro è negativo, quindi non può essere uguale a un quadrato reale, e non ci sono intersezioni.
-- Per $m=-1$ si ha $(x-1)^2=0$, quindi $x=1$ e si ottiene la sola coppia $(1,1)$. La retta è **tangente** alla parabola, cioè la tocca in un solo punto senza attraversarla.
+- Per $m=-1$ si ha $(x-1)^2=0$, quindi $x=1$ e si ottiene la sola coppia $(1;1)$. La retta è **tangente** alla parabola, cioè la tocca in un solo punto senza attraversarla.
 - Per $m>-1$ si ha $x-1=\pm\sqrt{m+1}$, e i due segni danno due ascisse distinte e quindi due coppie.
 
-Nel grafico la retta $y=2x-1$, con $m=-1$, tocca la parabola in $(1,1)$, mentre $y=2x-2$, con $m=-2$, resta sotto. Se la retta fosse verticale, come $x=2$, si sostituirebbe invece il valore di $x$ nella parabola, ottenendo $(2,4)$.
+Nel grafico la retta $y=2x-1$, con $m=-1$, tocca la parabola in $(1;1)$, mentre $y=2x-2$, con $m=-2$, resta sotto. Se la retta fosse verticale, come $x=2$, si sostituirebbe invece il valore di $x$ nella parabola, ottenendo $(2;4)$.
 
 ::grafico{f="x^2;2*x-1;2*x-2" legenda="y=x^2;y=2x-1;y=2x-2" xmin=-1.25 xmax=3.15 ymin=-2.65 ymax=6.8 punti="1,1,pieno" titolo="Una retta è tangente, l’altra resta sotto la parabola"}
 :::
@@ -289,8 +289,8 @@ $$
 
 Le incognite sono le radici dell’equazione ausiliaria $t^2-st+p=0$. Il suo **discriminante** è $\Delta=s^2-4p$ (lettera greca «delta»), la quantità sotto radice nella formula risolutiva.
 
-- Due radici reali distinte $t_1$ e $t_2$ danno due coppie ordinate, $(t_1,t_2)$ e $(t_2,t_1)$.
-- Una radice doppia $t_1$ dà una sola coppia, $(t_1,t_1)$.
+- Due radici reali distinte $t_1$ e $t_2$ danno due coppie ordinate, $(t_1;t_2)$ e $(t_2;t_1)$.
+- Una radice doppia $t_1$ dà una sola coppia, $(t_1;t_1)$.
 - Se le radici non sono reali, cioè se $\Delta<0$, non ci sono coppie reali.
 :::dimostrazione
 Per ogni coppia del sistema, sviluppando il prodotto si ottiene
@@ -314,7 +314,7 @@ xy&=6.
 \end{aligned}
 $$
 
-L’equazione $t^2-5t+6=(t-2)(t-3)=0$ dà $2$ e $3$. Il sistema ammette $(2,3)$ e $(3,2)$, che hanno somma $5$ e somma dei quadrati $4+9=13$. Poiché $(x+y)^3=x^3+y^3+3xy(x+y)$, si ha anche $x^3+y^3=(x+y)^3-3xy(x+y)=125-3\cdot6\cdot5=35$. Nel grafico la prima condizione è la retta $y=5-x$. La seconda è la **circonferenza** di centro l’origine e raggio $\sqrt{13}$ (i punti a distanza $\sqrt{13}$ dall’origine), e i punti $P$ e $Q$ sono le due soluzioni. Se si aggiunge $x\le y$, sopravvive solo $(2,3)$.
+L’equazione $t^2-5t+6=(t-2)(t-3)=0$ dà $2$ e $3$. Il sistema ammette $(2;3)$ e $(3;2)$, che hanno somma $5$ e somma dei quadrati $4+9=13$. Poiché $(x+y)^3=x^3+y^3+3xy(x+y)$, si ha anche $x^3+y^3=(x+y)^3-3xy(x+y)=125-3\cdot6\cdot5=35$. Nel grafico la prima condizione è la retta $y=5-x$. La seconda è la **circonferenza** di centro l’origine e raggio $\sqrt{13}$ (i punti a distanza $\sqrt{13}$ dall’origine), e i punti $P$ e $Q$ sono le due soluzioni. Se si aggiunge $x\le y$, sopravvive solo $(2;3)$.
 
 ::grafico{f="5-x" curve="sqrt(13)*cos(t),sqrt(13)*sin(t),0,6.283185307" legenda="y=5-x;x^2+y^2=13" xmin=-3.95 xmax=5.2 ymin=-3.95 ymax=5.2 uguale=1 punti="2,3,pieno,P;3,2,pieno,Q" titolo="Lo scambio delle coordinate lascia valide entrambe le relazioni"}
 :::
@@ -326,7 +326,7 @@ $$
 (x+y)^2-4xy=x^2+2xy+y^2-4xy=x^2-2xy+y^2=(x-y)^2.
 $$
 
-Poiché $(x-y)^2\ge0$, segue $s^2-4p\ge0$, cioè $p\le\dfrac{s^2}{4}$. Con somma $2$ il prodotto massimo è $\dfrac{2^2}{4}=1$, quindi la richiesta di somma $2$ e prodotto $3$ non rispetta la condizione. Con somma $2$ e prodotto $1$ si ha $(x-y)^2=4-4=0$, la differenza deve essere zero e la sola coppia è $(1,1)$. Poiché $s^2-4p$ è il discriminante $\Delta$, la condizione equivale a $\Delta\ge0$.
+Poiché $(x-y)^2\ge0$, segue $s^2-4p\ge0$, cioè $p\le\dfrac{s^2}{4}$. Con somma $2$ il prodotto massimo è $\dfrac{2^2}{4}=1$, quindi la richiesta di somma $2$ e prodotto $3$ non rispetta la condizione. Con somma $2$ e prodotto $1$ si ha $(x-y)^2=4-4=0$, la differenza deve essere zero e la sola coppia è $(1;1)$. Poiché $s^2-4p$ è il discriminante $\Delta$, la condizione equivale a $\Delta\ge0$.
 :::
 
 :::esempio{titolo="Una circonferenza di raggio insufficiente"}
@@ -336,7 +336,7 @@ $$
 (x-y)^2=2(x^2+y^2)-(x+y)^2=2q-16.
 $$
 
-Quindi occorre $2q-16\ge0$, cioè $q\ge8$. A $q=8$ le incognite sono uguali e la sola coppia è $(2,2)$. Per $q>8$ le differenze possibili sono $\sqrt{2q-16}$ e $-\sqrt{2q-16}$, opposte e distinte. Ciascuna, unita alla somma $4$, determina una coppia. Per esempio, con $q=10$ le differenze valgono $2$ e $-2$, e insieme a $x+y=4$ danno $(3,1)$ e $(1,3)$.
+Quindi occorre $2q-16\ge0$, cioè $q\ge8$. A $q=8$ le incognite sono uguali e la sola coppia è $(2;2)$. Per $q>8$ le differenze possibili sono $\sqrt{2q-16}$ e $-\sqrt{2q-16}$, opposte e distinte. Ciascuna, unita alla somma $4$, determina una coppia. Per esempio, con $q=10$ le differenze valgono $2$ e $-2$, e insieme a $x+y=4$ danno $(3;1)$ e $(1;3)$.
 
 La circonferenza $x^2+y^2=q$ ha raggio $\sqrt q$. Quando $0\le q<8$, la circonferenza è troppo piccola per raggiungere la retta. Aumentare il raggio fino alla soglia $\sqrt8$ produce la tangenza.
 :::
@@ -348,13 +348,13 @@ La **condizione di esistenza** di una frazione è che il denominatore sia divers
 
 Restano $x=0$ e $x=-2$, che annullano il numeratore senza annullare il denominatore. La forma semplificata avrebbe valore $2\cdot4=8$ in $x=2$, ma il grafico della frazione non contiene quel punto, segnato da un cerchio vuoto. La condizione di esistenza va conservata anche quando cambia la forma dell’espressione.
 
-::grafico{f="x*(x+2)" xmin=-3.3 xmax=2.9 ymin=-2 ymax=10 punti="-2,0,pieno;0,0,pieno;2,8,vuoto" titolo="Il grafico ha due zeri ammessi e un punto mancante in (2, 8)"}
+::grafico{f="x*(x+2)" xmin=-3.3 xmax=2.9 ymin=-2 ymax=10 punti="-2,0,pieno;0,0,pieno;2,8,vuoto" titolo="Il grafico ha due zeri ammessi e un punto mancante in (2; 8)"}
 :::
 
 :::esempio{titolo="Il problema può imporre un ordine"}
-Due lati adiacenti di un rettangolo misurano $x$ e $y$ centimetri. Le misure soddisfano $x+y=7$ e $xy=12$. Le radici ausiliarie di $t^2-7t+12=(t-3)(t-4)$ sono $3$ e $4$, entrambe positive. Come coppie ordinate si trovano $(3,4)$ e $(4,3)$.
+Due lati adiacenti di un rettangolo misurano $x$ e $y$ centimetri. Le misure soddisfano $x+y=7$ e $xy=12$. Le radici ausiliarie di $t^2-7t+12=(t-3)(t-4)$ sono $3$ e $4$, entrambe positive. Come coppie ordinate si trovano $(3;4)$ e $(4;3)$.
 
-Se $x$ indica specificamente il lato più corto, serve $x<y$ e si tiene solo $(3,4)$. La scelta conserva l’area $12\,\mathrm{cm}^2$ e il perimetro $14\,\mathrm{cm}$. Il vincolo proviene dalla descrizione delle misure, mentre le due equazioni da sole sono simmetriche.
+Se $x$ indica specificamente il lato più corto, serve $x<y$ e si tiene solo $(3;4)$. La scelta conserva l’area $12\,\mathrm{cm}^2$ e il perimetro $14\,\mathrm{cm}$. Il vincolo proviene dalla descrizione delle misure, mentre le due equazioni da sole sono simmetriche.
 :::
 
 :::esempio{titolo="Un radicale che compare anche al denominatore"}

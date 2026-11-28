@@ -57,7 +57,7 @@ Se $n$ è dispari, $\sqrt[n]{a}$ è l'unico numero reale $r$ con $r^n=a$, ed è 
 :::esempio{titolo="Una radice e le soluzioni di un'equazione"}
 L'equazione $u^2=4$ ha due soluzioni, $-2$ e $2$, perché $(-2)^2=4$ e $2^2=4$. La radice $\sqrt4$ è invece un solo numero, $2$, cioè la soluzione non negativa.
 
-Nel grafico di $y=x^2$ le due soluzioni sono le **ascisse** (coordinate $x$) dei punti $A=(-2,4)$ e $B=(2,4)$, che hanno la stessa **ordinata** (coordinata $y$) uguale a $4$. Il grafico di $y=\sqrt x$ contiene il punto $C=(4,2)$, perché $\sqrt4=2$. Scambiando le coordinate di $B$ si ottiene $C$, quindi nella figura $B$ e $C$ sono simmetrici rispetto alla retta $y=x$. Allo stesso modo il grafico della radice è il simmetrico, rispetto a quella retta, del solo ramo della parabola con $x\ge0$. Per questo la radice dà un solo valore.
+Nel grafico di $y=x^2$ le due soluzioni sono le **ascisse** (coordinate $x$) dei punti $A=(-2;4)$ e $B=(2;4)$, che hanno la stessa **ordinata** (coordinata $y$) uguale a $4$. Il grafico di $y=\sqrt x$ contiene il punto $C=(4;2)$, perché $\sqrt4=2$. Scambiando le coordinate di $B$ si ottiene $C$, quindi nella figura $B$ e $C$ sono simmetrici rispetto alla retta $y=x$. Allo stesso modo il grafico della radice è il simmetrico, rispetto a quella retta, del solo ramo della parabola con $x\ge0$. Per questo la radice dà un solo valore.
 
 ::grafico{f="x^2;sqrt(x);x" xmin=-2.6 xmax=4.8 ymin=-0.65 ymax=5.3 punti="-2,4,pieno,A;2,4,pieno,B;4,2,pieno,C" legenda="y=x^2;y=\sqrt{x};y=x" titolo="Al valore $4$ corrisponde la radice quadrata $2$"}
 :::
@@ -77,7 +77,7 @@ $$
 $$
 Il simbolo $\iff$ si legge «equivale a». Nel secondo passaggio si somma $6$ ai due membri, nel terzo si dividono per $2$, che è positivo. In $x=3$ la radice vale $\sqrt0=0$. Il reciproco $\dfrac1{\sqrt{2x-6}}$ ha la radice al denominatore, quindi richiede $2x-6>0$, cioè $x>3$. In forma di intervallo i due domini si scrivono $[3,+\infty)$ e $(3,+\infty)$. Il simbolo $[$ indica che l'estremo $3$ è compreso, il simbolo $($ che è escluso, e $+\infty$ (più infinito) indica che l'intervallo prosegue senza fine verso destra.
 
-Nella figura il punto $A=(3,0)$ appartiene al grafico della radice. La linea verticale tratteggiata $x=3$ indica il valore escluso dal reciproco. Il punto $B=\left(\dfrac72,1\right)$ appartiene a entrambi i grafici, perché per $x=\dfrac72$ il radicando vale $7-6=1$ e quindi la radice e il suo reciproco valgono $1$.
+Nella figura il punto $A=(3;0)$ appartiene al grafico della radice. La linea verticale tratteggiata $x=3$ indica il valore escluso dal reciproco. Il punto $B=\left(\dfrac72;1\right)$ appartiene a entrambi i grafici, perché per $x=\dfrac72$ il radicando vale $7-6=1$ e quindi la radice e il suo reciproco valgono $1$.
 
 ::grafico{f="sqrt(2*x-6);1/sqrt(2*x-6)" xmin=-0.6 xmax=7.4 ymin=-0.6 ymax=3.6 punti="3,0,pieno,A;3.5,1,pieno,B" asintoti="x=3" legenda="y=\sqrt{2x-6};y=\dfrac1{\sqrt{2x-6}}" titolo="La radice ammette $x=3$, il suo reciproco esclude quel valore"}
 :::
@@ -91,7 +91,7 @@ Per $\sqrt{\dfrac{x-1}{x+2}}$ il quoziente deve essere definito e maggiore o ugu
 | $-2<x<1$ | $-$ | $+$ | $-$ |
 | $x>1$ | $+$ | $+$ | $+$ |
 
-Il dominio è $(-\infty,-2)\cup[1,+\infty)$. Il simbolo $-\infty$ (meno infinito) indica che il primo intervallo prosegue senza fine verso sinistra, e il simbolo $\cup$ (unione) indica che si prendono insieme i numeri dei due intervalli. Il valore $-2$ resta escluso e $1$ è ammesso. Per esempio $x=-3$ appartiene al ramo a sinistra e dà il punto $(-3,2)$ della figura:
+Il dominio è $(-\infty,-2)\cup[1,+\infty)$. Il simbolo $-\infty$ (meno infinito) indica che il primo intervallo prosegue senza fine verso sinistra, e il simbolo $\cup$ (unione) indica che si prendono insieme i numeri dei due intervalli. Il valore $-2$ resta escluso e $1$ è ammesso. Per esempio $x=-3$ appartiene al ramo a sinistra e dà il punto $(-3;2)$ della figura:
 $$
 \frac{-3-1}{-3+2}=\frac{-4}{-1}=4,\qquad\sqrt4=2.
 $$
@@ -167,7 +167,7 @@ Quando il radicando contiene una lettera, il cambiamento d'indice va controllato
 $$
 \left(\sqrt[3]{|x|}\right)^6=\left(\left(\sqrt[3]{|x|}\right)^3\right)^2=|x|^2=x^2.
 $$
-Perciò $\sqrt[6]{x^2}=\sqrt[3]{|x|}$ per ogni reale $x$. Il valore assoluto è necessario, perché nel punto $x=-8$ si ha $\sqrt[6]{(-8)^2}=\sqrt[6]{64}=2$, mentre $\sqrt[3]{-8}=-2$. Nella figura questi valori sono i punti $A=(-8,2)$ e $B=(-8,-2)$. Per $x\ge0$ i due grafici coincidono, come nel punto $(8,2)$.
+Perciò $\sqrt[6]{x^2}=\sqrt[3]{|x|}$ per ogni reale $x$. Il valore assoluto è necessario, perché nel punto $x=-8$ si ha $\sqrt[6]{(-8)^2}=\sqrt[6]{64}=2$, mentre $\sqrt[3]{-8}=-2$. Nella figura questi valori sono i punti $A=(-8;2)$ e $B=(-8;-2)$. Per $x\ge0$ i due grafici coincidono, come nel punto $(8;2)$.
 
 ::grafico{f="cbrt(abs(x));cbrt(x)" xmin=-10 xmax=10 ymin=-2.8 ymax=2.8 punti="-8,2,pieno,A;-8,-2,pieno,B;8,2" legenda="y=\sqrt[6]{x^2};y=\sqrt[3]{x}" titolo="La radice sesta di $x^2$ rimane non negativa anche per $x<0$"}
 :::
@@ -178,7 +178,7 @@ Il radicando $x^2(x-1)$ è il prodotto di $x^2$, che è sempre maggiore o uguale
 - Per $x\ge1$, perché entrambi i fattori sono non negativi.
 - Per $x=0$, perché il fattore $x^2$ vale zero e quindi il prodotto vale $0\cdot(-1)=0$.
 
-Estraendo il fattore $x^2$ si ottiene la forma $|x|\sqrt{x-1}$, che è definita solo per $x\ge1$ perché contiene $\sqrt{x-1}$. Le due forme coincidono in quell'intervallo, ma la formula iniziale ammette anche $x=0$. Nella figura è il punto $A=(0,0)$, un **punto isolato**, cioè separato dal resto del grafico, che parte da $B=(1,0)$.
+Estraendo il fattore $x^2$ si ottiene la forma $|x|\sqrt{x-1}$, che è definita solo per $x\ge1$ perché contiene $\sqrt{x-1}$. Le due forme coincidono in quell'intervallo, ma la formula iniziale ammette anche $x=0$. Nella figura è il punto $A=(0;0)$, un **punto isolato**, cioè separato dal resto del grafico, che parte da $B=(1;0)$.
 
 ::grafico{f="sqrt(x*x*(x-1))" xmin=-1.5 xmax=4.0 ymin=-0.65 ymax=7.5 punti="0,0,pieno,A;1,0,pieno,B;2,2" legenda="y=\sqrt{x^2(x-1)}" titolo="Nel dominio compare anche $0$, benché $x-1$ sia negativo in quel punto"}
 :::
@@ -320,9 +320,9 @@ $$
 =\frac{\sqrt x-2}{(\sqrt x+2)(\sqrt x-2)}
 =\frac{\sqrt x-2}{x-4}.
 $$
-La nuova formula non è definita in $x=4$, dove il denominatore $x-4$ vale zero. La forma con denominatore $x-4$ va quindi accompagnata dal valore $\dfrac14$ in $x=4$ per rappresentare tutta la funzione iniziale. Nella figura il punto vuoto $A=\left(4,\dfrac14\right)$ indica il valore che manca alla sola formula trasformata. Il punto $B=\left(0,\dfrac12\right)$ è il valore in $x=0$, dove il denominatore iniziale vale $2$.
+La nuova formula non è definita in $x=4$, dove il denominatore $x-4$ vale zero. La forma con denominatore $x-4$ va quindi accompagnata dal valore $\dfrac14$ in $x=4$ per rappresentare tutta la funzione iniziale. Nella figura il punto vuoto $A=\left(4;\dfrac14\right)$ indica il valore che manca alla sola formula trasformata. Il punto $B=\left(0;\dfrac12\right)$ è il valore in $x=0$, dove il denominatore iniziale vale $2$.
 
-::grafico{f="1/(sqrt(x)+2)" xmin=-1.25 xmax=11 ymin=-0.09 ymax=0.65 punti="4,0.25,vuoto,A;0,0.5,pieno,B" legenda="y=\dfrac{\sqrt{x}-2}{x-4}\quad(x\ge0,\ x\ne4)" titolo="Il quoziente con denominatore $x-4$ perde il punto $(4,\dfrac14)$"}
+::grafico{f="1/(sqrt(x)+2)" xmin=-1.25 xmax=11 ymin=-0.09 ymax=0.65 punti="4,0.25,vuoto,A;0,0.5,pieno,B" legenda="y=\dfrac{\sqrt{x}-2}{x-4}\quad(x\ge0,\ x\ne4)" titolo="Il quoziente con denominatore $x-4$ perde il punto $(4;\dfrac14)$"}
 :::
 
 ## Potenze razionali
@@ -368,7 +368,7 @@ Per $x>0$ si ha $x^{\frac32}=\sqrt{x^3}=\sqrt{x^2\cdot x}=x\sqrt x$. Quindi $x^{
 
 - Se $0<x<1$, il prodotto per $x$ diminuisce il valore positivo $\sqrt x$, perché $x$ è minore di $1$. Quindi $x^{\frac32}<x^{\frac12}$.
 - Se $x>1$, il prodotto per $x$ lo aumenta. Quindi $x^{\frac32}>x^{\frac12}$.
-- Per $x=1$ le due potenze valgono $1$, e nel grafico si incontrano nel punto $A=(1,1)$.
+- Per $x=1$ le due potenze valgono $1$, e nel grafico si incontrano nel punto $A=(1;1)$.
 
 Per esempio in $x=2{,}25$ si ha $\sqrt{2{,}25}=1{,}5$ e $2{,}25\cdot1{,}5=3{,}375$; sono i due punti segnati a destra. L'origine appartiene ai due grafici, perché per esponenti positivi si pone $0^{\frac pq}=0$.
 

@@ -405,7 +405,7 @@ The direct distance is longer than either segment but shorter than the route thr
 
 :::esempio{titolo="Using differences between coordinates"}
 
-In the coordinate plane a point is given by its **coordinates** $(x,y)$: the $x$-coordinate is the horizontal position and the $y$-coordinate the vertical one. Points $P=(2,-3)$ and $R=(8,5)$ are joined by a horizontal segment from $P$ to $Q=(8,-3)$ and a vertical segment from $Q$ to $R$. The lengths of the two segments are the differences of the coordinates taken in **absolute value**, that is, without sign ($|-6|=6$):
+In the coordinate plane a point is given by its **coordinates** $(x;y)$: the $x$-coordinate is the horizontal position and the $y$-coordinate the vertical one. Points $P=(2;-3)$ and $R=(8;5)$ are joined by a horizontal segment from $P$ to $Q=(8;-3)$ and a vertical segment from $Q$ to $R$. The lengths of the two segments are the differences of the coordinates taken in **absolute value**, that is, without sign ($|-6|=6$):
 
 $$
 \left|8-2\right|=6,\qquad \left|5-(-3)\right|=8 .

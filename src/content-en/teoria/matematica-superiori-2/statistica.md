@@ -234,7 +234,7 @@ The divisor $N$ is used also when the data being described come from a sample. T
 ::::
 
 :::esempio{titolo="Same mean and range, different variances"}
-In the data $A=(0,0,4,4)$ and $B=(0,2,2,4)$ the mean is $2$ and the range is $4-0=4$. In $A$ all the observations are two units from the mean. In $B$ two observations coincide with the mean and only two are at the extremes. The variances are
+In the data $A=(0;0;4;4)$ and $B=(0;2;2;4)$ the mean is $2$ and the range is $4-0=4$. In $A$ all the observations are two units from the mean. In $B$ two observations coincide with the mean and only two are at the extremes. The variances are
 $$
 \sigma_A^2=\frac{(-2)^2+(-2)^2+2^2+2^2}{4}=\frac{16}{4}=4,\qquad
 \sigma_B^2=\frac{(-2)^2+0^2+0^2+2^2}{4}=\frac{8}{4}=2.

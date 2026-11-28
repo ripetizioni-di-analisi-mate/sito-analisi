@@ -405,7 +405,7 @@ La distanza diretta è maggiore di ciascun tratto, ma minore del percorso che pa
 
 :::esempio{titolo="Usare le differenze fra coordinate"}
 
-Nel piano cartesiano un punto si indica con le sue **coordinate** $(x,y)$: l'**ascissa** $x$ è la posizione in orizzontale, l'**ordinata** $y$ quella in verticale. I punti $P=(2,-3)$ e $R=(8,5)$ si collegano con un tratto orizzontale da $P$ a $Q=(8,-3)$ e con un tratto verticale da $Q$ a $R$. Le lunghezze dei due tratti sono le differenze delle coordinate prese in **valore assoluto**, cioè senza segno ($|-6|=6$):
+Nel piano cartesiano un punto si indica con le sue **coordinate** $(x;y)$: l'**ascissa** $x$ è la posizione in orizzontale, l'**ordinata** $y$ quella in verticale. I punti $P=(2;-3)$ e $R=(8;5)$ si collegano con un tratto orizzontale da $P$ a $Q=(8;-3)$ e con un tratto verticale da $Q$ a $R$. Le lunghezze dei due tratti sono le differenze delle coordinate prese in **valore assoluto**, cioè senza segno ($|-6|=6$):
 
 $$
 \left|8-2\right|=6,\qquad \left|5-(-3)\right|=8 .

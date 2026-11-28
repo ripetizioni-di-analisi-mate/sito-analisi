@@ -234,7 +234,7 @@ Si divide per $N$ anche quando i dati descritti provengono da un campione. Il di
 ::::
 
 :::esempio{titolo="Stessa media e stesso campo, varianza diversa"}
-Nei dati $A=(0,0,4,4)$ e $B=(0,2,2,4)$ la media è $2$ e il campo di variazione è $4-0=4$. In $A$ tutti i dati distano due unità dalla media. In $B$ due dati coincidono con la media e soltanto due sono agli estremi. Le varianze sono
+Nei dati $A=(0;0;4;4)$ e $B=(0;2;2;4)$ la media è $2$ e il campo di variazione è $4-0=4$. In $A$ tutti i dati distano due unità dalla media. In $B$ due dati coincidono con la media e soltanto due sono agli estremi. Le varianze sono
 $$
 \sigma_A^2=\frac{(-2)^2+(-2)^2+2^2+2^2}{4}=\frac{16}{4}=4,\qquad
 \sigma_B^2=\frac{(-2)^2+0^2+0^2+2^2}{4}=\frac{8}{4}=2.
