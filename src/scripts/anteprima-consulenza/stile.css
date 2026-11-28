@@ -462,6 +462,26 @@ html:has(.pa-dialog[open]) {
   max-width: 100%;
   overflow: auto;
 }
+.pa-dialog .pa-figura {
+  margin: 0.7rem 0;
+  max-width: 100%;
+}
+.pa-dialog .pa-figura svg,
+.pa-dialog .pa-lezione img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 23rem;
+  margin: auto;
+}
+.pa-dialog .pa-figura svg {
+  width: 100%;
+}
+.pa-dialog .pa-figura figcaption {
+  margin-top: 0.3rem;
+  color: var(--pa-dim);
+  font-size: 0.92rem;
+}
 .pa-dialog .pa-passo {
   margin: 0.65rem 0 0;
   padding: 0.55rem 0 0;
